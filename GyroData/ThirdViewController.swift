@@ -10,8 +10,9 @@ import UIKit
 class ThirdViewController: UIViewController {
 
     override func loadView() {
-        self.view = UIView()
-        view.backgroundColor = .green
+        initViewHierachy()
+        configureView()
+        bind()
     }
     
     override func viewDidLoad() {
@@ -31,4 +32,18 @@ class ThirdViewController: UIViewController {
     }
     */
 
+}
+
+extension ThirdViewController: Presentable {
+    func initViewHierachy() {
+        self.view = UIView()
+    }
+    
+    func configureView() {
+        view.backgroundColor = .yellow
+    }
+    
+    func bind() {
+        
+    }
 }

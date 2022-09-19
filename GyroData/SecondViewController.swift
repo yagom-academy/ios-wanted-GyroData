@@ -10,8 +10,9 @@ import UIKit
 class SecondViewController: UIViewController, SecondViewControllerRoutable {
 
     override func loadView() {
-        self.view = UIView()
-        view.backgroundColor = .yellow
+        initViewHierachy()
+        configureView()
+        bind()
     }
     
     override func viewDidLoad() {
@@ -31,4 +32,18 @@ class SecondViewController: UIViewController, SecondViewControllerRoutable {
     }
     */
 
+}
+
+extension SecondViewController: Presentable {
+    func initViewHierachy() {
+        self.view = UIView()
+    }
+    
+    func configureView() {
+        view.backgroundColor = .yellow
+    }
+    
+    func bind() {
+        
+    }
 }
