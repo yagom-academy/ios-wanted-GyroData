@@ -32,7 +32,10 @@ class FirstModel {
         privateFirstListViewModel.propergateDidSelectRowEvent = { [weak self] indexPathRow in
             //temp
             guard let self = self else { return }
-            self.routeSubject(.detail(.secondViewController))
+            let repository = Repository()
+            let model = SecondModel(repository: repository)
+            let sceneContext = SceneContext(dependency: model)
+            self.routeSubject(.detail(.secondViewController(context: sceneContext)))
         }
     }
     

@@ -1,5 +1,5 @@
 //
-//  SecondViewControllerRoutable.swift
+//  FirstViewControllerRoutable.swift
 //  GyroData
 //
 //  Created by pablo.jee on 2022/09/20.
@@ -8,16 +8,16 @@
 import Foundation
 import UIKit
 
-protocol SecondViewControllerRoutable: Routable, SecondViewControllerSceneBuildable {
+protocol FirstViewControllerRoutable: Routable, FirstViewControllerSceneBuildable {
     
 }
 
-extension SecondViewControllerRoutable where Self: SecondViewController {
+extension FirstViewControllerRoutable where Self: FirstViewController {
     func buildScene(scene: SceneCategory) -> Scenable? {
         var nextScene: Scenable?
         switch scene {
-        case .detail(.thirdViewController):
-            nextScene = buildThirdScene()
+        case .detail(.secondViewController(let context)):
+            nextScene = buildSecondScene(context: context)
         default: break
         }
         return nextScene
@@ -25,7 +25,7 @@ extension SecondViewControllerRoutable where Self: SecondViewController {
     
     func route(to Scene: SceneCategory) {
         switch Scene {
-        case .detail(.thirdViewController):
+        case .detail(.secondViewController):
             let nextScene = buildScene(scene: Scene)
             guard let nextVC = nextScene as? UIViewController else { return }
             self.navigationController?.pushViewController(nextVC, animated: true)
@@ -34,17 +34,18 @@ extension SecondViewControllerRoutable where Self: SecondViewController {
     }
 }
 
-protocol SecondViewControllerSceneBuildable: SceneBuildable {
+protocol FirstViewControllerSceneBuildable: SceneBuildable {
     
 }
 
-extension SecondViewControllerSceneBuildable {
-    func buildThirdScene() -> Scenable {
+extension FirstViewControllerSceneBuildable {
+    func buildSecondScene(context: SceneContext<SecondModel>) -> Scenable {
         var nextScene: Scenable
-        
-        let thirdVC = ThirdViewController()
-        nextScene = thirdVC
+        let secondModel = context.dependency
+        let secondVC = SecondViewController(viewModel: secondModel)
+        nextScene = secondVC
         
         return nextScene
     }
 }
+

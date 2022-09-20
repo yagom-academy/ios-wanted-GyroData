@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3695B0BD28D99CA100FF93FD /* SecondViewSegementedControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3695B0BC28D99CA100FF93FD /* SecondViewSegementedControlView.swift */; };
+		3695B0C128D9A08F00FF93FD /* SecondModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3695B0C028D9A08F00FF93FD /* SecondModel.swift */; };
+		3695B0C328D9A0BF00FF93FD /* SecondSegmentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3695B0C228D9A0BF00FF93FD /* SecondSegmentViewModel.swift */; };
+		3695B0C728D9AA0700FF93FD /* SecondViewControllerRoutable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3695B0C628D9AA0700FF93FD /* SecondViewControllerRoutable.swift */; };
 		36E1FC9D28D976B800EB7E4F /* BasicNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E1FC9C28D976B800EB7E4F /* BasicNavigationController.swift */; };
 		36E1FCA028D978AB00EB7E4F /* FirstModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E1FC9F28D978AB00EB7E4F /* FirstModel.swift */; };
 		36E1FCA328D978ED00EB7E4F /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E1FCA228D978ED00EB7E4F /* Repository.swift */; };
@@ -19,7 +23,7 @@
 		36FB64EF28D8C6EC00A87587 /* SceneCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36FB64EE28D8C6EC00A87587 /* SceneCategory.swift */; };
 		36FB64F128D8C76E00A87587 /* SceneDelegateRoutable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36FB64F028D8C76E00A87587 /* SceneDelegateRoutable.swift */; };
 		36FB64F328D8CA8000A87587 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36FB64F228D8CA8000A87587 /* SecondViewController.swift */; };
-		36FB64F528D8CAB000A87587 /* SecondViewControllerRoutable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36FB64F428D8CAB000A87587 /* SecondViewControllerRoutable.swift */; };
+		36FB64F528D8CAB000A87587 /* FirstViewControllerRoutable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36FB64F428D8CAB000A87587 /* FirstViewControllerRoutable.swift */; };
 		36FB64F728D8CC7900A87587 /* ThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36FB64F628D8CC7900A87587 /* ThirdViewController.swift */; };
 		36FB64F928D8CD1700A87587 /* SceneContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36FB64F828D8CD1700A87587 /* SceneContext.swift */; };
 		36FB64FC28D8CE1D00A87587 /* Presentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36FB64FB28D8CE1D00A87587 /* Presentable.swift */; };
@@ -32,6 +36,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3695B0BC28D99CA100FF93FD /* SecondViewSegementedControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewSegementedControlView.swift; sourceTree = "<group>"; };
+		3695B0C028D9A08F00FF93FD /* SecondModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondModel.swift; sourceTree = "<group>"; };
+		3695B0C228D9A0BF00FF93FD /* SecondSegmentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondSegmentViewModel.swift; sourceTree = "<group>"; };
+		3695B0C628D9AA0700FF93FD /* SecondViewControllerRoutable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewControllerRoutable.swift; sourceTree = "<group>"; };
 		36E1FC9C28D976B800EB7E4F /* BasicNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicNavigationController.swift; sourceTree = "<group>"; };
 		36E1FC9F28D978AB00EB7E4F /* FirstModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstModel.swift; sourceTree = "<group>"; };
 		36E1FCA228D978ED00EB7E4F /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
@@ -44,7 +52,7 @@
 		36FB64EE28D8C6EC00A87587 /* SceneCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneCategory.swift; sourceTree = "<group>"; };
 		36FB64F028D8C76E00A87587 /* SceneDelegateRoutable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegateRoutable.swift; sourceTree = "<group>"; };
 		36FB64F228D8CA8000A87587 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
-		36FB64F428D8CAB000A87587 /* SecondViewControllerRoutable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewControllerRoutable.swift; sourceTree = "<group>"; };
+		36FB64F428D8CAB000A87587 /* FirstViewControllerRoutable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewControllerRoutable.swift; sourceTree = "<group>"; };
 		36FB64F628D8CC7900A87587 /* ThirdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdViewController.swift; sourceTree = "<group>"; };
 		36FB64F828D8CD1700A87587 /* SceneContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneContext.swift; sourceTree = "<group>"; };
 		36FB64FB28D8CE1D00A87587 /* Presentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presentable.swift; sourceTree = "<group>"; };
@@ -69,22 +77,68 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		36E1FC9B28D9768D00EB7E4F /* UIKitClasses */ = {
+		3695B0BA28D99C6B00FF93FD /* FirstVCRelated */ = {
 			isa = PBXGroup;
 			children = (
-				36E1FC9C28D976B800EB7E4F /* BasicNavigationController.swift */,
+				63F01BB828D44FC400C53A39 /* FirstViewController.swift */,
+				36E1FCA628D97AAB00EB7E4F /* FirstListView.swift */,
+				36E1FCAB28D97CC000EB7E4F /* FirstListCell.swift */,
+				36E1FCAD28D97DB400EB7E4F /* FirstCellContentView.swift */,
 			);
-			path = UIKitClasses;
+			path = FirstVCRelated;
 			sourceTree = "<group>";
 		};
-		36E1FC9E28D9789900EB7E4F /* FirstModel */ = {
+		3695B0BB28D99C7800FF93FD /* SecondVCRelated */ = {
+			isa = PBXGroup;
+			children = (
+				36FB64F228D8CA8000A87587 /* SecondViewController.swift */,
+				3695B0BC28D99CA100FF93FD /* SecondViewSegementedControlView.swift */,
+			);
+			path = SecondVCRelated;
+			sourceTree = "<group>";
+		};
+		3695B0BE28D9A06800FF93FD /* FirstVCRelated */ = {
 			isa = PBXGroup;
 			children = (
 				36E1FC9F28D978AB00EB7E4F /* FirstModel.swift */,
 				36E1FCA828D97AD000EB7E4F /* FirstListViewModel.swift */,
 				36E1FCAF28D9820800EB7E4F /* FirstCellContentViewModel.swift */,
 			);
-			path = FirstModel;
+			path = FirstVCRelated;
+			sourceTree = "<group>";
+		};
+		3695B0BF28D9A07C00FF93FD /* SecondVCRelated */ = {
+			isa = PBXGroup;
+			children = (
+				3695B0C028D9A08F00FF93FD /* SecondModel.swift */,
+				3695B0C228D9A0BF00FF93FD /* SecondSegmentViewModel.swift */,
+			);
+			path = SecondVCRelated;
+			sourceTree = "<group>";
+		};
+		3695B0C428D9A8C400FF93FD /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				3695B0BE28D9A06800FF93FD /* FirstVCRelated */,
+				3695B0BF28D9A07C00FF93FD /* SecondVCRelated */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		3695B0C828D9AB1600FF93FD /* ThridVCRelated */ = {
+			isa = PBXGroup;
+			children = (
+				36FB64F628D8CC7900A87587 /* ThirdViewController.swift */,
+			);
+			path = ThridVCRelated;
+			sourceTree = "<group>";
+		};
+		36E1FC9B28D9768D00EB7E4F /* UIKitClasses */ = {
+			isa = PBXGroup;
+			children = (
+				36E1FC9C28D976B800EB7E4F /* BasicNavigationController.swift */,
+			);
+			path = UIKitClasses;
 			sourceTree = "<group>";
 		};
 		36E1FCA128D978DE00EB7E4F /* Utilities */ = {
@@ -98,26 +152,16 @@
 		36E1FCA428D97A7F00EB7E4F /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				36E1FCA628D97AAB00EB7E4F /* FirstListView.swift */,
-				36E1FCAD28D97DB400EB7E4F /* FirstCellContentView.swift */,
+				3695B0BA28D99C6B00FF93FD /* FirstVCRelated */,
+				3695B0BB28D99C7800FF93FD /* SecondVCRelated */,
+				3695B0C828D9AB1600FF93FD /* ThridVCRelated */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		36E1FCA528D97A8600EB7E4F /* ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				63F01BB828D44FC400C53A39 /* FirstViewController.swift */,
-				36FB64F228D8CA8000A87587 /* SecondViewController.swift */,
-				36FB64F628D8CC7900A87587 /* ThirdViewController.swift */,
-			);
-			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		36E1FCAA28D97CAB00EB7E4F /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				36E1FCAB28D97CC000EB7E4F /* FirstListCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -125,10 +169,11 @@
 		36FB64EB28D8C5BD00A87587 /* ViewPresentation */ = {
 			isa = PBXGroup;
 			children = (
-				36FB64EC28D8C5DC00A87587 /* Routable.swift */,
 				36FB64EE28D8C6EC00A87587 /* SceneCategory.swift */,
+				36FB64EC28D8C5DC00A87587 /* Routable.swift */,
 				36FB64F028D8C76E00A87587 /* SceneDelegateRoutable.swift */,
-				36FB64F428D8CAB000A87587 /* SecondViewControllerRoutable.swift */,
+				36FB64F428D8CAB000A87587 /* FirstViewControllerRoutable.swift */,
+				3695B0C628D9AA0700FF93FD /* SecondViewControllerRoutable.swift */,
 				36FB64F828D8CD1700A87587 /* SceneContext.swift */,
 			);
 			path = ViewPresentation;
@@ -164,10 +209,9 @@
 			children = (
 				63F01BB428D44FC400C53A39 /* AppDelegate.swift */,
 				63F01BB628D44FC400C53A39 /* SceneDelegate.swift */,
-				36E1FCA528D97A8600EB7E4F /* ViewControllers */,
 				36E1FCAA28D97CAB00EB7E4F /* Cells */,
 				36E1FCA428D97A7F00EB7E4F /* Views */,
-				36E1FC9E28D9789900EB7E4F /* FirstModel */,
+				3695B0C428D9A8C400FF93FD /* Models */,
 				36FB64FA28D8CE0E00A87587 /* ViewDraw */,
 				36FB64EB28D8C5BD00A87587 /* ViewPresentation */,
 				36E1FC9B28D9768D00EB7E4F /* UIKitClasses */,
@@ -260,14 +304,18 @@
 				36E1FCAC28D97CC000EB7E4F /* FirstListCell.swift in Sources */,
 				36FB64FE28D8CF0500A87587 /* Styling.swift in Sources */,
 				36FB64F328D8CA8000A87587 /* SecondViewController.swift in Sources */,
+				3695B0BD28D99CA100FF93FD /* SecondViewSegementedControlView.swift in Sources */,
+				3695B0C328D9A0BF00FF93FD /* SecondSegmentViewModel.swift in Sources */,
 				36FB64ED28D8C5DC00A87587 /* Routable.swift in Sources */,
-				36FB64F528D8CAB000A87587 /* SecondViewControllerRoutable.swift in Sources */,
+				36FB64F528D8CAB000A87587 /* FirstViewControllerRoutable.swift in Sources */,
 				36E1FCB028D9820800EB7E4F /* FirstCellContentViewModel.swift in Sources */,
+				3695B0C128D9A08F00FF93FD /* SecondModel.swift in Sources */,
 				36E1FCAE28D97DB500EB7E4F /* FirstCellContentView.swift in Sources */,
 				36E1FCA028D978AB00EB7E4F /* FirstModel.swift in Sources */,
 				36E1FC9D28D976B800EB7E4F /* BasicNavigationController.swift in Sources */,
 				36E1FCA728D97AAB00EB7E4F /* FirstListView.swift in Sources */,
 				36FB64FC28D8CE1D00A87587 /* Presentable.swift in Sources */,
+				3695B0C728D9AA0700FF93FD /* SecondViewControllerRoutable.swift in Sources */,
 				36FB64EF28D8C6EC00A87587 /* SceneCategory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
