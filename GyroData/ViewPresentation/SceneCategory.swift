@@ -13,7 +13,7 @@ enum SceneCategory {
     case detail(detailScene)
     
     enum mainScene {
-        case firstViewController
+        case firstViewController(context: SceneContext<FirstModel>)
     }
     
     enum detailScene {
