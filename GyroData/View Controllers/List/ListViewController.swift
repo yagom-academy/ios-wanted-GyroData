@@ -11,19 +11,16 @@ final class ListViewController: UIViewController {
 
     lazy var tableView: UITableView = {
         let tableView = UITableView()
-        
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        
         tableView.separatorStyle = .none
         tableView.showsVerticalScrollIndicator = false
-        
         tableView.delegate = self
         tableView.dataSource = self
-        
         tableView.register(ListCell.self, forCellReuseIdentifier: "cell")
-        
         return tableView
     }()
+
+    var gyroDatas: [GyroData] = GyroData.sampleData()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,48 +45,39 @@ final class ListViewController: UIViewController {
         ])
     }
     
-    @objc func didTapMeasureButton() {
+    @objc
+    private func didTapMeasureButton() {
         
     }
 }
 
 extension ListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        gyroDatas.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? ListCell else { return UITableViewCell()
         }
-        
-        cell.dateLabel.text = "2022/09/08 14:50:43"
-        cell.keyLabel.text = "Accelerometer"
-        cell.valueLabel.text = "43.4"
-        
+        let gyroData = gyroDatas[indexPath.row]
+        cell.dateLabel.text = gyroData.dateString
+        cell.keyLabel.text = gyroData.type.rawValue
+        cell.valueLabel.text = "\(gyroData.value)"
         return cell
     }
-    
-    
 }
 
 extension ListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        
         let playAction = UIContextualAction(style: .normal, title: "Play") { action, view, handler in
             print("touch Play Button")
         }
-        
+        playAction.backgroundColor = .systemGreen
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { action, view, handler in
             print("touch Delete Button")
         }
-        
-        playAction.backgroundColor = .systemGreen
         deleteAction.backgroundColor = .systemRed
-        
         let configuration = UISwipeActionsConfiguration(actions: [ deleteAction, playAction])
-        
         return configuration
     }
-    
 }
