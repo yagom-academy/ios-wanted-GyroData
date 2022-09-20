@@ -60,6 +60,20 @@ extension FirstViewStyling {
     }
 }
 
+protocol SecondViewStyling { }
+
+extension SecondViewStyling {
+    var segmentControlStyling: (UISegmentedControl) -> () {
+        {
+            $0.backgroundColor = .red
+            $0.insertSegment(withTitle: "gyro", at: 0, animated: true)
+            $0.insertSegment(withTitle: "acc", at: 1, animated: true)
+            $0.setEnabled(true, forSegmentAt: 0)
+            $0.selectedSegmentTintColor = .blue
+        }
+    }
+}
+
 extension NSCoding where Self: UIView {
     
     @discardableResult

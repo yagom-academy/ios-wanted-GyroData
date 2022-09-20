@@ -17,7 +17,7 @@ enum SceneCategory {
     }
     
     enum detailScene {
-        case secondViewController
+        case secondViewController(context: SceneContext<SecondModel>)
         case thirdViewController
     }
     
