@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		36E1FC9D28D976B800EB7E4F /* BasicNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E1FC9C28D976B800EB7E4F /* BasicNavigationController.swift */; };
+		36E1FCA028D978AB00EB7E4F /* FirstModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E1FC9F28D978AB00EB7E4F /* FirstModel.swift */; };
+		36E1FCA328D978ED00EB7E4F /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E1FCA228D978ED00EB7E4F /* Repository.swift */; };
+		36E1FCA728D97AAB00EB7E4F /* FirstListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E1FCA628D97AAB00EB7E4F /* FirstListView.swift */; };
+		36E1FCA928D97AD000EB7E4F /* FirstListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E1FCA828D97AD000EB7E4F /* FirstListViewModel.swift */; };
+		36E1FCAC28D97CC000EB7E4F /* FirstListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E1FCAB28D97CC000EB7E4F /* FirstListCell.swift */; };
+		36E1FCAE28D97DB500EB7E4F /* FirstCellContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E1FCAD28D97DB400EB7E4F /* FirstCellContentView.swift */; };
+		36E1FCB028D9820800EB7E4F /* FirstCellContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E1FCAF28D9820800EB7E4F /* FirstCellContentViewModel.swift */; };
 		36FB64ED28D8C5DC00A87587 /* Routable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36FB64EC28D8C5DC00A87587 /* Routable.swift */; };
 		36FB64EF28D8C6EC00A87587 /* SceneCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36FB64EE28D8C6EC00A87587 /* SceneCategory.swift */; };
 		36FB64F128D8C76E00A87587 /* SceneDelegateRoutable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36FB64F028D8C76E00A87587 /* SceneDelegateRoutable.swift */; };
@@ -24,6 +32,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		36E1FC9C28D976B800EB7E4F /* BasicNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicNavigationController.swift; sourceTree = "<group>"; };
+		36E1FC9F28D978AB00EB7E4F /* FirstModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstModel.swift; sourceTree = "<group>"; };
+		36E1FCA228D978ED00EB7E4F /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
+		36E1FCA628D97AAB00EB7E4F /* FirstListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstListView.swift; sourceTree = "<group>"; };
+		36E1FCA828D97AD000EB7E4F /* FirstListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstListViewModel.swift; sourceTree = "<group>"; };
+		36E1FCAB28D97CC000EB7E4F /* FirstListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstListCell.swift; sourceTree = "<group>"; };
+		36E1FCAD28D97DB400EB7E4F /* FirstCellContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstCellContentView.swift; sourceTree = "<group>"; };
+		36E1FCAF28D9820800EB7E4F /* FirstCellContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstCellContentViewModel.swift; sourceTree = "<group>"; };
 		36FB64EC28D8C5DC00A87587 /* Routable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Routable.swift; sourceTree = "<group>"; };
 		36FB64EE28D8C6EC00A87587 /* SceneCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneCategory.swift; sourceTree = "<group>"; };
 		36FB64F028D8C76E00A87587 /* SceneDelegateRoutable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegateRoutable.swift; sourceTree = "<group>"; };
@@ -53,6 +69,59 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		36E1FC9B28D9768D00EB7E4F /* UIKitClasses */ = {
+			isa = PBXGroup;
+			children = (
+				36E1FC9C28D976B800EB7E4F /* BasicNavigationController.swift */,
+			);
+			path = UIKitClasses;
+			sourceTree = "<group>";
+		};
+		36E1FC9E28D9789900EB7E4F /* FirstModel */ = {
+			isa = PBXGroup;
+			children = (
+				36E1FC9F28D978AB00EB7E4F /* FirstModel.swift */,
+				36E1FCA828D97AD000EB7E4F /* FirstListViewModel.swift */,
+				36E1FCAF28D9820800EB7E4F /* FirstCellContentViewModel.swift */,
+			);
+			path = FirstModel;
+			sourceTree = "<group>";
+		};
+		36E1FCA128D978DE00EB7E4F /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				36E1FCA228D978ED00EB7E4F /* Repository.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		36E1FCA428D97A7F00EB7E4F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				36E1FCA628D97AAB00EB7E4F /* FirstListView.swift */,
+				36E1FCAD28D97DB400EB7E4F /* FirstCellContentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		36E1FCA528D97A8600EB7E4F /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				63F01BB828D44FC400C53A39 /* FirstViewController.swift */,
+				36FB64F228D8CA8000A87587 /* SecondViewController.swift */,
+				36FB64F628D8CC7900A87587 /* ThirdViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		36E1FCAA28D97CAB00EB7E4F /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				36E1FCAB28D97CC000EB7E4F /* FirstListCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		36FB64EB28D8C5BD00A87587 /* ViewPresentation */ = {
 			isa = PBXGroup;
 			children = (
@@ -95,11 +164,14 @@
 			children = (
 				63F01BB428D44FC400C53A39 /* AppDelegate.swift */,
 				63F01BB628D44FC400C53A39 /* SceneDelegate.swift */,
-				63F01BB828D44FC400C53A39 /* FirstViewController.swift */,
-				36FB64F228D8CA8000A87587 /* SecondViewController.swift */,
-				36FB64F628D8CC7900A87587 /* ThirdViewController.swift */,
+				36E1FCA528D97A8600EB7E4F /* ViewControllers */,
+				36E1FCAA28D97CAB00EB7E4F /* Cells */,
+				36E1FCA428D97A7F00EB7E4F /* Views */,
+				36E1FC9E28D9789900EB7E4F /* FirstModel */,
 				36FB64FA28D8CE0E00A87587 /* ViewDraw */,
 				36FB64EB28D8C5BD00A87587 /* ViewPresentation */,
+				36E1FC9B28D9768D00EB7E4F /* UIKitClasses */,
+				36E1FCA128D978DE00EB7E4F /* Utilities */,
 				63F01BBD28D44FC500C53A39 /* Assets.xcassets */,
 				63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */,
 				63F01BC228D44FC500C53A39 /* Info.plist */,
@@ -177,16 +249,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36E1FCA928D97AD000EB7E4F /* FirstListViewModel.swift in Sources */,
 				36FB64F928D8CD1700A87587 /* SceneContext.swift in Sources */,
 				63F01BB928D44FC400C53A39 /* FirstViewController.swift in Sources */,
+				36E1FCA328D978ED00EB7E4F /* Repository.swift in Sources */,
 				36FB64F728D8CC7900A87587 /* ThirdViewController.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
 				36FB64F128D8C76E00A87587 /* SceneDelegateRoutable.swift in Sources */,
+				36E1FCAC28D97CC000EB7E4F /* FirstListCell.swift in Sources */,
 				36FB64FE28D8CF0500A87587 /* Styling.swift in Sources */,
 				36FB64F328D8CA8000A87587 /* SecondViewController.swift in Sources */,
 				36FB64ED28D8C5DC00A87587 /* Routable.swift in Sources */,
 				36FB64F528D8CAB000A87587 /* SecondViewControllerRoutable.swift in Sources */,
+				36E1FCB028D9820800EB7E4F /* FirstCellContentViewModel.swift in Sources */,
+				36E1FCAE28D97DB500EB7E4F /* FirstCellContentView.swift in Sources */,
+				36E1FCA028D978AB00EB7E4F /* FirstModel.swift in Sources */,
+				36E1FC9D28D976B800EB7E4F /* BasicNavigationController.swift in Sources */,
+				36E1FCA728D97AAB00EB7E4F /* FirstListView.swift in Sources */,
 				36FB64FC28D8CE1D00A87587 /* Presentable.swift in Sources */,
 				36FB64EF28D8C6EC00A87587 /* SceneCategory.swift in Sources */,
 			);

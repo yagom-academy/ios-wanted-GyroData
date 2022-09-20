@@ -19,7 +19,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, SceneDelegateRoutable {
         guard let _ = (scene as? UIWindowScene) else { return }
         self.windowScene = (scene as? UIWindowScene)
         
-        route(to: .main(.firstViewController))
+        
+        let model = FirstModel(repository: Repository())
+        let sceneContext = SceneContext(dependency: model)
+        
+        route(to: .main(.firstViewController(context: sceneContext)))
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

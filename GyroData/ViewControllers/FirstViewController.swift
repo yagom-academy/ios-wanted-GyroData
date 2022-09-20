@@ -10,9 +10,21 @@ import UIKit
 class FirstViewController: UIViewController, FirstViewStyling {
 
     var measureButton: UIButton = UIButton() //test용도, 프로젝트 진행에 따라 적당한 위치로 이동
+    lazy var contentView: FirstListView = FirstListView(viewModel: self.model.contentViewModel)
+    
+    var model: FirstModel
+    
+    init(viewModel: FirstModel) {
+        self.model = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func loadView() {
-        initViewHierachy()
+        initViewHierarchy()
         configureView()
         bind()
     }
@@ -28,7 +40,7 @@ class FirstViewController: UIViewController, FirstViewStyling {
 
 
 extension FirstViewController: Presentable {
-    func initViewHierachy() {
+    func initViewHierarchy() {
         self.view = UIView()
         
         self.view.addSubview(measureButton)
@@ -47,7 +59,7 @@ extension FirstViewController: Presentable {
     func configureView() {
         view.backgroundColor = .white
         
-        measureButton.addStyle(style: measureButtonStyling)
+        measureButton.addStyles(style: measureButtonStyling)
     }
     
     func bind() {

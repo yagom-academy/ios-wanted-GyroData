@@ -1,5 +1,5 @@
 //
-//  ThirdViewController.swift
+//  SecondViewController.swift
 //  GyroData
 //
 //  Created by pablo.jee on 2022/09/20.
@@ -7,10 +7,10 @@
 
 import UIKit
 
-class ThirdViewController: UIViewController {
+class SecondViewController: UIViewController, SecondViewControllerRoutable {
 
     override func loadView() {
-        initViewHierachy()
+        initViewHierarchy()
         configureView()
         bind()
     }
@@ -34,8 +34,8 @@ class ThirdViewController: UIViewController {
 
 }
 
-extension ThirdViewController: Presentable {
-    func initViewHierachy() {
+extension SecondViewController: Presentable {
+    func initViewHierarchy() {
         self.view = UIView()
     }
     
