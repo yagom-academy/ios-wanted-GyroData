@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		631456C428D9ABEE00B420E8 /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631456C328D9ABEE00B420E8 /* CoreData.swift */; };
+		631456C728D9BCAB00B420E8 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 631456C528D9BCAB00B420E8 /* Model.xcdatamodeld */; };
+		631456CE28D9EEF700B420E8 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631456CD28D9EEF700B420E8 /* DataManager.swift */; };
 		63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB428D44FC400C53A39 /* AppDelegate.swift */; };
 		63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB628D44FC400C53A39 /* SceneDelegate.swift */; };
 		63F01BBC28D44FC400C53A39 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBA28D44FC400C53A39 /* Main.storyboard */; };
@@ -18,6 +21,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		631456C328D9ABEE00B420E8 /* CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreData.swift; sourceTree = "<group>"; };
+		631456C628D9BCAB00B420E8 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		631456CD28D9EEF700B420E8 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		63F01BB128D44FC400C53A39 /* GyroData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GyroData.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63F01BB428D44FC400C53A39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63F01BB628D44FC400C53A39 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -41,9 +47,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		631456CC28D9EED400B420E8 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				631456CD28D9EEF700B420E8 /* DataManager.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
 		63F01BA828D44FC400C53A39 = {
 			isa = PBXGroup;
 			children = (
+				631456CC28D9EED400B420E8 /* Data */,
 				63F01BB328D44FC400C53A39 /* GyroData */,
 				63F01BB228D44FC400C53A39 /* Products */,
 			);
@@ -60,6 +75,7 @@
 		63F01BB328D44FC400C53A39 /* GyroData */ = {
 			isa = PBXGroup;
 			children = (
+				631456C328D9ABEE00B420E8 /* CoreData.swift */,
 				F8493CD028D997DF000A12F2 /* ViewController */,
 				63F01BB428D44FC400C53A39 /* AppDelegate.swift */,
 				63F01BB628D44FC400C53A39 /* SceneDelegate.swift */,
@@ -67,6 +83,7 @@
 				63F01BBD28D44FC500C53A39 /* Assets.xcassets */,
 				63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */,
 				63F01BC228D44FC500C53A39 /* Info.plist */,
+				631456C528D9BCAB00B420E8 /* Model.xcdatamodeld */,
 			);
 			path = GyroData;
 			sourceTree = "<group>";
@@ -155,7 +172,10 @@
 				F8493CD628D9986F000A12F2 /* ReplayViewController.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				F8493CD228D99818000A12F2 /* ListViewController.swift in Sources */,
+				631456C728D9BCAB00B420E8 /* Model.xcdatamodeld in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
+				631456C428D9ABEE00B420E8 /* CoreData.swift in Sources */,
+				631456CE28D9EEF700B420E8 /* DataManager.swift in Sources */,
 				F8493CD428D9984D000A12F2 /* MeasurmentViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -372,6 +392,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		631456C528D9BCAB00B420E8 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				631456C628D9BCAB00B420E8 /* Model.xcdatamodel */,
+			);
+			currentVersion = 631456C628D9BCAB00B420E8 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 63F01BA928D44FC400C53A39 /* Project object */;
 }
