@@ -12,7 +12,7 @@ class FirstListCell: UITableViewCell {
     lazy var cellView: FirstCellContentView = FirstCellContentView(viewModel: self.viewModel)
     var viewModel = FirstCellContentViewModel() {
         didSet {
-            
+            cellView.didReceiveViewModel(self.viewModel)
         }
     }
     

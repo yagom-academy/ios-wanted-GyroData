@@ -10,8 +10,10 @@ import UIKit
 class FirstListView: UIView {
 
     var tableView: UITableView = UITableView()
+    var viewModel: FirstListViewModel
     
     init(viewModel: FirstListViewModel) {
+        self.viewModel = viewModel
         super.init(frame: .zero)
         initViewHierarchy()
         configureView()
@@ -55,7 +57,7 @@ extension FirstListView: Presentable {
 
 extension FirstListView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        viewModel.didSelectRow(indexPath.row)
     }
 }
 
@@ -69,11 +71,19 @@ extension FirstListView: UITableViewDataSource {
         return 100
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? FirstListCell else {
             fatalError()
         }
         
+        //temp
+        //model이 만들어둔 cellViewModel을 잘 넘겨줄 수 있도록 추가 처리 필요
+        let viewModel = FirstCellContentViewModel()
+        cell.configureCell(viewModel: viewModel)
         return cell
     }
     

@@ -6,7 +6,34 @@
 //
 
 import Foundation
-
+//var timeLabel: UILabel = UILabel()
+//var measureTypeLabel: UILabel = UILabel()
+//var amountLabel: UILabel = UILabel()
 class FirstCellContentViewModel {
+    //input
+    var time: String
+    var measureType: String
+    var amount: String
     
+    //output
+    var timeString: String {
+        return time
+    }
+    
+    var measureTypeString: String {
+        return measureType
+    }
+    
+    var amountString: String {
+        return amount
+    }
+    
+    //properties
+    
+    init() {
+        //temp
+        self.time = "2022/09/08 14:50:43"
+        self.measureType = "gyro"
+        self.amount = "60.0"
+    }
 }

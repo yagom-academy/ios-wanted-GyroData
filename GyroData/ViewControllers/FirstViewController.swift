@@ -7,9 +7,8 @@
 
 import UIKit
 
-class FirstViewController: UIViewController, FirstViewStyling {
+class FirstViewController: UIViewController, FirstViewStyling, FirstViewControllerRoutable {
 
-    var measureButton: UIButton = UIButton() //test용도, 프로젝트 진행에 따라 적당한 위치로 이동
     lazy var contentView: FirstListView = FirstListView(viewModel: self.model.contentViewModel)
     
     var model: FirstModel
@@ -43,26 +42,30 @@ extension FirstViewController: Presentable {
     func initViewHierarchy() {
         self.view = UIView()
         
-        self.view.addSubview(measureButton)
+        self.view.addSubview(contentView)
         
-        measureButton.translatesAutoresizingMaskIntoConstraints = false
+        contentView.translatesAutoresizingMaskIntoConstraints = false
         
         var constraint: [NSLayoutConstraint] = []
         defer { NSLayoutConstraint.activate(constraint) }
         
         constraint += [
-            measureButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            measureButton.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
+            contentView.topAnchor.constraint(equalTo: self.view.topAnchor),
+            contentView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            contentView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
         ]
+        
     }
     
     func configureView() {
         view.backgroundColor = .white
-        
-        measureButton.addStyles(style: measureButtonStyling)
     }
     
     func bind() {
-        
+        model.routeSubject = { [weak self] sceneCategory in
+            guard let self = self else { return }
+            self.route(to: sceneCategory)
+        }
     }
 }

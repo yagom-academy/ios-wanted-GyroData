@@ -16,6 +16,8 @@ class FirstModel {
         return privateFirstListViewModel
     }
     
+    var routeSubject: (SceneCategory) -> () = { sceneCategory in }
+    
     //properties
     private var privateFirstListViewModel: FirstListViewModel
     private var repository: RepositoryProtocol
@@ -27,7 +29,11 @@ class FirstModel {
     }
     
     private func bind() {
-        
+        privateFirstListViewModel.propergateDidSelectRowEvent = { [weak self] indexPathRow in
+            //temp
+            guard let self = self else { return }
+            self.routeSubject(.detail(.secondViewController))
+        }
     }
     
     func populateData() {

@@ -10,6 +10,10 @@ import SwiftUI
 
 class FirstCellContentView: UIView, FirstViewStyling {
     
+    //input
+    var didReceiveViewModel: (FirstCellContentViewModel) -> () = { viewModel in  }
+    
+    //properties
     var timeLabel: UILabel = UILabel()
     var measureTypeLabel: UILabel = UILabel()
     var amountLabel: UILabel = UILabel()
@@ -76,7 +80,16 @@ extension FirstCellContentView: Presentable {
     }
 
     func bind() {
-        
+        didReceiveViewModel = { [weak self] viewModel in
+            guard let self = self else { return }
+            self.setData()
+        }
+    }
+    
+    private func setData() {
+        timeLabel.text = viewModel.timeString
+        measureTypeLabel.text = viewModel.measureTypeString
+        amountLabel.text = viewModel.amountString
     }
 }
 
