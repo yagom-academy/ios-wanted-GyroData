@@ -4,11 +4,9 @@
 //
 //  Created by pablo.jee on 2022/09/20.
 //
-
+//testteesttest
 import Foundation
-//var timeLabel: UILabel = UILabel()
-//var measureTypeLabel: UILabel = UILabel()
-//var amountLabel: UILabel = UILabel()
+
 class FirstCellContentViewModel {
     //input
     var time: String
