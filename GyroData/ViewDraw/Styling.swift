@@ -26,9 +26,7 @@ extension BasicNavigationBarStyling {
 }
 
 protocol FirstViewStyling { }
-//var timeLabel: UILabel = UILabel()
-//var measureTypeLabel: UILabel = UILabel()
-//var amountLabel: UILabel = UILabel()
+
 extension FirstViewStyling {
     var measureButtonStyling: (UIButton) -> () {
         {

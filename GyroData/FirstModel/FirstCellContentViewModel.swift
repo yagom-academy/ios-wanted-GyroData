@@ -6,9 +6,7 @@
 //
 
 import Foundation
-//var timeLabel: UILabel = UILabel()
-//var measureTypeLabel: UILabel = UILabel()
-//var amountLabel: UILabel = UILabel()
+
 class FirstCellContentViewModel {
     //input
     var time: String
