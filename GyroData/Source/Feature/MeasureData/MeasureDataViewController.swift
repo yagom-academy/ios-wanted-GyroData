@@ -11,8 +11,9 @@ class MeasureDataViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        self.title = "측정하기"
+        self.view.backgroundColor = .white
+        
     }
-
-
 }
