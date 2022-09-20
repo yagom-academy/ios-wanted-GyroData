@@ -6,7 +6,7 @@
 //
 
 import UIKit
-//testteesttest
+
 class SceneDelegate: UIResponder, UIWindowSceneDelegate, SceneDelegateRoutable {
 
     var window: UIWindow?
