@@ -9,6 +9,7 @@ import Foundation
 
 struct Motion {
     var type: String
+    var time: Float
+    var date: Date
     var path: String
-    var time: Date
 }

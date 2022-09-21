@@ -45,8 +45,9 @@ class CoreDataManager {
             let managedObject = NSManagedObject(entity: entity, insertInto: self.context)
             
             managedObject.setValue(motion.type, forKey: "type")
-            managedObject.setValue(motion.path, forKey: "path")
             managedObject.setValue(motion.time, forKey: "time")
+            managedObject.setValue(motion.date, forKey: "date")
+            managedObject.setValue(motion.path, forKey: "path")
             
             do {
                 try self.context.save()
