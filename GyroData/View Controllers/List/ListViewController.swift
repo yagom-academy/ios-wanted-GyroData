@@ -6,8 +6,12 @@
 //
 
 import UIKit
+import CoreData
 
 final class ListViewController: UIViewController {
+    
+    var container: NSPersistentContainer!
+    
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -25,6 +29,7 @@ final class ListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        container = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
         configureNavigation()
         configureLayout()
         loadMoreData()
