@@ -8,11 +8,29 @@
 import UIKit
 
 class MeasureViewController: UIViewController {
+    
+    let mainView = MeasureView()
+    
+    override func loadView() {
+        self.view = mainView
+        self.navigationItem.title = "측정하기"
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setup()
 
         // Do any additional setup after loading the view.
+    }
+    
+    func setup() {
+        mainView.segmentControl.selectedSegmentIndex = 0
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "측정", style: .plain, target: self, action: #selector(saveAction))
+    }
+    
+    // MARK: incomplete
+    @objc func saveAction() {
+        print("저장")
     }
     
 
