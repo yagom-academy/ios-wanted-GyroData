@@ -38,7 +38,7 @@ class CoreDataManager {
     }
     
     @discardableResult
-    func insertMotionData(motion: Motion) -> Bool {
+    func insertMotionTask(motion: Motion) -> Bool {
         let entity = NSEntityDescription.entity(forEntityName: "MotionModel", in: self.context)
         
         if let entity = entity {
