@@ -9,42 +9,64 @@ import UIKit
 
 class MeasureDataViewController: UIViewController {
         
-    var isGyroOnScreen : Bool = false{
-        didSet{
-            if oldValue{
-                gyroBtn.backgroundColor = .lightGray
-                accBtn.backgroundColor = .gray
-            }else{
-                gyroBtn.backgroundColor = .gray
-                accBtn.backgroundColor = .lightGray
-            }
+    var isGyroOnScreen : Bool = false
+    
+    lazy var segmentedControl: UISegmentedControl = {
+      let control = UISegmentedControl(items: ["Acc", "Gyro"])
+        control.selectedSegmentTintColor = .systemBlue
+        control.backgroundColor = .gray
+        control.addTarget(self, action: #selector(segconChange), for: .valueChanged)
+        control.selectedSegmentIndex = 0
+      return control
+    }()
+    
+    @objc func segconChange(_ secong:UISegmentedControl){
+        if secong.selectedSegmentIndex == 0{
+            presentAcc()
+            isGyroOnScreen.toggle()
+        }else{
+            presentGyro()
+            isGyroOnScreen.toggle()
         }
     }
     
-    lazy var gyroBtn : UIButton = {
-        let btn = UIButton(primaryAction: UIAction(title:"Gyro",handler:{ _ in
-            if !self.isGyroOnScreen {
-                self.presentGyro()
-                self.isGyroOnScreen.toggle()
-            }
-        }))
+    //dumyData
+    var xPoints : [Double]{
+        var arr = [Double]()
+        for _ in 0..<600{
+            arr.append(Double.random(in: -40..<40))
+        }
+        return arr
+    }
+    var yPoints : [Double]{
+        var arr = [Double]()
+        for _ in 0..<600{
+            arr.append(Double.random(in: -40..<40))
+        }
+        return arr
+    }
+    var zPoints : [Double]{
+        var arr = [Double]()
+        for _ in 0..<600{
+            arr.append(Double.random(in: -40..<40))
+        }
+        return arr
+    }
+    
+    lazy var measureBtn : UIButton = {
+        let btn = UIButton()
+        btn.setTitle("측정", for: .normal)
         btn.setTitleColor(.black, for: .normal)
-        btn.backgroundColor = .lightGray
         return btn
     }()
     
-    lazy var accBtn : UIButton = {
-        let btn = UIButton(primaryAction: UIAction(title:"Acc",handler:{ _ in
-            if self.isGyroOnScreen {
-                self.presentAcc()
-                self.isGyroOnScreen.toggle()
-            }
-        }))
+    lazy var stopBtn : UIButton = {
+        let btn = UIButton()
+        btn.setTitle("정지", for: .normal)
         btn.setTitleColor(.black, for: .normal)
-        btn.backgroundColor = .gray
         return btn
     }()
-        
+    
     lazy var xLabel : UILabel = {
         let lbl = UILabel()
         lbl.textColor = .red
@@ -61,27 +83,7 @@ class MeasureDataViewController: UIViewController {
         return lbl
     }()
     
-    lazy var measureBtn : UIButton = {
-        let btn = UIButton()
-        btn.setTitle("측정", for: .normal)
-        btn.setTitleColor(.black, for: .normal)
-        return btn
-    }()
     
-    lazy var stopBtn : UIButton = {
-        let btn = UIButton()
-        btn.setTitle("정지", for: .normal)
-        btn.setTitleColor(.black, for: .normal)
-        return btn
-    }()
-    
-    
-    
-    
-    //dumyData
-    var xPoints = [4,2,6,4,5,8,3,9,15,5,3,9,5]
-    var yPoints = [7,21,3,6,9,1,2,3,14,8,1,6,7]
-    var zPoints = [4,17,3,3,5,8,13,9,2,8,12,4,6]
     
     lazy var gyro : GraphView = {
         let view = GraphView(xPoints: xPoints, yPoints: yPoints, zPoints: zPoints)
@@ -104,16 +106,13 @@ class MeasureDataViewController: UIViewController {
         self.title = "측정하기"
         self.view.backgroundColor = .white
         
-        addViews(to: self.view, gyroBtn, accBtn, measureBtn, stopBtn)
-        doNotTranslate( gyroBtn, accBtn,measureBtn, stopBtn)
+        addViews(to: self.view, segmentedControl, measureBtn, stopBtn)
+        doNotTranslate( segmentedControl,measureBtn, stopBtn)
         
         NSLayoutConstraint.activate([
-            gyroBtn.bottomAnchor.constraint(equalTo: view.centerYAnchor, constant: -view.frame.width * 0.4 - 20),
-            gyroBtn.leadingAnchor.constraint(equalTo: view.centerXAnchor),
-            gyroBtn.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.4),
-            accBtn.bottomAnchor.constraint(equalTo: view.centerYAnchor, constant: -view.frame.width * 0.4 - 20),
-            accBtn.trailingAnchor.constraint(equalTo: view.centerXAnchor),
-            accBtn.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.4),
+            segmentedControl.bottomAnchor.constraint(equalTo: view.centerYAnchor, constant: -view.frame.width * 0.4 - 20),
+            segmentedControl.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            segmentedControl.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8),
             measureBtn.centerYAnchor.constraint(equalTo: view.centerYAnchor).constraintWithMultiplier(1.5),
             measureBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor).constraintWithMultiplier(0.5),
             stopBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor).constraintWithMultiplier(0.5),
@@ -195,16 +194,16 @@ class GraphView : UIView {
         static let colorAlpha: CGFloat = 0.7
         static let colorAlphaForSubLine : CGFloat = 0.3
         static let circleDiameter: CGFloat = 5.0
-        static let maxPoint : CGFloat = 25
+        static let maxPoint : CGFloat = 80
     }
     
     //그라데이션을 위한 시작 색상과 끝 색상
     var startColor : UIColor = .lightGray
     var endColor   : UIColor = .gray
     
-    var xPoints : [Int]
-    var yPoints : [Int]
-    var zPoints : [Int]
+    var xPoints : [Double]
+    var yPoints : [Double]
+    var zPoints : [Double]
     
     // set up the points line
     let xPath = UIBezierPath()
@@ -226,7 +225,7 @@ class GraphView : UIView {
     
     
     
-    init(xPoints:[Int], yPoints:[Int], zPoints:[Int]){
+    init(xPoints:[Double], yPoints:[Double], zPoints:[Double]){
         
         self.xPoints = xPoints
         self.yPoints = yPoints
@@ -247,7 +246,7 @@ class GraphView : UIView {
         //x-point 계산
         let margin = Constants.margin
         let graphWidth = width - margin * 2
-        let columnXPoint = { (column : Int) -> CGFloat in
+        let columnXPoint = { (column : Double) -> CGFloat in
             //gap between points
             let spacing = graphWidth / CGFloat(self.xPoints.count - 1)
             return CGFloat(column) * spacing + margin
@@ -258,9 +257,9 @@ class GraphView : UIView {
         let bottomBorder = Constants.bottomBorder
         let graphHeight  = height - topBorder - bottomBorder
         let maxValue     = Constants.maxPoint
-        let columnYPoint = { (graphPoint : Int) -> CGFloat in
+        let columnYPoint = { (graphPoint : Double) -> CGFloat in
             let y = CGFloat(graphPoint) / CGFloat(maxValue) * graphHeight
-            return graphHeight + topBorder - y
+            return graphHeight / 2 + topBorder - y
         }
         
         
@@ -303,25 +302,13 @@ class GraphView : UIView {
         //add points for each item in the xPoints array
         //at the correct (x,y) for the point
         for i in 1..<self.xPoints.count {
-            let nextPoint = CGPoint(x: columnXPoint(i), y: columnYPoint(self.xPoints[i]))
+            let nextPoint = CGPoint(x: columnXPoint(Double(i)), y: columnYPoint(self.xPoints[i]))
             xPath.addLine(to: nextPoint)
         }
         
         
         //xPath.stroke()
-        
-        
-        //점도 애니메이션 구현하기
-        //        for i in 0..<xPoints.count {
-        //            var point = CGPoint(x: columnXPoint(i), y: columnYPoint(xPoints[i]))
-        //            point.x -= Constants.circleDiameter / 2
-        //            point.y -= Constants.circleDiameter / 2
-        //
-        //            let circle = UIBezierPath(ovalIn: CGRect(origin: point, size: CGSize(width: Constants.circleDiameter, height: Constants.circleDiameter)))
-        //
-        //            circle.fill()
-        //        }
-        
+
         
         
         
@@ -337,26 +324,13 @@ class GraphView : UIView {
         //add points for each item in the xPoints array
         //at the correct (x,y) for the point
         for i in 1..<yPoints.count {
-            let nextPoint = CGPoint(x: columnXPoint(i), y: columnYPoint(yPoints[i]))
+            let nextPoint = CGPoint(x: columnXPoint(Double(i)), y: columnYPoint(yPoints[i]))
             yPath.addLine(to: nextPoint)
         }
         
         //yPath.stroke()
         
-        //        for i in 0..<yPoints.count {
-        //            var point = CGPoint(x: columnXPoint(i), y: columnYPoint(yPoints[i]))
-        //            point.x -= Constants.circleDiameter / 2
-        //            point.y -= Constants.circleDiameter / 2
-        //
-        //            let circle = UIBezierPath(ovalIn: CGRect(origin: point, size: CGSize(width: Constants.circleDiameter, height: Constants.circleDiameter)))
-        //
-        //            circle.fill()
-        //        }
-        
-        
-        
-        
-        
+    
         
         //draw the zline graph
         UIColor.blue.setFill()
@@ -369,28 +343,18 @@ class GraphView : UIView {
         //add points for each item in the xPoints array
         //at the correct (x,y) for the point
         for i in 1..<zPoints.count {
-            let nextPoint = CGPoint(x: columnXPoint(i), y: columnYPoint(zPoints[i]))
+            let nextPoint = CGPoint(x: columnXPoint(Double(i)), y: columnYPoint(zPoints[i]))
             zPath.addLine(to: nextPoint)
         }
         
         //zPath.stroke()
         
-        //        for i in 0..<yPoints.count {
-        //            var point = CGPoint(x: columnXPoint(i), y: columnYPoint(zPoints[i]))
-        //            point.x -= Constants.circleDiameter / 2
-        //            point.y -= Constants.circleDiameter / 2
-        //
-        //            let circle = UIBezierPath(ovalIn: CGRect(origin: point, size: CGSize(width: Constants.circleDiameter, height: Constants.circleDiameter)))
-        //
-        //            circle.fill()
-        //        }
-        
         
         //draw horizontal graph lines on the top of everything
         let linePath = UIBezierPath()
         
-        linePath.move(to: CGPoint(x: margin, y: columnYPoint(0) ))
-        linePath.addLine(to: CGPoint(x: width - margin, y: columnYPoint(0) ))
+        linePath.move(to: CGPoint(x: margin, y: graphHeight / 2 + topBorder ))
+        linePath.addLine(to: CGPoint(x: width - margin, y: graphHeight / 2 + topBorder ))
         
         linePath.move(to: CGPoint(x: margin, y: topBorder))
         linePath.addLine(to: CGPoint(x: margin, y: graphHeight + topBorder))
@@ -410,19 +374,19 @@ class GraphView : UIView {
         xLineLayer.path = xPath.cgPath
         xLineLayer.strokeColor = UIColor.red.cgColor
         xLineLayer.fillColor = nil
-        xLineLayer.lineWidth = 2
+        xLineLayer.lineWidth = 0.5
         self.layer.addSublayer(xLineLayer)
         
         yLineLayer.path = yPath.cgPath
         yLineLayer.strokeColor = UIColor.green.cgColor
         yLineLayer.fillColor = nil
-        yLineLayer.lineWidth = 2
+        yLineLayer.lineWidth = 0.5
         self.layer.addSublayer(yLineLayer)
         
         zLineLayer.path = zPath.cgPath
         zLineLayer.strokeColor = UIColor.blue.cgColor
         zLineLayer.fillColor = nil
-        zLineLayer.lineWidth = 2
+        zLineLayer.lineWidth = 0.5
         self.layer.addSublayer(zLineLayer)
         
     }
