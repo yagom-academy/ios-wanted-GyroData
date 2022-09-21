@@ -38,8 +38,8 @@ class CoreDataManager {
     }
     
     @discardableResult
-    func insertMotionTask(motion: Motion) -> Bool {
-        let entity = NSEntityDescription.entity(forEntityName: "MotionModel", in: self.context)
+    func insertMotionTask(motion: MotionTask) -> Bool {
+        let entity = NSEntityDescription.entity(forEntityName: "Motion", in: self.context)
         
         if let entity = entity {
             let managedObject = NSManagedObject(entity: entity, insertInto: self.context)

@@ -1,5 +1,5 @@
 //
-//  Motion.swift
+//  MotionTask.swift
 //  GyroData
 //
 //  Created by channy on 2022/09/21.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Motion {
+struct MotionTask {
     var type: String
     var time: Float
     var date: Date
