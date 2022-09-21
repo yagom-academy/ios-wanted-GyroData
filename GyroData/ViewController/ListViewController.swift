@@ -84,18 +84,14 @@ class ListViewController: UIViewController {
         naviBar.backgroundColor = .systemBackground
         
         let naviItem = UINavigationItem(title: "목록")
-        naviItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(add))
-                naviBar.items = [naviItem]
+        naviItem.rightBarButtonItem = UIBarButtonItem(title: "측정", style: .plain, target: self, action: #selector(add))
+        // + 버튼
+//        naviItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(add))
+        naviBar.items = [naviItem]
             view.addSubview(naviBar)
     }
     
-//    //지워도됨
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        DataManager.shared.fetchMemo()
-//        listTable.reloadData()
-//    }
-    
+
     
 }
 

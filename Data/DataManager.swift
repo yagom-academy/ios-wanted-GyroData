@@ -10,7 +10,14 @@ import CoreData
 class  DataManager {
     static let shared = DataManager()
     
-    private init() {}
+    private init() {
+        let uuid : Int64
+        let gyro : String?
+        let acc : String?
+        let timetamp: String?
+        let interval : Float
+        
+    }
     
     var viewContext: NSManagedObjectContext {
         return persistentContainer.viewContext
