@@ -7,11 +7,18 @@
 
 import UIKit
 
-class SecondViewController: UIViewController, SecondViewControllerRoutable {
+class SecondViewController: UIViewController, SecondViewControllerRoutable, SecondViewStyling, SceneDismissable {
+    // MARK: UI
+    var saveButton = UIBarButtonItem()
+    var backButton = UIBarButtonItem()
+    lazy var segmentView = SecondViewSegementedControlView(viewModel: self.viewModel.segmentViewModel)
+    var dummyGraphView = UIView()
+    var controlView = SecondControlView()
     
-    lazy var segmentView: SecondViewSegementedControlView = SecondViewSegementedControlView(viewModel: self.viewModel.segmentViewModel)
+    // MARK: Properties
     var viewModel: SecondModel
     
+    // MARK: Init
     init(viewModel: SecondModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -21,6 +28,7 @@ class SecondViewController: UIViewController, SecondViewControllerRoutable {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: LifeCycles
     override func loadView() {
         initViewHierarchy()
         configureView()
@@ -29,29 +37,20 @@ class SecondViewController: UIViewController, SecondViewControllerRoutable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
+// MARK: Presentable
 extension SecondViewController: Presentable {
     func initViewHierarchy() {
         self.view = UIView()
         view.addSubview(segmentView)
+        view.addSubview(dummyGraphView)
+        view.addSubview(controlView)
         
         segmentView.translatesAutoresizingMaskIntoConstraints = false
+        dummyGraphView.translatesAutoresizingMaskIntoConstraints = false
+        controlView.translatesAutoresizingMaskIntoConstraints = false
         
         var constraints: [NSLayoutConstraint] = []
         
@@ -59,17 +58,49 @@ extension SecondViewController: Presentable {
         
         constraints += [
             segmentView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 8),
-            segmentView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            segmentView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            segmentView.heightAnchor.constraint(equalToConstant: 100)
+            segmentView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            segmentView.widthAnchor.constraint(equalToConstant: 300),
+            segmentView.heightAnchor.constraint(equalToConstant: 30),
+            dummyGraphView.topAnchor.constraint(equalTo: segmentView.bottomAnchor, constant: 24),
+            dummyGraphView.leadingAnchor.constraint(equalTo: segmentView.leadingAnchor),
+            dummyGraphView.trailingAnchor.constraint(equalTo: segmentView.trailingAnchor),
+            dummyGraphView.heightAnchor.constraint(equalTo: dummyGraphView.widthAnchor),
+            controlView.leadingAnchor.constraint(equalTo: segmentView.leadingAnchor),
+            controlView.trailingAnchor.constraint(equalTo: segmentView.trailingAnchor),
+            controlView.topAnchor.constraint(equalTo: dummyGraphView.bottomAnchor, constant: 80),
+            controlView.heightAnchor.constraint(equalToConstant: 100)
         ]
+        
+        navigationItem.rightBarButtonItem = saveButton
+        navigationItem.leftBarButtonItem = backButton
     }
     
     func configureView() {
-        self.view.backgroundColor = .orange
+        self.view.backgroundColor = .white
+        dummyGraphView.backgroundColor = .systemCyan
+        navigationItem.title = "측정하기"
+        
+        saveButton.addStyles(style: saveButtonStyling)
+        saveButton.target = self
+        saveButton.action = #selector(didTapSaveButton)
+        
+        backButton.addStyles(style: backButtonStyling)
+        backButton.target = self
+        backButton.action = #selector(didTapBackButton)
     }
     
     func bind() {
-        
+        viewModel.routeSubject = { [weak self] scene in
+            self?.route(to: scene)
+        }
+    }
+    
+    // MARK: Action
+    @objc private func didTapSaveButton() {
+        viewModel.didTapSaveButton()
+    }
+    
+    @objc private func didTapBackButton() {
+        viewModel.didTapBackButton()
     }
 }

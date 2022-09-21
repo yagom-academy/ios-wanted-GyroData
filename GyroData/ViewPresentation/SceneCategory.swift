@@ -11,6 +11,7 @@ import Foundation
 enum SceneCategory {
     case main(mainScene)
     case detail(detailScene)
+    case close
     
     enum mainScene {
         case firstViewController(context: SceneContext<FirstModel>)

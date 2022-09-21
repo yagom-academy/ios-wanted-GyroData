@@ -29,6 +29,8 @@ extension SecondViewControllerRoutable where Self: SecondViewController {
             let nextScene = buildScene(scene: Scene)
             guard let nextVC = nextScene as? UIViewController else { return }
             self.navigationController?.pushViewController(nextVC, animated: true)
+        case .close:
+            self.navigationController?.popViewController(animated: true)
         default: break
         }
     }
