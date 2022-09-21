@@ -10,6 +10,7 @@ import CoreMotion
 
 class MeasureDataViewController: UIViewController {
         
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var isGyroOnScreen : Bool = false
     var isMeasuring: Bool = false
     let motion = CMMotionManager()
@@ -19,6 +20,12 @@ class MeasureDataViewController: UIViewController {
         NSAttributedString.Key.foregroundColor: UIColor.black,
         NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13)
     ]
+    var measureTime = 0
+    var motionXArray = [Double]()
+    var motionYArray = [Double]()
+    var motionZArray = [Double]()
+    var startDate = ""
+    var dataType = ""
 
     lazy var segmentedControl: UISegmentedControl = {
       let control = UISegmentedControl(items: ["Acc", "Gyro"])
@@ -199,36 +206,63 @@ class MeasureDataViewController: UIViewController {
     func doNotTranslate(_ views:UIView...){
         views.forEach{$0.translatesAutoresizingMaskIntoConstraints = false}
     }
+
+    func initMeasureDatas(type: String) {
+        measureTime = 0
+        motionXArray.removeAll()
+        motionYArray.removeAll()
+        motionZArray.removeAll()
+        dataType = type
+        let date = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "y-M-d_HH:mm:ss"
+        startDate = dateFormatter.string(from: date)
+
+    }
     
     func startAccelerometers() {
-            if motion.isAccelerometerAvailable {
-                motion.accelerometerUpdateInterval = 0.1
-                motion.startAccelerometerUpdates()
-                
-                self.accTimer = Timer(fire: Date(), interval: 0.1,
-                                      repeats: true, block: { (timer) in
-                    if let data = self.motion.accelerometerData {
-                        let x = data.acceleration.x
-                        let y = data.acceleration.y
-                        let z = data.acceleration.z
-                        self.xLabel.text = "x = \(String(format: "%.2f", x))"
-                        self.yLabel.text = "y = \(String(format: "%.2f", y))"
-                        self.zLabel.text = "z = \(String(format: "%.2f", z))"
-                    }
-                })
-                if let timer = accTimer {
-                    RunLoop.current.add(timer, forMode: .default)
+        initMeasureDatas(type: "Accelerometer")
+
+        if motion.isAccelerometerAvailable {
+            motion.accelerometerUpdateInterval = 0.1
+            motion.startAccelerometerUpdates()
+
+            self.accTimer = Timer(fire: Date(), interval: 0.1,
+                                  repeats: true, block: { (timer) in
+                if self.measureTime == 600 { self.buttonTapAction(self.stopBtn) }
+
+                if let data = self.motion.accelerometerData {
+                    let x = data.acceleration.x
+                    let y = data.acceleration.y
+                    let z = data.acceleration.z
+                    self.xLabel.text = "x = \(String(format: "%.2f", x))"
+                    self.yLabel.text = "y = \(String(format: "%.2f", y))"
+                    self.zLabel.text = "z = \(String(format: "%.2f", z))"
+
+                    self.motionXArray.append(x)
+                    self.motionYArray.append(y)
+                    self.motionZArray.append(z)
+
+                    self.measureTime += 1
                 }
+            })
+            if let timer = accTimer {
+                RunLoop.current.add(timer, forMode: .default)
             }
         }
+    }
 
     func startGyroscope() {
+        initMeasureDatas(type: "Gyro")
+
         if motion.isGyroAvailable {
             motion.gyroUpdateInterval = 0.1
             motion.startGyroUpdates()
             
             self.gyroTimer = Timer(fire: Date(), interval: 0.1,
                                    repeats: true, block: { (timer) in
+                if self.measureTime == 600 { self.buttonTapAction(self.stopBtn) }
+
                 if let data = self.motion.gyroData {
                     let x = data.rotationRate.x
                     let y = data.rotationRate.y
@@ -236,6 +270,12 @@ class MeasureDataViewController: UIViewController {
                     self.xLabel.text = "x = \(String(format: "%.2f", x))"
                     self.yLabel.text = "y = \(String(format: "%.2f", y))"
                     self.zLabel.text = "z = \(String(format: "%.2f", z))"
+
+                    self.motionXArray.append(x)
+                    self.motionYArray.append(y)
+                    self.motionZArray.append(z)
+
+                    self.measureTime += 1
                 }
             })
             if let timer = gyroTimer {
@@ -246,6 +286,24 @@ class MeasureDataViewController: UIViewController {
     
     func stopMeasuring(_ timer: Timer?) {
         timer?.invalidate()
+    }
+
+    func saveMeasuredData() {
+
+        let motionData = MotionData(context: self.context)
+        motionData.measureTime = String(Double(measureTime) / 10.0)
+        motionData.date = startDate
+        motionData.dataType = dataType
+        motionData.motionX = motionXArray
+        motionData.motionY = motionYArray
+        motionData.motionZ = motionZArray
+
+        do {
+            try context.save()
+        } catch {
+            print("<<Error Saving Context>>")
+            print(error)
+        }
     }
     
     @objc func buttonTapAction(_ sender: UIButton) {
@@ -271,7 +329,7 @@ class MeasureDataViewController: UIViewController {
             isMeasuring = false
             measureBtn.isEnabled = true
         case saveBtn:
-            print("save")
+            saveMeasuredData()
         default:
             return
         }
