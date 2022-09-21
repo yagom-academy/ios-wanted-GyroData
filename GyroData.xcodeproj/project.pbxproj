@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5DB1DE6128D9A50000C7161F /* GyroData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB1DE6028D9A50000C7161F /* GyroData.swift */; };
+		5DB1DE6328D9B9F400C7161F /* GyroDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB1DE6228D9B9F400C7161F /* GyroDataRepository.swift */; };
 		63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB428D44FC400C53A39 /* AppDelegate.swift */; };
 		63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB628D44FC400C53A39 /* SceneDelegate.swift */; };
 		63F01BB928D44FC400C53A39 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB828D44FC400C53A39 /* ListViewController.swift */; };
@@ -18,6 +19,7 @@
 
 /* Begin PBXFileReference section */
 		5DB1DE6028D9A50000C7161F /* GyroData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroData.swift; sourceTree = "<group>"; };
+		5DB1DE6228D9B9F400C7161F /* GyroDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroDataRepository.swift; sourceTree = "<group>"; };
 		63F01BB128D44FC400C53A39 /* GyroData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GyroData.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63F01BB428D44FC400C53A39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63F01BB628D44FC400C53A39 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -47,6 +49,14 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		5DB1DE6428D9BA4500C7161F /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				5DB1DE6228D9B9F400C7161F /* GyroDataRepository.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
 		63F01BA828D44FC400C53A39 = {
 			isa = PBXGroup;
 			children = (
@@ -67,8 +77,9 @@
 			isa = PBXGroup;
 			children = (
 				5DB1DE5F28D9A4F800C7161F /* Models */,
-				C1207E7D28D969AD003D14F5 /* Supporting Files */,
 				C1207E7C28D96843003D14F5 /* View Controllers */,
+				5DB1DE6428D9BA4500C7161F /* Repository */,
+				C1207E7D28D969AD003D14F5 /* Supporting Files */,
 			);
 			path = GyroData;
 			sourceTree = "<group>";
@@ -174,6 +185,7 @@
 			files = (
 				63F01BB928D44FC400C53A39 /* ListViewController.swift in Sources */,
 				C1207E8328D98712003D14F5 /* ListCell.swift in Sources */,
+				5DB1DE6328D9B9F400C7161F /* GyroDataRepository.swift in Sources */,
 				5DB1DE6128D9A50000C7161F /* GyroData.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
