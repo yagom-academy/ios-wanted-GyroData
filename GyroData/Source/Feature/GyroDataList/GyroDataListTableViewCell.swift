@@ -19,7 +19,7 @@ class GyroDataListTableViewCell: UITableViewCell {
         return stackView
     }()
 
-    private let dateLabel: UILabel = {
+    let dateLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
         label.font = .systemFont(ofSize: 12, weight: .regular)
@@ -27,7 +27,7 @@ class GyroDataListTableViewCell: UITableViewCell {
         return label
     }()
     
-    private let dataTypeLabel: UILabel = {
+    let dataTypeLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
         label.font = .systemFont(ofSize: 18, weight: .bold)
@@ -35,7 +35,7 @@ class GyroDataListTableViewCell: UITableViewCell {
         return label
     }()
     
-    private let timeLabel: UILabel = {
+    let timeLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
         label.font = .systemFont(ofSize: 30, weight: .heavy)
