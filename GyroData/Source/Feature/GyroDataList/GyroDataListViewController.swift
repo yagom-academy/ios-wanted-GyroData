@@ -50,6 +50,26 @@ class GyroDataListViewController: UIViewController, UITableViewDelegate, UITable
 
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let modity = UIContextualAction(style: .normal, title: "Play") { (UIContextualAction, UIView, success: @escaping (Bool) -> Void) in
+            print("play")
+            success(true)
+        }
+        modity.backgroundColor = .systemGreen
+        
+        
+        let delete = UIContextualAction(style: .normal, title: "Delete") { (UIContextualAction, UIView, success: @escaping (Bool) -> Void) in
+            print("delete")
+            success(true)
+        }
+        delete.backgroundColor = .systemRed
+        
+        let swipeActionConfiguration = UISwipeActionsConfiguration(actions:[delete, modity])
+        swipeActionConfiguration.performsFirstActionWithFullSwipe = false
+        
+        return swipeActionConfiguration
+    }
 
 }
 
