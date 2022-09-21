@@ -8,11 +8,13 @@
 import UIKit
 
 class FirstViewController: UIViewController, FirstViewStyling, FirstViewControllerRoutable {
-
+    // MARK: UI
     lazy var contentView: FirstListView = FirstListView(viewModel: self.model.contentViewModel)
     
+    // MARK: Properties
     var model: FirstModel
     
+    // MARK: Init
     init(viewModel: FirstModel) {
         self.model = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -22,6 +24,7 @@ class FirstViewController: UIViewController, FirstViewStyling, FirstViewControll
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: LifeCycles
     override func loadView() {
         initViewHierarchy()
         configureView()
@@ -32,12 +35,10 @@ class FirstViewController: UIViewController, FirstViewStyling, FirstViewControll
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
-
-
 }
 
 
-
+// MARK: Presentable
 extension FirstViewController: Presentable {
     func initViewHierarchy() {
         self.view = UIView()
@@ -60,6 +61,8 @@ extension FirstViewController: Presentable {
     
     func configureView() {
         view.backgroundColor = .white
+        navigationItem.title = "목록"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "측정", image: nil, target: self, action: #selector(didTapMesaureButton))
     }
     
     func bind() {
@@ -67,5 +70,10 @@ extension FirstViewController: Presentable {
             guard let self = self else { return }
             self.route(to: sceneCategory)
         }
+    }
+    
+    // MARK: Actions
+    @objc private func didTapMesaureButton() {
+        model.didTapMeasureButton()
     }
 }

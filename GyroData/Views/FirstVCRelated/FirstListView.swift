@@ -8,10 +8,13 @@
 import UIKit
 
 class FirstListView: UIView {
-
+    // MARK: UI
     var tableView: UITableView = UITableView()
+    
+    // MARK: Properties
     var viewModel: FirstListViewModel
     
+    // MARK: Init
     init(viewModel: FirstListViewModel) {
         self.viewModel = viewModel
         super.init(frame: .zero)
@@ -23,9 +26,9 @@ class FirstListView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }
 
+// MARK: Presentable
 extension FirstListView: Presentable {
     func initViewHierarchy() {
         self.addSubview(tableView)
@@ -45,19 +48,33 @@ extension FirstListView: Presentable {
     
     func configureView() {
         tableView.register(FirstListCell.self, forCellReuseIdentifier: "cell")
-    }
-    
-    func bind() {
         tableView.delegate = self
         tableView.dataSource = self
     }
     
-    
+    func bind() {
+        
+    }
 }
 
 extension FirstListView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         viewModel.didSelectRow(indexPath.row)
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let play = UIContextualAction(style: .normal, title: "Play") { [weak self] action, sourceView, completionHandler in
+            self?.viewModel.didSelectPlayAction(indexPath.row)
+            completionHandler(true)
+        }
+        play.backgroundColor = .green
+        
+        let delete = UIContextualAction(style: .destructive, title: "Delete") { action, sourceView, completionHandler in
+            completionHandler(true)
+        }
+        delete.backgroundColor = .red
+        
+        return UISwipeActionsConfiguration(actions: [delete, play])
     }
 }
 
@@ -86,6 +103,4 @@ extension FirstListView: UITableViewDataSource {
         cell.configureCell(viewModel: viewModel)
         return cell
     }
-    
-    
 }
