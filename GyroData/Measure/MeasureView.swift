@@ -28,11 +28,13 @@ class MeasureView: UIView {
         return control
     }()
     
-    let lineChartView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .green
-        return view
-    }()
+//    let lineChartView: UIView = {
+//        let view = UIView()
+//        view.backgroundColor = .green
+//        return view
+//    }()
+    
+    var lineChartView: UIView!
     
     let measureButton: UIButton = {
         let button = UIButton()
@@ -62,6 +64,8 @@ class MeasureView: UIView {
     func setupView() {
         backgroundColor = .white
         addSubview(segmentControl)
+        lineChartView = LineChartView(frame: frame, values: [20, 10, 30, 20, 50, 100, 10, 10], animated: true)
+        lineChartView.backgroundColor = .green
         addSubview(lineChartView)
         addSubview(measureButton)
         addSubview(stopButton)
