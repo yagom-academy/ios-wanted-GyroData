@@ -6,27 +6,39 @@
 //
 
 import UIKit
+import CoreMotion
 
 class MeasureDataViewController: UIViewController {
         
     var isGyroOnScreen : Bool = false
-    
+    var isMeasuring: Bool = false
+    let motion = CMMotionManager()
+    var accTimer: Timer?
+    var gyroTimer: Timer?
+    let segAttributes: NSDictionary = [
+        NSAttributedString.Key.foregroundColor: UIColor.black,
+        NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13)
+    ]
+
     lazy var segmentedControl: UISegmentedControl = {
       let control = UISegmentedControl(items: ["Acc", "Gyro"])
         control.selectedSegmentTintColor = .systemBlue
         control.backgroundColor = .gray
-        control.addTarget(self, action: #selector(segconChange), for: .valueChanged)
+        control.addTarget(self, action: #selector(segconChange), for: .touchUpInside)
         control.selectedSegmentIndex = 0
+        control.setTitleTextAttributes(segAttributes as? [NSAttributedString.Key : Any], for: .disabled)
       return control
     }()
     
-    @objc func segconChange(_ secong:UISegmentedControl){
-        if secong.selectedSegmentIndex == 0{
-            presentAcc()
-            isGyroOnScreen.toggle()
-        }else{
-            presentGyro()
-            isGyroOnScreen.toggle()
+    @objc func segconChange(_ secong: UISegmentedControl){
+        if !isMeasuring {
+            if secong.selectedSegmentIndex == 0 {
+                presentAcc()
+                isGyroOnScreen.toggle()
+            } else{
+                presentGyro()
+                isGyroOnScreen.toggle()
+            }
         }
     }
     
@@ -57,6 +69,7 @@ class MeasureDataViewController: UIViewController {
         let btn = UIButton()
         btn.setTitle("측정", for: .normal)
         btn.setTitleColor(.black, for: .normal)
+        btn.addTarget(self, action: #selector(buttonTapAction), for: .touchUpInside)
         return btn
     }()
     
@@ -64,6 +77,15 @@ class MeasureDataViewController: UIViewController {
         let btn = UIButton()
         btn.setTitle("정지", for: .normal)
         btn.setTitleColor(.black, for: .normal)
+        btn.addTarget(self, action: #selector(buttonTapAction), for: .touchUpInside)
+        return btn
+    }()
+    
+    lazy var saveBtn : UIButton = {
+        let btn = UIButton()
+        btn.setTitle("저장", for: .normal)
+        btn.setTitleColor(.black, for: .normal)
+        btn.addTarget(self, action: #selector(buttonTapAction), for: .touchUpInside)
         return btn
     }()
     
@@ -105,6 +127,7 @@ class MeasureDataViewController: UIViewController {
         
         self.title = "측정하기"
         self.view.backgroundColor = .white
+        self.navigationItem.setRightBarButton(UIBarButtonItem(customView: saveBtn), animated: true)
         
         addViews(to: self.view, segmentedControl, measureBtn, stopBtn)
         doNotTranslate( segmentedControl,measureBtn, stopBtn)
@@ -121,9 +144,9 @@ class MeasureDataViewController: UIViewController {
         
         presentAcc()
         
-        xLabel.text = "x = 10"
-        yLabel.text = "y = 20"
-        zLabel.text = "z = 30"
+        xLabel.text = "x = 0"
+        yLabel.text = "y = 0"
+        zLabel.text = "z = 0"
         
     }
     
@@ -177,6 +200,82 @@ class MeasureDataViewController: UIViewController {
         views.forEach{$0.translatesAutoresizingMaskIntoConstraints = false}
     }
     
+    func startAccelerometers() {
+            if motion.isAccelerometerAvailable {
+                motion.accelerometerUpdateInterval = 0.1
+                motion.startAccelerometerUpdates()
+                
+                self.accTimer = Timer(fire: Date(), interval: 0.1,
+                                      repeats: true, block: { (timer) in
+                    if let data = self.motion.accelerometerData {
+                        let x = data.acceleration.x
+                        let y = data.acceleration.y
+                        let z = data.acceleration.z
+                        self.xLabel.text = "x = \(String(format: "%.2f", x))"
+                        self.yLabel.text = "y = \(String(format: "%.2f", y))"
+                        self.zLabel.text = "z = \(String(format: "%.2f", z))"
+                    }
+                })
+                if let timer = accTimer {
+                    RunLoop.current.add(timer, forMode: .default)
+                }
+            }
+        }
+
+    func startGyroscope() {
+        if motion.isGyroAvailable {
+            motion.gyroUpdateInterval = 0.1
+            motion.startGyroUpdates()
+            
+            self.gyroTimer = Timer(fire: Date(), interval: 0.1,
+                                   repeats: true, block: { (timer) in
+                if let data = self.motion.gyroData {
+                    let x = data.rotationRate.x
+                    let y = data.rotationRate.y
+                    let z = data.rotationRate.z
+                    self.xLabel.text = "x = \(String(format: "%.2f", x))"
+                    self.yLabel.text = "y = \(String(format: "%.2f", y))"
+                    self.zLabel.text = "z = \(String(format: "%.2f", z))"
+                }
+            })
+            if let timer = gyroTimer {
+                RunLoop.current.add(timer, forMode: .default)
+            }
+        }
+    }
+    
+    func stopMeasuring(_ timer: Timer?) {
+        timer?.invalidate()
+    }
+    
+    @objc func buttonTapAction(_ sender: UIButton) {
+        switch sender {
+        case measureBtn:
+            if self.segmentedControl.selectedSegmentIndex == 0 {
+                startAccelerometers()
+                self.segmentedControl.setEnabled(false, forSegmentAt: 1)
+            } else {
+                startGyroscope()
+                self.segmentedControl.setEnabled(false, forSegmentAt: 0)
+            }
+            measureBtn.isEnabled = false
+            isMeasuring = true
+        case stopBtn:
+            if self.segmentedControl.selectedSegmentIndex == 0 {
+                stopMeasuring(accTimer)
+                self.segmentedControl.setEnabled(true, forSegmentAt: 1)
+            } else {
+                stopMeasuring(gyroTimer)
+                self.segmentedControl.setEnabled(true, forSegmentAt: 0)
+            }
+            isMeasuring = false
+            measureBtn.isEnabled = true
+        case saveBtn:
+            print("save")
+        default:
+            return
+        }
+    }
     
 }
 
