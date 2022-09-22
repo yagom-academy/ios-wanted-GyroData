@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3688190828DC8B1D002B5179 /* TestPathView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3688190728DC8B1D002B5179 /* TestPathView.swift */; };
 		3695B0BD28D99CA100FF93FD /* SecondViewSegementedControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3695B0BC28D99CA100FF93FD /* SecondViewSegementedControlView.swift */; };
 		3695B0C728D9AA0700FF93FD /* SecondViewControllerRoutable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3695B0C628D9AA0700FF93FD /* SecondViewControllerRoutable.swift */; };
 		36C67A8D28DAD9BC006F34CE /* TestPathGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C67A8C28DAD9BC006F34CE /* TestPathGraphView.swift */; };
@@ -56,7 +55,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3688190728DC8B1D002B5179 /* TestPathView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestPathView.swift; sourceTree = "<group>"; };
 		3695B0BC28D99CA100FF93FD /* SecondViewSegementedControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewSegementedControlView.swift; sourceTree = "<group>"; };
 		3695B0C628D9AA0700FF93FD /* SecondViewControllerRoutable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewControllerRoutable.swift; sourceTree = "<group>"; };
 		36C67A8C28DAD9BC006F34CE /* TestPathGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestPathGraphView.swift; sourceTree = "<group>"; };
@@ -152,7 +150,6 @@
 			isa = PBXGroup;
 			children = (
 				36C67A8C28DAD9BC006F34CE /* TestPathGraphView.swift */,
-				3688190728DC8B1D002B5179 /* TestPathView.swift */,
 			);
 			path = GraphView;
 			sourceTree = "<group>";
@@ -402,7 +399,6 @@
 				36FB64ED28D8C5DC00A87587 /* Routable.swift in Sources */,
 				B0CF0F4128DAA07900596BCF /* SecondViewStyling.swift in Sources */,
 				46E21ECB28DC5F2100593210 /* CoreDataManager.swift in Sources */,
-				3688190828DC8B1D002B5179 /* TestPathView.swift in Sources */,
 				36FB64F528D8CAB000A87587 /* FirstViewControllerRoutable.swift in Sources */,
 				464FE63A28DB3B4800C73656 /* UIColor+Extensions.swift in Sources */,
 				36E1FCAE28D97DB500EB7E4F /* FirstCellContentView.swift in Sources */,
