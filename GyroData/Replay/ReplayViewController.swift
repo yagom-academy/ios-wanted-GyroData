@@ -10,6 +10,16 @@ import SnapKit
 
 class ReplayViewController: UIViewController {
     
+    private var viewModel: ReplayViewModel = .init()
+    private var timerState: Bool = false
+    private var timer: Timer = Timer()
+    private var endTime: Double = 3.0 //끝 타이머
+    private var startTime: Double = 00.0{
+        didSet {
+            timerLabel.text = String(format: "%.1f", startTime)
+        }
+    }
+    
     private let navigationTitle: UILabel = {
         let label = UILabel()
         label.text = "다시보기"
@@ -53,11 +63,11 @@ class ReplayViewController: UIViewController {
     
     private let timerLabel: UILabel = {
         let label = UILabel()
-        label.text = "11:00"
+        label.text = "0.0"
         label.font = UIFont.systemFont(ofSize: 25, weight: .semibold)
         return label
     }()
-
+    
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,8 +76,13 @@ class ReplayViewController: UIViewController {
         self.setupLayouts()
         self.btnAddTarget()
     }
-
+    
     // MARK: - configure
+    
+    //    private func bind(_ viewModel: ReplayViewModel) {
+    //        let input = ReplayViewModel.Input(
+    //    }
+    //
     private func setupLayouts() {
         self.view.addSubViews(
             self.navigationTitle,
@@ -103,8 +118,8 @@ class ReplayViewController: UIViewController {
         
         self.graphView.snp.makeConstraints {
             $0.top.equalTo(self.stateLabel.snp.bottom).offset(30)
+            $0.height.equalTo(200)
             $0.leading.trailing.equalToSuperview().inset(30)
-            $0.width.height.equalTo(200)
         }
         
         self.playButton.snp.makeConstraints {
@@ -120,11 +135,42 @@ class ReplayViewController: UIViewController {
     }
     
     private func btnAddTarget() {
-        navigationBackButton.addTarget(self, action: #selector(tapBackBtn(_:)), for: .touchUpInside)
+        navigationBackButton.addTarget(self, action: #selector(backButtonTap(_:)), for: .touchUpInside)
+        playButton.addTarget(self, action: #selector(playButtonTap(_:)), for: .touchUpInside)
     }
     
     // MARK: - private func
-    @objc func tapBackBtn(_ sender: UIButton) {
+    @objc func backButtonTap(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
     }
+    
+    @objc func playButtonTap(_ sender: UIButton) {
+        
+        if timerState {
+            timerState = false
+            timer.invalidate()
+        } else {
+            timerState = true
+            timerSetting()
+        }
+        guard let image = timerState ? UIImage(systemName: "stop.fill") : UIImage(systemName: "play.fill") else { return }
+        self.playButton.setImage(image, for: .normal)
+        
+    }
+    
+    private func timerSetting() {
+        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(setTimer), userInfo: nil, repeats: true)
+    }
+    
+    @objc func setTimer() {
+        startTime += 0.1
+        print("값 증가중", startTime)
+
+        if startTime > endTime {
+            timer.invalidate()
+        }
+    }
 }
+
+
+
