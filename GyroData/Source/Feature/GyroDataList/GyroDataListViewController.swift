@@ -84,9 +84,17 @@ class GyroDataListViewController: UIViewController, UITableViewDelegate, UITable
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)  {
+        let showGraphViewController = ShowGraphViewController()
+        self.navigationController?.pushViewController(showGraphViewController, animated: true)
+    }
+
+
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let modity = UIContextualAction(style: .normal, title: "Play") { (UIContextualAction, UIView, success: @escaping (Bool) -> Void) in
             print("play")
+            let playGyroViewController = PlayGraphViewController()
+            self.navigationController?.pushViewController(playGyroViewController, animated: true)
             success(true)
         }
         modity.backgroundColor = .systemGreen
@@ -109,7 +117,6 @@ class GyroDataListViewController: UIViewController, UITableViewDelegate, UITable
         
         let swipeActionConfiguration = UISwipeActionsConfiguration(actions:[delete, modity])
         swipeActionConfiguration.performsFirstActionWithFullSwipe = false
-        
         return swipeActionConfiguration
     }
 
