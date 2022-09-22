@@ -13,69 +13,20 @@ protocol BasicNavigationBarStyling { }
 extension BasicNavigationBarStyling {
     var navigationBarStyle: (UINavigationBar) -> () {
         {
-            $0.tintColor = .red //backbutton color
-            $0.barTintColor = .black //default: nil //navi bar tintcolor //스크롤 아래로 하다 보면 색이 드러남
             $0.shadowImage = UIImage() //default: nil
-            $0.prefersLargeTitles = true
             $0.isTranslucent = true
-            $0.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]
-            $0.titleTextAttributes = [.foregroundColor : UIColor.white]
-            $0.backgroundColor = .white //navi bar backgroundcolor // 처음 네비컨, 뷰컨 init 했을시 보이는 네비바 색
+            $0.titleTextAttributes = [.foregroundColor : UIColor.black]
         }
     }
 }
 
-protocol FirstViewStyling { }
+protocol Styleable { }
 
-extension FirstViewStyling {
-    var measureButtonStyling: (UIButton) -> () {
-        {
-            $0.setTitle("측정", for: .normal)
-            $0.setTitleColor(.red, for: .normal)
-        }
-    }
-    
-    var cellTimeLabelStyling: (UILabel) -> () {
-        {
-            $0.font = UIFont.systemFont(ofSize: 12)
-            $0.textColor = .black
-            $0.textAlignment = .left
-        }
-    }
-    
-    var cellMeasureTypelabelStyling: (UILabel) -> () {
-        {
-            $0.font = UIFont.systemFont(ofSize: 12)
-            $0.textColor = .black
-            $0.textAlignment = .left
-        }
-    }
-    
-    var cellAmountTypeLabelStyling: (UILabel) -> () {
-        {
-            $0.font = UIFont.systemFont(ofSize: 16)
-            $0.textColor = .black
-            $0.textAlignment = .center
-        }
-    }
-}
+extension UIView: Styleable { }
+extension UIBarButtonItem: Styleable { }
+extension UINavigationItem: Styleable { }
 
-protocol SecondViewStyling { }
-
-extension SecondViewStyling {
-    var segmentControlStyling: (UISegmentedControl) -> () {
-        {
-            $0.backgroundColor = .red
-            $0.insertSegment(withTitle: "gyro", at: 0, animated: true)
-            $0.insertSegment(withTitle: "acc", at: 1, animated: true)
-            $0.setEnabled(true, forSegmentAt: 0)
-            $0.selectedSegmentTintColor = .blue
-        }
-    }
-}
-
-extension NSCoding where Self: UIView {
-    
+extension Styleable {
     @discardableResult
     func addStyles(style: (Self) -> ()) -> Self {
         style(self)

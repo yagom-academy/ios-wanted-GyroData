@@ -28,16 +28,24 @@
 		36FB64F928D8CD1700A87587 /* SceneContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36FB64F828D8CD1700A87587 /* SceneContext.swift */; };
 		36FB64FC28D8CE1D00A87587 /* Presentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36FB64FB28D8CE1D00A87587 /* Presentable.swift */; };
 		36FB64FE28D8CF0500A87587 /* Styling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36FB64FD28D8CF0500A87587 /* Styling.swift */; };
+		462FB33128DB11ED00BC5F04 /* ThirdModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462FB33028DB11ED00BC5F04 /* ThirdModel.swift */; };
+		462FB33328DB123D00BC5F04 /* ThirdViewControllerRoutable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462FB33228DB123D00BC5F04 /* ThirdViewControllerRoutable.swift */; };
+		462FB33528DB12A500BC5F04 /* ThirdViewStyling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462FB33428DB12A500BC5F04 /* ThirdViewStyling.swift */; };
+		462FB33728DB160B00BC5F04 /* ThirdInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462FB33628DB160B00BC5F04 /* ThirdInfoView.swift */; };
+		464FE63828DB3A7900C73656 /* ThirdInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464FE63728DB3A7900C73656 /* ThirdInfoViewModel.swift */; };
+		464FE63A28DB3B4800C73656 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464FE63928DB3B4800C73656 /* UIColor+Extensions.swift */; };
+		464FE63C28DB3D9D00C73656 /* UIFont+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464FE63B28DB3D9D00C73656 /* UIFont+Extensions.swift */; };
+		464FE63E28DB42F300C73656 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464FE63D28DB42F300C73656 /* Date+Extension.swift */; };
 		63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB428D44FC400C53A39 /* AppDelegate.swift */; };
 		63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB628D44FC400C53A39 /* SceneDelegate.swift */; };
 		63F01BB928D44FC400C53A39 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB828D44FC400C53A39 /* FirstViewController.swift */; };
 		63F01BBE28D44FC500C53A39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBD28D44FC500C53A39 /* Assets.xcassets */; };
 		63F01BC128D44FC500C53A39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */; };
-		6473CC9528DAF6F4002B3622 /* Motion+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6473CC9328DAF6F4002B3622 /* Motion+CoreDataClass.swift */; };
-		6473CC9628DAF6F4002B3622 /* Motion+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6473CC9428DAF6F4002B3622 /* Motion+CoreDataProperties.swift */; };
-		64E428C428DADA5C00047DB8 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E428C328DADA5C00047DB8 /* CoreDataManager.swift */; };
-		64E428C828DADB6300047DB8 /* MotionModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 64E428C628DADB6300047DB8 /* MotionModel.xcdatamodeld */; };
-		64E428CE28DADFB200047DB8 /* MotionTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E428CD28DADFB200047DB8 /* MotionTask.swift */; };
+		B019E7FD28DBECF5009BC86F /* ThirdControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B019E7FC28DBECF5009BC86F /* ThirdControlView.swift */; };
+		B019E7FF28DBED17009BC86F /* ThirdControlViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B019E7FE28DBED17009BC86F /* ThirdControlViewModel.swift */; };
+		B07C5F7828DAB10D00321A5F /* SecondControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07C5F7728DAB10D00321A5F /* SecondControlView.swift */; };
+		B0CF0F3F28DA9B9B00596BCF /* FirstViewStyling.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CF0F3E28DA9B9B00596BCF /* FirstViewStyling.swift */; };
+		B0CF0F4128DAA07900596BCF /* SecondViewStyling.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CF0F4028DAA07900596BCF /* SecondViewStyling.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +70,14 @@
 		36FB64F828D8CD1700A87587 /* SceneContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneContext.swift; sourceTree = "<group>"; };
 		36FB64FB28D8CE1D00A87587 /* Presentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presentable.swift; sourceTree = "<group>"; };
 		36FB64FD28D8CF0500A87587 /* Styling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styling.swift; sourceTree = "<group>"; };
+		462FB33028DB11ED00BC5F04 /* ThirdModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdModel.swift; sourceTree = "<group>"; };
+		462FB33228DB123D00BC5F04 /* ThirdViewControllerRoutable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdViewControllerRoutable.swift; sourceTree = "<group>"; };
+		462FB33428DB12A500BC5F04 /* ThirdViewStyling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdViewStyling.swift; sourceTree = "<group>"; };
+		462FB33628DB160B00BC5F04 /* ThirdInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdInfoView.swift; sourceTree = "<group>"; };
+		464FE63728DB3A7900C73656 /* ThirdInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdInfoViewModel.swift; sourceTree = "<group>"; };
+		464FE63928DB3B4800C73656 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
+		464FE63B28DB3D9D00C73656 /* UIFont+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extensions.swift"; sourceTree = "<group>"; };
+		464FE63D28DB42F300C73656 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		63F01BB128D44FC400C53A39 /* GyroData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GyroData.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63F01BB428D44FC400C53A39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63F01BB628D44FC400C53A39 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -69,11 +85,11 @@
 		63F01BBD28D44FC500C53A39 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		63F01BC028D44FC500C53A39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		63F01BC228D44FC500C53A39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6473CC9328DAF6F4002B3622 /* Motion+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Motion+CoreDataClass.swift"; sourceTree = "<group>"; };
-		6473CC9428DAF6F4002B3622 /* Motion+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Motion+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		64E428C328DADA5C00047DB8 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
-		64E428C728DADB6300047DB8 /* MotionModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MotionModel.xcdatamodel; sourceTree = "<group>"; };
-		64E428CD28DADFB200047DB8 /* MotionTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionTask.swift; sourceTree = "<group>"; };
+		B019E7FC28DBECF5009BC86F /* ThirdControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdControlView.swift; sourceTree = "<group>"; };
+		B019E7FE28DBED17009BC86F /* ThirdControlViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdControlViewModel.swift; sourceTree = "<group>"; };
+		B07C5F7728DAB10D00321A5F /* SecondControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondControlView.swift; sourceTree = "<group>"; };
+		B0CF0F3E28DA9B9B00596BCF /* FirstViewStyling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewStyling.swift; sourceTree = "<group>"; };
+		B0CF0F4028DAA07900596BCF /* SecondViewStyling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewStyling.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +118,7 @@
 			isa = PBXGroup;
 			children = (
 				36FB64F228D8CA8000A87587 /* SecondViewController.swift */,
+				B07C5F7728DAB10D00321A5F /* SecondControlView.swift */,
 				3695B0BC28D99CA100FF93FD /* SecondViewSegementedControlView.swift */,
 			);
 			path = SecondVCRelated;
@@ -131,7 +148,7 @@
 			children = (
 				3695B0BE28D9A06800FF93FD /* FirstVCRelated */,
 				3695B0BF28D9A07C00FF93FD /* SecondVCRelated */,
-				64E428C528DADB3400047DB8 /* CoreData */,
+				462FB32F28DB11B800BC5F04 /* ThirdVCRelated */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -140,6 +157,8 @@
 			isa = PBXGroup;
 			children = (
 				36FB64F628D8CC7900A87587 /* ThirdViewController.swift */,
+				462FB33628DB160B00BC5F04 /* ThirdInfoView.swift */,
+				B019E7FC28DBECF5009BC86F /* ThirdControlView.swift */,
 			);
 			path = ThridVCRelated;
 			sourceTree = "<group>";
@@ -186,6 +205,7 @@
 				36FB64F028D8C76E00A87587 /* SceneDelegateRoutable.swift */,
 				36FB64F428D8CAB000A87587 /* FirstViewControllerRoutable.swift */,
 				3695B0C628D9AA0700FF93FD /* SecondViewControllerRoutable.swift */,
+				462FB33228DB123D00BC5F04 /* ThirdViewControllerRoutable.swift */,
 				36FB64F828D8CD1700A87587 /* SceneContext.swift */,
 			);
 			path = ViewPresentation;
@@ -196,8 +216,31 @@
 			children = (
 				36FB64FB28D8CE1D00A87587 /* Presentable.swift */,
 				36FB64FD28D8CF0500A87587 /* Styling.swift */,
+				B0CF0F3E28DA9B9B00596BCF /* FirstViewStyling.swift */,
+				B0CF0F4028DAA07900596BCF /* SecondViewStyling.swift */,
+				462FB33428DB12A500BC5F04 /* ThirdViewStyling.swift */,
 			);
 			path = ViewDraw;
+			sourceTree = "<group>";
+		};
+		462FB32F28DB11B800BC5F04 /* ThirdVCRelated */ = {
+			isa = PBXGroup;
+			children = (
+				462FB33028DB11ED00BC5F04 /* ThirdModel.swift */,
+				464FE63728DB3A7900C73656 /* ThirdInfoViewModel.swift */,
+				B019E7FE28DBED17009BC86F /* ThirdControlViewModel.swift */,
+			);
+			path = ThirdVCRelated;
+			sourceTree = "<group>";
+		};
+		464FE63628DB2E2700C73656 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				464FE63928DB3B4800C73656 /* UIColor+Extensions.swift */,
+				464FE63B28DB3D9D00C73656 /* UIFont+Extensions.swift */,
+				464FE63D28DB42F300C73656 /* Date+Extension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		63F01BA828D44FC400C53A39 = {
@@ -228,6 +271,7 @@
 				36FB64EB28D8C5BD00A87587 /* ViewPresentation */,
 				36E1FC9B28D9768D00EB7E4F /* UIKitClasses */,
 				36E1FCA128D978DE00EB7E4F /* Utilities */,
+				464FE63628DB2E2700C73656 /* Extensions */,
 				63F01BBD28D44FC500C53A39 /* Assets.xcassets */,
 				63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */,
 				63F01BC228D44FC500C53A39 /* Info.plist */,
@@ -318,32 +362,43 @@
 			files = (
 				36E1FCA928D97AD000EB7E4F /* FirstListViewModel.swift in Sources */,
 				36FB64F928D8CD1700A87587 /* SceneContext.swift in Sources */,
+				B019E7FF28DBED17009BC86F /* ThirdControlViewModel.swift in Sources */,
 				63F01BB928D44FC400C53A39 /* FirstViewController.swift in Sources */,
 				6473CC9528DAF6F4002B3622 /* Motion+CoreDataClass.swift in Sources */,
 				36E1FCA328D978ED00EB7E4F /* Repository.swift in Sources */,
 				36FB64F728D8CC7900A87587 /* ThirdViewController.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
+				464FE63828DB3A7900C73656 /* ThirdInfoViewModel.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
-				64E428C828DADB6300047DB8 /* MotionModel.xcdatamodeld in Sources */,
+				B0CF0F3F28DA9B9B00596BCF /* FirstViewStyling.swift in Sources */,
 				36FB64F128D8C76E00A87587 /* SceneDelegateRoutable.swift in Sources */,
 				36E1FCAC28D97CC000EB7E4F /* FirstListCell.swift in Sources */,
 				36FB64FE28D8CF0500A87587 /* Styling.swift in Sources */,
+				B019E7FD28DBECF5009BC86F /* ThirdControlView.swift in Sources */,
 				36FB64F328D8CA8000A87587 /* SecondViewController.swift in Sources */,
+				462FB33328DB123D00BC5F04 /* ThirdViewControllerRoutable.swift in Sources */,
+				464FE63C28DB3D9D00C73656 /* UIFont+Extensions.swift in Sources */,
 				3695B0BD28D99CA100FF93FD /* SecondViewSegementedControlView.swift in Sources */,
 				64E428CE28DADFB200047DB8 /* MotionTask.swift in Sources */,
 				3695B0C328D9A0BF00FF93FD /* SecondSegmentViewModel.swift in Sources */,
 				36FB64ED28D8C5DC00A87587 /* Routable.swift in Sources */,
+				B0CF0F4128DAA07900596BCF /* SecondViewStyling.swift in Sources */,
 				36FB64F528D8CAB000A87587 /* FirstViewControllerRoutable.swift in Sources */,
+				464FE63A28DB3B4800C73656 /* UIColor+Extensions.swift in Sources */,
 				36E1FCB028D9820800EB7E4F /* FirstCellContentViewModel.swift in Sources */,
 				3695B0C128D9A08F00FF93FD /* SecondModel.swift in Sources */,
 				36E1FCAE28D97DB500EB7E4F /* FirstCellContentView.swift in Sources */,
 				64E428C428DADA5C00047DB8 /* CoreDataManager.swift in Sources */,
 				36E1FCA028D978AB00EB7E4F /* FirstModel.swift in Sources */,
+				464FE63E28DB42F300C73656 /* Date+Extension.swift in Sources */,
 				36E1FC9D28D976B800EB7E4F /* BasicNavigationController.swift in Sources */,
 				36E1FCA728D97AAB00EB7E4F /* FirstListView.swift in Sources */,
-				6473CC9628DAF6F4002B3622 /* Motion+CoreDataProperties.swift in Sources */,
+				462FB33128DB11ED00BC5F04 /* ThirdModel.swift in Sources */,
+				462FB33528DB12A500BC5F04 /* ThirdViewStyling.swift in Sources */,
 				36FB64FC28D8CE1D00A87587 /* Presentable.swift in Sources */,
 				3695B0C728D9AA0700FF93FD /* SecondViewControllerRoutable.swift in Sources */,
+				462FB33728DB160B00BC5F04 /* ThirdInfoView.swift in Sources */,
+				B07C5F7828DAB10D00321A5F /* SecondControlView.swift in Sources */,
 				36FB64EF28D8C6EC00A87587 /* SceneCategory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

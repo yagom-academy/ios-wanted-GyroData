@@ -8,20 +8,31 @@
 import Foundation
 
 class SecondModel {
+    // MARK: Input
+    var didTapBackButton: () -> () = { }
+    var didTapSaveButton: () -> () = { }
     
-    //output
+    // MARK: Output
+    var routeSubject: (SceneCategory) -> () = { sceneCategory in }
+    
+    // MARK: Properties
     var segmentViewModel: SecondSegmentViewModel {
         return privateSecondSegmentViewModel
     }
-    
-    //input
-    
-    //properties
     private var repository: RepositoryProtocol
     private var privateSecondSegmentViewModel: SecondSegmentViewModel
     
+    // MARK: Init
     init(repository: RepositoryProtocol) {
         self.repository = repository
         self.privateSecondSegmentViewModel = SecondSegmentViewModel()
+        bind()
+    }
+    
+    // MARK: Bind
+    func bind() {
+        didTapBackButton = { [weak self] in
+            self?.routeSubject((.close))
+        }
     }
 }

@@ -8,8 +8,8 @@
 import Foundation
 
 class FirstModel {
-    
     //input
+    var didTapMeasureButton: (() -> ()) = { }
     
     //output
     var contentViewModel: FirstListViewModel {
@@ -29,13 +29,25 @@ class FirstModel {
     }
     
     private func bind() {
-        privateFirstListViewModel.propergateDidSelectRowEvent = { [weak self] indexPathRow in
-            //temp
-            guard let self = self else { return }
+        didTapMeasureButton = { [weak self] in
+            guard let self else { return }
             let repository = Repository()
             let model = SecondModel(repository: repository)
             let sceneContext = SceneContext(dependency: model)
             self.routeSubject(.detail(.secondViewController(context: sceneContext)))
+        }
+        // TODO: 이동 타입(View or Play)을 선택해서 이동하도록 구현해야 함
+        privateFirstListViewModel.propagateDidSelectRowEvent = { [weak self] indexPathRow in
+            guard let self = self else { return }
+            let model = ThirdModel(viewType: .view)
+            let context = SceneContext(dependency: model)
+            self.routeSubject(.detail(.thirdViewController(context: context)))
+        }
+        privateFirstListViewModel.propagateDidSelectPlayActionEvent = { [weak self] indexPathRow in
+            guard let self = self else { return }
+            let model = ThirdModel(viewType: .play)
+            let context = SceneContext(dependency: model)
+            self.routeSubject(.detail(.thirdViewController(context: context)))
         }
     }
     

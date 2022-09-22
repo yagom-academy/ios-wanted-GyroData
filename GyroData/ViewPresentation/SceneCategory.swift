@@ -11,6 +11,7 @@ import Foundation
 enum SceneCategory {
     case main(mainScene)
     case detail(detailScene)
+    case close
     
     enum mainScene {
         case firstViewController(context: SceneContext<FirstModel>)
@@ -18,7 +19,7 @@ enum SceneCategory {
     
     enum detailScene {
         case secondViewController(context: SceneContext<SecondModel>)
-        case thirdViewController
+        case thirdViewController(context: SceneContext<ThirdModel>)
     }
     
 }
