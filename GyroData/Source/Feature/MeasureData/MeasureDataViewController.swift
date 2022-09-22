@@ -96,6 +96,13 @@ class MeasureDataViewController: UIViewController {
         return btn
     }()
     
+    lazy var saveBarButtonItem: UIBarButtonItem = {
+        let barButtonItem = UIBarButtonItem()
+        barButtonItem.customView = self.saveBtn
+        barButtonItem.isEnabled = false
+        return barButtonItem
+    }()
+    
     lazy var xLabel : UILabel = {
         let lbl = UILabel()
         lbl.textColor = .red
@@ -134,7 +141,7 @@ class MeasureDataViewController: UIViewController {
         
         self.title = "측정하기"
         self.view.backgroundColor = .white
-        self.navigationItem.setRightBarButton(UIBarButtonItem(customView: saveBtn), animated: true)
+        self.navigationItem.setRightBarButton(saveBarButtonItem, animated: true)
         
         addViews(to: self.view, segmentedControl, measureBtn, stopBtn)
         doNotTranslate( segmentedControl,measureBtn, stopBtn)
@@ -316,6 +323,16 @@ class MeasureDataViewController: UIViewController {
                                     motionZ: motionZArray)
 
         FileService.shared.saveJSON(data: motionInfo)
+        self.setAlertAndFinish(message: "저장이 완료되었습니다.")
+    }
+    
+    func setAlertAndFinish(message: String) {
+        let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: "확인", style: .default, handler: { _ in
+            self.navigationController?.popViewController(animated: true)
+        })
+        alertController.addAction(confirmAction)
+        present(alertController, animated: true, completion: nil)
     }
     
     @objc func buttonTapAction(_ sender: UIButton) {
@@ -329,6 +346,7 @@ class MeasureDataViewController: UIViewController {
                 self.segmentedControl.setEnabled(false, forSegmentAt: 0)
             }
             measureBtn.isEnabled = false
+            saveBarButtonItem.isEnabled = true
             isMeasuring = true
         case stopBtn:
             if self.segmentedControl.selectedSegmentIndex == 0 {
