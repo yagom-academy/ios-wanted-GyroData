@@ -176,7 +176,7 @@ extension TestPathGraphView: Presentable {
             //드로잉을 위한 데이터소스 변경, 붙이기, 삭제 등 비즈니스 로직
             self?.privateTempDataSource.append(value)
             
-            self?.setNeedsDisplay() //그 다음에 얘를 호출 //얘를 호출하면
+            self?.setNeedsDisplay() //그 다음에 얘를 호출 호출하면
             print("set needs display called")
             //다음 드로잉 사이클에 오버라이드한 draw가 불리게 될 것임
         }

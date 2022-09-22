@@ -92,14 +92,6 @@ extension SecondViewController: Presentable {
         viewModel.routeSubject = { [weak self] scene in
             self?.route(to: scene)
         }
-        
-        controlView.testClosure = { [weak self] in
-            let randomX = CGFloat.random(in: -10...10)
-            let randomY = CGFloat.random(in: -10...10)
-            let randomZ = CGFloat.random(in: -10...10)
-            let tempData = ValueInfo(xValue: randomX, yValue: randomY, zValue: randomZ)
-            self?.dummyGraphView.didReceiveData(tempData)
-        }
     }
     
     // MARK: Action

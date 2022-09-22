@@ -13,9 +13,6 @@ class SecondControlView: UIView, SecondViewStyling {
     var measureButton = UIButton()
     var stopButton = UIButton()
     
-    var testButton = UIButton()
-    var testClosure = { }
-    
     // MARK: Properties
     
     // MARK: Init
@@ -39,8 +36,6 @@ extension SecondControlView: Presentable {
         stackView.addArrangedSubview(measureButton)
         stackView.addArrangedSubview(stopButton)
         
-        stackView.addArrangedSubview(testButton)
-        
         var constraint: [NSLayoutConstraint] = []
         defer { NSLayoutConstraint.activate(constraint) }
         
@@ -57,15 +52,9 @@ extension SecondControlView: Presentable {
         stackView.addStyles(style: controlStackViewStyling)
         measureButton.addStyles(style: measureButtonStyling)
         stopButton.addStyles(style: stopButtonStyling)
-        
-        testButton.addStyles(style: testButtonStyling)
     }
     
     func bind() {
-        testButton.addTarget(self, action: #selector(testAction), for: .touchUpInside)
-    }
-    
-    @objc func testAction() {
-        testClosure()
+
     }
 }

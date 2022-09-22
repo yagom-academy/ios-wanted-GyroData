@@ -61,14 +61,4 @@ extension SecondViewStyling {
             $0.configuration?.baseForegroundColor = .graySecondary
         }
     }
-    
-    var testButtonStyling: (UIButton) -> () {
-        {
-            $0.configuration = .plain()
-            $0.configuration?.contentInsets = .zero
-            $0.configuration?.title = "테스트"
-            $0.configuration?.background.backgroundColor = .grayFourth
-            $0.configuration?.baseForegroundColor = .graySecondary
-        }
-    }
 }
