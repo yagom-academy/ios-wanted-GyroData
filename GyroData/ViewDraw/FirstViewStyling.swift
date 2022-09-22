@@ -13,24 +13,24 @@ protocol FirstViewStyling { }
 extension FirstViewStyling {
     var cellTimeLabelStyling: (UILabel) -> () {
         {
-            $0.font = UIFont.systemFont(ofSize: 12)
-            $0.textColor = .black
+            $0.textColor = .graySecondary
+            $0.font = .appleSDGothicNeo(weight: .regular, size: 12)
             $0.textAlignment = .left
         }
     }
     
     var cellMeasureTypelabelStyling: (UILabel) -> () {
         {
-            $0.font = UIFont.systemFont(ofSize: 12)
-            $0.textColor = .black
+            $0.textColor = .grayPrimary
+            $0.font = .appleSDGothicNeo(weight: .regular, size: 18)
             $0.textAlignment = .left
         }
     }
     
     var cellAmountTypeLabelStyling: (UILabel) -> () {
         {
-            $0.font = UIFont.systemFont(ofSize: 16)
-            $0.textColor = .black
+            $0.textColor = .grayPrimary
+            $0.font = .appleSDGothicNeo(weight: .regular, size: 28)
             $0.textAlignment = .center
         }
     }

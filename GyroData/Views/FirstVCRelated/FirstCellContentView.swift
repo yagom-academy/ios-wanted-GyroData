@@ -48,23 +48,19 @@ extension FirstCellContentView: Presentable {
         defer { NSLayoutConstraint.activate(constraints) }
         
         constraints += [
-            timeLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 8),
-            timeLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8),
-            timeLabel.trailingAnchor.constraint(lessThanOrEqualTo: amountLabel.leadingAnchor, constant: -8),
-            timeLabel.bottomAnchor.constraint(equalTo: amountLabel.centerYAnchor)
+            timeLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 18),
+            timeLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
         ]
         
         constraints += [
-            measureTypeLabel.topAnchor.constraint(equalTo: amountLabel.centerYAnchor),
-            measureTypeLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8),
-            measureTypeLabel.trailingAnchor.constraint(lessThanOrEqualTo: amountLabel.leadingAnchor, constant: -8),
-            measureTypeLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -8)
+            measureTypeLabel.topAnchor.constraint(equalTo: timeLabel.bottomAnchor, constant: 6),
+            measureTypeLabel.leadingAnchor.constraint(equalTo: timeLabel.leadingAnchor),
+            measureTypeLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -15)
         ]
         
         constraints += [
-            amountLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 8),
-            amountLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8),
-            amountLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -8)
+            amountLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            amountLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -21)
         ]
         
     }

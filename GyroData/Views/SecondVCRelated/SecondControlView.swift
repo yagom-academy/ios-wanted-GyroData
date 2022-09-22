@@ -41,9 +41,10 @@ extension SecondControlView: Presentable {
         
         constraint += [
             stackView.topAnchor.constraint(equalTo: self.topAnchor),
-            stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+            stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
+            stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+            stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            stackView.heightAnchor.constraint(equalToConstant: 48)
         ]
     }
     

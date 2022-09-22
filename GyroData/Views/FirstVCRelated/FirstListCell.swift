@@ -57,7 +57,7 @@ extension FirstListCell: Presentable {
     }
     
     func configureView() {
-        
+        self.selectionStyle = .none
     }
     
     func bind() {

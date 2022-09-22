@@ -57,18 +57,17 @@ extension SecondViewController: Presentable {
         defer { NSLayoutConstraint.activate(constraints) }
         
         constraints += [
-            segmentView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 8),
-            segmentView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            segmentView.widthAnchor.constraint(equalToConstant: 300),
-            segmentView.heightAnchor.constraint(equalToConstant: 30),
-            dummyGraphView.topAnchor.constraint(equalTo: segmentView.bottomAnchor, constant: 24),
-            dummyGraphView.leadingAnchor.constraint(equalTo: segmentView.leadingAnchor),
-            dummyGraphView.trailingAnchor.constraint(equalTo: segmentView.trailingAnchor),
+            segmentView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            segmentView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            segmentView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            segmentView.heightAnchor.constraint(equalToConstant: 42),
+            dummyGraphView.topAnchor.constraint(equalTo: segmentView.bottomAnchor, constant: 16),
+            dummyGraphView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            dummyGraphView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             dummyGraphView.heightAnchor.constraint(equalTo: dummyGraphView.widthAnchor),
-            controlView.leadingAnchor.constraint(equalTo: segmentView.leadingAnchor),
-            controlView.trailingAnchor.constraint(equalTo: segmentView.trailingAnchor),
-            controlView.topAnchor.constraint(equalTo: dummyGraphView.bottomAnchor, constant: 80),
-            controlView.heightAnchor.constraint(equalToConstant: 100)
+            controlView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
+            controlView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
+            controlView.topAnchor.constraint(equalTo: dummyGraphView.bottomAnchor, constant: 48)
         ]
         
         navigationItem.rightBarButtonItem = saveButton

@@ -8,8 +8,8 @@
 import UIKit
 
 extension UIColor {
-    static var black: UIColor! {
-        return UIColor(named: "Black")
+    static var success: UIColor! {
+        return UIColor(named: "Success")
     }
     
     static var destructive: UIColor! {

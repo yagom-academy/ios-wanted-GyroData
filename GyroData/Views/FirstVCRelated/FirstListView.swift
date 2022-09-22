@@ -48,6 +48,7 @@ extension FirstListView: Presentable {
     
     func configureView() {
         tableView.register(FirstListCell.self, forCellReuseIdentifier: "cell")
+        tableView.separatorStyle = .none
         tableView.delegate = self
         tableView.dataSource = self
     }
@@ -67,12 +68,12 @@ extension FirstListView: UITableViewDelegate {
             self?.viewModel.didSelectPlayAction(indexPath.row)
             completionHandler(true)
         }
-        play.backgroundColor = .green
+        play.backgroundColor = .success
         
-        let delete = UIContextualAction(style: .destructive, title: "Delete") { action, sourceView, completionHandler in
+        let delete = UIContextualAction(style: .normal, title: "Delete") { action, sourceView, completionHandler in
             completionHandler(true)
         }
-        delete.backgroundColor = .red
+        delete.backgroundColor = .destructive
         
         let configuration = UISwipeActionsConfiguration(actions: [delete, play])
         configuration.performsFirstActionWithFullSwipe = false
@@ -104,6 +105,12 @@ extension FirstListView: UITableViewDataSource {
         //model이 만들어둔 cellViewModel을 잘 넘겨줄 수 있도록 추가 처리 필요
         let viewModel = FirstCellContentViewModel()
         cell.configureCell(viewModel: viewModel)
+        
+        if indexPath.row % 2 == 1 {
+            cell.backgroundColor = .grayThird
+        } else {
+            cell.backgroundColor = .white
+        }
         return cell
     }
 }
