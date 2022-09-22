@@ -10,12 +10,9 @@ import SwiftUI
 import CoreGraphics
 
 // TODO: 측정값이 범위 최대값보다 클 경우 스케일 다시 설정
-// TODO: 테스트용 버튼 등을 만들어서 데이터를 하나씩 append + path가 제대로 그려지는지 확인
-// TODO: GraphView가 superView에 add되고 오토레이아웃 활용하여 레이아웃 잡힌 상태에서도 제대로 동작하는지 확인
 // TODO: 격자 그리드 뷰/효과 추가...여러 그래프에 나오는 격자효과 그거
 // TODO: 스케일에 기반해 그리드 뷰도 조정 혹은 보정
 // TODO: data 배열+path그래프가 화면의 가로 사이즈보다 커질 경우를 대비한 ScrollView 추가?
-// TODO: 이미 그려진 path 일괄 삭제 처리. 정지버튼을 누르고 다시 재생할 경우 처음부터 재생해야 하므로
 
 /*******. 두번째 페이지 *******/
 /* graphView
@@ -74,8 +71,10 @@ class TestPathGraphView: UIView {
     
     //input
     var didReceiveData: (ValueInfo) -> () = { value in }
+    var didReceiveRemoveAll = { }
     
     //output
+    
     
     //properties
     private var privateTempDataSource: [ValueInfo] = []
@@ -117,9 +116,9 @@ class TestPathGraphView: UIView {
     //그런데 현 시점 기준으로는 close를 부르나 부르지 않으나 효과가 똑같다.
     //언제 path.close를 확실히 불러줘야 하는지에 대한 검증이 필요해 보인다.
     func drawXpath() {
-        xPath.move(to: xPreviousPoint)
+        guard let receivedData = privateTempDataSource.last?.xValue else { return }
         
-        let receivedData = privateTempDataSource.last?.xValue ?? 0.0
+        xPath.move(to: xPreviousPoint)
         
         xNewPoint = CGPoint(x: xPreviousPoint.x + 10, y: xPreviousPoint.y + receivedData)
         xPath.addLine(to: xNewPoint)
@@ -131,9 +130,9 @@ class TestPathGraphView: UIView {
     }
     
     func drawYpath() {
-        yPath.move(to: yPreviousPoint)
+        guard let receivedData = privateTempDataSource.last?.yValue else { return }
         
-        let receivedData = privateTempDataSource.last?.yValue ?? 0.0
+        yPath.move(to: yPreviousPoint)
         
         yNewPoint = CGPoint(x: yPreviousPoint.x + 10, y: yPreviousPoint.y + receivedData)
         yPath.addLine(to: yNewPoint)
@@ -145,9 +144,9 @@ class TestPathGraphView: UIView {
     }
     
     func drawZpath() {
-        zPath.move(to: zPreviousPoint)
+        guard let receivedData = privateTempDataSource.last?.zValue else { return }
         
-        let receivedData = privateTempDataSource.last?.zValue ?? 0.0
+        zPath.move(to: zPreviousPoint)
         
         zNewPoint = CGPoint(x: zPreviousPoint.x + 10, y: zPreviousPoint.y + receivedData)
         zPath.addLine(to: zNewPoint)
@@ -177,8 +176,27 @@ extension TestPathGraphView: Presentable {
             self?.privateTempDataSource.append(value)
             
             self?.setNeedsDisplay() //그 다음에 얘를 호출 호출하면
-            print("set needs display called")
             //다음 드로잉 사이클에 오버라이드한 draw가 불리게 될 것임
+        }
+        
+        // TODO: remove, 초기화 처리 개선 혹은 다른 모델 등에서 처리하도록 수정
+        didReceiveRemoveAll = { [weak self] in
+            guard let self = self else { return }
+            self.privateTempDataSource.removeAll()
+            
+            self.xPreviousPoint = CGPoint(x: 0, y: self.middlePoint.y)
+            self.xNewPoint = CGPoint(x: 0, y: 0)
+            
+            self.yPreviousPoint = CGPoint(x: 0, y: self.middlePoint.y)
+            self.yNewPoint = CGPoint(x: 0, y: 0)
+            
+            self.zPreviousPoint = CGPoint(x: 0, y: self.middlePoint.y)
+            self.zNewPoint = CGPoint(x: 0, y: 0)
+            
+            self.xPath.removeAllPoints()
+            self.yPath.removeAllPoints()
+            self.zPath.removeAllPoints()
+            self.setNeedsDisplay()
         }
     }
 }
