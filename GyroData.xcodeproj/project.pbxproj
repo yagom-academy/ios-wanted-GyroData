@@ -12,6 +12,7 @@
 		402F398328DAEC9500D4EC69 /* MotionData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402F398128DAEC9500D4EC69 /* MotionData+CoreDataClass.swift */; };
 		402F398428DAEC9500D4EC69 /* MotionData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402F398228DAEC9500D4EC69 /* MotionData+CoreDataProperties.swift */; };
 		402F398628DAEDE900D4EC69 /* MotionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402F398528DAEDE900D4EC69 /* MotionInfo.swift */; };
+		40AAB77228DC1C79002E725F /* FileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AAB77128DC1C79002E725F /* FileService.swift */; };
 		63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB428D44FC400C53A39 /* AppDelegate.swift */; };
 		63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB628D44FC400C53A39 /* SceneDelegate.swift */; };
 		63F01BB928D44FC400C53A39 /* GyroDataListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB828D44FC400C53A39 /* GyroDataListViewController.swift */; };
@@ -27,6 +28,7 @@
 		402F398128DAEC9500D4EC69 /* MotionData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MotionData+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		402F398228DAEC9500D4EC69 /* MotionData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MotionData+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		402F398528DAEDE900D4EC69 /* MotionInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionInfo.swift; sourceTree = "<group>"; };
+		40AAB77128DC1C79002E725F /* FileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileService.swift; sourceTree = "<group>"; };
 		63F01BB128D44FC400C53A39 /* GyroData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GyroData.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63F01BB428D44FC400C53A39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63F01BB628D44FC400C53A39 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -61,6 +63,7 @@
 			isa = PBXGroup;
 			children = (
 				402F398528DAEDE900D4EC69 /* MotionInfo.swift */,
+				40AAB77128DC1C79002E725F /* FileService.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -231,6 +234,7 @@
 				E7370DD228D9FC9000C6D1D6 /* GyroDataListTableViewCell.swift in Sources */,
 				E7370DD028D9DEB300C6D1D6 /* MeasureDataViewController.swift in Sources */,
 				402F398628DAEDE900D4EC69 /* MotionInfo.swift in Sources */,
+				40AAB77228DC1C79002E725F /* FileService.swift in Sources */,
 				402F398028DAEAD200D4EC69 /* MotionDataModel.xcdatamodeld in Sources */,
 				33F4FDA528DAC21900DD82BA /* NSLayoutConstraint+Extension.swift in Sources */,
 				402F398428DAEC9500D4EC69 /* MotionData+CoreDataProperties.swift in Sources */,

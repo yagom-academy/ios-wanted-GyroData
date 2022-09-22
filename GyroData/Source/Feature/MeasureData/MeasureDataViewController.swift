@@ -290,6 +290,7 @@ class MeasureDataViewController: UIViewController {
 
     func saveMeasuredData() {
 
+        // Core Data
         let motionData = MotionData(context: self.context)
         motionData.measureTime = String(Double(measureTime) / 10.0)
         motionData.date = startDate
@@ -304,6 +305,17 @@ class MeasureDataViewController: UIViewController {
             print("<<Error Saving Context>>")
             print(error)
         }
+
+        // FileManager
+
+        let motionInfo = MotionInfo(date: startDate,
+                                    dataType: dataType,
+                                    measureTime: String(Double(measureTime) / 10.0),
+                                    motionX: motionXArray,
+                                    motionY: motionYArray,
+                                    motionZ: motionZArray)
+
+        FileService.shared.saveJSON(data: motionInfo)
     }
     
     @objc func buttonTapAction(_ sender: UIButton) {
