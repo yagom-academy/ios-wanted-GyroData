@@ -10,7 +10,7 @@ import UIKit
 
 class CustomCell: UITableViewCell {
     
-    static let identifier = "CustomCell"
+    static let identifier = "cell"
     
     var leftLabel: UILabel = {
         let leftLabel = UILabel()
@@ -27,13 +27,7 @@ class CustomCell: UITableViewCell {
         centerLabel.translatesAutoresizingMaskIntoConstraints = false
         return centerLabel
     }()
-  
-//    var notice: RunDataList? {
-//        didSet {
-//
-//        }
-//    }
-    
+   
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -55,29 +49,32 @@ class CustomCell: UITableViewCell {
             leftLabel.widthAnchor.constraint(equalToConstant: 20),
             leftLabel.heightAnchor.constraint(equalToConstant: 20),
             
+            rightLabel.topAnchor.constraint(equalTo: self.topAnchor),
+            rightLabel.leadingAnchor.constraint(equalTo: leftLabel.trailingAnchor, constant: margin),
+            rightLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             
-      
-        centerLabel.topAnchor.constraint(equalTo: self.topAnchor),
-        centerLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-        centerLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-        centerLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: margin),
+            centerLabel.topAnchor.constraint(equalTo: self.topAnchor),
+            centerLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            centerLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            centerLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: margin),
         ])
     }
-   
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        contentView.addSubview(leftLabel)
+        contentView.addSubview(rightLabel)
+        contentView.addSubview(centerLabel)
+        
+        leftLabel.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 10).isActive = true
+        rightLabel.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -10).isActive = true
     }
     required init?(coder: NSCoder) {
         fatalError()
+        
     }
-    //    var subLabel: UILabel = {
-    //        let subTitleLabel = UILabel()
-    //        subTitleLabel.text = "mm"
-    //        subTitleLabel.translatesAutoresizingMaskIntoConstraints = false
-    //        return subTitleLabel
-    //    }()
-    
 }
+
 extension CustomCell {
     public func bind(model: TestCell) {
         leftLabel.text = model.liftName
