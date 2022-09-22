@@ -48,9 +48,9 @@ class ReplayViewController: UIViewController {
         return label
     }()
     
-    private let graphView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .blue
+    private let graphView: GraphView = {
+        let view = GraphView()
+        view.backgroundColor = .white
         return view
     }()
     
@@ -75,6 +75,7 @@ class ReplayViewController: UIViewController {
         self.navigationController?.navigationBar.isHidden = true
         self.setupLayouts()
         self.btnAddTarget()
+        
     }
     
     // MARK: - configure

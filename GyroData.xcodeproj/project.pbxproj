@@ -16,6 +16,7 @@
 		6C78FB3228DAA871001CAE3B /* MeasureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C78FB3128DAA871001CAE3B /* MeasureViewController.swift */; };
 		6C78FB3428DAA878001CAE3B /* ReplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C78FB3328DAA878001CAE3B /* ReplayViewController.swift */; };
 		6CFA0C1428DB05A500390B0F /* ReplayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CFA0C1328DB05A500390B0F /* ReplayViewModel.swift */; };
+		6CFA0C2B28DCAE7000390B0F /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CFA0C2A28DCAE7000390B0F /* GraphView.swift */; };
 		6CFA77C228DA00B4009540E0 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 6CFA77C128DA00B4009540E0 /* SnapKit */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +32,7 @@
 		6C78FB3128DAA871001CAE3B /* MeasureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureViewController.swift; sourceTree = "<group>"; };
 		6C78FB3328DAA878001CAE3B /* ReplayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplayViewController.swift; sourceTree = "<group>"; };
 		6CFA0C1328DB05A500390B0F /* ReplayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplayViewModel.swift; sourceTree = "<group>"; };
+		6CFA0C2A28DCAE7000390B0F /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 				63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */,
 				63F01BB428D44FC400C53A39 /* AppDelegate.swift */,
 				63F01BB628D44FC400C53A39 /* SceneDelegate.swift */,
+				6CFA0C2A28DCAE7000390B0F /* GraphView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -200,6 +203,7 @@
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
 				6C78FB3428DAA878001CAE3B /* ReplayViewController.swift in Sources */,
 				6C78FB3228DAA871001CAE3B /* MeasureViewController.swift in Sources */,
+				6CFA0C2B28DCAE7000390B0F /* GraphView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
