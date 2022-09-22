@@ -175,6 +175,7 @@
 			isa = PBXGroup;
 			children = (
 				36E1FCA228D978ED00EB7E4F /* Repository.swift */,
+				64E428C328DADA5C00047DB8 /* CoreDataManager.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -278,6 +279,17 @@
 			path = GyroData;
 			sourceTree = "<group>";
 		};
+		64E428C528DADB3400047DB8 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				64E428C628DADB6300047DB8 /* MotionModel.xcdatamodeld */,
+				64E428CD28DADFB200047DB8 /* MotionTask.swift */,
+				6473CC9328DAF6F4002B3622 /* Motion+CoreDataClass.swift */,
+				6473CC9428DAF6F4002B3622 /* Motion+CoreDataProperties.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -352,6 +364,7 @@
 				36FB64F928D8CD1700A87587 /* SceneContext.swift in Sources */,
 				B019E7FF28DBED17009BC86F /* ThirdControlViewModel.swift in Sources */,
 				63F01BB928D44FC400C53A39 /* FirstViewController.swift in Sources */,
+				6473CC9528DAF6F4002B3622 /* Motion+CoreDataClass.swift in Sources */,
 				36E1FCA328D978ED00EB7E4F /* Repository.swift in Sources */,
 				36FB64F728D8CC7900A87587 /* ThirdViewController.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
@@ -366,6 +379,7 @@
 				462FB33328DB123D00BC5F04 /* ThirdViewControllerRoutable.swift in Sources */,
 				464FE63C28DB3D9D00C73656 /* UIFont+Extensions.swift in Sources */,
 				3695B0BD28D99CA100FF93FD /* SecondViewSegementedControlView.swift in Sources */,
+				64E428CE28DADFB200047DB8 /* MotionTask.swift in Sources */,
 				3695B0C328D9A0BF00FF93FD /* SecondSegmentViewModel.swift in Sources */,
 				36FB64ED28D8C5DC00A87587 /* Routable.swift in Sources */,
 				B0CF0F4128DAA07900596BCF /* SecondViewStyling.swift in Sources */,
@@ -374,6 +388,7 @@
 				36E1FCB028D9820800EB7E4F /* FirstCellContentViewModel.swift in Sources */,
 				3695B0C128D9A08F00FF93FD /* SecondModel.swift in Sources */,
 				36E1FCAE28D97DB500EB7E4F /* FirstCellContentView.swift in Sources */,
+				64E428C428DADA5C00047DB8 /* CoreDataManager.swift in Sources */,
 				36E1FCA028D978AB00EB7E4F /* FirstModel.swift in Sources */,
 				464FE63E28DB42F300C73656 /* Date+Extension.swift in Sources */,
 				36E1FC9D28D976B800EB7E4F /* BasicNavigationController.swift in Sources */,
@@ -590,6 +605,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		64E428C628DADB6300047DB8 /* MotionModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				64E428C728DADB6300047DB8 /* MotionModel.xcdatamodel */,
+			);
+			currentVersion = 64E428C728DADB6300047DB8 /* MotionModel.xcdatamodel */;
+			path = MotionModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 63F01BA928D44FC400C53A39 /* Project object */;
 }
