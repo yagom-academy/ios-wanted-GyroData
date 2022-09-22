@@ -16,8 +16,6 @@ extension UIButton {
 
 class MeasureView: UIView {
     
-    let splashLogo = UIImageView()
-    let splashText = UIImageView()
     let segmentControl: UISegmentedControl = {
         let control = UISegmentedControl(items: ["Acc","Gyro"])
         control.setTitle("Acc", forSegmentAt: 0)
@@ -49,6 +47,13 @@ class MeasureView: UIView {
         button.setCustom()
         return button
     }()
+    //MARK: TEST CODE1
+    let testButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("테스트", for: .normal)
+        button.setCustom()
+        return button
+    }()
     
     
     override init(frame: CGRect) {
@@ -64,11 +69,13 @@ class MeasureView: UIView {
     func setupView() {
         backgroundColor = .white
         addSubview(segmentControl)
-        lineChartView = LineChartView(frame: frame, values: [20, 10, 30, 20, 50, 100, 10, 10], animated: true)
+        lineChartView = GraphView()
         lineChartView.backgroundColor = .green
         addSubview(lineChartView)
         addSubview(measureButton)
         addSubview(stopButton)
+        //MARK: TEST CODE2
+        addSubview(testButton)
     }
     
     func setupConstraints() {
@@ -76,7 +83,6 @@ class MeasureView: UIView {
         segmentControl.snp.makeConstraints { make in
             make.leading.trailing.equalTo(self.safeAreaLayoutGuide).inset(16)
             make.top.equalTo(self.safeAreaLayoutGuide)
-            //make.height.equalToSuperview().multipliedBy(0.3)
         }
         
         lineChartView.snp.makeConstraints { make in
@@ -94,6 +100,11 @@ class MeasureView: UIView {
         stopButton.snp.makeConstraints { make in
             make.leading.trailing.equalTo(self.safeAreaLayoutGuide).inset(16)
             make.top.equalTo(measureButton.snp.bottom).offset(20)
+            make.height.equalTo(40)
+        }
+        testButton.snp.makeConstraints { make in
+            make.leading.trailing.equalTo(self.safeAreaLayoutGuide).inset(16)
+            make.top.equalTo(stopButton.snp.bottom).offset(20)
             make.height.equalTo(40)
         }
     }
