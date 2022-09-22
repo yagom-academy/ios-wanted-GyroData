@@ -1,18 +1,18 @@
 //
-//  SecondViewControllerRoutable.swift
+//  ThirdViewControllerRoutable.swift
 //  GyroData
 //
-//  Created by pablo.jee on 2022/09/20.
+//  Created by 한경수 on 2022/09/21.
 //
 
 import Foundation
 import UIKit
 
-protocol SecondViewControllerRoutable: Routable {
+protocol ThirdViewControllerRoutable: Routable {
     
 }
 
-extension SecondViewControllerRoutable where Self: SecondViewController {
+extension ThirdViewControllerRoutable where Self: ThirdViewController {
     func route(to Scene: SceneCategory) {
         switch Scene {
         case .close:

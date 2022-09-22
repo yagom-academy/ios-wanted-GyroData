@@ -39,11 +39,15 @@ class FirstModel {
         // TODO: 이동 타입(View or Play)을 선택해서 이동하도록 구현해야 함
         privateFirstListViewModel.propagateDidSelectRowEvent = { [weak self] indexPathRow in
             guard let self = self else { return }
-            self.routeSubject(.detail(.thirdViewController))
+            let model = ThirdModel(viewType: .view)
+            let context = SceneContext(dependency: model)
+            self.routeSubject(.detail(.thirdViewController(context: context)))
         }
         privateFirstListViewModel.propagateDidSelectPlayActionEvent = { [weak self] indexPathRow in
             guard let self = self else { return }
-            self.routeSubject(.detail(.thirdViewController))
+            let model = ThirdModel(viewType: .play)
+            let context = SceneContext(dependency: model)
+            self.routeSubject(.detail(.thirdViewController(context: context)))
         }
     }
     

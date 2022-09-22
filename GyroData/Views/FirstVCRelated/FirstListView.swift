@@ -74,7 +74,10 @@ extension FirstListView: UITableViewDelegate {
         }
         delete.backgroundColor = .red
         
-        return UISwipeActionsConfiguration(actions: [delete, play])
+        let configuration = UISwipeActionsConfiguration(actions: [delete, play])
+        configuration.performsFirstActionWithFullSwipe = false
+        
+        return configuration
     }
 }
 

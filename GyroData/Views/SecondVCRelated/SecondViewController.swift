@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SecondViewController: UIViewController, SecondViewControllerRoutable, SecondViewStyling, SceneDismissable {
+class SecondViewController: UIViewController, SecondViewControllerRoutable, SecondViewStyling {
     // MARK: UI
     var saveButton = UIBarButtonItem()
     var backButton = UIBarButtonItem()

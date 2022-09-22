@@ -18,8 +18,8 @@ extension FirstViewControllerRoutable where Self: FirstViewController {
         switch scene {
         case .detail(.secondViewController(let context)):
             nextScene = buildSecondScene(context: context)
-        case .detail(.thirdViewController):
-            nextScene = buildThirdScene()
+        case .detail(.thirdViewController(let context)):
+            nextScene = buildThirdScene(context: context)
         default: break
         }
         return nextScene
@@ -54,9 +54,10 @@ extension FirstViewControllerSceneBuildable {
         return nextScene
     }
     
-    func buildThirdScene() -> Scenable {
+    func buildThirdScene(context: SceneContext<ThirdModel>) -> Scenable {
         var nextScene: Scenable
-        let thirdVC = ThirdViewController()
+        let model = context.dependency
+        let thirdVC = ThirdViewController(viewModel: model)
         nextScene = thirdVC
         
         return nextScene
