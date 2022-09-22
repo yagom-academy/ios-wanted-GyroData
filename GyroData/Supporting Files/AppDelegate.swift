@@ -23,13 +23,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func saveContext(backgroundContext: NSManagedObjectContext? = nil) {
         let context = persistentContainer.viewContext
-            guard context.hasChanges else { return }
-            do {
-                try context.save()
-            } catch let error as NSError {
-                print("Error: \(error), \(error.userInfo)")
-            }
+        guard context.hasChanges else { return }
+        do {
+            try context.save()
+        } catch let error as NSError {
+            print("Failure to save context: \(error), \(error.userInfo)")
         }
+    }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.

@@ -29,9 +29,8 @@ final class ListCell: UITableViewCell {
         return label
     }()
     
-    let vStackView: UIStackView = {
+    private let vStackView: UIStackView = {
         let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.alignment = .fill
         stackView.distribution = .fill
@@ -39,7 +38,7 @@ final class ListCell: UITableViewCell {
         return stackView
     }()
     
-    let hStackView: UIStackView = {
+    private let hStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .horizontal

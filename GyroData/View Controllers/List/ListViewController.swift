@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreData
+import CoreMotion
 
 final class ListViewController: UIViewController {
     
@@ -38,6 +39,7 @@ final class ListViewController: UIViewController {
     private func configureNavigation() {
         navigationItem.title = "목록"
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "측정", style: .plain, target: self, action: #selector(didTapMeasureButton))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Load", style: .plain, target: self, action: #selector(didTapLoadDataButton))
     }
     
     private func configureLayout() {
@@ -65,10 +67,74 @@ final class ListViewController: UIViewController {
         }
     }
 
+    private var timer: Timer!
+    private let motion = CMMotionManager()
+
     @objc
     private func didTapMeasureButton() {
         // TODO: 두 번째 페이지로 이동
+        startAccelerometers()
     }
+
+    @objc
+    private func didTapLoadDataButton() {
+        let fetchRequest = DetailData.fetchRequest()
+        let sortDescriptor = NSSortDescriptor(key: #keyPath(DetailData.date), ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        do {
+            let results = try container.viewContext.fetch(fetchRequest)
+            results.forEach { print(#function, $0.date, $0.x, $0.y, $0.z) }
+        } catch {
+            fatalError("Failed to fetch: \(error)")
+        }
+    }
+
+    private func startAccelerometers() {
+        var timeout = 10 // TODO: 600
+
+        if self.motion.isAccelerometerAvailable {
+            self.motion.accelerometerUpdateInterval = 6 / 60.0  // 10 Hz
+            self.motion.startAccelerometerUpdates()
+
+            self.timer = Timer(fire: Date(), interval: (6 / 60.0),
+                               repeats: true, block: { (timer) in
+                guard timeout > 0 else {
+                    self.stopAccelerometers()
+                    return
+                }
+                timeout -= 1
+                if let data = self.motion.accelerometerData {
+                    let x = data.acceleration.x
+                    let y = data.acceleration.y
+                    let z = data.acceleration.z
+                    self.saveAccelerometerData(x: x, y: y, z: z)
+                    print(#function, timeout, x, y, z)
+                }
+            })
+            RunLoop.current.add(self.timer!, forMode: .default)
+        }
+    }
+
+    @objc func didTapStopButton() {
+        stopAccelerometers()
+    }
+
+    private func stopAccelerometers() {
+        self.motion.stopAccelerometerUpdates()
+    }
+
+    func saveAccelerometerData(x: Double, y: Double, z: Double, date: Date = Date()) {
+        let context = container.viewContext
+        let accelerometerData = DetailData(context: context)
+        accelerometerData.x = x
+        accelerometerData.y = y
+        accelerometerData.z = z
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd HH:mm:ss.SSS"
+        accelerometerData.date = formatter.string(from: date)
+        (UIApplication.shared.delegate as! AppDelegate).saveContext()
+    }
+
 }
 
 // MARK: - UITableViewDataSource
