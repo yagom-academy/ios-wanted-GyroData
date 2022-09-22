@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2D7F431D28DC52DC004CA619 /* DataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7F431C28DC52DC004CA619 /* DataError.swift */; };
 		33F4FDA528DAC21900DD82BA /* NSLayoutConstraint+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F4FDA428DAC21900DD82BA /* NSLayoutConstraint+Extension.swift */; };
 		402F398028DAEAD200D4EC69 /* MotionDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 402F397E28DAEAD200D4EC69 /* MotionDataModel.xcdatamodeld */; };
 		402F398328DAEC9500D4EC69 /* MotionData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402F398128DAEC9500D4EC69 /* MotionData+CoreDataClass.swift */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2D7F431C28DC52DC004CA619 /* DataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataError.swift; sourceTree = "<group>"; };
 		33F4FDA428DAC21900DD82BA /* NSLayoutConstraint+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+Extension.swift"; sourceTree = "<group>"; };
 		402F397F28DAEAD200D4EC69 /* MotionDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MotionDataModel.xcdatamodel; sourceTree = "<group>"; };
 		402F398128DAEC9500D4EC69 /* MotionData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MotionData+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
@@ -64,6 +66,7 @@
 			children = (
 				402F398528DAEDE900D4EC69 /* MotionInfo.swift */,
 				40AAB77128DC1C79002E725F /* FileService.swift */,
+				2D7F431C28DC52DC004CA619 /* DataError.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -236,6 +239,7 @@
 				402F398628DAEDE900D4EC69 /* MotionInfo.swift in Sources */,
 				40AAB77228DC1C79002E725F /* FileService.swift in Sources */,
 				402F398028DAEAD200D4EC69 /* MotionDataModel.xcdatamodeld in Sources */,
+				2D7F431D28DC52DC004CA619 /* DataError.swift in Sources */,
 				33F4FDA528DAC21900DD82BA /* NSLayoutConstraint+Extension.swift in Sources */,
 				402F398428DAEC9500D4EC69 /* MotionData+CoreDataProperties.swift in Sources */,
 				402F398328DAEC9500D4EC69 /* MotionData+CoreDataClass.swift in Sources */,
@@ -379,6 +383,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GyroData/Application/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -405,6 +410,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GyroData/Application/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

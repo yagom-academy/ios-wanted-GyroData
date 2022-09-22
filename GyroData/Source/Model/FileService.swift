@@ -13,7 +13,7 @@ class FileService {
 
     let documentUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
 
-    func saveJSON(data: MotionInfo) {
+    func saveJSON(data: MotionInfo) throws {
         let jsonEncoder = JSONEncoder()
 
         do {
@@ -24,10 +24,10 @@ class FileService {
             do {
                 try encodedData.write(to: fileURL)
             } catch {
-                print(error)
+                throw DataError.writeErr
             }
         } catch {
-            print(error)
+            throw DataError.encodedErr
         }
     }
 

@@ -135,6 +135,13 @@ class MeasureDataViewController: UIViewController {
     
     
     
+    lazy var activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.style = .large
+        activityIndicator.color = .blue
+        activityIndicator.layer.zPosition = 1
+        return activityIndicator
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -144,7 +151,7 @@ class MeasureDataViewController: UIViewController {
         self.navigationItem.setRightBarButton(saveBarButtonItem, animated: true)
         
         addViews(to: self.view, segmentedControl, measureBtn, stopBtn)
-        doNotTranslate( segmentedControl,measureBtn, stopBtn)
+        doNotTranslate(segmentedControl,measureBtn, stopBtn)
         
         NSLayoutConstraint.activate([
             segmentedControl.bottomAnchor.constraint(equalTo: view.centerYAnchor, constant: -view.frame.width * 0.4 - 20),
@@ -165,15 +172,17 @@ class MeasureDataViewController: UIViewController {
     }
     
     func presentGyro(){
-        removeViews([acc,xLabel,yLabel,zLabel])
+        removeViews([acc,xLabel,yLabel,zLabel, activityIndicator])
         addViews(to: self.view, gyro)
-        addViews(to: gyro, xLabel,yLabel,zLabel)
-        doNotTranslate(gyro,xLabel,yLabel,zLabel)
+        addViews(to: gyro, xLabel,yLabel,zLabel, activityIndicator)
+        doNotTranslate(gyro,xLabel,yLabel,zLabel, activityIndicator)
         NSLayoutConstraint.activate([
             gyro.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             gyro.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             gyro.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8),
             gyro.heightAnchor.constraint(equalTo: gyro.widthAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: gyro.centerYAnchor),
+            activityIndicator.centerXAnchor.constraint(equalTo: gyro.centerXAnchor),
             xLabel.topAnchor.constraint(equalTo: gyro.topAnchor),
             xLabel.centerXAnchor.constraint(equalTo: gyro.centerXAnchor).constraintWithMultiplier(0.3),
             yLabel.topAnchor.constraint(equalTo: gyro.topAnchor),
@@ -184,15 +193,17 @@ class MeasureDataViewController: UIViewController {
     }
     
     func presentAcc(){
-        removeViews([gyro,xLabel,yLabel,zLabel])
+        removeViews([gyro,xLabel,yLabel,zLabel, activityIndicator])
         addViews(to: self.view, acc)
-        addViews(to: acc, xLabel,yLabel,zLabel)
-        doNotTranslate(acc,xLabel,yLabel,zLabel)
+        addViews(to: acc, xLabel,yLabel,zLabel,activityIndicator)
+        doNotTranslate(acc,xLabel,yLabel,zLabel,activityIndicator)
         NSLayoutConstraint.activate([
             acc.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             acc.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             acc.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8),
             acc.heightAnchor.constraint(equalTo: acc.widthAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: acc.centerYAnchor),
+            activityIndicator.centerXAnchor.constraint(equalTo: acc.centerXAnchor),
             xLabel.topAnchor.constraint(equalTo: acc.topAnchor),
             xLabel.centerXAnchor.constraint(equalTo: acc.centerXAnchor).constraintWithMultiplier(0.3),
             yLabel.topAnchor.constraint(equalTo: acc.topAnchor),
@@ -296,7 +307,7 @@ class MeasureDataViewController: UIViewController {
     }
 
     func saveMeasuredData() {
-
+        activityIndicator.startAnimating()
         // Core Data
         let motionData = MotionData(context: self.context)
         motionData.measureTime = String(Double(measureTime) / 10.0)
@@ -306,13 +317,6 @@ class MeasureDataViewController: UIViewController {
         motionData.motionY = motionYArray
         motionData.motionZ = motionZArray
 
-        do {
-            try context.save()
-        } catch {
-            print("<<Error Saving Context>>")
-            print(error)
-        }
-
         // FileManager
 
         let motionInfo = MotionInfo(date: startDate,
@@ -321,9 +325,32 @@ class MeasureDataViewController: UIViewController {
                                     motionX: motionXArray,
                                     motionY: motionYArray,
                                     motionZ: motionZArray)
-
-        FileService.shared.saveJSON(data: motionInfo)
-        self.setAlertAndFinish(message: "저장이 완료되었습니다.")
+        let group = DispatchGroup()
+        
+        DispatchQueue.global().async(group: group) {
+            do {
+                try self.context.save()
+            } catch {
+                DispatchQueue.main.async {
+                    self.setAlert(message: error.localizedDescription)
+                }
+            }
+        }
+        
+        DispatchQueue.global().async(group: group) {
+            do {
+                try FileService.shared.saveJSON(data: motionInfo)
+            } catch {
+                DispatchQueue.main.async {
+                    self.setAlert(message: error.localizedDescription)
+                }
+            }
+        }
+        
+        group.notify(queue: .main) {
+            self.setAlertAndFinish(message: "저장이 완료되었습니다.")
+            self.activityIndicator.stopAnimating()
+        }
     }
     
     func setAlertAndFinish(message: String) {
@@ -331,6 +358,13 @@ class MeasureDataViewController: UIViewController {
         let confirmAction = UIAlertAction(title: "확인", style: .default, handler: { _ in
             self.navigationController?.popViewController(animated: true)
         })
+        alertController.addAction(confirmAction)
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    func setAlert(message: String) {
+        let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: "확인", style: .default, handler: nil)
         alertController.addAction(confirmAction)
         present(alertController, animated: true, completion: nil)
     }
