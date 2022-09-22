@@ -10,15 +10,15 @@ import UIKit
 import CoreData
 
 
-//struct CoreData {
-//    let uuid: Int
-//    let gyro: String?
-//    let acc: String?
-//    let timestamp: String?
-//    let interval: Float
-//    //    let modelacc: [Acc]
-//    //    let modelgyro: [Gyro]
-//}
+struct RunDataList: Codable, Equatable {
+    let uuid: Double
+    let gyro: String
+    let acc: String
+    let timestamp: String
+    let interval: Double
+    //    let modelacc: [Acc]
+    //    let modelgyro: [Gyro]
+}
 //struct Acc {
 //    var x: Double
 //    var y: Double
@@ -29,5 +29,4 @@ import CoreData
 //    var y: Double
 //    var z: Double
 //}
-
 

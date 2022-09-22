@@ -7,48 +7,195 @@
 
 import Foundation
 import CoreData
-class  DataManager {
-    static let shared = DataManager()
-    
-    private init() {
-        let uuid : Int64
-        let gyro : String?
-        let acc : String?
-        let timetamp: String?
-        let interval : Float
-        
-    }
-    
-    var viewContext: NSManagedObjectContext {
-        return persistentContainer.viewContext
-    }
-    
-    var runList = [Run]()
-    
-    func fetchRun() {
-        let request: NSFetchRequest<Run> = Run.fetchRequest()
-    }
+
+class DataManager {
+    static var shared: DataManager = DataManager()
     
     lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "Run")
-        container.loadPersistentStores { description, error in
-            if let error = error {
-                fatalError("Unable to load persistent stores: (error)")
+        let container = NSPersistentContainer(name: "Model")
+        container.loadPersistentStores(completionHandler: {
+            (storeDescription, error) in
+            if let error = error as NSError? {
+                fatalError("Unresolved error \(error), \(error.userInfo)")
             }
-        }
+        })
         return container
     }()
     
-    func saveContext(backgroundContext: NSManagedObjectContext? = nil) {
-        let context = backgroundContext ?? viewContext
-        guard context.hasChanges else { return }
+    var context: NSManagedObjectContext {
+        return self.persistentContainer.viewContext
+    }
+    var runkEntity: NSEntityDescription? {
+        return NSEntityDescription.entity(forEntityName: "Run", in: context)
+    }
+    //Context 저장
+    func saveToContext() {
         do {
             try context.save()
-        } catch let error as NSError {
-            print("Error: (error), (error.userInfo)")
+
+        } catch {
+            print(error.localizedDescription)
         }
     }
+    //Read 구현
+    func fetchRun() -> [Run] {
+        do {
+            let request = Run.fetchRequest()
+            let results = try context.fetch(request)
+            return results
+        } catch {
+            print(error.localizedDescription)
+        }
+        return []
+    }
+    //Context 저장
+    func insertRun(_ notice: RunDataList) {
+        if let entity = runkEntity {
+            let managedObject = NSManagedObject(entity: entity, insertInto: context)
+            managedObject.setValue(notice.interval, forKey: "interval")
+            managedObject.setValue(notice.timestamp, forKey: "timestamp")
+            managedObject.setValue(notice.acc, forKey: "acc")
+            managedObject.setValue(notice.gyro, forKey: "gyro")
+            managedObject.setValue(notice.uuid, forKey: "uuid")
+            saveToContext()
+        }
+    }
+    //Read 구현
+    func getRun() -> [RunDataList] {
+        var notices: [RunDataList] = []
+        let fetchResults = fetchRun()
+        for result in fetchResults {
+//            let notice = RunDataList(uuid: 1, gyro: "gy", acc: "acc", timestamp: "ti", interval: 1.1)
+            let notice = RunDataList(uuid: 1, gyro: result.gyro ?? "", acc: result.acc ?? "", timestamp: result.timestamp ?? "", interval: 1.1)
+            notices.append(notice)
+        }
+        return notices
+    }
+    //update 구현
+    func updateRun(_ notice: RunDataList) {
+        let fetchResults = fetchRun()
+        for result in fetchResults {
+            if result.acc == notice.acc {
+                result.gyro = "업그레이드"
+            }
+        }
+        saveToContext()
+    }
+    //Delete 구현
+    func deleteRun(_ notice: RunDataList) {
+        let fetchResults = fetchRun()
+        let notice = fetchResults.filter({ $0.acc == notice.acc }) [0]
+        context.delete(notice)
+        saveToContext()
+    }
+    //Delete 구현
+    func deleteAllRun() {
+        let fetchResults = fetchRun()
+        for result in fetchResults {
+            context.delete(result)
+        }
+        saveToContext()
+    }
 }
+
+
+
+
+
+//class  DataManager {  하기전 최신
+//    static let shared = DataManager()
+//
+//    private init() {}
+//
+//    var viewContext: NSManagedObjectContext {
+//        return persistentContainer.viewContext
+//    }
+//
+//    var runList = [Run]()
+//    let container = NSPersistentContainer(name: "Run")
+//
+//    func fetchRun() {
+//        let request: NSFetchRequest<Run> = Run.fetchRequest()
+//    }
+//
+//    lazy var persistentContainer: NSPersistentContainer = {
+//        let container = NSPersistentContainer(name: "Run")
+//        container.loadPersistentStores { description, error in
+//            if let error = error {
+//                fatalError("Unable to load persistent stores: (error)")
+//            }
+//        }
+//        return container
+//    }()
+//
+//    func saveContext(backgroundContext: NSManagedObjectContext? = nil) {
+//        let context = backgroundContext ?? viewContext
+//        guard context.hasChanges else { return }
+//        do {
+//            try context.save()
+//        } catch let error as NSError {
+//            print("Error: (error), (error.userInfo)")
+//        }
+//    }
+//}
+
+
+//    static let shared = DataManager()
+//    var runList = [Run]()
+//
+//    func fetchRun() {
+//        let request: NSFetchRequest<Run> = Run.fetchRequest()
+//    }
+//
+//    lazy var persistentContainer: NSPersistentContainer = {
+//        let container = NSPersistentContainer(name: "Run")
+//        container.loadPersistentStores { description, error in
+//            if let error = error as! NSError? {
+//                fatalError("Unable to load persistent stores: (error)")
+//            }
+//        }
+//        return container
+//    }()
+//    var context: NSManagedObjectContext {
+//        return self.persistentContainer.viewContext
+//    }
+
+
+
+//    var viewContext: NSManagedObjectContext {
+//        return persistentContainer.viewContext
+//    }
+//
+//    var runList = [Run]()
+//
+//    func fetchRun() {
+//        let request: NSFetchRequest<Run> = Run.fetchRequest()
+//    }
+//
+//    lazy var persistentContainer: NSPersistentContainer = {
+//        let container = NSPersistentContainer(name: "Run")
+//        container.loadPersistentStores { description, error in
+//            if let error = error {
+//                fatalError("Unable to load persistent stores: (error)")
+//            }
+//        }
+//        return container
+//    }()
+//
+//    func saveContext() {
+//        let context = persistentContainer.viewContext
+//        if context.hasChanges {
+//            do {
+//                try context.save()
+//            } catch let error as NSError {
+//                print("Error: (error), (error.userInfo)")
+//            }
+//        }
+//    }
+
+
+
+
 
 
 //class DataManager {
