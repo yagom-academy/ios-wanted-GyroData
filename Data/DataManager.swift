@@ -54,9 +54,9 @@ class DataManager {
             let managedObject = NSManagedObject(entity: entity, insertInto: context)
             managedObject.setValue(notice.interval, forKey: "interval")
             managedObject.setValue(notice.timestamp, forKey: "timestamp")
-            managedObject.setValue(notice.acc, forKey: "acc")
+//            managedObject.setValue(notice.acc, forKey: "acc")
             managedObject.setValue(notice.gyro, forKey: "gyro")
-            managedObject.setValue(notice.uuid, forKey: "uuid")
+//            managedObject.setValue(notice.uuid, forKey: "uuid")
             saveToContext()
         }
     }
@@ -66,7 +66,7 @@ class DataManager {
         let fetchResults = fetchRun()
         for result in fetchResults {
 //            let notice = RunDataList(uuid: 1, gyro: "gy", acc: "acc", timestamp: "ti", interval: 1.1)
-            let notice = RunDataList(uuid: 1, gyro: result.gyro ?? "", acc: result.acc ?? "", timestamp: result.timestamp ?? "", interval: 1.1)
+            let notice = RunDataList(timestamp: result.timestamp ?? "", gyro: result.gyro ?? "", interval: 1.1)
             notices.append(notice)
         }
         return notices
@@ -75,7 +75,7 @@ class DataManager {
     func updateRun(_ notice: RunDataList) {
         let fetchResults = fetchRun()
         for result in fetchResults {
-            if result.acc == notice.acc {
+            if result.gyro == notice.gyro {
                 result.gyro = "업그레이드"
             }
         }
@@ -84,7 +84,7 @@ class DataManager {
     //Delete 구현
     func deleteRun(_ notice: RunDataList) {
         let fetchResults = fetchRun()
-        let notice = fetchResults.filter({ $0.acc == notice.acc }) [0]
+        let notice = fetchResults.filter({ $0.acc == notice.gyro }) [0]
         context.delete(notice)
         saveToContext()
     }

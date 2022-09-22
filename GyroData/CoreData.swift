@@ -11,22 +11,7 @@ import CoreData
 
 
 struct RunDataList: Codable, Equatable {
-    let uuid: Double
-    let gyro: String
-    let acc: String
     let timestamp: String
+    let gyro: String
     let interval: Double
-    //    let modelacc: [Acc]
-    //    let modelgyro: [Gyro]
 }
-//struct Acc {
-//    var x: Double
-//    var y: Double
-//    var z: Double
-//}
-//struct Gyro {
-//    var x: Double
-//    var y: Double
-//    var z: Double
-//}
-

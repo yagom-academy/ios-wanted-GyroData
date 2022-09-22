@@ -8,12 +8,12 @@
 import UIKit
 import CoreData
 
-struct TestCell {
-    let liftName :String
-    let rightName: String
-    let centers: String
-}
-
+//struct TestCell {
+//    let liftName :String
+//    let rightName: String
+//    let centers: String
+//}
+//
 
 class ListViewController: UIViewController {
     //연산프로퍼티 검색100%, 함수 호출
@@ -22,12 +22,11 @@ class ListViewController: UIViewController {
         let tableView = UITableView()
         return tableView
     }()
-    var dataSource = [TestCell]()
-    let testCell: [TestCell] = [TestCell.init(liftName: "1", rightName: "2", centers: "3")]
-    let list: [String] = ["1", "2", "3"]
+//    var dataSource = [TestCell]()
+//    let testCell: [TestCell] = [TestCell.init(liftName: "1", rightName: "2", centers: "3")]
     var container: NSPersistentContainer!
-    private var runDataList: [RunDataList] = []
-    
+    var runDataList: [RunDataList] = []
+
     
     
     override func viewDidLoad() {
@@ -38,11 +37,18 @@ class ListViewController: UIViewController {
         view.backgroundColor = .white
         layout()
         addNaviBar()
+        addSetuo()
         
+        
+    }
+    func addSetuo() {
+        let list = ["Accelerometer", "Gyro", "Accelerometer1"]
+        for i in list {
+            self.runDataList.append(RunDataList(timestamp: "yy:mm", gyro: "측정값", interval: 43.44))
+        }
     }
     
     
-
     
     func layout() {
         view.addSubview(tableView)
@@ -56,10 +62,10 @@ class ListViewController: UIViewController {
         tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
     }
     
-    private func loadData() {
-        dataSource.append(.init(liftName: "왼쪽?", rightName: "오른쪽", centers: "가운데"))
-        tableView.reloadData()
-    }
+//    private func loadData() {
+//        runDataList.append(.init(timestamp: "timestemp", gyro: "gyro", interval: 43.6))
+//        tableView.reloadData()
+//    }
     
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -76,29 +82,29 @@ class ListViewController: UIViewController {
         return UISwipeActionsConfiguration(actions: [actions1, actions2])
     }
     
-    
     private func addNaviBar() {
-        
-//        let naviItem = UINavigationItem(title: "목록")
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "측정", style: .plain, target: self, action: #selector(add))
         title = "목록"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "측정", style: .plain, target: self, action: #selector(add))
     }
     @objc func add(_ sender: Any) {
-        // 측정 클릭시 3번째 화면 이동하기
+        let secondView = ReplayViewController()     // 3번째 화면 푸시
+        self.navigationController?.pushViewController(secondView, animated: true)
     }
 }
 
 
 extension ListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return list.count
+        return runDataList.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! CustomCell
+        var cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! CustomCell
+        let list = runDataList[indexPath.row]
+        cell.leftLabel.text = list.timestamp
+        cell.rightLabel.text = "\(list.interval)"
+        cell.centerLabel.text = list.gyro
         
-        cell.leftLabel.text = list[indexPath.row]
-        cell.rightLabel.text = list[indexPath.row]
-        cell.centerLabel.text = list[indexPath.row]
+       
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
