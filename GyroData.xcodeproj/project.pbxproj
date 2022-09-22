@@ -47,6 +47,8 @@
 		63F01BB928D44FC400C53A39 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB828D44FC400C53A39 /* FirstViewController.swift */; };
 		63F01BBE28D44FC500C53A39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBD28D44FC500C53A39 /* Assets.xcassets */; };
 		63F01BC128D44FC500C53A39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */; };
+		64336DE528DC9DD700D56D68 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64336DE428DC9DD700D56D68 /* FileManager.swift */; };
+		64336DE828DC9DE400D56D68 /* MotionFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64336DE728DC9DE400D56D68 /* MotionFile.swift */; };
 		B019E7FD28DBECF5009BC86F /* ThirdControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B019E7FC28DBECF5009BC86F /* ThirdControlView.swift */; };
 		B07C5F7828DAB10D00321A5F /* SecondControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07C5F7728DAB10D00321A5F /* SecondControlView.swift */; };
 		B0CF0F3F28DA9B9B00596BCF /* FirstViewStyling.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CF0F3E28DA9B9B00596BCF /* FirstViewStyling.swift */; };
@@ -96,6 +98,8 @@
 		63F01BBD28D44FC500C53A39 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		63F01BC028D44FC500C53A39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		63F01BC228D44FC500C53A39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		64336DE428DC9DD700D56D68 /* FileManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
+		64336DE728DC9DE400D56D68 /* MotionFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionFile.swift; sourceTree = "<group>"; };
 		B019E7FC28DBECF5009BC86F /* ThirdControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdControlView.swift; sourceTree = "<group>"; };
 		B07C5F7728DAB10D00321A5F /* SecondControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondControlView.swift; sourceTree = "<group>"; };
 		B0CF0F3E28DA9B9B00596BCF /* FirstViewStyling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewStyling.swift; sourceTree = "<group>"; };
@@ -208,10 +212,11 @@
 		46E21EAA28DC5F1500593210 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				46E21EAB28DC5F1500593210 /* ThirdVCRelated */,
 				46E21EAF28DC5F1500593210 /* CoreData */,
-				46E21EB528DC5F1500593210 /* SecondVCRelated */,
+				64336DE628DC9DE400D56D68 /* FileManager */,
 				46E21EB828DC5F1500593210 /* FirstVCRelated */,
+				46E21EB528DC5F1500593210 /* SecondVCRelated */,
+				46E21EAB28DC5F1500593210 /* ThirdVCRelated */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -260,6 +265,7 @@
 			isa = PBXGroup;
 			children = (
 				46E21EC928DC5F2100593210 /* CoreDataManager.swift */,
+				64336DE428DC9DD700D56D68 /* FileManager.swift */,
 				46E21ECA28DC5F2100593210 /* Repository.swift */,
 			);
 			path = Utilities;
@@ -300,6 +306,15 @@
 			);
 			path = GyroData;
 			sourceTree = "<group>";
+		};
+		64336DE628DC9DE400D56D68 /* FileManager */ = {
+			isa = PBXGroup;
+			children = (
+				64336DE728DC9DE400D56D68 /* MotionFile.swift */,
+			);
+			name = FileManager;
+			path = GyroData/Models/FileManager;
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -402,11 +417,13 @@
 				46E21EBE28DC5F1500593210 /* ThirdModel.swift in Sources */,
 				36E1FC9D28D976B800EB7E4F /* BasicNavigationController.swift in Sources */,
 				36E1FCA728D97AAB00EB7E4F /* FirstListView.swift in Sources */,
+				64336DE528DC9DD700D56D68 /* FileManager.swift in Sources */,
 				46E21EBF28DC5F1500593210 /* MotionModel.xcdatamodeld in Sources */,
 				462FB33528DB12A500BC5F04 /* ThirdViewStyling.swift in Sources */,
 				46E21EC328DC5F1500593210 /* SecondSegmentViewModel.swift in Sources */,
 				36FB64FC28D8CE1D00A87587 /* Presentable.swift in Sources */,
 				46E21ECC28DC5F2100593210 /* Repository.swift in Sources */,
+				64336DE828DC9DE400D56D68 /* MotionFile.swift in Sources */,
 				3695B0C728D9AA0700FF93FD /* SecondViewControllerRoutable.swift in Sources */,
 				46E21EC128DC5F1500593210 /* Motion+CoreDataClass.swift in Sources */,
 				46E21EC628DC5F1500593210 /* FirstModel.swift in Sources */,
