@@ -79,6 +79,14 @@ class TestPathGraphView: UIView {
     //properties
     private var privateTempDataSource: [ValueInfo] = []
     
+    //Point Properties for calculating Path's Position
+    
+    //path의 y좌표가 이 값의 최대값보다 크거나 작으면 CGAffineTransform을 이용해 뷰의 스케일을 축소한다? path가 잘려서 안 보이면 안되니까?
+    lazy var middleRange: ClosedRange<CGFloat> = middleRangeMin...middleRangeMax
+    lazy var middleRangeMin: CGFloat = middlePoint.y * 0.2
+    lazy var middleRangeMax: CGFloat = middlePoint.y * 1.8
+    lazy var yAxisMultiplier: CGFloat = 1.0
+    
     lazy var middlePoint: CGPoint = CGPoint(x: 0.0, y: self.frame.height / 2)
     
     lazy var xPreviousPoint: CGPoint = CGPoint(x: 0, y: self.middlePoint.y)
@@ -127,6 +135,8 @@ class TestPathGraphView: UIView {
         
         UIColor.red.setStroke()
         xPath.stroke()
+        
+        reCalculateScale(yPoint: xPreviousPoint.y)
     }
     
     func drawYpath() {
@@ -141,6 +151,8 @@ class TestPathGraphView: UIView {
         
         UIColor.green.setStroke()
         yPath.stroke()
+        
+        reCalculateScale(yPoint: yPreviousPoint.y)
     }
     
     func drawZpath() {
@@ -155,7 +167,23 @@ class TestPathGraphView: UIView {
         
         UIColor.blue.setStroke()
         zPath.stroke()
+        
+        reCalculateScale(yPoint: zPreviousPoint.y)
     }
+    
+    // TODO: 일단 스케일 조정 위한 발악의 목적으로 테스트 중이긴 하나 실제 기능구현을 위해서는 더 테스트, 보강이 필요
+    func reCalculateScale(yPoint: Double) {
+        if middleRange ~= yPoint {
+            
+        } else {
+            yAxisMultiplier = yAxisMultiplier * 0.8
+            
+            let transform = CGAffineTransform(scaleX: 1.0, y: yAxisMultiplier)
+            self.layer.setAffineTransform(transform)
+            //middleRangeMin, middleRangeMax 값도 조정, 보정이 필요해 보인다...하지만 어떻게 할지는 아직 떠오르지 않음
+        }
+    }
+    
 }
 
 extension TestPathGraphView: Presentable {
@@ -196,6 +224,7 @@ extension TestPathGraphView: Presentable {
             self.xPath.removeAllPoints()
             self.yPath.removeAllPoints()
             self.zPath.removeAllPoints()
+            self.yAxisMultiplier = 1.0
             self.setNeedsDisplay()
         }
     }
