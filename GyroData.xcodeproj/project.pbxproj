@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3695B0BD28D99CA100FF93FD /* SecondViewSegementedControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3695B0BC28D99CA100FF93FD /* SecondViewSegementedControlView.swift */; };
 		3695B0C728D9AA0700FF93FD /* SecondViewControllerRoutable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3695B0C628D9AA0700FF93FD /* SecondViewControllerRoutable.swift */; };
+		36C67A8D28DAD9BC006F34CE /* TestPathGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C67A8C28DAD9BC006F34CE /* TestPathGraphView.swift */; };
 		36E1FC9D28D976B800EB7E4F /* BasicNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E1FC9C28D976B800EB7E4F /* BasicNavigationController.swift */; };
 		36E1FCA728D97AAB00EB7E4F /* FirstListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E1FCA628D97AAB00EB7E4F /* FirstListView.swift */; };
 		36E1FCAC28D97CC000EB7E4F /* FirstListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E1FCAB28D97CC000EB7E4F /* FirstListCell.swift */; };
@@ -56,6 +57,7 @@
 /* Begin PBXFileReference section */
 		3695B0BC28D99CA100FF93FD /* SecondViewSegementedControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewSegementedControlView.swift; sourceTree = "<group>"; };
 		3695B0C628D9AA0700FF93FD /* SecondViewControllerRoutable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewControllerRoutable.swift; sourceTree = "<group>"; };
+		36C67A8C28DAD9BC006F34CE /* TestPathGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestPathGraphView.swift; sourceTree = "<group>"; };
 		36E1FC9C28D976B800EB7E4F /* BasicNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicNavigationController.swift; sourceTree = "<group>"; };
 		36E1FCA628D97AAB00EB7E4F /* FirstListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstListView.swift; sourceTree = "<group>"; };
 		36E1FCAB28D97CC000EB7E4F /* FirstListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstListCell.swift; sourceTree = "<group>"; };
@@ -144,6 +146,14 @@
 			path = ThridVCRelated;
 			sourceTree = "<group>";
 		};
+		36C67A8B28DAD9A8006F34CE /* GraphView */ = {
+			isa = PBXGroup;
+			children = (
+				36C67A8C28DAD9BC006F34CE /* TestPathGraphView.swift */,
+			);
+			path = GraphView;
+			sourceTree = "<group>";
+		};
 		36E1FC9B28D9768D00EB7E4F /* UIKitClasses */ = {
 			isa = PBXGroup;
 			children = (
@@ -160,13 +170,6 @@
 				3695B0C828D9AB1600FF93FD /* ThridVCRelated */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		36E1FCAA28D97CAB00EB7E4F /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Cells;
 			sourceTree = "<group>";
 		};
 		36FB64EB28D8C5BD00A87587 /* ViewPresentation */ = {
@@ -284,9 +287,9 @@
 		63F01BB328D44FC400C53A39 /* GyroData */ = {
 			isa = PBXGroup;
 			children = (
+				36C67A8B28DAD9A8006F34CE /* GraphView */,
 				63F01BB428D44FC400C53A39 /* AppDelegate.swift */,
 				63F01BB628D44FC400C53A39 /* SceneDelegate.swift */,
-				36E1FCAA28D97CAB00EB7E4F /* Cells */,
 				36E1FCA428D97A7F00EB7E4F /* Views */,
 				46E21EAA28DC5F1500593210 /* Models */,
 				36FB64FA28D8CE0E00A87587 /* ViewDraw */,
@@ -372,6 +375,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				46E21EC728DC5F1500593210 /* FirstListViewModel.swift in Sources */,
+				36C67A8D28DAD9BC006F34CE /* TestPathGraphView.swift in Sources */,
 				36FB64F928D8CD1700A87587 /* SceneContext.swift in Sources */,
 				63F01BB928D44FC400C53A39 /* FirstViewController.swift in Sources */,
 				46E21EBC28DC5F1500593210 /* ThirdInfoViewModel.swift in Sources */,

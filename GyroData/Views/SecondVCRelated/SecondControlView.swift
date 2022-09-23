@@ -55,6 +55,6 @@ extension SecondControlView: Presentable {
     }
     
     func bind() {
-        
+
     }
 }
