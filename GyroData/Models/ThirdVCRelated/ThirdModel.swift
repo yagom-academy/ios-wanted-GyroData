@@ -13,27 +13,33 @@ class ThirdModel {
     
     // MARK: Output
     var routeSubject: (SceneCategory) -> () = { sceneCategory in }
-    var viewTypeDidChanged: (ViewType) -> () = { viewType in } {
+    var viewTypeSource: (ViewType) -> () = { viewType in } {
         didSet {
-            viewTypeDidChanged(viewType)
+            viewTypeSource(_viewType)
         }
     }
     
     // MARK: Properties
     var infoViewModel: ThirdInfoViewModel
     var controlViewModel: ThirdControlViewModel
-    var viewType: ViewType {
+    private var _viewType: ViewType {
         didSet {
-            viewTypeDidChanged(viewType)
-            infoViewModel.didReceiveViewTypeChanged(viewType)
+            viewTypeSource(_viewType)
+            infoViewModel.didReceiveViewType(_viewType)
+        }
+    }
+    private var _motion: MotionTask {
+        didSet {
+            infoViewModel.didReceiveMotion(_motion)
         }
     }
     
     // MARK: Init
-    init(viewType: ViewType) {
-        self.viewType = viewType
-        self.infoViewModel = ThirdInfoViewModel(viewType: viewType)
-        self.controlViewModel = ThirdControlViewModel()
+    init(viewType: ViewType, motion: MotionTask) {
+        self._viewType = viewType
+        self._motion = motion
+        self.infoViewModel = ThirdInfoViewModel(viewType: viewType, motion: motion)
+        self.controlViewModel = ThirdControlViewModel(motion: motion)
         bind()
     }
     

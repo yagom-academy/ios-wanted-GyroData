@@ -58,13 +58,18 @@ extension ThirdViewController: Presentable {
             infoView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
             infoView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
             infoView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
+        ]
+        
+        constraints += [
             dummyGraphView.topAnchor.constraint(equalTo: infoView.bottomAnchor, constant: 32),
             dummyGraphView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             dummyGraphView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             dummyGraphView.heightAnchor.constraint(equalTo: dummyGraphView.widthAnchor),
+        ]
+        constraints += [
             controlView.topAnchor.constraint(equalTo: dummyGraphView.bottomAnchor),
             controlView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
-            controlView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor)
+            controlView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
         ]
         
         navigationItem.leftBarButtonItem = backButton
@@ -85,7 +90,7 @@ extension ThirdViewController: Presentable {
             self?.route(to: scene)
         }
         
-        viewModel.viewTypeDidChanged = { [weak self] viewType in
+        viewModel.viewTypeSource = { [weak self] viewType in
             self?.controlView.isHidden = viewType == .view
         }
     }

@@ -13,8 +13,8 @@ class FirstListViewModel {
     var didSelectPlayAction: (Int) -> () = { indexPathRow in }
     
     // MARK: Output
-    var propagateDidSelectRowEvent: (Int) -> () = { indexPathRow in }
-    var propagateDidSelectPlayActionEvent: (Int) -> () = { indexPathRow in }
+    var propagateDidSelectRowEvent: (MotionTask) -> () = { motion in }
+    var propagateDidSelectPlayActionEvent: (MotionTask) -> () = { motion in }
     var motionDatas: [MotionTask] {
         return _motionDatas
     }
@@ -32,11 +32,13 @@ class FirstListViewModel {
     private func bind() {
         didSelectRow = { [weak self] indexPathRow in
             guard let self = self else { return }
-            self.propagateDidSelectRowEvent(indexPathRow)
+            let motion = self._motionDatas[indexPathRow]
+            self.propagateDidSelectRowEvent(motion)
         }
         didSelectPlayAction = { [weak self] indexPathRow in
             guard let self = self else { return }
-            self.propagateDidSelectPlayActionEvent(indexPathRow)
+            let motion = self._motionDatas[indexPathRow]
+            self.propagateDidSelectPlayActionEvent(motion)
         }
     }
 }

@@ -10,34 +10,37 @@ import Foundation
 class ThirdControlViewModel {
     // MARK: Input
     var didTapControlButton: () -> () = { }
+    var didReceiveMotion: (MotionTask) -> () = { motion in }
     
     // MARK: Output
-    var isPlayingChanged: (Bool) -> () = { isPlaying in } {
+    var isPlayingSource: (Bool) -> () = { isPlaying in } {
         didSet {
-            isPlayingChanged(isPlaying)
+            isPlayingSource(_isPlaying)
         }
     }
-    var currentTimeChanged: (Double) -> () = { currentTime in } {
+    var currentTimeSource: (Float) -> () = { currentTime in } {
         didSet {
-            currentTimeChanged(currentTime)
+            currentTimeSource(_currentTime)
         }
     }
     
     // MARK: Properties
-    var isPlaying: Bool = false {
+    private var _isPlaying: Bool = false {
         didSet {
-            isPlayingChanged(isPlaying)
+            isPlayingSource(_isPlaying)
         }
     }
-    var currentTime: Double = 0 {
+    private var _currentTime: Float = 0 {
         didSet {
-            currentTimeChanged(currentTime)
+            currentTimeSource(_currentTime)
         }
     }
-    var timer: Timer?
+    private var _motion: MotionTask
+    private var timer: Timer?
     
     // MARK: Init
-    init() {
+    init(motion: MotionTask) {
+        self._motion = motion
         bind()
     }
     
@@ -45,25 +48,29 @@ class ThirdControlViewModel {
     func bind() {
         didTapControlButton = { [weak self] in
             guard let self else { return }
-            if self.isPlaying {
+            if self._isPlaying {
                 self.timer?.invalidate()
                 self.timer = nil
             } else {
-                self.currentTime = 0
+                self._currentTime = 0
                 self.timer = self.createTimer()
             }
-            self.isPlaying.toggle()
+            self._isPlaying.toggle()
+        }
+        
+        didReceiveMotion = { [weak self] motion in
+            self?._motion = motion
         }
     }
     
     private func createTimer() -> Timer {
         return Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] _ in
             guard let self else { return }
-            self.currentTime += 0.1
-            if self.currentTime >= 60 {
+            self._currentTime += 0.1
+            if self._currentTime >= self._motion.time {
                 self.timer?.invalidate()
                 self.timer = nil
-                self.isPlaying = false
+                self._isPlaying = false
             }
         }
     }
