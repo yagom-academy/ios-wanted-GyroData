@@ -12,8 +12,8 @@ class GyroDataListViewController: UIViewController, UITableViewDelegate, UITable
     let tableView = UITableView()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var motionDataArray = [MotionData]()
- 
-
+    var offset = 0
+    var isLoading = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,13 +27,27 @@ class GyroDataListViewController: UIViewController, UITableViewDelegate, UITable
         self.title = "목록"
         self.view.backgroundColor = .white
 
-        // 네비게이션 아이템 추가
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "측정", style: .plain, target: self, action: #selector(goToMeasureDataVC))
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         fetchData()
+    }
+
+    func loadMoreData() {
+        if !self.isLoading {
+            self.isLoading = true
+            let spinner = UIActivityIndicatorView(style: .medium)
+            spinner.color = UIColor.darkGray
+            spinner.hidesWhenStopped = true
+            spinner.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 60)
+            tableView.tableFooterView = spinner
+            spinner.startAnimating()
+            DispatchQueue.global().asyncAfter(deadline: .now() + 1) {
+                self.fetchData()
+            }
+        }
     }
 
     func saveData() {
@@ -46,17 +60,29 @@ class GyroDataListViewController: UIViewController, UITableViewDelegate, UITable
 
     func fetchData() {
         let request: NSFetchRequest<MotionData> = MotionData.fetchRequest()
-
-        motionDataArray.removeAll()
+        request.fetchLimit = 10
+        request.fetchOffset = offset
 
         do {
-            motionDataArray = try context.fetch(request)
+            let nextMotionDataArray = try context.fetch(request)
+            if nextMotionDataArray.isEmpty {
+                DispatchQueue.main.async {
+                    self.tableView.tableFooterView = nil
+                    self.isLoading = false
+                }
+            } else {
+                motionDataArray += nextMotionDataArray
+                offset += nextMotionDataArray.count
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                    self.isLoading = false
+                    self.tableView.tableFooterView = nil
+                }
+            }
         } catch {
             print("<<Error fetching data from context>>")
             print(error)
         }
-
-        tableView.reloadData()
     }
 
     //MeasureViewController 로 간다
@@ -132,6 +158,11 @@ class GyroDataListViewController: UIViewController, UITableViewDelegate, UITable
         return swipeActionConfiguration
     }
 
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if tableView.contentOffset.y > (tableView.contentSize.height - tableView.frame.size.height) + 100 {
+            loadMoreData()
+        }
+    }
 }
 
 

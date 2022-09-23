@@ -42,9 +42,6 @@ class FileService {
     }
 
     func loadJSON(fileName: String) -> Data? {
-
-        guard let documentUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return nil }
-
         let url = URL(fileURLWithPath: fileName + ".json", relativeTo: documentUrl)
 
         do {
