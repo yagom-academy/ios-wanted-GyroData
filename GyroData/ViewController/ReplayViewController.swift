@@ -108,6 +108,7 @@ class ReplayViewController: UIViewController {
         graphViewMaker.stop()
         graphViewMaker.resetGraph()
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

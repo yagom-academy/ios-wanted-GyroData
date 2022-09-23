@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import CoreMotion
 
 protocol GraphViewMakerDelegate {
     /// 그래프가 업데이트 될때 호출됨.
@@ -16,7 +17,6 @@ protocol GraphViewMakerDelegate {
     /// graphView의 에니메이션을 수행하는 타이머가 시작될때 호출되어짐.
     func graphViewDidPlay()
 }
-
 
 /**
     그래프뷰 모듈
@@ -36,10 +36,10 @@ class GraphViewMaker {
     public var delegate: GraphViewMakerDelegate!
     
     /// 그래프 뷰의 Height
-    private let graphViewHeight: CGFloat = 280.0
+    private let graphViewHeight: CGFloat = 300.0
     
     /// 그래프 뷰의 Width
-    private let graphViewWidth: CGFloat = 280.0
+    private let graphViewWidth: CGFloat = 300.0
     
     /// 1개의 데이터가 차지할 width
     private var blockWidth: CGFloat = 0.0
@@ -52,36 +52,87 @@ class GraphViewMaker {
     private var ySubValue: Float = 0.0
     private var zValue: Float = 0.0
     
-    /// 그래프 뷰를 불러옵니다.
-    lazy public var graphView: UIView = {
-        let uiView = UIView()
-            uiView.layer.borderColor = UIColor.black.cgColor
-            uiView.layer.borderWidth = 2.0
-        
-        // 그래프 차트의 백그라운드 표현
-        self.blockWidth = self.graphViewHeight/8 // 차트 백그라운드의 가로, 세로 칸 수
-        let backgroundPath = UIBezierPath()
-        for i in [1,2,3,4,5,6,7,8] {
-            backgroundPath.move(to: CGPoint(x: Int(blockWidth)*i, y: 0))
-            backgroundPath.addLine(to: CGPoint(x: Int(blockWidth)*i, y: Int(graphViewWidth)))
-        }
-        
-        for i in [1,2,3,4,5,6,7,8] {
-            backgroundPath.move(to: CGPoint(x: 0, y: Int(blockWidth)*i))
-            backgroundPath.addLine(to: CGPoint(x: Int(graphViewWidth), y: Int(blockWidth)*i))
-        }
-        
-        let chartBackgroundLayer = CAShapeLayer()
-        chartBackgroundLayer.frame = uiView.bounds
-        chartBackgroundLayer.path = backgroundPath.cgPath
-        chartBackgroundLayer.fillColor = UIColor.clear.cgColor
-        chartBackgroundLayer.strokeColor = UIColor.gray.cgColor
-        chartBackgroundLayer.lineWidth = 1.5
-        uiView.layer.addSublayer(chartBackgroundLayer)
-        
-        return uiView
-    }()
+    //Acc, gyro manager
+    let manager = CMMotionManager()
+    
+    /// 센서 측정 타이머
+    lazy private var timer = Timer()
+    lazy private var accTimer = Timer()
+    lazy private var timeoutTimer = Timer()
 
+    //데이터
+    private var xData = [Float]()
+    private var yData = [Float]()
+    private var zData = [Float]()
+
+    // x, y, z선을 추가할 layer
+    private var xLineLayer = CAShapeLayer()
+    private var yLineLayer = CAShapeLayer()
+    private var zLineLayer = CAShapeLayer()
+
+    // x, y, z 선
+    private var xLine = UIBezierPath()
+    private var yLine = UIBezierPath()
+    private var zLine = UIBezierPath()
+
+    // 데이터를 선택할 인덱스
+    private var index: Int = 0
+    
+    // 타임 라벨에 표시될 시간
+    private var interval: Float = 0.0
+    private var time: Float = 0.0
+    private var timeLeft = 600.0
+    
+    /// 그래프 데이터가 저장된 배열
+    private var graphData = [gyroValue]()
+    
+    /// 그래프 뷰 애니메이션을 담당하는 타이머의 상태
+    public var isRunning: Bool = false
+    
+    /// 그래프 스케일링 시 적용될 변수 값
+    private var multiplier: Float = 1.0
+    
+    /// 현재 x, y, z 좌표값의 절대값 최대치를 담는 변수
+    private var maxOffset: Float = 0.0
+    
+    lazy var accView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .black
+        return view
+    }()
+    
+    lazy var gyroView: UIView = {
+      let view = UIView()
+      view.backgroundColor = .black
+      return view
+    }()
+    
+    /// 그래프 뷰를 불러옵니다.
+    lazy public var graphView: GraphView = {
+        let view = GraphView()
+        view.backgroundColor = .white
+        return view
+    }()
+    
+    lazy public var gyroGraphView: GraphView = {
+        let view = GraphView()
+        view.backgroundColor = .white
+        return view
+    }()
+    
+    // sample struct
+    public struct gyroValue {
+        let x: Float
+        let y: Float
+        let z: Float
+        
+        init(x: Float, y: Float, z: Float) {
+            self.x = x
+            self.y = y
+            self.z = z
+        }
+    }
+    
     /// 센서 x 값
     lazy private var xOffsetLabel: UILabel = {
         let label = CommonUIModule().creatLabel(text: "x: 0", color: .red, alignment: .left, fontSize: 13, fontWeight: .regular)
@@ -115,52 +166,23 @@ class GraphViewMaker {
             xOffsetLabel.widthAnchor.constraint(equalTo: zOffsetLabel.widthAnchor).isActive = true
         return stackView
     }()
-
-    // MARK: 전역 변수
     
-    // sample struct
-    public struct gyroValue {
-        let x: Float
-        let y: Float
-        let z: Float
+    public func measurement() {
+        resetGraph()
         
-        init(x: Float, y: Float, z: Float) {
-            self.x = x
-            self.y = y
-            self.z = z
-        }
+        manager.startGyroUpdates()
+        manager.startAccelerometerUpdates()
+        
+        //업데이트 간격
+        manager.accelerometerUpdateInterval = 0.1
+        manager.gyroUpdateInterval = 0.1
+        
+        // 0.1초마다 측정을위한 타이머 설정
+        resetGraph() // 시작 시 초기화
+        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateGraphForMeasurement), userInfo: nil, repeats: true)
+        isRunning = true
+        delegate.graphViewDidPlay()
     }
-    
-    /// 센서 측정 타이머
-    lazy private var timer = Timer()
-    
-    /// 그래프 데이터가 저장된 배열
-    private var graphData = [gyroValue]()
-    
-    // x, y, z선을 추가할 layer
-    private var xLineLayer = CAShapeLayer()
-    private var yLineLayer = CAShapeLayer()
-    private var zLineLayer = CAShapeLayer()
-    
-    // x, y, z 선
-    private var xLine = UIBezierPath()
-    private var yLine = UIBezierPath()
-    private var zLine = UIBezierPath()
-    
-    ///; 데이터를 선택할 인덱스
-    private var index: Int = 0
-    
-    /// 그래프 뷰 애니메이션을 담당하는 타이머의 상태
-    public var isRunning: Bool = false
-    
-    // 기록 총 시간
-    private var interval: Float = 0.0
-    
-    /// 그래프 스케일링 시 적용될 변수 값
-    private var multiplier: Float = 1.0
-    
-    /// 현재 x, y, z 좌표값의 절대값 최대치를 담는 변수
-    private var maxOffset: Float = 0.0
     
     /**
         그래프에 데이터 배열을 0.1초 단위로 그려줍니다.
@@ -207,6 +229,18 @@ class GraphViewMaker {
         addLayer(zLine, zLineLayer, .blue, .multiple)
     }
     
+    @objc func stopMeasurement() {
+        if isRunning {
+            timer.invalidate()
+            accTimer.invalidate()
+            isRunning = false
+            delegate.graphViewDidEnd()
+            resetGraph()
+        } else {
+            print("실행 상태가 아닙니다.")
+        }
+        
+    }
     /**
         그래프 애니메이션을 중단합니다. timer invalidate
      */
@@ -214,6 +248,66 @@ class GraphViewMaker {
         timer.invalidate()
         isRunning = false
         delegate.graphViewDidEnd()
+    }
+    
+    /// 그래프 업데이트
+    @objc private func updateGraphForMeasurement() {
+        
+        // 모든 데이터를 보여준 뒤 timer out
+        if index == 599 {
+            stopMeasurement()
+            return
+        }
+        
+        if self.accView.isHidden == false {
+            if let data = self.manager.accelerometerData {
+                let x = data.acceleration.x
+                let y = data.acceleration.y
+                let z = data.acceleration.z
+                self.xData.append(Float(x) * 10)
+                self.yData.append(Float(y) * 10)
+                self.zData.append(Float(z) * 10)
+                print("x: \(x), y: \(y), z: \(z)")
+                delegate.graphViewDidUpdate(interval: self.interval, x: Float(x), y: Float(y), z: Float(z))
+            }
+
+        } else {
+            if let gyrodata = self.manager.gyroData {
+                let x = gyrodata.rotationRate.x
+                let y = gyrodata.rotationRate.y
+                let z = gyrodata.rotationRate.z
+                
+                self.xData.append(Float(x))
+                self.yData.append(Float(y))
+                self.zData.append(Float(z))
+                print("x: \(x), y: \(y), z: \(z)")
+            }
+        }
+        
+//        self.xData.append(10)
+//        self.yData.append(10)
+//        self.zData.append(10)
+        
+        // 타이머 라벨 update
+        self.interval += Float(timer.timeInterval)
+        //print("\(self.interval)")
+        
+//        delegate.graphViewDidUpdate(interval: self.interval, x: 10, y: 10, z: 10)
+        
+        // 한개의 점이 차지할 width
+        self.blockWidth = self.graphViewHeight/600.0
+        
+        // 각 x, y, z 레이어 add
+        addLayerForMeasurement(xLine, xLineLayer, .red)
+        addLayerForMeasurement(yLine, yLineLayer, customGreen)
+        addLayerForMeasurement(zLine, zLineLayer, .blue)
+        
+        // 다음 점 표시를 위한 index 증감
+        index += 1
+        
+        //60초
+        timeLeft -= 1
+//            print(timeLeft)
     }
     
     /**
@@ -277,8 +371,6 @@ class GraphViewMaker {
         yOffsetLabel.text = "y: \(String(format: "%0.f", y))"
         zOffsetLabel.text = "z: \(String(format: "%0.f", z))"
         
-        delegate.graphViewDidUpdate(interval: interval, x: x, y: y, z: z)
-        
         // x, y, z 절대값으로 비교 및 최대값 대체
         let max = [x, y, z].sorted { abs($0) > abs($1) }.first!
         maxOffset = abs(max) > maxOffset ?
@@ -286,6 +378,8 @@ class GraphViewMaker {
         
         // 타이머 라벨 update
         interval += Float(timer.timeInterval)
+        
+        delegate.graphViewDidUpdate(interval: interval, x: x, y: y, z: z)
         
         // 한개의 점이 차지할 width
         blockWidth = graphViewHeight/600.0
@@ -297,6 +391,69 @@ class GraphViewMaker {
         
         // 다음 점 표시를 위한 index 증감
         index += 1
+    }
+    
+    // garphView에 lineLayer를 추가
+    func addLayerForMeasurement(_ line: UIBezierPath, _ layer: CAShapeLayer, _ strokColor: UIColor, _ option: addLayerOption = .single) {
+        
+        // 최대값에 따른 스케일링 비율 설정
+        let baseHeight: Float = Float(graphBaseHeight)
+        if (maxOffset >= baseHeight) || (maxOffset <= -baseHeight) {
+            // 기준점은 높이의 절반 값
+            // 값이 baseHeight값의 절대값보다 크게되면 그래프 최대치를 초과하는것.
+            multiplier = ((baseHeight / maxOffset) - 0.05)
+        }
+        
+        // x, y, z 라인 구분
+        switch line {
+            case xLine:
+                if option == .single {
+                    xLine = UIBezierPath()
+                    xLine.move(to: CGPoint(x: 1.5, y: Double(baseHeight)))
+                }
+                for (i, data) in xData.enumerated() {
+                    let x = CGFloat((i+1)) * blockWidth
+                    let y = CGFloat(baseHeight - (data * multiplier))
+                    xLine.addLine(to: CGPoint(x: x, y: y))
+                }
+                break
+            case yLine:
+                if option == .single {
+                    yLine = UIBezierPath()
+                    yLine.move(to: CGPoint(x: 1.5, y: Double(baseHeight)))
+                }
+                for (i, data) in yData.enumerated() {
+                    let x = CGFloat((i+1)) * blockWidth
+                    let y = CGFloat(baseHeight - (data * multiplier))
+                    yLine.addLine(to: CGPoint(x: x, y: y))
+                }
+                break
+            case zLine:
+                if option == .single {
+                    zLine = UIBezierPath()
+                    zLine.move(to: CGPoint(x: 1.5, y: Double(baseHeight)))
+                }
+                for (i, data) in zData.enumerated() {
+                    let x = CGFloat((i+1)) * blockWidth
+                    let y = CGFloat(baseHeight - (data * multiplier))
+                    zLine.addLine(to: CGPoint(x: x, y: y))
+                }
+                break
+            default:
+                break
+        }
+        
+        layer.frame = graphView.bounds
+        layer.path = line.cgPath
+        layer.fillColor = UIColor.clear.cgColor
+        layer.strokeColor = strokColor.cgColor
+        layer.lineWidth = 1.5
+        
+        if accView.isHidden == false {
+            graphView.layer.addSublayer(layer)
+        } else {
+            gyroGraphView.layer.addSublayer(layer)
+        }
     }
     
     /**
@@ -369,6 +526,9 @@ class GraphViewMaker {
         interval = 0.0
         multiplier = 1.0
         graphData.removeAll(keepingCapacity: false)
+        xData.removeAll(keepingCapacity: false)
+        yData.removeAll(keepingCapacity: false)
+        zData.removeAll(keepingCapacity: false)
         
         // x, y, z 점 위치 초기화
         xLine = UIBezierPath()
@@ -392,4 +552,39 @@ class GraphViewMaker {
         yLineLayer.removeFromSuperlayer()
         zLineLayer.removeFromSuperlayer()
     }
+    
+    class GraphView: UIView {
+        override func draw(_ rect: CGRect) {
+            super.draw(rect)
+            let pathLine = UIBezierPath()
+            let boundsWidth = bounds.width / 8
+            let boundsHeight = bounds.height / 8
+            
+            pathLine.move(to: CGPoint(x: 5, y: 5))
+            pathLine.addLine(to: CGPoint(x: 5, y: bounds.height-5))
+            for i in 1..<8 {
+                pathLine.move(to: CGPoint(x: (Int(boundsWidth) * i)+5, y: 5))
+                pathLine.addLine(to: CGPoint(x: (Int(boundsWidth) * i)+5, y: Int(bounds.height)-5))
+            }
+            pathLine.move(to: CGPoint(x: bounds.width-5, y: 5))
+            pathLine.addLine(to: CGPoint(x: bounds.width-5, y: bounds.height-5))
+
+//            print(boundsWidth)
+     
+            pathLine.move(to: CGPoint(x: bounds.width-5, y: 5))
+            pathLine.addLine(to: CGPoint(x: 5, y: 5))
+            
+            for i in 1..<8 {
+                pathLine.move(to: CGPoint(x: bounds.width-5, y: boundsHeight*CGFloat(i)))
+                pathLine.addLine(to: CGPoint(x: 5, y: Int(boundsHeight)*i))
+            }
+            pathLine.move(to: CGPoint(x: bounds.width-5, y: bounds.height-5))
+            pathLine.addLine(to: CGPoint(x: 5, y: bounds.height-5))
+            
+            UIColor.black.setStroke()
+            pathLine.stroke()
+        }
+    }
 }
+
+
