@@ -265,8 +265,8 @@
 		46E21EC828DC5F2100593210 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				46E21EC928DC5F2100593210 /* CoreDataManager.swift */,
 				46E21ECA28DC5F2100593210 /* Repository.swift */,
+				46E21EC928DC5F2100593210 /* CoreDataManager.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";

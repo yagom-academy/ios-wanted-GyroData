@@ -26,19 +26,19 @@ class CoreDataManager {
         return self.persistentContainer.viewContext
     }
     
-    func fetch<T: NSManagedObject>(request: NSFetchRequest<T>) -> [T] {
+    func fetch<T: NSManagedObject>(request: NSFetchRequest<T>) -> Result<[T], Error> {
         do {
             let fetchResult = try self.context.fetch(request)
-            return fetchResult
+            return .success(fetchResult)
         } catch {
             // MARK: fetch 실패할 경우 에러 처리
             print(error.localizedDescription)
-            return []
+            return .failure(error)
         }
     }
     
     @discardableResult
-    func insertMotionTask(motion: MotionTask) -> Bool {
+    func insertMotionTask(motion: MotionTask) -> Result<Bool, Error> {
         let entity = NSEntityDescription.entity(forEntityName: "Motion", in: self.context)
         
         if let entity = entity {
@@ -51,25 +51,25 @@ class CoreDataManager {
             
             do {
                 try self.context.save()
-                return true
+                return .success(true)
             } catch {
                 // MARK: save 실패할 경우 에러 처리
                 print(error.localizedDescription)
-                return false
+                return .failure(error)
             }
         } else {
-            return false
+            return .success(false)
         }
     }
     
     @discardableResult
-    func delete(object: NSManagedObject) -> Bool {
+    func delete(object: NSManagedObject) -> Result<Bool, Error> {
         self.context.delete(object)
         do {
             try context.save()
-            return true
+            return .success(true)
         } catch {
-            return false
+            return .failure(error)
         }
     }
     
