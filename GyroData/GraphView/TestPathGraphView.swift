@@ -177,10 +177,16 @@ class TestPathGraphView: UIView {
             
         } else {
             yAxisMultiplier = yAxisMultiplier * 0.95
-            
+            //middleRangeMin, middleRangeMax 값도 조정, 보정이 필요해 보인다...하지만 어떻게 할지는 아직 떠오르지 않음
             let transform = CGAffineTransform(scaleX: 1.0, y: yAxisMultiplier)
             self.layer.setAffineTransform(transform)
-            //middleRangeMin, middleRangeMax 값도 조정, 보정이 필요해 보인다...하지만 어떻게 할지는 아직 떠오르지 않음
+
+            
+            //뷰의 레이어가 아니라 Path에 Transform을 먹여야 하나?
+            //이렇게 하니까 깨진다 좀 더 생각해봐야겠다
+//            xPath.apply(transform)
+//            yPath.apply(transform)
+//            zPath.apply(transform)
         }
     }
     
