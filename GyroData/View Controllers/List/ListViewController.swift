@@ -23,7 +23,7 @@ final class ListViewController: UIViewController {
         tableView.register(ListCell.self, forCellReuseIdentifier: ListCell.identifier)
         return tableView
     }()
-
+    
     private var gyroDataList: [GyroData] = []
     private var isLoading: Bool = false
     
@@ -35,7 +35,7 @@ final class ListViewController: UIViewController {
         configureLayout()
         loadMoreData()
     }
-
+    
     private func configureNavigation() {
         navigationItem.title = "목록"
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "측정", style: .plain, target: self, action: #selector(didTapMeasureButton))
@@ -52,7 +52,7 @@ final class ListViewController: UIViewController {
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
-
+    
     private func loadMoreData() {
         if isLoading { return }
         isLoading = true
@@ -66,16 +66,26 @@ final class ListViewController: UIViewController {
             }
         }
     }
-
+    
     private var timer: Timer!
     private let motion = CMMotionManager()
-
+    private var isStop: Bool = true
+    
     @objc
     private func didTapMeasureButton() {
         // TODO: 두 번째 페이지로 이동
-        startAccelerometers()
+        //        startAccelerometers()
+        if isStop == true {
+            startGyros()
+            isStop = false
+            navigationItem.rightBarButtonItem?.title = "중단"
+        } else {
+            stopGyros()
+            isStop = true
+            navigationItem.rightBarButtonItem?.title = "측정"
+        }
     }
-
+    
     @objc
     private func didTapLoadDataButton() {
         let fetchRequest = DetailData.fetchRequest()
@@ -88,15 +98,15 @@ final class ListViewController: UIViewController {
             fatalError("Failed to fetch: \(error)")
         }
     }
-
+    
     private func startAccelerometers() {
         var timeout = 10 // TODO: 600
-
+        
         if self.motion.isAccelerometerAvailable {
             self.motion.accelerometerUpdateInterval = 6 / 60.0  // 10 Hz
             self.motion.startAccelerometerUpdates()
-
-            self.timer = Timer(fire: Date(), interval: (6 / 60.0),
+            
+            self.timer = Timer(fire: Date(), interval: 0.1,
                                repeats: true, block: { (timer) in
                 guard timeout > 0 else {
                     self.stopAccelerometers()
@@ -114,15 +124,19 @@ final class ListViewController: UIViewController {
             RunLoop.current.add(self.timer!, forMode: .default)
         }
     }
-
+    
     @objc func didTapStopButton() {
         stopAccelerometers()
     }
-
+    
     private func stopAccelerometers() {
-        self.motion.stopAccelerometerUpdates()
+        if timer != nil {
+            self.timer.invalidate()
+            timer = nil
+            self.motion.stopAccelerometerUpdates()
+        }
     }
-
+    
     func saveAccelerometerData(x: Double, y: Double, z: Double, date: Date = Date()) {
         let context = container.viewContext
         let accelerometerData = DetailData(context: context)
@@ -134,7 +148,48 @@ final class ListViewController: UIViewController {
         accelerometerData.date = formatter.string(from: date)
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
     }
-
+    
+    func startGyros() {
+        
+        if motion.isGyroAvailable {
+            var timeout = 10
+            
+            self.motion.gyroUpdateInterval = 10.0 / 60.0
+            self.motion.startGyroUpdates()
+            
+            // Configure a timer to fetch the accelerometer data.
+            self.timer = Timer(fire: Date(), interval: 0.1,
+                               repeats: true, block: { (timer) in
+                // Get the gyro data.
+                
+                if timeout > 0 {
+                    timeout -= 1
+                    if let data = self.motion.gyroData {
+                        let x = data.rotationRate.x
+                        let y = data.rotationRate.y
+                        let z = data.rotationRate.z
+                        print(#line, x, y, z)
+                    }
+                    // Use the gyroscope data in your app.
+                } else {
+                    self.stopGyros()
+                }
+            })
+            // Add the timer to the current run loop.
+            RunLoop.current.add(self.timer!, forMode: .default)
+        }
+    }
+    
+    func stopGyros() {
+        
+        if self.timer != nil {
+            self.timer?.invalidate()
+            self.timer = nil
+            
+            self.motion.stopGyroUpdates()
+            
+        }
+    }
 }
 
 // MARK: - UITableViewDataSource
@@ -154,7 +209,7 @@ extension ListViewController: UITableViewDataSource {
         cell.valueLabel.text = "\(gyroData.value)"
         return cell
     }
-
+    
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row == gyroDataList.count - 1 {
             loadMoreData()
@@ -170,7 +225,7 @@ extension ListViewController: UITableViewDelegate {
         let viewController = UIViewController()
         navigationController?.pushViewController(viewController, animated: true)
     }
-
+    
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let playAction = UIContextualAction(style: .normal, title: "Play") { action, view, handler in
             // TODO: 세 번째 페이지를 play 타입으로 이동
