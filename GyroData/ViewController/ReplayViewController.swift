@@ -9,7 +9,7 @@ import UIKit
 import CoreData
 
 class ReplayViewController: UIViewController {
-    
+
     let graphViewMaker = GraphViewMaker.shared
     
     // TEST
@@ -108,7 +108,6 @@ class ReplayViewController: UIViewController {
         graphViewMaker.stop()
         graphViewMaker.resetGraph()
     }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
