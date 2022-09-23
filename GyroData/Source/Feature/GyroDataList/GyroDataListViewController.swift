@@ -159,7 +159,7 @@ class GyroDataListViewController: UIViewController, UITableViewDelegate, UITable
     }
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if tableView.contentOffset.y > (tableView.contentSize.height - tableView.frame.size.height) + 100 {
+        if tableView.contentOffset.y > (tableView.contentSize.height - tableView.frame.size.height) + 80 {
             loadMoreData()
         }
     }

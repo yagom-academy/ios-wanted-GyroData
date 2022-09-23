@@ -202,7 +202,10 @@ class MeasureDataViewController: UIViewController {
                 motion.startAccelerometerUpdates()
                 self.accTimer = Timer(fire: Date(), interval: 0.1,
                                       repeats: true, block: { (timer) in
-                    if self.measureTime == 600 { self.buttonTapAction(self.stopBtn) }
+                    if self.measureTime == 600 {
+                        self.buttonTapAction(self.stopBtn)
+                        return
+                    }
                     if let data = self.motion.accelerometerData {
                         let x = data.acceleration.x
                         let y = data.acceleration.y
@@ -251,7 +254,10 @@ class MeasureDataViewController: UIViewController {
                 motion.startGyroUpdates()
                 self.gyroTimer = Timer(fire: Date(), interval: 0.1,
                                        repeats: true, block: { (timer) in
-                    if self.measureTime == 600 { self.buttonTapAction(self.stopBtn) }
+                    if self.measureTime == 600 {
+                        self.buttonTapAction(self.stopBtn)
+                        return
+                    }
                     if let data = self.motion.gyroData {
                         let x = data.rotationRate.x
                         let y = data.rotationRate.y
