@@ -7,9 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		631456C428D9ABEE00B420E8 /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631456C328D9ABEE00B420E8 /* CoreData.swift */; };
 		631456C728D9BCAB00B420E8 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 631456C528D9BCAB00B420E8 /* Model.xcdatamodeld */; };
-		631456CE28D9EEF700B420E8 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631456CD28D9EEF700B420E8 /* DataManager.swift */; };
 		631456D828DB056F00B420E8 /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631456D728DB056F00B420E8 /* CustomCell.swift */; };
 		63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB428D44FC400C53A39 /* AppDelegate.swift */; };
 		63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB628D44FC400C53A39 /* SceneDelegate.swift */; };
@@ -20,12 +18,12 @@
 		F8493CD228D99818000A12F2 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8493CD128D99818000A12F2 /* ListViewController.swift */; };
 		F8493CD428D9984D000A12F2 /* MeasurmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8493CD328D9984D000A12F2 /* MeasurmentViewController.swift */; };
 		F8493CD628D9986F000A12F2 /* ReplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8493CD528D9986F000A12F2 /* ReplayViewController.swift */; };
+		F8FE9AAB28DDDE21008E5569 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FE9AAA28DDDE21008E5569 /* DataManager.swift */; };
+		F8FE9AAE28DDDE56008E5569 /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FE9AAD28DDDE56008E5569 /* CoreData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		631456C328D9ABEE00B420E8 /* CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreData.swift; sourceTree = "<group>"; };
 		631456C628D9BCAB00B420E8 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
-		631456CD28D9EEF700B420E8 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		631456D728DB056F00B420E8 /* CustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
 		63F01BB128D44FC400C53A39 /* GyroData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GyroData.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63F01BB428D44FC400C53A39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -38,6 +36,8 @@
 		F8493CD128D99818000A12F2 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		F8493CD328D9984D000A12F2 /* MeasurmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurmentViewController.swift; sourceTree = "<group>"; };
 		F8493CD528D9986F000A12F2 /* ReplayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplayViewController.swift; sourceTree = "<group>"; };
+		F8FE9AAA28DDDE21008E5569 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		F8FE9AAD28DDDE56008E5569 /* CoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,18 +51,9 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		631456CC28D9EED400B420E8 /* Data */ = {
-			isa = PBXGroup;
-			children = (
-				631456CD28D9EEF700B420E8 /* DataManager.swift */,
-			);
-			path = Data;
-			sourceTree = "<group>";
-		};
 		63F01BA828D44FC400C53A39 = {
 			isa = PBXGroup;
 			children = (
-				631456CC28D9EED400B420E8 /* Data */,
 				63F01BB328D44FC400C53A39 /* GyroData */,
 				63F01BB228D44FC400C53A39 /* Products */,
 			);
@@ -79,8 +70,8 @@
 		63F01BB328D44FC400C53A39 /* GyroData */ = {
 			isa = PBXGroup;
 			children = (
+				F8FE9AA928DDDDEE008E5569 /* Model */,
 				F83215A928DDDAAC000C35E6 /* View */,
-				631456C328D9ABEE00B420E8 /* CoreData.swift */,
 				F8493CD028D997DF000A12F2 /* ViewController */,
 				63F01BB428D44FC400C53A39 /* AppDelegate.swift */,
 				63F01BB628D44FC400C53A39 /* SceneDelegate.swift */,
@@ -110,6 +101,15 @@
 				F8493CD528D9986F000A12F2 /* ReplayViewController.swift */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		F8FE9AA928DDDDEE008E5569 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F8FE9AAD28DDDE56008E5569 /* CoreData.swift */,
+				F8FE9AAA28DDDE21008E5569 /* DataManager.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -183,17 +183,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				631456D828DB056F00B420E8 /* CustomCell.swift in Sources */,
+				F8FE9AAB28DDDE21008E5569 /* DataManager.swift in Sources */,
 				F8493CD628D9986F000A12F2 /* ReplayViewController.swift in Sources */,
 				F83215AD28DDDB17000C35E6 /* CommonUIModule.swift in Sources */,
+				F8FE9AAE28DDDE56008E5569 /* CoreData.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				F8493CD228D99818000A12F2 /* ListViewController.swift in Sources */,
 				631456C728D9BCAB00B420E8 /* Model.xcdatamodeld in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
 				F83215AB28DDDAC1000C35E6 /* GraphViewMaker.swift in Sources */,
-				631456C428D9ABEE00B420E8 /* CoreData.swift in Sources */,
-				631456CE28D9EEF700B420E8 /* DataManager.swift in Sources */,
 				F8493CD428D9984D000A12F2 /* MeasurmentViewController.swift in Sources */,
-				8C8220D228DADCFC005051EF /* UIModule.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

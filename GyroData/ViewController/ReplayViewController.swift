@@ -114,7 +114,7 @@ class ReplayViewController: UIViewController {
         graphViewMaker.delegate = self
         
         // MARK: UI Set
-        
+        self.view.backgroundColor = .white
         self.navigationItem.title = "다시보기"
         self.navigationController?.navigationBar.tintColor = .black
         self.titleLabel.text = self.pageType
