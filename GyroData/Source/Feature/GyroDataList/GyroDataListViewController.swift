@@ -12,6 +12,8 @@ class GyroDataListViewController: UIViewController, UITableViewDelegate, UITable
     let tableView = UITableView()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var motionDataArray = [MotionData]()
+ 
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,6 +90,8 @@ class GyroDataListViewController: UIViewController, UITableViewDelegate, UITable
         let showGraphViewController = ShowGraphViewController()
 
         guard let motionInfo = FileService.shared.getMotionInfo(name: motionDataArray[indexPath.row].date) else { return }
+        
+        showGraphViewController.setMotionInfo(motionInfo)
 
         self.navigationController?.pushViewController(showGraphViewController, animated: true)
     }
@@ -98,7 +102,9 @@ class GyroDataListViewController: UIViewController, UITableViewDelegate, UITable
             print("play")
             let playGyroViewController = PlayGraphViewController()
 
-            guard let motionInfo = FileService.shared.getMotionInfo(name: motionDataArray[indexPath.row].date) else { return }
+            guard let motionInfo = FileService.shared.getMotionInfo(name: self.motionDataArray[indexPath.row].date) else { return }
+            
+            playGyroViewController.setMotionInfo(motionInfo)
 
             self.navigationController?.pushViewController(playGyroViewController, animated: true)
             success(true)

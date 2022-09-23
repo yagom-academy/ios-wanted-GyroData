@@ -13,6 +13,14 @@ class ShowGraphViewController: UIViewController {
         super.viewDidLoad()
         self.title = "다시보기"
         self.view.backgroundColor = .white
+        print(motionInfo)
+
+    }
+    
+    var motionInfo : MotionInfo?
+    
+    func setMotionInfo(_ motionInfo:MotionInfo){
+        self.motionInfo = motionInfo
     }
 
 }

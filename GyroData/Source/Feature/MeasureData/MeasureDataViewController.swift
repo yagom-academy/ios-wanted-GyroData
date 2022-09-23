@@ -26,6 +26,7 @@ class MeasureDataViewController: UIViewController {
     var motionZArray = [Double]()
     var startDate = ""
     var dataType = ""
+    
 
     lazy var segmentedControl: UISegmentedControl = {
       let control = UISegmentedControl(items: ["Acc", "Gyro"])
@@ -191,6 +192,7 @@ class MeasureDataViewController: UIViewController {
     }
 
     func startAccelerometers() {
+        initMeasureDatas(type: "Accelerometer")
         accView.erase()
         var max = Constants.accMax
         setTextsIndicateLabels(max : max, min : -max)
@@ -199,7 +201,7 @@ class MeasureDataViewController: UIViewController {
                 motion.startAccelerometerUpdates()
                 self.accTimer = Timer(fire: Date(), interval: 0.1,
                                       repeats: true, block: { (timer) in
-                    if self.accView.elapsedTime == 600 { self.buttonTapAction(self.stopBtn) }
+                    if self.measureTime == 600 { self.buttonTapAction(self.stopBtn) }
                     if let data = self.motion.accelerometerData {
                         let x = data.acceleration.x
                         let y = data.acceleration.y
@@ -227,6 +229,8 @@ class MeasureDataViewController: UIViewController {
                         }
                         
                         self.accView.setNeedsDisplay()
+                        
+                        self.measureTime += 1
  
                     }
                 })
@@ -237,6 +241,7 @@ class MeasureDataViewController: UIViewController {
     }
 
     func startGyroscope() {
+        initMeasureDatas(type: "Gyro")
         gyroView.erase()
         var max = Constants.gyroMax
         setTextsIndicateLabels(max: max, min: -max)
@@ -245,7 +250,7 @@ class MeasureDataViewController: UIViewController {
                 motion.startGyroUpdates()
                 self.gyroTimer = Timer(fire: Date(), interval: 0.1,
                                        repeats: true, block: { (timer) in
-                    if self.gyroView.elapsedTime == 600 { self.buttonTapAction(self.stopBtn) }
+                    if self.measureTime == 600 { self.buttonTapAction(self.stopBtn) }
                     if let data = self.motion.gyroData {
                         let x = data.rotationRate.x
                         let y = data.rotationRate.y
@@ -274,6 +279,8 @@ class MeasureDataViewController: UIViewController {
                         }
                         
                         self.gyroView.setNeedsDisplay()
+                        
+                        self.measureTime += 1
     
                     }
                 })
