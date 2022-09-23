@@ -36,10 +36,10 @@ class GraphViewMaker {
     public var delegate: GraphViewMakerDelegate!
     
     /// 그래프 뷰의 Height
-    private let graphViewHeight: CGFloat = 280.0
+    private let graphViewHeight: CGFloat = 300.0
     
     /// 그래프 뷰의 Width
-    private let graphViewWidth: CGFloat = 280.0
+    private let graphViewWidth: CGFloat = 300.0
     
     /// 1개의 데이터가 차지할 width
     private var blockWidth: CGFloat = 0.0
@@ -119,37 +119,6 @@ class GraphViewMaker {
         view.backgroundColor = .white
         return view
     }()
-    
-//    lazy public var graphView: UIView = {
-//        let uiView = UIView()
-//            uiView.layer.borderColor = UIColor.black.cgColor
-//            uiView.layer.borderWidth = 2.0
-//
-//        // 그래프 차트의 백그라운드 표현
-//        self.blockWidth = self.graphViewHeight/8 // 차트 백그라운드의 가로, 세로 칸 수
-//        let backgroundPath = UIBezierPath()
-//        for i in [1,2,3,4,5,6,7,8] {
-//            backgroundPath.move(to: CGPoint(x: Int(blockWidth)*i, y: 0))
-//            backgroundPath.addLine(to: CGPoint(x: Int(blockWidth)*i, y: Int(graphViewWidth)))
-//        }
-//
-//        for i in [1,2,3,4,5,6,7,8] {
-//            backgroundPath.move(to: CGPoint(x: 0, y: Int(blockWidth)*i))
-//            backgroundPath.addLine(to: CGPoint(x: Int(graphViewWidth), y: Int(blockWidth)*i))
-//        }
-//
-//        let chartBackgroundLayer = CAShapeLayer()
-//        chartBackgroundLayer.frame = uiView.bounds
-//        chartBackgroundLayer.path = backgroundPath.cgPath
-//        chartBackgroundLayer.fillColor = UIColor.clear.cgColor
-//        chartBackgroundLayer.strokeColor = UIColor.gray.cgColor
-//        chartBackgroundLayer.lineWidth = 1.5
-//        uiView.layer.addSublayer(chartBackgroundLayer)
-//
-//        return uiView
-//    }()
-
-    // MARK: 전역 변수
     
     // sample struct
     public struct gyroValue {
