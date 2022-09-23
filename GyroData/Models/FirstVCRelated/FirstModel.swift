@@ -24,7 +24,13 @@ class FirstModel {
     
     init(repository: RepositoryProtocol) {
         self.repository = repository
-        self.privateFirstListViewModel = FirstListViewModel()
+        // TODO: Repository 구현이 끝나면 아래 부분을 Repository에서 MotionTask 배열을 가져오는 방식으로 구현할 예정입니다.
+        var motionDatas = [MotionTask]()
+        for _ in 0..<50 {
+            motionDatas.append(DummyGenerator.getDummyMotionData())
+        }
+        // -----
+        self.privateFirstListViewModel = FirstListViewModel(motionDatas)
         bind()
     }
     
@@ -36,7 +42,6 @@ class FirstModel {
             let sceneContext = SceneContext(dependency: model)
             self.routeSubject(.detail(.secondViewController(context: sceneContext)))
         }
-        // TODO: 이동 타입(View or Play)을 선택해서 이동하도록 구현해야 함
         privateFirstListViewModel.propagateDidSelectRowEvent = { [weak self] indexPathRow in
             guard let self = self else { return }
             let model = ThirdModel(viewType: .view)

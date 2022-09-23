@@ -16,6 +16,7 @@ extension FirstViewStyling {
             $0.textColor = .graySecondary
             $0.font = .appleSDGothicNeo(weight: .regular, size: 12)
             $0.textAlignment = .left
+            $0.text = "2022/09/08 14:50:43"
         }
     }
     
@@ -24,6 +25,7 @@ extension FirstViewStyling {
             $0.textColor = .grayPrimary
             $0.font = .appleSDGothicNeo(weight: .regular, size: 18)
             $0.textAlignment = .left
+            $0.text = "GYRO"
         }
     }
     
@@ -32,6 +34,7 @@ extension FirstViewStyling {
             $0.textColor = .grayPrimary
             $0.font = .appleSDGothicNeo(weight: .regular, size: 28)
             $0.textAlignment = .center
+            $0.text = "60.0"
         }
     }
 }

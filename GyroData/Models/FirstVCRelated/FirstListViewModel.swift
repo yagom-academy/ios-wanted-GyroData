@@ -8,19 +8,27 @@
 import Foundation
 
 class FirstListViewModel {
-    //input
+    // MARK: Input
     var didSelectRow: (Int) -> () = { indexPathRow in }
     var didSelectPlayAction: (Int) -> () = { indexPathRow in }
     
-    //output
+    // MARK: Output
     var propagateDidSelectRowEvent: (Int) -> () = { indexPathRow in }
     var propagateDidSelectPlayActionEvent: (Int) -> () = { indexPathRow in }
+    var motionDatas: [MotionTask] {
+        return _motionDatas
+    }
     
-    //properties
-    init() {
+    // MARK: Properties
+    private var _motionDatas: [MotionTask]
+    
+    // MARK: Init
+    init(_ motionDatas: [MotionTask]) {
+        self._motionDatas = motionDatas
         bind()
     }
     
+    // MARK: Bind
     private func bind() {
         didSelectRow = { [weak self] indexPathRow in
             guard let self = self else { return }
@@ -31,5 +39,4 @@ class FirstListViewModel {
             self.propagateDidSelectPlayActionEvent(indexPathRow)
         }
     }
-    
 }

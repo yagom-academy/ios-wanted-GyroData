@@ -18,10 +18,9 @@ class FirstCellContentView: UIView, FirstViewStyling {
     var measureTypeLabel: UILabel = UILabel()
     var amountLabel: UILabel = UILabel()
     
-    var viewModel: FirstCellContentViewModel
+    var viewModel: FirstCellContentViewModel?
     
-    init(viewModel: FirstCellContentViewModel) {
-        self.viewModel = viewModel
+    init() {
         super.init(frame: .zero)
         initViewHierarchy()
         configureView()
@@ -66,10 +65,6 @@ extension FirstCellContentView: Presentable {
     }
 
     func configureView() {
-        timeLabel.text = "2022/09/08 14:50:43"
-        measureTypeLabel.text = "gyro"
-        amountLabel.text = "60.0"
-        
         timeLabel.addStyles(style: cellTimeLabelStyling)
         measureTypeLabel.addStyles(style: cellMeasureTypelabelStyling)
         amountLabel.addStyles(style: cellAmountTypeLabelStyling)
@@ -78,14 +73,17 @@ extension FirstCellContentView: Presentable {
     func bind() {
         didReceiveViewModel = { [weak self] viewModel in
             guard let self = self else { return }
-            self.setData()
+            self.viewModel = viewModel
+            viewModel.timeSource = { time in
+                self.timeLabel.text = time
+            }
+            viewModel.typeSource = { type in
+                self.measureTypeLabel.text = type
+            }
+            viewModel.amountSource = { amount in
+                self.amountLabel.text = amount
+            }
         }
-    }
-    
-    private func setData() {
-        timeLabel.text = viewModel.timeString
-        measureTypeLabel.text = viewModel.measureTypeString
-        amountLabel.text = viewModel.amountString
     }
 }
 
@@ -114,10 +112,10 @@ struct FirstCellContentViewPreview<View: UIView> : UIViewRepresentable {
 struct FirstCellContentViewPreviewProvider: PreviewProvider {
     static var previews: some View {
         FirstCellContentViewPreview {
-            let view = FirstCellContentView(viewModel: FirstCellContentViewModel())
-            
+            let view = FirstCellContentView()
+            view.didReceiveViewModel(FirstCellContentViewModel(DummyGenerator.getDummyMotionData()))
             return view
-        }.previewLayout(.fixed(width: 180, height: 80))
+        }.previewLayout(.fixed(width: 390, height: 80))
     }
 }
 

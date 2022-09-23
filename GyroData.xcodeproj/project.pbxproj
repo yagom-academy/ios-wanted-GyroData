@@ -51,6 +51,7 @@
 		64336DE828DC9DE400D56D68 /* MotionFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64336DE728DC9DE400D56D68 /* MotionFile.swift */; };
 		B019E7FD28DBECF5009BC86F /* ThirdControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B019E7FC28DBECF5009BC86F /* ThirdControlView.swift */; };
 		B07C5F7828DAB10D00321A5F /* SecondControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07C5F7728DAB10D00321A5F /* SecondControlView.swift */; };
+		B08BCA3728DD8D8200F6E2A2 /* DummyGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08BCA3628DD8D8200F6E2A2 /* DummyGenerator.swift */; };
 		B0CF0F3F28DA9B9B00596BCF /* FirstViewStyling.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CF0F3E28DA9B9B00596BCF /* FirstViewStyling.swift */; };
 		B0CF0F4128DAA07900596BCF /* SecondViewStyling.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CF0F4028DAA07900596BCF /* SecondViewStyling.swift */; };
 /* End PBXBuildFile section */
@@ -102,6 +103,7 @@
 		64336DE728DC9DE400D56D68 /* MotionFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionFile.swift; sourceTree = "<group>"; };
 		B019E7FC28DBECF5009BC86F /* ThirdControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdControlView.swift; sourceTree = "<group>"; };
 		B07C5F7728DAB10D00321A5F /* SecondControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondControlView.swift; sourceTree = "<group>"; };
+		B08BCA3628DD8D8200F6E2A2 /* DummyGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyGenerator.swift; sourceTree = "<group>"; };
 		B0CF0F3E28DA9B9B00596BCF /* FirstViewStyling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewStyling.swift; sourceTree = "<group>"; };
 		B0CF0F4028DAA07900596BCF /* SecondViewStyling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewStyling.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -255,9 +257,9 @@
 		46E21EB828DC5F1500593210 /* FirstVCRelated */ = {
 			isa = PBXGroup;
 			children = (
-				46E21EB928DC5F1500593210 /* FirstCellContentViewModel.swift */,
 				46E21EBA28DC5F1500593210 /* FirstModel.swift */,
 				46E21EBB28DC5F1500593210 /* FirstListViewModel.swift */,
+				46E21EB928DC5F1500593210 /* FirstCellContentViewModel.swift */,
 			);
 			path = FirstVCRelated;
 			sourceTree = "<group>";
@@ -267,6 +269,7 @@
 			children = (
 				46E21ECA28DC5F2100593210 /* Repository.swift */,
 				46E21EC928DC5F2100593210 /* CoreDataManager.swift */,
+				B08BCA3628DD8D8200F6E2A2 /* DummyGenerator.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -405,6 +408,7 @@
 				46E21EC528DC5F1500593210 /* FirstCellContentViewModel.swift in Sources */,
 				36FB64F328D8CA8000A87587 /* SecondViewController.swift in Sources */,
 				462FB33328DB123D00BC5F04 /* ThirdViewControllerRoutable.swift in Sources */,
+				B08BCA3728DD8D8200F6E2A2 /* DummyGenerator.swift in Sources */,
 				464FE63C28DB3D9D00C73656 /* UIFont+Extensions.swift in Sources */,
 				3695B0BD28D99CA100FF93FD /* SecondViewSegementedControlView.swift in Sources */,
 				36FB64ED28D8C5DC00A87587 /* Routable.swift in Sources */,
