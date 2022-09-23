@@ -86,6 +86,9 @@ class GyroDataListViewController: UIViewController, UITableViewDelegate, UITable
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)  {
         let showGraphViewController = ShowGraphViewController()
+
+        guard let motionInfo = FileService.shared.getMotionInfo(name: motionDataArray[indexPath.row].date) else { return }
+
         self.navigationController?.pushViewController(showGraphViewController, animated: true)
     }
 
@@ -94,6 +97,9 @@ class GyroDataListViewController: UIViewController, UITableViewDelegate, UITable
         let modity = UIContextualAction(style: .normal, title: "Play") { (UIContextualAction, UIView, success: @escaping (Bool) -> Void) in
             print("play")
             let playGyroViewController = PlayGraphViewController()
+
+            guard let motionInfo = FileService.shared.getMotionInfo(name: motionDataArray[indexPath.row].date) else { return }
+
             self.navigationController?.pushViewController(playGyroViewController, animated: true)
             success(true)
         }
