@@ -49,14 +49,22 @@ extension SecondViewSegementedControlView: Presentable {
     
     func configureView() {
         segmentedControl.addStyles(style: segmentControlStyling)
-    }
-    
-    func bind() {
         segmentedControl.addTarget(self, action: #selector(segmentAction), for: .valueChanged)
     }
     
+    func bind() {
+        viewModel.selectedTypeSource = { [weak self] type in
+            if type == "ACC" {
+                self?.segmentedControl.selectedSegmentIndex = 0
+            } else {
+                self?.segmentedControl.selectedSegmentIndex = 1
+            }
+        }
+    }
+    
     @objc func segmentAction() {
-        viewModel.didSegmentChange()
+        let type = segmentedControl.selectedSegmentIndex == 0 ? "ACC" : "GYRO"
+        viewModel.didSegmentChange(type)
     }
 }
 
