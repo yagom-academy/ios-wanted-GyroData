@@ -51,13 +51,13 @@ class MeasureViewController: UIViewController {
     @objc func measureButtonClicked() {
         
         print("측정")
+        mainView.measureButton.isEnabled = false
         countDown = 600
         timer = Timer.scheduledTimer(withTimeInterval: stepDuration
                                      , repeats: true) { (timer) in
             self.sensorData = CGFloat.random(in: self.graphView.minValue * 0.75...self.graphView.maxValue * 0.75)
             self.graphView.animateNewValue(self.sensorData, duration: self.stepDuration)
             self.countDown -= 1
-            //print(self.countDown)
             if self.countDown <= 0 {
                 timer.invalidate()
             }
@@ -67,18 +67,14 @@ class MeasureViewController: UIViewController {
     }
     @objc func stopButtonClicked() {
         timer?.invalidate()
+        self.graphView.reset()
+        mainView.measureButton.isEnabled = true
     }
     
     
     // MARK: TEST CODE3
     @objc func testButtonClicked() {
         self.sensorData = CGFloat.random(in: self.graphView.minValue * 0.75...self.graphView.maxValue * 0.75)
-        //print(self.sensorData)
-        
-//        timer = Timer.scheduledTimer(withTimeInterval: stepDuration
-//                                     , repeats: true) { (timer) in
-//            self.sensorData = CGFloat.random(in: self.graphView.minValue * 0.75...self.graphView.maxValue * 0.75)
-//
-//        }
+        print(self.sensorData)
     }
 }
