@@ -82,9 +82,9 @@ class TestPathGraphView: UIView {
     //Point Properties for calculating Path's Position
     
     //path의 y좌표가 이 값의 최대값보다 크거나 작으면 CGAffineTransform을 이용해 뷰의 스케일을 축소한다? path가 잘려서 안 보이면 안되니까?
-    lazy var middleRange: ClosedRange<CGFloat> = middleRangeMin...middleRangeMax
-    lazy var middleRangeMin: CGFloat = middlePoint.y * 0.2
-    lazy var middleRangeMax: CGFloat = middlePoint.y * 1.8
+    lazy var yAxisMiddleRange: ClosedRange<CGFloat> = yAxisMiddleRangeMin...yAxisMiddleRangeMax
+    lazy var yAxisMiddleRangeMin: CGFloat = middlePoint.y * 0.2
+    lazy var yAxisMiddleRangeMax: CGFloat = middlePoint.y * 1.8
     lazy var yAxisMultiplier: CGFloat = 1.0
     
     lazy var middlePoint: CGPoint = CGPoint(x: 0.0, y: self.frame.height / 2)
@@ -136,7 +136,7 @@ class TestPathGraphView: UIView {
         UIColor.red.setStroke()
         xPath.stroke()
         
-        reCalculateScale(yPoint: xPreviousPoint.y)
+        reCalculateScale(point: xPreviousPoint)
     }
     
     func drawYpath() {
@@ -152,7 +152,7 @@ class TestPathGraphView: UIView {
         UIColor.green.setStroke()
         yPath.stroke()
         
-        reCalculateScale(yPoint: yPreviousPoint.y)
+        reCalculateScale(point: yPreviousPoint)
     }
     
     func drawZpath() {
@@ -168,15 +168,15 @@ class TestPathGraphView: UIView {
         UIColor.blue.setStroke()
         zPath.stroke()
         
-        reCalculateScale(yPoint: zPreviousPoint.y)
+        reCalculateScale(point: zPreviousPoint)
     }
     
     // TODO: 일단 스케일 조정 위한 발악의 목적으로 테스트 중이긴 하나 실제 기능구현을 위해서는 더 테스트, 보강이 필요
-    func reCalculateScale(yPoint: Double) {
-        if middleRange ~= yPoint {
+    func reCalculateScale(point: CGPoint) {
+        if yAxisMiddleRange ~= point.y {
             
         } else {
-            yAxisMultiplier = yAxisMultiplier * 0.8
+            yAxisMultiplier = yAxisMultiplier * 0.95
             
             let transform = CGAffineTransform(scaleX: 1.0, y: yAxisMultiplier)
             self.layer.setAffineTransform(transform)
