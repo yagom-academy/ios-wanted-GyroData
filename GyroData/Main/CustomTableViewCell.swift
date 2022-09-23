@@ -11,7 +11,17 @@ import SnapKit
 class CustomTableViewCell: UITableViewCell {
     
     static let identifier = "CustomTableViewCell"
-
+    
+    lazy var stackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [dataTypeLabel,valueLabel,dateLabel])
+        contentView.addSubview(stackView)
+        stackView.snp.makeConstraints { (make) in
+            make.left.bottom.right.top.equalTo(contentView)
+        }
+        
+        return stackView
+    }()
+    
     lazy var dataTypeLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 20)
@@ -39,22 +49,24 @@ class CustomTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been impl")
     }
     private func addContentView() {
-        contentView.addSubview(dataTypeLabel)
-        contentView.addSubview(valueLabel)
-        contentView.addSubview(dateLabel)
+        stackView.addSubview(dataTypeLabel)
+        stackView.addSubview(valueLabel)
+        stackView.addSubview(dateLabel)
         
         dateLabel.snp.makeConstraints { (make) in
-            make.leading.equalTo(contentView).offset(20)
-            make.top.equalTo(contentView)
+            make.leading.equalTo(stackView.snp.leading).offset(10)
+            make.top.equalTo(stackView.snp.top).offset(10)
+            make.bottom.equalTo(dataTypeLabel.snp.top).offset(-10)
         }
         dataTypeLabel.snp.makeConstraints { make in
-            make.leading.equalTo(contentView).offset(20)
-            make.top.equalTo(dateLabel.snp.bottom)
-            make.bottom.equalTo(contentView).offset(-5)
+            make.bottom.equalTo(stackView.snp.bottom)
+            make.leading.equalTo(dateLabel)
+//            make.top.equalTo(dateLabel.snp.bottom).offset(3)
+//            make.bottom.equalTo(stackView.snp.bottom)
         }
         valueLabel.snp.makeConstraints { make in
-            make.top.bottom.equalTo(contentView)
-            make.trailing.equalTo(contentView).offset(-50)
+//            make.top.equalTo(stackView.snp.top).offset(10)
+            make.trailing.equalTo(stackView.snp.trailing).offset(1)
         }
     }
 }
