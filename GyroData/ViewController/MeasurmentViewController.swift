@@ -9,7 +9,7 @@ import UIKit
 import CoreMotion
 
 class MeasurmentViewController: UIViewController {
-    
+
     //Acc, gyro manager
     let manager = CMMotionManager()
     
