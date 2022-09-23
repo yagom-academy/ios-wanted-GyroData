@@ -14,6 +14,7 @@ class CustomCell: UITableViewCell {
     
     var leftLabel: UILabel = {
         let leftLabel = UILabel()
+        leftLabel.text = "2022/09/20 20:20:20"
         leftLabel.translatesAutoresizingMaskIntoConstraints = false
         return leftLabel
     }()
@@ -33,9 +34,15 @@ class CustomCell: UITableViewCell {
         stackView.axis = .vertical //방향 버티컬 호리즌탈
         stackView.alignment = .fill
         stackView.distribution = .fill
-        stackView.spacing = 10
+        stackView.spacing = 20
         return stackView
     }()
+    
+    func setModel(model: RunDataList) {
+        leftLabel.text = model.timestamp
+        centerLabel.text = model.type
+        rightLabel.text = "\(model.interval)"
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -52,9 +59,19 @@ class CustomCell: UITableViewCell {
         contentView.addSubview(centerLabel)
         contentView.addSubview(stackView)
         
-        rightLabel.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -10).isActive = true
-        leftLabel.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 5).isActive = true
+        rightLabel.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -50).isActive = true
+        rightLabel.font = .italicSystemFont(ofSize: 30)
+        rightLabel.font = UIFont.preferredFont(forTextStyle: .title1)
+        leftLabel.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 10).isActive = true
+        leftLabel.font = .italicSystemFont(ofSize: 12)
+        leftLabel.numberOfLines = 0
+        leftLabel.font = UIFont.preferredFont(forTextStyle: .title3)
         centerLabel.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 10).isActive = true
+        centerLabel.font = .italicSystemFont(ofSize: 22)
+        centerLabel.numberOfLines = 0
+        centerLabel.font = UIFont.preferredFont(forTextStyle: .title2)
+        
+        
         
         
     }
@@ -62,12 +79,3 @@ class CustomCell: UITableViewCell {
         fatalError()
     }
 }
-//
-//extension CustomCell {
-//    public func bind(model: TestCell) {
-//        leftLabel.text = model.liftName
-//        rightLabel.text = model.rightName
-//        centerLabel.text = model.centers
-//    }
-//}
-//
