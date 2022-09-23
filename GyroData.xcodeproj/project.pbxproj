@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		2D7F431D28DC52DC004CA619 /* DataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7F431C28DC52DC004CA619 /* DataError.swift */; };
+		336FD3AF28DD419000557464 /* PlotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FD3AE28DD419000557464 /* PlotView.swift */; };
+		336FD3B128DD41D200557464 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FD3B028DD41D200557464 /* Constants.swift */; };
+		336FD3B328DD4E4C00557464 /* RealTimeGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FD3B228DD4E4C00557464 /* RealTimeGraph.swift */; };
 		33F4FDA528DAC21900DD82BA /* NSLayoutConstraint+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F4FDA428DAC21900DD82BA /* NSLayoutConstraint+Extension.swift */; };
 		402F398028DAEAD200D4EC69 /* MotionDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 402F397E28DAEAD200D4EC69 /* MotionDataModel.xcdatamodeld */; };
 		402F398328DAEC9500D4EC69 /* MotionData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402F398128DAEC9500D4EC69 /* MotionData+CoreDataClass.swift */; };
@@ -27,6 +30,9 @@
 
 /* Begin PBXFileReference section */
 		2D7F431C28DC52DC004CA619 /* DataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataError.swift; sourceTree = "<group>"; };
+		336FD3AE28DD419000557464 /* PlotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlotView.swift; sourceTree = "<group>"; };
+		336FD3B028DD41D200557464 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		336FD3B228DD4E4C00557464 /* RealTimeGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealTimeGraph.swift; sourceTree = "<group>"; };
 		33F4FDA428DAC21900DD82BA /* NSLayoutConstraint+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+Extension.swift"; sourceTree = "<group>"; };
 		402F397F28DAEAD200D4EC69 /* MotionDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MotionDataModel.xcdatamodel; sourceTree = "<group>"; };
 		402F398128DAEC9500D4EC69 /* MotionData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MotionData+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
@@ -57,10 +63,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		336FD3AD28DD416900557464 /* GraphView */ = {
+			isa = PBXGroup;
+			children = (
+				336FD3AE28DD419000557464 /* PlotView.swift */,
+				336FD3B228DD4E4C00557464 /* RealTimeGraph.swift */,
+			);
+			path = GraphView;
+			sourceTree = "<group>";
+		};
 		33F4FDA328DAC20700DD82BA /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				33F4FDA428DAC21900DD82BA /* NSLayoutConstraint+Extension.swift */,
+				336FD3B028DD41D200557464 /* Constants.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -143,6 +159,7 @@
 		E7370DCC28D9DC1E00C6D1D6 /* Feature */ = {
 			isa = PBXGroup;
 			children = (
+				336FD3AD28DD416900557464 /* GraphView */,
 				402F849F28DAEA2400A133D6 /* CoreData */,
 				E7370DCD28D9DC5C00C6D1D6 /* GyroDataList */,
 				E7370DCE28D9DC8500C6D1D6 /* MeasureData */,
@@ -252,8 +269,11 @@
 				E7370DD228D9FC9000C6D1D6 /* GyroDataListTableViewCell.swift in Sources */,
 				E7370DD028D9DEB300C6D1D6 /* MeasureDataViewController.swift in Sources */,
 				402F398628DAEDE900D4EC69 /* MotionInfo.swift in Sources */,
+				336FD3AF28DD419000557464 /* PlotView.swift in Sources */,
 				40AAB77228DC1C79002E725F /* FileService.swift in Sources */,
+				336FD3B128DD41D200557464 /* Constants.swift in Sources */,
 				402F398028DAEAD200D4EC69 /* MotionDataModel.xcdatamodeld in Sources */,
+				336FD3B328DD4E4C00557464 /* RealTimeGraph.swift in Sources */,
 				2D7F431D28DC52DC004CA619 /* DataError.swift in Sources */,
 				33F4FDA528DAC21900DD82BA /* NSLayoutConstraint+Extension.swift in Sources */,
 				402F398428DAEC9500D4EC69 /* MotionData+CoreDataProperties.swift in Sources */,
