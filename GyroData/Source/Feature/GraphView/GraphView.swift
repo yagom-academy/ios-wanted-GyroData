@@ -1,66 +1,14 @@
 //
-//  ViewGyroViewController.swift
+//  GraphView.swift
 //  GyroData
 //
-//  Created by 신동오 on 2022/09/22.
+//  Created by 엄철찬 on 2022/09/23.
 //
 
+import Foundation
 import UIKit
 
-class ShowGraphViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.title = "다시보기"
-        self.view.backgroundColor = .white
-        
-        view.addSubview(reviewView)
-        reviewView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            reviewView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            reviewView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            reviewView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
-            reviewView.heightAnchor.constraint(equalTo: reviewView.widthAnchor),
-        ])
-    }
-
-    var motionInfo : MotionInfo?
-    
-    func setMotionInfo(_ motionInfo:MotionInfo){
-        self.motionInfo = motionInfo
-    }
-    
-    lazy var back : UIButton = {
-        let btn = UIButton(primaryAction: UIAction(handler:{ _ in
-            let presentingVC = self.presentingViewController
-            presentingVC?.dismiss(animated: true)
-        }))
-        var config = UIButton.Configuration.filled()
-        config.image = UIImage(systemName: "checkmark.circle.fill")
-        config.buttonSize = .medium
-        config.cornerStyle = .capsule
-        config.buttonSize = .medium
-        btn.configuration = config
-        return btn
-    }()
-    
-    
-    
-    lazy var reviewView : ReviewView = {
-        let xPoints = motionInfo!.motionX
-        let yPoints = motionInfo!.motionY
-        let zPoints = motionInfo!.motionZ
-        let view = ReviewView(xPoints: xPoints, yPoints: yPoints, zPoints: zPoints)
-        view.backgroundColor = .clear
-        return view
-    }()
-
-}
-
-
-
-
-class ReviewView : UIView {
+class GraphView : UIView {
     
 //    private struct Constants {
 //        static let cornerRadiusSize = CGSize(width: 20.0, height: 20.0)
@@ -81,8 +29,6 @@ class ReviewView : UIView {
     var yPoints : [Double]
     var zPoints : [Double]
     
-    var maxValue : Double
-    
     // set up the points line
     let xPath = UIBezierPath()
     let yPath = UIBezierPath()
@@ -92,16 +38,18 @@ class ReviewView : UIView {
     var xLineLayer = CAShapeLayer()
     var yLineLayer = CAShapeLayer()
     var zLineLayer = CAShapeLayer()
+    
+    let id : String
 
     
     
-    init(xPoints:[Double], yPoints:[Double], zPoints:[Double]){
+    init(id:String,xPoints:[Double], yPoints:[Double], zPoints:[Double]){
+        
+        self.id = id
         
         self.xPoints = xPoints
         self.yPoints = yPoints
         self.zPoints = zPoints
-        
-        maxValue = (xPoints + yPoints + zPoints).map{abs($0)}.max() ?? 20
         
         super.init(frame: .zero)
     }
@@ -130,12 +78,12 @@ class ReviewView : UIView {
 //        let graphHeight  = height - topBorder - bottomBorder
 //        let maxValue     = Constants.maxPoint
         
-        //var maxValue : Double = 80
+        var maxValue : Double = 80
         
         let graphHeight = self.frame.height
         
         let columnYPoint = { (graphPoint : Double) -> CGFloat in
-            let y = CGFloat(graphPoint) / CGFloat(self.maxValue) * (graphHeight - Constants.graphHeightPadding * 2)
+            let y = CGFloat(graphPoint) / CGFloat(maxValue) * (graphHeight - Constants.graphHeightPadding * 2)
             return graphHeight / 2 - y
         }
         
@@ -181,8 +129,10 @@ class ReviewView : UIView {
             let nextPoint = CGPoint(x: columnXPoint(Double(i)), y: columnYPoint(self.xPoints[i]))
             xPath.addLine(to: nextPoint)
         }
-        xPath.stroke()
-        
+//        xPath.stroke()
+        if self.id == "review"{
+            xPath.stroke()
+        }
         //draw the yline graph
         UIColor.green.setFill()
         UIColor.green.setStroke()
@@ -197,8 +147,10 @@ class ReviewView : UIView {
             let nextPoint = CGPoint(x: columnXPoint(Double(i)), y: columnYPoint(yPoints[i]))
             yPath.addLine(to: nextPoint)
         }
-        
-        yPath.stroke()
+        if self.id == "review"{
+            yPath.stroke()
+        }
+     //   yPath.stroke()
         
         
         //draw the zline graph
@@ -216,7 +168,11 @@ class ReviewView : UIView {
             zPath.addLine(to: nextPoint)
         }
         
-        zPath.stroke()
+   //     zPath.stroke()
+        
+        if self.id == "review"{
+            zPath.stroke()
+        }
 
         //draw horizontal graph lines on the top of everything
         let linePath = UIBezierPath()
@@ -234,6 +190,27 @@ class ReviewView : UIView {
         
         
         //animation
+//        xLineLayer.path = xPath.cgPath
+//        xLineLayer.strokeColor = UIColor.red.cgColor
+//        xLineLayer.fillColor = nil
+//        xLineLayer.lineWidth = 1
+//        self.layer.addSublayer(xLineLayer)
+//
+//        yLineLayer.path = yPath.cgPath
+//        yLineLayer.strokeColor = UIColor.green.cgColor
+//        yLineLayer.fillColor = nil
+//        yLineLayer.lineWidth = 1
+//        self.layer.addSublayer(yLineLayer)
+//
+//        zLineLayer.path = zPath.cgPath
+//        zLineLayer.strokeColor = UIColor.blue.cgColor
+//        zLineLayer.fillColor = nil
+//        zLineLayer.lineWidth = 1
+//        self.layer.addSublayer(zLineLayer)
+        
+    }
+    
+    func startGraphDrawing(){
         xLineLayer.path = xPath.cgPath
         xLineLayer.strokeColor = UIColor.red.cgColor
         xLineLayer.fillColor = nil
@@ -251,10 +228,6 @@ class ReviewView : UIView {
         zLineLayer.fillColor = nil
         zLineLayer.lineWidth = 1
         self.layer.addSublayer(zLineLayer)
-        
-    }
-    
-    func startGraphDrawing(){
         layer.speed = 1.0
         // strokeEnd -> 끝 점 지정 0-1까지의 값을 가짐
         let animation = CABasicAnimation(keyPath: "strokeEnd")

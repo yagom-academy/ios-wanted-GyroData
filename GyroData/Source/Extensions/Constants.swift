@@ -19,4 +19,5 @@ struct Constants{
     static let cornerRadiusSize       = CGSize(width: 20.0, height: 20.0)
     static let margin  : CGFloat      = 10.0
     static var currentMax   : Double  = 0.0
+    static let graphHeightPadding : CGFloat = 20
 }

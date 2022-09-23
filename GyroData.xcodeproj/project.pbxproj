@@ -11,6 +11,7 @@
 		336FD3AF28DD419000557464 /* PlotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FD3AE28DD419000557464 /* PlotView.swift */; };
 		336FD3B128DD41D200557464 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FD3B028DD41D200557464 /* Constants.swift */; };
 		336FD3B328DD4E4C00557464 /* RealTimeGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FD3B228DD4E4C00557464 /* RealTimeGraph.swift */; };
+		336FD3B728DD658B00557464 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FD3B628DD658B00557464 /* GraphView.swift */; };
 		33F4FDA528DAC21900DD82BA /* NSLayoutConstraint+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F4FDA428DAC21900DD82BA /* NSLayoutConstraint+Extension.swift */; };
 		402F398028DAEAD200D4EC69 /* MotionDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 402F397E28DAEAD200D4EC69 /* MotionDataModel.xcdatamodeld */; };
 		402F398328DAEC9500D4EC69 /* MotionData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402F398128DAEC9500D4EC69 /* MotionData+CoreDataClass.swift */; };
@@ -33,6 +34,7 @@
 		336FD3AE28DD419000557464 /* PlotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlotView.swift; sourceTree = "<group>"; };
 		336FD3B028DD41D200557464 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		336FD3B228DD4E4C00557464 /* RealTimeGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealTimeGraph.swift; sourceTree = "<group>"; };
+		336FD3B628DD658B00557464 /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		33F4FDA428DAC21900DD82BA /* NSLayoutConstraint+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+Extension.swift"; sourceTree = "<group>"; };
 		402F397F28DAEAD200D4EC69 /* MotionDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MotionDataModel.xcdatamodel; sourceTree = "<group>"; };
 		402F398128DAEC9500D4EC69 /* MotionData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MotionData+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
@@ -68,6 +70,7 @@
 			children = (
 				336FD3AE28DD419000557464 /* PlotView.swift */,
 				336FD3B228DD4E4C00557464 /* RealTimeGraph.swift */,
+				336FD3B628DD658B00557464 /* GraphView.swift */,
 			);
 			path = GraphView;
 			sourceTree = "<group>";
@@ -275,6 +278,7 @@
 				402F398028DAEAD200D4EC69 /* MotionDataModel.xcdatamodeld in Sources */,
 				336FD3B328DD4E4C00557464 /* RealTimeGraph.swift in Sources */,
 				2D7F431D28DC52DC004CA619 /* DataError.swift in Sources */,
+				336FD3B728DD658B00557464 /* GraphView.swift in Sources */,
 				33F4FDA528DAC21900DD82BA /* NSLayoutConstraint+Extension.swift in Sources */,
 				402F398428DAEC9500D4EC69 /* MotionData+CoreDataProperties.swift in Sources */,
 				402F398328DAEC9500D4EC69 /* MotionData+CoreDataClass.swift in Sources */,
