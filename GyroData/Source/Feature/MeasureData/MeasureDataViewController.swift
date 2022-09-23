@@ -78,6 +78,7 @@ class MeasureDataViewController: UIViewController {
         let btn = UIButton()
         btn.setTitle("정지", for: .normal)
         btn.setTitleColor(.black, for: .normal)
+        btn.isEnabled = false
         btn.addTarget(self, action: #selector(buttonTapAction), for: .touchUpInside)
         return btn
     }()
@@ -297,6 +298,12 @@ class MeasureDataViewController: UIViewController {
     func saveMeasuredData() {
         activityIndicator.startAnimating()
         
+        if motionXArray.isEmpty || motionYArray.isEmpty || motionZArray.isEmpty {
+            self.setAlert(message: "데이터가 없습니다.")
+            activityIndicator.stopAnimating()
+            return
+        }
+        
         let motionData = MotionData(context: self.context)
         motionData.measureTime = String(Double(measureTime) / 10.0)
         motionData.date = startDate
@@ -365,7 +372,7 @@ class MeasureDataViewController: UIViewController {
                 startGyroscope()
             }
             self.segmentedControl.isEnabled = false
-            saveBarButtonItem.isEnabled = true
+            saveBarButtonItem.isEnabled = false
             isPlaying = true
         case stopBtn:
             if self.segmentedControl.selectedSegmentIndex == 0 {
@@ -374,6 +381,7 @@ class MeasureDataViewController: UIViewController {
                 stopMeasuring(gyroTimer)
             }
             self.segmentedControl.isEnabled = true
+            saveBarButtonItem.isEnabled = true
             isPlaying = false
         case saveBtn:
             saveMeasuredData()
@@ -390,8 +398,9 @@ class MeasureDataViewController: UIViewController {
         self.navigationItem.setRightBarButton(saveBarButtonItem, animated: true)
         
         addViews(to: self.view,plot, segmentedControl, measureBtn, stopBtn, containerView)
-        doNotTranslate(segmentedControl,measureBtn, stopBtn, containerView,plot)
+        doNotTranslate(segmentedControl,measureBtn, stopBtn, containerView,plot, activityIndicator)
         addSubViews(gyroView,accView)
+        containerView.addSubview(activityIndicator)
         addXYZLabels(xLabel,yLabel,zLabel)
         addIndicateLabels(maxLabel,minLabel)
         
@@ -400,6 +409,8 @@ class MeasureDataViewController: UIViewController {
             containerView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             containerView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
             containerView.heightAnchor.constraint(equalTo: containerView.widthAnchor),
+            activityIndicator.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: containerView.centerYAnchor),
             plot.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             plot.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             plot.widthAnchor.constraint(equalTo: containerView.widthAnchor),
