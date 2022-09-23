@@ -46,10 +46,9 @@ class GraphBuffer {
 
 class GraphView: UIView {
     
-    public var maxValue: CGFloat = 500
-    public var minValue: CGFloat = -500
+    public var maxValue: CGFloat = 50
+    public var minValue: CGFloat = -50
     var graphSwipeAnimation = false
-    let animation = CABasicAnimation(keyPath: "path")
     
     public var points: GraphBuffer?
 //    {
@@ -87,6 +86,7 @@ class GraphView: UIView {
     //그래프 초기화 기능 메소드
     public func reset() {
         guard let layer = self.layer as? CAShapeLayer else { return }
+        graphSwipeAnimation = false
         points?.resetToValue(nil)
         layer.path = makePath().path
     }
@@ -94,12 +94,14 @@ class GraphView: UIView {
     //이전 좌표, 현재 좌표를 이용하여 변화를 애니메이션 처리
     public func animateNewValue(_ value: CGFloat, duration: Double = 0.0) {
         guard let layer = self.layer as? CAShapeLayer else { return }
+        let animation = CABasicAnimation(keyPath: "path")
         let oldPathInfo = makePath()
         
         animation.duration = duration
         
         // 이전 경로로 부터 애니메이션 시작
         animation.fromValue = oldPathInfo.path
+        
         
         //view최대 가로 길이보다 그래프가 늘어나야 할 경우 지난 그래프를 왼쪽으로 한칸 씩 이동시킨다
         //처음부터 적용하면 애니메이션이 깨지는 현상이 발생하여, view의 최대 가로길이가 넘었을 경우 속성을 추가한다
