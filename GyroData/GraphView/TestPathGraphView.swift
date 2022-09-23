@@ -91,12 +91,15 @@ class TestPathGraphView: UIView {
     
     lazy var xPreviousPoint: CGPoint = CGPoint(x: 0, y: self.middlePoint.y)
     lazy var xNewPoint: CGPoint = CGPoint(x: 0, y: 0)
+    var xPathData: [CGPoint] = []
     
     lazy var yPreviousPoint: CGPoint = CGPoint(x: 0, y: self.middlePoint.y)
     lazy var yNewPoint: CGPoint = CGPoint(x: 0, y: 0)
+    var yPathData: [CGPoint] = []
     
     lazy var zPreviousPoint: CGPoint = CGPoint(x: 0, y: self.middlePoint.y)
     lazy var zNewPoint: CGPoint = CGPoint(x: 0, y: 0)
+    var zPathData: [CGPoint] = []
     
     let xPath = UIBezierPath()
     let yPath = UIBezierPath()
@@ -133,10 +136,13 @@ class TestPathGraphView: UIView {
         
         xPreviousPoint = xNewPoint
         
+        reCalculateScale(point: xPreviousPoint)
+        
         UIColor.red.setStroke()
         xPath.stroke()
+        xPathData.append(xPreviousPoint)
         
-        reCalculateScale(point: xPreviousPoint)
+        
     }
     
     func drawYpath() {
@@ -149,10 +155,13 @@ class TestPathGraphView: UIView {
         
         yPreviousPoint = yNewPoint
         
+        reCalculateScale(point: yPreviousPoint)
+        
         UIColor.green.setStroke()
         yPath.stroke()
+        yPathData.append(yPreviousPoint)
         
-        reCalculateScale(point: yPreviousPoint)
+        
     }
     
     func drawZpath() {
@@ -165,10 +174,13 @@ class TestPathGraphView: UIView {
         
         zPreviousPoint = zNewPoint
         
+        reCalculateScale(point: zPreviousPoint)
+        
         UIColor.blue.setStroke()
         zPath.stroke()
+        zPathData.append(zPreviousPoint)
         
-        reCalculateScale(point: zPreviousPoint)
+        
     }
     
     // TODO: 일단 스케일 조정 위한 발악의 목적으로 테스트 중이긴 하나 실제 기능구현을 위해서는 더 테스트, 보강이 필요
@@ -179,14 +191,36 @@ class TestPathGraphView: UIView {
             yAxisMultiplier = yAxisMultiplier * 0.95
             //middleRangeMin, middleRangeMax 값도 조정, 보정이 필요해 보인다...하지만 어떻게 할지는 아직 떠오르지 않음
             let transform = CGAffineTransform(scaleX: 1.0, y: yAxisMultiplier)
-            self.layer.setAffineTransform(transform)
+//            self.layer.setAffineTransform(transform)
 
             
             //뷰의 레이어가 아니라 Path에 Transform을 먹여야 하나?
-            //이렇게 하니까 깨진다 좀 더 생각해봐야겠다
-//            xPath.apply(transform)
-//            yPath.apply(transform)
-//            zPath.apply(transform)
+            xPath.apply(transform)
+            yPath.apply(transform)
+            zPath.apply(transform)
+            
+            let newXpathData = xPathData.map { point in
+                let newPoint = CGPoint(x: point.x, y: point.y * yAxisMultiplier)
+                return newPoint
+            }
+            xPathData = newXpathData
+            xPreviousPoint.y = xPreviousPoint.y * yAxisMultiplier
+            
+            let newYpathData = yPathData.map { point in
+                let newPoint = CGPoint(x: point.x, y: point.y * yAxisMultiplier)
+                return newPoint
+            }
+            yPathData = newYpathData
+            yPreviousPoint.y = yPreviousPoint.y * yAxisMultiplier
+            
+            let newZpathData = zPathData.map { point in
+                let newPoint = CGPoint(x: point.x, y: point.y * yAxisMultiplier)
+                return newPoint
+            }
+            
+            zPathData = newZpathData
+            zPreviousPoint.y = zPreviousPoint.y * yAxisMultiplier
+            
         }
     }
     
@@ -198,7 +232,7 @@ extension TestPathGraphView: Presentable {
     }
     
     func configureView() {
-        self.backgroundColor = .white
+        self.backgroundColor = .black
         xPath.lineWidth = 1 //default
         yPath.lineWidth = 1 //default
         zPath.lineWidth = 1 //default
@@ -231,6 +265,11 @@ extension TestPathGraphView: Presentable {
             self.yPath.removeAllPoints()
             self.zPath.removeAllPoints()
             self.yAxisMultiplier = 1.0
+            
+            self.xPathData.removeAll()
+            self.yPathData.removeAll()
+            self.zPathData.removeAll()
+            
             self.setNeedsDisplay()
         }
     }
