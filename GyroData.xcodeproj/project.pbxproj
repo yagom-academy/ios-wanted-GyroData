@@ -16,6 +16,7 @@
 		6C78FB3428DAA878001CAE3B /* ReplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C78FB3328DAA878001CAE3B /* ReplayViewController.swift */; };
 		6CFA77C228DA00B4009540E0 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 6CFA77C128DA00B4009540E0 /* SnapKit */; };
 		D3A0B4ED28DBE99A009ACF94 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A0B4EC28DBE99A009ACF94 /* CustomTableViewCell.swift */; };
+		D3A0B51228DC7F98009ACF94 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A0B51128DC7F98009ACF94 /* Model.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		6C78FB3128DAA871001CAE3B /* MeasureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureViewController.swift; sourceTree = "<group>"; };
 		6C78FB3328DAA878001CAE3B /* ReplayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplayViewController.swift; sourceTree = "<group>"; };
 		D3A0B4EC28DBE99A009ACF94 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
+		D3A0B51128DC7F98009ACF94 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +78,7 @@
 			children = (
 				63F01BB828D44FC400C53A39 /* MainViewController.swift */,
 				D3A0B4EC28DBE99A009ACF94 /* CustomTableViewCell.swift */,
+				D3A0B51128DC7F98009ACF94 /* Model.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -182,6 +185,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3A0B51228DC7F98009ACF94 /* Model.swift in Sources */,
 				D3A0B4ED28DBE99A009ACF94 /* CustomTableViewCell.swift in Sources */,
 				63F01BB928D44FC400C53A39 /* MainViewController.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,

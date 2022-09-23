@@ -11,24 +11,7 @@ import SnapKit
 class CustomTableViewCell: UITableViewCell {
     
     static let identifier = "CustomTableViewCell"
-    
-//    lazy var stackView: UIStackView = {
-//        let stackView = UIStackView(arrangedSubviews: [dataTypeLabel,valueLabel])
-//        contentView.addSubview(stackView)
-//
-//        let secondStackView = UIStackView(arrangedSubviews: [dateLabel])
-//        contentView.addSubview(secondStackView)
-//
-//        stackView.snp.makeConstraints { (make) in
-//            make.left.bottom.right.equalTo(contentView)
-//            make.top.equalTo(secondStackView).offset(25)
-//        }
-//        secondStackView.snp.makeConstraints { (make) in
-//            make.top.equalTo(contentView).offset(6)
-//        }
-//        return stackView
-//    }()
-    
+
     lazy var dataTypeLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 20)

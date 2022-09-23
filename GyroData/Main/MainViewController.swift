@@ -8,13 +8,6 @@
 import UIKit
 import SnapKit
 
-struct CustomCellModel {
-    let dataTypeLabel: String
-    let valueLabel: String
-    let dateLabel: String
-}
-
-
 class MainViewController: UIViewController {
     var dataSource = [CustomCellModel]()
     
@@ -46,19 +39,6 @@ class MainViewController: UIViewController {
     private func loadData() {
         dataSource.append(.init(dataTypeLabel: "Accelerometer", valueLabel: "43.4",dateLabel: "yyyy:mm:dd"))
         dataSource.append(.init(dataTypeLabel: "Gyro", valueLabel: "60",dateLabel: "yyyy:mm:dd"))
-        dataSource.append(.init(dataTypeLabel: "Accelerometer", valueLabel: "30.4",dateLabel: "yyyy:mm:dd"))
-        dataSource.append(.init(dataTypeLabel: "Accelerometer", valueLabel: "22.3",dateLabel: "yyyy:mm:dd"))
-        dataSource.append(.init(dataTypeLabel: "Gyro", valueLabel: "333.2",dateLabel: "yyyy:mm:dd"))
-        dataSource.append(.init(dataTypeLabel: "Accelerometer", valueLabel: "43.4",dateLabel: "yyyy:mm:dd"))
-        dataSource.append(.init(dataTypeLabel: "Gyro", valueLabel: "60",dateLabel: "yyyy:mm:dd"))
-        dataSource.append(.init(dataTypeLabel: "Accelerometer", valueLabel: "30.4",dateLabel: "yyyy:mm:dd"))
-        dataSource.append(.init(dataTypeLabel: "Accelerometer", valueLabel: "22.3",dateLabel: "yyyy:mm:dd"))
-        dataSource.append(.init(dataTypeLabel: "Gyro", valueLabel: "333.2",dateLabel: "yyyy:mm:dd"))
-        dataSource.append(.init(dataTypeLabel: "Accelerometer", valueLabel: "43.4",dateLabel: "yyyy:mm:dd"))
-        dataSource.append(.init(dataTypeLabel: "Gyro", valueLabel: "60",dateLabel: "yyyy:mm:dd"))
-        dataSource.append(.init(dataTypeLabel: "Accelerometer", valueLabel: "30.4",dateLabel: "yyyy:mm:dd"))
-        dataSource.append(.init(dataTypeLabel: "Accelerometer", valueLabel: "22.3",dateLabel: "yyyy:mm:dd"))
-        dataSource.append(.init(dataTypeLabel: "Gyro", valueLabel: "333.2",dateLabel: "yyyy:mm:dd"))
         
         tableView.reloadData()
     }
@@ -71,12 +51,17 @@ class MainViewController: UIViewController {
         print("측정버튼")
             let MeasureView = MeasureViewController()
         self.navigationController?.pushViewController(MeasureView, animated: true)
+//        두번째 뷰컨트롤러에서 데이터 받아오기
+//        CoreDataManager.shared.insertCoreData(Notice(dataTypeLabel: "22", valueLabel: "22", dateLabel: Date().description))
+//        CoreDataManager.shared.saveToContext()
+//        datasource1 = CoreDataManager.shared.getCoreData()
+//        tableView.reloadData()
+//
         }
     }
 
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataSource.count
     }
@@ -96,12 +81,18 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         
         let playAction = UIContextualAction(style: .normal, title:"Play"){ (UIContextualAction, UIView, success: @escaping (Bool) -> Void) in
             print("paly 클릭 됨")
+            let ReplayViewController = ReplayViewController()
+            self.navigationController?.pushViewController(ReplayViewController, animated: true)
             success(true)
         }
         
         let deleteAction = UIContextualAction(style: .normal, title: "Delete") { (UIContextualAction, UIView, success: @escaping (Bool) -> Void) in
             print("delete 클릭 됨")
-            
+            // 코어데이터 제거
+//            CoreDataManager.shared.deleteCoreData(self.datasource1[indexPath.row])
+//            CoreDataManager.shared.saveToContext()
+//            self.datasource1 = CoreDataManager.shared.getCoreData()
+//            tableView.reloadData()
             success(true)
         }
         
@@ -109,6 +100,11 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         deleteAction.backgroundColor = .systemRed
         
         return UISwipeActionsConfiguration(actions: [deleteAction, playAction])
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let ReplayViewController = ReplayViewController()
+        self.navigationController?.pushViewController(ReplayViewController, animated: true)
     }
 }
 
