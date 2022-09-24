@@ -6,31 +6,43 @@
 //
 
 import UIKit
-import SnapKit
+import CoreData
 
 class MainViewController: UIViewController {
     
-    let testButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Replay VC", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        return button
-    }()
+    let test = Measure(title: "test", second: 0.32)
+    let test2 = Measure(title: "haha", second: 0.9999)
+    let manager = CoreDataManager.shared
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "시작"
-        self.view.backgroundColor = .white
-        self.testButton.addTarget(self, action: #selector(tap(_:)), for: .touchUpInside)
-        self.view.addSubview(testButton)
+        print("⭐️insert")
+        manager.insertMeasure(measure: test)
+        manager.insertMeasure(measure: test2)
         
-        testButton.snp.makeConstraints {
-            $0.center.equalToSuperview() //정중앙에 배치
+        let data = manager.fetch()
+        print("💨fetch", data)
+        
+
+        guard let count = manager.count() else { return }
+        print("🎉count", count)
+        
+        print("❌ delete")
+        manager.delete(object: data.last!)
+        
+        guard let count = manager.count() else { return }
+        print("🎉count", count)
+        
+        manager.deleteAll()
+        let data2 = manager.fetch()
+        if data2.isEmpty {
+            print("👏🏻 clean!!")
         }
-    }
-    
-    @objc func tap(_ sender: UIButton) {
-        self.navigationController?.pushViewController(ReplayViewController(), animated: true)
+        
+        guard let count = manager.count() else { return }
+        print("🎉count", count)
+        
+        
     }
 
 
