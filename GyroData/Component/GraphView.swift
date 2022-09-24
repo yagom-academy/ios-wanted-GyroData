@@ -123,8 +123,8 @@ class GraphView: UIView {
         aPoint?.write(aValue)
         bPoint?.write(bValue)
         cPoint?.write(cValue)
-        print("⭐️", aPoint?.array)
-        print("🍎", bPoint?.array)
+        //print("⭐️", aPoint?.array)
+        //print("🍎", bPoint?.array)
         
         
         
@@ -167,9 +167,9 @@ class GraphView: UIView {
             let bCGPoint = CGPoint(x: x, y: bY)
             let cCGPoint = CGPoint(x: x, y: cY)
             
-            print("인덱스", idx)
-            print("⭐️", aCGPoint)
-            print("🍎", bCGPoint)
+            //print("인덱스", idx)
+            //print("⭐️", aCGPoint)
+            //print("🍎", bCGPoint)
             //이전 경로의 마지막 값이 시작 포인트 값이 된다
             if idx == 0 {
                 aPath.move(to: aCGPoint)

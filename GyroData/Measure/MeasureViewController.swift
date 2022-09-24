@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreMotion
 
 class MeasureViewController: UIViewController {
     
@@ -46,7 +47,7 @@ class MeasureViewController: UIViewController {
         mainView.measureButton.addTarget(self, action: #selector(measureButtonClicked), for: .touchUpInside)
         mainView.stopButton.addTarget(self, action: #selector(stopButtonClicked), for: .touchUpInside)
         //MARK: TEST CODE4
-//        mainView.testButton.addTarget(self, action: #selector(testButtonClicked), for: .touchUpInside)
+        mainView.testButton.addTarget(self, action: #selector(testButtonClicked), for: .touchUpInside)
     }
     
     // MARK: incomplete
@@ -57,6 +58,8 @@ class MeasureViewController: UIViewController {
     @objc func measureButtonClicked() {
         
         print("측정")
+        
+        
         mainView.measureButton.isEnabled = false
         countDown = 600 //max 60초
         timer = Timer.scheduledTimer(withTimeInterval: stepDuration
@@ -79,10 +82,19 @@ class MeasureViewController: UIViewController {
         mainView.measureButton.isEnabled = true
     }
     
+    func startAcceleration() {
+        MotionManager.shared.startAccelerometerUpdates()
+    }
     
-//    // MARK: TEST CODE3
-//    @objc func testButtonClicked() {
-//        self.sensorData = CGFloat.random(in: self.graphView.minValue * 0.75...self.graphView.maxValue * 0.75)
-//        print(self.sensorData)
-//    }
+    func startGyroscope() {
+        MotionManager.shared.startGyroUpdates()
+    }
+    
+    
+    // MARK: TEST CODE3
+    @objc func testButtonClicked() {
+        
+        startGyroscope()
+        
+    }
 }
