@@ -149,7 +149,7 @@ class ReplayViewController: UIViewController {
     }
     
     private func setupGraphView() {
-        graphView.points = buffer
+        //graphView.points = buffer
     }
     
     private func btnAddTarget() {
@@ -169,7 +169,7 @@ class ReplayViewController: UIViewController {
         timer = Timer.scheduledTimer(withTimeInterval: 0.1
                                      , repeats: true) { (timer) in
             self.sensorData = CGFloat.random(in: self.graphView.minValue * 0.75...self.graphView.maxValue * 0.75)
-            self.graphView.animateNewValue(self.sensorData, duration: 0.1)
+//            self.graphView.animateNewValue(self.sensorData, duration: 0.1)
             self.countDown -= 1
             self.startTime += 0.1
 
