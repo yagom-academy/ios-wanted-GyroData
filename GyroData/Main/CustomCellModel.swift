@@ -13,3 +13,11 @@ struct CustomCellModel {
     let valueLabel: String
     let dateLabel: String
 }
+
+
+struct Notice: Codable, Equatable {
+    var title: String
+    var second: Double
+    var measureDate: Date
+    var id: UUID
+}
