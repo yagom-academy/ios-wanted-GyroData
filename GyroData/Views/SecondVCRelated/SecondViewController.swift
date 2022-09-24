@@ -92,6 +92,22 @@ extension SecondViewController: Presentable {
         viewModel.routeSubject = { [weak self] scene in
             self?.route(to: scene)
         }
+        
+        controlView.populateAdd = { [weak self] in
+            
+            let x = CGFloat.random(in: -50...50)
+            let y = CGFloat.random(in: -50...50)
+            let z = CGFloat.random(in: -50...50)
+            
+            let dummyValue = ValueInfo(xValue: x, yValue: y, zValue: z)
+            
+            self?.dummyGraphView.didReceiveData(dummyValue)
+        }
+        
+        controlView.populateRemove = { [weak self] in
+            self?.dummyGraphView.didReceiveRemoveAll()
+        }
+        
     }
     
     // MARK: Action

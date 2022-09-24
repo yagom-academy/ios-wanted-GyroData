@@ -118,9 +118,9 @@ class TestPathGraphView: UIView {
     
     override func draw(_ rect: CGRect) {
         print("draw called")
-        drawZpath()
-        drawYpath()
         drawXpath()
+        drawYpath()
+        drawZpath()
     }
     
     // TODO: 일단 path.close는 "path"를 완전히 다 그렸을 시 close 해줘야 하는 듯 하다. UIGraphicCurrentContext가 close해줘야 하는 것처럼
@@ -186,14 +186,59 @@ class TestPathGraphView: UIView {
     // TODO: 일단 스케일 조정 위한 발악의 목적으로 테스트 중이긴 하나 실제 기능구현을 위해서는 더 테스트, 보강이 필요
     func reCalculateScale(point: CGPoint) {
         if yAxisMiddleRange ~= point.y {
-            
+            yAxisMiddleRangeMin = middlePoint.y * 0.2
+            yAxisMiddleRangeMax = middlePoint.y * 1.8
+            yAxisMultiplier = 1.0
         } else {
-            yAxisMultiplier = yAxisMultiplier * 0.95
             //middleRangeMin, middleRangeMax 값도 조정, 보정이 필요해 보인다...하지만 어떻게 할지는 아직 떠오르지 않음
+            if point.y > yAxisMiddleRangeMax {
+                //middlePoint.y * 1.8
+                let calculation = point.y - yAxisMiddleRangeMax
+                yAxisMiddleRangeMax = yAxisMiddleRangeMax + calculation
+                
+                print("calculation max : \(calculation)") //72
+                yAxisMultiplier = yAxisMultiplier * 0.95 //0.95와 1.05를 하드코딩으로 넣는게 아니라 이것도 특정한 계산식으로 보정을 해야 할 듯 함
+            }
+            
+            if point.y < yAxisMiddleRangeMin {
+                //middlePoint.y * 0.2
+                let calculation = yAxisMiddleRangeMin - point.y
+                yAxisMiddleRangeMin = yAxisMiddleRangeMin - calculation
+                
+                print("calculation min : \(calculation)") //22
+                yAxisMultiplier = yAxisMultiplier * 1.05 //0.95와 1.05를 하드코딩으로 넣는게 아니라 이것도 특정한 계산식으로 보정을 해야 할 듯 함
+            }
+            
+            //y값이 view 밖에 찍히는지에 대한 체크와 보정도 필요해 보인다
+            //그렇다면 이 view의 height가 커져야 할까? 이 뷰는 뷰컨트롤러에 있는 스크롤뷰에 올라가고?
+            //아니면 view의 bounds가 이동? 지도뷰 같이?
             
             let width = UIScreen.main.bounds.width - 32
             let height = width
-            let transform = CGAffineTransform(1, 0, 0, yAxisMultiplier, 0, height * 0.025)
+            
+            /*
+            a  b  0
+            c  d  0
+            tx ty 1
+             */
+            /*
+             let scaleMatrix = CGAffineTransformMakeScale(0.68, 0.68)
+             let translateMatrix = CGAffineTransformMakeTranslation(102, 65)
+
+             let translateThenScaleMatrix = CGAffineTransformConcat(scaleMatrix, translateMatrix)
+             // outputs : CGAffineTransform(a: 0.68, b: 0.0, c: 0.0, d: 0.68, tx: 102.0, ty: 65.0)
+             // the translation is the same
+
+             let scaleThenTranslateMatrix = CGAffineTransformConcat(translateMatrix, scaleMatrix)
+             // outputs : CGAffineTransform(a: 0.68, b: 0.0, c: 0.0, d: 0.68, tx: 69.36, ty: 44.2)
+             // the translation has been scaled too
+             */
+            
+            //CGAffineTransform(a:x축 스케일 조정, b, c, d:y축 스케일 조정, tx: x값 이동, ty: y값 이동)
+            //CGAffineTransformConcat으로 2개 이상의 CGAffineTransformMakeScale, CGAffineTransformMakeTranslation을 조합할 시 주의할 점: 어느 트랜스폼을 먼저 파라미터에 넣느냐에 따라 산출되는 CGAffineTransform이 다를 수 있음. 이는 내부적으로 CGAffineTransform은 행렬구조이며, 곱하기로 산출되기 때문인듯?
+            //내부의 행렬구조는 3 * 3임. 그러나 마지막 3열의 데이터는 개발자가 건드리지 않아야 함?
+            let previousTy = height * 0.025
+            let transform = CGAffineTransform(1, 0, 0, yAxisMultiplier, 0, 0)
 
             //뷰의 레이어가 아니라 Path에 Transform을 먹여야 하나?
             xPath.apply(transform)
