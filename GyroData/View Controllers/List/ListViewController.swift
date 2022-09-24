@@ -43,17 +43,18 @@ final class ListViewController: UIViewController {
         let detailData = MotionDetailData(date: date!, x: 23.0, y: 4, z: 5)
         detailDataList.append(detailData)
         manager.saveToJSON(with: detailDataList)
-
     }
     
     private func configureNavigation() {
         navigationItem.title = "목록"
+        navigationItem.backButtonDisplayMode = .minimal
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "측정", style: .plain, target: self, action: #selector(didTapMeasureButton))
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Load", style: .plain, target: self, action: #selector(didTapLoadDataButton))
     }
     
     private func configureLayout() {
         view.addSubview(tableView)
+        view.backgroundColor = .systemBackground
         
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -83,21 +84,8 @@ final class ListViewController: UIViewController {
     
     @objc
     private func didTapMeasureButton() {
-        // TODO: 두 번째 페이지로 이동
-        //        startAccelerometers()
-        if isStop == true {
-            startGyros()
-            isStop = false
-            navigationItem.rightBarButtonItem?.title = "중단"
-        } else {
-            stopGyros()
-            isStop = true
-            navigationItem.rightBarButtonItem?.title = "측정"
-        }
-        let data = manager.getDetailDataToFile(with: date!)
-        dump(data)
-        sleep(2)
-        manager.deleteData(with: date!)
+        let measureViewController = MeasureViewController()
+        show(measureViewController, sender: nil)
     }
     
     @objc
@@ -153,20 +141,24 @@ final class ListViewController: UIViewController {
     }
     
     func saveAccelerometerData() {
-//        let context = container.viewContext
-//        let accelerometerData = DetailData(context: context)
-        
-//        for data in detailDataList {
-//            accelerometerData.x = data.x
-//            accelerometerData.y = data.y
-//            accelerometerData.z = data.z
-//        }
         manager.saveToJSON(with: detailDataList)
-        
+        saveCoreData()
+    }
+    
+    private func saveCoreData() {
+        let context =  container.viewContext
+        let data = DetailData(context: context)
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy/MM/dd HH:mm:ss.SSS"
-//        accelerometerData.date = formatter.string(from: date)
-        (UIApplication.shared.delegate as! AppDelegate).saveContext()
+        
+        for detailData in detailDataList {
+            data.date = formatter.string(from: detailData.date)
+            data.x = detailData.x
+            data.y = detailData.y
+            data.z = detailData.z
+            
+            (UIApplication.shared.delegate as! AppDelegate).saveContext()
+        }
     }
     
     func startGyros() {
