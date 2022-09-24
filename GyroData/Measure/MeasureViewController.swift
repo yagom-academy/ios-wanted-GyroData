@@ -32,7 +32,6 @@ class MeasureViewController: UIViewController {
         super.viewDidLoad()
         setup()
         
-        // Do any additional setup after loading the view.
     }
     
     func setup() {
@@ -48,11 +47,12 @@ class MeasureViewController: UIViewController {
     @objc func saveAction() {
         print("저장")
     }
+    
     @objc func measureButtonClicked() {
         
         print("측정")
         mainView.measureButton.isEnabled = false
-        countDown = 600
+        countDown = 600 //max 60초
         timer = Timer.scheduledTimer(withTimeInterval: stepDuration
                                      , repeats: true) { (timer) in
             self.sensorData = CGFloat.random(in: self.graphView.minValue * 0.75...self.graphView.maxValue * 0.75)
@@ -61,7 +61,6 @@ class MeasureViewController: UIViewController {
             if self.countDown <= 0 {
                 timer.invalidate()
             }
-            
         }
         
     }

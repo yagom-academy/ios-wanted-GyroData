@@ -75,12 +75,13 @@
 			isa = PBXGroup;
 			children = (
 				6CFBD85028DEF24E002380A4 /* AppStart */,
-				6CFBD85128DEF259002380A4 /* CoreData */,
-				6C67A2E828DADAE300DE6704 /* Extension */,
+				6CFBD87C28DF18E2002380A4 /* Component */,
 				6C78FB2B28DA9069001CAE3B /* Main */,
 				6C78FB2F28DA9313001CAE3B /* Measure */,
 				6C78FB3028DA931D001CAE3B /* Replay */,
-				6C78FB2E28DA90C2001CAE3B /* Common */,
+				6CFBD85128DEF259002380A4 /* CoreData */,
+				6C78FB2E28DA90C2001CAE3B /* Design */,
+				6C67A2E828DADAE300DE6704 /* Extension */,
 				63F01BC228D44FC500C53A39 /* Info.plist */,
 			);
 			path = GyroData;
@@ -102,13 +103,13 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
-		6C78FB2E28DA90C2001CAE3B /* Common */ = {
+		6C78FB2E28DA90C2001CAE3B /* Design */ = {
 			isa = PBXGroup;
 			children = (
 				63F01BBD28D44FC500C53A39 /* Assets.xcassets */,
 				63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */,
 			);
-			path = Common;
+			path = Design;
 			sourceTree = "<group>";
 		};
 		6C78FB2F28DA9313001CAE3B /* Measure */ = {
@@ -116,7 +117,6 @@
 			children = (
 				6C78FB3128DAA871001CAE3B /* MeasureViewController.swift */,
 				0B15BAF728DAE6A500AC20E6 /* MeasureView.swift */,
-				0B15BB1028DCE4B700AC20E6 /* GraphView.swift */,
 			);
 			path = Measure;
 			sourceTree = "<group>";
@@ -147,6 +147,14 @@
 				6CFBD87A28DEF375002380A4 /* CoreDataManager.swift */,
 			);
 			path = CoreData;
+			sourceTree = "<group>";
+		};
+		6CFBD87C28DF18E2002380A4 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				0B15BB1028DCE4B700AC20E6 /* GraphView.swift */,
+			);
+			path = Component;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

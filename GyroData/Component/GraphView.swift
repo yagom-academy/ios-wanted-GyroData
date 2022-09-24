@@ -51,15 +51,7 @@ class GraphView: UIView {
     var graphSwipeAnimation = false
     
     public var points: GraphBuffer?
-//    {
-//        didSet {
-//            guard let layer = self.layer as? CAShapeLayer else { return }
-//            if oldValue == nil {
-//                layer.path = makePath().path
-//            }
-//        }
-//    }
-    
+
     //애니메이션 사용을 위해 layer 재정의
     static override var layerClass: AnyClass {
         return CAShapeLayer.self

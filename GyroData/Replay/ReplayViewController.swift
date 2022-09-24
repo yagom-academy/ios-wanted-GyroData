@@ -10,15 +10,19 @@ import SnapKit
 
 class ReplayViewController: UIViewController {
     
+    weak var timer: Timer?
     private var viewModel: ReplayViewModel = .init()
     private var timerState: Bool = false
-    private var timer: Timer = Timer()
     private var endTime: Double = 3.0 //끝 타이머
     private var startTime: Double = 00.0{
         didSet {
             timerLabel.text = String(format: "%.1f", startTime)
         }
     }
+    
+    var sensorData: CGFloat = 0.0
+    var buffer = GraphBuffer(count: 100)
+    var countDown = 0
     
     private let navigationTitle: UILabel = {
         let label = UILabel()
@@ -50,13 +54,20 @@ class ReplayViewController: UIViewController {
     
     private let graphView: GraphView = {
         let view = GraphView()
-        view.backgroundColor = .white
+        view.backgroundColor = .gray
         return view
     }()
     
     private let playButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "play.fill"), for: .normal)
+        button.tintColor = .black
+        return button
+    }()
+    
+    private let stopButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "stop.fill"), for: .normal)
         button.tintColor = .black
         return button
     }()
@@ -68,6 +79,7 @@ class ReplayViewController: UIViewController {
         return label
     }()
     
+    
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,15 +87,9 @@ class ReplayViewController: UIViewController {
         self.navigationController?.navigationBar.isHidden = true
         self.setupLayouts()
         self.btnAddTarget()
-        
+        self.setupGraphView()
     }
     
-    // MARK: - configure
-    
-    //    private func bind(_ viewModel: ReplayViewModel) {
-    //        let input = ReplayViewModel.Input(
-    //    }
-    //
     private func setupLayouts() {
         self.view.addSubViews(
             self.navigationTitle,
@@ -92,6 +98,7 @@ class ReplayViewController: UIViewController {
             self.stateLabel,
             self.graphView,
             self.playButton,
+            self.stopButton,
             self.timerLabel
         )
         
@@ -129,15 +136,26 @@ class ReplayViewController: UIViewController {
             $0.width.height.equalTo(50)
         }
         
+        self.stopButton.snp.makeConstraints {
+            $0.top.equalTo(self.graphView.snp.bottom).offset(30)
+            $0.leading.equalTo(self.graphView.snp.leading).offset(50)
+            $0.width.height.equalTo(50)
+        }
+        
         self.timerLabel.snp.makeConstraints {
             $0.top.equalTo(self.graphView.snp.bottom).offset(40)
             $0.leading.equalTo(self.playButton.snp.trailing).offset(50)
         }
     }
     
+    private func setupGraphView() {
+        graphView.points = buffer
+    }
+    
     private func btnAddTarget() {
         navigationBackButton.addTarget(self, action: #selector(backButtonTap(_:)), for: .touchUpInside)
         playButton.addTarget(self, action: #selector(playButtonTap(_:)), for: .touchUpInside)
+        stopButton.addTarget(self, action: #selector(stopButtonTap(_:)), for: .touchUpInside)
     }
     
     // MARK: - private func
@@ -146,17 +164,27 @@ class ReplayViewController: UIViewController {
     }
     
     @objc func playButtonTap(_ sender: UIButton) {
-        
-        if timerState {
-            timerState = false
-            timer.invalidate()
-        } else {
-            timerState = true
-            timerSetting()
+        print("측정")
+        countDown = 600
+        timer = Timer.scheduledTimer(withTimeInterval: 0.1
+                                     , repeats: true) { (timer) in
+            self.sensorData = CGFloat.random(in: self.graphView.minValue * 0.75...self.graphView.maxValue * 0.75)
+            self.graphView.animateNewValue(self.sensorData, duration: 0.1)
+            self.countDown -= 1
+            self.startTime += 0.1
+
+            if self.countDown <= 0 {
+                timer.invalidate()
+            }
+
         }
-        guard let image = timerState ? UIImage(systemName: "stop.fill") : UIImage(systemName: "play.fill") else { return }
-        self.playButton.setImage(image, for: .normal)
-        
+    }
+    
+    @objc func stopButtonTap(_ sender: UIButton) {
+        print("정지")
+        timer?.invalidate()
+        self.graphView.reset()
+        self.startTime = 0
     }
     
     private func timerSetting() {
@@ -166,10 +194,10 @@ class ReplayViewController: UIViewController {
     @objc func setTimer() {
         startTime += 0.1
         print("값 증가중", startTime)
-
-        if startTime > endTime {
-            timer.invalidate()
-        }
+//
+//        if startTime > endTime {
+//            timer.invalidate()
+//        }
     }
 }
 

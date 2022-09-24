@@ -6,26 +6,14 @@
 //
 
 import Foundation
+import UIKit
 
-protocol ReplayViewModelProtocol: AnyObject {
-    func backButtonTap()
-}
 
-class ReplayViewModel: ReplayViewModelProtocol {
-    func backButtonTap() {
+class ReplayViewModel {
+    var buttonState: Bool = false
+    
+    func startButtonTap(completion: @escaping () -> ()) {
         
     }
     
-//    struct Input {
-//        let backButtonTap: () -> Void
-//        let playButtonTap: () -> Void
-//    }
-//
-//    struct Output {
-//
-//    }
-//
-//    func transform(_ input: Input) -> Output {
-//        return Output()
-//    }
 }
