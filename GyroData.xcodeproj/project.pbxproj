@@ -16,6 +16,7 @@
 		63F01BC128D44FC500C53A39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */; };
 		C1207E8328D98712003D14F5 /* ListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1207E8228D98712003D14F5 /* ListCell.swift */; };
 		D80FE30D28DAB715005998BD /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D80FE30B28DAB715005998BD /* CoreDataModel.xcdatamodeld */; };
+		FD67510828DEF51200262248 /* MeasureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD67510728DEF51200262248 /* MeasureViewController.swift */; };
 		FDC50A1628DD9957006F6C6D /* FileManagerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC50A1528DD9957006F6C6D /* FileManagerService.swift */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +32,7 @@
 		63F01BC228D44FC500C53A39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C1207E8228D98712003D14F5 /* ListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCell.swift; sourceTree = "<group>"; };
 		D80FE30C28DAB715005998BD /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
+		FD67510728DEF51200262248 /* MeasureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureViewController.swift; sourceTree = "<group>"; };
 		FDC50A1528DD9957006F6C6D /* FileManagerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -94,6 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				C1207E8428D997F9003D14F5 /* List */,
+				FD67510628DEF4BE00262248 /* Measurement */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -117,6 +120,14 @@
 				C1207E8228D98712003D14F5 /* ListCell.swift */,
 			);
 			path = List;
+			sourceTree = "<group>";
+		};
+		FD67510628DEF4BE00262248 /* Measurement */ = {
+			isa = PBXGroup;
+			children = (
+				FD67510728DEF51200262248 /* MeasureViewController.swift */,
+			);
+			path = Measurement;
 			sourceTree = "<group>";
 		};
 		FDC50A1428DD98D3006F6C6D /* Util */ = {
@@ -203,6 +214,7 @@
 				5DB1DE6128D9A50000C7161F /* GyroData.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				D80FE30D28DAB715005998BD /* CoreDataModel.xcdatamodeld in Sources */,
+				FD67510828DEF51200262248 /* MeasureViewController.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
 				FDC50A1628DD9957006F6C6D /* FileManagerService.swift in Sources */,
 			);
