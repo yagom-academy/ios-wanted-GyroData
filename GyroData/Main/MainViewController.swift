@@ -12,7 +12,7 @@ class MainViewController: UIViewController {
     //더미데이터
     var dataSource = [CustomCellModel]()
     //코어데이터 사용예정
-    var datasource = [Notice]()
+//    var datasource1 = [Notice]()
     
     
     private lazy var tableView: UITableView = {
@@ -41,8 +41,9 @@ class MainViewController: UIViewController {
   //실행시 기존데이터 로드
     private func loadData() {
         //datasource = CoreDataManager.shared.getCoreData()
-        dataSource.append(.init(dataTypeLabel: "Accelerometer", valueLabel: "43.4",dateLabel: "yyyy:mm:dd"))
-        dataSource.append(.init(dataTypeLabel: "Gyro", valueLabel: "60",dateLabel: "yyyy:mm:dd"))
+        dataSource.append(.init(title: "Accelerometer", second: "43.4", measureDate: "yyyy:mm:dd"))
+//        dataSource.append(.init(dataTypeLabel: "Accelerometer", valueLabel: "43.4",dateLabel: "yyyy:mm:dd"))
+//        dataSource.append(.init(dataTypeLabel: "Gyro", valueLabel: "60",dateLabel: "yyyy:mm:dd"))
         tableView.reloadData()
     }
     

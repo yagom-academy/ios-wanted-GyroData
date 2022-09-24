@@ -9,15 +9,15 @@ import Foundation
 
 
 struct CustomCellModel {
-    let dataTypeLabel: String
-    let valueLabel: String
-    let dateLabel: String
-}
-
-
-struct Notice: Codable, Equatable {
     var title: String
-    var second: Double
-    var measureDate: Date
-    var id: UUID
+    let second: String
+    let measureDate: String
 }
+
+
+//struct Notice: Codable, Equatable {
+//    var title: String
+//    var second: Double
+//    var measureDate: Date
+//    var id: UUID
+//}
