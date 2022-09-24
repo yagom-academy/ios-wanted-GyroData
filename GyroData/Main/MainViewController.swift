@@ -12,7 +12,10 @@ class MainViewController: UIViewController {
     //더미데이터
     var dataSource = [CustomCellModel]()
     //코어데이터 사용예정
-//    var datasource1 = [Notice]()
+    var datasource1 = [Measure]()
+    let test = Measure(title: "test", second: 0.32)
+    let test2 = Measure(title: "haha", second: 0.9999)
+    let manager = CoreDataManager.shared
     
     
     private lazy var tableView: UITableView = {
@@ -40,11 +43,40 @@ class MainViewController: UIViewController {
 
   //실행시 기존데이터 로드
     private func loadData() {
+        datasource1.append(.init(title: "22", second: 0.22))
         //datasource = CoreDataManager.shared.getCoreData()
         dataSource.append(.init(title: "Accelerometer", second: "43.4", measureDate: "yyyy:mm:dd"))
-//        dataSource.append(.init(dataTypeLabel: "Accelerometer", valueLabel: "43.4",dateLabel: "yyyy:mm:dd"))
-//        dataSource.append(.init(dataTypeLabel: "Gyro", valueLabel: "60",dateLabel: "yyyy:mm:dd"))
+        //        dataSource.append(.init(dataTypeLabel: "Accelerometer", valueLabel: "43.4",dateLabel: "yyyy:mm:dd"))
+        //        dataSource.append(.init(dataTypeLabel: "Gyro", valueLabel: "60",dateLabel: "yyyy:mm:dd"))
         tableView.reloadData()
+        
+        
+        print("⭐️insert")
+        manager.insertMeasure(measure: test)
+        manager.insertMeasure(measure: test2)
+        
+        let data = manager.fetch()
+        print("💨fetch", data)
+        
+        
+        guard let count = manager.count() else { return }
+        print("🎉count", count)
+        
+        print("❌ delete")
+        manager.delete(object: data.last!)
+        
+        guard let count = manager.count() else { return }
+        print("🎉count", count)
+        
+        manager.deleteAll()
+        let data2 = manager.fetch()
+        if data2.isEmpty {
+            print("👏🏻 clean!!")
+        }
+        
+        guard let count = manager.count() else { return }
+        print("🎉count", count)
+        
     }
     
     //네비바 추가
@@ -67,12 +99,14 @@ class MainViewController: UIViewController {
 
 extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataSource.count
+        return datasource1.count
+//        dataSource.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.identifier) as? CustomTableViewCell ?? CustomTableViewCell()
-        cell.bind(model: dataSource[indexPath.row])
+        cell.bind1(model: datasource1[indexPath.row])
+//                    dataSource[indexPath.row]
         return cell
     }
     

@@ -72,6 +72,12 @@ class CustomTableViewCell: UITableViewCell {
 }
 
 extension CustomTableViewCell {
+    public func bind1(model: Measure) {
+        measureDate.text = model.measureDate
+        second.text = "\(model.second)"
+        title.text = model.title
+    }
+    
     public func bind(model: CustomCellModel) {
         
         measureDate.text = model.measureDate
