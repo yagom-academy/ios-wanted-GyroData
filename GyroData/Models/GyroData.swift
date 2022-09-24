@@ -28,3 +28,10 @@ extension GyroData {
         return formatter.string(from: self.date)
     }
 }
+
+struct MotionDetailData: Codable {
+    let date: Date
+    let x: Double
+    let y: Double
+    let z: Double
+}

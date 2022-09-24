@@ -25,7 +25,10 @@ final class ListViewController: UIViewController {
     }()
     
     private var gyroDataList: [GyroData] = []
+    private var detailDataList: [MotionDetailData] = []
+    var date: Date?
     private var isLoading: Bool = false
+    private let manager = FileManagerService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +37,13 @@ final class ListViewController: UIViewController {
         configureNavigation()
         configureLayout()
         loadMoreData()
+        
+        manager.createDirectory()
+        date = Date()
+        let detailData = MotionDetailData(date: date!, x: 23.0, y: 4, z: 5)
+        detailDataList.append(detailData)
+        manager.saveToJSON(with: detailDataList)
+
     }
     
     private func configureNavigation() {
@@ -84,6 +94,10 @@ final class ListViewController: UIViewController {
             isStop = true
             navigationItem.rightBarButtonItem?.title = "측정"
         }
+        let data = manager.getDetailDataToFile(with: date!)
+        dump(data)
+        sleep(2)
+        manager.deleteData(with: date!)
     }
     
     @objc
@@ -117,7 +131,8 @@ final class ListViewController: UIViewController {
                     let x = data.acceleration.x
                     let y = data.acceleration.y
                     let z = data.acceleration.z
-                    self.saveAccelerometerData(x: x, y: y, z: z)
+             
+                    self.detailDataList.append(MotionDetailData(date: Date(), x: x, y: y, z: z))
                     print(#function, timeout, x, y, z)
                 }
             })
@@ -137,15 +152,20 @@ final class ListViewController: UIViewController {
         }
     }
     
-    func saveAccelerometerData(x: Double, y: Double, z: Double, date: Date = Date()) {
-        let context = container.viewContext
-        let accelerometerData = DetailData(context: context)
-        accelerometerData.x = x
-        accelerometerData.y = y
-        accelerometerData.z = z
+    func saveAccelerometerData() {
+//        let context = container.viewContext
+//        let accelerometerData = DetailData(context: context)
+        
+//        for data in detailDataList {
+//            accelerometerData.x = data.x
+//            accelerometerData.y = data.y
+//            accelerometerData.z = data.z
+//        }
+        manager.saveToJSON(with: detailDataList)
+        
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy/MM/dd HH:mm:ss.SSS"
-        accelerometerData.date = formatter.string(from: date)
+//        accelerometerData.date = formatter.string(from: date)
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
     }
     
