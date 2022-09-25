@@ -59,9 +59,8 @@ class FirstModel {
     
     func populateData() {
         Task {
-            self.repository.fetchFromCoreData { [weak self] motionTasks in
-                self?.privateFirstListViewModel.didReceiveMotionTasks(motionTasks)
-            }
+            let motionTasks = try await self.repository.fetchFromCoreData()
+            self.privateFirstListViewModel.didReceiveMotionTasks(motionTasks)
         }
     }
 }

@@ -8,6 +8,12 @@
 import Foundation
 import CoreData
 
+enum CoreDataError: Error {
+    case fetchError
+    case insertError
+    case deleteError
+}
+
 class CoreDataManager {
     
     static var shared: CoreDataManager = CoreDataManager()
@@ -26,15 +32,13 @@ class CoreDataManager {
         return self.persistentContainer.viewContext
     }
     
-    func fetchMotionTasks() -> Result<[Motion], Error> {
+    func fetchMotionTasks() async throws -> [Motion] {
         let request = Motion.fetchRequest()
         do {
             let fetchResult = try self.context.fetch(request)
-            return .success(fetchResult)
+            return fetchResult
         } catch {
-            // MARK: fetch 실패할 경우 에러 처리
-            print(error.localizedDescription)
-            return .failure(error)
+            throw CoreDataError.fetchError
         }
     }
     

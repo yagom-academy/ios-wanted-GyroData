@@ -13,7 +13,7 @@ protocol RepositoryProtocol: CoreDataRepositoryProtocol { }
 
 // CoreData 와 통신하는 repository 가 들고 있는 프로토콜
 protocol CoreDataRepositoryProtocol {
-    func fetchFromCoreData(completion: @escaping ([MotionTask]) -> Void)
+    func fetchFromCoreData() async throws -> [MotionTask]
     func insertToCoreData(motion: MotionTask) -> Result<Bool, Error>
     func delete(motion: Motion) -> Result<Bool, Error>
 }
@@ -35,18 +35,14 @@ class Repository: RepositoryProtocol {
 }
 
 extension Repository: CoreDataRepositoryProtocol {
-    func fetchFromCoreData(completion: @escaping ([MotionTask]) -> Void) {
-        var motionTasks: [MotionTask] = []
-        let fetchResult = CoreDataManager.shared.fetchMotionTasks()
-        
-        switch fetchResult {
-        case .success(let motions):
-            motions.forEach { motionTasks.append(MotionTask(type: $0.type ?? "", time: $0.time , date: $0.date ?? Date(), path: $0.path ?? "")) }
-            completion(motionTasks)
-        
-        case .failure(let error):
-            print(error.localizedDescription)
+    func fetchFromCoreData() async throws -> [MotionTask] {
+        let fetchResult = try await CoreDataManager.shared.fetchMotionTasks()
+        let result = fetchResult.map { motion in
+            let task = MotionTask(type: motion.type ?? "", time: motion.time, date: motion.date ?? Date(), path: motion.path ?? "")
+            return task
         }
+        
+        return result
     }
     
     func insertToCoreData(motion: MotionTask) -> Result<Bool, Error> {
