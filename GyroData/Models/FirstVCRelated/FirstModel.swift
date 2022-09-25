@@ -21,7 +21,7 @@ class FirstModel {
     //properties
     private var privateFirstListViewModel: FirstListViewModel
     private var repository: RepositoryProtocol
-    var motionDatas = [MotionTask]()
+    var motionTasks = [MotionTask]()
     
     init(repository: RepositoryProtocol) {
         self.repository = repository
@@ -31,7 +31,7 @@ class FirstModel {
 //        }
         
         // -----
-        self.privateFirstListViewModel = FirstListViewModel(motionDatas)
+        self.privateFirstListViewModel = FirstListViewModel(motionTasks)
         bind()
     }
     

@@ -93,7 +93,7 @@ extension FirstListView: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.motionDatas.count
+        return viewModel.motionTasks.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -107,7 +107,7 @@ extension FirstListView: UITableViewDataSource {
         
         //temp
         //model이 만들어둔 cellViewModel을 잘 넘겨줄 수 있도록 추가 처리 필요
-        let viewModel = FirstCellContentViewModel(viewModel.motionDatas[indexPath.row])
+        let viewModel = FirstCellContentViewModel(viewModel.motionTasks[indexPath.row])
         cell.configureCell(viewModel: viewModel)
         
         if indexPath.row % 2 == 1 {
