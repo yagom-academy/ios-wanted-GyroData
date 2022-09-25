@@ -13,8 +13,13 @@ class CoreMotionService {
     private let motionInterval = 6 / 60.0
     private var timer: Timer?
     
+    private var completion: (() -> Void)? = nil
+    
     // MARK: - startMotion
-    func startMeasurement(of type: MotionType) {
+    func startMeasurement(of type: MotionType, completion: @escaping () -> Void) {
+        self.completion = completion
+        completion()
+        
         switch type {
         case .acc:  startAccelerometers()
         case .gyro: startGyros()
@@ -88,6 +93,7 @@ class CoreMotionService {
             case .gyro: self.motionManager.stopGyroUpdates()
             }
         }
+        self.completion?()
     }
     
 }

@@ -105,22 +105,20 @@ final class MeasureViewController: UIViewController {
     
     @objc
     private func didTapMeasureButton() {
-        measureButton.isEnabled = false
-        stopButton.isEnabled = true
-        navigationItem.rightBarButtonItem?.isEnabled = false
-        segmentControl.isEnabled = false
-        
-        self.coreMotionService.startMeasurement(of: MotionType(rawValue: segmentControl.selectedSegmentIndex) ?? .acc)
+        self.coreMotionService.startMeasurement(of: MotionType(rawValue: segmentControl.selectedSegmentIndex) ?? .acc,
+                                                completion: { self.changeButtonsState() })
     }
     
     @objc
     private func didTapStopButton() {
-        measureButton.isEnabled = true
-        stopButton.isEnabled = false
-        navigationItem.rightBarButtonItem?.isEnabled = true
-        segmentControl.isEnabled = true
-        
         self.coreMotionService.stopMeasurement(of: MotionType(rawValue: segmentControl.selectedSegmentIndex) ?? .acc)
+    }
+    
+    private func changeButtonsState() {
+        measureButton.isEnabled = !self.measureButton.isEnabled
+        self.stopButton.isEnabled = !self.measureButton.isEnabled
+        self.navigationItem.rightBarButtonItem?.isEnabled = self.measureButton.isEnabled
+        self.segmentControl.isEnabled = self.measureButton.isEnabled
     }
     
     @objc
