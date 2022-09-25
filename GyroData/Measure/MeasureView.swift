@@ -34,25 +34,18 @@ class MeasureView: UIView {
     
     var lineChartView: UIView!
     
-    let measureButton: UIButton = {
-        let button = UIButton()
+    let measureButton: CustomButton = {
+        let button = CustomButton()
         button.setTitle("측정", for: .normal)
         button.setCustom()
         return button
     }()
     
-    let stopButton: UIButton = {
-        let button = UIButton()
+    let stopButton: CustomButton = {
+        let button = CustomButton()
         button.setTitle("정지", for: .normal)
         button.setCustom()
         button.isEnabled = false
-        return button
-    }()
-    //MARK: TEST CODE1
-    let testButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("테스트", for: .normal)
-        button.setCustom()
         return button
     }()
     
@@ -76,8 +69,6 @@ class MeasureView: UIView {
         addSubview(lineChartView)
         addSubview(measureButton)
         addSubview(stopButton)
-        //MARK: TEST CODE2
-        addSubview(testButton)
     }
     
     func setupConstraints() {
@@ -102,11 +93,6 @@ class MeasureView: UIView {
         stopButton.snp.makeConstraints { make in
             make.leading.trailing.equalTo(self.safeAreaLayoutGuide).inset(16)
             make.top.equalTo(measureButton.snp.bottom).offset(20)
-            make.height.equalTo(40)
-        }
-        testButton.snp.makeConstraints { make in
-            make.leading.trailing.equalTo(self.safeAreaLayoutGuide).inset(16)
-            make.top.equalTo(stopButton.snp.bottom).offset(20)
             make.height.equalTo(40)
         }
     }

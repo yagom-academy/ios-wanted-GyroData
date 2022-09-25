@@ -58,9 +58,6 @@ class MeasureViewController: UIViewController {
         navigationItem.rightBarButtonItem?.isEnabled = false
         mainView.measureButton.addTarget(self, action: #selector(measureButtonClicked), for: .touchUpInside)
         mainView.stopButton.addTarget(self, action: #selector(stopButtonClicked), for: .touchUpInside)
-        //MARK: TEST CODE4
-        mainView.testButton.addTarget(self, action: #selector(testButtonClicked), for: .touchUpInside)
-        mainView.segmentControl.addTarget(self, action: #selector(segmentFlag), for: .valueChanged)
     }
     
     // MARK: incomplete
@@ -80,7 +77,9 @@ class MeasureViewController: UIViewController {
         mainView.stopButton.isEnabled = true
         mainView.measureButton.isEnabled = false
         mainView.segmentControl.isEnabled = false
+        navigationItem.rightBarButtonItem?.isEnabled = false
         countDown = 600 //max 60초
+        saveMotionData = []
         
         if graphFlag == 0 {
             MotionManager.shared.startAccelerometerUpdates()
@@ -88,7 +87,7 @@ class MeasureViewController: UIViewController {
         } else {
             MotionManager.shared.startGyroUpdates()
         }
-        
+        self.graphView.reset()
         timer = Timer.scheduledTimer(withTimeInterval: stepDuration
                                      , repeats: true) { [weak self] (timer) in
             guard let self = self else { return }
@@ -136,6 +135,7 @@ class MeasureViewController: UIViewController {
                 }
                 navigationItem.rightBarButtonItem?.isEnabled = false
                 saveMotionData = []
+                self.graphView.reset()
             }
         } catch {
             print(error)
@@ -144,7 +144,6 @@ class MeasureViewController: UIViewController {
     
     func stopMeasure() {
         timer?.invalidate()
-        self.graphView.reset()
         mainView.stopButton.isEnabled = false
         mainView.measureButton.isEnabled = true
         mainView.segmentControl.isEnabled = true
@@ -155,12 +154,5 @@ class MeasureViewController: UIViewController {
         stopMeasure()
     }
     
-    
-    // MARK: TEST CODE3
-    @objc func testButtonClicked() {
-        
-        //startGyroscope()
-        
-    }
     
 }
