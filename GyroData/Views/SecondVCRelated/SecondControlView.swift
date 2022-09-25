@@ -8,6 +8,7 @@
 import UIKit
 
 class SecondControlView: UIView, SecondViewStyling {
+    
     // MARK: UI
     var stackView = UIStackView()
     var measureButton = UIButton()
@@ -55,6 +56,6 @@ extension SecondControlView: Presentable {
     }
     
     func bind() {
-
+        
     }
 }
