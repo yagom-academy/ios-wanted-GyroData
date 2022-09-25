@@ -43,8 +43,6 @@ class CoreDataManager {
         }
     }
  
-    
-    
     @discardableResult
     func insertMeasure(measure: Measure) -> Bool {
         let entity = NSEntityDescription.entity(forEntityName: "GyroModel", in: self.context)

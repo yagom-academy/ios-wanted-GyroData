@@ -9,10 +9,7 @@ import UIKit
 import SnapKit
 
 class MainViewController: UIViewController {
-    //코어데이터 사용예정
     var datasource1 = [Measure]()
-    let test = Measure(title: "test", second: 0.32)
-    let test2 = Measure(title: "haha", second: 0.9999)
     let manager = CoreDataManager.shared
     
     private lazy var tableView: UITableView = {
@@ -32,6 +29,11 @@ class MainViewController: UIViewController {
         addNaviBar()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
+    
     private func setupView() {
         tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: CustomTableViewCell.identifier)
         tableView.delegate = self
@@ -39,15 +41,6 @@ class MainViewController: UIViewController {
     }
     //실행시 기존데이터 로드
     private func loadData() {
-        //왜
-        
-        //        manager.insertMeasure(measure: test)
-        //        manager.insertMeasure(measure: test2)
-        
-        //datasource = CoreDataManager.shared.getCoreData()
-        //        dataSource.append(.init(title: "Accelerometer", second: "43.4", measureDate: "yyyy:mm:dd"))
-        //        dataSource.append(.init(dataTypeLabel: "Accelerometer", valueLabel: "43.4",dateLabel: "yyyy:mm:dd"))
-        //        dataSource.append(.init(dataTypeLabel: "Gyro", valueLabel: "60",dateLabel: "yyyy:mm:dd"))
         tableView.reloadData()
     }
     
@@ -60,14 +53,10 @@ class MainViewController: UIViewController {
     //측정버튼액션
     @objc func measureButton(_ sender: UIBarButtonItem) {
         print("측정버튼")
-        //        let MeasureView = MeasureViewController()
-        //        self.navigationController?.pushViewController(MeasureView, animated: true)
-        //        두번째 뷰컨트롤러에서 데이터 받아오기
-        manager.insertMeasure(measure: test)
-        manager.insertMeasure(measure: test2)
-        manager.fetch()
-        //        datasource = CoreDataManager.shared.getCoreData()
-        print(self.manager.count())
+                let MeasureView = MeasureViewController()
+                self.navigationController?.pushViewController(MeasureView, animated: true)
+//                두번째 뷰컨트롤러에서 데이터 받아오기
+//        manager.fetch()
         tableView.reloadData()
         //
     }
@@ -105,12 +94,7 @@ extension MainViewController: UITableViewDataSource {
             print("delete 클릭 됨")
             // 코어데이터 제거
             self.manager.delete(object: self.manager.fetch()[indexPath.row])
-            //            CoreDataManager.shared.deleteCoreData(self.datasource1[indexPath.row])
-            //            CoreDataManager.shared.saveToContext()
-            //            self.datasource1 = CoreDataManager.shared.getCoreData()
-            print(self.manager.count())
             tableView.reloadData()
-            
             success(true)
         }
         playAction.backgroundColor = .systemGreen

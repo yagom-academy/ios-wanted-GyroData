@@ -7,12 +7,12 @@
 
 import Foundation
 
-
-struct CustomCellModel {
-    var title: String
-    let second: String
-    let measureDate: String
-}
+//
+//struct CustomCellModel {
+//    var title: String
+//    let second: String
+//    let measureDate: String
+//}
 
 
 //struct Notice: Codable, Equatable {

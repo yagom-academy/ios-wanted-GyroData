@@ -7,6 +7,9 @@
 
 import UIKit
 import CoreMotion
+let test = Measure(title: "test", second: 0.32)
+let test2 = Measure(title: "haha", second: 0.9999)
+let manager = CoreDataManager.shared
 
 enum sensorType: Int {
     case acceleration = 0
@@ -36,13 +39,6 @@ class MeasureViewController: UIViewController {
     override func loadView() {
         self.view = mainView
         self.navigationItem.title = "측정하기"
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-       
-      
-
-        // Do any additional setup after loading the view.
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -66,10 +62,13 @@ class MeasureViewController: UIViewController {
         mainView.measureButton.addTarget(self, action: #selector(measureButtonClicked), for: .touchUpInside)
         mainView.stopButton.addTarget(self, action: #selector(stopButtonClicked), for: .touchUpInside)
         mainView.segmentControl.addTarget(self, action: #selector(segmentFlag), for: .valueChanged)
+        
+        
     }
     
     // MARK: incomplete
     @objc func saveButtonClicked() {
+        navigationController?.popToRootViewController(animated: true)
         saveMeasureDataAsJSON()
     }
     
