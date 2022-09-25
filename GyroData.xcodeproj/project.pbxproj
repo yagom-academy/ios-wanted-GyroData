@@ -133,6 +133,7 @@
 			name = Replay;
 			path = "GyroData/View Controllers/Replay";
 			sourceTree = SOURCE_ROOT;
+        };
 		FD67510628DEF4BE00262248 /* Measurement */ = {
 			isa = PBXGroup;
 			children = (
