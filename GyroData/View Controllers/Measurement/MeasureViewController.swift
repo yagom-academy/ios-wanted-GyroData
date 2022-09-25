@@ -49,6 +49,8 @@ final class MeasureViewController: UIViewController {
         return indicator
     }()
     
+    let coreMotionService = CoreMotionService()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavigation()
@@ -107,6 +109,8 @@ final class MeasureViewController: UIViewController {
         stopButton.isEnabled = true
         navigationItem.rightBarButtonItem?.isEnabled = false
         segmentControl.isEnabled = false
+        
+        self.coreMotionService.startMeasurement(of: MotionType(rawValue: segmentControl.selectedSegmentIndex) ?? .acc)
     }
     
     @objc
@@ -115,6 +119,8 @@ final class MeasureViewController: UIViewController {
         stopButton.isEnabled = false
         navigationItem.rightBarButtonItem?.isEnabled = true
         segmentControl.isEnabled = true
+        
+        self.coreMotionService.stopMeasurement(of: MotionType(rawValue: segmentControl.selectedSegmentIndex) ?? .acc)
     }
     
     @objc

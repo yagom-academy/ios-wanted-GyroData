@@ -78,10 +78,6 @@ final class ListViewController: UIViewController {
         }
     }
     
-    private var timer: Timer!
-    private let motion = CMMotionManager()
-    private var isStop: Bool = true
-    
     @objc
     private func didTapMeasureButton() {
         let measureViewController = MeasureViewController()
@@ -95,48 +91,9 @@ final class ListViewController: UIViewController {
         fetchRequest.sortDescriptors = [sortDescriptor]
         do {
             let results = try container.viewContext.fetch(fetchRequest)
-            results.forEach { print(#function, $0.date, $0.x, $0.y, $0.z) }
+            results.forEach { print(#function, String(describing: $0.date), $0.x, $0.y, $0.z) }
         } catch {
             fatalError("Failed to fetch: \(error)")
-        }
-    }
-    
-    private func startAccelerometers() {
-        var timeout = 10 // TODO: 600
-        
-        if self.motion.isAccelerometerAvailable {
-            self.motion.accelerometerUpdateInterval = 6 / 60.0  // 10 Hz
-            self.motion.startAccelerometerUpdates()
-            
-            self.timer = Timer(fire: Date(), interval: 0.1,
-                               repeats: true, block: { (timer) in
-                guard timeout > 0 else {
-                    self.stopAccelerometers()
-                    return
-                }
-                timeout -= 1
-                if let data = self.motion.accelerometerData {
-                    let x = data.acceleration.x
-                    let y = data.acceleration.y
-                    let z = data.acceleration.z
-             
-                    self.detailDataList.append(MotionDetailData(date: Date(), x: x, y: y, z: z))
-                    print(#function, timeout, x, y, z)
-                }
-            })
-            RunLoop.current.add(self.timer!, forMode: .default)
-        }
-    }
-    
-    @objc func didTapStopButton() {
-        stopAccelerometers()
-    }
-    
-    private func stopAccelerometers() {
-        if timer != nil {
-            self.timer.invalidate()
-            timer = nil
-            self.motion.stopAccelerometerUpdates()
         }
     }
     
@@ -158,48 +115,6 @@ final class ListViewController: UIViewController {
             data.z = detailData.z
             
             (UIApplication.shared.delegate as! AppDelegate).saveContext()
-        }
-    }
-    
-    func startGyros() {
-        
-        if motion.isGyroAvailable {
-            var timeout = 10
-            
-            self.motion.gyroUpdateInterval = 10.0 / 60.0
-            self.motion.startGyroUpdates()
-            
-            // Configure a timer to fetch the accelerometer data.
-            self.timer = Timer(fire: Date(), interval: 0.1,
-                               repeats: true, block: { (timer) in
-                // Get the gyro data.
-                
-                if timeout > 0 {
-                    timeout -= 1
-                    if let data = self.motion.gyroData {
-                        let x = data.rotationRate.x
-                        let y = data.rotationRate.y
-                        let z = data.rotationRate.z
-                        print(#line, x, y, z)
-                    }
-                    // Use the gyroscope data in your app.
-                } else {
-                    self.stopGyros()
-                }
-            })
-            // Add the timer to the current run loop.
-            RunLoop.current.add(self.timer!, forMode: .default)
-        }
-    }
-    
-    func stopGyros() {
-        
-        if self.timer != nil {
-            self.timer?.invalidate()
-            self.timer = nil
-            
-            self.motion.stopGyroUpdates()
-            
         }
     }
 }
