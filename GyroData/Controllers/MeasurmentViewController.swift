@@ -109,7 +109,7 @@ class MeasurmentViewController: UIViewController {
                 alert.addAction(cancel)
                 present(alert, animated: true, completion: nil)
             } else {
-                DataManager.shared.addNewSave(name, Float(time)!, xData, yData: yData, zData: zData)
+                DataManager.shared.addNewSave(name, Float(time) ?? 0, xData, yData: yData, zData: zData)
                 xData.removeAll(keepingCapacity: false)
                 yData.removeAll(keepingCapacity: false)
                 zData.removeAll(keepingCapacity: false)

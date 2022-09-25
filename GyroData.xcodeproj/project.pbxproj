@@ -16,7 +16,7 @@
 		F8493CD428D9984D000A12F2 /* MeasurmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8493CD328D9984D000A12F2 /* MeasurmentViewController.swift */; };
 		F8493CD628D9986F000A12F2 /* ReplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8493CD528D9986F000A12F2 /* ReplayViewController.swift */; };
 		F86BCAA828DF3BDA0094DAC4 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86BCAA728DF3BDA0094DAC4 /* TableViewCell.swift */; };
-		F86BCAAA28DF3BE20094DAC4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86BCAA928DF3BE20094DAC4 /* ViewController.swift */; };
+		F86BCAAA28DF3BE20094DAC4 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86BCAA928DF3BE20094DAC4 /* ListViewController.swift */; };
 		F86BCAB028DF44E00094DAC4 /* GyroExample.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F86BCAAE28DF44E00094DAC4 /* GyroExample.xcdatamodeld */; };
 		F8FE9AAB28DDDE21008E5569 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FE9AAA28DDDE21008E5569 /* DataManager.swift */; };
 /* End PBXBuildFile section */
@@ -33,7 +33,7 @@
 		F8493CD328D9984D000A12F2 /* MeasurmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurmentViewController.swift; sourceTree = "<group>"; };
 		F8493CD528D9986F000A12F2 /* ReplayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplayViewController.swift; sourceTree = "<group>"; };
 		F86BCAA728DF3BDA0094DAC4 /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
-		F86BCAA928DF3BE20094DAC4 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F86BCAA928DF3BE20094DAC4 /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		F86BCAAF28DF44E00094DAC4 /* GyroExample.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GyroExample.xcdatamodel; sourceTree = "<group>"; };
 		F8FE9AAA28DDDE21008E5569 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -94,7 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				F86BCAA628DF3BB90094DAC4 /* Cell */,
-				F86BCAA928DF3BE20094DAC4 /* ViewController.swift */,
+				F86BCAA928DF3BE20094DAC4 /* ListViewController.swift */,
 				F8493CD328D9984D000A12F2 /* MeasurmentViewController.swift */,
 				F8493CD528D9986F000A12F2 /* ReplayViewController.swift */,
 			);
@@ -191,7 +191,7 @@
 				F8493CD628D9986F000A12F2 /* ReplayViewController.swift in Sources */,
 				F83215AD28DDDB17000C35E6 /* CommonUIModule.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
-				F86BCAAA28DF3BE20094DAC4 /* ViewController.swift in Sources */,
+				F86BCAAA28DF3BE20094DAC4 /* ListViewController.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
 				F86BCAA828DF3BDA0094DAC4 /* TableViewCell.swift in Sources */,
 				F86BCAB028DF44E00094DAC4 /* GyroExample.xcdatamodeld in Sources */,
@@ -335,7 +335,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = AH24YSXN5M;
+				DEVELOPMENT_TEAM = 6923PJ958M;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GyroData/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -347,7 +347,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.GyroData;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hem2.nettomboy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -362,7 +362,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = AH24YSXN5M;
+				DEVELOPMENT_TEAM = 6923PJ958M;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GyroData/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -374,7 +374,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.GyroData;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hem2.nettomboy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
