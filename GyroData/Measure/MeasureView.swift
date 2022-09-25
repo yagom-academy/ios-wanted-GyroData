@@ -45,6 +45,7 @@ class MeasureView: UIView {
         let button = UIButton()
         button.setTitle("정지", for: .normal)
         button.setCustom()
+        button.isEnabled = false
         return button
     }()
     //MARK: TEST CODE1

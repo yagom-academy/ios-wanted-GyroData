@@ -8,6 +8,10 @@
 import UIKit
 import CoreMotion
 
+struct MotionData: Codable {
+    let coodinate: [Double]
+}
+
 class MeasureViewController: UIViewController {
     
     let mainView = MeasureView()
@@ -22,6 +26,7 @@ class MeasureViewController: UIViewController {
     var cBuffer = GraphBuffer(count: 100)
     var countDown = 0
     var graphFlag = 0
+    var saveMotionData: [MotionData] = []
     
     override func loadView() {
         self.view = mainView
@@ -44,7 +49,7 @@ class MeasureViewController: UIViewController {
     
     func setup() {
         mainView.segmentControl.selectedSegmentIndex = 0
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "측정", style: .plain, target: self, action: #selector(saveAction))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(saveAction))
         mainView.measureButton.addTarget(self, action: #selector(measureButtonClicked), for: .touchUpInside)
         mainView.stopButton.addTarget(self, action: #selector(stopButtonClicked), for: .touchUpInside)
         //MARK: TEST CODE4
@@ -66,7 +71,9 @@ class MeasureViewController: UIViewController {
         print("측정")
         graphView.maxValue = 1
         graphView.minValue = -1
+        mainView.stopButton.isEnabled = true
         mainView.measureButton.isEnabled = false
+        mainView.segmentControl.isEnabled = false
         countDown = 600 //max 60초
         
         if graphFlag == 0 {
@@ -90,19 +97,41 @@ class MeasureViewController: UIViewController {
                 motionData = [data.x, data.y, data.z]
                 //print("자이로: [x:\(data.x), y:\(data.y), z:\(data.z)]")
             }
+            //데이터를 배열에 저장해둔다
+            self.saveMotionData.append(MotionData(coodinate: [motionData[0],motionData[1],motionData[2]]))
             self.graphView.animateNewValue(aValue: motionData[0], bValue: motionData[1], cValue: motionData[2], duration: self.stepDuration)
             self.countDown -= 1
             if self.countDown <= 0 {
-                timer.invalidate()
+                self.stopMeasure()
             }
         }
         
     }
     
-    @objc func stopButtonClicked() {
+    func saveMeasureDataAsJSON() {
+        
+        do {
+            let encoder = JSONEncoder()
+            let data = try encoder.encode(self.saveMotionData)
+            if let jsonString = String(data: data, encoding: .utf8) {
+                print(jsonString)
+            }
+        } catch {
+            print(error)
+        }
+    }
+    
+    func stopMeasure() {
         timer?.invalidate()
         self.graphView.reset()
+        mainView.stopButton.isEnabled = false
         mainView.measureButton.isEnabled = true
+        mainView.segmentControl.isEnabled = true
+        saveMeasureDataAsJSON()
+    }
+    
+    @objc func stopButtonClicked() {
+        stopMeasure()
     }
     
     
