@@ -12,26 +12,16 @@ class ReplayViewController: UIViewController {
 
     let graphViewMaker = GraphViewMaker.shared
     
-    // TEST
-    var xValue: Float = 0.0
-    var yValue: Float = 0.0
-    var ySubValue: Float = 0.0
-    var zValue: Float = 0.0
-    
-    /// 그래프 뷰의 Height
-    let graphViewHeight: CGFloat = 280.0
-    
-    /// 그래프 뷰의 Width
-    let graphViewWidth: CGFloat = 280.0
-    
-    /// 1개의 데이터가 차지할 width
-    var blockWidth: CGFloat = 0.0
-
-    /// 그래프 기준점
-    var graphBaseHeight: CGFloat = 0.0
-    
     /// 그래프 뷰
-    lazy var graphView = graphViewMaker.graphView
+    lazy var graphView = graphViewMaker.replayGraphView
+    
+    var safeArea: UILayoutGuide?
+    
+    var xData = [Float]()
+    var yData = [Float]()
+    var zData = [Float]()
+    
+    var data: Save?
     
     /**
         세번째 페이지의 타입을 정하는 변수
@@ -41,8 +31,6 @@ class ReplayViewController: UIViewController {
         - 기본값 "Play"
      */
     var pageType: String = "View"
-    
-    var timestamp: String = "ex)2022/09/12 12:33:02"
     
     /// 센서 측정 시작 버튼
     lazy var playButton: UIButton = {
@@ -113,53 +101,61 @@ class ReplayViewController: UIViewController {
         super.viewDidLoad()
         
         graphViewMaker.delegate = self
-        
+
         // MARK: UI Set
         self.view.backgroundColor = .white
         self.navigationItem.title = "다시보기"
         self.navigationController?.navigationBar.tintColor = .black
+
         self.titleLabel.text = self.pageType
-        self.timestampLabel.text = self.timestamp
+        self.timestampLabel.text = CommonUIModule().dateFormatter.string(from:  data!.date!)
+        graphViewMaker.data = data!
         
         // safeArea
-        let safeArea = self.view.safeAreaLayoutGuide
-        
+        safeArea = self.view.safeAreaLayoutGuide
+
         // 측정 시간, 타이틀
         self.view.addSubview(headerStackView)
         headerStackView.addArrangedSubview(timestampLabel)
         headerStackView.addArrangedSubview(titleLabel)
         timestampLabel.heightAnchor.constraint(equalTo: titleLabel.heightAnchor).isActive = true
-        
+
         headerStackView.translatesAutoresizingMaskIntoConstraints = false
-        headerStackView.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 10).isActive = true
-        headerStackView.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor).isActive = true
+        headerStackView.topAnchor.constraint(equalTo: safeArea!.topAnchor, constant: 10).isActive = true
+        headerStackView.centerXAnchor.constraint(equalTo: safeArea!.centerXAnchor).isActive = true
+        headerStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
+        headerStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
         headerStackView.heightAnchor.constraint(equalToConstant: 60).isActive = true
-        headerStackView.widthAnchor.constraint(equalToConstant: graphViewWidth).isActive = true
-        
-        // 그래프 뷰
-        self.view.addSubview(graphView)
+
+        self.view.addSubview(graphViewMaker.replayView)
+        graphViewMaker.replayView.translatesAutoresizingMaskIntoConstraints = false
+        graphViewMaker.replayView.topAnchor.constraint(equalTo: headerStackView.bottomAnchor, constant: 30).isActive = true
+        graphViewMaker.replayView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        graphViewMaker.replayView.widthAnchor.constraint(equalTo: headerStackView.widthAnchor).isActive = true
+        graphViewMaker.replayView.heightAnchor.constraint(equalToConstant: graphViewMaker.graphViewHeight).isActive = true
+
+        graphViewMaker.replayView.addSubview(graphView)
         graphView.translatesAutoresizingMaskIntoConstraints = false
-        graphView.topAnchor.constraint(equalTo: headerStackView.bottomAnchor, constant: 30).isActive = true
-        graphView.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor).isActive = true
-        graphView.heightAnchor.constraint(equalToConstant: graphViewHeight).isActive = true
-        graphView.widthAnchor.constraint(equalToConstant: graphViewWidth).isActive = true
+        graphView.topAnchor.constraint(equalTo: graphViewMaker.replayView.topAnchor, constant: 5).isActive = true
+        graphView.leadingAnchor.constraint(equalTo: graphViewMaker.replayView.leadingAnchor, constant: 5).isActive = true
+        graphView.trailingAnchor.constraint(equalTo: graphViewMaker.replayView.trailingAnchor, constant: -5).isActive = true
+        graphView.bottomAnchor.constraint(equalTo: graphViewMaker.replayView.bottomAnchor, constant: -5).isActive = true
 
         // 좌표값 display
-        let offsetPannelStackView = graphViewMaker.OffsetPannelStackView
-        graphView.addSubview(offsetPannelStackView)
-        offsetPannelStackView.translatesAutoresizingMaskIntoConstraints = false
-        offsetPannelStackView.topAnchor.constraint(equalTo: graphView.topAnchor, constant: 5).isActive = true
-        offsetPannelStackView.centerXAnchor.constraint(equalTo: graphView.centerXAnchor).isActive = true
-        offsetPannelStackView.widthAnchor.constraint(equalToConstant: graphViewWidth - 20).isActive = true
+        graphView.addSubview(graphViewMaker.OffsetPannelStackView)
+        graphViewMaker.OffsetPannelStackView.translatesAutoresizingMaskIntoConstraints = false
+        graphViewMaker.OffsetPannelStackView.topAnchor.constraint(equalTo: graphView.topAnchor, constant: 10).isActive = true
+        graphViewMaker.OffsetPannelStackView.centerXAnchor.constraint(equalTo: graphView.centerXAnchor).isActive = true
+        graphViewMaker.OffsetPannelStackView.widthAnchor.constraint(equalToConstant: graphViewMaker.graphViewWidth).isActive = true
         
         if self.pageType == "Play" {
             // 재생, 정지, 기록시간
             self.view.addSubview(playPannelStackView)
             playPannelStackView.translatesAutoresizingMaskIntoConstraints = false
             playPannelStackView.topAnchor.constraint(equalTo: graphView.bottomAnchor, constant: 20).isActive = true
-            playPannelStackView.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor).isActive = true
+            playPannelStackView.centerXAnchor.constraint(equalTo: safeArea!.centerXAnchor).isActive = true
             playPannelStackView.heightAnchor.constraint(equalToConstant: 60).isActive = true
-            playPannelStackView.widthAnchor.constraint(equalToConstant: graphViewWidth).isActive = true
+            playPannelStackView.widthAnchor.constraint(equalToConstant: graphViewMaker.graphViewWidth).isActive = true
             playPannelStackView.addArrangedSubview(invisibleBlock)
             playPannelStackView.addArrangedSubview(playButton)
             playPannelStackView.addArrangedSubview(stopButton)
@@ -171,7 +167,11 @@ class ReplayViewController: UIViewController {
             playButton.isHidden = graphViewMaker.isRunning
         } else {
             // 전체 데이터 한번에
-            graphViewMaker.play(animated: false)
+            DispatchQueue.main.async() {
+                self.graphViewMaker.graphViewWidth = self.graphView.bounds.width
+//                self.graphViewMaker.graphViewHeight = self.graphView.bounds.height
+                self.graphViewMaker.play(animated: false)
+            }
         }
     }
     
@@ -187,6 +187,8 @@ class ReplayViewController: UIViewController {
         재생 시작 버튼
      */
     @objc func playButtonPressed() {
+        graphViewMaker.graphViewWidth = graphView.bounds.width - 10
+//        graphViewMaker.graphViewHeight = graphView.bounds.height
         graphViewMaker.play(animated: true)
     }
     
@@ -206,17 +208,18 @@ class ReplayViewController: UIViewController {
 extension ReplayViewController: GraphViewMakerDelegate {
     func graphViewDidEnd() {
         // timer is invalidated
+        print("재생 정지")
         changeStatus()
     }
     
     func graphViewDidPlay() {
         // timer is fire
+        print("재생 시작")
         changeStatus()
     }
     
-    func graphViewDidUpdate(interval: Float, x: Float, y: Float, z: Float) {
+    func graphViewDidUpdate(interval: String, x: Float, y: Float, z: Float) {
 //        print("interval: \(interval)")
-//        print("x: \(x) y: \(y) z: \(z)")
-        timeLabel.text = String(format: "%0.1f", arguments: [interval])
+        timeLabel.text = interval
     }
 }
