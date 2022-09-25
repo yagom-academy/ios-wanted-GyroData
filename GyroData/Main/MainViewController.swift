@@ -39,6 +39,7 @@ class MainViewController: UIViewController {
     }
     //실행시 기존데이터 로드
     private func loadData() {
+        //왜
         
         //        manager.insertMeasure(measure: test)
         //        manager.insertMeasure(measure: test2)
