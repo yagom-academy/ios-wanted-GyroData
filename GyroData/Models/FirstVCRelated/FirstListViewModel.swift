@@ -11,6 +11,7 @@ class FirstListViewModel {
     // MARK: Input
     var didSelectRow: (Int) -> () = { indexPathRow in }
     var didSelectPlayAction: (Int) -> () = { indexPathRow in }
+    var didReceiveMotionTasks: ([MotionTask]) -> () = { motionTasks in }
     
     // MARK: Output
     var propagateDidSelectRowEvent: (MotionTask) -> () = { motion in }
@@ -18,6 +19,7 @@ class FirstListViewModel {
     var motionDatas: [MotionTask] {
         return _motionDatas
     }
+    var didReceiveViewModel: ( ((Void)) -> () )?
     
     // MARK: Properties
     private var _motionDatas: [MotionTask]
@@ -40,5 +42,13 @@ class FirstListViewModel {
             let motion = self._motionDatas[indexPathRow]
             self.propagateDidSelectPlayActionEvent(motion)
         }
+        didReceiveMotionTasks = { [weak self] motionTasks in
+            self?.populateData(result: motionTasks)
+            self?.didReceiveViewModel?(())
+        }
+    }
+    
+    private func populateData(result: [MotionTask]) {
+        self._motionDatas = result
     }
 }

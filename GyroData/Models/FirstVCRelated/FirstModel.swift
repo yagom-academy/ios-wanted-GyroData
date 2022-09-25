@@ -21,14 +21,15 @@ class FirstModel {
     //properties
     private var privateFirstListViewModel: FirstListViewModel
     private var repository: RepositoryProtocol
+    var motionDatas = [MotionTask]()
     
     init(repository: RepositoryProtocol) {
         self.repository = repository
-        // Repository 구현이 끝나면 아래 부분을 Repository에서 MotionTask 배열을 가져오는 방식으로 구현할 예정입니다.
-        var motionDatas = [MotionTask]()
-        for _ in 0..<50 {
-            motionDatas.append(DummyGenerator.getDummyMotionData())
-        }
+        // Test 데이터
+//        for _ in 0..<10 {
+//            CoreDataManager.shared.insertMotionTask(motion: DummyGenerator.getDummyMotionData())
+//        }
+        
         // -----
         self.privateFirstListViewModel = FirstListViewModel(motionDatas)
         bind()
@@ -57,6 +58,10 @@ class FirstModel {
     }
     
     func populateData() {
-        
+        Task {
+            self.repository.fetchFromCoreData { [weak self] motionTasks in
+                self?.privateFirstListViewModel.didReceiveMotionTasks(motionTasks)
+            }
+        }
     }
 }

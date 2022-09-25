@@ -54,7 +54,11 @@ extension FirstListView: Presentable {
     }
     
     func bind() {
-        
+        viewModel.didReceiveViewModel = { [weak self] _ in
+            DispatchQueue.main.async {
+                self?.tableView.reloadData()
+            }
+        }
     }
 }
 
