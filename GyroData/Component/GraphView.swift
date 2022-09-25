@@ -74,9 +74,9 @@ class GraphView: UIView {
     
     //그래프 속성 설정
     func doInitSetup() {
-        designLayer(xLayer, color: .yellow)
-        designLayer(yLayer, color: .blue)
-        designLayer(zLayer, color: .black)
+        designLayer(xLayer, color: .red)
+        designLayer(yLayer, color: .green)
+        designLayer(zLayer, color: .blue)
     }
     
     private func designLayer(_ layer: CAShapeLayer, color: UIColor) {
@@ -164,7 +164,6 @@ class GraphView: UIView {
             if !graphSwipeAnimation && bounds.width <= x {
                 graphSwipeAnimation = true
             }
-            print("22")
             let aY = yForValue(value, yInterval)
             let bY = yForValue(bPoint.nextItems()[idx], yInterval)
             let cY = yForValue(cPoint.nextItems()[idx], yInterval)
@@ -216,7 +215,6 @@ class GraphView: UIView {
                 minValue = value + (value * 0.2)
             }
         }
-        print("11")
 
     }
 }

@@ -70,7 +70,8 @@ class MeasureView: UIView {
         backgroundColor = .white
         addSubview(segmentControl)
         lineChartView = GraphView()
-        lineChartView.backgroundColor = .green
+        //lineChartView.backgroundColor = .gray
+        lineChartView.layer.borderWidth = 1
         addSubview(lineChartView)
         addSubview(measureButton)
         addSubview(stopButton)
