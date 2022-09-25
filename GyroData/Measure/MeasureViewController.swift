@@ -36,13 +36,6 @@ class MeasureViewController: UIViewController {
     override func loadView() {
         self.view = mainView
         self.navigationItem.title = "측정하기"
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-       
-      
-
-        // Do any additional setup after loading the view.
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -70,6 +63,7 @@ class MeasureViewController: UIViewController {
     
     // MARK: incomplete
     @objc func saveButtonClicked() {
+        self.navigationController?.popViewController(animated: true)
         saveMeasureDataAsJSON()
     }
     

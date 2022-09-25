@@ -18,10 +18,6 @@ class ReplayViewController: UIViewController {
         didSet {
             timerLabel.text = String(format: "%.1f", startTime)
         }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
     }
     
     var sensorData: CGFloat = 0.0
@@ -204,6 +200,3 @@ class ReplayViewController: UIViewController {
 //        }
     }
 }
-
-
-

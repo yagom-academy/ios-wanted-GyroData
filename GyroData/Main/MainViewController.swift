@@ -31,6 +31,9 @@ class MainViewController: UIViewController {
         loadData()
         addNaviBar()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        tableView.reloadData()
+    }
     
     private func setupView() {
         tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: CustomTableViewCell.identifier)
@@ -39,15 +42,7 @@ class MainViewController: UIViewController {
     }
     //실행시 기존데이터 로드
     private func loadData() {
-        //왜
-        
-        //        manager.insertMeasure(measure: test)
-        //        manager.insertMeasure(measure: test2)
-        
-        //datasource = CoreDataManager.shared.getCoreData()
-        //        dataSource.append(.init(title: "Accelerometer", second: "43.4", measureDate: "yyyy:mm:dd"))
-        //        dataSource.append(.init(dataTypeLabel: "Accelerometer", valueLabel: "43.4",dateLabel: "yyyy:mm:dd"))
-        //        dataSource.append(.init(dataTypeLabel: "Gyro", valueLabel: "60",dateLabel: "yyyy:mm:dd"))
+  
         tableView.reloadData()
     }
     
@@ -60,14 +55,14 @@ class MainViewController: UIViewController {
     //측정버튼액션
     @objc func measureButton(_ sender: UIBarButtonItem) {
         print("측정버튼")
-        //        let MeasureView = MeasureViewController()
-        //        self.navigationController?.pushViewController(MeasureView, animated: true)
+                let MeasureView = MeasureViewController()
+                self.navigationController?.pushViewController(MeasureView, animated: true)
         //        두번째 뷰컨트롤러에서 데이터 받아오기
-        manager.insertMeasure(measure: test)
-        manager.insertMeasure(measure: test2)
-        manager.fetch()
+//        manager.insertMeasure(measure: test)
+//        manager.insertMeasure(measure: test2)
+//        manager.fetch()
         //        datasource = CoreDataManager.shared.getCoreData()
-        print(self.manager.count())
+//        print(self.manager.count())
         tableView.reloadData()
         //
     }
@@ -105,9 +100,6 @@ extension MainViewController: UITableViewDataSource {
             print("delete 클릭 됨")
             // 코어데이터 제거
             self.manager.delete(object: self.manager.fetch()[indexPath.row])
-            //            CoreDataManager.shared.deleteCoreData(self.datasource1[indexPath.row])
-            //            CoreDataManager.shared.saveToContext()
-            //            self.datasource1 = CoreDataManager.shared.getCoreData()
             print(self.manager.count())
             tableView.reloadData()
             
