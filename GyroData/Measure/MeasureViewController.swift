@@ -8,6 +8,11 @@
 import UIKit
 import CoreMotion
 
+enum sensorType: Int {
+    case acceleration = 0
+    case gyroscope = 1
+}
+
 struct MotionData: Codable {
     let coodinate: [Double]
 }
@@ -24,7 +29,7 @@ class MeasureViewController: UIViewController {
     var aBuffer = GraphBuffer(count: 100)
     var bBuffer = GraphBuffer(count: 100)
     var cBuffer = GraphBuffer(count: 100)
-    var countDown = 0
+    var countDown: Double = 0.0
     var graphFlag = 0
     var saveMotionData: [MotionData] = []
     
@@ -49,7 +54,8 @@ class MeasureViewController: UIViewController {
     
     func setup() {
         mainView.segmentControl.selectedSegmentIndex = 0
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(saveAction))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(saveButtonClicked))
+        navigationItem.rightBarButtonItem?.isEnabled = false
         mainView.measureButton.addTarget(self, action: #selector(measureButtonClicked), for: .touchUpInside)
         mainView.stopButton.addTarget(self, action: #selector(stopButtonClicked), for: .touchUpInside)
         //MARK: TEST CODE4
@@ -58,8 +64,8 @@ class MeasureViewController: UIViewController {
     }
     
     // MARK: incomplete
-    @objc func saveAction() {
-        print("저장")
+    @objc func saveButtonClicked() {
+        saveMeasureDataAsJSON()
     }
     
     @objc func segmentFlag(_ sender: UISegmentedControl) {
@@ -110,11 +116,26 @@ class MeasureViewController: UIViewController {
     
     func saveMeasureDataAsJSON() {
         
+        let manager = CoreDataManager.shared
+        let coverData = Measure(title: "\(sensorType(rawValue: graphFlag)!)", second: (600.0 - self.countDown)/10)
+        
         do {
             let encoder = JSONEncoder()
             let data = try encoder.encode(self.saveMotionData)
             if let jsonString = String(data: data, encoding: .utf8) {
-                print(jsonString)
+                let result = MeasureFileManager.shared.saveFile(jsonString, coverData)
+                if !result {
+                    print("저장 실패 File Manager Error")
+                    return
+                } else {
+                    let result = manager.insertMeasure(measure: coverData)
+                    if !result {
+                        print("저장 실패 Core Data error")
+                        return
+                    }
+                }
+                navigationItem.rightBarButtonItem?.isEnabled = false
+                saveMotionData = []
             }
         } catch {
             print(error)
@@ -127,7 +148,7 @@ class MeasureViewController: UIViewController {
         mainView.stopButton.isEnabled = false
         mainView.measureButton.isEnabled = true
         mainView.segmentControl.isEnabled = true
-        saveMeasureDataAsJSON()
+        navigationItem.rightBarButtonItem?.isEnabled = true
     }
     
     @objc func stopButtonClicked() {
@@ -141,5 +162,5 @@ class MeasureViewController: UIViewController {
         //startGyroscope()
         
     }
-
+    
 }

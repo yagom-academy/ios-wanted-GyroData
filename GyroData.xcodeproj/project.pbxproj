@@ -10,6 +10,7 @@
 		0B15BAF828DAE6A500AC20E6 /* MeasureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B15BAF728DAE6A500AC20E6 /* MeasureView.swift */; };
 		0B15BB1128DCE4B700AC20E6 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B15BB1028DCE4B700AC20E6 /* GraphView.swift */; };
 		0B15C05C28DFBBD2000B68BB /* MotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B15C05B28DFBBD2000B68BB /* MotionManager.swift */; };
+		0B15C05F28E00215000B68BB /* MeasureFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B15C05E28E00215000B68BB /* MeasureFileManager.swift */; };
 		63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB428D44FC400C53A39 /* AppDelegate.swift */; };
 		63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB628D44FC400C53A39 /* SceneDelegate.swift */; };
 		63F01BB928D44FC400C53A39 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB828D44FC400C53A39 /* MainViewController.swift */; };
@@ -29,6 +30,7 @@
 		0B15BAF728DAE6A500AC20E6 /* MeasureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureView.swift; sourceTree = "<group>"; };
 		0B15BB1028DCE4B700AC20E6 /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		0B15C05B28DFBBD2000B68BB /* MotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionManager.swift; sourceTree = "<group>"; };
+		0B15C05E28E00215000B68BB /* MeasureFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureFileManager.swift; sourceTree = "<group>"; };
 		63F01BB128D44FC400C53A39 /* GyroData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GyroData.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63F01BB428D44FC400C53A39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63F01BB628D44FC400C53A39 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -65,6 +67,14 @@
 			path = CMMotion;
 			sourceTree = "<group>";
 		};
+		0B15C05D28E001DA000B68BB /* FileManager */ = {
+			isa = PBXGroup;
+			children = (
+				0B15C05E28E00215000B68BB /* MeasureFileManager.swift */,
+			);
+			path = FileManager;
+			sourceTree = "<group>";
+		};
 		63F01BA828D44FC400C53A39 = {
 			isa = PBXGroup;
 			children = (
@@ -91,6 +101,7 @@
 				6C78FB3028DA931D001CAE3B /* Replay */,
 				6CFBD85128DEF259002380A4 /* CoreData */,
 				63F01BC228D44FC500C53A39 /* Info.plist */,
+				0B15C05D28E001DA000B68BB /* FileManager */,
 				0B15C05A28DFBB96000B68BB /* CMMotion */,
 				6C78FB2E28DA90C2001CAE3B /* Design */,
 				6C67A2E828DADAE300DE6704 /* Extension */,
@@ -255,6 +266,7 @@
 				6CFBD85428DEF2A4002380A4 /* GyroModel.xcdatamodeld in Sources */,
 				6CFBD87B28DEF375002380A4 /* CoreDataManager.swift in Sources */,
 				6C78FB3228DAA871001CAE3B /* MeasureViewController.swift in Sources */,
+				0B15C05F28E00215000B68BB /* MeasureFileManager.swift in Sources */,
 				0B15BB1128DCE4B700AC20E6 /* GraphView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
