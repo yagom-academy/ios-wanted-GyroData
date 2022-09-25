@@ -25,7 +25,6 @@ class MeasureView: UIView {
         control.translatesAutoresizingMaskIntoConstraints = false
         return control
     }()
-
     
 //    let lineChartView: UIView = {
 //        let view = UIView()

@@ -18,6 +18,7 @@ class CustomTableViewCell: UITableViewCell {
         stackView.snp.makeConstraints { (make) in
             make.left.bottom.right.top.equalTo(contentView)
         }
+        
         return stackView
     }()
     
@@ -47,7 +48,6 @@ class CustomTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been impl")
     }
-    
     private func addContentView() {
         stackView.addSubview(title)
         stackView.addSubview(second)
@@ -61,8 +61,11 @@ class CustomTableViewCell: UITableViewCell {
         title.snp.makeConstraints { make in
             make.bottom.equalTo(stackView.snp.bottom)
             make.leading.equalTo(measureDate)
+//            make.top.equalTo(dateLabel.snp.bottom).offset(3)
+//            make.bottom.equalTo(stackView.snp.bottom)
         }
         second.snp.makeConstraints { make in
+//            make.top.equalTo(stackView.snp.top).offset(10)
             make.trailing.equalTo(stackView.snp.trailing).offset(1)
         }
     }
@@ -73,6 +76,16 @@ extension CustomTableViewCell {
         measureDate.text = model.measureDate
         second.text = "\(model.second)"
         title.text = model.title
+    }
+    
+    public func bind(model: CustomCellModel) {
+        
+        measureDate.text = model.measureDate
+        second.text = model.second
+        title.text = model.title
+//        dataTypeLabel.text = model.dataTypeLabel
+//        valueLabel.text = model.valueLabel
+//        dateLabel.text = model.dateLabel
     }
 }
 
