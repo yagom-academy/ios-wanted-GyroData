@@ -9,13 +9,18 @@ import Foundation
 import CoreData
 
 //UnitTest시 Repository 실제 클래스를 사용하면 안될것 같으므로(MockRepository를 만들어서 유닛테스트를 돌려야 하므로) 프로토콜을 추가함
-protocol RepositoryProtocol { }
+protocol RepositoryProtocol: CoreDataRepositoryProtocol { }
 
 // CoreData 와 통신하는 repository 가 들고 있는 프로토콜
-protocol CoreDataRepositoryInterface {
-    func fetchFromCoreData() -> Result<[Motion], Error>
+protocol CoreDataRepositoryProtocol {
+    func fetchFromCoreData(completion: @escaping ([MotionTask]) -> Void)
     func insertToCoreData(motion: MotionTask) -> Result<Bool, Error>
     func delete(motion: Motion) -> Result<Bool, Error>
+}
+
+protocol FileManagerRepositoryProtocol {
+    func fetchFromFileManager(completion: @escaping ([MotionFile]) -> Void)
+    func saveToFileManager(file: MotionFile)
 }
 
 //이 클래스가 들고 있는 어떠한 클래스가 자이로 데이터를 계산, 갱신 하게 하고
@@ -29,9 +34,21 @@ class Repository: RepositoryProtocol {
     }
 }
 
-extension Repository: CoreDataRepositoryInterface {
-    func fetchFromCoreData() -> Result<[Motion], Error> {
-        return CoreDataManager.shared.fetch(request: self.coreDataRequest)
+extension Repository: CoreDataRepositoryProtocol {
+    func fetchFromCoreData(completion: @escaping ([MotionTask]) -> Void) {
+        var motionTasks: [MotionTask] = []
+        let fetchResult = CoreDataManager.shared.fetchMotionTasks()
+        
+        switch fetchResult {
+        case .success(let motions):
+            motions.forEach { motionTasks.append(MotionTask(type: $0.type ?? "", time: $0.time , date: $0.date ?? Date(), path: $0.path ?? "")) }
+            DispatchQueue.main.async {
+                completion(motionTasks)
+            }
+        
+        case .failure(let error):
+            print(error.localizedDescription)
+        }
     }
     
     func insertToCoreData(motion: MotionTask) -> Result<Bool, Error> {
