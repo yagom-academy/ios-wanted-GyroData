@@ -14,8 +14,8 @@ protocol RepositoryProtocol: CoreDataRepositoryProtocol { }
 // CoreData 와 통신하는 repository 가 들고 있는 프로토콜
 protocol CoreDataRepositoryProtocol {
     func fetchFromCoreData() async throws -> [MotionTask]
-    func insertToCoreData(motion: MotionTask) -> Result<Bool, Error>
-    func delete(motion: Motion) -> Result<Bool, Error>
+    func insertToCoreData(motion: MotionTask) async throws -> Bool
+    func delete(motion: Motion) async throws -> Bool
 }
 
 protocol FileManagerRepositoryProtocol {
@@ -45,11 +45,13 @@ extension Repository: CoreDataRepositoryProtocol {
         return result
     }
     
-    func insertToCoreData(motion: MotionTask) -> Result<Bool, Error> {
-        return CoreDataManager.shared.insertMotionTask(motion: motion)
+    func insertToCoreData(motion: MotionTask) async throws -> Bool {
+        let result = try await CoreDataManager.shared.insertMotionTask(motion: motion)
+        return result
     }
     
-    func delete(motion: Motion) -> Result<Bool, Error> {
-        return CoreDataManager.shared.delete(object: motion)
+    func delete(motion: Motion) async throws -> Bool {
+        let result = try await CoreDataManager.shared.delete(object: motion)
+        return result
     }
 }

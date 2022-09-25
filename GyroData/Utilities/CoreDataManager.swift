@@ -11,6 +11,7 @@ import CoreData
 enum CoreDataError: Error {
     case fetchError
     case insertError
+    case entityError
     case deleteError
 }
 
@@ -43,7 +44,7 @@ class CoreDataManager {
     }
     
     @discardableResult
-    func insertMotionTask(motion: MotionTask) -> Result<Bool, Error> {
+    func insertMotionTask(motion: MotionTask) async throws -> Bool {
         let entity = NSEntityDescription.entity(forEntityName: "Motion", in: self.context)
         
         if let entity = entity {
@@ -56,25 +57,24 @@ class CoreDataManager {
             
             do {
                 try self.context.save()
-                return .success(true)
+                return true
             } catch {
                 // MARK: save 실패할 경우 에러 처리
-                print(error.localizedDescription)
-                return .failure(error)
+                throw CoreDataError.insertError
             }
         } else {
-            return .success(false)
+            throw CoreDataError.entityError
         }
     }
     
     @discardableResult
-    func delete(object: NSManagedObject) -> Result<Bool, Error> {
+    func delete(object: NSManagedObject) async throws -> Bool {
         self.context.delete(object)
         do {
             try context.save()
-            return .success(true)
+            return true
         } catch {
-            return .failure(error)
+            throw CoreDataError.deleteError
         }
     }
     
