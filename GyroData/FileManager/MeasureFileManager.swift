@@ -14,6 +14,7 @@ class MeasureFileManager {
     static let shared = MeasureFileManager()
     let fileManager = FileManager.default
     
+    //파일 쓰기
     func saveFile(_ jsonString: String,_ coverData: Measure) -> Bool {
         
         let documentsURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
@@ -31,6 +32,7 @@ class MeasureFileManager {
         }
     }
     
+    //파일 읽기
     func loadFile(_ coverData: Measure) -> Bool {
         
         let documentsURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
