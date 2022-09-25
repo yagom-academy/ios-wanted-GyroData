@@ -12,8 +12,9 @@ class ReplayViewController: UIViewController {
 
     let graphViewMaker = GraphViewMaker.shared
     
-    /// 그래프 뷰
-    lazy var graphView = graphViewMaker.replayGraphView
+    // 그래프 뷰
+    lazy var backgroundView = graphViewMaker.backgroundView
+    lazy var graphView = graphViewMaker.graphView
     
     var safeArea: UILayoutGuide?
     
@@ -116,30 +117,29 @@ class ReplayViewController: UIViewController {
 
         // 측정 시간, 타이틀
         self.view.addSubview(headerStackView)
-        headerStackView.addArrangedSubview(timestampLabel)
-        headerStackView.addArrangedSubview(titleLabel)
-        timestampLabel.heightAnchor.constraint(equalTo: titleLabel.heightAnchor).isActive = true
-
         headerStackView.translatesAutoresizingMaskIntoConstraints = false
         headerStackView.topAnchor.constraint(equalTo: safeArea!.topAnchor, constant: 10).isActive = true
         headerStackView.centerXAnchor.constraint(equalTo: safeArea!.centerXAnchor).isActive = true
         headerStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
         headerStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
         headerStackView.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        headerStackView.addArrangedSubview(timestampLabel)
+        headerStackView.addArrangedSubview(titleLabel)
+        timestampLabel.heightAnchor.constraint(equalTo: titleLabel.heightAnchor).isActive = true
 
-        self.view.addSubview(graphViewMaker.replayView)
-        graphViewMaker.replayView.translatesAutoresizingMaskIntoConstraints = false
-        graphViewMaker.replayView.topAnchor.constraint(equalTo: headerStackView.bottomAnchor, constant: 30).isActive = true
-        graphViewMaker.replayView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        graphViewMaker.replayView.widthAnchor.constraint(equalTo: headerStackView.widthAnchor).isActive = true
-        graphViewMaker.replayView.heightAnchor.constraint(equalToConstant: graphViewMaker.graphViewHeight).isActive = true
+        self.view.addSubview(backgroundView)
+        backgroundView.translatesAutoresizingMaskIntoConstraints = false
+        backgroundView.topAnchor.constraint(equalTo: headerStackView.bottomAnchor, constant: 30).isActive = true
+        backgroundView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        backgroundView.widthAnchor.constraint(equalTo: headerStackView.widthAnchor).isActive = true
+        backgroundView.heightAnchor.constraint(equalToConstant: graphViewMaker.graphViewHeight).isActive = true
 
-        graphViewMaker.replayView.addSubview(graphView)
+        backgroundView.addSubview(graphView)
         graphView.translatesAutoresizingMaskIntoConstraints = false
-        graphView.topAnchor.constraint(equalTo: graphViewMaker.replayView.topAnchor, constant: 5).isActive = true
-        graphView.leadingAnchor.constraint(equalTo: graphViewMaker.replayView.leadingAnchor, constant: 5).isActive = true
-        graphView.trailingAnchor.constraint(equalTo: graphViewMaker.replayView.trailingAnchor, constant: -5).isActive = true
-        graphView.bottomAnchor.constraint(equalTo: graphViewMaker.replayView.bottomAnchor, constant: -5).isActive = true
+        graphView.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 5).isActive = true
+        graphView.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 5).isActive = true
+        graphView.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -5).isActive = true
+        graphView.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor, constant: -5).isActive = true
 
         // 좌표값 display
         graphView.addSubview(graphViewMaker.OffsetPannelStackView)
