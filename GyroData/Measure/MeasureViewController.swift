@@ -21,6 +21,7 @@ class MeasureViewController: UIViewController {
     var bBuffer = GraphBuffer(count: 100)
     var cBuffer = GraphBuffer(count: 100)
     var countDown = 0
+    var graphFlag = 0
     
     override func loadView() {
         self.view = mainView
@@ -48,6 +49,7 @@ class MeasureViewController: UIViewController {
         mainView.stopButton.addTarget(self, action: #selector(stopButtonClicked), for: .touchUpInside)
         //MARK: TEST CODE4
         mainView.testButton.addTarget(self, action: #selector(testButtonClicked), for: .touchUpInside)
+        mainView.segmentControl.addTarget(self, action: #selector(segmentFlag), for: .valueChanged)
     }
     
     // MARK: incomplete
@@ -55,20 +57,40 @@ class MeasureViewController: UIViewController {
         print("저장")
     }
     
+    @objc func segmentFlag(_ sender: UISegmentedControl) {
+        graphFlag = sender.selectedSegmentIndex
+    }
+    
     @objc func measureButtonClicked() {
         
         print("측정")
-        
-        
+        graphView.maxValue = 1
+        graphView.minValue = -1
         mainView.measureButton.isEnabled = false
         countDown = 600 //max 60초
+        
+        if graphFlag == 0 {
+            MotionManager.shared.startAccelerometerUpdates()
+            
+        } else {
+            MotionManager.shared.startGyroUpdates()
+        }
+        
         timer = Timer.scheduledTimer(withTimeInterval: stepDuration
                                      , repeats: true) { [weak self] (timer) in
             guard let self = self else { return }
-            self.aData = CGFloat.random(in: self.graphView.minValue * 0.75...self.graphView.maxValue * 0.75)
-            self.bData = CGFloat.random(in: self.graphView.minValue * 0.75...self.graphView.maxValue * 0.75)
-            self.cData = CGFloat.random(in: self.graphView.minValue * 0.75...self.graphView.maxValue * 0.75)
-            self.graphView.animateNewValue(aValue: self.aData, bValue: self.bData, cValue: self.cData, duration: self.stepDuration)
+            var motionData: [CGFloat]
+            
+            if self.graphFlag == 0 {
+                guard let data = MotionManager.shared.accelerometerData?.acceleration else { return }
+                motionData = [data.x, data.y, data.z]
+                //print("가속도: [x:\(data.x), y:\(data.y), z:\(data.z)]")
+            } else {
+                guard let data = MotionManager.shared.gyroData?.rotationRate else { return }
+                motionData = [data.x, data.y, data.z]
+                //print("자이로: [x:\(data.x), y:\(data.y), z:\(data.z)]")
+            }
+            self.graphView.animateNewValue(aValue: motionData[0], bValue: motionData[1], cValue: motionData[2], duration: self.stepDuration)
             self.countDown -= 1
             if self.countDown <= 0 {
                 timer.invalidate()
@@ -76,25 +98,19 @@ class MeasureViewController: UIViewController {
         }
         
     }
+    
     @objc func stopButtonClicked() {
         timer?.invalidate()
         self.graphView.reset()
         mainView.measureButton.isEnabled = true
     }
     
-    func startAcceleration() {
-        MotionManager.shared.startAccelerometerUpdates()
-    }
-    
-    func startGyroscope() {
-        MotionManager.shared.startGyroUpdates()
-    }
-    
     
     // MARK: TEST CODE3
     @objc func testButtonClicked() {
         
-        startGyroscope()
+        //startGyroscope()
         
     }
+
 }
