@@ -9,7 +9,6 @@ import UIKit
 import SwiftUI
 import CoreGraphics
 
-// TODO: 측정값이 범위 최대값보다 클 경우 스케일 다시 설정
 // TODO: 격자 그리드 뷰/효과 추가...여러 그래프에 나오는 격자효과 그거
 // TODO: 스케일에 기반해 그리드 뷰도 조정 혹은 보정
 // TODO: data 배열+path그래프가 화면의 가로 사이즈보다 커질 경우를 대비한 ScrollView 추가?
@@ -105,6 +104,8 @@ class TestPathGraphView: UIView {
     let yPath = UIBezierPath()
     let zPath = UIBezierPath()
     
+    var lastAppliedTransform: CGAffineTransform?
+    
     init() {
         super.init(frame: .zero)
         initViewHierarchy()
@@ -117,7 +118,6 @@ class TestPathGraphView: UIView {
     }
     
     override func draw(_ rect: CGRect) {
-        print("draw called")
         drawXpath()
         drawYpath()
         drawZpath()
@@ -132,6 +132,10 @@ class TestPathGraphView: UIView {
         xPath.move(to: xPreviousPoint)
         
         xNewPoint = CGPoint(x: xPreviousPoint.x + 10, y: xPreviousPoint.y + receivedData)
+        // 이전 Path들에게 이미 적용된 Transform이 있다면 newPoint에도 해당 Transform을 적용시킨 뒤 선을 그려줘야 합니다. - Eric
+        if let lastAppliedTransform {
+            xNewPoint = xNewPoint.applying(lastAppliedTransform)
+        }
         xPath.addLine(to: xNewPoint)
         
         xPreviousPoint = xNewPoint
@@ -151,6 +155,9 @@ class TestPathGraphView: UIView {
         yPath.move(to: yPreviousPoint)
         
         yNewPoint = CGPoint(x: yPreviousPoint.x + 10, y: yPreviousPoint.y + receivedData)
+        if let lastAppliedTransform {
+            yNewPoint = yNewPoint.applying(lastAppliedTransform)
+        }
         yPath.addLine(to: yNewPoint)
         
         yPreviousPoint = yNewPoint
@@ -170,6 +177,9 @@ class TestPathGraphView: UIView {
         zPath.move(to: zPreviousPoint)
         
         zNewPoint = CGPoint(x: zPreviousPoint.x + 10, y: zPreviousPoint.y + receivedData)
+        if let lastAppliedTransform {
+            zNewPoint = zNewPoint.applying(lastAppliedTransform)
+        }
         zPath.addLine(to: zNewPoint)
         
         zPreviousPoint = zNewPoint
@@ -183,90 +193,48 @@ class TestPathGraphView: UIView {
         
     }
     
-    // TODO: 일단 스케일 조정 위한 발악의 목적으로 테스트 중이긴 하나 실제 기능구현을 위해서는 더 테스트, 보강이 필요
     func reCalculateScale(point: CGPoint) {
         if yAxisMiddleRange ~= point.y {
             yAxisMiddleRangeMin = middlePoint.y * 0.2
             yAxisMiddleRangeMax = middlePoint.y * 1.8
             yAxisMultiplier = 1.0
         } else {
-            //middleRangeMin, middleRangeMax 값도 조정, 보정이 필요해 보인다...하지만 어떻게 할지는 아직 떠오르지 않음
             if point.y > yAxisMiddleRangeMax {
                 //middlePoint.y * 1.8
                 let calculation = point.y - yAxisMiddleRangeMax
+                // 0.95 하드 코딩 대신 늘어난 길이를 계산하여 yAxisMutliper를 결정합니다. - Eric
+                yAxisMultiplier = yAxisMultiplier * (yAxisMiddleRangeMax / (yAxisMiddleRangeMax + calculation))
                 yAxisMiddleRangeMax = yAxisMiddleRangeMax + calculation
-                
-                print("calculation max : \(calculation)") //72
-                yAxisMultiplier = yAxisMultiplier * 0.95 //0.95와 1.05를 하드코딩으로 넣는게 아니라 이것도 특정한 계산식으로 보정을 해야 할 듯 함
-            }
-            
-            if point.y < yAxisMiddleRangeMin {
+            } else if point.y < yAxisMiddleRangeMin {
                 //middlePoint.y * 0.2
                 let calculation = yAxisMiddleRangeMin - point.y
+                yAxisMultiplier = yAxisMultiplier * ((middlePoint.y - yAxisMiddleRangeMin) / (middlePoint.y - yAxisMiddleRangeMin + calculation))
                 yAxisMiddleRangeMin = yAxisMiddleRangeMin - calculation
-                
-                print("calculation min : \(calculation)") //22
-                yAxisMultiplier = yAxisMultiplier * 1.05 //0.95와 1.05를 하드코딩으로 넣는게 아니라 이것도 특정한 계산식으로 보정을 해야 할 듯 함
             }
-            
-            //y값이 view 밖에 찍히는지에 대한 체크와 보정도 필요해 보인다
-            //그렇다면 이 view의 height가 커져야 할까? 이 뷰는 뷰컨트롤러에 있는 스크롤뷰에 올라가고?
-            //아니면 view의 bounds가 이동? 지도뷰 같이?
-            
+
             let width = UIScreen.main.bounds.width - 32
             let height = width
             
-            /*
-            a  b  0
-            c  d  0
-            tx ty 1
-             */
-            /*
-             let scaleMatrix = CGAffineTransformMakeScale(0.68, 0.68)
-             let translateMatrix = CGAffineTransformMakeTranslation(102, 65)
-
-             let translateThenScaleMatrix = CGAffineTransformConcat(scaleMatrix, translateMatrix)
-             // outputs : CGAffineTransform(a: 0.68, b: 0.0, c: 0.0, d: 0.68, tx: 102.0, ty: 65.0)
-             // the translation is the same
-
-             let scaleThenTranslateMatrix = CGAffineTransformConcat(translateMatrix, scaleMatrix)
-             // outputs : CGAffineTransform(a: 0.68, b: 0.0, c: 0.0, d: 0.68, tx: 69.36, ty: 44.2)
-             // the translation has been scaled too
-             */
-            
-            //CGAffineTransform(a:x축 스케일 조정, b, c, d:y축 스케일 조정, tx: x값 이동, ty: y값 이동)
-            //CGAffineTransformConcat으로 2개 이상의 CGAffineTransformMakeScale, CGAffineTransformMakeTranslation을 조합할 시 주의할 점: 어느 트랜스폼을 먼저 파라미터에 넣느냐에 따라 산출되는 CGAffineTransform이 다를 수 있음. 이는 내부적으로 CGAffineTransform은 행렬구조이며, 곱하기로 산출되기 때문인듯?
-            //내부의 행렬구조는 3 * 3임. 그러나 마지막 3열의 데이터는 개발자가 건드리지 않아야 함?
-            let previousTy = height * 0.025
-            let transform = CGAffineTransform(1, 0, 0, yAxisMultiplier, 0, 0)
-
-            //뷰의 레이어가 아니라 Path에 Transform을 먹여야 하나?
+            let transform = CGAffineTransform(1, 0, 0, yAxisMultiplier, 0, height * ((1-yAxisMultiplier)/2))
             xPath.apply(transform)
             yPath.apply(transform)
             zPath.apply(transform)
             
-            let newXpathData = xPathData.map { point in
-                let newPoint = CGPoint(x: point.x, y: point.y * yAxisMultiplier)
-                return newPoint
-            }
+            lastAppliedTransform = transform
+            
+            // Scaling뿐만 아니라 Transition까지 이전 Path와 previousPoint에 적용하기 위해, yAxisMutliplier를 곱하는 대신,
+            // applying 메소드를 통해 transform을 직접 적용하는 형태로 변경했습니다. - Eric
+            let newXpathData = xPathData.map { $0.applying(transform) }
             xPathData = newXpathData
-            xPreviousPoint.y = xPreviousPoint.y * yAxisMultiplier
+            xPreviousPoint = xPreviousPoint.applying(transform)
             
-            let newYpathData = yPathData.map { point in
-                let newPoint = CGPoint(x: point.x, y: point.y * yAxisMultiplier)
-                return newPoint
-            }
+            let newYpathData = yPathData.map { $0.applying(transform) }
             yPathData = newYpathData
-            yPreviousPoint.y = yPreviousPoint.y * yAxisMultiplier
-            
-            let newZpathData = zPathData.map { point in
-                let newPoint = CGPoint(x: point.x, y: point.y * yAxisMultiplier)
-                return newPoint
-            }
-            
+            yPreviousPoint = yPreviousPoint.applying(transform)
+
+            let newZpathData = zPathData.map { $0.applying(transform) }
             zPathData = newZpathData
-            zPreviousPoint.y = zPreviousPoint.y * yAxisMultiplier
-            
+            zPreviousPoint = zPreviousPoint.applying(transform)
         }
     }
     
@@ -315,6 +283,9 @@ extension TestPathGraphView: Presentable {
             self.xPathData.removeAll()
             self.yPathData.removeAll()
             self.zPathData.removeAll()
+            
+            //Path 전부 지우는 경우 Path그릴시 사용했던 트랜스폼도 초기화
+            self.lastAppliedTransform = nil
             
             self.setNeedsDisplay()
         }

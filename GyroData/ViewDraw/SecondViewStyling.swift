@@ -61,24 +61,4 @@ extension SecondViewStyling {
             $0.configuration?.baseForegroundColor = .graySecondary
         }
     }
-    
-    var testAddButtonStyling: (UIButton) -> () {
-        {
-            $0.configuration = .plain()
-            $0.configuration?.contentInsets = .zero
-            $0.configuration?.title = "추가"
-            $0.configuration?.background.backgroundColor = .grayFourth
-            $0.configuration?.baseForegroundColor = .graySecondary
-        }
-    }
-    
-    var testRemoveButtonStyling: (UIButton) -> () {
-        {
-            $0.configuration = .plain()
-            $0.configuration?.contentInsets = .zero
-            $0.configuration?.title = "삭제"
-            $0.configuration?.background.backgroundColor = .grayFourth
-            $0.configuration?.baseForegroundColor = .graySecondary
-        }
-    }
 }

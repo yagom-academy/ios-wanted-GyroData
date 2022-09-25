@@ -9,17 +9,10 @@ import UIKit
 
 class SecondControlView: UIView, SecondViewStyling {
     
-    //output
-    var populateAdd = { }
-    var populateRemove = { }
-    
     // MARK: UI
     var stackView = UIStackView()
     var measureButton = UIButton()
     var stopButton = UIButton()
-    
-    var testAddButton = UIButton()
-    var testRemoveButton = UIButton()
     
     // MARK: Properties
     
@@ -44,9 +37,6 @@ extension SecondControlView: Presentable {
         stackView.addArrangedSubview(measureButton)
         stackView.addArrangedSubview(stopButton)
         
-        stackView.addArrangedSubview(testAddButton)
-        stackView.addArrangedSubview(testRemoveButton)
-        
         var constraint: [NSLayoutConstraint] = []
         defer { NSLayoutConstraint.activate(constraint) }
         
@@ -63,21 +53,9 @@ extension SecondControlView: Presentable {
         stackView.addStyles(style: controlStackViewStyling)
         measureButton.addStyles(style: measureButtonStyling)
         stopButton.addStyles(style: stopButtonStyling)
-        
-        testAddButton.addStyles(style: testAddButtonStyling)
-        testRemoveButton.addStyles(style: testRemoveButtonStyling)
     }
     
     func bind() {
-        testAddButton.addTarget(self, action: #selector(add), for: .touchUpInside)
-        testRemoveButton.addTarget(self, action: #selector(remove), for: .touchUpInside)
-    }
-    
-    @objc func add() {
-        populateAdd()
-    }
-    
-    @objc func remove() {
-        populateRemove()
+        
     }
 }
