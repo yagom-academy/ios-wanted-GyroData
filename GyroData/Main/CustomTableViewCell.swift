@@ -72,7 +72,7 @@ class CustomTableViewCell: UITableViewCell {
 }
 
 extension CustomTableViewCell {
-    public func bind1(model: Measure) {
+    public func bind1(model: GyroModel) {
         measureDate.text = model.measureDate
         second.text = "\(model.second)"
         title.text = model.title
