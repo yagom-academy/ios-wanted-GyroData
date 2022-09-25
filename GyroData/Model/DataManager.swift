@@ -19,10 +19,12 @@ class DataManager {
     }
     
     var saveList = [Save]()
-    //패치를 10개를 만든다
+    //데이터 저장
     func fetchSave() {
         let request: NSFetchRequest<Save> = Save.fetchRequest()
-        request.fetchLimit = 4 // 0123 // 4567 // 891011 
+        //코어데이터 겟 데이타 리미트 리퀘스트 10개 request.fetchOffset = 0; request.fetchLimit = 10;
+        //데이터 불러오기 10개씩 일단 3개로
+        request.fetchLimit = 3 // 0123 // 4567 // 891011
         request.fetchOffset = saveList.count  // 카운터
         let sortByDateDesc = NSSortDescriptor(key: "date", ascending: false)
         request.sortDescriptors = [sortByDateDesc]
@@ -35,9 +37,28 @@ class DataManager {
         }
     }
     
-  //코어데이터 겟 데이타 리미트 리퀘스트 10개 request.fetchOffset = 0; request.fetchLimit = 10;
-    
-    
+    //부분Delete 구현
+    func deleteRun(object: Save) -> Bool {
+        self.mainContext.delete(object)
+        self.saveMainContext()
+        do {
+            try mainContext.save()
+            return true
+        } catch {
+            return false
+        }
+    }
+    func saveMainContext() {
+        mainContext.perform {
+            if self.mainContext.hasChanges {
+                do {
+                    try self.mainContext.save()
+                } catch {
+                    print(error)
+                }
+            }
+        }
+    }
     func addNewSave(_ name: String?, _ time: Float?, _ xData: [Float], yData: [Float], zData: [Float]) {
         let newSave = Save(context: mainContext)
         newSave.name = name
@@ -57,7 +78,7 @@ class DataManager {
     }
     
     // MARK: - Core Data stack
-
+    
     lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "GyroExample")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
@@ -67,9 +88,9 @@ class DataManager {
         })
         return container
     }()
-
+    
     // MARK: - Core Data Saving support
-
+    
     func saveContext () {
         let context = persistentContainer.viewContext
         if context.hasChanges {

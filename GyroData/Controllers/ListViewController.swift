@@ -103,7 +103,9 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
         
         let actions1 = UIContextualAction(style: .normal, title: "Delete", handler: { action, view, completionHaldler in
             completionHaldler(true)
-            
+            let cell = DataManager.shared.saveList.remove(at: indexPath.row)
+            DataManager.shared.deleteRun(object: cell)
+            tableView.reloadData()
         })
         actions1.backgroundColor = .systemRed
     
