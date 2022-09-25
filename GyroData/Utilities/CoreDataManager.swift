@@ -26,7 +26,8 @@ class CoreDataManager {
         return self.persistentContainer.viewContext
     }
     
-    func fetch<T: NSManagedObject>(request: NSFetchRequest<T>) -> Result<[T], Error> {
+    func fetchMotionTasks() -> Result<[Motion], Error> {
+        let request = Motion.fetchRequest()
         do {
             let fetchResult = try self.context.fetch(request)
             return .success(fetchResult)

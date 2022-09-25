@@ -42,9 +42,7 @@ extension Repository: CoreDataRepositoryProtocol {
         switch fetchResult {
         case .success(let motions):
             motions.forEach { motionTasks.append(MotionTask(type: $0.type ?? "", time: $0.time , date: $0.date ?? Date(), path: $0.path ?? "")) }
-            DispatchQueue.main.async {
-                completion(motionTasks)
-            }
+            completion(motionTasks)
         
         case .failure(let error):
             print(error.localizedDescription)
