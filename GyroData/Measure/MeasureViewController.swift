@@ -58,6 +58,7 @@ class MeasureViewController: UIViewController {
         navigationItem.rightBarButtonItem?.isEnabled = false
         mainView.measureButton.addTarget(self, action: #selector(measureButtonClicked), for: .touchUpInside)
         mainView.stopButton.addTarget(self, action: #selector(stopButtonClicked), for: .touchUpInside)
+        mainView.segmentControl.addTarget(self, action: #selector(segmentFlag), for: .valueChanged)
     }
     
     // MARK: incomplete
@@ -96,11 +97,11 @@ class MeasureViewController: UIViewController {
             if self.graphFlag == 0 {
                 guard let data = MotionManager.shared.accelerometerData?.acceleration else { return }
                 motionData = [data.x, data.y, data.z]
-                //print("가속도: [x:\(data.x), y:\(data.y), z:\(data.z)]")
+                print("가속도: [x:\(data.x), y:\(data.y), z:\(data.z)]")
             } else {
                 guard let data = MotionManager.shared.gyroData?.rotationRate else { return }
                 motionData = [data.x, data.y, data.z]
-                //print("자이로: [x:\(data.x), y:\(data.y), z:\(data.z)]")
+                print("자이로: [x:\(data.x), y:\(data.y), z:\(data.z)]")
             }
             //데이터를 배열에 저장해둔다
             self.saveMotionData.append(MotionData(coodinate: [motionData[0],motionData[1],motionData[2]]))
