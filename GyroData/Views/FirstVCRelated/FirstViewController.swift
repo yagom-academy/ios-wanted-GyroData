@@ -70,6 +70,7 @@ extension FirstViewController: Presentable {
             guard let self = self else { return }
             self.route(to: sceneCategory)
         }
+        model.populateData()
     }
     
     // MARK: Actions

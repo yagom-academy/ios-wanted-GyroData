@@ -8,30 +8,36 @@
 import Foundation
 
 class FirstCellContentViewModel {
-    //input
-    var time: String
-    var measureType: String
-    var amount: String
+    // MARK: Input
     
-    //output
-    var timeString: String {
-        return time
+    // MARK: Output
+    var timeSource: (String) -> () = { time in } {
+        didSet {
+            timeSource(_motion.date.asString())
+        }
+    }
+    var typeSource: (String) -> () = { type in } {
+        didSet {
+            typeSource(_motion.type)
+        }
+    }
+    var amountSource: (String) -> () = { amount in } {
+        didSet {
+            amountSource("\(_motion.time)")
+        }
     }
     
-    var measureTypeString: String {
-        return measureType
+    // MARK: Properties
+    private var _motion: MotionTask {
+        didSet {
+            timeSource(_motion.date.asString())
+            typeSource(_motion.type)
+            amountSource("\(_motion.time)")
+        }
     }
     
-    var amountString: String {
-        return amount
-    }
-    
-    //properties
-    
-    init() {
-        //temp
-        self.time = "2022/09/08 14:50:43"
-        self.measureType = "gyro"
-        self.amount = "60.0"
+    // MARK: Init
+    init(_ motion: MotionTask) {
+        self._motion = motion
     }
 }

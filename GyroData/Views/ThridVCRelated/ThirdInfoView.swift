@@ -44,6 +44,8 @@ extension ThirdInfoView: Presentable {
         constraints += [
             dateLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 18),
             dateLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
+        ]
+        constraints += [
             typeLabel.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 6),
             typeLabel.leadingAnchor.constraint(equalTo: dateLabel.leadingAnchor),
             typeLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor)
@@ -58,13 +60,17 @@ extension ThirdInfoView: Presentable {
     }
     
     func bind() {
-        viewModel.viewTypeChanged = { [weak self] type in
+        viewModel.viewTypeSource = { [weak self] type in
             switch type {
             case .view:
                 self?.typeLabel.text = "View"
             case .play:
                 self?.typeLabel.text = "Play"
             }
+        }
+        
+        viewModel.dateSource = { [weak self] date in
+            self?.dateLabel.text = date
         }
     }
 }

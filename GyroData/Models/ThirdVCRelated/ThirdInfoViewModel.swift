@@ -9,32 +9,49 @@ import Foundation
 
 class ThirdInfoViewModel {
     // MARK: Input
-    var didReceiveViewTypeChanged: (ViewType) -> () = { type in }
+    var didReceiveViewType: (ViewType) -> () = { type in }
+    var didReceiveMotion: (MotionTask) -> () = { motion in }
     
     // MARK: Output
-    var viewTypeChanged: (ViewType) -> () = { type in } {
+    var viewTypeSource: (ViewType) -> () = { type in } {
         didSet {
-            viewTypeChanged(viewType)
+            viewTypeSource(_viewType)
+        }
+    }
+    
+    var dateSource: (String) -> () = { date in } {
+        didSet {
+            dateSource(_motion.date.asString())
         }
     }
     
     // MARK: Properties
-    var viewType: ViewType {
+    private var _viewType: ViewType {
         didSet {
-            viewTypeChanged(viewType)
+            viewTypeSource(_viewType)
+        }
+    }
+    private var _motion: MotionTask {
+        didSet {
+            dateSource(_motion.date.asString())
         }
     }
     
     // MARK: Init
-    init(viewType: ViewType) {
-        self.viewType = viewType
+    init(viewType: ViewType, motion: MotionTask) {
+        self._viewType = viewType
+        self._motion = motion
         bind()
     }
     
     // MARK: Bind
     func bind() {
-        didReceiveViewTypeChanged = { [weak self] viewType in
-            self?.viewType = viewType
+        didReceiveViewType = { [weak self] viewType in
+            self?._viewType = viewType
+        }
+        
+        didReceiveMotion = { [weak self] motion in
+            self?._motion = motion
         }
     }
 }

@@ -38,15 +38,17 @@ extension ThirdControlView: Presentable {
         controlButton.translatesAutoresizingMaskIntoConstraints = false
         timerLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        var constraint: [NSLayoutConstraint] = []
-        defer { NSLayoutConstraint.activate(constraint) }
+        var constraints: [NSLayoutConstraint] = []
+        defer { NSLayoutConstraint.activate(constraints) }
         
-        constraint += [
+        constraints += [
             controlButton.topAnchor.constraint(equalTo: self.topAnchor, constant: 48),
             controlButton.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             controlButton.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             controlButton.widthAnchor.constraint(equalToConstant: 42),
             controlButton.heightAnchor.constraint(equalToConstant: 42),
+        ]
+        constraints += [
             timerLabel.centerYAnchor.constraint(equalTo: controlButton.centerYAnchor),
             timerLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
         ]
@@ -59,7 +61,7 @@ extension ThirdControlView: Presentable {
     }
     
     func bind() {
-        viewModel.isPlayingChanged = { [weak self] isPlaying in
+        viewModel.isPlayingSource = { [weak self] isPlaying in
             if isPlaying {
                 self?.controlButton.configuration?.image = UIImage(named: "icon_stop")
             } else {
@@ -67,8 +69,8 @@ extension ThirdControlView: Presentable {
             }
         }
         
-        viewModel.currentTimeChanged = { [weak self] currentTime in
-            let currentTime = round(currentTime*100) / 100
+        viewModel.currentTimeSource = { [weak self] currentTime in
+            let currentTime = round(currentTime*10) / 10
             self?.timerLabel.text = "\(currentTime)"
         }
     }

@@ -8,28 +8,47 @@
 import Foundation
 
 class FirstListViewModel {
-    //input
+    // MARK: Input
     var didSelectRow: (Int) -> () = { indexPathRow in }
     var didSelectPlayAction: (Int) -> () = { indexPathRow in }
+    var didReceiveMotionTasks: ([MotionTask]) -> () = { motionTasks in }
     
-    //output
-    var propagateDidSelectRowEvent: (Int) -> () = { indexPathRow in }
-    var propagateDidSelectPlayActionEvent: (Int) -> () = { indexPathRow in }
+    // MARK: Output
+    var propagateDidSelectRowEvent: (MotionTask) -> () = { motion in }
+    var propagateDidSelectPlayActionEvent: (MotionTask) -> () = { motion in }
+    var motionTasks: [MotionTask] {
+        return _motionTasks
+    }
+    var didReceiveViewModel: ( ((Void)) -> () )?
     
-    //properties
-    init() {
+    // MARK: Properties
+    private var _motionTasks: [MotionTask]
+    
+    // MARK: Init
+    init(_ motionDatas: [MotionTask]) {
+        self._motionTasks = motionDatas
         bind()
     }
     
+    // MARK: Bind
     private func bind() {
         didSelectRow = { [weak self] indexPathRow in
             guard let self = self else { return }
-            self.propagateDidSelectRowEvent(indexPathRow)
+            let motion = self._motionTasks[indexPathRow]
+            self.propagateDidSelectRowEvent(motion)
         }
         didSelectPlayAction = { [weak self] indexPathRow in
             guard let self = self else { return }
-            self.propagateDidSelectPlayActionEvent(indexPathRow)
+            let motion = self._motionTasks[indexPathRow]
+            self.propagateDidSelectPlayActionEvent(motion)
+        }
+        didReceiveMotionTasks = { [weak self] motionTasks in
+            self?.populateData(result: motionTasks)
+            self?.didReceiveViewModel?(())
         }
     }
     
+    private func populateData(result: [MotionTask]) {
+        self._motionTasks = result
+    }
 }

@@ -21,10 +21,17 @@ class FirstModel {
     //properties
     private var privateFirstListViewModel: FirstListViewModel
     private var repository: RepositoryProtocol
+    var motionTasks = [MotionTask]()
     
     init(repository: RepositoryProtocol) {
         self.repository = repository
-        self.privateFirstListViewModel = FirstListViewModel()
+        // Test 데이터
+//        for _ in 0..<10 {
+//            CoreDataManager.shared.insertMotionTask(motion: DummyGenerator.getDummyMotionData())
+//        }
+        
+        // -----
+        self.privateFirstListViewModel = FirstListViewModel(motionTasks)
         bind()
     }
     
@@ -36,22 +43,24 @@ class FirstModel {
             let sceneContext = SceneContext(dependency: model)
             self.routeSubject(.detail(.secondViewController(context: sceneContext)))
         }
-        // TODO: 이동 타입(View or Play)을 선택해서 이동하도록 구현해야 함
-        privateFirstListViewModel.propagateDidSelectRowEvent = { [weak self] indexPathRow in
+        privateFirstListViewModel.propagateDidSelectRowEvent = { [weak self] motion in
             guard let self = self else { return }
-            let model = ThirdModel(viewType: .view)
+            let model = ThirdModel(viewType: .view, motion: motion)
             let context = SceneContext(dependency: model)
             self.routeSubject(.detail(.thirdViewController(context: context)))
         }
-        privateFirstListViewModel.propagateDidSelectPlayActionEvent = { [weak self] indexPathRow in
+        privateFirstListViewModel.propagateDidSelectPlayActionEvent = { [weak self] motion in
             guard let self = self else { return }
-            let model = ThirdModel(viewType: .play)
+            let model = ThirdModel(viewType: .play, motion: motion)
             let context = SceneContext(dependency: model)
             self.routeSubject(.detail(.thirdViewController(context: context)))
         }
     }
     
     func populateData() {
-        
+        Task {
+            let motionTasks = try await self.repository.fetchFromCoreData()
+            self.privateFirstListViewModel.didReceiveMotionTasks(motionTasks)
+        }
     }
 }

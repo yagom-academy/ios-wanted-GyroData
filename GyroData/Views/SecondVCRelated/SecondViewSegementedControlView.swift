@@ -49,6 +49,7 @@ extension SecondViewSegementedControlView: Presentable {
     
     func configureView() {
         segmentedControl.addStyles(style: segmentControlStyling)
+        segmentedControl.addTarget(self, action: #selector(segmentAction), for: .valueChanged)
     }
     
     func bind() {
@@ -59,15 +60,14 @@ extension SecondViewSegementedControlView: Presentable {
                 self?.segmentedControl.selectedSegmentIndex = 1
             }
         }
-        
-        viewModel.isUserInteractionEnabledSource = { [weak self] enabled in
-            self?.segmentedControl.isUserInteractionEnabled = enabled
-        }
     }
     
     @objc func segmentAction() {
         let type: MotionType = segmentedControl.selectedSegmentIndex == 0 ? .acc : .gyro
         viewModel.didSegmentChange(type)
+        viewModel.isUserInteractionEnabledSource = { [weak self] enabled in
+            self?.segmentedControl.isUserInteractionEnabled = enabled
+        }
     }
 }
 

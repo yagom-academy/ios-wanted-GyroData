@@ -27,8 +27,8 @@ extension SecondViewStyling {
     var segmentControlStyling: (UISegmentedControl) -> () {
         {
             $0.backgroundColor = .grayFourth
-            $0.insertSegment(withTitle: "gyro", at: 0, animated: true)
-            $0.insertSegment(withTitle: "acc", at: 1, animated: true)
+            $0.insertSegment(withTitle: "Acc", at: 0, animated: true)
+            $0.insertSegment(withTitle: "Gyro", at: 1, animated: true)
             $0.setEnabled(true, forSegmentAt: 0)
             $0.selectedSegmentTintColor = .white
         }

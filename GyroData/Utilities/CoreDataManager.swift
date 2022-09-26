@@ -8,6 +8,13 @@
 import Foundation
 import CoreData
 
+enum CoreDataError: Error {
+    case fetchError
+    case insertError
+    case entityError
+    case deleteError
+}
+
 class CoreDataManager {
     
     static var shared: CoreDataManager = CoreDataManager()
@@ -26,19 +33,18 @@ class CoreDataManager {
         return self.persistentContainer.viewContext
     }
     
-    func fetch<T: NSManagedObject>(request: NSFetchRequest<T>) -> [T] {
+    func fetchMotionTasks() async throws -> [Motion] {
+        let request = Motion.fetchRequest()
         do {
             let fetchResult = try self.context.fetch(request)
             return fetchResult
         } catch {
-            // MARK: fetch 실패할 경우 에러 처리
-            print(error.localizedDescription)
-            return []
+            throw CoreDataError.fetchError
         }
     }
     
     @discardableResult
-    func insertMotionTask(motion: MotionTask) -> Bool {
+    func insertMotionTask(motion: MotionTask) async throws -> Bool {
         let entity = NSEntityDescription.entity(forEntityName: "Motion", in: self.context)
         
         if let entity = entity {
@@ -54,22 +60,21 @@ class CoreDataManager {
                 return true
             } catch {
                 // MARK: save 실패할 경우 에러 처리
-                print(error.localizedDescription)
-                return false
+                throw CoreDataError.insertError
             }
         } else {
-            return false
+            throw CoreDataError.entityError
         }
     }
     
     @discardableResult
-    func delete(object: NSManagedObject) -> Bool {
+    func delete(object: NSManagedObject) async throws -> Bool {
         self.context.delete(object)
         do {
             try context.save()
             return true
         } catch {
-            return false
+            throw CoreDataError.deleteError
         }
     }
     
