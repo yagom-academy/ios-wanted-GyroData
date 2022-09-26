@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3695B0BD28D99CA100FF93FD /* SecondViewSegementedControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3695B0BC28D99CA100FF93FD /* SecondViewSegementedControlView.swift */; };
 		3695B0C728D9AA0700FF93FD /* SecondViewControllerRoutable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3695B0C628D9AA0700FF93FD /* SecondViewControllerRoutable.swift */; };
+		36C67A8D28DAD9BC006F34CE /* TestPathGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C67A8C28DAD9BC006F34CE /* TestPathGraphView.swift */; };
 		36E1FC9D28D976B800EB7E4F /* BasicNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E1FC9C28D976B800EB7E4F /* BasicNavigationController.swift */; };
 		36E1FCA728D97AAB00EB7E4F /* FirstListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E1FCA628D97AAB00EB7E4F /* FirstListView.swift */; };
 		36E1FCAC28D97CC000EB7E4F /* FirstListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E1FCAB28D97CC000EB7E4F /* FirstListCell.swift */; };
@@ -41,7 +42,6 @@
 		46E21EC628DC5F1500593210 /* FirstModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E21EBA28DC5F1500593210 /* FirstModel.swift */; };
 		46E21EC728DC5F1500593210 /* FirstListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E21EBB28DC5F1500593210 /* FirstListViewModel.swift */; };
 		46E21ECB28DC5F2100593210 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E21EC928DC5F2100593210 /* CoreDataManager.swift */; };
-		46E21ECC28DC5F2100593210 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E21ECA28DC5F2100593210 /* Repository.swift */; };
 		63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB428D44FC400C53A39 /* AppDelegate.swift */; };
 		63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB628D44FC400C53A39 /* SceneDelegate.swift */; };
 		63F01BB928D44FC400C53A39 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB828D44FC400C53A39 /* FirstViewController.swift */; };
@@ -50,6 +50,9 @@
 		64336DE528DC9DD700D56D68 /* FileManager+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64336DE428DC9DD700D56D68 /* FileManager+Extensions.swift */; };
 		64336DE828DC9DE400D56D68 /* MotionFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64336DE728DC9DE400D56D68 /* MotionFile.swift */; };
 		B019E7FD28DBECF5009BC86F /* ThirdControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B019E7FC28DBECF5009BC86F /* ThirdControlView.swift */; };
+		B03F9D2628E1242100E352EC /* CoreMotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03F9D2528E1242100E352EC /* CoreMotionManager.swift */; };
+		B03F9D2828E1264F00E352EC /* SecondControlViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03F9D2728E1264F00E352EC /* SecondControlViewModel.swift */; };
+		B07C2D3B28E135DE00457396 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07C2D3A28E135DE00457396 /* Repository.swift */; };
 		B07C5F7828DAB10D00321A5F /* SecondControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07C5F7728DAB10D00321A5F /* SecondControlView.swift */; };
 		B08BCA3728DD8D8200F6E2A2 /* DummyGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08BCA3628DD8D8200F6E2A2 /* DummyGenerator.swift */; };
 		B0CF0F3F28DA9B9B00596BCF /* FirstViewStyling.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CF0F3E28DA9B9B00596BCF /* FirstViewStyling.swift */; };
@@ -59,6 +62,7 @@
 /* Begin PBXFileReference section */
 		3695B0BC28D99CA100FF93FD /* SecondViewSegementedControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewSegementedControlView.swift; sourceTree = "<group>"; };
 		3695B0C628D9AA0700FF93FD /* SecondViewControllerRoutable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewControllerRoutable.swift; sourceTree = "<group>"; };
+		36C67A8C28DAD9BC006F34CE /* TestPathGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestPathGraphView.swift; sourceTree = "<group>"; };
 		36E1FC9C28D976B800EB7E4F /* BasicNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicNavigationController.swift; sourceTree = "<group>"; };
 		36E1FCA628D97AAB00EB7E4F /* FirstListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstListView.swift; sourceTree = "<group>"; };
 		36E1FCAB28D97CC000EB7E4F /* FirstListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstListCell.swift; sourceTree = "<group>"; };
@@ -102,6 +106,9 @@
 		64336DE428DC9DD700D56D68 /* FileManager+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FileManager+Extensions.swift"; sourceTree = "<group>"; };
 		64336DE728DC9DE400D56D68 /* MotionFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionFile.swift; sourceTree = "<group>"; };
 		B019E7FC28DBECF5009BC86F /* ThirdControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdControlView.swift; sourceTree = "<group>"; };
+		B03F9D2528E1242100E352EC /* CoreMotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMotionManager.swift; sourceTree = "<group>"; };
+		B03F9D2728E1264F00E352EC /* SecondControlViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondControlViewModel.swift; sourceTree = "<group>"; };
+		B07C2D3A28E135DE00457396 /* Repository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		B07C5F7728DAB10D00321A5F /* SecondControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondControlView.swift; sourceTree = "<group>"; };
 		B08BCA3628DD8D8200F6E2A2 /* DummyGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyGenerator.swift; sourceTree = "<group>"; };
 		B0CF0F3E28DA9B9B00596BCF /* FirstViewStyling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewStyling.swift; sourceTree = "<group>"; };
@@ -150,6 +157,14 @@
 			path = ThridVCRelated;
 			sourceTree = "<group>";
 		};
+		36C67A8B28DAD9A8006F34CE /* GraphView */ = {
+			isa = PBXGroup;
+			children = (
+				36C67A8C28DAD9BC006F34CE /* TestPathGraphView.swift */,
+			);
+			path = GraphView;
+			sourceTree = "<group>";
+		};
 		36E1FC9B28D9768D00EB7E4F /* UIKitClasses */ = {
 			isa = PBXGroup;
 			children = (
@@ -166,13 +181,6 @@
 				3695B0C828D9AB1600FF93FD /* ThridVCRelated */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		36E1FCAA28D97CAB00EB7E4F /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Cells;
 			sourceTree = "<group>";
 		};
 		36FB64EB28D8C5BD00A87587 /* ViewPresentation */ = {
@@ -250,6 +258,7 @@
 			children = (
 				46E21EB628DC5F1500593210 /* SecondSegmentViewModel.swift */,
 				46E21EB728DC5F1500593210 /* SecondModel.swift */,
+				B03F9D2728E1264F00E352EC /* SecondControlViewModel.swift */,
 			);
 			path = SecondVCRelated;
 			sourceTree = "<group>";
@@ -270,6 +279,7 @@
 				46E21ECA28DC5F2100593210 /* Repository.swift */,
 				46E21EC928DC5F2100593210 /* CoreDataManager.swift */,
 				B08BCA3628DD8D8200F6E2A2 /* DummyGenerator.swift */,
+        B03F9D2528E1242100E352EC /* CoreMotionManager.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -279,6 +289,7 @@
 			children = (
 				63F01BB328D44FC400C53A39 /* GyroData */,
 				63F01BB228D44FC400C53A39 /* Products */,
+				B07C2D3928E135D300457396 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -293,9 +304,9 @@
 		63F01BB328D44FC400C53A39 /* GyroData */ = {
 			isa = PBXGroup;
 			children = (
+				36C67A8B28DAD9A8006F34CE /* GraphView */,
 				63F01BB428D44FC400C53A39 /* AppDelegate.swift */,
 				63F01BB628D44FC400C53A39 /* SceneDelegate.swift */,
-				36E1FCAA28D97CAB00EB7E4F /* Cells */,
 				36E1FCA428D97A7F00EB7E4F /* Views */,
 				46E21EAA28DC5F1500593210 /* Models */,
 				36FB64FA28D8CE0E00A87587 /* ViewDraw */,
@@ -390,6 +401,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				46E21EC728DC5F1500593210 /* FirstListViewModel.swift in Sources */,
+				36C67A8D28DAD9BC006F34CE /* TestPathGraphView.swift in Sources */,
 				36FB64F928D8CD1700A87587 /* SceneContext.swift in Sources */,
 				63F01BB928D44FC400C53A39 /* FirstViewController.swift in Sources */,
 				46E21EBC28DC5F1500593210 /* ThirdInfoViewModel.swift in Sources */,
@@ -397,6 +409,7 @@
 				36FB64F728D8CC7900A87587 /* ThirdViewController.swift in Sources */,
 				46E21EC028DC5F1500593210 /* Motion+CoreDataProperties.swift in Sources */,
 				46E21EC428DC5F1500593210 /* SecondModel.swift in Sources */,
+				B07C2D3B28E135DE00457396 /* Repository.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
 				B0CF0F3F28DA9B9B00596BCF /* FirstViewStyling.swift in Sources */,
@@ -409,6 +422,7 @@
 				36FB64F328D8CA8000A87587 /* SecondViewController.swift in Sources */,
 				462FB33328DB123D00BC5F04 /* ThirdViewControllerRoutable.swift in Sources */,
 				B08BCA3728DD8D8200F6E2A2 /* DummyGenerator.swift in Sources */,
+				B03F9D2628E1242100E352EC /* CoreMotionManager.swift in Sources */,
 				464FE63C28DB3D9D00C73656 /* UIFont+Extensions.swift in Sources */,
 				3695B0BD28D99CA100FF93FD /* SecondViewSegementedControlView.swift in Sources */,
 				36FB64ED28D8C5DC00A87587 /* Routable.swift in Sources */,
@@ -428,6 +442,7 @@
 				36FB64FC28D8CE1D00A87587 /* Presentable.swift in Sources */,
 				46E21ECC28DC5F2100593210 /* Repository.swift in Sources */,
 				64336DE828DC9DE400D56D68 /* MotionFile.swift in Sources */,
+				B03F9D2828E1264F00E352EC /* SecondControlViewModel.swift in Sources */,
 				3695B0C728D9AA0700FF93FD /* SecondViewControllerRoutable.swift in Sources */,
 				46E21EC128DC5F1500593210 /* Motion+CoreDataClass.swift in Sources */,
 				46E21EC628DC5F1500593210 /* FirstModel.swift in Sources */,
@@ -572,6 +587,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = U9B2QVCTVS;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GyroData/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -583,7 +599,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.GyroData;
+				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.GyroData.temp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -598,6 +614,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = U9B2QVCTVS;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GyroData/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -609,7 +626,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.GyroData;
+				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.GyroData.temp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

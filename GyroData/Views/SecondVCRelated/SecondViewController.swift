@@ -12,8 +12,8 @@ class SecondViewController: UIViewController, SecondViewControllerRoutable, Seco
     var saveButton = UIBarButtonItem()
     var backButton = UIBarButtonItem()
     lazy var segmentView = SecondViewSegementedControlView(viewModel: self.viewModel.segmentViewModel)
-    var dummyGraphView = UIView()
-    var controlView = SecondControlView()
+    var dummyGraphView = TestPathGraphView()
+    lazy var controlView = SecondControlView(viewModel: self.viewModel.controlViewModel)
     
     // MARK: Properties
     var viewModel: SecondModel
@@ -80,7 +80,7 @@ extension SecondViewController: Presentable {
     
     func configureView() {
         self.view.backgroundColor = .white
-        dummyGraphView.backgroundColor = .systemCyan
+        
         navigationItem.title = "측정하기"
         
         saveButton.addStyles(style: saveButtonStyling)

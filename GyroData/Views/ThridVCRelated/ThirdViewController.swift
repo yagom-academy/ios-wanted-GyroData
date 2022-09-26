@@ -11,7 +11,7 @@ class ThirdViewController: UIViewController, ThirdViewControllerRoutable, ThirdV
     // MARK: UI
     lazy var infoView = ThirdInfoView(viewModel: self.viewModel.infoViewModel)
     var backButton = UIBarButtonItem()
-    var dummyGraphView = UIView()
+    var dummyGraphView = TestPathGraphView()
     lazy var controlView = ThirdControlView(viewModel: self.viewModel.controlViewModel)
     
     // MARK: Properties
@@ -81,8 +81,6 @@ extension ThirdViewController: Presentable {
         backButton.addStyles(style: backButtonStyling)
         backButton.target = self
         backButton.action = #selector(didTapBackButton)
-        
-        dummyGraphView.backgroundColor = .systemCyan
     }
     
     func bind() {

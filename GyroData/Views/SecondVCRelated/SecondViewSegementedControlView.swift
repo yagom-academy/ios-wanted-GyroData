@@ -54,7 +54,7 @@ extension SecondViewSegementedControlView: Presentable {
     
     func bind() {
         viewModel.selectedTypeSource = { [weak self] type in
-            if type == "ACC" {
+            if type == .acc {
                 self?.segmentedControl.selectedSegmentIndex = 0
             } else {
                 self?.segmentedControl.selectedSegmentIndex = 1
@@ -63,8 +63,11 @@ extension SecondViewSegementedControlView: Presentable {
     }
     
     @objc func segmentAction() {
-        let type = segmentedControl.selectedSegmentIndex == 0 ? "ACC" : "GYRO"
+        let type: MotionType = segmentedControl.selectedSegmentIndex == 0 ? .acc : .gyro
         viewModel.didSegmentChange(type)
+        viewModel.isUserInteractionEnabledSource = { [weak self] enabled in
+            self?.segmentedControl.isUserInteractionEnabled = enabled
+        }
     }
 }
 
