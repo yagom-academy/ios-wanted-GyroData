@@ -20,6 +20,16 @@ class SecondModel {
             motionMeasuresSource(_motionMeasures)
         }
     }
+    var isMeasuringSource: (Bool) -> () = { isMeasuring in } {
+        didSet {
+            isMeasuringSource(_isMeasuring)
+        }
+    }
+    var isLoadingSource: (Bool) -> () = { isLoading in } {
+        didSet {
+            isLoadingSource(_isLoading)
+        }
+    }
     
     // MARK: Properties
     private var repository: RepositoryProtocol
@@ -34,7 +44,13 @@ class SecondModel {
     }
     private var _isMeasuring: Bool = false {
         didSet {
+            isMeasuringSource(_isMeasuring)
             segmentViewModel.didReceiveIsMeasuring(_isMeasuring)
+        }
+    }
+    private var _isLoading: Bool = false {
+        didSet {
+            isLoadingSource(_isLoading)
         }
     }
     
@@ -50,7 +66,7 @@ class SecondModel {
     // MARK: Bind
     func bind() {
         didTapBackButton = { [weak self] in
-            self?.routeSubject((.close))
+            self?.routeSubject(.close)
         }
         
         didTapSaveButton = { [weak self] in
@@ -59,7 +75,12 @@ class SecondModel {
                 debugPrint("측정 중에는 저장할 수 없습니다.")
                 return
             }
+            self._isLoading = true
             // TODO: 저장 로직 추가..
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self._isLoading = false
+                self.routeSubject(.close)
+            }
         }
         
         controlViewModel.propagateDidTapMeasureButton = { [weak self] in
