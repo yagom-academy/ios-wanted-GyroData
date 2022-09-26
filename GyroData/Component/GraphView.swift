@@ -63,6 +63,8 @@ class GraphView: UIView {
     var bPoint: GraphBuffer?
     var cPoint: GraphBuffer?
     
+    var animationIsValid: Bool = false
+    
     //애니메이션 사용을 위해 layer 재정의
     static override var layerClass: AnyClass {
         return CAShapeLayer.self
@@ -76,10 +78,6 @@ class GraphView: UIView {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-    
-//    override func draw(_ rect: CGRect) {
-//        showGraph()
-//    }
     
     //그래프 속성 설정
     func doInitSetup() {
@@ -128,53 +126,36 @@ class GraphView: UIView {
             animation.toValue = oldPathInfo.aPath.copy(using: &transform)
         }
         
-        xLayer.add(animation, forKey: animation.keyPath)
-        yLayer.add(animation, forKey: animation.keyPath)
-        zLayer.add(animation, forKey: animation.keyPath)
+        if animationIsValid {
+            xLayer.add(animation, forKey: animation.keyPath)
+            yLayer.add(animation, forKey: animation.keyPath)
+            zLayer.add(animation, forKey: animation.keyPath)
+        }
+ 
         
         // 새 좌표 업데이트
         aPoint?.write(aValue)
         bPoint?.write(bValue)
         cPoint?.write(cValue)
-     
+        
         // 애니메이션이 시작되기 전에 새 포인트의 경로를 설정하게 되면 애니메이션이 매끄럽지 않아, 시간 차를 두었다
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now()) { [weak self] in
             let path = self?.makePath()
             self?.xLayer.path = path?.aPath
             self?.yLayer.path = path?.bPath
             self?.zLayer.path = path?.cPath
-//            print("⭐️", path?.aPath)
-//            print("🍎", path?.bPath)
         }
     }
     
     public func showGraph() {
-        let start = 100
-        for (idx, eachData) in graphData.enumerated() {
-            let idx = CGFloat(idx)
-            let xValue = CGFloat(Float(start) - eachData.coodinate[0])
-            let yValue = CGFloat(Float(start) - eachData.coodinate[1])
-            let zValue = CGFloat(Float(start) - eachData.coodinate[2])
-            print(idx, xValue, yValue, zValue)
-            if idx == 0 {
-                aPath.move(to: CGPoint(x: 0, y: start))
-                bPath.move(to: CGPoint(x: 0, y: start))
-                cPath.move(to: CGPoint(x: 0, y: start))
-            } else {
-                aPath.addLine(to: CGPoint(x: idx, y: xValue))
-                bPath.addLine(to: CGPoint(x: idx, y: yValue))
-                cPath.addLine(to: CGPoint(x: idx, y: zValue))
-            }
-
-        }
         
-        xLayer.path = aPath.cgPath
-        yLayer.path = bPath.cgPath
-        zLayer.path = cPath.cgPath
-        self.layer.addSublayer(xLayer)
-        self.layer.addSublayer(yLayer)
-        self.layer.addSublayer(zLayer)
-   
+        graphData.forEach { data in
+            let x = CGFloat(data.coodinate.x)
+            let y = CGFloat(data.coodinate.y)
+            let z = CGFloat(data.coodinate.z)
+            animateNewValue(aValue: x, bValue: y, cValue: z)
+        }
+    
     }
     
     //경로 값을 이용해 선을 그린다
@@ -215,6 +196,7 @@ class GraphView: UIView {
                 cPath.move(to: CGPoint(x: x, y: cY))
             }
         }
+
         self.layer.addSublayer(xLayer)
         self.layer.addSublayer(yLayer)
         self.layer.addSublayer(zLayer)

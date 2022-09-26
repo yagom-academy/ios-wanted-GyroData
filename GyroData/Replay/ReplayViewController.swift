@@ -99,9 +99,11 @@ class ReplayViewController: UIViewController {
         self.view.backgroundColor = .white
         self.navigationController?.navigationBar.isHidden = true
         self.setupLayouts()
-//        self.btnAddTarget()
-//        self.setupGraphView()
-        graphViewShow()
+        self.btnAddTarget()
+        self.setupGraphView()
+        if pageTypeName == .view {
+            graphViewShow()
+        }
     }
     
     // MARK: - private func
@@ -173,11 +175,11 @@ class ReplayViewController: UIViewController {
     }
     
     private func graphViewShow() {
-        let result = JsonFetchManager.shared.request(id: "7ED4F393-5173-4047-9518-689F8595C5C0")
+        let result = JsonFetchManager.shared.request(id: "D1CE2BE2-1BD2-40AD-9A4A-BEA7C89E5AB2")
         switch result {
         case .success(let data):
             self.graphView.graphData = data
-            self.graphView.showGraph()
+            self.graphView.showGraph() 
         case .failure(let error):
             debugPrint(error)
         }

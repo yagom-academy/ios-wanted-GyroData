@@ -15,11 +15,6 @@ enum JsonFetchError: Error {
     case notFound
 }
 
-
-struct GyroJson: Decodable {
-    let coodinate: [Float]
-}
-
 class JsonFetchManager: JsonFetchProtocol {
     
     static let shared: JsonFetchManager = .init()
