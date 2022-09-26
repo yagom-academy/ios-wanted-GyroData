@@ -10,7 +10,14 @@ import UIKit
 
 
 class ReplayViewModel {
+    enum PageType: String {
+        case view = "View"
+        case play = "Play"
+    }
+    
     var buttonState: Bool = false
+    var measureDate: String?
+    var playType: PageType?
     
     func startButtonTap(completion: @escaping () -> ()) {
         

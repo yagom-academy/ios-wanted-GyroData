@@ -10,12 +10,18 @@ import SnapKit
 
 class ReplayViewController: UIViewController {
     
+    enum PageType: String {
+        case view = "View"
+        case play = "Play"
+    }
+    
     weak var timer: Timer?
     private var viewModel: ReplayViewModel = .init()
     let stepDuration = 0.1
     var aData: CGFloat = 0.0
     var bData: CGFloat = 0.0
     var cData: CGFloat = 0.0
+    var pageTypeName: PageType = .view
     var aBuffer = GraphBuffer(count: 100)
     var bBuffer = GraphBuffer(count: 100)
     var cBuffer = GraphBuffer(count: 100)
@@ -95,14 +101,13 @@ class ReplayViewController: UIViewController {
     }
     
     private func setupLayouts() {
+      
         self.view.addSubViews(
             self.navigationTitle,
             self.navigationBackButton,
             self.measureDateLabel,
             self.stateLabel,
-            self.graphView,
-            self.playButton,
-            self.timerLabel
+            self.graphView
         )
         
         self.navigationBackButton.snp.makeConstraints {
@@ -133,16 +138,22 @@ class ReplayViewController: UIViewController {
             $0.leading.trailing.equalToSuperview().inset(30)
         }
         
-        self.playButton.snp.makeConstraints {
-            $0.top.equalTo(self.graphView.snp.bottom).offset(30)
-            $0.centerX.equalToSuperview()
-            $0.width.height.equalTo(80)
+        if pageTypeName == .play {
+            self.view.addSubViews(
+                self.playButton,
+                self.timerLabel
+            )
+            self.playButton.snp.makeConstraints {
+                $0.top.equalTo(self.graphView.snp.bottom).offset(30)
+                $0.centerX.equalToSuperview()
+                $0.width.height.equalTo(80)
+            }
+            self.timerLabel.snp.makeConstraints {
+                $0.top.equalTo(self.playButton.snp.bottom).offset(30)
+                $0.centerX.equalToSuperview()
+            }
         }
-        
-        self.timerLabel.snp.makeConstraints {
-            $0.top.equalTo(self.playButton.snp.bottom).offset(30)
-            $0.centerX.equalToSuperview()
-        }
+       
     }
     
     private func setupGraphView() {
@@ -191,6 +202,8 @@ class ReplayViewController: UIViewController {
     @objc func stopButtonTap(_ sender: UIButton) {
         print("정지")
         timer?.invalidate()
+        self.graphView.reset()
+        self.startTime = 0
     }
 
 }
