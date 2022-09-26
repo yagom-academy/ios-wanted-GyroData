@@ -10,6 +10,7 @@ import Foundation
 class FirstModel {
     //input
     var didTapMeasureButton: (() -> ()) = { }
+    var didReceiveRefreshRequest = { }
     
     //output
     var contentViewModel: FirstListViewModel {
@@ -66,6 +67,10 @@ class FirstModel {
             guard let self = self else { return }
             print("!!!!!!!")
             self.populateData()
+        }
+        
+        didReceiveRefreshRequest = { [weak self] in
+            print("first Model didReceiveRefreshRequest")
         }
     }
     
