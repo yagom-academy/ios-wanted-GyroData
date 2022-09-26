@@ -26,9 +26,15 @@ class FirstModel {
     init(repository: RepositoryProtocol) {
         self.repository = repository
         // Test 데이터
-//        for _ in 0..<10 {
-//            CoreDataManager.shared.insertMotionTask(motion: DummyGenerator.getDummyMotionData())
-//        }
+        Task {
+            for _ in 0..<10 {
+                do {
+                    try await DummyGenerator.insertDummyMotionDataToCoreData()
+                } catch {
+                    throw error
+                }
+            }
+        }
         
         // -----
         self.privateFirstListViewModel = FirstListViewModel(motionTasks)
@@ -56,12 +62,17 @@ class FirstModel {
             let context = SceneContext(dependency: model)
             self.routeSubject(.detail(.thirdViewController(context: context)))
         }
+        privateFirstListViewModel.propagateStartPaging = { [weak self] _ in
+            guard let self = self else { return }
+            print("!!!!!!!")
+            self.populateData()
+        }
     }
     
     func populateData() {
         Task {
             let motionTasks = try await self.repository.fetchFromCoreData()
-            self.privateFirstListViewModel.didReceiveMotionTasks(motionTasks)
+            privateFirstListViewModel.didReceiveMotionTasks(motionTasks)
         }
     }
 }

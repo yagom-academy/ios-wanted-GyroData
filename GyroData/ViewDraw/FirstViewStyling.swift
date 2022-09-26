@@ -37,4 +37,12 @@ extension FirstViewStyling {
             $0.text = "60.0"
         }
     }
+    
+    var cellActivityIndicatorViewStyling: (UIActivityIndicatorView) -> () {
+        {
+            $0.style = .large
+            $0.color = .grayPrimary
+            $0.isHidden = false
+        }
+    }
 }
