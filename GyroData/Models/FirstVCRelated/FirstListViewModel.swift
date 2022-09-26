@@ -12,6 +12,8 @@ class FirstListViewModel {
     var didSelectRow: (Int) -> () = { indexPathRow in }
     var didSelectPlayAction: (Int) -> () = { indexPathRow in }
     var didReceiveMotionTasks: ([MotionTask]) -> () = { motionTasks in }
+    var didReceiveStartPaging: () -> () = { }
+    var didReceiveEndPaging: () -> () = { }
     
     // MARK: Output
     var propagateDidSelectRowEvent: (MotionTask) -> () = { motion in }
@@ -20,13 +22,20 @@ class FirstListViewModel {
         return _motionTasks
     }
     var didReceiveViewModel: ( ((Void)) -> () )?
+    var propagateFetchMotionTasks: ( ((Void)) -> () )?
+    var isPaging: Bool {
+        return _isPaging
+    }
+    var propagateStartPaging: ( ((Void)) -> () )?
     
     // MARK: Properties
     private var _motionTasks: [MotionTask]
+    private var _isPaging: Bool
     
     // MARK: Init
     init(_ motionDatas: [MotionTask]) {
         self._motionTasks = motionDatas
+        self._isPaging = false
         bind()
     }
     
@@ -43,12 +52,17 @@ class FirstListViewModel {
             self.propagateDidSelectPlayActionEvent(motion)
         }
         didReceiveMotionTasks = { [weak self] motionTasks in
-            self?.populateData(result: motionTasks)
-            self?.didReceiveViewModel?(())
+            guard let self = self else { return }
+            self._motionTasks = motionTasks
         }
-    }
-    
-    private func populateData(result: [MotionTask]) {
-        self._motionTasks = result
+        didReceiveStartPaging = {
+            self._isPaging = true
+            self.propagateStartPaging?(())
+        }
+        didReceiveEndPaging = {
+            self._isPaging = false
+            // TO-DO : CoreData 와 연결
+            self._motionTasks += self._motionTasks[0...9]
+        }
     }
 }

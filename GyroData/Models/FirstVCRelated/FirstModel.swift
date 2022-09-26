@@ -61,12 +61,17 @@ class FirstModel {
             let context = SceneContext(dependency: model)
             self.routeSubject(.detail(.thirdViewController(context: context)))
         }
+        privateFirstListViewModel.propagateStartPaging = { [weak self] _ in
+            guard let self = self else { return }
+            print("!!!!!!!")
+            self.populateData()
+        }
     }
     
     func populateData() {
         Task {
             let motionTasks = try await self.repository.fetchFromCoreData()
-            self.privateFirstListViewModel.didReceiveMotionTasks(motionTasks)
+            privateFirstListViewModel.didReceiveMotionTasks(motionTasks)
         }
     }
 }

@@ -55,12 +55,6 @@ extension FirstLoadingCellContentView: Presentable {
         didReceiveViewModel = { [weak self] viewModel in
             guard let self = self else { return }
             self.viewModel = viewModel
-//            viewModel.typeSource = { type in
-//                self.measureTypeLabel.text = type
-//            }
-//            viewModel.amountSource = { amount in
-//                self.amountLabel.text = amount
-//            }
         }
     }
 }
@@ -91,7 +85,7 @@ struct FirstLoadingCellContentViewPreviewProvider: PreviewProvider {
     static var previews: some View {
         FirstLoadingCellContentViewPreview {
             let view = FirstLoadingCellContentView()
-            view.didReceiveViewModel(FirstLoadingCellContentViewModel(DummyGenerator.getDummyMotionData()))
+            view.didReceiveViewModel(FirstLoadingCellContentViewModel())
             return view
         }.previewLayout(.fixed(width: 390, height: 80))
     }

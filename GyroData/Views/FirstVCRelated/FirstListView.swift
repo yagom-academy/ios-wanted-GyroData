@@ -55,8 +55,18 @@ extension FirstListView: Presentable {
     }
     
     func bind() {
-        viewModel.didReceiveViewModel = { [weak self] _ in
+        viewModel.propagateFetchMotionTasks = { [weak self] _ in
             DispatchQueue.main.async {
+                self?.tableView.reloadData()
+            }
+        }
+        viewModel.propagateStartPaging = { [weak self] _ in
+            DispatchQueue.main.async {
+                self?.tableView.reloadSections(IndexSet(integer: 1), with: .none)
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                // Debug
+                self?.viewModel.didReceiveEndPaging()
                 self?.tableView.reloadData()
             }
         }
@@ -129,10 +139,25 @@ extension FirstListView: UITableViewDataSource {
                 fatalError()
             }
             
-            let viewModel = FirstLoadingCellContentViewModel(viewModel.motionTasks[indexPath.row])
+            let viewModel = FirstLoadingCellContentViewModel()
             cell.configureCell(viewModel: viewModel)
+            cell.cellView.activityIndicatorView.startAnimating()
             
             return cell
+        }
+    }
+}
+
+extension FirstListView: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let height = scrollView.frame.height
+        
+        if offsetY > (contentHeight - height) {
+            if !viewModel.isPaging {
+                viewModel.didReceiveStartPaging()
+            }
         }
     }
 }
