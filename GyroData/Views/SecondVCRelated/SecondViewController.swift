@@ -12,7 +12,7 @@ class SecondViewController: UIViewController, SecondViewControllerRoutable, Seco
     var saveButton = UIBarButtonItem()
     var backButton = UIBarButtonItem()
     lazy var segmentView = SecondViewSegementedControlView(viewModel: self.viewModel.segmentViewModel)
-    lazy var dummyGraphView = GraphView(viewModel: self.viewModel.graphViewModel)
+    lazy var graphView = GraphView(viewModel: self.viewModel.graphViewModel)
     lazy var controlView = SecondControlView(viewModel: self.viewModel.controlViewModel)
     var indicatorView = SecondHoveringIndicatorView()
     
@@ -46,12 +46,12 @@ extension SecondViewController: Presentable {
     func initViewHierarchy() {
         self.view = UIView()
         view.addSubview(segmentView)
-        view.addSubview(dummyGraphView)
+        view.addSubview(graphView)
         view.addSubview(controlView)
         view.addSubview(indicatorView)
         
         segmentView.translatesAutoresizingMaskIntoConstraints = false
-        dummyGraphView.translatesAutoresizingMaskIntoConstraints = false
+        graphView.translatesAutoresizingMaskIntoConstraints = false
         controlView.translatesAutoresizingMaskIntoConstraints = false
         indicatorView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -66,15 +66,15 @@ extension SecondViewController: Presentable {
             segmentView.heightAnchor.constraint(equalToConstant: 42),
         ]
         constraints += [
-            dummyGraphView.topAnchor.constraint(equalTo: segmentView.bottomAnchor, constant: 16),
-            dummyGraphView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            dummyGraphView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
-            dummyGraphView.heightAnchor.constraint(equalTo: dummyGraphView.widthAnchor),
+            graphView.topAnchor.constraint(equalTo: segmentView.bottomAnchor, constant: 16),
+            graphView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            graphView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            graphView.heightAnchor.constraint(equalTo: graphView.widthAnchor),
         ]
         constraints += [
             controlView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
             controlView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
-            controlView.topAnchor.constraint(equalTo: dummyGraphView.bottomAnchor, constant: 48),
+            controlView.topAnchor.constraint(equalTo: graphView.bottomAnchor, constant: 48),
         ]
         constraints += [
             indicatorView.topAnchor.constraint(equalTo: self.view.topAnchor),
