@@ -14,7 +14,12 @@ enum sensorType: Int {
 }
 
 struct MotionData: Codable {
-    let coodinate: [Double]
+    let coodinate: coodinateData
+}
+struct coodinateData: Codable {
+    let x: Double
+    let y: Double
+    let z: Double
 }
 
 class MeasureViewController: UIViewController {
@@ -104,7 +109,8 @@ class MeasureViewController: UIViewController {
                 motionData = [data.x, data.y, data.z]
             }
             //데이터를 배열에 저장해둔다
-            self.saveMotionData.append(MotionData(coodinate: [motionData[0],motionData[1],motionData[2]]))
+            //self.saveMotionData.append(MotionData(coodinate: [motionData[0],motionData[1],motionData[2]]))
+            self.saveMotionData.append(MotionData(coodinate: coodinateData(x: motionData[0], y: motionData[1], z: motionData[2])))
             //받아온 데이터로 그래프 그리기, 카운트다운 60초
             self.graphView.animateNewValue(aValue: motionData[0], bValue: motionData[1], cValue: motionData[2], duration: self.stepDuration)
             self.countDown -= 1
@@ -130,6 +136,7 @@ class MeasureViewController: UIViewController {
                     print("저장 실패 File Manager Error")
                     return
                 } else {
+                    MeasureFileManager.shared.loadFile(coverData)
                     let result = manager.insertMeasure(measure: coverData)
                     if !result {
                         print("저장 실패 Core Data error")

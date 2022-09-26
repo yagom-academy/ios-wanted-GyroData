@@ -39,11 +39,15 @@ class MeasureFileManager {
         let fileURL = documentsURL.appendingPathComponent("\(coverData.id).json")
         
         do {
-            let data = try String(contentsOf: fileURL, encoding: .utf8)
-            print(data)
+            let data = try Data(contentsOf: fileURL)
+            let decoder = JSONDecoder()
+            let decodeData = try decoder.decode([MotionData].self, from: data)
+            print(decodeData)
+            
             return true
         }
         catch {
+            print(error)
             return false
         }
     }
