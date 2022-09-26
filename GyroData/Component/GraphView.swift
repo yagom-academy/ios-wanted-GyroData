@@ -46,8 +46,8 @@ class GraphBuffer {
 
 class GraphView: UIView {
     
-    public var maxValue: CGFloat = 50
-    public var minValue: CGFloat = -50
+    public var maxValue: CGFloat = 20
+    public var minValue: CGFloat = -20
     var graphSwipeAnimation = false
     
     public var aPoint: GraphBuffer?
@@ -74,9 +74,9 @@ class GraphView: UIView {
     
     //그래프 속성 설정
     func doInitSetup() {
-        designLayer(xLayer, color: .yellow)
-        designLayer(yLayer, color: .blue)
-        designLayer(zLayer, color: .black)
+        designLayer(xLayer, color: .red)
+        designLayer(yLayer, color: .green)
+        designLayer(zLayer, color: .blue)
     }
     
     private func designLayer(_ layer: CAShapeLayer, color: UIColor) {
@@ -99,6 +99,10 @@ class GraphView: UIView {
     //이전 좌표, 현재 좌표를 이용하여 변화를 애니메이션 처리
     public func animateNewValue(aValue: CGFloat, bValue: CGFloat, cValue: CGFloat, duration: Double = 0.0) {
         let animation = CABasicAnimation(keyPath: "strokeEnd")
+        
+        //value가 최대 혹은 최소 값을 초과 했을 경우 스케일 재설정
+        resetScale([aValue,bValue,cValue])
+        
         let oldPathInfo = makePath()
         
         animation.duration = duration
@@ -144,7 +148,7 @@ class GraphView: UIView {
 //
         let xInterval = bounds.width / (CGFloat(aPoint.count) - 1)
         let range = minValue - maxValue
-        let yInterval = bounds.height / (range * 3)
+        let yInterval = bounds.height / range
         
         let aPath = UIBezierPath()
         let bPath = UIBezierPath()
@@ -190,5 +194,20 @@ class GraphView: UIView {
     
     func yForValue(_ value: CGFloat, _ yInterval: CGFloat) -> CGFloat {
         return bounds.height / 2 + value * yInterval + bounds.origin.y
+    }
+    
+    func resetScale(_ motionData: [Double]) {
+
+        for value in motionData {
+            if value > maxValue {
+                maxValue = value + (value * 0.2)
+                minValue = (value + (value * 0.2)) * -1
+            }
+            if value < minValue {
+                maxValue = (value + (value * 0.2)) * -1
+                minValue = value + (value * 0.2)
+            }
+        }
+
     }
 }
