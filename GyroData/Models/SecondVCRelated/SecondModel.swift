@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreMotion
+import UIKit
 
 class SecondModel {
     // MARK: Input
@@ -79,7 +80,13 @@ class SecondModel {
             // TODO: 저장 로직 추가..
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 self._isLoading = false
-                self.routeSubject(.close)
+                
+                let okAction = AlertActionDependency(title: "확인") { _ in
+                    self.routeSubject(.close)
+                }
+                
+                let alertDependancy = AlertDependency(title: nil, message: "저장이 완료되었습니다.", preferredStyle: .alert, actionSet: [okAction])
+                self.routeSubject(.alert(alertDependancy))
             }
         }
         
