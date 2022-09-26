@@ -4,6 +4,7 @@
 //
 //  Created by 한경수 on 2022/09/21.
 //
+//TODO: 특정 시점에서 graphViewModel이 didReceiveData, didReceiveAll 호출하게끔 추가
 
 import Foundation
 
@@ -22,6 +23,7 @@ class ThirdModel {
     // MARK: Properties
     var infoViewModel: ThirdInfoViewModel
     var controlViewModel: ThirdControlViewModel
+    var graphViewModel: GraphViewModel
     private var _viewType: ViewType {
         didSet {
             viewTypeSource(_viewType)
@@ -40,6 +42,7 @@ class ThirdModel {
         self._motion = motion
         self.infoViewModel = ThirdInfoViewModel(viewType: viewType, motion: motion)
         self.controlViewModel = ThirdControlViewModel(motion: motion)
+        self.graphViewModel = GraphViewModel()
         bind()
     }
     

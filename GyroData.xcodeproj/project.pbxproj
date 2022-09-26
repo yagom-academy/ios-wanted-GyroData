@@ -9,7 +9,8 @@
 /* Begin PBXBuildFile section */
 		3695B0BD28D99CA100FF93FD /* SecondViewSegementedControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3695B0BC28D99CA100FF93FD /* SecondViewSegementedControlView.swift */; };
 		3695B0C728D9AA0700FF93FD /* SecondViewControllerRoutable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3695B0C628D9AA0700FF93FD /* SecondViewControllerRoutable.swift */; };
-		36C67A8D28DAD9BC006F34CE /* TestPathGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C67A8C28DAD9BC006F34CE /* TestPathGraphView.swift */; };
+		36C67A8D28DAD9BC006F34CE /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C67A8C28DAD9BC006F34CE /* GraphView.swift */; };
+		36CFA23E28E1729900C623E9 /* GraphViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36CFA23D28E1729900C623E9 /* GraphViewModel.swift */; };
 		36E1FC9D28D976B800EB7E4F /* BasicNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E1FC9C28D976B800EB7E4F /* BasicNavigationController.swift */; };
 		36E1FCA728D97AAB00EB7E4F /* FirstListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E1FCA628D97AAB00EB7E4F /* FirstListView.swift */; };
 		36E1FCAC28D97CC000EB7E4F /* FirstListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E1FCAB28D97CC000EB7E4F /* FirstListCell.swift */; };
@@ -76,7 +77,8 @@
 /* Begin PBXFileReference section */
 		3695B0BC28D99CA100FF93FD /* SecondViewSegementedControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewSegementedControlView.swift; sourceTree = "<group>"; };
 		3695B0C628D9AA0700FF93FD /* SecondViewControllerRoutable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewControllerRoutable.swift; sourceTree = "<group>"; };
-		36C67A8C28DAD9BC006F34CE /* TestPathGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestPathGraphView.swift; sourceTree = "<group>"; };
+		36C67A8C28DAD9BC006F34CE /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
+		36CFA23D28E1729900C623E9 /* GraphViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphViewModel.swift; sourceTree = "<group>"; };
 		36E1FC9C28D976B800EB7E4F /* BasicNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicNavigationController.swift; sourceTree = "<group>"; };
 		36E1FCA628D97AAB00EB7E4F /* FirstListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstListView.swift; sourceTree = "<group>"; };
 		36E1FCAB28D97CC000EB7E4F /* FirstListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstListCell.swift; sourceTree = "<group>"; };
@@ -186,9 +188,17 @@
 		36C67A8B28DAD9A8006F34CE /* GraphView */ = {
 			isa = PBXGroup;
 			children = (
-				36C67A8C28DAD9BC006F34CE /* TestPathGraphView.swift */,
+				36C67A8C28DAD9BC006F34CE /* GraphView.swift */,
 			);
 			path = GraphView;
+			sourceTree = "<group>";
+		};
+		36CFA23C28E1728300C623E9 /* GraphViewRelated */ = {
+			isa = PBXGroup;
+			children = (
+				36CFA23D28E1729900C623E9 /* GraphViewModel.swift */,
+			);
+			path = GraphViewRelated;
 			sourceTree = "<group>";
 		};
 		36E1FC9B28D9768D00EB7E4F /* UIKitClasses */ = {
@@ -249,6 +259,7 @@
 		46E21EAA28DC5F1500593210 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				36CFA23C28E1728300C623E9 /* GraphViewRelated */,
 				46E21EAF28DC5F1500593210 /* CoreData */,
 				64336DE628DC9DE400D56D68 /* FileManager */,
 				46E21EB828DC5F1500593210 /* FirstVCRelated */,
@@ -468,7 +479,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				46E21EC728DC5F1500593210 /* FirstListViewModel.swift in Sources */,
-				36C67A8D28DAD9BC006F34CE /* TestPathGraphView.swift in Sources */,
+				36C67A8D28DAD9BC006F34CE /* GraphView.swift in Sources */,
 				36FB64F928D8CD1700A87587 /* SceneContext.swift in Sources */,
 				63F01BB928D44FC400C53A39 /* FirstViewController.swift in Sources */,
 				46E21EBC28DC5F1500593210 /* ThirdInfoViewModel.swift in Sources */,
@@ -484,6 +495,7 @@
 				46E21EBD28DC5F1500593210 /* ThirdControlViewModel.swift in Sources */,
 				B07EFEFF28E16FEC0058E0DD /* SecondHoveringIndicatorView.swift in Sources */,
 				36E1FCAC28D97CC000EB7E4F /* FirstListCell.swift in Sources */,
+				36CFA23E28E1729900C623E9 /* GraphViewModel.swift in Sources */,
 				36FB64FE28D8CF0500A87587 /* Styling.swift in Sources */,
 				B019E7FD28DBECF5009BC86F /* ThirdControlView.swift in Sources */,
 				46E21EC528DC5F1500593210 /* FirstCellContentViewModel.swift in Sources */,
