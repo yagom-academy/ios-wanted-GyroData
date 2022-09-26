@@ -70,7 +70,11 @@ class FirstListViewModel {
             // TO-DO : CoreData 와 연결
             self._currentTaskIndex = min(self._totalMotionTasks.count-1, self._currentTaskIndex + 10)
 //            print(self._currentTaskIndex)
-            self._motionTasks = Array<MotionTask>(self._totalMotionTasks[0...self._currentTaskIndex])
+            if !self._totalMotionTasks.isEmpty {
+                self._motionTasks = Array<MotionTask>(self._totalMotionTasks[0...self._currentTaskIndex])
+            } else {
+                self._motionTasks = []
+            }
         }
     }
     
