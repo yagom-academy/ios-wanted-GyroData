@@ -12,6 +12,7 @@ class CoreDataManager {
     
     static var shared: CoreDataManager = CoreDataManager()
     
+    
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     let request: NSFetchRequest<GyroModel> = GyroModel.fetchRequest()
     
@@ -25,6 +26,24 @@ class CoreDataManager {
         return container
     }()
    
+//    func fetchSave() {
+//        let request = NSFetchRequest<GyroModel>(entityName: "GyroModel")
+//
+//        var fetchOffset = 0
+//        request.fetchOffset = fetchOffset
+//        request.fetchLimit = 10
+//        do{
+//            var users: [GyroModel] = try! context.fetch(request)
+//            print("🐤🐤🐤🐤🐤🐤🐤🐤\(users.count)")
+//            while users.count > 0{
+//                fetchOffset = fetchOffset + users.count
+//                request.fetchOffset = fetchOffset
+//                users = try! context.fetch(request)
+//                print("🙈🙈🙈🙈🙈🙈🙈\(users.count)")
+//            }
+//        }
+    
+    
     var context: NSManagedObjectContext {
         return self.persistentContainer.viewContext
     }
@@ -42,9 +61,19 @@ class CoreDataManager {
             return []
         }
     }
+    func fetchTen(offset:Int) -> [GyroModel] {
+        do {
+            request.fetchLimit = 10
+            request.fetchOffset = offset
+            let fetchdata = try self.context.fetch(request)
+            print("🐤🐤🐤🐤🐤🐤🐤🐤\(fetchdata.count)")
+            return fetchdata
+        } catch {
+            print(error.localizedDescription)
+            return []
+        }
+    }
  
-    
-    
     @discardableResult
     func insertMeasure(measure: Measure) -> Bool {
         let entity = NSEntityDescription.entity(forEntityName: "GyroModel", in: self.context)
@@ -100,5 +129,4 @@ class CoreDataManager {
             return nil
         }
     }
-        
 }

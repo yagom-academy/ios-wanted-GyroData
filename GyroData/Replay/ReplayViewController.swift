@@ -161,10 +161,13 @@ class ReplayViewController: UIViewController {
     // MARK: - private func
     @objc func backButtonTap(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
+        self.navigationController?.navigationBar.isHidden = false
     }
     
     @objc func playButtonTap(_ sender: UIButton) {
         print("측정")
+        print(measureDateLabel)
+        
         countDown = 600
         timer = Timer.scheduledTimer(withTimeInterval: 0.1
                                      , repeats: true) { (timer) in
@@ -200,6 +203,3 @@ class ReplayViewController: UIViewController {
 //        }
     }
 }
-
-
-
