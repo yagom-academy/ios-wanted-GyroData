@@ -11,7 +11,7 @@ class ThirdViewController: UIViewController, ThirdViewControllerRoutable, ThirdV
     // MARK: UI
     lazy var infoView = ThirdInfoView(viewModel: self.viewModel.infoViewModel)
     var backButton = UIBarButtonItem()
-    var dummyGraphView = TestPathGraphView()
+    lazy var dummyGraphView = GraphView(viewModel: self.viewModel.graphViewModel)
     lazy var controlView = ThirdControlView(viewModel: self.viewModel.controlViewModel)
     
     // MARK: Properties

@@ -4,6 +4,7 @@
 //
 //  Created by pablo.jee on 2022/09/20.
 //
+//TODO: 특정 시점에서 graphViewModel이 didReceiveData, didReceiveAll 호출하게끔 추가
 
 import Foundation
 import CoreMotion
@@ -36,6 +37,7 @@ class SecondModel {
     private var motionManager: CoreMotionManagerProtocol
     var segmentViewModel: SecondSegmentViewModel
     var controlViewModel: SecondControlViewModel
+    var graphViewModel: GraphViewModel
     
     private var _motionMeasures = [MotionMeasure]() {
         didSet {
@@ -60,6 +62,7 @@ class SecondModel {
         self.motionManager = motionManager
         self.segmentViewModel = SecondSegmentViewModel()
         self.controlViewModel = SecondControlViewModel()
+        self.graphViewModel = GraphViewModel()
         bind()
     }
     

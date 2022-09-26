@@ -12,7 +12,7 @@ class SecondViewController: UIViewController, SecondViewControllerRoutable, Seco
     var saveButton = UIBarButtonItem()
     var backButton = UIBarButtonItem()
     lazy var segmentView = SecondViewSegementedControlView(viewModel: self.viewModel.segmentViewModel)
-    var dummyGraphView = TestPathGraphView()
+    lazy var dummyGraphView = GraphView(viewModel: self.viewModel.graphViewModel)
     lazy var controlView = SecondControlView(viewModel: self.viewModel.controlViewModel)
     var indicatorView = SecondHoveringIndicatorView()
     
