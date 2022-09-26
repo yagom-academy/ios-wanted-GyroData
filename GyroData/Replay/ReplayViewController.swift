@@ -10,6 +10,7 @@ import SnapKit
 
 class ReplayViewController: UIViewController {
     
+    //viewmodel 값들
     enum PageType: String {
         case view = "View"
         case play = "Play"
@@ -32,10 +33,12 @@ class ReplayViewController: UIViewController {
             timerLabel.text = String(format: "%.1f", startTime)
         }
     }
-    
+        
     var sensorData: CGFloat = 0.0
     var buffer = GraphBuffer(count: 100)
     var countDown = 0
+    
+    // MARK: - Component
     
     private let navigationTitle: UILabel = {
         let label = UILabel()
@@ -98,8 +101,10 @@ class ReplayViewController: UIViewController {
         self.setupLayouts()
         self.btnAddTarget()
         self.setupGraphView()
+        graphViewShow()
     }
     
+    // MARK: - private func
     private func setupLayouts() {
       
         self.view.addSubViews(
@@ -167,7 +172,18 @@ class ReplayViewController: UIViewController {
         playButton.addTarget(self, action: #selector(playButtonTap(_:)), for: .touchUpInside)
     }
     
-    // MARK: - private func
+    private func graphViewShow() {
+        let result = JsonFetchManager.shared.request(id: "7ED4F393-5173-4047-9518-689F8595C5C0")
+        switch result {
+        case .success(let data):
+            self.graphView.showGraph(data)
+        case .failure(let error):
+            debugPrint(error)
+        }
+    }
+    
+    // MARK: - #selector
+    
     @objc func backButtonTap(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
     }
