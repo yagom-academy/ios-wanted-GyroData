@@ -9,8 +9,6 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    var datas = [Save]()
-    
     let formatter: DateFormatter = {
         let f = DateFormatter()
         f.dateStyle = .long
@@ -42,6 +40,7 @@ class ViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         DataManager.shared.fetchSave()
         tableView.reloadData()
     }
@@ -70,13 +69,6 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row == DataManager.shared.saveList.count - 1 {
-            DataManager.shared.fetchSave()
-            tableView.reloadData()
-        }
-    }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return DataManager.shared.saveList.count
@@ -103,10 +95,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         
         let actions1 = UIContextualAction(style: .normal, title: "Delete", handler: { action, view, completionHaldler in
             completionHaldler(true)
-            let cell = DataManager.shared.saveList.remove(at: indexPath.row)
-            DataManager.shared.deleteRun(object: cell)
-            DataManager.shared.saveContext()
-            tableView.reloadData()
+            
         })
         actions1.backgroundColor = .systemRed
     

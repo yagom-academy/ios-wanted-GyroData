@@ -19,43 +19,20 @@ class DataManager {
     }
     
     var saveList = [Save]()
-    //데이터 저장
+    
     func fetchSave() {
         let request: NSFetchRequest<Save> = Save.fetchRequest()
-        request.fetchLimit = 5
-        request.fetchOffset = saveList.count
+        
         let sortByDateDesc = NSSortDescriptor(key: "date", ascending: false)
         request.sortDescriptors = [sortByDateDesc]
+        
         do {
-            saveList.append(contentsOf: try mainContext.fetch(request))
+            saveList = try mainContext.fetch(request)
         } catch {
             print(error)
         }
     }
     
-    //부분Delete 구현
-    func deleteRun(object: Save) -> Bool {
-        self.mainContext.delete(object)
-        self.saveMainContext()
-        do {
-            try mainContext.save()
-            return true
-        } catch {
-            return false
-        }
-    }
-    func saveMainContext() {
-        mainContext.perform {
-            if self.mainContext.hasChanges {
-                do {
-                    try self.mainContext.save()
-                } catch {
-                    print(error)
-                }
-            }
-        }
-        saveContext()
-    }
     func addNewSave(_ name: String?, _ time: Float?, _ xData: [Float], yData: [Float], zData: [Float]) {
         let newSave = Save(context: mainContext)
         newSave.name = name
@@ -75,7 +52,7 @@ class DataManager {
     }
     
     // MARK: - Core Data stack
-    
+
     lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "GyroExample")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
@@ -85,9 +62,9 @@ class DataManager {
         })
         return container
     }()
-    
+
     // MARK: - Core Data Saving support
-    
+
     func saveContext () {
         let context = persistentContainer.viewContext
         if context.hasChanges {
