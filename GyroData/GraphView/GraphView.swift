@@ -124,7 +124,7 @@ class GraphView: UIView {
         
         xPath.move(to: xPreviousPoint)
         
-        xNewPoint = CGPoint(x: xPreviousPoint.x + 10, y: xPreviousPoint.y + receivedData)
+        xNewPoint = CGPoint(x: xPreviousPoint.x + 0.5, y: xPreviousPoint.y + receivedData)
         // 이전 Path들에게 이미 적용된 Transform이 있다면 newPoint에도 해당 Transform을 적용시킨 뒤 선을 그려줘야 합니다. - Eric
         if let lastAppliedTransform {
             xNewPoint = xNewPoint.applying(lastAppliedTransform)
@@ -145,7 +145,7 @@ class GraphView: UIView {
         
         yPath.move(to: yPreviousPoint)
         
-        yNewPoint = CGPoint(x: yPreviousPoint.x + 10, y: yPreviousPoint.y + receivedData)
+        yNewPoint = CGPoint(x: yPreviousPoint.x + 0.5, y: yPreviousPoint.y + receivedData)
         if let lastAppliedTransform {
             yNewPoint = yNewPoint.applying(lastAppliedTransform)
         }
@@ -165,7 +165,7 @@ class GraphView: UIView {
         
         zPath.move(to: zPreviousPoint)
         
-        zNewPoint = CGPoint(x: zPreviousPoint.x + 10, y: zPreviousPoint.y + receivedData)
+        zNewPoint = CGPoint(x: zPreviousPoint.x + 0.5, y: zPreviousPoint.y + receivedData)
         if let lastAppliedTransform {
             zNewPoint = zNewPoint.applying(lastAppliedTransform)
         }

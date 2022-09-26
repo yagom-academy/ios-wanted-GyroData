@@ -42,16 +42,14 @@ class GraphViewModel {
         }
     }
     
-    //Gyro, acc 값의 최소, 최대값은 0.0 ~ 1.0 으로 추정
     //그러므로 ViewModel에서 "그래프가 표시할 수 있는 정도의 값"으로 보정을 해야함
-    //TODO: 실제 데이터와 연결하면서 더 나은 데이터 범위로 나오도록 보정
     private func calculateValue(value: [MotionMeasure]) -> [ValueInfo] {
-        var newValue: [ValueInfo] = value.map { measure in
-            //0.0~100.0
+        let newValue: [ValueInfo] = value.map { measure in
+            //TODO: 실제 데이터와 연결하면서 더 나은 데이터 범위로 나오도록 보정
             var valueInfo = ValueInfo(xValue: 0, yValue: 0, zValue: 0)
-            valueInfo.xValue = measure.x * 50.0 * 2
-            valueInfo.yValue = measure.y * 50.0 * 2
-            valueInfo.zValue = measure.z * 50.0 * 2
+            valueInfo.xValue = measure.x * 100
+            valueInfo.yValue = measure.y * 100
+            valueInfo.zValue = measure.z * 100
             return valueInfo
         }
         return newValue
