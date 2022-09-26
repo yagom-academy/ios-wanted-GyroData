@@ -9,8 +9,8 @@ import UIKit
 
 class FirstListLoadingCell: UITableViewCell {
 
-    lazy var cellView: FirstCellContentView = FirstCellContentView()
-    var viewModel: FirstCellContentViewModel? {
+    lazy var cellView: FirstLoadingCellContentView = FirstLoadingCellContentView()
+    var viewModel: FirstLoadingCellContentViewModel? {
         didSet {
             guard let viewModel else { return }
             cellView.didReceiveViewModel(viewModel)
@@ -59,7 +59,7 @@ extension FirstListLoadingCell: Presentable {
         
     }
     
-    func configureCell(viewModel: FirstCellContentViewModel) {
+    func configureCell(viewModel: FirstLoadingCellContentViewModel) {
         self.viewModel = viewModel
     }
 }

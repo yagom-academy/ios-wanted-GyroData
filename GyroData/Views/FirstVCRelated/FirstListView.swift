@@ -48,6 +48,7 @@ extension FirstListView: Presentable {
     
     func configureView() {
         tableView.register(FirstListCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(FirstListLoadingCell.self, forCellReuseIdentifier: "loadingCell")
         tableView.separatorStyle = .none
         tableView.delegate = self
         tableView.dataSource = self
@@ -89,11 +90,16 @@ extension FirstListView: UITableViewDelegate {
 extension FirstListView: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.motionTasks.count
+        if section == 0 {
+            return viewModel.motionTasks.count
+        } else if section == 1 {
+            return 1
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -101,20 +107,32 @@ extension FirstListView: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? FirstListCell else {
-            fatalError()
-        }
-        
-        //temp
-        //model이 만들어둔 cellViewModel을 잘 넘겨줄 수 있도록 추가 처리 필요
-        let viewModel = FirstCellContentViewModel(viewModel.motionTasks[indexPath.row])
-        cell.configureCell(viewModel: viewModel)
-        
-        if indexPath.row % 2 == 1 {
-            cell.backgroundColor = .grayThird
+        if indexPath.section == 0 {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? FirstListCell else {
+                fatalError()
+            }
+            
+            //temp
+            //model이 만들어둔 cellViewModel을 잘 넘겨줄 수 있도록 추가 처리 필요
+            let viewModel = FirstCellContentViewModel(viewModel.motionTasks[indexPath.row])
+            cell.configureCell(viewModel: viewModel)
+            
+            if indexPath.row % 2 == 1 {
+                cell.backgroundColor = .grayThird
+            } else {
+                cell.backgroundColor = .white
+            }
+            
+            return cell
         } else {
-            cell.backgroundColor = .white
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "loadingCell", for: indexPath) as? FirstListLoadingCell else {
+                fatalError()
+            }
+            
+            let viewModel = FirstLoadingCellContentViewModel(viewModel.motionTasks[indexPath.row])
+            cell.configureCell(viewModel: viewModel)
+            
+            return cell
         }
-        return cell
     }
 }
