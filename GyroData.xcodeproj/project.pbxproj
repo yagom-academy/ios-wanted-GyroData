@@ -26,7 +26,6 @@
 		6CFBD85628DEF2D0002380A4 /* Measure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CFBD85528DEF2D0002380A4 /* Measure.swift */; };
 		6CFBD87B28DEF375002380A4 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CFBD87A28DEF375002380A4 /* CoreDataManager.swift */; };
 		D3A0B4ED28DBE99A009ACF94 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A0B4EC28DBE99A009ACF94 /* CustomTableViewCell.swift */; };
-		D3A0B51228DC7F98009ACF94 /* CustomCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A0B51128DC7F98009ACF94 /* CustomCellModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,7 +49,6 @@
 		6CFBD85528DEF2D0002380A4 /* Measure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Measure.swift; sourceTree = "<group>"; };
 		6CFBD87A28DEF375002380A4 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		D3A0B4EC28DBE99A009ACF94 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
-		D3A0B51128DC7F98009ACF94 /* CustomCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCellModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,7 +126,6 @@
 			children = (
 				63F01BB828D44FC400C53A39 /* MainViewController.swift */,
 				D3A0B4EC28DBE99A009ACF94 /* CustomTableViewCell.swift */,
-				D3A0B51128DC7F98009ACF94 /* CustomCellModel.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -264,7 +261,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6CFBD85628DEF2D0002380A4 /* Measure.swift in Sources */,
-				D3A0B51228DC7F98009ACF94 /* CustomCellModel.swift in Sources */,
 				D3A0B4ED28DBE99A009ACF94 /* CustomTableViewCell.swift in Sources */,
 				63F01BB928D44FC400C53A39 /* MainViewController.swift in Sources */,
 				6C67A2EA28DADAFA00DE6704 /* UIView+Extenstion.swift in Sources */,

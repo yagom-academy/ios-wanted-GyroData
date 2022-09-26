@@ -166,6 +166,8 @@ class ReplayViewController: UIViewController {
     
     @objc func playButtonTap(_ sender: UIButton) {
         print("측정")
+        print(measureDateLabel)
+        
         countDown = 600
         timer = Timer.scheduledTimer(withTimeInterval: 0.1
                                      , repeats: true) { (timer) in

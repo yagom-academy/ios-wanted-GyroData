@@ -61,11 +61,11 @@ class CustomTableViewCell: UITableViewCell {
         title.snp.makeConstraints { make in
             make.bottom.equalTo(stackView.snp.bottom)
             make.leading.equalTo(measureDate)
-//            make.top.equalTo(dateLabel.snp.bottom).offset(3)
-//            make.bottom.equalTo(stackView.snp.bottom)
+            //            make.top.equalTo(dateLabel.snp.bottom).offset(3)
+            //            make.bottom.equalTo(stackView.snp.bottom)
         }
         second.snp.makeConstraints { make in
-//            make.top.equalTo(stackView.snp.top).offset(10)
+            //            make.top.equalTo(stackView.snp.top).offset(10)
             make.trailing.equalTo(stackView.snp.trailing).offset(1)
         }
     }
@@ -76,16 +76,6 @@ extension CustomTableViewCell {
         measureDate.text = model.measureDate
         second.text = "\(model.second)"
         title.text = model.title
-    }
-    
-    public func bind(model: CustomCellModel) {
-        
-        measureDate.text = model.measureDate
-        second.text = model.second
-        title.text = model.title
-//        dataTypeLabel.text = model.dataTypeLabel
-//        valueLabel.text = model.valueLabel
-//        dateLabel.text = model.dateLabel
     }
 }
 
