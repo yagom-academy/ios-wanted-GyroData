@@ -2,8 +2,8 @@
 //  MeasurmentViewController.swift
 //  GyroData
 //
-//  Created by 유영훈 on 2022/09/20.
-//
+//  Created by KangMingyo on 2022/09/20.
+//  Modefied by yh on 2022/09/26
 
 import UIKit
 import CoreMotion
@@ -11,6 +11,7 @@ import CoreMotion
 class MeasurmentViewController: UIViewController {
 
     let graphViewMaker = GraphViewMaker.shared
+    let motionManager = MotionManager.shared
     
     // 데이터
     private var xData = [Float]()
@@ -18,7 +19,7 @@ class MeasurmentViewController: UIViewController {
     private var zData = [Float]()
     
     // 모션 값 타입 Gyro or Accelerometer
-    var name: String = "Accelerometer"
+    var name: MotionManager.MotionType = .acc
     
     // 최종 측정 시간
     var time: String = ""
@@ -34,14 +35,8 @@ class MeasurmentViewController: UIViewController {
       return sc
     }()
     
-    lazy var accView = graphViewMaker.accView
-    lazy var gyroView = graphViewMaker.gyroView
-    
-    /// acc graphView
-    lazy var graphView = graphViewMaker.accGraphView
-    
-    /// gyro graphView
-    lazy var gyroGraphView = graphViewMaker.gyroGraphView
+    lazy var backgroundView = graphViewMaker.backgroundView
+    lazy var graphView = graphViewMaker.graphView
     
     lazy var measurementButton: UIButton = {
         let button = UIButton(type: UIButton.ButtonType.system)
@@ -60,31 +55,35 @@ class MeasurmentViewController: UIViewController {
         return button
     }()
     
-    var shouldHideFirstView: Bool? {
-      didSet {
-          guard let shouldHideFirstView = self.shouldHideFirstView else { return }
-          self.accView.isHidden = shouldHideFirstView
-          self.gyroView.isHidden = !self.accView.isHidden
-
-      }
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        graphViewMaker.stopMeasurement()
-        graphViewMaker.resetGraph()
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        graphViewMaker.delegate = self
+        motionManager.delegate = self
         
         title = "측정하기"
         view.backgroundColor = .systemBackground
-        self.navigationItem.rightBarButtonItem = self.saveButton
+        navigationItem.rightBarButtonItem = saveButton
+        let backButtonAction = UIAction(handler: { action in
+            if self.motionManager.isRunning {
+                let alert = UIAlertController(title: "데이터 측정 중입니다.", message: "종료 시 측정기록은 사라집니다.", preferredStyle: UIAlertController.Style.alert)
+                let quit = UIAlertAction(title: "종료", style: .destructive, handler: { action in
+                    self.motionManager.cancel()
+                    self.navigationController?.popViewController(animated: true)
+                })
+                let cancel = UIAlertAction(title: "취소", style: .default, handler: nil)
+                alert.addAction(quit)
+                alert.addAction(cancel)
+                self.present(alert, animated: true, completion: nil)
+            }
+            else {
+                self.motionManager.cancel()
+                self.navigationController?.popViewController(animated: true)
+            }
+        })
+        navigationItem.backAction = backButtonAction
         
         segmentedControl.selectedSegmentIndex = 0
-        self.didChangeValue(segment: self.segmentedControl)
+        didChangeValue(segment: segmentedControl)
         
         configure()
     }
@@ -92,24 +91,33 @@ class MeasurmentViewController: UIViewController {
     /// 측정을 위한 타이머 실행
     @objc func measurementPressed() {
         graphViewMaker.graphViewWidth = graphView.bounds.width - 10
-        graphViewMaker.measurement()
+        if motionManager.isRunning {
+            let alert = UIAlertController(title: "이미 측정 중입니다.", message: nil, preferredStyle: UIAlertController.Style.alert)
+            let cancel = UIAlertAction(title: "확인", style: .default, handler: nil)
+            alert.addAction(cancel)
+            present(alert, animated: true, completion: nil)
+        }
+        else {
+            motionManager.start(type: name, interval: 0.1)
+        }
     }
     
     @objc func saveButtonPressed() {
-        
-        if graphViewMaker.isRunning {
+        if motionManager.isRunning {
+            // 측정 중
             let alert = UIAlertController(title: "측정 중 데이터 저장불가", message: "확인을 눌러주새요.", preferredStyle: UIAlertController.Style.alert)
             let cancel = UIAlertAction(title: "확인", style: .default, handler: nil)
             alert.addAction(cancel)
             present(alert, animated: true, completion: nil)
         } else {
+            // 측정 시작 전
             if time == "0.0" {
                 let alert = UIAlertController(title: "측정을 시작하세요", message: "확인을 눌러주세요.", preferredStyle: UIAlertController.Style.alert)
                 let cancel = UIAlertAction(title: "확인", style: .default, handler: nil)
                 alert.addAction(cancel)
                 present(alert, animated: true, completion: nil)
             } else {
-                DataManager.shared.addNewSave(name, Float(time) ?? 0, xData, yData: yData, zData: zData)
+                DataManager.shared.addNewSave(name.rawValue, Float(time)!, xData, yData: yData, zData: zData) 
                 xData.removeAll(keepingCapacity: false)
                 yData.removeAll(keepingCapacity: false)
                 zData.removeAll(keepingCapacity: false)
@@ -119,36 +127,37 @@ class MeasurmentViewController: UIViewController {
     }
     
     @objc func stopPressed() {
-        graphViewMaker.stopMeasurement()
+        if motionManager.isRunning {
+            motionManager.cancel()
+        }
+        else {
+            let alert = UIAlertController(title: "실행 상태가 아닙니다.", message: nil, preferredStyle: UIAlertController.Style.alert)
+            let cancel = UIAlertAction(title: "확인", style: .default, handler: nil)
+            alert.addAction(cancel)
+            present(alert, animated: true, completion: nil)
+        }
     }
     
     @objc private func didChangeValue(segment: UISegmentedControl) {
-        if graphViewMaker.isRunning {
-            //Alert창 띄워보자
-            if accView.isHidden == true {
-                segment.selectedSegmentIndex = 1
-            } else {
-                segment.selectedSegmentIndex = 0
-            }
+        if motionManager.isRunning {
             let alert = UIAlertController(title: "측정중에는 타입을 변경불가", message: "확인을 눌러주새요.", preferredStyle: UIAlertController.Style.alert)
             let cancel = UIAlertAction(title: "확인", style: .default, handler: nil)
             alert.addAction(cancel)
             present(alert, animated: true, completion: nil)
+            segment.selectedSegmentIndex = name == .gyro ? 1 : 0
         } else {
-            self.shouldHideFirstView = segment.selectedSegmentIndex != 0
-            name = self.shouldHideFirstView! ? "Gyro" : "Accelerometer"
+            let type = MotionManager.MotionType.self
+            name = segment.selectedSegmentIndex == 1 ? type.gyro : type.acc
         }
     }
     
     func configure() {
         view.addSubview(segmentedControl)
-        view.addSubview(accView)
-        view.addSubview(gyroView)
         view.addSubview(measurementButton)
         view.addSubview(stopButton)
+        view.addSubview(backgroundView)
         
-        accView.addSubview(graphView)
-        gyroView.addSubview(gyroGraphView)
+        backgroundView.addSubview(graphView)
         
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         segmentedControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
@@ -157,37 +166,25 @@ class MeasurmentViewController: UIViewController {
         segmentedControl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
         segmentedControl.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
-        accView.translatesAutoresizingMaskIntoConstraints = false
-        accView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 16).isActive = true
-        accView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        accView.heightAnchor.constraint(equalToConstant: graphViewMaker.graphViewHeight).isActive = true
-        accView.widthAnchor.constraint(equalTo: segmentedControl.widthAnchor).isActive = true
+        backgroundView.translatesAutoresizingMaskIntoConstraints = false
+        backgroundView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 16).isActive = true
+        backgroundView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        backgroundView.heightAnchor.constraint(equalToConstant: graphViewMaker.graphViewHeight).isActive = true
+        backgroundView.widthAnchor.constraint(equalTo: segmentedControl.widthAnchor).isActive = true
         
-        gyroView.translatesAutoresizingMaskIntoConstraints = false
-        gyroView.topAnchor.constraint(equalTo: self.accView.topAnchor).isActive = true
-        gyroView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        gyroView.heightAnchor.constraint(equalToConstant: graphViewMaker.graphViewHeight).isActive = true
-        gyroView.widthAnchor.constraint(equalTo: segmentedControl.widthAnchor).isActive = true
+        graphView.translatesAutoresizingMaskIntoConstraints = false
+        graphView.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 5).isActive = true
+        graphView.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 5).isActive = true
+        graphView.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -5).isActive = true
+        graphView.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor, constant: -5).isActive = true
         
         measurementButton.translatesAutoresizingMaskIntoConstraints = false
-        measurementButton.topAnchor.constraint(equalTo: accView.bottomAnchor, constant: 30).isActive = true
+        measurementButton.topAnchor.constraint(equalTo: backgroundView.bottomAnchor, constant: 30).isActive = true
         measurementButton.leadingAnchor.constraint(equalTo: segmentedControl.leadingAnchor).isActive = true
 
         stopButton.translatesAutoresizingMaskIntoConstraints = false
         stopButton.topAnchor.constraint(equalTo: measurementButton.bottomAnchor, constant: 30).isActive = true
         stopButton.leadingAnchor.constraint(equalTo: segmentedControl.leadingAnchor).isActive = true
-        
-        graphView.translatesAutoresizingMaskIntoConstraints = false
-        graphView.topAnchor.constraint(equalTo: accView.topAnchor, constant: 5).isActive = true
-        graphView.leadingAnchor.constraint(equalTo: accView.leadingAnchor, constant: 5).isActive = true
-        graphView.trailingAnchor.constraint(equalTo: accView.trailingAnchor, constant: -5).isActive = true
-        graphView.bottomAnchor.constraint(equalTo: accView.bottomAnchor, constant: -5).isActive = true
-        
-        gyroGraphView.translatesAutoresizingMaskIntoConstraints = false
-        gyroGraphView.topAnchor.constraint(equalTo: gyroView.topAnchor, constant: 5).isActive = true
-        gyroGraphView.leadingAnchor.constraint(equalTo: gyroView.leadingAnchor, constant: 5).isActive = true
-        gyroGraphView.trailingAnchor.constraint(equalTo: gyroView.trailingAnchor, constant: -5).isActive = true
-        gyroGraphView.bottomAnchor.constraint(equalTo: gyroView.bottomAnchor, constant: -5).isActive = true
         
         // 좌표값 display
         self.view.addSubview(graphViewMaker.OffsetPannelStackView)
@@ -196,23 +193,30 @@ class MeasurmentViewController: UIViewController {
         graphViewMaker.OffsetPannelStackView.centerXAnchor.constraint(equalTo: segmentedControl.centerXAnchor).isActive = true
         graphViewMaker.OffsetPannelStackView.widthAnchor.constraint(equalToConstant: graphViewMaker.graphViewWidth - 20).isActive = true
     }
+    
+    deinit {
+        print("deinit")
+    }
 }
 
-extension MeasurmentViewController: GraphViewMakerDelegate {
-    func graphViewDidEnd() {
-        // timer is invalidated
-        print("측정 종료")
+extension MeasurmentViewController: MotionManagerDelegate {
+    func motionValueDidUpdate(data: MotionManager.MotionValue, interval: TimeInterval) {
+        graphViewMaker.draw(data: data, interval: interval)
+        xData.append(Float(data.x))
+        yData.append(Float(data.y))
+        zData.append(Float(data.z))
     }
     
-    func graphViewDidPlay() {
-        // timer is fire
-        print("측정 시작")
+    func motionValueUpdateDidEnd(interval: TimeInterval) {
+        print("motionValueUpdateDidEnd")
+        self.time = String(format: "%0.1f", interval)
     }
     
-    func graphViewDidUpdate(interval: String, x: Float, y: Float, z: Float) {
-        time = interval
-        xData.append(x)
-        yData.append(y)
-        zData.append(z)
+    func motionValueUpdateWillStart() -> Bool {
+        return graphViewMaker.measurement()
+    }
+    
+    func motionValueUpdateWillEnd() -> Bool {
+        return graphViewMaker.stopMeasurement()
     }
 }
