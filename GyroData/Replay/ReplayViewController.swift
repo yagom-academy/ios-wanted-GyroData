@@ -99,8 +99,8 @@ class ReplayViewController: UIViewController {
         self.view.backgroundColor = .white
         self.navigationController?.navigationBar.isHidden = true
         self.setupLayouts()
-        self.btnAddTarget()
-        self.setupGraphView()
+//        self.btnAddTarget()
+//        self.setupGraphView()
         graphViewShow()
     }
     
@@ -176,7 +176,8 @@ class ReplayViewController: UIViewController {
         let result = JsonFetchManager.shared.request(id: "7ED4F393-5173-4047-9518-689F8595C5C0")
         switch result {
         case .success(let data):
-            self.graphView.showGraph(data)
+            self.graphView.graphData = data
+            self.graphView.showGraph()
         case .failure(let error):
             debugPrint(error)
         }

@@ -49,15 +49,20 @@ class GraphView: UIView {
     public var maxValue: CGFloat = 20
     public var minValue: CGFloat = -20
     var graphSwipeAnimation = false
+    var graphData: [GyroJson] = []
     
-    public var aPoint: GraphBuffer?
-    public var bPoint: GraphBuffer?
-    public var cPoint: GraphBuffer?
+    var aPath = UIBezierPath()
+    var bPath = UIBezierPath()
+    var cPath = UIBezierPath()
     
     var xLayer = CAShapeLayer()
     var yLayer = CAShapeLayer()
     var zLayer = CAShapeLayer()
-
+    
+    var aPoint: GraphBuffer?
+    var bPoint: GraphBuffer?
+    var cPoint: GraphBuffer?
+    
     //애니메이션 사용을 위해 layer 재정의
     static override var layerClass: AnyClass {
         return CAShapeLayer.self
@@ -71,6 +76,10 @@ class GraphView: UIView {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
+    
+//    override func draw(_ rect: CGRect) {
+//        showGraph()
+//    }
     
     //그래프 속성 설정
     func doInitSetup() {
@@ -139,6 +148,35 @@ class GraphView: UIView {
         }
     }
     
+    public func showGraph() {
+        let start = 100
+        for (idx, eachData) in graphData.enumerated() {
+            let idx = CGFloat(idx)
+            let xValue = CGFloat(Float(start) - eachData.coodinate[0])
+            let yValue = CGFloat(Float(start) - eachData.coodinate[1])
+            let zValue = CGFloat(Float(start) - eachData.coodinate[2])
+            print(idx, xValue, yValue, zValue)
+            if idx == 0 {
+                aPath.move(to: CGPoint(x: 0, y: start))
+                bPath.move(to: CGPoint(x: 0, y: start))
+                cPath.move(to: CGPoint(x: 0, y: start))
+            } else {
+                aPath.addLine(to: CGPoint(x: idx, y: xValue))
+                bPath.addLine(to: CGPoint(x: idx, y: yValue))
+                cPath.addLine(to: CGPoint(x: idx, y: zValue))
+            }
+
+        }
+        
+        xLayer.path = aPath.cgPath
+        yLayer.path = bPath.cgPath
+        zLayer.path = cPath.cgPath
+        self.layer.addSublayer(xLayer)
+        self.layer.addSublayer(yLayer)
+        self.layer.addSublayer(zLayer)
+   
+    }
+    
     //경로 값을 이용해 선을 그린다
     private func makePath() -> (aPath: CGPath, bPath: CGPath, cPath: CGPath, xInterval: CGFloat) {
         guard let aPoint = aPoint, let bPoint = bPoint, let cPoint = cPoint else {
@@ -149,11 +187,7 @@ class GraphView: UIView {
         let xInterval = bounds.width / (CGFloat(aPoint.count) - 1)
         let range = minValue - maxValue
         let yInterval = bounds.height / range
-        
-        let aPath = UIBezierPath()
-        let bPath = UIBezierPath()
-        let cPath = UIBezierPath()
-                
+ 
         for (idx, value) in aPoint.nextItems().enumerated() {
 
             let x = xForIndex(idx, xInterval) //x는 같고 y가 여러개여야한다.
