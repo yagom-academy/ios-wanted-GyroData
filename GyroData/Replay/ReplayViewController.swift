@@ -161,6 +161,7 @@ class ReplayViewController: UIViewController {
     // MARK: - private func
     @objc func backButtonTap(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
+        self.navigationController?.navigationBar.isHidden = false
     }
     
     @objc func playButtonTap(_ sender: UIButton) {

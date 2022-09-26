@@ -42,7 +42,28 @@ class CoreDataManager {
             return []
         }
     }
- 
+    func fetchTen(offset:Int) -> [GyroModel] {
+          do {
+              request.fetchLimit = 10
+              request.fetchOffset = offset
+              let fetchdata = try self.context.fetch(request)
+              return fetchdata
+          } catch {
+              print(error.localizedDescription)
+              return []
+          }
+      }
+//    func fetchTen(offset:Int) -> [GyroModel] {
+//          do {
+//              request.fetchLimit = 10
+//              request.fetchOffset = offset
+//              let fetchdata = try self.context.fetch(request)
+//              return fetchdata
+//          } catch {
+//              print(error.localizedDescription)
+//              return []
+//          }
+//      }
     
     
     @discardableResult

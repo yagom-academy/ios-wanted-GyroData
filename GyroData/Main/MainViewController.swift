@@ -9,10 +9,8 @@ import UIKit
 import SnapKit
 
 class MainViewController: UIViewController {
-    //코어데이터 사용예정
-    var datasource1 = [Measure]()
-    let test = Measure(title: "test", second: 0.32)
-    let test2 = Measure(title: "haha", second: 0.9999)
+    
+    var datasource = [GyroModel]()
     let manager = CoreDataManager.shared
     
     private lazy var tableView: UITableView = {
@@ -32,7 +30,11 @@ class MainViewController: UIViewController {
         addNaviBar()
     }
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         tableView.reloadData()
+        //        manager.fetch()
+        //        manager.fetchTen(offset: datasource.count)
+//        loadData()
     }
     
     private func setupView() {
@@ -42,7 +44,8 @@ class MainViewController: UIViewController {
     }
     //실행시 기존데이터 로드
     private func loadData() {
-  
+        //        manager.fetch()
+//        datasource.append(contentsOf: manager.fetchTen(offset: datasource.count))
         tableView.reloadData()
     }
     
@@ -55,20 +58,20 @@ class MainViewController: UIViewController {
     //측정버튼액션
     @objc func measureButton(_ sender: UIBarButtonItem) {
         print("측정버튼")
-                let MeasureView = MeasureViewController()
-                self.navigationController?.pushViewController(MeasureView, animated: true)
-        //        두번째 뷰컨트롤러에서 데이터 받아오기
-//        manager.insertMeasure(measure: test)
-//        manager.insertMeasure(measure: test2)
-//        manager.fetch()
-        //        datasource = CoreDataManager.shared.getCoreData()
-//        print(self.manager.count())
+        let MeasureView = MeasureViewController()
+        self.navigationController?.pushViewController(MeasureView, animated: true)
         tableView.reloadData()
         //
     }
 }
 
 extension MainViewController: UITableViewDataSource {
+//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        if indexPath.row == datasource.count - 1 {
+//            datasource.append(contentsOf: manager.fetchTen(offset: datasource.count))
+//            tableView.reloadData()
+//        }
+//    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return manager.fetch().count
     }
@@ -82,7 +85,7 @@ extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 75
     }
-
+    
     //SwipeAction
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let playAction = UIContextualAction(style: .normal, title:"Play"){ (UIContextualAction, UIView, success: @escaping (Bool) -> Void) in
@@ -90,17 +93,21 @@ extension MainViewController: UITableViewDataSource {
             //3번쨰 뷰컨틀롤러 이동과 동시에 데이터 업로드 예정
             let ReplayViewController = ReplayViewController()
             self.navigationController?.pushViewController(ReplayViewController, animated: true)
+            
             //업데이트인가??
-            self.manager.fetch()[indexPath.row]
-            print(self.manager.count(), self.manager.fetch()[indexPath.row].id)
+            //            self.manager.fetch()[indexPath.row]
+            //            print(self.manager.count(), self.manager.fetch()[indexPath.row].id)
+            //            print(MeasureFileManager.shared.loadFile(manager.fetch()[indexPath.row]))
             success(true)
         }
-        
+        // 코어데이터 제거
         let deleteAction = UIContextualAction(style: .normal, title: "Delete") { (UIContextualAction, UIView, success: @escaping (Bool) -> Void) in
             print("delete 클릭 됨")
-            // 코어데이터 제거
-            self.manager.delete(object: self.manager.fetch()[indexPath.row])
-            print(self.manager.count())
+//            self.manager.delete(object: self.datasource[indexPath.row])
+//                        self.loadData()
+            
+                        self.manager.delete(object: self.manager.fetch()[indexPath.row])
+            //            print(self.manager.fetch().count)
             tableView.reloadData()
             
             success(true)
@@ -117,6 +124,7 @@ extension MainViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         let ReplayViewController = ReplayViewController()
         self.navigationController?.pushViewController(ReplayViewController, animated: true)
+        
     }
 }
 
