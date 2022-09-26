@@ -54,7 +54,7 @@ class CoreMotionManager: CoreMotionManagerProtocol {
     }
 }
 
-struct MotionMeasure {
+struct MotionMeasure: Equatable {
     var x: Double
     var y: Double
     var z: Double
