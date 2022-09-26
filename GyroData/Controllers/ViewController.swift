@@ -32,8 +32,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         view.backgroundColor = .systemBackground
-        navigationItem.rightBarButtonItem = self.navButton
-        navigationItem.backButtonTitle = "" // 이동하기전 뷰에서 지정해줘야 적용됨.
+        self.navigationItem.rightBarButtonItem = self.navButton
         title = "목록"
         configure()
     }
