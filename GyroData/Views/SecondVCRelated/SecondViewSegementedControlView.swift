@@ -62,7 +62,7 @@ extension SecondViewSegementedControlView: Presentable {
         }
         
         viewModel.isUserInteractionEnabledSource = { [weak self] enabled in
-            self?.segmentedControl.isUserInteractionEnabled = enabled
+            self?.segmentedControl.isEnabled = enabled
         }
     }
     

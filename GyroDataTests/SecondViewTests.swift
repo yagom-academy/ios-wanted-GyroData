@@ -33,7 +33,7 @@ class SecondViewTests: XCTestCase {
         secondModel.controlViewModel.didTapMeasureButton()
         
         // then
-        XCTAssertFalse(segmentView.segmentedControl.isUserInteractionEnabled)
+        XCTAssertFalse(segmentView.segmentedControl.isEnabled)
     }
     
     func test다시_측정하는_경우_기존의_값들을_초기화합니다() throws {

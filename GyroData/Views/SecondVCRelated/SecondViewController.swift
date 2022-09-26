@@ -108,6 +108,10 @@ extension SecondViewController: Presentable {
             self?.route(to: scene)
         }
         
+        viewModel.isMeasuringSource = { [weak self] isMeasuring in
+            self?.saveButton.isEnabled = !isMeasuring
+        }
+        
         viewModel.isLoadingSource = { [weak self] isLoading in
             self?.indicatorView.isHidden = !isLoading
         }

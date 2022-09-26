@@ -20,6 +20,11 @@ class SecondModel {
             motionMeasuresSource(_motionMeasures)
         }
     }
+    var isMeasuringSource: (Bool) -> () = { isMeasuring in } {
+        didSet {
+            isMeasuringSource(_isMeasuring)
+        }
+    }
     var isLoadingSource: (Bool) -> () = { isLoading in } {
         didSet {
             isLoadingSource(_isLoading)
@@ -39,6 +44,7 @@ class SecondModel {
     }
     private var _isMeasuring: Bool = false {
         didSet {
+            isMeasuringSource(_isMeasuring)
             segmentViewModel.didReceiveIsMeasuring(_isMeasuring)
         }
     }
