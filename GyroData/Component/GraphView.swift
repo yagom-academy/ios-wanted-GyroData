@@ -123,11 +123,7 @@ class GraphView: UIView {
         aPoint?.write(aValue)
         bPoint?.write(bValue)
         cPoint?.write(cValue)
-        print("⭐️", aPoint?.array)
-        print("🍎", bPoint?.array)
-        
-        
-        
+     
         // 애니메이션이 시작되기 전에 새 포인트의 경로를 설정하게 되면 애니메이션이 매끄럽지 않아, 시간 차를 두었다
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) { [weak self] in
             let path = self?.makePath()
@@ -167,9 +163,6 @@ class GraphView: UIView {
             let bCGPoint = CGPoint(x: x, y: bY)
             let cCGPoint = CGPoint(x: x, y: cY)
             
-            print("인덱스", idx)
-            print("⭐️", aCGPoint)
-            print("🍎", bCGPoint)
             //이전 경로의 마지막 값이 시작 포인트 값이 된다
             if idx == 0 {
                 aPath.move(to: aCGPoint)
