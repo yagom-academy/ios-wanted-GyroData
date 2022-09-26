@@ -52,11 +52,22 @@ extension SecondViewSegementedControlView: Presentable {
     }
     
     func bind() {
-        segmentedControl.addTarget(self, action: #selector(segmentAction), for: .valueChanged)
+        viewModel.selectedTypeSource = { [weak self] type in
+            if type == .acc {
+                self?.segmentedControl.selectedSegmentIndex = 0
+            } else {
+                self?.segmentedControl.selectedSegmentIndex = 1
+            }
+        }
+        
+        viewModel.isUserInteractionEnabledSource = { [weak self] enabled in
+            self?.segmentedControl.isUserInteractionEnabled = enabled
+        }
     }
     
     @objc func segmentAction() {
-        viewModel.didSegmentChange()
+        let type: MotionType = segmentedControl.selectedSegmentIndex == 0 ? .acc : .gyro
+        viewModel.didSegmentChange(type)
     }
 }
 
