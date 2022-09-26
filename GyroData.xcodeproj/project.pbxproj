@@ -57,6 +57,7 @@
 		B07C2D4328E1371100457396 /* GyroDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07C2D4228E1371100457396 /* GyroDataTests.swift */; };
 		B07C2D4A28E1372A00457396 /* SecondViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07C2D4928E1372A00457396 /* SecondViewTests.swift */; };
 		B07C5F7828DAB10D00321A5F /* SecondControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07C5F7728DAB10D00321A5F /* SecondControlView.swift */; };
+		B07EFEFF28E16FEC0058E0DD /* SecondHoveringIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07EFEFE28E16FEC0058E0DD /* SecondHoveringIndicatorView.swift */; };
 		B08BCA3728DD8D8200F6E2A2 /* DummyGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08BCA3628DD8D8200F6E2A2 /* DummyGenerator.swift */; };
 		B0CF0F3F28DA9B9B00596BCF /* FirstViewStyling.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CF0F3E28DA9B9B00596BCF /* FirstViewStyling.swift */; };
 		B0CF0F4128DAA07900596BCF /* SecondViewStyling.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CF0F4028DAA07900596BCF /* SecondViewStyling.swift */; };
@@ -126,6 +127,7 @@
 		B07C2D4228E1371100457396 /* GyroDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroDataTests.swift; sourceTree = "<group>"; };
 		B07C2D4928E1372A00457396 /* SecondViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewTests.swift; sourceTree = "<group>"; };
 		B07C5F7728DAB10D00321A5F /* SecondControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondControlView.swift; sourceTree = "<group>"; };
+		B07EFEFE28E16FEC0058E0DD /* SecondHoveringIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondHoveringIndicatorView.swift; sourceTree = "<group>"; };
 		B08BCA3628DD8D8200F6E2A2 /* DummyGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyGenerator.swift; sourceTree = "<group>"; };
 		B0CF0F3E28DA9B9B00596BCF /* FirstViewStyling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewStyling.swift; sourceTree = "<group>"; };
 		B0CF0F4028DAA07900596BCF /* SecondViewStyling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewStyling.swift; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 				36FB64F228D8CA8000A87587 /* SecondViewController.swift */,
 				B07C5F7728DAB10D00321A5F /* SecondControlView.swift */,
 				3695B0BC28D99CA100FF93FD /* SecondViewSegementedControlView.swift */,
+				B07EFEFE28E16FEC0058E0DD /* SecondHoveringIndicatorView.swift */,
 			);
 			path = SecondVCRelated;
 			sourceTree = "<group>";
@@ -479,6 +482,7 @@
 				B0CF0F3F28DA9B9B00596BCF /* FirstViewStyling.swift in Sources */,
 				36FB64F128D8C76E00A87587 /* SceneDelegateRoutable.swift in Sources */,
 				46E21EBD28DC5F1500593210 /* ThirdControlViewModel.swift in Sources */,
+				B07EFEFF28E16FEC0058E0DD /* SecondHoveringIndicatorView.swift in Sources */,
 				36E1FCAC28D97CC000EB7E4F /* FirstListCell.swift in Sources */,
 				36FB64FE28D8CF0500A87587 /* Styling.swift in Sources */,
 				B019E7FD28DBECF5009BC86F /* ThirdControlView.swift in Sources */,
