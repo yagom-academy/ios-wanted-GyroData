@@ -47,6 +47,7 @@ class SecondModel {
         didSet {
             isMeasuringSource(_isMeasuring)
             segmentViewModel.didReceiveIsMeasuring(_isMeasuring)
+            controlViewModel.didReceiveIsMeasuring(_isMeasuring)
         }
     }
     private var _isLoading: Bool = false {

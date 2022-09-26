@@ -11,12 +11,23 @@ class SecondControlViewModel {
     // MARK: Input
     var didTapMeasureButton: () -> () = { }
     var didTapStopButton: () -> () = { }
+    var didReceiveIsMeasuring: (Bool) -> () = { isMeasuring in }
     
     // MARK: Output
     var propagateDidTapMeasureButton: () -> () = { }
     var propagateDidTapStopButton: () -> () = { }
+    var isMeasuringSource: (Bool) -> () = { isMeasuring in } {
+        didSet {
+            isMeasuringSource(_isMeasuring)
+        }
+    }
     
     // MARK: Properties
+    private var _isMeasuring: Bool = false {
+        didSet {
+            isMeasuringSource(_isMeasuring)
+        }
+    }
     
     // MARK: Init
     init() {
@@ -31,6 +42,10 @@ class SecondControlViewModel {
         
         didTapStopButton = { [weak self] in
             self?.propagateDidTapStopButton()
+        }
+        
+        didReceiveIsMeasuring = { [weak self] isMeasuring in
+            self?._isMeasuring = isMeasuring
         }
     }
 }
