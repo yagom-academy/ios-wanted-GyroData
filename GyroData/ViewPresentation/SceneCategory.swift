@@ -12,6 +12,7 @@ enum SceneCategory {
     case main(mainScene)
     case detail(detailScene)
     case close
+    case alert(AlertDependency)
     
     enum mainScene {
         case firstViewController(context: SceneContext<FirstModel>)

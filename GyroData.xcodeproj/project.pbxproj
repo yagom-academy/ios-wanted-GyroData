@@ -59,6 +59,7 @@
 		B07C2D4A28E1372A00457396 /* SecondViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07C2D4928E1372A00457396 /* SecondViewTests.swift */; };
 		B07C5F7828DAB10D00321A5F /* SecondControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07C5F7728DAB10D00321A5F /* SecondControlView.swift */; };
 		B07EFEFF28E16FEC0058E0DD /* SecondHoveringIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07EFEFE28E16FEC0058E0DD /* SecondHoveringIndicatorView.swift */; };
+		B07EFF0328E179D30058E0DD /* AlertFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07EFF0228E179D30058E0DD /* AlertFactory.swift */; };
 		B08BCA3728DD8D8200F6E2A2 /* DummyGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08BCA3628DD8D8200F6E2A2 /* DummyGenerator.swift */; };
 		B0CF0F3F28DA9B9B00596BCF /* FirstViewStyling.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CF0F3E28DA9B9B00596BCF /* FirstViewStyling.swift */; };
 		B0CF0F4128DAA07900596BCF /* SecondViewStyling.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CF0F4028DAA07900596BCF /* SecondViewStyling.swift */; };
@@ -130,6 +131,7 @@
 		B07C2D4928E1372A00457396 /* SecondViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewTests.swift; sourceTree = "<group>"; };
 		B07C5F7728DAB10D00321A5F /* SecondControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondControlView.swift; sourceTree = "<group>"; };
 		B07EFEFE28E16FEC0058E0DD /* SecondHoveringIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondHoveringIndicatorView.swift; sourceTree = "<group>"; };
+		B07EFF0228E179D30058E0DD /* AlertFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertFactory.swift; sourceTree = "<group>"; };
 		B08BCA3628DD8D8200F6E2A2 /* DummyGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyGenerator.swift; sourceTree = "<group>"; };
 		B0CF0F3E28DA9B9B00596BCF /* FirstViewStyling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewStyling.swift; sourceTree = "<group>"; };
 		B0CF0F4028DAA07900596BCF /* SecondViewStyling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewStyling.swift; sourceTree = "<group>"; };
@@ -317,6 +319,7 @@
 				46E21EC928DC5F2100593210 /* CoreDataManager.swift */,
 				B08BCA3628DD8D8200F6E2A2 /* DummyGenerator.swift */,
 				B03F9D2528E1242100E352EC /* CoreMotionManager.swift */,
+				B07EFF0228E179D30058E0DD /* AlertFactory.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -514,6 +517,7 @@
 				464FE63E28DB42F300C73656 /* Date+Extension.swift in Sources */,
 				46E21EBE28DC5F1500593210 /* ThirdModel.swift in Sources */,
 				36E1FC9D28D976B800EB7E4F /* BasicNavigationController.swift in Sources */,
+				B07EFF0328E179D30058E0DD /* AlertFactory.swift in Sources */,
 				36E1FCA728D97AAB00EB7E4F /* FirstListView.swift in Sources */,
 				64336DE528DC9DD700D56D68 /* FileManager+Extensions.swift in Sources */,
 				46E21EBF28DC5F1500593210 /* MotionModel.xcdatamodeld in Sources */,
