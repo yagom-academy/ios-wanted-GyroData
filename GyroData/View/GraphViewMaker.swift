@@ -59,8 +59,8 @@ class GraphViewMaker {
     
     /// 센서 측정 타이머
     lazy private var timer = Timer()
-    lazy private var accTimer = Timer()
-    lazy private var timeoutTimer = Timer()
+//    lazy private var accTimer = Timer()
+//    lazy private var timeoutTimer = Timer()
 
     // 데이터
     private var xData = [Float]()
@@ -93,7 +93,7 @@ class GraphViewMaker {
     private var time: Float = 0.0
     
     /// deprecated
-    private var timeLeft = 600.0
+//    private var timeLeft = 600.0
     
     /// 센서 값 타입
     private var name: MotionManager.MotionType = MotionManager.MotionType.acc
@@ -163,7 +163,7 @@ class GraphViewMaker {
     }
     
     /**
-        그래프에 모션값을 이용하여 x, y, z선을 그리는 함수를 호출합니다.
+        모션값을 이용하여 x, y, z선을 그리는 함수를 호출합니다.
      */
     func draw(data: MotionManager.MotionValue, interval: TimeInterval) {
         motionData.append(data)
@@ -182,7 +182,7 @@ class GraphViewMaker {
     }
     
     /**
-        그래프에 데이터 배열을 0.1초 단위로 그려줍니다.
+        Core Data에 저장된 모션값을 이용하여 x, y, z선을 그리는 함수를 호출합니다.
      */
     public func play(animated: Bool) {
         resetGraph()
@@ -233,7 +233,7 @@ class GraphViewMaker {
     }
     
     /**
-        센서 측정 중단
+        모션 센서의 측정을 중단합니다.
      */
     @objc func stopMeasurement() -> Bool {
         resetGraph()
@@ -242,7 +242,7 @@ class GraphViewMaker {
     }
     
     /**
-        그래프 애니메이션을 중단합니다. timer invalidate
+        그래프 애니메이션을 중단합니다.
      */
     @objc public func stop() {
         timer.invalidate()
@@ -250,14 +250,15 @@ class GraphViewMaker {
         delegate.graphViewDidEnd()
     }
     
-    /// x, y, z 좌표값의 최대값 비교
+    /// 그래프 스케일링시 활용하기위해 x, y, z 좌표값의 최대값 비교
     func compareMaxValue(_ x: Float, _ y: Float, _ z: Float) {
-        // x, y, z 절대값으로 비교 및 최대값 대체
+        // 절대값을 기준으로 비교
         let max = [x, y, z].sorted { abs($0) > abs($1) }.first!
         maxOffset = abs(max) > maxOffset ?
             abs(max) : maxOffset
     }
     
+    /// 그래프 상단의 좌표 디스플레이를 업데이트합니다.
     func updateOffsetDisplay(_ interval: Float, _ x: Float, _ y: Float, _ z: Float) {
         xOffsetLabel.text = "x: \(String(format: "%0.f", x))"
         yOffsetLabel.text = "y: \(String(format: "%0.f", y))"
@@ -284,6 +285,7 @@ class GraphViewMaker {
         // 타이머 라벨 update
         self.interval += timer.timeInterval.fixed(2)
         updateOffsetDisplay(interval, x, y, z)
+        delegate.graphViewDidUpdate(interval: String(format: "%0.1f", interval), x: Float(x), y: Float(y), z: Float(z))
         
         // 한개의 점이 차지할 width
         blockWidth = graphViewWidth / CGFloat(maxIndex)
@@ -297,12 +299,12 @@ class GraphViewMaker {
         index += 1
     }
     
+    /// 그래프위에 선을 그리는 함수입니다.
     private func drawLine(_ line: UIBezierPath, _ layer: CAShapeLayer, _ strokColor: UIColor, _ option: AddLayerOption = .measurement) {
         
         // 최대값에 따른 스케일링 비율 설정
         let baseHeight: Float = Float(graphBaseHeight)
         if (maxOffset >= baseHeight) || (maxOffset <= -baseHeight) {
-            // 기준점은 높이의 절반 값
             // 값이 baseHeight값의 절대값보다 크게되면 그래프 최대치를 초과하는것.
             multiplier = ((baseHeight / maxOffset) - 0.05)
         }
@@ -359,14 +361,19 @@ class GraphViewMaker {
         그래프 뷰를 초기화 합니다.
      */
     public func resetGraph() {
+        // baseline 계산
         graphBaseHeight = graphViewHeight / 2.0 - 5.6
-        index = 0 // index 초기화
+        // 인덱스 초기화
+        index = 0
+        // 측정시간 초기화
         interval = 0.0
+        // 스케일링 초기화
         multiplier = 1.0
         maxOffset = 0
+        // 데이터 초기화
         motionData.removeAll(keepingCapacity: false)
         
-        // x, y, z 점 위치 초기화
+        // x, y, z선 초기화
         xLine = UIBezierPath()
         xLine.move(to: CGPoint(x: 5, y: graphBaseHeight))
         yLine = UIBezierPath()
@@ -374,10 +381,12 @@ class GraphViewMaker {
         zLine = UIBezierPath()
         zLine.move(to: CGPoint(x: 5, y: graphBaseHeight))
         
+        // 좌표 디스플레이 초기화
         xOffsetLabel.text = "x: \(String(format: "%0.f", 0))"
         yOffsetLabel.text = "y: \(String(format: "%0.f", 0))"
         zOffsetLabel.text = "z: \(String(format: "%0.f", 0))"
         
+        // 선 그래프에서 제거
         xLineLayer.removeFromSuperlayer()
         yLineLayer.removeFromSuperlayer()
         zLineLayer.removeFromSuperlayer()

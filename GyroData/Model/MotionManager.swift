@@ -75,7 +75,7 @@ class MotionManager {
         if delegate.motionValueUpdateWillStart() {
             timer = Timer.scheduledTimer(timeInterval: interval, target: self, selector: #selector(getMotionValue), userInfo: nil, repeats: true)
         } else {
-            // 
+            //
         }
         
     }
@@ -92,7 +92,30 @@ class MotionManager {
                 delegate.motionValueDidUpdate(data: data, interval: time)
             }
             else {
-                let data = MotionValue(x: 100.0, y: -259.0, z: 1002.0)
+                
+                // scaling sample for emulator
+                var x = 0.0
+                var y = 0.0
+                var z = 0.0
+                
+                if count < 70 {
+                    x = 100.0
+                    z = -100.0
+                    y = 0.0
+                }
+                if count >= 70 && count < 100 {
+                    x = 500.0
+                    z = -100.0
+                    y = 0.0
+                }
+                
+                if count >= 100 {
+                    x = 500.0
+                    y = 0.0
+                    z = -1000.0
+                }
+                
+                var data = MotionValue(x: x, y: y, z: z)
                 time += timer.timeInterval
                 delegate.motionValueDidUpdate(data: data, interval: time)
             }
@@ -104,7 +127,30 @@ class MotionManager {
                 delegate.motionValueDidUpdate(data: data, interval: time)
             }
             else {
-                let data = MotionValue(x: 100.0, y: -259.0, z: 1002.0)
+                
+                // scaling sample for emulator
+                var x = 0.0
+                var y = 0.0
+                var z = 0.0
+                
+                if count < 70 {
+                    x = 100.0
+                    z = -100.0
+                    y = 0.0
+                }
+                if count >= 70 && count < 100 {
+                    x = 500.0
+                    z = -100.0
+                    y = 0.0
+                }
+                
+                if count >= 100 {
+                    x = 500.0
+                    y = 0.0
+                    z = -1000.0
+                }
+                
+                var data = MotionValue(x: x, y: y, z: z)
                 time += timer.timeInterval
                 delegate.motionValueDidUpdate(data: data, interval: time)
             }

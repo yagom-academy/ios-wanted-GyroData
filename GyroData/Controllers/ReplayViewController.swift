@@ -100,13 +100,31 @@ class ReplayViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        configure()
+    }
+    
+//    @objc func playGraph() {
+//
+//    }
+//
+//    @objc func deleteData() {
+//
+//    }
+    
+    func configure() {
         graphViewMaker.delegate = self
 
         // MARK: UI Set
         self.view.backgroundColor = .white
         self.navigationItem.title = "다시보기"
         self.navigationController?.navigationBar.tintColor = .black
+        
+        // 버튼그룹추가
+//        let delete = UIBarButtonItem(title: "삭제", style: .done, target: self, action: #selector(deleteData))
+//        let play = UIBarButtonItem(title: "재생", style: .plain, target: self, action: #selector(playGraph))
+//        let buttonGroup = UIBarButtonItemGroup(barButtonItems: [delete, play], representativeItem: nil)
+//        navigationItem.centerItemGroups = [buttonGroup]
+        
 
         self.titleLabel.text = self.pageType
         self.timestampLabel.text = CommonUIModule().dateFormatter.string(from:  data!.date!)
@@ -188,7 +206,6 @@ class ReplayViewController: UIViewController {
      */
     @objc func playButtonPressed() {
         graphViewMaker.graphViewWidth = graphView.bounds.width - 10
-//        graphViewMaker.graphViewHeight = graphView.bounds.height
         graphViewMaker.play(animated: true)
     }
     
@@ -219,7 +236,6 @@ extension ReplayViewController: GraphViewMakerDelegate {
     }
     
     func graphViewDidUpdate(interval: String, x: Float, y: Float, z: Float) {
-//        print("interval: \(interval)")
         timeLabel.text = interval
     }
 }
