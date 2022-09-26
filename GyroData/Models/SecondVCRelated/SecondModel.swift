@@ -15,6 +15,11 @@ class SecondModel {
     
     // MARK: Output
     var routeSubject: (SceneCategory) -> () = { sceneCategory in }
+    var motionMeasuresSource: ([MotionMeasure]) -> () = { measures in } {
+        didSet {
+            motionMeasuresSource(_motionMeasures)
+        }
+    }
     
     // MARK: Properties
     private var repository: RepositoryProtocol
@@ -22,7 +27,11 @@ class SecondModel {
     var segmentViewModel: SecondSegmentViewModel
     var controlViewModel: SecondControlViewModel
     
-    private var _motionMeasures = [MotionMeasure]()
+    private var _motionMeasures = [MotionMeasure]() {
+        didSet {
+            motionMeasuresSource(_motionMeasures)
+        }
+    }
     private var _isMeasuring: Bool = false {
         didSet {
             segmentViewModel.didReceiveIsMeasuring(_isMeasuring)
@@ -30,9 +39,9 @@ class SecondModel {
     }
     
     // MARK: Init
-    init(repository: RepositoryProtocol) {
+    init(repository: RepositoryProtocol, motionManager: CoreMotionManagerProtocol) {
         self.repository = repository
-        self.motionManager = CoreMotionManager()
+        self.motionManager = motionManager
         self.segmentViewModel = SecondSegmentViewModel()
         self.controlViewModel = SecondControlViewModel()
         bind()
@@ -79,7 +88,7 @@ class SecondModel {
                 let self
             else { return }
             self._motionMeasures.append(MotionMeasure(data))
-            debugPrint(data)
+            debugPrint(MotionMeasure(data))
         }
         
         motionManager.accHandler = { [weak self] data, error in
@@ -89,7 +98,7 @@ class SecondModel {
                 let self
             else { return }
             self._motionMeasures.append(MotionMeasure(data))
-            debugPrint(data)
+            debugPrint(MotionMeasure(data))
         }
     }
 }
