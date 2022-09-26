@@ -30,11 +30,15 @@ class FirstListViewModel {
     
     // MARK: Properties
     private var _motionTasks: [MotionTask]
+    private var _totalMotionTasks: [MotionTask]
+    private var _currentTaskIndex: Int
     private var _isPaging: Bool
     
     // MARK: Init
-    init(_ motionDatas: [MotionTask]) {
-        self._motionTasks = motionDatas
+    init(_ motionTasks: [MotionTask]) {
+        self._totalMotionTasks = motionTasks
+        self._motionTasks = motionTasks
+        self._currentTaskIndex = 9
         self._isPaging = false
         bind()
     }
@@ -53,7 +57,9 @@ class FirstListViewModel {
         }
         didReceiveMotionTasks = { [weak self] motionTasks in
             guard let self = self else { return }
-            self._motionTasks = motionTasks
+            self._currentTaskIndex = 0
+            self._totalMotionTasks = motionTasks
+            self._motionTasks = []
         }
         didReceiveStartPaging = {
             self._isPaging = true
@@ -62,7 +68,13 @@ class FirstListViewModel {
         didReceiveEndPaging = {
             self._isPaging = false
             // TO-DO : CoreData 와 연결
-            self._motionTasks += self._motionTasks[0...9]
+            self._currentTaskIndex = min(self._totalMotionTasks.count-1, self._currentTaskIndex + 10)
+//            print(self._currentTaskIndex)
+            self._motionTasks = Array<MotionTask>(self._totalMotionTasks[0...self._currentTaskIndex])
         }
+    }
+    
+    func isScrollAvailable() -> Bool {
+        return !(self._totalMotionTasks.count-1 == self._currentTaskIndex)
     }
 }

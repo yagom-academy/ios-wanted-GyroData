@@ -65,7 +65,6 @@ extension FirstListView: Presentable {
                 self?.tableView.reloadSections(IndexSet(integer: 1), with: .none)
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                // Debug
                 self?.viewModel.didReceiveEndPaging()
                 self?.tableView.reloadData()
             }
@@ -106,7 +105,7 @@ extension FirstListView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             return viewModel.motionTasks.count
-        } else if section == 1 {
+        } else if section == 1 && viewModel.isPaging && viewModel.isScrollAvailable() {
             return 1
         }
         return 0
@@ -155,7 +154,7 @@ extension FirstListView: UIScrollViewDelegate {
         let height = scrollView.frame.height
         
         if offsetY > (contentHeight - height) {
-            if !viewModel.isPaging {
+            if !viewModel.isPaging && viewModel.isScrollAvailable() {
                 viewModel.didReceiveStartPaging()
             }
         }
