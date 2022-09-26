@@ -50,6 +50,9 @@
 		64336DE528DC9DD700D56D68 /* FileManager+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64336DE428DC9DD700D56D68 /* FileManager+Extensions.swift */; };
 		64336DE828DC9DE400D56D68 /* MotionFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64336DE728DC9DE400D56D68 /* MotionFile.swift */; };
 		64FE265928E13D7A00BCC5D7 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FE265828E13D7A00BCC5D7 /* Repository.swift */; };
+		64FE265B28E1433400BCC5D7 /* FirstListLoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FE265A28E1433400BCC5D7 /* FirstListLoadingCell.swift */; };
+		64FE265D28E143A900BCC5D7 /* FirstLoadingCellContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FE265C28E143A900BCC5D7 /* FirstLoadingCellContentView.swift */; };
+		64FE265F28E145A600BCC5D7 /* FirstLoadingCellContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FE265E28E145A600BCC5D7 /* FirstLoadingCellContentViewModel.swift */; };
 		B019E7FD28DBECF5009BC86F /* ThirdControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B019E7FC28DBECF5009BC86F /* ThirdControlView.swift */; };
 		B03F9D2628E1242100E352EC /* CoreMotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03F9D2528E1242100E352EC /* CoreMotionManager.swift */; };
 		B03F9D2828E1264F00E352EC /* SecondControlViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03F9D2728E1264F00E352EC /* SecondControlViewModel.swift */; };
@@ -105,6 +108,9 @@
 		64336DE428DC9DD700D56D68 /* FileManager+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FileManager+Extensions.swift"; sourceTree = "<group>"; };
 		64336DE728DC9DE400D56D68 /* MotionFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionFile.swift; sourceTree = "<group>"; };
 		64FE265828E13D7A00BCC5D7 /* Repository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
+		64FE265A28E1433400BCC5D7 /* FirstListLoadingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstListLoadingCell.swift; sourceTree = "<group>"; };
+		64FE265C28E143A900BCC5D7 /* FirstLoadingCellContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstLoadingCellContentView.swift; sourceTree = "<group>"; };
+		64FE265E28E145A600BCC5D7 /* FirstLoadingCellContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstLoadingCellContentViewModel.swift; sourceTree = "<group>"; };
 		B019E7FC28DBECF5009BC86F /* ThirdControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdControlView.swift; sourceTree = "<group>"; };
 		B03F9D2528E1242100E352EC /* CoreMotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMotionManager.swift; sourceTree = "<group>"; };
 		B03F9D2728E1264F00E352EC /* SecondControlViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondControlViewModel.swift; sourceTree = "<group>"; };
@@ -131,7 +137,9 @@
 				63F01BB828D44FC400C53A39 /* FirstViewController.swift */,
 				36E1FCA628D97AAB00EB7E4F /* FirstListView.swift */,
 				36E1FCAB28D97CC000EB7E4F /* FirstListCell.swift */,
+				64FE265A28E1433400BCC5D7 /* FirstListLoadingCell.swift */,
 				36E1FCAD28D97DB400EB7E4F /* FirstCellContentView.swift */,
+				64FE265C28E143A900BCC5D7 /* FirstLoadingCellContentView.swift */,
 			);
 			path = FirstVCRelated;
 			sourceTree = "<group>";
@@ -268,6 +276,7 @@
 				46E21EBA28DC5F1500593210 /* FirstModel.swift */,
 				46E21EBB28DC5F1500593210 /* FirstListViewModel.swift */,
 				46E21EB928DC5F1500593210 /* FirstCellContentViewModel.swift */,
+				64FE265E28E145A600BCC5D7 /* FirstLoadingCellContentViewModel.swift */,
 			);
 			path = FirstVCRelated;
 			sourceTree = "<group>";
@@ -413,6 +422,7 @@
 				B0CF0F3F28DA9B9B00596BCF /* FirstViewStyling.swift in Sources */,
 				36FB64F128D8C76E00A87587 /* SceneDelegateRoutable.swift in Sources */,
 				46E21EBD28DC5F1500593210 /* ThirdControlViewModel.swift in Sources */,
+				64FE265F28E145A600BCC5D7 /* FirstLoadingCellContentViewModel.swift in Sources */,
 				36E1FCAC28D97CC000EB7E4F /* FirstListCell.swift in Sources */,
 				36FB64FE28D8CF0500A87587 /* Styling.swift in Sources */,
 				B019E7FD28DBECF5009BC86F /* ThirdControlView.swift in Sources */,
@@ -436,9 +446,11 @@
 				64336DE528DC9DD700D56D68 /* FileManager+Extensions.swift in Sources */,
 				46E21EBF28DC5F1500593210 /* MotionModel.xcdatamodeld in Sources */,
 				462FB33528DB12A500BC5F04 /* ThirdViewStyling.swift in Sources */,
+				64FE265B28E1433400BCC5D7 /* FirstListLoadingCell.swift in Sources */,
 				46E21EC328DC5F1500593210 /* SecondSegmentViewModel.swift in Sources */,
 				36FB64FC28D8CE1D00A87587 /* Presentable.swift in Sources */,
 				64336DE828DC9DE400D56D68 /* MotionFile.swift in Sources */,
+				64FE265D28E143A900BCC5D7 /* FirstLoadingCellContentView.swift in Sources */,
 				B03F9D2828E1264F00E352EC /* SecondControlViewModel.swift in Sources */,
 				3695B0C728D9AA0700FF93FD /* SecondViewControllerRoutable.swift in Sources */,
 				46E21EC128DC5F1500593210 /* Motion+CoreDataClass.swift in Sources */,

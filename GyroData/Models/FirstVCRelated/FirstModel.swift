@@ -26,8 +26,14 @@ class FirstModel {
     init(repository: RepositoryProtocol) {
         self.repository = repository
         // Test 데이터
-//        for _ in 0..<10 {
-//            CoreDataManager.shared.insertMotionTask(motion: DummyGenerator.getDummyMotionData())
+//        Task {
+//            for _ in 0..<10 {
+//                do {
+//                    try await DummyGenerator.insertDummyMotionDataToCoreData()
+//                } catch {
+//                    throw error
+//                }
+//            }
 //        }
         
         // -----
