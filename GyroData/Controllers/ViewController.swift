@@ -71,12 +71,14 @@ class ViewController: UIViewController {
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row == DataManager.shared.saveList.count - 1 {
-            DataManager.shared.fetchSave()
-            tableView.reloadData()
-        }
-    }
+//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        print(indexPath.row)
+//        print(DataManager.shared.saveList.count)
+//        if indexPath.row == DataManager.shared.saveList.count - 1 {
+//            DataManager.shared.fetchSave()
+////            tableView.reloadData()
+//        }
+//    }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return DataManager.shared.saveList.count

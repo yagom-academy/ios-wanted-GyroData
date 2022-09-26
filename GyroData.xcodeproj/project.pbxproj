@@ -13,6 +13,7 @@
 		63F01BC128D44FC500C53A39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */; };
 		F83215AB28DDDAC1000C35E6 /* GraphViewMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83215AA28DDDAC1000C35E6 /* GraphViewMaker.swift */; };
 		F83215AD28DDDB17000C35E6 /* CommonUIModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83215AC28DDDB17000C35E6 /* CommonUIModule.swift */; };
+		F839DB9428E17A56008D752B /* MotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F839DB9328E17A56008D752B /* MotionManager.swift */; };
 		F8493CD428D9984D000A12F2 /* MeasurmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8493CD328D9984D000A12F2 /* MeasurmentViewController.swift */; };
 		F8493CD628D9986F000A12F2 /* ReplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8493CD528D9986F000A12F2 /* ReplayViewController.swift */; };
 		F86BCAA828DF3BDA0094DAC4 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86BCAA728DF3BDA0094DAC4 /* TableViewCell.swift */; };
@@ -30,6 +31,7 @@
 		63F01BC228D44FC500C53A39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F83215AA28DDDAC1000C35E6 /* GraphViewMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphViewMaker.swift; sourceTree = "<group>"; };
 		F83215AC28DDDB17000C35E6 /* CommonUIModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonUIModule.swift; sourceTree = "<group>"; };
+		F839DB9328E17A56008D752B /* MotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionManager.swift; sourceTree = "<group>"; };
 		F8493CD328D9984D000A12F2 /* MeasurmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurmentViewController.swift; sourceTree = "<group>"; };
 		F8493CD528D9986F000A12F2 /* ReplayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplayViewController.swift; sourceTree = "<group>"; };
 		F86BCAA728DF3BDA0094DAC4 /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				F8FE9AAA28DDDE21008E5569 /* DataManager.swift */,
+				F839DB9328E17A56008D752B /* MotionManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -192,6 +195,7 @@
 				F83215AD28DDDB17000C35E6 /* CommonUIModule.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				F86BCAAA28DF3BE20094DAC4 /* ViewController.swift in Sources */,
+				F839DB9428E17A56008D752B /* MotionManager.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
 				F86BCAA828DF3BDA0094DAC4 /* TableViewCell.swift in Sources */,
 				F86BCAB028DF44E00094DAC4 /* GyroExample.xcdatamodeld in Sources */,

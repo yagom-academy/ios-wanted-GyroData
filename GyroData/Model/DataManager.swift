@@ -19,6 +19,7 @@ class DataManager {
     }
     
     var saveList = [Save]()
+    
     //데이터 저장
     func fetchSave() {
         let request: NSFetchRequest<Save> = Save.fetchRequest()
