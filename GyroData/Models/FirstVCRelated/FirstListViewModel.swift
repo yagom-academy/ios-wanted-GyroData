@@ -67,8 +67,7 @@ class FirstListViewModel {
         }
         didReceiveEndPaging = {
             self._isPaging = false
-            // TO-DO : CoreData 와 연결
-            if !self._totalMotionTasks.isEmpty {
+            if !self.isEmptyTotalMotionTasks() {
                 self._currentTaskIndex = min(self._totalMotionTasks.count-1, self._currentTaskIndex + 10)
                 self._motionTasks = Array<MotionTask>(self._totalMotionTasks[0...self._currentTaskIndex])
             } else {
@@ -79,5 +78,9 @@ class FirstListViewModel {
     
     func isScrollAvailable() -> Bool {
         return !(self._totalMotionTasks.count-1 == self._currentTaskIndex)
+    }
+    
+    func isEmptyTotalMotionTasks() -> Bool {
+        return self._totalMotionTasks.isEmpty
     }
 }

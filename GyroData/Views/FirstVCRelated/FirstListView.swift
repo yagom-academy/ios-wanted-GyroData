@@ -154,7 +154,7 @@ extension FirstListView: UIScrollViewDelegate {
         let height = scrollView.frame.height
         
         if offsetY > (contentHeight - height) {
-            if !viewModel.isPaging && viewModel.isScrollAvailable() {
+            if !viewModel.isPaging && viewModel.isScrollAvailable() && !viewModel.isEmptyTotalMotionTasks() {
                 viewModel.didReceiveStartPaging()
             }
         }

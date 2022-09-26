@@ -26,15 +26,15 @@ class FirstModel {
     init(repository: RepositoryProtocol) {
         self.repository = repository
         // Test 데이터
-//        Task {
-//            for _ in 0..<10 {
-//                do {
-//                    try await DummyGenerator.insertDummyMotionDataToCoreData()
-//                } catch {
-//                    throw error
-//                }
-//            }
-//        }
+        Task {
+            for _ in 0..<10 {
+                do {
+                    try await DummyGenerator.insertDummyMotionDataToCoreData()
+                } catch {
+                    throw error
+                }
+            }
+        }
         
         // -----
         self.privateFirstListViewModel = FirstListViewModel(motionTasks)
