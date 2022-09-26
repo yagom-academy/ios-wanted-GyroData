@@ -22,18 +22,17 @@ class ReplayViewController: UIViewController {
     var aData: CGFloat = 0.0
     var bData: CGFloat = 0.0
     var cData: CGFloat = 0.0
-    var pageTypeName: PageType = .view
+    var pageTypeName: PageType = .play
     var aBuffer = GraphBuffer(count: 100)
     var bBuffer = GraphBuffer(count: 100)
     var cBuffer = GraphBuffer(count: 100)
     private var timerValid: Bool = false
-    private var endTime: Double = 3.0 //끝 타이머
     private var startTime: Double = 00.0{
         didSet {
             timerLabel.text = String(format: "%.1f", startTime)
         }
     }
-        
+    
     var sensorData: CGFloat = 0.0
     var buffer = GraphBuffer(count: 100)
     var countDown = 0
@@ -102,13 +101,13 @@ class ReplayViewController: UIViewController {
         self.btnAddTarget()
         self.setupGraphView()
         if pageTypeName == .view {
-            graphViewShow()
+            dummyTestViewShow()
         }
     }
     
     // MARK: - private func
     private func setupLayouts() {
-      
+        
         self.view.addSubViews(
             self.navigationTitle,
             self.navigationBackButton,
@@ -160,7 +159,7 @@ class ReplayViewController: UIViewController {
                 $0.centerX.equalToSuperview()
             }
         }
-       
+        
     }
     
     private func setupGraphView() {
@@ -174,12 +173,12 @@ class ReplayViewController: UIViewController {
         playButton.addTarget(self, action: #selector(playButtonTap(_:)), for: .touchUpInside)
     }
     
-    private func graphViewShow() {
+    private func dummyTestViewShow() {
         let result = JsonFetchManager.shared.request(id: "D1CE2BE2-1BD2-40AD-9A4A-BEA7C89E5AB2")
         switch result {
         case .success(let data):
             self.graphView.graphData = data
-            self.graphView.showGraph() 
+            self.graphView.justShowGraph()
         case .failure(let error):
             debugPrint(error)
         }
@@ -202,7 +201,7 @@ class ReplayViewController: UIViewController {
                 self.aData = CGFloat.random(in: self.graphView.minValue * 0.75...self.graphView.maxValue * 0.75)
                 self.bData = CGFloat.random(in: self.graphView.minValue * 0.75...self.graphView.maxValue * 0.75)
                 self.cData = CGFloat.random(in: self.graphView.minValue * 0.75...self.graphView.maxValue * 0.75)
-                self.graphView.animateNewValue(aValue: self.aData, bValue: self.bData, cValue: self.cData, duration: self.stepDuration)
+                self.graphView.addNewValue(aValue: self.aData, bValue: self.bData, cValue: self.cData, duration: self.stepDuration)
                 self.countDown -= 1
                 self.startTime += 0.1
                 if self.countDown <= 0 {
@@ -211,6 +210,8 @@ class ReplayViewController: UIViewController {
             }
         } else {
             timer?.invalidate()
+            self.graphView.reset()
+            self.startTime = 0
         }
         //타이머 버튼 설정
         let image = timerValid ? UIImage(systemName: "stop.fill") : UIImage(systemName: "play.fill")
@@ -218,12 +219,6 @@ class ReplayViewController: UIViewController {
         print(timerValid)
     }
     
-    @objc func stopButtonTap(_ sender: UIButton) {
-        print("정지")
-        timer?.invalidate()
-        self.graphView.reset()
-        self.startTime = 0
-    }
 
 }
 

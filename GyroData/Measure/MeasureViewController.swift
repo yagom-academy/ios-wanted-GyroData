@@ -106,7 +106,7 @@ class MeasureViewController: UIViewController {
             //데이터를 배열에 저장해둔다
             self.saveMotionData.append(MotionData(coodinate: [motionData[0],motionData[1],motionData[2]]))
             //받아온 데이터로 그래프 그리기, 카운트다운 60초
-            self.graphView.animateNewValue(aValue: motionData[0], bValue: motionData[1], cValue: motionData[2], duration: self.stepDuration)
+            self.graphView.addNewValue(aValue: motionData[0], bValue: motionData[1], cValue: motionData[2], duration: self.stepDuration)
             self.countDown -= 1
             if self.countDown <= 0 {
                 self.stopMeasure()
