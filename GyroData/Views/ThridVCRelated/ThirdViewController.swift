@@ -11,7 +11,7 @@ class ThirdViewController: UIViewController, ThirdViewControllerRoutable, ThirdV
     // MARK: UI
     lazy var infoView = ThirdInfoView(viewModel: self.viewModel.infoViewModel)
     var backButton = UIBarButtonItem()
-    lazy var dummyGraphView = GraphView(viewModel: self.viewModel.graphViewModel)
+    lazy var graphView = GraphView(viewModel: self.viewModel.graphViewModel)
     lazy var controlView = ThirdControlView(viewModel: self.viewModel.controlViewModel)
     
     // MARK: Properties
@@ -44,11 +44,11 @@ extension ThirdViewController: Presentable {
     func initViewHierarchy() {
         self.view = UIView()
         view.addSubview(infoView)
-        view.addSubview(dummyGraphView)
+        view.addSubview(graphView)
         view.addSubview(controlView)
         
         infoView.translatesAutoresizingMaskIntoConstraints = false
-        dummyGraphView.translatesAutoresizingMaskIntoConstraints = false
+        graphView.translatesAutoresizingMaskIntoConstraints = false
         controlView.translatesAutoresizingMaskIntoConstraints = false
         
         var constraints = [NSLayoutConstraint]()
@@ -61,13 +61,13 @@ extension ThirdViewController: Presentable {
         ]
         
         constraints += [
-            dummyGraphView.topAnchor.constraint(equalTo: infoView.bottomAnchor, constant: 32),
-            dummyGraphView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            dummyGraphView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
-            dummyGraphView.heightAnchor.constraint(equalTo: dummyGraphView.widthAnchor),
+            graphView.topAnchor.constraint(equalTo: infoView.bottomAnchor, constant: 32),
+            graphView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            graphView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            graphView.heightAnchor.constraint(equalTo: graphView.widthAnchor),
         ]
         constraints += [
-            controlView.topAnchor.constraint(equalTo: dummyGraphView.bottomAnchor),
+            controlView.topAnchor.constraint(equalTo: graphView.bottomAnchor),
             controlView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
             controlView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
         ]
