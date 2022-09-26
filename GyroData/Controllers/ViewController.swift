@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ListViewController: UIViewController {
+class ViewController: UIViewController {
     
     var datas = [Save]()
     
@@ -19,7 +19,7 @@ class ListViewController: UIViewController {
         f.dateFormat = "yyyy/MM/dd HH:mm:ss"
         return f
     }()
-    //윌디스플레이스 에니매에 있다 10개씩 10개씩 부르는건 어펜드하면된다  10개 부르는건?
+    
     lazy var navButton: UIBarButtonItem = {
         let button = UIBarButtonItem(title: "측정", style: .plain, target: self, action: #selector(add))
         return button
@@ -68,14 +68,13 @@ class ListViewController: UIViewController {
     }
 }
 
-extension ListViewController: UITableViewDelegate, UITableViewDataSource {
+extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {  //그려질려고할때 2번째 셀의 데이터가 있어  근데 아직 안그렸어 그다음을 안시킬려면 // //여기서 멈춘다 1개보이는데 2개를 보이게 하기 위해서 그래서
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row == DataManager.shared.saveList.count - 1 {
             DataManager.shared.fetchSave()
             tableView.reloadData()
-        } // 5개 가있으니깐 5개가 더나오지  마지막셀은4
-        // 마지셀은 카운트 -1 마지막이다  내가 5개로 정했지만 배열는 4번이니깐  10개면 9가 마지막  -1 이  75줄 이 같다면 마지막셀이다   // 뷰윌이라서 2개를 그릴려고 하기때문에 그렇다 
+        }
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -105,6 +104,7 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
             completionHaldler(true)
             let cell = DataManager.shared.saveList.remove(at: indexPath.row)
             DataManager.shared.deleteRun(object: cell)
+            DataManager.shared.saveContext()
             tableView.reloadData()
         })
         actions1.backgroundColor = .systemRed

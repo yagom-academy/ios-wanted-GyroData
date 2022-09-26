@@ -22,16 +22,12 @@ class DataManager {
     //데이터 저장
     func fetchSave() {
         let request: NSFetchRequest<Save> = Save.fetchRequest()
-        //코어데이터 겟 데이타 리미트 리퀘스트 10개 request.fetchOffset = 0; request.fetchLimit = 10;
-        //데이터 불러오기 10개씩 일단 3개로
-        request.fetchLimit = 3 // 0123 // 4567 // 891011
-        request.fetchOffset = saveList.count  // 카운터
+        request.fetchLimit = 5
+        request.fetchOffset = saveList.count
         let sortByDateDesc = NSSortDescriptor(key: "date", ascending: false)
         request.sortDescriptors = [sortByDateDesc]
-        
         do {
-            saveList.append(contentsOf: try mainContext.fetch(request))  //니가 정해줘서 가능해
-            
+            saveList.append(contentsOf: try mainContext.fetch(request))
         } catch {
             print(error)
         }
@@ -58,6 +54,7 @@ class DataManager {
                 }
             }
         }
+        saveContext()
     }
     func addNewSave(_ name: String?, _ time: Float?, _ xData: [Float], yData: [Float], zData: [Float]) {
         let newSave = Save(context: mainContext)
