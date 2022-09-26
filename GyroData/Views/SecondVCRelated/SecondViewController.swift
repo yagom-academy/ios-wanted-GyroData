@@ -12,8 +12,9 @@ class SecondViewController: UIViewController, SecondViewControllerRoutable, Seco
     var saveButton = UIBarButtonItem()
     var backButton = UIBarButtonItem()
     lazy var segmentView = SecondViewSegementedControlView(viewModel: self.viewModel.segmentViewModel)
-    var dummyGraphView = TestPathGraphView()
+    lazy var dummyGraphView = GraphView(viewModel: self.viewModel.graphViewModel)
     lazy var controlView = SecondControlView(viewModel: self.viewModel.controlViewModel)
+    var indicatorView = SecondHoveringIndicatorView()
     
     // MARK: Properties
     var viewModel: SecondModel
@@ -47,10 +48,12 @@ extension SecondViewController: Presentable {
         view.addSubview(segmentView)
         view.addSubview(dummyGraphView)
         view.addSubview(controlView)
+        view.addSubview(indicatorView)
         
         segmentView.translatesAutoresizingMaskIntoConstraints = false
         dummyGraphView.translatesAutoresizingMaskIntoConstraints = false
         controlView.translatesAutoresizingMaskIntoConstraints = false
+        indicatorView.translatesAutoresizingMaskIntoConstraints = false
         
         var constraints: [NSLayoutConstraint] = []
         
@@ -73,6 +76,12 @@ extension SecondViewController: Presentable {
             controlView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
             controlView.topAnchor.constraint(equalTo: dummyGraphView.bottomAnchor, constant: 48),
         ]
+        constraints += [
+            indicatorView.topAnchor.constraint(equalTo: self.view.topAnchor),
+            indicatorView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            indicatorView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            indicatorView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+        ]
         
         navigationItem.rightBarButtonItem = saveButton
         navigationItem.leftBarButtonItem = backButton
@@ -90,11 +99,21 @@ extension SecondViewController: Presentable {
         backButton.addStyles(style: backButtonStyling)
         backButton.target = self
         backButton.action = #selector(didTapBackButton)
+        
+        indicatorView.isHidden = true
     }
     
     func bind() {
         viewModel.routeSubject = { [weak self] scene in
             self?.route(to: scene)
+        }
+        
+        viewModel.isMeasuringSource = { [weak self] isMeasuring in
+            self?.saveButton.isEnabled = !isMeasuring
+        }
+        
+        viewModel.isLoadingSource = { [weak self] isLoading in
+            self?.indicatorView.isHidden = !isLoading
         }
     }
     

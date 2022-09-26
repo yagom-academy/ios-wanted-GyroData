@@ -45,7 +45,8 @@ class FirstModel {
         didTapMeasureButton = { [weak self] in
             guard let self else { return }
             let repository = Repository()
-            let model = SecondModel(repository: repository)
+            let motionManager = CoreMotionManager()
+            let model = SecondModel(repository: repository, motionManager: motionManager)
             let sceneContext = SceneContext(dependency: model)
             self.routeSubject(.detail(.secondViewController(context: sceneContext)))
         }

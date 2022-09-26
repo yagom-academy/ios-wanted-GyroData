@@ -10,7 +10,6 @@ import SwiftUI
 import CoreGraphics
 
 // TODO: 격자 그리드 뷰/효과 추가...여러 그래프에 나오는 격자효과 그거
-// TODO: 스케일에 기반해 그리드 뷰도 조정 혹은 보정
 // TODO: data 배열+path그래프가 화면의 가로 사이즈보다 커질 경우를 대비한 ScrollView 추가?
 
 /*******. 두번째 페이지 *******/
@@ -60,23 +59,15 @@ import CoreGraphics
    x y z 중 하나의 값이라도 없다면 재생을 멈춤
  */
 
-struct ValueInfo {
-    var xValue: CGFloat
-    var yValue: CGFloat
-    var zValue: CGFloat
-}
-
-class TestPathGraphView: UIView {
+class GraphView: UIView {
     
     //input
-    var didReceiveData: (ValueInfo) -> () = { value in }
-    var didReceiveRemoveAll = { }
-    
+
     //output
     
     
     //properties
-    private var privateTempDataSource: [ValueInfo] = []
+    var viewModel: GraphViewModel = GraphViewModel()
     
     //Point Properties for calculating Path's Position
     
@@ -106,8 +97,10 @@ class TestPathGraphView: UIView {
     
     var lastAppliedTransform: CGAffineTransform?
     
-    init() {
+    init(viewModel: GraphViewModel) {
         super.init(frame: .zero)
+        
+        self.viewModel = viewModel
         initViewHierarchy()
         configureView()
         bind()
@@ -127,7 +120,7 @@ class TestPathGraphView: UIView {
     //그런데 현 시점 기준으로는 close를 부르나 부르지 않으나 효과가 똑같다.
     //언제 path.close를 확실히 불러줘야 하는지에 대한 검증이 필요해 보인다.
     func drawXpath() {
-        guard let receivedData = privateTempDataSource.last?.xValue else { return }
+        guard let receivedData = viewModel.dataSource.last?.xValue else { return }
         
         xPath.move(to: xPreviousPoint)
         
@@ -145,12 +138,10 @@ class TestPathGraphView: UIView {
         UIColor.red.setStroke()
         xPath.stroke()
         xPathData.append(xPreviousPoint)
-        
-        
     }
     
     func drawYpath() {
-        guard let receivedData = privateTempDataSource.last?.yValue else { return }
+        guard let receivedData = viewModel.dataSource.last?.yValue else { return }
         
         yPath.move(to: yPreviousPoint)
         
@@ -167,12 +158,10 @@ class TestPathGraphView: UIView {
         UIColor.green.setStroke()
         yPath.stroke()
         yPathData.append(yPreviousPoint)
-        
-        
     }
     
     func drawZpath() {
-        guard let receivedData = privateTempDataSource.last?.zValue else { return }
+        guard let receivedData = viewModel.dataSource.last?.zValue else { return }
         
         zPath.move(to: zPreviousPoint)
         
@@ -189,8 +178,6 @@ class TestPathGraphView: UIView {
         UIColor.blue.setStroke()
         zPath.stroke()
         zPathData.append(zPreviousPoint)
-        
-        
     }
     
     func reCalculateScale(point: CGPoint) {
@@ -240,7 +227,7 @@ class TestPathGraphView: UIView {
     
 }
 
-extension TestPathGraphView: Presentable {
+extension GraphView: Presentable {
     func initViewHierarchy() {
 
     }
@@ -253,19 +240,16 @@ extension TestPathGraphView: Presentable {
     }
     
     func bind() {
-        didReceiveData = { [weak self] value in
-            //드로잉을 위한 데이터소스 변경, 붙이기, 삭제 등 비즈니스 로직
-            self?.privateTempDataSource.append(value)
-            
+        
+        //드로잉을 위한 데이터소스 변경, 붙이기, 삭제 등 비즈니스 로직
+        viewModel.populateData = { [weak self] in
             self?.setNeedsDisplay() //그 다음에 얘를 호출 호출하면
             //다음 드로잉 사이클에 오버라이드한 draw가 불리게 될 것임
         }
-        
-        // TODO: remove, 초기화 처리 개선 혹은 다른 모델 등에서 처리하도록 수정
-        didReceiveRemoveAll = { [weak self] in
+
+        viewModel.populateRemoveAll = { [weak self] in
             guard let self = self else { return }
-            self.privateTempDataSource.removeAll()
-            
+
             self.xPreviousPoint = CGPoint(x: 0, y: self.middlePoint.y)
             self.xNewPoint = CGPoint(x: 0, y: 0)
             

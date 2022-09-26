@@ -60,7 +60,10 @@ extension SecondControlView: Presentable {
     }
     
     func bind() {
-        
+        viewModel.isMeasuringSource = { [weak self] isMeasuring in
+            self?.measureButton.isEnabled = !isMeasuring
+            self?.stopButton.isEnabled = isMeasuring
+        }
     }
     
     // MARK: Actions
