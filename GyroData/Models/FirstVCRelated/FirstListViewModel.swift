@@ -12,6 +12,8 @@ class FirstListViewModel {
     var didSelectRow: (Int) -> () = { indexPathRow in }
     var didSelectPlayAction: (Int) -> () = { indexPathRow in }
     var didReceiveMotionTasks: ([MotionTask]) -> () = { motionTasks in }
+    var didReceiveStartPaging: () -> () = { }
+    var didReceiveEndPaging: () -> () = { }
     
     // MARK: Output
     var propagateDidSelectRowEvent: (MotionTask) -> () = { motion in }
@@ -20,13 +22,24 @@ class FirstListViewModel {
         return _motionTasks
     }
     var didReceiveViewModel: ( ((Void)) -> () )?
+    var propagateFetchMotionTasks: ( ((Void)) -> () )?
+    var isPaging: Bool {
+        return _isPaging
+    }
+    var propagateStartPaging: ( ((Void)) -> () )?
     
     // MARK: Properties
     private var _motionTasks: [MotionTask]
+    private var _totalMotionTasks: [MotionTask]
+    private var _currentTaskIndex: Int
+    private var _isPaging: Bool
     
     // MARK: Init
-    init(_ motionDatas: [MotionTask]) {
-        self._motionTasks = motionDatas
+    init(_ motionTasks: [MotionTask]) {
+        self._totalMotionTasks = motionTasks
+        self._motionTasks = motionTasks
+        self._currentTaskIndex = 9
+        self._isPaging = false
         bind()
     }
     
@@ -43,12 +56,31 @@ class FirstListViewModel {
             self.propagateDidSelectPlayActionEvent(motion)
         }
         didReceiveMotionTasks = { [weak self] motionTasks in
-            self?.populateData(result: motionTasks)
-            self?.didReceiveViewModel?(())
+            guard let self = self else { return }
+            self._currentTaskIndex = 0
+            self._totalMotionTasks = motionTasks
+            self._motionTasks = []
+        }
+        didReceiveStartPaging = {
+            self._isPaging = true
+            self.propagateStartPaging?(())
+        }
+        didReceiveEndPaging = {
+            self._isPaging = false
+            if !self.isEmptyTotalMotionTasks() {
+                self._currentTaskIndex = min(self._totalMotionTasks.count-1, self._currentTaskIndex + 10)
+                self._motionTasks = Array<MotionTask>(self._totalMotionTasks[0...self._currentTaskIndex])
+            } else {
+                self._motionTasks = []
+            }
         }
     }
     
-    private func populateData(result: [MotionTask]) {
-        self._motionTasks = result
+    func isScrollAvailable() -> Bool {
+        return !(self._totalMotionTasks.count-1 == self._currentTaskIndex)
+    }
+    
+    func isEmptyTotalMotionTasks() -> Bool {
+        return self._totalMotionTasks.isEmpty
     }
 }

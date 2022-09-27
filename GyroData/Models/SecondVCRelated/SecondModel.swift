@@ -42,6 +42,7 @@ class SecondModel {
     
     private var _motionMeasures = [MotionMeasure]() {
         didSet {
+            graphViewModel.didReceiveData(_motionMeasures)
             motionMeasuresSource(_motionMeasures)
         }
     }
@@ -144,7 +145,8 @@ class SecondModel {
             _ = try await self.repository.insertToCoreData(motion: motionTask)
             self._isLoading = false
             let okAction = AlertActionDependency(title: "확인") { _ in
-                self.routeSubject(.close)
+                let context = SceneContext(dependency: FirstSceneAction.refresh)
+                self.routeSubject(.closeWithAction(.main(.firstViewControllerWithAction(context: context))))
             }
             let alertDependancy = AlertDependency(title: nil, message: "저장이 완료되었습니다.", preferredStyle: .alert, actionSet: [okAction])
             self.routeSubject(.alert(alertDependancy))

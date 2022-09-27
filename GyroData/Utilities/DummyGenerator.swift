@@ -16,6 +16,11 @@ class DummyGenerator {
         return MotionTask(type: type, time: time, date: date, path: path)
     }
     
+    static func insertDummyMotionDataToCoreData() async throws -> Bool {
+        let result = try await CoreDataManager.shared.insertMotionTask(motion: DummyGenerator.getDummyMotionData())
+        return result
+    }
+    
     static func getDummyMotionFile() -> MotionFile {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd-HH:mm:ss"

@@ -7,9 +7,10 @@
 
 import Foundation
 
-class FirstModel {
+class FirstModel: SceneActionReceiver {
     //input
     var didTapMeasureButton: (() -> ()) = { }
+    var didReceiveSceneAction: (SceneAction) -> () = { action in }
     
     //output
     var contentViewModel: FirstListViewModel {
@@ -26,9 +27,15 @@ class FirstModel {
     init(repository: RepositoryProtocol) {
         self.repository = repository
         // Test 데이터
-//        for _ in 0..<10 {
-//            CoreDataManager.shared.insertMotionTask(motion: DummyGenerator.getDummyMotionData())
-//        }
+        Task {
+            for _ in 0..<10 {
+                do {
+                    try await DummyGenerator.insertDummyMotionDataToCoreData()
+                } catch {
+                    throw error
+                }
+            }
+        }
         
         // -----
         self.privateFirstListViewModel = FirstListViewModel(motionTasks)
@@ -56,12 +63,26 @@ class FirstModel {
             let context = SceneContext(dependency: model)
             self.routeSubject(.detail(.thirdViewController(context: context)))
         }
+        privateFirstListViewModel.propagateStartPaging = { [weak self] _ in
+            guard let self = self else { return }
+            print("!!!!!!!")
+            self.populateData()
+        }
+        
+        didReceiveSceneAction = { [weak self] action in
+            guard let action = action as? FirstSceneAction else { return }
+            guard let self else { return }
+            switch action {
+            case .refresh:
+                self.populateData()
+            }
+        }
     }
     
     func populateData() {
         Task {
             let motionTasks = try await self.repository.fetchFromCoreData()
-            self.privateFirstListViewModel.didReceiveMotionTasks(motionTasks)
+            privateFirstListViewModel.didReceiveMotionTasks(motionTasks)
         }
     }
 }

@@ -30,6 +30,8 @@
 		464FE63A28DB3B4800C73656 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464FE63928DB3B4800C73656 /* UIColor+Extensions.swift */; };
 		464FE63C28DB3D9D00C73656 /* UIFont+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464FE63B28DB3D9D00C73656 /* UIFont+Extensions.swift */; };
 		464FE63E28DB42F300C73656 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464FE63D28DB42F300C73656 /* Date+Extension.swift */; };
+		4674C06728E2728D00325474 /* SceneAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4674C06628E2728D00325474 /* SceneAction.swift */; };
+		4674C06928E2729F00325474 /* FirstSceneAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4674C06828E2729F00325474 /* FirstSceneAction.swift */; };
 		46E21EBC28DC5F1500593210 /* ThirdInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E21EAC28DC5F1500593210 /* ThirdInfoViewModel.swift */; };
 		46E21EBD28DC5F1500593210 /* ThirdControlViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E21EAD28DC5F1500593210 /* ThirdControlViewModel.swift */; };
 		46E21EBE28DC5F1500593210 /* ThirdModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E21EAE28DC5F1500593210 /* ThirdModel.swift */; };
@@ -51,6 +53,9 @@
 		64336DE528DC9DD700D56D68 /* FileManager+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64336DE428DC9DD700D56D68 /* FileManager+Extensions.swift */; };
 		64336DE828DC9DE400D56D68 /* MotionFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64336DE728DC9DE400D56D68 /* MotionFile.swift */; };
 		64FE265928E13D7A00BCC5D7 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FE265828E13D7A00BCC5D7 /* Repository.swift */; };
+		64FE265B28E1433400BCC5D7 /* FirstListLoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FE265A28E1433400BCC5D7 /* FirstListLoadingCell.swift */; };
+		64FE265D28E143A900BCC5D7 /* FirstLoadingCellContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FE265C28E143A900BCC5D7 /* FirstLoadingCellContentView.swift */; };
+		64FE265F28E145A600BCC5D7 /* FirstLoadingCellContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FE265E28E145A600BCC5D7 /* FirstLoadingCellContentViewModel.swift */; };
 		B019E7FD28DBECF5009BC86F /* ThirdControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B019E7FC28DBECF5009BC86F /* ThirdControlView.swift */; };
 		B03F9D2628E1242100E352EC /* CoreMotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03F9D2528E1242100E352EC /* CoreMotionManager.swift */; };
 		B03F9D2828E1264F00E352EC /* SecondControlViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03F9D2728E1264F00E352EC /* SecondControlViewModel.swift */; };
@@ -99,6 +104,8 @@
 		464FE63928DB3B4800C73656 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		464FE63B28DB3D9D00C73656 /* UIFont+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extensions.swift"; sourceTree = "<group>"; };
 		464FE63D28DB42F300C73656 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		4674C06628E2728D00325474 /* SceneAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneAction.swift; sourceTree = "<group>"; };
+		4674C06828E2729F00325474 /* FirstSceneAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstSceneAction.swift; sourceTree = "<group>"; };
 		46E21EAC28DC5F1500593210 /* ThirdInfoViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdInfoViewModel.swift; sourceTree = "<group>"; };
 		46E21EAD28DC5F1500593210 /* ThirdControlViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdControlViewModel.swift; sourceTree = "<group>"; };
 		46E21EAE28DC5F1500593210 /* ThirdModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdModel.swift; sourceTree = "<group>"; };
@@ -122,6 +129,9 @@
 		64336DE428DC9DD700D56D68 /* FileManager+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FileManager+Extensions.swift"; sourceTree = "<group>"; };
 		64336DE728DC9DE400D56D68 /* MotionFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionFile.swift; sourceTree = "<group>"; };
 		64FE265828E13D7A00BCC5D7 /* Repository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
+		64FE265A28E1433400BCC5D7 /* FirstListLoadingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstListLoadingCell.swift; sourceTree = "<group>"; };
+		64FE265C28E143A900BCC5D7 /* FirstLoadingCellContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstLoadingCellContentView.swift; sourceTree = "<group>"; };
+		64FE265E28E145A600BCC5D7 /* FirstLoadingCellContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstLoadingCellContentViewModel.swift; sourceTree = "<group>"; };
 		B019E7FC28DBECF5009BC86F /* ThirdControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdControlView.swift; sourceTree = "<group>"; };
 		B03F9D2528E1242100E352EC /* CoreMotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMotionManager.swift; sourceTree = "<group>"; };
 		B03F9D2728E1264F00E352EC /* SecondControlViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondControlViewModel.swift; sourceTree = "<group>"; };
@@ -161,7 +171,9 @@
 				63F01BB828D44FC400C53A39 /* FirstViewController.swift */,
 				36E1FCA628D97AAB00EB7E4F /* FirstListView.swift */,
 				36E1FCAB28D97CC000EB7E4F /* FirstListCell.swift */,
+				64FE265A28E1433400BCC5D7 /* FirstListLoadingCell.swift */,
 				36E1FCAD28D97DB400EB7E4F /* FirstCellContentView.swift */,
+				64FE265C28E143A900BCC5D7 /* FirstLoadingCellContentView.swift */,
 			);
 			path = FirstVCRelated;
 			sourceTree = "<group>";
@@ -231,6 +243,7 @@
 				3695B0C628D9AA0700FF93FD /* SecondViewControllerRoutable.swift */,
 				462FB33228DB123D00BC5F04 /* ThirdViewControllerRoutable.swift */,
 				36FB64F828D8CD1700A87587 /* SceneContext.swift */,
+				4674C06528E2727F00325474 /* SceneAction */,
 			);
 			path = ViewPresentation;
 			sourceTree = "<group>";
@@ -256,6 +269,15 @@
 				64336DE428DC9DD700D56D68 /* FileManager+Extensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		4674C06528E2727F00325474 /* SceneAction */ = {
+			isa = PBXGroup;
+			children = (
+				4674C06628E2728D00325474 /* SceneAction.swift */,
+				4674C06828E2729F00325474 /* FirstSceneAction.swift */,
+			);
+			path = SceneAction;
 			sourceTree = "<group>";
 		};
 		46E21EAA28DC5F1500593210 /* Models */ = {
@@ -308,6 +330,7 @@
 				46E21EBA28DC5F1500593210 /* FirstModel.swift */,
 				46E21EBB28DC5F1500593210 /* FirstListViewModel.swift */,
 				46E21EB928DC5F1500593210 /* FirstCellContentViewModel.swift */,
+				64FE265E28E145A600BCC5D7 /* FirstLoadingCellContentViewModel.swift */,
 			);
 			path = FirstVCRelated;
 			sourceTree = "<group>";
@@ -494,8 +517,10 @@
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
 				64FE265928E13D7A00BCC5D7 /* Repository.swift in Sources */,
 				B0CF0F3F28DA9B9B00596BCF /* FirstViewStyling.swift in Sources */,
+				4674C06928E2729F00325474 /* FirstSceneAction.swift in Sources */,
 				36FB64F128D8C76E00A87587 /* SceneDelegateRoutable.swift in Sources */,
 				46E21EBD28DC5F1500593210 /* ThirdControlViewModel.swift in Sources */,
+				64FE265F28E145A600BCC5D7 /* FirstLoadingCellContentViewModel.swift in Sources */,
 				B07EFEFF28E16FEC0058E0DD /* SecondHoveringIndicatorView.swift in Sources */,
 				36E1FCAC28D97CC000EB7E4F /* FirstListCell.swift in Sources */,
 				36CFA23E28E1729900C623E9 /* GraphViewModel.swift in Sources */,
@@ -512,6 +537,7 @@
 				B0CF0F4128DAA07900596BCF /* SecondViewStyling.swift in Sources */,
 				46E21ECB28DC5F2100593210 /* CoreDataManager.swift in Sources */,
 				36FB64F528D8CAB000A87587 /* FirstViewControllerRoutable.swift in Sources */,
+				4674C06728E2728D00325474 /* SceneAction.swift in Sources */,
 				464FE63A28DB3B4800C73656 /* UIColor+Extensions.swift in Sources */,
 				36E1FCAE28D97DB500EB7E4F /* FirstCellContentView.swift in Sources */,
 				464FE63E28DB42F300C73656 /* Date+Extension.swift in Sources */,
@@ -522,9 +548,11 @@
 				64336DE528DC9DD700D56D68 /* FileManager+Extensions.swift in Sources */,
 				46E21EBF28DC5F1500593210 /* MotionModel.xcdatamodeld in Sources */,
 				462FB33528DB12A500BC5F04 /* ThirdViewStyling.swift in Sources */,
+				64FE265B28E1433400BCC5D7 /* FirstListLoadingCell.swift in Sources */,
 				46E21EC328DC5F1500593210 /* SecondSegmentViewModel.swift in Sources */,
 				36FB64FC28D8CE1D00A87587 /* Presentable.swift in Sources */,
 				64336DE828DC9DE400D56D68 /* MotionFile.swift in Sources */,
+				64FE265D28E143A900BCC5D7 /* FirstLoadingCellContentView.swift in Sources */,
 				B03F9D2828E1264F00E352EC /* SecondControlViewModel.swift in Sources */,
 				3695B0C728D9AA0700FF93FD /* SecondViewControllerRoutable.swift in Sources */,
 				46E21EC128DC5F1500593210 /* Motion+CoreDataClass.swift in Sources */,
@@ -688,19 +716,19 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = U9B2QVCTVS;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GyroData/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.GyroData;
+				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.GyroData.temp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -715,19 +743,19 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = U9B2QVCTVS;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GyroData/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.GyroData;
+				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.GyroData.temp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

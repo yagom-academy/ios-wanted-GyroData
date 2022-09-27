@@ -11,7 +11,7 @@ import UIKit
 protocol ThirdViewControllerRoutable: Routable {
     
 }
-
+    
 extension ThirdViewControllerRoutable where Self: ThirdViewController {
     func route(to Scene: SceneCategory) {
         switch Scene {
