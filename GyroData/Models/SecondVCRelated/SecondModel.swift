@@ -138,6 +138,7 @@ class SecondModel {
             self._isLoading = true
             let date = Date()
             let fileName = date.asString(.fileName)
+            let time = round((Float(_motionMeasures.count) * 0.1) * 10) / 10
             let motionFile = MotionFile(
                 fileName: fileName,
                 type: segmentViewModel.selectedType.rawValue,
