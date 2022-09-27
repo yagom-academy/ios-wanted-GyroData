@@ -177,8 +177,11 @@ class GraphView: UIView {
     }
     
     func reCalculateScale(_ receivedData: CGFloat) {
+        xPreviousPoint = xPreviousPoint.applying(lastAppliedTransform.inverted())
         xPath.apply(lastAppliedTransform.inverted())
+        yPreviousPoint = yPreviousPoint.applying(lastAppliedTransform.inverted())
         yPath.apply(lastAppliedTransform.inverted())
+        zPreviousPoint = zPreviousPoint.applying(lastAppliedTransform.inverted())
         zPath.apply(lastAppliedTransform.inverted())
         if abs(receivedData) > yAxisBound {
             yAxisMultiplier = yAxisMultiplier * (yAxisBound / (abs(receivedData) * 1.2))
@@ -186,8 +189,11 @@ class GraphView: UIView {
             let height = self.frame.height
             lastAppliedTransform = CGAffineTransform(1, 0, 0, yAxisMultiplier, 0, height * ((1 - yAxisMultiplier) / 2))
         }
+        xPreviousPoint = xPreviousPoint.applying(lastAppliedTransform)
         xPath.apply(lastAppliedTransform)
+        yPreviousPoint = yPreviousPoint.applying(lastAppliedTransform)
         yPath.apply(lastAppliedTransform)
+        zPreviousPoint = zPreviousPoint.applying(lastAppliedTransform)
         zPath.apply(lastAppliedTransform)
     }
 }
