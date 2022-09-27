@@ -44,7 +44,7 @@ class DataManager {
         }
     }
     
-    // 부분Delete 구현
+    // 부분 Delete 구현
     func deleteRun(object: Save) -> Bool {
         self.mainContext.delete(object)
         self.saveMainContext()
