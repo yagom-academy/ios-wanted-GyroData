@@ -41,7 +41,7 @@ class TableViewCell: UITableViewCell {
         fatalError()
     }
     
-    /// 레이아웃 설정
+    /// 레이아웃 설정 
     func configure() {
         timeLabel.translatesAutoresizingMaskIntoConstraints = false
         timeLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
