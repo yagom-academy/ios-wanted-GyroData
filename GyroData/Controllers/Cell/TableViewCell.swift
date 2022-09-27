@@ -8,7 +8,7 @@
 import UIKit
 
 class TableViewCell: UITableViewCell {
-     // 레이블 구현
+    // 레이블 구현
     var dateLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 15)
@@ -38,7 +38,7 @@ class TableViewCell: UITableViewCell {
         addSubview(stackView)
         
         configure()
-    
+        
     }
     required init?(coder: NSCoder) {
         fatalError()

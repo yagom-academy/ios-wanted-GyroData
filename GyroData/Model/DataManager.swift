@@ -70,7 +70,7 @@ class DataManager {
         saveContext()
     }
     func addNewSave(_ name: String?, _ time: Float?, _ xData: [Float], yData: [Float], zData: [Float]) {
-       // 데이터베이스의 sav를 저장하는데 필요한 인스턴스 생성
+        // 데이터베이스의 sav를 저장하는데 필요한 인스턴스 생성
         let newSave = Save(context: mainContext)
         //값 입력
         newSave.name = name
