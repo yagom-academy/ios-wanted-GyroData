@@ -22,7 +22,9 @@ class CoreDataService {
 
     lazy var fetchedResultsController: NSFetchedResultsController<CDMotionData> = {
         let fetchRequest: NSFetchRequest<CDMotionData> = CDMotionData.fetchRequest()
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(CDMotionData.date), ascending: true)]
+        fetchRequest.sortDescriptors = [
+            NSSortDescriptor(key: #keyPath(CDMotionData.date), ascending: true),
+        ]
         fetchRequest.fetchBatchSize = 10
         let controller = NSFetchedResultsController(
             fetchRequest: fetchRequest,
@@ -64,6 +66,7 @@ class CoreDataService {
             if shouldSave {
                 do {
                     try context.save()
+                    try FileManagerService().write(motionData)
                     completion?(nil)
                 } catch {
                     completion?(error)
@@ -77,7 +80,8 @@ class CoreDataService {
         shouldSave: Bool = true,
         completion: (() -> Void)? = nil
     ) {
-        guard let context = motionData.managedObjectContext else {
+        guard let context = motionData.managedObjectContext,
+        let date = motionData.date else {
             fatalError(#function + String(describing: motionData))
         }
         context.perform {
@@ -86,6 +90,7 @@ class CoreDataService {
             if shouldSave {
                 do {
                     try context.save()
+                    try FileManagerService().delete(date)
                     completion?()
                 } catch {
                     print(#function, error)
