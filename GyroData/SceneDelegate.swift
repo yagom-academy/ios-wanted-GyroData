@@ -17,6 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
+        
         let navigationController = UINavigationController(rootViewController: ViewController())
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible() //네비게이션 추가
