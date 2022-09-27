@@ -10,8 +10,8 @@ import SnapKit
 
 class MainViewController: UIViewController {
     var datasource = [GyroModel]()
-    
     let manager = CoreDataManager.shared
+    let FileManager = MeasureFileManager.shared
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -27,30 +27,24 @@ class MainViewController: UIViewController {
         self.view.backgroundColor = .white
         setupView()
         addNaviBar()
-//        loadData()
+//        tableView.reloadData()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        datasource.append(contentsOf: manager.fetchTen(offset: datasource.count))
-        tableView.reloadData()
-//        tableView.reloadData()
+        //        tableView.reloadData()
         //        manager.fetch()
-//                manager.fetchTen(offset: datasource.count)
-//        loadData()
+//        datasource.append(contentsOf: manager.fetchTen1(offset: datasource.count))
+
+        //                manager.fetchTen(offset: datasource.count)
+                loadData()
+//        tableView.reloadData()
     }
-    
     private func setupView() {
         tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: CustomTableViewCell.identifier)
         tableView.delegate = self
         tableView.dataSource = self
     }
-    //실행시 기존데이터 로드
-    private func loadData() {
-//        manager.fetch()
-//        manager.fetchTen(offset: 0)
-//        datasource.append(contentsOf: manager.fetchTen(offset: datasource.count))
-        tableView.reloadData()
-    }
+   
     
     //네비바 추가
     private func addNaviBar() {
@@ -64,63 +58,83 @@ class MainViewController: UIViewController {
         let MeasureView = MeasureViewController()
         self.navigationController?.pushViewController(MeasureView, animated: true)
         tableView.reloadData()
-//        loadData()
+        //        loadData()
         //
     }
+    //실행시 기존데이터 로드
+    private func loadData() {
+//                manager.fetch()
+//        manager.fetchTen(offset: 0)
+//        datasource.append(contentsOf: manager.fetchTen1(offset: datasource.count))
+//        print("데이터소스 카운트\(datasource.count)")
+        datasource.append(contentsOf: manager.fetchTen1(offset: datasource.count))
+//        print("데이터소스 카운트\(datasource.count)")
+        tableView.reloadData()
+    }
 }
+
 
 extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        //테이블셀이 10개일때 데이터를 10개불러오는곳
-//        guard indexPath.row == (datasource.count ?? 0) - 1 else {return}
-//            print("celllllllllllllll")
-//        tableView.reloadData()
+        //테이블셀이 10개일때 데이터를 10개불러오는곳??
+//        let fetchData = manager.fetchTen(count: count)
+//        print("111indexPath: \(indexPath.row) datasource.count: \(datasource.count)")
+        guard indexPath.row == manager.fetchTen1(offset: datasource.count).count - 1 else {return}
+     
+//            loadData()
+            //        count += fetchData.count
+            datasource.append(contentsOf: manager.fetchTen1(offset: datasource.count))
+        tableView.reloadData()
+        print("2222indexPath: \(indexPath.row) datasource.count: \(datasource.count)")
+//            datasource.append(contentsOf: manager.fetchTen1(offset: datasource.count))
+            //        datasource.append(contentsOf: manager.fetchTen1(offset: datasource.count))
+            //        print("\(fetchData.count)🐤")
+//            tableView.reloadData()
+     }
+
+        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+            return datasource.count
+//           manager.fetchTen(count: count)
+        }
         
+        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+            let cell = tableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.identifier) as? CustomTableViewCell ?? CustomTableViewCell()
+            cell.bind1(model: datasource[indexPath.row])
+            //manager.fetchTen(count: count)
+            return cell
         }
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return manager.fetch().count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.identifier) as? CustomTableViewCell ?? CustomTableViewCell()
-        cell.bind1(model: manager.fetch()[indexPath.row])
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 75
-    }
-    
-    //SwipeAction
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let playAction = UIContextualAction(style: .normal, title:"Play"){ (UIContextualAction, UIView, success: @escaping (Bool) -> Void) in
-            print("paly 클릭 됨")
-         
-            let ReplayViewController = ReplayViewController()
-            self.navigationController?.pushViewController(ReplayViewController, animated: true)
-
-//            self.datasource[indexPath.row]
-//            print(self.manager.count()!, self.datasource[indexPath.row].id!)
-            success(true)
+        
+        func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+            return 75
         }
-        // 코어데이터 제거
-        let deleteAction = UIContextualAction(style: .normal, title: "Delete") { (UIContextualAction, UIView, success: @escaping (Bool) -> Void) in
-            print("delete 클릭 됨")
-//            self.manager.delete(object: self.datasource[indexPath.row])
+        
+        //SwipeAction
+        func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+            let playAction = UIContextualAction(style: .normal, title:"Play"){ (UIContextualAction, UIView, success: @escaping (Bool) -> Void) in
+                print("paly 클릭 됨")
+                
+                let ReplayViewController = ReplayViewController()
+                self.navigationController?.pushViewController(ReplayViewController, animated: true)
+                //self.datasource[indexPath.row]
+                //print(self.manager.count()!, self.datasource[indexPath.row].id!)
+                success(true)
+            }
             // 코어데이터 제거
-//            self.manager.deleteAll()
-            self.manager.delete(object: self.manager.fetch()[indexPath.row])
-//            self.loadData()
-            tableView.reloadData()
-//
-            success(true)
+            let deleteAction = UIContextualAction(style: .normal, title: "Delete") { (UIContextualAction, UIView, success: @escaping (Bool) -> Void) in
+                print("delete 클릭 됨")
+//                self.manager.delete(object: self.datasource[indexPath.row])
+                self.manager.delete(object: self.datasource.remove(at: [indexPath.row].count))
+                // self.manager.deleteAll()
+//                self.manager.delete(object: self.datasource[indexPath.row])
+                tableView.reloadData()
+                success(true)
+            }
+            playAction.backgroundColor = .systemGreen
+            deleteAction.backgroundColor = .systemRed
+            
+            return UISwipeActionsConfiguration(actions: [deleteAction, playAction])
         }
-        playAction.backgroundColor = .systemGreen
-        deleteAction.backgroundColor = .systemRed
-
-        return UISwipeActionsConfiguration(actions: [deleteAction, playAction])
     }
-}
 
 //테이블뷰셀 선택시 3번째뷰컨트롤러뷰타입으로
 extension MainViewController: UITableViewDelegate {
@@ -128,10 +142,12 @@ extension MainViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         let ReplayViewController = ReplayViewController()
         self.navigationController?.pushViewController(ReplayViewController, animated: true)
-        print(manager.fetch()[indexPath.row].id)
+        print(datasource[indexPath.row].id!)
     }
-    
 }
+
+
+
 
 
 

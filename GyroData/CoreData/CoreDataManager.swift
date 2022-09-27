@@ -9,7 +9,7 @@ import CoreData
 import UIKit
 
 class CoreDataManager {
-    
+    var datasoooooo = [GyroModel]()
     static var shared: CoreDataManager = CoreDataManager()
     
     
@@ -44,6 +44,8 @@ class CoreDataManager {
 //        }
     
     
+    
+    
     var context: NSManagedObjectContext {
         return self.persistentContainer.viewContext
     }
@@ -61,19 +63,33 @@ class CoreDataManager {
             return []
         }
     }
-    func fetchTen(offset:Int) -> [GyroModel] {
+    func fetchTen(count:Int) -> [GyroModel] {
         do {
+            var fetchOffset = 0
             request.fetchLimit = 10
-            request.fetchOffset = offset
+            request.fetchOffset = count
+            fetchOffset = fetchOffset + request.fetchOffset
             let fetchdata = try self.context.fetch(request)
-            print("🐤🐤🐤🐤🐤🐤🐤🐤\(fetchdata.count)")
+//            print("🐤🐤🐤🐤🐤🐤🐤🐤\(fetchdata.count)")
             return fetchdata
         } catch {
             print(error.localizedDescription)
             return []
         }
     }
- 
+    func fetchTen1(offset:Int) -> [GyroModel] {
+        do {
+            request.fetchLimit = 10
+            request.fetchOffset = offset
+            let fetchdata = try self.context.fetch(request)
+            print("\(request.fetchOffset)🥝🥝🥝현재 데이터: \(fetchdata.count)")
+            return fetchdata
+        } catch {
+            print(error.localizedDescription)
+            return []
+        }
+    }
+    
     @discardableResult
     func insertMeasure(measure: Measure) -> Bool {
         let entity = NSEntityDescription.entity(forEntityName: "GyroModel", in: self.context)

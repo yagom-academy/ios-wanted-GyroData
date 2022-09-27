@@ -12,15 +12,15 @@ class CustomTableViewCell: UITableViewCell {
     
     static let identifier = "CustomTableViewCell"
     
-    lazy var stackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [title,second,measureDate])
-        contentView.addSubview(stackView)
-        stackView.snp.makeConstraints { (make) in
-            make.left.bottom.right.top.equalTo(contentView)
-        }
-        
-        return stackView
-    }()
+//    lazy var stackView: UIStackView = {
+//        let stackView = UIStackView(arrangedSubviews: [title,second,measureDate])
+//        contentView.addSubview(stackView)
+//        stackView.snp.makeConstraints { (make) in
+//            make.left.bottom.right.top.equalTo(contentView)
+//        }
+//
+//        return stackView
+//    }()
     
     lazy var title: UILabel = {
         let label = UILabel()
@@ -49,24 +49,24 @@ class CustomTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been impl")
     }
     private func addContentView() {
-        stackView.addSubview(title)
-        stackView.addSubview(second)
-        stackView.addSubview(measureDate)
+        contentView.addSubview(title)
+        contentView.addSubview(second)
+        contentView.addSubview(measureDate)
         
         measureDate.snp.makeConstraints { (make) in
-            make.leading.equalTo(stackView.snp.leading).offset(10)
-            make.top.equalTo(stackView.snp.top).offset(10)
+            make.leading.equalTo(contentView.snp.leading).offset(20)
+            make.top.equalTo(contentView.snp.top).offset(10)
             make.bottom.equalTo(title.snp.top).offset(-10)
         }
         title.snp.makeConstraints { make in
-            make.bottom.equalTo(stackView.snp.bottom)
-            make.leading.equalTo(measureDate)
+            make.bottom.equalTo(contentView.snp.bottom)
+            make.leading.equalTo(contentView.snp.leading).offset(20)
             //            make.top.equalTo(dateLabel.snp.bottom).offset(3)
             //            make.bottom.equalTo(stackView.snp.bottom)
         }
         second.snp.makeConstraints { make in
-            //            make.top.equalTo(stackView.snp.top).offset(10)
-            make.trailing.equalTo(stackView.snp.trailing).offset(1)
+            make.top.equalTo(contentView.snp.top).offset(10)
+            make.trailing.equalTo(contentView.snp.trailing).offset(-5)
         }
     }
 }
