@@ -5,7 +5,6 @@
 //  Created by 유영훈 on 2022/09/21.
 //
 
-import Foundation
 import UIKit
 
 class CommonUIModule {
