@@ -15,7 +15,7 @@ protocol RepositoryProtocol: CoreDataRepositoryProtocol, FileManagerRepositoryPr
 protocol CoreDataRepositoryProtocol {
     func fetchFromCoreData() async throws -> [MotionTask]
     func insertToCoreData(motion: MotionTask) async throws
-    func delete(motion: Motion) async throws
+    func deleteFromCoreData(motion: MotionTask) async throws
 }
 
 protocol FileManagerRepositoryProtocol {
@@ -51,8 +51,8 @@ extension Repository: CoreDataRepositoryProtocol {
         return
     }
     
-    func delete(motion: Motion) async throws {
-        try await CoreDataManager.shared.delete(object: motion)
+    func deleteFromCoreData(motion: MotionTask) async throws {
+        try await CoreDataManager.shared.deleteMotionTask(motion: motion)
         return
     }
 }
