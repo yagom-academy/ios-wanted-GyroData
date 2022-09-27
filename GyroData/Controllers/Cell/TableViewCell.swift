@@ -31,21 +31,17 @@ class TableViewCell: UITableViewCell {
         return stackView
     }()
     
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         addSubview(timeLabel)
         addSubview(stackView)
-        
         configure()
-        
     }
     required init?(coder: NSCoder) {
         fatalError()
     }
     /// 레이아웃 설정
     func configure() {
-        
         timeLabel.translatesAutoresizingMaskIntoConstraints = false
         timeLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         timeLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -40).isActive = true
