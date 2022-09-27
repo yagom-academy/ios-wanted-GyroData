@@ -34,22 +34,12 @@ class CoreDataManager {
         return  NSEntityDescription.entity(forEntityName: "GyroModel", in: context)
     }
     
-    func fetch() -> [GyroModel] {
-        do {
-            let fetchResult = try self.context.fetch(request)
-            return fetchResult
-        } catch {
-            print(error.localizedDescription)
-            return []
-        }
-    }
-
-    func fetchTen1(offset:Int) -> [GyroModel] {
+    func fetchTen(offset:Int) -> [GyroModel] {
         do {
             request.fetchLimit = 10
             request.fetchOffset = offset
             let fetchdata = try self.context.fetch(request)
-//            print("\(request.fetchOffset)🥝🥝🥝현재 데이터: \(fetchdata.count)")
+
             return fetchdata
         } catch {
             print(error.localizedDescription)

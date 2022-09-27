@@ -175,11 +175,9 @@ class ReplayViewController: UIViewController {
 //            self.graphView.animateNewValue(self.sensorData, duration: 0.1)
             self.countDown -= 1
             self.startTime += 0.1
-
             if self.countDown <= 0 {
                 timer.invalidate()
             }
-
         }
     }
     
