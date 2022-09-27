@@ -14,14 +14,14 @@ protocol RepositoryProtocol: CoreDataRepositoryProtocol, FileManagerRepositoryPr
 // CoreData 와 통신하는 repository 가 들고 있는 프로토콜
 protocol CoreDataRepositoryProtocol {
     func fetchFromCoreData() async throws -> [MotionTask]
-    func insertToCoreData(motion: MotionTask) async throws
-    func delete(motion: Motion) async throws
+    func insertToCoreData(motion: MotionTask)
+    func deleteFromCoreData(motion: MotionTask)
 }
 
 protocol FileManagerRepositoryProtocol {
     func fetchFromFileManager(fileName name: String) async throws -> MotionFile
-    func saveToFileManager(file: MotionFile) async throws
-    func deleteFromFileManager(fileName name: String) async throws
+    func saveToFileManager(file: MotionFile)
+    func deleteFromFileManager(fileName name: String)
 }
 
 //이 클래스가 들고 있는 어떠한 클래스가 자이로 데이터를 계산, 갱신 하게 하고
@@ -46,14 +46,18 @@ extension Repository: CoreDataRepositoryProtocol {
         return result
     }
     
-    func insertToCoreData(motion: MotionTask) async throws {
-        try await CoreDataManager.shared.insertMotionTask(motion: motion)
-        return
+    func insertToCoreData(motion: MotionTask) {
+        Task {
+            _ = try await CoreDataManager.shared.insertMotionTask(motion: motion)
+            return
+        }
     }
     
-    func delete(motion: Motion) async throws {
-        try await CoreDataManager.shared.delete(object: motion)
-        return
+    func deleteFromCoreData(motion: MotionTask) {
+        Task {
+            _ = try await CoreDataManager.shared.deleteMotionTask(motion: motion)
+            return
+        }
     }
 }
 
@@ -63,14 +67,18 @@ extension Repository: FileManagerRepositoryProtocol {
         return result
     }
     
-    func saveToFileManager(file: MotionFile) async throws {
-        try await FileManager.default.saveMotionFile(file: file)
-        return
+    func saveToFileManager(file: MotionFile) {
+        Task {
+            try await FileManager.default.saveMotionFile(file: file)
+            return
+        }
     }
     
-    func deleteFromFileManager(fileName name: String) async throws {
-        try await FileManager.default.removeMotionFile(fileName: name)
-        return
+    func deleteFromFileManager(fileName name: String) {
+        Task {
+            try await FileManager.default.removeMotionFile(fileName: name)
+            return
+        }
     }
     
 }

@@ -104,13 +104,9 @@ class FirstModel: SceneActionReceiver {
     
     func removeData(motion: MotionTask) {
         Task {
-            do {
-                try await self.repository.deleteFromFileManager(fileName: motion.path)
-                // TODO: CoreData 삭제 로직 추가
-                self.motionTasks = self.motionTasks.filter { $0.path != motion.path }
-            } catch let error {
-                debugPrint(error.localizedDescription)
-            }
+            _ = self.repository.deleteFromFileManager(fileName: motion.path)
+            _ = self.repository.deleteFromCoreData(motion: motion)
+            self.motionTasks = self.motionTasks.filter { $0.path != motion.path }
         }
     }
     
