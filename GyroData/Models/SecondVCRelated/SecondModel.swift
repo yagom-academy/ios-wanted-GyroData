@@ -136,7 +136,8 @@ class SecondModel {
     func saveMotionMeasures() async {
         do {
             self._isLoading = true
-            let fileName = "\(Date().timeIntervalSince1970)"
+            let date = Date()
+            let fileName = date.asString(.fileName)
             let motionFile = MotionFile(
                 fileName: fileName,
                 type: segmentViewModel.selectedType.rawValue,
@@ -147,7 +148,7 @@ class SecondModel {
             let motionTask = MotionTask(
                 type: segmentViewModel.selectedType.rawValue,
                 time: Float(_motionMeasures.count) * 0.1,
-                date: Date(),
+                date: date,
                 path: fileName)
             _ = try await self.repository.insertToCoreData(motion: motionTask)
             self._isLoading = false
