@@ -102,6 +102,8 @@ class GraphView: UIView {
     
     var lastAppliedTransform: CGAffineTransform = .identity
     
+    var drawPathIsNeeded: Bool = false
+    
     var xInterval: CGFloat {
         return self.frame.width / 600
     }
@@ -120,9 +122,13 @@ class GraphView: UIView {
     }
     
     override func draw(_ rect: CGRect) {
-        drawXpath()
-        drawYpath()
-        drawZpath()
+        if drawPathIsNeeded {
+            drawXpath()
+            drawYpath()
+            drawZpath()
+            strokePaths()
+            drawPathIsNeeded = false
+        }
         updateMaxLabel()
     }
     
@@ -147,8 +153,6 @@ class GraphView: UIView {
             
             reCalculateScale(receivedData)
             
-            UIColor.red.setStroke()
-            xPath.stroke()
             xPathData.append(xPreviousPoint)
         } else if drawMode == .whole {
             for receivedData in viewModel.dataSource {
@@ -163,8 +167,6 @@ class GraphView: UIView {
                 
                 reCalculateScale(receivedData.xValue)
                 
-                UIColor.red.setStroke()
-                xPath.stroke()
                 xPathData.append(xPreviousPoint)
             }
         }
@@ -186,8 +188,6 @@ class GraphView: UIView {
             
             reCalculateScale(receivedData)
             
-            UIColor.green.setStroke()
-            yPath.stroke()
             yPathData.append(yPreviousPoint)
         } else if drawMode == .whole {
             for receivedData in viewModel.dataSource {
@@ -201,8 +201,6 @@ class GraphView: UIView {
                 
                 reCalculateScale(receivedData.yValue)
                 
-                UIColor.green.setStroke()
-                yPath.stroke()
                 yPathData.append(yPreviousPoint)
             }
         }
@@ -225,8 +223,6 @@ class GraphView: UIView {
             
             reCalculateScale(receivedData)
             
-            UIColor.blue.setStroke()
-            zPath.stroke()
             zPathData.append(zPreviousPoint)
         } else if drawMode == .whole {
             for receivedData in viewModel.dataSource {
@@ -240,11 +236,18 @@ class GraphView: UIView {
                 
                 reCalculateScale(receivedData.zValue)
                 
-                UIColor.blue.setStroke()
-                zPath.stroke()
                 zPathData.append(zPreviousPoint)
             }
         }
+    }
+    
+    func strokePaths() {
+        UIColor.red.setStroke()
+        xPath.stroke()
+        UIColor.green.setStroke()
+        yPath.stroke()
+        UIColor.blue.setStroke()
+        zPath.stroke()
     }
     
     func reCalculateScale(_ receivedData: CGFloat) {
@@ -300,14 +303,17 @@ extension GraphView: Presentable {
     func bind() {
         //드로잉을 위한 데이터소스 변경, 붙이기, 삭제 등 비즈니스 로직
         viewModel.populateTickData = { [weak self] in
-            self?.drawMode = .tick
-            self?.setNeedsDisplay() //그 다음에 얘를 호출 호출하면
+            guard let self else { return }
+            self.drawMode = .tick
+            self.drawPathIsNeeded = true
+            self.setNeedsDisplay() //그 다음에 얘를 호출 호출하면
             //다음 드로잉 사이클에 오버라이드한 draw가 불리게 될 것임
         }
         
         viewModel.populateWholePacketData = { [weak self] in
             guard let self = self else { return }
             self.drawMode = .whole
+            self.drawPathIsNeeded = true
             self.setNeedsDisplay()
         }
 
