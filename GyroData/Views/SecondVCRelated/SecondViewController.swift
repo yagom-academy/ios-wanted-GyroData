@@ -36,6 +36,16 @@ class SecondViewController: UIViewController, SecondViewControllerRoutable, Seco
         configureView()
         bind()
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        print("viewDidLoad frame : \(self.gridView.frame.width)")
+    }
 }
 
 // MARK: Presentable
@@ -107,6 +117,7 @@ extension SecondViewController: Presentable {
         backButton.target = self
         backButton.action = #selector(didTapBackButton)
         
+        gridView.clipsToBounds = true
         indicatorView.isHidden = true
     }
     

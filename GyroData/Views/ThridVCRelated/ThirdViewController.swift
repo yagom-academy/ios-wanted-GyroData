@@ -92,6 +92,8 @@ extension ThirdViewController: Presentable {
         backButton.addStyles(style: backButtonStyling)
         backButton.target = self
         backButton.action = #selector(didTapBackButton)
+        
+        gridView.clipsToBounds = true
     }
     
     func bind() {
