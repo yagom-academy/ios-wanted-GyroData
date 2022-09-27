@@ -58,6 +58,7 @@ class SecondModel {
             isLoadingSource(_isLoading)
         }
     }
+    private var _lastMeasuredType: MotionType?
     
     // MARK: Init
     init(repository: RepositoryProtocol, motionManager: CoreMotionManagerProtocol) {
@@ -72,7 +73,13 @@ class SecondModel {
     // MARK: Bind
     func bind() {
         didTapBackButton = { [weak self] in
-            self?.routeSubject(.close)
+            guard let self else { return }
+            if self._isMeasuring {
+                let type = self.segmentViewModel.selectedType
+                self.motionManager.stopUpdate(type)
+                self._isMeasuring = false
+            }
+            self.routeSubject(.close)
         }
         
         didTapSaveButton = { [weak self] in
@@ -98,6 +105,7 @@ class SecondModel {
             do {
                 self._motionMeasures = []
                 try self.motionManager.startUpdate(type)
+                self._lastMeasuredType = type
                 self._isMeasuring = true
             } catch let error {
                 debugPrint(error)
@@ -135,20 +143,21 @@ class SecondModel {
     @MainActor
     func saveMotionMeasures() async {
         do {
-            self._isLoading = true
+            guard let type = _lastMeasuredType else { return }
             let date = Date()
             let fileName = date.asString(.fileName)
             let time = round((Float(_motionMeasures.count) * 0.1) * 10) / 10
+            self._isLoading = true
             let motionFile = MotionFile(
                 fileName: fileName,
-                type: segmentViewModel.selectedType.rawValue,
+                type: type.rawValue,
                 x_axis: _motionMeasures.map { Float($0.x) },
                 y_axis: _motionMeasures.map { Float($0.y) },
                 z_axis: _motionMeasures.map { Float($0.z) })
             try await self.repository.saveToFileManager(file: motionFile)
             let motionTask = MotionTask(
-                type: segmentViewModel.selectedType.rawValue,
-                time: Float(_motionMeasures.count) * 0.1,
+                type: type.rawValue,
+                time: time,
                 date: date,
                 path: fileName)
             _ = try await self.repository.insertToCoreData(motion: motionTask)
