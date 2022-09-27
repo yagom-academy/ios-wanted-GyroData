@@ -45,15 +45,13 @@ class GraphView: UIView {
     
     // MARK: - open func
     func reset() {
-        guard let layer = self.layer as? CAShapeLayer else { return }
         graphSwipeAnimation = false
         aPoint?.resetToValue(nil)
         bPoint?.resetToValue(nil)
         cPoint?.resetToValue(nil)
-        layer.path = makePath().aPath
-        layer.path = makePath().bPath
-        layer.path = makePath().cPath
-        
+        aPath = UIBezierPath()
+        bPath = UIBezierPath()
+        cPath = UIBezierPath()
     }
         
     func justShowGraph() {
