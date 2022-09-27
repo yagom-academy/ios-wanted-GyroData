@@ -92,7 +92,6 @@ extension MainViewController: UITableViewDataSource {
     //SwipeAction
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let playAction = UIContextualAction(style: .normal, title:"Play"){ (UIContextualAction, UIView, success: @escaping (Bool) -> Void) in
-            print("paly 클릭 됨")
             
             let vc = ReplayViewController()
             let data = self.datasource[indexPath.row]
@@ -104,7 +103,6 @@ extension MainViewController: UITableViewDataSource {
         
         // 코어데이터 제거
         let deleteAction = UIContextualAction(style: .normal, title: "Delete") { (UIContextualAction, UIView, success: @escaping (Bool) -> Void) in
-            print("delete 클릭 됨")
             self.manager.delete(object: self.datasource[indexPath.row])
             self.datasource.remove(at: indexPath.row)
             tableView.reloadData()
@@ -125,6 +123,5 @@ extension MainViewController: UITableViewDelegate {
         vc.pageTypeName = .view
         vc.measureData = data
         self.navigationController?.pushViewController(vc, animated: true)
-        print(datasource[indexPath.row].id!)
     }
 }

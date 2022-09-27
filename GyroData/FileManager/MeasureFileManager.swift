@@ -19,7 +19,6 @@ class MeasureFileManager {
         
         let documentsURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
         let fileURL = documentsURL.appendingPathComponent("\(coverData.id).json")
-        //print(fileURL)
         
         let jsonData = NSString(string: jsonString)
         
@@ -42,7 +41,6 @@ class MeasureFileManager {
             let data = try Data(contentsOf: fileURL)
             let decoder = JSONDecoder()
             let decodeData = try decoder.decode([GyroJson].self, from: data)
-            print("FileManager 읽어오기 성공")
             return .success(decodeData)
         }
         catch let error {

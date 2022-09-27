@@ -63,7 +63,7 @@ class MeasureViewController: UIViewController {
         mainView.segmentControl.addTarget(self, action: #selector(segmentFlag), for: .valueChanged)
     }
     
-    // MARK: incomplete
+    
     @objc func saveButtonClicked() {
         
         DispatchQueue.main.async {
@@ -79,15 +79,12 @@ class MeasureViewController: UIViewController {
                 
                 switch error {
                 case .coredata:
-                    print(error)
                     alert.title = error.rawValue
                     self.present(alert,animated: false)
                 case .filemanager:
-                    print(error)
                     alert.title = error.rawValue
                     self.present(alert,animated: false)
                 case .none:
-                    print(error)
                     self.navigationController?.popViewController(animated: true)
                 }
                 

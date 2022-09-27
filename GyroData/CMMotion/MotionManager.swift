@@ -16,7 +16,7 @@ class MotionManager: CMMotionManager {
         gyroUpdateInterval = 0.1
         startGyroUpdates(to: OperationQueue.current!) { (gyroData: CMGyroData!, error: Error!) -> Void in
             if (error != nil) {
-                print("error")
+                print(error!)
             }
         }
     }
@@ -27,7 +27,7 @@ class MotionManager: CMMotionManager {
         startAccelerometerUpdates(to: OperationQueue.current!) { (accelerometerData: CMAccelerometerData!, error: Error!) -> Void in
             
             if (error != nil) {
-                print("error")
+                print(error!)
             }
         }
     }

@@ -9,6 +9,7 @@ import UIKit
 
 class GraphView: UIView {
     
+    //기본 y축의 범위
     public var maxValue: CGFloat = 5
     public var minValue: CGFloat = -5
     var graphSwipeAnimation = false
@@ -72,7 +73,7 @@ class GraphView: UIView {
     public func animateNewValue(aValue: CGFloat, bValue: CGFloat, cValue: CGFloat, duration: Double = 0.0) {
         let animation = CABasicAnimation(keyPath: "strokeEnd")
         
-        //value가 최대 혹은 최소 값을 초과 했을 경우 스케일 재설정
+        //value가 기본 y축 범위의 최대 혹은 최소 값을 초과 했을 경우 스케일 재설정
         resetScale([aValue,bValue,cValue])
         
         let oldPathInfo = makePath()
@@ -97,7 +98,7 @@ class GraphView: UIView {
             zLayer.add(animation, forKey: animation.keyPath)
         }
         
-                // 새 좌표 업데이트
+        // 새 좌표 업데이트
         aPoint.write(aValue)
         bPoint.write(bValue)
         cPoint.write(cValue)
@@ -139,6 +140,7 @@ class GraphView: UIView {
             let bCGPoint = CGPoint(x: x, y: bY)
             let cCGPoint = CGPoint(x: x, y: cY)
 
+            //시작점으로 이동 및 선 그리기
             if idx == 0 {
                 aPath.move(to: aCGPoint)
                 bPath.move(to: bCGPoint)
@@ -158,7 +160,7 @@ class GraphView: UIView {
         
         return (aPath.cgPath, bPath.cgPath, cPath.cgPath, xInterval)
     }
-    
+    //그래프의 x y의 간격 조절
     func xForIndex(_ index: Int, _ xInterval: CGFloat) -> CGFloat {
         return CGFloat(index) * xInterval + bounds.origin.x
     }
@@ -167,6 +169,7 @@ class GraphView: UIView {
         return bounds.height / 2 + value * yInterval + bounds.origin.y
     }
     
+    //스케일 재설정 메소드, y축의 범위를 받은 값 + 받은 값 * 0.2로 설정한다
     func resetScale(_ motionData: [Double]) {
 
         for value in motionData {
