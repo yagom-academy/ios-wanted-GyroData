@@ -147,7 +147,7 @@ class GraphViewMaker {
         센서 정보 수집 및 그래프뷰 그리기를 시작합니다.  (측정용)
      */
     public func measurement() -> Bool {
-        resetGraph()
+        reset()
         isRunning = true
         return true
     }
@@ -175,7 +175,7 @@ class GraphViewMaker {
         Core Data에 저장된 모션값을 이용하여 x, y, z선을 그리는 함수를 호출합니다.
      */
     public func play(animated: Bool) {
-        resetGraph()
+        reset()
         xData = data?.xData as! [Float]
         yData = data?.yData as! [Float]
         zData = data?.zData as! [Float]
@@ -226,7 +226,7 @@ class GraphViewMaker {
         모션 센서의 측정을 중단합니다.
      */
     @objc func stopMeasurement() -> Bool {
-        resetGraph()
+        reset()
         isRunning = false
         return true
     }
@@ -350,7 +350,7 @@ class GraphViewMaker {
     /**
         그래프 뷰를 초기화 합니다.
      */
-    public func resetGraph() {
+    public func reset() {
         // baseline 계산
         graphBaseHeight = graphViewHeight / 2.0 - 5.6
         // 인덱스 초기화

@@ -95,7 +95,7 @@ class ReplayViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         graphViewMaker.stop()
-        graphViewMaker.resetGraph()
+        graphViewMaker.reset()
     }
     
     override func viewDidLoad() {
