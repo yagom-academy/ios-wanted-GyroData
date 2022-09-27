@@ -11,29 +11,40 @@ import CoreData
 class DataManager {
     
     static let shared = DataManager()
-    private init() {
-    }
+    
+    private init() { }
+    
+    var isFetching: Bool = false
+    
+    var saveList = [Save]()
     
     var mainContext: NSManagedObjectContext {
         return persistentContainer.viewContext
     }
     
-    var saveList = [Save]()
-    //데이터 저장
+    // 데이터 저장
     func fetchSave() {
+        if isFetching {
+            print("isFetching...")
+            return
+        }
+        isFetching = true
         let request: NSFetchRequest<Save> = Save.fetchRequest()
-        request.fetchLimit = 5
+        request.fetchLimit = 10
         request.fetchOffset = saveList.count
         let sortByDateDesc = NSSortDescriptor(key: "date", ascending: false)
         request.sortDescriptors = [sortByDateDesc]
         do {
             saveList.append(contentsOf: try mainContext.fetch(request))
+            print("Fetched!")
+            isFetching = false
         } catch {
             print(error)
+            isFetching = false
         }
     }
     
-    //부분Delete 구현
+    // 부분Delete 구현
     func deleteRun(object: Save) -> Bool {
         self.mainContext.delete(object)
         self.saveMainContext()
@@ -44,6 +55,7 @@ class DataManager {
             return false
         }
     }
+    
     func saveMainContext() {
         mainContext.perform {
             if self.mainContext.hasChanges {

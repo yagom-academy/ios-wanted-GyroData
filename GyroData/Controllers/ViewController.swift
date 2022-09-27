@@ -10,6 +10,7 @@ import UIKit
 class ViewController: UIViewController {
     
     var datas = [Save]()
+    var flag: Bool = true
     
     let formatter: DateFormatter = {
         let f = DateFormatter()
@@ -32,9 +33,8 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         view.backgroundColor = .systemBackground
-        navigationItem.rightBarButtonItem = self.navButton
+        self.navigationItem.rightBarButtonItem = self.navButton
         navigationItem.backButtonTitle = "" // 이동하기전 뷰에서 지정해줘야 적용됨.
         title = "목록"
         configure()
@@ -69,15 +69,17 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController: UITableViewDelegate, UITableViewDataSource {
+extension ViewController: UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row == DataManager.shared.saveList.count - 1 {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let currentOffset = scrollView.contentOffset.y + scrollView.frame.size.height
+        let maxOffset = scrollView.contentSize.height
+        if currentOffset == maxOffset {
             DataManager.shared.fetchSave()
-            tableView.reloadData()
+            self.tableView.reloadData()
         }
     }
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return DataManager.shared.saveList.count
     }
@@ -86,7 +88,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TableViewCell
         let target = DataManager.shared.saveList[indexPath.row]
         cell.dateLabel.text = formatter.string(for: target.date)
-        cell.nameLabel.text = target.name
+        cell.nameLabel.text = target.name // "\(target.name!) \(indexPath.row)"
         cell.timeLabel.text = String(format: "%.1f", target.time)
 
         return cell
@@ -120,6 +122,5 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         actions2.backgroundColor = .systemGreen
         return UISwipeActionsConfiguration(actions: [actions1, actions2])
     }
-
-
 }
+
