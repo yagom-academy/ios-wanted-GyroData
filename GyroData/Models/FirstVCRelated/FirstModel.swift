@@ -22,7 +22,11 @@ class FirstModel: SceneActionReceiver {
     //properties
     private var privateFirstListViewModel: FirstListViewModel
     private var repository: RepositoryProtocol
-    var motionTasks = [MotionTask]()
+    var motionTasks = [MotionTask]() {
+        didSet {
+            privateFirstListViewModel.didReceiveMotionTasks(motionTasks)
+        }
+    }
     
     init(repository: RepositoryProtocol) {
         self.repository = repository
@@ -90,14 +94,24 @@ class FirstModel: SceneActionReceiver {
     
     func populateData() {
         Task {
-            let motionTasks = try await self.repository.fetchFromCoreData()
-            privateFirstListViewModel.didReceiveMotionTasks(motionTasks)
+            do {
+                self.motionTasks = try await self.repository.fetchFromCoreData()
+            } catch let error {
+                debugPrint(error.localizedDescription)
+            }
         }
     }
     
     func removeData(motion: MotionTask) {
         Task {
-            try await self.repository.deleteFromFileManager(fileName: motion.path)
+            do {
+                try await self.repository.deleteFromFileManager(fileName: motion.path)
+                // TODO: CoreData 삭제 로직 추가
+                self.motionTasks = self.motionTasks.filter { $0.path != motion.path }
+            } catch let error {
+                debugPrint(error.localizedDescription)
+            }
         }
     }
+    
 }
