@@ -151,7 +151,6 @@ class GraphView : UIView {
         self.zPoint = z
     }
 
-
 }
 
 

@@ -8,10 +8,10 @@
 import Foundation
 
 struct MotionInfo: Codable {
-    let date: String
-    let dataType: String
-    let measureTime: String
-    let motionX: [Double]
-    let motionY: [Double]
-    let motionZ: [Double]
+    var date: String = ""
+    var dataType: String = ""
+    var measureTime: String = ""
+    var motionX: [Double] = []
+    var motionY: [Double] = []
+    var motionZ: [Double] = []
 }

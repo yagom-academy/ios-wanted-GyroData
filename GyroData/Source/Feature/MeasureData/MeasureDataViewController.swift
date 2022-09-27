@@ -9,7 +9,8 @@ import UIKit
 import CoreMotion
 
 class MeasureDataViewController: UIViewController {
-        
+    
+    let measureDataView = MeasureDataView()
     var isGyroOnScreen : Bool = false
     var isMeasuring: Bool = false
     let motion = CMMotionManager()
@@ -25,133 +26,52 @@ class MeasureDataViewController: UIViewController {
     var isPlaying : Bool = false{
         didSet{
             if isPlaying{
-                segmentedControl.isEnabled = false
-                measureButton.isEnabled = false
-                stopButton.isEnabled = true
+                measureDataView.segmentedControl.isEnabled = false
+                measureDataView.measureButton.isEnabled = false
+                measureDataView.stopButton.isEnabled = true
             }else{
-                segmentedControl.isEnabled = true
-                measureButton.isEnabled = true
-                stopButton.isEnabled = false
+                measureDataView.segmentedControl.isEnabled = true
+                measureDataView.measureButton.isEnabled = true
+                measureDataView.stopButton.isEnabled = false
             }
         }
     }
     
-    lazy var segmentedControl: UISegmentedControl = {
-      let control = UISegmentedControl(items: ["Acc", "Gyro"])
-        control.selectedSegmentTintColor = .systemBlue
-        control.backgroundColor = .secondarySystemBackground
-        control.addTarget(self, action: #selector(segconChange), for: .valueChanged)
-        control.selectedSegmentIndex = 0
-      return control
-    }()
-    
-    lazy var measureButton : UIButton = {
-        let button = UIButton()
-        button.setTitle("측정", for: .normal)
-        button.setTitleColor(.systemBlue, for: .normal)
-        button.addTarget(self, action: #selector(buttonTapAction), for: .touchUpInside)
-        return button
-    }()
-    
-    lazy var stopButton : UIButton = {
-        let button = UIButton()
-        button.setTitle("정지", for: .normal)
-        button.setTitleColor(.systemBlue, for: .normal)
-        button.isEnabled = false
-        button.addTarget(self, action: #selector(buttonTapAction), for: .touchUpInside)
-        return button
-    }()
-    
-    lazy var saveButton : UIButton = {
-        let button = UIButton()
-        button.setTitle("저장", for: .normal)
-        button.setTitleColor(.systemBlue, for: .normal)
-        button.addTarget(self, action: #selector(buttonTapAction), for: .touchUpInside)
-        return button
-    }()
-    
-    lazy var saveBarButtonItem: UIBarButtonItem = {
-        let barButtonItem = UIBarButtonItem()
-        barButtonItem.customView = self.saveButton
-        barButtonItem.isEnabled = false
-        return barButtonItem
-    }()
-    
-    var xLabel : UILabel = {
-        let lbl = UILabel()
-        lbl.textColor = .red
-        return lbl
-    }()
-    
-    var yLabel : UILabel = {
-        let lbl = UILabel()
-        lbl.textColor = .green
-        return lbl
-    }()
-    
-    var zLabel : UILabel = {
-        let lbl = UILabel()
-        lbl.textColor = .blue
-        return lbl
-    }()
-    
-    var maxLabel : UILabel = {
-        let lbl = UILabel()
-        lbl.textColor = .white
-        lbl.backgroundColor = .init(white: 0.8, alpha: 1)
-        lbl.layer.cornerRadius = 5
-        lbl.layer.masksToBounds = true
-        return lbl
-    }()
-    
-    var minLabel : UILabel = {
-        let lbl = UILabel()
-        lbl.textColor = .white
-        lbl.backgroundColor = .init(white: 0.2, alpha: 1)
-        lbl.layer.cornerRadius = 5
-        lbl.layer.masksToBounds = true
-        return lbl
-    }()
-    
-    let containerView : UIView = {
-        let view = UIView()
-        view.backgroundColor = .clear
-        return view
-    }()
-    
-    let plotView : PlotView = {
-       let view = PlotView()
-        view.backgroundColor = .clear
-        return view
-    }()
-    
-    lazy var gyroView : GraphView = {
-        let view = GraphView(id: .measure, xPoints: [0.0], yPoints: [0.0], zPoints: [0.0], max: Constants.gyroMax)
-        view.backgroundColor = .clear
-        return view
-    }()
-    
-    lazy var accView : GraphView = {
-        let view = GraphView(id: .measure, xPoints: [0.0], yPoints: [0.0], zPoints: [0.0], max: Constants.accMax)
-        view.backgroundColor = .clear
-        return view
-    }()
-    
-    lazy var activityIndicator: UIActivityIndicatorView = {
-        let activityIndicator = UIActivityIndicatorView()
-        activityIndicator.style = .large
-        activityIndicator.color = .blue
-        activityIndicator.layer.zPosition = 1
-        return activityIndicator
-    }()
+    override func loadView() {
+        self.view = measureDataView
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setProperties()
-        addViews()
-        setConstraints()
+        setTarget()
         setLabelValue(x: 0.0, y: 0.0, z: 0.0)
         setTextsIndicateLabels(max: Constants.accMax, min: -Constants.accMax)
+    }
+    
+    func setProperties() {
+        self.title = "측정하기"
+        self.view.backgroundColor = .systemBackground
+        self.navigationItem.setRightBarButton(measureDataView.saveBarButtonItem, animated: true)
+    }
+
+    func setTarget() {
+        [measureDataView.measureButton, measureDataView.saveButton, measureDataView.stopButton].forEach {
+            $0.addTarget(self, action: #selector(buttonTapAction), for: .touchUpInside)
+        }
+        
+        measureDataView.segmentedControl.addTarget(self, action: #selector(segconChange), for: .valueChanged)
+    }
+    
+    func setLabelValue(x:Double, y:Double, z:Double){
+        measureDataView.xLabel.text = "x:" + String(format:"%.2f",x)
+        measureDataView.yLabel.text = "y:" + String(format:"%.2f",y)
+        measureDataView.zLabel.text = "z:" + String(format:"%.2f",z)
+    }
+    
+    func setTextsIndicateLabels(max:Double, min:Double){
+        measureDataView.maxLabel.text = " max:" + String(format:"%.2f",max) + " "
+        measureDataView.minLabel.text = " min:" + String(format:"%.2f",min) + " "
     }
 
     func initMeasureDatas(type: String) {
@@ -168,17 +88,17 @@ class MeasureDataViewController: UIViewController {
 
     func startAccelerometers() {
         initMeasureDatas(type: "Accelerometer")
-        accView.erase()
-        accView.drawable = true
+        measureDataView.accView.erase()
+        measureDataView.accView.drawable = true
         var max = Constants.accMax
-        accView.max = Constants.accMax
+        measureDataView.accView.max = Constants.accMax
         setTextsIndicateLabels(max : max, min : -max)
         if motion.isAccelerometerAvailable {
                 motion.accelerometerUpdateInterval = 0.1
                 motion.startAccelerometerUpdates()
                 self.accTimer = Timer(fire: Date(), interval: 0.1,
                                       repeats: true, block: { (timer) in
-                    if self.measureTime == 599 { self.buttonTapAction(self.stopButton) }
+                    if self.measureTime == 599 { self.buttonTapAction(self.measureDataView.stopButton) }
                     if let data = self.motion.accelerometerData {
                         let x = data.acceleration.x
                         let y = data.acceleration.y
@@ -189,16 +109,16 @@ class MeasureDataViewController: UIViewController {
                         self.motionZArray.append(z)
              
                         self.setLabelValue(x: x, y: y, z: z)
-                        self.accView.getData(x: x, y: y, z: z)
+                        self.measureDataView.accView.getData(x: x, y: y, z: z)
                                                 
                         if abs(x) > max || abs(y) > max || abs(z) > max {
-                            self.accView.isOverflow = true
+                            self.measureDataView.accView.isOverflow = true
                             max *= 1.2
-                            self.accView.max = max
+                            self.measureDataView.accView.max = max
                             self.setTextsIndicateLabels(max: max, min: -max)
                         }
                         
-                        self.accView.setNeedsDisplay()
+                        self.measureDataView.accView.setNeedsDisplay()
                         self.measureTime += 1
                     }
                 })
@@ -210,17 +130,17 @@ class MeasureDataViewController: UIViewController {
 
     func startGyroscope() {
         initMeasureDatas(type: "Gyro")
-        gyroView.erase()
-        gyroView.drawable = true
+        measureDataView.gyroView.erase()
+        measureDataView.gyroView.drawable = true
         var max = Constants.gyroMax
-        gyroView.max = Constants.gyroMax
+        measureDataView.gyroView.max = Constants.gyroMax
         setTextsIndicateLabels(max: max, min: -max)
         if motion.isGyroAvailable {
                 motion.gyroUpdateInterval = 0.1
                 motion.startGyroUpdates()
                 self.gyroTimer = Timer(fire: Date(), interval: 0.1,
                                        repeats: true, block: { (timer) in
-                    if self.measureTime == 599 { self.buttonTapAction(self.stopButton) }
+                    if self.measureTime == 599 { self.buttonTapAction(self.measureDataView.stopButton) }
                     if let data = self.motion.gyroData {
                         let x = data.rotationRate.x
                         let y = data.rotationRate.y
@@ -231,16 +151,16 @@ class MeasureDataViewController: UIViewController {
                         self.motionZArray.append(z)
                         
                         self.setLabelValue(x: x, y: y, z: z)
-                        self.gyroView.getData(x: x, y: y, z: z)
+                        self.measureDataView.gyroView.getData(x: x, y: y, z: z)
      
                         if abs(x) > max || abs(y) > max || abs(z) > max {
-                            self.gyroView.isOverflow = true
+                            self.measureDataView.gyroView.isOverflow = true
                             max *= 1.2
-                            self.gyroView.max = max
+                            self.measureDataView.gyroView.max = max
                             self.setTextsIndicateLabels(max: max, min: -max)
                         }
                         
-                        self.gyroView.setNeedsDisplay()
+                        self.measureDataView.gyroView.setNeedsDisplay()
                         self.measureTime += 1
                     }
                 })
@@ -255,7 +175,7 @@ class MeasureDataViewController: UIViewController {
     }
 
     func saveMeasuredData() {
-        activityIndicator.startAnimating()
+        measureDataView.activityIndicator.startAnimating()
         
         let motionData = MotionData(context: CoreDataService.shared.context)
         motionData.measureTime = String(Double(measureTime) / 10.0)
@@ -290,7 +210,7 @@ class MeasureDataViewController: UIViewController {
         
         group.notify(queue: .main) {
             self.setAlertAndFinish(message: "저장이 완료되었습니다.")
-            self.activityIndicator.stopAnimating()
+            self.measureDataView.activityIndicator.stopAnimating()
         }
     }
     
@@ -312,14 +232,14 @@ class MeasureDataViewController: UIViewController {
     
     @objc func segconChange(_ secong: UISegmentedControl){
             if secong.selectedSegmentIndex == 0 {
-                containerView.exchangeSubview(at: 0, withSubviewAt: 1)
-                gyroView.isHidden = true
-                accView.isHidden = false
+                measureDataView.containerView.exchangeSubview(at: 0, withSubviewAt: 1)
+                measureDataView.gyroView.isHidden = true
+                measureDataView.accView.isHidden = false
                 setTextsIndicateLabels(max: Constants.accMax, min: -Constants.accMax)
             } else{
-                containerView.exchangeSubview(at: 1, withSubviewAt: 0)
-                gyroView.isHidden = false
-                accView.isHidden = true
+                measureDataView.containerView.exchangeSubview(at: 1, withSubviewAt: 0)
+                measureDataView.gyroView.isHidden = false
+                measureDataView.accView.isHidden = true
                 setTextsIndicateLabels(max: Constants.gyroMax, min: -Constants.gyroMax)
             }
         self.setLabelValue(x: 0.0, y: 0.0, z: 0.0)
@@ -327,93 +247,29 @@ class MeasureDataViewController: UIViewController {
     
     @objc func buttonTapAction(_ sender: UIButton) {
         switch sender {
-        case measureButton:
-            if segmentedControl.selectedSegmentIndex == 0 {
+        case measureDataView.measureButton:
+            if measureDataView.segmentedControl.selectedSegmentIndex == 0 {
                 startAccelerometers()
             } else {
                 startGyroscope()
             }
-            segmentedControl.isEnabled = false
-            saveBarButtonItem.isEnabled = false
+            measureDataView.segmentedControl.isEnabled = false
+            measureDataView.saveBarButtonItem.isEnabled = false
             isPlaying = true
-        case stopButton:
-            if self.segmentedControl.selectedSegmentIndex == 0 {
+        case measureDataView.stopButton:
+            if measureDataView.segmentedControl.selectedSegmentIndex == 0 {
                 stopMeasuring(accTimer)
             } else {
                 stopMeasuring(gyroTimer)
             }
-            segmentedControl.isEnabled = true
-            saveBarButtonItem.isEnabled = true
+            measureDataView.segmentedControl.isEnabled = true
+            measureDataView.saveBarButtonItem.isEnabled = true
             isPlaying = false
-        case saveButton:
+        case measureDataView.saveButton:
             saveMeasuredData()
         default:
             return
         }
-    }
-    
-    func setProperties() {
-        self.title = "측정하기"
-        self.view.backgroundColor = .systemBackground
-        self.navigationItem.setRightBarButton(saveBarButtonItem, animated: true)
-    }
-    
-    func addViews(){
-        view.addSubviews(plotView, containerView, segmentedControl, measureButton, stopButton)
-        containerView.addSubviews(accView, gyroView, xLabel, yLabel, zLabel, maxLabel, minLabel)
-        
-        [plotView, containerView, segmentedControl, measureButton, stopButton, accView, gyroView, xLabel, yLabel, zLabel, maxLabel, minLabel].forEach {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-        }
-    }
-    
-    func setConstraints(){
-        NSLayoutConstraint.activate([
-            plotView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            plotView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            plotView.widthAnchor.constraint(equalTo: containerView.widthAnchor),
-            plotView.heightAnchor.constraint(equalTo: plotView.widthAnchor),
-            containerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            containerView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            containerView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
-            containerView.heightAnchor.constraint(equalTo: containerView.widthAnchor),
-            segmentedControl.bottomAnchor.constraint(equalTo: containerView.topAnchor, constant: -20),
-            segmentedControl.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            segmentedControl.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
-            measureButton.topAnchor.constraint(equalTo: containerView.bottomAnchor, constant: 20),
-            measureButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
-            stopButton.topAnchor.constraint(equalTo: measureButton.bottomAnchor, constant: 20),
-            stopButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
-            accView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor),
-            accView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-            accView.widthAnchor.constraint(equalTo: containerView.widthAnchor),
-            accView.heightAnchor.constraint(equalTo: containerView.heightAnchor),
-            gyroView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor),
-            gyroView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-            gyroView.widthAnchor.constraint(equalTo: containerView.widthAnchor),
-            gyroView.heightAnchor.constraint(equalTo: containerView.heightAnchor),
-            maxLabel.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).constraintWithMultiplier(2/8),
-            maxLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).constraintWithMultiplier(1.7),
-            minLabel.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).constraintWithMultiplier(14/8),
-            minLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).constraintWithMultiplier(1.7),
-            xLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).constraintWithMultiplier(0.5),
-            xLabel.topAnchor.constraint(equalTo: containerView.topAnchor),
-            yLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-            yLabel.topAnchor.constraint(equalTo: containerView.topAnchor),
-            zLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).constraintWithMultiplier(1.5),
-            zLabel.topAnchor.constraint(equalTo: containerView.topAnchor),
-        ])
-    }
-
-    func setLabelValue(x:Double, y:Double, z:Double){
-        xLabel.text = "x:" + String(format:"%.2f",x)
-        yLabel.text = "y:" + String(format:"%.2f",y)
-        zLabel.text = "z:" + String(format:"%.2f",z)
-    }
-    
-    func setTextsIndicateLabels(max:Double, min:Double){
-        maxLabel.text = " max:" + String(format:"%.2f",max) + " "
-        minLabel.text = " min:" + String(format:"%.2f",min) + " "
     }
 }
 

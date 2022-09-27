@@ -11,6 +11,10 @@
 		2D40838E28E29F1800641176 /* UIStackView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D40838D28E29F1800641176 /* UIStackView+Extension.swift */; };
 		2D616FBF28E2C49000C4C24B /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D616FBE28E2C49000C4C24B /* UIColor+Extension.swift */; };
 		2D7F431D28DC52DC004CA619 /* DataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7F431C28DC52DC004CA619 /* DataError.swift */; };
+		2DDB031828E2D43F00B39A8E /* MotionDataListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DDB031728E2D43F00B39A8E /* MotionDataListView.swift */; };
+		2DDB031A28E2D73E00B39A8E /* MeasureDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DDB031928E2D73E00B39A8E /* MeasureDataView.swift */; };
+		2DDB031C28E2DB7600B39A8E /* PlayGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DDB031B28E2DB7600B39A8E /* PlayGraphView.swift */; };
+		2DDB031E28E2F57C00B39A8E /* ShowGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DDB031D28E2F57C00B39A8E /* ShowGraphView.swift */; };
 		336FD3AF28DD419000557464 /* PlotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FD3AE28DD419000557464 /* PlotView.swift */; };
 		336FD3B128DD41D200557464 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FD3B028DD41D200557464 /* Constants.swift */; };
 		336FD3B328DD4E4C00557464 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FD3B228DD4E4C00557464 /* GraphView.swift */; };
@@ -37,6 +41,10 @@
 		2D40838D28E29F1800641176 /* UIStackView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extension.swift"; sourceTree = "<group>"; };
 		2D616FBE28E2C49000C4C24B /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		2D7F431C28DC52DC004CA619 /* DataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataError.swift; sourceTree = "<group>"; };
+		2DDB031728E2D43F00B39A8E /* MotionDataListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDataListView.swift; sourceTree = "<group>"; };
+		2DDB031928E2D73E00B39A8E /* MeasureDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureDataView.swift; sourceTree = "<group>"; };
+		2DDB031B28E2DB7600B39A8E /* PlayGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayGraphView.swift; sourceTree = "<group>"; };
+		2DDB031D28E2F57C00B39A8E /* ShowGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowGraphView.swift; sourceTree = "<group>"; };
 		336FD3AE28DD419000557464 /* PlotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlotView.swift; sourceTree = "<group>"; };
 		336FD3B028DD41D200557464 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		336FD3B228DD4E4C00557464 /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
@@ -71,13 +79,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		336FD3AD28DD416900557464 /* View */ = {
+		336FD3AD28DD416900557464 /* GraphView */ = {
 			isa = PBXGroup;
 			children = (
 				336FD3AE28DD419000557464 /* PlotView.swift */,
 				336FD3B228DD4E4C00557464 /* GraphView.swift */,
 			);
-			path = View;
+			path = GraphView;
 			sourceTree = "<group>";
 		};
 		33F4FDA328DAC20700DD82BA /* Extensions */ = {
@@ -171,28 +179,30 @@
 		E7370DCC28D9DC1E00C6D1D6 /* Feature */ = {
 			isa = PBXGroup;
 			children = (
-				336FD3AD28DD416900557464 /* View */,
+				336FD3AD28DD416900557464 /* GraphView */,
 				402F849F28DAEA2400A133D6 /* CoreData */,
-				E7370DCD28D9DC5C00C6D1D6 /* GyroDataList */,
+				E7370DCD28D9DC5C00C6D1D6 /* MotionDataList */,
 				E7370DCE28D9DC8500C6D1D6 /* MeasureData */,
 				E76182D028DC861E00417547 /* GraphDetail */,
 			);
 			path = Feature;
 			sourceTree = "<group>";
 		};
-		E7370DCD28D9DC5C00C6D1D6 /* GyroDataList */ = {
+		E7370DCD28D9DC5C00C6D1D6 /* MotionDataList */ = {
 			isa = PBXGroup;
 			children = (
 				63F01BB828D44FC400C53A39 /* MotionDataListViewController.swift */,
+				2DDB031728E2D43F00B39A8E /* MotionDataListView.swift */,
 				E7370DD128D9FC9000C6D1D6 /* MotionDataListTableViewCell.swift */,
 			);
-			path = GyroDataList;
+			path = MotionDataList;
 			sourceTree = "<group>";
 		};
 		E7370DCE28D9DC8500C6D1D6 /* MeasureData */ = {
 			isa = PBXGroup;
 			children = (
 				E7370DCF28D9DEB300C6D1D6 /* MeasureDataViewController.swift */,
+				2DDB031928E2D73E00B39A8E /* MeasureDataView.swift */,
 			);
 			path = MeasureData;
 			sourceTree = "<group>";
@@ -201,7 +211,9 @@
 			isa = PBXGroup;
 			children = (
 				E76182D328DC898C00417547 /* PlayGraphViewController.swift */,
+				2DDB031B28E2DB7600B39A8E /* PlayGraphView.swift */,
 				E76182D528DC8C3A00417547 /* ShowGraphViewController.swift */,
+				2DDB031D28E2F57C00B39A8E /* ShowGraphView.swift */,
 			);
 			path = GraphDetail;
 			sourceTree = "<group>";
@@ -285,6 +297,7 @@
 				336FD3AF28DD419000557464 /* PlotView.swift in Sources */,
 				2D40838E28E29F1800641176 /* UIStackView+Extension.swift in Sources */,
 				40AAB77228DC1C79002E725F /* FileService.swift in Sources */,
+				2DDB031A28E2D73E00B39A8E /* MeasureDataView.swift in Sources */,
 				336FD3B128DD41D200557464 /* Constants.swift in Sources */,
 				402F398028DAEAD200D4EC69 /* MotionDataModel.xcdatamodeld in Sources */,
 				336FD3B328DD4E4C00557464 /* GraphView.swift in Sources */,
@@ -292,10 +305,13 @@
 				40A794D328E2B71E0073586D /* CoreDataService.swift in Sources */,
 				33F4FDA528DAC21900DD82BA /* NSLayoutConstraint+Extension.swift in Sources */,
 				2D40838C28E29ECB00641176 /* UIView+Extension.swift in Sources */,
+				2DDB031C28E2DB7600B39A8E /* PlayGraphView.swift in Sources */,
 				402F398428DAEC9500D4EC69 /* MotionData+CoreDataProperties.swift in Sources */,
 				402F398328DAEC9500D4EC69 /* MotionData+CoreDataClass.swift in Sources */,
+				2DDB031828E2D43F00B39A8E /* MotionDataListView.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
+				2DDB031E28E2F57C00B39A8E /* ShowGraphView.swift in Sources */,
 				E76182D428DC898C00417547 /* PlayGraphViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -435,7 +451,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 53A2NCY57F;
+				DEVELOPMENT_TEAM = 7X78626T5H;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GyroData/Application/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -461,7 +477,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 53A2NCY57F;
+				DEVELOPMENT_TEAM = 7X78626T5H;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GyroData/Application/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
