@@ -11,7 +11,7 @@ class PlayGraphViewController: UIViewController {
     
     var motionInfo : MotionInfo?
     var timer : Timer?
-    var elapsedTime : Double = 0.0
+    var playTime : Int = 0
     var isPlaying : Bool = false
     
     lazy var dateLabel: UILabel = {
@@ -33,7 +33,10 @@ class PlayGraphViewController: UIViewController {
     }()
     
     lazy var playView : GraphView = {
-        let view = GraphView(id: .play, xPoints: [0.0], yPoints: [0.0], zPoints: [0.0])
+        let xPoints = motionInfo?.motionX
+        let yPoints = motionInfo?.motionY
+        let zPoints = motionInfo?.motionZ
+        let view = GraphView(id: .play, xPoints: [0.0], yPoints: [0.0], zPoints: [0.0], max: extractMaxValue((xPoints ?? [])+(yPoints ?? [])+(zPoints ?? [])))
         view.backgroundColor = .clear
         view.measuredTime = (motionInfo?.motionX.count) ?? 0
         return view
@@ -93,22 +96,22 @@ class PlayGraphViewController: UIViewController {
             playView.erase()
             playView.drawable = true
             
-            //MARK: - 타이머 코드 추가
             timer = Timer(timeInterval: 0.1, repeats: true) { (timer) in
                 
-                let elapsedTime = self.playView.elapsedTime
-                self.timerLabel.text = String(format:"%5.1f",Double(elapsedTime) / 10)
+                self.timerLabel.text = String(format:"%4.1f",Double(self.playTime) / 10.0)
                 
-                if  elapsedTime > (self.motionInfo?.motionX.count ?? 0) - 1{
+                if  self.playTime >= (self.motionInfo?.motionX.count ?? 0) {
                     timer.invalidate()
                     let playImage = UIImage(systemName: "play.fill")
                     sender.setImage(playImage, for: .normal)
+                    return
                 }
                 
-                let (x,y,z) = self.extractMotionInfo(self.motionInfo, at: elapsedTime)
+                let (x,y,z) = self.extractMotionInfo(self.motionInfo, at: self.playTime)
                 self.playView.getData(x: x, y: y, z: z)
                 self.setLabelValue(x: x, y: y, z: z)
                 self.playView.setNeedsDisplay()
+                self.playTime += 1
             }
             
             if let timer = timer {
@@ -118,7 +121,7 @@ class PlayGraphViewController: UIViewController {
             let playImage = UIImage(systemName: "play.fill")
             sender.setImage(playImage, for: .normal)
             timer?.invalidate()
-            elapsedTime = 0.0
+            playTime = 0
         }
     }
     
@@ -191,5 +194,11 @@ class PlayGraphViewController: UIViewController {
             }
         }
         return (0.0, 0.0, 0.0)
+    }
+    
+    func extractMaxValue(_ motion:[Double]) -> Double {
+        let positiveMax = motion.max()  ?? 0.0
+        let negativeMax = motion.min()  ?? 0.0
+        return abs(positiveMax) > abs(negativeMax) ? positiveMax : negativeMax
     }
 }

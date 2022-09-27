@@ -15,7 +15,7 @@ class ShowGraphViewController: UIViewController {
         let xPoints = motionInfo?.motionX
         let yPoints = motionInfo?.motionY
         let zPoints = motionInfo?.motionZ
-        let view = GraphView(id: .show, xPoints: xPoints ?? [], yPoints: yPoints ?? [], zPoints: zPoints ?? [])
+        let view = GraphView(id: .show, xPoints: xPoints ?? [], yPoints: yPoints ?? [], zPoints: zPoints ?? [], max: extractMaxValue((xPoints ?? [])+(yPoints ?? [])+(zPoints ?? [])))
 
         view.drawable = true
         view.measuredTime = (motionInfo?.motionX.count)!
@@ -119,6 +119,12 @@ class ShowGraphViewController: UIViewController {
         let positiveMax = motion.max() ?? 0.0
         let negativeMax = motion.min() ?? 0.0
         return String(format:"%.2f", abs(positiveMax) > abs(negativeMax) ? positiveMax : negativeMax )
+    }
+    
+    func extractMaxValue(_ motion:[Double]) -> Double {
+        let positiveMax = motion.max()  ?? 0.0
+        let negativeMax = motion.min()  ?? 0.0
+        return abs(positiveMax) > abs(negativeMax) ? positiveMax : negativeMax
     }
 
     func setLabelValue(){

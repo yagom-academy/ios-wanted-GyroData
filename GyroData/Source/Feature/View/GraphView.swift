@@ -16,13 +16,15 @@ enum GraphType {
 
 class GraphView : UIView {
     
-    init(id:GraphType, xPoints:[Double], yPoints:[Double], zPoints:[Double]){
+    init(id:GraphType, xPoints:[Double], yPoints:[Double], zPoints:[Double], max : CGFloat){
         
         self.id = id
         
         self.xPoints = [0.0] + xPoints
         self.yPoints = [0.0] + yPoints
         self.zPoints = [0.0] + zPoints
+        
+        self.max = max
         
         super.init(frame: .zero)
     }
@@ -56,13 +58,15 @@ class GraphView : UIView {
     var elapsedTime = 0
     var isOverflow : Bool = false
     
+    var max : CGFloat
+    
     lazy var columnXPoint = { (column : Int) -> CGFloat in
         let spacing = (self.frame.width - self.margin * 2) / CGFloat(self.measuredTime)
         return CGFloat(column) * spacing + self.margin   //공백 더해서
     }
     
     lazy var columnYPoint = { (graphPoint : Double) -> CGFloat in
-        let y = CGFloat(graphPoint) * self.weight / CGFloat(Constants.calibration)
+        let y = CGFloat(graphPoint) / self.max * self.frame.height * 3 / 8
         return self.frame.height / 2 - y
     }
 
@@ -74,7 +78,6 @@ class GraphView : UIView {
             if drawable {
                 
                 if isOverflow {
-                    Constants.calibration *= 1.2
                     
                     overflow(path: xPath, points: xPoints, color: xColor)
                     overflow(path: yPath, points: yPoints, color: yColor)
@@ -121,7 +124,6 @@ class GraphView : UIView {
     }
     
     func erase(){
-        Constants.calibration = 1.0
         elapsedTime = 0
         xPath.removeAllPoints()
         yPath.removeAllPoints()

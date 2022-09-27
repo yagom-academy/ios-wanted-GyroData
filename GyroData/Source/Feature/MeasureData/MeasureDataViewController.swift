@@ -126,13 +126,13 @@ class MeasureDataViewController: UIViewController {
     }()
     
     lazy var gyroView : GraphView = {
-        let view = GraphView(id: .measure, xPoints: [0.0], yPoints: [0.0], zPoints: [0.0])
+        let view = GraphView(id: .measure, xPoints: [0.0], yPoints: [0.0], zPoints: [0.0], max: Constants.gyroMax)
         view.backgroundColor = .clear
         return view
     }()
     
     lazy var accView : GraphView = {
-        let view = GraphView(id: .measure, xPoints: [0.0], yPoints: [0.0], zPoints: [0.0])
+        let view = GraphView(id: .measure, xPoints: [0.0], yPoints: [0.0], zPoints: [0.0], max: Constants.accMax)
         view.backgroundColor = .clear
         return view
     }()
@@ -171,6 +171,7 @@ class MeasureDataViewController: UIViewController {
         accView.erase()
         accView.drawable = true
         var max = Constants.accMax
+        accView.max = Constants.accMax
         setTextsIndicateLabels(max : max, min : -max)
         if motion.isAccelerometerAvailable {
                 motion.accelerometerUpdateInterval = 0.1
@@ -192,8 +193,8 @@ class MeasureDataViewController: UIViewController {
                                                 
                         if abs(x) > max || abs(y) > max || abs(z) > max {
                             self.accView.isOverflow = true
-                            Constants.calibration *= 1.2
                             max *= 1.2
+                            self.accView.max = max
                             self.setTextsIndicateLabels(max: max, min: -max)
                         }
                         
@@ -212,6 +213,7 @@ class MeasureDataViewController: UIViewController {
         gyroView.erase()
         gyroView.drawable = true
         var max = Constants.gyroMax
+        gyroView.max = Constants.gyroMax
         setTextsIndicateLabels(max: max, min: -max)
         if motion.isGyroAvailable {
                 motion.gyroUpdateInterval = 0.1
@@ -233,8 +235,8 @@ class MeasureDataViewController: UIViewController {
      
                         if abs(x) > max || abs(y) > max || abs(z) > max {
                             self.gyroView.isOverflow = true
-                            Constants.calibration *= 1.2
                             max *= 1.2
+                            self.gyroView.max = max
                             self.setTextsIndicateLabels(max: max, min: -max)
                         }
                         
