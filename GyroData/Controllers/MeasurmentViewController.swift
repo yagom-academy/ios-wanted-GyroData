@@ -112,6 +112,7 @@ class MeasurmentViewController: UIViewController {
     
     @objc func saveButtonPressed() {
         
+        //activityIndicator 시작
         activityIndicator.startAnimating()
         
         if motionManager.isRunning {
