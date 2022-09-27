@@ -8,17 +8,17 @@
 import UIKit
 
 class TableViewCell: UITableViewCell {
-    // 레이블 구현
+  
     var dateLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 15)
         return label
-    }() // 레이블 구현
+    }()
     var timeLabel : UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 40)
         return label
-    }() // 레이블 구현
+    }()
     var nameLabel :UILabel =  {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 20)
@@ -43,7 +43,7 @@ class TableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError()
     }
-    ///오토 레이아웃 설정
+    /// 레이아웃 설정
     func configure() {
         
         timeLabel.translatesAutoresizingMaskIntoConstraints = false
