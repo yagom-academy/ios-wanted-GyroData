@@ -69,7 +69,7 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
-    //스크롤 뷰 구현
+    //스크롤 뷰 구현 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let currentOffset = scrollView.contentOffset.y + scrollView.frame.size.height
         let maxOffset = scrollView.contentSize.height
