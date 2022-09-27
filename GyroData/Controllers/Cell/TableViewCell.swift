@@ -26,7 +26,7 @@ class TableViewCell: UITableViewCell {
     }()
     lazy var stackView: UIStackView = {
         var stackView = UIStackView(arrangedSubviews: [dateLabel, nameLabel])
-        stackView.axis = .vertical //방향 버티컬 호리즌탈
+        stackView.axis = .vertical
         stackView.spacing = 20
         return stackView
     }()
