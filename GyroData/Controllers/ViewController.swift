@@ -19,12 +19,12 @@ class ViewController: UIViewController {
         f.dateFormat = "yyyy/MM/dd HH:mm:ss"
         return f
     }()
-    
+    //네비 버튼 추가
     lazy var navButton: UIBarButtonItem = {
         let button = UIBarButtonItem(title: "측정", style: .plain, target: self, action: #selector(add))
         return button
     }()
-    
+
     private var tableView: UITableView = {
         let tableView = UITableView()
         return tableView
@@ -103,7 +103,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource, UIScrollVi
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         let actions1 = UIContextualAction(style: .normal, title: "Delete", handler: { action, view, completionHaldler in
-            completionHaldler(true)
+            completionHaldler(true)  //셀 지우기
             let cell = DataManager.shared.saveList.remove(at: indexPath.row)
             DataManager.shared.deleteRun(object: cell)
             DataManager.shared.saveContext()
