@@ -9,14 +9,14 @@ import UIKit
 
 final class MeasureViewController: UIViewController {
     
-    let segmentControl: UISegmentedControl = {
-       let control = UISegmentedControl(items: ["Acc", "Gyro"])
+    private let segmentControl: UISegmentedControl = {
+        let control = UISegmentedControl(items: ["Acc", "Gyro"])
         control.translatesAutoresizingMaskIntoConstraints = false
         control.selectedSegmentIndex = 0
         return control
     }()
     
-    let graphView: GraphView = {
+    private let graphView: GraphView = {
         let width = UIScreen.main.bounds.width - 32
         let height = width
         let view = GraphView(frame: CGRect(x: .zero, y: .zero, width: width, height: height))
@@ -27,7 +27,7 @@ final class MeasureViewController: UIViewController {
         return view
     }()
     
-    lazy var measureButton: UIButton = {
+    private lazy var measureButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(didTapMeasureButton), for: .touchUpInside)
@@ -37,24 +37,28 @@ final class MeasureViewController: UIViewController {
         return button
     }()
     
-    lazy var stopButton: UIButton = {
+    private lazy var stopButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(didTapStopButton), for: .touchUpInside)
         button.setTitle("정지", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 20)
-        button.isEnabled = false 
+        button.isEnabled = false
         return button
     }()
     
-    lazy var activityIndicator: UIActivityIndicatorView = {
+    private lazy var activityIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView()
         indicator.translatesAutoresizingMaskIntoConstraints = false
         indicator.style = .large
         return indicator
     }()
     
-    let coreMotionService = CoreMotionService()
+    private let coreMotionService = CoreMotionService()
+    private let coreDataService: CoreDataService = {
+        let container = (UIApplication.shared.delegate as? AppDelegate)?.coreDataStack.persistentContainer
+        return CoreDataService(with: container!, fetchedResultsControllerDelegate: nil)
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -111,15 +115,17 @@ final class MeasureViewController: UIViewController {
     @objc
     private func didTapMeasureButton() {
         graphView.realtimeData.removeAll()
-        self.coreMotionService.startMeasurement(of: MotionType(rawValue: segmentControl.selectedSegmentIndex) ?? .acc,
-                                                completion: { self.changeButtonsState() },
-                                                resultCompletion: { data in self.drawMotionData(data: data) }
-        )
+        let type = MotionType(rawValue: segmentControl.selectedSegmentIndex) ?? .acc
+        coreMotionService.startMeasurement(of: type,
+                                           completion: { self.changeButtonsState() }) { data in
+            self.drawMotionData(data: data)
+        }
     }
     
     @objc
     private func didTapStopButton() {
-        self.coreMotionService.stopMeasurement(of: MotionType(rawValue: segmentControl.selectedSegmentIndex) ?? .acc)
+        let type = MotionType(rawValue: segmentControl.selectedSegmentIndex) ?? .acc
+        coreMotionService.stopMeasurement(of: type)
     }
     
     private func changeButtonsState() {
@@ -135,9 +141,26 @@ final class MeasureViewController: UIViewController {
     
     @objc
     private func didTapSaveButton() {
+        guard let motionData = coreMotionService.motionData else {
+            // TODO: alert controller
+            print("저장 실패, 측정된 데이터 없음")
+            return
+        }
+        changeButtonsState()
         activityIndicator.startAnimating()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            self.activityIndicator.stopAnimating()
+        let context = coreDataService.persistentContainer.viewContext
+        coreDataService.add(motionData, context: context) { error in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.activityIndicator.stopAnimating()
+                guard let error = error else {
+                    // FIXME: self.dismiss(animated: true)
+                    self.navigationController?.popViewController(animated: true)
+                    return
+                }
+                // 잘 저장X -> 저장 실패 alert controller
+                print("저장실패", error.localizedDescription)
+            }
         }
     }
 }
+

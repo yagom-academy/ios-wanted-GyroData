@@ -11,80 +11,71 @@ final class FileManagerService {
     private let manager: FileManager = FileManager.default
     private let directoryURL: URL = URL.documentsDirectory.appending(path: "MotionData")
     
-    func createDirectory() {
+    func write(_ motionData: GyroData) {
+        do {
+            try createDirectory()
+            let encodedData = try JSONEncoder().encode(motionData)
+            let filePath = fileName(from: motionData.date)
+            let fileURL = directoryURL.appending(path: filePath)
+            try encodedData.write(to: fileURL)
+        }
+        catch {
+            print(#function, error.localizedDescription)
+        }
+    }
+    
+    func read(with date: Date) -> GyroData {
+        // TODO: 46-47 함수로 빼기
+        let fileName = fileName(from: date)
+        let filePath = directoryURL.appending(path: fileName).appendingPathExtension("json")
         
         do {
-            let directoryPath = directoryURL.path()
-            guard !manager.fileExists(atPath: directoryPath) else {
-                return
+            guard let jsonData = manager.contents(atPath: filePath.relativePath) else {
+                throw FileManagerServiceError.fileNotFound(name: fileName)
             }
+            let motionData = try JSONDecoder().decode(GyroData.self, from: jsonData)
+            return motionData
+        }
+        catch {
+            fatalError(#function + error.localizedDescription)
+        }
+    }
+    
+    func delete(_ date: Date) {
+        let fileName = fileName(from: date)
+        let filePath = directoryURL.appending(path: fileName).appendingPathExtension("json")
+        
+        do {
+            try manager.removeItem(atPath: filePath.relativePath)
+        }
+        catch {
+            print(#function, error.localizedDescription)
+        }
+    }
+    
+    private func createDirectory() throws {
+        let directoryPath = directoryURL.path()
+        if manager.fileExists(atPath: directoryPath) {
             try manager.createDirectory(at: directoryURL, withIntermediateDirectories: false)
         }
-        catch {
-            print("Fail to create directory - \(error.localizedDescription)")
-        }
     }
-    
-    func saveToJSON(with motionDetailData: [MotionDetailData]) {
-        do {
-            let encodedData = try JSONEncoder().encode(motionDetailData)
-            guard let data = motionDetailData.first else {
-                print("Empty Data!")
-                return
-            }
-            let dateString = getFileName(from: data.date)
-            let fileURL = directoryURL.appending(path: dateString)
-            do {
-                try encodedData.write(to: fileURL)
-            }
-            catch {
-                print("Fail to write encodedData - \(error.localizedDescription)")
-            }
-        }
-        catch {
-            print("Fail to encode the MotionDetailData - \(error.localizedDescription)")
-        }
-    }
-    
-    private func getFileName(from date: Date) -> String {
+
+    private func fileName(from date: Date) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd HH-mm-ss"
-        let title = "\(formatter.string(from: date)).json"
-        return title
+        return formatter.string(from: date)
     }
-    
-    func getDetailDataToFile(with date: Date) -> [MotionDetailData] {
-        let jsonDataPath = directoryURL.path() + "/" + getFileName(from: date)
-        print(jsonDataPath)
-        
-        guard manager.fileExists(atPath: jsonDataPath) else {
-            print("No File")
-            return []
-        }
-        
-        guard let jsonData = manager.contents(atPath: jsonDataPath) else {
-            print("json data 없음")
-            return []
-        }
-        
-        do {
-            let motionDetailDataList = try JSONDecoder().decode([MotionDetailData].self, from: jsonData)
-            return motionDetailDataList
-        }
-        catch {
-            print("Fail to decode - \(error.localizedDescription)")
-            return []
-        }
-    }
-    
-    func deleteData(with date: Date) {
-        let filePath = directoryURL.path() + "/" + getFileName(from: date)
-        
-        do {
-            try manager.removeItem(atPath: filePath)
-        }
-        catch {
-            print("Fail to delete - \(error.localizedDescription)")
+}
+
+enum FileManagerServiceError: Error {
+    case fileNotFound(name: String)
+}
+
+extension FileManagerServiceError: LocalizedError {
+    var errorDescription: String? {
+        switch self {
+        case .fileNotFound(let name):
+            return "File not found - \(name)"
         }
     }
 }
