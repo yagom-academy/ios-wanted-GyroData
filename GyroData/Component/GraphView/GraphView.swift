@@ -61,7 +61,7 @@ class GraphView: UIView {
         layer.path = makePath().aPath
     }
     
-    func justShowGraph() {
+    func gyroListGraphShow() {
         graphData.forEach { data in
             let x = CGFloat(data.coodinate.x)
             let y = CGFloat(data.coodinate.y)

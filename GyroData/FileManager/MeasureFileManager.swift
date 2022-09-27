@@ -33,18 +33,19 @@ class MeasureFileManager {
     }
     
     //파일 읽기
-    func loadFile(_ coverData: Measure) -> Bool {
+    func loadFile(_ coverData: Measure) -> Result<[GyroJson], Error> {
         
         let documentsURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
         let fileURL = documentsURL.appendingPathComponent("\(coverData.id).json")
         
         do {
-            let data = try String(contentsOf: fileURL, encoding: .utf8)
-            print(data)
-            return true
+            let data = try Data(contentsOf: fileURL)
+            let fetch = try JSONDecoder().decode([GyroJson].self, from: data)
+            print("FileManager 읽어오기 성공")
+            return .success(fetch)
         }
-        catch {
-            return false
+        catch let error {
+            return .failure(error)
         }
     }
 }

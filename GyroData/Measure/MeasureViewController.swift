@@ -71,8 +71,6 @@ class MeasureViewController: UIViewController {
     }
     
     @objc func measureButtonClicked() {
-        
-        print("측정")
         graphView.maxValue = 1
         graphView.minValue = -1
         mainView.stopButton.isEnabled = true

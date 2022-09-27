@@ -16,6 +16,13 @@ enum PageType: String {
 class ReplayViewController: UIViewController {
     
     private var timer: Timer?
+    //첫번째화면에서 받아올 데이터
+    var measureData: Measure = Measure(title: "안들어있음", second: 0.0, pageType: .view) {
+        didSet {
+            self.measureDateLabel.text = String(measureData.measureDate)
+            self.stateLabel.text = measureData.pageType?.rawValue
+        }
+    }
     let stepDuration = 0.1
     var aData: CGFloat = 0.0
     var bData: CGFloat = 0.0
@@ -179,14 +186,13 @@ class ReplayViewController: UIViewController {
         switch result {
         case .success(let data):
             self.graphView.graphData = data
-            self.graphView.justShowGraph()
+            self.graphView.gyroListGraphShow()
         case .failure(let error):
             debugPrint(error)
         }
     }
     
     // MARK: - #selector
-    
     @objc func backButtonTap(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
     }
@@ -199,17 +205,20 @@ class ReplayViewController: UIViewController {
             timer = Timer.scheduledTimer(withTimeInterval: 0.1
                                          , repeats: true) { [weak self] (timer) in
                 guard let self = self else { return }
-                //랜덤값이 아닌 코어데이터의 값을 받아와서 써야함
-                self.aData = CGFloat.random(in: self.graphView.minValue * 0.75...self.graphView.maxValue * 0.75)
-                self.bData = CGFloat.random(in: self.graphView.minValue * 0.75...self.graphView.maxValue * 0.75)
-                self.cData = CGFloat.random(in: self.graphView.minValue * 0.75...self.graphView.maxValue * 0.75)
-                self.graphView.animateNewValue(aValue: self.aData, bValue: self.bData, cValue: self.cData, duration: self.stepDuration)
-                self.countDown -= 0.1
-                self.startTime += 0.1
-                if self.countDown <= 0 {
-                    timer.invalidate()
+                //랜덤값이 아닌 파일매니저의 값을 받아와서 써야함
+                let result = MeasureFileManager.shared.loadFile(self.measureData)
+                switch result {
+                case .success(let data):
+                    self.graphView.graphData = data
+                    self.graphView.gyroListGraphShow()
+                    self.countDown -= 0.1
+                    self.startTime += 0.1
+                    if self.countDown <= 0 {
+                        timer.invalidate()
+                    }
+                case .failure(let error):
+                    debugPrint("FileManager fetch fail", error)
                 }
-                print(self.startTime)
             }
         } else {
             timer?.invalidate()
@@ -217,13 +226,9 @@ class ReplayViewController: UIViewController {
             self.graphView.reset()
             self.startTime = 0
         }
-        //타이머 버튼 설정
         let image = timerValid ? UIImage(systemName: "stop.fill") : UIImage(systemName: "play.fill")
         playButton.setImage(image, for: .normal)
-        print(timerValid)
     }
-    
-
 }
 
 
