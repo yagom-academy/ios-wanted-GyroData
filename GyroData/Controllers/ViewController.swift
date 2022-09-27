@@ -24,7 +24,7 @@ class ViewController: UIViewController {
         let button = UIBarButtonItem(title: "측정", style: .plain, target: self, action: #selector(add))
         return button
     }()
-    
+    //테이블 뷰 생성 
     private var tableView: UITableView = {
         let tableView = UITableView()
         return tableView
@@ -38,7 +38,7 @@ class ViewController: UIViewController {
         title = "목록"
         configure()
     }
-    // 데이터 저장 테이블 릴로드
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         DataManager.shared.fetchSave()
