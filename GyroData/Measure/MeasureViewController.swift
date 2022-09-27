@@ -19,15 +19,6 @@ enum saveError: String {
     case none
 }
 
-struct MotionData: Codable {
-    let coodinate: coodinateData
-}
-struct coodinateData: Codable {
-    let x: Double
-    let y: Double
-    let z: Double
-}
-
 class MeasureViewController: UIViewController {
     
     let mainView = MeasureView()
