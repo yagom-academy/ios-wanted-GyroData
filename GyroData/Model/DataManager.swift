@@ -11,7 +11,6 @@ import CoreData
 class DataManager {
     //타입 프로퍼티
     static let shared = DataManager()
-    
     private init() { }
     
     var isFetching: Bool = false
