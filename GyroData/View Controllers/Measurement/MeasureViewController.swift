@@ -16,8 +16,13 @@ final class MeasureViewController: UIViewController {
         return control
     }()
     
-    let graphView: UIView = {
-       let view = UIView()
+    let graphView: GraphView = {
+        let width = UIScreen.main.bounds.width - 32
+        let height = width
+        let view = GraphView(frame: CGRect(x: .zero, y: .zero, width: width, height: height))
+        view.backgroundColor = .systemBackground
+        view.layer.borderColor = UIColor.separator.cgColor
+        view.layer.borderWidth = 3
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
