@@ -7,10 +7,10 @@
 
 import Foundation
 
-class FirstModel {
+class FirstModel: SceneActionReceiver {
     //input
     var didTapMeasureButton: (() -> ()) = { }
-    var didReceiveRefreshRequest = { }
+    var didReceiveSceneAction: (SceneAction) -> () = { action in }
     
     //output
     var contentViewModel: FirstListViewModel {
@@ -69,8 +69,13 @@ class FirstModel {
             self.populateData()
         }
         
-        didReceiveRefreshRequest = { [weak self] in
-            print("first Model didReceiveRefreshRequest")
+        didReceiveSceneAction = { [weak self] action in
+            guard let action = action as? FirstSceneAction else { return }
+            guard let self else { return }
+            switch action {
+            case .refresh:
+                self.populateData()
+            }
         }
     }
     

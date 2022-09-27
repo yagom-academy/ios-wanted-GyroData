@@ -49,7 +49,7 @@ class ThirdModel {
     // MARK: Bind
     func bind() {
         didTapBackButton = { [weak self] in
-            self?.routeSubject((.closeAndRefresh(.main(.firstViewControllerForRefresh))))
+            self?.routeSubject(.close)
         }
     }
 }

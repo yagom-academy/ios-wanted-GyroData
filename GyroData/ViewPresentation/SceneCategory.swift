@@ -12,12 +12,12 @@ enum SceneCategory {
     case main(mainScene)
     case detail(detailScene)
     case close //리프래시 등 아무것도 안 하고 닫는 경우
-    indirect case closeAndRefresh(SceneCategory) //이전뷰 리프레시 등 뭔가를 해주기 + 닫기가 되어야 하는 경우
+    indirect case closeWithAction(SceneCategory)
     case alert(AlertDependency)
     
     enum mainScene {
         case firstViewController(context: SceneContext<FirstModel>)
-        case firstViewControllerForRefresh
+        case firstViewControllerWithAction(context: SceneContext<FirstSceneAction>)
     }
     
     enum detailScene {

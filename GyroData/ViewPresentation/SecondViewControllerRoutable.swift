@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-protocol SecondViewControllerRoutable: Routable, SecondViewControllerSceneBuildable {
+protocol SecondViewControllerRoutable: Routable, SecondViewControllerSceneBuildable, SceneActionSendable {
     
 }
 
@@ -23,14 +23,29 @@ extension SecondViewControllerRoutable where Self: SecondViewController {
         
         return nextScene
     }
+    
     func route(to Scene: SceneCategory) {
         switch Scene {
         case .close:
+            self.navigationController?.popViewController(animated: true)
+        case .closeWithAction(let scene):
+            sendAction(scene: scene)
             self.navigationController?.popViewController(animated: true)
         case .alert:
             guard let scene = buildScene(scene: Scene) else { return }
             guard let nextVC = scene as? UIViewController else { return }
             present(nextVC, animated: true)
+        default: break
+        }
+    }
+    
+    func sendAction(scene: SceneCategory) {
+        switch scene {
+        case .main(.firstViewControllerWithAction(let context)):
+            guard let firstVC = self.navigationController?.viewControllers.first(where: { $0 is FirstViewController }) as? FirstViewController else { return }
+            let action = context.dependency
+            firstVC.model.didReceiveSceneAction(action)
+            break
         default: break
         }
     }
