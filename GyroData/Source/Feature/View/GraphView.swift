@@ -1,5 +1,5 @@
 //
-//  RealTimeGraph.swift
+//  GraphView.swift
 //  TestGyroData
 //
 //  Created by 엄철찬 on 2022/09/25.
@@ -14,7 +14,7 @@ enum GraphType {
     case show,play,measure
 }
 
-class Graph : UIView {
+class GraphView : UIView {
     
     init(id:GraphType, xPoints:[Double], yPoints:[Double], zPoints:[Double]){
         

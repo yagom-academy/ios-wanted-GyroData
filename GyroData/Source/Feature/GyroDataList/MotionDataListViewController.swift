@@ -8,11 +8,11 @@
 import UIKit
 import CoreData
 
-class GyroDataListViewController: UIViewController {
+class MotionDataListViewController: UIViewController {
     
     lazy var tableView: UITableView = {
         let tableView = UITableView()
-        tableView.register(GyroDataListTableViewCell.self, forCellReuseIdentifier: GyroDataListTableViewCell.identifier)
+        tableView.register(MotionDataListTableViewCell.self, forCellReuseIdentifier: MotionDataListTableViewCell.identifier)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = 90
@@ -98,13 +98,13 @@ class GyroDataListViewController: UIViewController {
     }
 }
     
-extension GyroDataListViewController:  UITableViewDelegate, UITableViewDataSource {
+extension MotionDataListViewController:  UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return motionDataArray.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: GyroDataListTableViewCell.identifier, for: indexPath) as? GyroDataListTableViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: MotionDataListTableViewCell.identifier, for: indexPath) as? MotionDataListTableViewCell
         else { return UITableViewCell() }
 
         cell.setLabel(motionDataArray[indexPath.row])

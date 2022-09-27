@@ -7,8 +7,8 @@
 
 import UIKit
 
-class GyroDataListTableViewCell: UITableViewCell {
-    static let identifier = "GyroDataListTableViewCell"
+class MotionDataListTableViewCell: UITableViewCell {
+    static let identifier = "MotionDataListTableViewCell"
     
     private let leftStackView: UIStackView = {
         let stackView = UIStackView()

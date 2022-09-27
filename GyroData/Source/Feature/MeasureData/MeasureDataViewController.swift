@@ -15,10 +15,6 @@ class MeasureDataViewController: UIViewController {
     let motion = CMMotionManager()
     var accTimer: Timer?
     var gyroTimer: Timer?
-    let segAttributes: NSDictionary = [
-        NSAttributedString.Key.foregroundColor: UIColor.black,
-        NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13)
-    ]
     var measureTime = 0
     var motionXArray = [Double]()
     var motionYArray = [Double]()
@@ -30,12 +26,12 @@ class MeasureDataViewController: UIViewController {
         didSet{
             if isPlaying{
                 segmentedControl.isEnabled = false
-                measureBtn.isEnabled = false
-                stopBtn.isEnabled = true
+                measureButton.isEnabled = false
+                stopButton.isEnabled = true
             }else{
                 segmentedControl.isEnabled = true
-                measureBtn.isEnabled = true
-                stopBtn.isEnabled = false
+                measureButton.isEnabled = true
+                stopButton.isEnabled = false
             }
         }
     }
@@ -49,34 +45,34 @@ class MeasureDataViewController: UIViewController {
       return control
     }()
     
-    lazy var measureBtn : UIButton = {
-        let btn = UIButton()
-        btn.setTitle("측정", for: .normal)
-        btn.setTitleColor(.systemBlue, for: .normal)
-        btn.addTarget(self, action: #selector(buttonTapAction), for: .touchUpInside)
-        return btn
+    lazy var measureButton : UIButton = {
+        let button = UIButton()
+        button.setTitle("측정", for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
+        button.addTarget(self, action: #selector(buttonTapAction), for: .touchUpInside)
+        return button
     }()
     
-    lazy var stopBtn : UIButton = {
-        let btn = UIButton()
-        btn.setTitle("정지", for: .normal)
-        btn.setTitleColor(.systemBlue, for: .normal)
-        btn.isEnabled = false
-        btn.addTarget(self, action: #selector(buttonTapAction), for: .touchUpInside)
-        return btn
+    lazy var stopButton : UIButton = {
+        let button = UIButton()
+        button.setTitle("정지", for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
+        button.isEnabled = false
+        button.addTarget(self, action: #selector(buttonTapAction), for: .touchUpInside)
+        return button
     }()
     
-    lazy var saveBtn : UIButton = {
-        let btn = UIButton()
-        btn.setTitle("저장", for: .normal)
-        btn.setTitleColor(.systemBlue, for: .normal)
-        btn.addTarget(self, action: #selector(buttonTapAction), for: .touchUpInside)
-        return btn
+    lazy var saveButton : UIButton = {
+        let button = UIButton()
+        button.setTitle("저장", for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
+        button.addTarget(self, action: #selector(buttonTapAction), for: .touchUpInside)
+        return button
     }()
     
     lazy var saveBarButtonItem: UIBarButtonItem = {
         let barButtonItem = UIBarButtonItem()
-        barButtonItem.customView = self.saveBtn
+        barButtonItem.customView = self.saveButton
         barButtonItem.isEnabled = false
         return barButtonItem
     }()
@@ -129,14 +125,14 @@ class MeasureDataViewController: UIViewController {
         return view
     }()
     
-    lazy var gyroView : Graph = {
-        let view = Graph(id: .measure, xPoints: [0.0], yPoints: [0.0], zPoints: [0.0])
+    lazy var gyroView : GraphView = {
+        let view = GraphView(id: .measure, xPoints: [0.0], yPoints: [0.0], zPoints: [0.0])
         view.backgroundColor = .clear
         return view
     }()
     
-    lazy var accView : Graph = {
-        let view = Graph(id: .measure, xPoints: [0.0], yPoints: [0.0], zPoints: [0.0])
+    lazy var accView : GraphView = {
+        let view = GraphView(id: .measure, xPoints: [0.0], yPoints: [0.0], zPoints: [0.0])
         view.backgroundColor = .clear
         return view
     }()
@@ -181,7 +177,7 @@ class MeasureDataViewController: UIViewController {
                 motion.startAccelerometerUpdates()
                 self.accTimer = Timer(fire: Date(), interval: 0.1,
                                       repeats: true, block: { (timer) in
-                    if self.measureTime == 599 { self.buttonTapAction(self.stopBtn) }
+                    if self.measureTime == 599 { self.buttonTapAction(self.stopButton) }
                     if let data = self.motion.accelerometerData {
                         let x = data.acceleration.x
                         let y = data.acceleration.y
@@ -222,7 +218,7 @@ class MeasureDataViewController: UIViewController {
                 motion.startGyroUpdates()
                 self.gyroTimer = Timer(fire: Date(), interval: 0.1,
                                        repeats: true, block: { (timer) in
-                    if self.measureTime == 599 { self.buttonTapAction(self.stopBtn) }
+                    if self.measureTime == 599 { self.buttonTapAction(self.stopButton) }
                     if let data = self.motion.gyroData {
                         let x = data.rotationRate.x
                         let y = data.rotationRate.y
@@ -329,7 +325,7 @@ class MeasureDataViewController: UIViewController {
     
     @objc func buttonTapAction(_ sender: UIButton) {
         switch sender {
-        case measureBtn:
+        case measureButton:
             if segmentedControl.selectedSegmentIndex == 0 {
                 startAccelerometers()
             } else {
@@ -338,7 +334,7 @@ class MeasureDataViewController: UIViewController {
             segmentedControl.isEnabled = false
             saveBarButtonItem.isEnabled = false
             isPlaying = true
-        case stopBtn:
+        case stopButton:
             if self.segmentedControl.selectedSegmentIndex == 0 {
                 stopMeasuring(accTimer)
             } else {
@@ -347,7 +343,7 @@ class MeasureDataViewController: UIViewController {
             segmentedControl.isEnabled = true
             saveBarButtonItem.isEnabled = true
             isPlaying = false
-        case saveBtn:
+        case saveButton:
             saveMeasuredData()
         default:
             return
@@ -361,10 +357,10 @@ class MeasureDataViewController: UIViewController {
     }
     
     func addViews(){
-        view.addSubviews(plot, containerView, segmentedControl, measureBtn, stopBtn)
+        view.addSubviews(plot, containerView, segmentedControl, measureButton, stopButton)
         containerView.addSubviews(accView, gyroView, xLabel, yLabel, zLabel, maxLabel, minLabel)
         
-        [plot, containerView, segmentedControl, measureBtn, stopBtn, accView, gyroView, xLabel, yLabel, zLabel, maxLabel, minLabel].forEach {
+        [plot, containerView, segmentedControl, measureButton, stopButton, accView, gyroView, xLabel, yLabel, zLabel, maxLabel, minLabel].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
     }
@@ -382,10 +378,10 @@ class MeasureDataViewController: UIViewController {
             segmentedControl.bottomAnchor.constraint(equalTo: containerView.topAnchor, constant: -20),
             segmentedControl.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             segmentedControl.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
-            measureBtn.topAnchor.constraint(equalTo: containerView.bottomAnchor, constant: 20),
-            measureBtn.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
-            stopBtn.topAnchor.constraint(equalTo: measureBtn.bottomAnchor, constant: 20),
-            stopBtn.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
+            measureButton.topAnchor.constraint(equalTo: containerView.bottomAnchor, constant: 20),
+            measureButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
+            stopButton.topAnchor.constraint(equalTo: measureButton.bottomAnchor, constant: 20),
+            stopButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
             accView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor),
             accView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             accView.widthAnchor.constraint(equalTo: containerView.widthAnchor),

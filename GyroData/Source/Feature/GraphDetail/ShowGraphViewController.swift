@@ -11,11 +11,11 @@ class ShowGraphViewController: UIViewController {
 
     var motionInfo : MotionInfo?
     
-    lazy var reviewView : Graph = {
+    lazy var reviewView : GraphView = {
         let xPoints = motionInfo?.motionX
         let yPoints = motionInfo?.motionY
         let zPoints = motionInfo?.motionZ
-        let view = Graph(id: .show, xPoints: xPoints ?? [], yPoints: yPoints ?? [], zPoints: zPoints ?? [])
+        let view = GraphView(id: .show, xPoints: xPoints ?? [], yPoints: yPoints ?? [], zPoints: zPoints ?? [])
 
         view.drawable = true
         view.measuredTime = (motionInfo?.motionX.count)!
@@ -59,7 +59,7 @@ class ShowGraphViewController: UIViewController {
         return lbl
     }()
     
-    let plot : PlotView = {
+    let plotView : PlotView = {
        let view = PlotView()
         view.backgroundColor = .clear
         return view
@@ -79,9 +79,9 @@ class ShowGraphViewController: UIViewController {
     }
     
     func addViews(){
-        view.addSubviews(dateLabel, typeLabel, plot, reviewView, xLabel, yLabel, zLabel)
+        view.addSubviews(dateLabel, typeLabel, plotView, reviewView, xLabel, yLabel, zLabel)
         
-        [dateLabel, typeLabel, plot, reviewView, xLabel, yLabel, zLabel].forEach {
+        [dateLabel, typeLabel, plotView, reviewView, xLabel, yLabel, zLabel].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
     }
@@ -94,20 +94,20 @@ class ShowGraphViewController: UIViewController {
             dateLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             typeLabel.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 10),
             typeLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            plot.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            plot.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            plot.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
-            plot.heightAnchor.constraint(equalTo: plot.widthAnchor),
+            plotView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            plotView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            plotView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
+            plotView.heightAnchor.constraint(equalTo: plotView.widthAnchor),
             reviewView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             reviewView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             reviewView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
             reviewView.heightAnchor.constraint(equalTo: reviewView.widthAnchor),
-            xLabel.centerXAnchor.constraint(equalTo: plot.centerXAnchor).constraintWithMultiplier(0.5),
-            xLabel.topAnchor.constraint(equalTo: plot.topAnchor),
-            yLabel.centerXAnchor.constraint(equalTo: plot.centerXAnchor),
-            yLabel.topAnchor.constraint(equalTo: plot.topAnchor),
-            zLabel.centerXAnchor.constraint(equalTo: plot.centerXAnchor).constraintWithMultiplier(1.5),
-            zLabel.topAnchor.constraint(equalTo: plot.topAnchor)
+            xLabel.centerXAnchor.constraint(equalTo: plotView.centerXAnchor).constraintWithMultiplier(0.5),
+            xLabel.topAnchor.constraint(equalTo: plotView.topAnchor),
+            yLabel.centerXAnchor.constraint(equalTo: plotView.centerXAnchor),
+            yLabel.topAnchor.constraint(equalTo: plotView.topAnchor),
+            zLabel.centerXAnchor.constraint(equalTo: plotView.centerXAnchor).constraintWithMultiplier(1.5),
+            zLabel.topAnchor.constraint(equalTo: plotView.topAnchor)
         ])
     }
     

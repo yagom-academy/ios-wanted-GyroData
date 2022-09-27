@@ -32,8 +32,8 @@ class PlayGraphViewController: UIViewController {
         return label
     }()
     
-    lazy var playView : Graph = {
-        let view = Graph(id: .play, xPoints: [0.0], yPoints: [0.0], zPoints: [0.0])
+    lazy var playView : GraphView = {
+        let view = GraphView(id: .play, xPoints: [0.0], yPoints: [0.0], zPoints: [0.0])
         view.backgroundColor = .clear
         view.measuredTime = (motionInfo?.motionX.count) ?? 0
         return view
@@ -64,31 +64,31 @@ class PlayGraphViewController: UIViewController {
         return lbl
     }()
     
-    let plot : PlotView = {
+    let plotView : PlotView = {
         let view = PlotView()
         view.backgroundColor = .clear
         return view
     }()
     
-    lazy var playBtn : UIButton = {
-        let btn = UIButton()
-        let img = UIImage(systemName: "play.fill")
-        btn.setImage(img, for: .normal)
-        btn.tintColor = .black
-        btn.addTarget(self, action: #selector(touched), for: .touchUpInside)
+    lazy var playButton : UIButton = {
+        let button = UIButton()
+        let playImage = UIImage(systemName: "play.fill")
+        button.setImage(playImage, for: .normal)
+        button.tintColor = .black
+        button.addTarget(self, action: #selector(touched), for: .touchUpInside)
         var config = UIButton.Configuration.plain()
         config.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(pointSize: 40)
-        btn.configuration = config
+        button.configuration = config
         
-        return btn
+        return button
     }()
     
     @objc func touched(_ sender:UIButton) {
         isPlaying.toggle()
         if isPlaying {
             
-            let img = UIImage(systemName: "stop.fill")
-            sender.setImage(img, for: .normal)
+            let stopImage = UIImage(systemName: "stop.fill")
+            sender.setImage(stopImage, for: .normal)
             
             playView.erase()
             playView.drawable = true
@@ -101,8 +101,8 @@ class PlayGraphViewController: UIViewController {
                 
                 if  elapsedTime > (self.motionInfo?.motionX.count ?? 0) - 1{
                     timer.invalidate()
-                    let img = UIImage(systemName: "play.fill")
-                    sender.setImage(img, for: .normal)
+                    let playImage = UIImage(systemName: "play.fill")
+                    sender.setImage(playImage, for: .normal)
                 }
                 
                 let (x,y,z) = self.extractMotionInfo(self.motionInfo, at: elapsedTime)
@@ -115,8 +115,8 @@ class PlayGraphViewController: UIViewController {
                 RunLoop.current.add(timer, forMode: .default)
             }
         } else {
-            let img = UIImage(systemName: "play.fill")
-            sender.setImage(img, for: .normal)
+            let playImage = UIImage(systemName: "play.fill")
+            sender.setImage(playImage, for: .normal)
             timer?.invalidate()
             elapsedTime = 0.0
         }
@@ -140,9 +140,9 @@ class PlayGraphViewController: UIViewController {
     }
     
     func addViews(){
-        view.addSubviews(dateLabel, typeLabel, plot, playView, playBtn, timerLabel, xLabel, yLabel, zLabel)
+        view.addSubviews(dateLabel, typeLabel, plotView, playView, playButton, timerLabel, xLabel, yLabel, zLabel)
         
-        [dateLabel, typeLabel, plot, playView, playBtn, timerLabel, xLabel, yLabel, zLabel].forEach {
+        [dateLabel, typeLabel, plotView, playView, playButton, timerLabel, xLabel, yLabel, zLabel].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
     }
@@ -155,25 +155,25 @@ class PlayGraphViewController: UIViewController {
             dateLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             typeLabel.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 10),
             typeLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            plot.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            plot.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            plot.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
-            plot.heightAnchor.constraint(equalTo: plot.widthAnchor),
+            plotView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            plotView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            plotView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
+            plotView.heightAnchor.constraint(equalTo: plotView.widthAnchor),
             playView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             playView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             playView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
             playView.heightAnchor.constraint(equalTo: playView.widthAnchor),
-            playBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            playBtn.topAnchor.constraint(equalTo: playView.bottomAnchor, constant: 30),
+            playButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            playButton.topAnchor.constraint(equalTo: playView.bottomAnchor, constant: 30),
             timerLabel.trailingAnchor.constraint(equalTo: playView.trailingAnchor),
-            timerLabel.centerYAnchor.constraint(equalTo: playBtn.centerYAnchor),
+            timerLabel.centerYAnchor.constraint(equalTo: playButton.centerYAnchor),
             timerLabel.widthAnchor.constraint(equalTo: playView.widthAnchor).constraintWithMultiplier(0.25),
-            xLabel.centerXAnchor.constraint(equalTo: plot.centerXAnchor).constraintWithMultiplier(0.5),
-            yLabel.centerXAnchor.constraint(equalTo: plot.centerXAnchor),
-            zLabel.centerXAnchor.constraint(equalTo: plot.centerXAnchor).constraintWithMultiplier(1.5),
-            xLabel.topAnchor.constraint(equalTo: plot.topAnchor),
-            yLabel.topAnchor.constraint(equalTo: plot.topAnchor),
-            zLabel.topAnchor.constraint(equalTo: plot.topAnchor)
+            xLabel.centerXAnchor.constraint(equalTo: plotView.centerXAnchor).constraintWithMultiplier(0.5),
+            yLabel.centerXAnchor.constraint(equalTo: plotView.centerXAnchor),
+            zLabel.centerXAnchor.constraint(equalTo: plotView.centerXAnchor).constraintWithMultiplier(1.5),
+            xLabel.topAnchor.constraint(equalTo: plotView.topAnchor),
+            yLabel.topAnchor.constraint(equalTo: plotView.topAnchor),
+            zLabel.topAnchor.constraint(equalTo: plotView.topAnchor)
         ])
     }
     
