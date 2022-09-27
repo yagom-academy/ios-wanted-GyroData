@@ -38,7 +38,7 @@ class ViewController: UIViewController {
         title = "목록"
         configure()
     }
-    
+    // 데이터 저장 테이블 릴로드
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         DataManager.shared.fetchSave()
