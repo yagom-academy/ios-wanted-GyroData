@@ -47,9 +47,9 @@
 - GryoExample
 - DataManager.swift
     
-    CREATE(생성) mainContext() context를 저장하는 saveCntext()
-    READ(읽기) - fetchSave()
-    UPDATE(저장,업데이트) addNewSave()
+    CREATE(생성) mainContext() context를 저장하는 saveCntext()  
+    READ(읽기) - fetchSave()  
+    UPDATE(저장,업데이트) addNewSave()  
     DELETE(삭제) - deleteRun()
     
 
