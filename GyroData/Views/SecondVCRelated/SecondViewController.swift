@@ -13,6 +13,7 @@ class SecondViewController: UIViewController, SecondViewControllerRoutable, Seco
     var backButton = UIBarButtonItem()
     lazy var segmentView = SecondViewSegementedControlView(viewModel: self.viewModel.segmentViewModel)
     lazy var graphView = GraphView(viewModel: self.viewModel.graphViewModel)
+    lazy var gridView = GridView()
     lazy var controlView = SecondControlView(viewModel: self.viewModel.controlViewModel)
     var indicatorView = SecondHoveringIndicatorView()
     
@@ -35,10 +36,6 @@ class SecondViewController: UIViewController, SecondViewControllerRoutable, Seco
         configureView()
         bind()
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
 }
 
 // MARK: Presentable
@@ -46,11 +43,13 @@ extension SecondViewController: Presentable {
     func initViewHierarchy() {
         self.view = UIView()
         view.addSubview(segmentView)
+        view.addSubview(gridView)
         view.addSubview(graphView)
         view.addSubview(controlView)
         view.addSubview(indicatorView)
         
         segmentView.translatesAutoresizingMaskIntoConstraints = false
+        gridView.translatesAutoresizingMaskIntoConstraints = false
         graphView.translatesAutoresizingMaskIntoConstraints = false
         controlView.translatesAutoresizingMaskIntoConstraints = false
         indicatorView.translatesAutoresizingMaskIntoConstraints = false
@@ -65,6 +64,14 @@ extension SecondViewController: Presentable {
             segmentView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             segmentView.heightAnchor.constraint(equalToConstant: 42),
         ]
+        
+        constraints += [
+            gridView.topAnchor.constraint(equalTo: segmentView.bottomAnchor, constant: 16),
+            gridView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            gridView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            gridView.heightAnchor.constraint(equalTo: gridView.widthAnchor),
+        ]
+        
         constraints += [
             graphView.topAnchor.constraint(equalTo: segmentView.bottomAnchor, constant: 16),
             graphView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
@@ -100,6 +107,7 @@ extension SecondViewController: Presentable {
         backButton.target = self
         backButton.action = #selector(didTapBackButton)
         
+        gridView.clipsToBounds = true
         indicatorView.isHidden = true
     }
     
