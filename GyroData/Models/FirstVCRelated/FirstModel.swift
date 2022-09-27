@@ -73,10 +73,9 @@ class FirstModel: SceneActionReceiver {
             let context = SceneContext(dependency: model)
             self.routeSubject(.detail(.thirdViewController(context: context)))
         }
-        privateFirstListViewModel.propagateStartPaging = { [weak self] _ in
+        privateFirstListViewModel.propagateDidSelectDeleteActionEvent = { [weak self] motion in
             guard let self = self else { return }
-            print("!!!!!!!")
-            self.populateData()
+
         }
         
         didReceiveSceneAction = { [weak self] action in
