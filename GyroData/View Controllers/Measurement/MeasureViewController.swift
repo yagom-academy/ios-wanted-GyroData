@@ -122,10 +122,10 @@ final class MeasureViewController: UIViewController {
     }
     
     private func changeButtonsState() {
-        measureButton.isEnabled = !self.measureButton.isEnabled
-        self.stopButton.isEnabled = !self.measureButton.isEnabled
-        self.navigationItem.rightBarButtonItem?.isEnabled = self.measureButton.isEnabled
-        self.segmentControl.isEnabled = self.measureButton.isEnabled
+        measureButton.isEnabled = !measureButton.isEnabled
+        stopButton.isEnabled = !measureButton.isEnabled
+        navigationItem.rightBarButtonItem?.isEnabled = measureButton.isEnabled
+        segmentControl.isEnabled = measureButton.isEnabled
     }
     
     private func drawMotionData(data: MotionDetailData) {

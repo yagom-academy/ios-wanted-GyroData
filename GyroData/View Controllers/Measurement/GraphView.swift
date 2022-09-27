@@ -13,7 +13,12 @@ class GraphView: UIView {
     
     var realtimeData: [MotionDetailData] = [] {
         didSet {
-            setNeedsDisplay()
+            if let width = self.width,
+               let height = self.height {
+                let timeInterval = width / 600
+                let xPosition = timeInterval * Double(realtimeData.count - 1)
+                setNeedsDisplay(CGRect(origin: CGPoint(x: xPosition, y: 0), size: CGSize(width: timeInterval * 2, height: height)))
+            }
         }
     }
     
@@ -63,37 +68,38 @@ class GraphView: UIView {
         guard let width = self.width else { return }
         guard let height = self.height else { return }
         let timeInterval = width / 600
-        let xPosition = timeInterval
+        let xPosition = timeInterval * Double(realtimeData.count - 1)
         
-        guard let data = realtimeData.first else { return }
         let xPath = UIBezierPath()
         let yPath = UIBezierPath()
         let zPath = UIBezierPath()
-        
-        xPath.move(to: CGPoint(x: 0, y: height / 2))
-        yPath.move(to: CGPoint(x: 0, y: height / 2))
-        zPath.move(to: CGPoint(x: 0, y: height / 2))
-        
-        var oldData = data
-        for (index, newData) in realtimeData.enumerated() {
-            UIColor.systemRed.set()
-            xPath.move(to: xPath.currentPoint)
-            xPath.addLine(to: CGPoint(x: xPosition * Double(index), y: height / 2 + newData.x * 10))
-            xPath.stroke()
-            
-            UIColor.systemGreen.set()
-            yPath.move(to: yPath.currentPoint)
-            yPath.addLine(to: CGPoint(x: xPosition * Double(index), y: height / 2 + newData.y * 10))
-            yPath.stroke()
-            
-            UIColor.systemBlue.set()
-            zPath.move(to: zPath.currentPoint)
-            zPath.addLine(to: CGPoint(x: xPosition * Double(index), y: height / 2 + newData.z * 10))
-            zPath.stroke()
-            
-            oldData = newData
-            print(#function, xPath.currentPoint, yPath.currentPoint, zPath.currentPoint)
+        xPath.lineWidth = 3
+        yPath.lineWidth = 3
+        zPath.lineWidth = 3
+
+        if realtimeData.count > 1 {
+            let oldData = realtimeData[realtimeData.count - 2]
+            xPath.move(to: CGPoint(x: xPosition - timeInterval, y: height / 2 + oldData.x * 10))
+            yPath.move(to: CGPoint(x: xPosition - timeInterval, y: height / 2 + oldData.y * 10))
+            zPath.move(to: CGPoint(x: xPosition - timeInterval, y: height / 2 + oldData.z * 10))
+        } else {
+            xPath.move(to: CGPoint(x: 0, y: height / 2))
+            yPath.move(to: CGPoint(x: 0, y: height / 2))
+            zPath.move(to: CGPoint(x: 0, y: height / 2))
         }
+
+        guard let newData = realtimeData.last else { return }
+        UIColor.systemRed.set()
+        xPath.addLine(to: CGPoint(x: xPosition, y: height / 2 + newData.x * 10))
+        xPath.stroke()
+
+        UIColor.systemGreen.set()
+        yPath.addLine(to: CGPoint(x: xPosition, y: height / 2 + newData.y * 10))
+        yPath.stroke()
+
+        UIColor.systemBlue.set()
+        zPath.addLine(to: CGPoint(x: xPosition, y: height / 2 + newData.z * 10))
+        zPath.stroke()
         
         path.append(xPath)
         path.append(yPath)
