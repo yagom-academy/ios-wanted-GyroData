@@ -148,6 +148,8 @@ class MeasurmentViewController: UIViewController {
                         self.yData.removeAll(keepingCapacity: false)
                         self.zData.removeAll(keepingCapacity: false)
                         self.time = "0.0"
+                        
+                        //activityIndicator 중지
                         self.activityIndicator.stopAnimating()
                     }
                 }
