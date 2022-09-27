@@ -9,20 +9,20 @@ import UIKit
 
 final class MeasureViewController: UIViewController {
     
-    let segmentControl: UISegmentedControl = {
+    private let segmentControl: UISegmentedControl = {
        let control = UISegmentedControl(items: ["Acc", "Gyro"])
         control.translatesAutoresizingMaskIntoConstraints = false
         control.selectedSegmentIndex = 0
         return control
     }()
     
-    let graphView: UIView = {
+    private let graphView: UIView = {
        let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    lazy var measureButton: UIButton = {
+    private lazy var measureButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(didTapMeasureButton), for: .touchUpInside)
@@ -32,7 +32,7 @@ final class MeasureViewController: UIViewController {
         return button
     }()
     
-    lazy var stopButton: UIButton = {
+    private lazy var stopButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(didTapStopButton), for: .touchUpInside)
@@ -42,7 +42,7 @@ final class MeasureViewController: UIViewController {
         return button
     }()
     
-    lazy var activityIndicator: UIActivityIndicatorView = {
+    private lazy var activityIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView()
         indicator.translatesAutoresizingMaskIntoConstraints = false
         indicator.style = .large
@@ -123,9 +123,14 @@ final class MeasureViewController: UIViewController {
     
     @objc
     private func didTapSaveButton() {
+        // 측정값이 없으면
+        // alert controller
         activityIndicator.startAnimating()
+        // 측정값을 coredata 저장
         DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
             self.activityIndicator.stopAnimating()
+            // 잘 저장되었으면 -> viewcontroller dimiss/pop
+            // 잘 저장X -> 저장 실패 alert controller
         }
     }
 }

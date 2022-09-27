@@ -44,6 +44,7 @@ class CoreMotionService {
                     let x = data.acceleration.x
                     let y = data.acceleration.y
                     let z = data.acceleration.z
+                    print(#function, x, y, z)
                 }
                 print(#function, timeout)
             })
@@ -72,6 +73,7 @@ class CoreMotionService {
                     let x = data.rotationRate.x
                     let y = data.rotationRate.y
                     let z = data.rotationRate.z
+                    print(#function, x, y, z)
                 }
                 print(#function, timeout)
             })

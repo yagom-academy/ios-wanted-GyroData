@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21279" systemVersion="21G83" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="DetailData" representedClassName="DetailData" syncable="YES" codeGenerationType="class">
-        <attribute name="date" optional="YES" attributeType="String"/>
-        <attribute name="x" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="y" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="z" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <relationship name="motion" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MotionData" inverseName="details" inverseEntity="MotionData"/>
-    </entity>
-    <entity name="MotionData" representedClassName="MotionData" syncable="YES" codeGenerationType="class">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21279" systemVersion="21G115" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="CDMotionData" representedClassName="CDMotionData" syncable="YES" codeGenerationType="class">
         <attribute name="date" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="unit" optional="YES" attributeType="String"/>
         <attribute name="value" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <relationship name="details" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DetailData" inverseName="motion" inverseEntity="DetailData"/>
+        <relationship name="items" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CDMotionDataItem" inverseName="motion" inverseEntity="CDMotionDataItem"/>
+    </entity>
+    <entity name="CDMotionDataItem" representedClassName="CDMotionDataItem" syncable="YES" codeGenerationType="class">
+        <attribute name="date" optional="YES" attributeType="String"/>
+        <attribute name="x" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="y" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="z" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="motion" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CDMotionData" inverseName="items" inverseEntity="CDMotionData"/>
     </entity>
 </model>
