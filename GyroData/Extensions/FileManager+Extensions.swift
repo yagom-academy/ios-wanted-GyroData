@@ -11,10 +11,8 @@ extension FileManager {
     
     enum FileManagerError: Error {
         case directoryError
-        case fetchError
-        case encodeError
+        case loadError
         case saveError
-        case decodeError
         case deleteError
     }
     
@@ -23,7 +21,7 @@ extension FileManager {
         let directoryURL = documentURL.appendingPathComponent("MotionData")
         let fileURL = directoryURL.appendingPathComponent("\(name).json")
         
-        guard !FileManager.default.fileExists(atPath: "\(fileURL)") else { throw FileManagerError.directoryError }
+        guard !FileManager.default.fileExists(atPath: "\(fileURL)") else { throw FileManagerError.loadError }
         
         do {
             let jsonDecoder = JSONDecoder()
@@ -31,7 +29,7 @@ extension FileManager {
             let decodeJson = try jsonDecoder.decode(MotionFile.self, from: jsonData)
             return decodeJson
         } catch {
-            throw FileManagerError.decodeError
+            throw FileManagerError.loadError
         }
     }
 
