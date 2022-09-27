@@ -36,16 +36,6 @@ class SecondViewController: UIViewController, SecondViewControllerRoutable, Seco
         configureView()
         bind()
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-    }
-    
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        print("viewDidLoad frame : \(self.gridView.frame.width)")
-    }
 }
 
 // MARK: Presentable

@@ -56,7 +56,6 @@ extension GridView: Presentable {
                 verticalLine.bottomAnchor.constraint(equalTo: self.bottomAnchor),
                 verticalLine.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: fixedWidthChecker)
             ]
-            print("width called")
         }
         
         //frame을 너무 일찍 가져와서 문제
@@ -72,7 +71,6 @@ extension GridView: Presentable {
                 horizontalLine.trailingAnchor.constraint(equalTo: self.trailingAnchor),
                 horizontalLine.topAnchor.constraint(equalTo: self.topAnchor, constant: fixedHeightChecker)
             ]
-            print("height called")
         }
     }
     
@@ -115,10 +113,10 @@ struct GridViewPreview<View: UIView> : UIViewRepresentable {
 #if canImport(SwiftUI) && DEBUG
 struct GridViewPreviewProvider: PreviewProvider {
     static var previews: some View {
-        FirstCellContentViewPreview {
+        GridViewPreview {
             let view = GridView()
             return view
-        }.previewLayout(.fixed(width: 390, height: 80))
+        }.previewLayout(.fixed(width: 390, height: 720))
     }
 }
 
