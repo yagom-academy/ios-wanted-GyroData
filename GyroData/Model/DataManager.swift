@@ -14,7 +14,7 @@ class DataManager {
     private init() { }
     
     var isFetching: Bool = false
-    //데이터를 저장할 배열선언후 초기화
+    //데이터를 저장할 배열선언 후 초기화
     var saveList = [Save]()
     
     var mainContext: NSManagedObjectContext {
