@@ -112,6 +112,7 @@ class MeasurmentViewController: UIViewController {
     
     @objc func saveButtonPressed() {
         
+        //activityIndicator 시작
         activityIndicator.startAnimating()
         
         if motionManager.isRunning {
@@ -148,6 +149,8 @@ class MeasurmentViewController: UIViewController {
                         self.yData.removeAll(keepingCapacity: false)
                         self.zData.removeAll(keepingCapacity: false)
                         self.time = "0.0"
+                        
+                        //activityIndicator 중지
                         self.activityIndicator.stopAnimating()
                     }
                 }

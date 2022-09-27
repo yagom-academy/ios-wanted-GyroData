@@ -46,7 +46,7 @@ class ViewController: UIViewController {
     }
     
     @objc func add(_ sender: Any) {
-        let secondView = MeasurmentViewController()     // 두번째 화면 푸시
+        let secondView = MeasurmentViewController() // 두번째 화면 푸시
         self.navigationController?.pushViewController(secondView, animated: true)
     }
     
