@@ -8,10 +8,20 @@
 import UIKit
 
 final class MeasureViewController: UIViewController {
+
+    private let stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.alignment = .leading
+        stackView.distribution = .fill
+        stackView.spacing = 16
+        return stackView
+    }()
     
     private let segmentControl: UISegmentedControl = {
-        let control = UISegmentedControl(items: ["Acc", "Gyro"])
-        control.translatesAutoresizingMaskIntoConstraints = false
+        let items = MotionType.allCases.map { $0.displayText }
+        let control = UISegmentedControl(items: items)
         control.selectedSegmentIndex = 0
         return control
     }()
@@ -23,13 +33,11 @@ final class MeasureViewController: UIViewController {
         view.backgroundColor = .systemBackground
         view.layer.borderColor = UIColor.separator.cgColor
         view.layer.borderWidth = 3
-        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     private lazy var measureButton: UIButton = {
         let button = UIButton(type: .system)
-        button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(didTapMeasureButton), for: .touchUpInside)
         button.setTitle("측정", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 20)
@@ -39,29 +47,31 @@ final class MeasureViewController: UIViewController {
     
     private lazy var stopButton: UIButton = {
         let button = UIButton(type: .system)
-        button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(didTapStopButton), for: .touchUpInside)
         button.setTitle("정지", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 20)
         button.isEnabled = false
         return button
     }()
-    
+
     private lazy var activityIndicator: UIActivityIndicatorView = {
-        let indicator = UIActivityIndicatorView()
+        let indicator = UIActivityIndicatorView(style: .large)
         indicator.translatesAutoresizingMaskIntoConstraints = false
-        indicator.style = .large
         return indicator
     }()
+
+    private lazy var saveButton = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(didTapSaveButton))
     
     private let coreMotionService = CoreMotionService()
-    private let coreDataService: CoreDataService = {
-        let container = (UIApplication.shared.delegate as? AppDelegate)?.coreDataStack.persistentContainer
-        return CoreDataService(with: container!, fetchedResultsControllerDelegate: nil)
+
+    private lazy var coreDataService: CoreDataService = {
+        let container = appDelegate.coreDataStack.persistentContainer
+        return CoreDataService(with: container, fetchedResultsControllerDelegate: nil)
     }()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
+
         configureNavigation()
         configureViews()
         configureLayout()
@@ -73,42 +83,35 @@ final class MeasureViewController: UIViewController {
     }
     
     private func configureViews() {
-        view.backgroundColor = .systemBackground
-        view.addSubview(segmentControl)
-        view.addSubview(graphView)
-        view.addSubview(measureButton)
-        view.addSubview(stopButton)
+        view.addSubview(stackView)
         view.addSubview(activityIndicator)
+        view.backgroundColor = .systemBackground
+
+        [
+            segmentControl,
+            graphView,
+            measureButton,
+            stopButton,
+            UIView(),
+        ].forEach { stackView.addArrangedSubview($0) }
     }
     
     private func configureLayout() {
-        NSLayoutConstraint.activate([
-            segmentControl.topAnchor.constraint(equalTo: view.topAnchor, constant: 130),
-            segmentControl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            segmentControl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            segmentControl.heightAnchor.constraint(equalToConstant: 50)
-        ])
-        
-        NSLayoutConstraint.activate([
-            graphView.topAnchor.constraint(equalTo: segmentControl.bottomAnchor, constant: 16),
-            graphView.leadingAnchor.constraint(equalTo: segmentControl.leadingAnchor),
-            graphView.trailingAnchor.constraint(equalTo: segmentControl.trailingAnchor),
-            graphView.heightAnchor.constraint(equalTo: graphView.widthAnchor)
-        ])
-        
-        NSLayoutConstraint.activate([
-            measureButton.topAnchor.constraint(equalTo: graphView.bottomAnchor, constant: 30),
-            measureButton.leadingAnchor.constraint(equalTo: segmentControl.leadingAnchor)
-        ])
-        
-        NSLayoutConstraint.activate([
-            stopButton.topAnchor.constraint(equalTo: measureButton.bottomAnchor, constant: 20),
-            stopButton.leadingAnchor.constraint(equalTo: segmentControl.leadingAnchor)
-        ])
-        
+        let inset: CGFloat = 16
         NSLayoutConstraint.activate([
             activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+
+            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: inset),
+            stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: inset),
+            stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -inset),
+            stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -inset),
+
+            segmentControl.widthAnchor.constraint(equalTo: stackView.widthAnchor),
+
+            graphView.widthAnchor.constraint(equalTo: stackView.widthAnchor),
+            graphView.heightAnchor.constraint(lessThanOrEqualTo: graphView.widthAnchor),
+            graphView.heightAnchor.constraint(equalTo: graphView.widthAnchor).withPriority(.defaultLow - 1),
         ])
     }
     
@@ -160,4 +163,3 @@ final class MeasureViewController: UIViewController {
         }
     }
 }
-

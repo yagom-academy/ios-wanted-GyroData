@@ -21,9 +21,11 @@ final class ListViewController: UIViewController {
         return tableView
     }()
 
+    private lazy var measureButton = UIBarButtonItem(title: "측정", style: .plain, target: self, action: #selector(didTapMeasureButton))
+
     private lazy var coreDataService: CoreDataService = {
-        let container = (UIApplication.shared.delegate as? AppDelegate)?.coreDataStack.persistentContainer
-        let service = CoreDataService(with: container!, fetchedResultsControllerDelegate: self)
+        let container = appDelegate.coreDataStack.persistentContainer
+        let service = CoreDataService(with: container, fetchedResultsControllerDelegate: self)
         return service
     }()
 
@@ -37,18 +39,19 @@ final class ListViewController: UIViewController {
     private func configureNavigation() {
         navigationItem.title = "목록"
         navigationItem.backButtonDisplayMode = .minimal
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "측정", style: .plain, target: self, action: #selector(didTapMeasureButton))
+        navigationItem.rightBarButtonItem = measureButton
     }
     
     private func configureLayout() {
         view.addSubview(tableView)
         view.backgroundColor = .systemBackground
-        
+
+        let safeAreaLayoutGuide = view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            tableView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            tableView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
         ])
     }
     
