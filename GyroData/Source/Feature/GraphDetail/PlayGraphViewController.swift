@@ -14,6 +14,24 @@ class PlayGraphViewController: UIViewController {
     var elapsedTime : Double = 0.0
     var isPlaying : Bool = false
     
+    lazy var dateLabel: UILabel = {
+        let label = UILabel()
+        label.text = motionInfo?.date
+        label.textColor = .black
+        label.textAlignment = .left
+        label.font = .systemFont(ofSize: 13, weight: .regular)
+        return label
+    }()
+    
+    let typeLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Play"
+        label.textColor = .black
+        label.textAlignment = .left
+        label.font = .systemFont(ofSize: 20, weight: .bold)
+        return label
+    }()
+    
     lazy var playView : Graph = {
         let view = Graph(id: .play, xPoints: [0.0], yPoints: [0.0], zPoints: [0.0])
         view.backgroundColor = .clear
@@ -56,9 +74,10 @@ class PlayGraphViewController: UIViewController {
         let btn = UIButton()
         let img = UIImage(systemName: "play.fill")
         btn.setImage(img, for: .normal)
+        btn.tintColor = .black
         btn.addTarget(self, action: #selector(touched), for: .touchUpInside)
         var config = UIButton.Configuration.plain()
-        config.buttonSize = .large
+        config.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(pointSize: 40)
         btn.configuration = config
         
         return btn
@@ -121,15 +140,21 @@ class PlayGraphViewController: UIViewController {
     }
     
     func addViews(){
-        view.addSubviews(plot, playView, playBtn, timerLabel, xLabel, yLabel, zLabel)
+        view.addSubviews(dateLabel, typeLabel, plot, playView, playBtn, timerLabel, xLabel, yLabel, zLabel)
         
-        [plot, playView, playBtn, timerLabel, xLabel, yLabel, zLabel].forEach {
+        [dateLabel, typeLabel, plot, playView, playBtn, timerLabel, xLabel, yLabel, zLabel].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
     }
     
     func setConstraints(){
+        let safeArea = view.safeAreaLayoutGuide
+        
         NSLayoutConstraint.activate([
+            dateLabel.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 20),
+            dateLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            typeLabel.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 10),
+            typeLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             plot.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             plot.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             plot.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
@@ -159,8 +184,10 @@ class PlayGraphViewController: UIViewController {
     }
     
     func extractMotionInfo(_ motionInfo:MotionInfo?, at idx:Int) -> (Double,Double,Double){
-        if let motionInfo = motionInfo{
-            return (motionInfo.motionX[idx], motionInfo.motionY[idx], motionInfo.motionZ[idx])
+        if let motionInfo = motionInfo {
+            if motionInfo.motionX.count != 0 && motionInfo.motionY.count != 0 && motionInfo.motionZ.count != 0 {
+                return (motionInfo.motionX[idx], motionInfo.motionY[idx], motionInfo.motionZ[idx])
+            }
         }
         return (0.0, 0.0, 0.0)
     }

@@ -44,7 +44,7 @@ class MeasureDataViewController: UIViewController {
     lazy var segmentedControl: UISegmentedControl = {
       let control = UISegmentedControl(items: ["Acc", "Gyro"])
         control.selectedSegmentTintColor = .systemBlue
-        control.backgroundColor = .gray
+        control.backgroundColor = .secondarySystemBackground
         control.addTarget(self, action: #selector(segconChange), for: .valueChanged)
         control.selectedSegmentIndex = 0
       return control
@@ -53,7 +53,7 @@ class MeasureDataViewController: UIViewController {
     lazy var measureBtn : UIButton = {
         let btn = UIButton()
         btn.setTitle("측정", for: .normal)
-        btn.setTitleColor(.black, for: .normal)
+        btn.setTitleColor(.systemBlue, for: .normal)
         btn.addTarget(self, action: #selector(buttonTapAction), for: .touchUpInside)
         return btn
     }()
@@ -61,7 +61,7 @@ class MeasureDataViewController: UIViewController {
     lazy var stopBtn : UIButton = {
         let btn = UIButton()
         btn.setTitle("정지", for: .normal)
-        btn.setTitleColor(.black, for: .normal)
+        btn.setTitleColor(.systemBlue, for: .normal)
         btn.addTarget(self, action: #selector(buttonTapAction), for: .touchUpInside)
         return btn
     }()
@@ -69,7 +69,7 @@ class MeasureDataViewController: UIViewController {
     lazy var saveBtn : UIButton = {
         let btn = UIButton()
         btn.setTitle("저장", for: .normal)
-        btn.setTitleColor(.black, for: .normal)
+        btn.setTitleColor(.systemBlue, for: .normal)
         btn.addTarget(self, action: #selector(buttonTapAction), for: .touchUpInside)
         return btn
     }()
@@ -384,13 +384,13 @@ class MeasureDataViewController: UIViewController {
             containerView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             containerView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
             containerView.heightAnchor.constraint(equalTo: containerView.widthAnchor),
-            segmentedControl.bottomAnchor.constraint(equalTo: view.centerYAnchor, constant: -view.frame.width * 0.4 - 20),
+            segmentedControl.bottomAnchor.constraint(equalTo: containerView.topAnchor, constant: -20),
             segmentedControl.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            segmentedControl.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8),
-            measureBtn.centerYAnchor.constraint(equalTo: view.centerYAnchor).constraintWithMultiplier(1.5),
-            measureBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor).constraintWithMultiplier(0.5),
-            stopBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor).constraintWithMultiplier(0.5),
-            stopBtn.centerYAnchor.constraint(equalTo: view.centerYAnchor).constraintWithMultiplier(1.7),
+            segmentedControl.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
+            measureBtn.topAnchor.constraint(equalTo: containerView.bottomAnchor, constant: 20),
+            measureBtn.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
+            stopBtn.topAnchor.constraint(equalTo: measureBtn.bottomAnchor, constant: 20),
+            stopBtn.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
             accView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor),
             accView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             accView.widthAnchor.constraint(equalTo: containerView.widthAnchor),

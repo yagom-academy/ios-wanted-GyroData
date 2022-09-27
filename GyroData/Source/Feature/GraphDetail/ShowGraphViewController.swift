@@ -23,6 +23,24 @@ class ShowGraphViewController: UIViewController {
         return view
     }()
     
+    lazy var dateLabel: UILabel = {
+        let label = UILabel()
+        label.text = motionInfo?.date
+        label.textColor = .black
+        label.textAlignment = .left
+        label.font = .systemFont(ofSize: 13, weight: .regular)
+        return label
+    }()
+    
+    let typeLabel: UILabel = {
+        let label = UILabel()
+        label.text = "View"
+        label.textColor = .black
+        label.textAlignment = .left
+        label.font = .systemFont(ofSize: 20, weight: .bold)
+        return label
+    }()
+    
     let xLabel : UILabel = {
         let lbl = UILabel()
         lbl.textColor = .red
@@ -61,15 +79,21 @@ class ShowGraphViewController: UIViewController {
     }
     
     func addViews(){
-        view.addSubviews(plot, reviewView, xLabel, yLabel, zLabel)
+        view.addSubviews(dateLabel, typeLabel, plot, reviewView, xLabel, yLabel, zLabel)
         
-        [plot, reviewView, xLabel, yLabel, zLabel].forEach {
+        [dateLabel, typeLabel, plot, reviewView, xLabel, yLabel, zLabel].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
     }
     
     func setConstraints(){
+        let safeArea = view.safeAreaLayoutGuide
+
         NSLayoutConstraint.activate([
+            dateLabel.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 20),
+            dateLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            typeLabel.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 10),
+            typeLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             plot.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             plot.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             plot.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
