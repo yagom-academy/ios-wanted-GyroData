@@ -26,7 +26,7 @@ class FirstModel: SceneActionReceiver {
     
     init(repository: RepositoryProtocol) {
         self.repository = repository
-        // Test 데이터
+        // MARK: - Core Data 테스트 데이터
 //        Task {
 //            for _ in 0..<10 {
 //                do {
@@ -36,10 +36,16 @@ class FirstModel: SceneActionReceiver {
 //                }
 //            }
 //        }
+
+        // MARK: - FileManager 테스트 데이터, 파일 이름은 yyyy-MM-dd-hh-mm-ss 을 string 인자로 받음.
 //        Task {
-//            let result = try await FileManager.default.loadMotionFile(name: "")
+//            try await repository.saveToFileManager(file:DummyGenerator.getDummyMotionFile())
+//        }
+//        Task {
+//            let result = try await FileManager.default.loadMotionFile(name: "2022-09-27-14-24-29")
 //            print(result)
 //        }
+//
         
         // -----
         self.privateFirstListViewModel = FirstListViewModel(motionTasks)
