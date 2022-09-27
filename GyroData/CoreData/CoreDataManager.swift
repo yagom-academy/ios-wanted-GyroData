@@ -12,7 +12,6 @@ class CoreDataManager {
     var datasoooooo = [GyroModel]()
     static var shared: CoreDataManager = CoreDataManager()
     
-    
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     let request: NSFetchRequest<GyroModel> = GyroModel.fetchRequest()
     
@@ -82,7 +81,6 @@ class CoreDataManager {
             request.fetchLimit = 10
             request.fetchOffset = offset
             let fetchdata = try self.context.fetch(request)
-            print("\(request.fetchOffset)🥝🥝🥝현재 데이터: \(fetchdata.count)")
             return fetchdata
         } catch {
             print(error.localizedDescription)
@@ -101,7 +99,7 @@ class CoreDataManager {
             managedObject.setValue(measure.title, forKey: "title")
             managedObject.setValue(measure.second, forKey: "second")
             managedObject.setValue(measure.measureDate, forKey: "measureDate")
-            
+        
             do {
                 try self.context.save()
                 return true
@@ -136,7 +134,7 @@ class CoreDataManager {
             return false
         }
     }
-    
+
     func count() -> Int? {
         do {
             let count = try self.context.count(for: request)

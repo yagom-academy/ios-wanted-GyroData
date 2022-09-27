@@ -12,16 +12,6 @@ class CustomTableViewCell: UITableViewCell {
     
     static let identifier = "CustomTableViewCell"
     
-//    lazy var stackView: UIStackView = {
-//        let stackView = UIStackView(arrangedSubviews: [title,second,measureDate])
-//        contentView.addSubview(stackView)
-//        stackView.snp.makeConstraints { (make) in
-//            make.left.bottom.right.top.equalTo(contentView)
-//        }
-//
-//        return stackView
-//    }()
-    
     lazy var title: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 20)
@@ -48,6 +38,7 @@ class CustomTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been impl")
     }
+    
     private func addContentView() {
         contentView.addSubview(title)
         contentView.addSubview(second)
@@ -61,8 +52,6 @@ class CustomTableViewCell: UITableViewCell {
         title.snp.makeConstraints { make in
             make.bottom.equalTo(contentView.snp.bottom)
             make.leading.equalTo(contentView.snp.leading).offset(20)
-            //            make.top.equalTo(dateLabel.snp.bottom).offset(3)
-            //            make.bottom.equalTo(stackView.snp.bottom)
         }
         second.snp.makeConstraints { make in
             make.top.equalTo(contentView.snp.top).offset(10)
