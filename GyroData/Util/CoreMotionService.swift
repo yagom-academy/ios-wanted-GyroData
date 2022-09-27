@@ -76,6 +76,8 @@ class CoreMotionService {
                     let x = data.rotationRate.x
                     let y = data.rotationRate.y
                     let z = data.rotationRate.z
+                    
+                    self.resultCompletion?(MotionDetailData(date: Date(), x: x, y: y, z: z))
                 }
                 print(#function, timeout)
             })
