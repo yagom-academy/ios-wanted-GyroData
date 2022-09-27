@@ -112,9 +112,17 @@ extension MainViewController: UITableViewDataSource {
         func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
             let playAction = UIContextualAction(style: .normal, title:"Play"){ (UIContextualAction, UIView, success: @escaping (Bool) -> Void) in
                 print("paly 클릭 됨")
+                let vc = ReplayViewController()
+                let data = self.datasource[indexPath.row]
+                guard let date = data.measureDate else { return }
+                let change = Measure(id: data.id ?? "0",
+                                     title: data.title ?? "타입안변함",
+                                     second: data.second ,
+                                     date: date,
+                                     pageType: .play)
+                vc.measureData = change
+                self.navigationController?.pushViewController(vc, animated: true)
                 
-                let ReplayViewController = ReplayViewController()
-                self.navigationController?.pushViewController(ReplayViewController, animated: true)
                 //self.datasource[indexPath.row]
                 //print(self.manager.count()!, self.datasource[indexPath.row].id!)
                 success(true)
@@ -140,7 +148,7 @@ extension MainViewController: UITableViewDataSource {
 extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        guard let vc = self.storyboard?.instantiateViewController(withIdentifier: "ReplayViewController") as? ReplayViewController else { return }
+        let vc = ReplayViewController()
         let data = datasource[indexPath.row]
         guard let date = data.measureDate else { return }
         let change = Measure(id: data.id ?? "0",

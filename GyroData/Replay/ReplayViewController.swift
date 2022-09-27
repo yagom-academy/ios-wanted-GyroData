@@ -20,7 +20,8 @@ class ReplayViewController: UIViewController {
     var measureData: Measure = Measure(title: "안들어있음", second: 0.0, pageType: .view) {
         didSet {
             print("Measuer Update!!")
-            self.measureDateLabel.text = String(measureData.measureDate)
+            self.measureDateLabel.text = String(measureData.saveDate)
+            print(measureData.pageType.rawValue)
             self.stateLabel.text = measureData.pageType.rawValue
             self.pageTypeName = measureData.pageType
         }
@@ -111,7 +112,8 @@ class ReplayViewController: UIViewController {
         self.btnAddTarget()
         self.setupGraphView()
         if pageTypeName == .view {
-            dummyTestViewShow()
+            print("측정 데이터 보임 ")
+            measureDataViewShow()
         }
         print("받아온 데이터: ", measureData)
     }
@@ -195,6 +197,22 @@ class ReplayViewController: UIViewController {
         }
     }
     
+    private func measureDataViewShow() {
+        let result = MeasureFileManager.shared.loadFile(self.measureData)
+        switch result {
+        case .success(let data):
+            self.graphView.graphData = data
+            self.graphView.gyroListGraphShow()
+            self.countDown -= 0.1
+            self.startTime += 0.1
+            if self.countDown <= 0 {
+                timer?.invalidate()
+            }
+        case .failure(let error):
+            debugPrint("FileManager fetch fail", error)
+        }
+    }
+    
     // MARK: - #selector
     @objc func backButtonTap(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
@@ -208,21 +226,9 @@ class ReplayViewController: UIViewController {
             countDown = 600
             timer = Timer.scheduledTimer(withTimeInterval: 0.1
                                          , repeats: true) { [weak self] (timer) in
-                guard let self = self else { return }
                 //랜덤값이 아닌 파일매니저의 값을 받아와서 써야함
-                let result = MeasureFileManager.shared.loadFile(self.measureData)
-                switch result {
-                case .success(let data):
-                    self.graphView.graphData = data
-                    self.graphView.gyroListGraphShow()
-                    self.countDown -= 0.1
-                    self.startTime += 0.1
-                    if self.countDown <= 0 {
-                        timer.invalidate()
-                    }
-                case .failure(let error):
-                    debugPrint("FileManager fetch fail", error)
-                }
+                self?.measureDataViewShow()
+                
             }
         } else {
             timer?.invalidate()
