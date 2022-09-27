@@ -19,8 +19,10 @@ class ReplayViewController: UIViewController {
     //첫번째화면에서 받아올 데이터
     var measureData: Measure = Measure(title: "안들어있음", second: 0.0, pageType: .view) {
         didSet {
+            print("Measuer Update!!")
             self.measureDateLabel.text = String(measureData.measureDate)
-            self.stateLabel.text = measureData.pageType?.rawValue
+            self.stateLabel.text = measureData.pageType.rawValue
+            self.pageTypeName = measureData.pageType
         }
     }
     let stepDuration = 0.1

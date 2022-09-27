@@ -142,10 +142,11 @@ extension MainViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         guard let vc = self.storyboard?.instantiateViewController(withIdentifier: "ReplayViewController") as? ReplayViewController else { return }
         let data = datasource[indexPath.row]
+        guard let date = data.measureDate else { return }
         let change = Measure(id: data.id ?? "0",
                              title: data.title ?? "타입안변함",
                              second: data.second ,
-                             date: data.measureDate ?? "0/0",
+                             date: date,
                              pageType: .view)
         vc.measureData = change
 //        let measure = Measure(

@@ -16,14 +16,15 @@ struct Measure {
         f.dateFormat = "yyyy/MM/dd HH:mm:ss"
         return f.string(from: Date())
     }
-    var saveDate: String?
-    var pageType: PageType?
+    var saveDate: String
+    var pageType: PageType
     
     init(title: String, second: Double, pageType: PageType = .view) {
         self.id = UUID().uuidString
         self.title = title
         self.second = second
         self.pageType = pageType
+        self.saveDate = ""
     }
     
     init(id: String, title: String, second: Double, date: String, pageType: PageType) {
