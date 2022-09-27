@@ -117,7 +117,7 @@ class MeasurmentViewController: UIViewController {
         
         if motionManager.isRunning {
             // 측정 중
-            let alert = UIAlertController(title: "측정 중 데이터 저장불가", message: "확인을 눌러주새요.", preferredStyle: UIAlertController.Style.alert)
+            let alert = UIAlertController(title: "측정 중 데이터 저장불가", message: "확인을 눌러주세요.", preferredStyle: UIAlertController.Style.alert)
             let cancel = UIAlertAction(title: "확인", style: .default, handler: nil)
             alert.addAction(cancel)
             present(alert, animated: true, completion: nil)
