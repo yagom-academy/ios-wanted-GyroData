@@ -109,9 +109,11 @@ class ReplayViewController: UIViewController {
         self.setupLayouts()
         self.btnAddTarget()
         self.setupGraphView()
+        self.injectMeasureData()
+//        dummyTestViewShow()
         if pageTypeName == .view {
             print("측정 데이터 보임")
-            measureDataViewShow()
+            self.graphView.gyroListGraphShow()
         }
         print("받아온 데이터: ", measureData)
     }
@@ -189,24 +191,17 @@ class ReplayViewController: UIViewController {
         switch result {
         case .success(let data):
             self.graphView.graphData = data
-            self.graphView.gyroListGraphShow()
+//            self.graphView.gyroListGraphShow()
         case .failure(let error):
             debugPrint(error)
         }
     }
     
-    private func measureDataViewShow() {
-        print(measureData.id)
+    private func injectMeasureData() { //데이터만 주기
         let result = MeasureFileManager.shared.loadFile(id: measureData.id ?? "")
         switch result {
         case .success(let data):
             self.graphView.graphData = data
-            self.graphView.gyroListGraphShow()
-            self.countDown -= 0.1
-            self.startTime += 0.1
-            if self.countDown <= 0 {
-                timer?.invalidate()
-            }
         case .failure(let error):
             debugPrint("FileManager fetch fail", error)
         }
@@ -223,11 +218,22 @@ class ReplayViewController: UIViewController {
         timerValid.toggle()
         if timerValid {
             countDown = 600
+            var idx = 0
             timer = Timer.scheduledTimer(withTimeInterval: 0.1
                                          , repeats: true) { [weak self] (timer) in
                 //랜덤값이 아닌 파일매니저의 값을 받아와서 써야함
-                self?.measureDataViewShow()
-                
+                guard let self = self else { return }
+                idx += 1
+                let x = self.graphView.graphData[idx].coodinate.x
+                let y = self.graphView.graphData[idx].coodinate.y
+                let z = self.graphView.graphData[idx].coodinate.z
+                print("x: \(x),y: \(y), z: \(z),")
+                self.graphView.animateNewValue(aValue: x, bValue: y, cValue: z, duration: self.stepDuration)
+                self.countDown -= 1
+                self.startTime += 0.1
+                if self.countDown <= 0 {
+                    timer.invalidate()
+                }
             }
         } else {
             timer?.invalidate()
