@@ -316,6 +316,7 @@ extension GraphView: Presentable {
             self.zPathData.removeAll()
             
             //Path 전부 지우는 경우 Path그릴시 사용했던 트랜스폼도 초기화
+            self.yAxisBound = self.frame.height / 2
             self.lastAppliedTransform = .identity
             
             self.setNeedsDisplay()
