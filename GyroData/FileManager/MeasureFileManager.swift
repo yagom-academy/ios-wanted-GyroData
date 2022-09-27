@@ -40,9 +40,10 @@ class MeasureFileManager {
         
         do {
             let data = try Data(contentsOf: fileURL)
-            let fetch = try JSONDecoder().decode([GyroJson].self, from: data)
+            let decoder = JSONDecoder()
+            let decodeData = try decoder.decode([GyroJson].self, from: data)
             print("FileManager 읽어오기 성공")
-            return .success(fetch)
+            return .success(decodeData)
         }
         catch let error {
             return .failure(error)

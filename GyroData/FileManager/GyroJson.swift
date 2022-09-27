@@ -13,5 +13,5 @@ struct GyroJson: Codable {
 
 // MARK: - Coodinate
 struct Coodinate: Codable {
-    let x, y, z: Float
+    let x, y, z: Double
 }

@@ -196,6 +196,7 @@ class ReplayViewController: UIViewController {
     }
     
     private func measureDataViewShow() {
+        print(measureData.id)
         let result = MeasureFileManager.shared.loadFile(id: measureData.id ?? "")
         switch result {
         case .success(let data):

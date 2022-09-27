@@ -13,10 +13,6 @@ enum sensorType: Int {
     case gyroscope = 1
 }
 
-struct MotionData: Codable {
-    let coodinate: [Double]
-}
-
 class MeasureViewController: UIViewController {
     
     let mainView = MeasureView()
@@ -31,7 +27,7 @@ class MeasureViewController: UIViewController {
     var cBuffer = GraphBuffer(count: 100)
     var countDown: Double = 0.0
     var graphFlag = 0
-    var saveMotionData: [MotionData] = []
+    var saveMotionData: [GyroJson] = []
     
     override func loadView() {
         self.view = mainView
@@ -103,7 +99,8 @@ class MeasureViewController: UIViewController {
                 motionData = [data.x, data.y, data.z]
             }
             //데이터를 배열에 저장해둔다
-            self.saveMotionData.append(MotionData(coodinate: [motionData[0],motionData[1],motionData[2]]))
+            self.saveMotionData.append(GyroJson(coodinate: Coodinate(x: motionData[0], y: motionData[1], z: motionData[2])))
+                                       
             //받아온 데이터로 그래프 그리기, 카운트다운 60초
             self.graphView.animateNewValue(aValue: motionData[0], bValue: motionData[1], cValue: motionData[2], duration: self.stepDuration)
             self.countDown -= 1
