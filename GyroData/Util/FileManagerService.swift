@@ -11,53 +11,38 @@ final class FileManagerService {
     private let manager: FileManager = FileManager.default
     private let directoryURL: URL = URL.documentsDirectory.appending(path: "MotionData")
     
-    func write(_ motionData: GyroData) {
-        do {
-            try createDirectory()
-            let encodedData = try JSONEncoder().encode(motionData)
-            let filePath = fileName(from: motionData.date)
-            let fileURL = directoryURL.appending(path: filePath)
-            try encodedData.write(to: fileURL)
-        }
-        catch {
-            print(#function, error.localizedDescription)
-        }
-    }
-    
-    func read(with date: Date) -> GyroData {
-        // TODO: 46-47 함수로 빼기
-        let fileName = fileName(from: date)
-        let filePath = directoryURL.appending(path: fileName).appendingPathExtension("json")
-        
-        do {
-            guard let jsonData = manager.contents(atPath: filePath.relativePath) else {
-                throw FileManagerServiceError.fileNotFound(name: fileName)
-            }
-            let motionData = try JSONDecoder().decode(GyroData.self, from: jsonData)
-            return motionData
-        }
-        catch {
-            fatalError(#function + error.localizedDescription)
-        }
-    }
-    
-    func delete(_ date: Date) {
-        let fileName = fileName(from: date)
-        let filePath = directoryURL.appending(path: fileName).appendingPathExtension("json")
-        
-        do {
-            try manager.removeItem(atPath: filePath.relativePath)
-        }
-        catch {
-            print(#function, error.localizedDescription)
-        }
-    }
-    
-    private func createDirectory() throws {
-        let directoryPath = directoryURL.path()
-        if manager.fileExists(atPath: directoryPath) {
+    func write(_ value: GyroData) throws {
+        if !manager.fileExists(atPath: directoryURL.relativePath) {
             try manager.createDirectory(at: directoryURL, withIntermediateDirectories: false)
         }
+        let fileURL = composeURL(from: value.date, withExtension: "json")
+        let data = try JSONEncoder().encode(value)
+        try data.write(to: fileURL)
+    }
+    
+    func read(with date: Date, completion: @escaping (Result<GyroData, Error>) -> Void) {
+        do {
+            let fileURL = composeURL(from: date, withExtension: "json")
+            guard let data = manager.contents(atPath: fileURL.relativePath) else {
+                throw FileManagerServiceError.fileNotFound(name: fileURL.relativePath)
+            }
+            let result = try JSONDecoder().decode(GyroData.self, from: data)
+            completion(.success(result))
+        }
+        catch {
+            completion(.failure(error))
+        }
+    }
+    
+    func delete(_ date: Date) throws {
+        let fileURL = composeURL(from: date, withExtension: "json")
+        try manager.removeItem(atPath: fileURL.relativePath)
+    }
+
+    private func composeURL(from date: Date, withExtension pathExtension: String) -> URL {
+        return directoryURL
+            .appendingPathComponent(fileName(from: date))
+            .appendingPathExtension(pathExtension)
     }
 
     private func fileName(from date: Date) -> String {
