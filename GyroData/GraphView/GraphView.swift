@@ -149,7 +149,22 @@ class GraphView: UIView {
             xPath.stroke()
             xPathData.append(xPreviousPoint)
         } else if drawMode == .whole {
-            
+            for receivedData in viewModel.dataSource {
+                xPath.move(to: xPreviousPoint)
+                
+                xNewPoint = CGPoint(x: xPreviousPoint.x + xInterval, y: middlePoint.y + receivedData.xValue)
+                // 이전 Path들에게 이미 적용된 Transform이 있다면 newPoint에도 해당 Transform을 적용시킨 뒤 선을 그려줘야 합니다. - Eric
+                xNewPoint = xNewPoint.applying(lastAppliedTransform)
+                xPath.addLine(to: xNewPoint)
+                
+                xPreviousPoint = xNewPoint
+                
+                reCalculateScale(receivedData.xValue)
+                
+                UIColor.red.setStroke()
+                xPath.stroke()
+                xPathData.append(xPreviousPoint)
+            }
         }
     }
     
@@ -173,7 +188,21 @@ class GraphView: UIView {
             yPath.stroke()
             yPathData.append(yPreviousPoint)
         } else if drawMode == .whole {
-            
+            for receivedData in viewModel.dataSource {
+                yPath.move(to: yPreviousPoint)
+                
+                yNewPoint = CGPoint(x: yPreviousPoint.x + xInterval, y: middlePoint.y + receivedData.yValue)
+                yNewPoint = yNewPoint.applying(lastAppliedTransform)
+                yPath.addLine(to: yNewPoint)
+                
+                yPreviousPoint = yNewPoint
+                
+                reCalculateScale(receivedData.yValue)
+                
+                UIColor.green.setStroke()
+                yPath.stroke()
+                yPathData.append(yPreviousPoint)
+            }
         }
     }
     
@@ -198,7 +227,21 @@ class GraphView: UIView {
             zPath.stroke()
             zPathData.append(zPreviousPoint)
         } else if drawMode == .whole {
-            
+            for receivedData in viewModel.dataSource {
+                zPath.move(to: zPreviousPoint)
+                
+                zNewPoint = CGPoint(x: zPreviousPoint.x + xInterval, y: middlePoint.y + receivedData.zValue)
+                zNewPoint = zNewPoint.applying(lastAppliedTransform)
+                zPath.addLine(to: zNewPoint)
+                
+                zPreviousPoint = zNewPoint
+                
+                reCalculateScale(receivedData.zValue)
+                
+                UIColor.blue.setStroke()
+                zPath.stroke()
+                zPathData.append(zPreviousPoint)
+            }
         }
     }
     
