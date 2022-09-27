@@ -12,7 +12,8 @@ class MainViewController: UIViewController {
     var datasource = [GyroModel]()
     let manager = CoreDataManager.shared
     let FileManager = MeasureFileManager.shared
-    
+    var count = 0
+    var dataCOunt = 0
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         view.addSubview(tableView)
@@ -27,7 +28,6 @@ class MainViewController: UIViewController {
         self.view.backgroundColor = .white
         setupView()
         addNaviBar()
-//        tableView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -40,7 +40,6 @@ class MainViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
     }
-   
     
     //네비바 추가
     private func addNaviBar() {
@@ -53,19 +52,13 @@ class MainViewController: UIViewController {
         let MeasureView = MeasureViewController()
         self.navigationController?.pushViewController(MeasureView, animated: true)
         tableView.reloadData()
-        //        loadData()
-        //
     }
     
     //실행시 기존데이터 로드
     private func loadData() {
-//                manager.fetch()
-//        manager.fetchTen(offset: 0)
-//        datasource.append(contentsOf: manager.fetchTen1(offset: datasource.count))
-//        print("데이터소스 카운트\(datasource.count)")
-        datasource.append(contentsOf: manager.fetchTen1(offset: datasource.count))
-//        print("데이터소스 카운트\(datasource.count)")
-        tableView.reloadData()
+        let data = manager.fetchTen(offset: datasource.count)
+        datasource.append(contentsOf: data)
+        dataCOunt = data.count
     }
 }
 
@@ -118,6 +111,7 @@ extension MainViewController: UITableViewDataSource {
         deleteAction.backgroundColor = .systemRed
         return UISwipeActionsConfiguration(actions: [deleteAction, playAction])
     }
+}
 
 extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -131,9 +125,3 @@ extension MainViewController: UITableViewDelegate {
         print(datasource[indexPath.row].id!)
     }
 }
-
-
-
-
-
-

@@ -24,27 +24,7 @@ class CoreDataManager {
         })
         return container
     }()
-   
-//    func fetchSave() {
-//        let request = NSFetchRequest<GyroModel>(entityName: "GyroModel")
-//
-//        var fetchOffset = 0
-//        request.fetchOffset = fetchOffset
-//        request.fetchLimit = 10
-//        do{
-//            var users: [GyroModel] = try! context.fetch(request)
-//            print("🐤🐤🐤🐤🐤🐤🐤🐤\(users.count)")
-//            while users.count > 0{
-//                fetchOffset = fetchOffset + users.count
-//                request.fetchOffset = fetchOffset
-//                users = try! context.fetch(request)
-//                print("🙈🙈🙈🙈🙈🙈🙈\(users.count)")
-//            }
-//        }
-    
-    
-    
-    
+
     var context: NSManagedObjectContext {
         return self.persistentContainer.viewContext
     }
@@ -53,30 +33,7 @@ class CoreDataManager {
         return  NSEntityDescription.entity(forEntityName: "GyroModel", in: context)
     }
     
-    func fetch() -> [GyroModel] {
-        do {
-            let fetchResult = try self.context.fetch(request)
-            return fetchResult
-        } catch {
-            print(error.localizedDescription)
-            return []
-        }
-    }
-    func fetchTen(count:Int) -> [GyroModel] {
-        do {
-            var fetchOffset = 0
-            request.fetchLimit = 10
-            request.fetchOffset = count
-            fetchOffset = fetchOffset + request.fetchOffset
-            let fetchdata = try self.context.fetch(request)
-//            print("🐤🐤🐤🐤🐤🐤🐤🐤\(fetchdata.count)")
-            return fetchdata
-        } catch {
-            print(error.localizedDescription)
-            return []
-        }
-    }
-    func fetchTen1(offset:Int) -> [GyroModel] {
+    func fetchTen(offset:Int) -> [GyroModel] {
         do {
             request.fetchLimit = 10
             request.fetchOffset = offset
