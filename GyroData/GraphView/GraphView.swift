@@ -72,10 +72,8 @@ class GraphView: UIView {
     //Point Properties for calculating Path's Position
     
     //path의 y좌표가 이 값의 최대값보다 크거나 작으면 CGAffineTransform을 이용해 뷰의 스케일을 축소한다? path가 잘려서 안 보이면 안되니까?
-    lazy var yAxisMiddleRange: ClosedRange<CGFloat> = yAxisMiddleRangeMin...yAxisMiddleRangeMax
-    lazy var yAxisMiddleRangeMin: CGFloat = middlePoint.y * 0.2
-    lazy var yAxisMiddleRangeMax: CGFloat = middlePoint.y * 1.8
     lazy var yAxisMultiplier: CGFloat = 1.0
+    lazy var yAxisBound: CGFloat = self.frame.height / 2
     
     lazy var middlePoint: CGPoint = CGPoint(x: 0.0, y: self.frame.height / 2)
     
@@ -95,7 +93,11 @@ class GraphView: UIView {
     let yPath = UIBezierPath()
     let zPath = UIBezierPath()
     
-    var lastAppliedTransform: CGAffineTransform?
+    var lastAppliedTransform: CGAffineTransform = .identity
+    
+    var xInterval: CGFloat {
+        return self.frame.width / 600
+    }
     
     init(viewModel: GraphViewModel) {
         super.init(frame: .zero)
@@ -124,16 +126,14 @@ class GraphView: UIView {
         
         xPath.move(to: xPreviousPoint)
         
-        xNewPoint = CGPoint(x: xPreviousPoint.x + 0.5, y: xPreviousPoint.y + receivedData)
+        xNewPoint = CGPoint(x: xPreviousPoint.x + xInterval, y: middlePoint.y + receivedData)
         // 이전 Path들에게 이미 적용된 Transform이 있다면 newPoint에도 해당 Transform을 적용시킨 뒤 선을 그려줘야 합니다. - Eric
-        if let lastAppliedTransform {
-            xNewPoint = xNewPoint.applying(lastAppliedTransform)
-        }
+        xNewPoint = xNewPoint.applying(lastAppliedTransform)
         xPath.addLine(to: xNewPoint)
         
         xPreviousPoint = xNewPoint
         
-        reCalculateScale(point: xPreviousPoint)
+        reCalculateScale(receivedData)
         
         UIColor.red.setStroke()
         xPath.stroke()
@@ -145,15 +145,13 @@ class GraphView: UIView {
         
         yPath.move(to: yPreviousPoint)
         
-        yNewPoint = CGPoint(x: yPreviousPoint.x + 0.5, y: yPreviousPoint.y + receivedData)
-        if let lastAppliedTransform {
-            yNewPoint = yNewPoint.applying(lastAppliedTransform)
-        }
+        yNewPoint = CGPoint(x: yPreviousPoint.x + xInterval, y: middlePoint.y + receivedData)
+        yNewPoint = yNewPoint.applying(lastAppliedTransform)
         yPath.addLine(to: yNewPoint)
         
         yPreviousPoint = yNewPoint
         
-        reCalculateScale(point: yPreviousPoint)
+        reCalculateScale(receivedData)
         
         UIColor.green.setStroke()
         yPath.stroke()
@@ -165,66 +163,39 @@ class GraphView: UIView {
         
         zPath.move(to: zPreviousPoint)
         
-        zNewPoint = CGPoint(x: zPreviousPoint.x + 0.5, y: zPreviousPoint.y + receivedData)
-        if let lastAppliedTransform {
-            zNewPoint = zNewPoint.applying(lastAppliedTransform)
-        }
+        zNewPoint = CGPoint(x: zPreviousPoint.x + xInterval, y: middlePoint.y + receivedData)
+        zNewPoint = zNewPoint.applying(lastAppliedTransform)
         zPath.addLine(to: zNewPoint)
         
         zPreviousPoint = zNewPoint
         
-        reCalculateScale(point: zPreviousPoint)
+        reCalculateScale(receivedData)
         
         UIColor.blue.setStroke()
         zPath.stroke()
         zPathData.append(zPreviousPoint)
     }
     
-    func reCalculateScale(point: CGPoint) {
-        if yAxisMiddleRange ~= point.y {
-            yAxisMiddleRangeMin = middlePoint.y * 0.2
-            yAxisMiddleRangeMax = middlePoint.y * 1.8
-            yAxisMultiplier = 1.0
-        } else {
-            if point.y > yAxisMiddleRangeMax {
-                //middlePoint.y * 1.8
-                let calculation = point.y - yAxisMiddleRangeMax
-                // 0.95 하드 코딩 대신 늘어난 길이를 계산하여 yAxisMutliper를 결정합니다. - Eric
-                yAxisMultiplier = yAxisMultiplier * (yAxisMiddleRangeMax / (yAxisMiddleRangeMax + calculation))
-                yAxisMiddleRangeMax = yAxisMiddleRangeMax + calculation
-            } else if point.y < yAxisMiddleRangeMin {
-                //middlePoint.y * 0.2
-                let calculation = yAxisMiddleRangeMin - point.y
-                yAxisMultiplier = yAxisMultiplier * ((middlePoint.y - yAxisMiddleRangeMin) / (middlePoint.y - yAxisMiddleRangeMin + calculation))
-                yAxisMiddleRangeMin = yAxisMiddleRangeMin - calculation
-            }
-
-            let width = UIScreen.main.bounds.width - 32
-            let height = width
-            
-            let transform = CGAffineTransform(1, 0, 0, yAxisMultiplier, 0, height * ((1-yAxisMultiplier)/2))
-            xPath.apply(transform)
-            yPath.apply(transform)
-            zPath.apply(transform)
-            
-            lastAppliedTransform = transform
-            
-            // Scaling뿐만 아니라 Transition까지 이전 Path와 previousPoint에 적용하기 위해, yAxisMutliplier를 곱하는 대신,
-            // applying 메소드를 통해 transform을 직접 적용하는 형태로 변경했습니다. - Eric
-            let newXpathData = xPathData.map { $0.applying(transform) }
-            xPathData = newXpathData
-            xPreviousPoint = xPreviousPoint.applying(transform)
-            
-            let newYpathData = yPathData.map { $0.applying(transform) }
-            yPathData = newYpathData
-            yPreviousPoint = yPreviousPoint.applying(transform)
-
-            let newZpathData = zPathData.map { $0.applying(transform) }
-            zPathData = newZpathData
-            zPreviousPoint = zPreviousPoint.applying(transform)
+    func reCalculateScale(_ receivedData: CGFloat) {
+        xPreviousPoint = xPreviousPoint.applying(lastAppliedTransform.inverted())
+        xPath.apply(lastAppliedTransform.inverted())
+        yPreviousPoint = yPreviousPoint.applying(lastAppliedTransform.inverted())
+        yPath.apply(lastAppliedTransform.inverted())
+        zPreviousPoint = zPreviousPoint.applying(lastAppliedTransform.inverted())
+        zPath.apply(lastAppliedTransform.inverted())
+        if abs(receivedData) > yAxisBound {
+            yAxisMultiplier = yAxisMultiplier * (yAxisBound / (abs(receivedData) * 1.2))
+            yAxisBound = abs(receivedData) * 1.2
+            let height = self.frame.height
+            lastAppliedTransform = CGAffineTransform(1, 0, 0, yAxisMultiplier, 0, height * ((1 - yAxisMultiplier) / 2))
         }
+        xPreviousPoint = xPreviousPoint.applying(lastAppliedTransform)
+        xPath.apply(lastAppliedTransform)
+        yPreviousPoint = yPreviousPoint.applying(lastAppliedTransform)
+        yPath.apply(lastAppliedTransform)
+        zPreviousPoint = zPreviousPoint.applying(lastAppliedTransform)
+        zPath.apply(lastAppliedTransform)
     }
-    
 }
 
 extension GraphView: Presentable {
@@ -269,7 +240,7 @@ extension GraphView: Presentable {
             self.zPathData.removeAll()
             
             //Path 전부 지우는 경우 Path그릴시 사용했던 트랜스폼도 초기화
-            self.lastAppliedTransform = nil
+            self.lastAppliedTransform = .identity
             
             self.setNeedsDisplay()
         }
