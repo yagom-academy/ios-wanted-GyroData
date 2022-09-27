@@ -148,14 +148,14 @@ extension ListViewController: UITableViewDataSource {
 
 extension ListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // TODO: 세 번째 페이지를 view 타입으로 이동
-        let viewController = UIViewController()
-        navigationController?.pushViewController(viewController, animated: true)
+        let replayViewController = ReplayViewController()
+        navigationController?.pushViewController(replayViewController, animated: true)
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let playAction = UIContextualAction(style: .normal, title: "Play") { action, view, handler in
-            // TODO: 세 번째 페이지를 play 타입으로 이동
+            let replayViewController = ReplayViewController()
+            self.navigationController?.pushViewController(replayViewController, animated: true)
             print("touch Play Button")
         }
         playAction.backgroundColor = .systemGreen

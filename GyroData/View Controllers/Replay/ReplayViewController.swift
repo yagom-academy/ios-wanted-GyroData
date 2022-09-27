@@ -43,22 +43,24 @@ class ReplayViewController: UIViewController {
     lazy var playButton: UIButton = {
         var button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("시작", for: .normal)
-        button.backgroundColor = .black
+        button.addTarget(self, action: #selector(didTapPlayButton), for: .touchUpInside)
+        button.setImage(UIImage.init(named: "play.fill"), for: .normal)
+        button.backgroundColor = .systemBackground
         return button
     }()
     
     lazy var stopButton: UIButton = {
         var button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("정지", for: .normal)
-        button.backgroundColor = .black
+        button.addTarget(self, action: #selector(didTapStopButton), for: .touchUpInside)
+        button.setImage(UIImage.init(named: "stop.fill"), for: .normal)
+        button.backgroundColor = .systemBackground
+        button.isHidden = true
         return button
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         configureNavigation()
         configureViews()
         configureLayout()
@@ -93,10 +95,13 @@ class ReplayViewController: UIViewController {
             graphView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             graphView.heightAnchor.constraint(equalTo: graphView.widthAnchor),
             
-            
+            playButton.widthAnchor.constraint(equalToConstant: 44),
+            playButton.heightAnchor.constraint(equalToConstant: 44),
             playButton.topAnchor.constraint(equalTo: graphView.bottomAnchor, constant: 50),
             playButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
+            stopButton.widthAnchor.constraint(equalToConstant: 44),
+            stopButton.heightAnchor.constraint(equalToConstant: 44),
             stopButton.topAnchor.constraint(equalTo: graphView.bottomAnchor, constant: 50),
             stopButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
@@ -106,12 +111,14 @@ class ReplayViewController: UIViewController {
         
     }
     
+    @objc func didTapPlayButton() {
+        playButton.isHidden = true
+        stopButton.isHidden = false
+    }
+    
+    @objc func didTapStopButton() {
+        stopButton.isHidden = true
+        playButton.isHidden = false
+    }
+    
 }
-
-
-// 1. Date Label
-// 2. Type Label
-// 3. GraphView
-// 4. Play Button
-// 5. Stop Button
-// 6. Play Time Label
