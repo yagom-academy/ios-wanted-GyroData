@@ -24,12 +24,12 @@ class ViewController: UIViewController {
         let button = UIBarButtonItem(title: "측정", style: .plain, target: self, action: #selector(add))
         return button
     }()
-
+    
     private var tableView: UITableView = {
         let tableView = UITableView()
         return tableView
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
@@ -44,7 +44,7 @@ class ViewController: UIViewController {
         DataManager.shared.fetchSave()
         tableView.reloadData()
     }
-    
+    //버튼액션
     @objc func add(_ sender: Any) {
         let secondView = MeasurmentViewController() // 두번째 화면 푸시
         self.navigationController?.pushViewController(secondView, animated: true)
@@ -61,7 +61,7 @@ class ViewController: UIViewController {
         tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
     }
-
+    
     func tableViewDelegate() {
         tableView.delegate = self
         tableView.dataSource = self
@@ -82,14 +82,14 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource, UIScrollVi
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return DataManager.shared.saveList.count
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TableViewCell
         let target = DataManager.shared.saveList[indexPath.row]
         cell.dateLabel.text = formatter.string(for: target.date)
-        cell.nameLabel.text = target.name // "\(target.name!) \(indexPath.row)"
+        cell.nameLabel.text = target.name
         cell.timeLabel.text = String(format: "%.1f", target.time)
-
+        
         return cell
     }
     
@@ -110,9 +110,9 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource, UIScrollVi
             tableView.reloadData()
         })
         actions1.backgroundColor = .systemRed
-    
+        
         let actions2 = UIContextualAction(style: .normal, title: "Play", handler: { action, view, completionHaldler in
-            completionHaldler(true)  // 버튼 클릭시 3번화면 
+            completionHaldler(true)  // 버튼 클릭시 3번화면
             let secondView = ReplayViewController()
             secondView.pageType = "Play"
             secondView.data = DataManager.shared.saveList[indexPath.row]
