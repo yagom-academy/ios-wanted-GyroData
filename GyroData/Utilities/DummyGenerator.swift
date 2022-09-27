@@ -23,7 +23,7 @@ class DummyGenerator {
     
     static func getDummyMotionFile() -> MotionFile {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd-HH:mm:ss"
+        dateFormatter.dateFormat = "yyyy-MM-dd-HH-mm-ss"
         
         let fileName = dateFormatter.string(from: Date(timeIntervalSinceNow: Double.random(in: 0...50000)))
         let type = Int.random(in: 0...1) % 2 == 0 ? "GYRO" : "ACC"
