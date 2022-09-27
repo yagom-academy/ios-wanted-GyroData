@@ -59,7 +59,7 @@ class MotionManager {
         }
     }
     
-    /// 모션값 핸들링을 시작합니다.
+    /// 모션 값 핸들링을 시작합니다.
     func start(type: MotionType, interval: TimeInterval) {
         motionType = type
         switch type {
