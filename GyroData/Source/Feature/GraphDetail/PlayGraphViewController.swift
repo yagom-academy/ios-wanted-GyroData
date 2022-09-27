@@ -33,7 +33,7 @@ class PlayGraphViewController: UIViewController {
     }
     
     func setProperties() {
-        self.title = "다시보기"
+        self.title = motionInfo?.measureTime ?? "다시 보기"
         setLabelValue(x: 0.0, y: 0.0, z: 0.0)
         playGraphView.playButton.addTarget(self, action: #selector(touched), for: .touchUpInside)        
     }
@@ -50,6 +50,9 @@ class PlayGraphViewController: UIViewController {
                 return (motionInfo.motionX[idx], motionInfo.motionY[idx], motionInfo.motionZ[idx])
             }
         }
+
+        timer?.invalidate()
+
         return (0.0, 0.0, 0.0)
     }
 
@@ -68,7 +71,7 @@ class PlayGraphViewController: UIViewController {
                 
                 self.playGraphView.timerLabel.text = String(format:"%4.1f",Double(self.playTime) / 10.0)
                 
-                if  self.playTime >= (self.motionInfo?.motionX.count ?? 0) {
+                if self.playTime >= (self.motionInfo?.motionX.count ?? 0) {
                     timer.invalidate()
                     let playImage = UIImage(systemName: "play.fill")
                     sender.setImage(playImage, for: .normal)

@@ -54,6 +54,20 @@ class PlotView:UIView{
         linePath.lineWidth = 0.7
         linePath.stroke()
 
+        linePath.move(to: CGPoint(x: Constants.margin, y: graphHeight * 0.75 ))
+        linePath.addLine(to: CGPoint(x: graphWidth - Constants.margin, y: graphHeight * 0.75 ))
+
+        linePath.move(to: CGPoint(x: Constants.margin, y: graphHeight * 0.25))
+        linePath.addLine(to: CGPoint(x: graphWidth - Constants.margin, y: graphHeight * 0.25 ))
+
+        linePath.move(to: CGPoint(x: Constants.margin, y: graphHeight * 0.625 ))
+        linePath.addLine(to: CGPoint(x: graphWidth - Constants.margin, y: graphHeight * 0.625 ))
+
+        linePath.move(to: CGPoint(x: Constants.margin, y: graphHeight * 0.375))
+        linePath.addLine(to: CGPoint(x: graphWidth - Constants.margin, y: graphHeight * 0.375 ))
+
+        linePath.lineWidth = 0.2
+        linePath.stroke()
     }
 
 }

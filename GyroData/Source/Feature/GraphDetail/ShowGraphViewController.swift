@@ -27,7 +27,7 @@ class ShowGraphViewController: UIViewController {
     }
     
     func setProperties() {
-        self.title = "다시보기"
+        self.title = motionInfo?.measureTime ?? "다시 보기"
     }
     
     func setMotionInfo(_ motionInfo:MotionInfo){

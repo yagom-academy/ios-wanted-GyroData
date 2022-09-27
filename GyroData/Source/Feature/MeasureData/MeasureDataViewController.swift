@@ -176,7 +176,13 @@ class MeasureDataViewController: UIViewController {
 
     func saveMeasuredData() {
         measureDataView.activityIndicator.startAnimating()
-        
+
+        if measureTime == 0 {
+            setAlert(message: "데이터가 없습니다")
+            measureDataView.activityIndicator.stopAnimating()
+            return
+        }
+
         let motionData = MotionData(context: CoreDataService.shared.context)
         motionData.measureTime = String(Double(measureTime) / 10.0)
         motionData.date = startDate

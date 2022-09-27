@@ -109,7 +109,7 @@ class MeasureDataView: UIView {
     lazy var activityIndicator: UIActivityIndicatorView = {
         let activityIndicator = UIActivityIndicatorView()
         activityIndicator.style = .large
-        activityIndicator.color = .blue
+        activityIndicator.color = .systemBlue
         activityIndicator.layer.zPosition = 1
         return activityIndicator
     }()
@@ -127,9 +127,9 @@ class MeasureDataView: UIView {
     
     func addViews(){
         addSubviews(plotView, containerView, segmentedControl, measureButton, stopButton)
-        containerView.addSubviews(accView, gyroView, xLabel, yLabel, zLabel, maxLabel, minLabel)
+        containerView.addSubviews(accView, gyroView, xLabel, yLabel, zLabel, maxLabel, minLabel, activityIndicator)
         
-        [plotView, containerView, segmentedControl, measureButton, stopButton, accView, gyroView, xLabel, yLabel, zLabel, maxLabel, minLabel].forEach {
+        [plotView, containerView, segmentedControl, measureButton, stopButton, accView, gyroView, xLabel, yLabel, zLabel, maxLabel, minLabel, activityIndicator].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
     }
@@ -144,6 +144,8 @@ class MeasureDataView: UIView {
             containerView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             containerView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.9),
             containerView.heightAnchor.constraint(equalTo: containerView.widthAnchor),
+            activityIndicator.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: containerView.centerYAnchor),
             segmentedControl.bottomAnchor.constraint(equalTo: containerView.topAnchor, constant: -20),
             segmentedControl.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             segmentedControl.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.9),
