@@ -119,7 +119,7 @@ class MeasureDataViewController: UIViewController {
         return view
     }()
     
-    let plot : PlotView = {
+    let plotView : PlotView = {
        let view = PlotView()
         view.backgroundColor = .clear
         return view
@@ -352,25 +352,25 @@ class MeasureDataViewController: UIViewController {
     
     func setProperties() {
         self.title = "측정하기"
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = .systemBackground
         self.navigationItem.setRightBarButton(saveBarButtonItem, animated: true)
     }
     
     func addViews(){
-        view.addSubviews(plot, containerView, segmentedControl, measureButton, stopButton)
+        view.addSubviews(plotView, containerView, segmentedControl, measureButton, stopButton)
         containerView.addSubviews(accView, gyroView, xLabel, yLabel, zLabel, maxLabel, minLabel)
         
-        [plot, containerView, segmentedControl, measureButton, stopButton, accView, gyroView, xLabel, yLabel, zLabel, maxLabel, minLabel].forEach {
+        [plotView, containerView, segmentedControl, measureButton, stopButton, accView, gyroView, xLabel, yLabel, zLabel, maxLabel, minLabel].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
     }
     
     func setConstraints(){
         NSLayoutConstraint.activate([
-            plot.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            plot.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            plot.widthAnchor.constraint(equalTo: containerView.widthAnchor),
-            plot.heightAnchor.constraint(equalTo: plot.widthAnchor),
+            plotView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            plotView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            plotView.widthAnchor.constraint(equalTo: containerView.widthAnchor),
+            plotView.heightAnchor.constraint(equalTo: plotView.widthAnchor),
             containerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             containerView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             containerView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),

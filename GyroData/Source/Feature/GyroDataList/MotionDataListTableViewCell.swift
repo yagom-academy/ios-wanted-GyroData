@@ -21,7 +21,7 @@ class MotionDataListTableViewCell: UITableViewCell {
 
     let dateLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .black
+        label.textColor = .systemColor
         label.font = .systemFont(ofSize: 12, weight: .regular)
         label.text = "2022/09/08 14:50:43"
         return label
@@ -29,7 +29,7 @@ class MotionDataListTableViewCell: UITableViewCell {
     
     let dataTypeLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .black
+        label.textColor = .systemColor
         label.font = .systemFont(ofSize: 18, weight: .bold)
         label.text = "Accelerometer"
         return label
@@ -37,7 +37,7 @@ class MotionDataListTableViewCell: UITableViewCell {
     
     let timeLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .black
+        label.textColor = .systemColor
         label.font = .systemFont(ofSize: 30, weight: .heavy)
         label.text = "43.4"
         return label
@@ -45,7 +45,7 @@ class MotionDataListTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.backgroundColor = .white
+        contentView.backgroundColor = .systemBackground
         setLayouts()
     }
     

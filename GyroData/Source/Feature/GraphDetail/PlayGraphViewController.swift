@@ -17,7 +17,7 @@ class PlayGraphViewController: UIViewController {
     lazy var dateLabel: UILabel = {
         let label = UILabel()
         label.text = motionInfo?.date
-        label.textColor = .black
+        label.textColor = .systemColor
         label.textAlignment = .left
         label.font = .systemFont(ofSize: 13, weight: .regular)
         return label
@@ -26,7 +26,7 @@ class PlayGraphViewController: UIViewController {
     let typeLabel: UILabel = {
         let label = UILabel()
         label.text = "Play"
-        label.textColor = .black
+        label.textColor = .systemColor
         label.textAlignment = .left
         label.font = .systemFont(ofSize: 20, weight: .bold)
         return label
@@ -74,7 +74,7 @@ class PlayGraphViewController: UIViewController {
         let button = UIButton()
         let playImage = UIImage(systemName: "play.fill")
         button.setImage(playImage, for: .normal)
-        button.tintColor = .black
+        button.tintColor = .systemColor
         button.addTarget(self, action: #selector(touched), for: .touchUpInside)
         var config = UIButton.Configuration.plain()
         config.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(pointSize: 40)
@@ -137,6 +137,7 @@ class PlayGraphViewController: UIViewController {
     func setProperties() {
         self.title = "다시보기"
         self.view.backgroundColor = .systemBackground
+        setLabelValue(x: 0.0, y: 0.0, z: 0.0)
     }
     
     func addViews(){

@@ -17,6 +17,7 @@ class MotionDataListViewController: UIViewController {
         tableView.dataSource = self
         tableView.rowHeight = 90
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.backgroundColor = .systemBackground
         return tableView
     }()
     
@@ -42,7 +43,7 @@ class MotionDataListViewController: UIViewController {
     
     func setProperties() {
         self.title = "목록"
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = .systemBackground
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "측정", style: .plain, target: self, action: #selector(goToMeasureDataVC))
     }
     

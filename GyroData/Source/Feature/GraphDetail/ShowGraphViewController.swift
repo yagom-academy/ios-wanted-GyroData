@@ -26,7 +26,7 @@ class ShowGraphViewController: UIViewController {
     lazy var dateLabel: UILabel = {
         let label = UILabel()
         label.text = motionInfo?.date
-        label.textColor = .black
+        label.textColor = .systemColor
         label.textAlignment = .left
         label.font = .systemFont(ofSize: 13, weight: .regular)
         return label
@@ -35,7 +35,7 @@ class ShowGraphViewController: UIViewController {
     let typeLabel: UILabel = {
         let label = UILabel()
         label.text = "View"
-        label.textColor = .black
+        label.textColor = .systemColor
         label.textAlignment = .left
         label.font = .systemFont(ofSize: 20, weight: .bold)
         return label
@@ -75,7 +75,7 @@ class ShowGraphViewController: UIViewController {
     
     func setProperties() {
         self.title = "다시보기"
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = .systemBackground
     }
     
     func addViews(){
@@ -122,9 +122,9 @@ class ShowGraphViewController: UIViewController {
     }
 
     func setLabelValue(){
-        xLabel.text = "x:" + extractMaxValue(motionInfo!.motionX)
-        yLabel.text = "y:" + extractMaxValue(motionInfo!.motionY)
-        zLabel.text = "z:" + extractMaxValue(motionInfo!.motionZ)
+        xLabel.text = "x:" + extractMaxValue(motionInfo?.motionX ?? [])
+        yLabel.text = "y:" + extractMaxValue(motionInfo?.motionY ?? [])
+        zLabel.text = "z:" + extractMaxValue(motionInfo?.motionZ ?? [])
     }
 
 }
