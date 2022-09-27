@@ -47,7 +47,7 @@ class GraphViewMaker {
     /// 그래프 뷰의 Width
     public var graphViewWidth: CGFloat = 300.0
     
-    /// 1개의 데이터가 차지할 width
+    /// 1개의 데이터가 차지할 Width
     private var blockWidth: CGFloat = 0.0
 
     /// 그래프 기준점
