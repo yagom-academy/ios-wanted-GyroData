@@ -63,7 +63,7 @@ class CoreMotionService {
             self.motionManager.gyroUpdateInterval = self.motionInterval
             self.motionManager.startGyroUpdates()
             
-            var timeout = 10
+            var timeout = 600
             
             self.timer = Timer(fire: Date(), interval: 0.1, repeats: true, block: { timer in
                 guard timeout > 0 else {

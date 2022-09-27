@@ -129,7 +129,7 @@ final class MeasureViewController: UIViewController {
     }
     
     private func drawMotionData(data: MotionDetailData) {
-        print(#function, data.date.convertDateFormat(), data.x)
+        graphView.realtimeData.append(data)
     }
     
     @objc
