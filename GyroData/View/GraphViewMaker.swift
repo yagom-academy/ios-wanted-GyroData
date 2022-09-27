@@ -39,11 +39,7 @@ class GraphViewMaker {
     static let shared = GraphViewMaker()
     public var delegate: GraphViewMakerDelegate!
     
-    private init() {
-    }
-    
-    /// Acc, gyro manager
-    private let manager = CMMotionManager()
+    private init() { }
     
     /// 그래프 뷰의 Height
     public let graphViewHeight: CGFloat = 300.0
@@ -59,8 +55,6 @@ class GraphViewMaker {
     
     /// 센서 측정 타이머
     lazy private var timer = Timer()
-//    lazy private var accTimer = Timer()
-//    lazy private var timeoutTimer = Timer()
 
     // 데이터
     private var xData = [Float]()
@@ -83,7 +77,6 @@ class GraphViewMaker {
     // 데이터를 선택할 인덱스
     private var index: Int = 0
     
-    ///
     private var maxIndex: Int = 600
     
     /// 현재 측정 시간 or 재생 시간
@@ -91,9 +84,6 @@ class GraphViewMaker {
     
     /// 총 측정 시간
     private var time: Float = 0.0
-    
-    /// deprecated
-//    private var timeLeft = 600.0
     
     /// 센서 값 타입
     private var name: MotionManager.MotionType = MotionManager.MotionType.acc

@@ -38,6 +38,14 @@ class MeasurmentViewController: UIViewController {
     lazy var backgroundView = graphViewMaker.backgroundView
     lazy var graphView = graphViewMaker.graphView
     
+    lazy var activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+        activityIndicator.center = self.view.center
+        activityIndicator.color = UIColor.gray
+        return activityIndicator
+    }()
+    
     lazy var measurementButton: UIButton = {
         let button = UIButton(type: UIButton.ButtonType.system)
         button.setTitle("측정", for: .normal)
@@ -103,6 +111,9 @@ class MeasurmentViewController: UIViewController {
     }
     
     @objc func saveButtonPressed() {
+        
+        activityIndicator.startAnimating()
+        
         if motionManager.isRunning {
             // 측정 중
             let alert = UIAlertController(title: "측정 중 데이터 저장불가", message: "확인을 눌러주새요.", preferredStyle: UIAlertController.Style.alert)
@@ -117,11 +128,29 @@ class MeasurmentViewController: UIViewController {
                 alert.addAction(cancel)
                 present(alert, animated: true, completion: nil)
             } else {
-                DataManager.shared.addNewSave(name.rawValue, Float(time)!, xData, yData: yData, zData: zData)
-                xData.removeAll(keepingCapacity: false)
-                yData.removeAll(keepingCapacity: false)
-                zData.removeAll(keepingCapacity: false)
-                time = "0.0"
+                if xData.count == 0 || yData.count == 0 || zData.count == 0 {
+                    let alert = UIAlertController(title: "데이터가 존재하지 않습니다.", message: "확인을 눌러주세요.", preferredStyle: UIAlertController.Style.alert)
+                    let cancel = UIAlertAction(title: "확인", style: .default, handler: nil)
+                    alert.addAction(cancel)
+                    present(alert, animated: true, completion: nil)
+                } else {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                        do {
+                            try DataManager.shared.addNewSave(self.name.rawValue, Float(self.time)!, self.xData, yData: self.yData, zData: self.zData)
+                            self.navigationController?.popViewController(animated: true)
+                        } catch let error as NSError {
+                            let alert = UIAlertController(title: "저장 실패", message: "\(error)", preferredStyle: UIAlertController.Style.alert)
+                            let cancel = UIAlertAction(title: "확인", style: .default, handler: nil)
+                            alert.addAction(cancel)
+                            self.present(alert, animated: true, completion: nil)
+                        }
+                        self.xData.removeAll(keepingCapacity: false)
+                        self.yData.removeAll(keepingCapacity: false)
+                        self.zData.removeAll(keepingCapacity: false)
+                        self.time = "0.0"
+                        self.activityIndicator.stopAnimating()
+                    }
+                }
             }
         }
     }
@@ -156,6 +185,7 @@ class MeasurmentViewController: UIViewController {
         view.addSubview(measurementButton)
         view.addSubview(stopButton)
         view.addSubview(backgroundView)
+        view.addSubview(activityIndicator)
         
         backgroundView.addSubview(graphView)
         
