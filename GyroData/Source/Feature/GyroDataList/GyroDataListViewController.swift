@@ -8,33 +8,49 @@
 import UIKit
 import CoreData
 
-class GyroDataListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    let tableView = UITableView()
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    var motionDataArray = [MotionData]()
-    var offset = 0
-    var isLoading = false
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.addSubview(tableView)
+class GyroDataListViewController: UIViewController {
+    
+    lazy var tableView: UITableView = {
+        let tableView = UITableView()
         tableView.register(GyroDataListTableViewCell.self, forCellReuseIdentifier: GyroDataListTableViewCell.identifier)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = 90
         tableView.translatesAutoresizingMaskIntoConstraints = false
-
-        self.title = "목록"
-        self.view.backgroundColor = .white
-
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "측정", style: .plain, target: self, action: #selector(goToMeasureDataVC))
+        return tableView
+    }()
+    
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    var motionDataArray = [MotionData]()
+    var offset = 0
+    var isLoading = false
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setProperties()
+        addViews()
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         fetchData()
     }
-
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        tableView.frame = view.bounds
+    }
+    
+    func setProperties() {
+        self.title = "목록"
+        self.view.backgroundColor = .white
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "측정", style: .plain, target: self, action: #selector(goToMeasureDataVC))
+    }
+    
+    func addViews() {
+        view.addSubview(tableView)
+    }
+    
     func loadMoreData() {
         if !self.isLoading {
             self.isLoading = true
@@ -49,7 +65,7 @@ class GyroDataListViewController: UIViewController, UITableViewDelegate, UITable
             }
         }
     }
-
+    
     func saveData() {
         do {
             try self.context.save()
@@ -57,12 +73,12 @@ class GyroDataListViewController: UIViewController, UITableViewDelegate, UITable
             print(error)
         }
     }
-
+    
     func fetchData() {
         let request: NSFetchRequest<MotionData> = MotionData.fetchRequest()
         request.fetchLimit = 10
         request.fetchOffset = offset
-
+        
         do {
             let nextMotionDataArray = try context.fetch(request)
             if nextMotionDataArray.isEmpty {
@@ -85,18 +101,13 @@ class GyroDataListViewController: UIViewController, UITableViewDelegate, UITable
         }
     }
 
-    //MeasureViewController 로 간다
     @objc fileprivate func goToMeasureDataVC(){
         let measureDataVC = MeasureDataViewController()
         self.navigationController?.pushViewController(measureDataVC, animated: true)
     }
-
-    // tableView Layout
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        tableView.frame = view.bounds
-    }
-
+}
+    
+extension GyroDataListViewController:  UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return motionDataArray.count
     }
@@ -125,13 +136,10 @@ class GyroDataListViewController: UIViewController, UITableViewDelegate, UITable
 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let modity = UIContextualAction(style: .normal, title: "Play") { (UIContextualAction, UIView, success: @escaping (Bool) -> Void) in
-            print("play")
-            let playGyroViewController = PlayGraphViewController()
-
-            guard let motionInfo = FileService.shared.getMotionInfo(name: self.motionDataArray[indexPath.row].date) else { return }
             
+            let playGyroViewController = PlayGraphViewController()
+            guard let motionInfo = FileService.shared.getMotionInfo(name: self.motionDataArray[indexPath.row].date) else { return }
             playGyroViewController.setMotionInfo(motionInfo)
-
             self.navigationController?.pushViewController(playGyroViewController, animated: true)
             success(true)
         }
@@ -143,9 +151,6 @@ class GyroDataListViewController: UIViewController, UITableViewDelegate, UITable
             FileService.shared.deleteJSON(fileName: self.motionDataArray[indexPath.row].date)
             self.context.delete(self.motionDataArray[indexPath.row])
             self.motionDataArray.remove(at: indexPath.row)
-
-            print("delete")
-
             self.saveData()
             self.tableView.reloadData()
 
@@ -164,5 +169,3 @@ class GyroDataListViewController: UIViewController, UITableViewDelegate, UITable
         }
     }
 }
-
-

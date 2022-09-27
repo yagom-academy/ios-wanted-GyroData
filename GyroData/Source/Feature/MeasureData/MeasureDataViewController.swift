@@ -27,31 +27,6 @@ class MeasureDataViewController: UIViewController {
     var startDate = ""
     var dataType = ""
     
-
-    lazy var segmentedControl: UISegmentedControl = {
-      let control = UISegmentedControl(items: ["Acc", "Gyro"])
-        control.selectedSegmentTintColor = .systemBlue
-        control.backgroundColor = .gray
-        control.addTarget(self, action: #selector(segconChange), for: .valueChanged)
-        control.selectedSegmentIndex = 0
-      return control
-    }()
-    
-    @objc func segconChange(_ secong: UISegmentedControl){
-            if secong.selectedSegmentIndex == 0 {
-                containerView.exchangeSubview(at: 0, withSubviewAt: 1)
-                gyroView.isHidden = true
-                accView.isHidden = false
-                setTextsIndicateLabels(max: Constants.accMax, min: -Constants.accMax)
-            } else{
-                containerView.exchangeSubview(at: 1, withSubviewAt: 0)
-                gyroView.isHidden = false
-                accView.isHidden = true
-                setTextsIndicateLabels(max: Constants.gyroMax, min: -Constants.gyroMax)
-            }
-        self.setLabelValue(x: 0.0, y: 0.0, z: 0.0)
-    }
-    
     var isPlaying : Bool = false{
         didSet{
             if isPlaying{
@@ -65,6 +40,15 @@ class MeasureDataViewController: UIViewController {
             }
         }
     }
+    
+    lazy var segmentedControl: UISegmentedControl = {
+      let control = UISegmentedControl(items: ["Acc", "Gyro"])
+        control.selectedSegmentTintColor = .systemBlue
+        control.backgroundColor = .gray
+        control.addTarget(self, action: #selector(segconChange), for: .valueChanged)
+        control.selectedSegmentIndex = 0
+      return control
+    }()
     
     lazy var measureBtn : UIButton = {
         let btn = UIButton()
@@ -97,22 +81,25 @@ class MeasureDataViewController: UIViewController {
         return barButtonItem
     }()
     
-    lazy var xLabel : UILabel = {
+    var xLabel : UILabel = {
         let lbl = UILabel()
         lbl.textColor = .red
         return lbl
     }()
-    lazy var yLabel : UILabel = {
+    
+    var yLabel : UILabel = {
         let lbl = UILabel()
         lbl.textColor = .green
         return lbl
     }()
-    lazy var zLabel : UILabel = {
+    
+    var zLabel : UILabel = {
         let lbl = UILabel()
         lbl.textColor = .blue
         return lbl
     }()
-    lazy var maxLabel : UILabel = {
+    
+    var maxLabel : UILabel = {
         let lbl = UILabel()
         lbl.textColor = .white
         lbl.backgroundColor = .init(white: 0.8, alpha: 1)
@@ -120,7 +107,8 @@ class MeasureDataViewController: UIViewController {
         lbl.layer.masksToBounds = true
         return lbl
     }()
-    lazy var minLabel : UILabel = {
+    
+    var minLabel : UILabel = {
         let lbl = UILabel()
         lbl.textColor = .white
         lbl.backgroundColor = .init(white: 0.2, alpha: 1)
@@ -129,21 +117,18 @@ class MeasureDataViewController: UIViewController {
         return lbl
     }()
     
-    
-    
-    
-    
-    
     let containerView : UIView = {
         let view = UIView()
         view.backgroundColor = .clear
         return view
     }()
+    
     let plot : PlotView = {
        let view = PlotView()
         view.backgroundColor = .clear
         return view
     }()
+    
     lazy var gyroView : Graph = {
         let view = Graph(id: .measure, xPoints: [0.0], yPoints: [0.0], zPoints: [0.0])
         view.backgroundColor = .clear
@@ -156,8 +141,6 @@ class MeasureDataViewController: UIViewController {
         return view
     }()
     
-    
-    
     lazy var activityIndicator: UIActivityIndicatorView = {
         let activityIndicator = UIActivityIndicatorView()
         activityIndicator.style = .large
@@ -165,6 +148,15 @@ class MeasureDataViewController: UIViewController {
         activityIndicator.layer.zPosition = 1
         return activityIndicator
     }()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setProperties()
+        addViews()
+        setConstraints()
+        setLabelValue(x: 0.0, y: 0.0, z: 0.0)
+        setTextsIndicateLabels(max: Constants.accMax, min: -Constants.accMax)
+    }
 
     func initMeasureDatas(type: String) {
         measureTime = 0
@@ -176,7 +168,6 @@ class MeasureDataViewController: UIViewController {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "y-M-d_HH:mm:ss"
         startDate = dateFormatter.string(from: date)
-
     }
 
     func startAccelerometers() {
@@ -200,11 +191,8 @@ class MeasureDataViewController: UIViewController {
                         self.motionYArray.append(y)
                         self.motionZArray.append(z)
              
-
                         self.setLabelValue(x: x, y: y, z: z)
-                        
                         self.accView.getData(x: x, y: y, z: z)
- 
                                                 
                         if abs(x) > max || abs(y) > max || abs(z) > max {
                             self.accView.isOverflow = true
@@ -214,9 +202,7 @@ class MeasureDataViewController: UIViewController {
                         }
                         
                         self.accView.setNeedsDisplay()
-                        
                         self.measureTime += 1
- 
                     }
                 })
                 if let timer = accTimer {
@@ -247,7 +233,6 @@ class MeasureDataViewController: UIViewController {
                         self.motionZArray.append(z)
                         
                         self.setLabelValue(x: x, y: y, z: z)
-                        
                         self.gyroView.getData(x: x, y: y, z: z)
      
                         if abs(x) > max || abs(y) > max || abs(z) > max {
@@ -258,7 +243,6 @@ class MeasureDataViewController: UIViewController {
                         }
                         
                         self.gyroView.setNeedsDisplay()
-                        
                         self.measureTime += 1
                     }
                 })
@@ -334,6 +318,21 @@ class MeasureDataViewController: UIViewController {
         present(alertController, animated: true, completion: nil)
     }
     
+    @objc func segconChange(_ secong: UISegmentedControl){
+            if secong.selectedSegmentIndex == 0 {
+                containerView.exchangeSubview(at: 0, withSubviewAt: 1)
+                gyroView.isHidden = true
+                accView.isHidden = false
+                setTextsIndicateLabels(max: Constants.accMax, min: -Constants.accMax)
+            } else{
+                containerView.exchangeSubview(at: 1, withSubviewAt: 0)
+                gyroView.isHidden = false
+                accView.isHidden = true
+                setTextsIndicateLabels(max: Constants.gyroMax, min: -Constants.gyroMax)
+            }
+        self.setLabelValue(x: 0.0, y: 0.0, z: 0.0)
+    }
+    
     @objc func buttonTapAction(_ sender: UIButton) {
         switch sender {
         case measureBtn:
@@ -360,52 +359,19 @@ class MeasureDataViewController: UIViewController {
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
+    func setProperties() {
         self.title = "측정하기"
         self.view.backgroundColor = .white
         self.navigationItem.setRightBarButton(saveBarButtonItem, animated: true)
-        
-        addViews()
-        
-        setConstraints()
-        
-        setLabelValue(x: 0.0, y: 0.0, z: 0.0)
-        
-        setTextsIndicateLabels(max: Constants.accMax, min: -Constants.accMax)
- 
-        
     }
     
-    
     func addViews(){
+        view.addSubviews(plot, containerView, segmentedControl, measureBtn, stopBtn)
+        containerView.addSubviews(accView, gyroView, xLabel, yLabel, zLabel, maxLabel, minLabel)
         
-        view.addSubview(plot)
-        view.addSubview(containerView)
-        view.addSubview(segmentedControl)
-        view.addSubview(measureBtn)
-        view.addSubview(stopBtn)
-        containerView.addSubview(accView)
-        containerView.addSubview(gyroView)
-        containerView.addSubview(xLabel)
-        containerView.addSubview(yLabel)
-        containerView.addSubview(zLabel)
-        containerView.addSubview(maxLabel)
-        containerView.addSubview(minLabel)
-        
-        plot.translatesAutoresizingMaskIntoConstraints             = false
-        containerView.translatesAutoresizingMaskIntoConstraints    = false
-        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
-        measureBtn.translatesAutoresizingMaskIntoConstraints       = false
-        stopBtn.translatesAutoresizingMaskIntoConstraints          = false
-        accView.translatesAutoresizingMaskIntoConstraints          = false
-        gyroView.translatesAutoresizingMaskIntoConstraints         = false
-        xLabel.translatesAutoresizingMaskIntoConstraints           = false
-        yLabel.translatesAutoresizingMaskIntoConstraints           = false
-        zLabel.translatesAutoresizingMaskIntoConstraints           = false
-        maxLabel.translatesAutoresizingMaskIntoConstraints         = false
-        minLabel.translatesAutoresizingMaskIntoConstraints         = false
+        [plot, containerView, segmentedControl, measureBtn, stopBtn, accView, gyroView, xLabel, yLabel, zLabel, maxLabel, minLabel].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
     }
     
     func setConstraints(){
@@ -456,8 +422,6 @@ class MeasureDataViewController: UIViewController {
         maxLabel.text = " max:" + String(format:"%.2f",max) + " "
         minLabel.text = " min:" + String(format:"%.2f",min) + " "
     }
-
-    
 }
 
 

@@ -24,7 +24,6 @@ class Graph : UIView {
         self.yPoints = [0.0] + yPoints
         self.zPoints = [0.0] + zPoints
         
-        
         super.init(frame: .zero)
     }
     
@@ -51,21 +50,17 @@ class Graph : UIView {
     let zPath = UIBezierPath()
     
     var drawable : Bool = false
-    
     let margin = Constants.margin
-    
     var weight : CGFloat = 10
-    
     var measuredTime = 600
-    
     var elapsedTime = 0
-    
     var isOverflow : Bool = false
     
     lazy var columnXPoint = { (column : Int) -> CGFloat in
         let spacing = (self.frame.width - self.margin * 2) / CGFloat(self.measuredTime)
         return CGFloat(column) * spacing + self.margin   //공백 더해서
     }
+    
     lazy var columnYPoint = { (graphPoint : Double) -> CGFloat in
         let y = CGFloat(graphPoint) * self.weight / CGFloat(Constants.calibration)
         return self.frame.height / 2 - y
@@ -73,9 +68,9 @@ class Graph : UIView {
 
     override func draw(_ rect: CGRect) {
         
-        if id == .show{
+        if id == .show {
             preview()
-        }else{
+        } else {
             if drawable {
                 
                 if isOverflow {

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2D40838C28E29ECB00641176 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D40838B28E29ECB00641176 /* UIView+Extension.swift */; };
+		2D40838E28E29F1800641176 /* UIStackView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D40838D28E29F1800641176 /* UIStackView+Extension.swift */; };
 		2D7F431D28DC52DC004CA619 /* DataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7F431C28DC52DC004CA619 /* DataError.swift */; };
 		336FD3AF28DD419000557464 /* PlotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FD3AE28DD419000557464 /* PlotView.swift */; };
 		336FD3B128DD41D200557464 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FD3B028DD41D200557464 /* Constants.swift */; };
@@ -29,6 +31,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2D40838B28E29ECB00641176 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		2D40838D28E29F1800641176 /* UIStackView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extension.swift"; sourceTree = "<group>"; };
 		2D7F431C28DC52DC004CA619 /* DataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataError.swift; sourceTree = "<group>"; };
 		336FD3AE28DD419000557464 /* PlotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlotView.swift; sourceTree = "<group>"; };
 		336FD3B028DD41D200557464 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -76,7 +80,9 @@
 			isa = PBXGroup;
 			children = (
 				33F4FDA428DAC21900DD82BA /* NSLayoutConstraint+Extension.swift */,
+				2D40838D28E29F1800641176 /* UIStackView+Extension.swift */,
 				336FD3B028DD41D200557464 /* Constants.swift */,
+				2D40838B28E29ECB00641176 /* UIView+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -270,12 +276,14 @@
 				E7370DD028D9DEB300C6D1D6 /* MeasureDataViewController.swift in Sources */,
 				402F398628DAEDE900D4EC69 /* MotionInfo.swift in Sources */,
 				336FD3AF28DD419000557464 /* PlotView.swift in Sources */,
+				2D40838E28E29F1800641176 /* UIStackView+Extension.swift in Sources */,
 				40AAB77228DC1C79002E725F /* FileService.swift in Sources */,
 				336FD3B128DD41D200557464 /* Constants.swift in Sources */,
 				402F398028DAEAD200D4EC69 /* MotionDataModel.xcdatamodeld in Sources */,
 				336FD3B328DD4E4C00557464 /* Graph.swift in Sources */,
 				2D7F431D28DC52DC004CA619 /* DataError.swift in Sources */,
 				33F4FDA528DAC21900DD82BA /* NSLayoutConstraint+Extension.swift in Sources */,
+				2D40838C28E29ECB00641176 /* UIView+Extension.swift in Sources */,
 				402F398428DAEC9500D4EC69 /* MotionData+CoreDataProperties.swift in Sources */,
 				402F398328DAEC9500D4EC69 /* MotionData+CoreDataClass.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,

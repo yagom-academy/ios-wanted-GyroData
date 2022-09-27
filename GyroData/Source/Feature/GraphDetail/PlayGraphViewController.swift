@@ -10,10 +10,9 @@ import UIKit
 class PlayGraphViewController: UIViewController {
     
     var motionInfo : MotionInfo?
-    
-    func setMotionInfo(_ motionInfo:MotionInfo){
-        self.motionInfo = motionInfo
-    }
+    var timer : Timer?
+    var elapsedTime : Double = 0.0
+    var isPlaying : Bool = false
     
     lazy var playView : Graph = {
         let view = Graph(id: .play, xPoints: [0.0], yPoints: [0.0], zPoints: [0.0])
@@ -22,9 +21,6 @@ class PlayGraphViewController: UIViewController {
         return view
     }()
     
-    var timer : Timer?
-    var elapsedTime : Double = 0.0
-    
     let timerLabel : UILabel = {
         let lbl = UILabel()
         lbl.font = .systemFont(ofSize: 30, weight: .heavy)
@@ -32,30 +28,29 @@ class PlayGraphViewController: UIViewController {
         return lbl
     }()
     
-    lazy var xLabel : UILabel = {
+    let xLabel : UILabel = {
         let lbl = UILabel()
         lbl.textColor = .red
         return lbl
     }()
-    lazy var yLabel : UILabel = {
+    
+    let yLabel : UILabel = {
         let lbl = UILabel()
         lbl.textColor = .green
         return lbl
     }()
-    lazy var zLabel : UILabel = {
+    
+    let zLabel : UILabel = {
         let lbl = UILabel()
         lbl.textColor = .blue
         return lbl
     }()
     
     let plot : PlotView = {
-       let view = PlotView()
+        let view = PlotView()
         view.backgroundColor = .clear
         return view
     }()
-
-    
-    var isPlaying : Bool = false
     
     lazy var playBtn : UIButton = {
         let btn = UIButton()
@@ -69,22 +64,20 @@ class PlayGraphViewController: UIViewController {
         return btn
     }()
     
-    @objc func touched(_ sender:UIButton){
+    @objc func touched(_ sender:UIButton) {
         isPlaying.toggle()
-        if isPlaying{
+        if isPlaying {
             
             let img = UIImage(systemName: "stop.fill")
             sender.setImage(img, for: .normal)
-
+            
             playView.erase()
             playView.drawable = true
             
-            
             //MARK: - 타이머 코드 추가
-            timer = Timer(timeInterval: 0.1, repeats: true){ (timer) in
-                                
+            timer = Timer(timeInterval: 0.1, repeats: true) { (timer) in
+                
                 let elapsedTime = self.playView.elapsedTime
-                               
                 self.timerLabel.text = String(format:"%5.1f",Double(elapsedTime) / 10 + 0.1)
                 
                 if  elapsedTime >= (self.motionInfo?.motionX.count)! - 1{
@@ -94,21 +87,15 @@ class PlayGraphViewController: UIViewController {
                 }
                 
                 let (x,y,z) = self.extractMotionInfo(self.motionInfo, at: elapsedTime)
-
                 self.playView.getData(x: x, y: y, z: z)
-
                 self.setLabelValue(x: x, y: y, z: z)
-                
                 self.playView.setNeedsDisplay()
-                
-       
             }
+            
             if let timer = timer {
                 RunLoop.current.add(timer, forMode: .default)
             }
-
-        }else{
-            //playView.pauseAnimation()
+        } else {
             let img = UIImage(systemName: "play.fill")
             sender.setImage(img, for: .normal)
             timer?.invalidate()
@@ -119,30 +106,26 @@ class PlayGraphViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "다시보기"
-        self.view.backgroundColor = .systemBackground
-
+        setProperties()
         addViews()
-        
         setConstraints()
     }
     
+    func setMotionInfo(_ motionInfo:MotionInfo){
+        self.motionInfo = motionInfo
+    }
+    
+    func setProperties() {
+        self.title = "다시보기"
+        self.view.backgroundColor = .systemBackground
+    }
+    
     func addViews(){
-        view.addSubview(plot)
-        view.addSubview(playView)
-        view.addSubview(playBtn)
-        view.addSubview(timerLabel)
-        view.addSubview(xLabel)
-        view.addSubview(yLabel)
-        view.addSubview(zLabel)
+        view.addSubviews(plot, playView, playBtn, timerLabel, xLabel, yLabel, zLabel)
         
-        plot.translatesAutoresizingMaskIntoConstraints = false
-        playView.translatesAutoresizingMaskIntoConstraints = false
-        playBtn.translatesAutoresizingMaskIntoConstraints = false
-        timerLabel.translatesAutoresizingMaskIntoConstraints = false
-        xLabel.translatesAutoresizingMaskIntoConstraints = false
-        yLabel.translatesAutoresizingMaskIntoConstraints = false
-        zLabel.translatesAutoresizingMaskIntoConstraints = false
+        [plot, playView, playBtn, timerLabel, xLabel, yLabel, zLabel].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
     }
     
     func setConstraints(){
@@ -157,7 +140,6 @@ class PlayGraphViewController: UIViewController {
             playView.heightAnchor.constraint(equalTo: playView.widthAnchor),
             playBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             playBtn.topAnchor.constraint(equalTo: playView.bottomAnchor, constant: 30),
-            //MARK: - 시간 표시 레이블 추가
             timerLabel.trailingAnchor.constraint(equalTo: playView.trailingAnchor),
             timerLabel.centerYAnchor.constraint(equalTo: playBtn.centerYAnchor),
             timerLabel.widthAnchor.constraint(equalTo: playView.widthAnchor).constraintWithMultiplier(0.25),
@@ -182,3 +164,4 @@ class PlayGraphViewController: UIViewController {
         }
         return (0.0, 0.0, 0.0)
     }
+}

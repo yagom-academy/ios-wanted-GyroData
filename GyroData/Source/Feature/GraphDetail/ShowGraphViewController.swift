@@ -9,31 +9,63 @@ import UIKit
 
 class ShowGraphViewController: UIViewController {
 
+    var motionInfo : MotionInfo?
+    
+    lazy var reviewView : Graph = {
+        let xPoints = motionInfo!.motionX
+        let yPoints = motionInfo!.motionY
+        let zPoints = motionInfo!.motionZ
+        let view = Graph(id: .show, xPoints: xPoints, yPoints: yPoints, zPoints: zPoints)
+
+        view.drawable = true
+        view.measuredTime = (motionInfo?.motionX.count)!
+        view.backgroundColor = .clear
+        return view
+    }()
+    
+    let xLabel : UILabel = {
+        let lbl = UILabel()
+        lbl.textColor = .red
+        return lbl
+    }()
+    
+    let yLabel : UILabel = {
+        let lbl = UILabel()
+        lbl.textColor = .green
+        return lbl
+    }()
+    
+    let zLabel : UILabel = {
+        let lbl = UILabel()
+        lbl.textColor = .blue
+        return lbl
+    }()
+    
+    let plot : PlotView = {
+       let view = PlotView()
+        view.backgroundColor = .clear
+        return view
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        setProperties()
+        addViews()
+        setConstraints()
+        setLabelValue()
+    }
+    
+    func setProperties() {
         self.title = "다시보기"
         self.view.backgroundColor = .white
-        
-        addViews()
-        
-        setConstraints()
-
-        setLabelValue()
-
     }
     
     func addViews(){
-        view.addSubview(plot)
-        view.addSubview(reviewView)
-        view.addSubview(xLabel)
-        view.addSubview(yLabel)
-        view.addSubview(zLabel)
+        view.addSubviews(plot, reviewView, xLabel, yLabel, zLabel)
         
-        plot.translatesAutoresizingMaskIntoConstraints = false
-        reviewView.translatesAutoresizingMaskIntoConstraints = false
-        xLabel.translatesAutoresizingMaskIntoConstraints = false
-        yLabel.translatesAutoresizingMaskIntoConstraints = false
-        zLabel.translatesAutoresizingMaskIntoConstraints = false
+        [plot, reviewView, xLabel, yLabel, zLabel].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
     }
     
     func setConstraints(){
@@ -54,8 +86,6 @@ class ShowGraphViewController: UIViewController {
             zLabel.topAnchor.constraint(equalTo: plot.topAnchor)
         ])
     }
-
-    var motionInfo : MotionInfo?
     
     func setMotionInfo(_ motionInfo:MotionInfo){
         self.motionInfo = motionInfo
@@ -67,38 +97,6 @@ class ShowGraphViewController: UIViewController {
         return String(format:"%.2f", abs(positiveMax) > abs(negativeMax) ? positiveMax : negativeMax )
     }
 
-    lazy var reviewView : Graph = {
-        let xPoints = motionInfo!.motionX
-        let yPoints = motionInfo!.motionY
-        let zPoints = motionInfo!.motionZ
-        let view = Graph(id: .show, xPoints: xPoints, yPoints: yPoints, zPoints: zPoints)
-
-        view.drawable = true
-        view.measuredTime = (motionInfo?.motionX.count)!
-        view.backgroundColor = .clear
-        return view
-    }()
-    lazy var xLabel : UILabel = {
-        let lbl = UILabel()
-        lbl.textColor = .red
-        return lbl
-    }()
-    lazy var yLabel : UILabel = {
-        let lbl = UILabel()
-        lbl.textColor = .green
-        return lbl
-    }()
-    lazy var zLabel : UILabel = {
-        let lbl = UILabel()
-        lbl.textColor = .blue
-        return lbl
-    }()
-    let plot : PlotView = {
-       let view = PlotView()
-        view.backgroundColor = .clear
-        return view
-    }()
-    
     func setLabelValue(){
         xLabel.text = "x:" + extractMaxValue(motionInfo!.motionX)
         yLabel.text = "y:" + extractMaxValue(motionInfo!.motionY)

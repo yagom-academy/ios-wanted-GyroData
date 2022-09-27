@@ -54,15 +54,13 @@ class GyroDataListTableViewCell: UITableViewCell {
     }
     
     private func setLayouts() {
-        setViewHierarchy()
+        addViews()
         setConstraints()
     }
     
-    private func setViewHierarchy() {
-        contentView.addSubview(leftStackView)
-        contentView.addSubview(timeLabel)
-        leftStackView.addArrangedSubview(dateLabel)
-        leftStackView.addArrangedSubview(dataTypeLabel)
+    private func addViews() {
+        contentView.addSubviews(leftStackView, timeLabel)
+        leftStackView.addArrangedSubviews(dateLabel, dataTypeLabel)
     }
     
     private func setConstraints() {
