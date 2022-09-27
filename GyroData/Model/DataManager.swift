@@ -9,7 +9,7 @@ import Foundation
 import CoreData
 
 class DataManager {
-    
+    //타입 프로퍼티
     static let shared = DataManager()
     
     private init() { }
@@ -22,7 +22,7 @@ class DataManager {
         return persistentContainer.viewContext
     }
     
-    // 데이터 저장
+    //데이터 베이스에서 데이터를 읽어오고 리쿼스트 만들기
     func fetchSave() {
         if isFetching {
             print("isFetching...")
