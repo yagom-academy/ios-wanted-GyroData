@@ -292,7 +292,7 @@ extension GraphView: Presentable {
     }
     
     func configureView() {
-        self.backgroundColor = .black
+        self.backgroundColor = .clear
         xPath.lineWidth = 1 //default
         yPath.lineWidth = 1 //default
         zPath.lineWidth = 1 //default

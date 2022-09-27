@@ -12,6 +12,7 @@ class ThirdViewController: UIViewController, ThirdViewControllerRoutable, ThirdV
     lazy var infoView = ThirdInfoView(viewModel: self.viewModel.infoViewModel)
     var backButton = UIBarButtonItem()
     lazy var graphView = GraphView(viewModel: self.viewModel.graphViewModel)
+    lazy var gridView = GridView()
     lazy var controlView = ThirdControlView(viewModel: self.viewModel.controlViewModel)
     
     // MARK: Properties
@@ -44,10 +45,12 @@ extension ThirdViewController: Presentable {
     func initViewHierarchy() {
         self.view = UIView()
         view.addSubview(infoView)
+        view.addSubview(gridView)
         view.addSubview(graphView)
         view.addSubview(controlView)
         
         infoView.translatesAutoresizingMaskIntoConstraints = false
+        gridView.translatesAutoresizingMaskIntoConstraints = false
         graphView.translatesAutoresizingMaskIntoConstraints = false
         controlView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -61,11 +64,19 @@ extension ThirdViewController: Presentable {
         ]
         
         constraints += [
+            gridView.topAnchor.constraint(equalTo: infoView.bottomAnchor, constant: 32),
+            gridView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            gridView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            gridView.heightAnchor.constraint(equalTo: gridView.widthAnchor),
+        ]
+        
+        constraints += [
             graphView.topAnchor.constraint(equalTo: infoView.bottomAnchor, constant: 32),
             graphView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             graphView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             graphView.heightAnchor.constraint(equalTo: graphView.widthAnchor),
         ]
+        
         constraints += [
             controlView.topAnchor.constraint(equalTo: graphView.bottomAnchor),
             controlView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),

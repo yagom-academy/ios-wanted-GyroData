@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		368AB9FD28E30721000A9E22 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368AB9FC28E30721000A9E22 /* GridView.swift */; };
+		368AB9FF28E31F72000A9E22 /* LineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368AB9FE28E31F72000A9E22 /* LineView.swift */; };
 		3695B0BD28D99CA100FF93FD /* SecondViewSegementedControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3695B0BC28D99CA100FF93FD /* SecondViewSegementedControlView.swift */; };
 		3695B0C728D9AA0700FF93FD /* SecondViewControllerRoutable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3695B0C628D9AA0700FF93FD /* SecondViewControllerRoutable.swift */; };
 		36C67A8D28DAD9BC006F34CE /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C67A8C28DAD9BC006F34CE /* GraphView.swift */; };
@@ -81,6 +83,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		368AB9FC28E30721000A9E22 /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
+		368AB9FE28E31F72000A9E22 /* LineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineView.swift; sourceTree = "<group>"; };
 		3695B0BC28D99CA100FF93FD /* SecondViewSegementedControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewSegementedControlView.swift; sourceTree = "<group>"; };
 		3695B0C628D9AA0700FF93FD /* SecondViewControllerRoutable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewControllerRoutable.swift; sourceTree = "<group>"; };
 		36C67A8C28DAD9BC006F34CE /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
@@ -199,12 +203,14 @@
 			path = ThridVCRelated;
 			sourceTree = "<group>";
 		};
-		36C67A8B28DAD9A8006F34CE /* GraphView */ = {
+		36C67A8B28DAD9A8006F34CE /* GraphViewRelated */ = {
 			isa = PBXGroup;
 			children = (
 				36C67A8C28DAD9BC006F34CE /* GraphView.swift */,
+				368AB9FC28E30721000A9E22 /* GridView.swift */,
+				368AB9FE28E31F72000A9E22 /* LineView.swift */,
 			);
-			path = GraphView;
+			path = GraphViewRelated;
 			sourceTree = "<group>";
 		};
 		36CFA23C28E1728300C623E9 /* GraphViewRelated */ = {
@@ -226,6 +232,7 @@
 		36E1FCA428D97A7F00EB7E4F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				36C67A8B28DAD9A8006F34CE /* GraphViewRelated */,
 				3695B0BA28D99C6B00FF93FD /* FirstVCRelated */,
 				3695B0BB28D99C7800FF93FD /* SecondVCRelated */,
 				3695B0C828D9AB1600FF93FD /* ThridVCRelated */,
@@ -368,7 +375,6 @@
 		63F01BB328D44FC400C53A39 /* GyroData */ = {
 			isa = PBXGroup;
 			children = (
-				36C67A8B28DAD9A8006F34CE /* GraphView */,
 				63F01BB428D44FC400C53A39 /* AppDelegate.swift */,
 				63F01BB628D44FC400C53A39 /* SceneDelegate.swift */,
 				36E1FCA428D97A7F00EB7E4F /* Views */,
@@ -504,6 +510,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				368AB9FF28E31F72000A9E22 /* LineView.swift in Sources */,
 				46E21EC728DC5F1500593210 /* FirstListViewModel.swift in Sources */,
 				36C67A8D28DAD9BC006F34CE /* GraphView.swift in Sources */,
 				36FB64F928D8CD1700A87587 /* SceneContext.swift in Sources */,
@@ -523,6 +530,7 @@
 				64FE265F28E145A600BCC5D7 /* FirstLoadingCellContentViewModel.swift in Sources */,
 				B07EFEFF28E16FEC0058E0DD /* SecondHoveringIndicatorView.swift in Sources */,
 				36E1FCAC28D97CC000EB7E4F /* FirstListCell.swift in Sources */,
+				368AB9FD28E30721000A9E22 /* GridView.swift in Sources */,
 				36CFA23E28E1729900C623E9 /* GraphViewModel.swift in Sources */,
 				36FB64FE28D8CF0500A87587 /* Styling.swift in Sources */,
 				B019E7FD28DBECF5009BC86F /* ThirdControlView.swift in Sources */,
