@@ -195,6 +195,7 @@ class ReplayViewController: UIViewController {
     // MARK: - #selector
     @objc func backButtonTap(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
+        self.navigationController?.navigationBar.isHidden = false
     }
     
     @objc func playButtonTap(_ sender: UIButton) {
@@ -230,6 +231,3 @@ class ReplayViewController: UIViewController {
         playButton.setImage(image, for: .normal)
     }
 }
-
-
-

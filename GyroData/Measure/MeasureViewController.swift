@@ -63,6 +63,7 @@ class MeasureViewController: UIViewController {
     
     // MARK: incomplete
     @objc func saveButtonClicked() {
+        self.navigationController?.popViewController(animated: true)
         saveMeasureDataAsJSON()
     }
     

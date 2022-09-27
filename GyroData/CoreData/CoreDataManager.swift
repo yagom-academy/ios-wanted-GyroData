@@ -9,8 +9,9 @@ import CoreData
 import UIKit
 
 class CoreDataManager {
-    
+    var datasoooooo = [GyroModel]()
     static var shared: CoreDataManager = CoreDataManager()
+    
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     let request: NSFetchRequest<GyroModel> = GyroModel.fetchRequest()
@@ -25,6 +26,26 @@ class CoreDataManager {
         return container
     }()
    
+//    func fetchSave() {
+//        let request = NSFetchRequest<GyroModel>(entityName: "GyroModel")
+//
+//        var fetchOffset = 0
+//        request.fetchOffset = fetchOffset
+//        request.fetchLimit = 10
+//        do{
+//            var users: [GyroModel] = try! context.fetch(request)
+//            print("🐤🐤🐤🐤🐤🐤🐤🐤\(users.count)")
+//            while users.count > 0{
+//                fetchOffset = fetchOffset + users.count
+//                request.fetchOffset = fetchOffset
+//                users = try! context.fetch(request)
+//                print("🙈🙈🙈🙈🙈🙈🙈\(users.count)")
+//            }
+//        }
+    
+    
+    
+    
     var context: NSManagedObjectContext {
         return self.persistentContainer.viewContext
     }
@@ -42,8 +63,32 @@ class CoreDataManager {
             return []
         }
     }
- 
-    
+    func fetchTen(count:Int) -> [GyroModel] {
+        do {
+            var fetchOffset = 0
+            request.fetchLimit = 10
+            request.fetchOffset = count
+            fetchOffset = fetchOffset + request.fetchOffset
+            let fetchdata = try self.context.fetch(request)
+//            print("🐤🐤🐤🐤🐤🐤🐤🐤\(fetchdata.count)")
+            return fetchdata
+        } catch {
+            print(error.localizedDescription)
+            return []
+        }
+    }
+    func fetchTen1(offset:Int) -> [GyroModel] {
+        do {
+            request.fetchLimit = 10
+            request.fetchOffset = offset
+            let fetchdata = try self.context.fetch(request)
+            print("\(request.fetchOffset)🥝🥝🥝현재 데이터: \(fetchdata.count)")
+            return fetchdata
+        } catch {
+            print(error.localizedDescription)
+            return []
+        }
+    }
     
     @discardableResult
     func insertMeasure(measure: Measure) -> Bool {
@@ -100,5 +145,4 @@ class CoreDataManager {
             return nil
         }
     }
-        
 }

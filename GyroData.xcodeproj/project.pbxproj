@@ -29,6 +29,7 @@
 		6CFBD85428DEF2A4002380A4 /* GyroModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6CFBD85228DEF2A4002380A4 /* GyroModel.xcdatamodeld */; };
 		6CFBD85628DEF2D0002380A4 /* Measure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CFBD85528DEF2D0002380A4 /* Measure.swift */; };
 		6CFBD87B28DEF375002380A4 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CFBD87A28DEF375002380A4 /* CoreDataManager.swift */; };
+		D3A0B4ED28DBE99A009ACF94 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A0B4EC28DBE99A009ACF94 /* CustomTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +56,7 @@
 		6CFBD85328DEF2A4002380A4 /* GyroModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GyroModel.xcdatamodel; sourceTree = "<group>"; };
 		6CFBD85528DEF2D0002380A4 /* Measure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Measure.swift; sourceTree = "<group>"; };
 		6CFBD87A28DEF375002380A4 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		D3A0B4EC28DBE99A009ACF94 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				63F01BB828D44FC400C53A39 /* MainViewController.swift */,
+				D3A0B4EC28DBE99A009ACF94 /* CustomTableViewCell.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -288,6 +291,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6CFBD85628DEF2D0002380A4 /* Measure.swift in Sources */,
+				D3A0B4ED28DBE99A009ACF94 /* CustomTableViewCell.swift in Sources */,
 				63F01BB928D44FC400C53A39 /* MainViewController.swift in Sources */,
 				6C67A2EA28DADAFA00DE6704 /* UIView+Extenstion.swift in Sources */,
 				0B15BAF828DAE6A500AC20E6 /* MeasureView.swift in Sources */,
@@ -442,19 +446,21 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2PC84U64N2;
+				DEVELOPMENT_TEAM = KFG37AXT2Q;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GyroData/Info.plist;
+				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.GyroData;
+				PRODUCT_BUNDLE_IDENTIFIER = kr.co.hyunsu.zzzz111;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -472,10 +478,13 @@
 				DEVELOPMENT_TEAM = 2PC84U64N2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GyroData/Info.plist;
+				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				"IPHONEOS_DEPLOYMENT_TARGET[sdk=iphoneos*]" = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
