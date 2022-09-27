@@ -112,7 +112,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource, UIScrollVi
         actions1.backgroundColor = .systemRed
     
         let actions2 = UIContextualAction(style: .normal, title: "Play", handler: { action, view, completionHaldler in
-            completionHaldler(true)
+            completionHaldler(true)  // 버튼 클릭시 3번화면 
             let secondView = ReplayViewController()
             secondView.pageType = "Play"
             secondView.data = DataManager.shared.saveList[indexPath.row]
