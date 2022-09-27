@@ -74,7 +74,7 @@ class ReplayViewController: UIViewController {
         return label
     }()
     
-    /// 센서 기록을 측정한 시간
+    /// 센서 기록을 측정한 시간 
     lazy var timestampLabel: UILabel = {
         let label = CommonUIModule().creatLabel(text: "", color: .black, alignment: .left, fontSize: 15, fontWeight: .regular)
         return label
