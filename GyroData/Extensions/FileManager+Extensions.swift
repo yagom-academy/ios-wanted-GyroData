@@ -9,22 +9,44 @@ import Foundation
 
 extension FileManager {
     
-    // 공통 Path 는 Repository 에서 관리해야할까?
-    // Directory 가 없을 때 만들어줘야 한다 -> AppDelegate?
+    enum FileManagerError: Error {
+        case directoryError
+        case fetchError
+        case incodeError
+        case insertError
+        case decodeError
+        case deleteError
+    }
     
-    func createDirectory() {
+    func createDirectory() throws {
         let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         let directoryURL = documentsURL.appendingPathComponent("MotionData")
         
         do {
             try FileManager.default.createDirectory(at: directoryURL, withIntermediateDirectories: false, attributes: nil)
-        } catch let e {
-            print(e.localizedDescription)
+        } catch {
+            throw FileManagerError.directoryError
+        }
+    }
+    
+    func loadMotionFile(name: String) async throws -> MotionFile {
+        let documentURL = self.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        let directoryURL = documentURL.appendingPathComponent("MotionData")
+        let fileURL = directoryURL.appendingPathComponent("\(name).json")
+        
+        guard FileManager.default.fileExists(atPath: "\(fileURL)") else { throw FileManagerError.directoryError }
+        
+        do {
+            let jsonDecoder = JSONDecoder()
+            let jsonData = try Data(contentsOf: fileURL, options: .mappedIfSafe)
+            let decodeJson = try jsonDecoder.decode(MotionFile.self, from: jsonData)
+            return decodeJson
+        } catch {
+            throw FileManagerError.decodeError
         }
     }
 
     func saveMotionFile(file: MotionFile) {
-        // TO-DO : Refactor - directory
         let documentURL = self.urls(for: .documentDirectory, in: .userDomainMask)[0]
         let directoryURL = documentURL.appendingPathComponent("MotionData")
         let fileURL = directoryURL.appendingPathComponent("\(file.fileName).json")
@@ -45,26 +67,8 @@ extension FileManager {
         }
     }
     
-    func loadMotionFile(name: String) -> MotionFile? {
-        // TO-DO : Refactor - directory
-        let documentURL = self.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        let directoryURL = documentURL.appendingPathComponent("MotionData")
-        let fileURL = directoryURL.appendingPathComponent("\(name).json")
-        
-        do {
-            let jsonDecoder = JSONDecoder()
-            let jsonData = try Data(contentsOf: fileURL, options: .mappedIfSafe)
-            let decodeJson = try jsonDecoder.decode(MotionFile.self, from: jsonData)
-            return decodeJson
-        } catch {
-            print(error)
-            return nil
-        }
-    }
-    
     @discardableResult
     func removeMotionFile(name: String) -> Error? {
-        // TO-DO : Refactor - directory
         let documentURL = self.urls(for: .documentDirectory, in: .userDomainMask)[0]
         let directoryURL = documentURL.appendingPathComponent("MotionData")
         let fileURL = directoryURL.appendingPathComponent("\(name).json")

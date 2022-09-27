@@ -19,8 +19,9 @@ protocol CoreDataRepositoryProtocol {
 }
 
 protocol FileManagerRepositoryProtocol {
-    func fetchFromFileManager(completion: @escaping ([MotionFile]) -> Void)
-    func saveToFileManager(file: MotionFile)
+    func fetchFromFileManager() async throws -> MotionFile
+    func saveToFileManager(file: MotionFile) async throws
+    func deleteFromFileManager(file: MotionFile) async throws
 }
 
 //이 클래스가 들고 있는 어떠한 클래스가 자이로 데이터를 계산, 갱신 하게 하고
@@ -55,3 +56,15 @@ extension Repository: CoreDataRepositoryProtocol {
         return result
     }
 }
+
+//extension Repository: FileManagerRepositoryProtocol {
+//    func fetchFromFileManager() async throws -> MotionFile {
+//        <#code#>
+//    }
+//    
+//    func saveToFileManager(file: MotionFile) async throws {
+//        FileManager.default.
+//    }
+//    
+//    func
+//}
