@@ -232,6 +232,8 @@ class MeasurmentViewController: UIViewController {
     }
 }
 
+//MARK: Extension
+
 extension MeasurmentViewController: MotionManagerDelegate {
     func motionValueDidUpdate(data: MotionManager.MotionValue, interval: TimeInterval) {
         graphViewMaker.draw(data: data, interval: interval)
