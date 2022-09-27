@@ -44,7 +44,6 @@ class MainViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
     }
-   
     
     //네비바 추가
     private func addNaviBar() {
@@ -58,16 +57,14 @@ class MainViewController: UIViewController {
         let MeasureView = MeasureViewController()
         self.navigationController?.pushViewController(MeasureView, animated: true)
         tableView.reloadData()
-        //        loadData()
-        //
     }
     //실행시 기존데이터 로드
     private func loadData() {
 //                manager.fetch()
 //        manager.fetchTen(offset: 0)
-//        datasource.append(contentsOf: manager.fetchTen1(offset: datasource.count))
-//        print("데이터소스 카운트\(datasource.count)")
         datasource.append(contentsOf: manager.fetchTen1(offset: datasource.count))
+//        print("데이터소스 카운트\(datasource.count)")
+//        datasource.append(contentsOf: manager.fetchTen1(offset: datasource.count))
 //        print("데이터소스 카운트\(datasource.count)")
         tableView.reloadData()
     }
@@ -78,10 +75,9 @@ extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         //테이블셀이 10개일때 데이터를 10개불러오는곳??
 //        let fetchData = manager.fetchTen(count: count)
-//        print("111indexPath: \(indexPath.row) datasource.count: \(datasource.count)")
+        print("111indexPath: \(indexPath.row) datasource.count: \(datasource.count)")
         guard indexPath.row == manager.fetchTen1(offset: datasource.count).count - 1 else {return}
-     
-//            loadData()
+        print("ddjsjsjdsdsdss🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅")
             //        count += fetchData.count
             datasource.append(contentsOf: manager.fetchTen1(offset: datasource.count))
         tableView.reloadData()
@@ -105,7 +101,7 @@ extension MainViewController: UITableViewDataSource {
         }
         
         func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-            return 75
+            return 90
         }
         
         //SwipeAction
@@ -122,10 +118,8 @@ extension MainViewController: UITableViewDataSource {
             // 코어데이터 제거
             let deleteAction = UIContextualAction(style: .normal, title: "Delete") { (UIContextualAction, UIView, success: @escaping (Bool) -> Void) in
                 print("delete 클릭 됨")
-//                self.manager.delete(object: self.datasource[indexPath.row])
-                self.manager.delete(object: self.datasource.remove(at: [indexPath.row].count))
-                // self.manager.deleteAll()
-//                self.manager.delete(object: self.datasource[indexPath.row])
+                self.manager.delete(object: self.datasource[indexPath.row])
+                self.datasource.remove(at: indexPath.row)
                 tableView.reloadData()
                 success(true)
             }
