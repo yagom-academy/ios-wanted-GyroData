@@ -96,7 +96,7 @@ class MeasurmentViewController: UIViewController {
         configure()
     }
 
-    /// 측정을 위한 타이머 실행
+    /// 측정을 위한 타이머 실행 
     @objc func measurementPressed() {
         graphViewMaker.graphViewWidth = graphView.bounds.width - 10
         if motionManager.isRunning {
