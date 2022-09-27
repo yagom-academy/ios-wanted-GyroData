@@ -86,12 +86,14 @@ class ThirdModel {
     private func fetchMotionMeasures() async {
         do {
             let motionFile = try await repository.fetchFromFileManager(fileName: _motion.path)
+            var motionMeasure = [MotionMeasure]()
             motionFile.x_axis.indices.forEach { index in
                 let x = Double(motionFile.x_axis[index])
                 let y = Double(motionFile.y_axis[index])
                 let z = Double(motionFile.z_axis[index])
-                self._motionMeasure.append(MotionMeasure(x: x, y: y, z: z))
+                motionMeasure.append(MotionMeasure(x: x, y: y, z: z))
             }
+            self._motionMeasure = motionMeasure
         } catch let error {
             let okAction = AlertActionDependency(title: "확인")
             let alertDependancy = AlertDependency(title: nil, message: error.localizedDescription, preferredStyle: .alert, actionSet: [okAction])
