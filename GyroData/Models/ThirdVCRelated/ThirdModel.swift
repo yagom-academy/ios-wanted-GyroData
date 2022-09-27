@@ -38,10 +38,16 @@ class ThirdModel {
         }
     }
     
-    private var _motionMeasure = [MotionMeasure]()
+    private var _motionMeasure = [MotionMeasure]() {
+        didSet {
+            guard _viewType == .view else { return }
+            graphViewModel.didReceiveWholePacketData(_motionMeasure)
+        }
+    }
     
     private var _currentTime: Float = 0 {
         didSet {
+            guard _viewType == .play else { return }
             let length = Int(_currentTime * 10)
             graphViewModel.didReceiveTickData(Array(_motionMeasure.prefix(length)))
         }
@@ -72,8 +78,6 @@ class ThirdModel {
                 guard let self else { return }
                 self._currentTime = currentTime
             }
-        } else {
-            self._currentTime = Float(_motionMeasure.count) * 0.1
         }
     }
     
