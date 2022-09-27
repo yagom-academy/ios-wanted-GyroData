@@ -142,8 +142,7 @@ final class MeasureViewController: UIViewController {
     @objc
     private func didTapSaveButton() {
         guard let motionData = coreMotionService.motionData else {
-            // TODO: alert controller
-            print("저장 실패, 측정된 데이터 없음")
+            presentAlertController(title: "저장실패", message: "측정된 데이터가 없습니다.")
             return
         }
         changeButtonsState()
@@ -153,12 +152,10 @@ final class MeasureViewController: UIViewController {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 self.activityIndicator.stopAnimating()
                 guard let error = error else {
-                    // FIXME: self.dismiss(animated: true)
                     self.navigationController?.popViewController(animated: true)
                     return
                 }
-                // 잘 저장X -> 저장 실패 alert controller
-                print("저장실패", error.localizedDescription)
+                self.presentAlertController(title: "저장실패", message: error.localizedDescription)
             }
         }
     }

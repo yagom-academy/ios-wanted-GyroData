@@ -25,6 +25,7 @@
 		D81A76D328DF2FA100C6F17B /* ReplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81A76D228DF2FA100C6F17B /* ReplayViewController.swift */; };
 		FD67510828DEF51200262248 /* MeasureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD67510728DEF51200262248 /* MeasureViewController.swift */; };
 		FDC50A1628DD9957006F6C6D /* FileManagerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC50A1528DD9957006F6C6D /* FileManagerService.swift */; };
+		FDE2BA6A28E33935008A8012 /* UIViewController+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE2BA6928E33935008A8012 /* UIViewController+Utils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		D81A76D228DF2FA100C6F17B /* ReplayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReplayViewController.swift; sourceTree = "<group>"; };
 		FD67510728DEF51200262248 /* MeasureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureViewController.swift; sourceTree = "<group>"; };
 		FDC50A1528DD9957006F6C6D /* FileManagerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerService.swift; sourceTree = "<group>"; };
+		FDE2BA6928E33935008A8012 /* UIViewController+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Utils.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +174,7 @@
 				5DF8463A28E2FFAB0040E44A /* CoreDataStack.swift */,
 				5DBBB73628E29BA300AAF165 /* CoreDataService.swift */,
 				5DF8463828E2F66A0040E44A /* Date+Utils.swift */,
+				FDE2BA6928E33935008A8012 /* UIViewController+Utils.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -248,6 +251,7 @@
 			files = (
 				63F01BB928D44FC400C53A39 /* ListViewController.swift in Sources */,
 				5DBBB73728E29BA300AAF165 /* CoreDataService.swift in Sources */,
+				FDE2BA6A28E33935008A8012 /* UIViewController+Utils.swift in Sources */,
 				D81A76D328DF2FA100C6F17B /* ReplayViewController.swift in Sources */,
 				C1207E8328D98712003D14F5 /* ListCell.swift in Sources */,
 				C1831DF128E005E600E7167D /* CoreMotionService.swift in Sources */,
