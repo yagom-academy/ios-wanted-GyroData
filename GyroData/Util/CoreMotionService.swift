@@ -12,7 +12,7 @@ class CoreMotionService {
     private let motionManager = CMMotionManager()
     private let motionInterval = 6 / 60.0
     private var timer: Timer?
-    
+    private var motionDataItems: [MotionDetailData] = []
     private var completion: (() -> Void)? = nil
     
     // MARK: - startMotion

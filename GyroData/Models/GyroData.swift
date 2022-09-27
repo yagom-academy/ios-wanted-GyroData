@@ -7,15 +7,19 @@
 
 import Foundation
 
-struct GyroData {
+struct GyroData: Codable {
     /// 측정 날짜
     let date: Date
     /// 측정 단위
     let type: Unit
     /// 측정 값
-    let value: Double
+    var lastTick: TimeInterval? {
+        return items.last?.tick
+    }
+    
+    var items: [MotionDetailData] = []
 
-    enum Unit: String {
+    enum Unit: String, Codable {
         case acc = "Accelerometer"
         case gyro = "Gyro"
     }
@@ -30,7 +34,7 @@ extension GyroData {
 }
 
 struct MotionDetailData: Codable {
-    let date: Date
+    let tick: TimeInterval
     let x: Double
     let y: Double
     let z: Double

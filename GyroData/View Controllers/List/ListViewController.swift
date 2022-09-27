@@ -33,6 +33,7 @@ final class ListViewController: UIViewController {
 
         configureNavigation()
         configureLayout()
+        
     }
     
     private func configureNavigation() {
