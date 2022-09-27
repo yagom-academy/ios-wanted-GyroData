@@ -104,6 +104,7 @@ class SecondModel {
             let type = self.segmentViewModel.selectedType
             do {
                 self._motionMeasures = []
+                self.graphViewModel.didReceiveRemoveAll()
                 try self.motionManager.startUpdate(type)
                 self._lastMeasuredType = type
                 self._isMeasuring = true
