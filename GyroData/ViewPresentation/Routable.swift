@@ -24,8 +24,6 @@ protocol Routable {
 //뷰컨트롤러가 dismiss될 수 있다
 protocol SceneDismissable {
     func dismissScene(animated: Bool, completion: (() -> Void)?)
-    func dismissSceneAndRefresh(sceneToRefresh: SceneCategory, animated: Bool, completion: (() -> Void)?)
-    func findSceneToRefresh()
 }
 
 //SceneDismissable이 뷰컨트롤러라면 그냥 일반적인 dismiss를 한다
