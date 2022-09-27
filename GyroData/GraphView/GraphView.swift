@@ -59,6 +59,11 @@ import CoreGraphics
    x y z 중 하나의 값이라도 없다면 재생을 멈춤
  */
 
+enum DrawMode {
+    case tick
+    case whole
+}
+
 class GraphView: UIView {
     
     //input
@@ -68,6 +73,7 @@ class GraphView: UIView {
     
     //properties
     var viewModel: GraphViewModel = GraphViewModel()
+    var drawMode: DrawMode = DrawMode.tick
     
     //Point Properties for calculating Path's Position
     
@@ -121,59 +127,122 @@ class GraphView: UIView {
     // TODO: 일단 path.close는 "path"를 완전히 다 그렸을 시 close 해줘야 하는 듯 하다. UIGraphicCurrentContext가 close해줘야 하는 것처럼
     //그런데 현 시점 기준으로는 close를 부르나 부르지 않으나 효과가 똑같다.
     //언제 path.close를 확실히 불러줘야 하는지에 대한 검증이 필요해 보인다.
+    
+    //이 부분은 1틱씩 데이터가 들어올때만을 가정해서 구현된 것이다.
+    //만약 추가 처리를 한 다면 이 부분에 대한 수정이 필요해 보인다
     func drawXpath() {
-        guard let receivedData = viewModel.dataSource.last?.xValue else { return }
-        
-        xPath.move(to: xPreviousPoint)
-        
-        xNewPoint = CGPoint(x: xPreviousPoint.x + xInterval, y: middlePoint.y + receivedData)
-        // 이전 Path들에게 이미 적용된 Transform이 있다면 newPoint에도 해당 Transform을 적용시킨 뒤 선을 그려줘야 합니다. - Eric
-        xNewPoint = xNewPoint.applying(lastAppliedTransform)
-        xPath.addLine(to: xNewPoint)
-        
-        xPreviousPoint = xNewPoint
-        
-        reCalculateScale(receivedData)
-        
-        UIColor.red.setStroke()
-        xPath.stroke()
-        xPathData.append(xPreviousPoint)
+        if drawMode == .tick {
+            guard let receivedData = viewModel.dataSource.last?.xValue else { return }
+            
+            xPath.move(to: xPreviousPoint)
+            
+            xNewPoint = CGPoint(x: xPreviousPoint.x + xInterval, y: middlePoint.y + receivedData)
+            // 이전 Path들에게 이미 적용된 Transform이 있다면 newPoint에도 해당 Transform을 적용시킨 뒤 선을 그려줘야 합니다. - Eric
+            xNewPoint = xNewPoint.applying(lastAppliedTransform)
+            xPath.addLine(to: xNewPoint)
+            
+            xPreviousPoint = xNewPoint
+            
+            reCalculateScale(receivedData)
+            
+            UIColor.red.setStroke()
+            xPath.stroke()
+            xPathData.append(xPreviousPoint)
+        } else if drawMode == .whole {
+            for receivedData in viewModel.dataSource {
+                xPath.move(to: xPreviousPoint)
+                
+                xNewPoint = CGPoint(x: xPreviousPoint.x + xInterval, y: middlePoint.y + receivedData.xValue)
+                // 이전 Path들에게 이미 적용된 Transform이 있다면 newPoint에도 해당 Transform을 적용시킨 뒤 선을 그려줘야 합니다. - Eric
+                xNewPoint = xNewPoint.applying(lastAppliedTransform)
+                xPath.addLine(to: xNewPoint)
+                
+                xPreviousPoint = xNewPoint
+                
+                reCalculateScale(receivedData.xValue)
+                
+                UIColor.red.setStroke()
+                xPath.stroke()
+                xPathData.append(xPreviousPoint)
+            }
+        }
     }
     
+    //이 부분은 1틱씩 데이터가 들어올때만을 가정해서 구현된 것이다.
+    //만약 추가 처리를 한 다면 이 부분에 대한 수정이 필요해 보인다
     func drawYpath() {
-        guard let receivedData = viewModel.dataSource.last?.yValue else { return }
-        
-        yPath.move(to: yPreviousPoint)
-        
-        yNewPoint = CGPoint(x: yPreviousPoint.x + xInterval, y: middlePoint.y + receivedData)
-        yNewPoint = yNewPoint.applying(lastAppliedTransform)
-        yPath.addLine(to: yNewPoint)
-        
-        yPreviousPoint = yNewPoint
-        
-        reCalculateScale(receivedData)
-        
-        UIColor.green.setStroke()
-        yPath.stroke()
-        yPathData.append(yPreviousPoint)
+        if drawMode == .tick {
+            guard let receivedData = viewModel.dataSource.last?.yValue else { return }
+            
+            yPath.move(to: yPreviousPoint)
+            
+            yNewPoint = CGPoint(x: yPreviousPoint.x + xInterval, y: middlePoint.y + receivedData)
+            yNewPoint = yNewPoint.applying(lastAppliedTransform)
+            yPath.addLine(to: yNewPoint)
+            
+            yPreviousPoint = yNewPoint
+            
+            reCalculateScale(receivedData)
+            
+            UIColor.green.setStroke()
+            yPath.stroke()
+            yPathData.append(yPreviousPoint)
+        } else if drawMode == .whole {
+            for receivedData in viewModel.dataSource {
+                yPath.move(to: yPreviousPoint)
+                
+                yNewPoint = CGPoint(x: yPreviousPoint.x + xInterval, y: middlePoint.y + receivedData.yValue)
+                yNewPoint = yNewPoint.applying(lastAppliedTransform)
+                yPath.addLine(to: yNewPoint)
+                
+                yPreviousPoint = yNewPoint
+                
+                reCalculateScale(receivedData.yValue)
+                
+                UIColor.green.setStroke()
+                yPath.stroke()
+                yPathData.append(yPreviousPoint)
+            }
+        }
     }
     
+    //이 부분은 1틱씩 데이터가 들어올때만을 가정해서 구현된 것이다.
+    //만약 추가 처리를 한 다면 이 부분에 대한 수정이 필요해 보인다
     func drawZpath() {
-        guard let receivedData = viewModel.dataSource.last?.zValue else { return }
         
-        zPath.move(to: zPreviousPoint)
-        
-        zNewPoint = CGPoint(x: zPreviousPoint.x + xInterval, y: middlePoint.y + receivedData)
-        zNewPoint = zNewPoint.applying(lastAppliedTransform)
-        zPath.addLine(to: zNewPoint)
-        
-        zPreviousPoint = zNewPoint
-        
-        reCalculateScale(receivedData)
-        
-        UIColor.blue.setStroke()
-        zPath.stroke()
-        zPathData.append(zPreviousPoint)
+        if drawMode == .tick {
+            guard let receivedData = viewModel.dataSource.last?.zValue else { return }
+            
+            zPath.move(to: zPreviousPoint)
+            
+            zNewPoint = CGPoint(x: zPreviousPoint.x + xInterval, y: middlePoint.y + receivedData)
+            zNewPoint = zNewPoint.applying(lastAppliedTransform)
+            zPath.addLine(to: zNewPoint)
+            
+            zPreviousPoint = zNewPoint
+            
+            reCalculateScale(receivedData)
+            
+            UIColor.blue.setStroke()
+            zPath.stroke()
+            zPathData.append(zPreviousPoint)
+        } else if drawMode == .whole {
+            for receivedData in viewModel.dataSource {
+                zPath.move(to: zPreviousPoint)
+                
+                zNewPoint = CGPoint(x: zPreviousPoint.x + xInterval, y: middlePoint.y + receivedData.zValue)
+                zNewPoint = zNewPoint.applying(lastAppliedTransform)
+                zPath.addLine(to: zNewPoint)
+                
+                zPreviousPoint = zNewPoint
+                
+                reCalculateScale(receivedData.zValue)
+                
+                UIColor.blue.setStroke()
+                zPath.stroke()
+                zPathData.append(zPreviousPoint)
+            }
+        }
     }
     
     func reCalculateScale(_ receivedData: CGFloat) {
@@ -213,9 +282,16 @@ extension GraphView: Presentable {
     func bind() {
         
         //드로잉을 위한 데이터소스 변경, 붙이기, 삭제 등 비즈니스 로직
-        viewModel.populateData = { [weak self] in
+        viewModel.populateTickData = { [weak self] in
+            self?.drawMode = .tick
             self?.setNeedsDisplay() //그 다음에 얘를 호출 호출하면
             //다음 드로잉 사이클에 오버라이드한 draw가 불리게 될 것임
+        }
+        
+        viewModel.populateWholePacketData = { [weak self] in
+            guard let self = self else { return }
+            self.drawMode = .whole
+            self.setNeedsDisplay()
         }
 
         viewModel.populateRemoveAll = { [weak self] in
