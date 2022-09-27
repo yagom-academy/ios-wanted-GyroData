@@ -79,7 +79,7 @@ class DataManager {
         newSave.xData = xData as NSObject
         newSave.yData = yData as NSObject
         newSave.zData = zData as NSObject
-        saveList.insert(newSave, at: 0)
+        saveList.insert(newSave, at: 0)  // 데이터 생성시 업데이트
         saveContext()
     }
     

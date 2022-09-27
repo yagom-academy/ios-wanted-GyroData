@@ -94,7 +94,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource, UIScrollVi
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let secondView = ReplayViewController()
+        let secondView = ReplayViewController() // 3번째 화면 넘김
         secondView.pageType = "View"
         secondView.data = DataManager.shared.saveList[indexPath.row]
         self.navigationController?.pushViewController(secondView, animated: true)
