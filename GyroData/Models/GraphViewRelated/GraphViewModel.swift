@@ -10,7 +10,8 @@ import Foundation
 class GraphViewModel {
     
     //input
-    var didReceiveData: ([MotionMeasure]) -> () = { measure in }
+    var didReceiveTickData: ([MotionMeasure]) -> () = { measure in } //데이터가 한 틱씩 들어오는 경우. ex. 실시간측정 + playType
+    var didReceiveWholePacketData: ([MotionMeasure]) -> () = { measure in } //한번에 모든 데이터가 들어오는 경우. ex. viewType
     var didReceiveRemoveAll = { }
     
     //output
@@ -18,7 +19,7 @@ class GraphViewModel {
         return privateDataSource
     }
     
-    var populateData: () -> () = { }
+    var populateTickData: () -> () = { }
     var populateRemoveAll = { }
     
     //properties
@@ -29,11 +30,18 @@ class GraphViewModel {
     }
     
     func bind() {
-        didReceiveData = { [weak self] measure in
+        //ThirdModel의 ViewType을 GraphViewModel이 알고 있는 것은 좋지 못한 발상으로 보인다.
+        //GraphViewModel은 인터페이스만 뚫어놓고 그 인터페이스의 사용 여부는 ThirdModel, SecondModel이 알아서 결정하게 해야 한다
+        didReceiveTickData = { [weak self] measure in
             guard let calculatedValue = self?.calculateValue(value: measure) else { return }
             
             self?.privateDataSource = calculatedValue
-            self?.populateData()
+            self?.populateTickData()
+        }
+        
+        didReceiveWholePacketData = { [weak self] measure in
+            guard let calculatedValue = self?.calculateValue(value: measure) else { return }
+            self?.privateDataSource = calculatedValue
         }
         
         didReceiveRemoveAll = { [weak self] in

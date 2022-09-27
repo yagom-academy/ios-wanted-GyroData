@@ -42,7 +42,7 @@ class SecondModel {
     
     private var _motionMeasures = [MotionMeasure]() {
         didSet {
-            graphViewModel.didReceiveData(_motionMeasures)
+            graphViewModel.didReceiveTickData(_motionMeasures)
             motionMeasuresSource(_motionMeasures)
         }
     }

@@ -43,7 +43,7 @@ class ThirdModel {
     private var _currentTime: Float = 0 {
         didSet {
             let length = Int(_currentTime * 10)
-            graphViewModel.didReceiveData(Array(_motionMeasure.prefix(length)))
+            graphViewModel.didReceiveTickData(Array(_motionMeasure.prefix(length)))
         }
     }
     

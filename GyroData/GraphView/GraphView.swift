@@ -121,6 +121,9 @@ class GraphView: UIView {
     // TODO: 일단 path.close는 "path"를 완전히 다 그렸을 시 close 해줘야 하는 듯 하다. UIGraphicCurrentContext가 close해줘야 하는 것처럼
     //그런데 현 시점 기준으로는 close를 부르나 부르지 않으나 효과가 똑같다.
     //언제 path.close를 확실히 불러줘야 하는지에 대한 검증이 필요해 보인다.
+    
+    //이 부분은 1틱씩 데이터가 들어올때만을 가정해서 구현된 것이다.
+    //만약 추가 처리를 한 다면 이 부분에 대한 수정이 필요해 보인다
     func drawXpath() {
         guard let receivedData = viewModel.dataSource.last?.xValue else { return }
         
@@ -140,6 +143,8 @@ class GraphView: UIView {
         xPathData.append(xPreviousPoint)
     }
     
+    //이 부분은 1틱씩 데이터가 들어올때만을 가정해서 구현된 것이다.
+    //만약 추가 처리를 한 다면 이 부분에 대한 수정이 필요해 보인다
     func drawYpath() {
         guard let receivedData = viewModel.dataSource.last?.yValue else { return }
         
@@ -158,6 +163,8 @@ class GraphView: UIView {
         yPathData.append(yPreviousPoint)
     }
     
+    //이 부분은 1틱씩 데이터가 들어올때만을 가정해서 구현된 것이다.
+    //만약 추가 처리를 한 다면 이 부분에 대한 수정이 필요해 보인다
     func drawZpath() {
         guard let receivedData = viewModel.dataSource.last?.zValue else { return }
         
@@ -213,7 +220,7 @@ extension GraphView: Presentable {
     func bind() {
         
         //드로잉을 위한 데이터소스 변경, 붙이기, 삭제 등 비즈니스 로직
-        viewModel.populateData = { [weak self] in
+        viewModel.populateTickData = { [weak self] in
             self?.setNeedsDisplay() //그 다음에 얘를 호출 호출하면
             //다음 드로잉 사이클에 오버라이드한 draw가 불리게 될 것임
         }
