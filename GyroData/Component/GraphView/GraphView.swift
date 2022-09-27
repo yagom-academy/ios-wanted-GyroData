@@ -9,8 +9,8 @@ import UIKit
 
 class GraphView: UIView {
     
-    public var maxValue: CGFloat = 20
-    public var minValue: CGFloat = -20
+    public var maxValue: CGFloat = 5
+    public var minValue: CGFloat = -5
     var graphSwipeAnimation = false
     var graphData: [GyroJson] = []
     var viewTypeIsPlay: PageType?

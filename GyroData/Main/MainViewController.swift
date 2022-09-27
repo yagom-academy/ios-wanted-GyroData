@@ -33,6 +33,7 @@ class MainViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadData()
+        tableView.reloadData()
     }
     
     private func setupView() {
@@ -93,8 +94,11 @@ extension MainViewController: UITableViewDataSource {
         let playAction = UIContextualAction(style: .normal, title:"Play"){ (UIContextualAction, UIView, success: @escaping (Bool) -> Void) in
             print("paly 클릭 됨")
             
-            let ReplayViewController = ReplayViewController()
-            self.navigationController?.pushViewController(ReplayViewController, animated: true)
+            let vc = ReplayViewController()
+            let data = self.datasource[indexPath.row]
+            vc.pageTypeName = .play
+            vc.measureData = data
+            self.navigationController?.pushViewController(vc, animated: true)
             success(true)
         }
         

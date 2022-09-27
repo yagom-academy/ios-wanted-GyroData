@@ -145,7 +145,7 @@ class ReplayViewController: UIViewController {
         
         self.graphView.snp.makeConstraints {
             $0.top.equalTo(self.stateLabel.snp.bottom).offset(30)
-            $0.height.equalTo(300)
+            $0.height.equalTo(graphView.snp.width)
             $0.leading.trailing.equalToSuperview().inset(30)
         }
         

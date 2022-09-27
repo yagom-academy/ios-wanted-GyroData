@@ -101,8 +101,6 @@ class MeasureViewController: UIViewController {
     }
     
     @objc func measureButtonClicked() {
-        graphView.maxValue = 1
-        graphView.minValue = -1
         mainView.stopButton.isEnabled = true
         mainView.measureButton.isEnabled = false
         mainView.segmentControl.isEnabled = false
