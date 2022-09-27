@@ -87,7 +87,7 @@ extension ListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
         let object = coreDataService.fetchedResultsController.object(at: indexPath)
-        if let recordDate = object.date?.dateString {
+        if let recordDate = object.date {
             let replayViewController = ReplayViewController()
             replayViewController.type = .view
             replayViewController.recordDate = recordDate
@@ -99,7 +99,7 @@ extension ListViewController: UITableViewDelegate {
         let object = coreDataService.fetchedResultsController.object(at: indexPath)
         let playAction = UIContextualAction(style: .normal, title: "Play") { action, view, handler in
             let object = self.coreDataService.fetchedResultsController.object(at: indexPath)
-            if let recordDate = object.date?.dateString {
+            if let recordDate = object.date {
                 let replayViewController = ReplayViewController()
                 replayViewController.type = .replay
                 replayViewController.recordDate = recordDate

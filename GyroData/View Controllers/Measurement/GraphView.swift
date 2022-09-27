@@ -22,6 +22,12 @@ class GraphView: UIView {
         }
     }
     
+    var storedData: [MotionDetailData] = [] {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -73,33 +79,58 @@ class GraphView: UIView {
         let xPath = UIBezierPath()
         let yPath = UIBezierPath()
         let zPath = UIBezierPath()
-        xPath.lineWidth = 3
-        yPath.lineWidth = 3
-        zPath.lineWidth = 3
 
-        if realtimeData.count > 1 {
-            let oldData = realtimeData[realtimeData.count - 2]
-            xPath.move(to: CGPoint(x: xPosition - timeInterval, y: height / 2 + oldData.x * 10))
-            yPath.move(to: CGPoint(x: xPosition - timeInterval, y: height / 2 + oldData.y * 10))
-            zPath.move(to: CGPoint(x: xPosition - timeInterval, y: height / 2 + oldData.z * 10))
-        } else {
+        if realtimeData.isEmpty == false {
+            if realtimeData.count > 1 {
+                let oldData = realtimeData[realtimeData.count - 2]
+                xPath.move(to: CGPoint(x: xPosition - timeInterval, y: height / 2 + oldData.x * 10))
+                yPath.move(to: CGPoint(x: xPosition - timeInterval, y: height / 2 + oldData.y * 10))
+                zPath.move(to: CGPoint(x: xPosition - timeInterval, y: height / 2 + oldData.z * 10))
+            } else {
+                xPath.move(to: CGPoint(x: 0, y: height / 2))
+                yPath.move(to: CGPoint(x: 0, y: height / 2))
+                zPath.move(to: CGPoint(x: 0, y: height / 2))
+            }
+            
+            guard let newData = realtimeData.last else { return }
+            UIColor.systemRed.withAlphaComponent(0.7).set()
+            xPath.addLine(to: CGPoint(x: xPosition, y: height / 2 + newData.x * 10))
+            xPath.stroke()
+            
+            UIColor.systemGreen.withAlphaComponent(0.7).set()
+            yPath.addLine(to: CGPoint(x: xPosition, y: height / 2 + newData.y * 10))
+            yPath.stroke()
+            
+            UIColor.systemBlue.withAlphaComponent(0.7).set()
+            zPath.addLine(to: CGPoint(x: xPosition, y: height / 2 + newData.z * 10))
+            zPath.stroke()
+            
+            print(#function, xPath.currentPoint, yPath.currentPoint, zPath.currentPoint)
+            
+        } else if storedData.isEmpty == false {
             xPath.move(to: CGPoint(x: 0, y: height / 2))
             yPath.move(to: CGPoint(x: 0, y: height / 2))
             zPath.move(to: CGPoint(x: 0, y: height / 2))
+            
+            for (index, newData) in storedData.enumerated() {
+                UIColor.systemRed.withAlphaComponent(0.7).set()
+                xPath.move(to: xPath.currentPoint)
+                xPath.addLine(to: CGPoint(x: timeInterval * Double(index), y: height / 2 + newData.x * 10))
+                xPath.stroke()
+                
+                UIColor.systemGreen.withAlphaComponent(0.7).set()
+                yPath.move(to: yPath.currentPoint)
+                yPath.addLine(to: CGPoint(x: timeInterval * Double(index), y: height / 2 + newData.y * 10))
+                yPath.stroke()
+                
+                UIColor.systemBlue.withAlphaComponent(0.7).set()
+                zPath.move(to: zPath.currentPoint)
+                zPath.addLine(to: CGPoint(x: timeInterval * Double(index), y: height / 2 + newData.z * 10))
+                zPath.stroke()
+                
+                print(#function, xPath.currentPoint, yPath.currentPoint, zPath.currentPoint)
+            }
         }
-
-        guard let newData = realtimeData.last else { return }
-        UIColor.systemRed.set()
-        xPath.addLine(to: CGPoint(x: xPosition, y: height / 2 + newData.x * 10))
-        xPath.stroke()
-
-        UIColor.systemGreen.set()
-        yPath.addLine(to: CGPoint(x: xPosition, y: height / 2 + newData.y * 10))
-        yPath.stroke()
-
-        UIColor.systemBlue.set()
-        zPath.addLine(to: CGPoint(x: xPosition, y: height / 2 + newData.z * 10))
-        zPath.stroke()
         
         path.append(xPath)
         path.append(yPath)

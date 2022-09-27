@@ -139,7 +139,9 @@ final class MeasureViewController: UIViewController {
     }
     
     private func drawMotionData(data: MotionDetailData) {
-        graphView.realtimeData.append(data)
+        DispatchQueue.main.async {
+            self.graphView.realtimeData.append(data)
+        }
     }
     
     @objc

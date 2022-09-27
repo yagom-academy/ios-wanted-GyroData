@@ -13,7 +13,7 @@ class ReplayViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 15)
-        label.text = self.recordDate
+        label.text = self.recordDate?.dateString ?? ""
         return label
     }()
     
@@ -68,13 +68,79 @@ class ReplayViewController: UIViewController {
     }()
     
     var type: ReplayType? = nil
-    var recordDate: String? = nil
+    var recordDate: Date? = nil
+    var isPlaying = false
+    private let fileManager = FileManagerService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavigation()
         configureViews()
         configureLayout()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if type == .view {
+            readMotionDataWithView()
+        }
+    }
+    
+    private func readMotionDataWithView() {
+        DispatchQueue.global().async {
+            if let date = self.recordDate {
+                self.fileManager.read(with: date) { result in
+                    switch result {
+                    case .success(let success):
+                        DispatchQueue.main.async {
+                            self.graphView.storedData = success.items
+                        }
+                    case .failure(let failure):
+                        print(failure)
+                    }
+                }
+            }
+        }
+    }
+    
+    var motionItems: [MotionDetailData]?
+    private func readMotionDataWithPlay() {
+        DispatchQueue.global().async {
+            if self.motionItems != nil {
+                self.drawGraphViewWithPlay()
+            } else {
+                if let date = self.recordDate {
+                    self.fileManager.read(with: date) { result in
+                        switch result {
+                        case .success(let success):
+                            self.motionItems = success.items
+                            self.drawGraphViewWithPlay()
+                        case .failure(let failure):
+                            print(failure)
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    private func drawGraphViewWithPlay() {
+        if let motionItems = self.motionItems {
+            for item in motionItems {
+                if isPlaying == false { break }
+                DispatchQueue.main.async {
+                    self.playTimeLabel.text = item.tick.description
+                    self.graphView.realtimeData.append(item)
+                }
+                usleep(100000)
+            }
+            DispatchQueue.main.async {
+                self.playButton.isHidden = false
+                self.stopButton.isHidden = true
+                self.isPlaying = false
+            }
+        }
     }
     
     private func configureViews() {
@@ -123,11 +189,15 @@ class ReplayViewController: UIViewController {
     @objc func didTapPlayButton() {
         playButton.isHidden = true
         stopButton.isHidden = false
+        isPlaying = true
+        
+        self.graphView.realtimeData.removeAll()
+        readMotionDataWithPlay()
     }
     
     @objc func didTapStopButton() {
         stopButton.isHidden = true
         playButton.isHidden = false
+        isPlaying = false
     }
-    
 }

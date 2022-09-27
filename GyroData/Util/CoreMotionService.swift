@@ -38,7 +38,7 @@ class CoreMotionService {
             var timeout = 0
 
             timer = Timer(timeInterval: interval, repeats: true, block: { timer in
-                guard timeout < 20 else { // TODO: 600
+                guard timeout < 600 else {
                     self.stopMeasurement(of: .acc)
                     return
                 }
@@ -68,7 +68,7 @@ class CoreMotionService {
             var timeout = 0
 
             self.timer = Timer(timeInterval: interval, repeats: true, block: { timer in
-                guard timeout < 20 else { // TODO: 600
+                guard timeout < 600 else {
                     self.stopMeasurement(of: .gyro)
                     return
                 }
