@@ -110,6 +110,7 @@ final class MeasureViewController: UIViewController {
     
     @objc
     private func didTapMeasureButton() {
+        graphView.realtimeData.removeAll()
         self.coreMotionService.startMeasurement(of: MotionType(rawValue: segmentControl.selectedSegmentIndex) ?? .acc,
                                                 completion: { self.changeButtonsState() },
                                                 resultCompletion: { data in self.drawMotionData(data: data) }
