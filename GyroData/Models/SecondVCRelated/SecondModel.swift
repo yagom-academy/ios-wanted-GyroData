@@ -87,18 +87,8 @@ class SecondModel {
                 self.routeSubject(.alert(alertDependancy))
                 return
             }
-            self._isLoading = true
-            // TODO: 저장 로직 추가..
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                self._isLoading = false
-                
-                let okAction = AlertActionDependency(title: "확인") { _ in
-                    let context = SceneContext(dependency: FirstSceneAction.refresh)
-                    self.routeSubject(.closeWithAction(.main(.firstViewControllerWithAction(context: context))))
-                }
-                
-                let alertDependancy = AlertDependency(title: nil, message: "저장이 완료되었습니다.", preferredStyle: .alert, actionSet: [okAction])
-                self.routeSubject(.alert(alertDependancy))
+            Task {
+                await self.saveMotionMeasures()
             }
         }
         
@@ -139,6 +129,32 @@ class SecondModel {
             else { return }
             self._motionMeasures.append(MotionMeasure(data))
             debugPrint(MotionMeasure(data))
+        }
+    }
+    
+    @MainActor
+    func saveMotionMeasures() async {
+        do {
+            self._isLoading = true
+            // TODO: FileManager 저장 로직을 넣고, 그 값을 path에 넣어야합니다.
+            let motionTask = MotionTask(
+                type: segmentViewModel.selectedType.rawValue,
+                time: Float(_motionMeasures.count) * 0.1,
+                date: Date(),
+                path: "")
+            _ = try await self.repository.insertToCoreData(motion: motionTask)
+            self._isLoading = false
+            let okAction = AlertActionDependency(title: "확인") { _ in
+                let context = SceneContext(dependency: FirstSceneAction.refresh)
+                self.routeSubject(.closeWithAction(.main(.firstViewControllerWithAction(context: context))))
+            }
+            let alertDependancy = AlertDependency(title: nil, message: "저장이 완료되었습니다.", preferredStyle: .alert, actionSet: [okAction])
+            self.routeSubject(.alert(alertDependancy))
+        } catch let error {
+            self._isLoading = false
+            let okAction = AlertActionDependency(title: "확인")
+            let alertDependancy = AlertDependency(title: nil, message: error.localizedDescription, preferredStyle: .alert, actionSet: [okAction])
+            self.routeSubject(.alert(alertDependancy))
         }
     }
 }
