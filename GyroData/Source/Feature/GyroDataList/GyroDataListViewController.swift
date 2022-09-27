@@ -142,7 +142,7 @@ extension GyroDataListViewController:  UITableViewDelegate, UITableViewDataSourc
             self.motionDataArray.remove(at: indexPath.row)
             CoreDataService.shared.saveContext()
             self.tableView.reloadData()
-
+            self.offset -= 1
             success(true)
         }
         delete.backgroundColor = .systemRed

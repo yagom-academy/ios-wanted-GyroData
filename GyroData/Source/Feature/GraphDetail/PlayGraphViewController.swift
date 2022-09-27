@@ -42,7 +42,7 @@ class PlayGraphViewController: UIViewController {
     let timerLabel : UILabel = {
         let lbl = UILabel()
         lbl.font = .systemFont(ofSize: 30, weight: .heavy)
-        lbl.text = "00.0"
+        lbl.text = "0.0"
         return lbl
     }()
     
@@ -97,9 +97,9 @@ class PlayGraphViewController: UIViewController {
             timer = Timer(timeInterval: 0.1, repeats: true) { (timer) in
                 
                 let elapsedTime = self.playView.elapsedTime
-                self.timerLabel.text = String(format:"%5.1f",Double(elapsedTime) / 10 + 0.1)
+                self.timerLabel.text = String(format:"%5.1f",Double(elapsedTime) / 10)
                 
-                if  elapsedTime >= (self.motionInfo?.motionX.count ?? 0) - 1{
+                if  elapsedTime > (self.motionInfo?.motionX.count ?? 0) - 1{
                     timer.invalidate()
                     let img = UIImage(systemName: "play.fill")
                     sender.setImage(img, for: .normal)

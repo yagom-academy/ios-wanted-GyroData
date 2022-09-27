@@ -52,7 +52,7 @@ class Graph : UIView {
     var drawable : Bool = false
     let margin = Constants.margin
     var weight : CGFloat = 10
-    var measuredTime = 600
+    var measuredTime = 599
     var elapsedTime = 0
     var isOverflow : Bool = false
     

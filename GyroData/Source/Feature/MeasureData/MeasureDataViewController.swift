@@ -61,6 +61,7 @@ class MeasureDataViewController: UIViewController {
         let btn = UIButton()
         btn.setTitle("정지", for: .normal)
         btn.setTitleColor(.systemBlue, for: .normal)
+        btn.isEnabled = false
         btn.addTarget(self, action: #selector(buttonTapAction), for: .touchUpInside)
         return btn
     }()
@@ -180,7 +181,7 @@ class MeasureDataViewController: UIViewController {
                 motion.startAccelerometerUpdates()
                 self.accTimer = Timer(fire: Date(), interval: 0.1,
                                       repeats: true, block: { (timer) in
-                    if self.measureTime == 600 { self.buttonTapAction(self.stopBtn) }
+                    if self.measureTime == 599 { self.buttonTapAction(self.stopBtn) }
                     if let data = self.motion.accelerometerData {
                         let x = data.acceleration.x
                         let y = data.acceleration.y
@@ -221,7 +222,7 @@ class MeasureDataViewController: UIViewController {
                 motion.startGyroUpdates()
                 self.gyroTimer = Timer(fire: Date(), interval: 0.1,
                                        repeats: true, block: { (timer) in
-                    if self.measureTime == 600 { self.buttonTapAction(self.stopBtn) }
+                    if self.measureTime == 599 { self.buttonTapAction(self.stopBtn) }
                     if let data = self.motion.gyroData {
                         let x = data.rotationRate.x
                         let y = data.rotationRate.y
@@ -329,13 +330,13 @@ class MeasureDataViewController: UIViewController {
     @objc func buttonTapAction(_ sender: UIButton) {
         switch sender {
         case measureBtn:
-            if self.segmentedControl.selectedSegmentIndex == 0 {
+            if segmentedControl.selectedSegmentIndex == 0 {
                 startAccelerometers()
             } else {
                 startGyroscope()
             }
-            self.segmentedControl.isEnabled = false
-            saveBarButtonItem.isEnabled = true
+            segmentedControl.isEnabled = false
+            saveBarButtonItem.isEnabled = false
             isPlaying = true
         case stopBtn:
             if self.segmentedControl.selectedSegmentIndex == 0 {
@@ -343,7 +344,8 @@ class MeasureDataViewController: UIViewController {
             } else {
                 stopMeasuring(gyroTimer)
             }
-            self.segmentedControl.isEnabled = true
+            segmentedControl.isEnabled = true
+            saveBarButtonItem.isEnabled = true
             isPlaying = false
         case saveBtn:
             saveMeasuredData()
