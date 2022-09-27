@@ -20,7 +20,6 @@ class GyroDataListViewController: UIViewController {
         return tableView
     }()
     
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var motionDataArray = [MotionData]()
     var offset = 0
     var isLoading = false
@@ -65,22 +64,14 @@ class GyroDataListViewController: UIViewController {
             }
         }
     }
-    
-    func saveData() {
-        do {
-            try self.context.save()
-        } catch {
-            print(error)
-        }
-    }
-    
+
     func fetchData() {
         let request: NSFetchRequest<MotionData> = MotionData.fetchRequest()
         request.fetchLimit = 10
         request.fetchOffset = offset
         
         do {
-            let nextMotionDataArray = try context.fetch(request)
+            let nextMotionDataArray = try CoreDataService.shared.context.fetch(request)
             if nextMotionDataArray.isEmpty {
                 DispatchQueue.main.async {
                     self.tableView.tableFooterView = nil
@@ -147,9 +138,9 @@ extension GyroDataListViewController:  UITableViewDelegate, UITableViewDataSourc
         let delete = UIContextualAction(style: .normal, title: "Delete") { (UIContextualAction, UIView, success: @escaping (Bool) -> Void) in
 
             FileService.shared.deleteJSON(fileName: self.motionDataArray[indexPath.row].date)
-            self.context.delete(self.motionDataArray[indexPath.row])
+            CoreDataService.shared.context.delete(self.motionDataArray[indexPath.row])
             self.motionDataArray.remove(at: indexPath.row)
-            self.saveData()
+            CoreDataService.shared.saveContext()
             self.tableView.reloadData()
 
             success(true)

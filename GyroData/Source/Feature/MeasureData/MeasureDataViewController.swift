@@ -10,7 +10,6 @@ import CoreMotion
 
 class MeasureDataViewController: UIViewController {
         
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var isGyroOnScreen : Bool = false
     var isMeasuring: Bool = false
     let motion = CMMotionManager()
@@ -259,7 +258,7 @@ class MeasureDataViewController: UIViewController {
     func saveMeasuredData() {
         activityIndicator.startAnimating()
         
-        let motionData = MotionData(context: self.context)
+        let motionData = MotionData(context: CoreDataService.shared.context)
         motionData.measureTime = String(Double(measureTime) / 10.0)
         motionData.date = startDate
         motionData.dataType = dataType
@@ -277,13 +276,7 @@ class MeasureDataViewController: UIViewController {
         let group = DispatchGroup()
         
         DispatchQueue.global().async(group: group) {
-            do {
-                try self.context.save()
-            } catch {
-                DispatchQueue.main.async {
-                    self.setAlert(message: error.localizedDescription)
-                }
-            }
+            CoreDataService.shared.saveContext()
         }
         
         DispatchQueue.global().async(group: group) {
