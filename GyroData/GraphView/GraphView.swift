@@ -74,6 +74,7 @@ class GraphView: UIView {
     //properties
     var viewModel: GraphViewModel = GraphViewModel()
     var drawMode: DrawMode = DrawMode.tick
+    var maxLabel = UILabel()
     
     //Point Properties for calculating Path's Position
     
@@ -122,6 +123,7 @@ class GraphView: UIView {
         drawXpath()
         drawYpath()
         drawZpath()
+        updateMaxLabel()
     }
     
     // TODO: 일단 path.close는 "path"를 완전히 다 그렸을 시 close 해줘야 하는 듯 하다. UIGraphicCurrentContext가 close해줘야 하는 것처럼
@@ -265,11 +267,25 @@ class GraphView: UIView {
         zPreviousPoint = zPreviousPoint.applying(lastAppliedTransform)
         zPath.apply(lastAppliedTransform)
     }
+    
+    func updateMaxLabel() {
+        maxLabel.text = "max: \(round(yAxisBound) / 100)"
+    }
 }
 
 extension GraphView: Presentable {
     func initViewHierarchy() {
-
+        self.addSubview(maxLabel)
+        
+        maxLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        var constraints: [NSLayoutConstraint] = []
+        defer { NSLayoutConstraint.activate(constraints) }
+        
+        constraints += [
+            maxLabel.topAnchor.constraint(equalTo: self.topAnchor),
+            maxLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+        ]
     }
     
     func configureView() {
@@ -277,10 +293,11 @@ extension GraphView: Presentable {
         xPath.lineWidth = 1 //default
         yPath.lineWidth = 1 //default
         zPath.lineWidth = 1 //default
+        maxLabel.font = .appleSDGothicNeo(weight: .regular, size: 10)
+        maxLabel.textColor = .systemPink
     }
     
     func bind() {
-        
         //드로잉을 위한 데이터소스 변경, 붙이기, 삭제 등 비즈니스 로직
         viewModel.populateTickData = { [weak self] in
             self?.drawMode = .tick
