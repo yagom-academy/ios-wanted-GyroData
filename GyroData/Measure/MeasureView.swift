@@ -48,6 +48,13 @@ class MeasureView: UIView {
         button.isEnabled = false
         return button
     }()
+    let activityIndicator: UIActivityIndicatorView = {
+        
+        let activityIndicator = UIActivityIndicatorView(style: .large)
+        activityIndicator.startAnimating()
+        activityIndicator.isHidden = true
+        return activityIndicator
+    }()
     
     
     override init(frame: CGRect) {
@@ -69,6 +76,7 @@ class MeasureView: UIView {
         addSubview(lineChartView)
         addSubview(measureButton)
         addSubview(stopButton)
+        addSubview(activityIndicator)
     }
     
     func setupConstraints() {
@@ -94,6 +102,10 @@ class MeasureView: UIView {
             make.leading.trailing.equalTo(self.safeAreaLayoutGuide).inset(16)
             make.top.equalTo(measureButton.snp.bottom).offset(20)
             make.height.equalTo(40)
+        }
+        activityIndicator.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.edges.equalToSuperview()
         }
     }
 }

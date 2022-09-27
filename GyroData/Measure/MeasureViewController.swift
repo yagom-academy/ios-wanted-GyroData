@@ -13,6 +13,21 @@ enum sensorType: Int {
     case gyroscope = 1
 }
 
+enum saveError: String {
+    case coredata = "저장 실패 CoreData error"
+    case filemanager = "저장 실패 FileManager error"
+    case none
+}
+
+struct MotionData: Codable {
+    let coodinate: coodinateData
+}
+struct coodinateData: Codable {
+    let x: Double
+    let y: Double
+    let z: Double
+}
+
 class MeasureViewController: UIViewController {
     
     let mainView = MeasureView()
@@ -59,8 +74,35 @@ class MeasureViewController: UIViewController {
     
     // MARK: incomplete
     @objc func saveButtonClicked() {
-        self.navigationController?.popViewController(animated: true)
-        saveMeasureDataAsJSON()
+        
+        DispatchQueue.main.async {
+            self.mainView.activityIndicator.isHidden = false
+            let error = self.saveMeasureDataAsJSON()
+            
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                
+                self.mainView.activityIndicator.isHidden = true
+                let alert = UIAlertController(title: "", message: "", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "확인", style: .default))
+                
+                switch error {
+                case .coredata:
+                    print(error)
+                    alert.title = error.rawValue
+                    self.present(alert,animated: false)
+                case .filemanager:
+                    print(error)
+                    alert.title = error.rawValue
+                    self.present(alert,animated: false)
+                case .none:
+                    print(error)
+                    self.navigationController?.popViewController(animated: true)
+                }
+                
+            }
+
+        }
     }
     
     @objc func segmentFlag(_ sender: UISegmentedControl) {
@@ -111,7 +153,7 @@ class MeasureViewController: UIViewController {
         
     }
     
-    func saveMeasureDataAsJSON() {
+    func saveMeasureDataAsJSON() -> saveError {
         
         let manager = CoreDataManager.shared
         let coverData = Measure(title: "\(sensorType(rawValue: graphFlag)!)", second: (600.0 - self.countDown)/10)
@@ -123,13 +165,11 @@ class MeasureViewController: UIViewController {
             if let jsonString = String(data: data, encoding: .utf8) {
                 let result = MeasureFileManager.shared.saveFile(jsonString, coverData)
                 if !result {
-                    print("저장 실패 File Manager Error")
-                    return
+                    return saveError.filemanager
                 } else {
                     let result = manager.insertMeasure(measure: coverData)
                     if !result {
-                        print("저장 실패 Core Data error")
-                        return
+                        return saveError.coredata
                     }
                 }
                 navigationItem.rightBarButtonItem?.isEnabled = false
@@ -140,6 +180,8 @@ class MeasureViewController: UIViewController {
         } catch {
             print(error)
         }
+        
+        return saveError.none
     }
     
     func stopMeasure() {
