@@ -40,6 +40,7 @@ class TableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError()
     }
+    
     /// 레이아웃 설정
     func configure() {
         timeLabel.translatesAutoresizingMaskIntoConstraints = false
