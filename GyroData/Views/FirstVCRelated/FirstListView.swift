@@ -55,7 +55,7 @@ extension FirstListView: Presentable {
     }
     
     func bind() {
-        viewModel.propagateFetchMotionTasks = { [weak self] _ in
+        viewModel.propagateFetchMotionTasks = { [weak self] in
             DispatchQueue.main.async {
                 self?.tableView.reloadData()
             }
@@ -153,7 +153,7 @@ extension FirstListView: UIScrollViewDelegate {
         let contentHeight = scrollView.contentSize.height
         let height = scrollView.frame.height
         
-        if offsetY > (contentHeight - height) {
+        if offsetY > (contentHeight - height) || contentHeight == .zero {
             if !viewModel.isPaging && viewModel.isScrollAvailable() && !viewModel.isEmptyTotalMotionTasks() {
                 viewModel.didReceiveStartPaging()
             }
