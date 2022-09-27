@@ -71,6 +71,7 @@ class CoreDataManager {
     func deleteMotionTask(motion: MotionTask) async throws -> Bool {
         let fetchResults = try await CoreDataManager.shared.fetchMotionTasks()
         let object = fetchResults.filter ({ $0.date == motion.date })[0]
+        print(object)
         
         self.context.delete(object)
         do {

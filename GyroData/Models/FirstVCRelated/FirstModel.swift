@@ -104,6 +104,7 @@ class FirstModel: SceneActionReceiver {
     
     func removeData(motion: MotionTask) {
         Task {
+<<<<<<< HEAD
             do {
                 try await self.repository.deleteFromFileManager(fileName: motion.path)
                 // TODO: CoreData 삭제 로직 추가
@@ -111,6 +112,10 @@ class FirstModel: SceneActionReceiver {
             } catch let error {
                 debugPrint(error.localizedDescription)
             }
+=======
+            _ = self.repository.deleteFromCoreData(motion: motion)
+            _ = self.repository.deleteFromFileManager(fileName: motion.path)
+>>>>>>> 25db49f (refactor: CoreDataManager async await)
         }
     }
     
