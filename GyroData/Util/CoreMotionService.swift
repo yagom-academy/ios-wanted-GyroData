@@ -14,10 +14,12 @@ class CoreMotionService {
     private var timer: Timer?
     
     private var completion: (() -> Void)? = nil
+    private var resultCompletion: ((MotionDetailData) -> Void)? = nil
     
     // MARK: - startMotion
-    func startMeasurement(of type: MotionType, completion: @escaping () -> Void) {
+    func startMeasurement(of type: MotionType, completion: @escaping () -> Void, resultCompletion: @escaping (MotionDetailData) -> Void) {
         self.completion = completion
+        self.resultCompletion = resultCompletion
         completion()
         
         switch type {
@@ -44,6 +46,8 @@ class CoreMotionService {
                     let x = data.acceleration.x
                     let y = data.acceleration.y
                     let z = data.acceleration.z
+                    
+                    self.resultCompletion?(MotionDetailData(date: Date(), x: x, y: y, z: z))
                 }
                 print(#function, timeout)
             })

@@ -18,6 +18,7 @@
 		C1831DF128E005E600E7167D /* CoreMotionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1831DF028E005E600E7167D /* CoreMotionService.swift */; };
 		C1831DF428E00FDD00E7167D /* MotionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1831DF328E00FDD00E7167D /* MotionType.swift */; };
 		C1831E2428E1AF2F00E7167D /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1831E2328E1AF2F00E7167D /* GraphView.swift */; };
+		C19D2AAE28E2979400DAE5EA /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19D2AAD28E2979400DAE5EA /* Date+Extension.swift */; };
 		D80FE30D28DAB715005998BD /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D80FE30B28DAB715005998BD /* CoreDataModel.xcdatamodeld */; };
 		D81A76D328DF2FA100C6F17B /* ReplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81A76D228DF2FA100C6F17B /* ReplayViewController.swift */; };
 		FD67510828DEF51200262248 /* MeasureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD67510728DEF51200262248 /* MeasureViewController.swift */; };
@@ -38,6 +39,7 @@
 		C1831DF028E005E600E7167D /* CoreMotionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMotionService.swift; sourceTree = "<group>"; };
 		C1831DF328E00FDD00E7167D /* MotionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionType.swift; sourceTree = "<group>"; };
 		C1831E2328E1AF2F00E7167D /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
+		C19D2AAD28E2979400DAE5EA /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		D80FE30C28DAB715005998BD /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
 		D81A76D228DF2FA100C6F17B /* ReplayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReplayViewController.swift; sourceTree = "<group>"; };
 		FD67510728DEF51200262248 /* MeasureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureViewController.swift; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 		63F01BB328D44FC400C53A39 /* GyroData */ = {
 			isa = PBXGroup;
 			children = (
+				C19D2AAC28E2977A00DAE5EA /* Extension */,
 				FDC50A1428DD98D3006F6C6D /* Util */,
 				5DB1DE5F28D9A4F800C7161F /* Models */,
 				C1207E7C28D96843003D14F5 /* View Controllers */,
@@ -138,6 +141,14 @@
 				C1831DF328E00FDD00E7167D /* MotionType.swift */,
 			);
 			path = Enum;
+			sourceTree = "<group>";
+		};
+		C19D2AAC28E2977A00DAE5EA /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				C19D2AAD28E2979400DAE5EA /* Date+Extension.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		D81A76D128DF2FA100C6F17B /* Replay */ = {
@@ -248,6 +259,7 @@
 				D80FE30D28DAB715005998BD /* CoreDataModel.xcdatamodeld in Sources */,
 				FD67510828DEF51200262248 /* MeasureViewController.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
+				C19D2AAE28E2979400DAE5EA /* Date+Extension.swift in Sources */,
 				FDC50A1628DD9957006F6C6D /* FileManagerService.swift in Sources */,
 				C1831DF428E00FDD00E7167D /* MotionType.swift in Sources */,
 			);
