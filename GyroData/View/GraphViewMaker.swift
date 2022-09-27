@@ -9,7 +9,7 @@ import UIKit
 import CoreMotion
 
 protocol GraphViewMakerDelegate {
-    /// 그래프가 업데이트 될때 호출됨.
+    /// 그래프가 업데이트 될때 호출됨. 
     func graphViewDidUpdate(interval: String, x: Float, y: Float, z: Float)
     /// graphView의 에니메이션을 수행하는 타이머가 중지될때 호출됨.
     func graphViewDidEnd()
