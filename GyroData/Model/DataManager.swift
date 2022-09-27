@@ -32,9 +32,10 @@ class DataManager {
         let request: NSFetchRequest<Save> = Save.fetchRequest()
         request.fetchLimit = 10
         request.fetchOffset = saveList.count
+        // 날짜 내림차순 sort
         let sortByDateDesc = NSSortDescriptor(key: "date", ascending: false)
         request.sortDescriptors = [sortByDateDesc]
-        do {
+        do {  //데이터 호출
             saveList.append(contentsOf: try mainContext.fetch(request))
             print("Fetched!")
             isFetching = false
@@ -69,7 +70,9 @@ class DataManager {
         saveContext()
     }
     func addNewSave(_ name: String?, _ time: Float?, _ xData: [Float], yData: [Float], zData: [Float]) {
+       // 데이터베이스의 sav를 저장하는데 필요한 인스턴스 생성
         let newSave = Save(context: mainContext)
+        //값 입력
         newSave.name = name
         newSave.date = Date()
         newSave.time = time ?? 0.00
