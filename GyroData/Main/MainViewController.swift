@@ -114,13 +114,8 @@ extension MainViewController: UITableViewDataSource {
                 print("paly 클릭 됨")
                 let vc = ReplayViewController()
                 let data = self.datasource[indexPath.row]
-                guard let date = data.measureDate else { return }
-                let change = Measure(id: data.id ?? "0",
-                                     title: data.title ?? "타입안변함",
-                                     second: data.second ,
-                                     date: date,
-                                     pageType: .play)
-                vc.measureData = change
+                vc.pageTypeName = .play
+                vc.measureData = data
                 self.navigationController?.pushViewController(vc, animated: true)
                 
                 //self.datasource[indexPath.row]
@@ -150,13 +145,8 @@ extension MainViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         let vc = ReplayViewController()
         let data = datasource[indexPath.row]
-        guard let date = data.measureDate else { return }
-        let change = Measure(id: data.id ?? "0",
-                             title: data.title ?? "타입안변함",
-                             second: data.second ,
-                             date: date,
-                             pageType: .view)
-        vc.measureData = change
+        vc.pageTypeName = .view
+        vc.measureData = data
 //        let measure = Measure(
         self.navigationController?.pushViewController(vc, animated: true)
         print(datasource[indexPath.row].id!)

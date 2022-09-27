@@ -17,13 +17,10 @@ class ReplayViewController: UIViewController {
     
     private var timer: Timer?
     //첫번째화면에서 받아올 데이터
-    var measureData: Measure = Measure(title: "안들어있음", second: 0.0, pageType: .view) {
+    var measureData: GyroModel = GyroModel(){
         didSet {
             print("Measuer Update!!")
-            self.measureDateLabel.text = String(measureData.saveDate)
-            print(measureData.pageType.rawValue)
-            self.stateLabel.text = measureData.pageType.rawValue
-            self.pageTypeName = measureData.pageType
+            self.measureDateLabel.text = measureData.measureDate
         }
     }
     let stepDuration = 0.1
@@ -33,6 +30,7 @@ class ReplayViewController: UIViewController {
     var pageTypeName: PageType = .play {
         didSet {
             self.graphView.viewTypeIsPlay = pageTypeName
+            self.stateLabel.text = pageTypeName.rawValue
         }
     }
     var aBuffer = GraphBuffer(count: 100)
@@ -112,7 +110,7 @@ class ReplayViewController: UIViewController {
         self.btnAddTarget()
         self.setupGraphView()
         if pageTypeName == .view {
-            print("측정 데이터 보임 ")
+            print("측정 데이터 보임")
             measureDataViewShow()
         }
         print("받아온 데이터: ", measureData)
@@ -198,7 +196,7 @@ class ReplayViewController: UIViewController {
     }
     
     private func measureDataViewShow() {
-        let result = MeasureFileManager.shared.loadFile(self.measureData)
+        let result = MeasureFileManager.shared.loadFile(id: measureData.id ?? "")
         switch result {
         case .success(let data):
             self.graphView.graphData = data
