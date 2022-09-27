@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let navigationController = UINavigationController(rootViewController: ViewController())
         window?.rootViewController = navigationController
-        window?.makeKeyAndVisible() //네비게이션 추가
+        window?.makeKeyAndVisible() //네비게이션 추가 
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
