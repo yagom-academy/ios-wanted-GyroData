@@ -17,7 +17,7 @@ protocol MotionManagerDelegate {
     func motionValueUpdateWillEnd() -> Bool
 }
 
-/// 모션값 핸들링기능을 모듈화
+/// 모션값 핸들링 기능을 모듈화
 class MotionManager {
     
     static let shared = MotionManager()
