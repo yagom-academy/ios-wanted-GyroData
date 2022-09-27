@@ -83,17 +83,26 @@ extension ListViewController: UITableViewDataSource {
 extension ListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
-        let replayViewController = ReplayViewController()
-        navigationController?.pushViewController(replayViewController, animated: true)
-        // TODO: 세 번째 페이지를 view 타입으로 이동
+        let object = coreDataService.fetchedResultsController.object(at: indexPath)
+        if let recordDate = object.date?.dateString {
+            let replayViewController = ReplayViewController()
+            replayViewController.type = .view
+            replayViewController.recordDate = recordDate
+            navigationController?.pushViewController(replayViewController, animated: true)
+        }
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let object = coreDataService.fetchedResultsController.object(at: indexPath)
         let playAction = UIContextualAction(style: .normal, title: "Play") { action, view, handler in
-            let replayViewController = ReplayViewController()
-            self.navigationController?.pushViewController(replayViewController, animated: true)
-            print("touch Play Button")
+            let object = self.coreDataService.fetchedResultsController.object(at: indexPath)
+            if let recordDate = object.date?.dateString {
+                let replayViewController = ReplayViewController()
+                replayViewController.type = .replay
+                replayViewController.recordDate = recordDate
+                self.navigationController?.pushViewController(replayViewController, animated: true)
+            }
+            print(#function)
         }
         playAction.backgroundColor = .systemGreen
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { _, _, handler in

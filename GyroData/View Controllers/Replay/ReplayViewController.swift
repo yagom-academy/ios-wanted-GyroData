@@ -9,55 +9,66 @@ import UIKit
 
 class ReplayViewController: UIViewController {
     
-    var dateLabel: UILabel = {
+    private lazy var dateLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 15)
-        label.text = "2022/09/07 15:10:11"
+        label.text = self.recordDate
         return label
     }()
     
-    var typeLabel: UILabel = {
+    private lazy var typeLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 30)
-        label.text = "View"
+        label.text = type?.typeString ?? ReplayType.view.typeString
         return label
     }()
     
-    var playTimeLabel: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 30)
-        label.text = "30.1"
-        return label
-    }()
-    
-    var graphView: UIView = {
-        var view = UIView()
+    private var graphView: GraphView = {
+        let width = UIScreen.main.bounds.width - 32
+        let height = width
+        let view = GraphView(frame: CGRect(x: .zero, y: .zero, width: width, height: height))
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .blue
+        view.layer.borderColor = UIColor.separator.cgColor
+        view.layer.borderWidth = 3
+        view.backgroundColor = .systemBackground
         return view
     }()
     
-    lazy var playButton: UIButton = {
+    private lazy var playButton: UIButton = {
         var button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(didTapPlayButton), for: .touchUpInside)
-        button.setImage(UIImage.init(named: "play.fill"), for: .normal)
+        button.setImage(UIImage(systemName: "play.fill"), for: .normal)
         button.backgroundColor = .systemBackground
+        button.tintColor = .systemGray
+        button.isHidden = (self.type == .view)
         return button
     }()
     
-    lazy var stopButton: UIButton = {
+    private lazy var stopButton: UIButton = {
         var button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(didTapStopButton), for: .touchUpInside)
-        button.setImage(UIImage.init(named: "stop.fill"), for: .normal)
+        button.setImage(UIImage(systemName: "stop.fill"), for: .normal)
         button.backgroundColor = .systemBackground
+        button.tintColor = .systemGray
         button.isHidden = true
         return button
     }()
+    
+    private lazy var playTimeLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .systemFont(ofSize: 30)
+        label.text = "0.0"
+        label.isHidden = (self.type == .view)
+        return label
+    }()
+    
+    var type: ReplayType? = nil
+    var recordDate: String? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,7 +78,6 @@ class ReplayViewController: UIViewController {
     }
     
     private func configureViews() {
-        
         view.backgroundColor = .systemBackground
         view.addSubview(dateLabel)
         view.addSubview(typeLabel)
@@ -108,7 +118,6 @@ class ReplayViewController: UIViewController {
             playTimeLabel.topAnchor.constraint(equalTo: graphView.bottomAnchor, constant: 50),
             playTimeLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
         ])
-        
     }
     
     @objc func didTapPlayButton() {
