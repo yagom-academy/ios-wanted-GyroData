@@ -11,6 +11,7 @@ class FirstListViewModel {
     // MARK: Input
     var didSelectRow: (Int) -> () = { indexPathRow in }
     var didSelectPlayAction: (Int) -> () = { indexPathRow in }
+    var didSelectDeleteAction: (Int) -> () = { IndexPathRow in }
     var didReceiveMotionTasks: ([MotionTask]) -> () = { motionTasks in }
     var didReceiveStartPaging: () -> () = { }
     var didReceiveEndPaging: () -> () = { }
@@ -18,6 +19,7 @@ class FirstListViewModel {
     // MARK: Output
     var propagateDidSelectRowEvent: (MotionTask) -> () = { motion in }
     var propagateDidSelectPlayActionEvent: (MotionTask) -> () = { motion in }
+    var propagateDidSelectDeleteActionEvent: (MotionTask) -> () = { motion in }
     var motionTasks: [MotionTask] {
         return _motionTasks
     }
@@ -26,7 +28,7 @@ class FirstListViewModel {
     var isPaging: Bool {
         return _isPaging
     }
-    var propagateStartPaging: ( ((Void)) -> () )?
+    var propagateStartPaging: () -> () = { }
     
     // MARK: Properties
     private var _motionTasks: [MotionTask]
@@ -55,6 +57,11 @@ class FirstListViewModel {
             let motion = self._motionTasks[indexPathRow]
             self.propagateDidSelectPlayActionEvent(motion)
         }
+        didSelectDeleteAction = { [weak self] indexPathRow in
+            guard let self = self else { return }
+            let motion = self._motionTasks[indexPathRow]
+            self.propagateDidSelectDeleteActionEvent(motion)
+        }
         didReceiveMotionTasks = { [weak self] motionTasks in
             guard let self = self else { return }
             self._currentTaskIndex = 0
@@ -67,9 +74,10 @@ class FirstListViewModel {
             }
             self.propagateFetchMotionTasks()
         }
-        didReceiveStartPaging = {
+        didReceiveStartPaging = { [weak self] in
+            guard let self = self else { return }
             self._isPaging = true
-            self.propagateStartPaging?(())
+            self.propagateStartPaging()
         }
         didReceiveEndPaging = {
             self._isPaging = false

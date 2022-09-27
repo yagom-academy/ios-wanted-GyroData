@@ -73,10 +73,9 @@ class FirstModel: SceneActionReceiver {
             let context = SceneContext(dependency: model)
             self.routeSubject(.detail(.thirdViewController(context: context)))
         }
-        privateFirstListViewModel.propagateStartPaging = { [weak self] _ in
+        privateFirstListViewModel.propagateDidSelectDeleteActionEvent = { [weak self] motion in
             guard let self = self else { return }
-            print("!!!!!!!")
-            self.populateData()
+            self.removeData(motion: motion)
         }
         
         didReceiveSceneAction = { [weak self] action in
@@ -93,6 +92,12 @@ class FirstModel: SceneActionReceiver {
         Task {
             let motionTasks = try await self.repository.fetchFromCoreData()
             privateFirstListViewModel.didReceiveMotionTasks(motionTasks)
+        }
+    }
+    
+    func removeData(motion: MotionTask) {
+        Task {
+            try await self.repository.deleteFromFileManager(fileName: motion.path)
         }
     }
 }

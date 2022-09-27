@@ -59,21 +59,20 @@ extension FileManager {
     }
     
     @discardableResult
-    func removeMotionFile(name: String) -> Error? {
+    func removeMotionFile(fileName name: String) async throws -> Bool {
         let documentURL = self.urls(for: .documentDirectory, in: .userDomainMask)[0]
         let directoryURL = documentURL.appendingPathComponent("MotionData")
         let fileURL = directoryURL.appendingPathComponent("\(name).json")
         
         guard !FileManager.default.fileExists(atPath: "\(fileURL)") else {
-            return NSError(domain: "File does not exist", code: -1) as Error
+            throw FileManagerError.deleteError
         }
         
         do {
             try FileManager.default.removeItem(at: fileURL)
-        } catch let error {
-            return error
+            return true
+        } catch {
+            throw FileManagerError.deleteError
         }
-        
-        return nil
     }
 }

@@ -60,7 +60,7 @@ extension FirstListView: Presentable {
                 self?.tableView.reloadData()
             }
         }
-        viewModel.propagateStartPaging = { [weak self] _ in
+        viewModel.propagateStartPaging = { [weak self] in
             DispatchQueue.main.async {
                 self?.tableView.reloadSections(IndexSet(integer: 1), with: .none)
             }
@@ -84,7 +84,8 @@ extension FirstListView: UITableViewDelegate {
         }
         play.backgroundColor = .success
         
-        let delete = UIContextualAction(style: .normal, title: "Delete") { action, sourceView, completionHandler in
+        let delete = UIContextualAction(style: .normal, title: "Delete") { [weak self] action, sourceView, completionHandler in
+            self?.viewModel.didSelectDeleteAction(indexPath.row)
             completionHandler(true)
         }
         delete.backgroundColor = .destructive
@@ -153,9 +154,9 @@ extension FirstListView: UIScrollViewDelegate {
         let contentHeight = scrollView.contentSize.height
         let height = scrollView.frame.height
         
-        if offsetY > (contentHeight - height) || contentHeight == .zero {
-            if !viewModel.isPaging && viewModel.isScrollAvailable() && !viewModel.isEmptyTotalMotionTasks() {
-                viewModel.didReceiveStartPaging()
+        if offsetY > (contentHeight - height) {
+            if !self.viewModel.isPaging && self.viewModel.isScrollAvailable() && !self.viewModel.isEmptyTotalMotionTasks() {
+                self.viewModel.didReceiveStartPaging()
             }
         }
     }
