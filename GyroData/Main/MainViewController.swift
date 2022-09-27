@@ -98,7 +98,7 @@ extension MainViewController: UITableViewDataSource {
         }
         
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            let cell = tableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.identifier) as? CustomTableViewCell ?? CustomTableViewCell()
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.identifier) as? CustomTableViewCell else { return UITableViewCell() }
             cell.bind1(model: datasource[indexPath.row])
             //manager.fetchTen(count: count)
             return cell
@@ -140,8 +140,16 @@ extension MainViewController: UITableViewDataSource {
 extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let ReplayViewController = ReplayViewController()
-        self.navigationController?.pushViewController(ReplayViewController, animated: true)
+        guard let vc = self.storyboard?.instantiateViewController(withIdentifier: "ReplayViewController") as? ReplayViewController else { return }
+        let data = datasource[indexPath.row]
+        let change = Measure(id: data.id ?? "0",
+                             title: data.title ?? "타입안변함",
+                             second: data.second ,
+                             date: data.measureDate ?? "0/0",
+                             pageType: .view)
+        vc.measureData = change
+//        let measure = Measure(
+        self.navigationController?.pushViewController(vc, animated: true)
         print(datasource[indexPath.row].id!)
     }
 }

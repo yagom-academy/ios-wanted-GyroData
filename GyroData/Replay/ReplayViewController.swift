@@ -111,6 +111,7 @@ class ReplayViewController: UIViewController {
         if pageTypeName == .view {
             dummyTestViewShow()
         }
+        print("받아온 데이터: ", measureData)
     }
     
     // MARK: - private func
