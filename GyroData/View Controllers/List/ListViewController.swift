@@ -7,7 +7,6 @@
 
 import UIKit
 import CoreData
-import CoreMotion
 
 final class ListViewController: UIViewController {
 
@@ -23,8 +22,8 @@ final class ListViewController: UIViewController {
     }()
 
     private lazy var coreDataService: CoreDataService = {
-        let container = (UIApplication.shared.delegate as? AppDelegate)!.persistentContainer
-        let service = CoreDataService(with: container, fetchedResultsControllerDelegate: self)
+        let container = (UIApplication.shared.delegate as? AppDelegate)?.coreDataStack.persistentContainer
+        let service = CoreDataService(with: container!, fetchedResultsControllerDelegate: self)
         return service
     }()
 
@@ -33,7 +32,6 @@ final class ListViewController: UIViewController {
 
         configureNavigation()
         configureLayout()
-        
     }
     
     private func configureNavigation() {
@@ -57,7 +55,7 @@ final class ListViewController: UIViewController {
     @objc
     private func didTapMeasureButton() {
         let measureViewController = MeasureViewController()
-        show(measureViewController, sender: nil)
+        navigationController?.pushViewController(measureViewController, animated: true)
     }
 }
 
@@ -73,17 +71,10 @@ extension ListViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         let object = coreDataService.fetchedResultsController.object(at: indexPath)
-        cell.dateLabel.text = object.date
-        cell.keyLabel.text = object.unit
-        cell.valueLabel.text = "\(object.value)"
+        cell.dateLabel.text = object.date?.dateString
+        cell.keyLabel.text = MotionType(rawValue: Int(object.type))?.displayText
+        cell.valueLabel.text = String(object.lastTick)
         return cell
-    }
-    
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        //TODO: 10개 더 불러오기
-//        if indexPath.row == gyroDataList.count - 1 {
-//            loadMoreData()
-//        }
     }
 }
 
@@ -92,21 +83,22 @@ extension ListViewController: UITableViewDataSource {
 extension ListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // TODO: 세 번째 페이지를 view 타입으로 이동
+        tableView.deselectRow(at: indexPath, animated: false)
         let viewController = UIViewController()
         navigationController?.pushViewController(viewController, animated: true)
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let object = coreDataService.fetchedResultsController.object(at: indexPath)
         let playAction = UIContextualAction(style: .normal, title: "Play") { action, view, handler in
             // TODO: 세 번째 페이지를 play 타입으로 이동
             print("touch Play Button")
         }
         playAction.backgroundColor = .systemGreen
-        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { action, view, handler in
-            // TODO: 데이터를 삭제 (CoreData와 파일 모두 삭제할 것)
-            print("touch Delete Button")
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { _, _, handler in
+            // TODO: 데이터를 삭제 (파일매니저)
+            self.coreDataService.delete(object)
         }
-        deleteAction.backgroundColor = .systemRed
         let configuration = UISwipeActionsConfiguration(actions: [deleteAction, playAction])
         return configuration
     }

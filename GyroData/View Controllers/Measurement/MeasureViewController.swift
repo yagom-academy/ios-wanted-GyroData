@@ -10,14 +10,14 @@ import UIKit
 final class MeasureViewController: UIViewController {
     
     private let segmentControl: UISegmentedControl = {
-       let control = UISegmentedControl(items: ["Acc", "Gyro"])
+        let control = UISegmentedControl(items: ["Acc", "Gyro"])
         control.translatesAutoresizingMaskIntoConstraints = false
         control.selectedSegmentIndex = 0
         return control
     }()
     
     private let graphView: UIView = {
-       let view = UIView()
+        let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -38,7 +38,7 @@ final class MeasureViewController: UIViewController {
         button.addTarget(self, action: #selector(didTapStopButton), for: .touchUpInside)
         button.setTitle("정지", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 20)
-        button.isEnabled = false 
+        button.isEnabled = false
         return button
     }()
     
@@ -49,7 +49,11 @@ final class MeasureViewController: UIViewController {
         return indicator
     }()
     
-    let coreMotionService = CoreMotionService()
+    private let coreMotionService = CoreMotionService()
+    private let coreDataService: CoreDataService = {
+        let container = (UIApplication.shared.delegate as? AppDelegate)?.coreDataStack.persistentContainer
+        return CoreDataService(with: container!, fetchedResultsControllerDelegate: nil)
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -126,14 +130,26 @@ final class MeasureViewController: UIViewController {
     
     @objc
     private func didTapSaveButton() {
-        // 측정값이 없으면
-        // alert controller
+        guard let motionData = coreMotionService.motionData else {
+            // TODO: alert controller
+            print("저장 실패, 측정된 데이터 없음")
+            return
+        }
+        changeButtonsState()
         activityIndicator.startAnimating()
-        // 측정값을 coredata 저장
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            self.activityIndicator.stopAnimating()
-            // 잘 저장되었으면 -> viewcontroller dimiss/pop
-            // 잘 저장X -> 저장 실패 alert controller
+        let context = coreDataService.persistentContainer.viewContext
+        coreDataService.add(motionData, context: context) { error in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.activityIndicator.stopAnimating()
+                guard let error = error else {
+                    // FIXME: self.dismiss(animated: true)
+                    self.navigationController?.popViewController(animated: true)
+                    return
+                }
+                // 잘 저장X -> 저장 실패 alert controller
+                print("저장실패", error.localizedDescription)
+            }
         }
     }
 }
+

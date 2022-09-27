@@ -15,16 +15,8 @@ struct GyroData: Codable {
     /// 측정 값
     var items: [MotionDetailData] = []
     
-    var lastTick: TimeInterval? {
-        return items.last?.tick
-    }
-}
-
-extension GyroData {
-    var dateString: String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
-        return formatter.string(from: date)
+    var lastTick: TimeInterval {
+        return items.last?.tick ?? 0
     }
 }
 

@@ -12,11 +12,12 @@ class CoreMotionService {
     private let manager = CMMotionManager()
     private let interval = 0.1
     private var timer: Timer?
-    private var motionData: GyroData?
     private var completion: (() -> Void)? = nil
+
+    var motionData: GyroData?
     
     // MARK: - Start
-    
+
     func startMeasurement(of type: MotionType, completion: @escaping () -> Void) {
         motionData = GyroData(date: Date(), type: type)
         self.completion = completion
@@ -27,14 +28,14 @@ class CoreMotionService {
         case .gyro: startGyros()
         }
     }
-    
+
     private func startAccelerometers() {
         if manager.isAccelerometerAvailable {
             manager.accelerometerUpdateInterval = interval
             manager.startAccelerometerUpdates()
             
             var timeout = 0
-            
+
             timer = Timer(timeInterval: interval, repeats: true, block: { timer in
                 guard timeout < 20 else { // TODO: 600
                     self.stopMeasurement(of: .acc)
@@ -63,7 +64,7 @@ class CoreMotionService {
             manager.startGyroUpdates()
             
             var timeout = 0
-            
+
             self.timer = Timer(timeInterval: interval, repeats: true, block: { timer in
                 guard timeout < 20 else { // TODO: 600
                     self.stopMeasurement(of: .gyro)
@@ -85,22 +86,22 @@ class CoreMotionService {
             }
         }
     }
-    
+
     private func appendItem(_ tick: Double, _ x: Double, _ y: Double, _ z: Double) {
         let digit: Double = 10
         let truncTick = trunc(tick * digit) / digit
         let item = MotionDetailData(tick: truncTick, x: x, y: y, z: z)
         self.motionData?.items.append(item)
-        dump(self.motionData)
+        dump(self.motionData!)
     }
-    
+
     func stopMeasurement(of type: MotionType) {
         if timer != nil {
             timer?.invalidate()
             timer = nil
             
             switch type {
-            case .acc:  manager.stopAccelerometerUpdates()
+            case .acc: manager.stopAccelerometerUpdates()
             case .gyro: manager.stopGyroUpdates()
             }
         }

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		5DB1DE6128D9A50000C7161F /* GyroData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB1DE6028D9A50000C7161F /* GyroData.swift */; };
 		5DBBB73728E29BA300AAF165 /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBBB73628E29BA300AAF165 /* CoreDataService.swift */; };
+		5DF8463928E2F66A0040E44A /* Date+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF8463828E2F66A0040E44A /* Date+Utils.swift */; };
+		5DF8463B28E2FFAB0040E44A /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF8463A28E2FFAB0040E44A /* CoreDataStack.swift */; };
 		63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB428D44FC400C53A39 /* AppDelegate.swift */; };
 		63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB628D44FC400C53A39 /* SceneDelegate.swift */; };
 		63F01BB928D44FC400C53A39 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB828D44FC400C53A39 /* ListViewController.swift */; };
@@ -26,6 +28,8 @@
 /* Begin PBXFileReference section */
 		5DB1DE6028D9A50000C7161F /* GyroData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroData.swift; sourceTree = "<group>"; };
 		5DBBB73628E29BA300AAF165 /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
+		5DF8463828E2F66A0040E44A /* Date+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Utils.swift"; sourceTree = "<group>"; };
+		5DF8463A28E2FFAB0040E44A /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		63F01BB128D44FC400C53A39 /* GyroData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GyroData.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63F01BB428D44FC400C53A39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63F01BB628D44FC400C53A39 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -151,7 +155,9 @@
 			children = (
 				FDC50A1528DD9957006F6C6D /* FileManagerService.swift */,
 				C1831DF028E005E600E7167D /* CoreMotionService.swift */,
+				5DF8463A28E2FFAB0040E44A /* CoreDataStack.swift */,
 				5DBBB73628E29BA300AAF165 /* CoreDataService.swift */,
+				5DF8463828E2F66A0040E44A /* Date+Utils.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -232,6 +238,8 @@
 				C1207E8328D98712003D14F5 /* ListCell.swift in Sources */,
 				C1831DF128E005E600E7167D /* CoreMotionService.swift in Sources */,
 				5DB1DE6128D9A50000C7161F /* GyroData.swift in Sources */,
+				5DF8463928E2F66A0040E44A /* Date+Utils.swift in Sources */,
+				5DF8463B28E2FFAB0040E44A /* CoreDataStack.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				D80FE30D28DAB715005998BD /* CoreDataModel.xcdatamodeld in Sources */,
 				FD67510828DEF51200262248 /* MeasureViewController.swift in Sources */,
