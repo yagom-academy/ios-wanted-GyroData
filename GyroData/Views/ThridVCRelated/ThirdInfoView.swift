@@ -55,8 +55,6 @@ extension ThirdInfoView: Presentable {
     func configureView() {
         dateLabel.addStyles(style: dateLabelStyling)
         typeLabel.addStyles(style: typeLabelStyling)
-        
-        dateLabel.text = Date().asString()
     }
     
     func bind() {

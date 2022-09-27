@@ -18,7 +18,14 @@ class ThirdControlViewModel {
             isPlayingSource(_isPlaying)
         }
     }
+    
     var currentTimeSource: (Float) -> () = { currentTime in } {
+        didSet {
+            currentTimeSource(_currentTime)
+        }
+    }
+    
+    var propagateCurrentTime: (Float) -> () = { currentTime in } {
         didSet {
             currentTimeSource(_currentTime)
         }
@@ -33,6 +40,7 @@ class ThirdControlViewModel {
     private var _currentTime: Float = 0 {
         didSet {
             currentTimeSource(_currentTime)
+            propagateCurrentTime(_currentTime)
         }
     }
     private var _motion: MotionTask

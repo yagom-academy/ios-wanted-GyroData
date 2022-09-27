@@ -22,6 +22,7 @@ extension ThirdViewStyling {
         {
             $0.textColor = .graySecondary
             $0.font = .appleSDGothicNeo(weight: .medium, size: 12)
+            $0.text = Date().asString(.forDisplay)
         }
     }
     

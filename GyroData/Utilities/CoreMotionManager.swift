@@ -58,7 +58,9 @@ struct MotionMeasure: Equatable {
     var x: Double
     var y: Double
     var z: Double
-    
+}
+
+extension MotionMeasure {
     init(_ data: CMGyroData) {
         self.x = data.rotationRate.x
         self.y = data.rotationRate.y

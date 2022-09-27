@@ -21,7 +21,7 @@ class ThirdInfoViewModel {
     
     var dateSource: (String) -> () = { date in } {
         didSet {
-            dateSource(_motion.date.asString())
+            dateSource(_motion.date.asString(.forDisplay))
         }
     }
     
@@ -33,7 +33,7 @@ class ThirdInfoViewModel {
     }
     private var _motion: MotionTask {
         didSet {
-            dateSource(_motion.date.asString())
+            dateSource(_motion.date.asString(.forDisplay))
         }
     }
     

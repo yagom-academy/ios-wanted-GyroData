@@ -13,7 +13,7 @@ class FirstCellContentViewModel {
     // MARK: Output
     var timeSource: (String) -> () = { time in } {
         didSet {
-            timeSource(_motion.date.asString())
+            timeSource(_motion.date.asString(.forDisplay))
         }
     }
     var typeSource: (String) -> () = { type in } {
@@ -30,7 +30,7 @@ class FirstCellContentViewModel {
     // MARK: Properties
     private var _motion: MotionTask {
         didSet {
-            timeSource(_motion.date.asString())
+            timeSource(_motion.date.asString(.forDisplay))
             typeSource(_motion.type)
             amountSource("\(_motion.time)")
         }

@@ -63,13 +63,13 @@ class FirstModel: SceneActionReceiver {
         }
         privateFirstListViewModel.propagateDidSelectRowEvent = { [weak self] motion in
             guard let self = self else { return }
-            let model = ThirdModel(viewType: .view, motion: motion)
+            let model = ThirdModel(repository: self.repository, viewType: .view, motion: motion)
             let context = SceneContext(dependency: model)
             self.routeSubject(.detail(.thirdViewController(context: context)))
         }
         privateFirstListViewModel.propagateDidSelectPlayActionEvent = { [weak self] motion in
             guard let self = self else { return }
-            let model = ThirdModel(viewType: .play, motion: motion)
+            let model = ThirdModel(repository: self.repository, viewType: .play, motion: motion)
             let context = SceneContext(dependency: model)
             self.routeSubject(.detail(.thirdViewController(context: context)))
         }
