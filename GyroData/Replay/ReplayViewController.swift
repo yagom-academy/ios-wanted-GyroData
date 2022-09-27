@@ -8,21 +8,23 @@
 import UIKit
 import SnapKit
 
+enum PageType: String {
+    case view = "View"
+    case play = "Play"
+}
+
 class ReplayViewController: UIViewController {
     
-    //viewmodel 값들
-    enum PageType: String {
-        case view = "View"
-        case play = "Play"
-    }
-    
-    weak var timer: Timer?
-    private var viewModel: ReplayViewModel = .init()
+    private var timer: Timer?
     let stepDuration = 0.1
     var aData: CGFloat = 0.0
     var bData: CGFloat = 0.0
     var cData: CGFloat = 0.0
-    var pageTypeName: PageType = .play
+    var pageTypeName: PageType = .play {
+        didSet {
+            self.graphView.viewTypeIsPlay = pageTypeName
+        }
+    }
     var aBuffer = GraphBuffer(count: 100)
     var bBuffer = GraphBuffer(count: 100)
     var cBuffer = GraphBuffer(count: 100)
@@ -35,10 +37,9 @@ class ReplayViewController: UIViewController {
     
     var sensorData: CGFloat = 0.0
     var buffer = GraphBuffer(count: 100)
-    var countDown = 0
+    var countDown: Double = 0.0
     
     // MARK: - Component
-    
     private let navigationTitle: UILabel = {
         let label = UILabel()
         label.text = "다시보기"
@@ -198,18 +199,21 @@ class ReplayViewController: UIViewController {
             timer = Timer.scheduledTimer(withTimeInterval: 0.1
                                          , repeats: true) { [weak self] (timer) in
                 guard let self = self else { return }
+                //랜덤값이 아닌 코어데이터의 값을 받아와서 써야함
                 self.aData = CGFloat.random(in: self.graphView.minValue * 0.75...self.graphView.maxValue * 0.75)
                 self.bData = CGFloat.random(in: self.graphView.minValue * 0.75...self.graphView.maxValue * 0.75)
                 self.cData = CGFloat.random(in: self.graphView.minValue * 0.75...self.graphView.maxValue * 0.75)
-                self.graphView.addNewValue(aValue: self.aData, bValue: self.bData, cValue: self.cData, duration: self.stepDuration)
-                self.countDown -= 1
+                self.graphView.animateNewValue(aValue: self.aData, bValue: self.bData, cValue: self.cData, duration: self.stepDuration)
+                self.countDown -= 0.1
                 self.startTime += 0.1
                 if self.countDown <= 0 {
                     timer.invalidate()
                 }
+                print(self.startTime)
             }
         } else {
             timer?.invalidate()
+            timer = nil
             self.graphView.reset()
             self.startTime = 0
         }

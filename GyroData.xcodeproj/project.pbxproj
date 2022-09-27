@@ -25,7 +25,6 @@
 		6CAB4AA128E16AD800AA1E98 /* JsonFetchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CAB4AA028E16AD800AA1E98 /* JsonFetchManager.swift */; };
 		6CAB4AA528E1B0F000AA1E98 /* D1CE2BE2-1BD2-40AD-9A4A-BEA7C89E5AB2.json in Resources */ = {isa = PBXBuildFile; fileRef = 6CAB4AA428E1B0F000AA1E98 /* D1CE2BE2-1BD2-40AD-9A4A-BEA7C89E5AB2.json */; };
 		6CAB4AA728E1B69C00AA1E98 /* GyroJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CAB4AA628E1B69C00AA1E98 /* GyroJson.swift */; };
-		6CFA0C1428DB05A500390B0F /* ReplayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CFA0C1328DB05A500390B0F /* ReplayViewModel.swift */; };
 		6CFA77C228DA00B4009540E0 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 6CFA77C128DA00B4009540E0 /* SnapKit */; };
 		6CFBD85428DEF2A4002380A4 /* GyroModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6CFBD85228DEF2A4002380A4 /* GyroModel.xcdatamodeld */; };
 		6CFBD85628DEF2D0002380A4 /* Measure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CFBD85528DEF2D0002380A4 /* Measure.swift */; };
@@ -53,7 +52,6 @@
 		6CAB4AA028E16AD800AA1E98 /* JsonFetchManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonFetchManager.swift; sourceTree = "<group>"; };
 		6CAB4AA428E1B0F000AA1E98 /* D1CE2BE2-1BD2-40AD-9A4A-BEA7C89E5AB2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "D1CE2BE2-1BD2-40AD-9A4A-BEA7C89E5AB2.json"; sourceTree = "<group>"; };
 		6CAB4AA628E1B69C00AA1E98 /* GyroJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroJson.swift; sourceTree = "<group>"; };
-		6CFA0C1328DB05A500390B0F /* ReplayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplayViewModel.swift; sourceTree = "<group>"; };
 		6CFBD85328DEF2A4002380A4 /* GyroModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GyroModel.xcdatamodel; sourceTree = "<group>"; };
 		6CFBD85528DEF2D0002380A4 /* Measure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Measure.swift; sourceTree = "<group>"; };
 		6CFBD87A28DEF375002380A4 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
@@ -180,7 +178,6 @@
 			isa = PBXGroup;
 			children = (
 				6C78FB3328DAA878001CAE3B /* ReplayViewController.swift */,
-				6CFA0C1328DB05A500390B0F /* ReplayViewModel.swift */,
 			);
 			path = Replay;
 			sourceTree = "<group>";
@@ -296,7 +293,6 @@
 				0B15BAF828DAE6A500AC20E6 /* MeasureView.swift in Sources */,
 				0B15C05C28DFBBD2000B68BB /* MotionManager.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
-				6CFA0C1428DB05A500390B0F /* ReplayViewModel.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
 				6C78FB3428DAA878001CAE3B /* ReplayViewController.swift in Sources */,
 				6CFBD85428DEF2A4002380A4 /* GyroModel.xcdatamodeld in Sources */,
