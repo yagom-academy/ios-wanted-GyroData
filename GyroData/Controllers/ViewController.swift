@@ -10,7 +10,7 @@ import UIKit
 class ViewController: UIViewController {
     
     var datas = [Save]()
-    
+    //실시간 날짜
     let formatter: DateFormatter = {
         let f = DateFormatter()
         f.dateStyle = .long
@@ -69,7 +69,7 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
-    
+    //스크롤뷰 구현
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let currentOffset = scrollView.contentOffset.y + scrollView.frame.size.height
         let maxOffset = scrollView.contentSize.height
