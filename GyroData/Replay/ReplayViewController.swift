@@ -24,18 +24,12 @@ class ReplayViewController: UIViewController {
         }
     }
     let stepDuration = 0.1
-    var aData: CGFloat = 0.0
-    var bData: CGFloat = 0.0
-    var cData: CGFloat = 0.0
     var pageTypeName: PageType = .play {
         didSet {
             self.graphView.viewTypeIsPlay = pageTypeName
             self.stateLabel.text = pageTypeName.rawValue
         }
     }
-    var aBuffer = GraphBuffer(count: 100)
-    var bBuffer = GraphBuffer(count: 100)
-    var cBuffer = GraphBuffer(count: 100)
     private var timerValid: Bool = false
     private var startTime: Double = 00.0{
         didSet {
@@ -108,8 +102,8 @@ class ReplayViewController: UIViewController {
         self.navigationController?.navigationBar.isHidden = true
         self.setupLayouts()
         self.btnAddTarget()
-        self.setupGraphView()
-        self.injectMeasureData()
+//        self.setupGraphView()
+        self.dummyTestViewShow()
 //        dummyTestViewShow()
         if pageTypeName == .view {
             print("측정 데이터 보임")
@@ -175,12 +169,6 @@ class ReplayViewController: UIViewController {
         
     }
     
-    private func setupGraphView() {
-        graphView.aPoint = aBuffer
-        graphView.bPoint = bBuffer
-        graphView.cPoint = cBuffer
-    }
-    
     private func btnAddTarget() {
         navigationBackButton.addTarget(self, action: #selector(backButtonTap(_:)), for: .touchUpInside)
         playButton.addTarget(self, action: #selector(playButtonTap(_:)), for: .touchUpInside)
@@ -219,21 +207,27 @@ class ReplayViewController: UIViewController {
         if timerValid {
             countDown = 600
             var idx = 0
+            print("총개수", self.graphView.graphData.count)
             timer = Timer.scheduledTimer(withTimeInterval: 0.1
                                          , repeats: true) { [weak self] (timer) in
                 //랜덤값이 아닌 파일매니저의 값을 받아와서 써야함
                 guard let self = self else { return }
-                idx += 1
-                let x = self.graphView.graphData[idx].coodinate.x
-                let y = self.graphView.graphData[idx].coodinate.y
-                let z = self.graphView.graphData[idx].coodinate.z
-                print("x: \(x),y: \(y), z: \(z),")
-                self.graphView.animateNewValue(aValue: x, bValue: y, cValue: z, duration: self.stepDuration)
-                self.countDown -= 1
-                self.startTime += 0.1
-                if self.countDown <= 0 {
+                print(idx)
+
+                if self.countDown <= 0 || self.graphView.graphData.count - 1 == idx {
                     timer.invalidate()
+                } else {
+                    idx += 1
+                    let x = self.graphView.graphData[idx].coodinate.x
+                    let y = self.graphView.graphData[idx].coodinate.y
+                    let z = self.graphView.graphData[idx].coodinate.z
+                    print("x: \(x),y: \(y), z: \(z),")
+                    self.graphView.animateNewValue(aValue: x, bValue: y, cValue: z, duration: self.stepDuration)
+                    self.countDown -= 1
+                    self.startTime += 0.1
                 }
+                
+                
             }
         } else {
             timer?.invalidate()

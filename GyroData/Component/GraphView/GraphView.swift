@@ -15,9 +15,9 @@ class GraphView: UIView {
     var graphData: [GyroJson] = []
     var viewTypeIsPlay: PageType?
     
-    public var aPoint: GraphBuffer?
-    public var bPoint: GraphBuffer?
-    public var cPoint: GraphBuffer?
+    public var aPoint: GraphBuffer = GraphBuffer(count: 100)
+    public var bPoint: GraphBuffer = GraphBuffer(count: 100)
+    public var cPoint: GraphBuffer = GraphBuffer(count: 100)
     
     var xLayer = CAShapeLayer()
     var yLayer = CAShapeLayer()
@@ -53,12 +53,10 @@ class GraphView: UIView {
     
     //그래프 초기화 기능 메소드
     public func reset() {
-        guard let layer = self.layer as? CAShapeLayer else { return }
         graphSwipeAnimation = false
-        aPoint?.resetToValue(nil)
-        bPoint?.resetToValue(nil)
-        cPoint?.resetToValue(nil)
-        layer.path = makePath().aPath
+        aPoint.resetToValue(nil)
+        bPoint.resetToValue(nil)
+        cPoint.resetToValue(nil)
     }
     
     func gyroListGraphShow() {
@@ -100,9 +98,9 @@ class GraphView: UIView {
         }
         
                 // 새 좌표 업데이트
-        aPoint?.write(aValue)
-        bPoint?.write(bValue)
-        cPoint?.write(cValue)
+        aPoint.write(aValue)
+        bPoint.write(bValue)
+        cPoint.write(cValue)
         
         // 애니메이션이 시작되기 전에 새 포인트의 경로를 설정하게 되면 애니메이션이 매끄럽지 않아, 시간 차를 두었다
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) { [weak self] in
@@ -115,10 +113,10 @@ class GraphView: UIView {
     
     //경로 값을 이용해 선을 그린다
     private func makePath() -> (aPath: CGPath, bPath: CGPath, cPath: CGPath, xInterval: CGFloat) {
-        guard let aPoint = aPoint, let bPoint = bPoint, let cPoint = cPoint else {
-            (layer as? CAShapeLayer)?.path = nil
-            return (UIBezierPath().cgPath, UIBezierPath().cgPath, UIBezierPath().cgPath, 0)
-        }
+//        guard let aPoint = aPoint, let bPoint = bPoint, let cPoint = cPoint else {
+//            (layer as? CAShapeLayer)?.path = nil
+//            return (UIBezierPath().cgPath, UIBezierPath().cgPath, UIBezierPath().cgPath, 0)
+//        }
 
         let xInterval = bounds.width / (CGFloat(aPoint.count) - 1)
         let range = minValue - maxValue
