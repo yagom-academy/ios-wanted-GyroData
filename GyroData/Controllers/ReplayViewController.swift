@@ -103,14 +103,6 @@ class ReplayViewController: UIViewController {
         configure()
     }
     
-//    @objc func playGraph() {
-//
-//    }
-//
-//    @objc func deleteData() {
-//
-//    }
-    
     func configure() {
         graphViewMaker.delegate = self
 
