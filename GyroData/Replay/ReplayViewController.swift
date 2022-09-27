@@ -102,9 +102,7 @@ class ReplayViewController: UIViewController {
         self.navigationController?.navigationBar.isHidden = true
         self.setupLayouts()
         self.btnAddTarget()
-//        self.setupGraphView()
-        self.dummyTestViewShow()
-//        dummyTestViewShow()
+        injectMeasureData()
         if pageTypeName == .view {
             print("측정 데이터 보임")
             self.graphView.gyroListGraphShow()
@@ -147,7 +145,7 @@ class ReplayViewController: UIViewController {
         
         self.graphView.snp.makeConstraints {
             $0.top.equalTo(self.stateLabel.snp.bottom).offset(30)
-            $0.height.equalTo(200)
+            $0.height.equalTo(300)
             $0.leading.trailing.equalToSuperview().inset(30)
         }
         
