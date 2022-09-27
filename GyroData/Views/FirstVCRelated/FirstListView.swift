@@ -154,15 +154,9 @@ extension FirstListView: UIScrollViewDelegate {
         let contentHeight = scrollView.contentSize.height
         let height = scrollView.frame.height
         
-<<<<<<< HEAD
-        if offsetY > (contentHeight - height) || contentHeight == .zero {
-            if !viewModel.isPaging && viewModel.isScrollAvailable() && !viewModel.isEmptyTotalMotionTasks() {
-                viewModel.didReceiveStartPaging()
-=======
         if offsetY > (contentHeight - height) {
             if !self.viewModel.isPaging && self.viewModel.isScrollAvailable() && !self.viewModel.isEmptyTotalMotionTasks() {
                 self.viewModel.didReceiveStartPaging()
->>>>>>> 7415fc7 (feat: Delete 버튼 눌렀을 때 indexPath 에 따른 해당 motion 전달)
             }
         }
     }
