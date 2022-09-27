@@ -13,7 +13,7 @@ class MainViewController: UIViewController {
     let manager = CoreDataManager.shared
     let FileManager = MeasureFileManager.shared
     var count = 0
-    var dataCOunt = 0
+    var dataCount = 0
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         view.addSubview(tableView)
@@ -56,16 +56,16 @@ class MainViewController: UIViewController {
     
     //실행시 기존데이터 로드
     private func loadData() {
-        let data = manager.fetchTen(offset: datasource.count)
+        let data = manager.fetch(offset: datasource.count)
         datasource.append(contentsOf: data)
-        dataCOunt = data.count
+        dataCount = data.count
     }
 }
 
 extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if datasource.count != count {
-            count += dataCOunt
+            count += dataCount
         }
         guard indexPath.row == count - 1 else {return}
         loadData()
@@ -120,7 +120,6 @@ extension MainViewController: UITableViewDelegate {
         let data = datasource[indexPath.row]
         vc.pageTypeName = .view
         vc.measureData = data
-//        let measure = Measure(
         self.navigationController?.pushViewController(vc, animated: true)
         print(datasource[indexPath.row].id!)
     }

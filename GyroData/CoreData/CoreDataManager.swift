@@ -33,7 +33,7 @@ class CoreDataManager {
         return  NSEntityDescription.entity(forEntityName: "GyroModel", in: context)
     }
     
-    func fetchTen(offset:Int) -> [GyroModel] {
+    func fetch(offset:Int) -> [GyroModel] {
         do {
             request.fetchLimit = 10
             request.fetchOffset = offset

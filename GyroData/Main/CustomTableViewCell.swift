@@ -50,7 +50,7 @@ class CustomTableViewCell: UITableViewCell {
             make.bottom.equalTo(title.snp.top).offset(-10)
         }
         title.snp.makeConstraints { make in
-            make.bottom.equalTo(contentView.snp.bottom)
+            make.bottom.equalTo(contentView.snp.bottom).offset(-10)
             make.leading.equalTo(contentView.snp.leading).offset(20)
         }
         second.snp.makeConstraints { make in
