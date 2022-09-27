@@ -22,7 +22,7 @@ class FirstListViewModel {
         return _motionTasks
     }
     var didReceiveViewModel: ( ((Void)) -> () )?
-    var propagateFetchMotionTasks: ( ((Void)) -> () )?
+    var propagateFetchMotionTasks: () -> () = { }
     var isPaging: Bool {
         return _isPaging
     }
@@ -59,7 +59,13 @@ class FirstListViewModel {
             guard let self = self else { return }
             self._currentTaskIndex = 0
             self._totalMotionTasks = motionTasks
-            self._motionTasks = []
+            if !self.isEmptyTotalMotionTasks() {
+                self._currentTaskIndex = min(self._totalMotionTasks.count-1, self._currentTaskIndex + 10)
+                self._motionTasks = Array<MotionTask>(self._totalMotionTasks[0...self._currentTaskIndex])
+            } else {
+                self._motionTasks = []
+            }
+            self.propagateFetchMotionTasks()
         }
         didReceiveStartPaging = {
             self._isPaging = true
@@ -73,6 +79,7 @@ class FirstListViewModel {
             } else {
                 self._motionTasks = []
             }
+            self.propagateFetchMotionTasks()
         }
     }
     

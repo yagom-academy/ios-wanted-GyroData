@@ -136,12 +136,21 @@ class SecondModel {
     func saveMotionMeasures() async {
         do {
             self._isLoading = true
-            // TODO: FileManager 저장 로직을 넣고, 그 값을 path에 넣어야합니다.
+            let date = Date()
+            let fileName = date.asString(.fileName)
+            let time = round((Float(_motionMeasures.count) * 0.1) * 10) / 10
+            let motionFile = MotionFile(
+                fileName: fileName,
+                type: segmentViewModel.selectedType.rawValue,
+                x_axis: _motionMeasures.map { Float($0.x) },
+                y_axis: _motionMeasures.map { Float($0.y) },
+                z_axis: _motionMeasures.map { Float($0.z) })
+            try await self.repository.saveToFileManager(file: motionFile)
             let motionTask = MotionTask(
                 type: segmentViewModel.selectedType.rawValue,
                 time: Float(_motionMeasures.count) * 0.1,
-                date: Date(),
-                path: "")
+                date: date,
+                path: fileName)
             _ = try await self.repository.insertToCoreData(motion: motionTask)
             self._isLoading = false
             let okAction = AlertActionDependency(title: "확인") { _ in
