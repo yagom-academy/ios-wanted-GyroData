@@ -62,7 +62,7 @@ class ReplayViewController: UIViewController {
         return label
     }()
     
-    /// 타이머 시간을 표시할 라벨
+    /// 타이머 시간을 표시할 라벨 
     lazy var timeLabel: UILabel = {
         let label = CommonUIModule().creatLabel(text: "0.0", color: .black, alignment: .right, fontSize: 20, fontWeight: .regular)
         return label
