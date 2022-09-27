@@ -17,6 +17,12 @@
 
 ## 각 팀원의 기여 파트
 
+<p>
+    <img width="170" height="220" src="https://user-images.githubusercontent.com/33388081/192535202-04ea588c-6557-4f7c-8f8f-3e6f06733049.jpeg">
+    <img width="170" height="220" src="">
+    <img width="170" height="220" src="">
+</p>
+
 - 강민교(Mango)
     - MeasurementViewController UI 코드 구현
     - 센서 측정 기능 구현
