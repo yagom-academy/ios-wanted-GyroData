@@ -105,13 +105,16 @@ final class MeasureViewController: UIViewController {
     
     @objc
     private func didTapMeasureButton() {
-        self.coreMotionService.startMeasurement(of: MotionType(rawValue: segmentControl.selectedSegmentIndex) ?? .acc,
-                                                completion: { self.changeButtonsState() })
+        let type = MotionType(rawValue: segmentControl.selectedSegmentIndex) ?? .acc
+        coreMotionService.startMeasurement(of: type) {
+            self.changeButtonsState()
+        }
     }
     
     @objc
     private func didTapStopButton() {
-        self.coreMotionService.stopMeasurement(of: MotionType(rawValue: segmentControl.selectedSegmentIndex) ?? .acc)
+        let type = MotionType(rawValue: segmentControl.selectedSegmentIndex) ?? .acc
+        coreMotionService.stopMeasurement(of: type)
     }
     
     private func changeButtonsState() {
