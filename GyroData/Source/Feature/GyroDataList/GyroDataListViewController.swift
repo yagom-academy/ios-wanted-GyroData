@@ -116,9 +116,7 @@ extension GyroDataListViewController:  UITableViewDelegate, UITableViewDataSourc
         guard let cell = tableView.dequeueReusableCell(withIdentifier: GyroDataListTableViewCell.identifier, for: indexPath) as? GyroDataListTableViewCell
         else { return UITableViewCell() }
 
-        cell.dataTypeLabel.text = motionDataArray[indexPath.row].dataType
-        cell.dateLabel.text = motionDataArray[indexPath.row].date
-        cell.timeLabel.text = motionDataArray[indexPath.row].measureTime
+        cell.setLabel(motionDataArray[indexPath.row])
 
         return cell
     }

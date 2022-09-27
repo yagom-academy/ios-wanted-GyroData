@@ -236,7 +236,7 @@ class MeasureDataViewController: UIViewController {
                         self.gyroView.getData(x: x, y: y, z: z)
      
                         if abs(x) > max || abs(y) > max || abs(z) > max {
-                            self.accView.isOverflow = true
+                            self.gyroView.isOverflow = true
                             Constants.calibration *= 1.2
                             max *= 1.2
                             self.setTextsIndicateLabels(max: max, min: -max)

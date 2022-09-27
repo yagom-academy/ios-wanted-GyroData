@@ -53,6 +53,12 @@ class GyroDataListTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func setLabel(_ motionData: MotionData) {
+        dataTypeLabel.text = motionData.dataType
+        dateLabel.text = motionData.date
+        timeLabel.text = motionData.measureTime
+    }
+    
     private func setLayouts() {
         addViews()
         setConstraints()

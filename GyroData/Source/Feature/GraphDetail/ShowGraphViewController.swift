@@ -12,10 +12,10 @@ class ShowGraphViewController: UIViewController {
     var motionInfo : MotionInfo?
     
     lazy var reviewView : Graph = {
-        let xPoints = motionInfo!.motionX
-        let yPoints = motionInfo!.motionY
-        let zPoints = motionInfo!.motionZ
-        let view = Graph(id: .show, xPoints: xPoints, yPoints: yPoints, zPoints: zPoints)
+        let xPoints = motionInfo?.motionX
+        let yPoints = motionInfo?.motionY
+        let zPoints = motionInfo?.motionZ
+        let view = Graph(id: .show, xPoints: xPoints ?? [], yPoints: yPoints ?? [], zPoints: zPoints ?? [])
 
         view.drawable = true
         view.measuredTime = (motionInfo?.motionX.count)!
@@ -92,8 +92,8 @@ class ShowGraphViewController: UIViewController {
     }
     
     func extractMaxValue(_ motion:[Double]) -> String {
-        let positiveMax = motion.max()!
-        let negativeMax = motion.min()!
+        let positiveMax = motion.max() ?? 0.0
+        let negativeMax = motion.min() ?? 0.0
         return String(format:"%.2f", abs(positiveMax) > abs(negativeMax) ? positiveMax : negativeMax )
     }
 

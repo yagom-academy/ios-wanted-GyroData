@@ -11,7 +11,7 @@ class FileService {
 
     static let shared = FileService()
 
-    let documentUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+    let documentUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
 
     func saveJSON(data: MotionInfo) throws {
         let jsonEncoder = JSONEncoder()
