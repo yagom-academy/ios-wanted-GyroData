@@ -1,37 +1,31 @@
 # README
-
-Created: September 25, 2022 7:15 PM
-Last Edited Time: September 28, 2022 3:31 PM
-Status: In Progress
-Type: Architecture Overview
-
 # Gyro Test App
 
----
-
 ## 팀원
-
-<img src="images/asdf.jpg" width="30%"></img>
-
-- 한경수
-    - YagomAcademy: Eric
-    - Discord: Eric
-    
-
-<img src="images/1.jpeg" width="30%"></img>
-
-- 김승찬
-    - YagomAcademy: Channy
-    - Discord: Channy
-    
-
-<img src="images/IMG_4426121212.jpg" width="30%"></img>
-
-- 지준영
-    - YagomAcademy: JunYoungJee
-    - Discord: Bill
-
----
+<table style = "width: 200px">
+    <tr align="center">
+        <td><B>한경수<B></td>
+        <td><B>김승찬<B></td>
+        <td><B>지준영<B></td>
+    </tr>
+    <tr align="center">
+        <td>
+            <img src="images/asdf.jpg" width="30%">
+            <br>
+            <a href="https://github.com/Eric-HanGyeongSoo"><I>Eric (Eric)</I></a>
+        </td>
+        <td>
+            <img src="https://github.com/gelb2/ios-wanted-GyroData/blob/main/images/1.jpeg?raw=true" width="30%">
+            <br>
+            <a href="https://github.com/seungchann"><I>Channy (Channy)</I></a>
+        </td>
+        <td>
+            <img src="images/IMG_4426121212.jpg" width="15%">
+            <br>
+            <a href="https://github.com/gelb2"><I>JunYoungJee (Bill)</I></a>
+        </td>
+    </tr>
+</table>
 
 # 기본구조
 
