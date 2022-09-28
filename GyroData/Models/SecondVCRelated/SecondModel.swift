@@ -115,9 +115,7 @@ class SecondModel {
         
         controlViewModel.propagateDidTapStopButton = { [weak self] in
             guard let self else { return }
-            let type = self.segmentViewModel.selectedType
-            self.motionManager.stopUpdate(type)
-            self._isMeasuring = false
+            self.stopMeasuring()
         }
         
         motionManager.gyroHandler = { [weak self] data, error in
@@ -127,7 +125,9 @@ class SecondModel {
                 let self
             else { return }
             self._motionMeasures.append(MotionMeasure(data))
-            debugPrint(MotionMeasure(data))
+            if self._motionMeasures.count >= 600 {
+                self.stopMeasuring()
+            }
         }
         
         motionManager.accHandler = { [weak self] data, error in
@@ -137,7 +137,9 @@ class SecondModel {
                 let self
             else { return }
             self._motionMeasures.append(MotionMeasure(data))
-            debugPrint(MotionMeasure(data))
+            if self._motionMeasures.count >= 600 {
+                self.stopMeasuring()
+            }
         }
     }
     
@@ -175,5 +177,11 @@ class SecondModel {
             let alertDependancy = AlertDependency(title: nil, message: error.localizedDescription, preferredStyle: .alert, actionSet: [okAction])
             self.routeSubject(.alert(alertDependancy))
         }
+    }
+    
+    func stopMeasuring() {
+        let type = self.segmentViewModel.selectedType
+        self.motionManager.stopUpdate(type)
+        self._isMeasuring = false
     }
 }
