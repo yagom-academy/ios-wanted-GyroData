@@ -59,7 +59,7 @@ extension FileManager {
     }
     
     @discardableResult
-    func removeMotionFile(fileName name: String) async throws -> Bool {
+    func removeMotionFile(name: String) async throws -> Bool {
         let documentURL = self.urls(for: .documentDirectory, in: .userDomainMask)[0]
         let directoryURL = documentURL.appendingPathComponent("MotionData")
         let fileURL = directoryURL.appendingPathComponent("\(name).json")
