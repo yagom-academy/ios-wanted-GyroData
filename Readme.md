@@ -2,25 +2,25 @@
 # Gyro Test App
 
 ## 팀원
-<table style = "width: 200px">
+<table>
     <tr align="center">
         <td><B>한경수<B></td>
         <td><B>김승찬<B></td>
         <td><B>지준영<B></td>
     </tr>
     <tr align="center">
-        <td>
-            <img src="images/asdf.jpg" width="30%">
+        <td width= 170px>
+            <img src="images/asdf.jpg" width="60%">
             <br>
             <a href="https://github.com/Eric-HanGyeongSoo"><I>Eric (Eric)</I></a>
         </td>
-        <td>
-            <img src="https://github.com/gelb2/ios-wanted-GyroData/blob/main/images/1.jpeg?raw=true" width="30%">
+        <td width= 170px>
+            <img src="https://github.com/gelb2/ios-wanted-GyroData/blob/main/images/1.jpeg?raw=true" width="60%">
             <br>
-            <a href="https://github.com/seungchann"><I>Channy (Channy)</I></a>
+            <a href="https://github.com/seungchann"><I>Channy(Channy)</I></a>
         </td>
-        <td>
-            <img src="images/IMG_4426121212.jpg" width="15%">
+        <td width= 170px>
+            <img src="images/IMG_4426121212.jpg" width="60%">
             <br>
             <a href="https://github.com/gelb2"><I>JunYoungJee (Bill)</I></a>
         </td>
