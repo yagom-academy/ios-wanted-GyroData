@@ -31,10 +31,17 @@ class ThirdControlViewModel {
         }
     }
     
+    var propagateIsPlaying: (Bool) -> () = { isPlaying in } {
+        didSet {
+            propagateIsPlaying(_isPlaying)
+        }
+    }
+    
     // MARK: Properties
     private var _isPlaying: Bool = false {
         didSet {
             isPlayingSource(_isPlaying)
+            propagateIsPlaying(_isPlaying)
         }
     }
     private var _currentTime: Float = 0 {
