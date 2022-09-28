@@ -25,6 +25,9 @@ class GraphViewModel {
     
     //properties
     private var privateDataSource: [ValueInfo] = []
+    var xMax: Double = .zero
+    var yMax: Double = .zero
+    var zMax: Double = .zero
     
     init() {
         bind()
@@ -37,6 +40,7 @@ class GraphViewModel {
         //데이터가 한 틱씩 들어오는 경우. ex. 실시간측정 + playType
         didReceiveTickData = { [weak self] measure in
             guard let calculatedValue = self?.calculateValue(value: measure) else { return }
+            self?.updateMaxValues(measures: measure)
             self?.privateDataSource = calculatedValue
             self?.populateTickData()
         }
@@ -44,12 +48,14 @@ class GraphViewModel {
         //한번에 모든 데이터가 들어오는 경우. ex. viewType
         didReceiveWholePacketData = { [weak self] measure in
             guard let calculatedValue = self?.calculateValue(value: measure) else { return }
+            self?.updateMaxValues(measures: measure)
             self?.privateDataSource = calculatedValue
             self?.populateWholePacketData()
         }
         
         didReceiveRemoveAll = { [weak self] in
             self?.privateDataSource.removeAll()
+            self?.removeMaxValues()
             self?.populateRemoveAll()
         }
     }
@@ -65,6 +71,20 @@ class GraphViewModel {
             return valueInfo
         }
         return newValue
+    }
+    
+    private func updateMaxValues(measures: [MotionMeasure]) {
+        measures.forEach { measure in
+            xMax = max(xMax, abs(measure.x))
+            yMax = max(yMax, abs(measure.y))
+            zMax = max(zMax, abs(measure.z))
+        }
+    }
+    
+    private func removeMaxValues() {
+        xMax = .zero
+        yMax = .zero
+        zMax = .zero
     }
 }
 

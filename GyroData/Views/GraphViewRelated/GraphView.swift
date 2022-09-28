@@ -64,7 +64,7 @@ enum DrawMode {
     case whole
 }
 
-class GraphView: UIView {
+class GraphView: UIView, GraphViewStyling {
     
     //input
 
@@ -74,7 +74,11 @@ class GraphView: UIView {
     //properties
     var viewModel: GraphViewModel = GraphViewModel()
     var drawMode: DrawMode = DrawMode.tick
-    var maxLabel = UILabel()
+    var graphMaxLabel = UILabel()
+    var stackView = UIStackView()
+    var xMaxLabel = UILabel()
+    var yMaxLabel = UILabel()
+    var zMaxLabel = UILabel()
     
     //Point Properties for calculating Path's Position
     
@@ -126,9 +130,9 @@ class GraphView: UIView {
             drawXpath()
             drawYpath()
             drawZpath()
-            strokePaths()
             drawPathIsNeeded = false
         }
+        strokePaths()
         updateMaxLabel()
     }
     
@@ -272,22 +276,38 @@ class GraphView: UIView {
     }
     
     func updateMaxLabel() {
-        maxLabel.text = "max: \(round(yAxisBound) / 100)"
+        graphMaxLabel.text = "graphMax: \(round(yAxisBound) / 100)"
+        xMaxLabel.text = "xMax(abs): \(viewModel.xMax.roundUpTo(decimalPlaces: 2))"
+        yMaxLabel.text = "yMax(abs): \(viewModel.yMax.roundUpTo(decimalPlaces: 2))"
+        zMaxLabel.text = "zMax(abs): \(viewModel.zMax.roundUpTo(decimalPlaces: 2))"
     }
 }
 
 extension GraphView: Presentable {
     func initViewHierarchy() {
-        self.addSubview(maxLabel)
+        self.addSubview(graphMaxLabel)
+        self.addSubview(stackView)
         
-        maxLabel.translatesAutoresizingMaskIntoConstraints = false
+        stackView.addArrangedSubview(xMaxLabel)
+        stackView.addArrangedSubview(yMaxLabel)
+        stackView.addArrangedSubview(zMaxLabel)
+        
+        graphMaxLabel.translatesAutoresizingMaskIntoConstraints = false
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         
         var constraints: [NSLayoutConstraint] = []
         defer { NSLayoutConstraint.activate(constraints) }
         
         constraints += [
-            maxLabel.topAnchor.constraint(equalTo: self.topAnchor),
-            maxLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            graphMaxLabel.topAnchor.constraint(equalTo: self.topAnchor),
+            graphMaxLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+        ]
+        
+        constraints += [
+            stackView.topAnchor.constraint(equalTo: graphMaxLabel.bottomAnchor),
+            stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            stackView.heightAnchor.constraint(equalToConstant: 12),
         ]
     }
     
@@ -296,8 +316,11 @@ extension GraphView: Presentable {
         xPath.lineWidth = 1 //default
         yPath.lineWidth = 1 //default
         zPath.lineWidth = 1 //default
-        maxLabel.font = .appleSDGothicNeo(weight: .regular, size: 10)
-        maxLabel.textColor = .systemPink
+        graphMaxLabel.addStyles(style: graphMaxLabelStyling)
+        stackView.addStyles(style: stackViewStyling)
+        xMaxLabel.addStyles(style: xMaxLabelStyling)
+        yMaxLabel.addStyles(style: yMaxLabelStyling)
+        zMaxLabel.addStyles(style: zMaxLabelStyling)
     }
     
     func bind() {
