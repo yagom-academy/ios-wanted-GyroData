@@ -21,7 +21,7 @@ extension GraphViewStyling {
     var stackViewStyling: (UIStackView) -> () {
         {
             $0.axis = .horizontal
-            $0.distribution = .fillEqually
+            $0.distribution = .equalSpacing
         }
     }
     
