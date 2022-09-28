@@ -20,7 +20,7 @@
             <a href="https://github.com/seungchann"><I>Channy(Channy)</I></a>
         </td>
         <td width= 170px>
-            <img src="images/IMG_4426121212.jpg" width="60%">
+            <img src="images/IMG_4426121212.jpg" width="73%">
             <br>
             <a href="https://github.com/gelb2"><I>JunYoungJee (Bill)</I></a>
         </td>
