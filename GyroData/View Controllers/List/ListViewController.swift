@@ -23,11 +23,21 @@ final class ListViewController: UIViewController {
 
     private lazy var measureButton = UIBarButtonItem(title: "측정", style: .plain, target: self, action: #selector(didTapMeasureButton))
 
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .large)
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        indicator.hidesWhenStopped = true
+        indicator.stopAnimating()
+        return indicator
+    }()
+
     private lazy var coreDataService: CoreDataService = {
         let container = appDelegate.coreDataStack.persistentContainer
         let service = CoreDataService(with: container, fetchedResultsControllerDelegate: self)
         return service
     }()
+
+    private var isLoading: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +54,7 @@ final class ListViewController: UIViewController {
     
     private func configureLayout() {
         view.addSubview(tableView)
+        view.addSubview(activityIndicator)
         view.backgroundColor = .systemBackground
 
         let safeAreaLayoutGuide = view.safeAreaLayoutGuide
@@ -51,7 +62,10 @@ final class ListViewController: UIViewController {
             tableView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
+            tableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
+
+            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor),
         ])
     }
     
@@ -59,6 +73,29 @@ final class ListViewController: UIViewController {
     private func didTapMeasureButton() {
         let measureViewController = MeasureViewController()
         navigationController?.pushViewController(measureViewController, animated: true)
+    }
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offset = tableView.contentOffset.y
+        let contentHeight = tableView.contentSize.height
+
+        if offset > contentHeight - tableView.bounds.size.height {
+            if !isLoading {
+                loadMoreData()
+            }
+        }
+    }
+
+    private func loadMoreData() {
+        isLoading = true
+        activityIndicator.startAnimating()
+        coreDataService.loadMoreData() {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.activityIndicator.stopAnimating()
+                self.tableView.reloadData()
+                self.isLoading = false
+            }
+        }
     }
 }
 

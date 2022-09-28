@@ -25,7 +25,8 @@ class CoreDataService {
         fetchRequest.sortDescriptors = [
             NSSortDescriptor(key: #keyPath(CDMotionData.date), ascending: true),
         ]
-        fetchRequest.fetchBatchSize = 10
+        fetchRequest.fetchOffset = 0
+        fetchRequest.fetchLimit = 1
         let controller = NSFetchedResultsController(
             fetchRequest: fetchRequest,
             managedObjectContext: persistentContainer.viewContext,
@@ -40,6 +41,17 @@ class CoreDataService {
         }
         return controller
     }()
+
+    func loadMoreData(completion: (() -> Void)? = nil) {
+        do {
+            NSFetchedResultsController<NSFetchRequestResult>.deleteCache(withName: nil)
+            fetchedResultsController.fetchRequest.fetchLimit += 10
+            try fetchedResultsController.performFetch()
+        } catch {
+            fatalError(#function + error.localizedDescription)
+        }
+        completion?()
+    }
     
     func add(
         _ motionData: GyroData,
