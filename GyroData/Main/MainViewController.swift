@@ -87,20 +87,20 @@ extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 75
     }
-    
     //SwipeAction
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let playAction = UIContextualAction(style: .normal, title:"Play"){ (UIContextualAction, UIView, success: @escaping (Bool) -> Void) in
-            print("paly 클릭 됨")
             
-            let ReplayViewController = ReplayViewController()
-            self.navigationController?.pushViewController(ReplayViewController, animated: true)
+            let vc = ReplayViewController()
+            let data = self.datasource[indexPath.row]
+            vc.pageTypeName = .play
+            vc.measureData = data
+            self.navigationController?.pushViewController(vc, animated: true)
             success(true)
         }
         
         // 코어데이터 제거
         let deleteAction = UIContextualAction(style: .normal, title: "Delete") { (UIContextualAction, UIView, success: @escaping (Bool) -> Void) in
-            print("delete 클릭 됨")
             self.manager.delete(object: self.datasource[indexPath.row])
             self.datasource.remove(at: indexPath.row)
             tableView.reloadData()
@@ -116,8 +116,10 @@ extension MainViewController: UITableViewDataSource {
 extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let ReplayViewController = ReplayViewController()
-        self.navigationController?.pushViewController(ReplayViewController, animated: true)
-        print(datasource[indexPath.row].id!)
+        let vc = ReplayViewController()
+        let data = datasource[indexPath.row]
+        vc.pageTypeName = .view
+        vc.measureData = data
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
