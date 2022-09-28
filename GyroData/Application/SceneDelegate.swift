@@ -22,7 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         self.window = UIWindow(windowScene: windowScene)
 
-        let rootViewController = ViewController()
+        let rootViewController = MotionDataListViewController()
 
         let navigationController = UINavigationController(rootViewController: rootViewController)
 
