@@ -161,7 +161,6 @@ class ReplayViewController: UIViewController {
                 $0.centerX.equalToSuperview()
             }
         }
-        
     }
     
     private func btnAddTarget() {
@@ -169,7 +168,9 @@ class ReplayViewController: UIViewController {
         playButton.addTarget(self, action: #selector(playButtonTap(_:)), for: .touchUpInside)
     }
     
-    private func injectMeasureData() { //데이터만 주기
+    private func injectMeasureData() {
+        //실기기 테스트가 안되어 미리 측정된 json 파일로 테스트
+        let dummyReslut = JsonFetchManager.shared.request(id: "D1CE2BE2-1BD2-40AD-9A4A-BEA7C89E5AB2")
         let result = MeasureFileManager.shared.loadFile(id: measureData.id ?? "")
         switch result {
         case .success(let data):
@@ -192,9 +193,8 @@ class ReplayViewController: UIViewController {
             var idx = 0
             timer = Timer.scheduledTimer(withTimeInterval: 0.1
                                          , repeats: true) { [weak self] (timer) in
-                //랜덤값이 아닌 파일매니저의 값을 받아와서 써야함
                 guard let self = self else { return }
-
+                
                 if self.countDown <= 0 || self.graphView.graphData.count - 1 == idx {
                     timer.invalidate()
                 } else {
@@ -206,8 +206,6 @@ class ReplayViewController: UIViewController {
                     self.countDown -= 1
                     self.startTime += 0.1
                 }
-                
-                
             }
         } else {
             timer?.invalidate()
