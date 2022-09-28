@@ -78,6 +78,13 @@ class ThirdModel {
                 guard let self else { return }
                 self._currentTime = currentTime
             }
+            
+            controlViewModel.propagateIsPlaying = { [weak self] isPlaying in
+                guard let self else { return }
+                if isPlaying {
+                    self.graphViewModel.didReceiveRemoveAll()
+                }
+            }
         }
     }
     
