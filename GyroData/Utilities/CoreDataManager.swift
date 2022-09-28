@@ -81,13 +81,4 @@ class CoreDataManager {
             throw CoreDataError.deleteError
         }
     }
-    
-    func count<T: NSManagedObject>(request: NSFetchRequest<T>) -> Int? {
-        do {
-            let count = try self.context.count(for: request)
-            return count
-        } catch {
-            return nil
-        }
-    }
 }

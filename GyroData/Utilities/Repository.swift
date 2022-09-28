@@ -69,7 +69,7 @@ extension Repository: FileManagerRepositoryProtocol {
     }
     
     func deleteFromFileManager(fileName name: String) async throws {
-        _ = try await FileManager.default.removeMotionFile(fileName: name)
+        _ = try await FileManager.default.removeMotionFile(name: name)
         return
     }
     
