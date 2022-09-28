@@ -13,13 +13,13 @@ class CoreMotionService {
     private let interval = 0.1
     private var timer: Timer?
     private var completion: (() -> Void)? = nil
-    private var resultCompletion: ((MotionDetailData) -> Void)? = nil
+    private var resultCompletion: ((MotionDataItem) -> Void)? = nil
     
-    var motionData: GyroData?
+    var motionData: MotionData?
     
     // MARK: - startMotion
-    func startMeasurement(of type: MotionType, completion: @escaping () -> Void, resultCompletion: @escaping (MotionDetailData) -> Void) {
-        motionData = GyroData(date: Date(), type: type)
+    func startMeasurement(of type: MotionType, completion: @escaping () -> Void, resultCompletion: @escaping (MotionDataItem) -> Void) {
+        motionData = MotionData(date: Date(), type: type)
         self.completion = completion
         self.resultCompletion = resultCompletion
         completion()
@@ -49,7 +49,7 @@ class CoreMotionService {
                     let y = data.acceleration.y
                     let z = data.acceleration.z
                     let tick = Double(timeout) * self.interval
-                    self.resultCompletion?(MotionDetailData(tick: tick, x: x, y: y, z: z))
+                    self.resultCompletion?(MotionDataItem(tick: tick, x: x, y: y, z: z))
                     self.appendItem(tick, x, y, z)
                 }
             })
@@ -67,7 +67,7 @@ class CoreMotionService {
             
             var timeout = 0
 
-            self.timer = Timer(timeInterval: interval, repeats: true, block: { timer in
+            timer = Timer(timeInterval: interval, repeats: true, block: { timer in
                 guard timeout < 600 else {
                     self.stopMeasurement(of: .gyro)
                     return
@@ -78,9 +78,9 @@ class CoreMotionService {
                     let x = data.rotationRate.x
                     let y = data.rotationRate.y
                     let z = data.rotationRate.z
-        
+
                     let tick = Double(timeout) * self.interval
-                    self.resultCompletion?(MotionDetailData(tick: tick, x: x, y: y, z: z))
+                    self.resultCompletion?(MotionDataItem(tick: tick, x: x, y: y, z: z))
                     self.appendItem(tick, x, y, z)
                 }
             })
@@ -94,9 +94,8 @@ class CoreMotionService {
     private func appendItem(_ tick: Double, _ x: Double, _ y: Double, _ z: Double) {
         let digit: Double = 10
         let truncTick = trunc(tick * digit) / digit
-        let item = MotionDetailData(tick: truncTick, x: x, y: y, z: z)
-        self.motionData?.items.append(item)
-        dump(self.motionData!)
+        let item = MotionDataItem(tick: truncTick, x: x, y: y, z: z)
+        motionData?.items.append(item)
     }
 
     func stopMeasurement(of type: MotionType) {

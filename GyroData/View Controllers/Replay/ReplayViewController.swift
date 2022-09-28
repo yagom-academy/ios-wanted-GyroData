@@ -74,6 +74,7 @@ class ReplayViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         configureNavigation()
         configureViews()
         configureLayout()
@@ -104,7 +105,7 @@ class ReplayViewController: UIViewController {
         }
     }
     
-    var motionItems: [MotionDetailData]?
+    var motionItems: [MotionDataItem]?
     private func readMotionDataWithPlay() {
         DispatchQueue.global().async {
             if self.motionItems != nil {

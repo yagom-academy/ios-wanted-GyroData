@@ -11,7 +11,7 @@ class GraphView: UIView {
     var width: Double?
     var height: Double?
     
-    var realtimeData: [MotionDetailData] = [] {
+    var realtimeData: [MotionDataItem] = [] {
         didSet {
             if let width = self.width,
                let height = self.height {
@@ -22,7 +22,7 @@ class GraphView: UIView {
         }
     }
     
-    var storedData: [MotionDetailData] = [] {
+    var storedData: [MotionDataItem] = [] {
         didSet {
             setNeedsDisplay()
         }
@@ -105,8 +105,6 @@ class GraphView: UIView {
             zPath.addLine(to: CGPoint(x: xPosition, y: height / 2 + newData.z * 10))
             zPath.stroke()
             
-            print(#function, xPath.currentPoint, yPath.currentPoint, zPath.currentPoint)
-            
         } else if storedData.isEmpty == false {
             xPath.move(to: CGPoint(x: 0, y: height / 2))
             yPath.move(to: CGPoint(x: 0, y: height / 2))
@@ -127,8 +125,6 @@ class GraphView: UIView {
                 zPath.move(to: zPath.currentPoint)
                 zPath.addLine(to: CGPoint(x: timeInterval * Double(index), y: height / 2 + newData.z * 10))
                 zPath.stroke()
-                
-                print(#function, xPath.currentPoint, yPath.currentPoint, zPath.currentPoint)
             }
         }
         
@@ -140,7 +136,7 @@ class GraphView: UIView {
         self.layer.addSublayer(shapeLayer)
     }
     
-    func setData(data: MotionDetailData) {
+    func setData(data: MotionDataItem) {
         realtimeData.append(data)
     }
 }

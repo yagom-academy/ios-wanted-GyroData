@@ -138,7 +138,7 @@ final class MeasureViewController: UIViewController {
         segmentControl.isEnabled = measureButton.isEnabled
     }
     
-    private func drawMotionData(data: MotionDetailData) {
+    private func drawMotionData(data: MotionDataItem) {
         DispatchQueue.main.async {
             self.graphView.realtimeData.append(data)
         }

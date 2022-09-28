@@ -9,8 +9,6 @@
 ## Index
 - [팀원](#팀원)
 - [구조 및 기능](#구조-및-기능)
-- [고민한 내용](#고민한-내용)
-- [회고](#회고)
 <br>
 <br>
 
@@ -25,39 +23,39 @@
 <br>
 
 ### Extension
-- Date+Extension  
+- Date+Extension   
     Date type을 String type으로 변환
-- UIKit+Extension
+- UIKit+Extension   
     사용자에게 보여질 메시지를 입력받아 알럿을 띄움
 <br>
 
 ### Utils
-- FimeManagerService 
+- FimeManagerService   
     motion data를 JSON형태로 파일에 저장/읽기/삭제 
-- CoreMotionService
+- CoreMotionService  
     장치의 움직임(Acc, Gro) 데이터 획득
-- CoreDataStack
+- CoreDataStack  
     CoreData를 사용하기 위한 환경설정
-- CoreDataService
+- CoreDataService  
     motion data를 저장/읽기/삭제
 <br>
 
 ### Models
-- MotionData ⊃ MotionDataItems
+- MotionData ⊃ MotionDataItems  
     motion data 모델
-- CDMotionData ⊃ CDMotionDataItems
+- CDMotionData ⊃ CDMotionDataItems  
     CoreData로 사용하기 위한 모델 
 <br>
 
 ### Views
-- ListView
-    - ListViewController
-        CoreData의 목록을 표현
-    - ListCell
-- MeasureView
-    - MeasureViewController
-        기기의 움직임을 측정 후 저장
-- ReplayView
-    - ReplayViewController
-        저장된 MotionData를 그래프로 표현
+- ListView  
+    - ListViewController  
+        CoreData의 목록을 표현  
+    - ListCell  
+- MeasureView  
+    - MeasureViewController  
+        기기의 움직임을 측정 후 저장  
+- ReplayView  
+    - ReplayViewController  
+        저장된 MotionData를 그래프로 표현  
 <br>

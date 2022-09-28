@@ -142,11 +142,9 @@ extension ListViewController: UITableViewDelegate {
                 replayViewController.recordDate = recordDate
                 self.navigationController?.pushViewController(replayViewController, animated: true)
             }
-            print(#function)
         }
         playAction.backgroundColor = .systemGreen
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { _, _, handler in
-            // TODO: 데이터를 삭제 (파일매니저)
             self.coreDataService.delete(object)
         }
         let configuration = UISwipeActionsConfiguration(actions: [deleteAction, playAction])

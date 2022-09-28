@@ -54,7 +54,7 @@ class CoreDataService {
     }
     
     func add(
-        _ motionData: GyroData,
+        _ motionData: MotionData,
         context: NSManagedObjectContext,
         shouldSave: Bool = true,
         completion: ((Error?) -> Void)? = nil

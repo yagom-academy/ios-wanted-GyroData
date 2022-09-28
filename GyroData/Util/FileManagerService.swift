@@ -11,7 +11,7 @@ final class FileManagerService {
     private let manager: FileManager = FileManager.default
     private let directoryURL: URL = URL.documentsDirectory.appending(path: "MotionData")
     
-    func write(_ value: GyroData) throws {
+    func write(_ value: MotionData) throws {
         if !manager.fileExists(atPath: directoryURL.relativePath) {
             try manager.createDirectory(at: directoryURL, withIntermediateDirectories: false)
         }
@@ -20,13 +20,13 @@ final class FileManagerService {
         try data.write(to: fileURL)
     }
     
-    func read(with date: Date, completion: @escaping (Result<GyroData, Error>) -> Void) {
+    func read(with date: Date, completion: @escaping (Result<MotionData, Error>) -> Void) {
         do {
             let fileURL = composeURL(from: date, withExtension: "json")
             guard let data = manager.contents(atPath: fileURL.relativePath) else {
                 throw FileManagerServiceError.fileNotFound(name: fileURL.relativePath)
             }
-            let result = try JSONDecoder().decode(GyroData.self, from: data)
+            let result = try JSONDecoder().decode(MotionData.self, from: data)
             completion(.success(result))
         }
         catch {
