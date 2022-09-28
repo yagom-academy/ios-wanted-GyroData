@@ -104,8 +104,8 @@ class FirstModel: SceneActionReceiver {
     
     func removeData(motion: MotionTask) {
         Task {
-            _ = self.repository.deleteFromFileManager(fileName: motion.path)
-            _ = self.repository.deleteFromCoreData(motion: motion)
+            _ = try await self.repository.deleteFromFileManager(fileName: motion.path)
+            _ = try await self.repository.deleteFromCoreData(motion: motion)
             self.motionTasks = self.motionTasks.filter { $0.path != motion.path }
         }
     }
