@@ -26,6 +26,8 @@
 		36FB64F928D8CD1700A87587 /* SceneContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36FB64F828D8CD1700A87587 /* SceneContext.swift */; };
 		36FB64FC28D8CE1D00A87587 /* Presentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36FB64FB28D8CE1D00A87587 /* Presentable.swift */; };
 		36FB64FE28D8CF0500A87587 /* Styling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36FB64FD28D8CF0500A87587 /* Styling.swift */; };
+		46176B7728E3D2EF00E7A390 /* GraphViewStyling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46176B7628E3D2EF00E7A390 /* GraphViewStyling.swift */; };
+		46176B7928E3D55500E7A390 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46176B7828E3D55500E7A390 /* Double+Extension.swift */; };
 		462FB33328DB123D00BC5F04 /* ThirdViewControllerRoutable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462FB33228DB123D00BC5F04 /* ThirdViewControllerRoutable.swift */; };
 		462FB33528DB12A500BC5F04 /* ThirdViewStyling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462FB33428DB12A500BC5F04 /* ThirdViewStyling.swift */; };
 		462FB33728DB160B00BC5F04 /* ThirdInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462FB33628DB160B00BC5F04 /* ThirdInfoView.swift */; };
@@ -102,6 +104,8 @@
 		36FB64F828D8CD1700A87587 /* SceneContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneContext.swift; sourceTree = "<group>"; };
 		36FB64FB28D8CE1D00A87587 /* Presentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presentable.swift; sourceTree = "<group>"; };
 		36FB64FD28D8CF0500A87587 /* Styling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styling.swift; sourceTree = "<group>"; };
+		46176B7628E3D2EF00E7A390 /* GraphViewStyling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphViewStyling.swift; sourceTree = "<group>"; };
+		46176B7828E3D55500E7A390 /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
 		462FB33228DB123D00BC5F04 /* ThirdViewControllerRoutable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdViewControllerRoutable.swift; sourceTree = "<group>"; };
 		462FB33428DB12A500BC5F04 /* ThirdViewStyling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdViewStyling.swift; sourceTree = "<group>"; };
 		462FB33628DB160B00BC5F04 /* ThirdInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdInfoView.swift; sourceTree = "<group>"; };
@@ -263,6 +267,7 @@
 				B0CF0F3E28DA9B9B00596BCF /* FirstViewStyling.swift */,
 				B0CF0F4028DAA07900596BCF /* SecondViewStyling.swift */,
 				462FB33428DB12A500BC5F04 /* ThirdViewStyling.swift */,
+				46176B7628E3D2EF00E7A390 /* GraphViewStyling.swift */,
 			);
 			path = ViewDraw;
 			sourceTree = "<group>";
@@ -274,6 +279,7 @@
 				464FE63B28DB3D9D00C73656 /* UIFont+Extensions.swift */,
 				464FE63D28DB42F300C73656 /* Date+Extension.swift */,
 				64336DE428DC9DD700D56D68 /* FileManager+Extensions.swift */,
+				46176B7828E3D55500E7A390 /* Double+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -518,6 +524,7 @@
 				46E21EBC28DC5F1500593210 /* ThirdInfoViewModel.swift in Sources */,
 				46E21EC228DC5F1500593210 /* MotionTask.swift in Sources */,
 				36FB64F728D8CC7900A87587 /* ThirdViewController.swift in Sources */,
+				46176B7928E3D55500E7A390 /* Double+Extension.swift in Sources */,
 				46E21EC028DC5F1500593210 /* Motion+CoreDataProperties.swift in Sources */,
 				46E21EC428DC5F1500593210 /* SecondModel.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
@@ -558,6 +565,7 @@
 				462FB33528DB12A500BC5F04 /* ThirdViewStyling.swift in Sources */,
 				64FE265B28E1433400BCC5D7 /* FirstListLoadingCell.swift in Sources */,
 				46E21EC328DC5F1500593210 /* SecondSegmentViewModel.swift in Sources */,
+				46176B7728E3D2EF00E7A390 /* GraphViewStyling.swift in Sources */,
 				36FB64FC28D8CE1D00A87587 /* Presentable.swift in Sources */,
 				64336DE828DC9DE400D56D68 /* MotionFile.swift in Sources */,
 				64FE265D28E143A900BCC5D7 /* FirstLoadingCellContentView.swift in Sources */,
@@ -725,7 +733,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = PDF8XXXYH9;
+				DEVELOPMENT_TEAM = U9B2QVCTVS;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GyroData/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -737,7 +745,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.GyroDatatemp;
+				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.GyroData.temp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -754,7 +762,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = PDF8XXXYH9;
+				DEVELOPMENT_TEAM = U9B2QVCTVS;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GyroData/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -766,7 +774,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.GyroDatatemp;
+				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.GyroData.temp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
