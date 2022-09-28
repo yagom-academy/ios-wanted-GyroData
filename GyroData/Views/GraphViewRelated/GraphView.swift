@@ -126,9 +126,9 @@ class GraphView: UIView {
             drawXpath()
             drawYpath()
             drawZpath()
-            strokePaths()
             drawPathIsNeeded = false
         }
+        strokePaths()
         updateMaxLabel()
     }
     
