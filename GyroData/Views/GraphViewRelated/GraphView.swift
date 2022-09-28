@@ -300,13 +300,13 @@ extension GraphView: Presentable {
         
         constraints += [
             graphMaxLabel.topAnchor.constraint(equalTo: self.topAnchor),
-            graphMaxLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            graphMaxLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8),
         ]
         
         constraints += [
             stackView.topAnchor.constraint(equalTo: graphMaxLabel.bottomAnchor),
-            stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8),
+            stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8),
             stackView.heightAnchor.constraint(equalToConstant: 12),
         ]
     }
