@@ -14,6 +14,7 @@
 		63F01BC128D44FC500C53A39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */; };
 		8F45089F2959817300538AE4 /* Accelerate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F45089E2959817300538AE4 /* Accelerate.swift */; };
 		8F4508A1295981F600538AE4 /* Gyroscope.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4508A0295981F600538AE4 /* Gyroscope.swift */; };
+		9B4251D72959843C00837A37 /* Analysisable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4251D62959843C00837A37 /* Analysisable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		63F01BC228D44FC500C53A39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8F45089E2959817300538AE4 /* Accelerate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Accelerate.swift; sourceTree = "<group>"; };
 		8F4508A0295981F600538AE4 /* Gyroscope.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gyroscope.swift; sourceTree = "<group>"; };
+		9B4251D62959843C00837A37 /* Analysisable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analysisable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 			children = (
 				8F45089E2959817300538AE4 /* Accelerate.swift */,
 				8F4508A0295981F600538AE4 /* Gyroscope.swift */,
+				9B4251D62959843C00837A37 /* Analysisable.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -175,6 +178,7 @@
 				63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				8F4508A1295981F600538AE4 /* Gyroscope.swift in Sources */,
+				9B4251D72959843C00837A37 /* Analysisable.swift in Sources */,
 				8F45089F2959817300538AE4 /* Accelerate.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
 			);
