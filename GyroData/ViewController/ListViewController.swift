@@ -7,9 +7,14 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ListViewController: BaseViewController {
+    // MARK: - View
+    // MARK: - Properties
+    // MARK: - LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
+        
     }
+    // MARK: -
 }
 
