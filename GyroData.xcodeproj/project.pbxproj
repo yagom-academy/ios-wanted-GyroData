@@ -16,6 +16,8 @@
 		63F01BBC28D44FC400C53A39 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBA28D44FC400C53A39 /* Main.storyboard */; };
 		63F01BBE28D44FC500C53A39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBD28D44FC500C53A39 /* Assets.xcassets */; };
 		63F01BC128D44FC500C53A39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */; };
+		FFCF8E6829599F8C004C51E5 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCF8E6729599F8C004C51E5 /* DataStore.swift */; };
+		FFCF8E6A2959A231004C51E5 /* GyroItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCF8E692959A231004C51E5 /* GyroItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		63F01BBD28D44FC500C53A39 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		63F01BC028D44FC500C53A39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		63F01BC228D44FC500C53A39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FFCF8E6729599F8C004C51E5 /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
+		FFCF8E692959A231004C51E5 /* GyroItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +71,8 @@
 				63F01BB428D44FC400C53A39 /* AppDelegate.swift */,
 				63F01BB628D44FC400C53A39 /* SceneDelegate.swift */,
 				63F01BB828D44FC400C53A39 /* ViewController.swift */,
+				FFCF8E692959A231004C51E5 /* GyroItem.swift */,
+				FFCF8E6729599F8C004C51E5 /* DataStore.swift */,
 				63F01BBA28D44FC400C53A39 /* Main.storyboard */,
 				63F01BBD28D44FC500C53A39 /* Assets.xcassets */,
 				63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */,
@@ -147,6 +153,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FFCF8E6829599F8C004C51E5 /* DataStore.swift in Sources */,
+				FFCF8E6A2959A231004C51E5 /* GyroItem.swift in Sources */,
 				4517CDB129599DAF00E90429 /* ModelEntity+CoreDataClass.swift in Sources */,
 				63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */,
 				4517CDB229599DAF00E90429 /* ModelEntity+CoreDataProperties.swift in Sources */,
