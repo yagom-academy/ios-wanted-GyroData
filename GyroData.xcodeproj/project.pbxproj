@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4517CDAE29599D7500E90429 /* ModelEntity.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4517CDAC29599D7500E90429 /* ModelEntity.xcdatamodeld */; };
+		4517CDB129599DAF00E90429 /* ModelEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4517CDAF29599DAF00E90429 /* ModelEntity+CoreDataClass.swift */; };
+		4517CDB229599DAF00E90429 /* ModelEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4517CDB029599DAF00E90429 /* ModelEntity+CoreDataProperties.swift */; };
 		63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB428D44FC400C53A39 /* AppDelegate.swift */; };
 		63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB628D44FC400C53A39 /* SceneDelegate.swift */; };
 		63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB828D44FC400C53A39 /* ViewController.swift */; };
@@ -16,6 +19,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4517CDAD29599D7500E90429 /* ModelEntity.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ModelEntity.xcdatamodel; sourceTree = "<group>"; };
+		4517CDAF29599DAF00E90429 /* ModelEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ModelEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		4517CDB029599DAF00E90429 /* ModelEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ModelEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		63F01BB128D44FC400C53A39 /* GyroData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GyroData.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63F01BB428D44FC400C53A39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63F01BB628D44FC400C53A39 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -40,6 +46,8 @@
 		63F01BA828D44FC400C53A39 = {
 			isa = PBXGroup;
 			children = (
+				4517CDAF29599DAF00E90429 /* ModelEntity+CoreDataClass.swift */,
+				4517CDB029599DAF00E90429 /* ModelEntity+CoreDataProperties.swift */,
 				63F01BB328D44FC400C53A39 /* GyroData */,
 				63F01BB228D44FC400C53A39 /* Products */,
 			);
@@ -63,6 +71,7 @@
 				63F01BBD28D44FC500C53A39 /* Assets.xcassets */,
 				63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */,
 				63F01BC228D44FC500C53A39 /* Info.plist */,
+				4517CDAC29599D7500E90429 /* ModelEntity.xcdatamodeld */,
 			);
 			path = GyroData;
 			sourceTree = "<group>";
@@ -138,8 +147,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4517CDB129599DAF00E90429 /* ModelEntity+CoreDataClass.swift in Sources */,
 				63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */,
+				4517CDB229599DAF00E90429 /* ModelEntity+CoreDataProperties.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
+				4517CDAE29599D7500E90429 /* ModelEntity.xcdatamodeld in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -356,6 +368,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		4517CDAC29599D7500E90429 /* ModelEntity.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				4517CDAD29599D7500E90429 /* ModelEntity.xcdatamodel */,
+			);
+			currentVersion = 4517CDAD29599D7500E90429 /* ModelEntity.xcdatamodel */;
+			path = ModelEntity.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 63F01BA928D44FC400C53A39 /* Project object */;
 }
