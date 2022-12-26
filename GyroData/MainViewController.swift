@@ -15,7 +15,8 @@ final class MainViewController: UIViewController {
             MainTableViewCell.self,
             forCellReuseIdentifier: MainTableViewCell.identifier
         )
-        tableView.backgroundColor = .red
+        tableView.rowHeight = 100
+        tableView.separatorStyle = .none
         return tableView
     }()
 
@@ -96,7 +97,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         _ tableView: UITableView,
         numberOfRowsInSection section: Int
     ) -> Int {
-        return 1
+        return 3
     }
     
     func tableView(
@@ -104,8 +105,9 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         cellForRowAt indexPath: IndexPath
     ) -> UITableViewCell {
         let cell = MainTableViewCell()
-        cell.backgroundColor = .black
-        
+        cell.setupTimeLabelText("2022/09/07 15:01:05")
+        cell.setupTypeLabelText("Aaccelometer")
+        cell.setupTypeMeasurementLabelText("100")
         return cell
     }
 }
