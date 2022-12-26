@@ -1,7 +1,7 @@
 ---
-name: "[화면 이름] issue title"
-about: issue 템플릿
-title: ''
+name: "issue template"
+about: ''
+title: "[화면 이름] issue title"
 labels: ''
 assignees: ''
 
