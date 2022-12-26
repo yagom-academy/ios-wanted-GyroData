@@ -2,7 +2,7 @@
 //  CoreDataManager.swift
 //  GyroData
 //
-//  Created by 오경식 on 2022/12/26.
+//  Created by unchain, Ellen J, yeton on 2022/12/26.
 //
 
 import Foundation
@@ -24,4 +24,25 @@ final class CoreDataManager {
     }()
 
     private init() {}
+    
+    func create(model: AnalysisType) {
+        let content = GyroData(context: context)
+        content.setValue(model.x, forKey: "x")
+        content.setValue(model.y, forKey: "y")
+        content.setValue(model.z, forKey: "z")
+        content.setValue(model.measurementTime, forKey: "measurementTime")
+        content.setValue(model.savedAt, forKey: "savedAt")
+        
+        saveContext()
+    }
+    
+    private func saveContext() {
+        if context.hasChanges {
+            do {
+                try context.save()
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+    }
 }
