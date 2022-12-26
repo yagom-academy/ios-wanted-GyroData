@@ -17,6 +17,8 @@
 		7256AD832959832300E14DC6 /* SensorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7256AD822959832300E14DC6 /* SensorType.swift */; };
 		7256AD862959843200E14DC6 /* Gyro+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7256AD842959843200E14DC6 /* Gyro+CoreDataClass.swift */; };
 		7256AD872959843200E14DC6 /* Gyro+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7256AD852959843200E14DC6 /* Gyro+CoreDataProperties.swift */; };
+		7256AD8D2959B29100E14DC6 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7256AD8C2959B29100E14DC6 /* CoreDataStack.swift */; };
+		7256AD8F2959B2B400E14DC6 /* GyroStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7256AD8E2959B2B400E14DC6 /* GyroStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		7256AD822959832300E14DC6 /* SensorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensorType.swift; sourceTree = "<group>"; };
 		7256AD842959843200E14DC6 /* Gyro+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Gyro+CoreDataClass.swift"; sourceTree = "<group>"; };
 		7256AD852959843200E14DC6 /* Gyro+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Gyro+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		7256AD8C2959B29100E14DC6 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		7256AD8E2959B2B400E14DC6 /* GyroStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +134,8 @@
 				7256AD842959843200E14DC6 /* Gyro+CoreDataClass.swift */,
 				7256AD852959843200E14DC6 /* Gyro+CoreDataProperties.swift */,
 				7256AD822959832300E14DC6 /* SensorType.swift */,
+				7256AD8C2959B29100E14DC6 /* CoreDataStack.swift */,
+				7256AD8E2959B2B400E14DC6 /* GyroStore.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -240,8 +246,10 @@
 				45BD401D295977BA00B37A25 /* FileManager.swift in Sources */,
 				7256AD862959843200E14DC6 /* Gyro+CoreDataClass.swift in Sources */,
 				45BD401A2959772000B37A25 /* GyroModel.xcdatamodeld in Sources */,
+				7256AD8D2959B29100E14DC6 /* CoreDataStack.swift in Sources */,
 				63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */,
 				7256AD872959843200E14DC6 /* Gyro+CoreDataProperties.swift in Sources */,
+				7256AD8F2959B2B400E14DC6 /* GyroStore.swift in Sources */,
 				7256AD832959832300E14DC6 /* SensorType.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
