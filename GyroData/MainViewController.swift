@@ -25,6 +25,14 @@ final class MainViewController: UIViewController {
     
     private func setupNavigationBar() {
         navigationItem.title = "목록"
+        let attribute = [
+            NSAttributedString.Key.foregroundColor: UIColor.black,
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 25)
+        ]
+        
+        navigationController?.navigationBar.titleTextAttributes = attribute as [
+            NSAttributedString.Key : Any
+        ]
         
         let rightBarButton = UIBarButtonItem(
             title: "측정",
