@@ -14,6 +14,8 @@
 		63F01BC128D44FC500C53A39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */; };
 		8F45089F2959817300538AE4 /* Accelerate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F45089E2959817300538AE4 /* Accelerate.swift */; };
 		8F4508A1295981F600538AE4 /* Gyroscope.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4508A0295981F600538AE4 /* Gyroscope.swift */; };
+		8F4508A929598C8C00538AE4 /* GyroData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8F4508A729598C8B00538AE4 /* GyroData.xcdatamodeld */; };
+		8F4508AB29598DB500538AE4 /* CoreDataManaged.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4508AA29598DB500538AE4 /* CoreDataManaged.swift */; };
 		9B4251D72959843C00837A37 /* Analysisable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4251D62959843C00837A37 /* Analysisable.swift */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +29,8 @@
 		63F01BC228D44FC500C53A39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8F45089E2959817300538AE4 /* Accelerate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Accelerate.swift; sourceTree = "<group>"; };
 		8F4508A0295981F600538AE4 /* Gyroscope.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gyroscope.swift; sourceTree = "<group>"; };
+		8F4508A829598C8B00538AE4 /* GyroData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GyroData.xcdatamodel; sourceTree = "<group>"; };
+		8F4508AA29598DB500538AE4 /* CoreDataManaged.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManaged.swift; sourceTree = "<group>"; };
 		9B4251D62959843C00837A37 /* Analysisable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analysisable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -60,12 +64,21 @@
 		63F01BB328D44FC400C53A39 /* GyroData */ = {
 			isa = PBXGroup;
 			children = (
+				8F4508A2295988DF00538AE4 /* CoreData */,
 				9B4251D0295964F200837A37 /* Entry */,
 				9B4251D52959842400837A37 /* Model */,
 				9B4251D2295965A400837A37 /* Domain */,
 				9B4251D12959658000837A37 /* SupportFile */,
 			);
 			path = GyroData;
+			sourceTree = "<group>";
+		};
+		8F4508A2295988DF00538AE4 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				8F4508AA29598DB500538AE4 /* CoreDataManaged.swift */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 		9B4251D0295964F200837A37 /* Entry */ = {
@@ -80,6 +93,7 @@
 		9B4251D12959658000837A37 /* SupportFile */ = {
 			isa = PBXGroup;
 			children = (
+				8F4508A729598C8B00538AE4 /* GyroData.xcdatamodeld */,
 				63F01BBD28D44FC500C53A39 /* Assets.xcassets */,
 				63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */,
 				63F01BC228D44FC500C53A39 /* Info.plist */,
@@ -175,6 +189,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F4508A929598C8C00538AE4 /* GyroData.xcdatamodeld in Sources */,
+				8F4508AB29598DB500538AE4 /* CoreDataManaged.swift in Sources */,
 				63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				8F4508A1295981F600538AE4 /* Gyroscope.swift in Sources */,
@@ -319,7 +335,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = RUFP7D8BXB;
+				DEVELOPMENT_TEAM = QW8FL6CWBT;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GyroData/SupportFile/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -346,7 +362,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = RUFP7D8BXB;
+				DEVELOPMENT_TEAM = QW8FL6CWBT;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GyroData/SupportFile/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -388,6 +404,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		8F4508A729598C8B00538AE4 /* GyroData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				8F4508A829598C8B00538AE4 /* GyroData.xcdatamodel */,
+			);
+			currentVersion = 8F4508A829598C8B00538AE4 /* GyroData.xcdatamodel */;
+			path = GyroData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 63F01BA928D44FC400C53A39 /* Project object */;
 }
