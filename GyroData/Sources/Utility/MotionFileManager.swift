@@ -12,19 +12,30 @@ final class MotionFileManager {
     let shared = MotionFileManager()
     private init() {}
     
-    private let manager = FileManager.default
-    private let documentURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+    private let manager: FileManager = FileManager.default
+    private let documentURL: URL = {
+        let documentURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        return documentURL.appending(path: "MotionData")
+    }()
     
 }
 
 extension MotionFileManager {
     
     func save(data: Motion) throws {
+        if manager.fileExists(atPath: documentURL.absoluteString) == false {
+            do {
+                try manager.createDirectory(at: documentURL, withIntermediateDirectories: true)
+            } catch {
+                debugPrint(error)
+                throw MotionFileManagerError.badSave
+            }
+        }
         do {
             let encoder = JSONEncoder()
             let newFileURL = documentURL.appending(path: data.uuid.uuidString + ".json")
-            let json = try encoder.encode(data)
-            try json.write(to: newFileURL)
+            let data = try encoder.encode(data)
+            try data.write(to: newFileURL)
         } catch {
             debugPrint(error)
             throw MotionFileManagerError.badSave
@@ -32,9 +43,12 @@ extension MotionFileManager {
     }
     
     func load(by uuid: UUID) throws -> Motion {
+        let fileURL = documentURL.appending(path: uuid.uuidString + ".json")
+        guard manager.fileExists(atPath: fileURL.absoluteString) == false else {
+            throw MotionFileManagerError.notFound
+        }
         do {
             let decoder = JSONDecoder()
-            let fileURL = documentURL.appending(path: uuid.uuidString + ".json")
             let data = try Data(contentsOf: fileURL)
             let motion = try decoder.decode(Motion.self, from: data)
             return motion
@@ -45,8 +59,11 @@ extension MotionFileManager {
     }
     
     func delete(by uuid: UUID) throws {
+        let fileURL = documentURL.appending(path: uuid.uuidString + ".json")
+        guard manager.fileExists(atPath: fileURL.absoluteString) == false else {
+            throw MotionFileManagerError.badDelete
+        }
         do {
-            let fileURL = documentURL.appending(path: uuid.uuidString + ".json")
             try manager.removeItem(at: fileURL)
         } catch {
             debugPrint(error)
