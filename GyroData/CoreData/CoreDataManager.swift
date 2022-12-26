@@ -25,13 +25,15 @@ final class CoreDataManager {
 
     private init() {}
     
-    func create(model: AnalysisType) {
+    func create(model: [AnalysisType]) {
         let content = GyroData(context: context)
-        content.setValue(model.x, forKey: "x")
-        content.setValue(model.y, forKey: "y")
-        content.setValue(model.z, forKey: "z")
-        content.setValue(model.measurementTime, forKey: "measurementTime")
-        content.setValue(model.savedAt, forKey: "savedAt")
+        model.forEach {
+            content.setValue($0.x, forKey: "x")
+            content.setValue($0.y, forKey: "y")
+            content.setValue($0.z, forKey: "z")
+            content.setValue($0.measurementTime, forKey: "measurementTime")
+            content.setValue($0.savedAt, forKey: "savedAt")
+        }
         
         saveContext()
     }
