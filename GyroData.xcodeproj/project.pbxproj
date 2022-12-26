@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		02432C11295990960035AEDD /* Motion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02432C10295990960035AEDD /* Motion.swift */; };
 		02432C132959909C0035AEDD /* CoreMotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02432C122959909C0035AEDD /* CoreMotionManager.swift */; };
+		02432C172959937D0035AEDD /* CoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02432C162959937D0035AEDD /* CoreDataStorage.swift */; };
+		02432C1A2959938E0035AEDD /* CoreDataStorage.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 02432C182959938E0035AEDD /* CoreDataStorage.xcdatamodeld */; };
+		02432C1F295994930035AEDD /* MotionEntity+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02432C1E295994930035AEDD /* MotionEntity+Mapping.swift */; };
+		02432C222959A38C0035AEDD /* CoreDataMotionStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02432C212959A38C0035AEDD /* CoreDataMotionStorage.swift */; };
+		02432C262959A8420035AEDD /* MotionStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02432C252959A8420035AEDD /* MotionStorage.swift */; };
 		63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB428D44FC400C53A39 /* AppDelegate.swift */; };
 		63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB628D44FC400C53A39 /* SceneDelegate.swift */; };
 		63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB828D44FC400C53A39 /* ViewController.swift */; };
@@ -20,6 +25,11 @@
 /* Begin PBXFileReference section */
 		02432C10295990960035AEDD /* Motion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Motion.swift; sourceTree = "<group>"; };
 		02432C122959909C0035AEDD /* CoreMotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMotionManager.swift; sourceTree = "<group>"; };
+		02432C162959937D0035AEDD /* CoreDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStorage.swift; sourceTree = "<group>"; };
+		02432C192959938E0035AEDD /* MotionEntity.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MotionEntity.xcdatamodel; sourceTree = "<group>"; };
+		02432C1E295994930035AEDD /* MotionEntity+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MotionEntity+Mapping.swift"; sourceTree = "<group>"; };
+		02432C212959A38C0035AEDD /* CoreDataMotionStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataMotionStorage.swift; sourceTree = "<group>"; };
+		02432C252959A8420035AEDD /* MotionStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionStorage.swift; sourceTree = "<group>"; };
 		63F01BB128D44FC400C53A39 /* GyroData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GyroData.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63F01BB428D44FC400C53A39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63F01BB628D44FC400C53A39 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -72,9 +82,38 @@
 		02432C152959910F0035AEDD /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				02432C202959A36A0035AEDD /* CoreDataStorage */,
 				02432C122959909C0035AEDD /* CoreMotionManager.swift */,
 			);
 			path = Utility;
+			sourceTree = "<group>";
+		};
+		02432C202959A36A0035AEDD /* CoreDataStorage */ = {
+			isa = PBXGroup;
+			children = (
+				02432C242959A8210035AEDD /* MotionStorage */,
+				02432C182959938E0035AEDD /* CoreDataStorage.xcdatamodeld */,
+				02432C162959937D0035AEDD /* CoreDataStorage.swift */,
+			);
+			path = CoreDataStorage;
+			sourceTree = "<group>";
+		};
+		02432C232959A7FE0035AEDD /* EntityMapping */ = {
+			isa = PBXGroup;
+			children = (
+				02432C1E295994930035AEDD /* MotionEntity+Mapping.swift */,
+			);
+			path = EntityMapping;
+			sourceTree = "<group>";
+		};
+		02432C242959A8210035AEDD /* MotionStorage */ = {
+			isa = PBXGroup;
+			children = (
+				02432C232959A7FE0035AEDD /* EntityMapping */,
+				02432C212959A38C0035AEDD /* CoreDataMotionStorage.swift */,
+				02432C252959A8420035AEDD /* MotionStorage.swift */,
+			);
+			path = MotionStorage;
 			sourceTree = "<group>";
 		};
 		63F01BA828D44FC400C53A39 = {
@@ -197,11 +236,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02432C172959937D0035AEDD /* CoreDataStorage.swift in Sources */,
 				02432C132959909C0035AEDD /* CoreMotionManager.swift in Sources */,
+				02432C1A2959938E0035AEDD /* CoreDataStorage.xcdatamodeld in Sources */,
 				63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */,
+				02432C222959A38C0035AEDD /* CoreDataMotionStorage.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				02432C11295990960035AEDD /* Motion.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
+				02432C1F295994930035AEDD /* MotionEntity+Mapping.swift in Sources */,
+				02432C262959A8420035AEDD /* MotionStorage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -417,6 +461,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		02432C182959938E0035AEDD /* CoreDataStorage.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				02432C192959938E0035AEDD /* MotionEntity.xcdatamodel */,
+			);
+			currentVersion = 02432C192959938E0035AEDD /* MotionEntity.xcdatamodel */;
+			path = CoreDataStorage.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 63F01BA928D44FC400C53A39 /* Project object */;
 }
