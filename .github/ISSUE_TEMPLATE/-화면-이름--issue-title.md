@@ -1,6 +1,6 @@
 ---
 name: "issue template"
-about: ''
+about: "issue template"
 title: "[화면 이름] issue title"
 labels: ''
 assignees: ''
