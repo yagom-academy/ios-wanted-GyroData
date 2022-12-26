@@ -20,7 +20,7 @@
 
 ### 커밋 규칙
 
->  {[Type]} {#issueNumber} {내용}
+>  [{Type}] {#issueNumber} {내용}
 
 **Type List**
 
