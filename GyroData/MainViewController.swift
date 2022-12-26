@@ -11,7 +11,10 @@ final class MainViewController: UIViewController {
     private let listTableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.register(MainTableViewCell.self , forCellReuseIdentifier: MainTableViewCell.identifier)
+        tableView.register(
+            MainTableViewCell.self,
+            forCellReuseIdentifier: MainTableViewCell.identifier
+        )
         tableView.backgroundColor = .red
         return tableView
     }()
@@ -68,11 +71,18 @@ final class MainViewController: UIViewController {
     
     private func setupTableViewConstraint() {
         NSLayoutConstraint.activate([
-            listTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            listTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            listTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            listTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            listTableView.leadingAnchor.constraint(
+                equalTo: view.leadingAnchor
+            ),
+            listTableView.topAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.topAnchor
+            ),
+            listTableView.trailingAnchor.constraint(
+                equalTo: view.trailingAnchor
+            ),
+            listTableView.bottomAnchor.constraint(
+                equalTo: view.bottomAnchor
+            )
         ])
     }
 }
-
