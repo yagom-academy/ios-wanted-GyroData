@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		05FF01BF2959C7DC0046F874 /* ReplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05FF01BE2959C7DC0046F874 /* ReplayViewController.swift */; };
-		05FF01C12959C7E70046F874 /* ReplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05FF01C02959C7E70046F874 /* ReplayView.swift */; };
 		05FF01BB2959B05D0046F874 /* MeasureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05FF01BA2959B05D0046F874 /* MeasureView.swift */; };
 		05FF01BD2959B0730046F874 /* MeasureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05FF01BC2959B0730046F874 /* MeasureViewController.swift */; };
+		05FF01BF2959C7DC0046F874 /* ReplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05FF01BE2959C7DC0046F874 /* ReplayViewController.swift */; };
+		05FF01C12959C7E70046F874 /* ReplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05FF01C02959C7E70046F874 /* ReplayView.swift */; };
 		18B05FE72959B03D00DC8800 /* GyroTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B05FE62959B03D00DC8800 /* GyroTableView.swift */; };
 		18B05FE92959B0E700DC8800 /* GyroTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B05FE82959B0E700DC8800 /* GyroTableViewCell.swift */; };
 		63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB428D44FC400C53A39 /* AppDelegate.swift */; };
@@ -21,10 +21,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		05FF01BE2959C7DC0046F874 /* ReplayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplayViewController.swift; sourceTree = "<group>"; };
-		05FF01C02959C7E70046F874 /* ReplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplayView.swift; sourceTree = "<group>"; };
 		05FF01BA2959B05D0046F874 /* MeasureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureView.swift; sourceTree = "<group>"; };
 		05FF01BC2959B0730046F874 /* MeasureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureViewController.swift; sourceTree = "<group>"; };
+		05FF01BE2959C7DC0046F874 /* ReplayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplayViewController.swift; sourceTree = "<group>"; };
+		05FF01C02959C7E70046F874 /* ReplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplayView.swift; sourceTree = "<group>"; };
 		18B05FE62959B03D00DC8800 /* GyroTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroTableView.swift; sourceTree = "<group>"; };
 		18B05FE82959B0E700DC8800 /* GyroTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroTableViewCell.swift; sourceTree = "<group>"; };
 		63F01BB128D44FC400C53A39 /* GyroData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GyroData.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -73,11 +73,11 @@
 				05FF01C02959C7E70046F874 /* ReplayView.swift */,
 				18B05FE62959B03D00DC8800 /* GyroTableView.swift */,
 				18B05FE82959B0E700DC8800 /* GyroTableViewCell.swift */,
+				05FF01BA2959B05D0046F874 /* MeasureView.swift */,
+				05FF01BC2959B0730046F874 /* MeasureViewController.swift */,
 				63F01BBD28D44FC500C53A39 /* Assets.xcassets */,
 				63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */,
 				63F01BC228D44FC500C53A39 /* Info.plist */,
-				05FF01BA2959B05D0046F874 /* MeasureView.swift */,
-				05FF01BC2959B0730046F874 /* MeasureViewController.swift */,
 			);
 			path = GyroData;
 			sourceTree = "<group>";

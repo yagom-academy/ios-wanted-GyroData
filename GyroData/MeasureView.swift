@@ -88,23 +88,61 @@ class MeasureView: UIView {
         self.addSubview(stopButton)
         
         NSLayoutConstraint.activate([
-            measurementSegmentedControl.leftAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leftAnchor, constant: 30),
-            measurementSegmentedControl.rightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.rightAnchor, constant: -30),
-            measurementSegmentedControl.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 15),
+            measurementSegmentedControl.leftAnchor.constraint(
+                equalTo: self.safeAreaLayoutGuide.leftAnchor,
+                constant: 30
+            ),
+            measurementSegmentedControl.rightAnchor.constraint(
+                equalTo: self.safeAreaLayoutGuide.rightAnchor,
+                constant: -30
+            ),
+            measurementSegmentedControl.topAnchor.constraint(
+                equalTo: self.safeAreaLayoutGuide.topAnchor,
+                constant: 15
+            ),
             
+            chartsView.leftAnchor.constraint(
+                equalTo: self.safeAreaLayoutGuide.leftAnchor,
+                constant: 30
+            ),
+            chartsView.rightAnchor.constraint(
+                equalTo: self.safeAreaLayoutGuide.rightAnchor,
+                constant: -30
+            ),
+            chartsView.topAnchor.constraint(
+                equalTo: measurementSegmentedControl.bottomAnchor,
+                constant: 30
+            ),
             
-            chartsView.leftAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leftAnchor, constant: 30),
-            chartsView.rightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.rightAnchor, constant: -30),
-            chartsView.topAnchor.constraint(equalTo: measurementSegmentedControl.bottomAnchor, constant: 30),
+            measurementButton.leftAnchor.constraint(
+                equalTo: self.safeAreaLayoutGuide.leftAnchor,
+                constant: 30
+            ),
+            measurementButton.rightAnchor.constraint(
+                equalTo: self.safeAreaLayoutGuide.rightAnchor,
+                constant: -320
+            ),
+            measurementButton.topAnchor.constraint(
+                equalTo: chartsView.bottomAnchor,
+                constant: 40
+            ),
             
-            measurementButton.leftAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leftAnchor, constant: 30),
-            measurementButton.rightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.rightAnchor, constant: -320),
-            measurementButton.topAnchor.constraint(equalTo: chartsView.bottomAnchor, constant: 40),
-            
-            stopButton.leftAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leftAnchor, constant: 30),
-            stopButton.rightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.rightAnchor, constant: -320),
-            stopButton.topAnchor.constraint(equalTo: measurementButton.bottomAnchor, constant: 40),
-            stopButton.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -200),
+            stopButton.leftAnchor.constraint(
+                equalTo: self.safeAreaLayoutGuide.leftAnchor,
+                constant: 30
+            ),
+            stopButton.rightAnchor.constraint(
+                equalTo: self.safeAreaLayoutGuide.rightAnchor,
+                constant: -320
+            ),
+            stopButton.topAnchor.constraint(
+                equalTo: measurementButton.bottomAnchor,
+                constant: 40
+            ),
+            stopButton.bottomAnchor.constraint(
+                equalTo: self.safeAreaLayoutGuide.bottomAnchor,
+                constant: -200
+            ),
         ])
     }
 }

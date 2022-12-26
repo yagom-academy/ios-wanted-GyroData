@@ -23,10 +23,12 @@ final class GyroViewController: UIViewController {
         navigationItem.title = "목록"
         view.backgroundColor = .systemBackground
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "측정",
-                                                            style: .plain,
-                                                            target: self,
-                                                            action: #selector(moveMeasureView))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            title: "측정",
+            style: .plain,
+            target: self,
+            action: #selector(moveMeasureView)
+        )
     }
     
     private func setupDefault() {
@@ -49,42 +51,71 @@ final class GyroViewController: UIViewController {
     }
     
     @objc private func moveMeasureView() {
-        self.navigationController?.pushViewController(MeasureViewController(), animated: true)
+        self.navigationController?.pushViewController(
+            MeasureViewController(),
+            animated: true
+        )
     }
 }
 
 extension GyroViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.navigationController?.pushViewController(ReplayViewController(pageType: ReplayViewType.view), animated: true)
+    func tableView(
+        _ tableView: UITableView,
+        didSelectRowAt indexPath: IndexPath
+    ) {
+        self.navigationController?.pushViewController(
+            ReplayViewController(pageType: ReplayViewType.view),
+            animated: true
+        )
     }
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let playAction = UIContextualAction(style: .normal,
-                                            title: "Play") { action, view, completionHaldler in
-            self.navigationController?.pushViewController(ReplayViewController(pageType: ReplayViewType.play), animated: true)
-            completionHaldler(true)
+
+    func tableView(
+        _ tableView: UITableView,
+        trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
+    ) -> UISwipeActionsConfiguration? {
+        let playAction = UIContextualAction(
+            style: .normal,
+            title: "Play"
+        ) { [weak self] _, _, _ in
+            self?.navigationController?.pushViewController(
+                ReplayViewController(pageType: ReplayViewType.play),
+                animated: true
+            )
         }
         playAction.backgroundColor = .green
         
-        let deleteAction = UIContextualAction(style: .destructive,
-                                              title: "delete") { action, view, completionHaldler in
-            completionHaldler(true)
-        }
+        let deleteAction = UIContextualAction(
+            style: .destructive,
+            title: "delete"
+        ) { _, _, _ in }
+    
         return UISwipeActionsConfiguration(actions: [deleteAction, playAction])
     }
 }
 
 extension GyroViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(
+        _ tableView: UITableView,
+        numberOfRowsInSection section: Int
+    ) -> Int {
         return 3
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: GyroTableViewCell.id) as? GyroTableViewCell ?? GyroTableViewCell()
+    func tableView(
+        _ tableView: UITableView,
+        cellForRowAt indexPath: IndexPath
+    ) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(
+            withIdentifier: GyroTableViewCell.id
+        ) as? GyroTableViewCell ?? GyroTableViewCell()
+
         return cell
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let height = CGFloat(80)
-        return height
+    func tableView(
+        _ tableView: UITableView,
+        heightForRowAt indexPath: IndexPath
+    ) -> CGFloat {
+        return CGFloat(80)
     }
 }

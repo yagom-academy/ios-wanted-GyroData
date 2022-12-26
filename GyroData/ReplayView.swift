@@ -63,18 +63,48 @@ class ReplayView: UIView {
             self.addSubview(graphView)
 
             NSLayoutConstraint.activate([
-                measurementTime.leftAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leftAnchor, constant: 30),
-                measurementTime.rightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.rightAnchor, constant: -30),
-                measurementTime.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 15),
+                measurementTime.leftAnchor.constraint(
+                    equalTo: self.safeAreaLayoutGuide.leftAnchor,
+                    constant: 30
+                ),
+                measurementTime.rightAnchor.constraint(
+                    equalTo: self.safeAreaLayoutGuide.rightAnchor,
+                    constant: -30
+                ),
+                measurementTime.topAnchor.constraint(
+                    equalTo: self.safeAreaLayoutGuide.topAnchor,
+                    constant: 15
+                ),
 
-                pageTypeLabel.leftAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leftAnchor, constant: 30),
-                pageTypeLabel.rightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.rightAnchor, constant: -30),
-                pageTypeLabel.topAnchor.constraint(equalTo: measurementTime.bottomAnchor, constant: 5),
+                pageTypeLabel.leftAnchor.constraint(
+                    equalTo: self.safeAreaLayoutGuide.leftAnchor,
+                    constant: 30
+                ),
+                pageTypeLabel.rightAnchor.constraint(
+                    equalTo: self.safeAreaLayoutGuide.rightAnchor,
+                    constant: -30
+                ),
+                pageTypeLabel.topAnchor.constraint(
+                    equalTo: measurementTime.bottomAnchor,
+                    constant: 5
+                ),
                 
-                graphView.leftAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leftAnchor, constant: 30),
-                graphView.rightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.rightAnchor, constant: -30),
-                graphView.topAnchor.constraint(equalTo: pageTypeLabel.bottomAnchor, constant: 30),
-                graphView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -300)
+                graphView.leftAnchor.constraint(
+                    equalTo: self.safeAreaLayoutGuide.leftAnchor,
+                    constant: 30
+                ),
+                graphView.rightAnchor.constraint(
+                    equalTo: self.safeAreaLayoutGuide.rightAnchor,
+                    constant: -30
+                ),
+                graphView.topAnchor.constraint(
+                    equalTo: pageTypeLabel.bottomAnchor,
+                    constant: 30
+                ),
+                graphView.bottomAnchor.constraint(
+                    equalTo: self.safeAreaLayoutGuide.bottomAnchor,
+                    constant: -300
+                )
             ])
         }
 }

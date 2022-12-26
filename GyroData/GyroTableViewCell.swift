@@ -34,7 +34,7 @@ final class GyroTableViewCell: UITableViewCell {
         return label
     }()
     
-    private let measurementInfoStackView: UIStackView = {
+    private let measurementPartStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.alignment = .leading
@@ -44,7 +44,7 @@ final class GyroTableViewCell: UITableViewCell {
         return stackView
     }()
     
-    private let measurementStackView: UIStackView = {
+    private let measurementWholeStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.alignment = .center
@@ -65,25 +65,36 @@ final class GyroTableViewCell: UITableViewCell {
     }
     
     private func setupSubviews() {
-        addSubview(measurementStackView)
+        addSubview(measurementWholeStackView)
         
-        measurementStackView.addArrangedSubview(measurementInfoStackView)
-        measurementStackView.addArrangedSubview(measurementValue)
+        measurementWholeStackView.addArrangedSubview(measurementPartStackView)
+        measurementWholeStackView.addArrangedSubview(measurementValue)
         
-        measurementInfoStackView.addArrangedSubview(measurementTime)
-        measurementInfoStackView.addArrangedSubview(measurementType)
+        measurementPartStackView.addArrangedSubview(measurementTime)
+        measurementPartStackView.addArrangedSubview(measurementType)
     }
     
     private func setupLayout() {
         NSLayoutConstraint.activate([
-            measurementStackView.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: 30),
-            measurementStackView.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -30),
-            measurementStackView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor),
-            measurementStackView.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor)
-        ])
-        
-        NSLayoutConstraint.activate([
-            measurementInfoStackView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.6)
+            measurementWholeStackView.leadingAnchor.constraint(
+                equalTo: contentView.safeAreaLayoutGuide.leadingAnchor,
+                constant: 30
+            ),
+            measurementWholeStackView.trailingAnchor.constraint(
+                equalTo: contentView.safeAreaLayoutGuide.trailingAnchor,
+                constant: -30
+            ),
+            measurementWholeStackView.topAnchor.constraint(
+                equalTo: contentView.safeAreaLayoutGuide.topAnchor
+            ),
+            measurementWholeStackView.bottomAnchor.constraint(
+                equalTo: contentView.safeAreaLayoutGuide.bottomAnchor
+            ),
+            
+            measurementPartStackView.widthAnchor.constraint(
+                equalTo: contentView.widthAnchor,
+                multiplier: 0.6
+            )
         ])
     }
 }
