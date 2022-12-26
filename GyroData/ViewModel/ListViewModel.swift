@@ -25,7 +25,7 @@ final class DefaultListViewModel: ListViewModel {
     }
     
     func configure() -> CellData {
-        // 데이터 변환
-        return CellData(date: "", sensorValue: "", sensor: "")
+
+        return CellData(date: model.date.translateToString(), sensorValue: "", sensor: "")
     }
 }
