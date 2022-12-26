@@ -17,6 +17,7 @@ final class ListViewCell: UITableViewCell {
         stackView.distribution = .fillEqually
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.layoutMargins = UIEdgeInsets(top: 20, left: 40, bottom: 20, right: 20)
+        
         return stackView
     }()
     
@@ -26,12 +27,14 @@ final class ListViewCell: UITableViewCell {
         stackView.axis = .vertical
         stackView.distribution = .equalSpacing
         stackView.spacing = 20
+        
         return stackView
     }()
     
     private let dateLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        
         return label
     }()
     
@@ -39,6 +42,7 @@ final class ListViewCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.preferredFont(forTextStyle: .title1)
+        
         return label
     }()
     
@@ -47,12 +51,13 @@ final class ListViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         label.font = UIFont.preferredFont(forTextStyle: .largeTitle)
+        
         return label
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setupInitialView()
+        addSubViews()
         setupLayout()
     }
     
@@ -65,8 +70,11 @@ final class ListViewCell: UITableViewCell {
         sensorLabel.text = model.sensor
         valueLabel.text = model.sensorValue
     }
+}
+
+private extension ListViewCell {
     
-    private func setupInitialView() {
+    func addSubViews() {
         contentView.addSubview(horizontalStackView)
         horizontalStackView.addArrangedSubview(stackView)
         horizontalStackView.addArrangedSubview(valueLabel)
@@ -74,7 +82,7 @@ final class ListViewCell: UITableViewCell {
         stackView.addArrangedSubview(sensorLabel)
     }
     
-    private func setupLayout() {
+    func setupLayout() {
         NSLayoutConstraint.activate([
             horizontalStackView.topAnchor.constraint(equalTo: contentView.topAnchor),
             horizontalStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),

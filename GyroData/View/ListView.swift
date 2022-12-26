@@ -28,7 +28,7 @@ final class ListView: UIView {
     
 }
 
-extension ListView {
+private extension ListView {
     
     func addSubViews() {
         self.addSubview(tableView)

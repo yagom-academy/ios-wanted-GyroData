@@ -9,7 +9,7 @@ import UIKit
 
 final class ListViewController: UIViewController {
     private let listView = ListView()
-    var list = [CellData(date: "2022/09/08 14:50:43", sensorValue: "43.4", sensor: "Accelerometer")]
+    private var list = [CellData(date: Date().translateToString(), sensorValue: "43.4", sensor: "Accelerometer")]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,13 +26,16 @@ final class ListViewController: UIViewController {
 
 // MARK: - UITableViewDelegate, UITableViewDataSource
 extension ListViewController: UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         return list.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ListViewCell.identifier, for: indexPath) as! ListViewCell
         cell.setupData(with: list[indexPath.row])
+        
         return cell
     }
 }
