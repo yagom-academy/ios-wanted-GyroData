@@ -12,6 +12,8 @@
 		63F01BB928D44FC400C53A39 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB828D44FC400C53A39 /* MainViewController.swift */; };
 		63F01BBE28D44FC500C53A39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBD28D44FC500C53A39 /* Assets.xcassets */; };
 		63F01BC128D44FC500C53A39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */; };
+		8A6A5BC629597C6900B9EB85 /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6A5BC529597C6900B9EB85 /* MainTableViewCell.swift */; };
+		8A6A5BC829597DA900B9EB85 /* ReuseIdentifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6A5BC729597DA800B9EB85 /* ReuseIdentifiable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		63F01BBD28D44FC500C53A39 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		63F01BC028D44FC500C53A39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		63F01BC228D44FC500C53A39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8A6A5BC529597C6900B9EB85 /* MainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
+		8A6A5BC729597DA800B9EB85 /* ReuseIdentifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReuseIdentifiable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,12 +58,22 @@
 		63F01BB328D44FC400C53A39 /* GyroData */ = {
 			isa = PBXGroup;
 			children = (
+				8A6A5BC929597DB700B9EB85 /* Protocol */,
 				C4E486FD2959712F00A1FB99 /* Resource */,
 				63F01BB428D44FC400C53A39 /* AppDelegate.swift */,
 				63F01BB628D44FC400C53A39 /* SceneDelegate.swift */,
 				63F01BB828D44FC400C53A39 /* MainViewController.swift */,
+				8A6A5BC529597C6900B9EB85 /* MainTableViewCell.swift */,
 			);
 			path = GyroData;
+			sourceTree = "<group>";
+		};
+		8A6A5BC929597DB700B9EB85 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				8A6A5BC729597DA800B9EB85 /* ReuseIdentifiable.swift */,
+			);
+			path = Protocol;
 			sourceTree = "<group>";
 		};
 		C4E486FD2959712F00A1FB99 /* Resource */ = {
@@ -143,7 +157,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				63F01BB928D44FC400C53A39 /* MainViewController.swift in Sources */,
+				8A6A5BC829597DA900B9EB85 /* ReuseIdentifiable.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
+				8A6A5BC629597C6900B9EB85 /* MainTableViewCell.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
