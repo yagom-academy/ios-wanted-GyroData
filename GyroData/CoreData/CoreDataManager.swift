@@ -35,11 +35,20 @@ final class CoreDataManager {
         
         saveContext()
     }
-    
+
+    private func read() {
+        do {
+            fetchedAnalysisValue = try context.fetch(GyroData.fetchRequest())
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+
     private func saveContext() {
         if context.hasChanges {
             do {
                 try context.save()
+                read()
             } catch {
                 print(error.localizedDescription)
             }
