@@ -33,6 +33,7 @@ final class MainViewController: UIViewController {
         setupNavigationBar()
         setupSubView()
         setupConstraint()
+        setupTableView()
     }
     
     private func setupNavigationBar() {
@@ -55,14 +56,8 @@ final class MainViewController: UIViewController {
         navigationItem.rightBarButtonItem = rightBarButton
     }
     
-    @objc private func rightBarButtonTapped() {
-        print("view move")
-    }
-    
     private func setupSubView() {
         view.addSubview(listTableView)
-//        listTableView.dataSource = self
-//        listTableView.delegate = self
     }
     
     private func setupConstraint() {
@@ -84,5 +79,33 @@ final class MainViewController: UIViewController {
                 equalTo: view.bottomAnchor
             )
         ])
+    }
+    
+    private func setupTableView() {
+        listTableView.dataSource = self
+        listTableView.delegate = self
+    }
+    
+    @objc private func rightBarButtonTapped() {
+        print("view move")
+    }
+}
+
+extension MainViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(
+        _ tableView: UITableView,
+        numberOfRowsInSection section: Int
+    ) -> Int {
+        return 1
+    }
+    
+    func tableView(
+        _ tableView: UITableView,
+        cellForRowAt indexPath: IndexPath
+    ) -> UITableViewCell {
+        let cell = MainTableViewCell()
+        cell.backgroundColor = .black
+        
+        return cell
     }
 }
