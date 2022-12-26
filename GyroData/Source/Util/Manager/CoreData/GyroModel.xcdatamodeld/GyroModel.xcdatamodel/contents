@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21512" systemVersion="21G115" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Gyro" representedClassName="Gyro" syncable="YES" codeGenerationType="class">
-        <attribute name="attribute2" optional="YES" attributeType="String"/>
-        <attribute name="time" optional="YES" attributeType="String"/>
-        <attribute name="type" optional="YES" attributeType="Transformable"/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21512" systemVersion="22A400" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Gyro" representedClassName="Gyro" syncable="YES">
+        <attribute name="measurementDate" optional="YES" attributeType="String"/>
+        <attribute name="measurementTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="sensorType" optional="YES" attributeType="String" valueTransformerName="NSSecureUnarchiveFromData" customClassName="SensorType"/>
     </entity>
 </model>
