@@ -15,7 +15,7 @@
 		8F45089F2959817300538AE4 /* Accelerate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F45089E2959817300538AE4 /* Accelerate.swift */; };
 		8F4508A1295981F600538AE4 /* Gyroscope.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4508A0295981F600538AE4 /* Gyroscope.swift */; };
 		8F4508A929598C8C00538AE4 /* GyroData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8F4508A729598C8B00538AE4 /* GyroData.xcdatamodeld */; };
-		8F4508AB29598DB500538AE4 /* CoreDataManaged.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4508AA29598DB500538AE4 /* CoreDataManaged.swift */; };
+		8F4508AD29598E6400538AE4 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4508AC29598E6400538AE4 /* CoreDataManager.swift */; };
 		9B4251D72959843C00837A37 /* Analysisable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4251D62959843C00837A37 /* Analysisable.swift */; };
 /* End PBXBuildFile section */
 
@@ -30,7 +30,7 @@
 		8F45089E2959817300538AE4 /* Accelerate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Accelerate.swift; sourceTree = "<group>"; };
 		8F4508A0295981F600538AE4 /* Gyroscope.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gyroscope.swift; sourceTree = "<group>"; };
 		8F4508A829598C8B00538AE4 /* GyroData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GyroData.xcdatamodel; sourceTree = "<group>"; };
-		8F4508AA29598DB500538AE4 /* CoreDataManaged.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManaged.swift; sourceTree = "<group>"; };
+		8F4508AC29598E6400538AE4 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		9B4251D62959843C00837A37 /* Analysisable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analysisable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -76,7 +76,7 @@
 		8F4508A2295988DF00538AE4 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				8F4508AA29598DB500538AE4 /* CoreDataManaged.swift */,
+				8F4508AC29598E6400538AE4 /* CoreDataManager.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -190,12 +190,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				8F4508A929598C8C00538AE4 /* GyroData.xcdatamodeld in Sources */,
-				8F4508AB29598DB500538AE4 /* CoreDataManaged.swift in Sources */,
 				63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				8F4508A1295981F600538AE4 /* Gyroscope.swift in Sources */,
 				9B4251D72959843C00837A37 /* Analysisable.swift in Sources */,
 				8F45089F2959817300538AE4 /* Accelerate.swift in Sources */,
+				8F4508AD29598E6400538AE4 /* CoreDataManager.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
