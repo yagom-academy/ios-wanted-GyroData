@@ -9,7 +9,7 @@ import Foundation
 import CoreMotion
 
 // MARK: - Motion
-struct Motion {
+struct Motion: Codable {
     
     let uuid: UUID
     let type: MotionType
@@ -48,7 +48,7 @@ extension MotionValue {
 }
 
 // MARK: - MotionType
-enum MotionType: String {
+enum MotionType: String, Codable {
     
     case gyro = "Gyro"
     case accelerometer = "Accelerometer"
