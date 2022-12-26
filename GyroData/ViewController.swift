@@ -2,18 +2,17 @@
 //  ViewController.swift
 //  GyroData
 //
-//  Created by kjs on 2022/09/16.
+//  Created by 백곰, 바드 on 2022/09/16.
 //
 
 import UIKit
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
 
+    // MARK: - View Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        view.backgroundColor = .red
     }
-
-
 }
-
