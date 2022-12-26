@@ -2,16 +2,18 @@
 //  Gyroscope.swift
 //  GyroData
 //
-//  Created by 오경식 on 2022/12/26.
+//  Created by unchain, Ellen J, yeton on 2022/12/26.
 //
 
 import Foundation
 
-struct Gyroscope: AnalysisType {
-    let x: Double
-    let y: Double
-    let z: Double
-    let measurementTime: Date
-    let savedAt: Date
+extension Model {
+    struct Gyroscope: AnalysisType {
+        public private(set) var x: Double
+        public private(set) var y: Double
+        public private(set) var z: Double
+        public private(set) var measurementTime: Date
+        public private(set) var savedAt: Date
+    }
 }
 
