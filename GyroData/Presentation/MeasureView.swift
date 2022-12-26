@@ -2,7 +2,7 @@
 //  MeasureView.swift
 //  GyroData
 //
-//  Created by seohyeon park on 2022/12/26.
+//  Created by bonf, seohyeon2 on 2022/12/26.
 //
 
 import UIKit

@@ -2,7 +2,7 @@
 //  GyroTableView.swift
 //  GyroData
 //
-//  Created by 이은찬 on 2022/12/26.
+//  Created by bonf, seohyeon2 on 2022/12/26.
 //
 
 import UIKit
