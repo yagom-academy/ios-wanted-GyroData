@@ -26,6 +26,7 @@ final class CoreDataStorage {
     func performBackgroundTask(_ block: @escaping (NSManagedObjectContext) -> Void) {
         persistentContainer.performBackgroundTask(block)
     }
+    
 }
 
 extension CoreDataStorage {
@@ -34,9 +35,11 @@ extension CoreDataStorage {
         let request = MotionEntity.fetchRequest()
         return try context.fetch(request)
     }
+    
 }
 
 extension NSManagedObjectContext {
+    
     func saveContext() {
         if self.hasChanges {
             do {
@@ -47,4 +50,5 @@ extension NSManagedObjectContext {
             }
         }
     }
+    
 }
