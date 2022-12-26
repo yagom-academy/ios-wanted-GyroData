@@ -26,7 +26,7 @@ final class GyroViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "측정",
                                                             style: .plain,
                                                             target: self,
-                                                            action: nil)
+                                                            action: #selector(moveMeasureView))
     }
     
     private func setupDefault() {
@@ -47,12 +47,20 @@ final class GyroViewController: UIViewController {
             gyroListView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
+    
+    @objc private func moveMeasureView() {
+        self.navigationController?.pushViewController(MeasureViewController(), animated: true)
+    }
 }
 
-extension GyroViewController: UITableViewDelegate {    
+extension GyroViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.navigationController?.pushViewController(ReplayViewController(pageType: ReplayViewType.view), animated: true)
+    }
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let playAction = UIContextualAction(style: .normal,
                                             title: "Play") { action, view, completionHaldler in
+            self.navigationController?.pushViewController(ReplayViewController(pageType: ReplayViewType.play), animated: true)
             completionHaldler(true)
         }
         playAction.backgroundColor = .green
