@@ -8,13 +8,13 @@
 import UIKit
 
 final class ListView: UIView {
-    
     var tableView = UITableView()
     
     init() {
         super.init(frame: .zero)
         addSubViews()
         setLayout()
+        tableViewSetting()
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -23,6 +23,7 @@ final class ListView: UIView {
     
     private func tableViewSetting() {
         tableView.register(ListViewCell.self, forCellReuseIdentifier: ListViewCell.identifier)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
     }
     
 }
@@ -34,6 +35,11 @@ extension ListView {
     }
     
     func setLayout() {
-        
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            tableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
+            tableView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor)
+        ])
     }
 }
