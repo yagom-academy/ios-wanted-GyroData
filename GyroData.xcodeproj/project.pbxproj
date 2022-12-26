@@ -82,8 +82,8 @@
 		02432C152959910F0035AEDD /* Utility */ = {
 			isa = PBXGroup;
 			children = (
-				02432C122959909C0035AEDD /* CoreMotionManager.swift */,
 				02432C202959A36A0035AEDD /* CoreDataStorage */,
+				02432C122959909C0035AEDD /* CoreMotionManager.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
