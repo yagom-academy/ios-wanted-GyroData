@@ -89,14 +89,7 @@ class MeasurementViewController: UIViewController {
                                             target: self,
                                             action: #selector(saveButtonTapped))
         
-        let backBarButton = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"),
-                                            style: .plain,
-                                            target: self,
-                                            action: #selector(backButtonTapped))
-        
-        navigationItem.leftBarButtonItem = backBarButton
         navigationItem.rightBarButtonItem = saveBarButton
-        navigationItem.setHidesBackButton(true, animated: false)
         navigationItem.title = "측정하기"
     }
     
