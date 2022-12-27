@@ -31,8 +31,10 @@ final class CoreDataStorage {
 
 extension CoreDataStorage {
     
-    func getMotion(_ context: NSManagedObjectContext) throws -> [MotionEntity] {
+    func getMotion(_ context: NSManagedObjectContext, page: UInt = 1) throws -> [MotionEntity] {
         let request = MotionEntity.fetchRequest()
+        request.fetchLimit = 10
+        request.fetchOffset = Int(page * 10) - 10
         return try context.fetch(request)
     }
     

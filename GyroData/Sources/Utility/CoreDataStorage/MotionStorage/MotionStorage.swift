@@ -9,7 +9,7 @@ import Foundation
 
 protocol MotionStorage {
     
-    func fetch() -> [MotionEntity]
+    func fetch(page: UInt) -> [MotionEntity]
     func insert(_ motion: Motion)
     func delete(_ item: MotionEntity)
     
