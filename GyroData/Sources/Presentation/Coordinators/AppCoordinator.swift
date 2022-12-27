@@ -21,9 +21,11 @@ final public class AppCoordinator: Coordinator {
         let coordinator = makeMotionListCoordinator()
         coordinator.start()
     }
+    
 }
 
 private extension AppCoordinator {
+    
     func makeMotionListCoordinator() -> Coordinator {
         let coordinator = MotionListCoordinator(navigationConrtoller: navigationController)
         coordinator.parentCoordinator = self
@@ -31,4 +33,5 @@ private extension AppCoordinator {
         
         return coordinator
     }
+    
 }

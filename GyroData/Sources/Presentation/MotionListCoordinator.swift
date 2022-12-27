@@ -24,6 +24,7 @@ final class MotionListCoordinator: Coordinator {
 }
 
 private extension MotionListCoordinator {
+    
     func makeMotionListViewController() -> UIViewController {
         let viewController = MotionListViewController(
             viewModel: MotionListViewModel(),
@@ -47,6 +48,7 @@ private extension MotionListCoordinator {
         let viewController = UIViewController()
         return viewController
     }
+    
 }
 
 extension MotionListCoordinator: MotionListCoordinatorInterface {

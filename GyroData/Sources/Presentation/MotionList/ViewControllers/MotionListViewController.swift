@@ -66,6 +66,7 @@ class MotionListViewController: UIViewController {
             tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         ])
     }
+    
 }
 
 extension MotionListViewController {
