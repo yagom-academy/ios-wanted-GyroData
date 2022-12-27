@@ -108,15 +108,23 @@ final class GraphView: UIView {
     }
 
     private func drawPastValues() {
-        viewModel.pastValueForRed.forEach {
+        let pastValueForRed = viewModel.pastValueForRed
+        let pastValueForBlue = viewModel.pastValueForBlue
+        let pastValueForGreen = viewModel.pastValueForGreen
+
+        viewModel.pastValueForRed.removeAll()
+        viewModel.pastValueForBlue.removeAll()
+        viewModel.pastValueForGreen.removeAll()
+
+        pastValueForRed.forEach {
             drawGraphFor1Hz(layerType: .red, value: $0)
         }
 
-        viewModel.pastValueForBlue.forEach {
+        pastValueForBlue.forEach {
             drawGraphFor1Hz(layerType: .blue, value: $0)
         }
 
-        viewModel.pastValueForGreen.forEach {
+        pastValueForGreen.forEach {
             drawGraphFor1Hz(layerType: .green, value: $0)
         }
     }
