@@ -19,6 +19,8 @@
 		C456F84A295A0EBF008C9261 /* CustomSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C456F849295A0EBF008C9261 /* CustomSegmentedControl.swift */; };
 		C456F84C295AC076008C9261 /* MeasurementReplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C456F84B295AC076008C9261 /* MeasurementReplayViewController.swift */; };
 		C456F84E295AC0AA008C9261 /* PlayType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C456F84D295AC0AA008C9261 /* PlayType.swift */; };
+		C456F856295AF00E008C9261 /* MotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C456F855295AF00E008C9261 /* MotionManager.swift */; };
+		C456F858295AF01D008C9261 /* MotionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C456F857295AF01D008C9261 /* MotionType.swift */; };
 		C4E4870329598D7C00A1FB99 /* MeasurementEnrollController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E4870229598D7C00A1FB99 /* MeasurementEnrollController.swift */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +39,8 @@
 		C456F849295A0EBF008C9261 /* CustomSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentedControl.swift; sourceTree = "<group>"; };
 		C456F84B295AC076008C9261 /* MeasurementReplayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementReplayViewController.swift; sourceTree = "<group>"; };
 		C456F84D295AC0AA008C9261 /* PlayType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayType.swift; sourceTree = "<group>"; };
+		C456F855295AF00E008C9261 /* MotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionManager.swift; sourceTree = "<group>"; };
+		C456F857295AF01D008C9261 /* MotionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionType.swift; sourceTree = "<group>"; };
 		C4E4870229598D7C00A1FB99 /* MeasurementEnrollController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementEnrollController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -74,6 +78,7 @@
 				C4E486FD2959712F00A1FB99 /* Resource */,
 				8A6A5BC929597DB700B9EB85 /* Protocol */,
 				C456F844295A0A18008C9261 /* Extension */,
+				C456F854295AF004008C9261 /* Manager */,
 				C4E486FE29598C7C00A1FB99 /* Scene */,
 			);
 			path = GyroData;
@@ -94,6 +99,15 @@
 				C456F847295A0A5A008C9261 /* UIContextualAction+Extension.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		C456F854295AF004008C9261 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				C456F855295AF00E008C9261 /* MotionManager.swift */,
+				C456F857295AF01D008C9261 /* MotionType.swift */,
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 		C4E486FD2959712F00A1FB99 /* Resource */ = {
@@ -229,9 +243,11 @@
 				C456F84C295AC076008C9261 /* MeasurementReplayViewController.swift in Sources */,
 				C456F846295A0A2C008C9261 /* UIImage+Extension.swift in Sources */,
 				C456F848295A0A5A008C9261 /* UIContextualAction+Extension.swift in Sources */,
+				C456F856295AF00E008C9261 /* MotionManager.swift in Sources */,
 				8A6A5BC629597C6900B9EB85 /* MainTableViewCell.swift in Sources */,
 				C4E4870329598D7C00A1FB99 /* MeasurementEnrollController.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
+				C456F858295AF01D008C9261 /* MotionType.swift in Sources */,
 				C456F84E295AC0AA008C9261 /* PlayType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -2,7 +2,7 @@
 //  PlayType.swift
 //  GyroData
 //
-//  Created by bard on 2022/12/27.
+//  Created by 백곰, 바드 on 2022/12/27.
 //
 
 import Foundation
