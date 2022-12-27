@@ -28,6 +28,7 @@ class MotionListViewController: UIViewController {
         
         setupView()
         configureNavigationBar()
+        bind(to: viewModel)
     }
 
     private func setupView() {
