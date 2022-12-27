@@ -8,5 +8,8 @@
 import Foundation
 
 protocol MotionListCoordinatorInterface: AnyObject {
+    
     func showMotionMeasureView()
+    func showMotionDetailView()
+    
 }

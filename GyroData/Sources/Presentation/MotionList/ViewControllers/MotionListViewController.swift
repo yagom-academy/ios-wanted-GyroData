@@ -112,7 +112,7 @@ extension MotionListViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(#function)
+        coordinator?.showMotionDetailView()
     }
     
 }
