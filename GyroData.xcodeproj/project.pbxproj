@@ -15,6 +15,7 @@
 		63F01BC128D44FC500C53A39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */; };
 		8F4508A929598C8C00538AE4 /* GyroData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8F4508A729598C8B00538AE4 /* GyroData.xcdatamodeld */; };
 		8F4508AD29598E6400538AE4 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4508AC29598E6400538AE4 /* CoreDataManager.swift */; };
+		8F4508B1295ACFB200538AE4 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4508B0295ACFB200538AE4 /* GraphView.swift */; };
 		9B3C8CD9295AB2CF0026AEA5 /* AccelerateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3C8CD8295AB2CF0026AEA5 /* AccelerateManager.swift */; };
 		9B3C8CDB295AB2E70026AEA5 /* AnalysisManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3C8CDA295AB2E70026AEA5 /* AnalysisManager.swift */; };
 		9B3C8CDD295AB3140026AEA5 /* GyroscopeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3C8CDC295AB3140026AEA5 /* GyroscopeManager.swift */; };
@@ -31,6 +32,7 @@
 		63F01BC228D44FC500C53A39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8F4508A829598C8B00538AE4 /* GyroData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GyroData.xcdatamodel; sourceTree = "<group>"; };
 		8F4508AC29598E6400538AE4 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		8F4508B0295ACFB200538AE4 /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		9B3C8CD8295AB2CF0026AEA5 /* AccelerateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccelerateManager.swift; sourceTree = "<group>"; };
 		9B3C8CDA295AB2E70026AEA5 /* AnalysisManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisManager.swift; sourceTree = "<group>"; };
 		9B3C8CDC295AB3140026AEA5 /* GyroscopeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroscopeManager.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 			isa = PBXGroup;
 			children = (
 				63F01BB828D44FC400C53A39 /* ViewController.swift */,
+				8F4508B0295ACFB200538AE4 /* GraphView.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -205,6 +208,7 @@
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				42404FA82959C04700BCE8B5 /* AnalysisType.swift in Sources */,
 				9B3C8CDD295AB3140026AEA5 /* GyroscopeManager.swift in Sources */,
+				8F4508B1295ACFB200538AE4 /* GraphView.swift in Sources */,
 				8F4508AD29598E6400538AE4 /* CoreDataManager.swift in Sources */,
 				9B3C8CDB295AB2E70026AEA5 /* AnalysisManager.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
