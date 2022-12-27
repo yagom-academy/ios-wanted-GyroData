@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		200E57CF295A99BA00D3EF5A /* MeasurementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200E57CE295A99BA00D3EF5A /* MeasurementView.swift */; };
+		200E57D1295A9FD900D3EF5A /* MeasurementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200E57D0295A9FD900D3EF5A /* MeasurementViewController.swift */; };
 		63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB428D44FC400C53A39 /* AppDelegate.swift */; };
 		63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB628D44FC400C53A39 /* SceneDelegate.swift */; };
 		63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB828D44FC400C53A39 /* ViewController.swift */; };
@@ -17,6 +18,7 @@
 
 /* Begin PBXFileReference section */
 		200E57CE295A99BA00D3EF5A /* MeasurementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementView.swift; sourceTree = "<group>"; };
+		200E57D0295A9FD900D3EF5A /* MeasurementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementViewController.swift; sourceTree = "<group>"; };
 		63F01BB128D44FC400C53A39 /* GyroData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GyroData.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63F01BB428D44FC400C53A39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63F01BB628D44FC400C53A39 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -62,6 +64,7 @@
 				63F01BBD28D44FC500C53A39 /* Assets.xcassets */,
 				63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */,
 				63F01BC228D44FC500C53A39 /* Info.plist */,
+				200E57D0295A9FD900D3EF5A /* MeasurementViewController.swift */,
 				200E57CE295A99BA00D3EF5A /* MeasurementView.swift */,
 			);
 			path = GyroData;
@@ -138,6 +141,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */,
+				200E57D1295A9FD900D3EF5A /* MeasurementViewController.swift in Sources */,
 				200E57CF295A99BA00D3EF5A /* MeasurementView.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
