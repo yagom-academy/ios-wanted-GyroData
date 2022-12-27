@@ -16,6 +16,8 @@ class MotionListViewController: UIViewController {
         let tableView = UITableView()
         tableView.rowHeight = 90
         tableView.backgroundColor = .white
+        tableView.register(MotionDataCell.self)
+        tableView.dataSource = self
         return tableView
     }()
     
@@ -63,4 +65,19 @@ class MotionListViewController: UIViewController {
             tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         ])
     }
+}
+
+extension MotionListViewController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(MotionDataCell.self, for: indexPath) else {
+            return UITableViewCell()
+        }
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
+    }
+    
 }
