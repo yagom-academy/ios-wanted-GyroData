@@ -8,33 +8,26 @@
 import Foundation
 import CoreMotion
 
-enum Analysis: String {
-    case accelerate = "accelerate"
-    case gyroscope = "gyroscope"
-    
-    var manager: AnalysisManagerType {
-        switch self {
-        case .accelerate:
-            return AccelerateManager()
-        case .gyroscope:
-            return GyroscopeManager()
-        }
-    }
-}
+typealias AnalysisData = (x: Double, y: Double, z: Double)
 
 protocol AnalysisManagerType {
-    func startAnalyse() -> AnalysisType
+    func startAnalyse() -> AnalysisData
     func stopAnalyse()
 }
 
 struct AnalysisManager {
     let manager: AnalysisManagerType
     
-    init(analysis: Analysis) {
-        self.manager = analysis.manager
+    init(analysis: AnalysisType) {
+        switch analysis {
+        case .accelerate:
+            manager = AccelerateManager()
+        case .gyroscope:
+            manager = GyroscopeManager()
+        }
     }
     
-    func startAnalyse() -> AnalysisType {
+    func startAnalyse() -> AnalysisData {
         return manager.startAnalyse()
     }
     
