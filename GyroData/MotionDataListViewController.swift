@@ -55,6 +55,15 @@ extension MotionDataListViewController: UITableViewDataSource {
             .dequeueReusableCell(withIdentifier: RecordTableViewCell.reuseIdentifier) as? RecordTableViewCell else {
             return UITableViewCell()
         }
-        return UITableViewCell()
+
+        cell.setUpContents(motionRecord: MotionRecord(
+            id: UUID(),
+            startDate: Date(),
+            msInterval: 10,
+            motionMode: .accelerometer,
+            coordinates: [Coordiante(x: 1, y: 1, z: 1),
+                          Coordiante(x: 1, y: 1, z: 1),
+                          Coordiante(x: 1, y: 1, z: 1)]))
+        return cell
     }
 }
