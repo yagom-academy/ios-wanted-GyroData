@@ -61,25 +61,64 @@ final class GraphView: UIView {
         }
     }
 
-    func drawGraphFor1Hz(layerType: Layer, value: CGFloat) {
+    func drawGraphFor1Hz(layerType: Layer, value: Double) {
         var layer: CAShapeLayer?
 
         switch layerType {
         case .red:
             layer = redLinesLayer
             redLabel.text = "x:\(value)"
+            viewModel.pastValueForRed.append(value)
         case .blue:
             layer = blueLinesLayer
             blueLabel.text = "y:\(value)"
+            viewModel.pastValueForBlue.append(value)
         case .green:
             layer = greenLinesLayer
             greenLabel.text = "z:\(value)"
+            viewModel.pastValueForGreen.append(value)
         }
 
         guard let path = layer?.path?.mutableCopy() else { return }
-        let nextPoint = CGPoint(x: path.currentPoint.x + widthFor1Hz, y: center.y - value * heightFor1Hz)
+        let nextPoint = CGPoint(x: path.currentPoint.x + widthFor1Hz, y: bounds.midY - value * heightFor1Hz)
+
+        let isExceedScale = abs(value) > viewModel.yScale / 2
+        if isExceedScale {
+            upScaleGraph(with: value)
+        }
+
         path.addLine(to: nextPoint)
         layer?.path = path
+    }
+
+    private func upScaleGraph(with value: Double) {
+        viewModel.yScale =  1.2 * 2 * abs(value)
+
+        [redLinesLayer, blueLinesLayer, greenLinesLayer].forEach {
+            $0.removeFromSuperlayer()
+        }
+        redLinesLayer = initializeLayer(color: UIColor.red.cgColor)
+        blueLinesLayer = initializeLayer(color: UIColor.blue.cgColor)
+        greenLinesLayer = initializeLayer(color: UIColor.green.cgColor)
+
+        [redLinesLayer, blueLinesLayer, greenLinesLayer].forEach {
+            self.layer.addSublayer($0)
+        }
+        drawPastValues()
+    }
+
+    private func drawPastValues() {
+        viewModel.pastValueForRed.forEach {
+            drawGraphFor1Hz(layerType: .red, value: $0)
+        }
+
+        viewModel.pastValueForBlue.forEach {
+            drawGraphFor1Hz(layerType: .blue, value: $0)
+        }
+
+        viewModel.pastValueForGreen.forEach {
+            drawGraphFor1Hz(layerType: .green, value: $0)
+        }
     }
 
     private func layout() {
@@ -96,15 +135,14 @@ final class GraphView: UIView {
             greenLabel.topAnchor.constraint(equalTo: topAnchor)
         ])
     }
-
-    private func drawPath(from start: CGPoint, to end: CGPoint) -> CGPath {
-        let path = CGMutablePath()
-        path.move(to: start)
-        path.addLine(to: end)
-        return path
-    }
     
     private func initializeBackgroundLayer() -> CAShapeLayer {
+        let drawPath: (CGPoint, CGPoint) -> CGPath = { start, end in
+            let path = CGMutablePath()
+            path.move(to: start)
+            path.addLine(to: end)
+            return path
+        }
         let backgroud = CAShapeLayer()
         backgroud.lineWidth = 1
         backgroud.strokeColor = UIColor.gray.cgColor
@@ -118,7 +156,7 @@ final class GraphView: UIView {
         while tempY < frame.height {
             let startPoint = CGPoint(x: 0, y: tempY)
             let endPoint = CGPoint(x: frame.width, y: tempY)
-            path.addPath(drawPath(from: startPoint, to: endPoint))
+            path.addPath(drawPath(startPoint, endPoint))
             tempY += verticalSpace
         }
         
@@ -126,7 +164,7 @@ final class GraphView: UIView {
         while tempX < frame.height {
             let startPoint = CGPoint(x: tempX, y: 0)
             let endPoint = CGPoint(x: tempX, y: frame.height)
-            path.addPath(drawPath(from: startPoint, to: endPoint))
+            path.addPath(drawPath(startPoint, endPoint))
             tempX += horizontalSpace
         }
         
@@ -137,7 +175,7 @@ final class GraphView: UIView {
     private func initializeLayer(color: CGColor) -> CAShapeLayer {
         let layer = CAShapeLayer()
         let path = CGMutablePath()
-        path.move(to: CGPoint(x: 0, y: center.y))
+        path.move(to: CGPoint(x: 0, y: bounds.midY))
         layer.path = path
 
         layer.lineWidth = 5

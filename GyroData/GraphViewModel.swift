@@ -12,4 +12,8 @@ final class GraphViewModel {
     var yScale: CGFloat = 60
     var horizontalBackgroundSlice = 8
     var verticalBackgroundSlice = 8
+
+    var pastValueForRed = [Double]()
+    var pastValueForBlue = [Double]()
+    var pastValueForGreen = [Double]()
 }
