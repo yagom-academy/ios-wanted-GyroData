@@ -70,6 +70,7 @@ final class MeasurementViewController: UIViewController {
         let button = UIButton()
         button.setTitle(Constant.stopButtonText, for: .normal)
         button.setTitleColor(Constant.buttonColor, for: .normal)
+        button.addTarget(self, action: #selector(startMeasurement(_:)), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -79,6 +80,27 @@ final class MeasurementViewController: UIViewController {
         graphView.drawGraph(data: data)
     }
     
+    @objc func startMeasurement(_ sender: UIButton) {
+        switch segmentControl.selectedSegmentIndex {
+        case 0:
+            viewModel.measerStart(type: .accelerometer)
+        case 1:
+            viewModel.measerStart(type: .gyro)
+        default:
+            return
+        }
+    }
+    
+    @objc func stopMeasurement(_ sender: UIButton) {
+        switch segmentControl.selectedSegmentIndex {
+        case 0:
+            viewModel.measerStop(type: .accelerometer)
+        case 1:
+            viewModel.measerStart(type: .gyro)
+        default:
+            return
+        }
+    }
 }
 
 extension MeasurementViewController {

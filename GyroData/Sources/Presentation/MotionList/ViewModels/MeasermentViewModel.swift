@@ -10,6 +10,7 @@ import Foundation
 protocol MeasermentViewModelInput {
     
     func measerStart(type: MotionType)
+    func measerStop(type: MotionType)
     
 }
 
@@ -54,6 +55,15 @@ final class DefaultMeasermentViewModel: MeasermentViewModel {
                     self.motions.value.append(motionValue)
                 }
             })
+        }
+    }
+    
+    func measerStop(type: MotionType) {
+        switch type {
+        case .gyro:
+            coreMotionManager.stopUpdates(type: .gyro)
+        case .accelerometer:
+            coreMotionManager.stopUpdates(type: .accelerometer)
         }
     }
 }
