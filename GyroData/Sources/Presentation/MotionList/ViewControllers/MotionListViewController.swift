@@ -75,8 +75,8 @@ extension MotionListViewController {
             print(#function)
             completeHandeler(true)
         }
-        let playAction = UIContextualAction(style: .normal, title: nil) { _, _, completeHandeler in
-            print(#function)
+        let playAction = UIContextualAction(style: .normal, title: nil) { [weak self] _, _, completeHandeler in
+            self?.coordinator?.showMotionPlayView()
             completeHandeler(true)
         }
         deleteAction.image = UIImage(systemName: "trash.fill")

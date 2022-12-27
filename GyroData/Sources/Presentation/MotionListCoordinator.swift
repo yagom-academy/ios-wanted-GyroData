@@ -42,6 +42,11 @@ private extension MotionListCoordinator {
         let viewController = UIViewController()
         return viewController
     }
+    
+    func makeMotionPlayViewController() -> UIViewController {
+        let viewController = UIViewController()
+        return viewController
+    }
 }
 
 extension MotionListCoordinator: MotionListCoordinatorInterface {
@@ -53,6 +58,11 @@ extension MotionListCoordinator: MotionListCoordinatorInterface {
     
     func showMotionDetailView() {
         let viewController = makeMotionDetailViewController()
+        navigationController.pushViewController(viewController, animated: true)
+    }
+    
+    func showMotionPlayView() {
+        let viewController = makeMotionPlayViewController()
         navigationController.pushViewController(viewController, animated: true)
     }
     
