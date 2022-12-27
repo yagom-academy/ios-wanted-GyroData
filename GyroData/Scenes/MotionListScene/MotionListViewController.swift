@@ -86,8 +86,8 @@ extension MotionListViewController {
     }
 
     @objc private func measurementBarButtonTapped() {
-        let viewController = ViewController()
-        navigationController?.pushViewController(viewController, animated: true)
+        let measurementViewController = MeasurementViewController()
+        navigationController?.pushViewController(measurementViewController, animated: true)
     }
 }
 
