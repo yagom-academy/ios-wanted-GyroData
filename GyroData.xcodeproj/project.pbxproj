@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		329E7EE7295B052D00537466 /* Coordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329E7EE6295B052D00537466 /* Coordinate.swift */; };
+		329E7EE9295B058200537466 /* MotionMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329E7EE8295B058200537466 /* MotionMode.swift */; };
+		329E7EEB295B05D000537466 /* MotionRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329E7EEA295B05D000537466 /* MotionRecord.swift */; };
 		32B01338295A844B005C8750 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B01337295A844B005C8750 /* GraphView.swift */; };
 		32B0133A295A871C005C8750 /* GraphViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B01339295A871C005C8750 /* GraphViewModel.swift */; };
 		63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB428D44FC400C53A39 /* AppDelegate.swift */; };
@@ -18,6 +21,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		329E7EE6295B052D00537466 /* Coordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinate.swift; sourceTree = "<group>"; };
+		329E7EE8295B058200537466 /* MotionMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionMode.swift; sourceTree = "<group>"; };
+		329E7EEA295B05D000537466 /* MotionRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionRecord.swift; sourceTree = "<group>"; };
 		32B01337295A844B005C8750 /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		32B01339295A871C005C8750 /* GraphViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphViewModel.swift; sourceTree = "<group>"; };
 		63F01BB128D44FC400C53A39 /* GyroData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GyroData.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -63,6 +69,9 @@
 				63F01BB428D44FC400C53A39 /* AppDelegate.swift */,
 				63F01BB628D44FC400C53A39 /* SceneDelegate.swift */,
 				63F01BB828D44FC400C53A39 /* ViewController.swift */,
+				329E7EE6295B052D00537466 /* Coordinate.swift */,
+				329E7EE8295B058200537466 /* MotionMode.swift */,
+				329E7EEA295B05D000537466 /* MotionRecord.swift */,
 				32B01337295A844B005C8750 /* GraphView.swift */,
 				32B01339295A871C005C8750 /* GraphViewModel.swift */,
 				63F01BBA28D44FC400C53A39 /* Main.storyboard */,
@@ -144,10 +153,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				329E7EE9295B058200537466 /* MotionMode.swift in Sources */,
 				32B0133A295A871C005C8750 /* GraphViewModel.swift in Sources */,
+				329E7EEB295B05D000537466 /* MotionRecord.swift in Sources */,
 				63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
+				329E7EE7295B052D00537466 /* Coordinate.swift in Sources */,
 				32B01338295A844B005C8750 /* GraphView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
