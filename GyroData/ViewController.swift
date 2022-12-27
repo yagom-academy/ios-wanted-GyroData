@@ -15,6 +15,7 @@ final class ViewController: UIViewController {
         super.viewDidLoad()
         graphView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(graphView)
+        view.backgroundColor = .systemBackground
 
         NSLayoutConstraint.activate([
             graphView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
