@@ -16,6 +16,7 @@ class MotionListViewController: UIViewController {
         
         setupView()
         setupTableView()
+        configureNavigationBar()
     }
 
     private func setupView() {
@@ -78,5 +79,22 @@ extension MotionListViewController: UITableViewDataSource {
     }
 }
 
+// MARK: NavigationController
 
+extension MotionListViewController {
+    private func configureNavigationBar() {
+        let measurementBarButton = UIBarButtonItem(title: "측정",
+                                            style: .done,
+                                            target: self,
+                                            action: #selector(measurementBarButtonTapped))
+
+        navigationItem.rightBarButtonItem = measurementBarButton
+        navigationItem.title = "목록"
+    }
+
+    @objc private func measurementBarButtonTapped() {
+        let viewController = ViewController()
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+}
 
