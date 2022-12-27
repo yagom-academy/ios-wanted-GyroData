@@ -9,7 +9,7 @@ import UIKit
 
 final class MotionMeasureCoordinator: Coordinator {
     
-    var finishDelegate: CoordinatorFinishDelegate?
+    weak var finishDelegate: CoordinatorFinishDelegate?
     var parentCoordinator: Coordinator?
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
