@@ -7,20 +7,6 @@
 
 import UIKit
 
-enum ReplayViewType {
-    case view
-    case play
-    
-    var name: String {
-        switch self {
-        case .view:
-            return "View"
-        case .play:
-            return "Play"
-        }
-    }
-}
-
 class ReplayView: UIView {
     let measurementTime: UILabel = {
         let label = UILabel()

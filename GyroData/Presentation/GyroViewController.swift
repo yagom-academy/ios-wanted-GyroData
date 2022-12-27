@@ -64,7 +64,7 @@ extension GyroViewController: UITableViewDelegate {
         didSelectRowAt indexPath: IndexPath
     ) {
         self.navigationController?.pushViewController(
-            ReplayViewController(pageType: ReplayViewType.view),
+            ReplayViewController(pageType: ReplayViewPageType.view),
             animated: true
         )
     }
@@ -78,7 +78,7 @@ extension GyroViewController: UITableViewDelegate {
             title: "Play"
         ) { [weak self] _, _, _ in
             self?.navigationController?.pushViewController(
-                ReplayViewController(pageType: ReplayViewType.play),
+                ReplayViewController(pageType: ReplayViewPageType.play),
                 animated: true
             )
         }

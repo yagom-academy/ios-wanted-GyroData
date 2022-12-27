@@ -9,9 +9,9 @@ import UIKit
 
 class ReplayViewController: UIViewController {
     
-    var pageType: ReplayViewType?
+    var pageType: ReplayViewPageType?
     
-    init(pageType: ReplayViewType) {
+    init(pageType: ReplayViewPageType) {
         super.init(nibName: nil, bundle: nil)
         self.pageType = pageType
     }
