@@ -12,6 +12,8 @@ final class MotionListCoordinator: Coordinator {
     var parentCoordinator: Coordinator?
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
+    var type: CoordinatorType { .list }
+    var finishDelegate: CoordinatorFinishDelegate?
     
     init(navigationConrtoller: UINavigationController) {
         self.navigationController = navigationConrtoller
@@ -51,11 +53,26 @@ private extension MotionListCoordinator {
     
 }
 
+extension MotionListCoordinator: CoordinatorFinishDelegate {
+    
+    func coordinatorDidFinish(childCoordinator: Coordinator) {
+        childCoordinators = childCoordinators.filter({ $0.type != childCoordinator.type })
+        
+        switch childCoordinator.type {
+        case .motionDataAdd:
+            childDidFinish(childCoordinator, parent: self)
+            
+        default: return
+        }
+    }
+    
+}
+
 extension MotionListCoordinator: MotionListCoordinatorInterface {
     
     func showMotionMeasureView() {
         let viewController = makeMotionMeasureViewController()
-        navigationController.pushViewController(viewController, animated: true)
+        navigationController.visibleViewController?.present(viewController, animated: true)
     }
     
     func showMotionDetailView() {
