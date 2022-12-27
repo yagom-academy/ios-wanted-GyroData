@@ -70,7 +70,9 @@ class MotionListViewController: UIViewController {
 
 extension MotionListViewController {
     
-    private func contextualActions() -> [UIContextualAction] {
+    private func contextualActions(
+        trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
+    ) -> [UIContextualAction] {
         let deleteAction = UIContextualAction(style: .destructive, title: nil) { _, _, completeHandeler in
             print(#function)
             completeHandeler(true)
@@ -108,7 +110,9 @@ extension MotionListViewController: UITableViewDelegate {
         _ tableView: UITableView,
         trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
     ) -> UISwipeActionsConfiguration? {
-        return UISwipeActionsConfiguration(actions: contextualActions())
+        return UISwipeActionsConfiguration(
+            actions: contextualActions(trailingSwipeActionsConfigurationForRowAt: indexPath)
+        )
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
