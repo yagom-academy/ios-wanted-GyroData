@@ -8,6 +8,9 @@
 import UIKit
 
 final class MainViewController: UIViewController {
+    
+    // MARK: Properties
+    
     private let listTableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -24,30 +27,39 @@ final class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
         commonInit()
     }
     
     // MARK: - Methods
     
     private func commonInit() {
+        setupBackgroundColor(.systemBackground)
         setupNavigationBar()
         setupSubView()
         setupConstraint()
         setupTableView()
     }
     
+    private func setupBackgroundColor(_ color: UIColor?) {
+        view.backgroundColor = color
+    }
+    
     private func setupNavigationBar() {
+        setupNavigationBarTitle()
+        setupNavigationBackButton()
+    }
+    
+    private func setupNavigationBarTitle() {
         navigationItem.title = "목록"
+        
         let attribute = [
             NSAttributedString.Key.foregroundColor: UIColor.black,
             NSAttributedString.Key.font: UIFont.systemFont(ofSize: 25)
         ]
-        
-        navigationController?.navigationBar.titleTextAttributes = attribute as [
-            NSAttributedString.Key : Any
-        ]
-        
+        navigationController?.navigationBar.titleTextAttributes = attribute
+    }
+    
+    private func setupNavigationBackButton() {
         let rightBarButton = UIBarButtonItem(
             title: "측정",
             style: .plain,
@@ -92,12 +104,14 @@ final class MainViewController: UIViewController {
     }
 }
 
+// MARK: Extension
+
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(
         _ tableView: UITableView,
         numberOfRowsInSection section: Int
     ) -> Int {
-        return 3
+        return 20
     }
     
     func tableView(
