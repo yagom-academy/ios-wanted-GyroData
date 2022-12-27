@@ -9,10 +9,10 @@ import Foundation
 import CoreData
 
 final class CoreDataManager {
-    private(set) var fetchedAnalysisValue: [GyroData] = []
     static let shared = CoreDataManager()
+    
+    private(set) var fetchedAnalysisValue: [GyroData] = []
     private lazy var context = persistentContainer.viewContext
-
     private lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "GyroData")
         container.loadPersistentStores { _, error in
@@ -46,6 +46,12 @@ final class CoreDataManager {
         }
     }
 
+    func delete(data: GyroData) {
+        context.delete(data)
+        
+        saveContext()
+    }
+    
     private func saveContext() {
         if context.hasChanges {
             do {

@@ -16,4 +16,3 @@ extension Model {
         public private(set) var savedAt: Date
     }
 }
-
