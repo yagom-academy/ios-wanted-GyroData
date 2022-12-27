@@ -15,7 +15,9 @@ extension Date {
     
     func formatted(for format: DateFormat) -> String {
         let dateFormatter = DateFormatter()
-        let deviceLocale = Locale(identifier: Locale.preferredLanguages.first ?? "ko-kr").language.languageCode?.identifier
+        let deviceLocale = Locale(
+            identifier: Locale.preferredLanguages.first ?? "ko-kr"
+        ).language.languageCode?.identifier
         dateFormatter.locale = Locale(identifier: deviceLocale ?? "ko-kr")
         dateFormatter.timeZone = TimeZone.current
         dateFormatter.dateFormat = format.rawValue
