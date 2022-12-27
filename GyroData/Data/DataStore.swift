@@ -25,7 +25,17 @@ final class DataStore {
     }
     
     
-    func readGyro(completion: @escaping () -> () ) {}
+    func readGyro(completion: @escaping ([ModelEntity]) -> () ) {
+        guard let context = context else { return }
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: String(describing: ModelEntity.self))
+        
+        do {
+            guard let gyroData = try context.fetch(request) as? [ModelEntity] else { return }
+            completion(gyroData)
+        } catch {
+            print("데이터 가져오기 실패")
+        }
+    }
     
     func deleteGyro() {}
     

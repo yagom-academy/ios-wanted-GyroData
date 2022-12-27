@@ -8,7 +8,7 @@
 import Foundation
 
 struct GyroItem {
-    let sensorType: String
-    let figure: String
-    let date: String
+    let sensorType: String?
+    let figure: String?
+    let date: String?
 }
