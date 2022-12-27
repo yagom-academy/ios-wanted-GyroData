@@ -12,6 +12,8 @@
 		63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB828D44FC400C53A39 /* ViewController.swift */; };
 		63F01BBE28D44FC500C53A39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBD28D44FC500C53A39 /* Assets.xcassets */; };
 		63F01BC128D44FC500C53A39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */; };
+		F35161F5295AC2DA008AB1A3 /* MotionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35161F4295AC2DA008AB1A3 /* MotionListViewController.swift */; };
+		F35161F7295ACC0C008AB1A3 /* MotionListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35161F6295ACC0C008AB1A3 /* MotionListTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		63F01BBD28D44FC500C53A39 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		63F01BC028D44FC500C53A39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		63F01BC228D44FC500C53A39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F35161F4295AC2DA008AB1A3 /* MotionListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionListViewController.swift; sourceTree = "<group>"; };
+		F35161F6295ACC0C008AB1A3 /* MotionListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionListTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +58,7 @@
 		63F01BB328D44FC400C53A39 /* GyroData */ = {
 			isa = PBXGroup;
 			children = (
+				F35161F2295AC259008AB1A3 /* Scenes */,
 				63F01BB428D44FC400C53A39 /* AppDelegate.swift */,
 				63F01BB628D44FC400C53A39 /* SceneDelegate.swift */,
 				63F01BB828D44FC400C53A39 /* ViewController.swift */,
@@ -62,6 +67,31 @@
 				63F01BC228D44FC500C53A39 /* Info.plist */,
 			);
 			path = GyroData;
+			sourceTree = "<group>";
+		};
+		F35161F2295AC259008AB1A3 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				F35161F3295AC288008AB1A3 /* MotionListScene */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		F35161F3295AC288008AB1A3 /* MotionListScene */ = {
+			isa = PBXGroup;
+			children = (
+				F35161F4295AC2DA008AB1A3 /* MotionListViewController.swift */,
+				F35161F8295AD7B5008AB1A3 /* SubViews */,
+			);
+			path = MotionListScene;
+			sourceTree = "<group>";
+		};
+		F35161F8295AD7B5008AB1A3 /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				F35161F6295ACC0C008AB1A3 /* MotionListTableViewCell.swift */,
+			);
+			path = SubViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -135,7 +165,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */,
+				F35161F7295ACC0C008AB1A3 /* MotionListTableViewCell.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
+				F35161F5295AC2DA008AB1A3 /* MotionListViewController.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
