@@ -29,7 +29,7 @@ private extension MotionListCoordinator {
     
     private func makeMotionListViewController() -> UIViewController {
         let viewController = MotionListViewController(
-            viewModel: MotionListViewModel(),
+            viewModel: DefaultMotionListViewModel(),
             coordinator: self
         )
         viewController.coordinator = self

@@ -74,8 +74,8 @@ extension MotionListViewController {
     private func contextualActions(
         trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
     ) -> [UIContextualAction] {
-        let deleteAction = UIContextualAction(style: .destructive, title: nil) { _, _, completeHandeler in
-            print(#function)
+        let deleteAction = UIContextualAction(style: .destructive, title: nil) { [weak self] _, _, completeHandeler in
+            self?.viewModel.didDeleteAction(at: indexPath.row)
             completeHandeler(true)
         }
         let playAction = UIContextualAction(style: .normal, title: nil) { [weak self] _, _, completeHandeler in
