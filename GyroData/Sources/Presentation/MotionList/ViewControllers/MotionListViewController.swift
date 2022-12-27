@@ -18,6 +18,7 @@ class MotionListViewController: UIViewController {
         tableView.backgroundColor = .white
         tableView.register(MotionDataCell.self)
         tableView.dataSource = self
+        tableView.delegate = self
         return tableView
     }()
     
@@ -67,6 +68,25 @@ class MotionListViewController: UIViewController {
     }
 }
 
+extension MotionListViewController {
+    
+    private func contextualActions() -> [UIContextualAction] {
+        let deleteAction = UIContextualAction(style: .destructive, title: nil) { _, _, completeHandeler in
+            print(#function)
+            completeHandeler(true)
+        }
+        let playAction = UIContextualAction(style: .normal, title: nil) { _, _, completeHandeler in
+            print(#function)
+            completeHandeler(true)
+        }
+        deleteAction.image = UIImage(systemName: "trash.fill")
+        playAction.image = UIImage(systemName: "play.fill")
+        playAction.backgroundColor = .systemGreen
+        return [deleteAction, playAction]
+    }
+    
+}
+
 extension MotionListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -78,6 +98,21 @@ extension MotionListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 10
+    }
+    
+}
+
+extension MotionListViewController: UITableViewDelegate {
+    
+    func tableView(
+        _ tableView: UITableView,
+        trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
+    ) -> UISwipeActionsConfiguration? {
+        return UISwipeActionsConfiguration(actions: contextualActions())
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print(#function)
     }
     
 }
