@@ -23,21 +23,11 @@ final class GraphView: UIView {
     private lazy var greenLinesLayer = initializeLayer(color: UIColor.green.cgColor)
 
     override func draw(_ rect: CGRect) {
+        let backgroundLayer = initializeBackgroundLayer()
+        layer.addSublayer(backgroundLayer)
         [redLinesLayer, blueLinesLayer, greenLinesLayer].forEach {
             self.layer.addSublayer($0)
         }
-    }
-
-    private func initializeLayer(color: CGColor) -> CAShapeLayer {
-        let layer = CAShapeLayer()
-        let path = CGMutablePath()
-        path.move(to: CGPoint(x: 0, y: center.y))
-        layer.path = path
-
-        layer.lineWidth = 5
-        layer.strokeColor = color
-        layer.fillColor = UIColor.clear.cgColor
-        return layer
     }
 
     func drawGraphFor1Hz(layerType: Layer, value: CGFloat) {
@@ -56,6 +46,55 @@ final class GraphView: UIView {
         let nextPoint = CGPoint(x: path.currentPoint.x + widthFor1Hz, y: center.y - value * heightFor1Hz)
         path.addLine(to: nextPoint)
         layer?.path = path
+    }
+
+    private func drawPath(from start: CGPoint, to end: CGPoint) -> CGPath {
+        let path = CGMutablePath()
+        path.move(to: start)
+        path.addLine(to: end)
+        return path
+    }
+    
+    private func initializeBackgroundLayer() -> CAShapeLayer {
+        let backgroud = CAShapeLayer()
+        backgroud.lineWidth = 1
+        backgroud.strokeColor = UIColor.gray.cgColor
+        backgroud.fillColor = UIColor.clear.cgColor
+        
+        let path = CGMutablePath()
+        let verticalSpace = frame.height / CGFloat(viewModel.verticalBackgroundSlice)
+        let horizontalSpace = frame.width / CGFloat(viewModel.horizontalBackgroundSlice)
+        
+        var tempY: CGFloat = verticalSpace
+        while tempY < frame.height {
+            let startPoint = CGPoint(x: 0, y: tempY)
+            let endPoint = CGPoint(x: frame.width, y: tempY)
+            path.addPath(drawPath(from: startPoint, to: endPoint))
+            tempY += verticalSpace
+        }
+        
+        var tempX: CGFloat = horizontalSpace
+        while tempX < frame.height {
+            let startPoint = CGPoint(x: tempX, y: 0)
+            let endPoint = CGPoint(x: tempX, y: frame.height)
+            path.addPath(drawPath(from: startPoint, to: endPoint))
+            tempX += horizontalSpace
+        }
+        
+        backgroud.path = path
+        return backgroud
+    }
+
+    private func initializeLayer(color: CGColor) -> CAShapeLayer {
+        let layer = CAShapeLayer()
+        let path = CGMutablePath()
+        path.move(to: CGPoint(x: 0, y: center.y))
+        layer.path = path
+
+        layer.lineWidth = 5
+        layer.strokeColor = color
+        layer.fillColor = UIColor.clear.cgColor
+        return layer
     }
 }
 

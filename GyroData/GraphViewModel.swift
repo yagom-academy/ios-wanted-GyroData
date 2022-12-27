@@ -10,4 +10,6 @@ import UIKit
 final class GraphViewModel {
     var xScale: CGFloat = 60
     var yScale: CGFloat = 60
+    var horizontalBackgroundSlice = 8
+    var verticalBackgroundSlice = 8
 }
