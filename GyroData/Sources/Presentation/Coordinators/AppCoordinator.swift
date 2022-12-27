@@ -26,7 +26,7 @@ final public class AppCoordinator: Coordinator {
 
 private extension AppCoordinator {
     
-    func makeMotionListCoordinator() -> Coordinator {
+    private func makeMotionListCoordinator() -> Coordinator {
         let coordinator = MotionListCoordinator(navigationConrtoller: navigationController)
         coordinator.parentCoordinator = self
         childCoordinators.append(coordinator)
