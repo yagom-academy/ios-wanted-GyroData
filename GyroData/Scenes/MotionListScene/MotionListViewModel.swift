@@ -16,9 +16,13 @@ protocol MotionListViewModelType: MotionListViewModelInput, MotionListViewModelO
 
 class MotionListViewModel: MotionListViewModelType {
     
+    /// Output
+    
     var items: Observable<[Motion]> = Observable([])
     var loading: Observable<Void> = Observable(())
     var error: Observable<String> = Observable("")
+    
+    /// Input
     
     func loadItems(count: Int) {
         items.value = testData.suffix(count)

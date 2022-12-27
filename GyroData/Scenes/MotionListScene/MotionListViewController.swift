@@ -100,6 +100,10 @@ extension MotionListViewController {
         let measurementViewController = MeasurementViewController()
         navigationController?.pushViewController(measurementViewController, animated: true)
     }
+    
+    private func pushMotionResultScene(motion: Motion) {
+        // 모션결과 페이지에 motionData 전달 및 push
+    }
 }
 
 // MARK: TableView SwipeAction
@@ -108,12 +112,13 @@ extension MotionListViewController {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         let playAction = UIContextualAction(style: .normal, title: "Play") { _, _, completionHandler in
-
+            self.pushMotionResultScene(motion: self.viewModel.items.value[indexPath.row])
             completionHandler(true)
         }
         playAction.backgroundColor = .systemGreen
         
         let deleteAction = UIContextualAction(style: .normal, title: "Delete") { _, _, completionHandler in
+            self.viewModel.deleteItem(motion: self.viewModel.items.value[indexPath.row])
             completionHandler(true)
         }
         deleteAction.backgroundColor = .red
