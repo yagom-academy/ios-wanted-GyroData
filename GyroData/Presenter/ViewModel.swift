@@ -12,14 +12,22 @@ final class ViewModel {
     let useCase = UseCase()
     
     var gyroList = [GyroItem]()
+    var errorMessage = ""
     
     func onCreate(item: GyroItem) {
         useCase.createItem(item)
     }
     
-    func onRead(onComplete: @escaping ([GyroItem]) -> ()) {
-        useCase.readItem { [weak self] items in
-            self?.gyroList = items
+    func onRead() {
+        useCase.readItem { [weak self] result in
+            switch result {
+            case let .success(items):
+                self?.gyroList = items
+            case let .failure(error):
+                self?.errorMessage = error.localizedDescription
+            }
         }
     }
+    
+    func onDelete() {}
 }

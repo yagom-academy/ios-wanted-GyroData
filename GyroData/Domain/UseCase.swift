@@ -15,10 +15,15 @@ final class UseCase {
         repository.createGyro(item: item)
     }
     
-    func readItem(completion: @escaping ([GyroItem]) -> ()) {
-        repository.readGyro { [weak self] entities in
-            guard let items = self?.convertItems(entities) else { return }
-            completion(items)
+    func readItem(completion: @escaping (Result<[GyroItem], Error>) -> ()) {
+        repository.readGyro { [weak self] result in
+            switch result {
+            case let .success(entities):
+                guard let items = self?.convertItems(entities) else { return }
+                completion(.success(items))
+            case let .failure(error):
+                completion(.failure(error))
+            }
         }
     }
     
