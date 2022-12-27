@@ -96,8 +96,4 @@ class MeasurementViewController: UIViewController {
     @objc private func saveButtonTapped() {
         navigationController?.popViewController(animated: true)
     }
-    
-    @objc private func backButtonTapped() {
-        navigationController?.popViewController(animated: true)
-    }
 }
