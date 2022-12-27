@@ -17,8 +17,9 @@
 		C456F846295A0A2C008C9261 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C456F845295A0A2C008C9261 /* UIImage+Extension.swift */; };
 		C456F848295A0A5A008C9261 /* UIContextualAction+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C456F847295A0A5A008C9261 /* UIContextualAction+Extension.swift */; };
 		C456F84A295A0EBF008C9261 /* CustomSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C456F849295A0EBF008C9261 /* CustomSegmentedControl.swift */; };
+		C456F84C295AC076008C9261 /* MeasurementReplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C456F84B295AC076008C9261 /* MeasurementReplayViewController.swift */; };
+		C456F84E295AC0AA008C9261 /* PlayType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C456F84D295AC0AA008C9261 /* PlayType.swift */; };
 		C4E4870329598D7C00A1FB99 /* MeasurementEnrollController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E4870229598D7C00A1FB99 /* MeasurementEnrollController.swift */; };
-		C4E487062959BC6900A1FB99 /* MeasurementRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E487052959BC6800A1FB99 /* MeasurementRecordViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,8 +35,9 @@
 		C456F845295A0A2C008C9261 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		C456F847295A0A5A008C9261 /* UIContextualAction+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIContextualAction+Extension.swift"; sourceTree = "<group>"; };
 		C456F849295A0EBF008C9261 /* CustomSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentedControl.swift; sourceTree = "<group>"; };
+		C456F84B295AC076008C9261 /* MeasurementReplayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementReplayViewController.swift; sourceTree = "<group>"; };
+		C456F84D295AC0AA008C9261 /* PlayType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayType.swift; sourceTree = "<group>"; };
 		C4E4870229598D7C00A1FB99 /* MeasurementEnrollController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementEnrollController.swift; sourceTree = "<group>"; };
-		C4E487052959BC6800A1FB99 /* MeasurementRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementRecordViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,7 +146,8 @@
 		C4E487042959BC2700A1FB99 /* MeasurementReplay */ = {
 			isa = PBXGroup;
 			children = (
-				C4E487052959BC6800A1FB99 /* MeasurementRecordViewController.swift */,
+				C456F84B295AC076008C9261 /* MeasurementReplayViewController.swift */,
+				C456F84D295AC0AA008C9261 /* PlayType.swift */,
 			);
 			path = MeasurementReplay;
 			sourceTree = "<group>";
@@ -223,12 +226,13 @@
 				8A6A5BC829597DA900B9EB85 /* ReuseIdentifiable.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				C456F84A295A0EBF008C9261 /* CustomSegmentedControl.swift in Sources */,
+				C456F84C295AC076008C9261 /* MeasurementReplayViewController.swift in Sources */,
 				C456F846295A0A2C008C9261 /* UIImage+Extension.swift in Sources */,
 				C456F848295A0A5A008C9261 /* UIContextualAction+Extension.swift in Sources */,
-				C4E487062959BC6900A1FB99 /* MeasurementRecordViewController.swift in Sources */,
 				8A6A5BC629597C6900B9EB85 /* MainTableViewCell.swift in Sources */,
 				C4E4870329598D7C00A1FB99 /* MeasurementEnrollController.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
+				C456F84E295AC0AA008C9261 /* PlayType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
