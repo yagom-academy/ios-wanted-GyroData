@@ -1,10 +1,3 @@
-//
-//  MotionListViewModel.swift
-//  GyroData
-//
-//  Created by 이호영 on 2022/12/27.
-//
-
 import Foundation
 
 protocol MotionListViewModelInput {
@@ -28,16 +21,23 @@ class MotionListViewModel: MotionListViewModelType {
     var error: Observable<String> = Observable("")
     
     func loadItems(count: Int) {
-        
+        items.value = testData.suffix(count)
     }
     
     func deleteItem(motion: Motion) {
-        
+        // TODO: CoreData내 motionData 삭제 처리 로직
+        if let index = items.value.firstIndex(where: { $0.id == motion.id }) {
+            items.value.remove(at: index)
+        }
     }
     
     func appendItems(count: Int) {
         
     }
     
+    var testData = [Motion(id: UUID(), motionType: .acc, date: Date(), time: 48.0),
+                        Motion(id: UUID(), motionType: .gyro, date: Date(), time: 48.0),
+                        Motion(id: UUID(), motionType: .acc, date: Date(), time: 60.0),
+                        Motion(id: UUID(), motionType: .gyro, date: Date(), time: 60.0)]
     
 }
