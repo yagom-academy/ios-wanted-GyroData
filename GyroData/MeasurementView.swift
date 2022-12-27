@@ -21,6 +21,7 @@ class MeasurementView: UIView {
     private let segmentedControl: UISegmentedControl = {
         let control = UISegmentedControl(items: ["Acc", "Gyro"])
         control.selectedSegmentIndex = 0
+        control.selectedSegmentTintColor = .systemCyan
         control.translatesAutoresizingMaskIntoConstraints = false
         return control
     }()
@@ -35,6 +36,7 @@ class MeasurementView: UIView {
         let button = UIButton()
         button.setTitle("측정", for: .normal)
         button.setTitleColor(.black, for: .normal)
+        button.contentHorizontalAlignment = .left
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -43,6 +45,7 @@ class MeasurementView: UIView {
         let button = UIButton()
         button.setTitle("정지", for: .normal)
         button.setTitleColor(.black, for: .normal)
+        button.contentHorizontalAlignment = .left
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
