@@ -37,8 +37,13 @@ private extension MotionListCoordinator {
     }
     
     private func makeMotionMeasureViewController() -> UIViewController {
-        let viewController = UIViewController()
-        return viewController
+        let navigationController = UINavigationController()
+        let coordinator = MotionMeasureCoordinator(navigationConrtoller: navigationController)
+        coordinator.parentCoordinator = self
+        coordinator.finishDelegate = self
+        coordinator.start()
+        childCoordinators.append(coordinator)
+        return navigationController
     }
     
     private func makeMotionDetailViewController() -> UIViewController {
