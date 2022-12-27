@@ -1,5 +1,5 @@
 //
-//  Analysisable.swift
+//  AnalysisType.swift
 //  GyroData
 //
 //  Created by Ellen J on 2022/12/26.
