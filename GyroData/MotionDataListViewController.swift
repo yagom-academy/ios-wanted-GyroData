@@ -12,6 +12,7 @@ final class MotionDataListViewController: UIViewController {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.dataSource = self
+        tableView.delegate = self
         tableView.register(RecordTableViewCell.self, forCellReuseIdentifier: RecordTableViewCell.reuseIdentifier)
         return tableView
     }()
@@ -65,5 +66,22 @@ extension MotionDataListViewController: UITableViewDataSource {
                           Coordiante(x: 1, y: 1, z: 1),
                           Coordiante(x: 1, y: 1, z: 1)]))
         return cell
+    }
+}
+
+extension MotionDataListViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let playAction = UIContextualAction(style: .normal, title: "Play") { action, view, didSuccessed in
+            didSuccessed(true)
+        }
+
+        playAction.backgroundColor = .systemGreen
+
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { action, view, didSuccessed in
+            didSuccessed(true)
+        }
+        deleteAction.backgroundColor = .systemRed
+
+        return UISwipeActionsConfiguration(actions: [deleteAction, playAction])
     }
 }
