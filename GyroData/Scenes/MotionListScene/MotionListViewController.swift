@@ -56,9 +56,15 @@ class MotionListViewController: UIViewController {
     }
 }
 
+// MARK: TableView Delegate
+
 extension MotionListViewController: UITableViewDelegate {
-     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.pushMotionResultScene(motion: self.viewModel.items.value[indexPath.row])
+    }
 }
+
+// MARK: TableView DataSource
 
 extension MotionListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
