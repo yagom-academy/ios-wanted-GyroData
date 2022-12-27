@@ -13,6 +13,12 @@ protocol MotionListViewModelInput {
     func appendItems(count: Int)
 }
 
+protocol MotionListViewModelOutput {
+    var items: Observable<[Motion]> { get }
+    var loading: Observable<Void> { get }
+    var error: Observable<String> { get }
+}
+
 class MotionListViewModel {
     
 }
