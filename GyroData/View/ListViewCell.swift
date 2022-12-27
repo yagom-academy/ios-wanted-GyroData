@@ -68,7 +68,7 @@ final class ListViewCell: UITableViewCell {
     func setupData(with model: CellData) {
         dateLabel.text = model.date
         sensorLabel.text = model.sensor
-        valueLabel.text = model.sensorValue
+        valueLabel.text = model.measuredTime
     }
 }
 

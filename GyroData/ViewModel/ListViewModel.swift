@@ -8,7 +8,7 @@
 import Foundation
 
 protocol ListViewModelInput {
-    var model: SensorData { get }
+    var model: MeasuredData { get }
 }
 
 protocol ListViewModelOutput {
@@ -18,14 +18,14 @@ protocol ListViewModelOutput {
 protocol ListViewModel: ListViewModelInput, ListViewModelOutput {}
 
 final class DefaultListViewModel: ListViewModel {
-    var model: SensorData
+    var model: MeasuredData
     
-    init(model: SensorData) {
+    init(model: MeasuredData) {
         self.model = model
     }
     
     func configure() -> CellData {
 
-        return CellData(date: model.date.translateToString(), sensorValue: "", sensor: "")
+        return CellData(date: model.date.translateToString(), measuredTime: "", sensor: "")
     }
 }

@@ -9,7 +9,7 @@ import UIKit
 
 final class ListViewController: UIViewController {
     private let listView = ListView()
-    private var list = [CellData(date: Date().translateToString(), sensorValue: "43.4", sensor: "Accelerometer")]
+    private var list = [CellData(date: Date().translateToString(), measuredTime: "43.4", sensor: "Accelerometer")]
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -12,12 +12,16 @@
 		63F01BB928D44FC400C53A39 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB828D44FC400C53A39 /* ListViewController.swift */; };
 		63F01BBE28D44FC500C53A39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBD28D44FC500C53A39 /* Assets.xcassets */; };
 		63F01BC128D44FC500C53A39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */; };
-		A3DED01B295965CE007EE19D /* SensorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3DED01A295965CE007EE19D /* SensorData.swift */; };
+		A3DED01B295965CE007EE19D /* MeasuredData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3DED01A295965CE007EE19D /* MeasuredData.swift */; };
 		A3DED01F29596846007EE19D /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3DED01E29596846007EE19D /* ListView.swift */; };
 		A3DED02129596A83007EE19D /* ListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3DED02029596A83007EE19D /* ListViewCell.swift */; };
 		A3DED0242959821C007EE19D /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3DED0232959821C007EE19D /* Date+Extension.swift */; };
 		AFABE5E22959734C00F2F6E3 /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFABE5E12959734C00F2F6E3 /* ListViewModel.swift */; };
 		AFABE5E4295975A600F2F6E3 /* CellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFABE5E3295975A600F2F6E3 /* CellData.swift */; };
+		FDA47545295AC62D006D57B7 /* Sensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA47544295AC62D006D57B7 /* Sensor.swift */; };
+		FDA47548295AC793006D57B7 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA47547295AC793006D57B7 /* ChartView.swift */; };
+		FDA4754E295AC838006D57B7 /* CoreMotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA4754D295AC838006D57B7 /* CoreMotionManager.swift */; };
+		FDA47550295AC953006D57B7 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA4754F295AC953006D57B7 /* CoreDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,12 +32,16 @@
 		63F01BBD28D44FC500C53A39 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		63F01BC028D44FC500C53A39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		63F01BC228D44FC500C53A39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A3DED01A295965CE007EE19D /* SensorData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensorData.swift; sourceTree = "<group>"; };
+		A3DED01A295965CE007EE19D /* MeasuredData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasuredData.swift; sourceTree = "<group>"; };
 		A3DED01E29596846007EE19D /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 		A3DED02029596A83007EE19D /* ListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewCell.swift; sourceTree = "<group>"; };
 		A3DED0232959821C007EE19D /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		AFABE5E12959734C00F2F6E3 /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
 		AFABE5E3295975A600F2F6E3 /* CellData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellData.swift; sourceTree = "<group>"; };
+		FDA47544295AC62D006D57B7 /* Sensor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sensor.swift; sourceTree = "<group>"; };
+		FDA47547295AC793006D57B7 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
+		FDA4754D295AC838006D57B7 /* CoreMotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMotionManager.swift; sourceTree = "<group>"; };
+		FDA4754F295AC953006D57B7 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,13 +76,16 @@
 			children = (
 				63F01BB428D44FC400C53A39 /* AppDelegate.swift */,
 				63F01BB628D44FC400C53A39 /* SceneDelegate.swift */,
+				63F01BBD28D44FC500C53A39 /* Assets.xcassets */,
+				63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */,
+				63F01BC228D44FC500C53A39 /* Info.plist */,
+				FDA47551295AC99D006D57B7 /* Manager */,
+				FDA47546295AC76E006D57B7 /* ChartView */,
+				FDA47543295AC619006D57B7 /* Common */,
 				A3DED022295981D9007EE19D /* Extension */,
 				AFABE5E5295975D300F2F6E3 /* ViewModel */,
 				A3DED01D29596817007EE19D /* View */,
 				A3DED01C295967D5007EE19D /* Model */,
-				63F01BBD28D44FC500C53A39 /* Assets.xcassets */,
-				63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */,
-				63F01BC228D44FC500C53A39 /* Info.plist */,
 			);
 			path = GyroData;
 			sourceTree = "<group>";
@@ -82,7 +93,7 @@
 		A3DED01C295967D5007EE19D /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				A3DED01A295965CE007EE19D /* SensorData.swift */,
+				A3DED01A295965CE007EE19D /* MeasuredData.swift */,
 				AFABE5E3295975A600F2F6E3 /* CellData.swift */,
 			);
 			path = Model;
@@ -112,6 +123,31 @@
 				AFABE5E12959734C00F2F6E3 /* ListViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		FDA47543295AC619006D57B7 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				FDA47544295AC62D006D57B7 /* Sensor.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		FDA47546295AC76E006D57B7 /* ChartView */ = {
+			isa = PBXGroup;
+			children = (
+				FDA47547295AC793006D57B7 /* ChartView.swift */,
+			);
+			path = ChartView;
+			sourceTree = "<group>";
+		};
+		FDA47551295AC99D006D57B7 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				FDA4754D295AC838006D57B7 /* CoreMotionManager.swift */,
+				FDA4754F295AC953006D57B7 /* CoreDataManager.swift */,
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -185,13 +221,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				63F01BB928D44FC400C53A39 /* ListViewController.swift in Sources */,
+				FDA47545295AC62D006D57B7 /* Sensor.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				AFABE5E22959734C00F2F6E3 /* ListViewModel.swift in Sources */,
+				FDA4754E295AC838006D57B7 /* CoreMotionManager.swift in Sources */,
 				AFABE5E4295975A600F2F6E3 /* CellData.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
+				FDA47550295AC953006D57B7 /* CoreDataManager.swift in Sources */,
 				A3DED01F29596846007EE19D /* ListView.swift in Sources */,
+				FDA47548295AC793006D57B7 /* ChartView.swift in Sources */,
 				A3DED02129596A83007EE19D /* ListViewCell.swift in Sources */,
-				A3DED01B295965CE007EE19D /* SensorData.swift in Sources */,
+				A3DED01B295965CE007EE19D /* MeasuredData.swift in Sources */,
 				A3DED0242959821C007EE19D /* Date+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
