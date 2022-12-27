@@ -25,7 +25,7 @@ final class CoreDataManager {
 
     private init() {}
     
-    func create(model: [AnalysisType]) {
+    func create(model: [Analysis]) {
         let content = GyroData(context: context)
         model.forEach {
             content.setValue($0.x, forKey: "x")
