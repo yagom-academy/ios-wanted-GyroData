@@ -9,13 +9,21 @@ import Foundation
 import CoreMotion
 
 // MARK: - Motion
-struct Motion: Codable {
+struct Motion {
     
     let uuid: UUID
     let type: MotionType
     let values: [MotionValue]
     let date: Date
     let duration: TimeInterval
+    
+}
+
+extension Motion {
+    
+    func toFile() -> MotionList {
+        return .init(uuid: self.uuid, values: self.values)
+    }
     
 }
 

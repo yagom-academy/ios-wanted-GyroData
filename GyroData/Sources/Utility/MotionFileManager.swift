@@ -22,7 +22,7 @@ final class MotionFileManager {
 
 extension MotionFileManager {
     
-    func save(data: Motion) throws {
+    func save(data: MotionList) throws {
         if manager.fileExists(atPath: documentURL.absoluteString) == false {
             do {
                 try manager.createDirectory(at: documentURL, withIntermediateDirectories: true)
@@ -42,7 +42,7 @@ extension MotionFileManager {
         }
     }
     
-    func load(by uuid: UUID) throws -> Motion {
+    func load(by uuid: UUID) throws -> MotionList {
         let fileURL = documentURL.appending(path: uuid.uuidString + ".json")
         guard manager.fileExists(atPath: fileURL.absoluteString) == false else {
             throw MotionFileManagerError.notFound
@@ -50,7 +50,7 @@ extension MotionFileManager {
         do {
             let decoder = JSONDecoder()
             let data = try Data(contentsOf: fileURL)
-            let motion = try decoder.decode(Motion.self, from: data)
+            let motion = try decoder.decode(MotionList.self, from: data)
             return motion
         } catch {
             debugPrint(error)
