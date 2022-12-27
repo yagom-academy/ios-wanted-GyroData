@@ -6,12 +6,16 @@
 
 import Foundation
 
-protocol AnalysisType: Codable {
-    var x: Double { get }
-    var y: Double { get }
-    var z: Double { get }
-    var measurementTime: Date { get }
-    var savedAt: Date { get }
+enum AnalysisType: String, Codable {
+    case accelerate = "accelerate"
+    case gyroscope = "gyroscope"
 }
 
-struct Model {}
+struct Analysis: Codable {
+    let analysisType: AnalysisType
+    let x: Double
+    let y: Double
+    let z: Double
+    let measurementTime: Date
+    let savedAt: Date
+}
