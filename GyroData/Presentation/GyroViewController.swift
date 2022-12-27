@@ -11,6 +11,8 @@ final class GyroViewController: UIViewController {
     
     private let gyroListView = GyroTableView()
     
+    private let coreData = CoreDataManager().fetchData()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationItem()
@@ -98,7 +100,7 @@ extension GyroViewController: UITableViewDataSource {
         _ tableView: UITableView,
         numberOfRowsInSection section: Int
     ) -> Int {
-        return 3
+        return coreData.count
     }
     
     func tableView(
@@ -108,7 +110,8 @@ extension GyroViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(
             withIdentifier: GyroTableViewCell.id
         ) as? GyroTableViewCell ?? GyroTableViewCell()
-
+        cell.configure(motion: coreData[indexPath.row])
+        
         return cell
     }
     

@@ -13,7 +13,6 @@ final class GyroTableViewCell: UITableViewCell {
     private let measurementTime: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "2022/09/08 14:50:23"
         label.font = .preferredFont(forTextStyle: .body)
         return label
     }()
@@ -21,7 +20,6 @@ final class GyroTableViewCell: UITableViewCell {
     private let measurementType: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Accelerometer"
         label.font = UIFont.preferredFont(forTextStyle: .title1)
         return label
     }()
@@ -29,7 +27,6 @@ final class GyroTableViewCell: UITableViewCell {
     private let measurementValue: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "43.4"
         label.font = .preferredFont(forTextStyle: .largeTitle)
         return label
     }()
@@ -96,5 +93,11 @@ final class GyroTableViewCell: UITableViewCell {
                 multiplier: 0.6
             )
         ])
+    }
+    
+    func configure(motion: Motion) {
+        self.measurementTime.text = motion.date
+        self.measurementType.text = motion.measurementType
+        self.measurementValue.text = "\(motion.coordinate.x)"
     }
 }
