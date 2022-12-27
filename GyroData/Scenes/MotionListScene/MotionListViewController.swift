@@ -9,13 +9,22 @@ import UIKit
 
 class MotionListViewController: UIViewController {
 
-    private var motionListTableView = UITableView()
+    private lazy var motionListTableView: UITableView = {
+       let tableView = UITableView()
+       tableView.delegate = self
+       tableView.dataSource = self
+       tableView.register(
+           MotionListTableViewCell.self,
+           forCellReuseIdentifier: MotionListTableViewCell.cellIdentifier
+       )
+       tableView.translatesAutoresizingMaskIntoConstraints = false
+       return tableView
+   }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupView()
-        setupTableView()
         configureNavigationBar()
     }
 
@@ -36,16 +45,6 @@ class MotionListViewController: UIViewController {
             motionListTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             motionListTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
-    }
-    
-    func setupTableView() {
-        motionListTableView.delegate = self
-        motionListTableView.dataSource = self
-        motionListTableView.register(
-            MotionListTableViewCell.self,
-            forCellReuseIdentifier: MotionListTableViewCell.cellIdentifier
-        )
-        motionListTableView.translatesAutoresizingMaskIntoConstraints = false
     }
 }
 
