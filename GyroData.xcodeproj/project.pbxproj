@@ -159,9 +159,7 @@
 			children = (
 				0247ED63295A8EEA00212A78 /* Coordinators */,
 				0247ED52295A8C0F00212A78 /* MotionList */,
-				0247ED59295A8CBE00212A78 /* MotionListCoordinator.swift */,
-				0247ED75295AB07100212A78 /* MotionMeasureCoordinator.swift */,
-				0247ED5F295A8D8C00212A78 /* MotionListCoordinatorInterface.swift */,
+				0247ED77295AB50E00212A78 /* MotionMeasure */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -169,6 +167,7 @@
 		0247ED52295A8C0F00212A78 /* MotionList */ = {
 			isa = PBXGroup;
 			children = (
+				0247ED78295AB52900212A78 /* Coordinator */,
 				0247ED61295A8DFB00212A78 /* ViewControllers */,
 				0247ED62295A8E0600212A78 /* ViewModels */,
 				0247ED70295A948800212A78 /* Views */,
@@ -227,6 +226,31 @@
 				0247ED71295A949D00212A78 /* MotionDataCell.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		0247ED77295AB50E00212A78 /* MotionMeasure */ = {
+			isa = PBXGroup;
+			children = (
+				0247ED79295AB53000212A78 /* Coordinator */,
+			);
+			path = MotionMeasure;
+			sourceTree = "<group>";
+		};
+		0247ED78295AB52900212A78 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				0247ED59295A8CBE00212A78 /* MotionListCoordinator.swift */,
+				0247ED5F295A8D8C00212A78 /* MotionListCoordinatorInterface.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		0247ED79295AB53000212A78 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				0247ED75295AB07100212A78 /* MotionMeasureCoordinator.swift */,
+			);
+			path = Coordinator;
 			sourceTree = "<group>";
 		};
 		63F01BA828D44FC400C53A39 = {
