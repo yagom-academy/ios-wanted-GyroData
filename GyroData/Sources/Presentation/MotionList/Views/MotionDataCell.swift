@@ -75,7 +75,19 @@ class MotionDataCell: UITableViewCell {
     }
     
     private func reset() {
-        
+        dateLabel.text = nil
+        titleLabel.text = nil
+        measurementTimeLabel.text = nil
     }
 
+}
+
+extension MotionDataCell {
+    
+    func setUp(by motionEntity: MotionEntity?) {
+        dateLabel.text = motionEntity?.date?.formatted(for: .display)
+        titleLabel.text = motionEntity?.type
+        measurementTimeLabel.text = motionEntity?.duration.description
+    }
+    
 }
