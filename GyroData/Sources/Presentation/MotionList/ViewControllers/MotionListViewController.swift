@@ -19,6 +19,7 @@ class MotionListViewController: UIViewController {
         tableView.register(MotionDataCell.self)
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.prefetchDataSource = self
         return tableView
     }()
     
@@ -126,6 +127,17 @@ extension MotionListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         coordinator?.showMotionDetailView()
+    }
+    
+}
+
+extension MotionListViewController: UITableViewDataSourcePrefetching {
+    
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        guard let index = indexPaths.last?.row, index != viewModel.motions.value.count - 1 else {
+            return
+        }
+        viewModel.prefetch()
     }
     
 }

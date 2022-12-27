@@ -10,12 +10,14 @@ import Foundation
 protocol MotionListViewModelInput {
     
     func didDeleteAction(at index: Int)
+    func prefetch()
     
 }
 
 protocol MotionListViewModelOutput {
     
     var motions: Observable<[MotionEntity]> { get }
+    var isLoading: Observable<Bool> { get }
     
 }
 
@@ -24,6 +26,7 @@ protocol MotionListViewModel: MotionListViewModelInput, MotionListViewModelOutpu
 final class DefaultMotionListViewModel: MotionListViewModel {
     
     private let storage: MotionStorage
+    private var currentPage: UInt = 1
     
     init(storage: CoreDataMotionStorage = .init()) {
         self.storage = storage
@@ -32,6 +35,7 @@ final class DefaultMotionListViewModel: MotionListViewModel {
     
     // MARK: - Output
     let motions: Observable<[MotionEntity]> = .init([])
+    let isLoading: Observable<Bool> = .init(false)
     
     // MARK: - Input
     func didDeleteAction(at index: Int) {
@@ -40,5 +44,18 @@ final class DefaultMotionListViewModel: MotionListViewModel {
         }
         let motion = motions.value.remove(at: index)
         storage.delete(motion)
+    }
+    
+    func prefetch() {
+        guard isLoading.value == false else {
+            return
+        }
+        isLoading.value = true
+        let newMotions = storage.fetch(page: currentPage + 1)
+        if newMotions.isEmpty == false {
+            currentPage += 1
+            motions.value.append(contentsOf: newMotions)
+        }
+        isLoading.value = false
     }
 }
