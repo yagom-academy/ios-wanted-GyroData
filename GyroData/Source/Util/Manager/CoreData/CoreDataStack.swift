@@ -13,11 +13,11 @@ class CoreDataStack {
     private let inMemory: Bool
     
     lazy var persistantContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "Gyro")
+        let container = NSPersistentContainer(name: "GyroModel")
         
         if inMemory {
             let description = NSPersistentStoreDescription()
-            description.url = URL(string: "/dev/null")
+            description.url = URL(fileURLWithPath: "/dev/null")
             description.shouldAddStoreAsynchronously = false //비동기 적으로 저장하는 걸 방지
             
             container.persistentStoreDescriptions = [description]
