@@ -7,6 +7,12 @@
 
 import Foundation
 
+protocol MotionListViewModelInput {
+    func loadItems(count: Int)
+    func deleteItem(motion: Motion)
+    func appendItems(count: Int)
+}
+
 class MotionListViewModel {
     
 }
