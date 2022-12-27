@@ -19,9 +19,9 @@ final class CoreDataMotionStorage {
 
 extension CoreDataMotionStorage: MotionStorage {
     
-    func fetch() -> [MotionEntity] {
+    func fetch(page: UInt) -> [MotionEntity] {
         let context = coreDataStorage.persistentContainer.viewContext
-        let object = try? coreDataStorage.getMotion(context)
+        let object = try? coreDataStorage.getMotion(context, page: page)
         return object ?? []
     }
     
