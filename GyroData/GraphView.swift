@@ -18,7 +18,7 @@ class GraphView: UIView {
         setupView()
     }
     
-    func setupView() {
+    private func setupView() {
         self.layer.borderWidth = 2
         self.layer.borderColor = UIColor.black.cgColor
         self.backgroundColor = .systemGray

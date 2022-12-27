@@ -8,16 +8,79 @@
 import UIKit
 
 class MeasurementViewController: UIViewController {
-    private let measurementView = MeasurementView()
+    private let entireStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.distribution = .fill
+        stackView.alignment = .fill
+        stackView.spacing = 16
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
     
-    override func loadView() {
-        view = measurementView
-    }
+    private let segmentedControl: UISegmentedControl = {
+        let control = UISegmentedControl(items: ["Acc", "Gyro"])
+        control.selectedSegmentIndex = 0
+        control.selectedSegmentTintColor = .systemCyan
+        control.translatesAutoresizingMaskIntoConstraints = false
+        return control
+    }()
+    
+    private let graphView: GraphView = {
+        let graph = GraphView()
+        graph.translatesAutoresizingMaskIntoConstraints = false
+        return graph
+    }()
+    
+    private let measurementButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("측정", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.contentHorizontalAlignment = .left
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private let stopButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("정지", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.contentHorizontalAlignment = .left
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupView()
         configureNavigationBar()
+    }
+    
+    private func setupView() {
+        addSubViews()
+        setupConstraints()
+        view.backgroundColor = .systemBackground
+    }
+    
+    private func addSubViews() {
+        entireStackView.addArrangedSubview(segmentedControl)
+        entireStackView.addArrangedSubview(graphView)
+        
+        view.addSubview(entireStackView)
+    }
+    
+    private func setupConstraints() {
+        NSLayoutConstraint.activate([
+            entireStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,
+                                                 constant: 16),
+            entireStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor,
+                                                 constant: 16),
+            entireStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,
+                                                 constant: -16),
+            
+            graphView.heightAnchor.constraint(equalTo: view.widthAnchor)
+        ])
     }
     
     private func configureNavigationBar() {
