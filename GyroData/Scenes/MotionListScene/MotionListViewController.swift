@@ -47,12 +47,6 @@ class MotionListViewController: UIViewController {
         )
         motionListTableView.translatesAutoresizingMaskIntoConstraints = false
     }
-    
-    private func setCellTextColor (cell: UITableViewCell) {
-        cell.backgroundColor = .white
-        cell.textLabel?.textColor = .lightGray
-        cell.detailTextLabel?.textColor = .lightGray
-    }
 }
 
 extension MotionListViewController: UITableViewDelegate {
