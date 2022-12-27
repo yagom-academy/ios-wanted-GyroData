@@ -34,7 +34,6 @@ final class DefaultMeasermentViewModel: MeasermentViewModel {
         manger: CoreMotionManager = CoreMotionManager()
     ) {
         self.coreMotionManager = manger
-        
     }
     
     func measerStart(type: MotionType) {
@@ -43,18 +42,20 @@ final class DefaultMeasermentViewModel: MeasermentViewModel {
             coreMotionManager.bind(gyroHandler: { data, error in
                 if let data = data {
                     let motionValue = MotionValue(data)
-                    self.currentMotion = Observable(motionValue)
-                    self.motions.value.append(motionValue)
+                    self.currentMotion.value = motionValue
+                    //self.motions.value.append(motionValue)
                 }
             })
+            coreMotionManager.startUpdates(type: .gyro)
         case .accelerometer:
             coreMotionManager.bind(accHandler: { data, error in
                 if let data = data {
                     let motionValue = MotionValue(data)
-                    self.currentMotion = Observable(motionValue)
-                    self.motions.value.append(motionValue)
+                    self.currentMotion.value = motionValue
+                    //self.motions.value.append(motionValue)
                 }
             })
+            coreMotionManager.startUpdates(type: .accelerometer)
         }
     }
     

@@ -190,7 +190,6 @@
 			isa = PBXGroup;
 			children = (
 				0247ED5B295A8D1200212A78 /* MotionListViewController.swift */,
-				E13ACFEF295B15DA00265ED2 /* MeasurementViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -199,7 +198,6 @@
 			isa = PBXGroup;
 			children = (
 				0247ED5D295A8D3300212A78 /* MotionListViewModel.swift */,
-				E13ACFEB295AFB5000265ED2 /* MeasermentViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -246,6 +244,8 @@
 		0247ED77295AB50E00212A78 /* MotionMeasure */ = {
 			isa = PBXGroup;
 			children = (
+				E13ACFF5295B31B100265ED2 /* ViewModels */,
+				E13ACFF4295B31A500265ED2 /* ViewControllers */,
 				0247ED79295AB53000212A78 /* Coordinator */,
 			);
 			path = MotionMeasure;
@@ -292,6 +292,22 @@
 				63F01BC228D44FC500C53A39 /* Info.plist */,
 			);
 			path = GyroData;
+			sourceTree = "<group>";
+		};
+		E13ACFF4295B31A500265ED2 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				E13ACFEF295B15DA00265ED2 /* MeasurementViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		E13ACFF5295B31B100265ED2 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				E13ACFEB295AFB5000265ED2 /* MeasermentViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -552,7 +568,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = RCVFD6XLU9;
+				DEVELOPMENT_TEAM = 4645UMZ6U4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GyroData/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -579,7 +595,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = RCVFD6XLU9;
+				DEVELOPMENT_TEAM = 4645UMZ6U4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GyroData/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

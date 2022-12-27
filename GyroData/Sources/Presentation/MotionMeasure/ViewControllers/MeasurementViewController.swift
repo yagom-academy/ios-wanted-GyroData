@@ -18,17 +18,18 @@ final class MeasurementViewController: UIViewController {
         static let buttonColor = UIColor.blue
     }
     
-    //weak var coordinator:
+    weak var coordinator: Coordinator?
     private let viewModel: MeasermentViewModel
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpView()
+        bind()
     }
     
-    init(viewModel: MeasermentViewModel) {
+    init(viewModel: MeasermentViewModel, coordinator: Coordinator) {
         self.viewModel = viewModel
-        //self.coordinator = coordinator
+        self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)
         view.backgroundColor = .systemBackground
     }
@@ -39,14 +40,13 @@ final class MeasurementViewController: UIViewController {
     
     private func bind() {
         viewModel.currentMotion.observe(on: self) { [weak self] value in
-            if let value = value {
-                self?.drawGraph(data: value)
-            }
+            self?.drawGraph(data: value)
         }
     }
     
     private lazy var segmentControl: UISegmentedControl = {
         let control = UISegmentedControl(items: [Constant.segmentLeftText, Constant.segmentRightText])
+        control.selectedSegmentIndex = 0
         control.translatesAutoresizingMaskIntoConstraints = false
         return control
     }()
@@ -62,6 +62,7 @@ final class MeasurementViewController: UIViewController {
         let button = UIButton()
         button.setTitle(Constant.measurementButtonText, for: .normal)
         button.setTitleColor(Constant.buttonColor, for: .normal)
+        button.addTarget(self, action: #selector(startMeasurement(_:)), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -70,14 +71,16 @@ final class MeasurementViewController: UIViewController {
         let button = UIButton()
         button.setTitle(Constant.stopButtonText, for: .normal)
         button.setTitleColor(Constant.buttonColor, for: .normal)
-        button.addTarget(self, action: #selector(startMeasurement(_:)), for: .touchUpInside)
+        button.addTarget(self, action: #selector(stopMeasurement(_:)), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
     //MARK - func
-    func drawGraph(data: MotionValue) {
-        graphView.drawGraph(data: data)
+    func drawGraph(data: MotionValue?) {
+        DispatchQueue.main.async {
+            self.graphView.drawGraph(data: data)
+        }
     }
     
     @objc func startMeasurement(_ sender: UIButton) {
@@ -153,6 +156,7 @@ final class GraphView: UIView {
         static let lineWidth: CGFloat = 2
         static let graphBaseCount: CGFloat = 8
         static let graphPointersCount: CGFloat = 600
+        static let multiplyer: CGFloat = 100
     }
     
     override func draw(_ rect: CGRect) {
@@ -237,7 +241,8 @@ final class GraphView: UIView {
         self.layer.addSublayer(layerZ)
     }
     
-    func drawGraph(data: MotionValue) {
+    func drawGraph(data: MotionValue?) {
+        
         let layerX = CAShapeLayer()
         let layerY = CAShapeLayer()
         let layerZ = CAShapeLayer()
@@ -248,15 +253,17 @@ final class GraphView: UIView {
         let offset = self.frame.width / Constant.graphPointersCount
         let initHeight: CGFloat = self.frame.height / 2
         var pointer: CGFloat = offset * CGFloat(index)
-        pathX.move(to: CGPoint(x: pointer, y: initHeight + previousMotion.x))
-        pathY.move(to: CGPoint(x: pointer, y: initHeight + previousMotion.y))
-        pathZ.move(to: CGPoint(x: pointer, y: initHeight + previousMotion.z))
+        pathX.move(to: CGPoint(x: pointer, y: initHeight + previousMotion.x * Constant.multiplyer))
+        pathY.move(to: CGPoint(x: pointer, y: initHeight + previousMotion.y * Constant.multiplyer))
+        pathZ.move(to: CGPoint(x: pointer, y: initHeight + previousMotion.z * Constant.multiplyer))
         
+        index += 1
+        previousMotion = data ?? MotionValue(timestamp: TimeInterval(), x: 0, y: 0, z: 0)
         pointer = offset * CGFloat(index)
         
-        let newPositionX = CGPoint(x: pointer, y: initHeight + data.x)
-        let newPositionY = CGPoint(x: pointer, y: initHeight + data.y)
-        let newPositionZ = CGPoint(x: pointer, y: initHeight + data.z)
+        let newPositionX = CGPoint(x: pointer, y: initHeight + (data?.x ?? 0) * Constant.multiplyer)
+        let newPositionY = CGPoint(x: pointer, y: initHeight + (data?.y ?? 0) * Constant.multiplyer)
+        let newPositionZ = CGPoint(x: pointer, y: initHeight + (data?.z ?? 0) * Constant.multiplyer)
         
         pathX.addLine(to: newPositionX)
         pathY.addLine(to: newPositionY)
