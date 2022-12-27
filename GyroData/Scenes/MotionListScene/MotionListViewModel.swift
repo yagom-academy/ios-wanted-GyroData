@@ -25,7 +25,7 @@ class MotionListViewModel: MotionListViewModelType {
     /// Input
     
     func loadItems(count: Int) {
-        items.value = testData.suffix(count)
+        items.value = testData
     }
     
     func deleteItem(motion: Motion) {

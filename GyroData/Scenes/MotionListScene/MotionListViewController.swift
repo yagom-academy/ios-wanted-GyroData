@@ -62,11 +62,7 @@ extension MotionListViewController: UITableViewDelegate {
 
 extension MotionListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
-    }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 10
+        return self.viewModel.items.value.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
