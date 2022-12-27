@@ -18,13 +18,13 @@ final class MotionListCoordinator: Coordinator {
     }
     
     func start() {
-        let viewController = makeAuthViewController()
+        let viewController = makeMotionListViewController()
         navigationController.pushViewController(viewController, animated: true)
     }
 }
 
 private extension MotionListCoordinator {
-    func makeAuthViewController() -> UIViewController {
+    func makeMotionListViewController() -> UIViewController {
         let viewController = MotionListViewController(
             viewModel: MotionListViewModel(),
             coordinator: self

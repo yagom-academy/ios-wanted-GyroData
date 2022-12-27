@@ -18,13 +18,13 @@ final public class AppCoordinator: Coordinator {
     }
     
     public func start() {
-        let coordinator = makeAuthCoordinator()
+        let coordinator = makeMotionListCoordinator()
         coordinator.start()
     }
 }
 
 private extension AppCoordinator {
-    func makeAuthCoordinator() -> Coordinator {
+    func makeMotionListCoordinator() -> Coordinator {
         let coordinator = MotionListCoordinator(navigationConrtoller: navigationController)
         coordinator.parentCoordinator = self
         childCoordinators.append(coordinator)
