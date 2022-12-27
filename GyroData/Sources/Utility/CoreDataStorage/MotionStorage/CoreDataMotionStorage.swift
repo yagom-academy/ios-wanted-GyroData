@@ -33,10 +33,10 @@ extension CoreDataMotionStorage: MotionStorage {
     }
     
     func delete(_ item: MotionEntity) {
-        coreDataStorage.performBackgroundTask { context in
-            context.delete(item)
-            context.saveContext()
-        }
+        let context = coreDataStorage.persistentContainer.viewContext
+        context.delete(item)
+        context.saveContext()
+        
     }
     
 }

@@ -38,6 +38,7 @@ final class DefaultMotionListViewModel: MotionListViewModel {
         guard motions.value[safe: index] != nil else {
             return
         }
-        motions.value.remove(at: index)
+        let motion = motions.value.remove(at: index)
+        storage.delete(motion)
     }
 }
