@@ -98,3 +98,22 @@ extension MotionListViewController {
     }
 }
 
+// MARK: TableView SwipeAction
+
+extension MotionListViewController {
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let playAction = UIContextualAction(style: .normal, title: "Play") { _, _, completionHandler in
+
+            completionHandler(true)
+        }
+        playAction.backgroundColor = .systemGreen
+        
+        let deleteAction = UIContextualAction(style: .normal, title: "Delete") { _, _, completionHandler in
+            completionHandler(true)
+        }
+        deleteAction.backgroundColor = .red
+        
+        return UISwipeActionsConfiguration(actions: [deleteAction, playAction])
+    }
+}
