@@ -21,6 +21,8 @@ class MotionListViewController: UIViewController {
        return tableView
    }()
     
+    private var viewModel: MotionListViewModel = MotionListViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -67,7 +69,7 @@ extension MotionListViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         
-        cell.configure(title: "Accelerometer", date: "2022/09/08 14:50:43", time: "43.4")
+        cell.configure(motion: self.viewModel.items.value[indexPath.row])
         return cell
     }
 }
