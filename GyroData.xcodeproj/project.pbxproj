@@ -36,8 +36,8 @@
 		63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB628D44FC400C53A39 /* SceneDelegate.swift */; };
 		63F01BBE28D44FC500C53A39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBD28D44FC500C53A39 /* Assets.xcassets */; };
 		63F01BC128D44FC500C53A39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */; };
-		E13ACFEA295AE6B700265ED2 /* MeasermentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13ACFE9295AE6B700265ED2 /* MeasermentViewController.swift */; };
 		E13ACFEC295AFB5000265ED2 /* MeasermentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13ACFEB295AFB5000265ED2 /* MeasermentViewModel.swift */; };
+		E13ACFF0295B15DA00265ED2 /* MeasurementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13ACFEF295B15DA00265ED2 /* MeasurementViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,8 +72,8 @@
 		63F01BBD28D44FC500C53A39 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		63F01BC028D44FC500C53A39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		63F01BC228D44FC500C53A39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E13ACFE9295AE6B700265ED2 /* MeasermentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MeasermentViewController.swift; path = ../../../../../../Documents/MeasermentViewController.swift; sourceTree = "<group>"; };
 		E13ACFEB295AFB5000265ED2 /* MeasermentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasermentViewModel.swift; sourceTree = "<group>"; };
+		E13ACFEF295B15DA00265ED2 /* MeasurementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,7 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				0247ED5B295A8D1200212A78 /* MotionListViewController.swift */,
-				E13ACFE9295AE6B700265ED2 /* MeasermentViewController.swift */,
+				E13ACFEF295B15DA00265ED2 /* MeasurementViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -403,7 +403,6 @@
 				02432C282959CAFB0035AEDD /* MotionFileManager.swift in Sources */,
 				0247ED76295AB07100212A78 /* MotionMeasureCoordinator.swift in Sources */,
 				02432C11295990960035AEDD /* Motion.swift in Sources */,
-				E13ACFEA295AE6B700265ED2 /* MeasermentViewController.swift in Sources */,
 				0247ED6C295A92AB00212A78 /* UITableView+extension.swift in Sources */,
 				0247ED68295A927900212A78 /* UIStackView+extension.swift in Sources */,
 				0247ED65295A923500212A78 /* UIView+extension.swift in Sources */,
@@ -413,6 +412,7 @@
 				02432C1F295994930035AEDD /* MotionEntity+Mapping.swift in Sources */,
 				02432C262959A8420035AEDD /* MotionStorage.swift in Sources */,
 				0247ED60295A8D8C00212A78 /* MotionListCoordinatorInterface.swift in Sources */,
+				E13ACFF0295B15DA00265ED2 /* MeasurementViewController.swift in Sources */,
 				0247ED7D295ABA9700212A78 /* Collection+extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
