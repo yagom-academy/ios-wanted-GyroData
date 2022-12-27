@@ -25,9 +25,8 @@ class MeasurementView: UIView {
         return control
     }()
     
-    private let graphView: UIView = {
-        let graph = UIView()
-        graph.backgroundColor = .systemGray
+    private let graphView: GraphView = {
+        let graph = GraphView()
         graph.translatesAutoresizingMaskIntoConstraints = false
         return graph
     }()

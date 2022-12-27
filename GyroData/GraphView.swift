@@ -1,0 +1,26 @@
+//
+//  GraphView.swift
+//  GyroData
+//
+//  Created by Judy on 2022/12/27.
+//
+
+import UIKit
+
+class GraphView: UIView {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupView()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setupView()
+    }
+    
+    func setupView() {
+        self.layer.borderWidth = 2
+        self.layer.borderColor = UIColor.black.cgColor
+        self.backgroundColor = .systemGray
+    }
+}
