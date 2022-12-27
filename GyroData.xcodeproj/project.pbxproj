@@ -68,8 +68,8 @@
 			children = (
 				02432BFE29598DE40035AEDD /* App */,
 				02432C142959910B0035AEDD /* Model */,
-				02432C152959910F0035AEDD /* Utility */,
 				0247ED51295A8C0B00212A78 /* Presentation */,
+				02432C152959910F0035AEDD /* Utility */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
