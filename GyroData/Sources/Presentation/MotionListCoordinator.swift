@@ -32,8 +32,18 @@ private extension MotionListCoordinator {
         viewController.coordinator = self
         return viewController
     }
+    
+    func makeMotionMeasureViewController() -> UIViewController {
+        let viewController = UIViewController()
+        return viewController
+    }
 }
 
 extension MotionListCoordinator: MotionListCoordinatorInterface {
+    
+    func showMotionMeasureView() {
+        let viewController = makeMotionMeasureViewController()
+        navigationController.pushViewController(viewController, animated: true)
+    }
     
 }

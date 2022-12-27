@@ -41,6 +41,6 @@ class MotionListViewController: UIViewController {
     }
     
     @objc private func didTapMeasure(_ sender: UIBarButtonItem) {
-        print(#function)
+        coordinator?.showMotionMeasureView()
     }
 }
