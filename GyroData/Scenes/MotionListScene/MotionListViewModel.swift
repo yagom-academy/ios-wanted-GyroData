@@ -19,6 +19,8 @@ protocol MotionListViewModelOutput {
     var error: Observable<String> { get }
 }
 
+protocol MotionListViewModelType: MotionListViewModelInput, MotionListViewModelOutput { }
+
 class MotionListViewModel {
     
 }
