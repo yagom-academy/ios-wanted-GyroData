@@ -16,5 +16,32 @@ class MeasurementViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        configureNavigationBar()
+    }
+    
+    private func configureNavigationBar() {
+        let saveBarButton = UIBarButtonItem(title: "저장",
+                                            style: .done,
+                                            target: self,
+                                            action: #selector(saveButtonTapped))
+        
+        let backBarButton = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"),
+                                            style: .plain,
+                                            target: self,
+                                            action: #selector(backButtonTapped))
+        
+        navigationItem.leftBarButtonItem = backBarButton
+        navigationItem.rightBarButtonItem = saveBarButton
+        navigationItem.setHidesBackButton(true, animated: false)
+        navigationItem.title = "측정하기"
+    }
+    
+    @objc private func saveButtonTapped() {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    @objc private func backButtonTapped() {
+        navigationController?.popViewController(animated: true)
     }
 }
