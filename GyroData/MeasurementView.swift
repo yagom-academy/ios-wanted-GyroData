@@ -47,4 +47,42 @@ class MeasurementView: UIView {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupView()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setupView()
+    }
+    
+    private func setupView() {
+        addSubViews()
+        setupConstraints()
+        self.backgroundColor = .systemBackground
+    }
+    
+    private func addSubViews() {
+        entireStackView.addArrangedSubview(segmentedControl)
+        entireStackView.addArrangedSubview(graphView)
+        entireStackView.addArrangedSubview(measurementButton)
+        entireStackView.addArrangedSubview(stopButton)
+        
+        self.addSubview(entireStackView)
+    }
+    
+    private func setupConstraints() {
+        NSLayoutConstraint.activate([
+            entireStackView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor,
+                                                 constant: 16),
+            entireStackView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor,
+                                                 constant: 16),
+            entireStackView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor,
+                                                 constant: -16),
+            
+            graphView.heightAnchor.constraint(equalTo: self.widthAnchor)
+        ])
+    }
 }
