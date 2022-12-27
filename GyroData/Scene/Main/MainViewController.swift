@@ -100,7 +100,11 @@ final class MainViewController: UIViewController {
     }
     
     @objc private func rightBarButtonTapped() {
-        print("view move")
+        let measurementEnrollController = MeasurementEnrollController()
+        navigationController?.pushViewController(
+            measurementEnrollController,
+            animated: true
+        )
     }
 }
 
@@ -123,5 +127,60 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         cell.setupTypeLabelText("Aaccelometer")
         cell.setupTypeMeasurementLabelText("100")
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+        let measurementReplayViewController = MeasurementReplayViewController(
+            with: .view
+        )
+        navigationController?.pushViewController(
+            measurementReplayViewController,
+            animated: true
+        )
+    }
+    
+    func tableView(
+        _ tableView: UITableView,
+        trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
+    ) -> UISwipeActionsConfiguration? {
+        let playButton = UIContextualAction(
+            style: .normal,
+            title: nil
+        ) { [weak self] action, _, result in
+            let measurementReplayViewController = MeasurementReplayViewController(
+                with: .play
+            )
+            
+            self?.navigationController?.pushViewController(
+                measurementReplayViewController,
+                animated: true
+            )
+            result(true)
+        }
+        
+        playButton.makeCustomTitle(
+            text: "Play",
+            font: .systemFont(ofSize: 24, weight: .semibold),
+            textColor: .white,
+            backgroundColor: UIColor(named: "PlayColor")
+        )
+        
+        let deleteButton = UIContextualAction(
+            style: .destructive,
+            title: nil
+        ) { [weak self] _, _, result in
+            print("Delete")
+            result(true)
+        }
+        
+        deleteButton.makeCustomTitle(
+            text: "Delete",
+            font: .systemFont(ofSize: 24, weight: .semibold),
+            textColor: .white,
+            backgroundColor: UIColor(named: "DeleteColor")
+        )
+        
+        return UISwipeActionsConfiguration(actions:[deleteButton, playButton])
     }
 }
