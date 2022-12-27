@@ -48,6 +48,11 @@ class MotionListViewController: UIViewController {
             motionListTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
+    
+    private func bind(to viewModel: MotionListViewModel) {
+        viewModel.items.subscribe() { [weak self] _ in self?.updateItem() }
+        viewModel.loadItems(count: 10)
+    }
 }
 
 extension MotionListViewController: UITableViewDelegate {
@@ -71,6 +76,10 @@ extension MotionListViewController: UITableViewDataSource {
         
         cell.configure(motion: self.viewModel.items.value[indexPath.row])
         return cell
+    }
+    
+    func updateItem() {
+        motionListTableView.reloadData()
     }
 }
 
