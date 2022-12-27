@@ -23,11 +23,21 @@ protocol MotionListViewModel: MotionListViewModelInput, MotionListViewModelOutpu
 
 final class DefaultMotionListViewModel: MotionListViewModel {
     
+    private let storage: MotionStorage
+    
+    init(storage: CoreDataMotionStorage = .init()) {
+        self.storage = storage
+        motions.value = storage.fetch(page: 1)
+    }
+    
     // MARK: - Output
     let motions: Observable<[MotionEntity]> = .init([])
     
     // MARK: - Input
     func didDeleteAction(at index: Int) {
-        print(#function)
+        guard motions.value[safe: index] != nil else {
+            return
+        }
+        motions.value.remove(at: index)
     }
 }
