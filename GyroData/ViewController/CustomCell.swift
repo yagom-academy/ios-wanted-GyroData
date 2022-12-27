@@ -30,7 +30,7 @@ class CustomCell: UITableViewCell {
         let stackView = UIStackView(arrangedSubviews: [timeLabel, typeLabel])
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
-        stackView.spacing = 0
+        stackView.spacing = 10
         
         return stackView
     }()
@@ -38,7 +38,7 @@ class CustomCell: UITableViewCell {
     let valueLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 30)
+        label.font = .systemFont(ofSize: 40)
         
         return label
     }()
