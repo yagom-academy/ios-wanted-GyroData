@@ -18,27 +18,51 @@ final class GraphView: UIView {
         return self.frame.height / viewModel.yScale
     }
 
-    private var path = CGMutablePath()
-    private var linesLayer: CAShapeLayer = {
-        let layer = CAShapeLayer()
-        layer.lineWidth = 5
-        layer.strokeColor = UIColor.systemYellow.cgColor
-        layer.fillColor = UIColor.clear.cgColor
-        return layer
-    }()
+    private lazy var redLinesLayer = initializeLayer(color: UIColor.red.cgColor)
+    private lazy var blueLinesLayer = initializeLayer(color: UIColor.blue.cgColor)
+    private lazy var greenLinesLayer = initializeLayer(color: UIColor.green.cgColor)
 
     override func draw(_ rect: CGRect) {
-        path.move(to: CGPoint(x: 0, y: center.y))
-        drawGraphFor1Hz(value: 1)
-        drawGraphFor1Hz(value: 4)
-        drawGraphFor1Hz(value: -4)
-        linesLayer.path = path
-        layer.addSublayer(linesLayer)
+        [redLinesLayer, blueLinesLayer, greenLinesLayer].forEach {
+            self.layer.addSublayer($0)
+        }
     }
 
-    private func drawGraphFor1Hz(value: CGFloat) {
+    private func initializeLayer(color: CGColor) -> CAShapeLayer {
+        let layer = CAShapeLayer()
+        let path = CGMutablePath()
+        path.move(to: CGPoint(x: 0, y: center.y))
+        layer.path = path
+
+        layer.lineWidth = 5
+        layer.strokeColor = color
+        layer.fillColor = UIColor.clear.cgColor
+        return layer
+    }
+
+    func drawGraphFor1Hz(layerType: Layer, value: CGFloat) {
+        var layer: CAShapeLayer?
+
+        switch layerType {
+        case .red:
+            layer = redLinesLayer
+        case .blue:
+            layer = blueLinesLayer
+        case .green:
+            layer = greenLinesLayer
+        }
+
+        guard let path = layer?.path?.mutableCopy() else { return }
         let nextPoint = CGPoint(x: path.currentPoint.x + widthFor1Hz, y: center.y - value * heightFor1Hz)
         path.addLine(to: nextPoint)
-        linesLayer.path = path
+        layer?.path = path
+    }
+}
+
+extension GraphView {
+    enum Layer {
+        case red
+        case blue
+        case green
     }
 }
