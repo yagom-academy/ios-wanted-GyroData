@@ -70,7 +70,7 @@ extension MotionListViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: MotionListTableViewCell.cellIdentifier, for: indexPath) as? MotionListTableViewCell else {
             return UITableViewCell()
         }
-        
+        cell.selectionStyle = .none
         cell.configure(motion: self.viewModel.items.value[indexPath.row])
         return cell
     }

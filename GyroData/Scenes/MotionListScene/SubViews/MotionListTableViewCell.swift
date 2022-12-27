@@ -47,7 +47,7 @@ class MotionListTableViewCell: UITableViewCell {
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.font = .preferredFont(forTextStyle: .body)
+        label.font = .preferredFont(forTextStyle: .title3)
         label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
