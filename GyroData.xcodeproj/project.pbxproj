@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -98,12 +98,12 @@
 				LastUpgradeCheck = 1400;
 				TargetAttributes = {
 					63F01BB028D44FC400C53A39 = {
-						CreatedOnToolsVersion = 14.0;
+						CreatedOnToolsVersion = 13.4;
 					};
 				};
 			};
 			buildConfigurationList = 63F01BAC28D44FC400C53A39 /* Build configuration list for PBXProject "GyroData" */;
-			compatibilityVersion = "Xcode 14.0";
+			compatibilityVersion = "Xcode 13.4";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
