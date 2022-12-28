@@ -77,6 +77,7 @@ extension MotionListCoordinator: MotionListCoordinatorInterface {
     
     func showMotionMeasureView() {
         let viewController = makeMotionMeasureViewController()
+        viewController.modalPresentationStyle = .fullScreen
         navigationController.visibleViewController?.present(viewController, animated: true)
     }
     
