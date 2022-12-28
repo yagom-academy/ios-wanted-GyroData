@@ -69,20 +69,19 @@ final class GraphView: UIView {
 
     func drawGraphFor1Hz(layerType: Layer, value: Double) {
         var layer: CAShapeLayer?
-        let value = CGFloat(Int(value))
 
         switch layerType {
         case .red:
             layer = redLinesLayer
-            redLabel.text = "x:\(value)"
+            redLabel.text = "x:\(String(format:"%.0f", value))"
             viewModel.pastValueForRed.append(value)
         case .blue:
             layer = blueLinesLayer
-            blueLabel.text = "z:\(value)"
+            blueLabel.text = "z:\(String(format:"%.0f", value))"
             viewModel.pastValueForBlue.append(value)
         case .green:
             layer = greenLinesLayer
-            greenLabel.text = "y:\(value)"
+            greenLabel.text = "y:\(String(format:"%.0f", value))"
             viewModel.pastValueForGreen.append(value)
         }
 
