@@ -34,9 +34,7 @@ final class MotionResultPlayViewController: MotionResultViewController {
         
         setupView()
         
-        dateLabel.text = "2022/12/29"
-        titleLabel.text = "Gyro Drop"
-        timerLabel.text = "5.0"
+        playButton.addTarget(self, action: #selector(playButtonTapped(_:)), for: .touchUpInside)
     }
     
     private func setupView() {
@@ -47,5 +45,27 @@ final class MotionResultPlayViewController: MotionResultViewController {
         entireStackView.addArrangedSubview(playStackView)
         playStackView.addArrangedSubview(playButton)
         playStackView.addArrangedSubview(timerLabel)
+    }
+    
+    @objc private func playButtonTapped(_ sender: PlayButton) {
+        if playButton.isSelected {
+            startDrawing()
+        } else {
+            stopDrawing()
+        }
+    }
+}
+
+// MARK: play Graph
+
+extension MotionResultViewController {
+    func startDrawing() {
+        guard let motionInformation = viewModel.motionInformation.value else { return }
+        // graphView에서 graph 그리기
+    }
+    
+    func stopDrawing() {
+        guard let motionInformation = viewModel.motionInformation.value else { return }
+        // graphView에서 graph 그리기
     }
 }
