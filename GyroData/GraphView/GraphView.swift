@@ -35,9 +35,12 @@ class GraphView: UIView {
         context.drawGridGraph(in: self.bounds.size)
     }
     
-    // TODO: 세그먼트를 삭제하고 그래프 지우는 메서드
     func clearSegmanet() {
+        segments.forEach {
+            $0.removeFromSuperview()
+        }
         
+        segments.removeAll()
     }
     
     func add(_ motions: [Double]) {

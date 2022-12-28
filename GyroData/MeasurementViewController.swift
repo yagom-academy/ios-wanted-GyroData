@@ -117,6 +117,6 @@ extension MeasurementViewController {
     }
     
     @objc private func stopButtonTapped() {
-        MotionMeasurementManager.shared.stopUpdates()
+        MotionMeasurementManager.shared.stopAccelerometer(at: graphView)
     }
 }

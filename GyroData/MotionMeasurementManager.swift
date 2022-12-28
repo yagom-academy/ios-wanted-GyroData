@@ -41,7 +41,7 @@ class MotionMeasurementManager {
         }
     }
     
-    func stopUpdates() {
+    func stopAccelerometer(at graphView: GraphView) {
         guard motionManager.isAccelerometerAvailable,
               let currentTimer = timer else { return }
         
@@ -49,6 +49,7 @@ class MotionMeasurementManager {
         timer = nil
         
         motionManager.stopAccelerometerUpdates()
+        graphView.clearSegmanet()
     }
     
     func startGyros(at graphView: GraphView) {
@@ -80,7 +81,7 @@ class MotionMeasurementManager {
         
     }
     
-    func stopGyros() {
+    func stopGyros(at graphView: GraphView) {
         guard motionManager.isGyroAvailable,
               let currentTimer = timer else { return }
         
@@ -88,5 +89,6 @@ class MotionMeasurementManager {
         timer = nil
         
         motionManager.stopGyroUpdates()
+        graphView.clearSegmanet()
     }
 }
