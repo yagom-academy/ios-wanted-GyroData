@@ -27,7 +27,8 @@ final class MotionManager {
         self.motionManager.accelerometerUpdateInterval = interval
     }
     
-    func startRecording(type: TempSensorType, completion: @escaping (MeasureData) -> Void) {
+    // 측정은 인터벌 설정한 시간마다 동작, 그 후 그래프 뷰에 넘기고 그리는건 비동기
+    func startRecording(type: SensorType, completion: @escaping (MeasureData) -> Void) {
         switch type {
         case .gyro:
             motionManager.startGyroUpdates(to: OperationQueue())
@@ -44,7 +45,7 @@ final class MotionManager {
         }
     }
     
-    func stopRecording(type: TempSensorType) {
+    func stopRecording(type: SensorType) {
         switch type {
         case .gyro:
             motionManager.stopGyroUpdates()
@@ -52,12 +53,6 @@ final class MotionManager {
             motionManager.stopAccelerometerUpdates()
         }
     }
-}
-
-// TODO: 코어 데이터 타입을 머지하기 전이라 동일한 내용의 임시 열거형 사용.
-enum TempSensorType: String {
-    case acc = "Accelerometer"
-    case gyro = "Gyro"
 }
 
 // TODO: 파일 분리 필요
@@ -71,6 +66,8 @@ extension Double {
     }
 }
 
+// TODO: 파일 분리 필요
+// 측정 데이터를 소수점 3자리로 변경하는 extension
 extension CMGyroData: MeasureDataConvertProtocol {
     func convertMeasureData() -> MeasureData {
         return MeasureData(

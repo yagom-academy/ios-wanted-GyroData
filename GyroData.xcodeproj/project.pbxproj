@@ -13,6 +13,8 @@
 		45BD40222959856000B37A25 /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BD40212959856000B37A25 /* RecordViewController.swift */; };
 		45BD4024295989F500B37A25 /* MeasureData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BD4023295989F500B37A25 /* MeasureData.swift */; };
 		45BD40262959FF0700B37A25 /* MotionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BD40252959FF0700B37A25 /* MotionData.swift */; };
+		45BD4028295AEBFC00B37A25 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BD4027295AEBFC00B37A25 /* GraphView.swift */; };
+		45FB1A55295B406100A9D43B /* GraphPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FB1A54295B406100A9D43B /* GraphPoint.swift */; };
 		63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB428D44FC400C53A39 /* AppDelegate.swift */; };
 		63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB628D44FC400C53A39 /* SceneDelegate.swift */; };
 		63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB828D44FC400C53A39 /* ViewController.swift */; };
@@ -44,6 +46,8 @@
 		45BD40212959856000B37A25 /* RecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
 		45BD4023295989F500B37A25 /* MeasureData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureData.swift; sourceTree = "<group>"; };
 		45BD40252959FF0700B37A25 /* MotionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionData.swift; sourceTree = "<group>"; };
+		45BD4027295AEBFC00B37A25 /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
+		45FB1A54295B406100A9D43B /* GraphPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphPoint.swift; sourceTree = "<group>"; };
 		63F01BB128D44FC400C53A39 /* GyroData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GyroData.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63F01BB428D44FC400C53A39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63F01BB628D44FC400C53A39 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -122,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				722944D1295A9978000C4302 /* FirstTableViewCell.swift */,
+				45BD4027295AEBFC00B37A25 /* GraphView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -140,6 +145,7 @@
 			children = (
 				45BD4023295989F500B37A25 /* MeasureData.swift */,
 				45BD40252959FF0700B37A25 /* MotionData.swift */,
+				45FB1A54295B406100A9D43B /* GraphPoint.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -155,6 +161,7 @@
 		45BD40152959766C00B37A25 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				45FB1A53295AFA7B00A9D43B /* GraphManager */,
 				45BD401E295984F500B37A25 /* MotionManager */,
 				45BD401B295977AC00B37A25 /* FileManager */,
 				45BD40172959770500B37A25 /* CoreData */,
@@ -189,6 +196,13 @@
 				45BD401F2959850300B37A25 /* MotionManager.swift */,
 			);
 			path = MotionManager;
+			sourceTree = "<group>";
+		};
+		45FB1A53295AFA7B00A9D43B /* GraphManager */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = GraphManager;
 			sourceTree = "<group>";
 		};
 		63F01BA828D44FC400C53A39 = {
@@ -339,7 +353,9 @@
 				7256AD872959843200E14DC6 /* Gyro+CoreDataProperties.swift in Sources */,
 				7256AD8F2959B2B400E14DC6 /* GyroStore.swift in Sources */,
 				7256AD832959832300E14DC6 /* SensorType.swift in Sources */,
+				45BD4028295AEBFC00B37A25 /* GraphView.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
+				45FB1A55295B406100A9D43B /* GraphPoint.swift in Sources */,
 				722944D2295A9978000C4302 /* FirstTableViewCell.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
 			);

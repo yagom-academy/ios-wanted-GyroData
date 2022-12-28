@@ -88,6 +88,7 @@ class ViewController: UIViewController {
     
     @objc private func didTappedRightBarButton(sender: UIButton) {
         let recordViewController = RecordViewController()
+        recordViewController.recordViewControllerPopProtocol = self
         self.navigationController?.pushViewController(recordViewController, animated: true)
     }
 }
@@ -128,5 +129,16 @@ extension ViewController: UITableViewDelegate {
             numberOfItem += 10
             configureSnapshot(itemCount: numberOfItem)
         }
+    }
+}
+
+//TODO: 뷰컨에서 넘어오는 데이터 처리 구현 해주시면됩니당
+
+extension ViewController: RecordViewControllerPopDelegate {
+    func saveMeasureData(registTime: Date, type: SensorType, samplingCount: Double) {
+        print("Pop Over Sucess")
+        print(registTime)
+        print(type)
+        print(samplingCount)
     }
 }
