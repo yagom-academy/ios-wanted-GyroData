@@ -29,6 +29,9 @@ class MotionListViewModel: MotionListViewModelType {
     /// Input
     
     func loadItems(count: Int) {
+        guard let motionData = motionCoreDataUseCase.fetch(offset: 0, count: count) else { return }
+        offset = count
+        items.value = motionData
     }
     
     func deleteItem(motion: Motion) {
