@@ -30,7 +30,6 @@ final class MotionRecordingViewModel {
 
     // TODO: Error 처리
     func startRecording() {
-        startDate = Date()
         let updateHandler: (Coordiante) -> Void = { [weak self] newData in
             guard let self = self else { return }
             self.coordinates.append(newData)
@@ -45,6 +44,7 @@ final class MotionRecordingViewModel {
             }
         }
 
+        startDate = Date()
         switch motionMode {
         case .accelerometer:
             let accelerometerHandler: CMAccelerometerHandler = { [weak self] newData, error in
@@ -66,9 +66,6 @@ final class MotionRecordingViewModel {
                 self?.coordinates.append(newCoordinate)
             }
             motionManager.startGyroUpdates(to: OperationQueue(), withHandler: gyroHandler)
-        }
-        timer = Timer(timeInterval: 60, repeats: false) { [weak self] _ in
-            self?.stopRecording()
         }
     }
 
