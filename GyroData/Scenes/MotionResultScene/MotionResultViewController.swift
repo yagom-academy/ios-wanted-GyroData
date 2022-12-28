@@ -14,7 +14,7 @@ class MotionResultViewController: UIViewController {
         stackView.axis = .vertical
         stackView.distribution = .fill
         stackView.alignment = .fill
-        stackView.spacing = 16
+        stackView.spacing = 30
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
