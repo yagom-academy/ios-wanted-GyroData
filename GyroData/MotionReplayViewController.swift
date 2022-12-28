@@ -32,6 +32,7 @@ final class MotionReplayViewController: UIViewController {
     private let timerLabel: UILabel = {
         let label = UILabel()
         label.text = "0.0"
+        label.font = UIFont.preferredFont(forTextStyle: .largeTitle)
         return label
     }()
     private var timer: DispatchSourceTimer = {
@@ -55,6 +56,7 @@ final class MotionReplayViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+        setUpNavigationBar()
         layout()
         setUpLabelContents()
         setUpGraphViewLayer()
@@ -65,6 +67,11 @@ final class MotionReplayViewController: UIViewController {
             viewModel.didGraphViewStartedDrawing = true
             showFinishedGraphView()
         }
+    }
+
+    private func setUpNavigationBar() {
+        navigationItem.title = "다시보기"
+        navigationItem.backButtonTitle = ""
     }
 
     private func layout() {
