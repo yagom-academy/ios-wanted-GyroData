@@ -46,9 +46,19 @@ final class GridView: UIView {
     
     private func commonInit() {
         setupBackgroundColor(.clear)
+        setupTranslatesAutoresizingMaskIntoConstraints(false)
+        setupLayer()
     }
     
     private func setupBackgroundColor(_ color: UIColor?) {
         backgroundColor = color
+    }
+    
+    private func setupTranslatesAutoresizingMaskIntoConstraints(_ bool: Bool) {
+        translatesAutoresizingMaskIntoConstraints = bool
+    }
+    
+    private func setupLayer() {
+        layer.borderWidth = 2
     }
 }

@@ -28,14 +28,7 @@ final class MeasurementReplayViewController: UIViewController {
         return label
     }()
     
-    private let graphView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.layer.borderWidth = 2
-        return view
-    }()
-    
-    private lazy var gridView = GridView()
+    private let gridView = GridView()
     
     private let playButton: UIButton = {
         let button = UIButton()
@@ -73,7 +66,6 @@ final class MeasurementReplayViewController: UIViewController {
     init(with type: PlayType) {
         playType = type
         super.init(nibName: nil, bundle: nil)
-        
         commonInit()
     }
     
@@ -126,14 +118,12 @@ final class MeasurementReplayViewController: UIViewController {
     }
     
     private func setupSubview() {
-        [dateLabel, viewTypeLabel, graphView, gridView,playButton, playTimeLabel]
+        [dateLabel, viewTypeLabel, gridView, playButton, playTimeLabel]
             .forEach { view.addSubview($0) }
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        print(graphView.frame)
-        gridView.frame = graphView.frame
     }
     
     private func setupConstraint() {
@@ -171,20 +161,20 @@ final class MeasurementReplayViewController: UIViewController {
     
     private func setupGraphViewConstraint() {
         NSLayoutConstraint.activate([
-            graphView.topAnchor.constraint(
+            gridView.topAnchor.constraint(
                 equalTo: viewTypeLabel.bottomAnchor,
                 constant: 32
             ),
-            graphView.leadingAnchor.constraint(
+            gridView.leadingAnchor.constraint(
                 equalTo: view.leadingAnchor,
                 constant: 32
             ),
-            graphView.trailingAnchor.constraint(
+            gridView.trailingAnchor.constraint(
                 equalTo: view.trailingAnchor,
                 constant: -40
             ),
-            graphView.heightAnchor.constraint(
-                equalTo: graphView.widthAnchor
+            gridView.heightAnchor.constraint(
+                equalTo: gridView.widthAnchor
             )
         ])
     }
@@ -195,11 +185,11 @@ final class MeasurementReplayViewController: UIViewController {
                 equalTo: view.centerXAnchor
             ),
             playButton.topAnchor.constraint(
-                equalTo: graphView.bottomAnchor,
+                equalTo: gridView.bottomAnchor,
                 constant: 40
             ),
             playButton.widthAnchor.constraint(
-                equalTo: graphView.widthAnchor,
+                equalTo: gridView.widthAnchor,
                 multiplier: 1/4
             ),
             playButton.heightAnchor.constraint(
@@ -214,7 +204,7 @@ final class MeasurementReplayViewController: UIViewController {
                 equalTo: playButton.centerYAnchor
             ),
             playTimeLabel.trailingAnchor.constraint(
-                equalTo: graphView.trailingAnchor
+                equalTo: gridView.trailingAnchor
             )
         ])
     }

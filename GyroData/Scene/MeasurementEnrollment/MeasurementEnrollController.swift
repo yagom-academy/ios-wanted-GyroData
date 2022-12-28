@@ -20,12 +20,7 @@ final class MeasurementEnrollController: UIViewController {
         return view
     }()
     
-    private let graphView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.layer.borderWidth = 2
-        return view
-    }()
+    private let graphView = GridView()
     
     private let measurementButton: UIButton = {
         let button = UIButton()
