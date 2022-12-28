@@ -17,6 +17,7 @@
 		32F77CC6295C7BDA00A78CCD /* MotionRecordEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F77CC2295C7BDA00A78CCD /* MotionRecordEntity+CoreDataProperties.swift */; };
 		32F77CC7295C7BDA00A78CCD /* CoordinateEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F77CC3295C7BDA00A78CCD /* CoordinateEntity+CoreDataClass.swift */; };
 		32F77CC8295C7BDA00A78CCD /* CoordinateEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F77CC4295C7BDA00A78CCD /* CoordinateEntity+CoreDataProperties.swift */; };
+		32F77CCA295C7DB700A78CCD /* CoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F77CC9295C7DB700A78CCD /* CoreDataStorage.swift */; };
 		63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB428D44FC400C53A39 /* AppDelegate.swift */; };
 		63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB828D44FC400C53A39 /* ViewController.swift */; };
 		63F01BBE28D44FC500C53A39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBD28D44FC500C53A39 /* Assets.xcassets */; };
@@ -34,6 +35,7 @@
 		32F77CC2295C7BDA00A78CCD /* MotionRecordEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MotionRecordEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		32F77CC3295C7BDA00A78CCD /* CoordinateEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoordinateEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		32F77CC4295C7BDA00A78CCD /* CoordinateEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoordinateEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		32F77CC9295C7DB700A78CCD /* CoreDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStorage.swift; sourceTree = "<group>"; };
 		63F01BB128D44FC400C53A39 /* GyroData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GyroData.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63F01BB428D44FC400C53A39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63F01BB828D44FC400C53A39 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -78,6 +80,7 @@
 				329E7EE8295B058200537466 /* MotionMode.swift */,
 				329E7EEA295B05D000537466 /* MotionRecord.swift */,
 				32B01337295A844B005C8750 /* GraphView.swift */,
+				32F77CC9295C7DB700A78CCD /* CoreDataStorage.swift */,
 				32F77CBE295C7AA400A78CCD /* MotionData.xcdatamodeld */,
 				32F77CC1295C7BDA00A78CCD /* MotionRecordEntity+CoreDataClass.swift */,
 				32F77CC2295C7BDA00A78CCD /* MotionRecordEntity+CoreDataProperties.swift */,
@@ -164,6 +167,7 @@
 				32F77CC8295C7BDA00A78CCD /* CoordinateEntity+CoreDataProperties.swift in Sources */,
 				329E7EE9295B058200537466 /* MotionMode.swift in Sources */,
 				32B0133A295A871C005C8750 /* GraphViewModel.swift in Sources */,
+				32F77CCA295C7DB700A78CCD /* CoreDataStorage.swift in Sources */,
 				329E7EEB295B05D000537466 /* MotionRecord.swift in Sources */,
 				32F77CC5295C7BDA00A78CCD /* MotionRecordEntity+CoreDataClass.swift in Sources */,
 				32F77CC7295C7BDA00A78CCD /* CoordinateEntity+CoreDataClass.swift in Sources */,
