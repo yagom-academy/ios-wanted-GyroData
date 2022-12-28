@@ -45,6 +45,7 @@ class GraphView: UIView {
             $0.center.x += GraphNumber.segmentWidth
         }
         
+        removeOutofBoundsSegment()
         addSegment()
         currentSegment?.add(motions)
     }
@@ -67,5 +68,16 @@ class GraphView: UIView {
         let segmentWidth = GraphNumber.capacity
         newSegment.frame = CGRect(x: -segmentWidth, y: 0, width: segmentWidth, height: bounds.size.height)
         self.addSubview(newSegment)
+    }
+    
+    private func removeOutofBoundsSegment() {
+        segments = segments.filter { segment in
+            if segment.frame.origin.x + CGFloat(GraphNumber.capacity) >= bounds.size.width {
+                segment.removeFromSuperview()
+                return false
+            }
+            
+            return true
+        }
     }
 }
