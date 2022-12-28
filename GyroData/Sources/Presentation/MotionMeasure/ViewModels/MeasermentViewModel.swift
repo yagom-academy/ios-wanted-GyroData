@@ -24,11 +24,11 @@ protocol MeasermentViewModelOutput {
     
 }
 
+protocol MeasermentViewModel: MeasermentViewModelInput, MeasermentViewModelOutput {}
+
 enum MeasermentStatus {
     case ready, start, stop
 }
-
-protocol MeasermentViewModel: MeasermentViewModelInput, MeasermentViewModelOutput {}
 
 final class DefaultMeasermentViewModel: MeasermentViewModel {
     
