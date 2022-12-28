@@ -12,6 +12,7 @@
 		329E7EEB295B05D000537466 /* MotionRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329E7EEA295B05D000537466 /* MotionRecord.swift */; };
 		32B01338295A844B005C8750 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B01337295A844B005C8750 /* GraphView.swift */; };
 		32B0133A295A871C005C8750 /* GraphViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B01339295A871C005C8750 /* GraphViewModel.swift */; };
+		32FDB349295C18C80095F6A5 /* ReplayType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32FDB348295C18C80095F6A5 /* ReplayType.swift */; };
 		63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB428D44FC400C53A39 /* AppDelegate.swift */; };
 		63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB828D44FC400C53A39 /* ViewController.swift */; };
 		63F01BBE28D44FC500C53A39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBD28D44FC500C53A39 /* Assets.xcassets */; };
@@ -24,6 +25,7 @@
 		329E7EEA295B05D000537466 /* MotionRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionRecord.swift; sourceTree = "<group>"; };
 		32B01337295A844B005C8750 /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		32B01339295A871C005C8750 /* GraphViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphViewModel.swift; sourceTree = "<group>"; };
+		32FDB348295C18C80095F6A5 /* ReplayType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplayType.swift; sourceTree = "<group>"; };
 		63F01BB128D44FC400C53A39 /* GyroData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GyroData.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63F01BB428D44FC400C53A39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63F01BB828D44FC400C53A39 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -63,6 +65,7 @@
 			isa = PBXGroup;
 			children = (
 				63F01BB428D44FC400C53A39 /* AppDelegate.swift */,
+				32FDB348295C18C80095F6A5 /* ReplayType.swift */,
 				63F01BB828D44FC400C53A39 /* ViewController.swift */,
 				329E7EE6295B052D00537466 /* Coordinate.swift */,
 				329E7EE8295B058200537466 /* MotionMode.swift */,
@@ -148,6 +151,7 @@
 			files = (
 				329E7EE9295B058200537466 /* MotionMode.swift in Sources */,
 				32B0133A295A871C005C8750 /* GraphViewModel.swift in Sources */,
+				32FDB349295C18C80095F6A5 /* ReplayType.swift in Sources */,
 				329E7EEB295B05D000537466 /* MotionRecord.swift in Sources */,
 				63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
