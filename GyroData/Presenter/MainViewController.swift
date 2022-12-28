@@ -27,7 +27,13 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         self.title = "목록"
         self.navigationItem.rightBarButtonItem = self.measureButton
+        itemTableView.dataSource = self
         setTableViewLayout()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        itemTableView.reloadData()
     }
     
     @objc private func pushMeasureVC(_ sender: Any) {
