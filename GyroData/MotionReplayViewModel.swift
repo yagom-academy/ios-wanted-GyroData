@@ -10,6 +10,7 @@ import Foundation
 final class MotionReplayViewModel {
     let replayType: ReplayType
     let record: MotionRecord
+    var didPlayStarted = false
 
     init(replayType: ReplayType, record: MotionRecord) {
         self.replayType = replayType
