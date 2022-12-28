@@ -8,16 +8,15 @@
 import Foundation
 
 struct MeasuredData {
-    let uuid = UUID()
+    let uuid: UUID
     let date: Date
     let measuredTime: Double
     
+    let sensor: Sensor
     let sensorData: SensorData
 }
 
 struct SensorData {
-    let sensor: Sensor
-    
     let AxisX: [Double]
     let AxisY: [Double]
     let AxisZ: [Double]
