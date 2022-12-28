@@ -40,6 +40,7 @@
 		E13ACFF0295B15DA00265ED2 /* MeasurementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13ACFEF295B15DA00265ED2 /* MeasurementViewController.swift */; };
 		E1F1D33E295BD5CE00E5C521 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F1D33D295BD5CE00E5C521 /* GraphView.swift */; };
 		E1F1D344295C328A00E5C521 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F1D343295C328A00E5C521 /* RoundButton.swift */; };
+		E1F1D34A295C5EBB00E5C521 /* MotionPlayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F1D349295C5EBB00E5C521 /* MotionPlayViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +79,7 @@
 		E13ACFEF295B15DA00265ED2 /* MeasurementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementViewController.swift; sourceTree = "<group>"; };
 		E1F1D33D295BD5CE00E5C521 /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		E1F1D343295C328A00E5C521 /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
+		E1F1D349295C5EBB00E5C521 /* MotionPlayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionPlayViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +174,7 @@
 		0247ED51295A8C0B00212A78 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				E1F1D345295C5DB300E5C521 /* MotionPlay */,
 				0247ED63295A8EEA00212A78 /* Coordinators */,
 				0247ED52295A8C0F00212A78 /* MotionList */,
 				0247ED77295AB50E00212A78 /* MotionMeasure */,
@@ -324,6 +327,30 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		E1F1D345295C5DB300E5C521 /* MotionPlay */ = {
+			isa = PBXGroup;
+			children = (
+				E1F1D347295C5E6400E5C521 /* ViewModels */,
+				E1F1D346295C5E5000E5C521 /* Views */,
+			);
+			path = MotionPlay;
+			sourceTree = "<group>";
+		};
+		E1F1D346295C5E5000E5C521 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E1F1D347295C5E6400E5C521 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				E1F1D349295C5EBB00E5C521 /* MotionPlayViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -427,6 +454,7 @@
 				02432C222959A38C0035AEDD /* CoreDataMotionStorage.swift in Sources */,
 				0247ED58295A8C5000212A78 /* Coordinator.swift in Sources */,
 				0247ED7F295ABFDC00212A78 /* Date+extension.swift in Sources */,
+				E1F1D34A295C5EBB00E5C521 /* MotionPlayViewModel.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				E13ACFEC295AFB5000265ED2 /* MeasermentViewModel.swift in Sources */,
 				0247ED7B295AB72600212A78 /* Observable.swift in Sources */,
