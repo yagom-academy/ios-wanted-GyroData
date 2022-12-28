@@ -13,7 +13,6 @@
 		32B01338295A844B005C8750 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B01337295A844B005C8750 /* GraphView.swift */; };
 		32B0133A295A871C005C8750 /* GraphViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B01339295A871C005C8750 /* GraphViewModel.swift */; };
 		3A6D2624295B258800FFD7F1 /* MotionRecordingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6D2622295B258800FFD7F1 /* MotionRecordingViewController.swift */; };
-		3A6D2627295B2B5800FFD7F1 /* MotionRecordingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6D2626295B2B5800FFD7F1 /* MotionRecordingView.swift */; };
 		63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB428D44FC400C53A39 /* AppDelegate.swift */; };
 		63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB828D44FC400C53A39 /* ViewController.swift */; };
 		63F01BBE28D44FC500C53A39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBD28D44FC500C53A39 /* Assets.xcassets */; };
@@ -27,7 +26,6 @@
 		32B01337295A844B005C8750 /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		32B01339295A871C005C8750 /* GraphViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphViewModel.swift; sourceTree = "<group>"; };
 		3A6D2622295B258800FFD7F1 /* MotionRecordingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionRecordingViewController.swift; sourceTree = "<group>"; };
-		3A6D2626295B2B5800FFD7F1 /* MotionRecordingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionRecordingView.swift; sourceTree = "<group>"; };
 		63F01BB128D44FC400C53A39 /* GyroData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GyroData.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63F01BB428D44FC400C53A39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63F01BB828D44FC400C53A39 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -74,7 +72,6 @@
 				32B01337295A844B005C8750 /* GraphView.swift */,
 				32B01339295A871C005C8750 /* GraphViewModel.swift */,
 				3A6D2622295B258800FFD7F1 /* MotionRecordingViewController.swift */,
-				3A6D2626295B2B5800FFD7F1 /* MotionRecordingView.swift */,
 				63F01BBD28D44FC500C53A39 /* Assets.xcassets */,
 				63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */,
 				63F01BC228D44FC500C53A39 /* Info.plist */,
@@ -152,7 +149,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A6D2627295B2B5800FFD7F1 /* MotionRecordingView.swift in Sources */,
 				3A6D2624295B258800FFD7F1 /* MotionRecordingViewController.swift in Sources */,
 				329E7EE9295B058200537466 /* MotionMode.swift in Sources */,
 				32B0133A295A871C005C8750 /* GraphViewModel.swift in Sources */,
