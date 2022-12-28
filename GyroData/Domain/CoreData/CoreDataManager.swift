@@ -11,19 +11,14 @@ import CoreData
 struct CoreDataManager {
     let appDelegate = UIApplication.shared.delegate as? AppDelegate
     
-    func saveData() {
+    func save(date: Motion) {
         guard let context = appDelegate?.persistentContainer.viewContext else { return }
-        let entity = NSEntityDescription.entity(forEntityName: "MotionEntity", in: context)
         
-        let coordinate = Coordinate(x: [3], y: [2], z: [1])
-        
-        if let entity = entity {
-            let data = NSManagedObject(entity: entity, insertInto: context)
-            data.setValue("2020/12/27", forKey: "date")
-            data.setValue("안녕하시라요", forKey: "measurementType")
-            data.setValue(coordinate, forKey: "coordinate")
-        }
-        
+        let coreData = MotionEntity(context: context)
+        coreData.date = date.date
+        coreData.measurementType = date.measurementType
+        coreData.coordinate = date.coordinate
+
         do {
             try context.save()
         } catch {
@@ -31,7 +26,7 @@ struct CoreDataManager {
         }
     }
     
-    func fetchData() -> [Motion] {
+    func fetch() -> [Motion] {
         var motions: [Motion] = []
         if let context = appDelegate?.persistentContainer.viewContext {
             do {

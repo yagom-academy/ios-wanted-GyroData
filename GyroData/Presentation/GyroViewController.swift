@@ -29,7 +29,7 @@ final class GyroViewController: UIViewController {
     private var dataSource: UITableViewDiffableDataSource<Section, Motion>?
     private var snapshot = NSDiffableDataSourceSnapshot<Section, Motion>()
     private let gyroListView = GyroTableView()
-    // private let coreDataManager = CoreDataManager()
+    private let coreDataManager = CoreDataManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
