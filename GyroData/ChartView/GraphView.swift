@@ -21,14 +21,67 @@ protocol TickReceivable {
 }
 
 final class GraphView: UIView, TickReceivable {
+    private enum Configuration {
+        static var lineColors: [UIColor] = [.red, .green, .blue]
+        static let lineWidth: CGFloat = 1
+    }
+    
     var data: MeasuredData?
     
-    func receive(x: Double, y: Double, z: Double) {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        self.backgroundColor = .clear
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
 
+extension GraphView {
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        
+        guard let measuredData = self.data else {
+            return
+        }
+        
+        drawGraph(of: measuredData)
+    }
+    
+    func receive(x: Double, y: Double, z: Double) {
+        
     }
     
     func retrieveData(data: MeasuredData?) {
         self.data = data
+    }
+}
+
+private extension GraphView {
+    func drawGraph(of measuredData: MeasuredData) {
+        let zeroX: CGFloat = 0
+        let zeroY: CGFloat = self.frame.height / CGFloat(2)
+        let xInterval = self.frame.width / CGFloat(measuredData.measuredTime * 10)
+        
+        let sensorData: [[Double]] = [
+            measuredData.sensorData.AxisX,
+            measuredData.sensorData.AxisY,
+            measuredData.sensorData.AxisZ
+        ]
+        
+        sensorData.forEach { eachAxisData in
+            let path = UIBezierPath()
+            let lineColor: UIColor = Configuration.lineColors.removeFirst()
+            
+            path.move(to: CGPoint(x: zeroX, y: zeroY))
+            path.lineWidth = Configuration.lineWidth
+            lineColor.setStroke()
+            
+            path.drawGraph(strideBy: xInterval, with: eachAxisData, axisY: zeroY)
+            path.stroke()
+        }
     }
 }
 
@@ -38,13 +91,20 @@ final class GraphContainerView: UIView {
         static let edgeDistance: CGFloat = 10
     }
     
-    private let chartBackgroundView: GraphBackgroundView = {
-        let chartBackgroundView = GraphBackgroundView()
-        chartBackgroundView.translatesAutoresizingMaskIntoConstraints = false
+    private let graphBackgroundView: GraphBackgroundView = {
+        let graphBackgroundView = GraphBackgroundView()
+        graphBackgroundView.translatesAutoresizingMaskIntoConstraints = false
         
-        return chartBackgroundView
+        return graphBackgroundView
     }()
-
+    
+    private let graphView: GraphView = {
+        let graphView = GraphView()
+        graphView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return graphView
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
 
@@ -65,17 +125,23 @@ private extension GraphContainerView {
         self.layer.borderWidth = Configuration.borderWidth
     }
     
+    func addViews() {
+        addSubview(graphView)
+        addSubview(graphBackgroundView)
+    }
+    
     func setupLayouts() {
         NSLayoutConstraint.activate([
-            chartBackgroundView.topAnchor.constraint(equalTo: self.topAnchor, constant: Configuration.edgeDistance),
-            chartBackgroundView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -Configuration.edgeDistance),
-            chartBackgroundView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: Configuration.edgeDistance),
-            chartBackgroundView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -Configuration.edgeDistance)
+            graphBackgroundView.topAnchor.constraint(equalTo: self.topAnchor, constant: Configuration.edgeDistance),
+            graphBackgroundView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -Configuration.edgeDistance),
+            graphBackgroundView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: Configuration.edgeDistance),
+            graphBackgroundView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -Configuration.edgeDistance),
+            
+            graphView.topAnchor.constraint(equalTo: graphBackgroundView.topAnchor),
+            graphView.bottomAnchor.constraint(equalTo: graphBackgroundView.bottomAnchor),
+            graphView.leadingAnchor.constraint(equalTo: graphBackgroundView.leadingAnchor),
+            graphView.trailingAnchor.constraint(equalTo: graphBackgroundView.trailingAnchor)
         ])
-    }
-
-    func addViews() {
-        addSubview(chartBackgroundView)
     }
 }
 
