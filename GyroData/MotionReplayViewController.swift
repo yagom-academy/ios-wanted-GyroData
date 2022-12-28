@@ -23,7 +23,6 @@ final class MotionReplayViewController: UIViewController {
         let button = UIButton()
         button.tintColor = .black
         button.setImage(UIImage(systemName: "play.fill"), for: .normal)
-        button.setImage(UIImage(systemName: "stop.fill"), for: .selected)
         button.setPreferredSymbolConfiguration(UIImage.SymbolConfiguration(pointSize: 80), forImageIn: .normal)
         button.setPreferredSymbolConfiguration(UIImage.SymbolConfiguration(pointSize: 80), forImageIn: .selected)
         button.addTarget(self, action: #selector(playButtonTapped(_:)), for: .touchUpInside)
