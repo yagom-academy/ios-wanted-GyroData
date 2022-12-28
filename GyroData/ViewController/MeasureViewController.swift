@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreMotion
 
 final class MeasureViewController: BaseViewController {
     // MARK: - View
@@ -13,13 +14,13 @@ final class MeasureViewController: BaseViewController {
         let button = UIButton()
         button.setTitle("저장", for: .normal)
         button.setTitleColor(.tintColor, for: .normal)
-        button.addTarget(self, action: #selector(self.didTapSaveButton), for: .touchDown)
+        button.addTarget(self, action: #selector(self.didTapSaveButton), for: .touchUpInside)
         
         return button
     }()
     
     private lazy var segmentControl: UISegmentedControl = {
-        let segmentControl = UISegmentedControl(items: [Segment.Accelerometer.rawValue, Segment.Gyro.rawValue])
+        let segmentControl = UISegmentedControl(items: [SensorType.accelerometer.rawValue, SensorType.gyro.rawValue])
         segmentControl.selectedSegmentIndex = 0
         segmentControl.backgroundColor = .white
         segmentControl.selectedSegmentTintColor = .systemBlue
@@ -39,7 +40,7 @@ final class MeasureViewController: BaseViewController {
         let button = UIButton()
         button.setTitle("측정", for: .normal)
         button.setTitleColor(.tintColor, for: .normal)
-        button.addTarget(self, action: #selector(self.didTapMeasureButton), for: .touchDown)
+        button.addTarget(self, action: #selector(self.didTapMeasureButton), for: .touchUpInside)
         
         return button
     }()
@@ -48,7 +49,8 @@ final class MeasureViewController: BaseViewController {
         let button = UIButton()
         button.setTitle("정지", for: .normal)
         button.setTitleColor(.tintColor, for: .normal)
-        button.addTarget(self, action: #selector(self.didTapStopButton), for: .touchDown)
+        button.isEnabled = false
+        button.addTarget(self, action: #selector(self.didTapStopButton), for: .touchUpInside)
         
         return button
     }()
@@ -66,6 +68,25 @@ final class MeasureViewController: BaseViewController {
     }()
     // MARK: - Properties
     private let viewTitle: String = "측정하기"
+    private var motionManager = CMMotionManager()
+    private var accTimer: Timer?
+    private var gyroTimer: Timer?
+    private var timeLeft: Double = 60
+    private var isMeasured: Bool = false {
+        didSet {
+            if isMeasured {
+                self.stopButton.isEnabled = true
+                self.segmentControl.isEnabled = false
+                self.measureButton.isEnabled = false
+                self.saveButton.isEnabled = false
+            } else {
+                self.saveButton.isEnabled = true
+                self.segmentControl.isEnabled = true
+                self.measureButton.isEnabled = true
+                self.stopButton.isEnabled = false
+            }
+        }
+    }
     
     // MARK: - LifeCycles
     override func viewDidLoad() {
@@ -136,10 +157,109 @@ extension MeasureViewController {
     }
     
     @objc private func didTapMeasureButton() {
-        print("Measure")
+        print(#function)
+        switch self.segmentControl.selectedSegmentIndex {
+        case SensorType.accelerometer.index :
+            startAccMeasure()
+        case SensorType.gyro.index :
+            startGyroMeasure()
+        default:
+            break
+        }
+        self.isMeasured = true
     }
     
     @objc private func didTapStopButton() {
-        print("Stop")
+        switch self.segmentControl.selectedSegmentIndex {
+        case SensorType.accelerometer.index :
+            accTimer?.invalidate()
+        case SensorType.gyro.index :
+            gyroTimer?.invalidate()
+        default:
+            break
+        }
+        self.isMeasured = false
+        print(#function)
+    }
+    
+    private func startAccMeasure() {
+        self.graphView.clear()
+        var max = SensorType.accelerometer.max
+        if motionManager.isAccelerometerAvailable {
+            motionManager.accelerometerUpdateInterval = 0.1
+            motionManager.startAccelerometerUpdates()
+            self.graphView.setMax(max: max)
+            self.accTimer = Timer(fire: Date(), interval: 0.1, repeats: true, block: { timer in
+                if self.timeLeft > 0 {
+                    if let accData = self.motionManager.accelerometerData {
+                        let x = accData.acceleration.x
+                        let y = accData.acceleration.y
+                        let z = accData.acceleration.z
+
+                        self.graphView.setLabel(x: x, y: y, z: z)
+                        self.graphView.getData(x: x, y: y, z: z)
+                        
+                        let regularExpression = abs(x) > max || abs(y) > max || abs(z) > max
+                        
+                        if regularExpression {
+                            self.graphView.isOverflowValue = true
+                            max *= 1.2
+                            self.graphView.setMax(max: max)
+                        }
+                        
+                        self.graphView.setNeedsDisplay()
+                        self.timeLeft -= 0.1
+                    }
+                } else {
+                    self.accTimer?.invalidate()
+                }
+            })
+            if let timer = self.accTimer {
+                RunLoop.current.add(timer, forMode: .default)
+            }
+        }
+    }
+    
+    private func startGyroMeasure() {
+        self.graphView.clear()
+        var max = SensorType.gyro.max
+        if motionManager.isGyroAvailable {
+            motionManager.gyroUpdateInterval = 0.1
+            motionManager.startGyroUpdates()
+            self.graphView.setMax(max: max)
+            self.gyroTimer = Timer(fire: Date(), interval: 0.1, repeats: true, block: { timer in
+                if self.timeLeft > 0 {
+                    if let gyroData = self.motionManager.gyroData {
+                        let x = gyroData.rotationRate.x
+                        let y = gyroData.rotationRate.y
+                        let z = gyroData.rotationRate.z
+
+                        self.graphView.setLabel(x: x, y: y, z: z)
+                        self.graphView.getData(x: x, y: y, z: z)
+                        
+                        let regularExpression = abs(x) > max || abs(y) > max || abs(z) > max
+                        
+                        if regularExpression {
+                            self.graphView.isOverflowValue = true
+                            max *= 1.2
+                            self.graphView.setMax(max: max)
+                        }
+                        
+                        self.graphView.setNeedsDisplay()
+                        self.timeLeft -= 0.1
+                    }
+                } else {
+                    self.gyroTimer?.invalidate()
+                }
+            })
+            if let timer = self.gyroTimer {
+                RunLoop.current.add(timer, forMode: .default)
+            }
+        }
+    }
+    
+    private func initDate() {
+        timeLeft = 60
+        
     }
 }

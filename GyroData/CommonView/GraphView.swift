@@ -6,12 +6,20 @@
 //
 
 import UIKit
+import Foundation
+
+enum GraphColor {
+    static let x: UIColor = .red
+    static let y: UIColor = .green
+    static let z: UIColor = .blue
+}
 
 class GraphView: UIView {
+    // MARK: - View
     private lazy var xLabel: UILabel = {
         let label = UILabel()
-        label.text = "x - 1234"
-        label.textColor = .red
+        label.text = "x: 0"
+        label.textColor = GraphColor.x
         label.font = UIFont.systemFont(ofSize: 12)
         
         return label
@@ -19,8 +27,8 @@ class GraphView: UIView {
     
     private lazy var yLabel: UILabel = {
         let label = UILabel()
-        label.text = "y - 1234"
-        label.textColor = .green
+        label.text = "y: 0"
+        label.textColor = GraphColor.y
         label.font = UIFont.systemFont(ofSize: 12)
         
         return label
@@ -28,8 +36,8 @@ class GraphView: UIView {
     
     private lazy var zLabel: UILabel = {
         let label = UILabel()
-        label.text = "z - 1234"
-        label.textColor = .blue
+        label.text = "z: 0"
+        label.textColor = GraphColor.z
         label.font = UIFont.systemFont(ofSize: 12)
         
         return label
@@ -47,17 +55,55 @@ class GraphView: UIView {
         return stackView
     }()
     
+    private var xPoint: Double = 0.0
+    private var yPoint: Double = 0.0
+    private var zPoint: Double = 0.0
+    
+    private var xPoints: [Double] = [0.0]
+    private var yPoints: [Double] = [0.0]
+    private var zPoints: [Double] = [0.0]
+    
+    private var xPath = UIBezierPath()
+    private var yPath = UIBezierPath()
+    private var zPath = UIBezierPath()
+    
+    private var runningTime: Int = 0
+    private var max: CGFloat = 0
+    private var initalDraw: Int = 0
+    var isOverflowValue: Bool = false
+    
+    lazy var standardXpoint = { (point: Int) -> CGFloat in
+        return CGFloat(point) * (self.frame.width / CGFloat(599))
+    }
+    
+    lazy var standardYPoint = { (graphPoint : Double) -> CGFloat in
+        let y = CGFloat(graphPoint) / self.max * self.frame.height * 3 / 8
+        return self.frame.height / 2 - y
+    }
+    
     override func draw(_ rect: CGRect) {
         super.draw(rect)
-        initalSetting()
+        if initalDraw == 0 {
+            initalSetting()
+        } else {
+            if isOverflowValue {
+                overflow()
+                isOverflowValue = false
+            }
+            drawPath()
+            
+            runningTime += 1
+        }
     }
     
     private func initalSetting() {
         self.backgroundColor = .white
         self.layer.borderColor = UIColor.black.cgColor
         self.layer.borderWidth = 3
+        self.layer.accessibilityPath?.lineWidth = 2
         stackViewConstraints()
         setBackgroundLayer()
+        initalDraw += 1
     }
     
     private func stackViewConstraints() {
@@ -79,6 +125,7 @@ class GraphView: UIView {
         var currentX = x
         var currentY = y
         let path = UIBezierPath()
+        
         for _ in 0...6 {
             path.move(to: CGPoint(x: currentX, y: 0))
             path.addLine(to: CGPoint(x: currentX, y: self.frame.height))
@@ -97,4 +144,67 @@ class GraphView: UIView {
         layer.strokeColor = UIColor.lightGray.cgColor
         self.layer.addSublayer(layer)
     }
+    
+    private func drawPath() {
+        drawGraph(path: xPath, next: xPoint, points: &xPoints, color: GraphColor.x, time: runningTime)
+        drawGraph(path: yPath, next: yPoint, points: &yPoints, color: GraphColor.y, time: runningTime)
+        drawGraph(path: zPath, next: zPoint, points: &zPoints, color: GraphColor.z, time: runningTime)
+    }
+    
+    private func drawGraph(path:UIBezierPath, next:Double, points:inout [Double],color:UIColor,time:Int){
+        color.setFill()
+        color.setStroke()
+        path.move(to: CGPoint(x: standardXpoint(time), y: standardYPoint(points[time]) ) )
+        points.append(next)
+        let nextPoint = CGPoint(x: standardXpoint(time + 1), y: standardYPoint(points[time + 1]) )
+        path.addLine(to: nextPoint)
+        path.stroke()
+    }
+    
+    private func overflow() {
+        overflowValue(path: xPath, points: xPoints, color: GraphColor.x)
+        overflowValue(path: yPath, points: yPoints, color: GraphColor.y)
+        overflowValue(path: zPath, points: zPoints, color: GraphColor.z)
+    }
+    
+    private func overflowValue(path: UIBezierPath, points: [Double], color: UIColor) {
+        path.removeAllPoints()
+        let firstPoint = CGPoint(x: standardXpoint(0), y: standardYPoint(points[0]))
+        path.move(to: firstPoint)
+        
+        for i in 0..<points.count {
+            let nextPoint = CGPoint(x: self.standardXpoint(i), y: standardYPoint(points[i]))
+            path.addLine(to: nextPoint)
+        }
+        color.setFill()
+        color.setStroke()
+        path.stroke()
+    }
+    
+    func setLabel(x: Double, y: Double, z: Double) {
+        self.xLabel.text = "x: \(round(x*1000)/1000)"
+        self.yLabel.text = "y: \(round(y*1000)/1000)"
+        self.zLabel.text = "z: \(round(z*1000)/1000)"
+    }
+    
+    func getData(x: Double, y: Double, z: Double) {
+        self.xPoint = x
+        self.yPoint = y
+        self.zPoint = z
+    }
+    
+    func setMax(max: CGFloat) {
+        self.max = max
+    }
+    
+    func clear() {
+        self.runningTime = 0
+        [xPath, yPath, zPath].forEach {
+            $0.removeAllPoints()
+        }
+        self.xPoints = [0.0]
+        self.yPoints = [0.0]
+        self.zPoints = [0.0]
+    }
+    
 }
