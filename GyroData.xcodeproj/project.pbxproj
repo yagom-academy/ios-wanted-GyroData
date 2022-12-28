@@ -38,6 +38,7 @@
 		63F01BC128D44FC500C53A39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */; };
 		E13ACFEC295AFB5000265ED2 /* MeasermentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13ACFEB295AFB5000265ED2 /* MeasermentViewModel.swift */; };
 		E13ACFF0295B15DA00265ED2 /* MeasurementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13ACFEF295B15DA00265ED2 /* MeasurementViewController.swift */; };
+		E1F1D33E295BD5CE00E5C521 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F1D33D295BD5CE00E5C521 /* GraphView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +75,7 @@
 		63F01BC228D44FC500C53A39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E13ACFEB295AFB5000265ED2 /* MeasermentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasermentViewModel.swift; sourceTree = "<group>"; };
 		E13ACFEF295B15DA00265ED2 /* MeasurementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementViewController.swift; sourceTree = "<group>"; };
+		E1F1D33D295BD5CE00E5C521 /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -244,6 +246,7 @@
 		0247ED77295AB50E00212A78 /* MotionMeasure */ = {
 			isa = PBXGroup;
 			children = (
+				E1F1D33C295BD5A600E5C521 /* Views */,
 				E13ACFF5295B31B100265ED2 /* ViewModels */,
 				E13ACFF4295B31A500265ED2 /* ViewControllers */,
 				0247ED79295AB53000212A78 /* Coordinator */,
@@ -308,6 +311,14 @@
 				E13ACFEB295AFB5000265ED2 /* MeasermentViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		E1F1D33C295BD5A600E5C521 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E1F1D33D295BD5CE00E5C521 /* GraphView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -406,6 +417,7 @@
 				02432C132959909C0035AEDD /* CoreMotionManager.swift in Sources */,
 				0247ED74295A963D00212A78 /* UIFont+extension.swift in Sources */,
 				0247ED5E295A8D3300212A78 /* MotionListViewModel.swift in Sources */,
+				E1F1D33E295BD5CE00E5C521 /* GraphView.swift in Sources */,
 				0247ED56295A8C3000212A78 /* AppCoordinator.swift in Sources */,
 				02432C1A2959938E0035AEDD /* CoreDataStorage.xcdatamodeld in Sources */,
 				0247ED5A295A8CBE00212A78 /* MotionListCoordinator.swift in Sources */,
