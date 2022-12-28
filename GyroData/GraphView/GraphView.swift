@@ -53,8 +53,8 @@ class GraphView: UIView {
         let startPoint: [Double]
         
         if let currentSegment = currentSegment {
-            guard let lastPoint = currentSegment.dataPoints.last else { return }
-            startPoint = lastPoint
+            guard currentSegment.dataPoint.isEmpty == false else { return }
+            startPoint = currentSegment.dataPoint
         } else {
             startPoint = [0, 0, 0]
         }

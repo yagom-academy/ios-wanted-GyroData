@@ -8,7 +8,7 @@
 import UIKit
 
 class GraphSegment: UIView {
-    private(set) var dataPoints = [[Double]]()
+    private(set) var dataPoint = [Double]()
     private let startPoint: [Double]
     private let segmentSize: Double
 
@@ -34,21 +34,17 @@ class GraphSegment: UIView {
             
             let startValue = startPoint[lineIndex]
             let startPoint = CGPoint(x: bounds.size.width, y: scaledValue(for: lineIndex, value: startValue))
+            let nextPoint = CGPoint(x: bounds.size.width - CGFloat(segmentSize),
+                                    y: scaledValue(for: lineIndex, value: dataPoint[lineIndex]))
             
             context.move(to: startPoint)
-
-            for (pointIndex, dataPoint) in dataPoints.enumerated() {
-                let nextPoint = CGPoint(x: bounds.size.width - CGFloat(Double(pointIndex) + segmentSize),
-                                        y: scaledValue(for: lineIndex, value: dataPoint[lineIndex]))
-                context.addLine(to: nextPoint)
-            }
-            
+            context.addLine(to: nextPoint)
             context.strokePath()
         }
     }
     
     func add(_ motions: [Double]) {
-        dataPoints.append(motions)
+        dataPoint = motions
         setNeedsDisplay()
     }
     
