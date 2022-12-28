@@ -10,7 +10,8 @@ import UIKit
 class GraphSegment: UIView {
     private(set) var dataPoint = [Double]()
     private let startPoint: [Double]
-
+    private var valueRange = GraphNumber.initialRange
+    
     init(startPoint: [Double]) {
         self.startPoint = startPoint
         
@@ -47,8 +48,10 @@ class GraphSegment: UIView {
     }
     
     private func scaledValue(_ value: Double) -> CGFloat {
-        // TODO: y축 범위에 따라 조정하는 메서드 -> 기준값 잡기 + 기준을 넘으면 "측정된 값 + (측정된 값 * 0.2)"으로 기준 조정
-        let valueRange = GraphNumber.initialRange
+        if value > valueRange.upperBound {
+            valueRange = GraphNumber.lowerBoundRange...(value + (value * 0.2))
+        }
+        
         let scale = bounds.size.height / (valueRange.upperBound - valueRange.lowerBound)
         
         return CGFloat(value * -scale)
