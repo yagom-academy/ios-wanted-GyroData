@@ -91,7 +91,9 @@ final class GyroTableViewCell: UITableViewCell {
             measurementPartStackView.widthAnchor.constraint(
                 equalTo: contentView.widthAnchor,
                 multiplier: 0.6
-            )
+            ),
+            
+            contentView.heightAnchor.constraint(equalToConstant: CGFloat(80))
         ])
     }
     

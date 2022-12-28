@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class GyroViewController: UIViewController, UITableViewDelegate {
+final class GyroViewController: UIViewController {
     private let dummy = [
         Motion(
             date: "2022/12/28 14:50:43",
@@ -94,5 +94,54 @@ final class GyroViewController: UIViewController, UITableViewDelegate {
             MeasureViewController(),
             animated: true
         )
+    }
+}
+
+extension GyroViewController: UITableViewDelegate {
+    func tableView(
+        _ tableView: UITableView,
+        didSelectRowAt indexPath: IndexPath
+    ) {
+        self.navigationController?.pushViewController(
+            ReplayViewController(pageType: ReplayViewPageType.view),
+            animated: true
+        )
+    }
+
+    func tableView(
+        _ tableView: UITableView,
+        trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
+    ) -> UISwipeActionsConfiguration? {
+        let playAction = UIContextualAction(
+            style: .normal,
+            title: "Play"
+        ) { [weak self] _, _, _ in
+            
+            guard let self = self else {
+                return
+            }
+            
+            self.navigationController?.pushViewController(
+                ReplayViewController(pageType: ReplayViewPageType.play),
+                animated: true
+            )
+        }
+        playAction.backgroundColor = .green
+        
+        let deleteAction = UIContextualAction(
+            style: .destructive,
+            title: "delete"
+        ) { [weak self] _, _, _ in
+            
+            guard let self = self else {
+                return
+            }
+            
+            let data = self.snapshot.itemIdentifiers[indexPath.item]
+            self.snapshot.deleteItems([data])
+            self.dataSource?.applySnapshotUsingReloadData(self.snapshot)
+        }
+    
+        return UISwipeActionsConfiguration(actions: [deleteAction, playAction])
     }
 }
