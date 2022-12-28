@@ -31,7 +31,7 @@
 		F37A2453295C91760006B552 /* MotionResultPlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37A2452295C91760006B552 /* MotionResultPlayViewController.swift */; };
 		F37A2456295C95660006B552 /* PlayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37A2455295C95660006B552 /* PlayButton.swift */; };
 		F37A2458295C9B050006B552 /* MotionResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37A2457295C9B050006B552 /* MotionResultViewModel.swift */; };
-		F37A245A295C9B870006B552 /* MotionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37A2459295C9B870006B552 /* MotionData.swift */; };
+		F37A245A295C9B870006B552 /* MotionInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37A2459295C9B870006B552 /* MotionInformation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,7 +61,7 @@
 		F37A2452295C91760006B552 /* MotionResultPlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionResultPlayViewController.swift; sourceTree = "<group>"; };
 		F37A2455295C95660006B552 /* PlayButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayButton.swift; sourceTree = "<group>"; };
 		F37A2457295C9B050006B552 /* MotionResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionResultViewModel.swift; sourceTree = "<group>"; };
-		F37A2459295C9B870006B552 /* MotionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionData.swift; sourceTree = "<group>"; };
+		F37A2459295C9B870006B552 /* MotionInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionInformation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -196,7 +196,7 @@
 			children = (
 				F35161FF295AF1C2008AB1A3 /* Motion.swift */,
 				F3516231295BF83C008AB1A3 /* MotionType.swift */,
-				F37A2459295C9B870006B552 /* MotionData.swift */,
+				F37A2459295C9B870006B552 /* MotionInformation.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -300,7 +300,7 @@
 			files = (
 				F351622C295BF783008AB1A3 /* CoreDataStack.swift in Sources */,
 				63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */,
-				F37A245A295C9B870006B552 /* MotionData.swift in Sources */,
+				F37A245A295C9B870006B552 /* MotionInformation.swift in Sources */,
 				F351622A295BF723008AB1A3 /* Storable.swift in Sources */,
 				F3516224295BF5C6008AB1A3 /* MotionInfo.xcdatamodeld in Sources */,
 				F35161F7295ACC0C008AB1A3 /* MotionListTableViewCell.swift in Sources */,

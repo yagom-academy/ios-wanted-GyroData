@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MotionData {
+struct MotionInformation {
     let id: UUID
     let motionType: MotionType
     let date: Date
