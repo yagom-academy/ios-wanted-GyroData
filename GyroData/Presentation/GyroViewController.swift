@@ -8,20 +8,6 @@
 import UIKit
 
 final class GyroViewController: UIViewController {
-    private let dummy = [
-        Motion(
-            date: "2022/12/28 14:50:43",
-            measurementType: "Acc",
-            coordinate: Coordinate(x: [1], y: [2], z: [3])
-        ),
-        
-        Motion(
-            date: "2022/12/29 15:42:13",
-            measurementType: "Acc",
-            coordinate: Coordinate(x: [4], y: [5], z: [6])
-        )
-    ]
-    
     private enum Section {
         case main
     }
@@ -71,7 +57,7 @@ final class GyroViewController: UIViewController {
             })
         
         snapshot.appendSections([.main])
-        snapshot.appendItems(dummy)
+        snapshot.appendItems(coreDataManager.fetch())
         
         dataSource?.apply(snapshot)
     }
@@ -138,6 +124,7 @@ extension GyroViewController: UITableViewDelegate {
             }
             
             let data = self.snapshot.itemIdentifiers[indexPath.item]
+            self.coreDataManager.delete(data: data)
             self.snapshot.deleteItems([data])
             self.dataSource?.applySnapshotUsingReloadData(self.snapshot)
         }

@@ -11,13 +11,13 @@ import CoreData
 struct CoreDataManager {
     let appDelegate = UIApplication.shared.delegate as? AppDelegate
     
-    func save(date: Motion) {
+    func save(data: Motion) {
         guard let context = appDelegate?.persistentContainer.viewContext else { return }
         
         let coreData = MotionEntity(context: context)
-        coreData.date = date.date
-        coreData.measurementType = date.measurementType
-        coreData.coordinate = date.coordinate
+        coreData.date = data.date
+        coreData.measurementType = data.measurementType
+        coreData.coordinate = data.coordinate
 
         do {
             try context.save()
@@ -42,5 +42,21 @@ struct CoreDataManager {
             }
         }
         return motions
+    }
+    
+    func delete(data: Motion) {
+        guard let context = appDelegate?.persistentContainer.viewContext,
+              let coreDatalist = try? context.fetch(MotionEntity.fetchRequest()),
+              let coreData = coreDatalist.filter({ $0.date == data.date }).first else {
+            return
+        }
+        
+        context.delete(coreData)
+        
+        do {
+            try context.save()
+        } catch {
+            print(error.localizedDescription)
+        }
     }
 }
