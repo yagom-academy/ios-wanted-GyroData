@@ -42,9 +42,13 @@ class MotionMeasurementManager {
     }
     
     func stopUpdates() {
-        guard motionManager.isAccelerometerAvailable else { return }
+        guard motionManager.isAccelerometerAvailable,
+              let currentTimer = timer else { return }
+        
+        currentTimer.invalidate()
+        timer = nil
         
         motionManager.stopAccelerometerUpdates()
-        timer?.invalidate()
+    }
     }
 }
