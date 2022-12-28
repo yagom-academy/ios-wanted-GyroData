@@ -16,6 +16,6 @@ struct Analysis: Codable {
     let x: Double
     let y: Double
     let z: Double
-    let measurementTime: Date
+    let measurementTime: Double
     let savedAt: Date
 }
