@@ -26,15 +26,14 @@ class GraphSegment: UIView {
         
         context.translateBy(x: .zero, y: bounds.size.height / 2.0)
     
-        for lineIndex in 0..<3 {
-            guard let motionData = MotionData(rawValue: lineIndex) else { return }
-            context.setStrokeColor(motionData.color)
+        for line in MotionData.allCases {
+            context.setStrokeColor(line.color)
             
-            let startValue = startPoint[lineIndex]
+            let startValue = startPoint[line.rawValue]
             let startPoint = CGPoint(x: bounds.size.width,
-                                     y: scaledValue(for: lineIndex, value: startValue))
+                                     y: scaledValue(startValue))
             let endPoint = CGPoint(x: bounds.size.width - GraphNumber.segmentWidth,
-                                   y: scaledValue(for: lineIndex, value: dataPoint[lineIndex]))
+                                   y: scaledValue(dataPoint[line.rawValue]))
             
             context.move(to: startPoint)
             context.addLine(to: endPoint)
@@ -47,7 +46,7 @@ class GraphSegment: UIView {
         setNeedsDisplay()
     }
     
-    private func scaledValue(for line: Int, value: Double) -> CGFloat {
+    private func scaledValue(_ value: Double) -> CGFloat {
         // TODO: y축 범위에 따라 조정하는 메서드 -> 기준값 잡기 + 기준을 넘으면 "측정된 값 + (측정된 값 * 0.2)"으로 기준 조정
         let valueRange = GraphNumber.initialRange
         let scale = bounds.size.height / (valueRange.upperBound - valueRange.lowerBound)
@@ -56,7 +55,7 @@ class GraphSegment: UIView {
     }
 }
 
-enum MotionData: Int {
+enum MotionData: Int, CaseIterable {
     case x, y, z
     
     var color: CGColor {
