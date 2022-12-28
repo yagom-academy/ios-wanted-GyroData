@@ -117,6 +117,11 @@ class MotionResultViewController: UIViewController {
     private func configureNavigationBar() {
         navigationItem.title = "다시보기"
     }
+    
+    private func configureUI(motion: MotionInformation) {
+        dateLabel.text = "\(motion.date)"
+        titleLabel.text = motion.motionType.rawValue
+    }
 
 }
 
