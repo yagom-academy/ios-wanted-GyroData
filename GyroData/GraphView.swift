@@ -48,6 +48,12 @@ final class GraphView: UIView {
         layout()
     }
 
+    init(xScale: CGFloat) {
+        super.init(frame: .zero)
+        viewModel.xScale = xScale
+        layout()
+    }
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         fatalError("init(coder:) has not been implemented")
