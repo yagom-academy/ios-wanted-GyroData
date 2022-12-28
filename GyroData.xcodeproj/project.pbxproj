@@ -11,7 +11,6 @@
 		42404FA82959C04700BCE8B5 /* AnalysisType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42404FA72959C04700BCE8B5 /* AnalysisType.swift */; };
 		63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB428D44FC400C53A39 /* AppDelegate.swift */; };
 		63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB628D44FC400C53A39 /* SceneDelegate.swift */; };
-		63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB828D44FC400C53A39 /* ViewController.swift */; };
 		63F01BBE28D44FC500C53A39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBD28D44FC500C53A39 /* Assets.xcassets */; };
 		63F01BC128D44FC500C53A39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */; };
 		8F4508A929598C8C00538AE4 /* GyroData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8F4508A729598C8B00538AE4 /* GyroData.xcdatamodeld */; };
@@ -34,7 +33,6 @@
 		63F01BB128D44FC400C53A39 /* GyroData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GyroData.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63F01BB428D44FC400C53A39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63F01BB628D44FC400C53A39 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		63F01BB828D44FC400C53A39 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		63F01BBD28D44FC500C53A39 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		63F01BC028D44FC500C53A39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		63F01BC228D44FC500C53A39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -151,7 +149,6 @@
 			children = (
 				4200A360295C55D30025E91D /* Record */,
 				8F97A77F295C20DB00138E61 /* TableView */,
-				63F01BB828D44FC400C53A39 /* ViewController.swift */,
 				8F4508B0295ACFB200538AE4 /* GraphView.swift */,
 				9B650968295C4F7200277B34 /* Analyze */,
 			);
@@ -267,7 +264,6 @@
 				4200A362295C55FA0025E91D /* GraphRecordView.swift in Sources */,
 				9B650960295C15BC00277B34 /* AnalyzeView.swift in Sources */,
 				8F4508A929598C8C00538AE4 /* GyroData.xcdatamodeld in Sources */,
-				63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				42404FA82959C04700BCE8B5 /* AnalysisType.swift in Sources */,
 				9B650963295C1D9E00277B34 /* UIColor+.swift in Sources */,

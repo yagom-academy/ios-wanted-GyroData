@@ -2,7 +2,7 @@
 //  GraphView.swift
 //  GyroData
 //
-//  Created by unchain on 2022/12/27.
+//  Created by unchain, Ellen J, yeton on 2022/12/27.
 //
 
 import Charts
