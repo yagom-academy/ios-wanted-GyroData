@@ -9,3 +9,14 @@ enum MotionType {
     case accelerometer
     case gyro
 }
+
+extension MotionType {
+    var codeName: String {
+        switch self {
+        case .accelerometer:
+            return "accelerometer"
+        case .gyro:
+            return "gyro"
+        }
+    }
+}
