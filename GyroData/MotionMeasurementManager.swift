@@ -31,6 +31,7 @@ class MotionMeasurementManager {
                 let y = data.acceleration.y
                 let z = data.acceleration.z
 
+                graphView.add([x, y, z])
             }
         })
         
