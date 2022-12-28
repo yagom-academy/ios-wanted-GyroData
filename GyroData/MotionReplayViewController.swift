@@ -15,6 +15,7 @@ final class MotionReplayViewController: UIViewController {
     }()
     private let typeLabel: UILabel = {
         let label = UILabel()
+        label.font = UIFont.preferredFont(forTextStyle: .largeTitle)
         return label
     }()
     private var graphView: GraphView
@@ -38,6 +39,7 @@ final class MotionReplayViewController: UIViewController {
         view.backgroundColor = .systemBackground
         layout()
         setUpLabelContents()
+        setUpGraphViewLayer()
     }
 
     override func viewDidLayoutSubviews() {
@@ -56,20 +58,25 @@ final class MotionReplayViewController: UIViewController {
         }
 
         NSLayoutConstraint.activate([
-            dateLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            dateLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             dateLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            typeLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            typeLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             typeLabel.topAnchor.constraint(equalTo: dateLabel.bottomAnchor),
-            graphView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            graphView.topAnchor.constraint(equalTo: typeLabel.bottomAnchor),
-            graphView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            graphView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            graphView.topAnchor.constraint(equalTo: typeLabel.bottomAnchor, constant: 20),
+            graphView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             graphView.heightAnchor.constraint(equalTo: graphView.widthAnchor)
         ])
     }
 
     private func setUpLabelContents() {
-        dateLabel.text = viewModel?.record.startDate.description
+        dateLabel.text = viewModel?.record.startDate.toString()
         typeLabel.text = viewModel?.replayType.name
+    }
+
+    private func setUpGraphViewLayer() {
+        graphView.layer.borderColor = UIColor.black.cgColor
+        graphView.layer.borderWidth = 2
     }
 
     private func playGraphView() {
@@ -78,8 +85,8 @@ final class MotionReplayViewController: UIViewController {
         var index = 0
         Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
             self.graphView.drawGraphFor1Hz(layerType: .red, value: record.coordinates[index].x)
-            self.graphView.drawGraphFor1Hz(layerType: .blue, value: record.coordinates[index].y)
-            self.graphView.drawGraphFor1Hz(layerType: .green, value: record.coordinates[index].z)
+            self.graphView.drawGraphFor1Hz(layerType: .green, value: record.coordinates[index].y)
+            self.graphView.drawGraphFor1Hz(layerType: .blue, value: record.coordinates[index].z)
             index += 1
             if index >= record.coordinates.count {
                 timer.invalidate()
@@ -91,8 +98,8 @@ final class MotionReplayViewController: UIViewController {
         guard let record = viewModel?.record else { return }
         record.coordinates.forEach { coordinate in
             self.graphView.drawGraphFor1Hz(layerType: .red, value: coordinate.x)
-            self.graphView.drawGraphFor1Hz(layerType: .blue, value: coordinate.y)
-            self.graphView.drawGraphFor1Hz(layerType: .green, value: coordinate.z)
+            self.graphView.drawGraphFor1Hz(layerType: .green, value: coordinate.y)
+            self.graphView.drawGraphFor1Hz(layerType: .blue, value: coordinate.z)
         }
     }
 }
@@ -105,5 +112,13 @@ fileprivate extension ReplayType {
         case .play:
             return "Play"
         }
+    }
+}
+
+fileprivate extension Date {
+    func toString() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
+        return dateFormatter.string(from: self)
     }
 }

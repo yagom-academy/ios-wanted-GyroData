@@ -17,14 +17,14 @@ final class GraphView: UIView {
 
     private let blueLabel: UILabel = {
         let label = UILabel()
-        label.text = "y:0"
+        label.text = "z:0"
         label.textColor = UIColor.blue
         return label
     }()
 
     private let greenLabel: UILabel = {
         let label = UILabel()
-        label.text = "z:0"
+        label.text = "y:0"
         label.textColor = UIColor.green
         return label
     }()
@@ -78,11 +78,11 @@ final class GraphView: UIView {
             viewModel.pastValueForRed.append(value)
         case .blue:
             layer = blueLinesLayer
-            blueLabel.text = "y:\(value)"
+            blueLabel.text = "z:\(value)"
             viewModel.pastValueForBlue.append(value)
         case .green:
             layer = greenLinesLayer
-            greenLabel.text = "z:\(value)"
+            greenLabel.text = "y:\(value)"
             viewModel.pastValueForGreen.append(value)
         }
 
@@ -142,12 +142,12 @@ final class GraphView: UIView {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         NSLayoutConstraint.activate([
-            redLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
-            blueLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            greenLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
-            redLabel.topAnchor.constraint(equalTo: topAnchor),
-            blueLabel.topAnchor.constraint(equalTo: topAnchor),
-            greenLabel.topAnchor.constraint(equalTo: topAnchor)
+            redLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            greenLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            blueLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            redLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            blueLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            greenLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10)
         ])
     }
     
