@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct Motion {
+struct Motion: Hashable {
     let date: String
     let measurementType: String
     let coordinate: Coordinate

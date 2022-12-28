@@ -7,18 +7,36 @@
 
 import UIKit
 
-final class GyroViewController: UIViewController {
+final class GyroViewController: UIViewController, UITableViewDelegate {
+    private let dummy = [
+        Motion(
+            date: "2022/12/28 14:50:43",
+            measurementType: "Acc",
+            coordinate: Coordinate(x: [1], y: [2], z: [3])
+        ),
+        
+        Motion(
+            date: "2022/12/29 15:42:13",
+            measurementType: "Acc",
+            coordinate: Coordinate(x: [4], y: [5], z: [6])
+        )
+    ]
     
+    private enum Section {
+        case main
+    }
+    
+    private var dataSource: UITableViewDiffableDataSource<Section, Motion>?
+    private var snapshot = NSDiffableDataSourceSnapshot<Section, Motion>()
     private let gyroListView = GyroTableView()
-    
-    private let coreData = CoreDataManager().fetchData()
+    // private let coreDataManager = CoreDataManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationItem()
-        setupDefault()
         setupSubviews()
         setupLayout()
+        setupDefault()
     }
     
     private func setupNavigationItem() {
@@ -34,11 +52,30 @@ final class GyroViewController: UIViewController {
     }
     
     private func setupDefault() {
+        gyroListView.register(GyroTableViewCell.self, forCellReuseIdentifier: "measurementListViewCell")
         gyroListView.delegate = self
-        gyroListView.dataSource = self
         gyroListView.translatesAutoresizingMaskIntoConstraints = false
+        
+        dataSource = UITableViewDiffableDataSource<Section, Motion>(
+            tableView: gyroListView,
+            cellProvider: { tableView, indexPath, itemIdentifier in
+                guard let cell = tableView.dequeueReusableCell(
+                    withIdentifier: "measurementListViewCell",
+                    for: indexPath
+                ) as? GyroTableViewCell else {
+                    return nil
+                }
+
+                cell.configure(motion: itemIdentifier)
+                return cell
+            })
+        
+        snapshot.appendSections([.main])
+        snapshot.appendItems(dummy)
+        
+        dataSource?.apply(snapshot)
     }
-    
+
     private func setupSubviews() {
         view.addSubview(gyroListView)
     }
@@ -57,68 +94,5 @@ final class GyroViewController: UIViewController {
             MeasureViewController(),
             animated: true
         )
-    }
-}
-
-extension GyroViewController: UITableViewDelegate {
-    func tableView(
-        _ tableView: UITableView,
-        didSelectRowAt indexPath: IndexPath
-    ) {
-        self.navigationController?.pushViewController(
-            ReplayViewController(pageType: ReplayViewPageType.view),
-            animated: true
-        )
-    }
-
-    func tableView(
-        _ tableView: UITableView,
-        trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
-    ) -> UISwipeActionsConfiguration? {
-        let playAction = UIContextualAction(
-            style: .normal,
-            title: "Play"
-        ) { [weak self] _, _, _ in
-            self?.navigationController?.pushViewController(
-                ReplayViewController(pageType: ReplayViewPageType.play),
-                animated: true
-            )
-        }
-        playAction.backgroundColor = .green
-        
-        let deleteAction = UIContextualAction(
-            style: .destructive,
-            title: "delete"
-        ) { _, _, _ in }
-    
-        return UISwipeActionsConfiguration(actions: [deleteAction, playAction])
-    }
-}
-
-extension GyroViewController: UITableViewDataSource {
-    func tableView(
-        _ tableView: UITableView,
-        numberOfRowsInSection section: Int
-    ) -> Int {
-        return coreData.count
-    }
-    
-    func tableView(
-        _ tableView: UITableView,
-        cellForRowAt indexPath: IndexPath
-    ) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(
-            withIdentifier: GyroTableViewCell.id
-        ) as? GyroTableViewCell ?? GyroTableViewCell()
-        cell.configure(motion: coreData[indexPath.row])
-        
-        return cell
-    }
-    
-    func tableView(
-        _ tableView: UITableView,
-        heightForRowAt indexPath: IndexPath
-    ) -> CGFloat {
-        return CGFloat(80)
     }
 }
