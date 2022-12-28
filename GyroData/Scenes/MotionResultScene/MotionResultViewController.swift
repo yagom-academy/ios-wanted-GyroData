@@ -78,7 +78,9 @@ class MotionResultViewController: UIViewController {
     }
     
     func bind(to viewModel: MotionResultViewModel) {
-        viewModel.motionData.subscribe { _ in
+        viewModel.motionInformation.subscribe { [weak self] motionInformation in
+            guard let motionInformation = motionInformation else { return }
+            self?.drawGraph(motion: motionInformation)
             // stopIndicator
         }
     }
@@ -116,4 +118,12 @@ class MotionResultViewController: UIViewController {
         navigationItem.title = "다시보기"
     }
 
+}
+
+// MARK: draw Graph
+
+extension MotionResultViewController {
+    func drawGraph(motion: MotionInformation) {
+        // graphView에서 graph 그리기
+    }
 }
