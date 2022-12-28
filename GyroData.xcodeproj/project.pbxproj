@@ -27,6 +27,9 @@
 		F351622E295BF7B1008AB1A3 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F351622D295BF7B1008AB1A3 /* CoreDataManager.swift */; };
 		F3516232295BF83C008AB1A3 /* MotionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3516231295BF83C008AB1A3 /* MotionType.swift */; };
 		F3516235295BF8CA008AB1A3 /* MotionCoreDataUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3516234295BF8CA008AB1A3 /* MotionCoreDataUseCase.swift */; };
+		F37A2451295C88850006B552 /* MotionResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37A2450295C88850006B552 /* MotionResultViewController.swift */; };
+		F37A2453295C91760006B552 /* MotionResultPlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37A2452295C91760006B552 /* MotionResultPlayViewController.swift */; };
+		F37A2456295C95660006B552 /* PlayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37A2455295C95660006B552 /* PlayButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +55,9 @@
 		F351622D295BF7B1008AB1A3 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		F3516231295BF83C008AB1A3 /* MotionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionType.swift; sourceTree = "<group>"; };
 		F3516234295BF8CA008AB1A3 /* MotionCoreDataUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionCoreDataUseCase.swift; sourceTree = "<group>"; };
+		F37A2450295C88850006B552 /* MotionResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionResultViewController.swift; sourceTree = "<group>"; };
+		F37A2452295C91760006B552 /* MotionResultPlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionResultPlayViewController.swift; sourceTree = "<group>"; };
+		F37A2455295C95660006B552 /* PlayButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +110,7 @@
 		F35161F2295AC259008AB1A3 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				F37A244F295C88650006B552 /* MotionResultScene */,
 				F35161F3295AC288008AB1A3 /* MotionListScene */,
 			);
 			path = Scenes;
@@ -205,6 +212,24 @@
 			path = UseCase;
 			sourceTree = "<group>";
 		};
+		F37A244F295C88650006B552 /* MotionResultScene */ = {
+			isa = PBXGroup;
+			children = (
+				F37A2450295C88850006B552 /* MotionResultViewController.swift */,
+				F37A2452295C91760006B552 /* MotionResultPlayViewController.swift */,
+				F37A2454295C952F0006B552 /* SubViews */,
+			);
+			path = MotionResultScene;
+			sourceTree = "<group>";
+		};
+		F37A2454295C952F0006B552 /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				F37A2455295C95660006B552 /* PlayButton.swift */,
+			);
+			path = SubViews;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -283,13 +308,16 @@
 				F35161FA295AE790008AB1A3 /* MotionListViewModel.swift in Sources */,
 				F3516200295AF1C2008AB1A3 /* Motion.swift in Sources */,
 				200E57D1295A9FD900D3EF5A /* MeasurementViewController.swift in Sources */,
+				F37A2456295C95660006B552 /* PlayButton.swift in Sources */,
 				F3516228295BF65F008AB1A3 /* MotionInfo+CoreDataProperties.swift in Sources */,
+				F37A2453295C91760006B552 /* MotionResultPlayViewController.swift in Sources */,
 				F35161FD295AEACA008AB1A3 /* Observable.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				F35161F5295AC2DA008AB1A3 /* MotionListViewController.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
 				200E57D3295AABCE00D3EF5A /* GraphView.swift in Sources */,
 				F351622E295BF7B1008AB1A3 /* CoreDataManager.swift in Sources */,
+				F37A2451295C88850006B552 /* MotionResultViewController.swift in Sources */,
 				F3516227295BF65F008AB1A3 /* MotionInfo+CoreDataClass.swift in Sources */,
 				F3516235295BF8CA008AB1A3 /* MotionCoreDataUseCase.swift in Sources */,
 				F3516232295BF83C008AB1A3 /* MotionType.swift in Sources */,
