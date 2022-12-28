@@ -8,6 +8,8 @@
 import UIKit
 
 final class MotionDataListViewController: UIViewController {
+    private let viewModel = MotionDataViewModel()
+
     private lazy var recordTableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -42,13 +44,13 @@ final class MotionDataListViewController: UIViewController {
 
     @objc
     private func measureButtonTapped(_ sender: UIButton) {
-
+        // Move to third page
     }
 }
 
 extension MotionDataListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return viewModel.records.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -57,14 +59,7 @@ extension MotionDataListViewController: UITableViewDataSource {
             return UITableViewCell()
         }
 
-        cell.setUpContents(motionRecord: MotionRecord(
-            id: UUID(),
-            startDate: Date(),
-            msInterval: 10,
-            motionMode: .accelerometer,
-            coordinates: [Coordiante(x: 1, y: 1, z: 1),
-                          Coordiante(x: 1, y: 1, z: 1),
-                          Coordiante(x: 1, y: 1, z: 1)]))
+        cell.setUpContents(motionRecord: viewModel.records[indexPath.row])
         return cell
     }
 }
@@ -72,12 +67,14 @@ extension MotionDataListViewController: UITableViewDataSource {
 extension MotionDataListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let playAction = UIContextualAction(style: .normal, title: "Play") { action, view, didSuccessed in
+            // Move to second page
             didSuccessed(true)
         }
-
         playAction.backgroundColor = .systemGreen
 
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { action, view, didSuccessed in
+            self.viewModel.records.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
             didSuccessed(true)
         }
         deleteAction.backgroundColor = .systemRed
