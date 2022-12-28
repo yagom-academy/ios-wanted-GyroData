@@ -12,4 +12,18 @@ struct Motion {
     let motionType: MotionType
     let date: Date
     let time: Double
+    
+    init(motionType: MotionType, date: Date, time: Double) {
+        self.id = UUID()
+        self.motionType = motionType
+        self.date = date
+        self.time = time
+    }
+    
+    init(model: MotionInfo) {
+        self.id = model.id ?? UUID()
+        self.motionType = model.motion
+        self.date = model.date ?? Date()
+        self.time = model.time
+    }
 }
