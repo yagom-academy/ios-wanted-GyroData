@@ -23,6 +23,7 @@
 		F3516227295BF65F008AB1A3 /* MotionInfo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3516225295BF65F008AB1A3 /* MotionInfo+CoreDataClass.swift */; };
 		F3516228295BF65F008AB1A3 /* MotionInfo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3516226295BF65F008AB1A3 /* MotionInfo+CoreDataProperties.swift */; };
 		F351622A295BF723008AB1A3 /* Storable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3516229295BF723008AB1A3 /* Storable.swift */; };
+		F351622C295BF783008AB1A3 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = F351622B295BF783008AB1A3 /* CoreDataStack.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		F3516225295BF65F008AB1A3 /* MotionInfo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MotionInfo+CoreDataClass.swift"; sourceTree = "<group>"; };
 		F3516226295BF65F008AB1A3 /* MotionInfo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MotionInfo+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F3516229295BF723008AB1A3 /* Storable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storable.swift; sourceTree = "<group>"; };
+		F351622B295BF783008AB1A3 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +155,7 @@
 		F3516220295BF5A7008AB1A3 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				F351622B295BF783008AB1A3 /* CoreDataStack.swift */,
 				F3516221295BF5A7008AB1A3 /* Entity */,
 			);
 			path = CoreData;
@@ -239,6 +242,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F351622C295BF783008AB1A3 /* CoreDataStack.swift in Sources */,
 				63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */,
 				F351622A295BF723008AB1A3 /* Storable.swift in Sources */,
 				F3516224295BF5C6008AB1A3 /* MotionInfo.xcdatamodeld in Sources */,
