@@ -42,7 +42,9 @@ class MotionListViewModel: MotionListViewModelType {
     }
     
     func appendItems(count: Int) {
-        
+        guard let motionData = motionCoreDataUseCase.fetch(offset: offset, count: count) else { return }
+        offset += count
+        items.value = motionData
     }
     
 }
