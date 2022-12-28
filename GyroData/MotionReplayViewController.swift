@@ -19,12 +19,10 @@ final class MotionReplayViewController: UIViewController {
         return label
     }()
     private var graphView: GraphView
-    private var didPlayStarted = false
 
     init(replayType: ReplayType, motionRecord: MotionRecord) {
         viewModel = MotionReplayViewModel(replayType: replayType, record: motionRecord)
         graphView = GraphView(xScale: CGFloat(motionRecord.coordinates.count))
-        graphView.translatesAutoresizingMaskIntoConstraints = false
         super.init(nibName: nil, bundle: nil)
     }
 
