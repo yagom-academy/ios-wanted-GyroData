@@ -12,7 +12,7 @@ protocol MotionResultViewModelInput {
 }
 
 protocol MotionResultViewModelOutput {
-    var motionData: Observable<MotionInformation?> { get }
+    var motionInformation: Observable<MotionInformation?> { get }
 }
 
 protocol MotionResultViewModelType: MotionResultViewModelInput, MotionResultViewModelOutput { }
@@ -28,14 +28,14 @@ class MotionResultViewModel: MotionResultViewModelType {
     /// Output
     
     var motionId: UUID?
-    var motionData: Observable<MotionInformation?> = Observable(nil)
+    var motionInformation: Observable<MotionInformation?> = Observable(nil)
     
     /// Input
     
     func load() {
         // id 가지고 fileManager 접근
         // 가지고 온 데이터 motionData에 Set
-        motionData.value = sampleData
+        motionInformation.value = sampleData
     }
     
 }
