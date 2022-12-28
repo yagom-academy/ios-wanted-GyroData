@@ -74,17 +74,15 @@ extension MotionDataListViewController: UITableViewDataSource {
 
 extension MotionDataListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let playAction = UIContextualAction(style: .normal, title: "Play") { action, view, didSuccessed in
+        let playAction = UIContextualAction(style: .normal, title: "Play") { _, _, _ in
             // Move to second page
-            didSuccessed(true)
         }
         playAction.backgroundColor = .systemGreen
 
-        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { action, view, didSuccessed in
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { _, _, _ in
             self.viewModel.deleteCellSwipeActionDone(indexPath: indexPath) {
                 tableView.deleteRows(at: [indexPath], with: .automatic)
             }
-            didSuccessed(true)
         }
         deleteAction.backgroundColor = .systemRed
 
