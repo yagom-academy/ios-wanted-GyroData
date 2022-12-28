@@ -24,7 +24,7 @@ class GraphSegment: UIView {
     override func draw(_ rect: CGRect) {
         guard let context = UIGraphicsGetCurrentContext() else { return }
         
-        context.translateBy(x: 0, y: bounds.size.height / 2.0)
+        context.translateBy(x: .zero, y: bounds.size.height / 2.0)
     
         for lineIndex in 0..<3 {
             guard let motionData = MotionData(rawValue: lineIndex) else { return }
@@ -49,7 +49,7 @@ class GraphSegment: UIView {
     
     private func scaledValue(for line: Int, value: Double) -> CGFloat {
         // TODO: y축 범위에 따라 조정하는 메서드 -> 기준값 잡기 + 기준을 넘으면 "측정된 값 + (측정된 값 * 0.2)"으로 기준 조정
-        let valueRange = -4.0...4.0
+        let valueRange = GraphNumber.initialRange
         let scale = bounds.size.height / (valueRange.upperBound - valueRange.lowerBound)
         
         return CGFloat(value * -scale)

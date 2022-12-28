@@ -24,7 +24,7 @@ class GraphView: UIView {
     }
     
     private func setupView() {
-        self.layer.borderWidth = 2
+        self.layer.borderWidth = GraphNumber.borderWidth
         self.layer.borderColor = UIColor.black.cgColor
         self.backgroundColor = .systemBackground
     }
@@ -57,7 +57,7 @@ class GraphView: UIView {
             guard currentSegment.dataPoint.isEmpty == false else { return }
             startPoint = currentSegment.dataPoint
         } else {
-            startPoint = [0, 0, 0]
+            startPoint = GraphNumber.initialPoint
         }
         
         let newSegment = GraphSegment(startPoint: startPoint)
@@ -84,5 +84,8 @@ class GraphView: UIView {
 }
 
 enum GraphNumber {
+    static let borderWidth = CGFloat(2)
     static let segmentWidth = CGFloat(3)
+    static let initialPoint = [Double.zero, Double.zero, Double.zero]
+    static let initialRange = -4.0...4.0
 }
