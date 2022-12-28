@@ -25,7 +25,6 @@ class MotionListViewModel: MotionListViewModelType {
     /// Input
     
     func loadItems(count: Int) {
-        items.value = testData
     }
     
     func deleteItem(motion: Motion) {
@@ -38,10 +37,5 @@ class MotionListViewModel: MotionListViewModelType {
     func appendItems(count: Int) {
         
     }
-    
-    var testData = [Motion(id: UUID(), motionType: .acc, date: Date(), time: 48.0),
-                        Motion(id: UUID(), motionType: .gyro, date: Date(), time: 48.0),
-                        Motion(id: UUID(), motionType: .acc, date: Date(), time: 60.0),
-                        Motion(id: UUID(), motionType: .gyro, date: Date(), time: 60.0)]
     
 }

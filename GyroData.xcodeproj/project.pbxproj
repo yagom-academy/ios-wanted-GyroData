@@ -26,6 +26,7 @@
 		F351622C295BF783008AB1A3 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = F351622B295BF783008AB1A3 /* CoreDataStack.swift */; };
 		F351622E295BF7B1008AB1A3 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F351622D295BF7B1008AB1A3 /* CoreDataManager.swift */; };
 		F3516232295BF83C008AB1A3 /* MotionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3516231295BF83C008AB1A3 /* MotionType.swift */; };
+		F3516235295BF8CA008AB1A3 /* MotionCoreDataUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3516234295BF8CA008AB1A3 /* MotionCoreDataUseCase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		F351622B295BF783008AB1A3 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		F351622D295BF7B1008AB1A3 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		F3516231295BF83C008AB1A3 /* MotionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionType.swift; sourceTree = "<group>"; };
+		F3516234295BF8CA008AB1A3 /* MotionCoreDataUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionCoreDataUseCase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +182,7 @@
 		F351622F295BF7D7008AB1A3 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				F3516233295BF8B8008AB1A3 /* UseCase */,
 				F3516230295BF7F4008AB1A3 /* Entities */,
 			);
 			path = Domain;
@@ -192,6 +195,14 @@
 				F3516231295BF83C008AB1A3 /* MotionType.swift */,
 			);
 			path = Entities;
+			sourceTree = "<group>";
+		};
+		F3516233295BF8B8008AB1A3 /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				F3516234295BF8CA008AB1A3 /* MotionCoreDataUseCase.swift */,
+			);
+			path = UseCase;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -280,6 +291,7 @@
 				200E57D3295AABCE00D3EF5A /* GraphView.swift in Sources */,
 				F351622E295BF7B1008AB1A3 /* CoreDataManager.swift in Sources */,
 				F3516227295BF65F008AB1A3 /* MotionInfo+CoreDataClass.swift in Sources */,
+				F3516235295BF8CA008AB1A3 /* MotionCoreDataUseCase.swift in Sources */,
 				F3516232295BF83C008AB1A3 /* MotionType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
