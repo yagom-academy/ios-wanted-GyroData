@@ -39,7 +39,7 @@
 		E13ACFEC295AFB5000265ED2 /* MeasermentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13ACFEB295AFB5000265ED2 /* MeasermentViewModel.swift */; };
 		E13ACFF0295B15DA00265ED2 /* MeasurementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13ACFEF295B15DA00265ED2 /* MeasurementViewController.swift */; };
 		E1F1D33E295BD5CE00E5C521 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F1D33D295BD5CE00E5C521 /* GraphView.swift */; };
-		E1F1D342295C0D7900E5C521 /* UIButton+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F1D341295C0D7900E5C521 /* UIButton+extension.swift */; };
+		E1F1D344295C328A00E5C521 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F1D343295C328A00E5C521 /* RoundButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,7 +77,7 @@
 		E13ACFEB295AFB5000265ED2 /* MeasermentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasermentViewModel.swift; sourceTree = "<group>"; };
 		E13ACFEF295B15DA00265ED2 /* MeasurementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementViewController.swift; sourceTree = "<group>"; };
 		E1F1D33D295BD5CE00E5C521 /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
-		E1F1D341295C0D7900E5C521 /* UIButton+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+extension.swift"; sourceTree = "<group>"; };
+		E1F1D343295C328A00E5C521 /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -233,7 +233,6 @@
 				0247ED67295A927900212A78 /* UIStackView+extension.swift */,
 				0247ED73295A963D00212A78 /* UIFont+extension.swift */,
 				0247ED6B295A92AB00212A78 /* UITableView+extension.swift */,
-				E1F1D341295C0D7900E5C521 /* UIButton+extension.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -320,6 +319,7 @@
 			isa = PBXGroup;
 			children = (
 				E1F1D33D295BD5CE00E5C521 /* GraphView.swift */,
+				E1F1D343295C328A00E5C521 /* RoundButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -417,7 +417,6 @@
 			files = (
 				02432C172959937D0035AEDD /* CoreDataStorage.swift in Sources */,
 				0247ED72295A949D00212A78 /* MotionDataCell.swift in Sources */,
-				E1F1D342295C0D7900E5C521 /* UIButton+extension.swift in Sources */,
 				02432C132959909C0035AEDD /* CoreMotionManager.swift in Sources */,
 				0247ED74295A963D00212A78 /* UIFont+extension.swift in Sources */,
 				0247ED5E295A8D3300212A78 /* MotionListViewModel.swift in Sources */,
@@ -431,6 +430,7 @@
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				E13ACFEC295AFB5000265ED2 /* MeasermentViewModel.swift in Sources */,
 				0247ED7B295AB72600212A78 /* Observable.swift in Sources */,
+				E1F1D344295C328A00E5C521 /* RoundButton.swift in Sources */,
 				0247ED5C295A8D1200212A78 /* MotionListViewController.swift in Sources */,
 				02432C282959CAFB0035AEDD /* MotionFileManager.swift in Sources */,
 				0247ED76295AB07100212A78 /* MotionMeasureCoordinator.swift in Sources */,
