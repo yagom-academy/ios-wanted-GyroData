@@ -19,6 +19,10 @@
 		9B3C8CD9295AB2CF0026AEA5 /* AccelerateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3C8CD8295AB2CF0026AEA5 /* AccelerateManager.swift */; };
 		9B3C8CDB295AB2E70026AEA5 /* AnalysisManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3C8CDA295AB2E70026AEA5 /* AnalysisManager.swift */; };
 		9B3C8CDD295AB3140026AEA5 /* GyroscopeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3C8CDC295AB3140026AEA5 /* GyroscopeManager.swift */; };
+		9B650960295C15BC00277B34 /* AnalyzeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B65095F295C15BC00277B34 /* AnalyzeView.swift */; };
+		9B650963295C1D9E00277B34 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B650962295C1D9E00277B34 /* UIColor+.swift */; };
+		9B650965295C350B00277B34 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B650964295C350B00277B34 /* UIView+.swift */; };
+		9B650967295C4EDF00277B34 /* AnalyzeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B650966295C4EDF00277B34 /* AnalyzeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +40,10 @@
 		9B3C8CD8295AB2CF0026AEA5 /* AccelerateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccelerateManager.swift; sourceTree = "<group>"; };
 		9B3C8CDA295AB2E70026AEA5 /* AnalysisManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisManager.swift; sourceTree = "<group>"; };
 		9B3C8CDC295AB3140026AEA5 /* GyroscopeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroscopeManager.swift; sourceTree = "<group>"; };
+		9B65095F295C15BC00277B34 /* AnalyzeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyzeView.swift; sourceTree = "<group>"; };
+		9B650962295C1D9E00277B34 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
+		9B650964295C350B00277B34 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
+		9B650966295C4EDF00277B34 /* AnalyzeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyzeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +81,7 @@
 				9B4251D52959842400837A37 /* Model */,
 				9B4251DD2959C69D00837A37 /* Manager */,
 				9B4251D2295965A400837A37 /* Domain */,
+				9B650961295C1D8B00277B34 /* Extension */,
 				9B4251D12959658000837A37 /* SupportFile */,
 			);
 			path = GyroData;
@@ -111,6 +120,7 @@
 			children = (
 				63F01BB828D44FC400C53A39 /* ViewController.swift */,
 				8F4508B0295ACFB200538AE4 /* GraphView.swift */,
+				9B650968295C4F7200277B34 /* Analyze */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -131,6 +141,24 @@
 				9B3C8CDC295AB3140026AEA5 /* GyroscopeManager.swift */,
 			);
 			path = Manager;
+			sourceTree = "<group>";
+		};
+		9B650961295C1D8B00277B34 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				9B650962295C1D9E00277B34 /* UIColor+.swift */,
+				9B650964295C350B00277B34 /* UIView+.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		9B650968295C4F7200277B34 /* Analyze */ = {
+			isa = PBXGroup;
+			children = (
+				9B65095F295C15BC00277B34 /* AnalyzeView.swift */,
+				9B650966295C4EDF00277B34 /* AnalyzeViewController.swift */,
+			);
+			path = Analyze;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -203,14 +231,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B650960295C15BC00277B34 /* AnalyzeView.swift in Sources */,
 				8F4508A929598C8C00538AE4 /* GyroData.xcdatamodeld in Sources */,
 				63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				42404FA82959C04700BCE8B5 /* AnalysisType.swift in Sources */,
+				9B650963295C1D9E00277B34 /* UIColor+.swift in Sources */,
 				9B3C8CDD295AB3140026AEA5 /* GyroscopeManager.swift in Sources */,
+				9B650967295C4EDF00277B34 /* AnalyzeViewController.swift in Sources */,
 				8F4508B1295ACFB200538AE4 /* GraphView.swift in Sources */,
 				8F4508AD29598E6400538AE4 /* CoreDataManager.swift in Sources */,
 				9B3C8CDB295AB2E70026AEA5 /* AnalysisManager.swift in Sources */,
+				9B650965295C350B00277B34 /* UIView+.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
 				9B3C8CD9295AB2CF0026AEA5 /* AccelerateManager.swift in Sources */,
 			);
