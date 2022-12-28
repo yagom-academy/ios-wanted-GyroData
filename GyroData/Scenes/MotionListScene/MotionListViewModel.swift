@@ -16,6 +16,10 @@ protocol MotionListViewModelType: MotionListViewModelInput, MotionListViewModelO
 
 class MotionListViewModel: MotionListViewModelType {
     
+    let motionCoreDataUseCase = MotionCoreDataUseCase()
+    
+    var offset = 0
+    
     /// Output
     
     var items: Observable<[Motion]> = Observable([])
