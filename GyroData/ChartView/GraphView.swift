@@ -1,11 +1,11 @@
 //
-//  ChartView.swift
+//  GraphView.swift
 //  GyroData
 //
 //  Created by minsson on 2022/12/27.
 //
 
-protocol ChartDrawable {
+protocol GraphDrawable {
     var data: MeasuredData? { get }
     
     func retrieveData(data: MeasuredData?)
@@ -18,7 +18,7 @@ protocol TickReceivable {
     func receive(x: Double, y: Double, z: Double)
 }
 
-final class ChartView: TickReceivable {
+final class GraphView: TickReceivable {
     var data: MeasuredData?
     
     func receive(x: Double, y: Double, z: Double) {

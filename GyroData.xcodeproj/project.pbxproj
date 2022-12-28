@@ -19,7 +19,7 @@
 		AFABE5E22959734C00F2F6E3 /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFABE5E12959734C00F2F6E3 /* ListViewModel.swift */; };
 		AFABE5E4295975A600F2F6E3 /* CellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFABE5E3295975A600F2F6E3 /* CellData.swift */; };
 		FDA47545295AC62D006D57B7 /* Sensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA47544295AC62D006D57B7 /* Sensor.swift */; };
-		FDA47548295AC793006D57B7 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA47547295AC793006D57B7 /* ChartView.swift */; };
+		FDA47548295AC793006D57B7 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA47547295AC793006D57B7 /* GraphView.swift */; };
 		FDA4754E295AC838006D57B7 /* CoreMotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA4754D295AC838006D57B7 /* CoreMotionManager.swift */; };
 		FDA47550295AC953006D57B7 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA4754F295AC953006D57B7 /* CoreDataManager.swift */; };
 /* End PBXBuildFile section */
@@ -39,7 +39,7 @@
 		AFABE5E12959734C00F2F6E3 /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
 		AFABE5E3295975A600F2F6E3 /* CellData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellData.swift; sourceTree = "<group>"; };
 		FDA47544295AC62D006D57B7 /* Sensor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sensor.swift; sourceTree = "<group>"; };
-		FDA47547295AC793006D57B7 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
+		FDA47547295AC793006D57B7 /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		FDA4754D295AC838006D57B7 /* CoreMotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMotionManager.swift; sourceTree = "<group>"; };
 		FDA4754F295AC953006D57B7 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -136,7 +136,7 @@
 		FDA47546295AC76E006D57B7 /* ChartView */ = {
 			isa = PBXGroup;
 			children = (
-				FDA47547295AC793006D57B7 /* ChartView.swift */,
+				FDA47547295AC793006D57B7 /* GraphView.swift */,
 			);
 			path = ChartView;
 			sourceTree = "<group>";
@@ -229,7 +229,7 @@
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
 				FDA47550295AC953006D57B7 /* CoreDataManager.swift in Sources */,
 				A3DED01F29596846007EE19D /* ListView.swift in Sources */,
-				FDA47548295AC793006D57B7 /* ChartView.swift in Sources */,
+				FDA47548295AC793006D57B7 /* GraphView.swift in Sources */,
 				A3DED02129596A83007EE19D /* ListViewCell.swift in Sources */,
 				A3DED01B295965CE007EE19D /* MeasuredData.swift in Sources */,
 				A3DED0242959821C007EE19D /* Date+Extension.swift in Sources */,
