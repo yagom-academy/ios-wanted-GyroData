@@ -21,40 +21,47 @@ final class GraphView: UIView {
         static let lineWidth: CGFloat = 2
         static let graphBaseCount: CGFloat = 8
         static let graphPointersCount: CGFloat = 600
-        static let multiplyer: CGFloat = 100
+        static let multiplyer: CGFloat = 30
+        static let graphViewBorderColor = UIColor.gray.cgColor
     }
     
     override func draw(_ rect: CGRect) {
-            let layer = CAShapeLayer()
-            let path = UIBezierPath()
-            
-            let xOffset = self.frame.width / CGFloat(Constant.dividCount)
-            let yOffset = self.frame.height / CGFloat(Constant.dividCount)
-            var xpointer: CGFloat = 0
-            var ypointer: CGFloat = 0
-            let xMaxPointer: CGFloat = self.frame.width
-            let yMaxPointer: CGFloat = self.frame.height
+            self.layer.addSublayer(drawBaseLayer())
+    }
+    
+    func drawBaseLayer() -> CAShapeLayer {
+        self.layer.borderWidth = 3
+        self.layer.borderColor = Constant.graphViewBorderColor
+        let layer = CAShapeLayer()
+        let path = UIBezierPath()
         
-            var count = 1
-            
-            while (count < Constant.dividCount) {
-                count += 1
-                xpointer += xOffset
-                path.move(to: CGPoint(x: xpointer, y: 0))
-                let newXPosition = CGPoint(x: xpointer, y: yMaxPointer)
-                path.addLine(to: newXPosition)
+        let xOffset = self.frame.width / CGFloat(Constant.dividCount)
+        let yOffset = self.frame.height / CGFloat(Constant.dividCount)
+        var xpointer: CGFloat = 0
+        var ypointer: CGFloat = 0
+        let xMaxPointer: CGFloat = self.frame.width
+        let yMaxPointer: CGFloat = self.frame.height
+    
+        var count = 1
+        
+        while (count < Constant.dividCount) {
+            count += 1
+            xpointer += xOffset
+            path.move(to: CGPoint(x: xpointer, y: 0))
+            let newXPosition = CGPoint(x: xpointer, y: yMaxPointer)
+            path.addLine(to: newXPosition)
 
-                ypointer += yOffset
-                path.move(to: CGPoint(x: 0, y: ypointer))
-                let newYPosition = CGPoint(x: xMaxPointer, y: ypointer)
-                path.addLine(to: newYPosition)
-            }
-            
-            layer.fillColor = UIColor.black.cgColor
-            layer.strokeColor = Constant.lineColor
-            layer.lineWidth = 1
-            layer.path = path.cgPath
-            self.layer.addSublayer(layer)
+            ypointer += yOffset
+            path.move(to: CGPoint(x: 0, y: ypointer))
+            let newYPosition = CGPoint(x: xMaxPointer, y: ypointer)
+            path.addLine(to: newYPosition)
+        }
+        
+        layer.fillColor = Constant.lineColor
+        layer.strokeColor = Constant.lineColor
+        layer.lineWidth = 1
+        layer.path = path.cgPath
+        return layer
     }
     
     func drawGraph(data: [MotionValue]) {
@@ -108,6 +115,9 @@ final class GraphView: UIView {
     
     func drawGraph(data: MotionValue?) {
         
+        guard let data = data else {
+            return
+        }
         let layerX = CAShapeLayer()
         let layerY = CAShapeLayer()
         let layerZ = CAShapeLayer()
@@ -123,12 +133,12 @@ final class GraphView: UIView {
         pathZ.move(to: CGPoint(x: pointer, y: initHeight + previousMotion.z * Constant.multiplyer))
         
         index += 1
-        previousMotion = data ?? MotionValue(timestamp: TimeInterval(), x: 0, y: 0, z: 0)
+        previousMotion = data
         pointer = offset * CGFloat(index)
         
-        let newPositionX = CGPoint(x: pointer, y: initHeight + (data?.x ?? 0) * Constant.multiplyer)
-        let newPositionY = CGPoint(x: pointer, y: initHeight + (data?.y ?? 0) * Constant.multiplyer)
-        let newPositionZ = CGPoint(x: pointer, y: initHeight + (data?.z ?? 0) * Constant.multiplyer)
+        let newPositionX = CGPoint(x: pointer, y: initHeight + (data.x) * Constant.multiplyer)
+        let newPositionY = CGPoint(x: pointer, y: initHeight + (data.y) * Constant.multiplyer)
+        let newPositionZ = CGPoint(x: pointer, y: initHeight + (data.z) * Constant.multiplyer)
         
         pathX.addLine(to: newPositionX)
         pathY.addLine(to: newPositionY)
@@ -153,5 +163,11 @@ final class GraphView: UIView {
         self.layer.addSublayer(layerX)
         self.layer.addSublayer(layerY)
         self.layer.addSublayer(layerZ)
+    }
+    
+    func clean() {
+        layer.sublayers = nil
+        layer.addSublayer(drawBaseLayer())
+        index = 0
     }
 }
