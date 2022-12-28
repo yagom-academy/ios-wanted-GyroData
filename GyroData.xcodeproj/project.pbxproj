@@ -24,6 +24,7 @@
 		F3516228295BF65F008AB1A3 /* MotionInfo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3516226295BF65F008AB1A3 /* MotionInfo+CoreDataProperties.swift */; };
 		F351622A295BF723008AB1A3 /* Storable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3516229295BF723008AB1A3 /* Storable.swift */; };
 		F351622C295BF783008AB1A3 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = F351622B295BF783008AB1A3 /* CoreDataStack.swift */; };
+		F351622E295BF7B1008AB1A3 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F351622D295BF7B1008AB1A3 /* CoreDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		F3516226295BF65F008AB1A3 /* MotionInfo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MotionInfo+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F3516229295BF723008AB1A3 /* Storable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storable.swift; sourceTree = "<group>"; };
 		F351622B295BF783008AB1A3 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		F351622D295BF7B1008AB1A3 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				F351622B295BF783008AB1A3 /* CoreDataStack.swift */,
+				F351622D295BF7B1008AB1A3 /* CoreDataManager.swift */,
 				F3516221295BF5A7008AB1A3 /* Entity */,
 			);
 			path = CoreData;
@@ -256,6 +259,7 @@
 				F35161F5295AC2DA008AB1A3 /* MotionListViewController.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
 				200E57D3295AABCE00D3EF5A /* GraphView.swift in Sources */,
+				F351622E295BF7B1008AB1A3 /* CoreDataManager.swift in Sources */,
 				F3516227295BF65F008AB1A3 /* MotionInfo+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
