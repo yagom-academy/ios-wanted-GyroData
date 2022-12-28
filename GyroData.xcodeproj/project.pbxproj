@@ -55,6 +55,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		20E26445295C375E00C66E8A /* GraphView */ = {
+			isa = PBXGroup;
+			children = (
+				200E57D2295AABCE00D3EF5A /* GraphView.swift */,
+				20BC9AFF295C1771009A7F7A /* GraphSegment.swift */,
+				20BC9AFD295C1713009A7F7A /* CGContext+GridGraph.swift */,
+			);
+			path = GraphView;
+			sourceTree = "<group>";
+		};
 		63F01BA828D44FC400C53A39 = {
 			isa = PBXGroup;
 			children = (
@@ -77,6 +87,7 @@
 				F3516205295B1140008AB1A3 /* Utility */,
 				F35161FE295AF196008AB1A3 /* Model */,
 				F35161F2295AC259008AB1A3 /* Scenes */,
+				20E26445295C375E00C66E8A /* GraphView */,
 				63F01BB428D44FC400C53A39 /* AppDelegate.swift */,
 				63F01BB628D44FC400C53A39 /* SceneDelegate.swift */,
 				63F01BB828D44FC400C53A39 /* ViewController.swift */,
@@ -84,9 +95,6 @@
 				63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */,
 				63F01BC228D44FC500C53A39 /* Info.plist */,
 				200E57D0295A9FD900D3EF5A /* MeasurementViewController.swift */,
-				200E57D2295AABCE00D3EF5A /* GraphView.swift */,
-				20BC9AFD295C1713009A7F7A /* CGContext+GridGraph.swift */,
-				20BC9AFF295C1771009A7F7A /* GraphSegment.swift */,
 				20BC9B01295C17FF009A7F7A /* MotionMeasurementManager.swift */,
 			);
 			path = GyroData;
