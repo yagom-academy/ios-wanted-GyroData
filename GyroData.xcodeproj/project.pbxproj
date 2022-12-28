@@ -14,6 +14,13 @@
 		63F01BC128D44FC500C53A39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */; };
 		8A6A5BC629597C6900B9EB85 /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6A5BC529597C6900B9EB85 /* MainTableViewCell.swift */; };
 		8A6A5BC829597DA900B9EB85 /* ReuseIdentifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6A5BC729597DA800B9EB85 /* ReuseIdentifiable.swift */; };
+		8A6A5BD6295B0BD000B9EB85 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8A6A5BD4295B0BD000B9EB85 /* Model.xcdatamodeld */; };
+		8A6A5BD9295B0C8800B9EB85 /* MotionEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6A5BD7295B0C8800B9EB85 /* MotionEntity+CoreDataClass.swift */; };
+		8A6A5BDA295B0C8800B9EB85 /* MotionEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6A5BD8295B0C8800B9EB85 /* MotionEntity+CoreDataProperties.swift */; };
+		8A6A5C2A295B16FB00B9EB85 /* CoreDataFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A6A5C29295B16F000B9EB85 /* CoreDataFramework.framework */; };
+		8A6A5C2B295B16FB00B9EB85 /* CoreDataFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8A6A5C29295B16F000B9EB85 /* CoreDataFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8ADDF9F8295B1F2900085D72 /* GyroModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADDF9F7295B1F2900085D72 /* GyroModel.swift */; };
+		8ADDF9FA295B1F9B00085D72 /* MotionDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADDF9F9295B1F9B00085D72 /* MotionDataManager.swift */; };
 		C456F846295A0A2C008C9261 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C456F845295A0A2C008C9261 /* UIImage+Extension.swift */; };
 		C456F848295A0A5A008C9261 /* UIContextualAction+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C456F847295A0A5A008C9261 /* UIContextualAction+Extension.swift */; };
 		C456F84A295A0EBF008C9261 /* CustomSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C456F849295A0EBF008C9261 /* CustomSegmentedControl.swift */; };
@@ -23,6 +30,30 @@
 		C456F858295AF01D008C9261 /* MotionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C456F857295AF01D008C9261 /* MotionType.swift */; };
 		C4E4870329598D7C00A1FB99 /* MeasurementEnrollController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E4870229598D7C00A1FB99 /* MeasurementEnrollController.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8A6A5C28295B16F000B9EB85 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8A6A5C24295B16F000B9EB85 /* CoreDataFramework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 20FB2ED128B74F9700358670;
+			remoteInfo = CoreDataFramework;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8A6A5C13295B14F500B9EB85 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				8A6A5C2B295B16FB00B9EB85 /* CoreDataFramework.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		63F01BB128D44FC400C53A39 /* GyroData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GyroData.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -34,6 +65,12 @@
 		63F01BC228D44FC500C53A39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8A6A5BC529597C6900B9EB85 /* MainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
 		8A6A5BC729597DA800B9EB85 /* ReuseIdentifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReuseIdentifiable.swift; sourceTree = "<group>"; };
+		8A6A5BD5295B0BD000B9EB85 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		8A6A5BD7295B0C8800B9EB85 /* MotionEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MotionEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		8A6A5BD8295B0C8800B9EB85 /* MotionEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MotionEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		8A6A5C24295B16F000B9EB85 /* CoreDataFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CoreDataFramework.xcodeproj; path = CoreDataFramework/CoreDataFramework.xcodeproj; sourceTree = "<group>"; };
+		8ADDF9F7295B1F2900085D72 /* GyroModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroModel.swift; sourceTree = "<group>"; };
+		8ADDF9F9295B1F9B00085D72 /* MotionDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDataManager.swift; sourceTree = "<group>"; };
 		C456F845295A0A2C008C9261 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		C456F847295A0A5A008C9261 /* UIContextualAction+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIContextualAction+Extension.swift"; sourceTree = "<group>"; };
 		C456F849295A0EBF008C9261 /* CustomSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentedControl.swift; sourceTree = "<group>"; };
@@ -49,6 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8A6A5C2A295B16FB00B9EB85 /* CoreDataFramework.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,8 +96,11 @@
 		63F01BA828D44FC400C53A39 = {
 			isa = PBXGroup;
 			children = (
+				8A6A5BD7295B0C8800B9EB85 /* MotionEntity+CoreDataClass.swift */,
+				8A6A5BD8295B0C8800B9EB85 /* MotionEntity+CoreDataProperties.swift */,
 				63F01BB328D44FC400C53A39 /* GyroData */,
 				63F01BB228D44FC400C53A39 /* Products */,
+				8A6A5BDB295B0E8600B9EB85 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -74,6 +115,7 @@
 		63F01BB328D44FC400C53A39 /* GyroData */ = {
 			isa = PBXGroup;
 			children = (
+				8ADDF9F5295B1F0D00085D72 /* Model */,
 				C4E4870029598CB400A1FB99 /* Application */,
 				C4E486FD2959712F00A1FB99 /* Resource */,
 				8A6A5BC929597DB700B9EB85 /* Protocol */,
@@ -92,6 +134,30 @@
 			path = Protocol;
 			sourceTree = "<group>";
 		};
+		8A6A5BDB295B0E8600B9EB85 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8A6A5C24295B16F000B9EB85 /* CoreDataFramework.xcodeproj */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8A6A5C25295B16F000B9EB85 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8A6A5C29295B16F000B9EB85 /* CoreDataFramework.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8ADDF9F5295B1F0D00085D72 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8ADDF9F7295B1F2900085D72 /* GyroModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		C456F844295A0A18008C9261 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -106,6 +172,7 @@
 			children = (
 				C456F855295AF00E008C9261 /* MotionManager.swift */,
 				C456F857295AF01D008C9261 /* MotionType.swift */,
+				8ADDF9F9295B1F9B00085D72 /* MotionDataManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -115,6 +182,7 @@
 			children = (
 				63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */,
 				63F01BC228D44FC500C53A39 /* Info.plist */,
+				8A6A5BD4295B0BD000B9EB85 /* Model.xcdatamodeld */,
 				63F01BBD28D44FC500C53A39 /* Assets.xcassets */,
 			);
 			path = Resource;
@@ -176,6 +244,7 @@
 				63F01BAD28D44FC400C53A39 /* Sources */,
 				63F01BAE28D44FC400C53A39 /* Frameworks */,
 				63F01BAF28D44FC400C53A39 /* Resources */,
+				8A6A5C13295B14F500B9EB85 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -212,12 +281,28 @@
 			mainGroup = 63F01BA828D44FC400C53A39;
 			productRefGroup = 63F01BB228D44FC400C53A39 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 8A6A5C25295B16F000B9EB85 /* Products */;
+					ProjectRef = 8A6A5C24295B16F000B9EB85 /* CoreDataFramework.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				63F01BB028D44FC400C53A39 /* GyroData */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		8A6A5C29295B16F000B9EB85 /* CoreDataFramework.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = CoreDataFramework.framework;
+			remoteRef = 8A6A5C28295B16F000B9EB85 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		63F01BAF28D44FC400C53A39 /* Resources */ = {
@@ -236,18 +321,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8ADDF9F8295B1F2900085D72 /* GyroModel.swift in Sources */,
+				8ADDF9FA295B1F9B00085D72 /* MotionDataManager.swift in Sources */,
 				63F01BB928D44FC400C53A39 /* MainViewController.swift in Sources */,
 				8A6A5BC829597DA900B9EB85 /* ReuseIdentifiable.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
+				8A6A5BD6295B0BD000B9EB85 /* Model.xcdatamodeld in Sources */,
 				C456F84A295A0EBF008C9261 /* CustomSegmentedControl.swift in Sources */,
 				C456F84C295AC076008C9261 /* MeasurementReplayViewController.swift in Sources */,
 				C456F846295A0A2C008C9261 /* UIImage+Extension.swift in Sources */,
 				C456F848295A0A5A008C9261 /* UIContextualAction+Extension.swift in Sources */,
+				8A6A5BD9295B0C8800B9EB85 /* MotionEntity+CoreDataClass.swift in Sources */,
 				C456F856295AF00E008C9261 /* MotionManager.swift in Sources */,
 				8A6A5BC629597C6900B9EB85 /* MainTableViewCell.swift in Sources */,
 				C4E4870329598D7C00A1FB99 /* MeasurementEnrollController.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
 				C456F858295AF01D008C9261 /* MotionType.swift in Sources */,
+				8A6A5BDA295B0C8800B9EB85 /* MotionEntity+CoreDataProperties.swift in Sources */,
 				C456F84E295AC0AA008C9261 /* PlayType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -456,6 +546,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		8A6A5BD4295B0BD000B9EB85 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				8A6A5BD5295B0BD000B9EB85 /* Model.xcdatamodel */,
+			);
+			currentVersion = 8A6A5BD5295B0BD000B9EB85 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 63F01BA928D44FC400C53A39 /* Project object */;
 }
