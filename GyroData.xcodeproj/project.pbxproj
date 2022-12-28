@@ -80,6 +80,7 @@
 		63F01BB328D44FC400C53A39 /* GyroData */ = {
 			isa = PBXGroup;
 			children = (
+				F351622F295BF7D7008AB1A3 /* Domain */,
 				F351621F295BF5A7008AB1A3 /* Service */,
 				F3516205295B1140008AB1A3 /* Utility */,
 				F35161FE295AF196008AB1A3 /* Model */,
@@ -159,12 +160,12 @@
 			children = (
 				F351622B295BF783008AB1A3 /* CoreDataStack.swift */,
 				F351622D295BF7B1008AB1A3 /* CoreDataManager.swift */,
-				F3516221295BF5A7008AB1A3 /* Entity */,
+				F3516221295BF5A7008AB1A3 /* Entities */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
 		};
-		F3516221295BF5A7008AB1A3 /* Entity */ = {
+		F3516221295BF5A7008AB1A3 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
 				F3516225295BF65F008AB1A3 /* MotionInfo+CoreDataClass.swift */,
@@ -172,7 +173,22 @@
 				F3516222295BF5C6008AB1A3 /* MotionInfo.xcdatamodeld */,
 				F3516229295BF723008AB1A3 /* Storable.swift */,
 			);
-			path = Entity;
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		F351622F295BF7D7008AB1A3 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				F3516230295BF7F4008AB1A3 /* Entities */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		F3516230295BF7F4008AB1A3 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Entities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
