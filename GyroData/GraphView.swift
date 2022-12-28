@@ -69,6 +69,7 @@ final class GraphView: UIView {
 
     func drawGraphFor1Hz(layerType: Layer, value: Double) {
         var layer: CAShapeLayer?
+        let value = CGFloat(Int(value))
 
         switch layerType {
         case .red:
@@ -192,7 +193,7 @@ final class GraphView: UIView {
         path.move(to: CGPoint(x: 0, y: bounds.midY))
         layer.path = path
 
-        layer.lineWidth = 5
+        layer.lineWidth = 2
         layer.strokeColor = color
         layer.fillColor = UIColor.clear.cgColor
         return layer
