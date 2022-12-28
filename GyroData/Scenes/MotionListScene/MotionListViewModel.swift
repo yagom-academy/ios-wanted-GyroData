@@ -35,7 +35,7 @@ class MotionListViewModel: MotionListViewModelType {
     }
     
     func deleteItem(motion: Motion) {
-        // TODO: CoreData내 motionData 삭제 처리 로직
+        motionCoreDataUseCase.delete(id: motion.id)
         if let index = items.value.firstIndex(where: { $0.id == motion.id }) {
             items.value.remove(at: index)
         }
