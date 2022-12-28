@@ -10,6 +10,7 @@ import CoreMotion
 class MotionMeasurementManager {
     static let shared = MotionMeasurementManager()
     private let motionManager = CMMotionManager()
+    private var timer: Timer?
     
     private init() {}
     
@@ -20,7 +21,7 @@ class MotionMeasurementManager {
         motionManager.startAccelerometerUpdates()
         
         var timeCount = 0.0
-        let timer = Timer(fire: Date(), interval: 1.0 / 10.0, repeats: true, block: { (timer) in
+        timer = Timer(fire: Date(), interval: 1.0 / 10.0, repeats: true, block: { (timer) in
             timeCount += 0.1
             if (round(timeCount * 10) / 10) == 60.0 {
                 timer.invalidate()
@@ -35,12 +36,15 @@ class MotionMeasurementManager {
             }
         })
         
-        RunLoop.current.add(timer, forMode: .default)
+        if let timer = timer {
+            RunLoop.current.add(timer, forMode: .default)
+        }
     }
     
     func stopUpdates() {
         guard motionManager.isAccelerometerAvailable else { return }
         
         motionManager.stopAccelerometerUpdates()
+        timer?.invalidate()
     }
 }
