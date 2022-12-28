@@ -9,36 +9,44 @@ import Foundation
 import CoreMotion
 
 final class MotionRecordingViewModel {
-    private let id = UUID()
+    var motionMode: MotionMode {
+        didSet {
+            coordinates.removeAll()
+        }
+    }
     private let timeOut = TimeInterval(60)
-    private let motionMode: MotionMode
     private var startDate = Date()
     private var motionManager = CMMotionManager()
     private var coordinates = [Coordiante]()
-    private var timer: Timer?
     private var updateTimeInterval: TimeInterval {
         didSet {
             motionManager.accelerometerUpdateInterval = updateTimeInterval
             motionManager.gyroUpdateInterval = updateTimeInterval
         }
     }
+    private var updateCompletion: (Coordiante) -> Void
 
-    init(msInterval: Int, motionMode: MotionMode) {
+    init(msInterval: Int, motionMode: MotionMode, updateCompletion: @escaping (Coordiante) -> Void) {
         self.motionMode = motionMode
         updateTimeInterval = Double(msInterval) / 1000
+        self.updateCompletion = updateCompletion
     }
 
-    // TODO: Error 처리
+    // TODO: Error 처리하기
     func startRecording() {
         let updateHandler: (Coordiante) -> Void = { [weak self] newData in
             guard let self = self else { return }
-            self.coordinates.append(newData)
-
             var isFullDatas: Bool {
                 let maximumCount = Int(self.timeOut / self.updateTimeInterval)
                 return self.coordinates.count >= maximumCount
             }
-            guard isFullDatas == false else {
+
+            if isFullDatas {
+                self.coordinates.removeAll()
+            }
+            self.coordinates.append(newData)
+            self.updateCompletion(newData)
+            guard !isFullDatas else {
                 self.stopRecording()
                 return
             }
@@ -63,7 +71,7 @@ final class MotionRecordingViewModel {
                     return
                 }
                 let newCoordinate = Coordiante(newData)
-                self?.coordinates.append(newCoordinate)
+                updateHandler(newCoordinate)
             }
             motionManager.startGyroUpdates(to: OperationQueue(), withHandler: gyroHandler)
         }

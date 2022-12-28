@@ -67,15 +67,15 @@ final class GraphView: UIView {
         switch layerType {
         case .red:
             layer = redLinesLayer
-            redLabel.text = "x:\(value)"
+            redLabel.text = String(format: "x:%.3f", value)
             viewModel.pastValueForRed.append(value)
         case .blue:
             layer = blueLinesLayer
-            blueLabel.text = "y:\(value)"
+            blueLabel.text = String(format: "y:%.3f", value)
             viewModel.pastValueForBlue.append(value)
         case .green:
             layer = greenLinesLayer
-            greenLabel.text = "z:\(value)"
+            greenLabel.text = String(format: "z:%.3f", value)
             viewModel.pastValueForGreen.append(value)
         }
 
@@ -89,6 +89,16 @@ final class GraphView: UIView {
 
         path.addLine(to: nextPoint)
         layer?.path = path
+    }
+
+    func reset() {
+        viewModel.pastValueForRed.removeAll()
+        viewModel.pastValueForBlue.removeAll()
+        viewModel.pastValueForGreen.removeAll()
+        redLinesLayer.sublayers?.removeAll()
+        blueLinesLayer.sublayers?.removeAll()
+        greenLinesLayer.sublayers?.removeAll()
+        setNeedsDisplay()
     }
 
     private func upScaleGraph(with value: Double) {
@@ -130,17 +140,18 @@ final class GraphView: UIView {
     }
 
     private func layout() {
+        let spacing = 10.0
         [redLabel, blueLabel, greenLabel].forEach {
             self.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         NSLayoutConstraint.activate([
-            redLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
+            redLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: spacing),
             blueLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            greenLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
-            redLabel.topAnchor.constraint(equalTo: topAnchor),
-            blueLabel.topAnchor.constraint(equalTo: topAnchor),
-            greenLabel.topAnchor.constraint(equalTo: topAnchor)
+            greenLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -spacing),
+            redLabel.topAnchor.constraint(equalTo: topAnchor, constant: spacing),
+            blueLabel.topAnchor.constraint(equalTo: topAnchor, constant: spacing),
+            greenLabel.topAnchor.constraint(equalTo: topAnchor, constant: spacing)
         ])
     }
     
@@ -186,7 +197,7 @@ final class GraphView: UIView {
         path.move(to: CGPoint(x: 0, y: bounds.midY))
         layer.path = path
 
-        layer.lineWidth = 5
+        layer.lineWidth = 2
         layer.strokeColor = color
         layer.fillColor = UIColor.clear.cgColor
         return layer

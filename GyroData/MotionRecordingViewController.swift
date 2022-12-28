@@ -8,9 +8,24 @@
 import UIKit
 
 final class MotionRecordingViewController: UIViewController {
+    private lazy var motionRecordingViewModel = MotionRecordingViewModel(msInterval: msInterval, motionMode: .accelerometer, updateCompletion: drawGraphFor1Hz)
+    private let msInterval = 100
 
-    private let segmentedControl: UISegmentedControl = {
+    private let recordButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("측정", for: .normal)
+        return button
+    }()
+
+    private let stopButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("정지", for: .normal)
+        return button
+    }()
+    
+    private lazy var segmentedControl: UISegmentedControl = {
         let segmentedControl = UISegmentedControl()
+
         MotionMode.allCases.enumerated().forEach { index, mode in
             segmentedControl.insertSegment(withTitle: mode.segmentName, at: index, animated: false)
         }
@@ -20,7 +35,7 @@ final class MotionRecordingViewController: UIViewController {
 
     private let graphView: GraphView = {
         let graphView = GraphView()
-        graphView.layer.borderWidth = 1
+        graphView.layer.borderWidth = 2
         graphView.layer.borderColor = UIColor.gray.cgColor
         graphView.translatesAutoresizingMaskIntoConstraints = false
         graphView.heightAnchor.constraint(equalTo: graphView.widthAnchor).isActive = true
@@ -30,6 +45,32 @@ final class MotionRecordingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         layout()
+        setButtonActions()
+    }
+
+    private func drawGraphFor1Hz(_ coordiante: Coordiante) {
+        DispatchQueue.main.async { [weak self] in
+            self?.graphView.drawGraphFor1Hz(layerType: .red, value: coordiante.x)
+            self?.graphView.drawGraphFor1Hz(layerType: .green, value: coordiante.y)
+            self?.graphView.drawGraphFor1Hz(layerType: .blue, value: coordiante.z)
+        }
+    }
+
+    private func setButtonActions() {
+        MotionMode.allCases.enumerated().forEach { index, mode in
+            let segment = UIAction(title: mode.segmentName) { _ in
+                self.motionRecordingViewModel.motionMode = mode
+            }
+            segmentedControl.setAction(segment, forSegmentAt: index)
+        }
+        let startRecording = UIAction() { [weak self] _ in
+            self?.motionRecordingViewModel.startRecording()
+        }
+        let stopRecording = UIAction() { [weak self] _ in
+            self?.motionRecordingViewModel.stopRecording()
+        }
+        recordButton.addAction(startRecording, for: .touchUpInside)
+        stopButton.addAction(stopRecording, for: .touchUpInside)
     }
 
     private func layout() {
@@ -43,11 +84,6 @@ final class MotionRecordingViewController: UIViewController {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.spacing = spacing
-
-        let recordButton = UIButton(type: .system)
-        recordButton.setTitle("측정", for: .normal)
-        let stopButton = UIButton(type: .system)
-        stopButton.setTitle("정지", for: .normal)
 
         let buttonStackView = UIStackView()
         buttonStackView.axis = .vertical
