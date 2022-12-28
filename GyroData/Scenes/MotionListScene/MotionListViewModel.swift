@@ -16,6 +16,10 @@ protocol MotionListViewModelType: MotionListViewModelInput, MotionListViewModelO
 
 class MotionListViewModel: MotionListViewModelType {
     
+    let motionCoreDataUseCase = MotionCoreDataUseCase()
+    
+    var offset = 0
+    
     /// Output
     
     var items: Observable<[Motion]> = Observable([])
@@ -25,23 +29,22 @@ class MotionListViewModel: MotionListViewModelType {
     /// Input
     
     func loadItems(count: Int) {
-        items.value = testData
+        guard let motionData = motionCoreDataUseCase.fetch(offset: 0, count: count) else { return }
+        offset = count
+        items.value = motionData
     }
     
     func deleteItem(motion: Motion) {
-        // TODO: CoreData내 motionData 삭제 처리 로직
+        motionCoreDataUseCase.delete(id: motion.id)
         if let index = items.value.firstIndex(where: { $0.id == motion.id }) {
             items.value.remove(at: index)
         }
     }
     
     func appendItems(count: Int) {
-        
+        guard let motionData = motionCoreDataUseCase.fetch(offset: offset, count: count) else { return }
+        offset += count
+        items.value = motionData
     }
-    
-    var testData = [Motion(id: UUID(), motionType: .acc, date: Date(), time: 48.0),
-                        Motion(id: UUID(), motionType: .gyro, date: Date(), time: 48.0),
-                        Motion(id: UUID(), motionType: .acc, date: Date(), time: 60.0),
-                        Motion(id: UUID(), motionType: .gyro, date: Date(), time: 60.0)]
     
 }
