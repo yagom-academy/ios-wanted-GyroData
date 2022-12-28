@@ -86,4 +86,8 @@ class FirstTableViewCell: UITableViewCell {
         self.typeLabel.text = type
         self.timeLabel.text = time
     }
+    
+    func getDate() -> String? {
+        return self.dateLabel.text
+    }
 }
