@@ -34,7 +34,7 @@ class GraphSegment: UIView {
             let startPoint = CGPoint(x: bounds.size.width,
                                      y: scaledValue(for: lineIndex, value: startValue))
             let endPoint = CGPoint(x: bounds.size.width - GraphNumber.segmentWidth,
-                                    y: scaledValue(for: lineIndex, value: dataPoint[lineIndex]))
+                                   y: scaledValue(for: lineIndex, value: dataPoint[lineIndex]))
             
             context.move(to: startPoint)
             context.addLine(to: endPoint)
