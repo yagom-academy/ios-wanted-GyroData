@@ -55,6 +55,7 @@ class MeasurementViewController: UIViewController {
         
         setupView()
         configureNavigationBar()
+        configureButton()
     }
     
     private func setupView() {
@@ -97,5 +98,25 @@ class MeasurementViewController: UIViewController {
     
     @objc private func saveButtonTapped() {
         navigationController?.popViewController(animated: true)
+    }
+}
+
+extension MeasurementViewController {
+    private func configureButton() {
+        measurementButton.addTarget(self,
+                             action: #selector(measureButtonTapped),
+                             for: .touchUpInside)
+        
+        stopButton.addTarget(self,
+                             action: #selector(stopButtonTapped),
+                             for: .touchUpInside)
+    }
+    
+    @objc private func measureButtonTapped() {
+        MotionMeasurementManager.shared.startAccelerometers(at: graphView)
+    }
+    
+    @objc private func stopButtonTapped() {
+        MotionMeasurementManager.shared.stopUpdates()
     }
 }
