@@ -110,7 +110,9 @@ extension MotionListViewController {
     }
     
     private func pushMotionResultScene(motion: Motion) {
-        // 모션결과 페이지에 motionData 전달 및 push
+        let motionResultViewModel = MotionResultViewModel(motion)
+        let motionResultViewController = MotionResultPlayViewController(viewModel: motionResultViewModel)
+        navigationController?.pushViewController(motionResultViewController, animated: true)
     }
 }
 
