@@ -29,13 +29,16 @@ final class MotionRecordingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "측정하기"
-        view.backgroundColor = .systemBackground
         layout()
     }
 
     private func layout() {
+        view.backgroundColor = .systemBackground
         let spacing = 20.0
+
+        navigationItem.title = "측정하기"
+        let saveButton = UIBarButtonItem(title: "저장", style: .plain, target: nil, action: nil)
+        navigationItem.rightBarButtonItem = saveButton
 
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -60,8 +63,8 @@ final class MotionRecordingViewController: UIViewController {
         view.addSubview(stackView)
         stackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: spacing),
+            stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -spacing),
             stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
         ])
     }
