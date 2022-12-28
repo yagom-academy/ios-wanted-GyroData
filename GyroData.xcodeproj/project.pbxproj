@@ -16,6 +16,9 @@
 		63F01BC128D44FC500C53A39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */; };
 		F35161F5295AC2DA008AB1A3 /* MotionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35161F4295AC2DA008AB1A3 /* MotionListViewController.swift */; };
 		F35161F7295ACC0C008AB1A3 /* MotionListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35161F6295ACC0C008AB1A3 /* MotionListTableViewCell.swift */; };
+		F35161FA295AE790008AB1A3 /* MotionListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35161F9295AE790008AB1A3 /* MotionListViewModel.swift */; };
+		F35161FD295AEACA008AB1A3 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35161FC295AEACA008AB1A3 /* Observable.swift */; };
+		F3516200295AF1C2008AB1A3 /* Motion.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35161FF295AF1C2008AB1A3 /* Motion.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +33,9 @@
 		63F01BC228D44FC500C53A39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F35161F4295AC2DA008AB1A3 /* MotionListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionListViewController.swift; sourceTree = "<group>"; };
 		F35161F6295ACC0C008AB1A3 /* MotionListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionListTableViewCell.swift; sourceTree = "<group>"; };
+		F35161F9295AE790008AB1A3 /* MotionListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionListViewModel.swift; sourceTree = "<group>"; };
+		F35161FC295AEACA008AB1A3 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		F35161FF295AF1C2008AB1A3 /* Motion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Motion.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +68,8 @@
 		63F01BB328D44FC400C53A39 /* GyroData */ = {
 			isa = PBXGroup;
 			children = (
+				F3516205295B1140008AB1A3 /* Utility */,
+				F35161FE295AF196008AB1A3 /* Model */,
 				F35161F2295AC259008AB1A3 /* Scenes */,
 				63F01BB428D44FC400C53A39 /* AppDelegate.swift */,
 				63F01BB628D44FC400C53A39 /* SceneDelegate.swift */,
@@ -87,6 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				F35161F4295AC2DA008AB1A3 /* MotionListViewController.swift */,
+				F35161F9295AE790008AB1A3 /* MotionListViewModel.swift */,
 				F35161F8295AD7B5008AB1A3 /* SubViews */,
 			);
 			path = MotionListScene;
@@ -98,6 +107,30 @@
 				F35161F6295ACC0C008AB1A3 /* MotionListTableViewCell.swift */,
 			);
 			path = SubViews;
+			sourceTree = "<group>";
+		};
+		F35161FE295AF196008AB1A3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F35161FF295AF1C2008AB1A3 /* Motion.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		F3516205295B1140008AB1A3 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				F3516206295B114C008AB1A3 /* Observable */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		F3516206295B114C008AB1A3 /* Observable */ = {
+			isa = PBXGroup;
+			children = (
+				F35161FC295AEACA008AB1A3 /* Observable.swift */,
+			);
+			path = Observable;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -171,8 +204,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */,
-        F35161F7295ACC0C008AB1A3 /* MotionListTableViewCell.swift in Sources */,
-        200E57D1295A9FD900D3EF5A /* MeasurementViewController.swift in Sources */,
+				F35161F7295ACC0C008AB1A3 /* MotionListTableViewCell.swift in Sources */,
+				F35161FA295AE790008AB1A3 /* MotionListViewModel.swift in Sources */,
+				F3516200295AF1C2008AB1A3 /* Motion.swift in Sources */,
+				200E57D1295A9FD900D3EF5A /* MeasurementViewController.swift in Sources */,
+				F35161FD295AEACA008AB1A3 /* Observable.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				F35161F5295AC2DA008AB1A3 /* MotionListViewController.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,

@@ -21,11 +21,14 @@ class MotionListViewController: UIViewController {
        return tableView
    }()
     
+    private var viewModel: MotionListViewModel = MotionListViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupView()
         configureNavigationBar()
+        bind(to: viewModel)
     }
 
     private func setupView() {
@@ -34,7 +37,7 @@ class MotionListViewController: UIViewController {
         view.backgroundColor = .systemBackground
     }
     
-    func addSubViews() {
+    private func addSubViews() {
         view.addSubview(motionListTableView)
     }
     
@@ -46,19 +49,26 @@ class MotionListViewController: UIViewController {
             motionListTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
+    
+    private func bind(to viewModel: MotionListViewModel) {
+        viewModel.items.subscribe() { [weak self] _ in self?.updateItem() }
+        viewModel.loadItems(count: 10)
+    }
 }
 
+// MARK: TableView Delegate
+
 extension MotionListViewController: UITableViewDelegate {
-     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.pushMotionResultScene(motion: self.viewModel.items.value[indexPath.row])
+    }
 }
+
+// MARK: TableView DataSource
 
 extension MotionListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
-    }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 10
+        return self.viewModel.items.value.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -66,9 +76,13 @@ extension MotionListViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: MotionListTableViewCell.cellIdentifier, for: indexPath) as? MotionListTableViewCell else {
             return UITableViewCell()
         }
-        
-        cell.configure(title: "Accelerometer", date: "2022/09/08 14:50:43", time: "43.4")
+        cell.selectionStyle = .none
+        cell.configure(motion: self.viewModel.items.value[indexPath.row])
         return cell
+    }
+    
+    private func updateItem() {
+        motionListTableView.reloadData()
     }
 }
 
@@ -89,6 +103,10 @@ extension MotionListViewController {
         let measurementViewController = MeasurementViewController()
         navigationController?.pushViewController(measurementViewController, animated: true)
     }
+    
+    private func pushMotionResultScene(motion: Motion) {
+        // 모션결과 페이지에 motionData 전달 및 push
+    }
 }
 
 // MARK: TableView SwipeAction
@@ -97,12 +115,13 @@ extension MotionListViewController {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         let playAction = UIContextualAction(style: .normal, title: "Play") { _, _, completionHandler in
-
+            self.pushMotionResultScene(motion: self.viewModel.items.value[indexPath.row])
             completionHandler(true)
         }
         playAction.backgroundColor = .systemGreen
         
         let deleteAction = UIContextualAction(style: .normal, title: "Delete") { _, _, completionHandler in
+            self.viewModel.deleteItem(motion: self.viewModel.items.value[indexPath.row])
             completionHandler(true)
         }
         deleteAction.backgroundColor = .red
