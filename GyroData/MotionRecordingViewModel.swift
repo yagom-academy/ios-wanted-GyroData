@@ -32,9 +32,7 @@ final class MotionRecordingViewModel {
     func startRecording() {
         startDate = Date()
         let updateHandler: (Coordiante) -> Void = { [weak self] newData in
-            guard let self = self else {
-                return
-            }
+            guard let self = self else { return }
             self.coordinates.append(newData)
 
             var isFullDatas: Bool {
