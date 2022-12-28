@@ -37,7 +37,7 @@ class MotionListViewController: UIViewController {
         view.backgroundColor = .systemBackground
     }
     
-    func addSubViews() {
+    private func addSubViews() {
         view.addSubview(motionListTableView)
     }
     
@@ -81,7 +81,7 @@ extension MotionListViewController: UITableViewDataSource {
         return cell
     }
     
-    func updateItem() {
+    private func updateItem() {
         motionListTableView.reloadData()
     }
 }
