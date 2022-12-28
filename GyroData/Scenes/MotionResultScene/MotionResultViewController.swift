@@ -9,7 +9,7 @@ import UIKit
 
 class MotionResultViewController: UIViewController {
 
-    private let entireStackView: UIStackView = {
+    let entireStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.distribution = .fill
@@ -30,7 +30,7 @@ class MotionResultViewController: UIViewController {
         return stackView
     }()
     
-    private let dateLabel: UILabel = {
+    let dateLabel: UILabel = {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .title2)
         label.textColor = .black
@@ -38,7 +38,7 @@ class MotionResultViewController: UIViewController {
         return label
     }()
     
-    private let titleLabel: UILabel = {
+    let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .title3)
         label.textColor = .black
@@ -80,9 +80,9 @@ class MotionResultViewController: UIViewController {
             entireStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,
                                                  constant: 16),
             entireStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor,
-                                                 constant: 16),
+                                                 constant: 30),
             entireStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,
-                                                 constant: -16),
+                                                 constant: -30),
             
             graphView.heightAnchor.constraint(equalTo: view.widthAnchor)
         ])
