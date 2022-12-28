@@ -22,8 +22,16 @@ final class MotionDataListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+        setUpViewModel()
         layout()
         setUpNavigationBar()
+        viewModel.viewDidLoad()
+    }
+
+    private func setUpViewModel() {
+        viewModel.reloadData = { [weak self] in
+            self?.recordTableView.reloadData()
+        }
     }
 
     private func layout() {
@@ -73,8 +81,9 @@ extension MotionDataListViewController: UITableViewDelegate {
         playAction.backgroundColor = .systemGreen
 
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { action, view, didSuccessed in
-            self.viewModel.records.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .automatic)
+            self.viewModel.deleteCellSwipeActionDone(indexPath: indexPath) {
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+            }
             didSuccessed(true)
         }
         deleteAction.backgroundColor = .systemRed

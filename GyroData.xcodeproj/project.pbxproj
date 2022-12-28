@@ -18,6 +18,7 @@
 		32FD288E295BE44D006B6871 /* FetchMotionDataListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32FD288D295BE44D006B6871 /* FetchMotionDataListUseCase.swift */; };
 		32FD2890295BE4A6006B6871 /* MotionDataListStorageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32FD288F295BE4A6006B6871 /* MotionDataListStorageProtocol.swift */; };
 		32FDB345295BE62A0095F6A5 /* DeleteMotionDataUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32FDB344295BE62A0095F6A5 /* DeleteMotionDataUseCase.swift */; };
+		32FDB347295BEF8E0095F6A5 /* MockStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32FDB346295BEF8E0095F6A5 /* MockStorage.swift */; };
 		63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB428D44FC400C53A39 /* AppDelegate.swift */; };
 		63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB828D44FC400C53A39 /* ViewController.swift */; };
 		63F01BBE28D44FC500C53A39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBD28D44FC500C53A39 /* Assets.xcassets */; };
@@ -36,6 +37,7 @@
 		32FD288D295BE44D006B6871 /* FetchMotionDataListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchMotionDataListUseCase.swift; sourceTree = "<group>"; };
 		32FD288F295BE4A6006B6871 /* MotionDataListStorageProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDataListStorageProtocol.swift; sourceTree = "<group>"; };
 		32FDB344295BE62A0095F6A5 /* DeleteMotionDataUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteMotionDataUseCase.swift; sourceTree = "<group>"; };
+		32FDB346295BEF8E0095F6A5 /* MockStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockStorage.swift; sourceTree = "<group>"; };
 		63F01BB128D44FC400C53A39 /* GyroData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GyroData.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63F01BB428D44FC400C53A39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63F01BB828D44FC400C53A39 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 				32FDB344295BE62A0095F6A5 /* DeleteMotionDataUseCase.swift */,
 				32FD288F295BE4A6006B6871 /* MotionDataListStorageProtocol.swift */,
 				32FD288B295B2EFB006B6871 /* MotionDataViewModel.swift */,
+				32FDB346295BEF8E0095F6A5 /* MockStorage.swift */,
 				32FD2889295B2588006B6871 /* RecordTableViewCell.swift */,
 				63F01BBD28D44FC500C53A39 /* Assets.xcassets */,
 				63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */,
@@ -165,6 +168,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				329E7EE9295B058200537466 /* MotionMode.swift in Sources */,
+				32FDB347295BEF8E0095F6A5 /* MockStorage.swift in Sources */,
 				32FD2890295BE4A6006B6871 /* MotionDataListStorageProtocol.swift in Sources */,
 				329E7EED295B1A0100537466 /* MotionDataListViewController.swift in Sources */,
 				32FDB345295BE62A0095F6A5 /* DeleteMotionDataUseCase.swift in Sources */,

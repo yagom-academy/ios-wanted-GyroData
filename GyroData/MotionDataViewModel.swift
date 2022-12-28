@@ -8,23 +8,46 @@ import Foundation
 
 final class MotionDataViewModel {
     var records = [MotionRecord]()
+    private let fetchMotionDataListUseCase = FetchMotionDataListUseCase(motionDataListStorage: MockStorage())
+    private let deleteMotionDataListUseCase = DeleteMotionDataUseCase(motionDataListStorage: MockStorage())
+    private var pageToLoad = 0
+    var reloadData: (() -> Void)?
 
     init() {
-        setUpMockData()
     }
 
-    private func setUpMockData() {
-        records = [
-            MotionRecord(id: UUID(), startDate: Date(), msInterval: 10,
-                         motionMode: .accelerometer, coordinates: [Coordiante(x: 1, y: 1, z: 1)]),
-            MotionRecord(id: UUID(), startDate: Date(), msInterval: 10,
-                         motionMode: .gyroscope, coordinates: [Coordiante(x: 1, y: 1, z: 1)]),
-            MotionRecord(id: UUID(), startDate: Date(), msInterval: 10,
-                         motionMode: .gyroscope, coordinates: [Coordiante(x: 1, y: 1, z: 1)]),
-            MotionRecord(id: UUID(), startDate: Date(), msInterval: 10,
-                         motionMode: .accelerometer, coordinates: [Coordiante(x: 1, y: 1, z: 1)]),
-            MotionRecord(id: UUID(), startDate: Date(), msInterval: 10,
-                         motionMode: .accelerometer, coordinates: [Coordiante(x: 1, y: 1, z: 1)]),
-        ]
+    func viewDidLoad() {
+        fetchMotionDataList(page: pageToLoad)
+    }
+
+    func deleteCellSwipeActionDone(indexPath: IndexPath, completion: @escaping () -> Void) {
+        let recordToDelete = records[indexPath.row]
+        deleteMotionData(id: recordToDelete.id) {
+            self.records.remove(at: indexPath.row)
+            completion()
+        }
+    }
+
+    private func fetchMotionDataList(page: Int) {
+        fetchMotionDataListUseCase.execute(page: page) { result in
+            switch result {
+            case .success(let records):
+                self.records = records
+                self.reloadData?()
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+
+    private func deleteMotionData(id: UUID, completion: @escaping () -> Void) {
+        deleteMotionDataListUseCase.execute(id: id) { result in
+            switch result {
+            case .success:
+                completion()
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 }
