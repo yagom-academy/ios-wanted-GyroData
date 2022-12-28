@@ -8,20 +8,30 @@
 import UIKit
 
 class MainViewController: UIViewController {
-
+    
     let viewModel = ViewModel()
     
     private let itemTableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.register(MainCell.self, forCellReuseIdentifier: MainCell.cellID)
         tableView.backgroundColor = .white
         return tableView
+    }()
+    private lazy var measureButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(title: "측정", style: .plain, target: self, action: #selector(pushMeasureVC(_:)))
+        return button
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "목록"
+        self.navigationItem.rightBarButtonItem = self.measureButton
         setTableViewLayout()
+    }
+    
+    @objc private func pushMeasureVC(_ sender: Any) {
+        self.navigationController?.pushViewController(MeasureViewController(), animated: true)
     }
     
     private func setTableViewLayout() {
