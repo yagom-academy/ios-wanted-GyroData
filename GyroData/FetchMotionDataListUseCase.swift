@@ -8,8 +8,20 @@
 import Foundation
 
 final class FetchMotionDataListUseCase {
+    private let motionDataListStorage: MotionDataListStorageProtocol
 
-    func execute(completion: @escaping (Result<[MotionRecord], Error>) -> Void) {
+    init(motionDataListStorage: MotionDataListStorageProtocol) {
+        self.motionDataListStorage = motionDataListStorage
+    }
 
+    func execute(page: Int, completion: @escaping (Result<[MotionRecord], Error>) -> Void) {
+        motionDataListStorage.loadMotionRecords(page: page) { result in
+            switch result {
+            case .success(let records):
+                completion(.success(records))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
     }
 }
