@@ -9,7 +9,7 @@ import Foundation
 
 final class MotionFileManager {
     
-    let shared = MotionFileManager()
+    static let shared = MotionFileManager()
     private init() {}
     
     private let manager: FileManager = FileManager.default

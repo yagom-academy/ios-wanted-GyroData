@@ -28,8 +28,7 @@ final class MotionMeasureCoordinator: Coordinator {
 private extension MotionMeasureCoordinator {
     
     private func makeMotionMeasureViewController() -> UIViewController {
-        let viewController = UIViewController()
-        viewController.view.backgroundColor = .white
+        let viewController = MeasurementViewController(viewModel: DefaultMeasermentViewModel(), coordinator: self)
         return viewController
     }
     
