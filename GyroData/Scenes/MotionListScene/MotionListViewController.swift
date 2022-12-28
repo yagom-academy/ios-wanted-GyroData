@@ -30,6 +30,12 @@ class MotionListViewController: UIViewController {
         configureNavigationBar()
         bind(to: viewModel)
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        viewModel.loadItems(count: 10)
+    }
 
     private func setupView() {
         addSubViews()
@@ -52,7 +58,6 @@ class MotionListViewController: UIViewController {
     
     private func bind(to viewModel: MotionListViewModel) {
         viewModel.items.subscribe() { [weak self] _ in self?.updateItem() }
-        viewModel.loadItems(count: 10)
     }
 }
 

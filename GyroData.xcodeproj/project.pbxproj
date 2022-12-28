@@ -19,6 +19,14 @@
 		F35161FA295AE790008AB1A3 /* MotionListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35161F9295AE790008AB1A3 /* MotionListViewModel.swift */; };
 		F35161FD295AEACA008AB1A3 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35161FC295AEACA008AB1A3 /* Observable.swift */; };
 		F3516200295AF1C2008AB1A3 /* Motion.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35161FF295AF1C2008AB1A3 /* Motion.swift */; };
+		F3516224295BF5C6008AB1A3 /* MotionInfo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F3516222295BF5C6008AB1A3 /* MotionInfo.xcdatamodeld */; };
+		F3516227295BF65F008AB1A3 /* MotionInfo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3516225295BF65F008AB1A3 /* MotionInfo+CoreDataClass.swift */; };
+		F3516228295BF65F008AB1A3 /* MotionInfo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3516226295BF65F008AB1A3 /* MotionInfo+CoreDataProperties.swift */; };
+		F351622A295BF723008AB1A3 /* Storable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3516229295BF723008AB1A3 /* Storable.swift */; };
+		F351622C295BF783008AB1A3 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = F351622B295BF783008AB1A3 /* CoreDataStack.swift */; };
+		F351622E295BF7B1008AB1A3 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F351622D295BF7B1008AB1A3 /* CoreDataManager.swift */; };
+		F3516232295BF83C008AB1A3 /* MotionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3516231295BF83C008AB1A3 /* MotionType.swift */; };
+		F3516235295BF8CA008AB1A3 /* MotionCoreDataUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3516234295BF8CA008AB1A3 /* MotionCoreDataUseCase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +44,14 @@
 		F35161F9295AE790008AB1A3 /* MotionListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionListViewModel.swift; sourceTree = "<group>"; };
 		F35161FC295AEACA008AB1A3 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		F35161FF295AF1C2008AB1A3 /* Motion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Motion.swift; sourceTree = "<group>"; };
+		F3516223295BF5C6008AB1A3 /* MotionInfo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MotionInfo.xcdatamodel; sourceTree = "<group>"; };
+		F3516225295BF65F008AB1A3 /* MotionInfo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MotionInfo+CoreDataClass.swift"; sourceTree = "<group>"; };
+		F3516226295BF65F008AB1A3 /* MotionInfo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MotionInfo+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		F3516229295BF723008AB1A3 /* Storable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storable.swift; sourceTree = "<group>"; };
+		F351622B295BF783008AB1A3 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		F351622D295BF7B1008AB1A3 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		F3516231295BF83C008AB1A3 /* MotionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionType.swift; sourceTree = "<group>"; };
+		F3516234295BF8CA008AB1A3 /* MotionCoreDataUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionCoreDataUseCase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +84,8 @@
 		63F01BB328D44FC400C53A39 /* GyroData */ = {
 			isa = PBXGroup;
 			children = (
+				F351622F295BF7D7008AB1A3 /* Domain */,
+				F351621F295BF5A7008AB1A3 /* Service */,
 				F3516205295B1140008AB1A3 /* Utility */,
 				F35161FE295AF196008AB1A3 /* Model */,
 				F35161F2295AC259008AB1A3 /* Scenes */,
@@ -112,7 +130,6 @@
 		F35161FE295AF196008AB1A3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				F35161FF295AF1C2008AB1A3 /* Motion.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -131,6 +148,61 @@
 				F35161FC295AEACA008AB1A3 /* Observable.swift */,
 			);
 			path = Observable;
+			sourceTree = "<group>";
+		};
+		F351621F295BF5A7008AB1A3 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				F3516220295BF5A7008AB1A3 /* CoreData */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		F3516220295BF5A7008AB1A3 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				F351622B295BF783008AB1A3 /* CoreDataStack.swift */,
+				F351622D295BF7B1008AB1A3 /* CoreDataManager.swift */,
+				F3516221295BF5A7008AB1A3 /* Entities */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		F3516221295BF5A7008AB1A3 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				F3516225295BF65F008AB1A3 /* MotionInfo+CoreDataClass.swift */,
+				F3516226295BF65F008AB1A3 /* MotionInfo+CoreDataProperties.swift */,
+				F3516222295BF5C6008AB1A3 /* MotionInfo.xcdatamodeld */,
+				F3516229295BF723008AB1A3 /* Storable.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		F351622F295BF7D7008AB1A3 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				F3516233295BF8B8008AB1A3 /* UseCase */,
+				F3516230295BF7F4008AB1A3 /* Entities */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		F3516230295BF7F4008AB1A3 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				F35161FF295AF1C2008AB1A3 /* Motion.swift */,
+				F3516231295BF83C008AB1A3 /* MotionType.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		F3516233295BF8B8008AB1A3 /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				F3516234295BF8CA008AB1A3 /* MotionCoreDataUseCase.swift */,
+			);
+			path = UseCase;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -203,16 +275,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F351622C295BF783008AB1A3 /* CoreDataStack.swift in Sources */,
 				63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */,
+				F351622A295BF723008AB1A3 /* Storable.swift in Sources */,
+				F3516224295BF5C6008AB1A3 /* MotionInfo.xcdatamodeld in Sources */,
 				F35161F7295ACC0C008AB1A3 /* MotionListTableViewCell.swift in Sources */,
 				F35161FA295AE790008AB1A3 /* MotionListViewModel.swift in Sources */,
 				F3516200295AF1C2008AB1A3 /* Motion.swift in Sources */,
 				200E57D1295A9FD900D3EF5A /* MeasurementViewController.swift in Sources */,
+				F3516228295BF65F008AB1A3 /* MotionInfo+CoreDataProperties.swift in Sources */,
 				F35161FD295AEACA008AB1A3 /* Observable.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				F35161F5295AC2DA008AB1A3 /* MotionListViewController.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
 				200E57D3295AABCE00D3EF5A /* GraphView.swift in Sources */,
+				F351622E295BF7B1008AB1A3 /* CoreDataManager.swift in Sources */,
+				F3516227295BF65F008AB1A3 /* MotionInfo+CoreDataClass.swift in Sources */,
+				F3516235295BF8CA008AB1A3 /* MotionCoreDataUseCase.swift in Sources */,
+				F3516232295BF83C008AB1A3 /* MotionType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -422,6 +502,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		F3516222295BF5C6008AB1A3 /* MotionInfo.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				F3516223295BF5C6008AB1A3 /* MotionInfo.xcdatamodel */,
+			);
+			currentVersion = F3516223295BF5C6008AB1A3 /* MotionInfo.xcdatamodel */;
+			path = MotionInfo.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 63F01BA928D44FC400C53A39 /* Project object */;
 }
