@@ -19,6 +19,26 @@ final class MotionReplayViewController: UIViewController {
         return label
     }()
     private var graphView: GraphView
+    private lazy var playButton: UIButton = {
+        let button = UIButton()
+        button.tintColor = .black
+        button.setImage(UIImage(systemName: "play.fill"), for: .normal)
+        button.setImage(UIImage(systemName: "stop.fill"), for: .selected)
+        button.setPreferredSymbolConfiguration(UIImage.SymbolConfiguration(pointSize: 80), forImageIn: .normal)
+        button.setPreferredSymbolConfiguration(UIImage.SymbolConfiguration(pointSize: 80), forImageIn: .selected)
+        button.addTarget(self, action: #selector(playButtonTapped(_:)), for: .touchUpInside)
+        return button
+    }()
+    private let timerLabel: UILabel = {
+        let label = UILabel()
+        label.text = "0.0"
+        return label
+    }()
+    private var timer: DispatchSourceTimer = {
+        let timer = DispatchSource.makeTimerSource(queue: .main)
+        timer.schedule(deadline: .now(), repeating: 0.1)
+        return timer
+    }()
 
     init(replayType: ReplayType, motionRecord: MotionRecord) {
         viewModel = MotionReplayViewModel(replayType: replayType, record: motionRecord)
@@ -41,16 +61,14 @@ final class MotionReplayViewController: UIViewController {
     }
 
     override func viewDidLayoutSubviews() {
-        switch viewModel.replayType {
-        case .play:
-            if !viewModel.didPlayStarted { playGraphView() }
-        case .view:
+        if viewModel.replayType == .view && !viewModel.didGraphViewStartedDrawing {
+            viewModel.didGraphViewStartedDrawing = true
             showFinishedGraphView()
         }
     }
 
     private func layout() {
-        [dateLabel, typeLabel, graphView].forEach {
+        [dateLabel, typeLabel, graphView, playButton, timerLabel].forEach {
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -63,8 +81,19 @@ final class MotionReplayViewController: UIViewController {
             graphView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             graphView.topAnchor.constraint(equalTo: typeLabel.bottomAnchor, constant: 20),
             graphView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            graphView.heightAnchor.constraint(equalTo: graphView.widthAnchor)
+            graphView.heightAnchor.constraint(equalTo: graphView.widthAnchor),
+            playButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            playButton.topAnchor.constraint(equalTo: graphView.bottomAnchor, constant: 20),
+            playButton.widthAnchor.constraint(equalToConstant: 100),
+            playButton.heightAnchor.constraint(equalToConstant: 100),
+            timerLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            timerLabel.topAnchor.constraint(equalTo: graphView.bottomAnchor, constant: 20)
         ])
+
+        if viewModel.replayType == .view {
+            playButton.isHidden = true
+            timerLabel.isHidden = true
+        }
     }
 
     private func setUpLabelContents() {
@@ -79,16 +108,21 @@ final class MotionReplayViewController: UIViewController {
 
     private func playGraphView() {
         let record = viewModel.record
-        viewModel.didPlayStarted = true
+        viewModel.didGraphViewStartedDrawing = true
         var index = 0
-        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
-            self.graphView.drawGraphFor1Hz(layerType: .red, value: record.coordinates[index].x)
-            self.graphView.drawGraphFor1Hz(layerType: .green, value: record.coordinates[index].y)
-            self.graphView.drawGraphFor1Hz(layerType: .blue, value: record.coordinates[index].z)
+        var time: Double = 0
+
+        timer.setEventHandler { [weak self] in
+            self?.graphView.drawGraphFor1Hz(layerType: .red, value: record.coordinates[index].x)
+            self?.graphView.drawGraphFor1Hz(layerType: .green, value: record.coordinates[index].y)
+            self?.graphView.drawGraphFor1Hz(layerType: .blue, value: record.coordinates[index].z)
             index += 1
+            time += 0.1
             if index >= record.coordinates.count {
-                timer.invalidate()
+                self?.timer.suspend()
+                self?.playButton.isSelected = true
             }
+            self?.timerLabel.text = "\(String(format:"%.1f", time))"
         }
     }
 
@@ -98,6 +132,20 @@ final class MotionReplayViewController: UIViewController {
             self.graphView.drawGraphFor1Hz(layerType: .red, value: coordinate.x)
             self.graphView.drawGraphFor1Hz(layerType: .green, value: coordinate.y)
             self.graphView.drawGraphFor1Hz(layerType: .blue, value: coordinate.z)
+        }
+    }
+
+    @objc
+    private func playButtonTapped(_ sender: UIButton) {
+        if viewModel.playButtonState == .play {
+            viewModel.playButtonState = .stop
+            playButton.setImage(UIImage(systemName: "stop.fill"), for: .normal)
+            if !viewModel.didGraphViewStartedDrawing { playGraphView() }
+            timer.resume()
+        } else {
+            viewModel.playButtonState = .play
+            playButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+            timer.suspend()
         }
     }
 }

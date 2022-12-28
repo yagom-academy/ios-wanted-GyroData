@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let record = MotionRecord(id: UUID(), startDate: Date(),
                                   msInterval: 10, motionMode: .accelerometer,
                                   coordinates: randomCoordinates)
-        let vc = MotionReplayViewController(replayType: .play, motionRecord: record)
+        let vc = MotionReplayViewController(replayType: .view, motionRecord: record)
 
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = UINavigationController(rootViewController: vc)
