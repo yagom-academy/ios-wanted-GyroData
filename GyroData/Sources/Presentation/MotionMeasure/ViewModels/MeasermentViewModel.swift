@@ -47,6 +47,7 @@ final class DefaultMeasermentViewModel: MeasermentViewModel {
     }
     
     func measerStart(type: MotionType) {
+        status.value = .start
         switch type {
         case .gyro:
             coreMotionManager.bind(gyroHandler: { data, error in
@@ -70,6 +71,7 @@ final class DefaultMeasermentViewModel: MeasermentViewModel {
     }
     
     func measerStop(type: MotionType) {
+        status.value = .stop
         switch type {
         case .gyro:
             coreMotionManager.stopUpdates(type: .gyro)
@@ -79,6 +81,7 @@ final class DefaultMeasermentViewModel: MeasermentViewModel {
     }
     
     func measerSave(type: MotionType) throws {
+        status.value = .ready
         let timeInterval = TimeInterval( Double(motions.value.count) * 0.1)
         let saveData = Motion(uuid: UUID(), type: type, values: motions.value, date: Date(), duration: timeInterval)
         storage.insert(saveData)
@@ -86,6 +89,12 @@ final class DefaultMeasermentViewModel: MeasermentViewModel {
     }
     
     func measerCancle(type: MotionType) {
+        switch type {
+        case .gyro:
+            coreMotionManager.stopUpdates(type: .gyro)
+        case .accelerometer:
+            coreMotionManager.stopUpdates(type: .accelerometer)
+        }
         motions.value = []
         status.value = .ready
         currentMotion.value = nil
