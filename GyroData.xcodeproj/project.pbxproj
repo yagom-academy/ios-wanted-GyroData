@@ -22,6 +22,7 @@
 		FDA47548295AC793006D57B7 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA47547295AC793006D57B7 /* GraphView.swift */; };
 		FDA4754E295AC838006D57B7 /* CoreMotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA4754D295AC838006D57B7 /* CoreMotionManager.swift */; };
 		FDA47550295AC953006D57B7 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA4754F295AC953006D57B7 /* CoreDataManager.swift */; };
+		FDA4759A295C95D0006D57B7 /* UIBezierPath+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA47599295C95D0006D57B7 /* UIBezierPath+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		FDA47547295AC793006D57B7 /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		FDA4754D295AC838006D57B7 /* CoreMotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMotionManager.swift; sourceTree = "<group>"; };
 		FDA4754F295AC953006D57B7 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		FDA47599295C95D0006D57B7 /* UIBezierPath+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBezierPath+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				FDA47547295AC793006D57B7 /* GraphView.swift */,
+				FDA47599295C95D0006D57B7 /* UIBezierPath+Extension.swift */,
 			);
 			path = ChartView;
 			sourceTree = "<group>";
@@ -230,6 +233,7 @@
 				FDA47550295AC953006D57B7 /* CoreDataManager.swift in Sources */,
 				A3DED01F29596846007EE19D /* ListView.swift in Sources */,
 				FDA47548295AC793006D57B7 /* GraphView.swift in Sources */,
+				FDA4759A295C95D0006D57B7 /* UIBezierPath+Extension.swift in Sources */,
 				A3DED02129596A83007EE19D /* ListViewCell.swift in Sources */,
 				A3DED01B295965CE007EE19D /* MeasuredData.swift in Sources */,
 				A3DED0242959821C007EE19D /* Date+Extension.swift in Sources */,
