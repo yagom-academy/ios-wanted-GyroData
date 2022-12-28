@@ -35,6 +35,8 @@ final class MeasurementReplayViewController: UIViewController {
         return view
     }()
     
+    private lazy var gridView = GridView()
+    
     private let playButton: UIButton = {
         let button = UIButton()
         let playImage = UIImage(systemName: "play.fill")
@@ -124,8 +126,14 @@ final class MeasurementReplayViewController: UIViewController {
     }
     
     private func setupSubview() {
-        [dateLabel, viewTypeLabel, graphView, playButton, playTimeLabel]
+        [dateLabel, viewTypeLabel, graphView, gridView,playButton, playTimeLabel]
             .forEach { view.addSubview($0) }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        print(graphView.frame)
+        gridView.frame = graphView.frame
     }
     
     private func setupConstraint() {

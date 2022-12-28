@@ -28,6 +28,7 @@
 		C456F84E295AC0AA008C9261 /* PlayType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C456F84D295AC0AA008C9261 /* PlayType.swift */; };
 		C456F856295AF00E008C9261 /* MotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C456F855295AF00E008C9261 /* MotionManager.swift */; };
 		C456F858295AF01D008C9261 /* MotionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C456F857295AF01D008C9261 /* MotionType.swift */; };
+		C456F86B295C1041008C9261 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C456F86A295C1041008C9261 /* GridView.swift */; };
 		C4E4870329598D7C00A1FB99 /* MeasurementEnrollController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E4870229598D7C00A1FB99 /* MeasurementEnrollController.swift */; };
 /* End PBXBuildFile section */
 
@@ -78,6 +79,7 @@
 		C456F84D295AC0AA008C9261 /* PlayType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayType.swift; sourceTree = "<group>"; };
 		C456F855295AF00E008C9261 /* MotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionManager.swift; sourceTree = "<group>"; };
 		C456F857295AF01D008C9261 /* MotionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionType.swift; sourceTree = "<group>"; };
+		C456F86A295C1041008C9261 /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
 		C4E4870229598D7C00A1FB99 /* MeasurementEnrollController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementEnrollController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -177,6 +179,14 @@
 			path = Manager;
 			sourceTree = "<group>";
 		};
+		C456F868295C1036008C9261 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				C456F86A295C1041008C9261 /* GridView.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		C4E486FD2959712F00A1FB99 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
@@ -191,6 +201,7 @@
 		C4E486FE29598C7C00A1FB99 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				C456F868295C1036008C9261 /* Common */,
 				C4E486FF29598C8200A1FB99 /* Main */,
 				C4E4870129598D2900A1FB99 /* MeasurementEnrollment */,
 				C4E487042959BC2700A1FB99 /* MeasurementReplay */,
@@ -321,6 +332,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C456F86B295C1041008C9261 /* GridView.swift in Sources */,
 				8ADDF9F8295B1F2900085D72 /* GyroModel.swift in Sources */,
 				8ADDF9FA295B1F9B00085D72 /* MotionDataManager.swift in Sources */,
 				63F01BB928D44FC400C53A39 /* MainViewController.swift in Sources */,
