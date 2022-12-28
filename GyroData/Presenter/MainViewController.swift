@@ -21,6 +21,7 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "목록"
+        setTableViewLayout()
     }
     
     private func setTableViewLayout() {
@@ -35,3 +36,14 @@ class MainViewController: UIViewController {
     }
 }
 
+extension MainViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        viewModel.gyroList.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: MainCell.cellID, for: indexPath) as? MainCell else { return UITableViewCell() }
+        cell.configureCell(gyroItem: viewModel.gyroList[indexPath.row])
+        return cell
+    }
+}
