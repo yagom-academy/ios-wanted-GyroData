@@ -13,8 +13,3 @@ struct Motion {
     let date: Date
     let time: Double
 }
-
-enum MotionType: String {
-    case acc = "Accelerometer"
-    case gyro = "Gyro"
-}

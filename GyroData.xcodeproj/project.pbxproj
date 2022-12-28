@@ -25,6 +25,7 @@
 		F351622A295BF723008AB1A3 /* Storable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3516229295BF723008AB1A3 /* Storable.swift */; };
 		F351622C295BF783008AB1A3 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = F351622B295BF783008AB1A3 /* CoreDataStack.swift */; };
 		F351622E295BF7B1008AB1A3 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F351622D295BF7B1008AB1A3 /* CoreDataManager.swift */; };
+		F3516232295BF83C008AB1A3 /* MotionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3516231295BF83C008AB1A3 /* MotionType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		F3516229295BF723008AB1A3 /* Storable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storable.swift; sourceTree = "<group>"; };
 		F351622B295BF783008AB1A3 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		F351622D295BF7B1008AB1A3 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		F3516231295BF83C008AB1A3 /* MotionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,7 +128,6 @@
 		F35161FE295AF196008AB1A3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				F35161FF295AF1C2008AB1A3 /* Motion.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -187,6 +188,8 @@
 		F3516230295BF7F4008AB1A3 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				F35161FF295AF1C2008AB1A3 /* Motion.swift */,
+				F3516231295BF83C008AB1A3 /* MotionType.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -277,6 +280,7 @@
 				200E57D3295AABCE00D3EF5A /* GraphView.swift in Sources */,
 				F351622E295BF7B1008AB1A3 /* CoreDataManager.swift in Sources */,
 				F3516227295BF65F008AB1A3 /* MotionInfo+CoreDataClass.swift in Sources */,
+				F3516232295BF83C008AB1A3 /* MotionType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
