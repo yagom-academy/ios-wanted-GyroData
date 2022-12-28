@@ -18,8 +18,7 @@ class MotionResultViewController: UIViewController {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
-    
-    
+
     private let informationStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -51,12 +50,37 @@ class MotionResultViewController: UIViewController {
         graph.translatesAutoresizingMaskIntoConstraints = false
         return graph
     }()
+
+    var viewModel: MotionResultViewModel
+    
+    init(viewModel: MotionResultViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupView()
         configureNavigationBar()
+        bind(to: viewModel)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        viewModel.load()
+        // startIndicator
+    }
+    
+    func bind(to viewModel: MotionResultViewModel) {
+        viewModel.motionData.subscribe { _ in
+            // stopIndicator
+        }
     }
     
     private func setupView() {

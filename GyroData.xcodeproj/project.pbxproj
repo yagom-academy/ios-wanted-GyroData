@@ -30,6 +30,8 @@
 		F37A2451295C88850006B552 /* MotionResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37A2450295C88850006B552 /* MotionResultViewController.swift */; };
 		F37A2453295C91760006B552 /* MotionResultPlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37A2452295C91760006B552 /* MotionResultPlayViewController.swift */; };
 		F37A2456295C95660006B552 /* PlayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37A2455295C95660006B552 /* PlayButton.swift */; };
+		F37A2458295C9B050006B552 /* MotionResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37A2457295C9B050006B552 /* MotionResultViewModel.swift */; };
+		F37A245A295C9B870006B552 /* MotionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37A2459295C9B870006B552 /* MotionData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +60,8 @@
 		F37A2450295C88850006B552 /* MotionResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionResultViewController.swift; sourceTree = "<group>"; };
 		F37A2452295C91760006B552 /* MotionResultPlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionResultPlayViewController.swift; sourceTree = "<group>"; };
 		F37A2455295C95660006B552 /* PlayButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayButton.swift; sourceTree = "<group>"; };
+		F37A2457295C9B050006B552 /* MotionResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionResultViewModel.swift; sourceTree = "<group>"; };
+		F37A2459295C9B870006B552 /* MotionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,7 +97,6 @@
 				F351622F295BF7D7008AB1A3 /* Domain */,
 				F351621F295BF5A7008AB1A3 /* Service */,
 				F3516205295B1140008AB1A3 /* Utility */,
-				F35161FE295AF196008AB1A3 /* Model */,
 				F35161F2295AC259008AB1A3 /* Scenes */,
 				63F01BB428D44FC400C53A39 /* AppDelegate.swift */,
 				63F01BB628D44FC400C53A39 /* SceneDelegate.swift */,
@@ -132,13 +135,6 @@
 				F35161F6295ACC0C008AB1A3 /* MotionListTableViewCell.swift */,
 			);
 			path = SubViews;
-			sourceTree = "<group>";
-		};
-		F35161FE295AF196008AB1A3 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		F3516205295B1140008AB1A3 /* Utility */ = {
@@ -200,6 +196,7 @@
 			children = (
 				F35161FF295AF1C2008AB1A3 /* Motion.swift */,
 				F3516231295BF83C008AB1A3 /* MotionType.swift */,
+				F37A2459295C9B870006B552 /* MotionData.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -217,6 +214,7 @@
 			children = (
 				F37A2450295C88850006B552 /* MotionResultViewController.swift */,
 				F37A2452295C91760006B552 /* MotionResultPlayViewController.swift */,
+				F37A2457295C9B050006B552 /* MotionResultViewModel.swift */,
 				F37A2454295C952F0006B552 /* SubViews */,
 			);
 			path = MotionResultScene;
@@ -302,11 +300,13 @@
 			files = (
 				F351622C295BF783008AB1A3 /* CoreDataStack.swift in Sources */,
 				63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */,
+				F37A245A295C9B870006B552 /* MotionData.swift in Sources */,
 				F351622A295BF723008AB1A3 /* Storable.swift in Sources */,
 				F3516224295BF5C6008AB1A3 /* MotionInfo.xcdatamodeld in Sources */,
 				F35161F7295ACC0C008AB1A3 /* MotionListTableViewCell.swift in Sources */,
 				F35161FA295AE790008AB1A3 /* MotionListViewModel.swift in Sources */,
 				F3516200295AF1C2008AB1A3 /* Motion.swift in Sources */,
+				F37A2458295C9B050006B552 /* MotionResultViewModel.swift in Sources */,
 				200E57D1295A9FD900D3EF5A /* MeasurementViewController.swift in Sources */,
 				F37A2456295C95660006B552 /* PlayButton.swift in Sources */,
 				F3516228295BF65F008AB1A3 /* MotionInfo+CoreDataProperties.swift in Sources */,
