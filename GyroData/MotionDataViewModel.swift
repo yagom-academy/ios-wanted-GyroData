@@ -13,9 +13,6 @@ final class MotionDataViewModel {
     private var pageToLoad = 0
     var reloadData: (() -> Void)?
 
-    init() {
-    }
-
     func viewDidLoad() {
         fetchMotionDataList(page: pageToLoad)
     }
