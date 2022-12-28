@@ -80,6 +80,7 @@ class MotionResultViewController: UIViewController {
     func bind(to viewModel: MotionResultViewModel) {
         viewModel.motionInformation.subscribe { [weak self] motionInformation in
             guard let motionInformation = motionInformation else { return }
+            self?.configureUI(motion: motionInformation)
             self?.drawGraph(motion: motionInformation)
             // stopIndicator
         }
