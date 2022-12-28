@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		200E57D1295A9FD900D3EF5A /* MeasurementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200E57D0295A9FD900D3EF5A /* MeasurementViewController.swift */; };
 		200E57D3295AABCE00D3EF5A /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200E57D2295AABCE00D3EF5A /* GraphView.swift */; };
+		20BC9AFE295C1713009A7F7A /* CGContext+GridGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20BC9AFD295C1713009A7F7A /* CGContext+GridGraph.swift */; };
 		63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB428D44FC400C53A39 /* AppDelegate.swift */; };
 		63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB628D44FC400C53A39 /* SceneDelegate.swift */; };
 		63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB828D44FC400C53A39 /* ViewController.swift */; };
@@ -24,6 +25,7 @@
 /* Begin PBXFileReference section */
 		200E57D0295A9FD900D3EF5A /* MeasurementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementViewController.swift; sourceTree = "<group>"; };
 		200E57D2295AABCE00D3EF5A /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
+		20BC9AFD295C1713009A7F7A /* CGContext+GridGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGContext+GridGraph.swift"; sourceTree = "<group>"; };
 		63F01BB128D44FC400C53A39 /* GyroData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GyroData.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63F01BB428D44FC400C53A39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63F01BB628D44FC400C53A39 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 				63F01BC228D44FC500C53A39 /* Info.plist */,
 				200E57D0295A9FD900D3EF5A /* MeasurementViewController.swift */,
 				200E57D2295AABCE00D3EF5A /* GraphView.swift */,
+				20BC9AFD295C1713009A7F7A /* CGContext+GridGraph.swift */,
 			);
 			path = GyroData;
 			sourceTree = "<group>";
@@ -213,6 +216,7 @@
 				F35161F5295AC2DA008AB1A3 /* MotionListViewController.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
 				200E57D3295AABCE00D3EF5A /* GraphView.swift in Sources */,
+				20BC9AFE295C1713009A7F7A /* CGContext+GridGraph.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

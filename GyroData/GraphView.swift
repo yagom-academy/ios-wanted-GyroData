@@ -21,6 +21,12 @@ class GraphView: UIView {
     private func setupView() {
         self.layer.borderWidth = 2
         self.layer.borderColor = UIColor.black.cgColor
-        self.backgroundColor = .systemGray
+        self.backgroundColor = .systemBackground
+    }
+    
+    override func draw(_ rect: CGRect) {
+        guard let context = UIGraphicsGetCurrentContext() else { return }
+        
+        context.drawGridGraph(in: self.bounds.size)
     }
 }
