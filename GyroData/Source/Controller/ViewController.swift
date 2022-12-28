@@ -8,6 +8,17 @@
 import UIKit
 
 class ViewController: UIViewController {
+    enum Section {
+        case main
+    }
+    
+    typealias DataSource = UITableViewDiffableDataSource<Section, Gyro>
+    typealias Snapshot = NSDiffableDataSourceSnapshot<Section, Gyro>
+    
+    private var dataSource: DataSource?
+    private var snapshot: Snapshot?
+    private let gyroStore = GyroStore(dataStack: CoreDataStack())
+    private var numberOfItem = 10
     
     private let tableView: UITableView = {
         let tableView = UITableView()
@@ -19,12 +30,52 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tableView.dataSource = self
+        configureDefaultSetting()
         configureLayout()
+        configureDataSource()
+        configureSnapshot(itemCount: self.numberOfItem)
     }
     
-    private func configureLayout() {
+    private func configureDataSource() {
+        self.dataSource = DataSource(tableView: self.tableView) { tableView, indexPath, item in
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? FirstTableViewCell
+            else {
+                return UITableViewCell()
+            }
+            cell.setText(date: item.measurementDate!, type: item.sensorType!, time: "60.0")
+            
+            return cell
+        }
+    }
+    
+    private func configureSnapshot(itemCount: Int) {
+        var snapshot = Snapshot()
+        snapshot.appendSections([.main])
+        
+        do {
+            let gyroData = try gyroStore.read(limitCount: itemCount)
+            snapshot.appendItems(gyroData)
+        } catch {
+            print("error")
+        }
+        
+        self.snapshot = snapshot
+        self.dataSource?.apply(self.snapshot!)
+    }
+    
+    private func configureDefaultSetting() {
         self.view.backgroundColor = .white
+        self.tableView.delegate = self
+        self.navigationItem.title = "목록"
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(
+            title: "측정",
+            style: .plain,
+            target: self,
+            action: #selector(didTappedRightBarButton)
+        )
+    }
+
+    private func configureLayout() {
         self.view.addSubview(tableView)
         
         NSLayoutConstraint.activate([
@@ -34,19 +85,48 @@ class ViewController: UIViewController {
             tableView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
+    
+    @objc private func didTappedRightBarButton(sender: UIButton) {
+        let recordViewController = RecordViewController()
+        self.navigationController?.pushViewController(recordViewController, animated: true)
+    }
 }
 
-extension ViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+extension ViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let playAction = UIContextualAction(style: .normal, title: "Play") { (UIContextualAction, UIView, success: @escaping (Bool) -> Void) in
+            print("Play")
+            success(true)
+        }
+        playAction.backgroundColor = .systemGreen
+        
+        let deleteAction = UIContextualAction(style: .normal, title: "Delete") { (UIContextualAction, UIView, success: @escaping (Bool) -> Void) in
+            let cell = tableView.cellForRow(at: indexPath) as! FirstTableViewCell
+            let date = cell.getDate()
+            let deleteData = try! self.gyroStore.readDetailData(measurementDate: date!)
+            try! self.gyroStore.delete(measurementDate: date!)
+            self.snapshot?.deleteItems(deleteData)
+            self.dataSource?.apply(self.snapshot!)
+            
+            success(true)
+        }
+        deleteAction.backgroundColor = .systemRed
+        
+        return UISwipeActionsConfiguration(actions: [deleteAction, playAction])
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? FirstTableViewCell else {
-            return UITableViewCell()
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let contentOffsetY = scrollView.contentOffset.y
+        let tableViewContentSize = tableView.contentSize.height
+        let paginationY = tableViewContentSize * 0.8
+
+        if contentOffsetY > tableViewContentSize - paginationY {
+            guard gyroStore.getEntityCount() > numberOfItem else {
+                return
+            }
+            
+            numberOfItem += 10
+            configureSnapshot(itemCount: numberOfItem)
         }
-        
-        cell.setText(date: "2022.12.27 12:00:00", type: "Acc", time: "60.0")
-        return cell
     }
 }

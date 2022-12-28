@@ -34,7 +34,7 @@ final class GyroDataTests: XCTestCase {
         
         // when
         try! sut.create(by: dictionary)
-        let data = try! sut.read()
+        let data = try! sut.read(limitCount: 1)
         
         // then
         XCTAssertEqual(dictionary["sensorType"] as? String, data.first?.sensorType)
@@ -51,7 +51,7 @@ final class GyroDataTests: XCTestCase {
         // when
         try! sut.create(by: dictionary)
         try! sut.delete(measurementDate: (dictionary["measurementDate"] as? String)!)
-        let data = try! sut.read()
+        let data = try! sut.read(limitCount: 1)
         
         // then
         XCTAssertTrue(data.isEmpty)
