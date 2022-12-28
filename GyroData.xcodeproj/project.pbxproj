@@ -22,6 +22,7 @@
 		F3516224295BF5C6008AB1A3 /* MotionInfo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F3516222295BF5C6008AB1A3 /* MotionInfo.xcdatamodeld */; };
 		F3516227295BF65F008AB1A3 /* MotionInfo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3516225295BF65F008AB1A3 /* MotionInfo+CoreDataClass.swift */; };
 		F3516228295BF65F008AB1A3 /* MotionInfo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3516226295BF65F008AB1A3 /* MotionInfo+CoreDataProperties.swift */; };
+		F351622A295BF723008AB1A3 /* Storable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3516229295BF723008AB1A3 /* Storable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		F3516223295BF5C6008AB1A3 /* MotionInfo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MotionInfo.xcdatamodel; sourceTree = "<group>"; };
 		F3516225295BF65F008AB1A3 /* MotionInfo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MotionInfo+CoreDataClass.swift"; sourceTree = "<group>"; };
 		F3516226295BF65F008AB1A3 /* MotionInfo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MotionInfo+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		F3516229295BF723008AB1A3 /* Storable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +164,7 @@
 				F3516225295BF65F008AB1A3 /* MotionInfo+CoreDataClass.swift */,
 				F3516226295BF65F008AB1A3 /* MotionInfo+CoreDataProperties.swift */,
 				F3516222295BF5C6008AB1A3 /* MotionInfo.xcdatamodeld */,
+				F3516229295BF723008AB1A3 /* Storable.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -237,6 +240,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */,
+				F351622A295BF723008AB1A3 /* Storable.swift in Sources */,
 				F3516224295BF5C6008AB1A3 /* MotionInfo.xcdatamodeld in Sources */,
 				F35161F7295ACC0C008AB1A3 /* MotionListTableViewCell.swift in Sources */,
 				F35161FA295AE790008AB1A3 /* MotionListViewModel.swift in Sources */,

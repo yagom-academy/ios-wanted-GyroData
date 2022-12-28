@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 @objc(MotionInfo)
-public class MotionInfo: NSManagedObject {
+public class MotionInfo: NSManagedObject, Storable {
     struct Constant {
         static let date = "date"
         static let entitiyName = "MotionInfo"
