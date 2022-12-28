@@ -14,7 +14,7 @@ final class RoundButton: UIButton {
     ) {
         self.init(frame: .zero)
         self.backgroundColor = backgroundColor
-        self.layer.borderWidth = 1
+        self.layer.borderWidth = 2
         self.layer.borderColor = UIColor.gray.cgColor
         self.clipsToBounds = true
     }
