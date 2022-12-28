@@ -8,13 +8,4 @@
 enum MotionMode {
     case accelerometer
     case gyroscope
-
-    var name: String {
-        switch self {
-        case .accelerometer:
-            return "Accelerometer"
-        case .gyroscope:
-            return "Gyro"
-        }
-    }
 }

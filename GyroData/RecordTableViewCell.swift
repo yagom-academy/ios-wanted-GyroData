@@ -72,3 +72,14 @@ fileprivate extension Date {
         return dateFormatter.string(from: self)
     }
 }
+
+fileprivate extension MotionMode {
+    var name: String {
+        switch self {
+        case .accelerometer:
+            return "Accelerometer"
+        case .gyroscope:
+            return "Gyro"
+        }
+    }
+}
