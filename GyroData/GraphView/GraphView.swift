@@ -42,7 +42,7 @@ class GraphView: UIView {
     
     func add(_ motions: [Double]) {
         segments.forEach {
-            $0.center.x += bounds.size.width / 600.0
+            $0.center.x += GraphNumber.segmentWidth
         }
         
         addSegment()
@@ -59,12 +59,12 @@ class GraphView: UIView {
             startPoint = [0, 0, 0]
         }
         
-        let newSegment = GraphSegment(startPoint: startPoint, segmentSize: bounds.size.width / 600.0)
+        let newSegment = GraphSegment(startPoint: startPoint)
         segments.append(newSegment)
         
         newSegment.backgroundColor = .clear
         
-        let segmentWidth = CGFloat(32)
+        let segmentWidth = GraphNumber.capacity
         newSegment.frame = CGRect(x: -segmentWidth, y: 0, width: segmentWidth, height: bounds.size.height)
         self.addSubview(newSegment)
     }

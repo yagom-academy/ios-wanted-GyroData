@@ -10,11 +10,9 @@ import UIKit
 class GraphSegment: UIView {
     private(set) var dataPoint = [Double]()
     private let startPoint: [Double]
-    private let segmentSize: Double
 
-    init(startPoint: [Double], segmentSize: Double) {
+    init(startPoint: [Double]) {
         self.startPoint = startPoint
-        self.segmentSize = segmentSize
         
         super.init(frame: .zero)
     }
@@ -33,12 +31,13 @@ class GraphSegment: UIView {
             context.setStrokeColor(motionData.color)
             
             let startValue = startPoint[lineIndex]
-            let startPoint = CGPoint(x: bounds.size.width, y: scaledValue(for: lineIndex, value: startValue))
-            let nextPoint = CGPoint(x: bounds.size.width - CGFloat(segmentSize),
+            let startPoint = CGPoint(x: bounds.size.width,
+                                     y: scaledValue(for: lineIndex, value: startValue))
+            let endPoint = CGPoint(x: bounds.size.width - GraphNumber.segmentWidth,
                                     y: scaledValue(for: lineIndex, value: dataPoint[lineIndex]))
             
             context.move(to: startPoint)
-            context.addLine(to: nextPoint)
+            context.addLine(to: endPoint)
             context.strokePath()
         }
     }
