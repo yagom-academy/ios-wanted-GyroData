@@ -50,5 +50,43 @@ class MotionMeasurementManager {
         
         motionManager.stopAccelerometerUpdates()
     }
+    
+    func startGyros(at graphView: GraphView) {
+        guard motionManager.isGyroAvailable else { return }
+
+        motionManager.gyroUpdateInterval = 1.0 / 10.0
+        motionManager.startGyroUpdates()
+        
+        var timeCount = 0.0
+        
+        timer = Timer(fire: Date(), interval: 1.0 / 10.0, repeats: true, block: { (timer) in
+            timeCount += 0.1
+            if (round(timeCount * 10) / 10) == 60.0 {
+                timer.invalidate()
+            }
+            
+            if let data = self.motionManager.gyroData {
+                let x = data.rotationRate.x
+                let y = data.rotationRate.y
+                let z = data.rotationRate.z
+                
+                graphView.add([x, y, z])
+            }
+        })
+        
+        if let timer = timer {
+            RunLoop.current.add(timer, forMode: .default)
+        }
+        
+    }
+    
+    func stopGyros() {
+        guard motionManager.isGyroAvailable,
+              let currentTimer = timer else { return }
+        
+        currentTimer.invalidate()
+        timer = nil
+        
+        motionManager.stopGyroUpdates()
     }
 }
