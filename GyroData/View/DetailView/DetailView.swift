@@ -47,7 +47,7 @@ final class DetailView: UIView {
         return view
     }()
     
-    private let playButton: UIButton = {
+    let playButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(systemName: "play.fill"), for: .normal)
@@ -60,7 +60,7 @@ final class DetailView: UIView {
         return button
     }()
     
-    private let timerLabel: UILabel = {
+    let timerLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.preferredFont(forTextStyle: .title2)

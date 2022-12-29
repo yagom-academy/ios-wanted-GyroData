@@ -98,7 +98,7 @@ final class GraphContainerView: UIView {
         return graphBackgroundView
     }()
     
-    private let graphView: GraphView = {
+    let graphView: GraphView = {
         let graphView = GraphView()
         graphView.translatesAutoresizingMaskIntoConstraints = false
         
