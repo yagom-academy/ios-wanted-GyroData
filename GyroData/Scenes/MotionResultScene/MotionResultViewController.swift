@@ -51,7 +51,7 @@ class MotionResultViewController: UIViewController {
         return graph
     }()
 
-    var viewModel: MotionResultViewModel
+    let viewModel: MotionResultViewModel
     
     init(viewModel: MotionResultViewModel) {
         self.viewModel = viewModel
