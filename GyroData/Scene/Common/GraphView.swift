@@ -89,12 +89,6 @@ final class GraphView : UIView {
         drawPath(path: zPath, points: zPoints, color: zColor)
     }
     
-    func getData(xPoints: [Double], yPoints: [Double], zPoints: [Double]){
-        drawPath(path: xPath, points: xPoints, color: xColor)
-        drawPath(path: yPath, points: yPoints, color: yColor)
-        drawPath(path: zPath, points: zPoints, color: zColor)
-    }
-    
     func drawPath(path: UIBezierPath, points: [Double], color: UIColor) {
         var tickPoint = tick
         
