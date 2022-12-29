@@ -43,6 +43,8 @@ class GraphView: UIView {
     }
     
     func clearSegmanet() {
+        setupLabel(with: GraphNumber.initialPoint)
+        
         segments.forEach {
             $0.removeFromSuperview()
         }

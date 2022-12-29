@@ -35,6 +35,7 @@ class MotionMeasurementManager {
         var timeCount = Double.zero
         
         checkAvailableAndStart(motionType)
+        graphView.clearSegmanet()
         
         timer = Timer(fire: Date(),
                       interval: MotionMeasurementNumber.updateInterval,
