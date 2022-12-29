@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Motion {
+struct Motion: Codable {
     let id: UUID
     let motionType: MotionType
     let date: Date

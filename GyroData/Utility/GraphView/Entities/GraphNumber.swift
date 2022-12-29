@@ -5,7 +5,7 @@
 //  Created by Judy on 2022/12/29.
 //
 
-import Foundation
+import UIKit
 
 enum GraphNumber {
     static let borderWidth = CGFloat(2)
