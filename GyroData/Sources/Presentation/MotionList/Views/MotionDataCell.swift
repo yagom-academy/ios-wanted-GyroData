@@ -87,7 +87,7 @@ extension MotionDataCell {
     func setUp(by motionEntity: MotionEntity?) {
         dateLabel.text = motionEntity?.date?.formatted(for: .display)
         titleLabel.text = motionEntity?.type
-        measurementTimeLabel.text = motionEntity?.duration.description
+        measurementTimeLabel.text = String(format: "%.1f", motionEntity?.duration ?? 0)
     }
     
 }

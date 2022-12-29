@@ -31,10 +31,16 @@ final class MeasurementViewController: UIViewController {
         static let buttonSize: CGFloat = 80
     }
     
-    weak var coordinator: Coordinator?
+    weak var coordinator: MotionListCoordinatorInterface?
     private let viewModel: MeasermentViewModel
     
-    init(viewModel: MeasermentViewModel) {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setUpView()
+        bind()
+    }
+    
+    init(viewModel: MeasermentViewModel, coordinator: MotionListCoordinatorInterface) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
         view.backgroundColor = .systemBackground
@@ -163,12 +169,15 @@ final class MeasurementViewController: UIViewController {
         do {
             switch segmentControl.selectedSegmentIndex {
             case 0:
-                try? viewModel.measerSave(type: .accelerometer)
+                try viewModel.measerSave(type: .accelerometer)
             case 1:
-                try? viewModel.measerSave(type: .gyro)
+                try viewModel.measerSave(type: .gyro)
             default:
                 return
             }
+            coordinator?.popViewController()
+        } catch {
+            debugPrint(error)
         }
     }
     

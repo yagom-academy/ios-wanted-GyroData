@@ -9,6 +9,15 @@ import Foundation
 
 enum ViewType {
     case play, view
+    
+    func toTitle() -> String {
+        switch self {
+        case .play:
+            return "Play"
+        case .view:
+            return "View"
+        }
+    }
 }
 
 enum PlayStatus {
@@ -27,17 +36,21 @@ protocol MotionPlayViewModelOutput {
     var viewType: ViewType { get }
     var motions: Observable<[MotionValue]?> { get }
     var playStatus: Observable<PlayStatus> { get }
+    var date: Date { get }
+    var duration: Double { get }
     
 }
 
 protocol MotionPlayViewModel: MotionPlayViewModelInput, MotionPlayViewModelOutput {}
 
 final class DefaultMotionPlayViewModel: MotionPlayViewModel {
-    
+        
     private let motionEntity: MotionEntity
     var playStatus: Observable<PlayStatus>
     var viewType: ViewType
     var motions: Observable<[MotionValue]?>
+    var date: Date
+    var duration: Double
     
     init(motionEntity: MotionEntity, viewType: ViewType) {
         self.motionEntity = motionEntity
@@ -45,6 +58,8 @@ final class DefaultMotionPlayViewModel: MotionPlayViewModel {
         let motionList = try? MotionFileManager.shared.load(by: motionEntity.uuid ?? UUID())
         motions =  Observable(motionList?.values)
         playStatus = Observable(PlayStatus.stop)
+        date = motionEntity.date ?? Date()
+        duration = motionEntity.duration
     }
     
     func playStart() {

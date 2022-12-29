@@ -28,6 +28,11 @@ class MotionListViewController: UIViewController {
         setUp()
         bind()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.viewWillAppear()
+    }
 
     init(viewModel: MotionListViewModel, coordinator: MotionListCoordinatorInterface) {
         self.viewModel = viewModel

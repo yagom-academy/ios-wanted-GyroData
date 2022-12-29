@@ -40,12 +40,14 @@ final class MotionPlayViewController: UIViewController {
     }
     
     private func bind() {
+        dateLabel.text = viewModel.date.formatted()
+        titleLabel.text = viewModel.viewType.toTitle()
+        
         if viewModel.viewType == .play {
             self.viewModel.playStatus.observe(on: self) { [weak self] playStatus in
                 switch playStatus {
                 case .play:
                     self?.graphView.clean()
-                    
                     self?.playButton.isHidden = true
                     self?.pauseButton.isHidden = false
                     self?.drawingIndex = 0
@@ -85,6 +87,22 @@ final class MotionPlayViewController: UIViewController {
         return button
     }()
     
+    private lazy var dateLabel: UILabel = {
+        let label = UILabel()
+        label.text = "2022/09/08 14:50:43"
+        label.font = .preferredFont(for: .footnote, weight: .semibold)
+        label.textColor = .label
+        return label
+    }()
+    
+    private lazy var titleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "View"
+        label.font = .preferredFont(for: .title1, weight: .semibold)
+        label.textColor = .label
+        return label
+    }()
+    
     private func startTimer() {
         timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(drawGraph), userInfo: nil, repeats: true)
     }
@@ -116,6 +134,18 @@ extension MotionPlayViewController {
     }
     
     private func setUpView() {
+
+        view.addSubview(dateLabel)
+        NSLayoutConstraint.activate([
+            dateLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            dateLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: ConstantLayout.offset)
+        ])
+        
+        view.addSubview(titleLabel)
+        NSLayoutConstraint.activate([
+            dateLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            dateLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: ConstantLayout.offset)
+        ])
         
         view.addSubview(graphView)
         NSLayoutConstraint.activate([

@@ -13,6 +13,7 @@ identifier_name:
         - x
         - y
         - z
+        - dot
 function_body_length:
     - 150 # warning
     - 300 # error
