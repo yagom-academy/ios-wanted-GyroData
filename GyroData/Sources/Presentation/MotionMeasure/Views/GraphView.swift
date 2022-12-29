@@ -15,14 +15,28 @@ final class GraphView: UIView {
     private enum Constant {
         static let dividCount: Int = 8
         static let lineColor: CGColor = UIColor.gray.cgColor
-        static let graphXColor = UIColor.red.cgColor
-        static let graphYColor = UIColor.green.cgColor
-        static let graphZColor = UIColor.blue.cgColor
         static let lineWidth: CGFloat = 2
+        static let baseLineWidth: CGFloat = 1
         static let graphBaseCount: CGFloat = 8
         static let graphPointersCount: CGFloat = 600
         static let multiplyer: CGFloat = 30
         static let graphViewBorderColor = UIColor.gray.cgColor
+        static let borderWidth: CGFloat = 3
+    }
+    
+    private enum GraphType {
+        case x,y,z
+        
+        var color: CGColor {
+            switch self {
+            case .x:
+                return UIColor.red.cgColor
+            case .y:
+                return UIColor.green.cgColor
+            case .z:
+                return UIColor.blue.cgColor
+            }
+        }
     }
     
     override func draw(_ rect: CGRect) {
@@ -30,7 +44,7 @@ final class GraphView: UIView {
     }
     
     func drawBaseLayer() -> CAShapeLayer {
-        self.layer.borderWidth = 3
+        self.layer.borderWidth = Constant.borderWidth
         self.layer.borderColor = Constant.graphViewBorderColor
         let layer = CAShapeLayer()
         let path = UIBezierPath()
@@ -59,12 +73,12 @@ final class GraphView: UIView {
         
         layer.fillColor = Constant.lineColor
         layer.strokeColor = Constant.lineColor
-        layer.lineWidth = 1
+        layer.lineWidth = Constant.baseLineWidth
         layer.path = path.cgPath
         return layer
     }
     
-    func drawGraph(data: [MotionValue]) {
+    func drawGraph(datas: [MotionValue]) {
         let layerX = CAShapeLayer()
         let layerY = CAShapeLayer()
         let layerZ = CAShapeLayer()
@@ -72,33 +86,40 @@ final class GraphView: UIView {
         let pathY = UIBezierPath()
         let pathZ = UIBezierPath()
         
-        let offset = self.frame.width / Constant.graphPointersCount
+        let offset = (self.frame.width - Constant.borderWidth * 2) / Constant.graphPointersCount
         let initHeight: CGFloat = self.frame.height / 2
-        var pointer: CGFloat = 0
         
-        pathX.move(to: CGPoint(x: pointer, y: initHeight))
-        pathY.move(to: CGPoint(x: pointer, y: initHeight))
-        pathZ.move(to: CGPoint(x: pointer, y: initHeight))
+        var prevPositionX = CGPoint(x: Constant.borderWidth, y: initHeight)
+        var prevPositionY = CGPoint(x: Constant.borderWidth, y: initHeight)
+        var prevPositionZ = CGPoint(x: Constant.borderWidth, y: initHeight)
         
-        for dot in data {
-            pointer += offset
+        for data in datas {
+            pathX.move(to: prevPositionX)
+            pathY.move(to: prevPositionY)
+            pathZ.move(to: prevPositionZ)
             
-            let newPositionX = CGPoint(x: pointer, y: initHeight + dot.x)
-            let newPositionY = CGPoint(x: pointer, y: initHeight + dot.y)
-            let newPositionZ = CGPoint(x: pointer, y: initHeight + dot.z)
+            index += 1
+            
+            let newPositionX = CGPoint(x: prevPositionX.x + offset, y: initHeight + data.x * Constant.multiplyer)
+            let newPositionY = CGPoint(x: prevPositionY.x + offset, y: initHeight + data.y * Constant.multiplyer)
+            let newPositionZ = CGPoint(x: prevPositionZ.x + offset, y: initHeight + data.z * Constant.multiplyer)
             
             pathX.addLine(to: newPositionX)
             pathY.addLine(to: newPositionY)
             pathZ.addLine(to: newPositionZ)
+            
+            prevPositionX = newPositionX
+            prevPositionY = newPositionY
+            prevPositionZ = newPositionZ
         }
         
-        layerX.fillColor = Constant.graphXColor
-        layerY.fillColor = Constant.graphYColor
-        layerZ.fillColor = Constant.graphZColor
+        layerX.fillColor = GraphType.x.color
+        layerY.fillColor = GraphType.y.color
+        layerZ.fillColor = GraphType.z.color
         
-        layerX.strokeColor = Constant.graphXColor
-        layerY.strokeColor = Constant.graphYColor
-        layerZ.strokeColor = Constant.graphZColor
+        layerX.strokeColor = GraphType.x.color
+        layerY.strokeColor = GraphType.y.color
+        layerZ.strokeColor = GraphType.z.color
         
         layerX.lineWidth = Constant.lineWidth
         layerY.lineWidth = Constant.lineWidth
@@ -125,16 +146,16 @@ final class GraphView: UIView {
         let pathY = UIBezierPath()
         let pathZ = UIBezierPath()
         
-        let offset = self.frame.width / Constant.graphPointersCount
+        let offset = (self.frame.width - Constant.borderWidth * 2) / Constant.graphPointersCount
         let initHeight: CGFloat = self.frame.height / 2
-        var pointer: CGFloat = offset * CGFloat(index)
+        var pointer: CGFloat = Constant.borderWidth + offset * CGFloat(index)
         pathX.move(to: CGPoint(x: pointer, y: initHeight + previousMotion.x * Constant.multiplyer))
         pathY.move(to: CGPoint(x: pointer, y: initHeight + previousMotion.y * Constant.multiplyer))
         pathZ.move(to: CGPoint(x: pointer, y: initHeight + previousMotion.z * Constant.multiplyer))
         
         index += 1
         previousMotion = data
-        pointer = offset * CGFloat(index)
+        pointer = Constant.borderWidth + offset * CGFloat(index)
         
         let newPositionX = CGPoint(x: pointer, y: initHeight + (data.x) * Constant.multiplyer)
         let newPositionY = CGPoint(x: pointer, y: initHeight + (data.y) * Constant.multiplyer)
@@ -144,13 +165,13 @@ final class GraphView: UIView {
         pathY.addLine(to: newPositionY)
         pathZ.addLine(to: newPositionZ)
         
-        layerX.fillColor = Constant.graphXColor
-        layerY.fillColor = Constant.graphYColor
-        layerZ.fillColor = Constant.graphZColor
+        layerX.fillColor = GraphType.x.color
+        layerY.fillColor = GraphType.y.color
+        layerZ.fillColor = GraphType.z.color
         
-        layerX.strokeColor = Constant.graphXColor
-        layerY.strokeColor = Constant.graphYColor
-        layerZ.strokeColor = Constant.graphZColor
+        layerX.strokeColor = GraphType.x.color
+        layerY.strokeColor = GraphType.y.color
+        layerZ.strokeColor = GraphType.z.color
         
         layerX.lineWidth = Constant.lineWidth
         layerY.lineWidth = Constant.lineWidth

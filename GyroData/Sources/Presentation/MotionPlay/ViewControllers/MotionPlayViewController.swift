@@ -7,15 +7,15 @@
 
 import UIKit
 
-final class MotionPlayViewControllers: UIViewController {
+final class MotionPlayViewController: UIViewController {
     
     weak var coordinator: Coordinator?
     private let viewModel: MotionPlayViewModel
+    private var drawingIndex = 0
+    private var timer = Timer()
     
-    init(viewModel: MotionPlayViewModel,
-         coordinator: Coordinator) {
+    init(viewModel: MotionPlayViewModel) {
         self.viewModel = viewModel
-        self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)
         view.backgroundColor = .systemBackground
     }
@@ -30,28 +30,31 @@ final class MotionPlayViewControllers: UIViewController {
         bind()
     }
     
-    private func bind() {
-        switch viewModel.viewType {
-        case .play:
-            self.viewModel.currentMotion.observe(on: self) { [weak self] motionValue in
-                self?.graphView.drawGraph(data: motionValue)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if viewModel.viewType == .view {
+            if let datas = viewModel.motions.value {
+                graphView.drawGraph(datas: datas)
             }
+        }
+    }
+    
+    private func bind() {
+        if viewModel.viewType == .play {
             self.viewModel.playStatus.observe(on: self) { [weak self] playStatus in
                 switch playStatus {
                 case .play:
-                    self?.playButton.isHidden = false
-                    self?.pauseButton.isHidden = true
+                    self?.graphView.clean()
+                    
+                    self?.playButton.isHidden = true
+                    self?.pauseButton.isHidden = false
+                    self?.drawingIndex = 0
+                    self?.startTimer()
                 case .stop:
                     self?.playButton.isHidden = false
                     self?.pauseButton.isHidden = true
+                    self?.timer.invalidate()
                 }
-            }
-        case .view:
-            self.viewModel.motions.observe(on: self) { [weak self] motionValues in
-                guard let motionValues = motionValues else {
-                    return
-                }
-                self?.graphView.drawGraph(data: motionValues)
             }
         }
     }
@@ -64,45 +67,61 @@ final class MotionPlayViewControllers: UIViewController {
     
     private lazy var playButton: UIButton = {
         let button = UIButton()
-        let image = UIImage(systemName: "Play")
+        let image = UIImage(systemName: "play")
         button.setImage(image, for: .normal)
         button.addTarget(self, action: #selector(startDraw(_:)), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.isHidden = true
         return button
     }()
     
     private lazy var pauseButton: UIButton = {
         let button = UIButton()
-        let image = UIImage(systemName: "Pause")
+        let image = UIImage(systemName: "pause")
+        button.isHidden = true
         button.setImage(image, for: .normal)
         button.addTarget(self, action: #selector(pauseDraw(_:)), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
+    private func startTimer() {
+        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(drawGraph), userInfo: nil, repeats: true)
+    }
+    
     @objc func startDraw(_ sender: UIButton) {
-        viewModel.playStop()
+        viewModel.playStart()
     }
     
     @objc func pauseDraw(_ sender: UIButton) {
         viewModel.playStop()
     }
+    
+    @objc func drawGraph() {
+        if drawingIndex == viewModel.motions.value?.count {
+            viewModel.playStop()
+        } else {
+            let motion = viewModel.motions.value?[drawingIndex]
+            graphView.drawGraph(data: motion)
+            drawingIndex += 1
+        }
+    }
 }
 
-extension MotionPlayViewControllers {
+extension MotionPlayViewController {
     
     private enum ConstantLayout {
         static let offset: CGFloat = 30
-        static let buttonSize: CGFloat = 50
+        static let buttonSize: CGFloat = 100
     }
     
     private func setUpView() {
         
         view.addSubview(graphView)
         NSLayoutConstraint.activate([
-            graphView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: ConstantLayout.offset),
-            graphView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -ConstantLayout.offset),
-            graphView.topAnchor.constraint(equalTo: view.topAnchor, constant: ConstantLayout.offset),
+            graphView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: ConstantLayout.offset),
+            graphView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -ConstantLayout.offset),
+            graphView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: ConstantLayout.offset),
             graphView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5)
         ])
         
