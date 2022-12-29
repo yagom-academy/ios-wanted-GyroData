@@ -13,15 +13,21 @@ import Combine
 struct GraphView: View {
     @EnvironmentObject var environment: AnalyzeViewModel
 
-    var dummyData: [Analysis] {
-        return environment.testArr
-    }
+    var dummyData: [GraphModel] = [
+        .init(x: 1, y: 2, z: 3, measurementTime: 10),
+        .init(x: 2, y: 3, z: 4, measurementTime: 20),
+        .init(x: 3, y: 4, z: 5, measurementTime: 30),
+        .init(x: 4, y: 5, z: 6, measurementTime: 40),
+        .init(x: 5, y: 6, z: 7, measurementTime: 50)
+    ]
+    
+    let dummyData2: [GyroData] = []
     
     var body: some View {
         ZStack(alignment: .top) {
             GroupBox {
-                FigureView(viewModel2: environment)
-                Chart() {
+                FigureView()
+                Chart {
                     ForEach(dummyData, id: \.measurementTime) { data in
                         LineMark(
                             x: .value("Time", data.measurementTime),

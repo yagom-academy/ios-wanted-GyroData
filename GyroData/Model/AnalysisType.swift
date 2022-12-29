@@ -11,25 +11,16 @@ enum AnalysisType: String, Codable {
     case gyroscope = "gyroscope"
 }
 
-struct Analysis: Codable {
-    let analysisType: AnalysisType
+struct CellModel: Codable {
+    let id: UUID
+    let analysisType: String
+    let savedAt: Date
+    let measurementTime: Double
+}
+
+struct GraphModel: Codable {
     let x: Double
     let y: Double
     let z: Double
     let measurementTime: Double
-    let savedAt: Date
-}
-
-struct TestAnalysis: Codable {
-    let x: Double
-    let y: Double
-    let z: Double
-    let measurementTime: Double
-    let savedAt: Date
-}
-
-struct TestMeasuredAnalysis: Codable {
-    let analysisType: AnalysisType
-    let analysis: [Analysis]
-    let savedAt: Date
 }
