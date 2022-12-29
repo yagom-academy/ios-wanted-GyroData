@@ -13,11 +13,12 @@ protocol AnalyzeViewModelInputInterface {
     func onViewDidLoad()
     func tapAnalyzeButton()
     func tapStopButton()
+    func tapSaveButton()
+    func changeAnalyzeMode(_ segmentcontrolNumber: Int)
 }
 
 protocol AnalyzeViewModelOutputInterface {
-    var analysisPublisher: PassthroughSubject<[TestAnalysis], Never> { get }
-    var measuredAnalysisPublisher: PassthroughSubject<TestMeasuredAnalysis, Never> { get }
+    var analysisPublisher: PassthroughSubject<[GraphModel], Never> { get }
 }
 
 protocol AnalyzeViewModelInterface {
@@ -25,7 +26,7 @@ protocol AnalyzeViewModelInterface {
     var output: AnalyzeViewModelOutputInterface { get }
 }
 
-final class AnalyzeViewModel: AnalyzeViewModelInterface, AnalyzeViewModelOutputInterface, ObservableObject {
+final class AnalyzeViewModel: AnalyzeViewModelInterface, AnalyzeViewModelOutputInterface {
     
     var store: AnyCancellable?
     
@@ -34,22 +35,24 @@ final class AnalyzeViewModel: AnalyzeViewModelInterface, AnalyzeViewModelOutputI
     var output: AnalyzeViewModelOutputInterface { self }
     
     // MARK: AnalyzeViewModelOutputInterface
-    var analysisPublisher = PassthroughSubject<[TestAnalysis], Never>()
-    var measuredAnalysisPublisher = PassthroughSubject<TestMeasuredAnalysis, Never>()
+    var analysisPublisher = PassthroughSubject<[GraphModel], Never>()
     
-    @Published var analysis: [Analysis] = [
-        .init(analysisType: .accelerate, x: 11, y: 20, z: 30, measurementTime: 1, savedAt: Date()),
-        .init(analysisType: .accelerate, x: 12, y: 20, z: 30, measurementTime: 2, savedAt: Date()),
-        .init(analysisType: .accelerate, x: 13, y: 20, z: 30, measurementTime: 3, savedAt: Date()),
-        .init(analysisType: .accelerate, x: 14, y: 20, z: 30, measurementTime: 4, savedAt: Date()),
+    @Published var analysis: [GraphModel] = [
+        .init(x: 1, y: 2, z: 3, measurementTime: 1),
+        .init(x: 1, y: 2, z: 3, measurementTime: 2),
+        .init(x: 1, y: 2, z: 3, measurementTime: 3),
+        .init(x: 1, y: 2, z: 3, measurementTime: 4),
+        .init(x: 1, y: 2, z: 3, measurementTime: 5),
+        .init(x: 1, y: 2, z: 3, measurementTime: 6),
+        .init(x: 1, y: 2, z: 3, measurementTime: 7),
     ]
     
-    @Published var testAnalysis: [Analysis]  = [
-        .init(analysisType: .accelerate, x: 11, y: 20, z: 30, measurementTime: 1, savedAt: Date()),
-        .init(analysisType: .accelerate, x: 12, y: 20, z: 30, measurementTime: 2, savedAt: Date())
-    ]
+    @Published var testArr : [GraphModel] = []
     
     private let analysisManager: AnalysisManager
+    private var timer: Timer?
+    private var analyzeMode: Int = 0
+    private var cellModel: [CellModel] = []
     
     init(
         analysisManager: AnalysisManager
@@ -57,14 +60,28 @@ final class AnalyzeViewModel: AnalyzeViewModelInterface, AnalyzeViewModelOutputI
         self.analysisManager = analysisManager
     }
     
-    @Published var testArr : [Analysis] = []
+    private func analyzeData() {
+        let now = Date.now.timeIntervalSince1970
+        analysis = []
+        timer = Timer(fire: Date(), interval: 0.1, repeats: true, block: { [weak self] (timer) in
+            guard let self = self else { return }
+            let date = timer.fireDate.timeIntervalSince1970
+            let measureTime = date - now
+            let data = self.analysisManager.startAnalyse()
+            self.analysis.append(.init(x: data.x, y: data.y, z: data.z, measurementTime: timer.timeInterval))
+        })
+        
+        if let timer = self.timer {
+            RunLoop.current.add(timer, forMode: .default)
+        }
+    }
     
-    func bind() {
-        store = $analysis
-            .sink { [weak self] model in
-                guard let self = self else { return }
-                self.testArr = model
-            }
+    private func stopTimer() {
+        if timer != nil {
+            timer?.invalidate()
+            timer = nil
+            analysisManager.stopAnalyse()
+        }
     }
 }
 
@@ -76,24 +93,48 @@ extension AnalyzeViewModel: AnalyzeViewModelInputInterface {
     }
     
     func tapAnalyzeButton() {
-        
-        analysis.append(contentsOf: [
-            .init(analysisType: .accelerate, x: 10, y: 20, z: 30, measurementTime: 1, savedAt: Date()),
-            .init(analysisType: .accelerate, x: 10, y: 20, z: 30, measurementTime: 2, savedAt: Date()),
-            .init(analysisType: .accelerate, x: 10, y: 20, z: 30, measurementTime: 3, savedAt: Date()),
-            .init(analysisType: .accelerate, x: 10, y: 20, z: 30, measurementTime: 4, savedAt: Date()),
-            .init(analysisType: .accelerate, x: 10, y: 20, z: 30, measurementTime: 5, savedAt: Date()),
-            .init(analysisType: .accelerate, x: 10, y: 20, z: 30, measurementTime: 6, savedAt: Date()),
-            .init(analysisType: .accelerate, x: 10, y: 20, z: 30, measurementTime: 7, savedAt: Date()),
-            .init(analysisType: .accelerate, x: 10, y: 20, z: 30, measurementTime: 8, savedAt: Date()),
-            .init(analysisType: .accelerate, x: 10, y: 20, z: 30, measurementTime: 9, savedAt: Date()),
-            .init(analysisType: .accelerate, x: 10, y: 20, z: 30, measurementTime: 10, savedAt: Date()),
-            .init(analysisType: .accelerate, x: 10, y: 20, z: 30, measurementTime: 11, savedAt: Date()),
-            .init(analysisType: .accelerate, x: 10, y: 20, z: 30, measurementTime: 12, savedAt: Date())
-        ])
+        analyzeData()
         bind()
     }
     
     func tapStopButton() {
+        stopTimer()
+        analysisManager.stopAnalyse()
+        print(analysis)
+    }
+    
+    func tapSaveButton() {
+        // TODO: save CoreData
+        if analyzeMode == 0 {
+            cellModel.append(.init(
+                id: UUID(),
+                analysisType: AnalysisType.accelerate.rawValue,
+                savedAt: Date.now,
+                measurementTime: analysis.last?.measurementTime ?? 0.0
+            ))
+            print(cellModel)
+        } else if analyzeMode == 1 {
+            cellModel.append(.init(
+                id: UUID(),
+                analysisType: AnalysisType.gyroscope.rawValue,
+                savedAt: Date.now,
+                measurementTime: analysis.last?.measurementTime ?? 0.0
+            ))
+            print(cellModel)
+        }
+    }
+    
+    func changeAnalyzeMode(_ segmentIndex: Int) {
+        analyzeMode = segmentIndex
+    }
+}
+
+extension AnalyzeViewModel: ObservableObject {
+    func bind() {
+        store = $analysis
+            .sink { [weak self] model in
+                guard let self = self else { return }
+                self.testArr = model
+            }
     }
 }
