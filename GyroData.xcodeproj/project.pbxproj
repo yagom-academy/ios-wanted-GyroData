@@ -37,6 +37,7 @@
 		FDA475AB295DC13A006D57B7 /* UIBezierPath+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA475AA295DC13A006D57B7 /* UIBezierPath+Extension.swift */; };
 		FDA475AD295DC932006D57B7 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA475AC295DC932006D57B7 /* DetailView.swift */; };
 		FDA475B0295DCA15006D57B7 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA475AF295DCA15006D57B7 /* DetailViewController.swift */; };
+		FDA475B8295DD70D006D57B7 /* GraphBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA475B7295DD70D006D57B7 /* GraphBackgroundView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,7 @@
 		FDA475AA295DC13A006D57B7 /* UIBezierPath+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIBezierPath+Extension.swift"; sourceTree = "<group>"; };
 		FDA475AC295DC932006D57B7 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		FDA475AF295DCA15006D57B7 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		FDA475B7295DD70D006D57B7 /* GraphBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphBackgroundView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -209,6 +211,7 @@
 			isa = PBXGroup;
 			children = (
 				FDA475A8295DC12E006D57B7 /* GraphView.swift */,
+				FDA475B7295DD70D006D57B7 /* GraphBackgroundView.swift */,
 				FDA475AA295DC13A006D57B7 /* UIBezierPath+Extension.swift */,
 			);
 			path = GraphView;
@@ -358,6 +361,7 @@
 				A3DED01B295965CE007EE19D /* MeasuredData.swift in Sources */,
 				A30E7B62295DC47D0012B96A /* Observable.swift in Sources */,
 				AF786B27295DBFA700C5DF5F /* MotionData.xcdatamodeld in Sources */,
+				FDA475B8295DD70D006D57B7 /* GraphBackgroundView.swift in Sources */,
 				A3DED0242959821C007EE19D /* Date+Extension.swift in Sources */,
 				FDA475A9295DC12E006D57B7 /* GraphView.swift in Sources */,
 			);
