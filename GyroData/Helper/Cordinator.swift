@@ -16,6 +16,7 @@ class Cordinator {
     
     func start() {
         let rootViewController = ReplayPlayTypeViewController()
+        let rootViewController = MeasureViewController()
         let navigationRootViewController = UINavigationController(rootViewController: rootViewController)
         window.rootViewController = navigationRootViewController
         window.makeKeyAndVisible()
