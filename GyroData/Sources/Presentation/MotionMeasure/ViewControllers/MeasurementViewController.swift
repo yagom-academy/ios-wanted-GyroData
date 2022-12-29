@@ -31,7 +31,7 @@ final class MeasurementViewController: UIViewController {
         static let buttonSize: CGFloat = 80
     }
     
-    weak var coordinator: Coordinator?
+    weak var coordinator: MotionListCoordinatorInterface?
     private let viewModel: MeasermentViewModel
     
     override func viewDidLoad() {
@@ -40,7 +40,7 @@ final class MeasurementViewController: UIViewController {
         bind()
     }
     
-    init(viewModel: MeasermentViewModel, coordinator: Coordinator) {
+    init(viewModel: MeasermentViewModel, coordinator: MotionListCoordinatorInterface) {
         self.viewModel = viewModel
         self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)
@@ -164,12 +164,15 @@ final class MeasurementViewController: UIViewController {
         do {
             switch segmentControl.selectedSegmentIndex {
             case 0:
-                try? viewModel.measerSave(type: .accelerometer)
+                try viewModel.measerSave(type: .accelerometer)
             case 1:
-                try? viewModel.measerSave(type: .gyro)
+                try viewModel.measerSave(type: .gyro)
             default:
                 return
             }
+            coordinator?.popViewController()
+        } catch {
+            debugPrint(error)
         }
     }
     
