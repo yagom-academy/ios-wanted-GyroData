@@ -15,7 +15,7 @@ protocol AnalysisManagerType {
     func stopAnalyse()
 }
 
-struct AnalysisManager {
+struct AnalysisManager: AnalysisManagerType {
     let manager: AnalysisManagerType
     
     init(analysis: AnalysisType) {

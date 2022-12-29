@@ -19,3 +19,17 @@ struct Analysis: Codable {
     let measurementTime: Double
     let savedAt: Date
 }
+
+struct TestAnalysis: Codable {
+    let x: Double
+    let y: Double
+    let z: Double
+    let measurementTime: Double
+    let savedAt: Date
+}
+
+struct TestMeasuredAnalysis: Codable {
+    let analysisType: AnalysisType
+    let analysis: [Analysis]
+    let savedAt: Date
+}

@@ -7,17 +7,12 @@
 
 import Charts
 import SwiftUI
+import Combine
 
-let dummyData: [Analysis] = [
-    .init(analysisType: .accelerate, x: 1, y: 2, z: 3, measurementTime: 10.0, savedAt: Date()),
-    .init(analysisType: .accelerate, x: 2, y: 3, z: 3, measurementTime: 20.0, savedAt: Date()),
-    .init(analysisType: .accelerate, x: 3, y: 4, z: 3, measurementTime: 30.0, savedAt: Date()),
-    .init(analysisType: .accelerate, x: 4, y: 5, z: 3, measurementTime: 40.0, savedAt: Date()),
-    .init(analysisType: .accelerate, x: 5, y: 6, z: 3, measurementTime: 50.0, savedAt: Date()),
-    .init(analysisType: .accelerate, x: 6, y: 7, z: 3, measurementTime: 60.0, savedAt: Date())
-]
 
 struct GraphView: View {
+    var dummyData: [Analysis] = []
+    
     var body: some View {
         ZStack(alignment: .top) {
             GroupBox {

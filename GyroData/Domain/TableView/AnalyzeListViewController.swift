@@ -29,6 +29,8 @@ class AnalyzeListViewController: UIViewController {
           let button = UIBarButtonItem()
            button.title = "측정"
            button.tintColor = UIColor(r: 21, g: 198, b: 238, a: 1)
+           button.target = self
+           button.action = #selector(tabButton)
            return button
        }()
 
@@ -45,16 +47,19 @@ class AnalyzeListViewController: UIViewController {
         self.analysisTableView.delegate = self
         self.analysisTableView.dataSource = self
     }
+    
+    @objc func tabButton() {
+        self.navigationController?.pushViewController(AnalyzeViewController(), animated: true)
+    }
 }
 
 extension AnalyzeListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        dummyData.count
+        1
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: AnalysisTableViewCell.identifier, for: indexPath) as? AnalysisTableViewCell else { return AnalysisTableViewCell() }
-        cell.configureCell(at: indexPath, data: dummyData)
         return cell
     }
 
@@ -66,8 +71,6 @@ extension AnalyzeListViewController: UITableViewDelegate, UITableViewDataSource 
 
         let delete = UIContextualAction(style: .normal, title: "Delete") { (UIContextualAction, UIView, success: @escaping (Bool) -> Void) in
             success(true)
-            dummyData.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
             print("delete")
         }
 

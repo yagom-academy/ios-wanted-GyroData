@@ -38,18 +38,18 @@ class GraphRecordView: UIView {
     }()
     
     private lazy var graphView: UIView = {
-        return setupHostView()
+        return UIView()
     }()
     
-    private func setupHostView() -> UIView {
-        let host = UIHostingController(rootView: GraphView())
-        guard let chartView = host.view else {
-            return UIView(frame: .zero)
-        }
-        chartView.translatesAutoresizingMaskIntoConstraints = false
-        chartView.backgroundColor = UIColor(r: 16, g: 17, b: 21, a: 1)
-        return chartView
-    }
+//    private func setupHostView() -> UIView {
+//        let host = UIHostingController(rootView: GraphView())
+//        guard let chartView = host.view else {
+//            return UIView(frame: .zero)
+//        }
+//        chartView.translatesAutoresizingMaskIntoConstraints = false
+//        chartView.backgroundColor = UIColor(r: 16, g: 17, b: 21, a: 1)
+//        return chartView
+//    }
     
     private lazy var pausePlayButton: UIButton = {
         let button = UIButton(type: .system)
