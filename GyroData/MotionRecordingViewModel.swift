@@ -24,7 +24,7 @@ final class MotionRecordingViewModel {
         return self.coordinates.count >= maximumCount
     }
     var isSaveEnable: Bool {
-        let isEmpty: Bool = coordinates.isEmpty
+        let isEmpty = coordinates.isEmpty
         return !(isEmpty || isRecording)
     }
     var reflectRecordingState: ((Bool) -> Void)?
