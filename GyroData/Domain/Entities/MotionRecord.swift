@@ -12,5 +12,5 @@ struct MotionRecord {
     let startDate: Date
     let msInterval: Int
     let motionMode: MotionMode
-    let coordinates: [Coordiante]
+    let coordinates: [Coordinate]
 }

@@ -6,27 +6,28 @@
 //
 import Foundation
 
-final class MotionDataViewModel {
+final class MotionDataListViewModel {
     var records = [MotionRecord]()
-    private let fetchMotionDataListUseCase = FetchMotionDataListUseCase(motionDataListStorage: MockStorage())
-    private let deleteMotionDataListUseCase = DeleteMotionDataUseCase(motionDataListStorage: MockStorage())
+    private let fetchMotionDataListUseCase = FetchMotionDataListUseCase()
+    private let deleteMotionDataListUseCase = DeleteMotionDataUseCase()
     private var pageToLoad = 0
     var reloadData: (() -> Void)?
 
-    func viewDidLoad() {
+    func viewWillAppear() {
         fetchMotionDataList(page: pageToLoad)
     }
 
     func deleteCellSwipeActionDone(indexPath: IndexPath, completion: @escaping () -> Void) {
         let recordToDelete = records[indexPath.row]
-        deleteMotionData(id: recordToDelete.id) {
-            self.records.remove(at: indexPath.row)
+        deleteMotionData(id: recordToDelete.id) { [weak self] in
+            self?.records.remove(at: indexPath.row)
             completion()
         }
     }
 
     private func fetchMotionDataList(page: Int) {
-        fetchMotionDataListUseCase.execute(page: page) { result in
+        fetchMotionDataListUseCase.execute(page: page) { [weak self] result in
+            guard let self = self else { return }
             switch result {
             case .success(let records):
                 self.records = records
