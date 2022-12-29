@@ -56,6 +56,7 @@ final class MotionRecordingViewController: UIViewController {
             DispatchQueue.main.async {
                 guard let self = self else { return }
                 self.segmentedControl.isEnabled = !isRecording
+                self.recordButton.isEnabled = !isRecording
                 self.stopButton.isEnabled = isRecording
                 self.saveButton.isEnabled = self.motionRecordingViewModel.isSaveEnable
             }
