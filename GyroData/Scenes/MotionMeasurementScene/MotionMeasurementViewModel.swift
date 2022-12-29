@@ -9,6 +9,8 @@ import Foundation
 
 protocol MotionMeasurementViewModelInput {
     func save(_ motionType: MotionType, datas: [[Double]])
+    func startMeasurement(_ motionType: MotionType, on graphView: GraphView)
+    func stopMeasurement(_ motionType: MotionType)
 }
 
 protocol MotionMeasurementViewModelOutput {
@@ -37,4 +39,11 @@ class MotionMeasurementViewModel: MotionMeasurementViewModelType {
         //TODO: - motionCoreDataUseCase.save(item: motion, motinData: datas)
     }
     
+    func startMeasurement(_ motionType: MotionType, on graphView: GraphView) {
+        MotionMeasurementManager.shared.startMeasurement(motionType ,on: graphView)
+    }
+    
+    func stopMeasurement(_ motionType: MotionType) {
+        MotionMeasurementManager.shared.stopMeasurement(motionType)
+    }
 }

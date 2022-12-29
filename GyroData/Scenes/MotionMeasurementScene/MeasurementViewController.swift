@@ -51,6 +51,7 @@ class MeasurementViewController: UIViewController {
     }()
     
     private let measurementviewModel = MotionMeasurementViewModel()
+    private var motionType = MotionType.acc
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -116,10 +117,10 @@ extension MeasurementViewController {
     }
     
     @objc private func measureButtonTapped() {
-        MotionMeasurementManager.shared.startMeasurement(MotionType.acc ,on: graphView)
+        measurementviewModel.startMeasurement(motionType, on: graphView)
     }
     
     @objc private func stopButtonTapped() {
-        MotionMeasurementManager.shared.stopMeasurement(MotionType.acc)
+        measurementviewModel.stopMeasurement(motionType)
     }
 }
