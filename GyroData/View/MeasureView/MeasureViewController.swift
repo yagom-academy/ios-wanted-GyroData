@@ -33,7 +33,12 @@ final class MeasureViewController: UIViewController {
     }
     
     @objc func saveButtonDidTapped() {
-        measureViewModel.saveCoreMotion()
+        DefaultAlertBuilder(title: "알림", message: "저장 하시겠습니까?", preferredStyle: .alert)
+            .setButton(name: "예", style: .default) {
+                self.measureViewModel.saveCoreMotion()
+            }
+            .setButton(name: "아니오", style: .destructive, nil)
+            .showAlert(on: self)
     }
     
     @objc func startButtonDidTapped() {
@@ -49,15 +54,15 @@ private extension MeasureViewController {
     
     func setupNavigationBar() {
         let rightButton: UIBarButtonItem = {
-             let button = UIBarButtonItem(
+            let button = UIBarButtonItem(
                 title: "저장",
                 style: .plain,
                 target: self,
                 action: #selector(saveButtonDidTapped)
-             )
-             
-             return button
-         }()
+            )
+            
+            return button
+        }()
         self.navigationItem.title = "측정하기"
         self.navigationItem.rightBarButtonItem = rightButton
     }
