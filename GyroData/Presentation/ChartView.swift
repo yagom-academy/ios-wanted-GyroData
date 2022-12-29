@@ -48,6 +48,20 @@ final class ChartView: UIView {
         return stackView
     }()
     
+    let layerX = CAShapeLayer()
+    let layerY = CAShapeLayer()
+    let layerZ = CAShapeLayer()
+    
+    let pathX = UIBezierPath()
+    let pathY = UIBezierPath()
+    let pathZ = UIBezierPath()
+    
+    private var lastValueOfX: Double = 0
+    private var lastValueOfY: Double = 0
+    private var lastValueOfZ: Double = 0
+    
+    private var current: Double = 0
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupLayout()
@@ -81,7 +95,7 @@ final class ChartView: UIView {
     private func drawGrid() {
         let layer = CAShapeLayer()
         let paths = CGMutablePath()
-
+        
         var current: CGFloat = 0
         let Offset = frame.width / 10
         
@@ -107,16 +121,8 @@ final class ChartView: UIView {
         self.layer.addSublayer(layer)
     }
     
-    func drawChart(value: Motion) {
-        let layerX = CAShapeLayer()
-        let layerY = CAShapeLayer()
-        let layerZ = CAShapeLayer()
-        
-        let pathX = UIBezierPath()
-        let pathY = UIBezierPath()
-        let pathZ = UIBezierPath()
-        
-        let xOffset = frame.width / CGFloat(value.motionX.count)
+    func playChart(value: Motion) {
+        let xOffset = frame.width / CGFloat(600)
         
         var currentX: CGFloat = 0
         var currentY: CGFloat = 0
@@ -138,28 +144,16 @@ final class ChartView: UIView {
             pathZ.addLine(to: newPosition3)
         }
         
-        layerX.fillColor = nil
-        layerX.lineWidth = 0.7
-        layerX.path = pathX.cgPath
-        layerX.strokeColor = UIColor.red.cgColor
+        setupLayers()
+        
         self.layer.addSublayer(layerX)
-        
-        layerY.fillColor = nil
-        layerY.lineWidth = 0.7
-        layerY.path = pathY.cgPath
-        layerY.strokeColor = UIColor.green.cgColor
         self.layer.addSublayer(layerY)
-        
-        layerZ.fillColor = nil
-        layerZ.lineWidth = 0.7
-        layerZ.path = pathZ.cgPath
-        layerZ.strokeColor = UIColor.blue.cgColor
         self.layer.addSublayer(layerZ)
         
         layerX.removeAnimation(forKey: Key.xAnimationName.rawValue)
         layerY.removeAnimation(forKey: Key.yAnimationName.rawValue)
         layerZ.removeAnimation(forKey: Key.zAnimationName.rawValue)
-        
+        // 애니메이션 필요 없는 경우 return
         let animation = CABasicAnimation(keyPath: "strokeEnd")
         animation.fromValue = 0
         animation.toValue = 1
@@ -171,9 +165,71 @@ final class ChartView: UIView {
         layerZ.add(animation, forKey: Key.zAnimationName.rawValue)
     }
     
+    func drawChart(x: Double, y: Double, z: Double) {
+        let xOffset = Double(frame.width / 600)
+        let yOffset = frame.height / CGFloat(2)
+        
+        pathX.move(to: CGPoint(x: current, y: lastValueOfX))
+        pathY.move(to: CGPoint(x: current, y: lastValueOfY))
+        pathZ.move(to: CGPoint(x: current, y: lastValueOfZ))
+        
+        current += xOffset
+        
+        let mX = x * 30 + Double(yOffset)
+        let mY = y * 30 + Double(yOffset)
+        let mZ = z * 30 + Double(yOffset)
+        
+        pathX.addLine(to: CGPoint(x: current, y: mX))
+        pathY.addLine(to: CGPoint(x: current, y: mY))
+        pathZ.addLine(to: CGPoint(x: current, y: mZ))
+        
+        setupLayers()
+        
+        self.layer.addSublayer(layerX)
+        self.layer.addSublayer(layerY)
+        self.layer.addSublayer(layerZ)
+        
+        lastValueOfX = mX
+        lastValueOfY = mY
+        lastValueOfZ = mZ
+    }
+    
     func configureLabelText(x: String, y: String, z: String) {
-        self.xLabel.text = x
-        self.yLabel.text = y
-        self.zLabel.text = z
+        self.xLabel.text = "x = \(x)"
+        self.yLabel.text = "y = \(y)"
+        self.zLabel.text = "z = \(z)"
+    }
+    
+    func setupDefaultValue() {
+        self.xLabel.text = "x = 0"
+        self.yLabel.text = "y = 0"
+        self.zLabel.text = "z = 0"
+        current = 0
+        layerX.removeFromSuperlayer()
+        layerY.removeFromSuperlayer()
+        layerZ.removeFromSuperlayer()
+        layerX.path = nil
+        layerY.path = nil
+        layerZ.path = nil
+        pathX.removeAllPoints()
+        pathY.removeAllPoints()
+        pathZ.removeAllPoints()
+    }
+    
+    private func setupLayers() {
+        layerX.fillColor = nil
+        layerX.lineWidth = 0.7
+        layerX.path = pathX.cgPath
+        layerX.strokeColor = UIColor.red.cgColor
+        
+        layerY.fillColor = nil
+        layerY.lineWidth = 0.7
+        layerY.path = pathY.cgPath
+        layerY.strokeColor = UIColor.green.cgColor
+        
+        layerZ.fillColor = nil
+        layerZ.lineWidth = 0.7
+        layerZ.path = pathZ.cgPath
+        layerZ.strokeColor = UIColor.blue.cgColor
     }
 }

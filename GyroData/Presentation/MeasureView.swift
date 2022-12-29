@@ -27,9 +27,8 @@ class MeasureView: UIView {
         return control
     }()
     
-    let chartsView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .blue
+    let chartsView: ChartView = {
+        let view = ChartView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -87,6 +86,9 @@ class MeasureView: UIView {
                 equalTo: self.safeAreaLayoutGuide.rightAnchor,
                 constant: -30
             ),
+            chartsView.heightAnchor.constraint(
+                equalTo: chartsView.widthAnchor
+            ),
             chartsView.topAnchor.constraint(
                 equalTo: measurementSegmentedControl.bottomAnchor,
                 constant: 30
@@ -119,8 +121,8 @@ class MeasureView: UIView {
             ),
             stopButton.bottomAnchor.constraint(
                 equalTo: self.safeAreaLayoutGuide.bottomAnchor,
-                constant: -200
-            ),
+                constant: -150
+            )
         ])
     }
 }

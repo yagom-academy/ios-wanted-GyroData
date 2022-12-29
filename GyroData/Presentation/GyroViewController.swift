@@ -27,7 +27,7 @@ final class GyroViewController: UIViewController {
     
     private func setupNavigationItem() {
         navigationItem.title = "목록"
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .white
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             title: "측정",

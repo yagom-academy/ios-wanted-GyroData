@@ -18,6 +18,7 @@
 		186667EB295D823700489994 /* MotionEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186667E9295D823700489994 /* MotionEntity+CoreDataClass.swift */; };
 		186667EC295D823700489994 /* MotionEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186667EA295D823700489994 /* MotionEntity+CoreDataProperties.swift */; };
 		186667EE295D9C5B00489994 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186667ED295D9C5B00489994 /* ChartView.swift */; };
+		186667F1295DD18000489994 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186667F0295DD18000489994 /* Observable.swift */; };
 		186D1F02295ADF0500C3A202 /* MotionModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 186D1F00295ADF0500C3A202 /* MotionModel.xcdatamodeld */; };
 		186D1F08295AE17D00C3A202 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186D1F07295AE17D00C3A202 /* CoreDataManager.swift */; };
 		18B05FE72959B03D00DC8800 /* GyroTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B05FE62959B03D00DC8800 /* GyroTableView.swift */; };
@@ -41,6 +42,7 @@
 		186667E9295D823700489994 /* MotionEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MotionEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		186667EA295D823700489994 /* MotionEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MotionEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		186667ED295D9C5B00489994 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
+		186667F0295DD18000489994 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		186D1F01295ADF0500C3A202 /* MotionModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MotionModel.xcdatamodel; sourceTree = "<group>"; };
 		186D1F07295AE17D00C3A202 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		18B05FE62959B03D00DC8800 /* GyroTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroTableView.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 				05146B57295AAB1000A51B02 /* Motion.swift */,
 				05146B59295AAE1F00A51B02 /* MeasurementType.swift */,
 				05146B5B295AAE8300A51B02 /* ReplayViewType.swift */,
+				186667F0295DD18000489994 /* Observable.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -227,6 +230,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				186667F1295DD18000489994 /* Observable.swift in Sources */,
 				18B05FF22959E1B400DC8800 /* AppDelegate.swift in Sources */,
 				63F01BB928D44FC400C53A39 /* GyroViewController.swift in Sources */,
 				186667EB295D823700489994 /* MotionEntity+CoreDataClass.swift in Sources */,
@@ -383,6 +387,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = RF7GLLKTJB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GyroData/Resource/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -396,7 +401,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.GyroData;
+				PRODUCT_BUNDLE_IDENTIFIER = net.bonf.GyroData;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -411,6 +416,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = RF7GLLKTJB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GyroData/Resource/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -424,7 +430,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.GyroData;
+				PRODUCT_BUNDLE_IDENTIFIER = net.bonf.GyroData;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

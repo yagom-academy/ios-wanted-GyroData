@@ -10,45 +10,45 @@ import CoreMotion
 class MeasurementService {
     private let manager = CMMotionManager()
     private var timer = Timer()
+    
+    var accCoordinates: Observable<[(x: Double, y: Double, z: Double)]> = Observable([])
+    var gyroCoordinates: Observable<[(x: Double, y: Double, z: Double)]> = Observable([])
 
     func measureAccelerometer() {
+        accCoordinates.value = []
         manager.startAccelerometerUpdates()
         manager.accelerometerUpdateInterval = 0.1
         
         var second = 0
-        timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
+        timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] timer in
             second += 1
             
             if second == 600 {
                 timer.invalidate()
             }
-            
-            if let data = self.manager.accelerometerData {
-                // TODO: 데이터 저장 코드 작성
-                print(data.acceleration.x)
-                print(data.acceleration.y)
-                print(data.acceleration.z)
+            if let data = self?.manager.accelerometerData {
+                let coordinate = (data.acceleration.x, data.acceleration.y, data.acceleration.z)
+                self?.accCoordinates.value.append(coordinate)
             }
         }
     }
     
     func measureGyro() {
+        gyroCoordinates.value = []
         manager.startGyroUpdates()
         manager.gyroUpdateInterval = 0.1
         
         var second = 0
-        timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
+        timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] timer in
             second += 1
             
             if second == 600 {
                 timer.invalidate()
             }
             
-            if let data = self.manager.gyroData {
-                // TODO: 데이터 저장 코드 작성
-                print(data.rotationRate.x)
-                print(data.rotationRate.y)
-                print(data.rotationRate.z)
+            if let data = self?.manager.gyroData {
+                let coordinate = (data.rotationRate.x, data.rotationRate.y, data.rotationRate.z)
+                self?.gyroCoordinates.value.append(coordinate)
             }
         }
     }
