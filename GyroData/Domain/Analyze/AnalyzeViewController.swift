@@ -42,9 +42,13 @@ final class AnalyzeViewController: UIViewController {
         button.setTitleColor(.white, for: .normal)
         return button
     }()
-    
+
+    @ObservedObject private var viewModel = AnalyzeViewModel(
+        analysisManager: AnalysisManager(analysis: .accelerate)
+    )
+
     private var swiftUIChartsView = GraphView()
-    private lazy var hostView = UIHostingController(rootView: swiftUIChartsView)
+    private lazy var hostView = HostingViewController(model2: viewModel)
     private lazy var graphView: UIView = {
         guard let chartView = hostView.view else {
             return UIView(frame: .zero)
@@ -53,9 +57,6 @@ final class AnalyzeViewController: UIViewController {
     }()
 
     private var cancellables = Set<AnyCancellable>()
-    @ObservedObject private var viewModel = AnalyzeViewModel(
-        analysisManager: AnalysisManager(analysis: .accelerate)
-    )
     
     private lazy var titleLabelItem: UILabel = {
        let label = UILabel()
@@ -165,7 +166,7 @@ final class AnalyzeViewController: UIViewController {
     }
     
     @objc func tappedAnalyzeButton() {
-        viewModel.tapAnalyzeButton()
+        viewModel.input.tapAnalyzeButton()
         self.view.setNeedsLayout()
     }
 }

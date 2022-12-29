@@ -11,15 +11,16 @@ import Combine
 
 
 struct GraphView: View {
-    @StateObject var viewModel = AnalyzeViewModel(analysisManager: AnalysisManager(analysis: .accelerate))
+    @EnvironmentObject var environment: AnalyzeViewModel
+
     var dummyData: [Analysis] {
-        return viewModel.testArr
+        return environment.testArr
     }
     
     var body: some View {
         ZStack(alignment: .top) {
             GroupBox {
-                FigureView(viewModel2: viewModel)
+                FigureView(viewModel2: environment)
                 Chart() {
                     ForEach(dummyData, id: \.measurementTime) { data in
                         LineMark(
@@ -50,7 +51,7 @@ struct GraphView: View {
                     }
                 }
                 .onAppear {
-                    viewModel.bind()
+                    environment.bind()
                 }
                 .chartXScale(domain: 0...60, range: .plotDimension(padding: 20))
                 .padding()
