@@ -88,7 +88,9 @@ class MeasurementViewController: UIViewController {
             graphView.heightAnchor.constraint(equalTo: view.widthAnchor)
         ])
     }
-    
+}
+
+extension MeasurementViewController {
     private func configureNavigationBar() {
         let saveBarButton = UIBarButtonItem(title: "저장",
                                             style: .done,
@@ -103,9 +105,7 @@ class MeasurementViewController: UIViewController {
         measurementviewModel.save(motionType, datas: graphView.segmentDatas)
         navigationController?.popViewController(animated: true)
     }
-}
-
-extension MeasurementViewController {
+    
     private func configureButton() {
         measurementButton.addTarget(self,
                              action: #selector(measureButtonTapped),
@@ -114,6 +114,10 @@ extension MeasurementViewController {
         stopButton.addTarget(self,
                              action: #selector(stopButtonTapped),
                              for: .touchUpInside)
+        
+        segmentedControl.addTarget(self,
+                                   action: #selector(segmentedContorolSelected),
+                                   for: .valueChanged)
     }
     
     @objc private func measureButtonTapped() {
@@ -122,5 +126,16 @@ extension MeasurementViewController {
     
     @objc private func stopButtonTapped() {
         measurementviewModel.stopMeasurement(motionType)
+    }
+    
+    @objc private func segmentedContorolSelected() {
+        switch segmentedControl.selectedSegmentIndex {
+        case 0:
+            motionType = .acc
+        case 1:
+            motionType = .gyro
+        default:
+            motionType = .acc
+        }
     }
 }
