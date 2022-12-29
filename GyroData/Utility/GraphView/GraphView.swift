@@ -8,36 +8,10 @@
 import UIKit
 
 class GraphView: UIView {
-    private let xDataLabel: UILabel = {
-        let label = UILabel()
-        label.text = String(Double.zero)
-        label.textAlignment = .center
-        label.font = .preferredFont(forTextStyle: .body)
-        label.textColor = .systemRed
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    private let yDataLabel: UILabel = {
-        let label = UILabel()
-        label.text = String(Double.zero)
-        label.textAlignment = .center
-        label.font = .preferredFont(forTextStyle: .body)
-        label.textColor = .systemGreen
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    private let zDataLabel: UILabel = {
-        let label = UILabel()
-        label.text = String(Double.zero)
-        label.textAlignment = .center
-        label.font = .preferredFont(forTextStyle: .body)
-        label.textColor = .systemBlue
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
+    private let xDataLabel = MotionLabel(textColor: .systemRed, frame: .zero)
+    private let yDataLabel = MotionLabel(textColor: .systemGreen, frame: .zero)
+    private let zDataLabel = MotionLabel(textColor: .systemBlue, frame: .zero)
+
     private let dataStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
@@ -157,4 +131,3 @@ extension GraphView {
         return String(format: "%.4f", data)
     }
 }
-
