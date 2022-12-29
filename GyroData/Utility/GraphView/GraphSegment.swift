@@ -58,17 +58,4 @@ class GraphSegment: UIView {
     }
 }
 
-enum MotionData: Int, CaseIterable {
-    case x, y, z
-    
-    var color: CGColor {
-        switch self {
-        case .x:
-            return UIColor.systemRed.cgColor
-        case .y:
-            return UIColor.systemGreen.cgColor
-        case .z:
-            return UIColor.systemBlue.cgColor
-        }
-    }
-}
+
