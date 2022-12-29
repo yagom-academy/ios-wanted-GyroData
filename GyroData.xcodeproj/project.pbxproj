@@ -28,7 +28,6 @@
 		0247ED6C295A92AB00212A78 /* UITableView+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0247ED6B295A92AB00212A78 /* UITableView+extension.swift */; };
 		0247ED72295A949D00212A78 /* MotionDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0247ED71295A949D00212A78 /* MotionDataCell.swift */; };
 		0247ED74295A963D00212A78 /* UIFont+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0247ED73295A963D00212A78 /* UIFont+extension.swift */; };
-		0247ED76295AB07100212A78 /* MotionMeasureCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0247ED75295AB07100212A78 /* MotionMeasureCoordinator.swift */; };
 		0247ED7B295AB72600212A78 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0247ED7A295AB72600212A78 /* Observable.swift */; };
 		0247ED7D295ABA9700212A78 /* Collection+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0247ED7C295ABA9700212A78 /* Collection+extension.swift */; };
 		0247ED7F295ABFDC00212A78 /* Date+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0247ED7E295ABFDC00212A78 /* Date+extension.swift */; };
@@ -64,7 +63,6 @@
 		0247ED6B295A92AB00212A78 /* UITableView+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+extension.swift"; sourceTree = "<group>"; };
 		0247ED71295A949D00212A78 /* MotionDataCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDataCell.swift; sourceTree = "<group>"; };
 		0247ED73295A963D00212A78 /* UIFont+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+extension.swift"; sourceTree = "<group>"; };
-		0247ED75295AB07100212A78 /* MotionMeasureCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionMeasureCoordinator.swift; sourceTree = "<group>"; };
 		0247ED7A295AB72600212A78 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		0247ED7C295ABA9700212A78 /* Collection+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+extension.swift"; sourceTree = "<group>"; };
 		0247ED7E295ABFDC00212A78 /* Date+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+extension.swift"; sourceTree = "<group>"; };
@@ -251,7 +249,6 @@
 				E1F1D33C295BD5A600E5C521 /* Views */,
 				E13ACFF5295B31B100265ED2 /* ViewModels */,
 				E13ACFF4295B31A500265ED2 /* ViewControllers */,
-				0247ED79295AB53000212A78 /* Coordinator */,
 			);
 			path = MotionMeasure;
 			sourceTree = "<group>";
@@ -261,14 +258,6 @@
 			children = (
 				0247ED59295A8CBE00212A78 /* MotionListCoordinator.swift */,
 				0247ED5F295A8D8C00212A78 /* MotionListCoordinatorInterface.swift */,
-			);
-			path = Coordinator;
-			sourceTree = "<group>";
-		};
-		0247ED79295AB53000212A78 /* Coordinator */ = {
-			isa = PBXGroup;
-			children = (
-				0247ED75295AB07100212A78 /* MotionMeasureCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -433,7 +422,6 @@
 				E1F1D344295C328A00E5C521 /* RoundButton.swift in Sources */,
 				0247ED5C295A8D1200212A78 /* MotionListViewController.swift in Sources */,
 				02432C282959CAFB0035AEDD /* MotionFileManager.swift in Sources */,
-				0247ED76295AB07100212A78 /* MotionMeasureCoordinator.swift in Sources */,
 				02432C11295990960035AEDD /* Motion.swift in Sources */,
 				0247ED6C295A92AB00212A78 /* UITableView+extension.swift in Sources */,
 				0247ED68295A927900212A78 /* UIStackView+extension.swift in Sources */,

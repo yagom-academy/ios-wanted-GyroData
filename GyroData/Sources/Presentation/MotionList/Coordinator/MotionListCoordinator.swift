@@ -32,18 +32,15 @@ private extension MotionListCoordinator {
             viewModel: DefaultMotionListViewModel(),
             coordinator: self
         )
-        viewController.coordinator = self
         return viewController
     }
     
     private func makeMotionMeasureViewController() -> UIViewController {
-        let navigationController = UINavigationController()
-        let coordinator = MotionMeasureCoordinator(navigationConrtoller: navigationController)
-        coordinator.parentCoordinator = self
-        coordinator.finishDelegate = self
-        coordinator.start()
-        childCoordinators.append(coordinator)
-        return navigationController
+        let viewController = MeasurementViewController(
+            viewModel: DefaultMeasermentViewModel(),
+            coordinator: self
+        )
+        return viewController
     }
     
     private func makeMotionDetailViewController() -> UIViewController {
@@ -58,27 +55,11 @@ private extension MotionListCoordinator {
     
 }
 
-extension MotionListCoordinator: CoordinatorFinishDelegate {
-    
-    func coordinatorDidFinish(childCoordinator: Coordinator) {
-        childCoordinators = childCoordinators.filter({ $0.type != childCoordinator.type })
-        
-        switch childCoordinator.type {
-        case .motionDataAdd:
-            childDidFinish(childCoordinator, parent: self)
-            
-        default: return
-        }
-    }
-    
-}
-
 extension MotionListCoordinator: MotionListCoordinatorInterface {
     
     func showMotionMeasureView() {
         let viewController = makeMotionMeasureViewController()
-        viewController.modalPresentationStyle = .fullScreen
-        navigationController.visibleViewController?.present(viewController, animated: true)
+        navigationController.pushViewController(viewController, animated: true)
     }
     
     func showMotionDetailView() {

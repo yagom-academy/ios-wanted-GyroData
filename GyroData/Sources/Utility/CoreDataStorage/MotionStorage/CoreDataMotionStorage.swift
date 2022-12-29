@@ -26,10 +26,9 @@ extension CoreDataMotionStorage: MotionStorage {
     }
     
     func insert(_ motion: Motion) {
-        coreDataStorage.performBackgroundTask { context in
-            _ = MotionEntity(motion: motion, context: context)
-            context.saveContext()
-        }
+        let context = coreDataStorage.persistentContainer.viewContext
+        _ = MotionEntity(motion: motion, context: context)
+        context.saveContext()
     }
     
     func delete(_ item: MotionEntity) {

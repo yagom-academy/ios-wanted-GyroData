@@ -40,7 +40,7 @@ final class DefaultMeasermentViewModel: MeasermentViewModel {
     
     init(
         manger: CoreMotionManager = CoreMotionManager(),
-        storage: CoreDataMotionStorage = .init()
+        storage: MotionStorage = CoreDataMotionStorage()
     ) {
         self.coreMotionManager = manger
         self.storage = storage
