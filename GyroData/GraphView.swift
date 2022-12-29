@@ -17,14 +17,14 @@ final class GraphView: UIView {
 
     private let blueLabel: UILabel = {
         let label = UILabel()
-        label.text = "y:0"
+        label.text = "z:0"
         label.textColor = UIColor.blue
         return label
     }()
 
     private let greenLabel: UILabel = {
         let label = UILabel()
-        label.text = "z:0"
+        label.text = "y:0"
         label.textColor = UIColor.green
         return label
     }()
@@ -45,6 +45,12 @@ final class GraphView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        layout()
+    }
+
+    init(xScale: CGFloat) {
+        super.init(frame: .zero)
+        viewModel.xScale = xScale
         layout()
     }
 
