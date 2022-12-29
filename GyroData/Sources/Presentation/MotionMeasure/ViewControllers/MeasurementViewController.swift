@@ -85,6 +85,13 @@ final class MeasurementViewController: UIViewController {
                 self?.coordinator?.popViewController()
             }
         }
+        
+        viewModel.errorMessage.observe(on: self) { [weak self] value in
+            if let message = value {
+                self?.indicatorView.stopAnimating()
+                self?.showErrorAlert(message: message)
+            }
+        }
     }
     
     private lazy var indicatorView: UIActivityIndicatorView = {

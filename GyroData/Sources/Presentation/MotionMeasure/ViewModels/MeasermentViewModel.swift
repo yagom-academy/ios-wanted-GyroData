@@ -100,10 +100,10 @@ final class DefaultMeasermentViewModel: MeasermentViewModel {
             self.storage.insert(saveData)
             do {
                 try MotionFileManager.shared.save(data: saveData.toFile())
+                self.status.value = .done
             } catch {
                 self.errorMessage.value = error.localizedDescription
             }
-            self.status.value = .done
         }
     }
     
