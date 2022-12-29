@@ -39,6 +39,13 @@ final class MotionRecordingViewController: UIViewController {
         return segmentedControl
     }()
 
+    private lazy var activityIndicator = {
+        let indicator = UIActivityIndicatorView()
+        indicator.style = .large
+        indicator.isHidden = true
+        return indicator
+    }()
+
     private let graphView: GraphView = {
         let graphView = GraphView()
         graphView.layer.borderWidth = 2
@@ -59,6 +66,24 @@ final class MotionRecordingViewController: UIViewController {
                 self.recordButton.isEnabled = !isRecording
                 self.stopButton.isEnabled = isRecording
                 self.saveButton.isEnabled = self.motionRecordingViewModel.isSaveEnable
+            }
+        }
+        motionRecordingViewModel.saveRecordingCompletion = { [weak self] result in
+            DispatchQueue.main.async {
+                let stopActivityIndicator = {
+                    self?.activityIndicator.stopAnimating()
+                    self?.activityIndicator.isHidden = true
+                }
+                stopActivityIndicator()
+                switch result {
+                case .success():
+                    self?.navigationController?.popViewController(animated: true)
+                case .failure(_):
+                    let alert = UIAlertController(title: "저장 실패", message: nil, preferredStyle: .alert)
+                    let alertAction = UIAlertAction(title: "확인", style: .default)
+                    alert.addAction(alertAction)
+                    self?.present(alert, animated: true)
+                }
             }
         }
     }
@@ -96,6 +121,13 @@ final class MotionRecordingViewController: UIViewController {
             self?.motionRecordingViewModel.stopButtonTapped()
         }
         let saveRecording = UIAction(title: "저장") { [weak self] _ in
+            let startActivityIndicator = {
+                DispatchQueue.main.async {
+                    self?.activityIndicator.isHidden = false
+                    self?.activityIndicator.startAnimating()
+                }
+            }
+            startActivityIndicator()
             self?.motionRecordingViewModel.saveRecord()
         }
         recordButton.addAction(startRecording, for: .touchUpInside)
@@ -131,6 +163,13 @@ final class MotionRecordingViewController: UIViewController {
             stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: spacing),
             stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -spacing),
             stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+        ])
+
+        view.addSubview(activityIndicator)
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
     }
 }

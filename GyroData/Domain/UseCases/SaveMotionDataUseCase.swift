@@ -18,7 +18,7 @@ final class SaveMotionDataUseCase {
             case .success:
                 completion(.success(()))
             case .failure(let error):
-                print(error)
+                completion(.failure(error))
             }
         }
     }

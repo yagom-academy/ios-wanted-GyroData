@@ -28,6 +28,7 @@ final class MotionRecordingViewModel {
         return !(isEmpty || isRecording)
     }
     var reflectRecordingState: ((Bool) -> Void)?
+    var saveRecordingCompletion: ((Result<Void, Error>) -> Void)?
     private let saveMotionDataUseCase = SaveMotionDataUseCase()
     private let timeOut = TimeInterval(60)
     private var startDate = Date()
@@ -55,8 +56,8 @@ final class MotionRecordingViewModel {
             motionMode: motionMode,
             coordinates: coordinates
         )
-        saveMotionDataUseCase.excute(record: motionRecord) { result in
-            print(result)
+        saveMotionDataUseCase.excute(record: motionRecord) { [weak self] result in
+            self?.saveRecordingCompletion?(result)
         }
     }
 
