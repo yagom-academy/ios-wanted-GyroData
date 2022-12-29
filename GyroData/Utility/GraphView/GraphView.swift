@@ -8,6 +8,45 @@
 import UIKit
 
 class GraphView: UIView {
+    private let xDataLabel: UILabel = {
+        let label = UILabel()
+        label.text = String(Double.zero)
+        label.textAlignment = .center
+        label.font = .preferredFont(forTextStyle: .body)
+        label.textColor = .systemRed
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let yDataLabel: UILabel = {
+        let label = UILabel()
+        label.text = String(Double.zero)
+        label.textAlignment = .center
+        label.font = .preferredFont(forTextStyle: .body)
+        label.textColor = .systemGreen
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let zDataLabel: UILabel = {
+        let label = UILabel()
+        label.text = String(Double.zero)
+        label.textAlignment = .center
+        label.font = .preferredFont(forTextStyle: .body)
+        label.textColor = .systemBlue
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let dataStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.distribution = .fillEqually
+        stackView.alignment = .center
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
     private var segments = [GraphSegment]()
     private var currentSegment: GraphSegment? {
         return segments.last
@@ -21,12 +60,6 @@ class GraphView: UIView {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setupView()
-    }
-    
-    private func setupView() {
-        self.layer.borderWidth = GraphNumber.borderWidth
-        self.layer.borderColor = UIColor.black.cgColor
-        self.backgroundColor = .systemBackground
     }
     
     override func draw(_ rect: CGRect) {
@@ -44,6 +77,8 @@ class GraphView: UIView {
     }
     
     func add(_ motions: [Double]) {
+        setupLabel(with: motions)
+        
         segments.forEach {
             $0.center.x += GraphNumber.segmentWidth
         }
@@ -83,6 +118,43 @@ class GraphView: UIView {
             
             return true
         }
+    }
+}
+
+// MARK: - setup UI
+extension GraphView {
+    private func setupView() {
+        addSubView()
+        self.layer.borderWidth = GraphNumber.borderWidth
+        self.layer.borderColor = UIColor.black.cgColor
+        self.backgroundColor = .systemBackground
+    }
+    
+    private func addSubView() {
+        dataStackView.addArrangedSubview(xDataLabel)
+        dataStackView.addArrangedSubview(yDataLabel)
+        dataStackView.addArrangedSubview(zDataLabel)
+        
+        self.addSubview(dataStackView)
+        
+        NSLayoutConstraint.activate([
+            dataStackView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor
+                                               , constant: 8),
+            dataStackView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor
+                                               , constant: 16),
+            dataStackView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor
+                                               , constant: -16)
+        ])
+    }
+    
+    private func setupLabel(with data: [Double]) {
+        xDataLabel.text = refineData(data[MotionData.x.rawValue])
+        yDataLabel.text = refineData(data[MotionData.y.rawValue])
+        zDataLabel.text = refineData(data[MotionData.z.rawValue])
+    }
+    
+    private func refineData(_ data: Double) -> String {
+        return String(format: "%.4f", data)
     }
 }
 
