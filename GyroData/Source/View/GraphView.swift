@@ -33,7 +33,7 @@ final class GraphView: UIView {
         self.graphZLayer = CAShapeLayer()
         super.init(frame: frame)
         translatesAutoresizingMaskIntoConstraints = false
-        backgroundColor = .lightGray
+        self.layer.borderWidth = 2
     }
     
     required init?(coder: NSCoder) {
@@ -45,6 +45,10 @@ final class GraphView: UIView {
         self.graphZLayer = CAShapeLayer()
         super.init(coder: coder)
         debugPrint("init(coder:) has not been implemented")
+    }
+    
+    override func draw(_ rect: CGRect) {
+        self.drawBackgroundGraph(rect)
     }
     
     func setupViewDefault() {
@@ -102,5 +106,44 @@ final class GraphView: UIView {
         self.graphXLayer.path = newXPath
         self.graphYLayer.path = newYPath
         self.graphZLayer.path = newZPath
+    }
+    
+    // 격자형 view 만들기
+    func drawBackgroundGraph(_ rect: CGRect) {
+        let colummLinePath = UIBezierPath()
+        let rowLinePath = UIBezierPath()
+        
+        for linePositionX in 0..<Int(rect.size.width) {
+            if linePositionX % 40 == 0 {
+                let colummStartPoint = CGPoint(x: CGFloat(linePositionX), y: CGFloat(0))
+                let colummEndPoint = CGPoint(x: CGFloat(linePositionX), y: rect.size.height)
+                
+                colummLinePath.move(to: colummStartPoint)
+                colummLinePath.addLine(to: colummEndPoint)
+            }
+        }
+        
+        for linePositionY in 0..<Int(rect.size.height) {
+            if linePositionY % 40 == 0 {
+                let rowStartPoint = CGPoint(x: CGFloat(0), y: CGFloat(linePositionY))
+                let rowEndPoint = CGPoint(x: rect.size.width, y: CGFloat(linePositionY))
+                
+                rowLinePath.move(to: rowStartPoint)
+                rowLinePath.addLine(to: rowEndPoint)
+            }
+        }
+        
+        
+        let colummLineLayer = CAShapeLayer()
+        let rowLineLayer = CAShapeLayer()
+        colummLineLayer.path = colummLinePath.cgPath
+        rowLineLayer.path = rowLinePath.cgPath
+        colummLineLayer.strokeColor = UIColor.black.cgColor
+        rowLineLayer.strokeColor = UIColor.black.cgColor
+        colummLineLayer.lineWidth = 0.5
+        rowLineLayer.lineWidth = 0.5
+        
+        self.layer.addSublayer(colummLineLayer)
+        self.layer.addSublayer(rowLineLayer)
     }
 }
