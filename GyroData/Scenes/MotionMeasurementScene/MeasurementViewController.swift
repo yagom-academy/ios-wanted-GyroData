@@ -36,6 +36,7 @@ class MeasurementViewController: UIViewController {
         let button = UIButton()
         button.setTitle("측정", for: .normal)
         button.setTitleColor(.black, for: .normal)
+        button.titleLabel?.font = .preferredFont(forTextStyle: .title2)
         button.contentHorizontalAlignment = .left
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -45,6 +46,7 @@ class MeasurementViewController: UIViewController {
         let button = UIButton()
         button.setTitle("정지", for: .normal)
         button.setTitleColor(.black, for: .normal)
+        button.titleLabel?.font = .preferredFont(forTextStyle: .title2)
         button.contentHorizontalAlignment = .left
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
