@@ -25,7 +25,7 @@ final class MotionRecordingViewModel {
     }
     var isSaveEnable: Bool {
         let isEmpty: Bool = coordinates.isEmpty
-        return !isEmpty || !isRecording
+        return !(isEmpty || isRecording)
     }
     var reflectRecordingState: ((Bool) -> Void)?
     private let saveMotionDataUseCase = SaveMotionDataUseCase()
