@@ -25,19 +25,6 @@ final class CoreDataStorage {
         return container
     }()
 
-    // MARK: - Core Data Saving support
-    func saveContext() {
-        let context = persistentContainer.viewContext
-        if context.hasChanges {
-            do {
-                try context.save()
-            } catch {
-                // TODO: - Log to Crashlytics
-                assertionFailure("MotionData Unresolved error \(error), \((error as NSError).userInfo)")
-            }
-        }
-    }
-
     func performBackgroundTask(_ block: @escaping (NSManagedObjectContext) -> Void) {
         persistentContainer.performBackgroundTask(block)
     }
