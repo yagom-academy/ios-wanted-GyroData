@@ -9,21 +9,16 @@ import UIKit
 
 class ReplayViewController: UIViewController {
     
-    var pageType: ReplayViewPageType?
-    
-    init(pageType: ReplayViewPageType) {
-        super.init(nibName: nil, bundle: nil)
-        self.pageType = pageType
-    }
-
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
+    private var motionInfo: MotionInfo?
+    private let replayView = ReplayView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view = ReplayView()
+        replayView.measurementTime.text = motionInfo?.data.date
+        replayView.pageTypeLabel.text = motionInfo?.pageType.name
+
+        view = replayView
         view.backgroundColor = .white
         
         self.navigationItem.title = "다시보기"

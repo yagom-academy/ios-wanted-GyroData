@@ -11,6 +11,8 @@
 		05146B5A295AAE1F00A51B02 /* MeasurementType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05146B59295AAE1F00A51B02 /* MeasurementType.swift */; };
 		05146B5C295AAE8300A51B02 /* ReplayViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05146B5B295AAE8300A51B02 /* ReplayViewType.swift */; };
 		05146B60295AEA6200A51B02 /* MeasurementService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05146B5F295AEA6200A51B02 /* MeasurementService.swift */; };
+		053B38A1295DBCB500EFFCB9 /* SendDataDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053B38A0295DBCB500EFFCB9 /* SendDataDelegate.swift */; };
+		053B38A3295DCF8600EFFCB9 /* Stopwatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053B38A2295DCF8600EFFCB9 /* Stopwatch.swift */; };
 		05FF01BB2959B05D0046F874 /* MeasureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05FF01BA2959B05D0046F874 /* MeasureView.swift */; };
 		05FF01BD2959B0730046F874 /* MeasureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05FF01BC2959B0730046F874 /* MeasureViewController.swift */; };
 		05FF01BF2959C7DC0046F874 /* ReplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05FF01BE2959C7DC0046F874 /* ReplayViewController.swift */; };
@@ -33,6 +35,8 @@
 		05146B59295AAE1F00A51B02 /* MeasurementType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementType.swift; sourceTree = "<group>"; };
 		05146B5B295AAE8300A51B02 /* ReplayViewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplayViewType.swift; sourceTree = "<group>"; };
 		05146B5F295AEA6200A51B02 /* MeasurementService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementService.swift; sourceTree = "<group>"; };
+		053B38A0295DBCB500EFFCB9 /* SendDataDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendDataDelegate.swift; sourceTree = "<group>"; };
+		053B38A2295DCF8600EFFCB9 /* Stopwatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stopwatch.swift; sourceTree = "<group>"; };
 		05FF01BA2959B05D0046F874 /* MeasureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureView.swift; sourceTree = "<group>"; };
 		05FF01BC2959B0730046F874 /* MeasureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureViewController.swift; sourceTree = "<group>"; };
 		05FF01BE2959C7DC0046F874 /* ReplayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplayViewController.swift; sourceTree = "<group>"; };
@@ -112,6 +116,8 @@
 				05FF01BA2959B05D0046F874 /* MeasureView.swift */,
 				05FF01BC2959B0730046F874 /* MeasureViewController.swift */,
 				05146B5F295AEA6200A51B02 /* MeasurementService.swift */,
+				053B38A0295DBCB500EFFCB9 /* SendDataDelegate.swift */,
+				053B38A2295DCF8600EFFCB9 /* Stopwatch.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -226,6 +232,8 @@
 			files = (
 				18B05FF22959E1B400DC8800 /* AppDelegate.swift in Sources */,
 				63F01BB928D44FC400C53A39 /* GyroViewController.swift in Sources */,
+				053B38A3295DCF8600EFFCB9 /* Stopwatch.swift in Sources */,
+				053B38A1295DBCB500EFFCB9 /* SendDataDelegate.swift in Sources */,
 				186667EB295D823700489994 /* MotionEntity+CoreDataClass.swift in Sources */,
 				05FF01BF2959C7DC0046F874 /* ReplayViewController.swift in Sources */,
 				05146B58295AAB1000A51B02 /* Motion.swift in Sources */,

@@ -114,8 +114,16 @@ extension GyroViewController: UITableViewDelegate {
         _ tableView: UITableView,
         didSelectRowAt indexPath: IndexPath
     ) {
+        guard let motion = self.dataSource?.snapshot().itemIdentifiers[indexPath.item] else {
+            return
+        }
+        
+        let replayViewController = ReplayViewController()
+        weak var sendDataDelegate: SendDataDelegate? = replayViewController
+        sendDataDelegate?.sendData(MotionInfo(data: motion, pageType: ReplayViewPageType.view))
+        
         self.navigationController?.pushViewController(
-            ReplayViewController(pageType: ReplayViewPageType.view),
+            replayViewController,
             animated: true
         )
     }
@@ -129,12 +137,17 @@ extension GyroViewController: UITableViewDelegate {
             title: "Play"
         ) { [weak self] _, _, _ in
             
-            guard let self = self else {
+            guard let self = self,
+                  let motion = self.dataSource?.snapshot().itemIdentifiers[indexPath.item] else {
                 return
             }
+
+            let replayViewController = ReplayViewController()
+            weak var sendDataDelegate: SendDataDelegate? = replayViewController
+            sendDataDelegate?.sendData(MotionInfo(data: motion, pageType: ReplayViewPageType.play))
             
             self.navigationController?.pushViewController(
-                ReplayViewController(pageType: ReplayViewPageType.play),
+                replayViewController,
                 animated: true
             )
         }
