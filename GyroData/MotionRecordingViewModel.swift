@@ -14,6 +14,16 @@ final class MotionRecordingViewModel {
             coordinates.removeAll()
         }
     }
+    var isRecording: Bool = false {
+        didSet {
+            toggleSegmentContorlEnable?()
+        }
+    }
+    var isFullDatas: Bool {
+        let maximumCount = Int(self.timeOut / self.updateTimeInterval)
+        return self.coordinates.count >= maximumCount
+    }
+    var toggleSegmentContorlEnable: (() -> Void)?
     private let timeOut = TimeInterval(60)
     private var startDate = Date()
     private var motionManager = CMMotionManager()
@@ -34,19 +44,16 @@ final class MotionRecordingViewModel {
 
     // TODO: Error 처리하기
     func startRecording() {
+        isRecording = true
+
         let updateHandler: (Coordiante) -> Void = { [weak self] newData in
             guard let self = self else { return }
-            var isFullDatas: Bool {
-                let maximumCount = Int(self.timeOut / self.updateTimeInterval)
-                return self.coordinates.count >= maximumCount
-            }
-
-            if isFullDatas {
+            if self.isFullDatas {
                 self.coordinates.removeAll()
             }
             self.coordinates.append(newData)
             self.updateCompletion(newData)
-            guard !isFullDatas else {
+            guard !self.isFullDatas else {
                 self.stopRecording()
                 return
             }
@@ -76,7 +83,12 @@ final class MotionRecordingViewModel {
         }
     }
 
-    func stopRecording() {
+    func stopButtonTapped() {
+        stopRecording()
+    }
+
+    private func stopRecording() {
+        isRecording = false
         motionManager.stopAccelerometerUpdates()
         motionManager.stopGyroUpdates()
     }

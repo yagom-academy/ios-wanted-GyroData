@@ -46,6 +46,11 @@ final class MotionRecordingViewController: UIViewController {
         super.viewDidLoad()
         layout()
         setButtonActions()
+        motionRecordingViewModel.toggleSegmentContorlEnable = { [weak self] in
+            DispatchQueue.main.async {
+                self?.segmentedControl.isEnabled.toggle()
+            }
+        }
     }
 
     private func drawGraphFor1Hz(_ coordiante: Coordiante) {
@@ -57,19 +62,27 @@ final class MotionRecordingViewController: UIViewController {
     }
 
     private func setButtonActions() {
+        let reset = {
+            self.motionRecordingViewModel.initializeModel()
+            self.graphView.reset()
+        }
+
         MotionMode.allCases.enumerated().forEach { index, mode in
             let segment = UIAction(title: mode.segmentName) { _ in
                 self.motionRecordingViewModel.motionMode = mode
+                reset()
             }
             segmentedControl.setAction(segment, forSegmentAt: index)
         }
         let startRecording = UIAction() { [weak self] _ in
+            if self?.motionRecordingViewModel.isFullDatas == true {
+                reset()
+            }
             self?.motionRecordingViewModel.startRecording()
         }
         let stopRecording = UIAction() { [weak self] _ in
-            self?.motionRecordingViewModel.stopRecording()
-            self?.motionRecordingViewModel.initializeModel()
-            self?.graphView.reset()
+            self?.motionRecordingViewModel.stopButtonTapped()
+            reset()
         }
         recordButton.addAction(startRecording, for: .touchUpInside)
         stopButton.addAction(stopRecording, for: .touchUpInside)
