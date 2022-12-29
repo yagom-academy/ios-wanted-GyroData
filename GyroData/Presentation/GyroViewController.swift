@@ -57,7 +57,11 @@ final class GyroViewController: UIViewController {
             })
         
         snapshot.appendSections([.main])
-        snapshot.appendItems(coreDataManager.fetch())
+        snapshot.appendItems(coreDataManager.fetch(
+            request: MotionEntity.fetchRequestWithOptions(
+                offset: 0
+            )
+        ))
         
         dataSource?.apply(snapshot)
     }
@@ -84,6 +88,28 @@ final class GyroViewController: UIViewController {
 }
 
 extension GyroViewController: UITableViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y > (scrollView.contentSize.height - scrollView.bounds.height) {
+            let snapshotCount = dataSource?.snapshot().numberOfItems ?? 0
+            let coreDatalist = coreDataManager.fetch(
+                request: MotionEntity.fetchRequest()
+            )
+
+            print(snapshotCount, coreDatalist.count)
+            
+            if snapshotCount < coreDatalist.count {
+                let coreData = coreDataManager.fetch(
+                    request: MotionEntity.fetchRequestWithOptions(
+                        offset: snapshotCount
+                    )
+                )
+
+                snapshot.appendItems(coreData)
+                dataSource?.apply(snapshot, animatingDifferences: false)
+            }
+        }
+    }
+    
     func tableView(
         _ tableView: UITableView,
         didSelectRowAt indexPath: IndexPath

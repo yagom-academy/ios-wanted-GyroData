@@ -15,6 +15,13 @@ extension MotionEntity {
     @nonobjc public class func fetchRequest() -> NSFetchRequest<MotionEntity> {
         return NSFetchRequest<MotionEntity>(entityName: "MotionEntity")
     }
+    
+    @nonobjc public class func fetchRequestWithOptions(offset:Int) -> NSFetchRequest<MotionEntity> {
+           let nsFetchRequest =  NSFetchRequest<MotionEntity>(entityName: "MotionEntity")
+           nsFetchRequest.fetchLimit = 10
+           nsFetchRequest.fetchOffset = offset
+           return nsFetchRequest
+    }
 
     @NSManaged public var date: String?
     @NSManaged public var measurementType: String?

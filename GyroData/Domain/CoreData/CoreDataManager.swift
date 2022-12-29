@@ -28,12 +28,12 @@ struct CoreDataManager {
         }
     }
     
-    func fetch() -> [Motion] {
+    func fetch(request: NSFetchRequest<MotionEntity>) -> [Motion] {
         var motions: [Motion] = []
         if let context = appDelegate?.persistentContainer.viewContext {
             do {
-                let contact = try context.fetch(MotionEntity.fetchRequest()) as? [MotionEntity]
-                contact?.forEach {
+                let contact = try context.fetch(request)
+                contact.forEach {
                     let motion = Motion(date: $0.date ?? "",
                                         measurementType: $0.measurementType ?? "",
                                         motionX: $0.motionX,
@@ -47,7 +47,7 @@ struct CoreDataManager {
         }
         return motions
     }
-    
+
     func delete(data: Motion) {
         guard let context = appDelegate?.persistentContainer.viewContext,
               let coreDatalist = try? context.fetch(MotionEntity.fetchRequest()),
