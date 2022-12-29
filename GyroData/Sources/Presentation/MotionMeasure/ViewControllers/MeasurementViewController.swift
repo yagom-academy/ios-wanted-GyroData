@@ -34,12 +34,6 @@ final class MeasurementViewController: UIViewController {
     weak var coordinator: Coordinator?
     private let viewModel: MeasermentViewModel
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setUpView()
-        bind()
-    }
-    
     init(viewModel: MeasermentViewModel, coordinator: Coordinator) {
         self.viewModel = viewModel
         self.coordinator = coordinator
@@ -49,6 +43,12 @@ final class MeasurementViewController: UIViewController {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setUpView()
+        bind()
     }
     
     private func bind() {
