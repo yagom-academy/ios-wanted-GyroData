@@ -9,7 +9,7 @@ import UIKit
 import CoreMotion
 
 enum GraphViewValue {
-    static let samplingCount: Int = 60
+    static let samplingCount: Int = 6000
 }
 
 //TODO: 메인 뷰컨에 테이블뷰 셀에 보여질 데이터 딜리게이트로 넘겨야함.
@@ -70,7 +70,7 @@ final class RecordViewController: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("측정 시작", for: .normal)
-        button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
         button.addTarget(self, action: #selector(startButtonDidTap), for: .touchUpInside)
         return button
     }()
@@ -79,7 +79,7 @@ final class RecordViewController: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("측정 중지", for: .normal)
-        button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
         button.addTarget(self, action: #selector(stopButtonDidTap), for: .touchUpInside)
         return button
     }()
@@ -179,25 +179,27 @@ final class RecordViewController: UIViewController {
             switch result {
             case .success(_) :
                 print("Save Success")
-                
-                guard let recordingStartTime = self?.recordingStartTime,
-                      let segmentType = self?.segmentType,
-                      let recordCount = self?.recordData.count else {
-                    return
-                }
-                // 본 측정 치의 정보를 delegate로 넘기고
-                self?.recordViewControllerPopProtocol?.saveMeasureData(
-                    registTime: recordingStartTime, // 측정된 시간
-                    type: segmentType, // 측정 타입
-                    samplingCount: Double(recordCount) // 얼마나 측정할건지
-                )
+
                 //pop
+                self?.delegateData()
                 self?.navigationController?.popViewController(animated: true)
             case .failure(let error) :
                 print("error \(error)")
             }
         }
         recordData = []
+    }
+    
+    private func delegateData() {
+        guard let recordingStartTime = self.recordingStartTime else {
+            return
+        }
+        
+        saveMeasureData(
+            registTime: recordingStartTime,
+            type: segmentType,
+            samplingCount: Double(self.recordData.count / 3)
+        )
     }
     
     //측정 시작
@@ -227,7 +229,7 @@ final class RecordViewController: UIViewController {
     
     // 측정 중지
     func stopRecording() {
-        if recordData.count == 60 {
+        if recordData.count == 600 {
             isRecorded = false
         }
         MotionManager.shared.stopRecording(type: segmentType)
@@ -243,3 +245,12 @@ final class RecordViewController: UIViewController {
     }
 }
 
+extension RecordViewController: RecordViewControllerPopDelegate {
+    func saveMeasureData(registTime: Date, type: SensorType, samplingCount: Double) {
+        self.recordViewControllerPopProtocol?.saveMeasureData(
+            registTime: registTime,
+            type: type,
+            samplingCount: samplingCount
+        )
+    }
+}

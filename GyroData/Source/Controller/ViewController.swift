@@ -42,7 +42,7 @@ class ViewController: UIViewController {
             else {
                 return UITableViewCell()
             }
-            cell.setText(date: item.measurementDate!, type: item.sensorType!, time: "60.0")
+            cell.setText(date: item.measurementDate!, type: item.sensorType!, time: "\(item.measurementTime)")
             
             return cell
         }
@@ -60,7 +60,7 @@ class ViewController: UIViewController {
         }
         
         self.snapshot = snapshot
-        self.dataSource?.apply(self.snapshot!)
+        self.dataSource?.apply(self.snapshot!, animatingDifferences: false)
     }
     
     private func configureDefaultSetting() {
@@ -136,9 +136,32 @@ extension ViewController: UITableViewDelegate {
 
 extension ViewController: RecordViewControllerPopDelegate {
     func saveMeasureData(registTime: Date, type: SensorType, samplingCount: Double) {
-        print("Pop Over Sucess")
-        print(registTime)
-        print(type)
-        print(samplingCount)
+        let date = DateFormatterManager.shared.convertToDateString(from: registTime)
+        let sensorType = type.rawValue
+        let measurementTime = samplingCount
+        
+        let coreDataDict: [String: Any] = ["measurementDate": date, "measurementTime": measurementTime, "sensorType": sensorType]
+        
+        do {
+            try self.gyroStore.create(by: coreDataDict)
+            configureSnapshot(itemCount: numberOfItem)
+        } catch {
+            print(error)
+        }
+    }
+}
+
+//TODO: 폴더 정리 필요!!
+class DateFormatterManager {
+    static let shared = DateFormatterManager()
+    private let formatter = DateFormatter()
+    
+    var dateFormatter: DateFormatter {
+        self.formatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
+        return formatter
+    }
+    
+    func convertToDateString(from date: Date) -> String {
+        return self.dateFormatter.string(from: date)
     }
 }
