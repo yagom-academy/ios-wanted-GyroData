@@ -12,6 +12,7 @@
 		63F01BB928D44FC400C53A39 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB828D44FC400C53A39 /* ListViewController.swift */; };
 		63F01BBE28D44FC500C53A39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBD28D44FC500C53A39 /* Assets.xcassets */; };
 		63F01BC128D44FC500C53A39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */; };
+		A30E7B60295DBEB50012B96A /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30E7B5F295DBEB50012B96A /* Double+Extension.swift */; };
 		A3DED01B295965CE007EE19D /* MeasuredData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3DED01A295965CE007EE19D /* MeasuredData.swift */; };
 		A3DED01F29596846007EE19D /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3DED01E29596846007EE19D /* ListView.swift */; };
 		A3DED02129596A83007EE19D /* ListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3DED02029596A83007EE19D /* ListViewCell.swift */; };
@@ -50,6 +51,7 @@
 		63F01BBD28D44FC500C53A39 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		63F01BC028D44FC500C53A39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		63F01BC228D44FC500C53A39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A30E7B5F295DBEB50012B96A /* Double+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Double+Extension.swift"; path = "../../../../../../../Desktop/sp/ios-wanted-GyroData/GyroData/Extension/Double+Extension.swift"; sourceTree = "<group>"; };
 		A3DED01A295965CE007EE19D /* MeasuredData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasuredData.swift; sourceTree = "<group>"; };
 		A3DED01E29596846007EE19D /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 		A3DED02029596A83007EE19D /* ListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewCell.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				A3DED0232959821C007EE19D /* Date+Extension.swift */,
+				A30E7B5F295DBEB50012B96A /* Double+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -297,6 +300,7 @@
 			files = (
 				63F01BB928D44FC400C53A39 /* ListViewController.swift in Sources */,
 				AF1BD844295C3E2A00432F19 /* FileHandleManager.swift in Sources */,
+				A30E7B60295DBEB50012B96A /* Double+Extension.swift in Sources */,
 				FDA47545295AC62D006D57B7 /* Sensor.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				AFABE5E22959734C00F2F6E3 /* ListViewModel.swift in Sources */,
