@@ -26,9 +26,9 @@ protocol AnalyzeViewModelInterface {
 }
 
 final class AnalyzeViewModel: AnalyzeViewModelInterface, AnalyzeViewModelOutputInterface, ObservableObject {
-
+    
     var store: AnyCancellable?
-
+    
     // MARK: AnalyzeViewModelInterface
     var input: AnalyzeViewModelInputInterface { self }
     var output: AnalyzeViewModelOutputInterface { self }
@@ -56,9 +56,9 @@ final class AnalyzeViewModel: AnalyzeViewModelInterface, AnalyzeViewModelOutputI
     ) {
         self.analysisManager = analysisManager
     }
-
+    
     @Published var testArr : [Analysis] = []
-
+    
     func bind() {
         store = $analysis
             .sink { [weak self] model in
@@ -71,7 +71,7 @@ final class AnalyzeViewModel: AnalyzeViewModelInterface, AnalyzeViewModelOutputI
 extension AnalyzeViewModel: AnalyzeViewModelInputInterface {
     func onViewWillAppear() {
     }
-
+    
     func onViewDidLoad() {
     }
     

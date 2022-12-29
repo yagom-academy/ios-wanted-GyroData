@@ -12,7 +12,7 @@ import Combine
 
 struct GraphView: View {
     @EnvironmentObject var environment: AnalyzeViewModel
-
+    
     var dummyData: [GraphModel] = [
         .init(x: 1, y: 2, z: 3, measurementTime: 10),
         .init(x: 2, y: 3, z: 4, measurementTime: 20),

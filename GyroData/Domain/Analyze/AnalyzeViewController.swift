@@ -42,11 +42,11 @@ final class AnalyzeViewController: UIViewController {
         button.setTitleColor(.white, for: .normal)
         return button
     }()
-
+    
     @ObservedObject private var viewModel = AnalyzeViewModel(
         analysisManager: AnalysisManager(analysis: .accelerate)
     )
-
+    
     private var swiftUIChartsView = GraphView()
     private lazy var hostView = HostingViewController(model2: viewModel)
     private lazy var graphView: UIView = {
@@ -55,19 +55,19 @@ final class AnalyzeViewController: UIViewController {
         }
         return chartView
     }()
-
+    
     private var cancellables = Set<AnyCancellable>()
     
     private lazy var titleLabelItem: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.text = "측정하기"
         label.textColor = .white
         label.font = .preferredFont(forTextStyle: .title3)
         return label
     }()
-
+    
     private lazy var analyzeButtonItem: UIBarButtonItem = {
-       let button = UIBarButtonItem()
+        let button = UIBarButtonItem()
         button.title = "저장"
         button.tintColor = UIColor(r: 101, g: 159, b: 247, a: 1)
         return button
@@ -78,7 +78,7 @@ final class AnalyzeViewController: UIViewController {
         self.viewModel.input.onViewWillAppear()
         viewModel.bind()
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

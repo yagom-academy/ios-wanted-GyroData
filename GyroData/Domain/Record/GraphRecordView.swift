@@ -10,7 +10,7 @@ import SwiftUI
 
 class GraphRecordView: UIView {
     private lazy var verticalStackView: UIStackView = {
-       var stackView = UIStackView()
+        var stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.alignment = .leading
@@ -20,7 +20,7 @@ class GraphRecordView: UIView {
     }()
     
     private lazy var dateLabel: UILabel = {
-       var label = UILabel()
+        var label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "2022/10/20 15:10:11"
         label.font = .systemFont(ofSize: 10)
@@ -29,7 +29,7 @@ class GraphRecordView: UIView {
     }()
     
     private lazy var viewNameLabel: UILabel = {
-       var label = UILabel()
+        var label = UILabel()
         label.text = "Play"
         label.font = .boldSystemFont(ofSize: 20)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -41,15 +41,15 @@ class GraphRecordView: UIView {
         return UIView()
     }()
     
-//    private func setupHostView() -> UIView {
-//        let host = UIHostingController(rootView: GraphView())
-//        guard let chartView = host.view else {
-//            return UIView(frame: .zero)
-//        }
-//        chartView.translatesAutoresizingMaskIntoConstraints = false
-//        chartView.backgroundColor = UIColor(r: 16, g: 17, b: 21, a: 1)
-//        return chartView
-//    }
+    //    private func setupHostView() -> UIView {
+    //        let host = UIHostingController(rootView: GraphView())
+    //        guard let chartView = host.view else {
+    //            return UIView(frame: .zero)
+    //        }
+    //        chartView.translatesAutoresizingMaskIntoConstraints = false
+    //        chartView.backgroundColor = UIColor(r: 16, g: 17, b: 21, a: 1)
+    //        return chartView
+    //    }
     
     private lazy var pausePlayButton: UIButton = {
         let button = UIButton(type: .system)
@@ -65,7 +65,7 @@ class GraphRecordView: UIView {
     }()
     
     private lazy var timerLabel: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "00.0"
         label.contentCompressionResistancePriority(for: .horizontal)

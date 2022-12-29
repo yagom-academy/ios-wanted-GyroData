@@ -9,12 +9,12 @@ import Foundation
 
 final class GraphFileManager {
     static let shared = GraphFileManager()
-
+    
     private init() {}
-
+    
     func saveJsonData(data: [GraphModel], fileName: UUID) {
         let jsonEncoder = JSONEncoder()
-
+        
         do {
             let encodedData = try jsonEncoder.encode(data)
             guard let documentDirectoryUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
@@ -32,10 +32,10 @@ final class GraphFileManager {
             print(error)
         }
     }
-
+    
     func loadJsonFile(fileName: UUID) -> [GraphModel]? {
         let jsonDecoder = JSONDecoder()
-
+        
         do {
             guard let documentDirectoryUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
                 return nil

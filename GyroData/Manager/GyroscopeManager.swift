@@ -22,7 +22,7 @@ struct GyroscopeManager: AnalysisManagerType {
         guard let data = self.motion.gyroData?.rotationRate else {
             return (x: 0, y: 0, z: 0)
         }
-            
+        
         return (x: data.x, y: data.y, z: data.z)
     }
     
