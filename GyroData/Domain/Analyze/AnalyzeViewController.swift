@@ -10,6 +10,14 @@ import SwiftUI
 import Combine
 
 final class AnalyzeViewController: UIViewController {
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .large)
+        indicator.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+        indicator.center = self.view.center
+        indicator.color = UIColor(r: 101, g: 159, b: 247, a: 1)
+        return indicator
+    }()
+    
     private lazy var backgroundView: UIView = {
         let view = UIView(frame: .zero)
         view.backgroundColor = UIColor(r: 39, g: 40, b: 46, a: 1)
@@ -24,9 +32,7 @@ final class AnalyzeViewController: UIViewController {
         segmentControl.addTarget(self, action: #selector(changeSegmentMode), for: .valueChanged)
         return segmentControl
     }()
-    
-    private var emptyView: UIView?
-    
+        
     private lazy var analyzeButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = UIColor(r: 101, g: 159, b: 247, a: 1)
@@ -44,22 +50,7 @@ final class AnalyzeViewController: UIViewController {
         button.addTarget(self, action: #selector(tappedStopButton), for: .touchUpInside)
         return button
     }()
-    
-    @ObservedObject private var viewModel = AnalyzeViewModel(
-        analysisManager: AnalysisManager(analysis: .accelerate)
-    )
-    
-    private var swiftUIChartsView = GraphView()
-    private lazy var hostView = HostingViewController(model2: viewModel)
-    private lazy var graphView: UIView = {
-        guard let chartView = hostView.view else {
-            return UIView(frame: .zero)
-        }
-        return chartView
-    }()
-    
-    private var cancellables = Set<AnyCancellable>()
-    
+        
     private lazy var titleLabelItem: UILabel = {
         let label = UILabel()
         label.text = "측정하기"
@@ -77,6 +68,26 @@ final class AnalyzeViewController: UIViewController {
         return button
     }()
     
+    private lazy var backButtonItem: UIBarButtonItem = {
+        let button = UIBarButtonItem()
+        button.image = UIImage(systemName: "chevron.backward")
+        button.tintColor = UIColor(r: 101, g: 159, b: 247, a: 1)
+        button.target = self
+        button.action = #selector(tappedBackButton)
+        return button
+    }()
+    
+    @ObservedObject private var viewModel = AnalyzeViewModel(analysisManager: AnalysisManager())
+    private var swiftUIChartsView = GraphView()
+    private lazy var hostView = HostingViewController(model2: viewModel)
+    private lazy var graphView: UIView = {
+        guard let chartView = hostView.view else {
+            return UIView(frame: .zero)
+        }
+        return chartView
+    }()
+    private var cancellables = Set<AnyCancellable>()
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.viewModel.input.onViewWillAppear()
@@ -86,8 +97,6 @@ final class AnalyzeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.titleView = titleLabelItem
-        self.navigationItem.rightBarButtonItem = saveButtonItem
         self.viewModel.input.onViewDidLoad()
         setup()
         setupUI()
@@ -96,13 +105,17 @@ final class AnalyzeViewController: UIViewController {
     
     private func setup() {
         self.view.backgroundColor = .white
+        self.navigationItem.titleView = titleLabelItem
+        self.navigationItem.rightBarButtonItem = saveButtonItem
+        self.navigationItem.leftBarButtonItem = backButtonItem
         
         view.addSubviews(
             backgroundView,
             graphView,
             segmentControl,
             analyzeButton,
-            stopButton
+            stopButton,
+            activityIndicator
         )
     }
     
@@ -168,9 +181,34 @@ final class AnalyzeViewController: UIViewController {
             stopButton.heightAnchor.constraint(equalToConstant: 100),
             stopButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 100)
         ])
+        
+        // MARK: - activityIndicator
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
     }
     
     private func bindEvents() {
+        viewModel.isLoadingPublisher
+            .sink { [weak self] isLoading in
+                guard let self = self else { return }
+                if isLoading {
+                    self.activityIndicator.startAnimating()
+                } else {
+                    self.activityIndicator.stopAnimating()
+                }
+            }
+            .store(in: &cancellables)
+        
+        viewModel.dissmissPublisher
+            .sink { [weak self] _ in
+                guard let self = self else { return }
+                self.navigationController?.popViewController(animated: true)
+            }
+            .store(in: &cancellables)
     }
 }
 
@@ -187,6 +225,10 @@ extension AnalyzeViewController {
         viewModel.input.tapStopButton()
         segmentControl.isEnabled = true
         saveButtonItem.isEnabled = true
+    }
+    
+    @objc func tappedBackButton() {
+        self.navigationController?.popViewController(animated: true)
     }
     
     @objc func tappedSaveButton() {

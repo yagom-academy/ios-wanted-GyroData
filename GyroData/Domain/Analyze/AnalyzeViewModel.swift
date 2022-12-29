@@ -19,6 +19,7 @@ protocol AnalyzeViewModelInputInterface {
 
 protocol AnalyzeViewModelOutputInterface {
     var analysisPublisher: PassthroughSubject<[GraphModel], Never> { get }
+    var isLoadingPublisher: PassthroughSubject<Bool, Never> { get }
 }
 
 protocol AnalyzeViewModelInterface {
@@ -36,23 +37,17 @@ final class AnalyzeViewModel: AnalyzeViewModelInterface, AnalyzeViewModelOutputI
     
     // MARK: AnalyzeViewModelOutputInterface
     var analysisPublisher = PassthroughSubject<[GraphModel], Never>()
+    var isLoadingPublisher = PassthroughSubject<Bool, Never>()
+    var dissmissPublisher = PassthroughSubject<Void, Never>()
     
-    @Published var analysis: [GraphModel] = [
-        .init(x: 1, y: 2, z: 3, measurementTime: 1),
-        .init(x: 1, y: 2, z: 3, measurementTime: 2),
-        .init(x: 1, y: 2, z: 3, measurementTime: 3),
-        .init(x: 1, y: 2, z: 3, measurementTime: 4),
-        .init(x: 1, y: 2, z: 3, measurementTime: 5),
-        .init(x: 1, y: 2, z: 3, measurementTime: 6),
-        .init(x: 1, y: 2, z: 3, measurementTime: 7),
-    ]
-    
+    @Published var analysis: [GraphModel] = []
     @Published var testArr : [GraphModel] = []
     
     private let analysisManager: AnalysisManager
     private var timer: Timer?
     private var analyzeMode: Int = 0
     private var cellModel: [CellModel] = []
+    private var isLoading = false
     
     init(
         analysisManager: AnalysisManager
@@ -68,7 +63,8 @@ final class AnalyzeViewModel: AnalyzeViewModelInterface, AnalyzeViewModelOutputI
             let date = timer.fireDate.timeIntervalSince1970
             let measureTime = date - now
             let data = self.analysisManager.startAnalyse()
-            self.analysis.append(.init(x: data.x, y: data.y, z: data.z, measurementTime: timer.timeInterval))
+            self.analysis.append(.init(x: data.x, y: data.y, z: data.z, measurementTime: measureTime))
+            print(self.analysis)
         })
         
         if let timer = self.timer {
@@ -104,23 +100,29 @@ extension AnalyzeViewModel: AnalyzeViewModelInputInterface {
     }
     
     func tapSaveButton() {
+        isLoadingPublisher.send(true)
         // TODO: save CoreData
-        if analyzeMode == 0 {
-            cellModel.append(.init(
-                id: UUID(),
-                analysisType: AnalysisType.accelerate.rawValue,
-                savedAt: Date.now,
-                measurementTime: analysis.last?.measurementTime ?? 0.0
-            ))
-            print(cellModel)
-        } else if analyzeMode == 1 {
-            cellModel.append(.init(
-                id: UUID(),
-                analysisType: AnalysisType.gyroscope.rawValue,
-                savedAt: Date.now,
-                measurementTime: analysis.last?.measurementTime ?? 0.0
-            ))
-            print(cellModel)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
+            guard let self = self else { return }
+            if self.analyzeMode == 0 {
+                self.cellModel = [.init(
+                    id: UUID(),
+                    analysisType: AnalysisType.accelerate.rawValue,
+                    savedAt: Date.now,
+                    measurementTime: self.analysis.last?.measurementTime ?? 0.0
+                )]
+                print(self.cellModel)
+            } else if self.analyzeMode == 1 {
+                self.cellModel = [.init(
+                    id: UUID(),
+                    analysisType: AnalysisType.gyroscope.rawValue,
+                    savedAt: Date.now,
+                    measurementTime: self.analysis.last?.measurementTime ?? 0.0
+                )]
+                print(self.cellModel)
+            }
+            self.isLoadingPublisher.send(false)
+            self.dissmissPublisher.send(())
         }
     }
     
