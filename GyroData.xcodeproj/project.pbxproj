@@ -19,6 +19,9 @@
 		32FD2890295BE4A6006B6871 /* MotionDataListStorageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32FD288F295BE4A6006B6871 /* MotionDataListStorageProtocol.swift */; };
 		32FDB345295BE62A0095F6A5 /* DeleteMotionDataUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32FDB344295BE62A0095F6A5 /* DeleteMotionDataUseCase.swift */; };
 		32FDB347295BEF8E0095F6A5 /* MockStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32FDB346295BEF8E0095F6A5 /* MockStorage.swift */; };
+		32FDB349295C18C80095F6A5 /* ReplayType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32FDB348295C18C80095F6A5 /* ReplayType.swift */; };
+		32FDB34B295C18F20095F6A5 /* MotionReplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32FDB34A295C18F20095F6A5 /* MotionReplayViewController.swift */; };
+		32FDB34D295C19B60095F6A5 /* MotionReplayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32FDB34C295C19B60095F6A5 /* MotionReplayViewModel.swift */; };
 		63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB428D44FC400C53A39 /* AppDelegate.swift */; };
 		63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB828D44FC400C53A39 /* ViewController.swift */; };
 		63F01BBE28D44FC500C53A39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBD28D44FC500C53A39 /* Assets.xcassets */; };
@@ -38,6 +41,9 @@
 		32FD288F295BE4A6006B6871 /* MotionDataListStorageProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDataListStorageProtocol.swift; sourceTree = "<group>"; };
 		32FDB344295BE62A0095F6A5 /* DeleteMotionDataUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteMotionDataUseCase.swift; sourceTree = "<group>"; };
 		32FDB346295BEF8E0095F6A5 /* MockStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockStorage.swift; sourceTree = "<group>"; };
+		32FDB348295C18C80095F6A5 /* ReplayType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplayType.swift; sourceTree = "<group>"; };
+		32FDB34A295C18F20095F6A5 /* MotionReplayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionReplayViewController.swift; sourceTree = "<group>"; };
+		32FDB34C295C19B60095F6A5 /* MotionReplayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionReplayViewModel.swift; sourceTree = "<group>"; };
 		63F01BB128D44FC400C53A39 /* GyroData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GyroData.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63F01BB428D44FC400C53A39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63F01BB828D44FC400C53A39 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -77,6 +83,9 @@
 			isa = PBXGroup;
 			children = (
 				63F01BB428D44FC400C53A39 /* AppDelegate.swift */,
+				32FDB348295C18C80095F6A5 /* ReplayType.swift */,
+				32FDB34A295C18F20095F6A5 /* MotionReplayViewController.swift */,
+				32FDB34C295C19B60095F6A5 /* MotionReplayViewModel.swift */,
 				63F01BB828D44FC400C53A39 /* ViewController.swift */,
 				329E7EE6295B052D00537466 /* Coordinate.swift */,
 				329E7EE8295B058200537466 /* MotionMode.swift */,
@@ -167,6 +176,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				32FDB34B295C18F20095F6A5 /* MotionReplayViewController.swift in Sources */,
 				329E7EE9295B058200537466 /* MotionMode.swift in Sources */,
 				32FDB347295BEF8E0095F6A5 /* MockStorage.swift in Sources */,
 				32FD2890295BE4A6006B6871 /* MotionDataListStorageProtocol.swift in Sources */,
@@ -174,6 +184,8 @@
 				32FDB345295BE62A0095F6A5 /* DeleteMotionDataUseCase.swift in Sources */,
 				32FD288A295B2588006B6871 /* RecordTableViewCell.swift in Sources */,
 				32B0133A295A871C005C8750 /* GraphViewModel.swift in Sources */,
+				32FDB34D295C19B60095F6A5 /* MotionReplayViewModel.swift in Sources */,
+				32FDB349295C18C80095F6A5 /* ReplayType.swift in Sources */,
 				329E7EEB295B05D000537466 /* MotionRecord.swift in Sources */,
 				63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */,
 				32FD288E295BE44D006B6871 /* FetchMotionDataListUseCase.swift in Sources */,
