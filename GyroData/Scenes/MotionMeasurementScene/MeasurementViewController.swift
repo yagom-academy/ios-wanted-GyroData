@@ -113,10 +113,10 @@ extension MeasurementViewController {
     }
     
     @objc private func measureButtonTapped() {
-        MotionMeasurementManager.shared.startAccelerometers(at: graphView)
+        MotionMeasurementManager.shared.startMeasurement(MotionType.acc ,on: graphView)
     }
     
     @objc private func stopButtonTapped() {
-        MotionMeasurementManager.shared.stopAccelerometer(at: graphView)
+        MotionMeasurementManager.shared.stopMeasurement(MotionType.acc)
     }
 }

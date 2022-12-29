@@ -12,58 +12,29 @@ class MotionMeasurementManager {
     private let motionManager = CMMotionManager()
     private var timer: Timer?
     
-    private init() {}
-    
-    func startAccelerometers(at graphView: GraphView) {
-        guard motionManager.isAccelerometerAvailable else { return }
-        
+    private init() {
         motionManager.accelerometerUpdateInterval = MotionMeasurementNumber.updateInterval
-        motionManager.startAccelerometerUpdates()
-        
-        var timeCount = Double.zero
-        timer = Timer(fire: Date(),
-                      interval: MotionMeasurementNumber.updateInterval,
-                      repeats: true,
-                      block: { [self] (timer) in
-            
-            timeCount += MotionMeasurementNumber.updateInterval
-            
-            if checkOutofTime(timeCount) {
-                timer.invalidate()
-            }
-            
-            if let data = motionManager.accelerometerData {
-                let x = data.acceleration.x
-                let y = data.acceleration.y
-                let z = data.acceleration.z
-
-                graphView.add([x, y, z])
-            }
-        })
-        
-        if let timer = timer {
-            RunLoop.current.add(timer, forMode: .default)
-        }
-    }
-    
-    func stopAccelerometer(at graphView: GraphView) {
-        guard motionManager.isAccelerometerAvailable,
-              let currentTimer = timer else { return }
-        
-        currentTimer.invalidate()
-        timer = nil
-        
-        motionManager.stopAccelerometerUpdates()
-        graphView.clearSegmanet()
-    }
-    
-    func startGyros(at graphView: GraphView) {
-        guard motionManager.isGyroAvailable else { return }
-
         motionManager.gyroUpdateInterval = MotionMeasurementNumber.updateInterval
-        motionManager.startGyroUpdates()
+    }
+    
+    func stopMeasurement(_ type: MotionType) {
+        guard let currentTimer = timer else { return }
         
+        currentTimer.invalidate()
+        timer = nil
+        
+        switch type {
+        case .acc:
+            motionManager.stopAccelerometerUpdates()
+        case .gyro:
+            motionManager.stopGyroUpdates()
+        }
+    }
+    
+    func startMeasurement(_ motionType: MotionType, on graphView: GraphView) {
         var timeCount = Double.zero
+        
+        checkAvailableAndStart(motionType)
         
         timer = Timer(fire: Date(),
                       interval: MotionMeasurementNumber.updateInterval,
@@ -76,32 +47,42 @@ class MotionMeasurementManager {
                 timer.invalidate()
             }
             
-            if let data = motionManager.gyroData {
-                let x = data.rotationRate.x
-                let y = data.rotationRate.y
-                let z = data.rotationRate.z
-                
-                graphView.add([x, y, z])
-            }
+            drawGraph(motionType, on: graphView)
         })
         
         if let timer = timer {
             RunLoop.current.add(timer, forMode: .default)
         }
-        
     }
     
-    func stopGyros(at graphView: GraphView) {
-        guard motionManager.isGyroAvailable,
-              let currentTimer = timer else { return }
-        
-        currentTimer.invalidate()
-        timer = nil
-        
-        motionManager.stopGyroUpdates()
-        graphView.clearSegmanet()
+    private func checkAvailableAndStart(_ motionType: MotionType) {
+        switch motionType {
+        case .acc:
+            guard motionManager.isAccelerometerAvailable else { return }
+  
+            motionManager.startAccelerometerUpdates()
+        case .gyro:
+            guard motionManager.isGyroAvailable else { return }
+            
+            motionManager.startGyroUpdates()
+        }
     }
     
+    private func drawGraph(_ motionType: MotionType, on graphView: GraphView) {
+        let measurementData: Measurementable?
+        
+        switch motionType {
+        case .acc:
+            measurementData = motionManager.accelerometerData?.acceleration
+        case .gyro:
+            measurementData = motionManager.gyroData?.rotationRate
+        }
+        
+        guard let data = measurementData else { return }
+        
+        graphView.add([data.x, data.y, data.z])
+    }
+
     private func checkOutofTime(_ value: Double) -> Bool {
         return round(value * 10) / 10 == MotionMeasurementNumber.completeTime
     }
@@ -111,3 +92,14 @@ fileprivate enum MotionMeasurementNumber {
     static let updateInterval = 1.0 / 10.0
     static let completeTime = 60.0
 }
+
+
+protocol Measurementable {
+    var x: Double { get }
+    var y: Double { get }
+    var z: Double { get }
+}
+
+extension CMAcceleration: Measurementable { }
+extension CMRotationRate: Measurementable { }
+
