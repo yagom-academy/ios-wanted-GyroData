@@ -23,6 +23,7 @@
 		8ADDF9FA295B1F9B00085D72 /* MotionDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADDF9F9295B1F9B00085D72 /* MotionDataManager.swift */; };
 		C43AF11E295D76F900EE7A7E /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43AF11D295D76F900EE7A7E /* GraphView.swift */; };
 		C43AF121295D771000EE7A7E /* GraphType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43AF120295D771000EE7A7E /* GraphType.swift */; };
+		C43AF124295D7A6E00EE7A7E /* MockModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43AF123295D7A6E00EE7A7E /* MockModel.swift */; };
 		C456F846295A0A2C008C9261 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C456F845295A0A2C008C9261 /* UIImage+Extension.swift */; };
 		C456F848295A0A5A008C9261 /* UIContextualAction+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C456F847295A0A5A008C9261 /* UIContextualAction+Extension.swift */; };
 		C456F84A295A0EBF008C9261 /* CustomSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C456F849295A0EBF008C9261 /* CustomSegmentedControl.swift */; };
@@ -76,6 +77,7 @@
 		8ADDF9F9295B1F9B00085D72 /* MotionDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDataManager.swift; sourceTree = "<group>"; };
 		C43AF11D295D76F900EE7A7E /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		C43AF120295D771000EE7A7E /* GraphType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphType.swift; sourceTree = "<group>"; };
+		C43AF123295D7A6E00EE7A7E /* MockModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockModel.swift; sourceTree = "<group>"; };
 		C456F845295A0A2C008C9261 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		C456F847295A0A5A008C9261 /* UIContextualAction+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIContextualAction+Extension.swift"; sourceTree = "<group>"; };
 		C456F849295A0EBF008C9261 /* CustomSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentedControl.swift; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 			isa = PBXGroup;
 			children = (
 				8ADDF9F7295B1F2900085D72 /* GyroModel.swift */,
+				C43AF123295D7A6E00EE7A7E /* MockModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -343,6 +346,7 @@
 				8ADDF9FA295B1F9B00085D72 /* MotionDataManager.swift in Sources */,
 				63F01BB928D44FC400C53A39 /* MainViewController.swift in Sources */,
 				8A6A5BC829597DA900B9EB85 /* ReuseIdentifiable.swift in Sources */,
+				C43AF124295D7A6E00EE7A7E /* MockModel.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				8A6A5BD6295B0BD000B9EB85 /* Model.xcdatamodeld in Sources */,
 				C456F84A295A0EBF008C9261 /* CustomSegmentedControl.swift in Sources */,

@@ -30,6 +30,13 @@ final class MeasurementReplayViewController: UIViewController {
     
     private let gridView = GridView()
     
+    private let graphView = GraphView(
+        graphType: .show,
+        xPoints: MockModel.xPoints,
+        yPoints: MockModel.yPoints,
+        zPoints: MockModel.zPoints
+    )
+    
     private let playButton: UIButton = {
         let button = UIButton()
         let playImage = UIImage(systemName: "play.fill")
@@ -60,6 +67,16 @@ final class MeasurementReplayViewController: UIViewController {
         super.viewWillAppear(animated)
         setupConstraint()
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+           graphView.frame = CGRect(
+            x: gridView.frame.minX + 2,
+            y: gridView.frame.minY,
+            width: gridView.frame.width,
+            height: gridView.frame.height - 4
+           )
+       }
     
     // MARK: - Initializers
     
@@ -118,12 +135,8 @@ final class MeasurementReplayViewController: UIViewController {
     }
     
     private func setupSubview() {
-        [dateLabel, viewTypeLabel, gridView, playButton, playTimeLabel]
+        [dateLabel, viewTypeLabel, gridView, graphView, playButton, playTimeLabel]
             .forEach { view.addSubview($0) }
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
     }
     
     private func setupConstraint() {
