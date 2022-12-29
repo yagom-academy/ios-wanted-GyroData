@@ -8,24 +8,29 @@
 import Foundation
 
 protocol ListViewModelInput {
-    var model: MeasuredData { get }
+    var models: Observable<[MeasuredData]> { get }
 }
 
-protocol ListViewModelOutput {
-    func configure() -> CellData
-}
+protocol ListViewModelOutput { }
 
-protocol ListViewModel: ListViewModelInput, ListViewModelOutput {}
+protocol ListViewModel: ListViewModelInput, ListViewModelOutput { }
 
 final class DefaultListViewModel: ListViewModel {
-    var model: MeasuredData
+    private let coreDataManager = CoreDataManager()
+    private let fileHandlerManager = FileHandleManager()
     
-    init(model: MeasuredData) {
-        self.model = model
+    var models: Observable<[MeasuredData]> = Observable([])
+    
+    init() {
+        coreDataManager.fileManager = fileHandlerManager
     }
     
-    func configure() -> CellData {
-
-        return CellData(date: model.date.translateToString(), measuredTime: "", sensor: "")
+    func fetchData() {
+        models.value = coreDataManager.read()
+    }
+    
+    func deleteData(data: MeasuredData) {
+        coreDataManager.delete(data: data)
+        fetchData()
     }
 }
