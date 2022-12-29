@@ -70,10 +70,14 @@ class GraphView: UIView {
     private var runningTime: Int = 0
     private var max: CGFloat = 0
     private var initalDraw: Int = 0
+    var measureTime: Int = 599
     var isOverflowValue: Bool = false
+    var isShow: Bool = false
     
     lazy var standardXpoint = { (point: Int) -> CGFloat in
-        return CGFloat(point) * (self.frame.width / CGFloat(599))
+        let margin: CGFloat = 5
+        let space = (self.frame.width - margin * 2) / CGFloat(self.measureTime)
+        return CGFloat(point) * space + margin
     }
     
     lazy var standardYPoint = { (graphPoint : Double) -> CGFloat in
@@ -86,13 +90,16 @@ class GraphView: UIView {
         if initalDraw == 0 {
             initalSetting()
         } else {
-            if isOverflowValue {
-                overflow()
-                isOverflowValue = false
+            if isShow {
+                show()
+            } else {
+                if isOverflowValue {
+                    overflow()
+                    isOverflowValue = false
+                }
+                drawPath()
+                runningTime += 1
             }
-            drawPath()
-            
-            runningTime += 1
         }
     }
     
@@ -145,6 +152,26 @@ class GraphView: UIView {
         self.layer.addSublayer(layer)
     }
     
+    private func show() {
+        self.xLabel.isHidden = true
+        self.yLabel.isHidden = true
+        self.zLabel.isHidden = true
+        
+        preview(path: xPath, points: xPoints, color: GraphColor.x)
+        preview(path: yPath, points: yPoints, color: GraphColor.y)
+        preview(path: zPath, points: zPoints, color: GraphColor.z)
+    }
+    
+    func preview(path:UIBezierPath, points:[Double], color:UIColor){
+        path.move(to: CGPoint(x: standardXpoint(0), y: standardYPoint(points[0])))
+        for i in 1..<points.count{
+            path.addLine(to: CGPoint(x: standardXpoint(i), y: standardYPoint(points[i])))
+        }
+        color.setFill()
+        color.setStroke()
+        path.stroke()
+    }
+    
     private func drawPath() {
         drawGraph(path: xPath, next: xPoint, points: &xPoints, color: GraphColor.x, time: runningTime)
         drawGraph(path: yPath, next: yPoint, points: &yPoints, color: GraphColor.y, time: runningTime)
@@ -182,9 +209,9 @@ class GraphView: UIView {
     }
     
     func setLabel(x: Double, y: Double, z: Double) {
-        self.xLabel.text = "x: \(round(x*1000)/1000)"
-        self.yLabel.text = "y: \(round(y*1000)/1000)"
-        self.zLabel.text = "z: \(round(z*1000)/1000)"
+        self.xLabel.text = "x: \(String(format: "%.3f", x))"
+        self.yLabel.text = "y: \(String(format: "%.3f", y))"
+        self.zLabel.text = "z: \(String(format: "%.3f", z))"
     }
     
     func getData(x: Double, y: Double, z: Double) {
@@ -205,6 +232,14 @@ class GraphView: UIView {
         self.xPoints = [0.0]
         self.yPoints = [0.0]
         self.zPoints = [0.0]
+    }
+    
+    func setShowGraphValue(x: [Double], y: [Double], z: [Double], max: CGFloat, time: Int) {
+        self.xPoints = x
+        self.yPoints = y
+        self.zPoints = z
+        self.max = max
+        self.measureTime = time
     }
     
 }
