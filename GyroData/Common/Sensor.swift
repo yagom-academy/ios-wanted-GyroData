@@ -5,7 +5,7 @@
 //  Created by minsson on 2022/12/27.
 //
 
-enum Sensor {
+enum Sensor: String {
     case accelerometer
     case gyro
 }
