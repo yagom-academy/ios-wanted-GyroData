@@ -21,6 +21,8 @@
 		32F77CC8295C7BDA00A78CCD /* CoordinateEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F77CC4295C7BDA00A78CCD /* CoordinateEntity+CoreDataProperties.swift */; };
 		32F77CCA295C7DB700A78CCD /* CoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F77CC9295C7DB700A78CCD /* CoreDataStorage.swift */; };
 		32F77CCC295C81A800A78CCD /* MotionDataListStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F77CCB295C81A800A78CCD /* MotionDataListStorage.swift */; };
+		3A6D2624295B258800FFD7F1 /* MotionRecordingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6D2622295B258800FFD7F1 /* MotionRecordingViewController.swift */; };
+		3A9BFE94295BF25D007824C6 /* MotionRecordingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9BFE93295BF25D007824C6 /* MotionRecordingViewModel.swift */; };
 		32FD288A295B2588006B6871 /* RecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32FD2889295B2588006B6871 /* RecordTableViewCell.swift */; };
 		32FD288C295B2EFB006B6871 /* MotionDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32FD288B295B2EFB006B6871 /* MotionDataViewModel.swift */; };
 		32FD288E295BE44D006B6871 /* FetchMotionDataListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32FD288D295BE44D006B6871 /* FetchMotionDataListUseCase.swift */; };
@@ -51,6 +53,8 @@
 		32F77CC4295C7BDA00A78CCD /* CoordinateEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoordinateEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		32F77CC9295C7DB700A78CCD /* CoreDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStorage.swift; sourceTree = "<group>"; };
 		32F77CCB295C81A800A78CCD /* MotionDataListStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDataListStorage.swift; sourceTree = "<group>"; };
+		3A6D2622295B258800FFD7F1 /* MotionRecordingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionRecordingViewController.swift; sourceTree = "<group>"; };
+		3A9BFE93295BF25D007824C6 /* MotionRecordingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionRecordingViewModel.swift; sourceTree = "<group>"; };
 		32FD2889295B2588006B6871 /* RecordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordTableViewCell.swift; sourceTree = "<group>"; };
 		32FD288B295B2EFB006B6871 /* MotionDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDataViewModel.swift; sourceTree = "<group>"; };
 		32FD288D295BE44D006B6871 /* FetchMotionDataListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchMotionDataListUseCase.swift; sourceTree = "<group>"; };
@@ -116,6 +120,8 @@
 				32F77CC3295C7BDA00A78CCD /* CoordinateEntity+CoreDataClass.swift */,
 				32F77CC4295C7BDA00A78CCD /* CoordinateEntity+CoreDataProperties.swift */,
 				32B01339295A871C005C8750 /* GraphViewModel.swift */,
+				3A6D2622295B258800FFD7F1 /* MotionRecordingViewController.swift */,
+				3A9BFE93295BF25D007824C6 /* MotionRecordingViewModel.swift */,
 				329E7EEC295B1A0100537466 /* MotionDataListViewController.swift */,
 				32FD288D295BE44D006B6871 /* FetchMotionDataListUseCase.swift */,
 				32FDB344295BE62A0095F6A5 /* DeleteMotionDataUseCase.swift */,
@@ -201,6 +207,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				32F77CC8295C7BDA00A78CCD /* CoordinateEntity+CoreDataProperties.swift in Sources */,
+				3A6D2624295B258800FFD7F1 /* MotionRecordingViewController.swift in Sources */,
 				32FDB34B295C18F20095F6A5 /* MotionReplayViewController.swift in Sources */,
 				329E7EE9295B058200537466 /* MotionMode.swift in Sources */,
 				32FDB347295BEF8E0095F6A5 /* MockStorage.swift in Sources */,
@@ -217,6 +224,7 @@
 				32F77CC7295C7BDA00A78CCD /* CoordinateEntity+CoreDataClass.swift in Sources */,
 				63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */,
 				32F77CC6295C7BDA00A78CCD /* MotionRecordEntity+CoreDataProperties.swift in Sources */,
+				3A9BFE94295BF25D007824C6 /* MotionRecordingViewModel.swift in Sources */,
 				32FD288E295BE44D006B6871 /* FetchMotionDataListUseCase.swift in Sources */,
 				32FD288C295B2EFB006B6871 /* MotionDataViewModel.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
