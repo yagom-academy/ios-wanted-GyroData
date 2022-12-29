@@ -16,14 +16,14 @@ final class MotionRecordingViewModel {
     }
     var isRecording: Bool = false {
         didSet {
-            toggleSegmentContorlEnable?()
+            reflectRecordingState?(isRecording)
         }
     }
     var isFullDatas: Bool {
         let maximumCount = Int(self.timeOut / self.updateTimeInterval)
         return self.coordinates.count >= maximumCount
     }
-    var toggleSegmentContorlEnable: (() -> Void)?
+    var reflectRecordingState: ((Bool) -> Void)?
     private let saveMotionDataUseCase = SaveMotionDataUseCase()
     private let timeOut = TimeInterval(60)
     private var startDate = Date()

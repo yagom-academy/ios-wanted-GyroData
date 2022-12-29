@@ -20,6 +20,7 @@ final class MotionRecordingViewController: UIViewController {
     private let stopButton = {
         let button = UIButton(type: .system)
         button.setTitle("정지", for: .normal)
+        button.isEnabled = false
         return button
     }()
     private let saveButton = UIBarButtonItem(title: nil, style: .plain, target: nil, action: nil)
@@ -47,9 +48,10 @@ final class MotionRecordingViewController: UIViewController {
         super.viewDidLoad()
         layout()
         setButtonActions()
-        motionRecordingViewModel.toggleSegmentContorlEnable = { [weak self] in
+        motionRecordingViewModel.reflectRecordingState = { [weak self] isEnabled in
             DispatchQueue.main.async {
-                self?.segmentedControl.isEnabled.toggle()
+                self?.segmentedControl.isEnabled = !isEnabled
+                self?.stopButton.isEnabled = isEnabled
             }
         }
     }
@@ -83,7 +85,6 @@ final class MotionRecordingViewController: UIViewController {
         }
         let stopRecording = UIAction() { [weak self] _ in
             self?.motionRecordingViewModel.stopButtonTapped()
-            reset()
         }
         let saveRecording = UIAction(title: "저장") { [weak self] _ in
             self?.motionRecordingViewModel.saveRecord()
