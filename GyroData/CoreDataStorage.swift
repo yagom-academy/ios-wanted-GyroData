@@ -14,7 +14,7 @@ final class CoreDataStorage {
     private init() {}
 
     // MARK: - Core Data stack
-    private lazy var persistentContainer: NSPersistentContainer = {
+    lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "MotionData")
         container.loadPersistentStores { _, error in
             if let error = error as NSError? {

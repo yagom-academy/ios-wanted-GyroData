@@ -11,33 +11,26 @@ final class MotionRecordingStorage {
     private let coreDataStorage = CoreDataStorage.shared
 
     func saveRecord(record: MotionRecord, completion: @escaping (Result<Void, Error>) -> Void) {
+        let context = coreDataStorage.persistentContainer.viewContext
+        let newRecord = MotionRecordEntity(context: context)
+        newRecord.motionRecordId = record.id
+        newRecord.startDate = record.startDate
+        newRecord.msInterval = Int64(record.msInterval)
+        newRecord.motionMode = record.motionMode.name
 
-        coreDataStorage.performBackgroundTask { context in
-            guard let context = MotionRecordEntity(context: context).managedObjectContext else { return }
-            record.coordinates.forEach {
-                let newCoordinate = CoordinateEntity(context: context)
-                newCoordinate.motionRecordId = record.id
-                newCoordinate.x = $0.x
-                newCoordinate.y = $0.y
-                newCoordinate.z = $0.z
-            }
-
-            let newRecord = MotionRecordEntity(context: context)
-            newRecord.motionRecordId = record.id
-            newRecord.startDate = record.startDate
-            newRecord.msInterval = Int64(record.msInterval)
-            newRecord.motionMode = record.motionMode.name
-
-            do {
-                try context.save()
-
-            } catch {
-                completion(.failure(error))
-            }
-
-            completion(.success(()))
+        record.coordinates.forEach {
+            let newCoordinate = CoordinateEntity(context: context)
+            newCoordinate.motionRecordId = record.id
+            newCoordinate.x = $0.x
+            newCoordinate.y = $0.y
+            newCoordinate.z = $0.z
         }
-    }
+
+        do {
+            try context.save()
+        } catch {
+            print(error)
+        }    }
 }
 
 fileprivate extension MotionMode {
