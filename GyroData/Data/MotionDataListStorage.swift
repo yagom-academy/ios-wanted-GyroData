@@ -11,8 +11,8 @@ final class MotionDataListStorage: MotionDataListStorageProtocol {
     private let coreDataStorage = CoreDataStorage.shared
 
     func loadMotionRecords(page: Int, completion: @escaping (Result<[MotionRecord], Error>) -> Void) {
-
-        coreDataStorage.performBackgroundTask { context in
+        let context = coreDataStorage.persistentContainer.viewContext
+        DispatchQueue.global().async {
             do {
                 let request: NSFetchRequest = MotionRecordEntity.fetchRequest()
                 request.sortDescriptors = [NSSortDescriptor(key: #keyPath(MotionRecordEntity.startDate), ascending: false)]

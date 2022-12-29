@@ -11,7 +11,4 @@ import CoreData
 
 @objc(MotionRecordEntity)
 public class MotionRecordEntity: NSManagedObject {
-    var coordinates: [CoordinateEntity] {
-        return value(forKey: "coordinates") as? [CoordinateEntity] ?? []
-    }
 }

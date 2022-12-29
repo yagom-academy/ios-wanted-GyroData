@@ -18,14 +18,7 @@ final class MotionRecordingStorage: MotionRecordingStorageProtocol {
             newRecord.startDate = record.startDate
             newRecord.msInterval = Int64(record.msInterval)
             newRecord.motionMode = record.motionMode.name
-
-            record.coordinates.forEach {
-                let newCoordinate = CoordinateEntity(context: context)
-                newCoordinate.motionRecordId = record.id
-                newCoordinate.x = $0.x
-                newCoordinate.y = $0.y
-                newCoordinate.z = $0.z
-            }
+            newRecord.coordinates = record.coordinates.map { return [$0.x, $0.y, $0.z] }
 
             do {
                 try context.save()

@@ -20,6 +20,7 @@ extension MotionRecordEntity {
     @NSManaged public var startDate: Date
     @NSManaged public var msInterval: Int64
     @NSManaged public var motionMode: String
+    @NSManaged public var coordinates: [[Double]]
 
     func toDomain() -> MotionRecord {
         return MotionRecord(
@@ -27,7 +28,7 @@ extension MotionRecordEntity {
             startDate: startDate,
             msInterval: Int(msInterval),
             motionMode: .accelerometer,
-            coordinates: coordinates.map { Coordinate(x: $0.x, y: $0.y, z: $0.z) }
+            coordinates: coordinates.map { Coordinate(x: $0[0], y: $0[1], z: $0[2]) }
         )
     }
 }

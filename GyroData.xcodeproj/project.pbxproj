@@ -19,8 +19,6 @@
 		32F77CC0295C7AA400A78CCD /* MotionData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 32F77CBE295C7AA400A78CCD /* MotionData.xcdatamodeld */; };
 		32F77CC5295C7BDA00A78CCD /* MotionRecordEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F77CC1295C7BDA00A78CCD /* MotionRecordEntity+CoreDataClass.swift */; };
 		32F77CC6295C7BDA00A78CCD /* MotionRecordEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F77CC2295C7BDA00A78CCD /* MotionRecordEntity+CoreDataProperties.swift */; };
-		32F77CC7295C7BDA00A78CCD /* CoordinateEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F77CC3295C7BDA00A78CCD /* CoordinateEntity+CoreDataClass.swift */; };
-		32F77CC8295C7BDA00A78CCD /* CoordinateEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F77CC4295C7BDA00A78CCD /* CoordinateEntity+CoreDataProperties.swift */; };
 		32F77CCA295C7DB700A78CCD /* CoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F77CC9295C7DB700A78CCD /* CoreDataStorage.swift */; };
 		32F77CCC295C81A800A78CCD /* MotionDataListStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F77CCB295C81A800A78CCD /* MotionDataListStorage.swift */; };
 		32FD288A295B2588006B6871 /* RecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32FD2889295B2588006B6871 /* RecordTableViewCell.swift */; };
@@ -51,8 +49,6 @@
 		32F77CBF295C7AA400A78CCD /* MotionData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MotionData.xcdatamodel; sourceTree = "<group>"; };
 		32F77CC1295C7BDA00A78CCD /* MotionRecordEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MotionRecordEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		32F77CC2295C7BDA00A78CCD /* MotionRecordEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MotionRecordEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		32F77CC3295C7BDA00A78CCD /* CoordinateEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoordinateEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
-		32F77CC4295C7BDA00A78CCD /* CoordinateEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoordinateEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		32F77CC9295C7DB700A78CCD /* CoreDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStorage.swift; sourceTree = "<group>"; };
 		32F77CCB295C81A800A78CCD /* MotionDataListStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDataListStorage.swift; sourceTree = "<group>"; };
 		32FD2889295B2588006B6871 /* RecordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordTableViewCell.swift; sourceTree = "<group>"; };
@@ -121,8 +117,6 @@
 				32F77CBE295C7AA400A78CCD /* MotionData.xcdatamodeld */,
 				32F77CC1295C7BDA00A78CCD /* MotionRecordEntity+CoreDataClass.swift */,
 				32F77CC2295C7BDA00A78CCD /* MotionRecordEntity+CoreDataProperties.swift */,
-				32F77CC3295C7BDA00A78CCD /* CoordinateEntity+CoreDataClass.swift */,
-				32F77CC4295C7BDA00A78CCD /* CoordinateEntity+CoreDataProperties.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -294,7 +288,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				32F77CC8295C7BDA00A78CCD /* CoordinateEntity+CoreDataProperties.swift in Sources */,
 				3A6D2624295B258800FFD7F1 /* MotionRecordingViewController.swift in Sources */,
 				32FDB34B295C18F20095F6A5 /* MotionReplayViewController.swift in Sources */,
 				329E7EE9295B058200537466 /* MotionMode.swift in Sources */,
@@ -308,7 +301,6 @@
 				32FDB349295C18C80095F6A5 /* ReplayType.swift in Sources */,
 				329E7EEB295B05D000537466 /* MotionRecord.swift in Sources */,
 				32F77CC5295C7BDA00A78CCD /* MotionRecordEntity+CoreDataClass.swift in Sources */,
-				32F77CC7295C7BDA00A78CCD /* CoordinateEntity+CoreDataClass.swift in Sources */,
 				32F77CC6295C7BDA00A78CCD /* MotionRecordEntity+CoreDataProperties.swift in Sources */,
 				3A9BFE94295BF25D007824C6 /* MotionRecordingViewModel.swift in Sources */,
 				32FD288E295BE44D006B6871 /* FetchMotionDataListUseCase.swift in Sources */,
