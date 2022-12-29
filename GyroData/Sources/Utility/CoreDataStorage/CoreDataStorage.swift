@@ -35,6 +35,8 @@ extension CoreDataStorage {
         let request = MotionEntity.fetchRequest()
         request.fetchLimit = 10
         request.fetchOffset = Int(page * 10) - 10
+        let dateSort = NSSortDescriptor(key: "date", ascending: false)
+        request.sortDescriptors = [dateSort]
         return try context.fetch(request)
     }
     
