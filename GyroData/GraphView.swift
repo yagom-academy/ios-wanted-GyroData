@@ -69,19 +69,20 @@ final class GraphView: UIView {
 
     func drawGraphFor1Hz(layerType: Layer, value: Double) {
         var layer: CAShapeLayer?
+        let scaledValue = value * 1000
 
         switch layerType {
         case .red:
             layer = redLinesLayer
-            redLabel.text = "x:\(String(format:"%.0f", value))"
+            redLabel.text = String(format: "x:%.0f", scaledValue)
             viewModel.pastValueForRed.append(value)
         case .blue:
             layer = blueLinesLayer
-            blueLabel.text = "z:\(String(format:"%.0f", value))"
+            blueLabel.text = String(format: "y:%.0f", scaledValue)
             viewModel.pastValueForBlue.append(value)
         case .green:
             layer = greenLinesLayer
-            greenLabel.text = "y:\(String(format:"%.0f", value))"
+            greenLabel.text = String(format: "z:%.0f", scaledValue)
             viewModel.pastValueForGreen.append(value)
         }
 
@@ -97,9 +98,21 @@ final class GraphView: UIView {
         layer?.path = path
     }
 
-    private func upScaleGraph(with value: Double) {
-        viewModel.yScale =  1.2 * 2 * abs(value)
+    func reset() {
+        resetViewModel()
+        eraseGraph()
+    }
 
+    private func resetViewModel() {
+        viewModel.pastValueForRed.removeAll()
+        viewModel.pastValueForBlue.removeAll()
+        viewModel.pastValueForGreen.removeAll()
+    }
+
+    private func eraseGraph() {
+        redLabel.text = "x:0"
+        blueLabel.text = "y:0"
+        greenLabel.text = "z:0"
         [redLinesLayer, blueLinesLayer, greenLinesLayer].forEach {
             $0.removeFromSuperlayer()
         }
@@ -110,6 +123,11 @@ final class GraphView: UIView {
         [redLinesLayer, blueLinesLayer, greenLinesLayer].forEach {
             self.layer.addSublayer($0)
         }
+    }
+
+    private func upScaleGraph(with value: Double) {
+        viewModel.yScale =  1.2 * 2 * abs(value)
+        eraseGraph()
         drawPastValues()
     }
 
@@ -136,17 +154,18 @@ final class GraphView: UIView {
     }
 
     private func layout() {
+        let spacing = 10.0
         [redLabel, blueLabel, greenLabel].forEach {
             self.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         NSLayoutConstraint.activate([
-            redLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            greenLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            blueLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-            redLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
-            blueLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
-            greenLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10)
+            redLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: spacing),
+            blueLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            greenLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -spacing),
+            redLabel.topAnchor.constraint(equalTo: topAnchor, constant: spacing),
+            blueLabel.topAnchor.constraint(equalTo: topAnchor, constant: spacing),
+            greenLabel.topAnchor.constraint(equalTo: topAnchor, constant: spacing)
         ])
     }
     
