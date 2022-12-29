@@ -14,7 +14,7 @@ final class ListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupInitialView()
-        setupNavigation()
+        setupNavigationBar()
         setupBinding()
     }
     
