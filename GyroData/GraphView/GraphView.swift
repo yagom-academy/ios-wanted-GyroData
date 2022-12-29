@@ -66,9 +66,9 @@ private extension GraphView {
         let xInterval = self.frame.width / CGFloat(measuredData.measuredTime * 10)
         
         let sensorData: [[Double]] = [
-            measuredData.sensorData.AxisX,
-            measuredData.sensorData.AxisY,
-            measuredData.sensorData.AxisZ
+            measuredData.sensorData.axisX,
+            measuredData.sensorData.axisY,
+            measuredData.sensorData.axisZ
         ]
         
         sensorData.forEach { eachAxisData in
