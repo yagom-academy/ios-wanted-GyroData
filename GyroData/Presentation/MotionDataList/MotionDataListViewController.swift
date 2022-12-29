@@ -8,7 +8,7 @@
 import UIKit
 
 final class MotionDataListViewController: UIViewController {
-    private let viewModel = MotionDataViewModel()
+    private let viewModel = MotionDataListViewModel()
 
     private lazy var recordTableView: UITableView = {
         let tableView = UITableView()

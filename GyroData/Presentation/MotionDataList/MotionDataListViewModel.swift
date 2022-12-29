@@ -6,7 +6,7 @@
 //
 import Foundation
 
-final class MotionDataViewModel {
+final class MotionDataListViewModel {
     var records = [MotionRecord]()
     private let fetchMotionDataListUseCase = FetchMotionDataListUseCase()
     private let deleteMotionDataListUseCase = DeleteMotionDataUseCase()
