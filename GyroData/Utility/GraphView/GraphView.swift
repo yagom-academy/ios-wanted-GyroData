@@ -26,6 +26,12 @@ class GraphView: UIView {
         return segments.last
     }
     
+    var segmentDatas: [[Double]] {
+        return segments.map {
+            $0.dataPoint
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
