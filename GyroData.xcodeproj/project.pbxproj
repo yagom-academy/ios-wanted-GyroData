@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		32040C0D295D696B00317CA8 /* MotionRecordingStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32040C0C295D696B00317CA8 /* MotionRecordingStorage.swift */; };
 		329E7EE7295B052D00537466 /* Coordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329E7EE6295B052D00537466 /* Coordinate.swift */; };
 		329E7EE9295B058200537466 /* MotionMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329E7EE8295B058200537466 /* MotionMode.swift */; };
 		329E7EEB295B05D000537466 /* MotionRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329E7EEA295B05D000537466 /* MotionRecord.swift */; };
@@ -26,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		32040C0C295D696B00317CA8 /* MotionRecordingStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionRecordingStorage.swift; sourceTree = "<group>"; };
 		329E7EE6295B052D00537466 /* Coordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinate.swift; sourceTree = "<group>"; };
 		329E7EE8295B058200537466 /* MotionMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionMode.swift; sourceTree = "<group>"; };
 		329E7EEA295B05D000537466 /* MotionRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionRecord.swift; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 				32B01337295A844B005C8750 /* GraphView.swift */,
 				32F77CC9295C7DB700A78CCD /* CoreDataStorage.swift */,
 				32F77CCB295C81A800A78CCD /* MotionDataListStorage.swift */,
+				32040C0C295D696B00317CA8 /* MotionRecordingStorage.swift */,
 				32F77CBE295C7AA400A78CCD /* MotionData.xcdatamodeld */,
 				32F77CC1295C7BDA00A78CCD /* MotionRecordEntity+CoreDataClass.swift */,
 				32F77CC2295C7BDA00A78CCD /* MotionRecordEntity+CoreDataProperties.swift */,
@@ -179,6 +182,7 @@
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				329E7EE7295B052D00537466 /* Coordinate.swift in Sources */,
 				32B01338295A844B005C8750 /* GraphView.swift in Sources */,
+				32040C0D295D696B00317CA8 /* MotionRecordingStorage.swift in Sources */,
 				32F77CC0295C7AA400A78CCD /* MotionData.xcdatamodeld in Sources */,
 				32F77CCC295C81A800A78CCD /* MotionDataListStorage.swift in Sources */,
 			);

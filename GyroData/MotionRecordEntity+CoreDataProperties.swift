@@ -20,7 +20,6 @@ extension MotionRecordEntity {
     @NSManaged public var startDate: Date
     @NSManaged public var msInterval: Int64
     @NSManaged public var motionMode: String
-    @NSManaged public var coordinate: NSObject
 
     func toDomain() -> MotionRecord {
         return MotionRecord(

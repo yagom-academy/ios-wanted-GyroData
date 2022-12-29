@@ -19,6 +19,7 @@ extension CoordinateEntity {
     @NSManaged public var x: Double
     @NSManaged public var y: Double
     @NSManaged public var z: Double
+    @NSManaged public var motionRecordId: UUID
 
 }
 
