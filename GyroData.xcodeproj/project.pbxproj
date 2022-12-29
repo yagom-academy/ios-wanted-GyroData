@@ -21,9 +21,7 @@
 		8F82A222295DB43E001722C3 /* HostingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F82A221295DB43E001722C3 /* HostingViewController.swift */; };
 		8F97A77E295C1CD900138E61 /* AnalyzeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F97A77D295C1CD900138E61 /* AnalyzeListViewController.swift */; };
 		8F97A782295C20FA00138E61 /* AnalysisTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F97A781295C20FA00138E61 /* AnalysisTableViewCell.swift */; };
-		9B3C8CD9295AB2CF0026AEA5 /* AccelerateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3C8CD8295AB2CF0026AEA5 /* AccelerateManager.swift */; };
 		9B3C8CDB295AB2E70026AEA5 /* AnalysisManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3C8CDA295AB2E70026AEA5 /* AnalysisManager.swift */; };
-		9B3C8CDD295AB3140026AEA5 /* GyroscopeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3C8CDC295AB3140026AEA5 /* GyroscopeManager.swift */; };
 		9B650963295C1D9E00277B34 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B650962295C1D9E00277B34 /* UIColor+.swift */; };
 		9B650965295C350B00277B34 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B650964295C350B00277B34 /* UIView+.swift */; };
 		9B650967295C4EDF00277B34 /* AnalyzeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B650966295C4EDF00277B34 /* AnalyzeViewController.swift */; };
@@ -47,9 +45,7 @@
 		8F82A221295DB43E001722C3 /* HostingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingViewController.swift; sourceTree = "<group>"; };
 		8F97A77D295C1CD900138E61 /* AnalyzeListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyzeListViewController.swift; sourceTree = "<group>"; };
 		8F97A781295C20FA00138E61 /* AnalysisTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisTableViewCell.swift; sourceTree = "<group>"; };
-		9B3C8CD8295AB2CF0026AEA5 /* AccelerateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccelerateManager.swift; sourceTree = "<group>"; };
 		9B3C8CDA295AB2E70026AEA5 /* AnalysisManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisManager.swift; sourceTree = "<group>"; };
-		9B3C8CDC295AB3140026AEA5 /* GyroscopeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroscopeManager.swift; sourceTree = "<group>"; };
 		9B650962295C1D9E00277B34 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		9B650964295C350B00277B34 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		9B650966295C4EDF00277B34 /* AnalyzeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyzeViewController.swift; sourceTree = "<group>"; };
@@ -173,9 +169,7 @@
 		9B4251DD2959C69D00837A37 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
-				9B3C8CD8295AB2CF0026AEA5 /* AccelerateManager.swift */,
 				9B3C8CDA295AB2E70026AEA5 /* AnalysisManager.swift */,
-				9B3C8CDC295AB3140026AEA5 /* GyroscopeManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -193,8 +187,8 @@
 		9B650968295C4F7200277B34 /* Analyze */ = {
 			isa = PBXGroup;
 			children = (
-				9B650966295C4EDF00277B34 /* AnalyzeViewController.swift */,
 				8F82A221295DB43E001722C3 /* HostingViewController.swift */,
+				9B650966295C4EDF00277B34 /* AnalyzeViewController.swift */,
 				9B650969295C654800277B34 /* AnalyzeViewModel.swift */,
 			);
 			path = Analyze;
@@ -276,7 +270,6 @@
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				42404FA82959C04700BCE8B5 /* AnalysisType.swift in Sources */,
 				9B650963295C1D9E00277B34 /* UIColor+.swift in Sources */,
-				9B3C8CDD295AB3140026AEA5 /* GyroscopeManager.swift in Sources */,
 				9B650967295C4EDF00277B34 /* AnalyzeViewController.swift in Sources */,
 				8F4508B1295ACFB200538AE4 /* GraphView.swift in Sources */,
 				8F4508AD29598E6400538AE4 /* CoreDataManager.swift in Sources */,
@@ -288,7 +281,6 @@
 				9B65096A295C654800277B34 /* AnalyzeViewModel.swift in Sources */,
 				8F97A782295C20FA00138E61 /* AnalysisTableViewCell.swift in Sources */,
 				8F97A77E295C1CD900138E61 /* AnalyzeListViewController.swift in Sources */,
-				9B3C8CD9295AB2CF0026AEA5 /* AccelerateManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -427,7 +419,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = QW8FL6CWBT;
+				DEVELOPMENT_TEAM = RUFP7D8BXB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GyroData/SupportFile/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -454,7 +446,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = QW8FL6CWBT;
+				DEVELOPMENT_TEAM = RUFP7D8BXB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GyroData/SupportFile/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

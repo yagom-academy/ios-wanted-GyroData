@@ -8,6 +8,10 @@
 import UIKit
 
 class AnalyzeListViewController: UIViewController {
+    let dummyData2: [CellModel] = [
+        CellModel(id: UUID(), analysisType: "acce", savedAt: Date(), measurementTime: 6.0)
+    ]
+    
     let analysisTableView : UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
