@@ -78,8 +78,8 @@ final class MotionRecordingViewController: UIViewController {
                 switch result {
                 case .success():
                     self?.navigationController?.popViewController(animated: true)
-                case .failure(let error):
-                    let alert = UIAlertController(title: "저장 실패", message: error.localizedDescription, preferredStyle: .alert)
+                case .failure(_):
+                    let alert = UIAlertController(title: "저장 실패", message: nil, preferredStyle: .alert)
                     let alertAction = UIAlertAction(title: "확인", style: .default)
                     alert.addAction(alertAction)
                     self?.present(alert, animated: true)
