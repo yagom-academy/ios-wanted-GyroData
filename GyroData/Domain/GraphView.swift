@@ -11,12 +11,15 @@ import Combine
 
 
 struct GraphView: View {
-    var dummyData: [Analysis] = []
+    @StateObject var viewModel = AnalyzeViewModel(analysisManager: AnalysisManager(analysis: .accelerate))
+    var dummyData: [Analysis] {
+        return viewModel.testArr
+    }
     
     var body: some View {
         ZStack(alignment: .top) {
             GroupBox {
-                FigureView()
+                FigureView(viewModel2: viewModel)
                 Chart() {
                     ForEach(dummyData, id: \.measurementTime) { data in
                         LineMark(
@@ -46,6 +49,9 @@ struct GraphView: View {
                         .lineStyle(StrokeStyle(lineWidth: 1, lineCap: .round))
                     }
                 }
+                .onAppear {
+                    viewModel.bind()
+                }
                 .chartXScale(domain: 0...60, range: .plotDimension(padding: 20))
                 .padding()
             }
@@ -55,11 +61,15 @@ struct GraphView: View {
     }
     
     struct FigureView: View {
+        @ObservedObject var viewModel2 : AnalyzeViewModel
         var body: some View {
             HStack {
                 Text("xdata")
                     .font(.caption2)
                     .foregroundColor(.red)
+                    .onTapGesture {
+                        viewModel2.tapAnalyzeButton()
+                    }
                 Spacer()
                 Text("ydata")
                     .font(.caption2)

@@ -26,6 +26,9 @@ protocol AnalyzeViewModelInterface {
 }
 
 final class AnalyzeViewModel: AnalyzeViewModelInterface, AnalyzeViewModelOutputInterface, ObservableObject {
+
+    var store: AnyCancellable?
+
     // MARK: AnalyzeViewModelInterface
     var input: AnalyzeViewModelInputInterface { self }
     var output: AnalyzeViewModelOutputInterface { self }
@@ -53,6 +56,16 @@ final class AnalyzeViewModel: AnalyzeViewModelInterface, AnalyzeViewModelOutputI
     ) {
         self.analysisManager = analysisManager
     }
+
+    @Published var testArr : [Analysis] = []
+
+    func bind() {
+        store = $analysis
+            .sink { [weak self] model in
+                guard let self = self else { return }
+                self.testArr = model
+            }
+    }
 }
 
 extension AnalyzeViewModel: AnalyzeViewModelInputInterface {
@@ -64,7 +77,7 @@ extension AnalyzeViewModel: AnalyzeViewModelInputInterface {
     
     func tapAnalyzeButton() {
         
-        testAnalysis = [
+        analysis.append(contentsOf: [
             .init(analysisType: .accelerate, x: 10, y: 20, z: 30, measurementTime: 1, savedAt: Date()),
             .init(analysisType: .accelerate, x: 10, y: 20, z: 30, measurementTime: 2, savedAt: Date()),
             .init(analysisType: .accelerate, x: 10, y: 20, z: 30, measurementTime: 3, savedAt: Date()),
@@ -77,7 +90,8 @@ extension AnalyzeViewModel: AnalyzeViewModelInputInterface {
             .init(analysisType: .accelerate, x: 10, y: 20, z: 30, measurementTime: 10, savedAt: Date()),
             .init(analysisType: .accelerate, x: 10, y: 20, z: 30, measurementTime: 11, savedAt: Date()),
             .init(analysisType: .accelerate, x: 10, y: 20, z: 30, measurementTime: 12, savedAt: Date())
-        ]
+        ])
+        bind()
     }
     
     func tapStopButton() {

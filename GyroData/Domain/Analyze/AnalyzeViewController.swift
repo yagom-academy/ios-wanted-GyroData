@@ -51,6 +51,7 @@ final class AnalyzeViewController: UIViewController {
         }
         return chartView
     }()
+
     private var cancellables = Set<AnyCancellable>()
     @ObservedObject private var viewModel = AnalyzeViewModel(
         analysisManager: AnalysisManager(analysis: .accelerate)
@@ -74,6 +75,7 @@ final class AnalyzeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.viewModel.input.onViewWillAppear()
+        viewModel.bind()
     }
 
     override func viewDidLoad() {
@@ -81,9 +83,9 @@ final class AnalyzeViewController: UIViewController {
         self.navigationItem.titleView = titleLabelItem
         self.navigationItem.rightBarButtonItem = analyzeButtonItem
         self.viewModel.input.onViewDidLoad()
-        bind()
         setup()
         setupUI()
+        viewModel.bind()
     }
     
     private func setup() {
@@ -162,19 +164,8 @@ final class AnalyzeViewController: UIViewController {
         ])
     }
     
-    private func bind() {
-        viewModel.$analysis
-            .sink { [weak self] model in
-                guard let self = self else { return }
-                self.swiftUIChartsView.dummyData = model
-                self.view.setNeedsLayout()
-            }
-            .store(in: &cancellables)
-    }
-    
     @objc func tappedAnalyzeButton() {
-        viewModel.input.tapAnalyzeButton()
-        self.swiftUIChartsView.dummyData = []
+        viewModel.tapAnalyzeButton()
         self.view.setNeedsLayout()
     }
 }
