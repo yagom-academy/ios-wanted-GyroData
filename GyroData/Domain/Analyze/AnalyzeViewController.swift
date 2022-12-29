@@ -79,7 +79,7 @@ final class AnalyzeViewController: UIViewController {
     
     @ObservedObject private var viewModel = AnalyzeViewModel(analysisManager: AnalysisManager())
     private var swiftUIChartsView = GraphView()
-    private lazy var hostView = HostingViewController(model2: viewModel)
+    private lazy var hostView = HostingViewController(model2: viewModel.environmnt)
     private lazy var graphView: UIView = {
         guard let chartView = hostView.view else {
             return UIView(frame: .zero)
@@ -91,7 +91,7 @@ final class AnalyzeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.viewModel.input.onViewWillAppear()
-        viewModel.bind()
+//        viewModel.bind()
         bindEvents()
     }
     
@@ -100,7 +100,7 @@ final class AnalyzeViewController: UIViewController {
         self.viewModel.input.onViewDidLoad()
         setup()
         setupUI()
-        viewModel.bind()
+//        viewModel.bind()
     }
     
     private func setup() {

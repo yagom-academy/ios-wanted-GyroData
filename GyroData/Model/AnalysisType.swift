@@ -18,6 +18,10 @@ struct CellModel: Codable {
     let measurementTime: Double
 }
 
+class EnvironmentGraphModel: ObservableObject {
+    @Published var graphModels: [GraphModel] = []
+}
+
 struct GraphModel: Codable {
     let x: Double
     let y: Double

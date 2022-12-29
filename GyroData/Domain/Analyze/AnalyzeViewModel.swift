@@ -40,8 +40,8 @@ final class AnalyzeViewModel: AnalyzeViewModelInterface, AnalyzeViewModelOutputI
     var isLoadingPublisher = PassthroughSubject<Bool, Never>()
     var dissmissPublisher = PassthroughSubject<Void, Never>()
     
+    @Published var environmnt: EnvironmentGraphModel = .init()
     @Published var analysis: [GraphModel] = []
-    @Published var testArr : [GraphModel] = []
     
     private let analysisManager: AnalysisManager
     private var timer: Timer?
@@ -83,6 +83,7 @@ final class AnalyzeViewModel: AnalyzeViewModelInterface, AnalyzeViewModelOutputI
 
 extension AnalyzeViewModel: AnalyzeViewModelInputInterface {
     func onViewWillAppear() {
+        bind()
     }
     
     func onViewDidLoad() {
@@ -90,7 +91,6 @@ extension AnalyzeViewModel: AnalyzeViewModelInputInterface {
     
     func tapAnalyzeButton() {
         analyzeData()
-        bind()
     }
     
     func tapStopButton() {
@@ -136,7 +136,7 @@ extension AnalyzeViewModel: ObservableObject {
         store = $analysis
             .sink { [weak self] model in
                 guard let self = self else { return }
-                self.testArr = model
+                self.environmnt.graphModels = model
             }
     }
 }

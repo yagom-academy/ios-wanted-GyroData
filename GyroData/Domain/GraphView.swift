@@ -11,25 +11,14 @@ import Combine
 
 
 struct GraphView: View {
-    @EnvironmentObject var environment: AnalyzeViewModel
-    
-    var dummyData: [GraphModel] = [
-        .init(x: 1, y: 2, z: 3, measurementTime: 10),
-        .init(x: 2, y: 3, z: 4, measurementTime: 20),
-        .init(x: 3, y: 4, z: 5, measurementTime: 30),
-        .init(x: 4, y: 5, z: 6, measurementTime: 40),
-        .init(x: 5, y: 6, z: 7, measurementTime: 50)
-    ]
-    
-    let dummyData2: [GyroData] = []
+    @EnvironmentObject var environment: EnvironmentGraphModel
     
     var body: some View {
         ZStack(alignment: .top) {
             GroupBox {
-                FigureView()
-                
+                FigureView(viewModel2: environment)
                 Chart {
-                    ForEach(dummyData, id: \.measurementTime) { data in
+                    ForEach(environment.graphModels, id: \.measurementTime) { data in
                         LineMark(
                             x: .value("Time", data.measurementTime),
                             y: .value("value", data.x),
@@ -38,7 +27,7 @@ struct GraphView: View {
                         .foregroundStyle(.red)
                         .lineStyle(StrokeStyle(lineWidth: 1, lineCap: .round))
                     }
-                    ForEach(dummyData, id: \.measurementTime) { data in
+                    ForEach(environment.graphModels, id: \.measurementTime) { data in
                         LineMark(
                             x: .value("Time", data.measurementTime),
                             y: .value("value", data.y),
@@ -47,7 +36,7 @@ struct GraphView: View {
                         .foregroundStyle(.green)
                         .lineStyle(StrokeStyle(lineWidth: 1, lineCap: .round))
                     }
-                    ForEach(dummyData, id: \.measurementTime) { data in
+                    ForEach(environment.graphModels, id: \.measurementTime) { data in
                         LineMark(
                             x: .value("Time", data.measurementTime),
                             y: .value("value", data.z),
@@ -56,9 +45,6 @@ struct GraphView: View {
                         .foregroundStyle(.blue)
                         .lineStyle(StrokeStyle(lineWidth: 1, lineCap: .round))
                     }
-                }
-                .onAppear {
-                    environment.bind()
                 }
                 .chartXScale(domain: 0...60, range: .plotDimension(padding: 20))
                 .padding()
@@ -69,15 +55,12 @@ struct GraphView: View {
     }
     
     struct FigureView: View {
-        @ObservedObject var viewModel2 : AnalyzeViewModel
+        @ObservedObject var viewModel2 : EnvironmentGraphModel
         var body: some View {
             HStack {
                 Text("xdata")
                     .font(.caption2)
                     .foregroundColor(.red)
-                    .onTapGesture {
-                        viewModel2.tapAnalyzeButton()
-                    }
                 Spacer()
                 Text("ydata")
                     .font(.caption2)
