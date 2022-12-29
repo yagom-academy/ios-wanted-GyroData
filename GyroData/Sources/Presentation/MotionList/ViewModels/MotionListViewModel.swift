@@ -28,7 +28,7 @@ final class DefaultMotionListViewModel: MotionListViewModel {
     private let storage: MotionStorage
     private var currentPage: UInt = 1
     
-    init(storage: CoreDataMotionStorage = .init()) {
+    init(storage: MotionStorage = CoreDataMotionStorage()) {
         self.storage = storage
         motions.value = storage.fetch(page: 1)
     }
