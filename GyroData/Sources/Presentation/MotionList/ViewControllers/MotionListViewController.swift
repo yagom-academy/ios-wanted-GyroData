@@ -87,7 +87,10 @@ extension MotionListViewController {
             completeHandeler(true)
         }
         let playAction = UIContextualAction(style: .normal, title: nil) { [weak self] _, _, completeHandeler in
-            self?.coordinator?.showMotionPlayView()
+            guard let motionEntity = self?.viewModel.motions.value[indexPath.row] else {
+                return
+            }
+            self?.coordinator?.showMotionPlayView(motionEntity: motionEntity)
             completeHandeler(true)
         }
         deleteAction.image = UIImage(systemName: "trash.fill")
@@ -126,7 +129,8 @@ extension MotionListViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        coordinator?.showMotionDetailView()
+        let motionEntity = viewModel.motions.value[indexPath.row]
+        coordinator?.showMotionDetailView(motionEntity: motionEntity)
     }
     
 }

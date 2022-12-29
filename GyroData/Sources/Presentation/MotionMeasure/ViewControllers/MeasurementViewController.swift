@@ -34,9 +34,8 @@ final class MeasurementViewController: UIViewController {
     weak var coordinator: Coordinator?
     private let viewModel: MeasermentViewModel
     
-    init(viewModel: MeasermentViewModel, coordinator: Coordinator) {
+    init(viewModel: MeasermentViewModel) {
         self.viewModel = viewModel
-        self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)
         view.backgroundColor = .systemBackground
     }

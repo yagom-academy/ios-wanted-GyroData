@@ -37,22 +37,17 @@ private extension MotionListCoordinator {
     }
     
     private func makeMotionMeasureViewController() -> UIViewController {
-        let navigationController = UINavigationController()
-        let coordinator = MotionMeasureCoordinator(navigationConrtoller: navigationController)
-        coordinator.parentCoordinator = self
-        coordinator.finishDelegate = self
-        coordinator.start()
-        childCoordinators.append(coordinator)
-        return navigationController
-    }
-    
-    private func makeMotionDetailViewController() -> UIViewController {
-        let viewController = UIViewController()
+        let viewController = MeasurementViewController(viewModel: DefaultMeasermentViewModel())
         return viewController
     }
     
-    private func makeMotionPlayViewController() -> UIViewController {
-        let viewController = UIViewController()
+    private func makeMotionDetailViewController(motionEntity: MotionEntity) -> UIViewController {
+        let viewController = MotionPlayViewController(viewModel: DefaultMotionPlayViewModel(motionEntity: motionEntity, viewType: .view))
+        return viewController
+    }
+    
+    private func makeMotionPlayViewController(motionEntity: MotionEntity) -> UIViewController {
+        let viewController = MotionPlayViewController(viewModel: DefaultMotionPlayViewModel(motionEntity: motionEntity, viewType: .play))
         return viewController
     }
     
@@ -81,13 +76,13 @@ extension MotionListCoordinator: MotionListCoordinatorInterface {
         navigationController.visibleViewController?.present(viewController, animated: true)
     }
     
-    func showMotionDetailView() {
-        let viewController = makeMotionDetailViewController()
+    func showMotionDetailView(motionEntity: MotionEntity) {
+        let viewController = makeMotionDetailViewController(motionEntity: motionEntity)
         navigationController.pushViewController(viewController, animated: true)
     }
     
-    func showMotionPlayView() {
-        let viewController = makeMotionPlayViewController()
+    func showMotionPlayView(motionEntity: MotionEntity) {
+        let viewController = makeMotionPlayViewController(motionEntity: motionEntity)
         navigationController.pushViewController(viewController, animated: true)
     }
     
