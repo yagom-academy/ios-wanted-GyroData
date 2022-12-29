@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol GraphDrawable {
+protocol GraphDrawable: AnyObject {
     var data: MeasuredData? { get }
     
     func retrieveData(data: MeasuredData)
@@ -26,7 +26,7 @@ enum DrawMode {
 
 final class GraphView: UIView, TickReceivable, GraphDrawable {
     func startDraw() {
-        
+
     }
     
     func stopDraw() {

@@ -24,6 +24,7 @@
 		AF1BD841295C1EC500432F19 /* MotionData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1BD83D295C1E9E00432F19 /* MotionData+CoreDataProperties.swift */; };
 		AF1BD844295C3E2A00432F19 /* FileHandleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1BD843295C3E2A00432F19 /* FileHandleManager.swift */; };
 		AF6C3A3B295DCC2C0074574D /* AlertBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6C3A3A295DCC2C0074574D /* AlertBuilder.swift */; };
+		AF6C3A3D295DDEB60074574D /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6C3A3C295DDEB60074574D /* DetailViewModel.swift */; };
 		AF786B27295DBFA700C5DF5F /* MotionData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AF786B25295DBFA700C5DF5F /* MotionData.xcdatamodeld */; };
 		AF786B2B295DC69300C5DF5F /* MeasureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF786B2A295DC69300C5DF5F /* MeasureView.swift */; };
 		AF786B2D295DC6A800C5DF5F /* MeasureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF786B2C295DC6A800C5DF5F /* MeasureViewController.swift */; };
@@ -70,6 +71,7 @@
 		AF1BD83D295C1E9E00432F19 /* MotionData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MotionData+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		AF1BD843295C3E2A00432F19 /* FileHandleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileHandleManager.swift; sourceTree = "<group>"; };
 		AF6C3A3A295DCC2C0074574D /* AlertBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertBuilder.swift; sourceTree = "<group>"; };
+		AF6C3A3C295DDEB60074574D /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		AF786B26295DBFA700C5DF5F /* MotionData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MotionData.xcdatamodel; sourceTree = "<group>"; };
 		AF786B2A295DC69300C5DF5F /* MeasureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureView.swift; sourceTree = "<group>"; };
 		AF786B2C295DC6A800C5DF5F /* MeasureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureViewController.swift; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 			children = (
 				AFABE5E12959734C00F2F6E3 /* ListViewModel.swift */,
 				AF786B2E295DC6C200C5DF5F /* MeasureViewModel.swift */,
+				AF6C3A3C295DDEB60074574D /* DetailViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -342,6 +345,7 @@
 			files = (
 				FDA475AB295DC13A006D57B7 /* UIBezierPath+Extension.swift in Sources */,
 				FDA475AD295DC932006D57B7 /* DetailView.swift in Sources */,
+				AF6C3A3D295DDEB60074574D /* DetailViewModel.swift in Sources */,
 				FDA475B0295DCA15006D57B7 /* DetailViewController.swift in Sources */,
 				AF786B2B295DC69300C5DF5F /* MeasureView.swift in Sources */,
 				63F01BB928D44FC400C53A39 /* ListViewController.swift in Sources */,

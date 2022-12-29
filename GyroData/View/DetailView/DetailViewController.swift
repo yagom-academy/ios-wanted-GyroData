@@ -13,16 +13,12 @@ enum DetailType: String {
 }
 
 final class DetailViewController: UIViewController {
-    private var currenType: DetailType?
     private let detailView = DetailView()
-    private var myData: MeasuredData?
-    private var timer: Timer?
-    private var timerNum: Double = 0.0
+    private let viewModel: DetailViewModel
     
     init(data: MeasuredData,type: DetailType) {
+        viewModel = DetailViewModel(data: data, type: type)
         super.init(nibName: nil, bundle: nil)
-        detailView.setupMode(data: data, type: type)
-        myData = data
     }
     
     required init?(coder: NSCoder) {
@@ -34,6 +30,11 @@ final class DetailViewController: UIViewController {
         view = detailView
         setupNavigationBar()
         setupButton()
+        setupView()
+    }
+    
+    func setupView() {
+        detailView.setupMode(with: viewModel)
     }
 }
 
@@ -41,23 +42,13 @@ extension DetailViewController {
     @objc func playButtonDidTapped() {
         if detailView.playButton.image(for: .normal) == UIImage(systemName: "play.fill") {
             detailView.playButton.setImage(UIImage(systemName: "stop.fill"), for: .normal)
-            timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { [weak self ] _ in
-                
-                guard let self = self else {
-                    return
-                }
-                
-                self.timerNum += 0.1
-                
-                self.detailView.timerLabel.text = self.timerNum.timeDecimal().description
-                
-                if self.timerNum.timeDecimal() == self.myData?.measuredTime {
-                    self.stopTimer()
-                    self.timerNum = 0
-                }
-            })
+            viewModel.startTimer { timerCount in
+                self.detailView.timerLabel.text = timerCount
+            }
         } else {
-            stopTimer()
+            viewModel.stopTimer {
+                self.detailView.playButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+            }
         }
     }
 }
@@ -73,10 +64,5 @@ private extension DetailViewController {
             action: #selector(playButtonDidTapped),
             for: .touchUpInside
         )
-    }
-    
-    func stopTimer() {
-        detailView.playButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
-        timer?.invalidate()
     }
 }
