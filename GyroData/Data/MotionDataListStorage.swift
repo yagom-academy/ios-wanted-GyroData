@@ -10,16 +10,22 @@ import CoreData
 final class MotionDataListStorage: MotionDataListStorageProtocol {
     private let coreDataStorage = CoreDataStorage.shared
 
-    func loadMotionRecords(page: Int, completion: @escaping (Result<[MotionRecord], Error>) -> Void) {
+    func loadMotionRecords(page: Int, completion: @escaping (Result<FetchMotionDataListResponse, Error>) -> Void) {
         let context = coreDataStorage.persistentContainer.viewContext
         DispatchQueue.global().async {
             do {
                 let request: NSFetchRequest = MotionRecordEntity.fetchRequest()
                 request.sortDescriptors = [NSSortDescriptor(key: #keyPath(MotionRecordEntity.startDate), ascending: false)]
                 request.fetchLimit = 10
+                request.fetchOffset = 10 * page
                 let result = try context.fetch(request).map { $0.toDomain() }
+                let response = FetchMotionDataListResponse(
+                    records: result,
+                    currentPage: page,
+                    hasNextPage: !result.isEmpty
+                )
 
-                completion(.success(result))
+                completion(.success(response))
             } catch {
                 completion(.failure(error))
             }

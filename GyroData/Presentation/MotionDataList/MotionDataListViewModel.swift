@@ -11,9 +11,11 @@ final class MotionDataListViewModel {
     private let fetchMotionDataListUseCase = FetchMotionDataListUseCase()
     private let deleteMotionDataListUseCase = DeleteMotionDataUseCase()
     private var pageToLoad = 0
+    var hasNextPage = true
     var reloadData: (() -> Void)?
 
     func viewWillAppear() {
+        initializeViewModel()
         fetchMotionDataList(page: pageToLoad)
     }
 
@@ -25,12 +27,19 @@ final class MotionDataListViewModel {
         }
     }
 
+    private func initializeViewModel() {
+        hasNextPage = true
+        pageToLoad = 0
+    }
+
     private func fetchMotionDataList(page: Int) {
         fetchMotionDataListUseCase.execute(page: page) { [weak self] result in
             guard let self = self else { return }
             switch result {
-            case .success(let records):
-                self.records = records
+            case .success(let response):
+                self.records = response.records
+                self.pageToLoad = response.currentPage + 1
+                self.hasNextPage = response.hasNextPage
                 self.reloadData?()
             case .failure(let error):
                 print(error)
