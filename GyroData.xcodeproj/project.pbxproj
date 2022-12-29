@@ -34,6 +34,7 @@
 		FDA47550295AC953006D57B7 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA4754F295AC953006D57B7 /* CoreDataManager.swift */; };
 		FDA475A9295DC12E006D57B7 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA475A8295DC12E006D57B7 /* GraphView.swift */; };
 		FDA475AB295DC13A006D57B7 /* UIBezierPath+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA475AA295DC13A006D57B7 /* UIBezierPath+Extension.swift */; };
+		FDA475AD295DC932006D57B7 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA475AC295DC932006D57B7 /* DetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,7 @@
 		FDA4754F295AC953006D57B7 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		FDA475A8295DC12E006D57B7 /* GraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		FDA475AA295DC13A006D57B7 /* UIBezierPath+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIBezierPath+Extension.swift"; sourceTree = "<group>"; };
+		FDA475AC295DC932006D57B7 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +149,7 @@
 		A3DED01D29596817007EE19D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				FDA475AE295DC93E006D57B7 /* DetailView */,
 				AF786B29295DC67A00C5DF5F /* MeasureView */,
 				AF786B28295DC65E00C5DF5F /* ListView */,
 			);
@@ -215,6 +218,14 @@
 				AF1BD843295C3E2A00432F19 /* FileHandleManager.swift */,
 			);
 			path = Manager;
+			sourceTree = "<group>";
+		};
+		FDA475AE295DC93E006D57B7 /* DetailView */ = {
+			isa = PBXGroup;
+			children = (
+				FDA475AC295DC932006D57B7 /* DetailView.swift */,
+			);
+			path = DetailView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -318,6 +329,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FDA475AB295DC13A006D57B7 /* UIBezierPath+Extension.swift in Sources */,
+				FDA475AD295DC932006D57B7 /* DetailView.swift in Sources */,
 				AF786B2B295DC69300C5DF5F /* MeasureView.swift in Sources */,
 				63F01BB928D44FC400C53A39 /* ListViewController.swift in Sources */,
 				AF1BD844295C3E2A00432F19 /* FileHandleManager.swift in Sources */,
