@@ -21,6 +21,8 @@
 		8A6A5C2B295B16FB00B9EB85 /* CoreDataFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8A6A5C29295B16F000B9EB85 /* CoreDataFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8ADDF9F8295B1F2900085D72 /* GyroModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADDF9F7295B1F2900085D72 /* GyroModel.swift */; };
 		8ADDF9FA295B1F9B00085D72 /* MotionDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADDF9F9295B1F9B00085D72 /* MotionDataManager.swift */; };
+		C43AF11E295D76F900EE7A7E /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43AF11D295D76F900EE7A7E /* GraphView.swift */; };
+		C43AF121295D771000EE7A7E /* GraphType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43AF120295D771000EE7A7E /* GraphType.swift */; };
 		C456F846295A0A2C008C9261 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C456F845295A0A2C008C9261 /* UIImage+Extension.swift */; };
 		C456F848295A0A5A008C9261 /* UIContextualAction+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C456F847295A0A5A008C9261 /* UIContextualAction+Extension.swift */; };
 		C456F84A295A0EBF008C9261 /* CustomSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C456F849295A0EBF008C9261 /* CustomSegmentedControl.swift */; };
@@ -72,6 +74,8 @@
 		8A6A5C24295B16F000B9EB85 /* CoreDataFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CoreDataFramework.xcodeproj; path = CoreDataFramework/CoreDataFramework.xcodeproj; sourceTree = "<group>"; };
 		8ADDF9F7295B1F2900085D72 /* GyroModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroModel.swift; sourceTree = "<group>"; };
 		8ADDF9F9295B1F9B00085D72 /* MotionDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDataManager.swift; sourceTree = "<group>"; };
+		C43AF11D295D76F900EE7A7E /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
+		C43AF120295D771000EE7A7E /* GraphType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphType.swift; sourceTree = "<group>"; };
 		C456F845295A0A2C008C9261 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		C456F847295A0A5A008C9261 /* UIContextualAction+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIContextualAction+Extension.swift"; sourceTree = "<group>"; };
 		C456F849295A0EBF008C9261 /* CustomSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentedControl.swift; sourceTree = "<group>"; };
@@ -183,6 +187,8 @@
 			isa = PBXGroup;
 			children = (
 				C456F86A295C1041008C9261 /* GridView.swift */,
+				C43AF11D295D76F900EE7A7E /* GraphView.swift */,
+				C43AF120295D771000EE7A7E /* GraphType.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -347,6 +353,8 @@
 				C456F856295AF00E008C9261 /* MotionManager.swift in Sources */,
 				8A6A5BC629597C6900B9EB85 /* MainTableViewCell.swift in Sources */,
 				C4E4870329598D7C00A1FB99 /* MeasurementEnrollController.swift in Sources */,
+				C43AF121295D771000EE7A7E /* GraphType.swift in Sources */,
+				C43AF11E295D76F900EE7A7E /* GraphView.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
 				C456F858295AF01D008C9261 /* MotionType.swift in Sources */,
 				8A6A5BDA295B0C8800B9EB85 /* MotionEntity+CoreDataProperties.swift in Sources */,
