@@ -19,7 +19,6 @@ final class MotionDataListStorage: MotionDataListStorageProtocol {
                 request.fetchLimit = 10
                 request.fetchOffset = 10 * page
                 let result = try context.fetch(request).map { $0.toDomain() }
-                print(result.count)
                 let response = FetchMotionDataListResponse(
                     records: result,
                     currentPage: page,

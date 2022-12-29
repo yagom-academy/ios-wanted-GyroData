@@ -34,11 +34,7 @@ final class MotionReplayViewController: UIViewController {
         label.font = UIFont.preferredFont(forTextStyle: .largeTitle)
         return label
     }()
-    private var timer: DispatchSourceTimer = {
-        let timer = DispatchSource.makeTimerSource(queue: .main)
-        timer.schedule(deadline: .now(), repeating: 0.1)
-        return timer
-    }()
+    private var timer = Timer()
 
     init(replayType: ReplayType, motionRecord: MotionRecord) {
         viewModel = MotionReplayViewModel(replayType: replayType, record: motionRecord)
@@ -52,10 +48,6 @@ final class MotionReplayViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    deinit {
-        timer.resume()
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
@@ -66,8 +58,8 @@ final class MotionReplayViewController: UIViewController {
     }
 
     override func viewDidLayoutSubviews() {
-        if viewModel.replayType == .view && !viewModel.didGraphViewStartedDrawing {
-            viewModel.didGraphViewStartedDrawing = true
+        if viewModel.replayType == .view && !viewModel.isDrawingGraphView {
+            viewModel.isDrawingGraphView = true
             showFinishedGraphView()
         }
     }
@@ -117,20 +109,22 @@ final class MotionReplayViewController: UIViewController {
     }
 
     private func playGraphView() {
+        graphView.reset()
         let record = viewModel.record
-        viewModel.didGraphViewStartedDrawing = true
+        viewModel.isDrawingGraphView = true
         var index = 0
         var time: Double = 0
 
-        timer.setEventHandler { [weak self] in
+        timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] timer in
             self?.graphView.drawGraphFor1Hz(layerType: .red, value: record.coordinates[index].x)
             self?.graphView.drawGraphFor1Hz(layerType: .green, value: record.coordinates[index].y)
             self?.graphView.drawGraphFor1Hz(layerType: .blue, value: record.coordinates[index].z)
             index += 1
             time += 0.1
             if index >= record.coordinates.count {
-                self?.timer.suspend()
+                timer.invalidate()
                 self?.playButton.isSelected = true
+                self?.viewModel.isDrawingGraphView = false
             }
             self?.timerLabel.text = "\(String(format:"%.1f", time))"
         }
@@ -150,12 +144,11 @@ final class MotionReplayViewController: UIViewController {
         if viewModel.playButtonState == .play {
             viewModel.playButtonState = .stop
             playButton.setImage(UIImage(systemName: "stop.fill"), for: .normal)
-            if !viewModel.didGraphViewStartedDrawing { playGraphView() }
-            timer.resume()
+            playGraphView()
         } else {
             viewModel.playButtonState = .play
             playButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
-            timer.suspend()
+            timer.invalidate()
         }
     }
 }

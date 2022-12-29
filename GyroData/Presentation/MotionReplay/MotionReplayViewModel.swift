@@ -10,7 +10,7 @@ import Foundation
 final class MotionReplayViewModel {
     let replayType: ReplayType
     let record: MotionRecord
-    var didGraphViewStartedDrawing = false
+    var isDrawingGraphView = false
     var playButtonState: PlayButtonState = .play
 
     init(replayType: ReplayType, record: MotionRecord) {
