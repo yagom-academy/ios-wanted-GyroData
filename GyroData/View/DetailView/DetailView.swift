@@ -89,6 +89,7 @@ extension DetailView {
         if type == .view {
             playButton.isHidden = true
             timerLabel.isHidden = true
+            graphContainerView.graphView.drawMode = .image
         }
     }
 }

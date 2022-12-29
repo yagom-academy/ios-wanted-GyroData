@@ -10,26 +10,47 @@ import UIKit
 protocol GraphDrawable {
     var data: MeasuredData? { get }
     
-    func retrieveData(data: MeasuredData?)
+    func retrieveData(data: MeasuredData)
     func startDraw()
     func stopDraw()
-    
 }
 
 protocol TickReceivable {
     func receive(x: Double, y: Double, z: Double)
 }
 
-final class GraphView: UIView, TickReceivable {
+enum DrawMode {
+    case image
+    case play
+}
+
+final class GraphView: UIView, TickReceivable, GraphDrawable {
+    func startDraw() {
+        
+    }
+    
+    func stopDraw() {
+        
+    }
+    
+    func configureDrawMode(_ drawMode: DrawMode) {
+        self.drawMode = drawMode
+    }
+    
+    
     private enum Configuration {
-        static var lineColors: [UIColor] = [.red, .green, .blue]
         static let lineWidth: CGFloat = 1
     }
     
     var data: MeasuredData?
+    var drawMode: DrawMode = .play
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    private var zeroX: CGFloat = 0
+    private lazy var zeroY: CGFloat = self.frame.height / CGFloat(2)
+    private var xInterval: CGFloat = 0
+
+    init() {
+        super.init(frame: .zero)
         
         self.backgroundColor = .clear
     }
@@ -43,19 +64,25 @@ extension GraphView {
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         
-        guard let measuredData = self.data else {
-            return
+        switch drawMode {
+        case .play:
+            break
+        case .image:
+            guard let measuredData = self.data else {
+                return
+            }
+            drawGraph(of: measuredData)
         }
+    }
+
+    func retrieveData(data: MeasuredData) {
+        self.data = data
         
-        drawGraph(of: measuredData)
+        setNeedsDisplay()
     }
     
     func receive(x: Double, y: Double, z: Double) {
         
-    }
-    
-    func retrieveData(data: MeasuredData?) {
-        self.data = data
     }
 }
 
@@ -71,20 +98,19 @@ private extension GraphView {
             measuredData.sensorData.axisZ
         ]
         
+        var lineColors: [UIColor] = [.red, .green, .blue]
+        
         sensorData.forEach { eachAxisData in
             let path = UIBezierPath()
-            let lineColor: UIColor = Configuration.lineColors.removeFirst()
+            let lineColor: UIColor = lineColors.removeFirst()
             
             path.move(to: CGPoint(x: zeroX, y: zeroY))
             path.lineWidth = Configuration.lineWidth
             lineColor.setStroke()
             
             path.drawGraph(strideBy: xInterval, with: eachAxisData, axisY: zeroY)
+            
             path.stroke()
         }
     }
 }
-
-
-
-
