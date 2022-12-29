@@ -21,22 +21,28 @@ protocol MeasermentViewModelOutput {
     var status: Observable<MeasermentStatus> { get }
     var motions: Observable<[MotionValue]> { get }
     var currentMotion: Observable<MotionValue?> { get }
+    var errorMessage: Observable<String?> { get }
     
-}
-
-enum MeasermentStatus {
-    case ready, start, stop
 }
 
 protocol MeasermentViewModel: MeasermentViewModelInput, MeasermentViewModelOutput {}
 
+enum MeasermentStatus {
+    case ready, start, stop, save, done
+}
+
 final class DefaultMeasermentViewModel: MeasermentViewModel {
+    
+    private enum Constant {
+        static let maxCount = 600
+    }
     
     private let storage: MotionStorage
     private let coreMotionManager: CoreMotionManager
     var motions: Observable<[MotionValue]> = .init([])
     var status: Observable<MeasermentStatus> = .init(.ready)
     var currentMotion: Observable<MotionValue?> = .init(nil)
+    var errorMessage: Observable<String?> = .init(nil)
     
     init(
         manger: CoreMotionManager = CoreMotionManager(),
@@ -55,6 +61,9 @@ final class DefaultMeasermentViewModel: MeasermentViewModel {
                     let motionValue = MotionValue(data)
                     self.currentMotion.value = motionValue
                     self.motions.value.append(motionValue)
+                    if self.motions.value.count == Constant.maxCount {
+                        self.measerStop(type: .accelerometer)
+                    }
                 }
             })
             coreMotionManager.startUpdates(type: .gyro)
@@ -64,6 +73,9 @@ final class DefaultMeasermentViewModel: MeasermentViewModel {
                     let motionValue = MotionValue(data)
                     self.currentMotion.value = motionValue
                     self.motions.value.append(motionValue)
+                    if self.motions.value.count == Constant.maxCount {
+                        self.measerStop(type: .accelerometer)
+                    }
                 }
             })
             coreMotionManager.startUpdates(type: .accelerometer)
@@ -80,12 +92,19 @@ final class DefaultMeasermentViewModel: MeasermentViewModel {
         }
     }
     
-    func measerSave(type: MotionType) throws {
-        status.value = .ready
-        let timeInterval = TimeInterval( Double(motions.value.count) * 0.1)
-        let saveData = Motion(uuid: UUID(), type: type, values: motions.value, date: Date(), duration: timeInterval)
-        storage.insert(saveData)
-        try MotionFileManager.shared.save(data: saveData.toFile())
+    func measerSave(type: MotionType) {
+        status.value = .save
+        DispatchQueue.global().async {
+            let timeInterval = TimeInterval( Double(self.motions.value.count) * 0.1)
+            let saveData = Motion(uuid: UUID(), type: type, values: self.motions.value, date: Date(), duration: timeInterval)
+            self.storage.insert(saveData)
+            do {
+                try MotionFileManager.shared.save(data: saveData.toFile())
+                self.status.value = .done
+            } catch {
+                self.errorMessage.value = error.localizedDescription
+            }
+        }
     }
     
     func measerCancle(type: MotionType) {

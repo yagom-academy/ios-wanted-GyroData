@@ -36,20 +36,17 @@ private extension MotionListCoordinator {
     }
     
     private func makeMotionMeasureViewController() -> UIViewController {
-        let viewController = MeasurementViewController(
-            viewModel: DefaultMeasermentViewModel(),
-            coordinator: self
-        )
+        let viewController = MeasurementViewController(viewModel: DefaultMeasermentViewModel(), coordinator: self)
         return viewController
     }
     
-    private func makeMotionDetailViewController() -> UIViewController {
-        let viewController = UIViewController()
+    private func makeMotionDetailViewController(motionEntity: MotionEntity) -> UIViewController {
+        let viewController = MotionPlayViewController(viewModel: DefaultMotionPlayViewModel(motionEntity: motionEntity, viewType: .view))
         return viewController
     }
     
-    private func makeMotionPlayViewController() -> UIViewController {
-        let viewController = UIViewController()
+    private func makeMotionPlayViewController(motionEntity: MotionEntity) -> UIViewController {
+        let viewController = MotionPlayViewController(viewModel: DefaultMotionPlayViewModel(motionEntity: motionEntity, viewType: .play))
         return viewController
     }
     
@@ -62,13 +59,13 @@ extension MotionListCoordinator: MotionListCoordinatorInterface {
         navigationController.pushViewController(viewController, animated: true)
     }
     
-    func showMotionDetailView() {
-        let viewController = makeMotionDetailViewController()
+    func showMotionDetailView(motionEntity: MotionEntity) {
+        let viewController = makeMotionDetailViewController(motionEntity: motionEntity)
         navigationController.pushViewController(viewController, animated: true)
     }
     
-    func showMotionPlayView() {
-        let viewController = makeMotionPlayViewController()
+    func showMotionPlayView(motionEntity: MotionEntity) {
+        let viewController = makeMotionPlayViewController(motionEntity: motionEntity)
         navigationController.pushViewController(viewController, animated: true)
     }
     

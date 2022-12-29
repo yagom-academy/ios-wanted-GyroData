@@ -37,8 +37,11 @@
 		63F01BC128D44FC500C53A39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */; };
 		E13ACFEC295AFB5000265ED2 /* MeasermentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13ACFEB295AFB5000265ED2 /* MeasermentViewModel.swift */; };
 		E13ACFF0295B15DA00265ED2 /* MeasurementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13ACFEF295B15DA00265ED2 /* MeasurementViewController.swift */; };
+		E1A5A235295DBE920086DADB /* UIViewController+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A5A234295DBE920086DADB /* UIViewController+extension.swift */; };
 		E1F1D33E295BD5CE00E5C521 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F1D33D295BD5CE00E5C521 /* GraphView.swift */; };
 		E1F1D344295C328A00E5C521 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F1D343295C328A00E5C521 /* RoundButton.swift */; };
+		E1F1D34A295C5EBB00E5C521 /* MotionPlayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F1D349295C5EBB00E5C521 /* MotionPlayViewModel.swift */; };
+		E1F1D34F295CAF8300E5C521 /* MotionPlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F1D34E295CAF8300E5C521 /* MotionPlayViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,8 +77,11 @@
 		63F01BC228D44FC500C53A39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E13ACFEB295AFB5000265ED2 /* MeasermentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasermentViewModel.swift; sourceTree = "<group>"; };
 		E13ACFEF295B15DA00265ED2 /* MeasurementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementViewController.swift; sourceTree = "<group>"; };
+		E1A5A234295DBE920086DADB /* UIViewController+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+extension.swift"; sourceTree = "<group>"; };
 		E1F1D33D295BD5CE00E5C521 /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		E1F1D343295C328A00E5C521 /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
+		E1F1D349295C5EBB00E5C521 /* MotionPlayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionPlayViewModel.swift; sourceTree = "<group>"; };
+		E1F1D34E295CAF8300E5C521 /* MotionPlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionPlayViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +176,7 @@
 		0247ED51295A8C0B00212A78 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				E1F1D345295C5DB300E5C521 /* MotionPlay */,
 				0247ED63295A8EEA00212A78 /* Coordinators */,
 				0247ED52295A8C0F00212A78 /* MotionList */,
 				0247ED77295AB50E00212A78 /* MotionMeasure */,
@@ -231,6 +238,7 @@
 				0247ED67295A927900212A78 /* UIStackView+extension.swift */,
 				0247ED73295A963D00212A78 /* UIFont+extension.swift */,
 				0247ED6B295A92AB00212A78 /* UITableView+extension.swift */,
+				E1A5A234295DBE920086DADB /* UIViewController+extension.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -311,6 +319,31 @@
 				E1F1D343295C328A00E5C521 /* RoundButton.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		E1F1D345295C5DB300E5C521 /* MotionPlay */ = {
+			isa = PBXGroup;
+			children = (
+				E1F1D34D295CAF6400E5C521 /* ViewControllers */,
+				E1F1D347295C5E6400E5C521 /* ViewModels */,
+			);
+			path = MotionPlay;
+			sourceTree = "<group>";
+		};
+		E1F1D347295C5E6400E5C521 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				E1F1D349295C5EBB00E5C521 /* MotionPlayViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		E1F1D34D295CAF6400E5C521 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				E1F1D34E295CAF8300E5C521 /* MotionPlayViewController.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -416,18 +449,21 @@
 				02432C222959A38C0035AEDD /* CoreDataMotionStorage.swift in Sources */,
 				0247ED58295A8C5000212A78 /* Coordinator.swift in Sources */,
 				0247ED7F295ABFDC00212A78 /* Date+extension.swift in Sources */,
+				E1F1D34A295C5EBB00E5C521 /* MotionPlayViewModel.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				E13ACFEC295AFB5000265ED2 /* MeasermentViewModel.swift in Sources */,
 				0247ED7B295AB72600212A78 /* Observable.swift in Sources */,
 				E1F1D344295C328A00E5C521 /* RoundButton.swift in Sources */,
 				0247ED5C295A8D1200212A78 /* MotionListViewController.swift in Sources */,
 				02432C282959CAFB0035AEDD /* MotionFileManager.swift in Sources */,
+				E1F1D34F295CAF8300E5C521 /* MotionPlayViewController.swift in Sources */,
 				02432C11295990960035AEDD /* Motion.swift in Sources */,
 				0247ED6C295A92AB00212A78 /* UITableView+extension.swift in Sources */,
 				0247ED68295A927900212A78 /* UIStackView+extension.swift in Sources */,
 				0247ED65295A923500212A78 /* UIView+extension.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
 				0247ED6A295A929300212A78 /* NSObject+extension.swift in Sources */,
+				E1A5A235295DBE920086DADB /* UIViewController+extension.swift in Sources */,
 				0247ED2F295A6F5400212A78 /* MotionList.swift in Sources */,
 				02432C1F295994930035AEDD /* MotionEntity+Mapping.swift in Sources */,
 				02432C262959A8420035AEDD /* MotionStorage.swift in Sources */,

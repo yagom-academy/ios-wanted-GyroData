@@ -29,6 +29,9 @@ final class MeasurementViewController: UIViewController {
         static let saveButtonTextColor = UIColor.black
         static let cancleButtonTextColor = UIColor.black
         static let buttonSize: CGFloat = 80
+        static let activityIndicatorSize: CGFloat = 100
+        static let offset: CGFloat = 30
+        static let indicatorSize: CGFloat = 100
     }
     
     weak var coordinator: MotionListCoordinatorInterface?
@@ -75,9 +78,34 @@ final class MeasurementViewController: UIViewController {
                 self?.saveButton.isHidden = false
                 self?.cancleButton.isEnabled = true
                 self?.segmentControl.isEnabled = false
+            case .save:
+                self?.indicatorView.startAnimating()
+            case .done:
+                self?.indicatorView.stopAnimating()
+                self?.coordinator?.popViewController()
+            }
+        }
+        
+        viewModel.errorMessage.observe(on: self) { [weak self] value in
+            if let message = value {
+                self?.indicatorView.stopAnimating()
+                self?.showErrorAlert(message: message)
             }
         }
     }
+    
+    private lazy var indicatorView: UIActivityIndicatorView = {
+        let view = UIActivityIndicatorView()
+        view.frame = CGRect(
+            x: 0, y: 0, width: Constant.activityIndicatorSize, height: Constant.activityIndicatorSize
+        )
+        view.frame = CGRect(x: 0, y: 0, width: Constant.indicatorSize, height: Constant.indicatorSize)
+        view.center = self.view.center
+        view.color = UIColor.gray
+        view.style = UIActivityIndicatorView.Style.large
+        view.stopAnimating()
+        return view
+    }()
     
     private lazy var segmentControl: UISegmentedControl = {
         let control = UISegmentedControl(items: [Constant.segmentLeftText, Constant.segmentRightText])
@@ -170,9 +198,8 @@ final class MeasurementViewController: UIViewController {
             default:
                 return
             }
-            coordinator?.popViewController()
         } catch {
-            debugPrint(error)
+            showErrorAlert(message: error.localizedDescription)
         }
     }
     
@@ -191,30 +218,26 @@ final class MeasurementViewController: UIViewController {
 
 extension MeasurementViewController {
     
-    private enum ConstantLayout {
-        static let offset: CGFloat = 30
-    }
-    
     private func setUpView() {
         view.addSubview(segmentControl)
         NSLayoutConstraint.activate([
-            segmentControl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: ConstantLayout.offset),
-            segmentControl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -ConstantLayout.offset),
-            segmentControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: ConstantLayout.offset)
+            segmentControl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constant.offset),
+            segmentControl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constant.offset),
+            segmentControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Constant.offset)
         ])
         
         view.addSubview(graphView)
         NSLayoutConstraint.activate([
-            graphView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: ConstantLayout.offset),
-            graphView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -ConstantLayout.offset),
-            graphView.topAnchor.constraint(equalTo: segmentControl.bottomAnchor, constant: ConstantLayout.offset),
+            graphView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constant.offset),
+            graphView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constant.offset),
+            graphView.topAnchor.constraint(equalTo: segmentControl.bottomAnchor, constant: Constant.offset),
             graphView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5)
         ])
         
         view.addSubview(cancleButton)
         NSLayoutConstraint.activate([
-            cancleButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: ConstantLayout.offset),
-            cancleButton.topAnchor.constraint(equalTo: graphView.bottomAnchor, constant: ConstantLayout.offset),
+            cancleButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constant.offset),
+            cancleButton.topAnchor.constraint(equalTo: graphView.bottomAnchor, constant: Constant.offset),
             cancleButton.widthAnchor.constraint(equalToConstant: Constant.buttonSize),
             cancleButton.heightAnchor.constraint(equalToConstant: Constant.buttonSize)
         ])
@@ -222,8 +245,8 @@ extension MeasurementViewController {
         view.addSubview(measurementButton)
         NSLayoutConstraint.activate([
             measurementButton.leadingAnchor.constraint(greaterThanOrEqualTo: cancleButton.trailingAnchor),
-            measurementButton.topAnchor.constraint(equalTo: graphView.bottomAnchor, constant: ConstantLayout.offset),
-            measurementButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -ConstantLayout.offset),
+            measurementButton.topAnchor.constraint(equalTo: graphView.bottomAnchor, constant: Constant.offset),
+            measurementButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constant.offset),
             measurementButton.widthAnchor.constraint(equalToConstant: Constant.buttonSize),
             measurementButton.heightAnchor.constraint(equalToConstant: Constant.buttonSize)
         ])
@@ -231,8 +254,8 @@ extension MeasurementViewController {
         view.addSubview(stopButton)
         NSLayoutConstraint.activate([
             stopButton.leadingAnchor.constraint(greaterThanOrEqualTo: cancleButton.trailingAnchor),
-            stopButton.topAnchor.constraint(equalTo: graphView.bottomAnchor, constant: ConstantLayout.offset),
-            stopButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -ConstantLayout.offset),
+            stopButton.topAnchor.constraint(equalTo: graphView.bottomAnchor, constant: Constant.offset),
+            stopButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constant.offset),
             stopButton.widthAnchor.constraint(equalToConstant: Constant.buttonSize),
             stopButton.heightAnchor.constraint(equalToConstant: Constant.buttonSize)
         ])
@@ -240,10 +263,12 @@ extension MeasurementViewController {
         view.addSubview(saveButton)
         NSLayoutConstraint.activate([
             saveButton.leadingAnchor.constraint(greaterThanOrEqualTo: cancleButton.trailingAnchor),
-            saveButton.topAnchor.constraint(equalTo: graphView.bottomAnchor, constant: ConstantLayout.offset),
-            saveButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -ConstantLayout.offset),
+            saveButton.topAnchor.constraint(equalTo: graphView.bottomAnchor, constant: Constant.offset),
+            saveButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constant.offset),
             saveButton.widthAnchor.constraint(equalToConstant: Constant.buttonSize),
             saveButton.heightAnchor.constraint(equalToConstant: Constant.buttonSize)
         ])
+        
+        view.addSubview(indicatorView)
     }
 }

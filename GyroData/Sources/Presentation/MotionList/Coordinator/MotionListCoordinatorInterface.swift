@@ -10,8 +10,8 @@ import Foundation
 protocol MotionListCoordinatorInterface: AnyObject {
     
     func showMotionMeasureView()
-    func showMotionDetailView()
-    func showMotionPlayView()
+    func showMotionDetailView(motionEntity: MotionEntity)
+    func showMotionPlayView(motionEntity: MotionEntity)
     func popViewController()
     
 }

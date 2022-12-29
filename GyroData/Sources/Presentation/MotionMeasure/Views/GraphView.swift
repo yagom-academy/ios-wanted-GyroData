@@ -9,28 +9,96 @@ import UIKit
 
 final class GraphView: UIView {
     
-    private var index = 0
-    private var previousMotion: MotionValue = MotionValue(timestamp: TimeInterval(), x: 0, y: 0, z: 0)
-    
     private enum Constant {
         static let dividCount: Int = 8
         static let lineColor: CGColor = UIColor.gray.cgColor
-        static let graphXColor = UIColor.red.cgColor
-        static let graphYColor = UIColor.green.cgColor
-        static let graphZColor = UIColor.blue.cgColor
         static let lineWidth: CGFloat = 2
+        static let baseLineWidth: CGFloat = 1
         static let graphBaseCount: CGFloat = 8
         static let graphPointersCount: CGFloat = 600
         static let multiplyer: CGFloat = 30
         static let graphViewBorderColor = UIColor.gray.cgColor
+        static let borderWidth: CGFloat = 3
+        static let space: CGFloat = 30
     }
+    
+    private enum GraphType {
+        case x,y,z
+        
+        var color: UIColor {
+            switch self {
+            case .x:
+                return UIColor.red
+            case .y:
+                return UIColor.green
+            case .z:
+                return UIColor.blue
+            }
+        }
+    }
+    
+    private var index = 0
+    private var previousMotion: MotionValue = MotionValue(timestamp: TimeInterval(), x: 0, y: 0, z: 0)
+    
+    private lazy var xLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = GraphType.x.color
+        label.font = .preferredFont(forTextStyle: .body)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "x : 00"
+        return label
+    }()
+    
+    private lazy var yLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = GraphType.y.color
+        label.font = .preferredFont(forTextStyle: .body)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "y : 00"
+        return label
+    }()
+    
+    private lazy var zLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = GraphType.z.color
+        label.font = .preferredFont(forTextStyle: .body)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "z : 00"
+        return label
+    }()
     
     override func draw(_ rect: CGRect) {
             self.layer.addSublayer(drawBaseLayer())
     }
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setUpLabel() {
+        xLabel.text = "x : 00"
+        yLabel.text = "y : 00"
+        zLabel.text = "z : 00"
+        addSubviews(xLabel, yLabel, zLabel)
+        NSLayoutConstraint.activate([
+            xLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constant.space),
+            xLabel.topAnchor.constraint(equalTo: topAnchor),
+            yLabel.topAnchor.constraint(equalTo: topAnchor),
+            yLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            zLabel.topAnchor.constraint(equalTo: topAnchor),
+            zLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constant.space)
+        ])
+    }
+}
+
+extension GraphView {
     func drawBaseLayer() -> CAShapeLayer {
-        self.layer.borderWidth = 3
+        setUpLabel()
+        self.layer.borderWidth = Constant.borderWidth
         self.layer.borderColor = Constant.graphViewBorderColor
         let layer = CAShapeLayer()
         let path = UIBezierPath()
@@ -59,12 +127,12 @@ final class GraphView: UIView {
         
         layer.fillColor = Constant.lineColor
         layer.strokeColor = Constant.lineColor
-        layer.lineWidth = 1
+        layer.lineWidth = Constant.baseLineWidth
         layer.path = path.cgPath
         return layer
     }
     
-    func drawGraph(data: [MotionValue]) {
+    func drawGraph(datas: [MotionValue]) {
         let layerX = CAShapeLayer()
         let layerY = CAShapeLayer()
         let layerZ = CAShapeLayer()
@@ -72,33 +140,40 @@ final class GraphView: UIView {
         let pathY = UIBezierPath()
         let pathZ = UIBezierPath()
         
-        let offset = self.frame.width / Constant.graphPointersCount
+        let offset = (self.frame.width - Constant.borderWidth * 2) / Constant.graphPointersCount
         let initHeight: CGFloat = self.frame.height / 2
-        var pointer: CGFloat = 0
         
-        pathX.move(to: CGPoint(x: pointer, y: initHeight))
-        pathY.move(to: CGPoint(x: pointer, y: initHeight))
-        pathZ.move(to: CGPoint(x: pointer, y: initHeight))
+        var prevPositionX = CGPoint(x: Constant.borderWidth, y: initHeight)
+        var prevPositionY = CGPoint(x: Constant.borderWidth, y: initHeight)
+        var prevPositionZ = CGPoint(x: Constant.borderWidth, y: initHeight)
         
-        for dot in data {
-            pointer += offset
+        for data in datas {
+            pathX.move(to: prevPositionX)
+            pathY.move(to: prevPositionY)
+            pathZ.move(to: prevPositionZ)
             
-            let newPositionX = CGPoint(x: pointer, y: initHeight + dot.x)
-            let newPositionY = CGPoint(x: pointer, y: initHeight + dot.y)
-            let newPositionZ = CGPoint(x: pointer, y: initHeight + dot.z)
+            index += 1
+            
+            let newPositionX = CGPoint(x: prevPositionX.x + offset, y: initHeight + data.x * Constant.multiplyer)
+            let newPositionY = CGPoint(x: prevPositionY.x + offset, y: initHeight + data.y * Constant.multiplyer)
+            let newPositionZ = CGPoint(x: prevPositionZ.x + offset, y: initHeight + data.z * Constant.multiplyer)
             
             pathX.addLine(to: newPositionX)
             pathY.addLine(to: newPositionY)
             pathZ.addLine(to: newPositionZ)
+            
+            prevPositionX = newPositionX
+            prevPositionY = newPositionY
+            prevPositionZ = newPositionZ
         }
         
-        layerX.fillColor = Constant.graphXColor
-        layerY.fillColor = Constant.graphYColor
-        layerZ.fillColor = Constant.graphZColor
+        layerX.fillColor = GraphType.x.color.cgColor
+        layerY.fillColor = GraphType.y.color.cgColor
+        layerZ.fillColor = GraphType.z.color.cgColor
         
-        layerX.strokeColor = Constant.graphXColor
-        layerY.strokeColor = Constant.graphYColor
-        layerZ.strokeColor = Constant.graphZColor
+        layerX.strokeColor = GraphType.x.color.cgColor
+        layerY.strokeColor = GraphType.y.color.cgColor
+        layerZ.strokeColor = GraphType.z.color.cgColor
         
         layerX.lineWidth = Constant.lineWidth
         layerY.lineWidth = Constant.lineWidth
@@ -125,16 +200,21 @@ final class GraphView: UIView {
         let pathY = UIBezierPath()
         let pathZ = UIBezierPath()
         
-        let offset = self.frame.width / Constant.graphPointersCount
+        let offset = (self.frame.width - Constant.borderWidth * 2) / Constant.graphPointersCount
         let initHeight: CGFloat = self.frame.height / 2
-        var pointer: CGFloat = offset * CGFloat(index)
+        var pointer: CGFloat = Constant.borderWidth + offset * CGFloat(index)
+        
+        xLabel.text = "x : " + String(format: "%02d", Int(data.x * Constant.multiplyer))
+        yLabel.text = "y : " + String(format: "%02d", Int(data.y * Constant.multiplyer))
+        zLabel.text = "z : " + String(format: "%02d", Int(data.z * Constant.multiplyer))
+        
         pathX.move(to: CGPoint(x: pointer, y: initHeight + previousMotion.x * Constant.multiplyer))
         pathY.move(to: CGPoint(x: pointer, y: initHeight + previousMotion.y * Constant.multiplyer))
         pathZ.move(to: CGPoint(x: pointer, y: initHeight + previousMotion.z * Constant.multiplyer))
         
         index += 1
         previousMotion = data
-        pointer = offset * CGFloat(index)
+        pointer = Constant.borderWidth + offset * CGFloat(index)
         
         let newPositionX = CGPoint(x: pointer, y: initHeight + (data.x) * Constant.multiplyer)
         let newPositionY = CGPoint(x: pointer, y: initHeight + (data.y) * Constant.multiplyer)
@@ -144,13 +224,13 @@ final class GraphView: UIView {
         pathY.addLine(to: newPositionY)
         pathZ.addLine(to: newPositionZ)
         
-        layerX.fillColor = Constant.graphXColor
-        layerY.fillColor = Constant.graphYColor
-        layerZ.fillColor = Constant.graphZColor
+        layerX.fillColor = GraphType.x.color.cgColor
+        layerY.fillColor = GraphType.y.color.cgColor
+        layerZ.fillColor = GraphType.z.color.cgColor
         
-        layerX.strokeColor = Constant.graphXColor
-        layerY.strokeColor = Constant.graphYColor
-        layerZ.strokeColor = Constant.graphZColor
+        layerX.strokeColor = GraphType.x.color.cgColor
+        layerY.strokeColor = GraphType.y.color.cgColor
+        layerZ.strokeColor = GraphType.z.color.cgColor
         
         layerX.lineWidth = Constant.lineWidth
         layerY.lineWidth = Constant.lineWidth
