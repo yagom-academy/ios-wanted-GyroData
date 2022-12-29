@@ -21,6 +21,7 @@ final class AnalyzeViewController: UIViewController {
         segmentControl.backgroundColor = .systemGray4
         segmentControl.selectedSegmentTintColor = UIColor(r: 101, g: 159, b: 247, a: 1)
         segmentControl.selectedSegmentIndex = 0
+        segmentControl.addTarget(self, action: #selector(changeSegmentMode), for: .valueChanged)
         return segmentControl
     }()
     
@@ -40,6 +41,7 @@ final class AnalyzeViewController: UIViewController {
         button.backgroundColor = UIColor(r: 101, g: 159, b: 247, a: 1)
         button.setTitle("정지", for: .normal)
         button.setTitleColor(.white, for: .normal)
+        button.addTarget(self, action: #selector(tappedStopButton), for: .touchUpInside)
         return button
     }()
     
@@ -66,10 +68,12 @@ final class AnalyzeViewController: UIViewController {
         return label
     }()
     
-    private lazy var analyzeButtonItem: UIBarButtonItem = {
+    private lazy var saveButtonItem: UIBarButtonItem = {
         let button = UIBarButtonItem()
         button.title = "저장"
         button.tintColor = UIColor(r: 101, g: 159, b: 247, a: 1)
+        button.target = self
+        button.action = #selector(tappedSaveButton)
         return button
     }()
     
@@ -77,13 +81,13 @@ final class AnalyzeViewController: UIViewController {
         super.viewWillAppear(animated)
         self.viewModel.input.onViewWillAppear()
         viewModel.bind()
+        bindEvents()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.navigationItem.titleView = titleLabelItem
-        self.navigationItem.rightBarButtonItem = analyzeButtonItem
+        self.navigationItem.rightBarButtonItem = saveButtonItem
         self.viewModel.input.onViewDidLoad()
         setup()
         setupUI()
@@ -166,8 +170,30 @@ final class AnalyzeViewController: UIViewController {
         ])
     }
     
+    private func bindEvents() {
+    }
+}
+
+extension AnalyzeViewController {
+    
     @objc func tappedAnalyzeButton() {
         viewModel.input.tapAnalyzeButton()
-        self.view.setNeedsLayout()
+        segmentControl.isEnabled = false
+        saveButtonItem.isEnabled = false
+        
+    }
+    
+    @objc func tappedStopButton() {
+        viewModel.input.tapStopButton()
+        segmentControl.isEnabled = true
+        saveButtonItem.isEnabled = true
+    }
+    
+    @objc func tappedSaveButton() {
+        viewModel.input.tapSaveButton()
+    }
+    
+    @objc func changeSegmentMode() {
+        viewModel.input.changeAnalyzeMode(segmentControl.selectedSegmentIndex)
     }
 }
