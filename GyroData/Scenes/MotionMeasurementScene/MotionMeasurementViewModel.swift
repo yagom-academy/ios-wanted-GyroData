@@ -27,6 +27,7 @@ class MotionMeasurementViewModel: MotionMeasurementViewModelType {
     
     var measurementedMotion: Observable<[MotionInformation]> = Observable([])
     var error: Observable<String> = Observable("")
+    var isMeasuring: Observable<Bool> = Observable(false)
     
     /// Input
     
@@ -40,10 +41,12 @@ class MotionMeasurementViewModel: MotionMeasurementViewModelType {
     }
     
     func startMeasurement(_ motionType: MotionType, on graphView: GraphView) {
+        isMeasuring.value = true
         MotionMeasurementManager.shared.startMeasurement(motionType ,on: graphView)
     }
     
     func stopMeasurement(_ motionType: MotionType) {
+        isMeasuring.value = false
         MotionMeasurementManager.shared.stopMeasurement(motionType)
     }
 }

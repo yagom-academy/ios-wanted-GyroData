@@ -59,6 +59,7 @@ class MeasurementViewController: UIViewController {
         setupView()
         configureNavigationBar()
         configureButton()
+        bind()
     }
     
     private func setupView() {
@@ -87,6 +88,14 @@ class MeasurementViewController: UIViewController {
             
             graphView.heightAnchor.constraint(equalTo: view.widthAnchor)
         ])
+    }
+    
+    private func bind() {
+        measurementviewModel.isMeasuring
+            .subscribe { [weak self] isMeasuring in
+                self?.segmentedControl.isEnabled = !isMeasuring
+                self?.stopButton.isEnabled = isMeasuring
+            }
     }
 }
 
