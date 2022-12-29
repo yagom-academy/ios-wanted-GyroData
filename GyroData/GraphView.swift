@@ -17,14 +17,14 @@ final class GraphView: UIView {
 
     private let blueLabel: UILabel = {
         let label = UILabel()
-        label.text = "y:0"
+        label.text = "z:0"
         label.textColor = UIColor.blue
         return label
     }()
 
     private let greenLabel: UILabel = {
         let label = UILabel()
-        label.text = "z:0"
+        label.text = "y:0"
         label.textColor = UIColor.green
         return label
     }()
@@ -48,6 +48,12 @@ final class GraphView: UIView {
         layout()
     }
 
+    init(xScale: CGFloat) {
+        super.init(frame: .zero)
+        viewModel.xScale = xScale
+        layout()
+    }
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         fatalError("init(coder:) has not been implemented")
@@ -67,15 +73,15 @@ final class GraphView: UIView {
         switch layerType {
         case .red:
             layer = redLinesLayer
-            redLabel.text = "x:\(value)"
+            redLabel.text = "x:\(String(format:"%.0f", value))"
             viewModel.pastValueForRed.append(value)
         case .blue:
             layer = blueLinesLayer
-            blueLabel.text = "y:\(value)"
+            blueLabel.text = "z:\(String(format:"%.0f", value))"
             viewModel.pastValueForBlue.append(value)
         case .green:
             layer = greenLinesLayer
-            greenLabel.text = "z:\(value)"
+            greenLabel.text = "y:\(String(format:"%.0f", value))"
             viewModel.pastValueForGreen.append(value)
         }
 
@@ -135,12 +141,12 @@ final class GraphView: UIView {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         NSLayoutConstraint.activate([
-            redLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
-            blueLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            greenLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
-            redLabel.topAnchor.constraint(equalTo: topAnchor),
-            blueLabel.topAnchor.constraint(equalTo: topAnchor),
-            greenLabel.topAnchor.constraint(equalTo: topAnchor)
+            redLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            greenLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            blueLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            redLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            blueLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            greenLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10)
         ])
     }
     
@@ -186,7 +192,7 @@ final class GraphView: UIView {
         path.move(to: CGPoint(x: 0, y: bounds.midY))
         layer.path = path
 
-        layer.lineWidth = 5
+        layer.lineWidth = 2
         layer.strokeColor = color
         layer.fillColor = UIColor.clear.cgColor
         return layer
