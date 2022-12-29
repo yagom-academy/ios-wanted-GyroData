@@ -48,6 +48,7 @@ final class MeasureViewController: UIViewController {
     
     @objc func stopButtonDidTapped() {
         measureViewModel.stopCoreMotion()
+        self.navigationItem.rightBarButtonItem?.isEnabled = true
     }
 }
 
@@ -66,6 +67,7 @@ private extension MeasureViewController {
         }()
         self.navigationItem.title = "측정하기"
         self.navigationItem.rightBarButtonItem = rightButton
+        self.navigationItem.rightBarButtonItem?.isEnabled = false
     }
     
     func setupButtons() {
