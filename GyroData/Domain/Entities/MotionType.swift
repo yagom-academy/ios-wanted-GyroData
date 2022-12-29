@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum MotionType: String {
+enum MotionType: String, Codable {
     case acc = "Accelerometer"
     case gyro = "Gyro"
 }
