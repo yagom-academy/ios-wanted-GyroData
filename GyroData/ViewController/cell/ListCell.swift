@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CustomCell: UITableViewCell {
+class ListCell: UITableViewCell {
     static let cellId = "CellId"
     
     let timeLabel: UILabel = {

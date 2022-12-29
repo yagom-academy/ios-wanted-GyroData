@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 struct Value {
     let time: String
@@ -60,7 +61,7 @@ class ListViewController: BaseViewController {
 // MARK: - ConfigureTableView
 extension ListViewController {
     private func configureTableView() {
-        tableView.register(CustomCell.self, forCellReuseIdentifier: CustomCell.cellId)
+        tableView.register(ListCell.self, forCellReuseIdentifier: ListCell.cellId)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
@@ -91,10 +92,10 @@ extension ListViewController {
         self.vStackView.translatesAutoresizingMaskIntoConstraints = false
         
         let layout = [
-            self.vStackView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20),
-            self.vStackView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            self.vStackView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: 20),
-            self.vStackView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20)
+            self.vStackView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            self.vStackView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            self.vStackView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+            self.vStackView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
         ]
         
         NSLayoutConstraint.activate(layout)
@@ -134,7 +135,7 @@ extension ListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: CustomCell.cellId, for: indexPath) as? CustomCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ListCell.cellId, for: indexPath) as? ListCell else {
             return UITableViewCell()
         }
         
@@ -149,6 +150,7 @@ extension ListViewController: UITableViewDataSource {
 // MARK: - Action
 extension ListViewController {
     @objc private func didTapMeasurementButton() {
-        print("measurement")
+        let measureVC = MeasureViewController()
+        self.navigationController?.pushViewController(measureVC, animated: true)
     }
 }
