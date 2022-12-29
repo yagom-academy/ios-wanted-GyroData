@@ -72,4 +72,8 @@ extension MotionListCoordinator: MotionListCoordinatorInterface {
         navigationController.pushViewController(viewController, animated: true)
     }
     
+    func popViewController() {
+        navigationController.popViewController(animated: true)
+    }
+    
 }
