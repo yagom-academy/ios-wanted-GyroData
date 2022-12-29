@@ -63,11 +63,11 @@ final class MotionRecordingViewController: UIViewController {
         }
     }
 
-    private func drawGraphFor1Hz(_ coordiante: Coordiante) {
+    private func drawGraphFor1Hz(_ Coordinate: Coordinate) {
         DispatchQueue.main.async { [weak self] in
-            self?.graphView.drawGraphFor1Hz(layerType: .red, value: coordiante.x)
-            self?.graphView.drawGraphFor1Hz(layerType: .green, value: coordiante.y)
-            self?.graphView.drawGraphFor1Hz(layerType: .blue, value: coordiante.z)
+            self?.graphView.drawGraphFor1Hz(layerType: .red, value: Coordinate.x)
+            self?.graphView.drawGraphFor1Hz(layerType: .green, value: Coordinate.y)
+            self?.graphView.drawGraphFor1Hz(layerType: .blue, value: Coordinate.z)
         }
     }
 

@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class MotionRecordingStorage {
+final class MotionRecordingStorage: MotionRecordingStorageProtocol {
     private let coreDataStorage = CoreDataStorage.shared
 
     func saveRecord(record: MotionRecord, completion: @escaping (Result<Void, Error>) -> Void) {

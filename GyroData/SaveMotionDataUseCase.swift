@@ -8,7 +8,7 @@
 final class SaveMotionDataUseCase {
     private let storage: MotionRecordingStorageProtocol
 
-    init(storage: MotionRecordingStorageProtocol = MockMotionRecordingStorage()) {
+    init(storage: MotionRecordingStorageProtocol = MotionRecordingStorage()) {
         self.storage = storage
     }
 
