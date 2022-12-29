@@ -52,7 +52,6 @@ final class MotionRecordingViewModel {
             }
         }
 
-        startDate = Date()
         switch motionMode {
         case .accelerometer:
             let accelerometerHandler: CMAccelerometerHandler = { [weak self] newData, error in
@@ -80,6 +79,11 @@ final class MotionRecordingViewModel {
     func stopRecording() {
         motionManager.stopAccelerometerUpdates()
         motionManager.stopGyroUpdates()
+    }
+
+    func initializeModel() {
+        startDate = Date()
+        coordinates.removeAll()
     }
 }
 

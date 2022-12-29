@@ -92,18 +92,17 @@ final class GraphView: UIView {
     }
 
     func reset() {
+        resetViewModel()
+        eraseGraph()
+    }
+
+    private func resetViewModel() {
         viewModel.pastValueForRed.removeAll()
         viewModel.pastValueForBlue.removeAll()
         viewModel.pastValueForGreen.removeAll()
-        redLinesLayer.sublayers?.removeAll()
-        blueLinesLayer.sublayers?.removeAll()
-        greenLinesLayer.sublayers?.removeAll()
-        setNeedsDisplay()
     }
 
-    private func upScaleGraph(with value: Double) {
-        viewModel.yScale =  1.2 * 2 * abs(value)
-
+    private func eraseGraph() {
         [redLinesLayer, blueLinesLayer, greenLinesLayer].forEach {
             $0.removeFromSuperlayer()
         }
@@ -114,6 +113,11 @@ final class GraphView: UIView {
         [redLinesLayer, blueLinesLayer, greenLinesLayer].forEach {
             self.layer.addSublayer($0)
         }
+    }
+
+    private func upScaleGraph(with value: Double) {
+        viewModel.yScale =  1.2 * 2 * abs(value)
+        eraseGraph()
         drawPastValues()
     }
 

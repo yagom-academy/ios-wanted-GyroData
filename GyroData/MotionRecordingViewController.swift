@@ -68,6 +68,8 @@ final class MotionRecordingViewController: UIViewController {
         }
         let stopRecording = UIAction() { [weak self] _ in
             self?.motionRecordingViewModel.stopRecording()
+            self?.motionRecordingViewModel.initializeModel()
+            self?.graphView.reset()
         }
         recordButton.addAction(startRecording, for: .touchUpInside)
         stopButton.addAction(stopRecording, for: .touchUpInside)
