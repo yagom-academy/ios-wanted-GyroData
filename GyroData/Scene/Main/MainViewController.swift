@@ -10,6 +10,9 @@ import UIKit
 final class MainViewController: UIViewController {
     
     // MARK: Properties
+    private var listCount = 10
+    private var gyroData: [GyroModel] = []
+    private let dataManager = MotionDataManager.shared
     
     private let listTableView: UITableView = {
         let tableView = UITableView()
@@ -99,6 +102,11 @@ final class MainViewController: UIViewController {
         listTableView.delegate = self
     }
     
+    private func fetchData(manager: MotionDataManager) {
+        guard let motionData = manager.fetchMotion() else { return }
+        gyroData = motionData
+    }
+    
     @objc private func rightBarButtonTapped() {
         let measurementEnrollController = MeasurementEnrollController()
         navigationController?.pushViewController(
@@ -115,7 +123,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         _ tableView: UITableView,
         numberOfRowsInSection section: Int
     ) -> Int {
-        return 20
+        return listCount
     }
     
     func tableView(
@@ -182,5 +190,14 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         )
         
         return UISwipeActionsConfiguration(actions:[deleteButton, playButton])
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell,
+                   forRowAt indexPath: IndexPath) {
+        if indexPath.row + 1 == listCount {
+            listCount += 10
+            self.listTableView.reloadData()
+            fetchData(manager: dataManager)
+        }
     }
 }
