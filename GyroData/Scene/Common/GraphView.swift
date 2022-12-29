@@ -89,7 +89,16 @@ final class GraphView : UIView {
         drawPath(path: zPath, points: zPoints, color: zColor)
     }
     
-    func drawPath(path: UIBezierPath, points: [Double], color: UIColor) {
+    func erase(){
+        xPath.removeAllPoints()
+        yPath.removeAllPoints()
+        zPath.removeAllPoints()
+        xPoints = [0.0]
+        yPoints = [0.0]
+        zPoints = [0.0]
+    }
+    
+    private func drawPath(path: UIBezierPath, points: [Double], color: UIColor) {
         var tickPoint = tick
         
         path.move(to: CGPoint(x: 0, y: columnYStartPoint))
@@ -102,15 +111,6 @@ final class GraphView : UIView {
         }
         color.setStroke()
         path.stroke()
-    }
-    
-    func erase(){
-        xPath.removeAllPoints()
-        yPath.removeAllPoints()
-        zPath.removeAllPoints()
-        xPoints = [0.0]
-        yPoints = [0.0]
-        zPoints = [0.0]
     }
     
     private func setupBackgroundcolor(_ color: UIColor?) {
