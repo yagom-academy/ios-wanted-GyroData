@@ -11,6 +11,7 @@ class MotionMeasurementManager {
     static let shared = MotionMeasurementManager()
     private let motionManager = CMMotionManager()
     private var timer: Timer?
+    var timeCount = Double.zero
     
     private init() {
         motionManager.accelerometerUpdateInterval = MotionMeasurementNumber.updateInterval
@@ -32,7 +33,7 @@ class MotionMeasurementManager {
     }
     
     func startMeasurement(_ motionType: MotionType, on graphView: GraphView) {
-        var timeCount = Double.zero
+        timeCount = Double.zero
         
         checkAvailableAndStart(motionType)
         graphView.clearSegmanet()
