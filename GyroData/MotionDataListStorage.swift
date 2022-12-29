@@ -27,17 +27,16 @@ final class MotionDataListStorage: MotionDataListStorageProtocol {
     }
 
     func deleteRecord(id: UUID, completion: @escaping (Result<Void, Error>) -> Void) {
-
-        coreDataStorage.performBackgroundTask { context in
-            do {
-                let request: NSFetchRequest = MotionRecordEntity.fetchRequest()
-                if let objectToDelete = try context.fetch(request).filter({ $0.motionRecordId == id }).first {
-                    context.delete(objectToDelete)
-                    completion(.success(()))
-                }
-            } catch {
-                completion(.failure(error))
+        let context = coreDataStorage.persistentContainer.viewContext
+        do {
+            let request: NSFetchRequest = MotionRecordEntity.fetchRequest()
+            if let objectToDelete = try context.fetch(request).filter({ $0.motionRecordId == id }).first {
+                context.delete(objectToDelete)
+                completion(.success(()))
             }
+            try context.save()
+        } catch {
+            completion(.failure(error))
         }
     }
 }

@@ -30,7 +30,9 @@ final class MotionDataListViewController: UIViewController {
 
     private func setUpViewModel() {
         viewModel.reloadData = { [weak self] in
-            self?.recordTableView.reloadData()
+            DispatchQueue.main.async {
+                self?.recordTableView.reloadData()
+            }
         }
     }
 
@@ -81,7 +83,9 @@ extension MotionDataListViewController: UITableViewDelegate {
 
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { _, _, _ in
             self.viewModel.deleteCellSwipeActionDone(indexPath: indexPath) {
-                tableView.deleteRows(at: [indexPath], with: .automatic)
+                DispatchQueue.main.async {
+                    tableView.deleteRows(at: [indexPath], with: .automatic)
+                }
             }
         }
         deleteAction.backgroundColor = .systemRed
