@@ -50,6 +50,8 @@ class MeasurementViewController: UIViewController {
         return button
     }()
     
+    private let measurementviewModel = MotionMeasurementViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -97,6 +99,7 @@ class MeasurementViewController: UIViewController {
     }
     
     @objc private func saveButtonTapped() {
+        measurementviewModel.save(motionType, datas: graphView.segmentDatas)
         navigationController?.popViewController(animated: true)
     }
 }
