@@ -63,19 +63,20 @@ final class GraphView: UIView {
 
     func drawGraphFor1Hz(layerType: Layer, value: Double) {
         var layer: CAShapeLayer?
+        let scaledValue = value * 1000
 
         switch layerType {
         case .red:
             layer = redLinesLayer
-            redLabel.text = String(format: "x:%.3f", value)
+            redLabel.text = String(format: "x:%.0f", scaledValue)
             viewModel.pastValueForRed.append(value)
         case .blue:
             layer = blueLinesLayer
-            blueLabel.text = String(format: "y:%.3f", value)
+            blueLabel.text = String(format: "y:%.0f", scaledValue)
             viewModel.pastValueForBlue.append(value)
         case .green:
             layer = greenLinesLayer
-            greenLabel.text = String(format: "z:%.3f", value)
+            greenLabel.text = String(format: "z:%.0f", scaledValue)
             viewModel.pastValueForGreen.append(value)
         }
 
@@ -103,6 +104,9 @@ final class GraphView: UIView {
     }
 
     private func eraseGraph() {
+        redLabel.text = "x:0"
+        blueLabel.text = "y:0"
+        greenLabel.text = "z:0"
         [redLinesLayer, blueLinesLayer, greenLinesLayer].forEach {
             $0.removeFromSuperlayer()
         }
