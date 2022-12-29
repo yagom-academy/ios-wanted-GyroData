@@ -92,14 +92,3 @@ fileprivate enum MotionMeasurementNumber {
     static let updateInterval = 1.0 / 10.0
     static let completeTime = 60.0
 }
-
-
-protocol Measurementable {
-    var x: Double { get }
-    var y: Double { get }
-    var z: Double { get }
-}
-
-extension CMAcceleration: Measurementable { }
-extension CMRotationRate: Measurementable { }
-
