@@ -87,6 +87,7 @@ final class GraphView: UIView {
         NSLayoutConstraint.activate([
             xLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constant.space),
             xLabel.topAnchor.constraint(equalTo: topAnchor),
+            yLabel.topAnchor.constraint(equalTo: topAnchor),
             yLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             zLabel.topAnchor.constraint(equalTo: topAnchor),
             zLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constant.space)

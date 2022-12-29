@@ -29,7 +29,6 @@ final class MeasurementViewController: UIViewController {
         static let saveButtonTextColor = UIColor.black
         static let cancleButtonTextColor = UIColor.black
         static let buttonSize: CGFloat = 80
-        static let navigationTitle = "측정하기"
         static let activityIndicatorSize: CGFloat = 100
         static let offset: CGFloat = 30
         static let indicatorSize: CGFloat = 100
@@ -211,10 +210,6 @@ final class MeasurementViewController: UIViewController {
 }
 
 extension MeasurementViewController {
-    
-    private func setNavigationTitle() {
-        navigationController?.navigationBar.topItem?.title = Constant.navigationTitle
-    }
     
     private func setUpView() {
         view.addSubview(segmentControl)
