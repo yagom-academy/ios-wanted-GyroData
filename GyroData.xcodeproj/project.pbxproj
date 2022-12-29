@@ -26,9 +26,10 @@
 		AFABE5E22959734C00F2F6E3 /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFABE5E12959734C00F2F6E3 /* ListViewModel.swift */; };
 		AFABE5E4295975A600F2F6E3 /* CellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFABE5E3295975A600F2F6E3 /* CellData.swift */; };
 		FDA47545295AC62D006D57B7 /* Sensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA47544295AC62D006D57B7 /* Sensor.swift */; };
-		FDA47548295AC793006D57B7 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA47547295AC793006D57B7 /* ChartView.swift */; };
 		FDA4754E295AC838006D57B7 /* CoreMotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA4754D295AC838006D57B7 /* CoreMotionManager.swift */; };
 		FDA47550295AC953006D57B7 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA4754F295AC953006D57B7 /* CoreDataManager.swift */; };
+		FDA475A9295DC12E006D57B7 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA475A8295DC12E006D57B7 /* GraphView.swift */; };
+		FDA475AB295DC13A006D57B7 /* UIBezierPath+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA475AA295DC13A006D57B7 /* UIBezierPath+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,9 +63,10 @@
 		AFABE5E12959734C00F2F6E3 /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
 		AFABE5E3295975A600F2F6E3 /* CellData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellData.swift; sourceTree = "<group>"; };
 		FDA47544295AC62D006D57B7 /* Sensor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sensor.swift; sourceTree = "<group>"; };
-		FDA47547295AC793006D57B7 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		FDA4754D295AC838006D57B7 /* CoreMotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMotionManager.swift; sourceTree = "<group>"; };
 		FDA4754F295AC953006D57B7 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		FDA475A8295DC12E006D57B7 /* GraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
+		FDA475AA295DC13A006D57B7 /* UIBezierPath+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIBezierPath+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,7 +116,7 @@
 				63F01BC228D44FC500C53A39 /* Info.plist */,
 				AF786B25295DBFA700C5DF5F /* MotionData.xcdatamodeld */,
 				FDA47551295AC99D006D57B7 /* Manager */,
-				FDA47546295AC76E006D57B7 /* ChartView */,
+				FDA47546295AC76E006D57B7 /* GraphView */,
 				FDA47543295AC619006D57B7 /* Common */,
 				A3DED022295981D9007EE19D /* Extension */,
 				AFABE5E5295975D300F2F6E3 /* ViewModel */,
@@ -168,12 +170,13 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
-		FDA47546295AC76E006D57B7 /* ChartView */ = {
+		FDA47546295AC76E006D57B7 /* GraphView */ = {
 			isa = PBXGroup;
 			children = (
-				FDA47547295AC793006D57B7 /* ChartView.swift */,
+				FDA475A8295DC12E006D57B7 /* GraphView.swift */,
+				FDA475AA295DC13A006D57B7 /* UIBezierPath+Extension.swift */,
 			);
-			path = ChartView;
+			path = GraphView;
 			sourceTree = "<group>";
 		};
 		FDA47551295AC99D006D57B7 /* Manager */ = {
@@ -286,6 +289,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FDA475AB295DC13A006D57B7 /* UIBezierPath+Extension.swift in Sources */,
 				63F01BB928D44FC400C53A39 /* ListViewController.swift in Sources */,
 				AF1BD844295C3E2A00432F19 /* FileHandleManager.swift in Sources */,
 				A30E7B60295DBEB50012B96A /* Double+Extension.swift in Sources */,
@@ -298,12 +302,12 @@
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
 				FDA47550295AC953006D57B7 /* CoreDataManager.swift in Sources */,
 				A3DED01F29596846007EE19D /* ListView.swift in Sources */,
-				FDA47548295AC793006D57B7 /* ChartView.swift in Sources */,
 				AF1BD841295C1EC500432F19 /* MotionData+CoreDataProperties.swift in Sources */,
 				A3DED02129596A83007EE19D /* ListViewCell.swift in Sources */,
 				A3DED01B295965CE007EE19D /* MeasuredData.swift in Sources */,
 				AF786B27295DBFA700C5DF5F /* MotionData.xcdatamodeld in Sources */,
 				A3DED0242959821C007EE19D /* Date+Extension.swift in Sources */,
+				FDA475A9295DC12E006D57B7 /* GraphView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
