@@ -30,7 +30,8 @@ final class MotionRecordingStorage {
             try context.save()
         } catch {
             print(error)
-        }    }
+        }
+    }
 }
 
 fileprivate extension MotionMode {
