@@ -12,7 +12,10 @@ struct GyroscopeManager: AnalysisManagerType {
     private let motion = CMMotionManager()
     
     func startAnalyse() -> AnalysisData {
-        guard motion.isGyroAvailable else { return (x: 0, y: 0, z: 0) }
+        guard motion.isGyroAvailable else {
+            return (x: 0, y: 0, z: 0)
+        }
+        
         motion.gyroUpdateInterval = 0.1
         motion.startGyroUpdates()
         

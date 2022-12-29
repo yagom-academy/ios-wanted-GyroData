@@ -36,6 +36,7 @@ class AnalyzeListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.view.backgroundColor = .white
         view = analysisTableView
         self.navigationItem.titleView = titleLabel

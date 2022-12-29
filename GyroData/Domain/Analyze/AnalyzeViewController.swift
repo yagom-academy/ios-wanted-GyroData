@@ -81,6 +81,7 @@ final class AnalyzeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.navigationItem.titleView = titleLabelItem
         self.navigationItem.rightBarButtonItem = analyzeButtonItem
         self.viewModel.input.onViewDidLoad()

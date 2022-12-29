@@ -73,6 +73,7 @@ class GraphRecordView: UIView {
         label.font = label.font.withSize(25)
         return label
     }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         

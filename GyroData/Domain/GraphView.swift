@@ -27,6 +27,7 @@ struct GraphView: View {
         ZStack(alignment: .top) {
             GroupBox {
                 FigureView()
+                
                 Chart {
                     ForEach(dummyData, id: \.measurementTime) { data in
                         LineMark(
