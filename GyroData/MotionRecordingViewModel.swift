@@ -23,6 +23,10 @@ final class MotionRecordingViewModel {
         let maximumCount = Int(self.timeOut / self.updateTimeInterval)
         return self.coordinates.count >= maximumCount
     }
+    var isSaveEnable: Bool {
+        let isEmpty: Bool = coordinates.isEmpty
+        return !isEmpty || !isRecording
+    }
     var reflectRecordingState: ((Bool) -> Void)?
     private let saveMotionDataUseCase = SaveMotionDataUseCase()
     private let timeOut = TimeInterval(60)

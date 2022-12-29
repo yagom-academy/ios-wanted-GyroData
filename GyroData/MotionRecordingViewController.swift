@@ -23,7 +23,11 @@ final class MotionRecordingViewController: UIViewController {
         button.isEnabled = false
         return button
     }()
-    private let saveButton = UIBarButtonItem(title: nil, style: .plain, target: nil, action: nil)
+    private let saveButton = {
+        let button = UIBarButtonItem(title: nil, style: .plain, target: nil, action: nil)
+        button.isEnabled = false
+        return button
+    }()
 
     private lazy var segmentedControl: UISegmentedControl = {
         let segmentedControl = UISegmentedControl()
@@ -48,10 +52,12 @@ final class MotionRecordingViewController: UIViewController {
         super.viewDidLoad()
         layout()
         setButtonActions()
-        motionRecordingViewModel.reflectRecordingState = { [weak self] isEnabled in
+        motionRecordingViewModel.reflectRecordingState = { [weak self] isRecording in
             DispatchQueue.main.async {
-                self?.segmentedControl.isEnabled = !isEnabled
-                self?.stopButton.isEnabled = isEnabled
+                guard let self = self else { return }
+                self.segmentedControl.isEnabled = !isRecording
+                self.stopButton.isEnabled = isRecording
+                self.saveButton.isEnabled = self.motionRecordingViewModel.isSaveEnable
             }
         }
     }
@@ -68,10 +74,12 @@ final class MotionRecordingViewController: UIViewController {
         let reset = {
             self.motionRecordingViewModel.initializeModel()
             self.graphView.reset()
+            self.saveButton.isEnabled = false
         }
 
         MotionMode.allCases.enumerated().forEach { index, mode in
-            let segment = UIAction(title: mode.segmentName) { _ in
+            let segment = UIAction(title: mode.segmentName) { [weak self] _ in
+                guard let self = self else { return }
                 self.motionRecordingViewModel.motionMode = mode
                 reset()
             }
