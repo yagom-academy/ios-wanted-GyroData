@@ -108,7 +108,7 @@ final class MotionReplayViewController: UIViewController {
     }
 
     private func setUpGraphViewLayer() {
-        graphView.layer.borderColor = UIColor.black.cgColor
+        graphView.layer.borderColor = UIColor.gray.cgColor
         graphView.layer.borderWidth = 2
     }
 
