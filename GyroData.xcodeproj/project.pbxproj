@@ -14,6 +14,8 @@
 		329E7EED295B1A0100537466 /* MotionDataListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329E7EEC295B1A0100537466 /* MotionDataListViewController.swift */; };
 		32A17EF5295D8D6C007D8A8F /* SaveMotionDataUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A17EF4295D8D6C007D8A8F /* SaveMotionDataUseCase.swift */; };
 		32A17EF7295D8D77007D8A8F /* MotionRecordingStorageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A17EF6295D8D77007D8A8F /* MotionRecordingStorageProtocol.swift */; };
+		32AA1E95295DBF0D002259C3 /* CoordinateDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32AA1E94295DBF0D002259C3 /* CoordinateDTO.swift */; };
+		32AA1E97295DBF50002259C3 /* MotionRecordDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32AA1E96295DBF50002259C3 /* MotionRecordDTO.swift */; };
 		32B01338295A844B005C8750 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B01337295A844B005C8750 /* GraphView.swift */; };
 		32B0133A295A871C005C8750 /* GraphViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B01339295A871C005C8750 /* GraphViewModel.swift */; };
 		32F77CC0295C7AA400A78CCD /* MotionData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 32F77CBE295C7AA400A78CCD /* MotionData.xcdatamodeld */; };
@@ -44,6 +46,8 @@
 		329E7EEC295B1A0100537466 /* MotionDataListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDataListViewController.swift; sourceTree = "<group>"; };
 		32A17EF4295D8D6C007D8A8F /* SaveMotionDataUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaveMotionDataUseCase.swift; sourceTree = "<group>"; };
 		32A17EF6295D8D77007D8A8F /* MotionRecordingStorageProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionRecordingStorageProtocol.swift; sourceTree = "<group>"; };
+		32AA1E94295DBF0D002259C3 /* CoordinateDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateDTO.swift; sourceTree = "<group>"; };
+		32AA1E96295DBF50002259C3 /* MotionRecordDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionRecordDTO.swift; sourceTree = "<group>"; };
 		32B01337295A844B005C8750 /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		32B01339295A871C005C8750 /* GraphViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphViewModel.swift; sourceTree = "<group>"; };
 		32F77CBF295C7AA400A78CCD /* MotionData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MotionData.xcdatamodel; sourceTree = "<group>"; };
@@ -117,6 +121,8 @@
 				32F77CBE295C7AA400A78CCD /* MotionData.xcdatamodeld */,
 				32F77CC1295C7BDA00A78CCD /* MotionRecordEntity+CoreDataClass.swift */,
 				32F77CC2295C7BDA00A78CCD /* MotionRecordEntity+CoreDataProperties.swift */,
+				32AA1E94295DBF0D002259C3 /* CoordinateDTO.swift */,
+				32AA1E96295DBF50002259C3 /* MotionRecordDTO.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -295,7 +301,9 @@
 				329E7EED295B1A0100537466 /* MotionDataListViewController.swift in Sources */,
 				32FDB345295BE62A0095F6A5 /* DeleteMotionDataUseCase.swift in Sources */,
 				32FD288A295B2588006B6871 /* RecordTableViewCell.swift in Sources */,
+				32AA1E95295DBF0D002259C3 /* CoordinateDTO.swift in Sources */,
 				32B0133A295A871C005C8750 /* GraphViewModel.swift in Sources */,
+				32AA1E97295DBF50002259C3 /* MotionRecordDTO.swift in Sources */,
 				32F77CCA295C7DB700A78CCD /* CoreDataStorage.swift in Sources */,
 				32FDB34D295C19B60095F6A5 /* MotionReplayViewModel.swift in Sources */,
 				32FDB349295C18C80095F6A5 /* ReplayType.swift in Sources */,
