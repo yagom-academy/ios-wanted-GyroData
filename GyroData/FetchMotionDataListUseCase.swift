@@ -10,7 +10,7 @@ import Foundation
 final class FetchMotionDataListUseCase {
     private let motionDataListStorage: MotionDataListStorageProtocol
 
-    init(motionDataListStorage: MotionDataListStorageProtocol) {
+    init(motionDataListStorage: MotionDataListStorageProtocol = MotionDataListStorage()) {
         self.motionDataListStorage = motionDataListStorage
     }
 

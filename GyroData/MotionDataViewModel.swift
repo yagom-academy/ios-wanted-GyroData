@@ -8,8 +8,8 @@ import Foundation
 
 final class MotionDataViewModel {
     var records = [MotionRecord]()
-    private let fetchMotionDataListUseCase = FetchMotionDataListUseCase(motionDataListStorage: MockStorage())
-    private let deleteMotionDataListUseCase = DeleteMotionDataUseCase(motionDataListStorage: MockStorage())
+    private let fetchMotionDataListUseCase = FetchMotionDataListUseCase()
+    private let deleteMotionDataListUseCase = DeleteMotionDataUseCase()
     private var pageToLoad = 0
     var reloadData: (() -> Void)?
 

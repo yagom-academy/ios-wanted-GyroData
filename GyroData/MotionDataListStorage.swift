@@ -7,10 +7,10 @@
 
 import CoreData
 
-final class MotionDataListStorage {
+final class MotionDataListStorage: MotionDataListStorageProtocol {
     private let coreDataStorage = CoreDataStorage.shared
 
-    func loadStorage(page: Int, completion: @escaping (Result<[MotionRecord], Error>) -> Void) {
+    func loadMotionRecords(page: Int, completion: @escaping (Result<[MotionRecord], Error>) -> Void) {
 
         coreDataStorage.performBackgroundTask { context in
             do {
