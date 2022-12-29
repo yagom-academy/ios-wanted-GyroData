@@ -8,9 +8,9 @@
 import UIKit
 
 class GraphView: UIView {
-    private let xDataLabel = MotionLabel(textColor: .systemRed, frame: .zero)
-    private let yDataLabel = MotionLabel(textColor: .systemGreen, frame: .zero)
-    private let zDataLabel = MotionLabel(textColor: .systemBlue, frame: .zero)
+    private let xDataLabel = MotionLabel(motionData: .x, frame: .zero)
+    private let yDataLabel = MotionLabel(motionData: .y, frame: .zero)
+    private let zDataLabel = MotionLabel(motionData: .z, frame: .zero)
 
     private let dataStackView: UIStackView = {
         let stackView = UIStackView()
@@ -124,9 +124,9 @@ extension GraphView {
     }
     
     private func setupLabel(with data: [Double]) {
-        xDataLabel.text = refineData(data[MotionData.x.rawValue])
-        yDataLabel.text = refineData(data[MotionData.y.rawValue])
-        zDataLabel.text = refineData(data[MotionData.z.rawValue])
+        xDataLabel.text = "x: " + refineData(data[MotionData.x.rawValue])
+        yDataLabel.text = "y: " + refineData(data[MotionData.y.rawValue])
+        zDataLabel.text = "z: " +  refineData(data[MotionData.z.rawValue])
     }
     
     private func refineData(_ data: Double) -> String {
