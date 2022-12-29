@@ -24,6 +24,7 @@ final class MotionRecordingViewModel {
         return self.coordinates.count >= maximumCount
     }
     var toggleSegmentContorlEnable: (() -> Void)?
+    private let saveMotionDataUseCase = SaveMotionDataUseCase()
     private let timeOut = TimeInterval(60)
     private var startDate = Date()
     private var motionManager = CMMotionManager()
@@ -42,7 +43,19 @@ final class MotionRecordingViewModel {
         self.updateCompletion = updateCompletion
     }
 
-    // TODO: Error 처리하기
+    func saveRecord() {
+        let motionRecord = MotionRecord(
+            id: UUID(),
+            startDate: startDate,
+            msInterval: Int(updateTimeInterval),
+            motionMode: motionMode,
+            coordinates: coordinates
+        )
+        saveMotionDataUseCase.excute(record: motionRecord) { result in
+            print(result)
+        }
+    }
+
     func startRecording() {
         isRecording = true
 

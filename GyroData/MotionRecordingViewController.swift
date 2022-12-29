@@ -22,7 +22,8 @@ final class MotionRecordingViewController: UIViewController {
         button.setTitle("정지", for: .normal)
         return button
     }()
-    
+    private let saveButton = UIBarButtonItem(title: nil, style: .plain, target: nil, action: nil)
+
     private lazy var segmentedControl: UISegmentedControl = {
         let segmentedControl = UISegmentedControl()
 
@@ -84,8 +85,12 @@ final class MotionRecordingViewController: UIViewController {
             self?.motionRecordingViewModel.stopButtonTapped()
             reset()
         }
+        let saveRecording = UIAction(title: "저장") { [weak self] _ in
+            self?.motionRecordingViewModel.saveRecord()
+        }
         recordButton.addAction(startRecording, for: .touchUpInside)
         stopButton.addAction(stopRecording, for: .touchUpInside)
+        saveButton.primaryAction = saveRecording
     }
 
     private func layout() {
@@ -93,7 +98,6 @@ final class MotionRecordingViewController: UIViewController {
         let spacing = 20.0
 
         navigationItem.title = "측정하기"
-        let saveButton = UIBarButtonItem(title: "저장", style: .plain, target: nil, action: nil)
         navigationItem.rightBarButtonItem = saveButton
 
         let stackView = UIStackView()
