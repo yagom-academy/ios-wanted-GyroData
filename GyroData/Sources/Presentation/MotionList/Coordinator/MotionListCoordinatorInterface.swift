@@ -12,5 +12,6 @@ protocol MotionListCoordinatorInterface: AnyObject {
     func showMotionMeasureView()
     func showMotionDetailView(motionEntity: MotionEntity)
     func showMotionPlayView(motionEntity: MotionEntity)
+    func popViewController()
     
 }

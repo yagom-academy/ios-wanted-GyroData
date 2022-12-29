@@ -36,7 +36,7 @@ private extension MotionListCoordinator {
     }
     
     private func makeMotionMeasureViewController() -> UIViewController {
-        let viewController = MeasurementViewController(viewModel: DefaultMeasermentViewModel())
+        let viewController = MeasurementViewController(viewModel: DefaultMeasermentViewModel(), coordinator: self)
         return viewController
     }
     

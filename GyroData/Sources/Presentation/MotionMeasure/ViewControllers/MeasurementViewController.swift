@@ -50,12 +50,6 @@ final class MeasurementViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setUpView()
-        bind()
-    }
-    
     private func bind() {
         viewModel.currentMotion.observe(on: self) { [weak self] value in
             self?.drawGraph(data: value)
