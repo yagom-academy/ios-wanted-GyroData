@@ -23,10 +23,10 @@
 		722944CB295A7D49000C4302 /* GyroDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722944CA295A7D49000C4302 /* GyroDataTests.swift */; };
 		722944D2295A9978000C4302 /* FirstTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722944D1295A9978000C4302 /* FirstTableViewCell.swift */; };
 		7256AD832959832300E14DC6 /* SensorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7256AD822959832300E14DC6 /* SensorType.swift */; };
-		7256AD862959843200E14DC6 /* Gyro+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7256AD842959843200E14DC6 /* Gyro+CoreDataClass.swift */; };
-		7256AD872959843200E14DC6 /* Gyro+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7256AD852959843200E14DC6 /* Gyro+CoreDataProperties.swift */; };
 		7256AD8D2959B29100E14DC6 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7256AD8C2959B29100E14DC6 /* CoreDataStack.swift */; };
 		7256AD8F2959B2B400E14DC6 /* GyroStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7256AD8E2959B2B400E14DC6 /* GyroStore.swift */; };
+		72757A91295D7BB3002DE163 /* Gyro+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72757A8F295D7BB3002DE163 /* Gyro+CoreDataClass.swift */; };
+		72757A92295D7BB3002DE163 /* Gyro+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72757A90295D7BB3002DE163 /* Gyro+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,12 +57,12 @@
 		63F01BC228D44FC500C53A39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		722944C8295A7D49000C4302 /* GyroDataTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GyroDataTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		722944CA295A7D49000C4302 /* GyroDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroDataTests.swift; sourceTree = "<group>"; };
-		722944D1295A9978000C4302 /* FirstTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FirstTableViewCell.swift; path = GyroData/Source/Util/Manager/CoreData/FirstTableViewCell.swift; sourceTree = SOURCE_ROOT; };
+		722944D1295A9978000C4302 /* FirstTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FirstTableViewCell.swift; path = GyroData/Source/View/FirstTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		7256AD822959832300E14DC6 /* SensorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensorType.swift; sourceTree = "<group>"; };
-		7256AD842959843200E14DC6 /* Gyro+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Gyro+CoreDataClass.swift"; sourceTree = "<group>"; };
-		7256AD852959843200E14DC6 /* Gyro+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Gyro+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		7256AD8C2959B29100E14DC6 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		7256AD8E2959B2B400E14DC6 /* GyroStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroStore.swift; sourceTree = "<group>"; };
+		72757A8F295D7BB3002DE163 /* Gyro+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Gyro+CoreDataClass.swift"; sourceTree = "<group>"; };
+		72757A90295D7BB3002DE163 /* Gyro+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Gyro+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,8 +173,6 @@
 			isa = PBXGroup;
 			children = (
 				45BD40182959772000B37A25 /* GyroModel.xcdatamodeld */,
-				7256AD842959843200E14DC6 /* Gyro+CoreDataClass.swift */,
-				7256AD852959843200E14DC6 /* Gyro+CoreDataProperties.swift */,
 				7256AD822959832300E14DC6 /* SensorType.swift */,
 				7256AD8C2959B29100E14DC6 /* CoreDataStack.swift */,
 				7256AD8E2959B2B400E14DC6 /* GyroStore.swift */,
@@ -208,6 +206,8 @@
 		63F01BA828D44FC400C53A39 = {
 			isa = PBXGroup;
 			children = (
+				72757A8F295D7BB3002DE163 /* Gyro+CoreDataClass.swift */,
+				72757A90295D7BB3002DE163 /* Gyro+CoreDataProperties.swift */,
 				63F01BB328D44FC400C53A39 /* GyroData */,
 				722944C9295A7D49000C4302 /* GyroDataTests */,
 				63F01BB228D44FC400C53A39 /* Products */,
@@ -346,15 +346,15 @@
 				45BD40222959856000B37A25 /* RecordViewController.swift in Sources */,
 				45BD40262959FF0700B37A25 /* MotionData.swift in Sources */,
 				45BD4024295989F500B37A25 /* MeasureData.swift in Sources */,
-				7256AD862959843200E14DC6 /* Gyro+CoreDataClass.swift in Sources */,
 				45BD401A2959772000B37A25 /* GyroModel.xcdatamodeld in Sources */,
 				7256AD8D2959B29100E14DC6 /* CoreDataStack.swift in Sources */,
 				63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */,
-				7256AD872959843200E14DC6 /* Gyro+CoreDataProperties.swift in Sources */,
 				7256AD8F2959B2B400E14DC6 /* GyroStore.swift in Sources */,
 				7256AD832959832300E14DC6 /* SensorType.swift in Sources */,
+				72757A91295D7BB3002DE163 /* Gyro+CoreDataClass.swift in Sources */,
 				45BD4028295AEBFC00B37A25 /* GraphView.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
+				72757A92295D7BB3002DE163 /* Gyro+CoreDataProperties.swift in Sources */,
 				45FB1A55295B406100A9D43B /* GraphPoint.swift in Sources */,
 				722944D2295A9978000C4302 /* FirstTableViewCell.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
