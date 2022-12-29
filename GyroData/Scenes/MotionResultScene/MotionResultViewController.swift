@@ -80,7 +80,7 @@ class MotionResultViewController: UIViewController {
     func bind(to viewModel: MotionResultViewModel) {
         viewModel.motionInformation.subscribe { [weak self] motionInformation in
             guard let motionInformation = motionInformation else { return }
-            self?.configureUI(motion: motionInformation)
+            self?.configureUI(motionInformation: motionInformation)
             self?.drawGraph(motion: motionInformation)
             // stopIndicator
         }
@@ -119,9 +119,9 @@ class MotionResultViewController: UIViewController {
         navigationItem.title = "다시보기"
     }
     
-    private func configureUI(motion: MotionInformation) {
-        dateLabel.text = "\(motion.date)"
-        titleLabel.text = motion.motionType.rawValue
+    private func configureUI(motionInformation: MotionInformation) {
+        dateLabel.text = "\(motionInformation.motion.date)"
+        titleLabel.text = motionInformation.motion.motionType.rawValue
     }
 
 }

@@ -8,10 +8,7 @@
 import Foundation
 
 struct MotionInformation {
-    let id: UUID
-    let motionType: MotionType
-    let date: Date
-    let time: Double
+    let motion: Motion
     let xData: [Double]
     let yData: [Double]
     let zData: [Double]
