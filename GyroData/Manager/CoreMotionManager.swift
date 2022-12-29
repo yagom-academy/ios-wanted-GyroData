@@ -91,9 +91,9 @@ final class CoreMotionManager: SensorDataHandleable {
             measuredTime: timerNum.timeDecimal(),
             sensor: of,
             sensorData: SensorData(
-                AxisX: self.axisX,
-                AxisY: self.axisY,
-                AxisZ: self.axisZ
+                axisX: self.axisX,
+                axisY: self.axisY,
+                axisZ: self.axisZ
             )
         )
         stopSystem()

@@ -17,14 +17,12 @@
 		A3DED01F29596846007EE19D /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3DED01E29596846007EE19D /* ListView.swift */; };
 		A3DED02129596A83007EE19D /* ListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3DED02029596A83007EE19D /* ListViewCell.swift */; };
 		A3DED0242959821C007EE19D /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3DED0232959821C007EE19D /* Date+Extension.swift */; };
-		AF0CBC94295B413A0098A6D1 /* GyroDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0CBC93295B413A0098A6D1 /* GyroDataTests.swift */; };
-		AF1BD837295C1DDA00432F19 /* MotionData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AF1BD835295C1DDA00432F19 /* MotionData.xcdatamodeld */; };
 		AF1BD83E295C1E9E00432F19 /* MotionData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1BD83C295C1E9E00432F19 /* MotionData+CoreDataClass.swift */; };
 		AF1BD83F295C1E9E00432F19 /* MotionData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1BD83D295C1E9E00432F19 /* MotionData+CoreDataProperties.swift */; };
 		AF1BD840295C1EC300432F19 /* MotionData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1BD83C295C1E9E00432F19 /* MotionData+CoreDataClass.swift */; };
 		AF1BD841295C1EC500432F19 /* MotionData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1BD83D295C1E9E00432F19 /* MotionData+CoreDataProperties.swift */; };
-		AF1BD842295C1F5100432F19 /* MotionData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AF1BD835295C1DDA00432F19 /* MotionData.xcdatamodeld */; };
 		AF1BD844295C3E2A00432F19 /* FileHandleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1BD843295C3E2A00432F19 /* FileHandleManager.swift */; };
+		AF786B27295DBFA700C5DF5F /* MotionData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AF786B25295DBFA700C5DF5F /* MotionData.xcdatamodeld */; };
 		AFABE5E22959734C00F2F6E3 /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFABE5E12959734C00F2F6E3 /* ListViewModel.swift */; };
 		AFABE5E4295975A600F2F6E3 /* CellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFABE5E3295975A600F2F6E3 /* CellData.swift */; };
 		FDA47545295AC62D006D57B7 /* Sensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA47544295AC62D006D57B7 /* Sensor.swift */; };
@@ -51,17 +49,16 @@
 		63F01BBD28D44FC500C53A39 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		63F01BC028D44FC500C53A39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		63F01BC228D44FC500C53A39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A30E7B5F295DBEB50012B96A /* Double+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Double+Extension.swift"; path = "../../../../../../../Desktop/sp/ios-wanted-GyroData/GyroData/Extension/Double+Extension.swift"; sourceTree = "<group>"; };
+		A30E7B5F295DBEB50012B96A /* Double+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
 		A3DED01A295965CE007EE19D /* MeasuredData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasuredData.swift; sourceTree = "<group>"; };
 		A3DED01E29596846007EE19D /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 		A3DED02029596A83007EE19D /* ListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewCell.swift; sourceTree = "<group>"; };
 		A3DED0232959821C007EE19D /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		AF0CBC91295B413A0098A6D1 /* GyroDataTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GyroDataTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		AF0CBC93295B413A0098A6D1 /* GyroDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroDataTests.swift; sourceTree = "<group>"; };
-		AF1BD836295C1DDA00432F19 /* MotionData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MotionData.xcdatamodel; sourceTree = "<group>"; };
 		AF1BD83C295C1E9E00432F19 /* MotionData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MotionData+CoreDataClass.swift"; sourceTree = "<group>"; };
 		AF1BD83D295C1E9E00432F19 /* MotionData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MotionData+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		AF1BD843295C3E2A00432F19 /* FileHandleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileHandleManager.swift; sourceTree = "<group>"; };
+		AF786B26295DBFA700C5DF5F /* MotionData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MotionData.xcdatamodel; sourceTree = "<group>"; };
 		AFABE5E12959734C00F2F6E3 /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
 		AFABE5E3295975A600F2F6E3 /* CellData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellData.swift; sourceTree = "<group>"; };
 		FDA47544295AC62D006D57B7 /* Sensor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sensor.swift; sourceTree = "<group>"; };
@@ -94,7 +91,6 @@
 				AF1BD83C295C1E9E00432F19 /* MotionData+CoreDataClass.swift */,
 				AF1BD83D295C1E9E00432F19 /* MotionData+CoreDataProperties.swift */,
 				63F01BB328D44FC400C53A39 /* GyroData */,
-				AF0CBC92295B413A0098A6D1 /* GyroDataTests */,
 				63F01BB228D44FC400C53A39 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -116,7 +112,7 @@
 				63F01BBD28D44FC500C53A39 /* Assets.xcassets */,
 				63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */,
 				63F01BC228D44FC500C53A39 /* Info.plist */,
-				AF1BD835295C1DDA00432F19 /* MotionData.xcdatamodeld */,
+				AF786B25295DBFA700C5DF5F /* MotionData.xcdatamodeld */,
 				FDA47551295AC99D006D57B7 /* Manager */,
 				FDA47546295AC76E006D57B7 /* ChartView */,
 				FDA47543295AC619006D57B7 /* Common */,
@@ -154,14 +150,6 @@
 				A30E7B5F295DBEB50012B96A /* Double+Extension.swift */,
 			);
 			path = Extension;
-			sourceTree = "<group>";
-		};
-		AF0CBC92295B413A0098A6D1 /* GyroDataTests */ = {
-			isa = PBXGroup;
-			children = (
-				AF0CBC93295B413A0098A6D1 /* GyroDataTests.swift */,
-			);
-			path = GyroDataTests;
 			sourceTree = "<group>";
 		};
 		AFABE5E5295975D300F2F6E3 /* ViewModel */ = {
@@ -314,8 +302,8 @@
 				AF1BD841295C1EC500432F19 /* MotionData+CoreDataProperties.swift in Sources */,
 				A3DED02129596A83007EE19D /* ListViewCell.swift in Sources */,
 				A3DED01B295965CE007EE19D /* MeasuredData.swift in Sources */,
+				AF786B27295DBFA700C5DF5F /* MotionData.xcdatamodeld in Sources */,
 				A3DED0242959821C007EE19D /* Date+Extension.swift in Sources */,
-				AF1BD842295C1F5100432F19 /* MotionData.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -323,10 +311,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AF0CBC94295B413A0098A6D1 /* GyroDataTests.swift in Sources */,
 				AF1BD83F295C1E9E00432F19 /* MotionData+CoreDataProperties.swift in Sources */,
 				AF1BD83E295C1E9E00432F19 /* MotionData+CoreDataClass.swift in Sources */,
-				AF1BD837295C1DDA00432F19 /* MotionData.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -595,15 +581,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		AF1BD835295C1DDA00432F19 /* MotionData.xcdatamodeld */ = {
+		AF786B25295DBFA700C5DF5F /* MotionData.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				AF1BD836295C1DDA00432F19 /* MotionData.xcdatamodel */,
+				AF786B26295DBFA700C5DF5F /* MotionData.xcdatamodel */,
 			);
-			currentVersion = AF1BD836295C1DDA00432F19 /* MotionData.xcdatamodel */;
-			name = MotionData.xcdatamodeld;
-			path = GyroDataTests/MotionData.xcdatamodeld;
-			sourceTree = SOURCE_ROOT;
+			currentVersion = AF786B26295DBFA700C5DF5F /* MotionData.xcdatamodel */;
+			path = MotionData.xcdatamodeld;
+			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
 /* End XCVersionGroup section */
