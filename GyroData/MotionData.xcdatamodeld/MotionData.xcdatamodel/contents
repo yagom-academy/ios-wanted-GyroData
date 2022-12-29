@@ -6,11 +6,13 @@
         <attribute name="z" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
     </entity>
     <entity name="MotionRecordEntity" representedClassName="MotionRecordEntity" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="motionMode" optional="YES" attributeType="String"/>
         <attribute name="msInterval" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="startDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
     </entity>
     <elements>
-        <element name="MotionRecordEntity" positionX="-63" positionY="-18" width="128" height="73"/>
         <element name="CoordinateEntity" positionX="87.06640625" positionY="-0.05078125" width="128" height="88"/>
+        <element name="MotionRecordEntity" positionX="-63" positionY="-18" width="128" height="89"/>
     </elements>
 </model>
