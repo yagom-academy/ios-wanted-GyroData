@@ -86,13 +86,10 @@ class GraphView: UIView {
     }
     
     private func removeOutofBoundsSegment() {
-        segments = segments.filter { segment in
+        segments.forEach { segment in
             if segment.frame.origin.x + GraphNumber.segmentWidth >= bounds.size.width {
                 segment.removeFromSuperview()
-                return false
             }
-            
-            return true
         }
     }
 }
