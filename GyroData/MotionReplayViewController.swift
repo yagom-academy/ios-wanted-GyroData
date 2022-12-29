@@ -21,7 +21,7 @@ final class MotionReplayViewController: UIViewController {
     private var graphView: GraphView
     private lazy var playButton: UIButton = {
         let button = UIButton()
-        button.tintColor = .black
+        button.tintColor = .label
         button.setImage(UIImage(systemName: "play.fill"), for: .normal)
         button.setPreferredSymbolConfiguration(UIImage.SymbolConfiguration(pointSize: 80), forImageIn: .normal)
         button.setPreferredSymbolConfiguration(UIImage.SymbolConfiguration(pointSize: 80), forImageIn: .selected)
