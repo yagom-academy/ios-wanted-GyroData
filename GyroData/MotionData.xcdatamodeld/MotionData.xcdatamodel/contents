@@ -7,12 +7,12 @@
         <attribute name="z" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
     </entity>
     <entity name="MotionRecordEntity" representedClassName="MotionRecordEntity" syncable="YES">
-        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="motionMode" optional="YES" attributeType="String"/>
+        <attribute name="motionRecordId" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="msInterval" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="startDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <fetchedProperty name="coordinates" optional="YES">
-            <fetchRequest name="fetchedPropertyFetchRequest" entity="MotionRecordEntity" predicateString="motionRecordId == $FETCH_SOURCE.id"/>
+            <fetchRequest name="fetchedPropertyFetchRequest" entity="MotionRecordEntity" predicateString="motionRecordId == $FETCH_SOURCE. motionRecordId"/>
         </fetchedProperty>
     </entity>
 </model>

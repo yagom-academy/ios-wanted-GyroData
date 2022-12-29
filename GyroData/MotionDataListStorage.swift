@@ -31,7 +31,7 @@ final class MotionDataListStorage {
         coreDataStorage.performBackgroundTask { context in
             do {
                 let request: NSFetchRequest = MotionRecordEntity.fetchRequest()
-                if let objectToDelete = try context.fetch(request).filter({ $0.id == id }).first {
+                if let objectToDelete = try context.fetch(request).filter({ $0.motionRecordId == id }).first {
                     context.delete(objectToDelete)
                     completion(.success(()))
                 }

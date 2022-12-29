@@ -16,14 +16,14 @@ extension MotionRecordEntity {
         return NSFetchRequest<MotionRecordEntity>(entityName: "MotionRecordEntity")
     }
 
-    @NSManaged public var id: UUID
+    @NSManaged public var motionRecordId: UUID
     @NSManaged public var startDate: Date
     @NSManaged public var msInterval: Int64
     @NSManaged public var motionMode: String
 
     func toDomain() -> MotionRecord {
         return MotionRecord(
-            id: id,
+            id: motionRecordId,
             startDate: startDate,
             msInterval: Int(msInterval),
             motionMode: .accelerometer,

@@ -12,8 +12,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    var randomCoordinate: Coordiante {
-        return Coordiante(x: Double.random(in: -5000...5000),
+    var randomCoordinate: Coordinate {
+        return Coordinate(x: Double.random(in: -5000...5000),
                           y: Double.random(in: -1500...5000),
                           z: Double.random(in: -5000...1500))
     }
@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
 
-        var randomCoordinates = [Coordiante]()
+        var randomCoordinates = [Coordinate]()
         for _ in 0..<100 {
             randomCoordinates.append(randomCoordinate)
         }

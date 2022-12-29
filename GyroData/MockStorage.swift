@@ -21,15 +21,15 @@ final class MockStorage: MotionDataListStorageProtocol {
     private func mockData() -> [MotionRecord] {
         return [
             MotionRecord(id: UUID(), startDate: Date(), msInterval: 10,
-                         motionMode: .accelerometer, coordinates: [Coordiante(x: 1, y: 1, z: 1)]),
+                         motionMode: .accelerometer, coordinates: [Coordinate(x: 1, y: 1, z: 1)]),
             MotionRecord(id: UUID(), startDate: Date(), msInterval: 10,
-                         motionMode: .gyroscope, coordinates: [Coordiante(x: 1, y: 1, z: 1)]),
+                         motionMode: .gyroscope, coordinates: [Coordinate(x: 1, y: 1, z: 1)]),
             MotionRecord(id: UUID(), startDate: Date(), msInterval: 10,
-                         motionMode: .gyroscope, coordinates: [Coordiante(x: 1, y: 1, z: 1)]),
+                         motionMode: .gyroscope, coordinates: [Coordinate(x: 1, y: 1, z: 1)]),
             MotionRecord(id: UUID(), startDate: Date(), msInterval: 10,
-                         motionMode: .accelerometer, coordinates: [Coordiante(x: 1, y: 1, z: 1)]),
+                         motionMode: .accelerometer, coordinates: [Coordinate(x: 1, y: 1, z: 1)]),
             MotionRecord(id: UUID(), startDate: Date(), msInterval: 10,
-                         motionMode: .accelerometer, coordinates: [Coordiante(x: 1, y: 1, z: 1)]),
+                         motionMode: .accelerometer, coordinates: [Coordinate(x: 1, y: 1, z: 1)]),
         ]
     }
 }

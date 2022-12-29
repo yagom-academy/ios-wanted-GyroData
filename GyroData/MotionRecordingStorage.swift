@@ -23,7 +23,7 @@ final class MotionRecordingStorage {
             }
 
             let newRecord = MotionRecordEntity(context: context)
-            newRecord.id = record.id
+            newRecord.motionRecordId = record.id
             newRecord.startDate = record.startDate
             newRecord.msInterval = Int64(record.msInterval)
             newRecord.motionMode = record.motionMode.name
