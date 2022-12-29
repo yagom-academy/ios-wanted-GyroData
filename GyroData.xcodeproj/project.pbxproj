@@ -7,20 +7,28 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3553FEB02959A773005E4AE4 /* Cordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3553FEAF2959A773005E4AE4 /* Cordinator.swift */; };
+		3553FEB32959AA68005E4AE4 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3553FEB22959AA68005E4AE4 /* BaseViewController.swift */; };
+		3553FEB52959ACEB005E4AE4 /* MeasureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3553FEB42959ACEB005E4AE4 /* MeasureViewController.swift */; };
+		3553FEB82959B382005E4AE4 /* SensorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3553FEB72959B382005E4AE4 /* SensorType.swift */; };
+		3553FEBB2959B60F005E4AE4 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3553FEBA2959B60F005E4AE4 /* GraphView.swift */; };
 		63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB428D44FC400C53A39 /* AppDelegate.swift */; };
 		63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB628D44FC400C53A39 /* SceneDelegate.swift */; };
-		63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB828D44FC400C53A39 /* ViewController.swift */; };
-		63F01BBC28D44FC400C53A39 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBA28D44FC400C53A39 /* Main.storyboard */; };
+		63F01BB928D44FC400C53A39 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB828D44FC400C53A39 /* ListViewController.swift */; };
 		63F01BBE28D44FC500C53A39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBD28D44FC500C53A39 /* Assets.xcassets */; };
 		63F01BC128D44FC500C53A39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3553FEAF2959A773005E4AE4 /* Cordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cordinator.swift; sourceTree = "<group>"; };
+		3553FEB22959AA68005E4AE4 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		3553FEB42959ACEB005E4AE4 /* MeasureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureViewController.swift; sourceTree = "<group>"; };
+		3553FEB72959B382005E4AE4 /* SensorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensorType.swift; sourceTree = "<group>"; };
+		3553FEBA2959B60F005E4AE4 /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		63F01BB128D44FC400C53A39 /* GyroData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GyroData.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63F01BB428D44FC400C53A39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63F01BB628D44FC400C53A39 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		63F01BB828D44FC400C53A39 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		63F01BBB28D44FC400C53A39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		63F01BB828D44FC400C53A39 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		63F01BBD28D44FC500C53A39 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		63F01BC028D44FC500C53A39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		63F01BC228D44FC500C53A39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -37,6 +45,56 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3553FEAC2959A6A4005E4AE4 /* Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				63F01BB428D44FC400C53A39 /* AppDelegate.swift */,
+				63F01BB628D44FC400C53A39 /* SceneDelegate.swift */,
+			);
+			path = Delegate;
+			sourceTree = "<group>";
+		};
+		3553FEAD2959A6B2005E4AE4 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				63F01BB828D44FC400C53A39 /* ListViewController.swift */,
+				3553FEB42959ACEB005E4AE4 /* MeasureViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		3553FEAE2959A75A005E4AE4 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				3553FEAF2959A773005E4AE4 /* Cordinator.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		3553FEB12959AA2F005E4AE4 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				3553FEB22959AA68005E4AE4 /* BaseViewController.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		3553FEB62959B367005E4AE4 /* Type */ = {
+			isa = PBXGroup;
+			children = (
+				3553FEB72959B382005E4AE4 /* SensorType.swift */,
+			);
+			path = Type;
+			sourceTree = "<group>";
+		};
+		3553FEB92959B5F3005E4AE4 /* CommonView */ = {
+			isa = PBXGroup;
+			children = (
+				3553FEBA2959B60F005E4AE4 /* GraphView.swift */,
+			);
+			path = CommonView;
+			sourceTree = "<group>";
+		};
 		63F01BA828D44FC400C53A39 = {
 			isa = PBXGroup;
 			children = (
@@ -56,10 +114,12 @@
 		63F01BB328D44FC400C53A39 /* GyroData */ = {
 			isa = PBXGroup;
 			children = (
-				63F01BB428D44FC400C53A39 /* AppDelegate.swift */,
-				63F01BB628D44FC400C53A39 /* SceneDelegate.swift */,
-				63F01BB828D44FC400C53A39 /* ViewController.swift */,
-				63F01BBA28D44FC400C53A39 /* Main.storyboard */,
+				3553FEB92959B5F3005E4AE4 /* CommonView */,
+				3553FEB62959B367005E4AE4 /* Type */,
+				3553FEB12959AA2F005E4AE4 /* Base */,
+				3553FEAE2959A75A005E4AE4 /* Helper */,
+				3553FEAC2959A6A4005E4AE4 /* Delegate */,
+				3553FEAD2959A6B2005E4AE4 /* ViewController */,
 				63F01BBD28D44FC500C53A39 /* Assets.xcassets */,
 				63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */,
 				63F01BC228D44FC500C53A39 /* Info.plist */,
@@ -127,7 +187,6 @@
 			files = (
 				63F01BC128D44FC500C53A39 /* LaunchScreen.storyboard in Resources */,
 				63F01BBE28D44FC500C53A39 /* Assets.xcassets in Resources */,
-				63F01BBC28D44FC400C53A39 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,23 +197,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */,
+				3553FEB32959AA68005E4AE4 /* BaseViewController.swift in Sources */,
+				3553FEB02959A773005E4AE4 /* Cordinator.swift in Sources */,
+				63F01BB928D44FC400C53A39 /* ListViewController.swift in Sources */,
+				3553FEB82959B382005E4AE4 /* SensorType.swift in Sources */,
+				3553FEB52959ACEB005E4AE4 /* MeasureViewController.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
+				3553FEBB2959B60F005E4AE4 /* GraphView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		63F01BBA28D44FC400C53A39 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				63F01BBB28D44FC400C53A39 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -287,11 +343,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 45K89U54K6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GyroData/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -299,7 +355,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.GyroData;
+				PRODUCT_BUNDLE_IDENTIFIER = com.JaeGeun.GyroData;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -314,11 +370,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 45K89U54K6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GyroData/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -326,7 +382,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.GyroData;
+				PRODUCT_BUNDLE_IDENTIFIER = com.JaeGeun.GyroData;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
