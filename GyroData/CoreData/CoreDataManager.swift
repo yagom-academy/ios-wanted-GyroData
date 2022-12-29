@@ -22,23 +22,22 @@ final class CoreDataManager {
         }
         return container
     }()
-
     private init() {}
     
-    func create(model: [Analysis]) {
+    func create(model: [CellModel], fileModel: [GraphModel]) {
         let content = GyroData(context: context)
         model.forEach {
-            content.setValue($0.x, forKey: "x")
-            content.setValue($0.y, forKey: "y")
-            content.setValue($0.z, forKey: "z")
-            content.setValue($0.measurementTime, forKey: "measurementTime")
+            content.setValue($0.id, forKey: "ID")
+            content.setValue($0.analysisType, forKey: "Type")
+            
+            
             content.setValue($0.savedAt, forKey: "savedAt")
         }
-        
+        GraphFileManager.shared.saveJsonData(data: fileModel, fileName: content.id ?? UUID())
         saveContext()
     }
-
-    private func read() {
+    
+    func read() {
         do {
             fetchedAnalysisValue = try context.fetch(GyroData.fetchRequest())
         } catch {
