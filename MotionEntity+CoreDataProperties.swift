@@ -2,7 +2,7 @@
 //  MotionEntity+CoreDataProperties.swift
 //  GyroData
 //
-//  Created by bonf, seohyeon2 on 2022/12/27.
+//  Created by 이은찬 on 2022/12/29.
 //
 //
 
@@ -18,7 +18,9 @@ extension MotionEntity {
 
     @NSManaged public var date: String?
     @NSManaged public var measurementType: String?
-    @NSManaged public var coordinate: Coordinate?
+    @NSManaged public var motionX: [Double]
+    @NSManaged public var motionY: [Double]
+    @NSManaged public var motionZ: [Double]
 
 }
 

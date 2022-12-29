@@ -11,14 +11,13 @@
 		05146B5A295AAE1F00A51B02 /* MeasurementType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05146B59295AAE1F00A51B02 /* MeasurementType.swift */; };
 		05146B5C295AAE8300A51B02 /* ReplayViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05146B5B295AAE8300A51B02 /* ReplayViewType.swift */; };
 		05146B60295AEA6200A51B02 /* MeasurementService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05146B5F295AEA6200A51B02 /* MeasurementService.swift */; };
-		056C20AC295C516D00ECA077 /* CoordinateTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 056C20AB295C516D00ECA077 /* CoordinateTransformer.swift */; };
 		05FF01BB2959B05D0046F874 /* MeasureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05FF01BA2959B05D0046F874 /* MeasureView.swift */; };
 		05FF01BD2959B0730046F874 /* MeasureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05FF01BC2959B0730046F874 /* MeasureViewController.swift */; };
 		05FF01BF2959C7DC0046F874 /* ReplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05FF01BE2959C7DC0046F874 /* ReplayViewController.swift */; };
 		05FF01C12959C7E70046F874 /* ReplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05FF01C02959C7E70046F874 /* ReplayView.swift */; };
+		186667EB295D823700489994 /* MotionEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186667E9295D823700489994 /* MotionEntity+CoreDataClass.swift */; };
+		186667EC295D823700489994 /* MotionEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186667EA295D823700489994 /* MotionEntity+CoreDataProperties.swift */; };
 		186D1F02295ADF0500C3A202 /* MotionModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 186D1F00295ADF0500C3A202 /* MotionModel.xcdatamodeld */; };
-		186D1F05295AE08400C3A202 /* MotionEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186D1F03295AE08400C3A202 /* MotionEntity+CoreDataClass.swift */; };
-		186D1F06295AE08400C3A202 /* MotionEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186D1F04295AE08400C3A202 /* MotionEntity+CoreDataProperties.swift */; };
 		186D1F08295AE17D00C3A202 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186D1F07295AE17D00C3A202 /* CoreDataManager.swift */; };
 		18B05FE72959B03D00DC8800 /* GyroTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B05FE62959B03D00DC8800 /* GyroTableView.swift */; };
 		18B05FE92959B0E700DC8800 /* GyroTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B05FE82959B0E700DC8800 /* GyroTableViewCell.swift */; };
@@ -34,14 +33,13 @@
 		05146B59295AAE1F00A51B02 /* MeasurementType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementType.swift; sourceTree = "<group>"; };
 		05146B5B295AAE8300A51B02 /* ReplayViewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplayViewType.swift; sourceTree = "<group>"; };
 		05146B5F295AEA6200A51B02 /* MeasurementService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementService.swift; sourceTree = "<group>"; };
-		056C20AB295C516D00ECA077 /* CoordinateTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateTransformer.swift; sourceTree = "<group>"; };
 		05FF01BA2959B05D0046F874 /* MeasureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureView.swift; sourceTree = "<group>"; };
 		05FF01BC2959B0730046F874 /* MeasureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureViewController.swift; sourceTree = "<group>"; };
 		05FF01BE2959C7DC0046F874 /* ReplayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplayViewController.swift; sourceTree = "<group>"; };
 		05FF01C02959C7E70046F874 /* ReplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplayView.swift; sourceTree = "<group>"; };
+		186667E9295D823700489994 /* MotionEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MotionEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		186667EA295D823700489994 /* MotionEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MotionEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		186D1F01295ADF0500C3A202 /* MotionModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MotionModel.xcdatamodel; sourceTree = "<group>"; };
-		186D1F03295AE08400C3A202 /* MotionEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MotionEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
-		186D1F04295AE08400C3A202 /* MotionEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MotionEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		186D1F07295AE17D00C3A202 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		18B05FE62959B03D00DC8800 /* GyroTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroTableView.swift; sourceTree = "<group>"; };
 		18B05FE82959B0E700DC8800 /* GyroTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroTableViewCell.swift; sourceTree = "<group>"; };
@@ -89,7 +87,6 @@
 			children = (
 				186D1F00295ADF0500C3A202 /* MotionModel.xcdatamodeld */,
 				186D1F07295AE17D00C3A202 /* CoreDataManager.swift */,
-				056C20AB295C516D00ECA077 /* CoordinateTransformer.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -131,8 +128,8 @@
 		63F01BA828D44FC400C53A39 = {
 			isa = PBXGroup;
 			children = (
-				186D1F03295AE08400C3A202 /* MotionEntity+CoreDataClass.swift */,
-				186D1F04295AE08400C3A202 /* MotionEntity+CoreDataProperties.swift */,
+				186667E9295D823700489994 /* MotionEntity+CoreDataClass.swift */,
+				186667EA295D823700489994 /* MotionEntity+CoreDataProperties.swift */,
 				63F01BB328D44FC400C53A39 /* GyroData */,
 				63F01BB228D44FC400C53A39 /* Products */,
 			);
@@ -229,10 +226,8 @@
 			files = (
 				18B05FF22959E1B400DC8800 /* AppDelegate.swift in Sources */,
 				63F01BB928D44FC400C53A39 /* GyroViewController.swift in Sources */,
-				186D1F06295AE08400C3A202 /* MotionEntity+CoreDataProperties.swift in Sources */,
-				186D1F05295AE08400C3A202 /* MotionEntity+CoreDataClass.swift in Sources */,
+				186667EB295D823700489994 /* MotionEntity+CoreDataClass.swift in Sources */,
 				05FF01BF2959C7DC0046F874 /* ReplayViewController.swift in Sources */,
-				056C20AC295C516D00ECA077 /* CoordinateTransformer.swift in Sources */,
 				05146B58295AAB1000A51B02 /* Motion.swift in Sources */,
 				05FF01C12959C7E70046F874 /* ReplayView.swift in Sources */,
 				05FF01BB2959B05D0046F874 /* MeasureView.swift in Sources */,
@@ -242,6 +237,7 @@
 				18B05FE72959B03D00DC8800 /* GyroTableView.swift in Sources */,
 				05146B5C295AAE8300A51B02 /* ReplayViewType.swift in Sources */,
 				18B05FE92959B0E700DC8800 /* GyroTableViewCell.swift in Sources */,
+				186667EC295D823700489994 /* MotionEntity+CoreDataProperties.swift in Sources */,
 				186D1F08295AE17D00C3A202 /* CoreDataManager.swift in Sources */,
 				05146B60295AEA6200A51B02 /* MeasurementService.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,

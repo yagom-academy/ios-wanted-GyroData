@@ -17,8 +17,10 @@ struct CoreDataManager {
         let coreData = MotionEntity(context: context)
         coreData.date = data.date
         coreData.measurementType = data.measurementType
-        coreData.coordinate = data.coordinate
-
+        coreData.motionX = data.motionX
+        coreData.motionY = data.motionY
+        coreData.motionZ = data.motionZ
+        
         do {
             try context.save()
         } catch {
@@ -34,7 +36,9 @@ struct CoreDataManager {
                 contact?.forEach {
                     let motion = Motion(date: $0.date ?? "",
                                         measurementType: $0.measurementType ?? "",
-                                        coordinate: $0.coordinate ?? Coordinate(x: [], y: [], z: []))
+                                        motionX: $0.motionX,
+                                        motionY: $0.motionY,
+                                        motionZ: $0.motionZ)
                     motions.append(motion)
                 }
             } catch {
