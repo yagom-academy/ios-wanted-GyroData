@@ -25,6 +25,10 @@ final class GyroViewController: UIViewController {
         setupDefault()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        MotionDataLoad()
+    }
+
     private func setupNavigationItem() {
         navigationItem.title = "목록"
         view.backgroundColor = .systemBackground
@@ -57,13 +61,6 @@ final class GyroViewController: UIViewController {
             })
         
         snapshot.appendSections([.main])
-        snapshot.appendItems(coreDataManager.fetch(
-            request: MotionEntity.fetchRequestWithOptions(
-                offset: 0
-            )
-        ))
-        
-        dataSource?.apply(snapshot)
     }
 
     private func setupSubviews() {
@@ -85,28 +82,30 @@ final class GyroViewController: UIViewController {
             animated: true
         )
     }
+
+    private func MotionDataLoad() {
+        let snapshotCount = dataSource?.snapshot().numberOfItems ?? 0
+        let coreDataList = coreDataManager.fetch(
+            request: MotionEntity.fetchRequest()
+        )
+        
+        if snapshotCount < coreDataList.count {
+            let coreData = coreDataManager.fetch(
+                request: MotionEntity.fetchRequestWithOptions(
+                    offset: snapshotCount
+                )
+            )
+            
+            snapshot.appendItems(coreData)
+            dataSource?.apply(snapshot, animatingDifferences: false)
+        }
+    }
 }
 
 extension GyroViewController: UITableViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.contentOffset.y > (scrollView.contentSize.height - scrollView.bounds.height) {
-            let snapshotCount = dataSource?.snapshot().numberOfItems ?? 0
-            let coreDatalist = coreDataManager.fetch(
-                request: MotionEntity.fetchRequest()
-            )
-
-            print(snapshotCount, coreDatalist.count)
-            
-            if snapshotCount < coreDatalist.count {
-                let coreData = coreDataManager.fetch(
-                    request: MotionEntity.fetchRequestWithOptions(
-                        offset: snapshotCount
-                    )
-                )
-
-                snapshot.appendItems(coreData)
-                dataSource?.apply(snapshot, animatingDifferences: false)
-            }
+            MotionDataLoad()
         }
     }
     

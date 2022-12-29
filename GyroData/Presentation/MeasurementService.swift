@@ -9,25 +9,30 @@ import CoreMotion
 
 class MeasurementService {
     private let manager = CMMotionManager()
-    private var timer = Timer()
+    private(set) var timer = Timer()
+    private var measuredDataList = [[Double]]()
 
     func measureAccelerometer() {
         manager.startAccelerometerUpdates()
         manager.accelerometerUpdateInterval = 0.1
         
         var second = 0
-        timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
+        
+        measuredDataList = [[Double](), [Double](), [Double]()]
+        timer = Timer.scheduledTimer(
+            withTimeInterval: 0.1,
+            repeats: true
+        ) { [weak self] timer in
             second += 1
             
             if second == 600 {
                 timer.invalidate()
             }
             
-            if let data = self.manager.accelerometerData {
-                // TODO: 데이터 저장 코드 작성
-                print(data.acceleration.x)
-                print(data.acceleration.y)
-                print(data.acceleration.z)
+            if let data = self?.manager.accelerometerData {
+                self?.measuredDataList[0].append(data.acceleration.x)
+                self?.measuredDataList[1].append(data.acceleration.y)
+                self?.measuredDataList[2].append(data.acceleration.z)
             }
         }
     }
@@ -37,23 +42,32 @@ class MeasurementService {
         manager.gyroUpdateInterval = 0.1
         
         var second = 0
-        timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
+
+        measuredDataList = [[Double](), [Double](), [Double]()]
+        timer = Timer.scheduledTimer(
+            withTimeInterval: 0.1, repeats: true
+        ) { [weak self] timer in
             second += 1
             
             if second == 600 {
                 timer.invalidate()
             }
-            
-            if let data = self.manager.gyroData {
-                // TODO: 데이터 저장 코드 작성
-                print(data.rotationRate.x)
-                print(data.rotationRate.y)
-                print(data.rotationRate.z)
+
+            if let data = self?.manager.gyroData {
+                self?.measuredDataList[0].append(data.rotationRate.x)
+                self?.measuredDataList[1].append(data.rotationRate.y)
+                self?.measuredDataList[2].append(data.rotationRate.z)
             }
         }
     }
     
     func stopMeasurement() {
         timer.invalidate()
+    }
+
+    func getMeasurementResult() -> [[Double]] {
+        let result = measuredDataList
+        measuredDataList = [[Double]]()
+        return result
     }
 }

@@ -14,7 +14,15 @@ class ReplayViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setupNavigationItem()
+        setupDefault()
+    }
+    
+    private func setupNavigationItem() {
+        self.navigationItem.title = "다시보기"
+    }
+    
+    private func setupDefault() {
         replayView.measurementTime.text = motionInfo?.data.date
         replayView.pageTypeLabel.text = motionInfo?.pageType.name
 
@@ -26,19 +34,23 @@ class ReplayViewController: UIViewController {
         
         view = replayView
         view.backgroundColor = .white
-        
-        self.navigationItem.title = "다시보기"
     }
     
     @objc
     func activateTimer() {
         Stopwatch.share.isRunning.toggle()
-
-        if Stopwatch.share.isRunning == false {
-            let imageConfig = UIImage.SymbolConfiguration(pointSize: 45, weight: .light)
-            replayView.playButton.setImage(UIImage(systemName: "play.fill", withConfiguration: imageConfig), for: .normal)
-            return
-        }
+        
+        let systemImageName = Stopwatch.share.isRunning ? "play.fill" : "stop.fill"
+        let imageConfig = UIImage.SymbolConfiguration(
+            pointSize: 45,
+            weight: .light
+        )
+        replayView.playButton.setImage(
+            UIImage(
+                systemName: systemImageName,
+                withConfiguration: imageConfig),
+            for: .normal
+        )
 
         // TODO: 시간 Motion에 추가 후 바꾸기
         Stopwatch.share.activateTimer(for: 6, 1)

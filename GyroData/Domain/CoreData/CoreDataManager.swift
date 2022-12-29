@@ -11,8 +11,10 @@ import CoreData
 struct CoreDataManager {
     let appDelegate = UIApplication.shared.delegate as? AppDelegate
     
-    func save(data: Motion) {
-        guard let context = appDelegate?.persistentContainer.viewContext else { return }
+    func save(data: Motion, completion: @escaping (Result<Bool,Error>) -> Void) {
+        guard let context = appDelegate?.persistentContainer.viewContext else {
+            return
+        }
         
         let coreData = MotionEntity(context: context)
         coreData.date = data.date
@@ -23,8 +25,9 @@ struct CoreDataManager {
         
         do {
             try context.save()
+            completion(.success(true))
         } catch {
-            print(error.localizedDescription)
+            completion(.failure(error))
         }
     }
     
