@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		45BD401A2959772000B37A25 /* GyroModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 45BD40182959772000B37A25 /* GyroModel.xcdatamodeld */; };
 		45BD401D295977BA00B37A25 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BD401C295977BA00B37A25 /* FileManager.swift */; };
 		45BD40202959850300B37A25 /* MotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BD401F2959850300B37A25 /* MotionManager.swift */; };
 		45BD40222959856000B37A25 /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BD40212959856000B37A25 /* RecordViewController.swift */; };
@@ -27,6 +26,7 @@
 		7256AD8F2959B2B400E14DC6 /* GyroStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7256AD8E2959B2B400E14DC6 /* GyroStore.swift */; };
 		72757A91295D7BB3002DE163 /* Gyro+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72757A8F295D7BB3002DE163 /* Gyro+CoreDataClass.swift */; };
 		72757A92295D7BB3002DE163 /* Gyro+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72757A90295D7BB3002DE163 /* Gyro+CoreDataProperties.swift */; };
+		72757A9B295D816A002DE163 /* GyroModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 45BD40182959772000B37A25 /* GyroModel.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -340,13 +340,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				72757A9B295D816A002DE163 /* GyroModel.xcdatamodeld in Sources */,
 				45BD401D295977BA00B37A25 /* FileManager.swift in Sources */,
 				45BD40202959850300B37A25 /* MotionManager.swift in Sources */,
-				45BD401A2959772000B37A25 /* GyroModel.xcdatamodeld in Sources */,
 				45BD40222959856000B37A25 /* RecordViewController.swift in Sources */,
 				45BD40262959FF0700B37A25 /* MotionData.swift in Sources */,
 				45BD4024295989F500B37A25 /* MeasureData.swift in Sources */,
-				45BD401A2959772000B37A25 /* GyroModel.xcdatamodeld in Sources */,
 				7256AD8D2959B29100E14DC6 /* CoreDataStack.swift in Sources */,
 				63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */,
 				7256AD8F2959B2B400E14DC6 /* GyroStore.swift in Sources */,
