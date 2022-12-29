@@ -19,13 +19,17 @@ final class MotionDataListViewController: UIViewController {
         return tableView
     }()
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.viewWillAppear()
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         setUpViewModel()
         layout()
         setUpNavigationBar()
-        viewModel.viewDidLoad()
     }
 
     private func setUpViewModel() {
@@ -54,7 +58,7 @@ final class MotionDataListViewController: UIViewController {
 
     @objc
     private func measureButtonTapped(_ sender: UIButton) {
-        // Move to third page
+        navigationController?.pushViewController(MotionRecordingViewController(), animated: true)
     }
 }
 
@@ -76,8 +80,12 @@ extension MotionDataListViewController: UITableViewDataSource {
 
 extension MotionDataListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let playAction = UIContextualAction(style: .normal, title: "Play") { _, _, _ in
-            // Move to second page
+        let playAction = UIContextualAction(style: .normal, title: "Play") { [weak self] _, _, _ in
+            guard let self = self else { return }
+            self.navigationController?.pushViewController(
+                MotionReplayViewController(replayType: .play, motionRecord: self.viewModel.records[indexPath.row])
+                , animated: true
+            )
         }
         playAction.backgroundColor = .systemGreen
 
@@ -91,5 +99,12 @@ extension MotionDataListViewController: UITableViewDelegate {
         deleteAction.backgroundColor = .systemRed
 
         return UISwipeActionsConfiguration(actions: [deleteAction, playAction])
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        navigationController?.pushViewController(
+            MotionReplayViewController(replayType: .view, motionRecord: viewModel.records[indexPath.row])
+            , animated: true
+        )
     }
 }
