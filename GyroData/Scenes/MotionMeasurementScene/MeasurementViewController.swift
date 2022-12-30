@@ -118,10 +118,8 @@ class MeasurementViewController: UIViewController {
         
         measurementviewModel.loading
             .subscribe { [weak self] isLoading in
-                if isLoading {
-                    self?.showLoading()
-                } else {
-                    self?.hideLoading()
+                if let isLoading = isLoading {
+                    isLoading ? self?.showLoading() : self?.hideLoading()
                 }
             }
     }
@@ -139,7 +137,6 @@ extension MeasurementViewController {
     
     @objc private func saveButtonTapped() {
         measurementviewModel.save(motionType, datas: graphView.segmentDatas)
-        navigationController?.popViewController(animated: true)
     }
     
     private func configureButton() {
@@ -191,6 +188,10 @@ extension MeasurementViewController {
     }
     
     private func hideLoading() {
-        indicatorView.removeFromSuperview()
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
+            self.indicatorView.stopAnimating()
+        }
+        
+        navigationController?.popViewController(animated: true)
     }
 }

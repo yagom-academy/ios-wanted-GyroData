@@ -16,7 +16,7 @@ protocol MotionMeasurementViewModelInput {
 protocol MotionMeasurementViewModelOutput {
     var error: Observable<String> { get set }
     var isMeasuring: Observable<Bool> { get set }
-    var loading: Observable<Bool> { get set }
+    var loading: Observable<Bool?> { get set }
 }
 
 protocol MotionMeasurementViewModelType: MotionMeasurementViewModelInput, MotionMeasurementViewModelOutput { }
@@ -28,7 +28,7 @@ class MotionMeasurementViewModel: MotionMeasurementViewModelType {
 
     var error: Observable<String> = Observable("")
     var isMeasuring: Observable<Bool> = Observable(false)
-    var loading: Observable<Bool> = Observable(false)
+    var loading: Observable<Bool?> = Observable(nil)
     
     /// Input
     
