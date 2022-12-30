@@ -172,7 +172,9 @@ extension ListViewController: UITableViewDelegate {
         let play = UIContextualAction(style: .normal, title: "Play") { (UIContextualAction, UIView, success: @escaping (Bool) -> Void) in
             let showVC = ShowViewController()
             showVC.viewType = .replay
-            showVC.setMeasureData(data: self.measureDataList[indexPath.row])
+            let key = self.measureDataList[indexPath.row].measureDate ?? ""
+            guard let measureValue = FileManagerService.shared.getMeasureInfo(key: key) else { return }
+            showVC.setMeasureData(data: measureValue)
             
             self.navigationController?.pushViewController(showVC, animated: true)
         }
@@ -182,6 +184,9 @@ extension ListViewController: UITableViewDelegate {
             CoreDataManager.shared.context.delete(self.measureDataList[indexPath.row])
             self.measureDataList.remove(at: indexPath.row)
             CoreDataManager.shared.saveContext()
+            
+            FileManagerService.shared.deleteMeasureFile(fileName: self.measureDataList[indexPath.row].measureDate!)
+            
             self.tableView.reloadData()
             self.fetchOffset -= 1
             success(true)
@@ -194,7 +199,9 @@ extension ListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let showVC = ShowViewController()
         showVC.viewType = .preview
-        showVC.setMeasureData(data: self.measureDataList[indexPath.row])
+        let key = measureDataList[indexPath.row].measureDate ?? ""
+        guard let measureValue = FileManagerService.shared.getMeasureInfo(key: key) else { return }
+        showVC.setMeasureData(data: measureValue)
         
         self.navigationController?.pushViewController(showVC, animated: true)
     }

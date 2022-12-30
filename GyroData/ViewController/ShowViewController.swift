@@ -99,7 +99,7 @@ class ShowViewController: BaseViewController {
     // MARK: - Properties
     private let viewTitle: String = "다시보기"
     var viewType: ViewType = .preview
-    private var measureData: MeasureData?
+    private var measureData: MeasureValue?
     private var timer: Timer?
     private var playTime: Int = 0
     private var isPlay: Bool = false
@@ -138,13 +138,13 @@ extension ShowViewController {
         if data.sensorType == SensorType.gyro.rawValue {
             max = SensorType.gyro.max
         }
-        max += maxValueArr(x: data.xData ?? [], y: data.yData ?? [], z: data.zData ?? []) * 1.2
+        max += maxValueArr(x: data.xData, y: data.yData, z: data.zData) * 1.2
         self.graphView.isShow = true
-        self.graphView.setShowGraphValue(x: data.xData ?? [],
-                                         y: data.yData ?? [],
-                                         z: data.zData ?? [],
+        self.graphView.setShowGraphValue(x: data.xData,
+                                         y: data.yData,
+                                         z: data.zData,
                                          max: max,
-                                         time: data.xData?.count ?? 0)
+                                         time: data.xData.count)
         self.graphView.setNeedsDisplay()
     }
 }
@@ -237,7 +237,7 @@ extension ShowViewController {
         if self.isPlay {
             self.playButton.setImage(UIImage(systemName: "stop.fill", withConfiguration: imageConfig), for: .normal)
             self.graphView.clear()
-            self.graphView.measureTime = self.measureData?.xData?.count ?? 0
+            self.graphView.measureTime = self.measureData?.xData.count ?? 0
             
             var max = SensorType.acc.max
             if self.measureData?.sensorType == SensorType.gyro.rawValue {
@@ -248,7 +248,7 @@ extension ShowViewController {
             self.timer = Timer(timeInterval: 0.1, repeats: true) { timer in
                 self.playTimeLabel.text = String(format:"%4.1f",Double(self.playTime) / 10.0)
                 
-                if self.playTime >= self.measureData?.xData?.count ?? 0 {
+                if self.playTime >= self.measureData?.xData.count ?? 0 {
                     self.timer?.invalidate()
                     
                     return
@@ -286,10 +286,10 @@ extension ShowViewController {
 }
 // MARK: - Helper
 extension ShowViewController {
-    func decodeMeasureData(_ measureData: MeasureData?, at index:Int) -> (Double,Double,Double){
+    func decodeMeasureData(_ measureData: MeasureValue?, at index:Int) -> (Double,Double,Double){
         if let measureData = measureData {
-            if measureData.xData!.count != 0 && measureData.yData!.count != 0 && measureData.zData!.count != 0 {
-                return (measureData.xData![index], measureData.yData![index], measureData.zData![index])
+            if measureData.xData.count != 0 && measureData.yData.count != 0 && measureData.zData.count != 0 {
+                return (measureData.xData[index], measureData.yData[index], measureData.zData[index])
             }
         }
 
@@ -298,7 +298,7 @@ extension ShowViewController {
         return (0.0, 0.0, 0.0)
     }
     
-    func setMeasureData(data: MeasureData) {
+    func setMeasureData(data: MeasureValue) {
         self.measureData = data
     }
     

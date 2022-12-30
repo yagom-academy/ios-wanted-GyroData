@@ -297,7 +297,15 @@ extension MeasureViewController {
     
     private func saveMeasureData() {
         self.indicator.startAnimating()
-        isEnableSaveCheck(runningTime: self.runningTime)
+        
+        if runningTime == 0 {
+            let alert = AlertManager.alert(title: "값을 측정후 저장해주세요.", alertType: .saveFail)
+            present(alert, animated: true, completion: nil)
+            self.indicator.stopAnimating()
+            
+            return
+        }
+        
         let dispatchGroup = DispatchGroup()
         
         let _ = measureDataForCoreData(runningTime: self.runningTime,
@@ -307,8 +315,26 @@ extension MeasureViewController {
                                                  y: self.yData,
                                                  z: self.zData)
         
+        let measureValue = MeasureValue(measureDate: self.measureDate,
+                                        sensorType: self.sensorType,
+                                        measureTime: String(Double(self.runningTime) / 10),
+                                        xData: self.xData,
+                                        yData: self.yData,
+                                        zData: self.zData)
+        
         DispatchQueue.global().async(group: dispatchGroup) {
             CoreDataManager.shared.saveContext()
+        }
+        
+        DispatchQueue.global().async(group: dispatchGroup) {
+            do {
+                try FileManagerService.shared.saveMeasureFile(data: measureValue)
+            } catch {
+                DispatchQueue.main.async {
+                    let alert = AlertManager.alert(title: error.localizedDescription, alertType: .saveFail)
+                    self.present(alert, animated: true)
+                }
+            }
         }
         
         dispatchGroup.notify(queue: .main) { [weak self] in
@@ -334,13 +360,7 @@ extension MeasureViewController {
     }
     
     private func isEnableSaveCheck(runningTime: Int) {
-        if runningTime == 0 {
-            let alert = AlertManager.alert(title: "값을 측정후 저장해주세요.", alertType: .saveFail)
-            present(alert, animated: true, completion: nil)
-            self.indicator.stopAnimating()
-            
-            return
-        }
+        
     }
     
     private func measureDataForCoreData(runningTime: Int, date: String, sensor: String, x: [Double], y: [Double], z: [Double]) -> MeasureData {
