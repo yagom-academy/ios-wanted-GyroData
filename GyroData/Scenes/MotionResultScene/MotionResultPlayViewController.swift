@@ -29,7 +29,8 @@ final class MotionResultPlayViewController: MotionResultViewController {
         return label
     }()
     
-    var timer: Timer?
+    private var timer: Timer?
+    private var timerIndex = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,18 +73,27 @@ extension MotionResultPlayViewController {
         let yList = motionInformation.yData
         let zList = motionInformation.zData
         let timeOut = min(motionInformation.xData.count, motionInformation.yData.count, motionInformation.zData.count)
-        var index = 0
         
-        timer = Timer(timeInterval: MotionMeasurementNumber.updateInterval, repeats: true, block: { timer in
-            if index == timeOut {
+        if timerIndex == timeOut {
+            graphView.clearSegmanet()
+            timerIndex = 0
+        }
+        
+        timer = Timer(timeInterval: MotionMeasurementNumber.updateInterval,
+                      repeats: true,
+                      block: { [self] timer in
+            
+            if timerIndex == timeOut {
                 timer.invalidate()
+                self.timer = nil
+                playButton.isSelected = false
                 return
             }
             
-            let motionData = [xList[index], yList[index], zList[index]]
-            self.graphView.add(motionData)
+            let motionData = [xList[timerIndex], yList[timerIndex], zList[timerIndex]]
+            graphView.add(motionData)
             
-            index += 1
+            timerIndex += 1
         })
 
         if let timer = timer {
