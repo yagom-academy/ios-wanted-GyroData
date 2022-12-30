@@ -22,8 +22,9 @@ extension FileManager {
     
     func addFile(for motion: Motion) {
         let fileManager = FileManager.default
-        let directoryPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("GyroData")
-        let filePath = directoryPath.appendingPathComponent("\(motion.date).json")
+        let directoryPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        let name = convertFileName(with: motion)
+        let filePath = directoryPath.appendingPathComponent("\(name).json")
         
         if let data = try? JSONEncoder().encode(motion) {
             do {
@@ -34,9 +35,10 @@ extension FileManager {
         }
     }
     
-    func load(for name: String) -> Motion? {
+    func load(for motion: Motion) -> Motion? {
         let fileManager = FileManager.default
-        let directoryPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("GyroData")
+        let directoryPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        let name = convertFileName(with: motion)
         let filePath = directoryPath.appendingPathComponent("\(name).json")
         
         if let data = try? Data(contentsOf: filePath) {
@@ -48,9 +50,10 @@ extension FileManager {
         return nil
     }
     
-    func delete(for name: String) {
+    func delete(for motion: Motion) {
         let fileManager = FileManager.default
-        let directoryPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("GyroData")
+        let directoryPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        let name = convertFileName(with: motion)
         let filePath = directoryPath.appendingPathComponent("\(name).json")
         
         do {
@@ -58,5 +61,9 @@ extension FileManager {
         } catch {
             print(error.localizedDescription)
         }
+    }
+
+    private func convertFileName(with motion: Motion) -> String {
+        return motion.date.filter{ $0.isNumber }
     }
 }

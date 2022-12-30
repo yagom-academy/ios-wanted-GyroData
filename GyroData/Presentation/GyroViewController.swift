@@ -45,7 +45,6 @@ final class GyroViewController: UIViewController {
         gyroListView.register(GyroTableViewCell.self, forCellReuseIdentifier: "measurementListViewCell")
         gyroListView.delegate = self
         gyroListView.translatesAutoresizingMaskIntoConstraints = false
-        FileManager.default.createAppDirectory()
 
         dataSource = UITableViewDiffableDataSource<Section, Motion>(
             tableView: gyroListView,
