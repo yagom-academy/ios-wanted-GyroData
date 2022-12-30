@@ -111,7 +111,10 @@ extension MotionDataListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row > viewModel.records.count - 3 {
             viewModel.fetchNextPage { indexPaths in
-                tableView.insertRows(at: indexPaths, with: .automatic)
+                DispatchQueue.main.async {
+                    tableView.insertRows(at: indexPaths, with: .automatic)
+                    self.viewModel.isFetching = false
+                }
             }
         }
     }

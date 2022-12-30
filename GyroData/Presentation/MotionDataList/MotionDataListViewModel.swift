@@ -32,11 +32,10 @@ final class MotionDataListViewModel {
         if !isFetching && hasNextPage {
             isFetching = true
             fetchMotionDataList(page: pageToLoad) { [weak self] fetchedCount in
-                guard let self = self else { return }
-                completion((self.records.count - fetchedCount ... self.records.endIndex).map {
+                guard let self = self, fetchedCount > 0 else { return }
+                completion((self.records.count - fetchedCount ..< self.records.endIndex - 1).map {
                     return IndexPath(row: $0, section: 0)
                 })
-                self.isFetching = false
             }
         }
     }
