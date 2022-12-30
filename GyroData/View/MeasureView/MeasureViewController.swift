@@ -12,6 +12,7 @@ final class MeasureViewController: UIViewController {
     private let measureView = MeasureView()
     
     private var sensor: Sensor = Sensor.accelerometer
+    private var timer: Timer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,10 +45,14 @@ final class MeasureViewController: UIViewController {
     
     @objc func startButtonDidTapped() {
         measureViewModel.startCoreMotion(of: sensor)
+        timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
+            self.measureView.setupMode(with: self.measureViewModel)
+        }
     }
     
     @objc func stopButtonDidTapped() {
         measureViewModel.stopCoreMotion()
+        timer?.invalidate()
         self.navigationItem.rightBarButtonItem?.isEnabled = true
     }
 }

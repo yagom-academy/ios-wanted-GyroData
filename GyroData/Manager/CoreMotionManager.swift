@@ -9,18 +9,14 @@ import Foundation
 import CoreMotion
 
 protocol SensorDataHandleable {
-    var delegate: TickReceivable? { get set }
-    
-    func startMeasure(of: Sensor)
+    func startMeasure(of: Sensor, completion: @escaping (SensorData) -> Void)
     func stopMeasure()
     func deliverMeasureData() -> MeasuredData
 }
 
 final class CoreMotionManager: SensorDataHandleable {
     private let motionManager = CMMotionManager()
-    
-    var delegate: TickReceivable?
-    
+        
     private var timer: Timer?
     private var timerNum: Double = 0.0
     private let timeSet: Double = 60.0
@@ -34,7 +30,7 @@ final class CoreMotionManager: SensorDataHandleable {
         setupMotionInterval()
     }
     
-    func startMeasure(of SensorType: Sensor) {
+    func startMeasure(of SensorType: Sensor, completion: @escaping (SensorData) -> Void) {
         
         if timer != nil && timer!.isValid {
             timer!.invalidate()
@@ -51,11 +47,11 @@ final class CoreMotionManager: SensorDataHandleable {
                     self.axisX.append(myData.rotationRate.x.axisDecimal())
                     self.axisY.append(myData.rotationRate.y.axisDecimal())
                     self.axisZ.append(myData.rotationRate.z.axisDecimal())
-                    
-                    self.delegate?.receive(
-                        x: myData.rotationRate.x.axisDecimal(),
-                        y: myData.rotationRate.y.axisDecimal(),
-                        z: myData.rotationRate.z.axisDecimal()
+                    completion(
+                        SensorData(axisX: [myData.rotationRate.x],
+                                   axisY: [myData.rotationRate.y],
+                                   axisZ: [myData.rotationRate.z]
+                                  )
                     )
                 }
                 if self.timerNum.timeDecimal() == self.timeSet {
@@ -69,11 +65,11 @@ final class CoreMotionManager: SensorDataHandleable {
                     self.axisX.append(myData.acceleration.x.axisDecimal())
                     self.axisY.append(myData.acceleration.y.axisDecimal())
                     self.axisZ.append(myData.acceleration.z.axisDecimal())
-                    
-                    self.delegate?.receive(
-                        x: myData.acceleration.x.axisDecimal(),
-                        y: myData.acceleration.y.axisDecimal(),
-                        z: myData.acceleration.z.axisDecimal()
+                    completion(
+                        SensorData(axisX: [myData.acceleration.x],
+                                   axisY: [myData.acceleration.y],
+                                   axisZ: [myData.acceleration.z]
+                                  )
                     )
                 }
                 if self.timerNum.timeDecimal() == self.timeSet {
