@@ -33,6 +33,10 @@ final class DetailViewController: UIViewController {
         setupView()
     }
     
+    func viewWillAppear() {
+        self.detailView.playButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+    }
+        
     func setupView() {
         detailView.setupMode(with: viewModel)
     }
@@ -40,12 +44,24 @@ final class DetailViewController: UIViewController {
 
 extension DetailViewController {
     @objc func playButtonDidTapped() {
-        if detailView.playButton.image(for: .normal) == UIImage(systemName: "play.fill") {
+        if detailView.playButton.image(for: .normal) == UIImage(systemName: "play.fill") && viewModel.model.measuredTime != 0.0 {
+            viewModel.resetGraphView()
             detailView.playButton.setImage(UIImage(systemName: "stop.fill"), for: .normal)
             viewModel.startTimer { timerCount in
                 self.detailView.timerLabel.text = timerCount
+                if timerCount == self.viewModel.model.measuredTime.description {
+                    self.detailView.playButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+                }
             }
-        } else {
+        } else if detailView.playButton.image(for: .normal) == UIImage(systemName: "play.fill") {
+            detailView.playButton.setImage(UIImage(systemName: "stop.fill"), for: .normal)
+            viewModel.startTimer { timerCount in
+                self.detailView.timerLabel.text = timerCount
+                if timerCount == self.viewModel.model.measuredTime.description {
+                    self.detailView.playButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+                }
+            }
+        } else if detailView.playButton.image(for: .normal) == UIImage(systemName: "stop.fill") {
             viewModel.stopTimer {
                 self.detailView.playButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
                 viewModel.resetGraphView()
