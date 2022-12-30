@@ -103,6 +103,7 @@ extension GraphView {
         guard let data = data else {
             return
         }
+        updatePositions(data: data)
         drawLines(data: data)
         index += 1
         previousMotion = data
@@ -181,6 +182,24 @@ private extension GraphView {
         layer.lineWidth = Constant.lineWidth
         layer.path = path.cgPath
         return layer
+    }
+    
+    func updatePositions(data: MotionValue) {
+        updatePositionLabel(type: .x, data: data.x)
+        updatePositionLabel(type: .y, data: data.y)
+        updatePositionLabel(type: .z, data: data.z)
+    }
+    
+    func updatePositionLabel(type: GraphType, data: Double) {
+        let format = "%02d"
+        switch type {
+        case .x:
+            xLabel.text = "x : " + String(format: format, Int(data * Constant.multiplyer))
+        case .y:
+            yLabel.text = "y : " + String(format: format, Int(data * Constant.multiplyer))
+        case .z:
+            zLabel.text = "z : " + String(format: format, Int(data * Constant.multiplyer))
+        }
     }
     
 }
