@@ -32,25 +32,8 @@ class MeasurementViewController: UIViewController {
         return graph
     }()
     
-    private let measurementButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("측정", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.titleLabel?.font = .preferredFont(forTextStyle: .title2)
-        button.contentHorizontalAlignment = .left
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-    
-    private let stopButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("정지", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.titleLabel?.font = .preferredFont(forTextStyle: .title2)
-        button.contentHorizontalAlignment = .left
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
+    private let measurementButton = MeasurementButton(title: "측정", frame: .zero)
+    private let stopButton = MeasurementButton(title: "정지", frame: .zero)
     private let indicatorView = UIActivityIndicatorView(style: .large)
     private let saveBarButton = UIBarButtonItem()
     

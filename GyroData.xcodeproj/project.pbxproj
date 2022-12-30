@@ -13,9 +13,10 @@
 		20383201295D1E1500B58F53 /* MotionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20383200295D1E1500B58F53 /* MotionData.swift */; };
 		20383208295D28FA00B58F53 /* Measurementable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20383207295D28FA00B58F53 /* Measurementable.swift */; };
 		2038320A295D311900B58F53 /* MotionLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20383209295D311900B58F53 /* MotionLabel.swift */; };
-		2038321D295DD8B500B58F53 /* MotionMeasurementViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2038321C295DD8B500B58F53 /* MotionMeasurementViewModel.swift */; };
 		20383215295D5E6000B58F53 /* FileDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20383214295D5E6000B58F53 /* FileDataManager.swift */; };
 		20383217295D666D00B58F53 /* MotionFileManagerUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20383216295D666D00B58F53 /* MotionFileManagerUseCase.swift */; };
+		2038321D295DD8B500B58F53 /* MotionMeasurementViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2038321C295DD8B500B58F53 /* MotionMeasurementViewModel.swift */; };
+		204CCBEE295E9C5E006A6893 /* MeasurementButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204CCBED295E9C5E006A6893 /* MeasurementButton.swift */; };
 		20BC9AFE295C1713009A7F7A /* CGContext+GridGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20BC9AFD295C1713009A7F7A /* CGContext+GridGraph.swift */; };
 		20BC9B00295C1771009A7F7A /* GraphSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20BC9AFF295C1771009A7F7A /* GraphSegment.swift */; };
 		20BC9B02295C17FF009A7F7A /* MotionMeasurementManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20BC9B01295C17FF009A7F7A /* MotionMeasurementManager.swift */; };
@@ -52,9 +53,10 @@
 		20383200295D1E1500B58F53 /* MotionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionData.swift; sourceTree = "<group>"; };
 		20383207295D28FA00B58F53 /* Measurementable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Measurementable.swift; sourceTree = "<group>"; };
 		20383209295D311900B58F53 /* MotionLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionLabel.swift; sourceTree = "<group>"; };
-		2038321C295DD8B500B58F53 /* MotionMeasurementViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionMeasurementViewModel.swift; sourceTree = "<group>"; };
 		20383214295D5E6000B58F53 /* FileDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDataManager.swift; sourceTree = "<group>"; };
 		20383216295D666D00B58F53 /* MotionFileManagerUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionFileManagerUseCase.swift; sourceTree = "<group>"; };
+		2038321C295DD8B500B58F53 /* MotionMeasurementViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionMeasurementViewModel.swift; sourceTree = "<group>"; };
+		204CCBED295E9C5E006A6893 /* MeasurementButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementButton.swift; sourceTree = "<group>"; };
 		20BC9AFD295C1713009A7F7A /* CGContext+GridGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGContext+GridGraph.swift"; sourceTree = "<group>"; };
 		20BC9AFF295C1771009A7F7A /* GraphSegment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphSegment.swift; sourceTree = "<group>"; };
 		20BC9B01295C17FF009A7F7A /* MotionMeasurementManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionMeasurementManager.swift; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 			children = (
 				200E57D0295A9FD900D3EF5A /* MeasurementViewController.swift */,
 				2038321C295DD8B500B58F53 /* MotionMeasurementViewModel.swift */,
+				204CCBEC295E9C44006A6893 /* SubViews */,
 			);
 			path = MotionMeasurementScene;
 			sourceTree = "<group>";
@@ -155,6 +158,14 @@
 				20383214295D5E6000B58F53 /* FileDataManager.swift */,
 			);
 			path = FileManager;
+			sourceTree = "<group>";
+		};
+		204CCBEC295E9C44006A6893 /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				204CCBED295E9C5E006A6893 /* MeasurementButton.swift */,
+			);
+			path = SubViews;
 			sourceTree = "<group>";
 		};
 		20E26445295C375E00C66E8A /* GraphView */ = {
@@ -426,6 +437,7 @@
 				F351622E295BF7B1008AB1A3 /* CoreDataManager.swift in Sources */,
 				F37A2451295C88850006B552 /* MotionResultViewController.swift in Sources */,
 				2038320A295D311900B58F53 /* MotionLabel.swift in Sources */,
+				204CCBEE295E9C5E006A6893 /* MeasurementButton.swift in Sources */,
 				F3516227295BF65F008AB1A3 /* MotionInfo+CoreDataClass.swift in Sources */,
 				F3516235295BF8CA008AB1A3 /* MotionCoreDataUseCase.swift in Sources */,
 				F3516232295BF83C008AB1A3 /* MotionType.swift in Sources */,
