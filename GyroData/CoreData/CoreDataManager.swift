@@ -12,7 +12,7 @@ final class CoreDataManager {
     static let shared = CoreDataManager()
     
     private(set) var fetchedAnalysisValue: [GyroData] = []
-    private lazy var context = persistentContainer.viewContext
+    lazy var context = persistentContainer.viewContext
     private lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "GyroData")
         container.loadPersistentStores { _, error in
@@ -41,7 +41,7 @@ final class CoreDataManager {
     
     func read() -> [GyroData]? {
         do {
-            fetchedAnalysisValue = try context.fetch(GyroData.fetchRequest())
+            fetchedAnalysisValue = try context.fetch(GyroData.fetchRequest()).reversed()
             return fetchedAnalysisValue
         } catch {
             print(error.localizedDescription)

@@ -44,6 +44,14 @@ class AnalyzeListViewController: UIViewController {
         self.navigationItem.titleView = titleLabel
         self.navigationItem.rightBarButtonItem = analyzeButton
         setTableView()
+        listViewModel.input.onViewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        listViewModel.input.onViewWillAppear()
+        analysisTableView.reloadData()
     }
     
     func setTableView() {

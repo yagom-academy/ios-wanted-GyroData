@@ -101,15 +101,16 @@ extension AnalyzeViewModel: AnalyzeViewModelInputInterface {
     func tapSaveButton() {
         isLoadingPublisher.send(true)
         // TODO: save CoreData
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
             guard let self = self else { return }
             if self.analyzeMode == 0 {
-                self.cellModel = [.init(
+                self.cellModel = [CellModel.init(
                     id: UUID(),
                     analysisType: AnalysisType.accelerate.rawValue,
                     savedAt: Date.now,
                     measurementTime: self.analysis.last?.measurementTime ?? 0.0
                 )]
+                CoreDataManager.shared.create(model: self.cellModel, fileModel: self.analysis)
                 print(self.cellModel)
             } else if self.analyzeMode == 1 {
                 self.cellModel = [.init(
@@ -118,12 +119,12 @@ extension AnalyzeViewModel: AnalyzeViewModelInputInterface {
                     savedAt: Date.now,
                     measurementTime: self.analysis.last?.measurementTime ?? 0.0
                 )]
+                CoreDataManager.shared.create(model: self.cellModel, fileModel: self.analysis)
                 print(self.cellModel)
             }
             self.isLoadingPublisher.send(false)
             self.dismissPublisher.send(())
         }
-        CoreDataManager.shared.create(model: self.cellModel, fileModel: self.analysis)
     }
     
     func changeAnalyzeMode(_ segmentIndex: Int) {
