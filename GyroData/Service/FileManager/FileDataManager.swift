@@ -8,9 +8,9 @@
 import Foundation
 
 protocol FileDataManagable {
-    func save<T: Codable>(_ file: T, id: UUID)
-    func delete(_ id: UUID)
-    func fetch<T: Codable>(_ id: UUID) -> T?
+    func save<T: Codable>(_ file: T, id: UUID, completion: @escaping (Result<Void, FileManagerError>) -> Void)
+    func delete(_ id: UUID, completion: @escaping (Result<Void, FileManagerError>) -> Void)
+    func fetch<T: Codable>(_ id: UUID, completion: @escaping (Result<Void, FileManagerError>) -> Void) -> T?
 }
 
 class FileDataManager: FileDataManagable {
@@ -29,29 +29,39 @@ class FileDataManager: FileDataManagable {
         }
     }
     
-    func save<T: Codable>(_ file: T, id: UUID) {
+    func save<T: Codable>(
+        _ file: T,
+        id: UUID,
+        completion: @escaping (Result<Void, FileManagerError>) -> Void
+    ) {
         let path = directoryPath.appendingPathComponent("\(id).json")
         
         if let data = try? JSONEncoder().encode(file) {
             do {
                 try data.write(to: path)
             } catch {
-                print(error.localizedDescription)
+                completion(.failure(.save))
             }
         }
     }
     
-    func delete(_ id: UUID) {
+    func delete(
+        _ id: UUID,
+        completion: @escaping (Result<Void, FileManagerError>) -> Void
+    ) {
         let path = directoryPath.appendingPathComponent("\(id).json")
         
         do {
             try fileManager.removeItem(at: path)
         } catch {
-            print(error.localizedDescription)
+            completion(.failure(.save))
         }
     }
     
-    func fetch<T: Codable>(_ id: UUID) -> T? {
+    func fetch<T: Codable>(
+        _ id: UUID,
+        completion: @escaping (Result<Void, FileManagerError>) -> Void
+    ) -> T? {
         let path = directoryPath.appendingPathComponent("\(id).json")
         
         do {
@@ -59,7 +69,7 @@ class FileDataManager: FileDataManagable {
             let fetchedData = try? JSONDecoder().decode(T.self, from: dataFromPath)
             return fetchedData
         } catch {
-            print(error.localizedDescription)
+            completion(.failure(.fetch))
         }
         
         return nil
