@@ -20,6 +20,7 @@
 		FF79232B295E74FE00B397BA /* MeasureViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF79232A295E74FE00B397BA /* MeasureViewModel.swift */; };
 		FF79232D295E762800B397BA /* CoreMotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF79232C295E762800B397BA /* CoreMotionManager.swift */; };
 		FF79232F295E78A100B397BA /* GyroItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF79232E295E78A100B397BA /* GyroItem.swift */; };
+		FF792331295E7A8C00B397BA /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF792330295E7A8C00B397BA /* Observable.swift */; };
 		FFCF8E6829599F8C004C51E5 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCF8E6729599F8C004C51E5 /* DataStore.swift */; };
 		FFCF8E6A2959A231004C51E5 /* MeasureItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCF8E692959A231004C51E5 /* MeasureItem.swift */; };
 		FFCF8E72295AEAD4004C51E5 /* UseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCF8E71295AEAD4004C51E5 /* UseCase.swift */; };
@@ -42,6 +43,7 @@
 		FF79232A295E74FE00B397BA /* MeasureViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureViewModel.swift; sourceTree = "<group>"; };
 		FF79232C295E762800B397BA /* CoreMotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMotionManager.swift; sourceTree = "<group>"; };
 		FF79232E295E78A100B397BA /* GyroItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroItem.swift; sourceTree = "<group>"; };
+		FF792330295E7A8C00B397BA /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		FFCF8E6729599F8C004C51E5 /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
 		FFCF8E692959A231004C51E5 /* MeasureItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureItem.swift; sourceTree = "<group>"; };
 		FFCF8E71295AEAD4004C51E5 /* UseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCase.swift; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 		FFCF8E6B295AE3F3004C51E5 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
+				FF792330295E7A8C00B397BA /* Observable.swift */,
 				FF792328295E74E100B397BA /* Main Page */,
 				FF792329295E74E800B397BA /* MeasurePage */,
 			);
@@ -210,6 +213,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF792331295E7A8C00B397BA /* Observable.swift in Sources */,
 				FF79232D295E762800B397BA /* CoreMotionManager.swift in Sources */,
 				FFCF8E74295AF1EA004C51E5 /* ViewModel.swift in Sources */,
 				FFCF8E6829599F8C004C51E5 /* DataStore.swift in Sources */,
