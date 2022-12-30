@@ -78,6 +78,7 @@ final class AnalyzeViewController: UIViewController {
     }()
     
     @ObservedObject private var viewModel = AnalyzeViewModel(analysisManager: AnalysisManager())
+    private var cancelable = Set<AnyCancellable>()
     private var swiftUIChartsView = GraphView()
     private lazy var hostView = HostingViewController(model2: viewModel.environment)
     private lazy var graphView: UIView = {
@@ -90,15 +91,12 @@ final class AnalyzeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
         self.viewModel.input.onViewWillAppear()
         bindEvents()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.viewModel.input.onViewDidLoad()
         setup()
         setupUI()
     }
@@ -192,7 +190,7 @@ final class AnalyzeViewController: UIViewController {
     }
     
     private func bindEvents() {
-        cancelStore = viewModel.isLoadingPublisher
+        viewModel.isLoadingPublisher
             .sink { [weak self] isLoading in
                 guard let self = self else { return }
                 if isLoading {
@@ -201,12 +199,14 @@ final class AnalyzeViewController: UIViewController {
                     self.activityIndicator.stopAnimating()
                 }
             }
+            .store(in: &cancelable)
         
-        cancelStore = viewModel.dismissPublisher
+        viewModel.dismissPublisher
             .sink { [weak self] _ in
                 guard let self = self else { return }
                 self.navigationController?.popViewController(animated: true)
             }
+            .store(in: &cancelable)
     }
 }
 

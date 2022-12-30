@@ -10,7 +10,6 @@ import Combine
 
 protocol AnalyzeViewModelInputInterface {
     func onViewWillAppear()
-    func onViewDidLoad()
     func tapAnalyzeButton()
     func tapStopButton()
     func tapSaveButton()
@@ -20,6 +19,7 @@ protocol AnalyzeViewModelInputInterface {
 protocol AnalyzeViewModelOutputInterface {
     var analysisPublisher: PassthroughSubject<[GraphModel], Never> { get }
     var isLoadingPublisher: PassthroughSubject<Bool, Never> { get }
+    var dismissPublisher: PassthroughSubject<Void, Never> { get }
 }
 
 protocol AnalyzeViewModelInterface {
@@ -44,7 +44,7 @@ final class AnalyzeViewModel: AnalyzeViewModelInterface, AnalyzeViewModelOutputI
     
     private let analysisManager: AnalysisManager
     private var timer: Timer?
-    private var analyzeMode: Int = 0
+    private var analyzeMode: AnalysisType = .accelerate
     private var cellModel: [CellModel] = []
     private var isLoading = false
     
@@ -61,9 +61,8 @@ final class AnalyzeViewModel: AnalyzeViewModelInterface, AnalyzeViewModelOutputI
             guard let self = self else { return }
             let date = timer.fireDate.timeIntervalSince1970
             let measureTime = date - now
-            let data = self.analysisManager.startAnalyze()
+            let data = self.analysisManager.startAnalyze(mode: self.analyzeMode)
             self.analysis.append(.init(x: data.x, y: data.y, z: data.z, measurementTime: measureTime))
-            print(self.analysis)
         })
         
         if let timer = self.timer {
@@ -75,7 +74,7 @@ final class AnalyzeViewModel: AnalyzeViewModelInterface, AnalyzeViewModelOutputI
         if timer != nil {
             timer?.invalidate()
             timer = nil
-            analysisManager.stopAnalyze()
+            analysisManager.stopAnalyze(mode: self.analyzeMode)
         }
     }
 }
@@ -85,25 +84,21 @@ extension AnalyzeViewModel: AnalyzeViewModelInputInterface {
         bind()
     }
     
-    func onViewDidLoad() {
-    }
-    
     func tapAnalyzeButton() {
         analyzeData()
     }
     
     func tapStopButton() {
         stopTimer()
-        analysisManager.stopAnalyze()
-        print(analysis)
+        analysisManager.stopAnalyze(mode: self.analyzeMode)
     }
     
     func tapSaveButton() {
         isLoadingPublisher.send(true)
-        // TODO: save CoreData
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now()) { [weak self] in
             guard let self = self else { return }
-            if self.analyzeMode == 0 {
+            switch self.analyzeMode {
+            case .accelerate:
                 self.cellModel = [CellModel.init(
                     id: UUID(),
                     analysisType: AnalysisType.accelerate.rawValue,
@@ -111,8 +106,7 @@ extension AnalyzeViewModel: AnalyzeViewModelInputInterface {
                     measurementTime: self.analysis.last?.measurementTime ?? 0.0
                 )]
                 CoreDataManager.shared.create(model: self.cellModel, fileModel: self.analysis)
-                print(self.cellModel)
-            } else if self.analyzeMode == 1 {
+            case .gyroscope:
                 self.cellModel = [.init(
                     id: UUID(),
                     analysisType: AnalysisType.gyroscope.rawValue,
@@ -120,15 +114,19 @@ extension AnalyzeViewModel: AnalyzeViewModelInputInterface {
                     measurementTime: self.analysis.last?.measurementTime ?? 0.0
                 )]
                 CoreDataManager.shared.create(model: self.cellModel, fileModel: self.analysis)
-                print(self.cellModel)
             }
+            
             self.isLoadingPublisher.send(false)
             self.dismissPublisher.send(())
         }
     }
     
     func changeAnalyzeMode(_ segmentIndex: Int) {
-        analyzeMode = segmentIndex
+        if segmentIndex == 0 {
+            self.analyzeMode = .accelerate
+        } else if segmentIndex == 1 {
+            self.analyzeMode = .gyroscope
+        }
     }
 }
 
