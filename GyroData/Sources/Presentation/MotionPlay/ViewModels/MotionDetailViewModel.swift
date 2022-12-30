@@ -24,14 +24,14 @@ enum PlayStatus {
     case stop, play
 }
 
-protocol MotionPlayViewModelInput {
+protocol MotionDetailViewModelInput {
 
     func playStart()
     func playStop()
     
 }
 
-protocol MotionPlayViewModelOutput {
+protocol MotionDetailViewModelOutput {
     
     var viewType: ViewType { get }
     var motions: Observable<[MotionValue]?> { get }
@@ -42,9 +42,9 @@ protocol MotionPlayViewModelOutput {
     var playingTime: Observable<Double> { get }
 }
 
-protocol MotionPlayViewModel: MotionPlayViewModelInput, MotionPlayViewModelOutput {}
+protocol MotionDetailViewModel: MotionDetailViewModelInput, MotionDetailViewModelOutput {}
 
-final class DefaultMotionPlayViewModel: MotionPlayViewModel {
+final class DefaultMotionDetailViewModel: MotionDetailViewModel {
         
     var playStatus: Observable<PlayStatus>
     var viewType: ViewType

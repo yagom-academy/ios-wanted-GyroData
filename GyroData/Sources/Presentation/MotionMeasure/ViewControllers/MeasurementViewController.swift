@@ -10,8 +10,6 @@ import UIKit
 final class MeasurementViewController: UIViewController {
     
     private enum Constant {
-        static let segmentLeftText = "Acc"
-        static let segmentRightText = "Gyro"
         static let measurementButtonText = "측정"
         static let stopButtonText = "정지"
         static let saveButtonText = "저장"
@@ -111,7 +109,7 @@ final class MeasurementViewController: UIViewController {
     }()
     
     private lazy var segmentControl: UISegmentedControl = {
-        let control = UISegmentedControl(items: [Constant.segmentLeftText, Constant.segmentRightText])
+        let control = UISegmentedControl(items: [MotionType.accelerometer.segmentTitle, MotionType.gyro.segmentTitle])
         control.selectedSegmentIndex = 0
         control.translatesAutoresizingMaskIntoConstraints = false
         return control
@@ -170,36 +168,39 @@ final class MeasurementViewController: UIViewController {
     }
     
     @objc func startMeasurement(_ sender: UIButton) {
-        switch segmentControl.selectedSegmentIndex {
-        case 0:
-            viewModel.measerStart(type: .accelerometer)
-        case 1:
-            viewModel.measerStart(type: .gyro)
-        default:
+        guard let motionType = MotionType(rawValue: segmentControl.selectedSegmentIndex) else {
             return
+        }
+        switch motionType {
+        case .accelerometer:
+            viewModel.measerStart(type: .accelerometer)
+        case .gyro:
+            viewModel.measerStart(type: .gyro)
         }
     }
     
     @objc func stopMeasurement(_ sender: UIButton) {
-        switch segmentControl.selectedSegmentIndex {
-        case 0:
-            viewModel.measerStop(type: .accelerometer)
-        case 1:
-            viewModel.measerStop(type: .gyro)
-        default:
+        guard let motionType = MotionType(rawValue: segmentControl.selectedSegmentIndex) else {
             return
+        }
+        switch motionType {
+        case .accelerometer:
+            viewModel.measerStop(type: .accelerometer)
+        case .gyro:
+            viewModel.measerStop(type: .gyro)
         }
     }
     
     @objc func saveMeasurement(_ sender: UIButton) {
         do {
-            switch segmentControl.selectedSegmentIndex {
-            case 0:
-                try viewModel.measerSave(type: .accelerometer)
-            case 1:
-                try viewModel.measerSave(type: .gyro)
-            default:
+            guard let motionType = MotionType(rawValue: segmentControl.selectedSegmentIndex) else {
                 return
+            }
+            switch motionType {
+            case .accelerometer:
+                try viewModel.measerSave(type: .accelerometer)
+            case .gyro:
+                try viewModel.measerSave(type: .gyro)
             }
         } catch {
             showErrorAlert(message: error.localizedDescription)
@@ -207,13 +208,14 @@ final class MeasurementViewController: UIViewController {
     }
     
     @objc func cancleMeasurement(_ sender: UIButton) {
-        switch segmentControl.selectedSegmentIndex {
-        case 0:
-            viewModel.measerCancle(type: .accelerometer)
-        case 1:
-            viewModel.measerCancle(type: .gyro)
-        default:
+        guard let motionType = MotionType(rawValue: segmentControl.selectedSegmentIndex) else {
             return
+        }
+        switch motionType {
+        case .accelerometer:
+            viewModel.measerCancle(type: .accelerometer)
+        case .gyro:
+            viewModel.measerCancle(type: .gyro)
         }
         graphView.clean()
     }

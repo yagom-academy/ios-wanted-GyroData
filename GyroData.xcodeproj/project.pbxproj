@@ -40,8 +40,8 @@
 		E1A5A235295DBE920086DADB /* UIViewController+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A5A234295DBE920086DADB /* UIViewController+extension.swift */; };
 		E1F1D33E295BD5CE00E5C521 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F1D33D295BD5CE00E5C521 /* GraphView.swift */; };
 		E1F1D344295C328A00E5C521 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F1D343295C328A00E5C521 /* RoundButton.swift */; };
-		E1F1D34A295C5EBB00E5C521 /* MotionPlayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F1D349295C5EBB00E5C521 /* MotionPlayViewModel.swift */; };
-		E1F1D34F295CAF8300E5C521 /* MotionPlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F1D34E295CAF8300E5C521 /* MotionPlayViewController.swift */; };
+		E1F1D34A295C5EBB00E5C521 /* MotionDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F1D349295C5EBB00E5C521 /* MotionDetailViewModel.swift */; };
+		E1F1D34F295CAF8300E5C521 /* MotionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F1D34E295CAF8300E5C521 /* MotionDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,8 +80,8 @@
 		E1A5A234295DBE920086DADB /* UIViewController+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+extension.swift"; sourceTree = "<group>"; };
 		E1F1D33D295BD5CE00E5C521 /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		E1F1D343295C328A00E5C521 /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
-		E1F1D349295C5EBB00E5C521 /* MotionPlayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionPlayViewModel.swift; sourceTree = "<group>"; };
-		E1F1D34E295CAF8300E5C521 /* MotionPlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionPlayViewController.swift; sourceTree = "<group>"; };
+		E1F1D349295C5EBB00E5C521 /* MotionDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDetailViewModel.swift; sourceTree = "<group>"; };
+		E1F1D34E295CAF8300E5C521 /* MotionDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -333,7 +333,7 @@
 		E1F1D347295C5E6400E5C521 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				E1F1D349295C5EBB00E5C521 /* MotionPlayViewModel.swift */,
+				E1F1D349295C5EBB00E5C521 /* MotionDetailViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -341,7 +341,7 @@
 		E1F1D34D295CAF6400E5C521 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				E1F1D34E295CAF8300E5C521 /* MotionPlayViewController.swift */,
+				E1F1D34E295CAF8300E5C521 /* MotionDetailViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -449,14 +449,14 @@
 				02432C222959A38C0035AEDD /* CoreDataMotionStorage.swift in Sources */,
 				0247ED58295A8C5000212A78 /* Coordinator.swift in Sources */,
 				0247ED7F295ABFDC00212A78 /* Date+extension.swift in Sources */,
-				E1F1D34A295C5EBB00E5C521 /* MotionPlayViewModel.swift in Sources */,
+				E1F1D34A295C5EBB00E5C521 /* MotionDetailViewModel.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				E13ACFEC295AFB5000265ED2 /* MeasermentViewModel.swift in Sources */,
 				0247ED7B295AB72600212A78 /* Observable.swift in Sources */,
 				E1F1D344295C328A00E5C521 /* RoundButton.swift in Sources */,
 				0247ED5C295A8D1200212A78 /* MotionListViewController.swift in Sources */,
 				02432C282959CAFB0035AEDD /* MotionFileManager.swift in Sources */,
-				E1F1D34F295CAF8300E5C521 /* MotionPlayViewController.swift in Sources */,
+				E1F1D34F295CAF8300E5C521 /* MotionDetailViewController.swift in Sources */,
 				02432C11295990960035AEDD /* Motion.swift in Sources */,
 				0247ED6C295A92AB00212A78 /* UITableView+extension.swift in Sources */,
 				0247ED68295A927900212A78 /* UIStackView+extension.swift in Sources */,

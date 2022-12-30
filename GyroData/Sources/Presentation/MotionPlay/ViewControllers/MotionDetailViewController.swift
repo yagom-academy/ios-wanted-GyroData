@@ -7,14 +7,13 @@
 
 import UIKit
 
-final class MotionPlayViewController: UIViewController {
+final class MotionDetailViewController: UIViewController {
     
     weak var coordinator: Coordinator?
-    private let viewModel: MotionPlayViewModel
+    private let viewModel: MotionDetailViewModel
     private var drawingIndex = 0
-
     
-    init(viewModel: MotionPlayViewModel) {
+    init(viewModel: MotionDetailViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
         view.backgroundColor = .systemBackground
@@ -135,7 +134,7 @@ final class MotionPlayViewController: UIViewController {
     }
 }
 
-private extension MotionPlayViewController {
+private extension MotionDetailViewController {
     
     enum ConstantLayout {
         static let offset: CGFloat = 30
