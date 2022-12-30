@@ -33,6 +33,7 @@ final class CoreDataManager: CoreDataManagable {
             
             objects.forEach {
                 context.delete($0)
+                completion(.success(()))
             }
         } catch {
             completion(.failure(.delete))

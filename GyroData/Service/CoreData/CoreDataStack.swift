@@ -33,6 +33,7 @@ final class CoreDataStack {
         if context.hasChanges {
             do {
                 try context.save()
+                completion(.success(()))
             } catch {
                 completion(.failure(.save))
             }

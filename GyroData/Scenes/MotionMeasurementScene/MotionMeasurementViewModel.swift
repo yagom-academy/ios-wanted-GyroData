@@ -46,9 +46,9 @@ final class MotionMeasurementViewModel: MotionMeasurementViewModelType {
         
         motionCoreDataUseCase.save(item: newMotion) { result in
             switch result {
-                case .success:
-                    self.loading.value = false
-                case .failure(let error):
+            case .success:
+                self.loading.value = false
+            case .failure(let error):
                 self.error.value = error.localizedDescription
             }
         }

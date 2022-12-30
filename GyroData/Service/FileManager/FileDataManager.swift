@@ -39,6 +39,7 @@ final class FileDataManager: FileDataManagable {
         if let data = try? JSONEncoder().encode(file) {
             do {
                 try data.write(to: path)
+                completion(.success(()))
             } catch {
                 completion(.failure(.save))
             }
@@ -53,6 +54,7 @@ final class FileDataManager: FileDataManagable {
         
         do {
             try fileManager.removeItem(at: path)
+            completion(.success(()))
         } catch {
             completion(.failure(.save))
         }
@@ -67,6 +69,7 @@ final class FileDataManager: FileDataManagable {
         do {
             let dataFromPath = try Data(contentsOf: path)
             let fetchedData = try? JSONDecoder().decode(T.self, from: dataFromPath)
+            completion(.success(()))
             return fetchedData
         } catch {
             completion(.failure(.fetch))
