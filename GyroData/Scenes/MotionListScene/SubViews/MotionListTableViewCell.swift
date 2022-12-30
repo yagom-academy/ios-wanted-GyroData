@@ -97,7 +97,7 @@ final class MotionListTableViewCell: UITableViewCell {
         ])
     }
     
-    public func configure(motion: Motion) {
+    public func configure(motion: MotionInformation) {
         titleLabel.text = motion.motionType.rawValue
         dateLabel.text = motion.date.convertToString()
         timeLabel.text = String(format: "%.1f", motion.time)

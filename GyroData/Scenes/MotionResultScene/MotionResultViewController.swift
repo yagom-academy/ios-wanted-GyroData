@@ -126,11 +126,11 @@ class MotionResultViewController: UIViewController {
         navigationItem.title = "다시보기"
     }
     
-    func configureUI(motionInformation: MotionInformation) {
+    func configureUI(motionInformation: Motion) {
         dateLabel.text = motionInformation.motion.date.convertToString()
     }
 
-    func drawGraph(motion: MotionInformation) {
+    func drawGraph(motion: Motion) {
         let motionDatas = zip(motion.xData, zip(motion.yData, motion.zData))
         let minCount = min(motion.xData.count, motion.yData.count, motion.zData.count)
         let width = CGFloat((view.bounds.width - 60.0) / Double(minCount))

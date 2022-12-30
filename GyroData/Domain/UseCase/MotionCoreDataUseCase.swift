@@ -11,7 +11,7 @@ import CoreData
 final class MotionCoreDataUseCase {
     let coreDataManager = CoreDataManager()
     
-    func save(item: Motion, completion: @escaping (Result<Void, CoreDataError>) -> Void) {
+    func save(item: MotionInformation, completion: @escaping (Result<Void, CoreDataError>) -> Void) {
         let motionInfo = MotionInfo(
             entity: MotionInfo.entity(),
             insertInto: coreDataManager.coreDataStack?.managedContext
@@ -31,7 +31,7 @@ final class MotionCoreDataUseCase {
         coreDataManager.delete(fetchRequest, completion: completion)
     }
     
-    func fetch(offset: Int, count: Int) -> [Motion]? {
+    func fetch(offset: Int, count: Int) -> [MotionInformation]? {
         let fetchRequest = MotionInfo.fetchRequest()
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: MotionInfo.Constant.date, ascending: false)]
         fetchRequest.fetchOffset = offset
@@ -39,6 +39,6 @@ final class MotionCoreDataUseCase {
         
         let motions = coreDataManager.fetch(fetchRequest)
         
-        return motions?.map { Motion(model: $0) }
+        return motions?.map { MotionInformation(model: $0) }
     }
 }

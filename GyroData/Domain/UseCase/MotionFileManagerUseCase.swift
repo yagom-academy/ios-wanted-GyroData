@@ -10,16 +10,16 @@ import Foundation
 final class MotionFileManagerUseCase {
     private let fileDataManager = FileDataManager.shared
     
-    func save(_ motion: Motion, motinData: [[Double]], completion: @escaping (Result<Void, FileManagerError>) -> Void) {
+    func save(_ motion: MotionInformation, motinData: [[Double]], completion: @escaping (Result<Void, FileManagerError>) -> Void) {
         let xData = motinData.map { $0[MotionData.x.rawValue] }
         let yData = motinData.map { $0[MotionData.y.rawValue] }
         let zData = motinData.map { $0[MotionData.z.rawValue] }
-        let motionInformation = MotionInformation(motion: motion, xData: xData, yData: yData, zData: zData)
+        let motionInformation = Motion(motion: motion, xData: xData, yData: yData, zData: zData)
         
         fileDataManager.save(motionInformation, id: motion.id, completion: completion)
     }
     
-    func fetch(_ id: UUID, completion: @escaping (Result<Void, FileManagerError>) -> Void) -> MotionInformation? {
+    func fetch(_ id: UUID, completion: @escaping (Result<Void, FileManagerError>) -> Void) -> Motion? {
         return fileDataManager.fetch(id, completion: completion)
     }
     

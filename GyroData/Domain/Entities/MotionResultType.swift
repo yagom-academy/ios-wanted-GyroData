@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum MotionResult {
+enum MotionResultType {
     case view
     case play
 }

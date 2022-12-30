@@ -40,7 +40,7 @@ final class MotionMeasurementViewModel: MotionMeasurementViewModelType {
         }
         
         loading.value = true
-        let newMotion = Motion(motionType: motionType,
+        let newMotion = MotionInformation(motionType: motionType,
                                date: Date(),
                                time: MotionMeasurementManager.shared.timeCount)
         

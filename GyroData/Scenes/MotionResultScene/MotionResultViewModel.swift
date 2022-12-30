@@ -12,7 +12,7 @@ protocol MotionResultViewModelInput {
 }
 
 protocol MotionResultViewModelOutput {
-    var motionInformation: Observable<MotionInformation?> { get }
+    var motionInformation: Observable<Motion?> { get }
     var error: Observable<String?> { get }
 }
 
@@ -21,7 +21,7 @@ protocol MotionResultViewModelType: MotionResultViewModelInput, MotionResultView
 final class MotionResultViewModel: MotionResultViewModelType {
     private let motionFileManagerUseCase = MotionFileManagerUseCase()
     
-    init(_ motion: Motion) {
+    init(_ motion: MotionInformation) {
         self.motionId = motion.id
     }
     
@@ -29,7 +29,7 @@ final class MotionResultViewModel: MotionResultViewModelType {
     
     var motionId: UUID?
     var error: Observable<String?> = Observable(nil)
-    var motionInformation: Observable<MotionInformation?> = Observable(nil)
+    var motionInformation: Observable<Motion?> = Observable(nil)
     
     /// Input
     

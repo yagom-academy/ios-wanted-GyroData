@@ -2,11 +2,11 @@ import Foundation
 
 protocol MotionListViewModelInput {
     func loadItems()
-    func deleteItem(motion: Motion)
+    func deleteItem(motion: MotionInformation)
 }
 
 protocol MotionListViewModelOutput {
-    var items: Observable<[Motion]> { get }
+    var items: Observable<[MotionInformation]> { get }
     var isloading: Observable<Bool> { get }
     var error: Observable<String?> { get }
 }
@@ -21,7 +21,7 @@ final class MotionListViewModel: MotionListViewModelType {
     
     /// Output
     
-    var items: Observable<[Motion]> = Observable([])
+    var items: Observable<[MotionInformation]> = Observable([])
     var isloading: Observable<Bool> = Observable(false)
     var error: Observable<String?> = Observable(nil)
     
@@ -32,7 +32,7 @@ final class MotionListViewModel: MotionListViewModelType {
         appendItems()
     }
     
-    func deleteItem(motion: Motion) {
+    func deleteItem(motion: MotionInformation) {
         motionCoreDataUseCase.delete(id: motion.id) { result in
             switch result {
                 case .success:

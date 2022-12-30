@@ -63,12 +63,12 @@ final class MotionResultPlayViewController: MotionResultViewController {
         }
     }
     
-    override func configureUI(motionInformation: MotionInformation) {
+    override func configureUI(motionInformation: Motion) {
         super.configureUI(motionInformation: motionInformation)
         titleLabel.text = "Play"
     }
     
-    override func drawGraph(motion: MotionInformation) {
+    override func drawGraph(motion: Motion) {
         graphView.setupSegmentSize(height: view.bounds.width)
     }
 }

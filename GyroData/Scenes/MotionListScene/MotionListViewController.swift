@@ -128,7 +128,7 @@ extension MotionListViewController {
         navigationController?.pushViewController(measurementViewController, animated: true)
     }
     
-    private func pushMotionResultScene(resultType: MotionResult ,motion: Motion) {
+    private func pushMotionResultScene(resultType: MotionResultType ,motion: MotionInformation) {
         let motionResultViewModel = MotionResultViewModel(motion)
         
         switch resultType {
