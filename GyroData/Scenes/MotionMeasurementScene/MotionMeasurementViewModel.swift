@@ -23,6 +23,7 @@ protocol MotionMeasurementViewModelType: MotionMeasurementViewModelInput, Motion
 
 class MotionMeasurementViewModel: MotionMeasurementViewModelType {
     private let motionCoreDataUseCase = MotionCoreDataUseCase()
+    private let motionFileManagerUseCase = MotionFileManagerUseCase()
     
     /// Output
 
@@ -44,7 +45,7 @@ class MotionMeasurementViewModel: MotionMeasurementViewModelType {
                                time: MotionMeasurementManager.shared.timeCount)
         
         motionCoreDataUseCase.save(item: newMotion)
-        //TODO: - motionCoreDataUseCase.save(item: motion, motinData: datas)
+        motionFileManagerUseCase.save(newMotion, motinData: datas)
         loading.value = false
     }
     
