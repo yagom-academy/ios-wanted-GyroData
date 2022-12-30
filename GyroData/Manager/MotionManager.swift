@@ -23,28 +23,6 @@ final class MotionManager {
     
     // MARK: - Methods
     
-    private func commonInit() {
-        motionManager.accelerometerUpdateInterval = 0.1
-        motionManager.gyroUpdateInterval = 0.1
-    }
-    
-    private func convertGyroData(data: Double?) -> [Double] {
-        guard let unwrapData = data else { return [0.0] }
-        return [unwrapData]
-    }
-    
-    private func makeGyroCoordinate(coordinateX: [Double], coordinateY: [Double],
-                                coordinateZ:[Double]) -> [[Double]] {
-        
-        var coordinateArray = [[Double]]()
-        for count in 0..<coordinateX.count {
-            let coordinate = [coordinateX[count], coordinateY[count], coordinateZ[count]]
-            coordinateArray.append(coordinate)
-        }
-        
-        return coordinateArray
-    }
-    
     func startAccelerometerRecord() {
         var maxCount = 60
         motionManager.startAccelerometerUpdates(
@@ -120,5 +98,27 @@ final class MotionManager {
  
             maxCount -= 1
         }
+    }
+    
+    private func commonInit() {
+        motionManager.accelerometerUpdateInterval = 0.1
+        motionManager.gyroUpdateInterval = 0.1
+    }
+    
+    private func convertGyroData(data: Double?) -> [Double] {
+        guard let unwrapData = data else { return [0.0] }
+        return [unwrapData]
+    }
+    
+    private func makeGyroCoordinate(coordinateX: [Double], coordinateY: [Double],
+                                coordinateZ:[Double]) -> [[Double]] {
+        
+        var coordinateArray = [[Double]]()
+        for count in 0..<coordinateX.count {
+            let coordinate = [coordinateX[count], coordinateY[count], coordinateZ[count]]
+            coordinateArray.append(coordinate)
+        }
+        
+        return coordinateArray
     }
 }
