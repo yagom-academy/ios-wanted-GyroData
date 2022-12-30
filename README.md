@@ -10,11 +10,10 @@
 | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: |
 |                          앱의 동작                           |                          파일 삭제                           |                          파일 열기                           |
 
-
+<br/>
 
 ## 적용 아키텍쳐: 클린 아키텍쳐
-
-<img src="https://raw.githubusercontent.com/Neph3779/Blog-Image/forUpload/img/20221230182257.png" alt="image-20221230182257869" style="zoom:50%;" />
+<img src = "https://raw.githubusercontent.com/Neph3779/Blog-Image/forUpload/img/20221230182257.png" width="40%" height="height 40%">
 
 이번 프로젝트에서는 클린 아키텍쳐를 적용해보았습니다.
 
@@ -30,26 +29,27 @@ Data Layer에서는 DTO, CoreData Entity의 정의와 data fetching 로직들을
 
 Presentation Layer에서는 View와 ViewModel을 분리하여 ViewController의 부담을 줄여주었습니다.
 
-
-
-
+<br/>
 
 ### 앱 구조 도식화 (UML)
 
 https://www.figma.com/file/1vyeSsmY86fHYzlomfCf3D/GyroData-%EA%B5%AC%EC%A1%B0?node-id=1%3A127&t=3iRrJVWRskO48ASL-1
 
-
+<br/>
 
 ## 팀원
 
-**윤영서 (@aCafela-coffee)**
+**윤영서 ([@aCafela-coffee](https://github.com/aCafela-coffee))**
 
 <img src = "https://user-images.githubusercontent.com/67148595/210053745-af09f692-e613-4923-92fe-5e57639a2035.png" width="40%" height="height 40%">
 
-**천수현 (@Neph3779)**
+
+
+**천수현 ([@Neph](https://github.com/Neph3779))**
 
 <img src = "https://raw.githubusercontent.com/Neph3779/Blog-Image/forUpload/img/20221230163657.png" width="40%" height="height 40%">
 
+<br/>
 
 ## 작업 분할 내역
 
@@ -57,9 +57,7 @@ https://www.figma.com/file/1vyeSsmY86fHYzlomfCf3D/GyroData-%EA%B5%AC%EC%A1%B0?no
 
 - 페어프로그래밍으로 제작
 
-
-
-**천수현 (Neph)**
+**천수현**
 
 - MotionDataList 화면 구현  (첫 번째 페이지) 
 - MotionReplay 화면 구현 (세 번째 페이지)
@@ -67,8 +65,7 @@ https://www.figma.com/file/1vyeSsmY86fHYzlomfCf3D/GyroData-%EA%B5%AC%EC%A1%B0?no
 - 앱의 Domain Layer 제작 (UseCase)
 
 
-
-**윤영서 (aCafela-coffee)**
+**윤영서**
 
 - MotionRecording 화면 구현 (두 번째 페이지)
 - CMMotionManager를 통해 Accelerometer, Gyro 데이터를 받아오는 로직 제작
