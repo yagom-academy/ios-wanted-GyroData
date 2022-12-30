@@ -22,6 +22,7 @@
 		8ADDF9FE295E887600085D72 /* CoordinateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADDF9FD295E887600085D72 /* CoordinateModel.swift */; };
 		8ADDFA0E295E8CCA00085D72 /* MotionEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADDFA0C295E8CCA00085D72 /* MotionEntity+CoreDataClass.swift */; };
 		8ADDFA0F295E8CCA00085D72 /* MotionEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADDFA0D295E8CCA00085D72 /* MotionEntity+CoreDataProperties.swift */; };
+		8ADDFA11295EC8CF00085D72 /* ReuseIdentifying.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADDFA10295EC8CF00085D72 /* ReuseIdentifying.swift */; };
 		C43AF11E295D76F900EE7A7E /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43AF11D295D76F900EE7A7E /* GraphView.swift */; };
 		C43AF121295D771000EE7A7E /* GraphType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43AF120295D771000EE7A7E /* GraphType.swift */; };
 		C43AF124295D7A6E00EE7A7E /* MockModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43AF123295D7A6E00EE7A7E /* MockModel.swift */; };
@@ -77,6 +78,7 @@
 		8ADDF9FD295E887600085D72 /* CoordinateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateModel.swift; sourceTree = "<group>"; };
 		8ADDFA0C295E8CCA00085D72 /* MotionEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MotionEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		8ADDFA0D295E8CCA00085D72 /* MotionEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MotionEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		8ADDFA10295EC8CF00085D72 /* ReuseIdentifying.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReuseIdentifying.swift; sourceTree = "<group>"; };
 		C43AF11D295D76F900EE7A7E /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		C43AF120295D771000EE7A7E /* GraphType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphType.swift; sourceTree = "<group>"; };
 		C43AF123295D7A6E00EE7A7E /* MockModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockModel.swift; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 				8ADDF9F7295B1F2900085D72 /* GyroModel.swift */,
 				C43AF123295D7A6E00EE7A7E /* MockModel.swift */,
 				8ADDF9FD295E887600085D72 /* CoordinateModel.swift */,
+				8ADDFA10295EC8CF00085D72 /* ReuseIdentifying.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -351,6 +354,7 @@
 				8ADDF9FA295B1F9B00085D72 /* MotionDataManager.swift in Sources */,
 				63F01BB928D44FC400C53A39 /* MainViewController.swift in Sources */,
 				8A6A5BC829597DA900B9EB85 /* ReuseIdentifiable.swift in Sources */,
+				8ADDFA11295EC8CF00085D72 /* ReuseIdentifying.swift in Sources */,
 				C43AF124295D7A6E00EE7A7E /* MockModel.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				8A6A5BD6295B0BD000B9EB85 /* Model.xcdatamodeld in Sources */,
