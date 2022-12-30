@@ -70,7 +70,7 @@ final class MotionListViewController: UIViewController {
 
 extension MotionListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.pushMotionResultScene(resultType: .view, motion: self.viewModel.items.value[indexPath.row])
+        self.pushMotionResultScene(resultType: .view, information: self.viewModel.items.value[indexPath.row])
     }
 }
 
@@ -87,7 +87,7 @@ extension MotionListViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         cell.selectionStyle = .none
-        cell.configure(motion: self.viewModel.items.value[indexPath.row])
+        cell.configure(information: self.viewModel.items.value[indexPath.row])
         return cell
     }
     
@@ -128,8 +128,8 @@ extension MotionListViewController {
         navigationController?.pushViewController(measurementViewController, animated: true)
     }
     
-    private func pushMotionResultScene(resultType: MotionResultType ,motion: MotionInformation) {
-        let motionResultViewModel = MotionResultViewModel(motion)
+    private func pushMotionResultScene(resultType: MotionResultType, information: MotionInformation) {
+        let motionResultViewModel = MotionResultViewModel(information)
         
         switch resultType {
         case .view:
@@ -149,13 +149,13 @@ extension MotionListViewController {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         let playAction = UIContextualAction(style: .normal, title: "Play") { _, _, completionHandler in
-            self.pushMotionResultScene(resultType: .play, motion: self.viewModel.items.value[indexPath.row])
+            self.pushMotionResultScene(resultType: .play, information: self.viewModel.items.value[indexPath.row])
             completionHandler(true)
         }
         playAction.backgroundColor = .systemGreen
         
         let deleteAction = UIContextualAction(style: .normal, title: "Delete") { _, _, completionHandler in
-            self.viewModel.deleteItem(motion: self.viewModel.items.value[indexPath.row])
+            self.viewModel.deleteItem(information: self.viewModel.items.value[indexPath.row])
             completionHandler(true)
         }
         deleteAction.backgroundColor = .red

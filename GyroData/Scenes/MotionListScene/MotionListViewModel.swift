@@ -2,7 +2,7 @@ import Foundation
 
 protocol MotionListViewModelInput {
     func loadItems()
-    func deleteItem(motion: MotionInformation)
+    func deleteItem(information: MotionInformation)
 }
 
 protocol MotionListViewModelOutput {
@@ -32,11 +32,11 @@ final class MotionListViewModel: MotionListViewModelType {
         appendItems()
     }
     
-    func deleteItem(motion: MotionInformation) {
-        motionCoreDataUseCase.delete(id: motion.id) { result in
+    func deleteItem(information: MotionInformation) {
+        motionCoreDataUseCase.delete(id: information.id) { result in
             switch result {
                 case .success:
-                    if let index = self.items.value.firstIndex(where: { $0.id == motion.id }) {
+                    if let index = self.items.value.firstIndex(where: { $0.id == information.id }) {
                         self.items.value.remove(at: index)
                     }
                 case .failure(let error):

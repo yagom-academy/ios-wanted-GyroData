@@ -63,8 +63,8 @@ final class MotionResultPlayViewController: MotionResultViewController {
         }
     }
     
-    override func configureUI(motionInformation: Motion) {
-        super.configureUI(motionInformation: motionInformation)
+    override func configureUI(motion: Motion) {
+        super.configureUI(motion: motion)
         titleLabel.text = "Play"
     }
     
@@ -77,11 +77,11 @@ final class MotionResultPlayViewController: MotionResultViewController {
 
 extension MotionResultPlayViewController {
     func startDrawing() {
-        guard let motionInformation = viewModel.motionInformation.value else { return }
-        let xList = motionInformation.xData
-        let yList = motionInformation.yData
-        let zList = motionInformation.zData
-        let timeOut = min(motionInformation.xData.count, motionInformation.yData.count, motionInformation.zData.count)
+        guard let motion = viewModel.motion.value else { return }
+        let xList = motion.xData
+        let yList = motion.yData
+        let zList = motion.zData
+        let timeOut = min(motion.xData.count, motion.yData.count, motion.zData.count)
         var timeCount = Double.zero
         
         if timerIndex == timeOut {

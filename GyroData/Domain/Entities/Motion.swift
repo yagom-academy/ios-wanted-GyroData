@@ -8,7 +8,7 @@
 import Foundation
 
 struct Motion: Codable {
-    let motion: MotionInformation
+    let information: MotionInformation
     let xData: [Double]
     let yData: [Double]
     let zData: [Double]

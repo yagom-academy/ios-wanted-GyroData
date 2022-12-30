@@ -78,11 +78,11 @@ class MotionResultViewController: UIViewController {
     }
     
     func bind(to viewModel: MotionResultViewModel) {
-        viewModel.motionInformation
-            .subscribe { [weak self] motionInformation in
-                guard let motionInformation = motionInformation else { return }
-                self?.configureUI(motionInformation: motionInformation)
-                self?.drawGraph(motion: motionInformation)
+        viewModel.motion
+            .subscribe { [weak self] motion in
+                guard let motion = motion else { return }
+                self?.configureUI(motion: motion)
+                self?.drawGraph(motion: motion)
         }
         
         viewModel.error
@@ -126,8 +126,8 @@ class MotionResultViewController: UIViewController {
         navigationItem.title = "다시보기"
     }
     
-    func configureUI(motionInformation: Motion) {
-        dateLabel.text = motionInformation.motion.date.convertToString()
+    func configureUI(motion: Motion) {
+        dateLabel.text = motion.information.date.convertToString()
     }
 
     func drawGraph(motion: Motion) {

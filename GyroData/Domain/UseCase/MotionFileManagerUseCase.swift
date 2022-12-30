@@ -14,7 +14,7 @@ final class MotionFileManagerUseCase {
         let xData = motinData.map { $0[MotionData.x.rawValue] }
         let yData = motinData.map { $0[MotionData.y.rawValue] }
         let zData = motinData.map { $0[MotionData.z.rawValue] }
-        let motionInformation = Motion(motion: motion, xData: xData, yData: yData, zData: zData)
+        let motionInformation = Motion(information: motion, xData: xData, yData: yData, zData: zData)
         
         fileDataManager.save(motionInformation, id: motion.id, completion: completion)
     }
