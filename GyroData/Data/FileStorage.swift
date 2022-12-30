@@ -15,8 +15,7 @@ final class FileStorage {
     static let shared = FileStorage()
 
     private init() {
-        if !UserDefaults.standard.bool(forKey: "isFirst") {
-            UserDefaults.standard.set(true, forKey: "isFirst")
+        if !fileManager.fileExists(atPath: directoryURL.absoluteString) {
             makeDirectory()
         }
     }
