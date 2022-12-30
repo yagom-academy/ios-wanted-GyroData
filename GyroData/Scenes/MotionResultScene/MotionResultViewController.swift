@@ -82,7 +82,6 @@ class MotionResultViewController: UIViewController {
             guard let motionInformation = motionInformation else { return }
             self?.configureUI(motionInformation: motionInformation)
             self?.drawGraph(motion: motionInformation)
-            // stopIndicator
         }
     }
     
@@ -124,12 +123,15 @@ class MotionResultViewController: UIViewController {
         titleLabel.text = motionInformation.motion.motionType.rawValue
     }
 
-}
-
-// MARK: draw Graph
-
-extension MotionResultViewController {
     func drawGraph(motion: MotionInformation) {
-        // graphView에서 graph 그리기
+        let motionDatas = zip(motion.xData, zip(motion.yData, motion.zData))
+        let minCount = min(motion.xData.count, motion.yData.count, motion.zData.count)
+        
+        graphView.clearSegmanet()
+        graphView.setupSegmentSize(width: (view.bounds.width - 60.0) / Double(minCount), height: view.bounds.width)
+        
+        for (x, (y, z)) in motionDatas {
+            graphView.add([x, y, z])
+        }
     }
 }
