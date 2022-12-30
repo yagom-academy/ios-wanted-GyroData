@@ -32,9 +32,39 @@ final class GraphView: UIView, TickReceivable, GraphDrawable {
         static let maximumMeasureCount: CGFloat = 600
     }
     
-    var sensorValueIndex = 0
-    var data: MeasuredData?
-    var drawMode: DrawMode = .play
+    private let xLabel: UILabel = {
+        let xLabel = UILabel()
+        xLabel.text = "x:"
+        xLabel.textColor = .red
+        return xLabel
+    }()
+    
+    private let yLabel: UILabel = {
+        let yLabel = UILabel()
+        yLabel.text = "y:"
+        yLabel.textColor = .green
+        return yLabel
+    }()
+    
+    private let zLabel: UILabel = {
+        let zLabel = UILabel()
+        zLabel.text = "z:"
+        zLabel.textColor = .blue
+        return zLabel
+    }()
+    
+    private let valueLabelStackView: UIStackView = {
+       let valueLabelStackView = UIStackView()
+        valueLabelStackView.translatesAutoresizingMaskIntoConstraints = false
+        valueLabelStackView.axis = .horizontal
+
+        valueLabelStackView.distribution = .equalSpacing
+        return valueLabelStackView
+    }()
+    
+    private var sensorValueIndex = 0
+    private var data: MeasuredData?
+    private var drawMode: DrawMode = .play
     
     private let zeroX: CGFloat = 0
     private lazy var zeroY: CGFloat = self.frame.height / CGFloat(2)
@@ -55,6 +85,9 @@ final class GraphView: UIView, TickReceivable, GraphDrawable {
     init() {
         super.init(frame: .zero)
         
+        addViews()
+        setupLayout()
+        
         setupRootView()
         setupPathStartPosition()
     }
@@ -73,6 +106,12 @@ extension GraphView {
             drawWithAnimation(x: xSensorCurrentXPoint, yPoint: sensorXPoint, path: pathX, with: .red)
             drawWithAnimation(x: ySensorCurrentXPoint, yPoint: sensorYPoint, path: pathY, with: .green)
             drawWithAnimation(x: zSensorCurrentXPoint, yPoint: sensorZPoint, path: pathZ, with: .blue)
+            
+            updateValueLabels(
+                x: sensorXPoint.axisDecimal() / Configuration.graphSizeAdjustment,
+                y: sensorYPoint.axisDecimal() / Configuration.graphSizeAdjustment,
+                z: sensorZPoint.axisDecimal() / Configuration.graphSizeAdjustment
+            )
         case .image:
             guard let measuredData = self.data else {
                 return
@@ -191,5 +230,34 @@ private extension GraphView {
             
             path.stroke()
         }
+        
+        guard let lastXValue = measuredData.sensorData.axisX.last,
+              let lastYValue = measuredData.sensorData.axisY.last,
+              let lastZValue = measuredData.sensorData.axisZ.last else {
+            return
+        }
+        
+        updateValueLabels(x: lastXValue.axisDecimal(), y: lastYValue.axisDecimal(), z: lastZValue.axisDecimal())
+    }
+    
+    func addViews() {
+        self.addSubview(valueLabelStackView)
+        valueLabelStackView.addArrangedSubview(xLabel)
+        valueLabelStackView.addArrangedSubview(yLabel)
+        valueLabelStackView.addArrangedSubview(zLabel)
+    }
+    
+    func setupLayout() {
+        NSLayoutConstraint.activate([
+            valueLabelStackView.topAnchor.constraint(equalTo: self.topAnchor, constant: 8),
+            valueLabelStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8),
+            valueLabelStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8)
+        ])
+    }
+    
+    func updateValueLabels(x: Double, y: Double, z: Double) {
+        xLabel.text = String("x: \(x)")
+        yLabel.text = String("y: \(y)")
+        zLabel.text = String("z: \(z)")
     }
 }
