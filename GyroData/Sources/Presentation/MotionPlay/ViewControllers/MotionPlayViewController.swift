@@ -40,7 +40,7 @@ final class MotionPlayViewController: UIViewController {
     }
     
     private func bind() {
-        dateLabel.text = viewModel.date.formatted()
+        dateLabel.text = viewModel.date.formatted(for: .display)
         titleLabel.text = viewModel.viewType.toTitle()
         
         if viewModel.viewType == .play {

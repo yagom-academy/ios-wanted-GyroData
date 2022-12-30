@@ -11,7 +11,7 @@ protocol MotionListViewModelInput {
     
     func didDeleteAction(at index: Int)
     func prefetch()
-    func viewWillAppear()
+    func updateMotions()
     
 }
 
@@ -60,7 +60,7 @@ final class DefaultMotionListViewModel: MotionListViewModel {
         isLoading.value = false
     }
     
-    func viewWillAppear() {
+    func updateMotions() {
         motions.value = storage.fetch(page: 1)
         currentPage = 1
     }

@@ -15,6 +15,8 @@ final class MotionListCoordinator: Coordinator {
     var type: CoordinatorType { .list }
     var finishDelegate: CoordinatorFinishDelegate?
     
+    private weak var listDelegate: MotionListViewControllerDelegate?
+    
     init(navigationConrtoller: UINavigationController) {
         self.navigationController = navigationConrtoller
     }
@@ -32,6 +34,7 @@ private extension MotionListCoordinator {
             viewModel: DefaultMotionListViewModel(),
             coordinator: self
         )
+        listDelegate = viewController
         return viewController
     }
     
@@ -81,6 +84,7 @@ extension MotionListCoordinator: MotionListCoordinatorInterface {
     
     func popViewController() {
         navigationController.popViewController(animated: true)
+        listDelegate?.update()
     }
     
 }
