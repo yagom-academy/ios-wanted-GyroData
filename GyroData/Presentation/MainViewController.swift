@@ -97,7 +97,7 @@ final class MainViewController: UIViewController {
             )
             
             snapshot.appendItems(coreData)
-            dataSource?.apply(snapshot, animatingDifferences: false)
+            dataSource?.applySnapshotUsingReloadData(snapshot)
         }
     }
 }
