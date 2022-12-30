@@ -76,6 +76,35 @@ final class AnalyzeViewController: UIViewController {
         button.action = #selector(tappedBackButton)
         return button
     }()
+
+    private let xLabel: UILabel = {
+            let label = UILabel()
+            label.text = "X: 0.0"
+            label.textColor = .red
+            return label
+        }()
+
+        private let yLabel: UILabel = {
+            let label = UILabel()
+            label.text = "Y: 0.0"
+            label.textColor = .green
+            return label
+        }()
+
+        private let zLabel: UILabel = {
+            let label = UILabel()
+            label.text = "Z: 0.0"
+            label.textColor = .blue
+            return label
+        }()
+
+        private let locationStackView: UIStackView = {
+            let stack = UIStackView()
+            stack.axis = .horizontal
+            stack.distribution = .equalSpacing
+            stack.alignment = .fill
+            return stack
+        }()
     
     @ObservedObject private var viewModel = AnalyzeViewModel(analysisManager: AnalysisManager())
     private var cancelable = Set<AnyCancellable>()
@@ -113,11 +142,24 @@ final class AnalyzeViewController: UIViewController {
             segmentControl,
             analyzeButton,
             stopButton,
-            activityIndicator
+            activityIndicator,
+            locationStackView
         )
+
+        locationStackView.addArrangedSubview(xLabel)
+        locationStackView.addArrangedSubview(yLabel)
+        locationStackView.addArrangedSubview(zLabel)
     }
     
     private func setupUI() {
+        //MARK: - locationStackView
+        NSLayoutConstraint.activate([locationStackView.topAnchor.constraint(equalTo: graphView.topAnchor, constant: 10),
+                                     locationStackView.leadingAnchor.constraint(equalTo: graphView.leadingAnchor, constant: 5),
+                                     locationStackView.trailingAnchor.constraint(equalTo: graphView.trailingAnchor, constant: -5),
+                                     locationStackView.heightAnchor.constraint(equalToConstant: 50)
+                                    ])
+
+
         // MARK: - backgroundView
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
         backgroundView.layer.cornerRadius = 40
@@ -205,6 +247,15 @@ final class AnalyzeViewController: UIViewController {
             .sink { [weak self] _ in
                 guard let self = self else { return }
                 self.navigationController?.popViewController(animated: true)
+            }
+            .store(in: &cancelable)
+
+        viewModel.analyzeModelPublisher
+            .sink { [weak self] (x: Double, y: Double, z: Double) in
+                guard let self = self else { return }
+                self.xLabel.text = "X:" + String(format: "%.1f", x)
+                self.yLabel.text = "y:" + String(format: "%.1f",y)
+                self.zLabel.text = "z:" + String(format: "%.1f",z)
             }
             .store(in: &cancelable)
     }

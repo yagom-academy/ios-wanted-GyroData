@@ -38,6 +38,7 @@ final class AnalyzeViewModel: AnalyzeViewModelInterface, AnalyzeViewModelOutputI
     var analysisPublisher = PassthroughSubject<[GraphModel], Never>()
     var isLoadingPublisher = PassthroughSubject<Bool, Never>()
     var dismissPublisher = PassthroughSubject<Void, Never>()
+    var analyzeModelPublisher = PassthroughSubject<AnalysisData, Never>()
     
     @Published var environment: EnvironmentGraphModel = .init()
     @Published var analysis: [GraphModel] = []
@@ -63,6 +64,7 @@ final class AnalyzeViewModel: AnalyzeViewModelInterface, AnalyzeViewModelOutputI
             let measureTime = date - now
             let data = self.analysisManager.startAnalyze(mode: self.analyzeMode)
             self.analysis.append(.init(x: data.x, y: data.y, z: data.z, measurementTime: measureTime))
+            self.analyzeModelPublisher.send((x: data.x, y: data.y, z: data.z))
         })
         
         if let timer = self.timer {

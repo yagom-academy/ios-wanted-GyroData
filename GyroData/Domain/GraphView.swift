@@ -15,7 +15,6 @@ struct GraphView: View {
     var body: some View {
         ZStack(alignment: .top) {
             GroupBox {
-                FigureView(viewModel: environment)
                 Chart {
                     ForEach(environment.graphModels, id: \.measurementTime) { data in
                         LineMark(
@@ -50,26 +49,6 @@ struct GraphView: View {
             }
             .border(.black, width: 1)
             .backgroundStyle(.white)
-        }
-    }
-    
-    struct FigureView: View {
-        @ObservedObject var viewModel: EnvironmentGraphModel
-        var body: some View {
-            HStack {
-                Text("xdata")
-                    .font(.caption2)
-                    .foregroundColor(.red)
-                Spacer()
-                Text("ydata")
-                    .font(.caption2)
-                    .foregroundColor(.green)
-                Spacer()
-                Text("zdata")
-                    .font(.caption2)
-                    .foregroundColor(.blue)
-            }
-            .padding([.top, .leading, .trailing], 30)
         }
     }
 }
