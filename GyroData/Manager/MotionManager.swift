@@ -100,6 +100,14 @@ final class MotionManager {
         }
     }
     
+    func stopAccelerometerRecord() {
+        motionManager.stopAccelerometerUpdates()
+    }
+    
+    func stopGyroRecord() {
+        motionManager.stopAccelerometerUpdates()
+    }
+    
     private func commonInit() {
         motionManager.accelerometerUpdateInterval = 0.1
         motionManager.gyroUpdateInterval = 0.1
