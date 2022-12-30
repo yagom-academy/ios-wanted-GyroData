@@ -15,7 +15,7 @@ final class FileStorage {
     static let shared = FileStorage()
 
     private init() {
-        if !fileManager.fileExists(atPath: directoryURL.absoluteString) {
+        if !fileManager.fileExists(atPath: directoryURL.path) {
             makeDirectory()
         }
     }
