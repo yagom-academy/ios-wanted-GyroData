@@ -8,24 +8,33 @@
 import Foundation
 
 enum SensorType: String {
-    case accelerometer = "Acc"
+    case acc = "Accelerometer"
     case gyro = "Gyro"
     
     var index: Int {
         switch self {
-        case .accelerometer:
+        case .acc:
             return 0
         case .gyro:
             return 1
         }
     }
     
+    var segmentTitle: String {
+        switch self {
+        case .acc:
+            return "Acc"
+        case .gyro:
+            return "Gyro"
+        }
+    }
+    
     var max: CGFloat {
         switch self {
-        case .accelerometer:
-            return CGFloat(3)
+        case .acc:
+            return CGFloat(6)
         case .gyro:
-            return CGFloat(9)
+            return CGFloat(18)
         }
     }
 }

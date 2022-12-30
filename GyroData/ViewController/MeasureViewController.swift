@@ -20,7 +20,7 @@ final class MeasureViewController: BaseViewController {
     }()
     
     private lazy var segmentControl: UISegmentedControl = {
-        let segmentControl = UISegmentedControl(items: [SensorType.accelerometer.rawValue, SensorType.gyro.rawValue])
+        let segmentControl = UISegmentedControl(items: [SensorType.acc.segmentTitle, SensorType.gyro.segmentTitle])
         segmentControl.selectedSegmentIndex = 0
         segmentControl.backgroundColor = .white
         segmentControl.selectedSegmentTintColor = .systemBlue
@@ -66,12 +66,27 @@ final class MeasureViewController: BaseViewController {
         
         return stackView
     }()
+    
+    private lazy var indicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.style = .large
+        activityIndicator.color = .black
+        
+        return activityIndicator
+    }()
     // MARK: - Properties
     private let viewTitle: String = "측정하기"
     private var motionManager = CMMotionManager()
     private var accTimer: Timer?
     private var gyroTimer: Timer?
-    private var timeLeft: Double = 60
+    // MARK: - MeasureData
+    private var measureDate: String = ""
+    private var runningTime: Int = 0
+    private var sensorType: String = ""
+    private var xData: [Double] = []
+    private var yData: [Double] = []
+    private var zData: [Double] = []
+    
     private var isMeasured: Bool = false {
         didSet {
             if isMeasured {
@@ -113,11 +128,11 @@ extension MeasureViewController {
         vStackViewConstraints()
         segmentControlConstraints()
         graphViewConstraints()
-        
+        indicatorConstraints()
     }
     
     private func vStackViewConstraints() {
-        self.view.addSubview(vStackView)
+        self.view.addSubview(self.vStackView)
         self.vStackView.translatesAutoresizingMaskIntoConstraints = false
         
         let layout = [
@@ -149,17 +164,30 @@ extension MeasureViewController {
 
         NSLayoutConstraint.activate(layout)
     }
+    
+    private func indicatorConstraints() {
+        self.view.addSubview(self.indicator)
+        
+        self.indicator.translatesAutoresizingMaskIntoConstraints = false
+        
+        let layout = [
+            self.indicator.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            self.indicator.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
+        ]
+        
+        NSLayoutConstraint.activate(layout)
+    }
 }
-// MARK: - Action
+// MARK: - ButtonAction
 extension MeasureViewController {
     @objc private func didTapSaveButton() {
-        print("Save")
+        saveMeasureData()
     }
     
     @objc private func didTapMeasureButton() {
         print(#function)
         switch self.segmentControl.selectedSegmentIndex {
-        case SensorType.accelerometer.index :
+        case SensorType.acc.index :
             startAccMeasure()
         case SensorType.gyro.index :
             startGyroMeasure()
@@ -171,7 +199,7 @@ extension MeasureViewController {
     
     @objc private func didTapStopButton() {
         switch self.segmentControl.selectedSegmentIndex {
-        case SensorType.accelerometer.index :
+        case SensorType.acc.index :
             accTimer?.invalidate()
         case SensorType.gyro.index :
             gyroTimer?.invalidate()
@@ -179,22 +207,27 @@ extension MeasureViewController {
             break
         }
         self.isMeasured = false
-        print(#function)
     }
-    
+}
+// MARK: - MeasureFunction
+extension MeasureViewController {
     private func startAccMeasure() {
-        self.graphView.clear()
-        var max = SensorType.accelerometer.max
+        self.initData(sensorType: .acc)
+        var max = SensorType.acc.max
         if motionManager.isAccelerometerAvailable {
             motionManager.accelerometerUpdateInterval = 0.1
             motionManager.startAccelerometerUpdates()
             self.graphView.setMax(max: max)
             self.accTimer = Timer(fire: Date(), interval: 0.1, repeats: true, block: { timer in
-                if self.timeLeft > 0 {
+                if self.runningTime < 600 {
                     if let accData = self.motionManager.accelerometerData {
                         let x = accData.acceleration.x
                         let y = accData.acceleration.y
                         let z = accData.acceleration.z
+                        
+                        self.xData.append(x)
+                        self.yData.append(y)
+                        self.zData.append(z)
 
                         self.graphView.setLabel(x: x, y: y, z: z)
                         self.graphView.getData(x: x, y: y, z: z)
@@ -203,12 +236,12 @@ extension MeasureViewController {
                         
                         if regularExpression {
                             self.graphView.isOverflowValue = true
-                            max *= 1.2
+                            max += self.maxValue(x: x, y: y, z: z) * 0.2
                             self.graphView.setMax(max: max)
                         }
                         
                         self.graphView.setNeedsDisplay()
-                        self.timeLeft -= 0.1
+                        self.runningTime += 1
                     }
                 } else {
                     self.accTimer?.invalidate()
@@ -221,18 +254,22 @@ extension MeasureViewController {
     }
     
     private func startGyroMeasure() {
-        self.graphView.clear()
+        self.initData(sensorType: .gyro)
         var max = SensorType.gyro.max
         if motionManager.isGyroAvailable {
             motionManager.gyroUpdateInterval = 0.1
             motionManager.startGyroUpdates()
             self.graphView.setMax(max: max)
             self.gyroTimer = Timer(fire: Date(), interval: 0.1, repeats: true, block: { timer in
-                if self.timeLeft > 0 {
+                if self.runningTime < 600 {
                     if let gyroData = self.motionManager.gyroData {
                         let x = gyroData.rotationRate.x
                         let y = gyroData.rotationRate.y
                         let z = gyroData.rotationRate.z
+                        
+                        self.xData.append(x)
+                        self.yData.append(y)
+                        self.zData.append(z)
 
                         self.graphView.setLabel(x: x, y: y, z: z)
                         self.graphView.getData(x: x, y: y, z: z)
@@ -241,12 +278,12 @@ extension MeasureViewController {
                         
                         if regularExpression {
                             self.graphView.isOverflowValue = true
-                            max *= 1.2
+                            max += self.maxValue(x: x, y: y, z: z) * 0.2
                             self.graphView.setMax(max: max)
                         }
                         
                         self.graphView.setNeedsDisplay()
-                        self.timeLeft -= 0.1
+                        self.runningTime += 1
                     }
                 } else {
                     self.gyroTimer?.invalidate()
@@ -258,8 +295,88 @@ extension MeasureViewController {
         }
     }
     
-    private func initDate() {
-        timeLeft = 60
+    private func saveMeasureData() {
+        self.indicator.startAnimating()
         
+        if runningTime == 0 {
+            let alert = AlertManager.alert(title: "값을 측정후 저장해주세요.", alertType: .saveFail)
+            present(alert, animated: true, completion: nil)
+            self.indicator.stopAnimating()
+            
+            return
+        }
+        
+        let dispatchGroup = DispatchGroup()
+        
+        let _ = measureDataForCoreData(runningTime: self.runningTime,
+                                                 date: self.measureDate,
+                                                 sensor: self.sensorType,
+                                                 x: self.xData,
+                                                 y: self.yData,
+                                                 z: self.zData)
+        
+        let measureValue = MeasureValue(measureDate: self.measureDate,
+                                        sensorType: self.sensorType,
+                                        measureTime: String(Double(self.runningTime) / 10),
+                                        xData: self.xData,
+                                        yData: self.yData,
+                                        zData: self.zData)
+        
+        DispatchQueue.global().async(group: dispatchGroup) {
+            CoreDataManager.shared.saveContext()
+        }
+        
+        DispatchQueue.global().async(group: dispatchGroup) {
+            do {
+                try FileManagerService.shared.saveMeasureFile(data: measureValue)
+            } catch {
+                DispatchQueue.main.async {
+                    let alert = AlertManager.alert(title: error.localizedDescription, alertType: .saveFail)
+                    self.present(alert, animated: true)
+                }
+            }
+        }
+        
+        dispatchGroup.notify(queue: .main) { [weak self] in
+            let alert = AlertManager.alert(title: "저장 완료", alertType: .saveSuccess(self!))
+            self?.present(alert, animated: true, completion: nil)
+            self?.indicator.stopAnimating()
+        }
+    }
+    
+    private func initData(sensorType: SensorType) {
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "y-M-d_HH:mm:ss"
+        self.graphView.clear()
+        self.graphView.setMax(max: sensorType.max)
+        
+        self.runningTime = 0
+        self.xData.removeAll()
+        self.yData.removeAll()
+        self.zData.removeAll()
+        self.sensorType = sensorType.rawValue
+        self.measureDate = formatter.string(from: date)
+    }
+    
+    private func isEnableSaveCheck(runningTime: Int) {
+        
+    }
+    
+    private func measureDataForCoreData(runningTime: Int, date: String, sensor: String, x: [Double], y: [Double], z: [Double]) -> MeasureData {
+        let measureData = MeasureData(context: CoreDataManager.shared.context)
+        measureData.measureTime = String(Double(runningTime) / 10)
+        measureData.measureDate = date
+        measureData.sensorType = sensor
+        measureData.xData = x
+        measureData.yData = y
+        measureData.zData = z
+        
+        return measureData
+    }
+    
+    private func maxValue(x: Double, y: Double, z: Double) -> Double {
+        let arr = [x,y,z]
+        return arr.max()!
     }
 }
