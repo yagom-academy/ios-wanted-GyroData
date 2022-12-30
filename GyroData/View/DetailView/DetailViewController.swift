@@ -48,6 +48,7 @@ extension DetailViewController {
         } else {
             viewModel.stopTimer {
                 self.detailView.playButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+                viewModel.resetGraphView()
             }
         }
     }

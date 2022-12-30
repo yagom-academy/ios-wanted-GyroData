@@ -27,6 +27,10 @@ final class DetailViewModel: DetailViewModelInput, DetailViewModelOutput {
         model = data
     }
     
+    func resetGraphView() {
+        delegate?.stopDraw()
+    }
+    
     func startTimer(_ completion: @escaping (String) -> Void) {
         timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { [weak self] _ in
             
@@ -47,5 +51,6 @@ final class DetailViewModel: DetailViewModelInput, DetailViewModelOutput {
     func stopTimer(_ completion: () -> Void) {
         completion()
         timer?.invalidate()
+        self.timerNum = 0
     }
 }

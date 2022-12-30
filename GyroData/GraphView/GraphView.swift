@@ -128,7 +128,21 @@ extension GraphView {
     }
     
     func stopDraw() {
+        resetPathsForReplay()
+    }
+    
+    func resetPathsForReplay() {
+        pathX.removeAllPoints()
+        pathY.removeAllPoints()
+        pathZ.removeAllPoints()
         
+        xSensorCurrentXPoint = 0
+        ySensorCurrentXPoint = 0
+        zSensorCurrentXPoint = 0
+        
+        sensorValueIndex = 0
+        
+        setupPathStartPosition()
     }
     
     func configureDrawMode(_ drawMode: DrawMode) {
