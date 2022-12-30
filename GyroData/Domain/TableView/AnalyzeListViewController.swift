@@ -78,13 +78,13 @@ extension AnalyzeListViewController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let play = UIContextualAction(style: .normal, title: "Play") { (UIContextualAction, UIView, success: @escaping (Bool) -> Void) in
-            success(true)
-            print("play버튼")
+            self.listViewModel.input.playButtonDidTap(indexPath: indexPath)
+            self.navigationController?.pushViewController(GraphRecordViewController(), animated: true)
         }
         
         let delete = UIContextualAction(style: .normal, title: "Delete") { (UIContextualAction, UIView, success: @escaping (Bool) -> Void) in
-            success(true)
-            print("delete")
+            self.listViewModel.input.deleteButtonDidTap(indexPath: indexPath)
+            self.analysisTableView.reloadData()
         }
         
         play.backgroundColor = .systemGreen
