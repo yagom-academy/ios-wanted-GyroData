@@ -8,6 +8,7 @@ protocol MotionListViewModelInput {
 protocol MotionListViewModelOutput {
     var items: Observable<[Motion]> { get }
     var isloading: Observable<Bool> { get }
+    var error: Observable<String?> { get }
 }
 
 protocol MotionListViewModelType: MotionListViewModelInput, MotionListViewModelOutput { }
@@ -22,6 +23,7 @@ class MotionListViewModel: MotionListViewModelType {
     
     var items: Observable<[Motion]> = Observable([])
     var isloading: Observable<Bool> = Observable(false)
+    var error: Observable<String?> = Observable(nil)
     
     /// Input
     
@@ -31,7 +33,14 @@ class MotionListViewModel: MotionListViewModelType {
     }
     
     func deleteItem(motion: Motion) {
-        motionCoreDataUseCase.delete(id: motion.id)
+        motionCoreDataUseCase.delete(id: motion.id) { result in
+            switch result {
+                case .success:
+                    break
+                case .failure(let error):
+                self.error.value = error.localizedDescription
+            }
+        }
         if let index = items.value.firstIndex(where: { $0.id == motion.id }) {
             items.value.remove(at: index)
         }

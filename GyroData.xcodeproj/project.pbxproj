@@ -45,6 +45,7 @@
 		F37A245A295C9B870006B552 /* MotionInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37A2459295C9B870006B552 /* MotionInformation.swift */; };
 		F37A245D295CBDB40006B552 /* MotionResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37A245C295CBDB40006B552 /* MotionResult.swift */; };
 		F3AFF7E5295ECEC700D631AB /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3AFF7E4295ECEC700D631AB /* Date+Extension.swift */; };
+		F3AFF7EA295EEF6100D631AB /* CoreDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3AFF7E9295EEF6100D631AB /* CoreDataError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -88,6 +89,7 @@
 		F37A2459295C9B870006B552 /* MotionInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionInformation.swift; sourceTree = "<group>"; };
 		F37A245C295CBDB40006B552 /* MotionResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionResult.swift; sourceTree = "<group>"; };
 		F3AFF7E4295ECEC700D631AB /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		F3AFF7E9295EEF6100D631AB /* CoreDataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -273,6 +275,7 @@
 		F3516220295BF5A7008AB1A3 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				F3AFF7E9295EEF6100D631AB /* CoreDataError.swift */,
 				F351622B295BF783008AB1A3 /* CoreDataStack.swift */,
 				F351622D295BF7B1008AB1A3 /* CoreDataManager.swift */,
 				F3516221295BF5A7008AB1A3 /* Entities */,
@@ -429,6 +432,7 @@
 				F3AFF7E5295ECEC700D631AB /* Date+Extension.swift in Sources */,
 				F3516228295BF65F008AB1A3 /* MotionInfo+CoreDataProperties.swift in Sources */,
 				F37A2453295C91760006B552 /* MotionResultPlayViewController.swift in Sources */,
+				F3AFF7EA295EEF6100D631AB /* CoreDataError.swift in Sources */,
 				203831FF295D1DF200B58F53 /* GraphNumber.swift in Sources */,
 				F35161FD295AEACA008AB1A3 /* Observable.swift in Sources */,
 				20BC9B00295C1771009A7F7A /* GraphSegment.swift in Sources */,
