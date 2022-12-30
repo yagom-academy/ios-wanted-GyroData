@@ -13,7 +13,7 @@
 
 # 완성화면
 
-
+- 
 https://user-images.githubusercontent.com/81068345/210080898-5d42f3e8-aba9-4fea-8bc6-41bb17647af2.MP4
 
 
