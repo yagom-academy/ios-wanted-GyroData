@@ -179,6 +179,15 @@
 			path = SubViews;
 			sourceTree = "<group>";
 		};
+		204CCBEF295F11A3006A6893 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				63F01BB428D44FC400C53A39 /* AppDelegate.swift */,
+				63F01BB628D44FC400C53A39 /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
 		20E26445295C375E00C66E8A /* GraphView */ = {
 			isa = PBXGroup;
 			children = (
@@ -208,12 +217,11 @@
 		63F01BB328D44FC400C53A39 /* GyroData */ = {
 			isa = PBXGroup;
 			children = (
+				204CCBEF295F11A3006A6893 /* Application */,
 				F351622F295BF7D7008AB1A3 /* Domain */,
 				F351621F295BF5A7008AB1A3 /* Service */,
 				F3516205295B1140008AB1A3 /* Utility */,
 				F35161F2295AC259008AB1A3 /* Scenes */,
-				63F01BB428D44FC400C53A39 /* AppDelegate.swift */,
-				63F01BB628D44FC400C53A39 /* SceneDelegate.swift */,
 				63F01BB828D44FC400C53A39 /* ViewController.swift */,
 				63F01BBD28D44FC500C53A39 /* Assets.xcassets */,
 				63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */,
