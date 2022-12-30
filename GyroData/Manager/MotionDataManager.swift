@@ -15,8 +15,9 @@ class MotionDataManager {
     private init() { }
     
     func saveMotion(data: GyroModel) {
-        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName:
-                                                                                    "MotionEntity")
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(
+            entityName: "MotionEntity"
+        )
         fetchRequest.predicate = NSPredicate(format: "id = %@", data.id as CVarArg)
         
         let sampleModel = SaveModel(entityName: "MotionEntity",

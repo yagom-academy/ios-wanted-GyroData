@@ -118,7 +118,9 @@ extension MainTableViewCell: ReuseIdentifying {
     func configure(with data: GyroModel) {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        timeLabel.text = dateFormatter.string(from: Date(timeIntervalSince1970: data.createdAt))
+        timeLabel.text = dateFormatter.string(
+            from: Date(timeIntervalSince1970: data.createdAt)
+        )
         
         if data.motionType == "accelerometer" {
             typeLabel.text = "Accelerometer"

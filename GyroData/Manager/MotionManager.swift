@@ -53,9 +53,16 @@ final class MotionManager {
             guard let self = self else { return }
             
             let coordinateModel = self.makeGyroCoordinate(
-                                        coordinateX: self.convertGyroData(data: data?.acceleration.x),
-                                        coordinateY: self.convertGyroData(data: data?.acceleration.y),
-                                        coordinateZ: self.convertGyroData(data: data?.acceleration.z))
+                coordinateX: self.convertGyroData(
+                    data: data?.acceleration.x
+                ),
+                coordinateY: self.convertGyroData(
+                    data: data?.acceleration.y
+                ),
+                coordinateZ: self.convertGyroData(
+                    data: data?.acceleration.z
+                )
+            )
             
             let accModel = GyroModel(id: UUID(),
                                       coordinate: coordinateModel,
@@ -84,9 +91,16 @@ final class MotionManager {
         ) { [weak self] data, error in
             guard let self = self else { return }
             let coordinateModel = self.makeGyroCoordinate(
-                                        coordinateX: self.convertGyroData(data: data?.rotationRate.x),
-                                        coordinateY: self.convertGyroData(data: data?.rotationRate.y),
-                                        coordinateZ: self.convertGyroData(data: data?.rotationRate.z))
+                coordinateX: self.convertGyroData(
+                    data: data?.rotationRate.x
+                ),
+                coordinateY: self.convertGyroData(
+                    data: data?.rotationRate.y
+                ),
+                coordinateZ: self.convertGyroData(
+                    data: data?.rotationRate.z
+                )
+            )
             
             let gyroModel = GyroModel(id: UUID(),
                                       coordinate: coordinateModel,
