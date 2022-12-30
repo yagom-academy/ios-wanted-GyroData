@@ -22,13 +22,14 @@ protocol MeasermentViewModelOutput {
     var motions: Observable<[MotionValue]> { get }
     var currentMotion: Observable<MotionValue?> { get }
     var errorMessage: Observable<String?> { get }
+    var isLoading: Observable<Bool> { get }
     
 }
 
 protocol MeasermentViewModel: MeasermentViewModelInput, MeasermentViewModelOutput {}
 
 enum MeasermentStatus {
-    case ready, start, stop, save, done
+    case ready, start, stop, done
 }
 
 final class DefaultMeasermentViewModel: MeasermentViewModel {
@@ -39,10 +40,6 @@ final class DefaultMeasermentViewModel: MeasermentViewModel {
     
     private let storage: MotionStorage
     private let coreMotionManager: CoreMotionManager
-    var motions: Observable<[MotionValue]> = .init([])
-    var status: Observable<MeasermentStatus> = .init(.ready)
-    var currentMotion: Observable<MotionValue?> = .init(nil)
-    var errorMessage: Observable<String?> = .init(nil)
     
     init(
         manger: CoreMotionManager = CoreMotionManager(),
@@ -52,11 +49,22 @@ final class DefaultMeasermentViewModel: MeasermentViewModel {
         self.storage = storage
     }
     
+    // MARK: - Output
+    var motions: Observable<[MotionValue]> = .init([])
+    var status: Observable<MeasermentStatus> = .init(.ready)
+    var currentMotion: Observable<MotionValue?> = .init(nil)
+    var errorMessage: Observable<String?> = .init(nil)
+    var isLoading: Observable<Bool> = .init(false)
+    
+    // MARK: - Input
     func measerStart(type: MotionType) {
         status.value = .start
         switch type {
         case .gyro:
-            coreMotionManager.bind(gyroHandler: { data, error in
+            coreMotionManager.bind(gyroHandler: { [weak self] data, _ in
+                guard let self else {
+                    return
+                }
                 if let data = data {
                     let motionValue = MotionValue(data)
                     self.currentMotion.value = motionValue
@@ -68,7 +76,10 @@ final class DefaultMeasermentViewModel: MeasermentViewModel {
             })
             coreMotionManager.startUpdates(type: .gyro)
         case .accelerometer:
-            coreMotionManager.bind(accHandler: { data, error in
+            coreMotionManager.bind(accHandler: { [weak self] data, _ in
+                guard let self else {
+                    return
+                }
                 if let data = data {
                     let motionValue = MotionValue(data)
                     self.currentMotion.value = motionValue
@@ -93,10 +104,19 @@ final class DefaultMeasermentViewModel: MeasermentViewModel {
     }
     
     func measerSave(type: MotionType) {
-        status.value = .save
-        DispatchQueue.global().async {
+        isLoading.value = true
+        DispatchQueue.global().async { [weak self] in
+            guard let self else {
+                return
+            }
             let timeInterval = TimeInterval( Double(self.motions.value.count) * 0.1)
-            let saveData = Motion(uuid: UUID(), type: type, values: self.motions.value, date: Date(), duration: timeInterval)
+            let saveData = Motion(
+                uuid: UUID(),
+                type: type, 
+                values: self.motions.value, 
+                date: Date(), 
+                duration: timeInterval
+            )
             self.storage.insert(saveData)
             do {
                 try MotionFileManager.shared.save(data: saveData.toFile())
@@ -104,6 +124,7 @@ final class DefaultMeasermentViewModel: MeasermentViewModel {
             } catch {
                 self.errorMessage.value = error.localizedDescription
             }
+            self.isLoading.value = false
         }
     }
     

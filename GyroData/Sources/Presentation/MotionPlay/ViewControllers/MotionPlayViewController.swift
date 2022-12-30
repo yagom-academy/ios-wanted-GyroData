@@ -26,7 +26,7 @@ final class MotionPlayViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpView()
+        setUp()
         bind()
     }
     
@@ -69,7 +69,8 @@ final class MotionPlayViewController: UIViewController {
     
     private lazy var playButton: UIButton = {
         let button = UIButton()
-        let image = UIImage(systemName: "play")
+        let config = UIImage.SymbolConfiguration(textStyle: .title1, scale: .large)
+        let image = UIImage(systemName: "play.fill")?.withConfiguration(config)
         button.setImage(image, for: .normal)
         button.addTarget(self, action: #selector(startDraw(_:)), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -79,12 +80,20 @@ final class MotionPlayViewController: UIViewController {
     
     private lazy var pauseButton: UIButton = {
         let button = UIButton()
-        let image = UIImage(systemName: "pause")
+        let config = UIImage.SymbolConfiguration(textStyle: .title1, scale: .large)
+        let image = UIImage(systemName: "pause.fill")?.withConfiguration(config)
         button.isHidden = true
         button.setImage(image, for: .normal)
         button.addTarget(self, action: #selector(pauseDraw(_:)), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
+    }()
+    
+    private lazy var labelStackView: UIStackView = {
+        let stackView = UIStackView(axis: .vertical, alignment: .leading, distribution: .fill, spacing: 8)
+        stackView.backgroundColor = .clear
+        stackView.addArrangedSubviews(dateLabel, titleLabel)
+        return stackView
     }()
     
     private lazy var dateLabel: UILabel = {
@@ -104,7 +113,13 @@ final class MotionPlayViewController: UIViewController {
     }()
     
     private func startTimer() {
-        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(drawGraph), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(
+            timeInterval: 0.1,
+            target: self,
+            selector: #selector(drawGraph),
+            userInfo: nil,
+            repeats: true
+        )
     }
     
     @objc func startDraw(_ sender: UIButton) {
@@ -126,32 +141,39 @@ final class MotionPlayViewController: UIViewController {
     }
 }
 
-extension MotionPlayViewController {
+private extension MotionPlayViewController {
     
-    private enum ConstantLayout {
+    enum ConstantLayout {
         static let offset: CGFloat = 30
         static let buttonSize: CGFloat = 100
     }
     
-    private func setUpView() {
-
-        view.addSubview(dateLabel)
+    func setUp() {
+        setUpView()
+        setUpNavigationBar()
+    }
+    
+    func setUpView() {
+        view.addSubviews(labelStackView)
         NSLayoutConstraint.activate([
-            dateLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            dateLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: ConstantLayout.offset)
-        ])
-        
-        view.addSubview(titleLabel)
-        NSLayoutConstraint.activate([
-            dateLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            dateLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: ConstantLayout.offset)
+            labelStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            labelStackView.leadingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.leadingAnchor,
+                constant: ConstantLayout.offset
+            )
         ])
         
         view.addSubview(graphView)
         NSLayoutConstraint.activate([
-            graphView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: ConstantLayout.offset),
-            graphView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -ConstantLayout.offset),
-            graphView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: ConstantLayout.offset),
+            graphView.leadingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.leadingAnchor,
+                constant: ConstantLayout.offset
+            ),
+            graphView.trailingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.trailingAnchor,
+                constant: -ConstantLayout.offset
+            ),
+            graphView.topAnchor.constraint(equalTo: labelStackView.bottomAnchor, constant: 20),
             graphView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5)
         ])
         
@@ -171,4 +193,9 @@ extension MotionPlayViewController {
             pauseButton.widthAnchor.constraint(equalToConstant: ConstantLayout.buttonSize)
         ])
     }
+    
+    func setUpNavigationBar() {
+        navigationItem.title = "다시보기"
+    }
+    
 }

@@ -39,7 +39,7 @@ final class MeasurementViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpView()
+        setUp()
         bind()
     }
     
@@ -47,7 +47,6 @@ final class MeasurementViewController: UIViewController {
         self.viewModel = viewModel
         self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)
-        view.backgroundColor = .systemBackground
     }
     
     required init?(coder: NSCoder) {
@@ -78,18 +77,22 @@ final class MeasurementViewController: UIViewController {
                 self?.saveButton.isHidden = false
                 self?.cancleButton.isEnabled = true
                 self?.segmentControl.isEnabled = false
-            case .save:
-                self?.indicatorView.startAnimating()
             case .done:
-                self?.indicatorView.stopAnimating()
                 self?.coordinator?.popViewController()
             }
         }
         
-        viewModel.errorMessage.observe(on: self) { [weak self] value in
-            if let message = value {
-                self?.indicatorView.stopAnimating()
+        viewModel.errorMessage.observe(on: self) { [weak self] message in
+            if let message {
                 self?.showErrorAlert(message: message)
+            }
+        }
+        
+        viewModel.isLoading.observe(on: self) { [weak self] isLoading in
+            if isLoading {
+                self?.indicatorView.startAnimating()
+            } else {
+                self?.indicatorView.stopAnimating()
             }
         }
     }
@@ -159,10 +162,10 @@ final class MeasurementViewController: UIViewController {
         return button
     }()
     
-    //MARK - func
+    // MARK: - func
     func drawGraph(data: MotionValue?) {
-        DispatchQueue.main.async {
-            self.graphView.drawGraph(data: data)
+        DispatchQueue.main.async { [weak self] in
+            self?.graphView.drawGraph(data: data)
         }
     }
     
@@ -216,9 +219,15 @@ final class MeasurementViewController: UIViewController {
     }
 }
 
-extension MeasurementViewController {
+private extension MeasurementViewController {
     
-    private func setUpView() {
+    func setUp() {
+        setUpView()
+        setUpNavigationBar()
+    }
+    
+    func setUpView() {
+        view.backgroundColor = .systemBackground
         view.addSubview(segmentControl)
         NSLayoutConstraint.activate([
             segmentControl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constant.offset),
@@ -270,5 +279,9 @@ extension MeasurementViewController {
         ])
         
         view.addSubview(indicatorView)
+    }
+    
+    func setUpNavigationBar() {
+        navigationItem.title = "측정하기"
     }
 }
