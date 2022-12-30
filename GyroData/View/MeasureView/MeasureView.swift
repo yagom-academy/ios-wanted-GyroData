@@ -86,6 +86,8 @@ private extension MeasureView {
             stackView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
             stackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
+            
+            graphContainerView.heightAnchor.constraint(equalToConstant: 350)
         ])
     }
 }

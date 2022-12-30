@@ -26,9 +26,10 @@ enum DrawMode {
 
 final class GraphView: UIView, TickReceivable, GraphDrawable {
     private enum Configuration {
-        static let lineWidth: CGFloat = 1
+        static let lineWidth: CGFloat = 2
         static let centerY: CGFloat = 150.5
-        static let graphSizeAdjustment: Double = 100
+        static let graphSizeAdjustment: Double = 30
+        static let maximumMeasureCount: CGFloat = 600
     }
     
     var sensorValueIndex = 0
@@ -107,6 +108,10 @@ extension GraphView {
         sensorXPoint = x * Configuration.graphSizeAdjustment
         sensorYPoint = y * Configuration.graphSizeAdjustment
         sensorZPoint = z * Configuration.graphSizeAdjustment
+        
+        xSensorCurrentXPoint += self.frame.width / Configuration.maximumMeasureCount
+        ySensorCurrentXPoint += self.frame.width / Configuration.maximumMeasureCount
+        zSensorCurrentXPoint += self.frame.width / Configuration.maximumMeasureCount
         
         self.setNeedsDisplay()
     }

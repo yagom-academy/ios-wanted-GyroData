@@ -116,7 +116,9 @@ private extension DetailView {
             playButton.centerXAnchor.constraint(equalTo: centerXAnchor),
             playButton.topAnchor.constraint(equalTo: graphContainerView.bottomAnchor, constant: 40),
             timerLabel.centerYAnchor.constraint(equalTo: playButton.centerYAnchor),
-            timerLabel.trailingAnchor.constraint(equalTo: graphContainerView.trailingAnchor)
+            timerLabel.trailingAnchor.constraint(equalTo: graphContainerView.trailingAnchor),
+            
+            graphContainerView.heightAnchor.constraint(equalToConstant: 350)
         ])
     }
 }
