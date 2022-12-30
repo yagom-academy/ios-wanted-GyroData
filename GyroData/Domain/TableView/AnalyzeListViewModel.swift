@@ -10,12 +10,16 @@ import CoreData
 import Combine
 
 protocol AnalyzeListViewModelInputInterface {
-    func onViewWillAppear()
     func onViewDidLoad()
+    func onViewWillAppear()
+    func playButtonDidTap(indexPath: IndexPath)
+    func deleteButtonDidTap()
+    func cellDidTap()
+    func measurementButtonDidTap()
 }
 
 protocol AnalyzeListViewModelOutputInterface {
-    var analysisPublisher: PassthroughSubject<[CellModel], Never> { get }
+    var analysisPublisher: PassthroughSubject<[GyroData], Never> { get }
 }
 
 protocol AnalyzeListViewModelInterface {
@@ -23,28 +27,59 @@ protocol AnalyzeListViewModelInterface {
     var output: AnalyzeListViewModelOutputInterface { get }
 }
 
-final class AnalyzeListViewModel: AnalyzeListViewModelInterface, AnalyzeListViewModelOutputInterface {
-    var analysisPublisher = PassthroughSubject<[CellModel], Never>()
+final class AnalyzeListViewModel: AnalyzeListViewModelInterface {
+    var analysisPublisher = PassthroughSubject<[GyroData], Never>()
 
     // MARK: AnalyzeViewModelInterface
     var input: AnalyzeListViewModelInputInterface { self }
     var output: AnalyzeListViewModelOutputInterface { self }
 
     // MARK: AnalyzeViewModelOutputInterface
-    var analysis: [CellModel] = []
+    var analysis: [GyroData] = []
+    var graph: [GraphModel] = []
 }
 
 extension AnalyzeListViewModel: AnalyzeListViewModelInputInterface {
+    func onViewDidLoad() {
+        guard let fetchedData = CoreDataManager.shared.read() else {
+            return
+        }
+        
+        analysis = fetchedData
+    }
+    
     func onViewWillAppear() {
-        bind()
+        guard let fetchedData = CoreDataManager.shared.read() else {
+            return
+        }
+        
+        analysis = fetchedData
     }
 
-    func onViewDidLoad() {
+    func playButtonDidTap(indexPath: IndexPath) {
+        guard let id = analysis[indexPath.row].id,
+              let fetchedData = GraphFileManager.shared.loadJsonFile(fileName: id) else {
+            return
+        }
+        
+        graph = fetchedData
+    }
+    
+    func deleteButtonDidTap() {
+        
+    }
+    
+    func cellDidTap() {
+        
+    }
+    
+    func measurementButtonDidTap() {
+        
     }
 }
 
-extension AnalyzeListViewModel: ObservableObject {
-    func bind() {
-      
+extension AnalyzeListViewModel: AnalyzeListViewModelOutputInterface {
+    func data전달() {
+        
     }
 }
