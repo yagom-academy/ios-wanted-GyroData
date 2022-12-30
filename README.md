@@ -12,13 +12,41 @@
 
 
 
+## 적용 아키텍쳐: 클린 아키텍쳐
+
+<img src="https://raw.githubusercontent.com/Neph3779/Blog-Image/forUpload/img/20221230182257.png" alt="image-20221230182257869" style="zoom:50%;" />
+
+이번 프로젝트에서는 클린 아키텍쳐를 적용해보았습니다.
+
+클린아키텍쳐는 앱을 각 Layer로 나누어 내부에 있는 Layer는 바깥 Layer에 종속성을 가지지 않도록 하는것이 핵심적인 아키텍쳐입니다.
+
+Domain Layer의 UseCase에서는 비즈니스 로직을 정의하였고
+
+Data Layer의 Storage의 Interface에 해당하는 protocol을 Domain Layer에 정의함으로써
+
+Domain Layer에는 외부 종속성이 걸리지 않도록 하였습니다. (Dependency Inversion 방지)
+
+Data Layer에서는 DTO, CoreData Entity의 정의와 data fetching 로직들을 담았으며
+
+Presentation Layer에서는 View와 ViewModel을 분리하여 ViewController의 부담을 줄여주었습니다.
+
+
+
+
+
+### 앱 구조 도식화 (UML)
+
+https://www.figma.com/file/1vyeSsmY86fHYzlomfCf3D/GyroData-%EA%B5%AC%EC%A1%B0?node-id=1%3A127&t=3iRrJVWRskO48ASL-1
+
+
+
 ## 팀원
 
-**윤영서 (aCafela-coffee)**
+**윤영서 (@aCafela-coffee)**
 
 <img src = "https://user-images.githubusercontent.com/67148595/210053745-af09f692-e613-4923-92fe-5e57639a2035.png" width="40%" height="height 40%">
 
-**천수현 (Neph)**
+**천수현 (@Neph3779)**
 
 <img src = "https://raw.githubusercontent.com/Neph3779/Blog-Image/forUpload/img/20221230163657.png" width="40%" height="height 40%">
 
@@ -48,6 +76,3 @@
 
 
 
-## 앱 구조 도식화 (UML)
-
-https://www.figma.com/file/1vyeSsmY86fHYzlomfCf3D/GyroData-%EA%B5%AC%EC%A1%B0?node-id=1%3A127&t=3iRrJVWRskO48ASL-1
