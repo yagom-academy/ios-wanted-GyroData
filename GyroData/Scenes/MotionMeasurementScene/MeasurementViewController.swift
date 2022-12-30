@@ -32,23 +32,13 @@ class MeasurementViewController: UIViewController {
         return graph
     }()
     
-    private let measurementButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("측정", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.contentHorizontalAlignment = .left
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
+    private let measurementButton = MeasurementButton(title: "측정", frame: .zero)
+    private let stopButton = MeasurementButton(title: "정지", frame: .zero)
+    private let indicatorView = UIActivityIndicatorView(style: .large)
+    private let saveBarButton = UIBarButtonItem()
     
-    private let stopButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("정지", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.contentHorizontalAlignment = .left
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
+    private let measurementviewModel = MotionMeasurementViewModel()
+    private var motionType = MotionType.acc
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,11 +46,13 @@ class MeasurementViewController: UIViewController {
         setupView()
         configureNavigationBar()
         configureButton()
+        bind()
     }
     
     private func setupView() {
         addSubViews()
         setupConstraints()
+        setupIndicatorView()
         view.backgroundColor = .systemBackground
     }
     
@@ -86,22 +78,50 @@ class MeasurementViewController: UIViewController {
         ])
     }
     
+    private func setupIndicatorView() {
+        indicatorView.frame = view.frame
+        indicatorView.color = .systemGray
+        view.addSubview(indicatorView)
+    }
+
+    private func bind() {
+        measurementviewModel.isMeasuring
+            .subscribe { [weak self] isMeasuring in
+                self?.segmentedControl.isEnabled = !isMeasuring
+                self?.stopButton.isEnabled = isMeasuring
+                self?.saveBarButton.isEnabled = !isMeasuring
+            }
+        
+        measurementviewModel.error
+            .subscribe { [weak self] error in
+                if let description = error {
+                    self?.showAlert(message: description)
+                }
+            }
+        
+        measurementviewModel.loading
+            .subscribe { [weak self] isLoading in
+                if let isLoading = isLoading {
+                    isLoading ? self?.showLoading() : self?.hideLoading()
+                }
+            }
+    }
+}
+
+extension MeasurementViewController {
     private func configureNavigationBar() {
-        let saveBarButton = UIBarButtonItem(title: "저장",
-                                            style: .done,
-                                            target: self,
-                                            action: #selector(saveButtonTapped))
+        saveBarButton.title = "저장"
+        saveBarButton.target = self
+        saveBarButton.action = #selector(saveButtonTapped)
         
         navigationItem.rightBarButtonItem = saveBarButton
         navigationItem.title = "측정하기"
     }
     
     @objc private func saveButtonTapped() {
-        navigationController?.popViewController(animated: true)
+        measurementviewModel.save(motionType, datas: graphView.segmentDatas)
     }
-}
-
-extension MeasurementViewController {
+    
     private func configureButton() {
         measurementButton.addTarget(self,
                              action: #selector(measureButtonTapped),
@@ -110,13 +130,51 @@ extension MeasurementViewController {
         stopButton.addTarget(self,
                              action: #selector(stopButtonTapped),
                              for: .touchUpInside)
+        
+        segmentedControl.addTarget(self,
+                                   action: #selector(segmentedContorolSelected),
+                                   for: .valueChanged)
     }
     
     @objc private func measureButtonTapped() {
-        MotionMeasurementManager.shared.startMeasurement(MotionType.acc ,on: graphView)
+        measurementviewModel.startMeasurement(motionType, on: graphView)
     }
     
     @objc private func stopButtonTapped() {
-        MotionMeasurementManager.shared.stopMeasurement(MotionType.acc)
+        measurementviewModel.stopMeasurement(motionType)
+    }
+    
+    @objc private func segmentedContorolSelected() {
+        switch segmentedControl.selectedSegmentIndex {
+        case 0:
+            motionType = .acc
+        case 1:
+            motionType = .gyro
+        default:
+            motionType = .acc
+        }
+    }
+}
+
+extension MeasurementViewController {
+    private func showAlert(message: String) {
+        let alert = UIAlertController(title: "알림",
+                                      message: message,
+                                      preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "확인", style: .default))
+        self.present(alert, animated: true)
+    }
+    
+    private func showLoading() {
+        indicatorView.startAnimating()
+    }
+    
+    private func hideLoading() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
+            self.indicatorView.stopAnimating()
+        }
+        
+        navigationController?.popViewController(animated: true)
     }
 }

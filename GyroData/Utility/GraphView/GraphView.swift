@@ -26,6 +26,12 @@ class GraphView: UIView {
         return segments.last
     }
     
+    var segmentDatas: [[Double]] {
+        return segments.map {
+            $0.dataPoint
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -86,13 +92,10 @@ class GraphView: UIView {
     }
     
     private func removeOutofBoundsSegment() {
-        segments = segments.filter { segment in
+        segments.forEach { segment in
             if segment.frame.origin.x + GraphNumber.segmentWidth >= bounds.size.width {
                 segment.removeFromSuperview()
-                return false
             }
-            
-            return true
         }
     }
 }
