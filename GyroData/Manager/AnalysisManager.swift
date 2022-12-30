@@ -10,6 +10,11 @@ import CoreMotion
 
 typealias AnalysisData = (x: Double, y: Double, z: Double)
 
+enum AnalysisType: String, Codable {
+    case accelerate = "accelerate"
+    case gyroscope = "gyroscope"
+}
+
 protocol AnalysisManagerType {
     func startAnalyze(mode: AnalysisType) -> AnalysisData
     func stopAnalyze(mode: AnalysisType)
