@@ -126,9 +126,15 @@ class MotionResultViewController: UIViewController {
     func drawGraph(motion: MotionInformation) {
         let motionDatas = zip(motion.xData, zip(motion.yData, motion.zData))
         let minCount = min(motion.xData.count, motion.yData.count, motion.zData.count)
-        
+        let width = CGFloat((view.bounds.width - 60.0) / Double(minCount))
+       
         graphView.clearSegmanet()
-        graphView.setupSegmentSize(width: (view.bounds.width - 60.0) / Double(minCount), height: view.bounds.width)
+        
+        if width < GraphNumber.segmentWidth {
+            graphView.setupSegmentSize(width: width, height: view.bounds.width)
+        } else {
+            graphView.setupSegmentSize(height: view.bounds.width)
+        }
         
         for (x, (y, z)) in motionDatas {
             graphView.add([x, y, z])

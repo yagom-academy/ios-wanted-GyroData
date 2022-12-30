@@ -74,8 +74,8 @@ class GraphView: UIView {
         currentSegment?.add(motions)
     }
     
-    func setupSegmentSize(width: Double = GraphNumber.segmentWidth, height: Double) {
-        segmentWidth = CGFloat(width)
+    func setupSegmentSize(width: CGFloat = GraphNumber.segmentWidth, height: Double) {
+        segmentWidth = width
         segmentHeight = height
     }
     
