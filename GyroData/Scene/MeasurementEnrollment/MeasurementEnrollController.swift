@@ -10,7 +10,7 @@ import UIKit
 final class MeasurementEnrollController: UIViewController {
     
     // MARK: Properties
-    
+    private let motionManager = MotionManager()
     private let segmentControl = CustomSegmentedControl(items: ["Acc", "Gyro"])
     private let segmentControlShadowView: UIView = {
         let view = UIView()
@@ -200,6 +200,14 @@ final class MeasurementEnrollController: UIViewController {
     }
     
     @objc private func saveButtonTapped() {
-        print("saved")
+        
+        switch segmentControl.selectedSegmentIndex {
+        case 0:
+            motionManager.startAccelerometerRecord()
+        case 1:
+            motionManager.startGyroRecord()
+        default:
+            break
+        }
     }
 }

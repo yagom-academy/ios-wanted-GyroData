@@ -20,8 +20,9 @@ class MotionDataManager {
         fetchRequest.predicate = NSPredicate(format: "id = %@", data.id as CVarArg)
         
         let sampleModel = SaveModel(entityName: "MotionEntity",
-                                    sampleData: ["id": data.id, "x": data.x, "y": data.y,
-                                                 "z": data.z, "createdAt": data.createdAt,
+                                    sampleData: ["id": data.id,
+                                                 "coordinate": data.coordinate,
+                                                 "createdAt": data.createdAt,
                                                  "motionType": data.motionType])
         CoreDataManager.shared.save(model: sampleModel, request: fetchRequest)
     }
@@ -40,7 +41,7 @@ class MotionDataManager {
         }
         
         var gyroModel = data.compactMap {
-            GyroModel(id: $0.id, x: $0.x, y: $0.y, z: $0.z,
+            GyroModel(id: $0.id , coordinate: $0.coordinate,
                       createdAt: $0.createdAt, motionType: $0.motionType)
         }
         

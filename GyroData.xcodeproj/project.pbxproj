@@ -15,12 +15,13 @@
 		8A6A5BC629597C6900B9EB85 /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6A5BC529597C6900B9EB85 /* MainTableViewCell.swift */; };
 		8A6A5BC829597DA900B9EB85 /* ReuseIdentifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6A5BC729597DA800B9EB85 /* ReuseIdentifiable.swift */; };
 		8A6A5BD6295B0BD000B9EB85 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8A6A5BD4295B0BD000B9EB85 /* Model.xcdatamodeld */; };
-		8A6A5BD9295B0C8800B9EB85 /* MotionEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6A5BD7295B0C8800B9EB85 /* MotionEntity+CoreDataClass.swift */; };
-		8A6A5BDA295B0C8800B9EB85 /* MotionEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6A5BD8295B0C8800B9EB85 /* MotionEntity+CoreDataProperties.swift */; };
 		8A6A5C2A295B16FB00B9EB85 /* CoreDataFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A6A5C29295B16F000B9EB85 /* CoreDataFramework.framework */; };
 		8A6A5C2B295B16FB00B9EB85 /* CoreDataFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8A6A5C29295B16F000B9EB85 /* CoreDataFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8ADDF9F8295B1F2900085D72 /* GyroModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADDF9F7295B1F2900085D72 /* GyroModel.swift */; };
 		8ADDF9FA295B1F9B00085D72 /* MotionDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADDF9F9295B1F9B00085D72 /* MotionDataManager.swift */; };
+		8ADDF9FE295E887600085D72 /* CoordinateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADDF9FD295E887600085D72 /* CoordinateModel.swift */; };
+		8ADDFA0E295E8CCA00085D72 /* MotionEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADDFA0C295E8CCA00085D72 /* MotionEntity+CoreDataClass.swift */; };
+		8ADDFA0F295E8CCA00085D72 /* MotionEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADDFA0D295E8CCA00085D72 /* MotionEntity+CoreDataProperties.swift */; };
 		C43AF11E295D76F900EE7A7E /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43AF11D295D76F900EE7A7E /* GraphView.swift */; };
 		C43AF121295D771000EE7A7E /* GraphType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43AF120295D771000EE7A7E /* GraphType.swift */; };
 		C43AF124295D7A6E00EE7A7E /* MockModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43AF123295D7A6E00EE7A7E /* MockModel.swift */; };
@@ -70,11 +71,12 @@
 		8A6A5BC529597C6900B9EB85 /* MainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
 		8A6A5BC729597DA800B9EB85 /* ReuseIdentifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReuseIdentifiable.swift; sourceTree = "<group>"; };
 		8A6A5BD5295B0BD000B9EB85 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
-		8A6A5BD7295B0C8800B9EB85 /* MotionEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MotionEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
-		8A6A5BD8295B0C8800B9EB85 /* MotionEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MotionEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		8A6A5C24295B16F000B9EB85 /* CoreDataFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CoreDataFramework.xcodeproj; path = CoreDataFramework/CoreDataFramework.xcodeproj; sourceTree = "<group>"; };
 		8ADDF9F7295B1F2900085D72 /* GyroModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroModel.swift; sourceTree = "<group>"; };
 		8ADDF9F9295B1F9B00085D72 /* MotionDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDataManager.swift; sourceTree = "<group>"; };
+		8ADDF9FD295E887600085D72 /* CoordinateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateModel.swift; sourceTree = "<group>"; };
+		8ADDFA0C295E8CCA00085D72 /* MotionEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MotionEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		8ADDFA0D295E8CCA00085D72 /* MotionEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MotionEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		C43AF11D295D76F900EE7A7E /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		C43AF120295D771000EE7A7E /* GraphType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphType.swift; sourceTree = "<group>"; };
 		C43AF123295D7A6E00EE7A7E /* MockModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockModel.swift; sourceTree = "<group>"; };
@@ -104,8 +106,8 @@
 		63F01BA828D44FC400C53A39 = {
 			isa = PBXGroup;
 			children = (
-				8A6A5BD7295B0C8800B9EB85 /* MotionEntity+CoreDataClass.swift */,
-				8A6A5BD8295B0C8800B9EB85 /* MotionEntity+CoreDataProperties.swift */,
+				8ADDFA0C295E8CCA00085D72 /* MotionEntity+CoreDataClass.swift */,
+				8ADDFA0D295E8CCA00085D72 /* MotionEntity+CoreDataProperties.swift */,
 				63F01BB328D44FC400C53A39 /* GyroData */,
 				63F01BB228D44FC400C53A39 /* Products */,
 				8A6A5BDB295B0E8600B9EB85 /* Frameworks */,
@@ -163,6 +165,7 @@
 			children = (
 				8ADDF9F7295B1F2900085D72 /* GyroModel.swift */,
 				C43AF123295D7A6E00EE7A7E /* MockModel.swift */,
+				8ADDF9FD295E887600085D72 /* CoordinateModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -341,8 +344,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8ADDF9FE295E887600085D72 /* CoordinateModel.swift in Sources */,
 				C456F86B295C1041008C9261 /* GridView.swift in Sources */,
 				8ADDF9F8295B1F2900085D72 /* GyroModel.swift in Sources */,
+				8ADDFA0F295E8CCA00085D72 /* MotionEntity+CoreDataProperties.swift in Sources */,
 				8ADDF9FA295B1F9B00085D72 /* MotionDataManager.swift in Sources */,
 				63F01BB928D44FC400C53A39 /* MainViewController.swift in Sources */,
 				8A6A5BC829597DA900B9EB85 /* ReuseIdentifiable.swift in Sources */,
@@ -353,15 +358,14 @@
 				C456F84C295AC076008C9261 /* MeasurementReplayViewController.swift in Sources */,
 				C456F846295A0A2C008C9261 /* UIImage+Extension.swift in Sources */,
 				C456F848295A0A5A008C9261 /* UIContextualAction+Extension.swift in Sources */,
-				8A6A5BD9295B0C8800B9EB85 /* MotionEntity+CoreDataClass.swift in Sources */,
 				C456F856295AF00E008C9261 /* MotionManager.swift in Sources */,
 				8A6A5BC629597C6900B9EB85 /* MainTableViewCell.swift in Sources */,
 				C4E4870329598D7C00A1FB99 /* MeasurementEnrollController.swift in Sources */,
 				C43AF121295D771000EE7A7E /* GraphType.swift in Sources */,
 				C43AF11E295D76F900EE7A7E /* GraphView.swift in Sources */,
+				8ADDFA0E295E8CCA00085D72 /* MotionEntity+CoreDataClass.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
 				C456F858295AF01D008C9261 /* MotionType.swift in Sources */,
-				8A6A5BDA295B0C8800B9EB85 /* MotionEntity+CoreDataProperties.swift in Sources */,
 				C456F84E295AC0AA008C9261 /* PlayType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

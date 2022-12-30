@@ -7,19 +7,15 @@
 
 import Foundation
 
-struct GyroModel {
+public struct GyroModel {
     let id: UUID
-    let x: Double
-    let y: Double
-    let z: Double
+    let coordinate: [[Double]]
     let createdAt: Double
     let motionType: String
     
-    init(id: UUID, x: Double, y: Double, z: Double, createdAt: Double, motionType: String) {
+    init(id: UUID, coordinate: [[Double]], createdAt: Double, motionType: String) {
         self.id = id
-        self.x = x
-        self.y = y
-        self.z = z
+        self.coordinate = coordinate
         self.createdAt = createdAt
         self.motionType = motionType
     }
