@@ -100,6 +100,13 @@ class MeasurementViewController: UIViewController {
                 self?.stopButton.isEnabled = isMeasuring
                 self?.saveBarButton.isEnabled = !isMeasuring
             }
+        
+        measurementviewModel.error
+            .subscribe { [weak self] description in
+                if description != "" {
+                    self?.showAlert(message: description)
+                }
+            }
     }
 }
 
@@ -149,5 +156,16 @@ extension MeasurementViewController {
         default:
             motionType = .acc
         }
+    }
+}
+
+extension MeasurementViewController {
+    private func showAlert(message: String) {
+        let alert = UIAlertController(title: "알림",
+                                      message: message,
+                                      preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "확인", style: .default))
+        self.present(alert, animated: true)
     }
 }

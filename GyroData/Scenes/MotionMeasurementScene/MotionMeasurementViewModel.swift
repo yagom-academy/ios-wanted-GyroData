@@ -33,6 +33,12 @@ class MotionMeasurementViewModel: MotionMeasurementViewModelType {
     /// Input
     
     func save(_ motionType: MotionType, datas: [[Double]]) {
+        guard datas.isEmpty == false else {
+            error.value = "측정된 데이터가 없습니다."
+            return
+        }
+        
+        loading.value = true
         let newMotion = Motion(motionType: motionType,
                                date: Date(),
                                time: MotionMeasurementManager.shared.timeCount)
