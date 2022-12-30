@@ -95,6 +95,7 @@ final class DefaultMotionDetailViewModel: MotionDetailViewModel {
     func playStart() {
         playStatus.value = .play
         playingTime.value = 0
+        drawingIndex = 0
         startTimer()
     }
     
