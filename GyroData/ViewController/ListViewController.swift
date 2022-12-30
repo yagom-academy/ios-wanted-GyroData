@@ -26,9 +26,10 @@ class ListViewController: BaseViewController {
     }()
     
     private lazy var tableView: UITableView = {
-        let view = UITableView()
+        let tableView = UITableView()
+        tableView.rowHeight = 90
         
-        return view
+        return tableView
     }()
     
     private lazy var vStackView: UIStackView = {
@@ -45,8 +46,8 @@ class ListViewController: BaseViewController {
     // MARK: - Properties
     private let viewTitle: String = "목록"
     private var measureDataList: [MeasureData] = []
-    private var loadCount: Int = 0
-    private var indexPage: Int = 0
+    private var fetchOffset: Int = 0
+    private var isLoadData: Bool = false
     
     // MARK: - LifeCycles
     override func viewDidLoad() {
@@ -123,30 +124,42 @@ extension ListViewController {
         self.navigationController?.pushViewController(measureVC, animated: true)
     }
     
-    private func scrollToBottom(indexPath: IndexPath) {
-        if indexPath.row + 1 == self.measureDataList.count {
-                print("load more")
-                if !(loadCount % 2 == 0) {
-                    indexPage += 1
-                    print("index: \(indexPage)")
-                }
-                loadCount += 1
-                print("loadCount: \(loadCount)")
+    private func readMoreData() {
+        let indicator = UIActivityIndicatorView(style: .medium)
+        indicator.color = .systemBlue
+        indicator.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 60)
+        if !self.isLoadData {
+            self.isLoadData = true
+            self.tableView.tableFooterView = indicator
+            indicator.startAnimating()
+            DispatchQueue.global().async { [weak self] in
+                self?.fetchMeasureDataList()
             }
+        }
     }
 }
 // MARK: - DataBinding
 extension ListViewController {
     func fetchMeasureDataList() {
         let request = MeasureData.fetchRequest()
-        request.fetchLimit = 20
-        request.fetchOffset = measureDataList.count
+        request.fetchLimit = 10
+        request.fetchOffset = self.fetchOffset
         
         do {
-            let motionDataList = try CoreDataManager.shared.context.fetch(request)
-            self.measureDataList += motionDataList
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
+            let nextData = try CoreDataManager.shared.context.fetch(request)
+            if !nextData.isEmpty {
+                self.measureDataList += nextData
+                self.fetchOffset += nextData.count
+                DispatchQueue.main.async {
+                    self.isLoadData = false
+                    self.tableView.tableFooterView = nil
+                    self.tableView.reloadData()
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self.isLoadData = false
+                    self.tableView.tableFooterView = nil
+                }
             }
         } catch {
             print(error)
@@ -166,7 +179,12 @@ extension ListViewController: UITableViewDelegate {
         play.backgroundColor = .systemGreen
         
         let delete = UIContextualAction(style: .normal, title: "Delete") { (UIContextualAction, UIView, success: @escaping (Bool) -> Void) in
-            print("delete 클릭 됨")
+            CoreDataManager.shared.context.delete(self.measureDataList[indexPath.row])
+            self.measureDataList.remove(at: indexPath.row)
+            CoreDataManager.shared.saveContext()
+            self.tableView.reloadData()
+            self.fetchOffset -= 1
+            success(true)
         }
         delete.backgroundColor = .systemRed
         
@@ -182,7 +200,9 @@ extension ListViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        scrollToBottom(indexPath: indexPath)
+        if tableView.contentOffset.y > (tableView.contentSize.height - tableView.frame.size.height) + 100 {
+            self.readMoreData()
+        }
     }
 }
 

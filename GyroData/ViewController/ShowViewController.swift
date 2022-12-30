@@ -1,5 +1,5 @@
 //
-//  ReplayPlayTypeViewController.swift
+//  ShowViewController.swift
 //  GyroData
 //
 //  Created by 천승희 on 2022/12/29.
@@ -102,7 +102,7 @@ class ShowViewController: BaseViewController {
     private var measureData: MeasureData?
     private var timer: Timer?
     private var playTime: Int = 0
-    
+    private var isPlay: Bool = false
     // MARK: - LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -124,9 +124,11 @@ extension ShowViewController {
     
     private func checkViewType() {
         if viewType == .preview {
-            hStackView.isHidden = true
-            self.typeLabel.text = ViewType.preview.rawValue
-            drawGraph()
+            DispatchQueue.main.async {
+                self.hStackView.isHidden = true
+                self.typeLabel.text = ViewType.preview.rawValue
+                self.drawGraph()
+            }
         }
     }
     
@@ -154,6 +156,7 @@ extension ShowViewController {
         labelStackViewConstraints()
         graphViewConstraints()
         hStackViewConstraints()
+        playTimeLabelConstraints()
     }
     
     private func vStackViewConstraints() {
@@ -212,6 +215,15 @@ extension ShowViewController {
         
         NSLayoutConstraint.activate(layout)
     }
+    
+    private func playTimeLabelConstraints() {
+        let layout = [
+            self.playTimeLabel.widthAnchor.constraint(equalTo: self.playButton.widthAnchor),
+            self.playTimeLabel.heightAnchor.constraint(equalTo: self.playButton.heightAnchor)
+        ]
+        
+        NSLayoutConstraint.activate(layout)
+    }
 }
 // MARK: - Action
 extension ShowViewController {
@@ -220,43 +232,72 @@ extension ShowViewController {
     }
     
     private func play() {
-        self.graphView.clear()
-        self.graphView.measureTime = self.measureData?.xData?.count ?? 0
-        var max = SensorType.acc.max
-        if self.measureData?.sensorType == SensorType.gyro.rawValue {
-            max = SensorType.gyro.max
-        }
-        self.graphView.setMax(max: max)
-        self.timer = Timer(timeInterval: 0.1, repeats: true) { timer in
-            if self.playTime > self.measureData?.xData?.count ?? 0 {
-                self.timer?.invalidate()
+        self.isPlay.toggle()
+        let imageConfig = UIImage.SymbolConfiguration(pointSize: 50, weight: .light)
+        if self.isPlay {
+            self.playButton.setImage(UIImage(systemName: "stop.fill", withConfiguration: imageConfig), for: .normal)
+            self.graphView.clear()
+            self.graphView.measureTime = self.measureData?.xData?.count ?? 0
+            
+            var max = SensorType.acc.max
+            if self.measureData?.sensorType == SensorType.gyro.rawValue {
+                max = SensorType.gyro.max
             }
+            self.graphView.setMax(max: max)
             
-            let x = self.measureData?.xData?[self.playTime] ?? 0
-            let y = self.measureData?.yData?[self.playTime] ?? 0
-            let z = self.measureData?.zData?[self.playTime] ?? 0
-            
-            self.graphView.setLabel(x: x, y: y, z: z)
-            self.graphView.getData(x: x, y: y, z: z)
-            
-            let regularExpression = abs(x) > max || abs(y) > max || abs(z) > max
-            
-            if regularExpression {
-                self.graphView.isOverflowValue = true
-                max += self.maxValue(x: x, y: y, z: z) * 0.2
-                self.graphView.setMax(max: max)
+            self.timer = Timer(timeInterval: 0.1, repeats: true) { timer in
+                self.playTimeLabel.text = String(format:"%4.1f",Double(self.playTime) / 10.0)
+                
+                if self.playTime >= self.measureData?.xData?.count ?? 0 {
+                    self.timer?.invalidate()
+                    
+                    return
+                }
+                
+                let (x, y, z) = self.decodeMeasureData(self.measureData, at: self.playTime)
+                
+                self.graphView.setLabel(x: x, y: y, z: z)
+                self.graphView.getData(x: x, y: y, z: z)
+                
+                let regularExpression = abs(x) > max || abs(y) > max || abs(z) > max
+                
+                if regularExpression {
+                    self.graphView.isOverflowValue = true
+                    max += self.maxValue(x: x, y: y, z: z) * 0.2
+                    self.graphView.setMax(max: max)
+                }
+                
+                self.graphView.setNeedsDisplay()
+                self.playTime += 1
             }
-            
-            self.graphView.setNeedsDisplay()
-            self.playTime += 1
+            if let timer = self.timer {
+                RunLoop.current.add(timer, forMode: .default)
+            }
+        } else {
+            self.playButton.setImage(UIImage(systemName: "play.fill", withConfiguration: imageConfig), for: .normal)
+            self.timer?.invalidate()
+            self.playTime = 0
         }
-        if let timer = self.timer {
-            RunLoop.current.add(timer, forMode: .default)
-        }
+    }
+    
+    private func setGraphViewMax() {
+        
     }
 }
 // MARK: - Helper
 extension ShowViewController {
+    func decodeMeasureData(_ measureData: MeasureData?, at index:Int) -> (Double,Double,Double){
+        if let measureData = measureData {
+            if measureData.xData!.count != 0 && measureData.yData!.count != 0 && measureData.zData!.count != 0 {
+                return (measureData.xData![index], measureData.yData![index], measureData.zData![index])
+            }
+        }
+
+        timer?.invalidate()
+
+        return (0.0, 0.0, 0.0)
+    }
+    
     func setMeasureData(data: MeasureData) {
         self.measureData = data
     }
