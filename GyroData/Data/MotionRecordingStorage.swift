@@ -23,6 +23,7 @@ final class MotionRecordingStorage: MotionRecordingStorageProtocol {
 
             do {
                 try context.save()
+                completion(.success(Void()))
             } catch {
                 print(error)
                 completion(.failure(error))

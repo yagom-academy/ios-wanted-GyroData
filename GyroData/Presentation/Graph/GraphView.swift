@@ -104,6 +104,7 @@ final class GraphView: UIView {
     }
 
     private func resetViewModel() {
+        viewModel.yScale = 60
         viewModel.pastValueForRed.removeAll()
         viewModel.pastValueForBlue.removeAll()
         viewModel.pastValueForGreen.removeAll()
