@@ -9,7 +9,7 @@ import Foundation
 
 final class MeasureViewModel {
     
-    let manager = CoreMotionManager()
+    private let manager = CoreMotionManager()
     var gyroItem = Observable(GyroItem(x: [], y: [], z: []))
     
     func onStart() {

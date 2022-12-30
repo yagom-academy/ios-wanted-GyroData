@@ -10,8 +10,8 @@ import CoreMotion
 
 final class CoreMotionManager {
     
-    let motion = CMMotionManager()
-    var timer: Timer?
+    private let motion = CMMotionManager()
+    private var timer: Timer?
     
     func startGyros(completion: @escaping (CGFloat, CGFloat, CGFloat) -> ()) {
        if motion.isGyroAvailable {
@@ -28,6 +28,7 @@ final class CoreMotionManager {
                  completion(x, y, z)
              }
           })
+           
            RunLoop.current.add(timer!, forMode: .default)
        }
     }

@@ -24,7 +24,6 @@ final class DataStore {
         changedContextValidate()
     }
     
-    
     func readGyro(completion: @escaping (Result<[ModelEntity], Error>) -> () ) {
         guard let context = context else { return }
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: String(describing: ModelEntity.self))
@@ -37,8 +36,6 @@ final class DataStore {
             print("데이터 가져오기 실패")
         }
     }
-    
-    func deleteGyro() {}
     
     // 코어데이터 내용이 변경되었을때만 저장
     private func changedContextValidate() {

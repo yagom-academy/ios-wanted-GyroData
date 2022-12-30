@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainCell: UITableViewCell {
+final class MainCell: UITableViewCell {
     
     static let cellID = "MainCell"
     

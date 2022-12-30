@@ -7,10 +7,10 @@
 
 import UIKit
 
-class MeasureViewController: UIViewController {
+final class MeasureViewController: UIViewController {
     
-    let viewModel = MeasureViewModel()
-    var graphView = GraphView()
+    private let viewModel = MeasureViewModel()
+    private var graphView = GraphView()
 
     private let segmentControl: UISegmentedControl = {
         let control = UISegmentedControl(items: SensorType.allCases.map({ $0.rawValue }))
@@ -81,45 +81,10 @@ class MeasureViewController: UIViewController {
             pauseButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -100)
         ])
     }
-    
-    func createGraphLayer(values: [CGFloat], color: UIColor) -> CAShapeLayer {
-        let layer = CAShapeLayer()
-        let path = UIBezierPath()
-        
-        var currentX: CGFloat = 10
-        
-        let xOffset = self.view.frame.width / CGFloat(values.count)
-        
-        let centerY = self.view.frame.height / 2
-        
-        let centerYPosition = CGPoint(x: currentX, y: centerY)
-        path.move(to: centerYPosition)
-        
-        for i in 0..<values.count {
-            currentX += xOffset
-            path.addLine(to: CGPoint(x: currentX, y: centerY - values[i]))
-        }
-        
-        layer.fillColor = nil
-        layer.strokeColor = color.cgColor
-        layer.lineWidth = 2
-        layer.path = path.cgPath
-        
-        return layer
-    }
-    
+
     func bind() {
         viewModel.gyroItem.subscribe { gyroItem in
-            guard let x = gyroItem.x,
-                  let y = gyroItem.y,
-                  let z = gyroItem.z else { return }
-            let graphX = self.createGraphLayer(values: x, color: .red)
-            let graphY = self.createGraphLayer(values: y, color: .green)
-            let graphZ = self.createGraphLayer(values: z, color: .blue)
-            
-            [graphX, graphY, graphZ].forEach {
-                self.graphView.layer.addSublayer($0)
-            }
+            self.graphView.configureGraph(item: gyroItem)
         }
     }
     

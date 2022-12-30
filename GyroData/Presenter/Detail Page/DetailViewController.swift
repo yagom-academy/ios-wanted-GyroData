@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DetailViewController: UIViewController {
+final class DetailViewController: UIViewController {
     
     private let recordDateLabel: UILabel = {
         let label = UILabel()
@@ -15,7 +15,7 @@ class DetailViewController: UIViewController {
         label.font = UIFont.preferredFont(forTextStyle: .caption1)
         return label
     }()
-    private var stateLabel: UILabel = {
+    private let stateLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.preferredFont(forTextStyle: .title2)
@@ -29,7 +29,7 @@ class DetailViewController: UIViewController {
 //        button.addTarget(self, action: <#T##Selector#>, for: .touchUpInside)
         return button
     }()
-    private var timerLabel: UILabel = {
+    private let timerLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         return label

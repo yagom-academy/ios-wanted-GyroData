@@ -9,14 +9,10 @@ import Foundation
 
 final class ViewModel {
     
-    let useCase = UseCase()
+    private let useCase = UseCase()
     
     var gyroList = [MeasureItem]()
     var errorMessage = ""
-    
-    func onCreate(item: MeasureItem) {
-        
-    }
     
     func onRead() {
         useCase.readItem { [weak self] result in
@@ -28,6 +24,4 @@ final class ViewModel {
             }
         }
     }
-    
-    func onDelete() {}
 }

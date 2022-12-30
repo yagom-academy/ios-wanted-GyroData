@@ -9,7 +9,7 @@ import Foundation
 
 final class UseCase {
     
-    let repository = DataStore()
+    private let repository = DataStore()
     
     func createItem(_ item: MeasureItem) {
         repository.createGyro(item: item)
@@ -25,10 +25,6 @@ final class UseCase {
                 completion(.failure(error))
             }
         }
-    }
-    
-    func deleteItem() {
-        
     }
     
     private func convertItems(_ items: [ModelEntity]) -> [MeasureItem] {

@@ -7,9 +7,9 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
+final class MainViewController: UIViewController {
     
-    let viewModel = ViewModel()
+    private let viewModel = ViewModel()
     
     private let itemTableView: UITableView = {
         let tableView = UITableView()
