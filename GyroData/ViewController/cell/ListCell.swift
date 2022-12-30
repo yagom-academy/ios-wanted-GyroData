@@ -13,7 +13,7 @@ class ListCell: UITableViewCell {
     let timeLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 13)
+        label.font = .systemFont(ofSize: 16)
         
         return label
     }()
@@ -21,7 +21,7 @@ class ListCell: UITableViewCell {
     let typeLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 25)
+        label.font = .boldSystemFont(ofSize: 25)
         
         return label
     }()
@@ -38,7 +38,7 @@ class ListCell: UITableViewCell {
     let valueLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 40)
+        label.font = .boldSystemFont(ofSize: 45)
         
         return label
     }()
