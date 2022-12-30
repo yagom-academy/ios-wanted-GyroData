@@ -108,9 +108,9 @@ extension GraphView {
             drawWithAnimation(x: zSensorCurrentXPoint, yPoint: sensorZPoint, path: pathZ, with: .blue)
             
             updateValueLabels(
-                x: sensorXPoint.axisDecimal() / Configuration.graphSizeAdjustment,
-                y: sensorYPoint.axisDecimal() / Configuration.graphSizeAdjustment,
-                z: sensorZPoint.axisDecimal() / Configuration.graphSizeAdjustment
+                x: (sensorXPoint / Configuration.graphSizeAdjustment).axisDecimal(),
+                y: (sensorYPoint / Configuration.graphSizeAdjustment).axisDecimal(),
+                z: (sensorZPoint / Configuration.graphSizeAdjustment).axisDecimal()
             )
         case .image:
             guard let measuredData = self.data else {
