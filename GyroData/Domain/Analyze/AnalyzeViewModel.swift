@@ -20,6 +20,7 @@ protocol AnalyzeViewModelOutputInterface {
     var analysisPublisher: PassthroughSubject<[GraphModel], Never> { get }
     var isLoadingPublisher: PassthroughSubject<Bool, Never> { get }
     var dismissPublisher: PassthroughSubject<Void, Never> { get }
+    var analyzeModelPublisher: PassthroughSubject<AnalysisData, Never> { get }
 }
 
 protocol AnalyzeViewModelInterface {
@@ -60,11 +61,15 @@ final class AnalyzeViewModel: AnalyzeViewModelInterface, AnalyzeViewModelOutputI
         analysis = []
         timer = Timer(fire: Date(), interval: 0.1, repeats: true, block: { [weak self] (timer) in
             guard let self = self else { return }
-            let date = timer.fireDate.timeIntervalSince1970
-            let measureTime = date - now
-            let data = self.analysisManager.startAnalyze(mode: self.analyzeMode)
-            self.analysis.append(.init(x: data.x, y: data.y, z: data.z, measurementTime: measureTime))
-            self.analyzeModelPublisher.send((x: data.x, y: data.y, z: data.z))
+            if self.analysis.count != 600 {
+                let date = timer.fireDate.timeIntervalSince1970
+                let measureTime = date - now
+                let data = self.analysisManager.startAnalyze(mode: self.analyzeMode)
+                self.analysis.append(.init(x: data.x, y: data.y, z: data.z, measurementTime: measureTime))
+                self.analyzeModelPublisher.send((x: data.x, y: data.y, z: data.z))
+            } else {
+                self.stopTimer()
+            }
         })
         
         if let timer = self.timer {

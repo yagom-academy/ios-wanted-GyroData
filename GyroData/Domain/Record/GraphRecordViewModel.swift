@@ -17,6 +17,7 @@ protocol GraphRecordViewModelInputInterface {
 protocol GraphRecordViewModelOutputInterface {
     var secondPublisher: PassthroughSubject<String, Never> { get }
     var playCompletePublisher: PassthroughSubject<Void, Never> { get }
+    var analyzeModelPublisher: PassthroughSubject<AnalysisData, Never> { get }
 }
 
 protocol GraphRecordViewModelInterface {
@@ -30,6 +31,7 @@ class GraphRecordViewModel: GraphRecordViewModelInterface, GraphRecordViewModelO
     var store: AnyCancellable?
     var secondPublisher = PassthroughSubject<String, Never>()
     var playCompletePublisher = PassthroughSubject<Void, Never>()
+    var analyzeModelPublisher = PassthroughSubject<AnalysisData, Never>()
     private var timer: Timer?
     private var currentSecond: String = ""
     @Published var model: [GraphModel] = []
@@ -51,6 +53,7 @@ class GraphRecordViewModel: GraphRecordViewModelInterface, GraphRecordViewModelO
                 let data = storedModel.removeFirst()
                 self.secondPublisher.send(String(format: "%.1f", data.measurementTime))
                 self.model.append(data)
+                self.analyzeModelPublisher.send((x: data.x, y: data.y, z: data.z))
             }
         })
         

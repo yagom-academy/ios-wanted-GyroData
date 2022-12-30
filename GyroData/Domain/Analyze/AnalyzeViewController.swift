@@ -32,7 +32,7 @@ final class AnalyzeViewController: UIViewController {
         segmentControl.addTarget(self, action: #selector(changeSegmentMode), for: .valueChanged)
         return segmentControl
     }()
-
+    
     private lazy var analyzeButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = UIColor(r: 101, g: 159, b: 247, a: 1)
@@ -50,7 +50,7 @@ final class AnalyzeViewController: UIViewController {
         button.addTarget(self, action: #selector(tappedStopButton), for: .touchUpInside)
         return button
     }()
-
+    
     private lazy var titleLabelItem: UILabel = {
         let label = UILabel()
         label.text = "측정하기"
@@ -76,35 +76,40 @@ final class AnalyzeViewController: UIViewController {
         button.action = #selector(tappedBackButton)
         return button
     }()
-
+    
     private let xLabel: UILabel = {
-            let label = UILabel()
-            label.text = "X: 0.0"
-            label.textColor = .red
-            return label
-        }()
-
-        private let yLabel: UILabel = {
-            let label = UILabel()
-            label.text = "Y: 0.0"
-            label.textColor = .green
-            return label
-        }()
-
-        private let zLabel: UILabel = {
-            let label = UILabel()
-            label.text = "Z: 0.0"
-            label.textColor = .blue
-            return label
-        }()
-
-        private let locationStackView: UIStackView = {
-            let stack = UIStackView()
-            stack.axis = .horizontal
-            stack.distribution = .equalSpacing
-            stack.alignment = .fill
-            return stack
-        }()
+        let label = UILabel()
+        label.text = "X: 0.0"
+        label.textColor = .red
+        label.font = .preferredFont(forTextStyle: .caption2)
+        return label
+    }()
+    
+    private let yLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Y: 0.0"
+        label.textColor = .green
+        label.font = .preferredFont(forTextStyle: .caption2)
+        
+        return label
+    }()
+    
+    private let zLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Z: 0.0"
+        label.textColor = .blue
+        label.font = .preferredFont(forTextStyle: .caption2)
+        
+        return label
+    }()
+    
+    private let locationStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.distribution = .equalSpacing
+        stack.alignment = .fill
+        return stack
+    }()
     
     @ObservedObject private var viewModel = AnalyzeViewModel(analysisManager: AnalysisManager())
     private var cancelable = Set<AnyCancellable>()
@@ -145,7 +150,7 @@ final class AnalyzeViewController: UIViewController {
             activityIndicator,
             locationStackView
         )
-
+        
         locationStackView.addArrangedSubview(xLabel)
         locationStackView.addArrangedSubview(yLabel)
         locationStackView.addArrangedSubview(zLabel)
@@ -158,8 +163,8 @@ final class AnalyzeViewController: UIViewController {
                                      locationStackView.trailingAnchor.constraint(equalTo: graphView.trailingAnchor, constant: -5),
                                      locationStackView.heightAnchor.constraint(equalToConstant: 50)
                                     ])
-
-
+        
+        
         // MARK: - backgroundView
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
         backgroundView.layer.cornerRadius = 40
@@ -249,7 +254,7 @@ final class AnalyzeViewController: UIViewController {
                 self.navigationController?.popViewController(animated: true)
             }
             .store(in: &cancelable)
-
+        
         viewModel.analyzeModelPublisher
             .sink { [weak self] (x: Double, y: Double, z: Double) in
                 guard let self = self else { return }
@@ -267,13 +272,14 @@ extension AnalyzeViewController {
         viewModel.input.tapAnalyzeButton()
         segmentControl.isEnabled = false
         saveButtonItem.isEnabled = false
-        
+        analyzeButton.isEnabled = false
     }
     
     @objc func tappedStopButton() {
         viewModel.input.tapStopButton()
         segmentControl.isEnabled = true
         saveButtonItem.isEnabled = true
+        analyzeButton.isEnabled = true
     }
     
     @objc func tappedBackButton() {

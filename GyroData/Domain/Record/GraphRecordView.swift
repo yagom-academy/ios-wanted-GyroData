@@ -39,6 +39,40 @@ class GraphRecordViewController: UIViewController {
         bind()
     }
     
+    private let xLabel: UILabel = {
+        let label = UILabel()
+        label.text = "X: 0.0"
+        label.textColor = .red
+        label.font = .preferredFont(forTextStyle: .caption2)
+        return label
+    }()
+    
+    private let yLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Y: 0.0"
+        label.textColor = .green
+        label.font = .preferredFont(forTextStyle: .caption2)
+        
+        return label
+    }()
+    
+    private let zLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Z: 0.0"
+        label.textColor = .blue
+        label.font = .preferredFont(forTextStyle: .caption2)
+        
+        return label
+    }()
+    
+    private let locationStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.distribution = .equalSpacing
+        stack.alignment = .fill
+        return stack
+    }()
+    
     private lazy var dateLabel: UILabel = {
         var label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -102,13 +136,25 @@ class GraphRecordViewController: UIViewController {
             graphView,
             playButton,
             stopButton,
-            timerLabel
+            timerLabel,
+            locationStackView
         )
+        
+        locationStackView.addArrangedSubview(xLabel)
+        locationStackView.addArrangedSubview(yLabel)
+        locationStackView.addArrangedSubview(zLabel)
     }
     
     func setupUI() {
         graphView.backgroundColor = .white
         graphView.layer.cornerRadius = 10
+        
+        // MARK: - locationStackView
+        NSLayoutConstraint.activate([locationStackView.topAnchor.constraint(equalTo: graphView.topAnchor, constant: 10),
+                                     locationStackView.leadingAnchor.constraint(equalTo: graphView.leadingAnchor, constant: 5),
+                                     locationStackView.trailingAnchor.constraint(equalTo: graphView.trailingAnchor, constant: -5),
+                                     locationStackView.heightAnchor.constraint(equalToConstant: 50)
+                                    ])
         
         // MARK: - dateLabel
         NSLayoutConstraint.activate([
@@ -170,6 +216,15 @@ extension GraphRecordViewController {
                 guard let self = self else { return }
                 self.stopButton.isHidden = true
                 self.playButton.isHidden = false
+            }
+            .store(in: &cancelable)
+        
+        graphRecordViewModel.analyzeModelPublisher
+            .sink { [weak self] (x: Double, y: Double, z: Double) in
+                guard let self = self else { return }
+                self.xLabel.text = "X:" + String(format: "%.1f", x)
+                self.yLabel.text = "y:" + String(format: "%.1f",y)
+                self.zLabel.text = "z:" + String(format: "%.1f",z)
             }
             .store(in: &cancelable)
     }
