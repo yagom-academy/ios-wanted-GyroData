@@ -87,7 +87,7 @@ extension MotionResultPlayViewController {
     }
 
     func stopDrawing() {
-        guard let motionInformation = viewModel.motionInformation.value else { return }
-        // graphView에서 graph 그리기
+        guard let currentTimer = timer else { return }
+        currentTimer.invalidate()
     }
 }
