@@ -66,7 +66,7 @@ final class DefaultMeasermentViewModel: MeasermentViewModel {
                     self.currentMotion.value = motionValue
                     self.motions.value.append(motionValue)
                     if self.motions.value.count == GraphConstant.timeout {
-                        self.measerStop(type: .accelerometer)
+                        self.measerStop(type: .gyro)
                     }
                 }
             })
