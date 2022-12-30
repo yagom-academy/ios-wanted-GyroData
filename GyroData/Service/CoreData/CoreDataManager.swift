@@ -9,8 +9,8 @@ import Foundation
 import CoreData
 
 protocol CoreDataManagable {
-    func save()
-    func delete(_ request: NSFetchRequest<NSFetchRequestResult>)
+    func save(completion: @escaping (Result<Void, CoreDataError>) -> Void)
+    func delete(_ request: NSFetchRequest<NSFetchRequestResult>, completion: @escaping (Result<Void, CoreDataError>) -> Void)
     func fetch<T: Storable>(_ request: NSFetchRequest<T>) -> [T]?
 }
 
@@ -21,11 +21,11 @@ class CoreDataManager: CoreDataManagable {
         self.coreDataStack = coreDataStack
     }
     
-    func save() {
-        coreDataStack?.saveContext()
+    func save(completion: @escaping (Result<Void, CoreDataError>) -> Void) {
+        coreDataStack?.saveContext(completion: completion)
     }
     
-    func delete(_ request: NSFetchRequest<NSFetchRequestResult>) {
+    func delete(_ request: NSFetchRequest<NSFetchRequestResult>, completion: @escaping (Result<Void, CoreDataError>) -> Void) {
         guard let context = coreDataStack?.managedContext else { return }
         
         do {
@@ -35,10 +35,10 @@ class CoreDataManager: CoreDataManagable {
                 context.delete($0)
             }
         } catch {
-            print(error.localizedDescription)
+            completion(.failure(.delete))
         }
 
-        coreDataStack?.saveContext()
+        coreDataStack?.saveContext(completion: completion)
     }
     
     func fetch<T: Storable>(_ request: NSFetchRequest<T>) -> [T]? {

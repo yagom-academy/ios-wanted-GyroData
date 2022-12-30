@@ -11,7 +11,7 @@ import CoreData
 class MotionCoreDataUseCase {
     let coreDataManager = CoreDataManager()
     
-    func save(item: Motion) {
+    func save(item: Motion, completion: @escaping (Result<Void, CoreDataError>) -> Void) {
         let motionInfo = MotionInfo(
             entity: MotionInfo.entity(),
             insertInto: coreDataManager.coreDataStack?.managedContext
@@ -21,14 +21,14 @@ class MotionCoreDataUseCase {
         motionInfo.date = item.date
         motionInfo.time = item.time
         
-        coreDataManager.save()
+        coreDataManager.save(completion: completion)
     }
 
-    func delete(id: UUID) {
+    func delete(id: UUID, completion: @escaping (Result<Void, CoreDataError>) -> Void) {
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: MotionInfo.Constant.entitiyName)
         fetchRequest.predicate = NSPredicate(format: "id = %@", id as CVarArg)
 
-        coreDataManager.delete(fetchRequest)
+        coreDataManager.delete(fetchRequest, completion: completion)
     }
     
     func fetch(offset: Int, count: Int) -> [Motion]? {
