@@ -70,7 +70,13 @@ final class DefaultMotionPlayViewModel: MotionPlayViewModel {
     }
     
     private func startTimer() {
-        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateMotions), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(
+            timeInterval: 0.1,
+            target: self,
+            selector: #selector(updateMotions),
+            userInfo: nil,
+            repeats: true
+        )
     }
     
     @objc func updateMotions() {

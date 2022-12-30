@@ -44,6 +44,7 @@ final class MotionPlayViewController: UIViewController {
         titleLabel.text = viewModel.viewType.toTitle()
         
         if viewModel.viewType == .play {
+            playingTimeLabel.isHidden = false
             self.viewModel.playStatus.observe(on: self) { [weak self] playStatus in
                 switch playStatus {
                 case .play:
@@ -59,7 +60,7 @@ final class MotionPlayViewController: UIViewController {
             self.viewModel.playingTime.observe(on: self) { [weak self] playingTime in
                 self?.playingTimeLabel.text = String(format: "%03.1f", playingTime)
             }
-            self.viewModel.playMotion.observe(on: self){ [weak self] motionValue in
+            self.viewModel.playMotion.observe(on: self) { [weak self] motionValue in
                 self?.graphView.drawGraph(data: motionValue)
             }
         }
@@ -121,6 +122,7 @@ final class MotionPlayViewController: UIViewController {
         label.text = "00.0"
         label.font = .preferredFont(for: .title1, weight: .semibold)
         label.textColor = .white
+        label.isHidden = true
         return label
     }()
     
@@ -169,9 +171,9 @@ private extension MotionPlayViewController {
             graphView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5)
         ])
         
-        view.addSubview(playingTimeLabel)
+        view.addSubviews(playingTimeLabel)
         NSLayoutConstraint.activate([
-            playingTimeLabel.topAnchor.constraint(equalTo: graphView.bottomAnchor),
+            playingTimeLabel.topAnchor.constraint(equalTo: graphView.bottomAnchor, constant: ConstantLayout.offset),
             playingTimeLabel.trailingAnchor.constraint(equalTo: graphView.trailingAnchor)
         ])
         
