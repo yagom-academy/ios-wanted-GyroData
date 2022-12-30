@@ -45,7 +45,7 @@ class MotionResultViewController: UIViewController {
         return label
     }()
     
-    private let graphView: GraphView = {
+    let graphView: GraphView = {
         let graph = GraphView()
         graph.translatesAutoresizingMaskIntoConstraints = false
         return graph

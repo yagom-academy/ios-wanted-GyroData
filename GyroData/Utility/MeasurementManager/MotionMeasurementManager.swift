@@ -91,7 +91,7 @@ class MotionMeasurementManager {
     }
 }
 
-fileprivate enum MotionMeasurementNumber {
+enum MotionMeasurementNumber {
     static let updateInterval = 1.0 / 10.0
     static let completeTime = 60.0
 }

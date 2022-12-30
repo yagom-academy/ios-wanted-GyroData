@@ -29,6 +29,8 @@ final class MotionResultPlayViewController: MotionResultViewController {
         return label
     }()
     
+    var timer: Timer?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -58,12 +60,32 @@ final class MotionResultPlayViewController: MotionResultViewController {
 
 // MARK: play Graph
 
-extension MotionResultViewController {
+extension MotionResultPlayViewController {
     func startDrawing() {
         guard let motionInformation = viewModel.motionInformation.value else { return }
-        // graphView에서 graph 그리기
+        let xList = motionInformation.xData
+        let yList = motionInformation.yData
+        let zList = motionInformation.zData
+        let timeOut = min(motionInformation.xData.count, motionInformation.yData.count, motionInformation.zData.count)
+        var index = 0
+        
+        timer = Timer(timeInterval: MotionMeasurementNumber.updateInterval, repeats: true, block: { timer in
+            if index == timeOut {
+                timer.invalidate()
+                return
+            }
+            
+            let motionData = [xList[index], yList[index], zList[index]]
+            self.graphView.add(motionData)
+            
+            index += 1
+        })
+
+        if let timer = timer {
+            RunLoop.current.add(timer, forMode: .default)
+        }
     }
-    
+
     func stopDrawing() {
         guard let motionInformation = viewModel.motionInformation.value else { return }
         // graphView에서 graph 그리기
