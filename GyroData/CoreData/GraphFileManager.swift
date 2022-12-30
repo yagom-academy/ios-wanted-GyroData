@@ -52,5 +52,16 @@ final class GraphFileManager {
             return nil
         }
     }
+
+    func deleteJsonFile(fileName: UUID) {
+        let documentPath: URL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        let directoryPath: URL = documentPath.appendingPathComponent("\(fileName).json")
+
+        do {
+            try FileManager.default.removeItem(at: directoryPath)
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
 }
 
