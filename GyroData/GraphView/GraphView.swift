@@ -31,6 +31,7 @@ final class GraphView: UIView, TickReceivable, GraphDrawable {
         static let graphSizeAdjustment: Double = 100
     }
     
+    var sensorValueIndex = 0
     var data: MeasuredData?
     var drawMode: DrawMode = .play
     
@@ -111,7 +112,19 @@ extension GraphView {
     }
     
     func startDraw() {
+        guard let sensorXValue = data?.sensorData.axisX[sensorValueIndex],
+              let sensorYValue = data?.sensorData.axisY[sensorValueIndex],
+              let sensorZValue = data?.sensorData.axisZ[sensorValueIndex] else {
+            return
+        }
         
+        sensorXPoint = sensorXValue * Configuration.graphSizeAdjustment
+        sensorYPoint = sensorYValue * Configuration.graphSizeAdjustment
+        sensorZPoint = sensorZValue * Configuration.graphSizeAdjustment
+        
+        sensorValueIndex += 1
+
+        self.setNeedsDisplay()
     }
     
     func stopDraw() {
