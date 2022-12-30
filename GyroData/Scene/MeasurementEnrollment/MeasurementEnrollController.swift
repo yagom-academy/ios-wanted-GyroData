@@ -10,6 +10,7 @@ import UIKit
 final class MeasurementEnrollController: UIViewController {
     
     // MARK: Properties
+    
     private let motionManager = MotionManager()
     private let segmentControl = CustomSegmentedControl(items: ["Acc", "Gyro"])
     private let segmentControlShadowView: UIView = {
@@ -54,6 +55,8 @@ final class MeasurementEnrollController: UIViewController {
         setupNavigationBar()
         setupSubview()
         setupConstraint()
+        setupMeasurementButton()
+        setupMeasurementStopButton()
     }
     
     private func setupBackgroundColor(_ color: UIColor?) {
@@ -94,6 +97,22 @@ final class MeasurementEnrollController: UIViewController {
             action: #selector(saveButtonTapped)
         )
         navigationItem.rightBarButtonItem = saveButton
+    }
+    
+    private func setupMeasurementButton() {
+        measurementButton.addTarget(
+            self,
+            action: #selector(measurementButtonTapped),
+            for: .touchUpInside
+        )
+    }
+    
+    private func setupMeasurementStopButton() {
+        measurementStopButton.addTarget(
+            self,
+            action: #selector(measurementStopButtonTapped),
+            for: .touchUpInside
+        )
     }
     
     private func setupSubview() {
@@ -195,6 +214,28 @@ final class MeasurementEnrollController: UIViewController {
         ])
     }
     
+    @objc private func measurementButtonTapped() {
+        switch segmentControl.selectedSegmentIndex {
+        case 0:
+            motionManager.startAccelerometerRecord()
+        case 1:
+            motionManager.stopGyroRecord()
+        default:
+            break
+        }
+    }
+    
+    @objc private func measurementStopButtonTapped() {
+        switch segmentControl.selectedSegmentIndex {
+        case 0:
+            motionManager.stopAccelerometerRecord()
+        case 1:
+            motionManager.stopGyroRecord()
+        default:
+            break
+        }
+    }
+    
     @objc private func backButtonTapped() {
         navigationController?.popViewController(animated: true)
     }
@@ -203,9 +244,9 @@ final class MeasurementEnrollController: UIViewController {
         
         switch segmentControl.selectedSegmentIndex {
         case 0:
-            motionManager.startAccelerometerRecord()
+            motionManager.stopAccelerometerRecord()
         case 1:
-            motionManager.startGyroRecord()
+            motionManager.stopGyroRecord()
         default:
             break
         }
