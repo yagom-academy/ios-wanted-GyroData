@@ -36,14 +36,14 @@ class MotionListViewModel: MotionListViewModelType {
         motionCoreDataUseCase.delete(id: motion.id) { result in
             switch result {
                 case .success:
-                    break
+                    if let index = self.items.value.firstIndex(where: { $0.id == motion.id }) {
+                        self.items.value.remove(at: index)
+                    }
                 case .failure(let error):
                 self.error.value = error.localizedDescription
             }
         }
-        if let index = items.value.firstIndex(where: { $0.id == motion.id }) {
-            items.value.remove(at: index)
-        }
+        
     }
     
     func appendItems() {
