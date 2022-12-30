@@ -14,10 +14,13 @@
 
 ## 팀원
 
-| ![img](https://cdn.discordapp.com/attachments/1056735148508463145/1058287727428255784/a3c6a55b70a47d71.jpg) | <img src="https://raw.githubusercontent.com/Neph3779/Blog-Image/forUpload/img/20221230163657.png" alt="logoOriginal" style="zoom: 25%;" /> |
-| :----------------------------------------------------------: | :----------------------------------------------------------: |
-|                 **윤영서 (aCafela-coffee)**                  |                      **천수현 (Neph)**                       |
+**윤영서 (aCafela-coffee)**
 
+<img src = "https://user-images.githubusercontent.com/67148595/210053745-af09f692-e613-4923-92fe-5e57639a2035.png" width="40%" height="height 40%">
+
+**천수현 (Neph)**
+
+<img src = "https://raw.githubusercontent.com/Neph3779/Blog-Image/forUpload/img/20221230163657.png" width="40%" height="height 40%">
 
 
 ## 작업 분할 내역
