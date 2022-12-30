@@ -25,11 +25,10 @@ final class MeasureView: UIView {
         return segment
     }()
     
-    private let chartView: UIView = {
-        let view = UIView()
+    private let graphContainerView: GraphContainerView = {
+        let view = GraphContainerView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .gray
-        view.heightAnchor.constraint(equalToConstant: 350).isActive = true
+        view.backgroundColor = .clear
         return view
     }()
     
@@ -61,13 +60,22 @@ final class MeasureView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func setupMode(with viewModel: MeasureViewModel) {
+        graphContainerView.graphView.receive(
+            x: viewModel.myX.axisDecimal(),
+            y: viewModel.myY.axisDecimal(),
+            z: viewModel.myZ.axisDecimal()
+        )
+    }
+    
 }
 
 private extension MeasureView {
     func addSubviews() {
         addSubview(stackView)
         stackView.addArrangedSubview(segmentControl)
-        stackView.addArrangedSubview(chartView)
+        stackView.addArrangedSubview(graphContainerView)
         stackView.addArrangedSubview(startButton)
         stackView.addArrangedSubview(stopButton)
     }
