@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4200A362295C55FA0025E91D /* GraphRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4200A361295C55F90025E91D /* GraphRecordView.swift */; };
 		42111386295EAB6E003D5BF5 /* GraphRecordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42111385295EAB6E003D5BF5 /* GraphRecordViewModel.swift */; };
+		42111389295F026C003D5BF5 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42111388295F026C003D5BF5 /* SplashViewController.swift */; };
 		42404FA82959C04700BCE8B5 /* AnalysisType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42404FA72959C04700BCE8B5 /* AnalysisType.swift */; };
 		42ACE259295DD8E100C9CE8E /* GraphFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42ACE258295DD8E100C9CE8E /* GraphFileManager.swift */; };
 		42ACE25B295DDF5600C9CE8E /* UIDate+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42ACE25A295DDF5600C9CE8E /* UIDate+.swift */; };
@@ -33,6 +34,7 @@
 /* Begin PBXFileReference section */
 		4200A361295C55F90025E91D /* GraphRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphRecordView.swift; sourceTree = "<group>"; };
 		42111385295EAB6E003D5BF5 /* GraphRecordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphRecordViewModel.swift; sourceTree = "<group>"; };
+		42111388295F026C003D5BF5 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		42404FA72959C04700BCE8B5 /* AnalysisType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisType.swift; sourceTree = "<group>"; };
 		42ACE258295DD8E100C9CE8E /* GraphFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphFileManager.swift; sourceTree = "<group>"; };
 		42ACE25A295DDF5600C9CE8E /* UIDate+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDate+.swift"; sourceTree = "<group>"; };
@@ -74,6 +76,14 @@
 				4200A361295C55F90025E91D /* GraphRecordView.swift */,
 			);
 			path = Record;
+			sourceTree = "<group>";
+		};
+		42111387295F0256003D5BF5 /* SplitView */ = {
+			isa = PBXGroup;
+			children = (
+				42111388295F026C003D5BF5 /* SplashViewController.swift */,
+			);
+			path = SplitView;
 			sourceTree = "<group>";
 		};
 		63F01BA828D44FC400C53A39 = {
@@ -157,6 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				8F4508B0295ACFB200538AE4 /* GraphView.swift */,
+				42111387295F0256003D5BF5 /* SplitView */,
 				4200A360295C55D30025E91D /* Record */,
 				8F97A77F295C20DB00138E61 /* TableView */,
 				9B650968295C4F7200277B34 /* Analyze */,
@@ -289,6 +300,7 @@
 				8FC14348295E5B2600EE5E6D /* AnalyzeListViewModel.swift in Sources */,
 				8F97A782295C20FA00138E61 /* AnalysisTableViewCell.swift in Sources */,
 				8F97A77E295C1CD900138E61 /* AnalyzeListViewController.swift in Sources */,
+				42111389295F026C003D5BF5 /* SplashViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

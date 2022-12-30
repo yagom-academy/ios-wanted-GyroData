@@ -18,11 +18,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         options connectionOptions: UIScene.ConnectionOptions
     ) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
-        
         window = UIWindow(windowScene: windowScene)
-        window?.overrideUserInterfaceStyle = .dark
-        window?.rootViewController = UINavigationController(rootViewController: AnalyzeListViewController())
+        window?.rootViewController = SplashViewController()
+        window?.backgroundColor = .white
         window?.makeKeyAndVisible()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
+            guard let self = self else { return }
+            self.window?.overrideUserInterfaceStyle = .dark
+            self.window?.rootViewController = UINavigationController(rootViewController: AnalyzeListViewController())
+            self.window?.makeKeyAndVisible()
+        }
     }
 }
-
