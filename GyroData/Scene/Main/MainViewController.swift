@@ -10,7 +10,7 @@ import UIKit
 final class MainViewController: UIViewController {
     
     // MARK: Properties
-    private var listCount = 10
+    
     private var gyroData: [GyroModel] = []
     private let dataManager = MotionDataManager.shared
     
@@ -33,11 +33,18 @@ final class MainViewController: UIViewController {
         commonInit()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fetchData(manager: dataManager)
+        listTableView.reloadData()
+    }
+    
     // MARK: - Methods
     
     private func commonInit() {
         setupBackgroundColor(.systemBackground)
         setupNavigationBar()
+        fetchData(manager: dataManager)
         setupSubView()
         setupConstraint()
         setupTableView()
@@ -103,8 +110,8 @@ final class MainViewController: UIViewController {
     }
     
     private func fetchData(manager: MotionDataManager) {
-        guard let motionData = manager.fetchMotion() else { return }
-        gyroData = motionData
+        guard let tableList = manager.fetchMotion() else { return }
+        self.gyroData = tableList
     }
     
     @objc private func rightBarButtonTapped() {
@@ -123,17 +130,21 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         _ tableView: UITableView,
         numberOfRowsInSection section: Int
     ) -> Int {
-        return listCount
+        if gyroData.count <= 10 {
+            return gyroData.count
+        } else {
+            return 10
+        }
     }
     
     func tableView(
         _ tableView: UITableView,
         cellForRowAt indexPath: IndexPath
     ) -> UITableViewCell {
-        let cell = MainTableViewCell()
-        cell.setupTimeLabelText("2022/09/07 15:01:05")
-        cell.setupTypeLabelText("Aaccelometer")
-        cell.setupTypeMeasurementLabelText("100")
+        guard let cell = self.listTableView.dequeueReusableCell(
+            withIdentifier: MainTableViewCell.reuseIdentifier,
+            for: indexPath) as? MainTableViewCell else { return UITableViewCell() }
+        cell.configure(with: gyroData[indexPath.row])
         return cell
     }
     
@@ -194,8 +205,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell,
                    forRowAt indexPath: IndexPath) {
-        if indexPath.row + 1 == listCount {
-            listCount += 10
+        if indexPath.row + 1 == gyroData.count {
             self.listTableView.reloadData()
             fetchData(manager: dataManager)
         }

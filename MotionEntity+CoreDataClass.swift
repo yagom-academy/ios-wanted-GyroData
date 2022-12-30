@@ -2,7 +2,7 @@
 //  MotionEntity+CoreDataClass.swift
 //  GyroData
 //
-//  Created by Baek on 2022/12/27.
+//  Created by 백곰, 바드 on 2022/12/30.
 //
 //
 

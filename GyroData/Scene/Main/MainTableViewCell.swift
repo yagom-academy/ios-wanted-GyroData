@@ -65,19 +65,25 @@ final class MainTableViewCell: UITableViewCell {
         
         commonInit()
     }
-    
+}
+
+extension MainTableViewCell: ReuseIdentifying {
     // MARK: - Methods
     
-    func setupTimeLabelText(_ text: String) {
-        timeLabel.text = text
-    }
-    
-    func setupTypeLabelText(_ text: String) {
-        typeLabel.text = text
-    }
-    
-    func setupTypeMeasurementLabelText(_ text: String) {
-        typeMeasurementLabel.text = text
+    func configure(with data: GyroModel) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        timeLabel.text = dateFormatter.string(
+            from: Date(timeIntervalSince1970: data.createdAt)
+        )
+        
+        if data.motionType == "accelerometer" {
+            typeLabel.text = "Accelerometer"
+        } else {
+            typeLabel.text = "Gyro"
+        }
+        
+        typeMeasurementLabel.text = "60"
     }
     
     private func commonInit() {

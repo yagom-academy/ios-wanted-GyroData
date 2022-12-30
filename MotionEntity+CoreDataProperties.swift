@@ -2,7 +2,7 @@
 //  MotionEntity+CoreDataProperties.swift
 //  GyroData
 //
-//  Created by Baek on 2022/12/27.
+//  Created by 백곰, 바드 on 2022/12/30.
 //
 //
 
@@ -16,12 +16,10 @@ extension MotionEntity {
         return NSFetchRequest<MotionEntity>(entityName: "MotionEntity")
     }
 
-    @NSManaged public var x: Double
-    @NSManaged public var y: Double
-    @NSManaged public var z: Double
     @NSManaged public var createdAt: Double
     @NSManaged public var id: UUID
     @NSManaged public var motionType: String
+    @NSManaged public var coordinate: [[Double]]
 
 }
 

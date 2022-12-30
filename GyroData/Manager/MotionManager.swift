@@ -11,50 +11,43 @@ final class MotionManager {
     
     // MARK: Properties
     
-    private let motionType: MotionType
+    private let createDate = Date().timeIntervalSince1970
+    private let dataManager = MotionDataManager.shared
     private let motionManager = CMMotionManager()
-    static let accelerometer = MotionManager(with: .accelerometer)
-    static let gyro = MotionManager(with: .gyro)
     
     // MARK: - Initializers
     
-    private init(with type: MotionType) {
-        motionType = type
+    init() {
         commonInit()
     }
     
     // MARK: - Methods
     
-    func startUpdates() {
-        switch motionType {
-        case .accelerometer:
-            startAccelerometerRecord()
-        case .gyro:
-            startGyroRecord()
-        }
-    }
-    
-    func stopUpdates() {
-        switch motionType {
-        case .accelerometer:
-            motionManager.stopAccelerometerUpdates()
-        case .gyro:
-            motionManager.stopGyroUpdates()
-        }
-    }
-    
-    private func commonInit() {
-        motionManager.accelerometerUpdateInterval = 0.1
-        motionManager.gyroUpdateInterval = 0.1
-    }
-    
-    private func startAccelerometerRecord() {
+    func startAccelerometerRecord() {
         var maxCount = 60
         motionManager.startAccelerometerUpdates(
             to: .main
         ) { [weak self] data, error in
-            /// 코어데이터 저장
-            print(data)
+            guard let self = self else { return }
+            
+            let coordinateModel = self.makeGyroCoordinate(
+                coordinateX: self.convertGyroData(
+                    data: data?.acceleration.x
+                ),
+                coordinateY: self.convertGyroData(
+                    data: data?.acceleration.y
+                ),
+                coordinateZ: self.convertGyroData(
+                    data: data?.acceleration.z
+                )
+            )
+            
+            let accModel = GyroModel(id: UUID(),
+                                      coordinate: coordinateModel,
+                                      createdAt: self.createDate,
+                                      motionType: MotionType.accelerometer.codeName)
+            
+            self.dataManager.saveMotion(data: accModel)
         }
         let timer = Timer.scheduledTimer(
             withTimeInterval: 1,
@@ -69,13 +62,30 @@ final class MotionManager {
         }
     }
     
-    private func startGyroRecord() {
+    func startGyroRecord() {
         var maxCount = 60
         motionManager.startGyroUpdates(
             to: .main
         ) { [weak self] data, error in
-            /// 코어데이터 저장
-            print(data)
+            guard let self = self else { return }
+            let coordinateModel = self.makeGyroCoordinate(
+                coordinateX: self.convertGyroData(
+                    data: data?.rotationRate.x
+                ),
+                coordinateY: self.convertGyroData(
+                    data: data?.rotationRate.y
+                ),
+                coordinateZ: self.convertGyroData(
+                    data: data?.rotationRate.z
+                )
+            )
+            
+            let gyroModel = GyroModel(id: UUID(),
+                                      coordinate: coordinateModel,
+                                      createdAt: self.createDate,
+                                      motionType: MotionType.accelerometer.codeName)
+            
+            self.dataManager.saveMotion(data: gyroModel)
         }
         let timer = Timer.scheduledTimer(
             withTimeInterval: 1,
@@ -88,5 +98,35 @@ final class MotionManager {
  
             maxCount -= 1
         }
+    }
+    
+    func stopAccelerometerRecord() {
+        motionManager.stopAccelerometerUpdates()
+    }
+    
+    func stopGyroRecord() {
+        motionManager.stopAccelerometerUpdates()
+    }
+    
+    private func commonInit() {
+        motionManager.accelerometerUpdateInterval = 0.1
+        motionManager.gyroUpdateInterval = 0.1
+    }
+    
+    private func convertGyroData(data: Double?) -> [Double] {
+        guard let unwrapData = data else { return [0.0] }
+        return [unwrapData]
+    }
+    
+    private func makeGyroCoordinate(coordinateX: [Double], coordinateY: [Double],
+                                coordinateZ:[Double]) -> [[Double]] {
+        
+        var coordinateArray = [[Double]]()
+        for count in 0..<coordinateX.count {
+            let coordinate = [coordinateX[count], coordinateY[count], coordinateZ[count]]
+            coordinateArray.append(coordinate)
+        }
+        
+        return coordinateArray
     }
 }
