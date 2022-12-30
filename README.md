@@ -6,7 +6,7 @@
 
 **작동화면**
 
-| <img src="https://raw.githubusercontent.com/Neph3779/Blog-Image/forUpload/img/20221230180424.gif" alt="play+view+measure" style="zoom:50%;" /> | <img src="https://raw.githubusercontent.com/Neph3779/Blog-Image/forUpload/img/20221230180353.gif" alt="fileRemove" style="zoom: 67%;" /> | <img src="https://raw.githubusercontent.com/Neph3779/Blog-Image/forUpload/img/20221230180330.gif" alt="fileOpen" style="zoom:50%;" /> |
+| <img src="https://raw.githubusercontent.com/Neph3779/Blog-Image/forUpload/img/20221230180424.gif" alt="play+view+measure" style="zoom:50%;" /> | <img src="https://raw.githubusercontent.com/Neph3779/Blog-Image/forUpload/img/20221230180353.gif" alt="fileRemove"  /> | <img src="https://raw.githubusercontent.com/Neph3779/Blog-Image/forUpload/img/20221230180330.gif" alt="fileOpen" style="zoom:50%;" /> |
 | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: |
 |                          앱의 동작                           |                          파일 삭제                           |                          파일 열기                           |
 
@@ -14,7 +14,7 @@
 
 ## 팀원
 
-| ![img](https://cdn.discordapp.com/attachments/1056735148508463145/1058287727428255784/a3c6a55b70a47d71.jpg) | <img src="https://raw.githubusercontent.com/Neph3779/Blog-Image/forUpload/img/20221230163657.png" alt="logoOriginal" style="zoom: 33%;" /> |
+| ![img](https://cdn.discordapp.com/attachments/1056735148508463145/1058287727428255784/a3c6a55b70a47d71.jpg) | <img src="https://raw.githubusercontent.com/Neph3779/Blog-Image/forUpload/img/20221230163657.png" alt="logoOriginal" style="zoom: 25%;" /> |
 | :----------------------------------------------------------: | :----------------------------------------------------------: |
 |                 **윤영서 (aCafela-coffee)**                  |                      **천수현 (Neph)**                       |
 
