@@ -23,24 +23,6 @@ final class MotionManager {
     
     // MARK: - Methods
     
-//    func startUpdates() {
-//        switch motionType {
-//        case .accelerometer:
-//            startAccelerometerRecord()
-//        case .gyro:
-//            startGyroRecord()
-//        }
-//    }
-    
-//    func stopUpdates() {
-//        switch motionType {
-//        case .accelerometer:
-//            motionManager.stopAccelerometerUpdates()
-//        case .gyro:
-//            motionManager.stopGyroUpdates()
-//        }
-//    }
-    
     private func commonInit() {
         motionManager.accelerometerUpdateInterval = 0.1
         motionManager.gyroUpdateInterval = 0.1
