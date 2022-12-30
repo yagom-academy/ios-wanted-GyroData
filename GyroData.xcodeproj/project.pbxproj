@@ -21,6 +21,7 @@
 		8F82A222295DB43E001722C3 /* HostingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F82A221295DB43E001722C3 /* HostingViewController.swift */; };
 		8F97A77E295C1CD900138E61 /* AnalyzeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F97A77D295C1CD900138E61 /* AnalyzeListViewController.swift */; };
 		8F97A782295C20FA00138E61 /* AnalysisTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F97A781295C20FA00138E61 /* AnalysisTableViewCell.swift */; };
+		8FC14348295E5B2600EE5E6D /* AnalyzeListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC14347295E5B2600EE5E6D /* AnalyzeListViewModel.swift */; };
 		9B3C8CDB295AB2E70026AEA5 /* AnalysisManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3C8CDA295AB2E70026AEA5 /* AnalysisManager.swift */; };
 		9B650963295C1D9E00277B34 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B650962295C1D9E00277B34 /* UIColor+.swift */; };
 		9B650965295C350B00277B34 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B650964295C350B00277B34 /* UIView+.swift */; };
@@ -45,6 +46,7 @@
 		8F82A221295DB43E001722C3 /* HostingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingViewController.swift; sourceTree = "<group>"; };
 		8F97A77D295C1CD900138E61 /* AnalyzeListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyzeListViewController.swift; sourceTree = "<group>"; };
 		8F97A781295C20FA00138E61 /* AnalysisTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisTableViewCell.swift; sourceTree = "<group>"; };
+		8FC14347295E5B2600EE5E6D /* AnalyzeListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyzeListViewModel.swift; sourceTree = "<group>"; };
 		9B3C8CDA295AB2E70026AEA5 /* AnalysisManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisManager.swift; sourceTree = "<group>"; };
 		9B650962295C1D9E00277B34 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		9B650964295C350B00277B34 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				8F97A77D295C1CD900138E61 /* AnalyzeListViewController.swift */,
+				8FC14347295E5B2600EE5E6D /* AnalyzeListViewModel.swift */,
 				8F97A780295C20E500138E61 /* Cell */,
 			);
 			path = TableView;
@@ -279,6 +282,7 @@
 				42ACE259295DD8E100C9CE8E /* GraphFileManager.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
 				9B65096A295C654800277B34 /* AnalyzeViewModel.swift in Sources */,
+				8FC14348295E5B2600EE5E6D /* AnalyzeListViewModel.swift in Sources */,
 				8F97A782295C20FA00138E61 /* AnalysisTableViewCell.swift in Sources */,
 				8F97A77E295C1CD900138E61 /* AnalyzeListViewController.swift in Sources */,
 			);

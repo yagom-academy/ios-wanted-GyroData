@@ -28,9 +28,8 @@ protocol AnalyzeViewModelInterface {
 }
 
 final class AnalyzeViewModel: AnalyzeViewModelInterface, AnalyzeViewModelOutputInterface {
-    
     var store: AnyCancellable?
-    
+
     // MARK: AnalyzeViewModelInterface
     var input: AnalyzeViewModelInputInterface { self }
     var output: AnalyzeViewModelOutputInterface { self }
@@ -111,6 +110,7 @@ extension AnalyzeViewModel: AnalyzeViewModelInputInterface {
                     savedAt: Date.now,
                     measurementTime: self.analysis.last?.measurementTime ?? 0.0
                 )]
+                CoreDataManager.shared.create(model: self.cellModel, fileModel: self.analysis)
                 print(self.cellModel)
             } else if self.analyzeMode == 1 {
                 self.cellModel = [.init(
@@ -119,6 +119,7 @@ extension AnalyzeViewModel: AnalyzeViewModelInputInterface {
                     savedAt: Date.now,
                     measurementTime: self.analysis.last?.measurementTime ?? 0.0
                 )]
+                CoreDataManager.shared.create(model: self.cellModel, fileModel: self.analysis)
                 print(self.cellModel)
             }
             self.isLoadingPublisher.send(false)
