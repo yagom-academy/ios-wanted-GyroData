@@ -23,6 +23,7 @@ final class MotionResultPlayViewController: MotionResultViewController {
     
     private let timerLabel: UILabel = {
         let label = UILabel()
+        label.text = "0.0"
         label.font = .preferredFont(forTextStyle: .title2)
         label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -49,6 +50,9 @@ final class MotionResultPlayViewController: MotionResultViewController {
         entireStackView.addArrangedSubview(playStackView)
         playStackView.addArrangedSubview(playButton)
         playStackView.addArrangedSubview(timerLabel)
+        
+        timerLabel.widthAnchor.constraint(equalTo: view.widthAnchor,
+                                          multiplier: 1/10).isActive = true
     }
     
     @objc private func playButtonTapped(_ sender: PlayButton) {
@@ -78,6 +82,7 @@ extension MotionResultPlayViewController {
         let yList = motionInformation.yData
         let zList = motionInformation.zData
         let timeOut = min(motionInformation.xData.count, motionInformation.yData.count, motionInformation.zData.count)
+        var timeCount = Double.zero
         
         if timerIndex == timeOut {
             graphView.clearSegmanet()
@@ -99,6 +104,8 @@ extension MotionResultPlayViewController {
             graphView.add(motionData)
             
             timerIndex += 1
+            timeCount += MotionMeasurementNumber.updateInterval
+            timerLabel.text = String(format: "%.1f", timeCount)
         })
 
         if let timer = timer {
