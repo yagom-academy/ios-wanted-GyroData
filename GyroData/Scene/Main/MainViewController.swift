@@ -33,6 +33,12 @@ final class MainViewController: UIViewController {
         commonInit()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fetchData(manager: dataManager)
+        listTableView.reloadData()
+    }
+    
     // MARK: - Methods
     
     private func commonInit() {
