@@ -38,19 +38,24 @@ protocol MotionPlayViewModelOutput {
     var playStatus: Observable<PlayStatus> { get }
     var date: Date { get }
     var duration: Double { get }
-    
+    var playMotion: Observable<MotionValue?> { get }
+    var playingTime: Observable<Double> { get }
 }
 
 protocol MotionPlayViewModel: MotionPlayViewModelInput, MotionPlayViewModelOutput {}
 
 final class DefaultMotionPlayViewModel: MotionPlayViewModel {
         
-    private let motionEntity: MotionEntity
     var playStatus: Observable<PlayStatus>
     var viewType: ViewType
     var motions: Observable<[MotionValue]?>
     var date: Date
     var duration: Double
+    var playMotion: Observable<MotionValue?>
+    var playingTime: Observable<Double>
+    private var timer = Timer()
+    private let motionEntity: MotionEntity
+    private var drawingIndex = 0
     
     init(motionEntity: MotionEntity, viewType: ViewType) {
         self.motionEntity = motionEntity
@@ -60,13 +65,41 @@ final class DefaultMotionPlayViewModel: MotionPlayViewModel {
         playStatus = Observable(PlayStatus.stop)
         date = motionEntity.date ?? Date()
         duration = motionEntity.duration
+        playingTime = .init(0)
+        playMotion = .init(nil)
+    }
+    
+    private func startTimer() {
+        timer = Timer.scheduledTimer(
+            timeInterval: 0.1,
+            target: self,
+            selector: #selector(updateMotions),
+            userInfo: nil,
+            repeats: true
+        )
+    }
+    
+    @objc func updateMotions() {
+        guard let motions = motions.value else {
+            return
+        }
+        if drawingIndex >= motions.count {
+            playStop()
+        } else {
+            playMotion.value = motions[drawingIndex]
+            playingTime.value += 0.1
+            drawingIndex += 1
+        }
     }
     
     func playStart() {
         playStatus.value = .play
+        playingTime.value = 0
+        startTimer()
     }
     
     func playStop() {
         playStatus.value = .stop
+        self.timer.invalidate()
     }
 }

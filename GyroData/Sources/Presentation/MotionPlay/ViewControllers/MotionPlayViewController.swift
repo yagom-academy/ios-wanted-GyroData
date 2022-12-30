@@ -12,7 +12,7 @@ final class MotionPlayViewController: UIViewController {
     weak var coordinator: Coordinator?
     private let viewModel: MotionPlayViewModel
     private var drawingIndex = 0
-    private var timer = Timer()
+
     
     init(viewModel: MotionPlayViewModel) {
         self.viewModel = viewModel
@@ -44,6 +44,7 @@ final class MotionPlayViewController: UIViewController {
         titleLabel.text = viewModel.viewType.toTitle()
         
         if viewModel.viewType == .play {
+            playingTimeLabel.isHidden = false
             self.viewModel.playStatus.observe(on: self) { [weak self] playStatus in
                 switch playStatus {
                 case .play:
@@ -51,12 +52,16 @@ final class MotionPlayViewController: UIViewController {
                     self?.playButton.isHidden = true
                     self?.pauseButton.isHidden = false
                     self?.drawingIndex = 0
-                    self?.startTimer()
                 case .stop:
                     self?.playButton.isHidden = false
                     self?.pauseButton.isHidden = true
-                    self?.timer.invalidate()
                 }
+            }
+            self.viewModel.playingTime.observe(on: self) { [weak self] playingTime in
+                self?.playingTimeLabel.text = String(format: "%03.1f", playingTime)
+            }
+            self.viewModel.playMotion.observe(on: self) { [weak self] motionValue in
+                self?.graphView.drawGraph(data: motionValue)
             }
         }
     }
@@ -112,15 +117,14 @@ final class MotionPlayViewController: UIViewController {
         return label
     }()
     
-    private func startTimer() {
-        timer = Timer.scheduledTimer(
-            timeInterval: 0.1,
-            target: self,
-            selector: #selector(drawGraph),
-            userInfo: nil,
-            repeats: true
-        )
-    }
+    private lazy var playingTimeLabel: UILabel = {
+        let label = UILabel()
+        label.text = "00.0"
+        label.font = .preferredFont(for: .title1, weight: .semibold)
+        label.textColor = .white
+        label.isHidden = true
+        return label
+    }()
     
     @objc func startDraw(_ sender: UIButton) {
         viewModel.playStart()
@@ -128,16 +132,6 @@ final class MotionPlayViewController: UIViewController {
     
     @objc func pauseDraw(_ sender: UIButton) {
         viewModel.playStop()
-    }
-    
-    @objc func drawGraph() {
-        if drawingIndex == viewModel.motions.value?.count {
-            viewModel.playStop()
-        } else {
-            let motion = viewModel.motions.value?[drawingIndex]
-            graphView.drawGraph(data: motion)
-            drawingIndex += 1
-        }
     }
 }
 
@@ -175,6 +169,12 @@ private extension MotionPlayViewController {
             ),
             graphView.topAnchor.constraint(equalTo: labelStackView.bottomAnchor, constant: 20),
             graphView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5)
+        ])
+        
+        view.addSubviews(playingTimeLabel)
+        NSLayoutConstraint.activate([
+            playingTimeLabel.topAnchor.constraint(equalTo: graphView.bottomAnchor, constant: ConstantLayout.offset),
+            playingTimeLabel.trailingAnchor.constraint(equalTo: graphView.trailingAnchor)
         ])
         
         view.addSubview(playButton)
