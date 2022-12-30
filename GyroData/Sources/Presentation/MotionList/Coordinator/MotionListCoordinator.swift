@@ -44,8 +44,8 @@ private extension MotionListCoordinator {
     }
     
     private func makeMotionDetailViewController(motionEntity: MotionEntity) -> UIViewController {
-        let viewController = MotionPlayViewController(
-            viewModel: DefaultMotionPlayViewModel(
+        let viewController = MotionDetailViewController(
+            viewModel: DefaultMotionDetailViewModel(
                 motionEntity: motionEntity,
                 viewType: .view
             )
@@ -54,8 +54,8 @@ private extension MotionListCoordinator {
     }
     
     private func makeMotionPlayViewController(motionEntity: MotionEntity) -> UIViewController {
-        let viewController = MotionPlayViewController(
-            viewModel: DefaultMotionPlayViewModel(
+        let viewController = MotionDetailViewController(
+            viewModel: DefaultMotionDetailViewModel(
                 motionEntity: motionEntity,
                 viewType: .play
             )

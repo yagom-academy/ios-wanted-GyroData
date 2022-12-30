@@ -15,14 +15,13 @@ final class GraphView: UIView {
         static let lineWidth: CGFloat = 2
         static let baseLineWidth: CGFloat = 1
         static let graphBaseCount: CGFloat = 8
-        static let graphPointersCount: CGFloat = 600
         static let multiplyer: CGFloat = 30
         static let graphViewBorderColor = UIColor.gray.cgColor
         static let borderWidth: CGFloat = 3
         static let space: CGFloat = 30
     }
     
-    private enum GraphType {
+    enum GraphType {
         case x, y, z
         
         var color: UIColor {
@@ -39,6 +38,8 @@ final class GraphView: UIView {
     
     private var index = 0
     private var previousMotion: MotionValue = MotionValue(timestamp: TimeInterval(), x: 0, y: 0, z: 0)
+    private var currentScaleY: CGFloat = 1
+    private var multiplyer: CGFloat = 30
     
     private lazy var labelStackView: UIStackView = {
         let stackView = UIStackView(axis: .horizontal, alignment: .center, distribution: .fill, spacing: 20)
@@ -71,8 +72,21 @@ final class GraphView: UIView {
         return label
     }()
     
+    private lazy var baseGridView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .clear
+        return view
+    }()
+    
+    private lazy var linesView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .clear
+        return view
+    }()
+    
     override func draw(_ rect: CGRect) {
-        self.layer.addSublayer(drawBaseLayer())
+        super.draw(rect)
+        baseGridView.layer.addSublayer(drawBaseLayer())
     }
     
     override init(frame: CGRect) {
@@ -84,15 +98,47 @@ final class GraphView: UIView {
     }
     
     private func setUpLabel() {
-        addSubviews(labelStackView)
+        addSubviews(labelStackView, baseGridView, linesView)
         NSLayoutConstraint.activate([
             labelStackView.topAnchor.constraint(equalTo: topAnchor, constant: 4),
-            labelStackView.centerXAnchor.constraint(equalTo: centerXAnchor)
+            labelStackView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            baseGridView.topAnchor.constraint(equalTo: topAnchor),
+            baseGridView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            baseGridView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            baseGridView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            linesView.topAnchor.constraint(equalTo: topAnchor),
+            linesView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            linesView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            linesView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
 }
 
 extension GraphView {
+    
+    func drawGraph(datas: [MotionValue]) {
+        datas.forEach { data in
+            drawGraph(data: data)
+        }
+    }
+    
+    func drawGraph(data: MotionValue?) {
+        guard let data = data else {
+            return
+        }
+        updatePositions(data: data)
+        drawLines(data: data)
+        index += 1
+        previousMotion = data
+    }
+    
+    func clean() {
+        linesView.layer.sublayers = nil
+        index = 0
+    }
+}
+
+private extension GraphView {
     func drawBaseLayer() -> CAShapeLayer {
         setUpLabel()
         self.layer.borderWidth = Constant.borderWidth
@@ -106,7 +152,7 @@ extension GraphView {
         var ypointer: CGFloat = 0
         let xMaxPointer: CGFloat = self.frame.width
         let yMaxPointer: CGFloat = self.frame.height
-    
+        
         var count = 1
         
         while (count < Constant.dividCount) {
@@ -115,7 +161,7 @@ extension GraphView {
             path.move(to: CGPoint(x: xpointer, y: 0))
             let newXPosition = CGPoint(x: xpointer, y: yMaxPointer)
             path.addLine(to: newXPosition)
-
+            
             ypointer += yOffset
             path.move(to: CGPoint(x: 0, y: ypointer))
             let newYPosition = CGPoint(x: xMaxPointer, y: ypointer)
@@ -129,72 +175,63 @@ extension GraphView {
         return layer
     }
     
-    func drawGraph(datas: [MotionValue]) {
-        datas.forEach { data in
-            drawGraph(data: data)
+    func drawLines(data: MotionValue) {
+        drawLine(type: .x, data: data.x)
+        drawLine(type: .y, data: data.y)
+        drawLine(type: .z, data: data.z)
+    }
+    
+    func drawLine(type: GraphType, data: Double) {
+        switch type {
+        case .x: linesView.layer.addSublayer(createLineLayer(data: data, prevMotion: previousMotion.x, type: type))
+        case .y: linesView.layer.addSublayer(createLineLayer(data: data, prevMotion: previousMotion.y, type: type))
+        case .z: linesView.layer.addSublayer(createLineLayer(data: data, prevMotion: previousMotion.z, type: type))
         }
     }
     
-    func drawGraph(data: MotionValue?) {
+    func createLineLayer(data: Double, prevMotion: Double, type: GraphType) -> CAShapeLayer {
+        let offset = (self.frame.width - Constant.borderWidth * 2) / CGFloat(GraphConstant.timeout)
+        let initY = self.frame.minY
+        let pointer: CGFloat = Constant.borderWidth + offset * CGFloat(index)
+        let layer = CAShapeLayer()
+        let path = UIBezierPath()
         
-        guard let data = data else {
-            return
-        }
-        let layerX = CAShapeLayer()
-        let layerY = CAShapeLayer()
-        let layerZ = CAShapeLayer()
-        let pathX = UIBezierPath()
-        let pathY = UIBezierPath()
-        let pathZ = UIBezierPath()
-        
-        let offset = (self.frame.width - Constant.borderWidth * 2) / Constant.graphPointersCount
-        let initHeight: CGFloat = self.frame.height / 2
-        var pointer: CGFloat = Constant.borderWidth + offset * CGFloat(index)
-        
-        xLabel.text = "x : " + String(format: "%02d", Int(data.x * Constant.multiplyer))
-        yLabel.text = "y : " + String(format: "%02d", Int(data.y * Constant.multiplyer))
-        zLabel.text = "z : " + String(format: "%02d", Int(data.z * Constant.multiplyer))
-        
-        pathX.move(to: CGPoint(x: pointer, y: initHeight + previousMotion.x * Constant.multiplyer))
-        pathY.move(to: CGPoint(x: pointer, y: initHeight + previousMotion.y * Constant.multiplyer))
-        pathZ.move(to: CGPoint(x: pointer, y: initHeight + previousMotion.z * Constant.multiplyer))
-        
-        index += 1
-        previousMotion = data
-        pointer = Constant.borderWidth + offset * CGFloat(index)
-        
-        let newPositionX = CGPoint(x: pointer, y: initHeight + (data.x) * Constant.multiplyer)
-        let newPositionY = CGPoint(x: pointer, y: initHeight + (data.y) * Constant.multiplyer)
-        let newPositionZ = CGPoint(x: pointer, y: initHeight + (data.z) * Constant.multiplyer)
-        
-        pathX.addLine(to: newPositionX)
-        pathY.addLine(to: newPositionY)
-        pathZ.addLine(to: newPositionZ)
-        
-        layerX.fillColor = GraphType.x.color.cgColor
-        layerY.fillColor = GraphType.y.color.cgColor
-        layerZ.fillColor = GraphType.z.color.cgColor
-        
-        layerX.strokeColor = GraphType.x.color.cgColor
-        layerY.strokeColor = GraphType.y.color.cgColor
-        layerZ.strokeColor = GraphType.z.color.cgColor
-        
-        layerX.lineWidth = Constant.lineWidth
-        layerY.lineWidth = Constant.lineWidth
-        layerZ.lineWidth = Constant.lineWidth
-        
-        layerX.path = pathX.cgPath
-        layerY.path = pathY.cgPath
-        layerZ.path = pathZ.cgPath
-        
-        self.layer.addSublayer(layerX)
-        self.layer.addSublayer(layerY)
-        self.layer.addSublayer(layerZ)
+        let computePrevPosintion = validatePosition(prevMotion * Constant.multiplyer)
+        path.move(to: CGPoint(x: pointer, y: computePrevPosintion))
+        let newPointer = pointer + offset
+        let computeValue = validatePosition(data * Constant.multiplyer)
+        let newPosition = CGPoint(x: newPointer, y: computeValue)
+        path.addLine(to: newPosition)
+        layer.fillColor = type.color.cgColor
+        layer.strokeColor = type.color.cgColor
+        layer.lineWidth = Constant.lineWidth
+        layer.path = path.cgPath
+        return layer
     }
     
-    func clean() {
-        layer.sublayers = nil
-        layer.addSublayer(drawBaseLayer())
-        index = 0
+    func updatePositions(data: MotionValue) {
+        updatePositionLabel(type: .x, data: data.x)
+        updatePositionLabel(type: .y, data: data.y)
+        updatePositionLabel(type: .z, data: data.z)
     }
+    
+    func updatePositionLabel(type: GraphType, data: Double) {
+        let format = "%02d"
+        switch type {
+        case .x:
+            xLabel.text = "x : " + String(format: format, Int(data * Constant.multiplyer))
+        case .y:
+            yLabel.text = "y : " + String(format: format, Int(data * Constant.multiplyer))
+        case .z:
+            zLabel.text = "z : " + String(format: format, Int(data * Constant.multiplyer))
+        }
+    }
+    
+    func validatePosition(_ value: Double) -> Double {
+            let initHeight: CGFloat = self.frame.height / 2
+            if value > initHeight { return initHeight + initHeight }
+            if value < -initHeight { return 0 }
+            return value + initHeight
+        }
+    
 }

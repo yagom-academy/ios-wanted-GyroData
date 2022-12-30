@@ -56,9 +56,26 @@ extension MotionValue {
 }
 
 // MARK: - MotionType
-enum MotionType: String, Codable {
+enum MotionType: Int, Codable {
+
+    case accelerometer = 0
+    case gyro = 1
+
+    var title: String {
+        switch self {
+        case .accelerometer:
+            return "Accelerometer"
+        case .gyro:
+            return "Gyro"
+        }
+    }
     
-    case gyro = "Gyro"
-    case accelerometer = "Accelerometer"
-    
+    var segmentTitle: String {
+        switch self {
+        case .accelerometer:
+            return "Acc"
+        case .gyro:
+            return "Gyro"
+        }
+    }
 }

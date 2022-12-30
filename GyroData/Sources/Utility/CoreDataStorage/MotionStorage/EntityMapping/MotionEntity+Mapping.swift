@@ -14,7 +14,7 @@ extension MotionEntity {
         self.init(context: context)
         self.uuid = motion.uuid
         self.date = motion.date
-        self.type = motion.type.rawValue
+        self.type = motion.type.title
         self.duration = motion.duration
     }
     
