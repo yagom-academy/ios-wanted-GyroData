@@ -7,9 +7,11 @@
 
 import UIKit
 import SwiftUI
+import Combine
 
 class GraphRecordViewController: UIViewController {
     var graphRecordViewModel: GraphRecordViewModel
+    var cancelable = Set<AnyCancellable>()
     
     init(graphRecordviewModel: GraphRecordViewModel) {
         self.graphRecordViewModel = graphRecordviewModel
@@ -22,21 +24,11 @@ class GraphRecordViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         graphRecordViewModel.input.onViewDidLoad()
         setup()
         setupUI()
+        bind()
     }
-    
-    private lazy var verticalStackView: UIStackView = {
-        var stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .vertical
-        stackView.alignment = .leading
-        stackView.distribution = .equalSpacing
-        stackView.spacing = 5
-        return stackView
-    }()
     
     private lazy var dateLabel: UILabel = {
         var label = UILabel()
@@ -58,16 +50,28 @@ class GraphRecordViewController: UIViewController {
     
     private lazy var graphView: UIView = HostingViewController(model2: graphRecordViewModel.environmentGraphModel).view
     
-    private lazy var pausePlayButton: UIButton = {
+    private lazy var playButton: UIButton = {
         let button = UIButton(type: .system)
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 25, weight: .light)
         let image = UIImage(systemName: "play.fill", withConfiguration: imageConfig)
-        
         button.setImage(image, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.contentMode = .scaleAspectFit
         button.tintColor = UIColor(r: 101, g: 159, b: 247,a: 1)
-        button.backgroundColor = UIColor(r: 30, g: 40, b: 46, a: 1)
+        button.addTarget(self, action: #selector(tappedPlayButton), for: .touchUpInside)
+        return button
+    }()
+    
+    private lazy var stopButton: UIButton = {
+        let button = UIButton(type: .system)
+        let imageConfig = UIImage.SymbolConfiguration(pointSize: 25, weight: .light)
+        let image = UIImage(systemName: "stop.fill", withConfiguration: imageConfig)
+        button.setImage(image, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.contentMode = .scaleAspectFit
+        button.tintColor = UIColor(r: 101, g: 159, b: 247,a: 1)
+        button.isHidden = true
+        button.addTarget(self, action: #selector(tappedStopButton), for: .touchUpInside)
         return button
     }()
     
@@ -82,46 +86,94 @@ class GraphRecordViewController: UIViewController {
     }()
     
     func setup() {
-        view.addSubviews(verticalStackView, graphView, pausePlayButton, timerLabel)
-        
-        [dateLabel, viewNameLabel].forEach {
-            verticalStackView.addArrangedSubview($0)
-        }
+        self.view.backgroundColor = UIColor(r: 39, g: 40, b: 46, a: 1)
+        view.addSubviews(
+            dateLabel,
+            viewNameLabel,
+            graphView,
+            playButton,
+            stopButton,
+            timerLabel
+        )
     }
     
     func setupUI() {
         graphView.backgroundColor = .white
         graphView.layer.cornerRadius = 10
         
+        // MARK: - dateLabel
         NSLayoutConstraint.activate([
-            // MARK: - verticalStackView
-            verticalStackView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 30),
-            verticalStackView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            verticalStackView.bottomAnchor.constraint(equalTo: graphView.topAnchor, constant: -15)
+            dateLabel.bottomAnchor.constraint(equalTo: viewNameLabel.topAnchor, constant: -5),
+            dateLabel.leadingAnchor.constraint(equalTo: graphView.leadingAnchor),
+            dateLabel.trailingAnchor.constraint(equalTo: graphView.trailingAnchor)
         ])
         
+        // MARK: - viewNameLabel
         NSLayoutConstraint.activate([
-            // MARK: - graphView
+            viewNameLabel.bottomAnchor.constraint(equalTo: graphView.topAnchor, constant: -20),
+            viewNameLabel.leadingAnchor.constraint(equalTo: graphView.leadingAnchor),
+            viewNameLabel.trailingAnchor.constraint(equalTo: graphView.trailingAnchor)
+        ])
+        
+        // MARK: - graphView
+        NSLayoutConstraint.activate([
             graphView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             graphView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 80),
             graphView.widthAnchor.constraint(equalToConstant: 300),
             graphView.heightAnchor.constraint(equalToConstant: 300)
         ])
         
+        // MARK: - playButton
         NSLayoutConstraint.activate([
-            // MARK: - pausePlayButton
-            pausePlayButton.topAnchor.constraint(equalTo: graphView.bottomAnchor, constant: 35),
-            pausePlayButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            pausePlayButton.widthAnchor.constraint(equalToConstant: 30)
+            playButton.topAnchor.constraint(equalTo: graphView.bottomAnchor, constant: 35),
+            playButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            playButton.widthAnchor.constraint(equalToConstant: 30),
+            playButton.heightAnchor.constraint(equalToConstant: 30)
         ])
         
+        // MARK: - pauseButton
         NSLayoutConstraint.activate([
-            // MARK: - timerLabel
-            timerLabel.topAnchor.constraint(equalTo: graphView.bottomAnchor, constant: 35),
-            timerLabel.widthAnchor.constraint(equalToConstant: 30),
-            timerLabel.leadingAnchor.constraint(equalTo: pausePlayButton.trailingAnchor, constant: 80),
-            timerLabel.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -10)
+            stopButton.topAnchor.constraint(equalTo: graphView.bottomAnchor, constant: 35),
+            stopButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            stopButton.widthAnchor.constraint(equalToConstant: 30),
+            stopButton.heightAnchor.constraint(equalToConstant: 30)
+        ])
+        
+        // MARK: - timerLabel
+        NSLayoutConstraint.activate([
+            timerLabel.centerYAnchor.constraint(equalTo: playButton.centerYAnchor),
+            timerLabel.trailingAnchor.constraint(equalTo: graphView.trailingAnchor)
         ])
     }
 }
 
+extension GraphRecordViewController {
+    private func bind() {        
+        graphRecordViewModel.output.secondPublisher
+            .sink { [weak self] second in
+                guard let self = self else { return }
+                self.timerLabel.text = second
+            }
+            .store(in: &cancelable)
+        
+        graphRecordViewModel.output.playCompletePublisher
+            .sink { [weak self] in
+                guard let self = self else { return }
+                self.stopButton.isHidden = true
+                self.playButton.isHidden = false
+            }
+            .store(in: &cancelable)
+    }
+    
+    @objc func tappedPlayButton() {
+        graphRecordViewModel.input.tappedPlayButton()
+        self.stopButton.isHidden = false
+        self.playButton.isHidden = true
+    }
+    
+    @objc func tappedStopButton() {
+        graphRecordViewModel.input.tappedStopButton()
+        self.stopButton.isHidden = true
+        self.playButton.isHidden = false
+    }
+}
