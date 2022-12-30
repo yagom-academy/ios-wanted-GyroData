@@ -18,6 +18,15 @@ class GraphRecordViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
     
+    convenience init(graphRecordViewModel: GraphRecordViewModel, isViewMode: Bool) {
+        self.init(graphRecordviewModel: graphRecordViewModel)
+        if isViewMode {
+            self.viewNameLabel.text = "View"
+            self.playButton.isHidden = true
+            self.timerLabel.isHidden = true
+        }
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

@@ -106,7 +106,7 @@ extension AnalyzeListViewController: UITableViewDelegate, UITableViewDataSource 
                     return
                 }
                 
-                self.navigationController?.pushViewController(GraphRecordViewController(graphRecordviewModel: GraphRecordViewModel(model: model)), animated: true)
+                self.navigationController?.pushViewController(GraphRecordViewController(graphRecordViewModel: GraphRecordViewModel(model: model), isViewMode: true), animated: true)
             }
     }
 }
