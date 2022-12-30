@@ -141,11 +141,6 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         _ tableView: UITableView,
         cellForRowAt indexPath: IndexPath
     ) -> UITableViewCell {
-//        let cell = MainTableViewCell()
-//        cell.setupTimeLabelText("2022/09/07 15:01:05")
-//        cell.setupTypeLabelText("Aaccelometer")
-//        cell.setupTypeMeasurementLabelText("100")
-//
         guard let cell = self.listTableView.dequeueReusableCell(
             withIdentifier: MainTableViewCell.reuseIdentifier,
             for: indexPath) as? MainTableViewCell else { return UITableViewCell() }
