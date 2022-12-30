@@ -112,8 +112,8 @@ final class GraphView: UIView {
 
     private func eraseGraph() {
         redLabel.text = "x:0"
-        blueLabel.text = "y:0"
-        greenLabel.text = "z:0"
+        blueLabel.text = "z:0"
+        greenLabel.text = "y:0"
         [redLinesLayer, blueLinesLayer, greenLinesLayer].forEach {
             $0.removeFromSuperlayer()
         }
