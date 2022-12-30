@@ -79,7 +79,7 @@ class GyroStore {
         do {
             try  context.save()
         } catch {
-            throw error
+            print("error \(error)")
         }
     }
 }

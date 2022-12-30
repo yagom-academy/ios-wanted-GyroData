@@ -54,37 +54,3 @@ final class MotionManager {
         }
     }
 }
-
-// TODO: 파일 분리 필요
-protocol MeasureDataConvertProtocol {
-    func convertMeasureData() -> MeasureData
-}
-
-extension Double {
-    func roundDigit() -> Double {
-        return (self * 1000).rounded() / 1000
-    }
-}
-
-// TODO: 파일 분리 필요
-// 측정 데이터를 소수점 3자리로 변경하는 extension
-extension CMGyroData: MeasureDataConvertProtocol {
-    func convertMeasureData() -> MeasureData {
-        return MeasureData(
-            lotationX: self.rotationRate.x.roundDigit(),
-            lotationY: self.rotationRate.y.roundDigit(),
-            lotationZ: self.rotationRate.z.roundDigit()
-        )
-    }
-}
-
-extension CMAccelerometerData: MeasureDataConvertProtocol {
-    func convertMeasureData() -> MeasureData {
-        return MeasureData(
-            lotationX: self.acceleration.x.roundDigit(),
-            lotationY: self.acceleration.y.roundDigit(),
-            lotationZ: self.acceleration.z.roundDigit()
-        )
-    }
-}
-

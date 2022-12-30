@@ -83,7 +83,4 @@ extension FileManager: MeasureDataSavingInFileManagerProtocol {
 }
 
 //TODO: 그래프 View 범위를 벗어나지 않도록 확인 한번 하기 (7) -> 마지막에 시간 남으면
-//TODO: 에러 처리 하기 (3)
-//TODO: 폴더 정리하기 (6)
-//TODO: 메서드 네이밍 정리 (4)
 //TODO: 리드미 작성하기. (*******)

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class MainViewController: UIViewController {
     enum Section {
         case main
     }
@@ -57,7 +57,7 @@ class ViewController: UIViewController {
             let gyroData = try gyroStore.read(limitCount: itemCount)
             snapshot.appendItems(gyroData)
         } catch {
-            print("error")
+            print("error \(error)")
         }
         
         self.snapshot = snapshot
@@ -72,7 +72,7 @@ class ViewController: UIViewController {
             title: "측정",
             style: .plain,
             target: self,
-            action: #selector(didTappedRightBarButton)
+            action: #selector(rightBarButtonDidTap)
         )
     }
 
@@ -87,14 +87,14 @@ class ViewController: UIViewController {
         ])
     }
     
-    @objc private func didTappedRightBarButton(sender: UIButton) {
+    @objc private func rightBarButtonDidTap(sender: UIButton) {
         let recordViewController = RecordViewController()
         recordViewController.recordViewControllerPopProtocol = self
         self.navigationController?.pushViewController(recordViewController, animated: true)
     }
 }
 
-extension ViewController: UITableViewDelegate {
+extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let playAction = UIContextualAction(style: .normal, title: "Play") { (UIContextualAction, UIView, success: @escaping (Bool) -> Void) in
             print("Play")
@@ -118,7 +118,7 @@ extension ViewController: UITableViewDelegate {
                 self.snapshot?.deleteItems(deleteData)
                 self.dataSource?.apply(self.snapshot!)
             } catch {
-                print(error)
+                print("error \(error)")
             }
             
             success(true)
@@ -144,7 +144,7 @@ extension ViewController: UITableViewDelegate {
     }
 }
 
-extension ViewController: RecordViewControllerPopDelegate {
+extension MainViewController: RecordViewControllerPopDelegate {
     func saveMeasureData(registTime: Date, type: SensorType, samplingCount: Double) {
         let date = DateFormatterManager.shared.convertToDateString(from: registTime)
         let sensorType = type.rawValue
@@ -156,7 +156,7 @@ extension ViewController: RecordViewControllerPopDelegate {
             try self.gyroStore.create(by: coreDataDict)
             configureSnapshot(itemCount: numberOfItem)
         } catch {
-            print(error)
+            print("error \(error)")
         }
     }
 }

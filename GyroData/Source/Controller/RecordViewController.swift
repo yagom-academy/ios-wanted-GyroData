@@ -21,7 +21,7 @@ protocol RecordViewControllerPopDelegate: AnyObject {
 final class RecordViewController: UIViewController {
     
     //MARK: ViewController Properties
-    var isRecorded: Bool = false {
+    private var isRecorded: Bool = false {
         didSet {
             DispatchQueue.main.async { [weak self] in
                 guard let isRecorded = self?.isRecorded else { return }
@@ -34,7 +34,7 @@ final class RecordViewController: UIViewController {
         }
     }
     
-    var isGyroMeasure: Bool? {
+    private var isGyroMeasure: Bool? {
         didSet {
             guard let isGyroMeasure = self.isGyroMeasure else { return }
             if isGyroMeasure {
@@ -56,49 +56,47 @@ final class RecordViewController: UIViewController {
     
     //MARK: View
     
-    let segmentedControl: UISegmentedControl = {
+    private let segmentedControl: UISegmentedControl = {
         let control = UISegmentedControl(items: ["Acc", "Gyro"])
         control.translatesAutoresizingMaskIntoConstraints = false
         return control
     }()
 
-    let graphView: GraphView = GraphView(frame: .zero, valueCount: GraphViewValue.samplingCount)
+    private let graphView: GraphView = GraphView(frame: .zero, valueCount: GraphViewValue.samplingCount)
     
-    let startButton: UIButton = {
+    private let startButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("측정 시작", for: .normal)
         button.setTitleColor(.systemBlue, for: .normal)
-        button.addTarget(self, action: #selector(startButtonDidTap), for: .touchUpInside)
+        button.addTarget(
+            self,
+            action: #selector(startButtonDidTap),
+            for: .touchUpInside
+        )
         return button
     }()
     
-    let stopButton: UIButton = {
+    private let stopButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("측정 중지", for: .normal)
         button.setTitleColor(.systemBlue, for: .normal)
-        button.addTarget(self, action: #selector(stopButtonDidTap), for: .touchUpInside)
+        button.addTarget(
+            self,
+            action: #selector(stopButtonDidTap),
+            for: .touchUpInside
+        )
         return button
     }()
     
     // MARK: ViewController Setup
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
-        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            title: "저장",
-            style: .done,
-            target: self,
-            action: #selector(saveNaviButtonDidTap)
-        )
-        
         MotionManager.shared.setupMotionManagerInterval(at: 0.1)
-        addUIComponents()
-        setupLayouts()
+        configureDefaultSetting()
+        configureLayout()
         setupRecordTypeSegment()
-        graphView.setupViewDefault()
     }
     
     private func addUIComponents() {
@@ -108,7 +106,21 @@ final class RecordViewController: UIViewController {
         view.addSubview(stopButton)
     }
     
-    private func setupLayouts() {
+    private func configureDefaultSetting() {
+        view.backgroundColor = .systemBackground
+        graphView.setupViewDefault()
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            title: "저장",
+            style: .done,
+            target: self,
+            action: #selector(saveNaviButtonDidTap)
+        )
+    }
+    
+    private func configureLayout() {
+        addUIComponents()
+        
         NSLayoutConstraint.activate([
             segmentedControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             segmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
@@ -149,7 +161,7 @@ final class RecordViewController: UIViewController {
     }
     
     // 버튼 동작
-    @objc func startButtonDidTap() {
+    @objc private func startButtonDidTap() {
         recordingStartTime = Date()
         if recordData.count == GraphViewValue.samplingCount {
             recordingStartTime = Date()
@@ -160,11 +172,11 @@ final class RecordViewController: UIViewController {
         startRecording()
     }
     
-    @objc func stopButtonDidTap() {
+    @objc private func stopButtonDidTap() {
         stopRecording()
     }
     
-    @objc func saveNaviButtonDidTap() {
+    @objc private func saveNaviButtonDidTap() {
         guard let startTime = recordingStartTime else {
             return
         }
@@ -209,7 +221,7 @@ final class RecordViewController: UIViewController {
      3. graphView에 그리기 위한 메서드 호출
      4. 만약 최대 샘플링 개수(시간이 되면) 알아서 멈추도록 지정
      */
-    func startRecording() {
+    private func startRecording() {
         isRecorded = true
         MotionManager.shared.startRecording(type: segmentType)
         { [weak self] (measuredData: MeasureData) in
@@ -228,14 +240,14 @@ final class RecordViewController: UIViewController {
     }
     
     // 측정 중지
-    func stopRecording() {
+    private func stopRecording() {
         if recordData.count == 600 {
             isRecorded = false
         }
         MotionManager.shared.stopRecording(type: segmentType)
     }
     
-    func drawMeasurePoint(measureData: MeasureData, offset: Int) {
+    private func drawMeasurePoint(measureData: MeasureData, offset: Int) {
         var currentPoint = GraphPoint(0, 0, 0)
         currentPoint.xValue = measureData.lotationX
         currentPoint.yValue = measureData.lotationY
