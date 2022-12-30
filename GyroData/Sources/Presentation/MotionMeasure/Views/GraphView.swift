@@ -40,11 +40,17 @@ final class GraphView: UIView {
     private var index = 0
     private var previousMotion: MotionValue = MotionValue(timestamp: TimeInterval(), x: 0, y: 0, z: 0)
     
+    private lazy var labelStackView: UIStackView = {
+        let stackView = UIStackView(axis: .horizontal, alignment: .center, distribution: .fill, spacing: 20)
+        stackView.backgroundColor = .clear
+        stackView.addArrangedSubviews(xLabel, yLabel, zLabel)
+        return stackView
+    }()
+    
     private lazy var xLabel: UILabel = {
         let label = UILabel()
         label.textColor = GraphType.x.color
-        label.font = .preferredFont(forTextStyle: .body)
-        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .preferredFont(for: .body, weight: .semibold)
         label.text = "x : 00"
         return label
     }()
@@ -52,8 +58,7 @@ final class GraphView: UIView {
     private lazy var yLabel: UILabel = {
         let label = UILabel()
         label.textColor = GraphType.y.color
-        label.font = .preferredFont(forTextStyle: .body)
-        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .preferredFont(for: .body, weight: .semibold)
         label.text = "y : 00"
         return label
     }()
@@ -61,14 +66,13 @@ final class GraphView: UIView {
     private lazy var zLabel: UILabel = {
         let label = UILabel()
         label.textColor = GraphType.z.color
-        label.font = .preferredFont(forTextStyle: .body)
-        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .preferredFont(for: .body, weight: .semibold)
         label.text = "z : 00"
         return label
     }()
     
     override func draw(_ rect: CGRect) {
-            self.layer.addSublayer(drawBaseLayer())
+        self.layer.addSublayer(drawBaseLayer())
     }
     
     override init(frame: CGRect) {
@@ -80,17 +84,10 @@ final class GraphView: UIView {
     }
     
     private func setUpLabel() {
-        xLabel.text = "x : 00"
-        yLabel.text = "y : 00"
-        zLabel.text = "z : 00"
-        addSubviews(xLabel, yLabel, zLabel)
+        addSubviews(labelStackView)
         NSLayoutConstraint.activate([
-            xLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constant.space),
-            xLabel.topAnchor.constraint(equalTo: topAnchor),
-            yLabel.topAnchor.constraint(equalTo: topAnchor),
-            yLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            zLabel.topAnchor.constraint(equalTo: topAnchor),
-            zLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constant.space)
+            labelStackView.topAnchor.constraint(equalTo: topAnchor, constant: 4),
+            labelStackView.centerXAnchor.constraint(equalTo: centerXAnchor)
         ])
     }
 }
@@ -133,59 +130,9 @@ extension GraphView {
     }
     
     func drawGraph(datas: [MotionValue]) {
-        let layerX = CAShapeLayer()
-        let layerY = CAShapeLayer()
-        let layerZ = CAShapeLayer()
-        let pathX = UIBezierPath()
-        let pathY = UIBezierPath()
-        let pathZ = UIBezierPath()
-        
-        let offset = (self.frame.width - Constant.borderWidth * 2) / Constant.graphPointersCount
-        let initHeight: CGFloat = self.frame.height / 2
-        
-        var prevPositionX = CGPoint(x: Constant.borderWidth, y: initHeight)
-        var prevPositionY = CGPoint(x: Constant.borderWidth, y: initHeight)
-        var prevPositionZ = CGPoint(x: Constant.borderWidth, y: initHeight)
-        
-        for data in datas {
-            pathX.move(to: prevPositionX)
-            pathY.move(to: prevPositionY)
-            pathZ.move(to: prevPositionZ)
-            
-            index += 1
-            
-            let newPositionX = CGPoint(x: prevPositionX.x + offset, y: initHeight + data.x * Constant.multiplyer)
-            let newPositionY = CGPoint(x: prevPositionY.x + offset, y: initHeight + data.y * Constant.multiplyer)
-            let newPositionZ = CGPoint(x: prevPositionZ.x + offset, y: initHeight + data.z * Constant.multiplyer)
-            
-            pathX.addLine(to: newPositionX)
-            pathY.addLine(to: newPositionY)
-            pathZ.addLine(to: newPositionZ)
-            
-            prevPositionX = newPositionX
-            prevPositionY = newPositionY
-            prevPositionZ = newPositionZ
+        datas.forEach { data in
+            drawGraph(data: data)
         }
-        
-        layerX.fillColor = GraphType.x.color.cgColor
-        layerY.fillColor = GraphType.y.color.cgColor
-        layerZ.fillColor = GraphType.z.color.cgColor
-        
-        layerX.strokeColor = GraphType.x.color.cgColor
-        layerY.strokeColor = GraphType.y.color.cgColor
-        layerZ.strokeColor = GraphType.z.color.cgColor
-        
-        layerX.lineWidth = Constant.lineWidth
-        layerY.lineWidth = Constant.lineWidth
-        layerZ.lineWidth = Constant.lineWidth
-        
-        layerX.path = pathX.cgPath
-        layerY.path = pathY.cgPath
-        layerZ.path = pathZ.cgPath
-        
-        self.layer.addSublayer(layerX)
-        self.layer.addSublayer(layerY)
-        self.layer.addSublayer(layerZ)
     }
     
     func drawGraph(data: MotionValue?) {
