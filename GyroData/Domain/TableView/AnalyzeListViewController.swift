@@ -10,7 +10,7 @@ import Combine
 
 class AnalyzeListViewController: UIViewController {
     let listViewModel = AnalyzeListViewModel()
-    var store: AnyCancellable?
+    var store = Set<AnyCancellable>()
     
     let analysisTableView : UITableView = {
         let tableView = UITableView()
@@ -100,13 +100,25 @@ extension AnalyzeListViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func bind() {
-        store = listViewModel.selectedItemPublisher
+        listViewModel.selectedItemPublisher
             .sink { [weak self] model in
-                guard let self = self else {
-                    return
-                }
-                
-                self.navigationController?.pushViewController(GraphRecordViewController(graphRecordViewModel: GraphRecordViewModel(model: model), isViewMode: true), animated: true)
+                guard let self = self else { return }
+                self.navigationController?.pushViewController(
+                    GraphRecordViewController(
+                        graphRecordViewModel: GraphRecordViewModel(model: model), isViewMode: true),
+                    animated: true
+                )
             }
+            .store(in: &store)
+        
+        listViewModel.playModePublisher
+            .sink { [weak self] model in
+                guard let self = self else { return }
+                self.navigationController?.pushViewController(
+                    GraphRecordViewController(graphRecordviewModel: GraphRecordViewModel(model: model)),
+                    animated: true
+                )
+            }
+            .store(in: &store)
     }
 }

@@ -29,6 +29,7 @@ protocol AnalyzeListViewModelInterface {
 final class AnalyzeListViewModel: AnalyzeListViewModelInterface, AnalyzeListViewModelOutputInterface {
     var analysisPublisher = PassthroughSubject<[GyroData], Never>()
     var selectedItemPublisher = PassthroughSubject<[GraphModel], Never>()
+    var playModePublisher = PassthroughSubject<[GraphModel], Never>()
     
     // MARK: AnalyzeViewModelInterface
     var input: AnalyzeListViewModelInputInterface { self }
@@ -63,7 +64,7 @@ extension AnalyzeListViewModel: AnalyzeListViewModelInputInterface {
         }
         
         graph = fetchedData
-        selectedItemPublisher.send(graph)
+        playModePublisher.send(graph)
     }
     
     func deleteButtonDidTap(indexPath: IndexPath) {
