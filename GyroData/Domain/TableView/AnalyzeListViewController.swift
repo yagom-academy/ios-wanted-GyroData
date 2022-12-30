@@ -8,7 +8,7 @@
 import UIKit
 
 class AnalyzeListViewController: UIViewController {
-    let dummyData2: [CellModel] = []
+    let listViewModel = AnalyzeListViewModel()
     
     let analysisTableView : UITableView = {
         let tableView = UITableView()
@@ -58,13 +58,13 @@ class AnalyzeListViewController: UIViewController {
 
 extension AnalyzeListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        dummyData2.count
+        listViewModel.analysis.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: AnalysisTableViewCell.identifier, for: indexPath) as? AnalysisTableViewCell else { return AnalysisTableViewCell() }
         
-        cell.configureCell(at: indexPath, cellData: dummyData2)
+        cell.configureCell(at: indexPath, cellData: listViewModel.analysis)
         return cell
     }
     

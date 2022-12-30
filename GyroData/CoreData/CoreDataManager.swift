@@ -29,9 +29,10 @@ final class CoreDataManager {
         let content = GyroData(context: context)
         
         model.forEach {
-            content.setValue($0.id, forKey: "ID")
-            content.setValue($0.analysisType, forKey: "Type")
+            content.setValue($0.id, forKey: "id")
+            content.setValue($0.analysisType, forKey: "analysisType")
             content.setValue($0.savedAt, forKey: "savedAt")
+            content.setValue($0.measurementTime, forKey: "measurementTime")
         }
         
         GraphFileManager.shared.saveJsonData(data: fileModel, fileName: content.id ?? UUID())

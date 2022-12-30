@@ -3,7 +3,7 @@
     <entity name="GyroData" representedClassName="GyroData" syncable="YES" codeGenerationType="class">
         <attribute name="analysisType" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="measurementTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="measurementTime" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="savedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
     </entity>
 </model>

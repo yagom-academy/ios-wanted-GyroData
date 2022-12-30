@@ -76,8 +76,8 @@ final class AnalysisTableViewCell: UITableViewCell {
         ])
     }
     
-    func configureCell(at indexPath: IndexPath, cellData: [CellModel]) {
-        savedAtLabel.text = cellData[indexPath.row].savedAt.formattedString()
+    func configureCell(at indexPath: IndexPath, cellData: [GyroData]) {
+        savedAtLabel.text = cellData[indexPath.row].savedAt?.formattedString()
         measurementTimeLabel.text = String(cellData[indexPath.row].measurementTime)
         analysisTypeLabel.text = cellData[indexPath.row].analysisType
     }
