@@ -44,9 +44,22 @@ class MotionMeasurementViewModel: MotionMeasurementViewModelType {
                                date: Date(),
                                time: MotionMeasurementManager.shared.timeCount)
         
-        motionCoreDataUseCase.save(item: newMotion)
-        motionFileManagerUseCase.save(newMotion, motinData: datas)
-        loading.value = false
+        motionCoreDataUseCase.save(item: newMotion) { result in
+            switch result {
+                case .success:
+                    self.loading.value = false
+                case .failure(let error):
+                self.error.value = error.localizedDescription
+            }
+        }
+        motionFileManagerUseCase.save(newMotion, motinData: datas) { result in
+            switch result {
+            case .success:
+                self.loading.value = false
+            case .failure(let error):
+                self.error.value = error.localizedDescription
+            }
+        }
     }
     
     func startMeasurement(_ motionType: MotionType, on graphView: GraphView) {
