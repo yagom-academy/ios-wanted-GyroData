@@ -40,13 +40,15 @@ final class CoreDataManager {
     }
     
     func read() -> [GyroData]? {
+        let request = NSFetchRequest<GyroData>(entityName: "GyroData")
+        request.fetchLimit = 10
         do {
-            fetchedAnalysisValue = try context.fetch(GyroData.fetchRequest()).reversed()
-            return fetchedAnalysisValue
+            let gyroData = try context.fetch(request)
+            fetchedAnalysisValue = gyroData.reversed()
         } catch {
             print(error.localizedDescription)
-            return nil
         }
+        return fetchedAnalysisValue
     }
 
     func delete(data: GyroData) {
