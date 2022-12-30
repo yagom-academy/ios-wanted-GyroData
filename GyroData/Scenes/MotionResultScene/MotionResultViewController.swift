@@ -39,7 +39,8 @@ class MotionResultViewController: UIViewController {
     
     let titleLabel: UILabel = {
         let label = UILabel()
-        label.font = .preferredFont(forTextStyle: .title3)
+        label.text = "View"
+        label.font = .preferredFont(forTextStyle: .title1)
         label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -118,9 +119,8 @@ class MotionResultViewController: UIViewController {
         navigationItem.title = "다시보기"
     }
     
-    private func configureUI(motionInformation: MotionInformation) {
+    func configureUI(motionInformation: MotionInformation) {
         dateLabel.text = "\(motionInformation.motion.date)"
-        titleLabel.text = motionInformation.motion.motionType.rawValue
     }
 
     func drawGraph(motion: MotionInformation) {
