@@ -1,37 +1,33 @@
 import Foundation
 
 protocol MotionListViewModelInput {
-    func loadItems(count: Int)
+    func loadItems()
     func deleteItem(motion: Motion)
-    func appendItems(count: Int)
 }
 
 protocol MotionListViewModelOutput {
     var items: Observable<[Motion]> { get }
-    var loading: Observable<Void> { get }
-    var error: Observable<String> { get }
+    var isloading: Observable<Bool> { get }
 }
 
 protocol MotionListViewModelType: MotionListViewModelInput, MotionListViewModelOutput { }
 
 class MotionListViewModel: MotionListViewModelType {
-    
     let motionCoreDataUseCase = MotionCoreDataUseCase()
     
+    var count = 10
     var offset = 0
     
     /// Output
     
     var items: Observable<[Motion]> = Observable([])
-    var loading: Observable<Void> = Observable(())
-    var error: Observable<String> = Observable("")
+    var isloading: Observable<Bool> = Observable(false)
     
     /// Input
     
-    func loadItems(count: Int) {
-        guard let motionData = motionCoreDataUseCase.fetch(offset: 0, count: count) else { return }
-        offset = count
-        items.value = motionData
+    func loadItems() {
+        offset = 0
+        appendItems()
     }
     
     func deleteItem(motion: Motion) {
@@ -41,10 +37,14 @@ class MotionListViewModel: MotionListViewModelType {
         }
     }
     
-    func appendItems(count: Int) {
-        guard let motionData = motionCoreDataUseCase.fetch(offset: offset, count: count) else { return }
-        offset += count
-        items.value = motionData
+    func appendItems() {
+        isloading.value = true
+        DispatchQueue.global().async {
+            guard let motionData = self.motionCoreDataUseCase.fetch(offset: self.offset, count: self.count) else { return }
+            self.offset = self.count
+            self.items.value = motionData
+            self.isloading.value = false
+        }
     }
     
 }

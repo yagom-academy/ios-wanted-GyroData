@@ -33,9 +33,9 @@ class MotionCoreDataUseCase {
     
     func fetch(offset: Int, count: Int) -> [Motion]? {
         let fetchRequest = MotionInfo.fetchRequest()
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: MotionInfo.Constant.date, ascending: true)]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: MotionInfo.Constant.date, ascending: false)]
         fetchRequest.fetchOffset = offset
-        fetchRequest.fetchLimit = offset
+        fetchRequest.fetchLimit = count
         
         let motions = coreDataManager.fetch(fetchRequest)
         

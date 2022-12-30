@@ -99,8 +99,8 @@ class MotionListTableViewCell: UITableViewCell {
     
     public func configure(motion: Motion) {
         titleLabel.text = motion.motionType.rawValue
-        dateLabel.text = "2022/09/18 14:50:43" // TODO: formatter 적용하면 수정할게요...
-        timeLabel.text = String(motion.time)
+        dateLabel.text = motion.date.convertToString()
+        timeLabel.text = String(format: "%.1f", motion.time)
     }
 
 }
