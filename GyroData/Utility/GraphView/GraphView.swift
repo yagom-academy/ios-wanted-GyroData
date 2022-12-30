@@ -11,7 +11,8 @@ class GraphView: UIView {
     private let xDataLabel = MotionLabel(motionData: .x, frame: .zero)
     private let yDataLabel = MotionLabel(motionData: .y, frame: .zero)
     private let zDataLabel = MotionLabel(motionData: .z, frame: .zero)
-
+    private var segmentWidth = GraphNumber.segmentWidth
+    private var segmentHeight: Double = .zero
     private let dataStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
@@ -51,6 +52,9 @@ class GraphView: UIView {
     func clearSegmanet() {
         setupLabel(with: GraphNumber.initialPoint)
         
+        segmentWidth = GraphNumber.segmentWidth
+        segmentHeight = bounds.size.height
+        
         segments.forEach {
             $0.removeFromSuperview()
         }
@@ -62,12 +66,17 @@ class GraphView: UIView {
         setupLabel(with: motions)
         
         segments.forEach {
-            $0.center.x += GraphNumber.segmentWidth
+            $0.center.x += segmentWidth
         }
         
         removeOutofBoundsSegment()
         addSegment()
         currentSegment?.add(motions)
+    }
+    
+    func setupSegmentSize(width: Double = GraphNumber.segmentWidth, height: Double) {
+        segmentWidth = CGFloat(width)
+        segmentHeight = height
     }
     
     private func addSegment() {
@@ -84,8 +93,8 @@ class GraphView: UIView {
         newSegment.backgroundColor = .clear
         newSegment.frame = CGRect(x: .zero,
                                   y: .zero,
-                                  width: GraphNumber.segmentWidth,
-                                  height: bounds.size.height)
+                                  width: segmentWidth,
+                                  height: segmentHeight)
         
         segments.append(newSegment)
         self.addSubview(newSegment)
@@ -93,7 +102,7 @@ class GraphView: UIView {
     
     private func removeOutofBoundsSegment() {
         segments.forEach { segment in
-            if segment.frame.origin.x + GraphNumber.segmentWidth >= bounds.size.width {
+            if segment.frame.origin.x + segmentWidth >= bounds.size.width {
                 segment.removeFromSuperview()
             }
         }
@@ -104,6 +113,7 @@ class GraphView: UIView {
 extension GraphView {
     private func setupView() {
         addSubView()
+        segmentHeight = bounds.size.height
         self.layer.borderWidth = GraphNumber.borderWidth
         self.layer.borderColor = UIColor.black.cgColor
         self.backgroundColor = .systemBackground
