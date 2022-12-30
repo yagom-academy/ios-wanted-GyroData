@@ -31,7 +31,7 @@ final class MeasurementReplayViewController: UIViewController {
     private let gridView = GridView()
     
     private let graphView = GraphView(
-        graphType: .show,
+        graphType: .play,
         xPoints: MockModel.xPoints,
         yPoints: MockModel.yPoints,
         zPoints: MockModel.zPoints
@@ -101,6 +101,7 @@ final class MeasurementReplayViewController: UIViewController {
         setupConstraint()
         setupViewTypeLabelText(with: playType)
         setupPlayButtonAndTypeLabel(with: playType)
+        setupPlayButton()
     }
     
     private func setupBackgroundColor(_ color: UIColor?) {
@@ -132,6 +133,14 @@ final class MeasurementReplayViewController: UIViewController {
         
         backButton.tintColor = .black
         navigationItem.leftBarButtonItem = backButton
+    }
+    
+    private func setupPlayButton() {
+        playButton.addTarget(
+            self,
+            action: #selector(playButtonTapped),
+            for: .touchUpInside
+        )
     }
     
     private func setupSubview() {
@@ -240,6 +249,10 @@ final class MeasurementReplayViewController: UIViewController {
             playButton.isHidden = false
             playTimeLabel.isHidden = false
         }
+    }
+    
+    @objc private func playButtonTapped() {
+        graphView.startAnimation()
     }
     
     @objc private func backButtonTapped() {
