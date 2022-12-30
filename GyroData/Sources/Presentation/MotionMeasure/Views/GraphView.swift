@@ -15,7 +15,6 @@ final class GraphView: UIView {
         static let lineWidth: CGFloat = 2
         static let baseLineWidth: CGFloat = 1
         static let graphBaseCount: CGFloat = 8
-        static let graphPointersCount: CGFloat = 600
         static let multiplyer: CGFloat = 30
         static let graphViewBorderColor = UIColor.gray.cgColor
         static let borderWidth: CGFloat = 3
@@ -147,7 +146,7 @@ extension GraphView {
         let pathY = UIBezierPath()
         let pathZ = UIBezierPath()
         
-        let offset = (self.frame.width - Constant.borderWidth * 2) / Constant.graphPointersCount
+        let offset = (self.frame.width - Constant.borderWidth * 2) / CGFloat(GraphConstant.timeout)
         let initHeight: CGFloat = self.frame.height / 2
         var pointer: CGFloat = Constant.borderWidth + offset * CGFloat(index)
         

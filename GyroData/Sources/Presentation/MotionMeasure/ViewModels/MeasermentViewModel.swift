@@ -34,10 +34,6 @@ enum MeasermentStatus {
 
 final class DefaultMeasermentViewModel: MeasermentViewModel {
     
-    private enum Constant {
-        static let maxCount = 600
-    }
-    
     private let storage: MotionStorage
     private let coreMotionManager: CoreMotionManager
     
@@ -69,7 +65,7 @@ final class DefaultMeasermentViewModel: MeasermentViewModel {
                     let motionValue = MotionValue(data)
                     self.currentMotion.value = motionValue
                     self.motions.value.append(motionValue)
-                    if self.motions.value.count == Constant.maxCount {
+                    if self.motions.value.count == GraphConstant.timeout {
                         self.measerStop(type: .accelerometer)
                     }
                 }
@@ -84,7 +80,7 @@ final class DefaultMeasermentViewModel: MeasermentViewModel {
                     let motionValue = MotionValue(data)
                     self.currentMotion.value = motionValue
                     self.motions.value.append(motionValue)
-                    if self.motions.value.count == Constant.maxCount {
+                    if self.motions.value.count == GraphConstant.timeout {
                         self.measerStop(type: .accelerometer)
                     }
                 }

@@ -37,6 +37,7 @@
 		63F01BC128D44FC500C53A39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */; };
 		E13ACFEC295AFB5000265ED2 /* MeasermentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13ACFEB295AFB5000265ED2 /* MeasermentViewModel.swift */; };
 		E13ACFF0295B15DA00265ED2 /* MeasurementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13ACFEF295B15DA00265ED2 /* MeasurementViewController.swift */; };
+		E1A09573295EB7BD0073D668 /* GraphConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A09572295EB7BD0073D668 /* GraphConstant.swift */; };
 		E1A5A235295DBE920086DADB /* UIViewController+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A5A234295DBE920086DADB /* UIViewController+extension.swift */; };
 		E1F1D33E295BD5CE00E5C521 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F1D33D295BD5CE00E5C521 /* GraphView.swift */; };
 		E1F1D344295C328A00E5C521 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F1D343295C328A00E5C521 /* RoundButton.swift */; };
@@ -77,6 +78,7 @@
 		63F01BC228D44FC500C53A39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E13ACFEB295AFB5000265ED2 /* MeasermentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasermentViewModel.swift; sourceTree = "<group>"; };
 		E13ACFEF295B15DA00265ED2 /* MeasurementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementViewController.swift; sourceTree = "<group>"; };
+		E1A09572295EB7BD0073D668 /* GraphConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphConstant.swift; sourceTree = "<group>"; };
 		E1A5A234295DBE920086DADB /* UIViewController+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+extension.swift"; sourceTree = "<group>"; };
 		E1F1D33D295BD5CE00E5C521 /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		E1F1D343295C328A00E5C521 /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 				02432C122959909C0035AEDD /* CoreMotionManager.swift */,
 				02432C272959CAFB0035AEDD /* MotionFileManager.swift */,
 				0247ED7A295AB72600212A78 /* Observable.swift */,
+				E1A09572295EB7BD0073D668 /* GraphConstant.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -438,6 +441,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				02432C172959937D0035AEDD /* CoreDataStorage.swift in Sources */,
+				E1A09573295EB7BD0073D668 /* GraphConstant.swift in Sources */,
 				0247ED72295A949D00212A78 /* MotionDataCell.swift in Sources */,
 				02432C132959909C0035AEDD /* CoreMotionManager.swift in Sources */,
 				0247ED74295A963D00212A78 /* UIFont+extension.swift in Sources */,
