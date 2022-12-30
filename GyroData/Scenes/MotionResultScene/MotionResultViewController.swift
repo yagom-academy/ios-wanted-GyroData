@@ -137,7 +137,9 @@ class MotionResultViewController: UIViewController {
         }
         
         for (x, (y, z)) in motionDatas {
-            graphView.add([x, y, z])
+            DispatchQueue.main.async {
+                self.graphView.add([x, y, z])
+            }
         }
     }
 }
