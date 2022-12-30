@@ -116,7 +116,7 @@ class ReplayViewController: UIViewController {
         self.view.addSubview(replayView.playStackView)
         
         replayView.playStackView.addArrangedSubview(replayView.playButton)
-        replayView.playStackView.addArrangedSubview(replayView.timeLabel)
+        replayView.playStackView.addArrangedSubview(replayView.runtimeLabel)
         
         NSLayoutConstraint.activate([
             replayView.measurementTime.leftAnchor.constraint(

@@ -22,6 +22,7 @@ struct CoreDataManager {
         coreData.motionX = data.motionX
         coreData.motionY = data.motionY
         coreData.motionZ = data.motionZ
+        coreData.runtime = data.runtime
         
         do {
             try context.save()
@@ -39,7 +40,7 @@ struct CoreDataManager {
                 contact.forEach {
                     let motion = Motion(date: $0.date ?? "",
                                         measurementType: $0.measurementType ?? "",
-                                        time: $0.time ?? "",
+                                        runtime: $0.runtime ?? "",
                                         motionX: $0.motionX,
                                         motionY: $0.motionY,
                                         motionZ: $0.motionZ)

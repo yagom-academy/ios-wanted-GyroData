@@ -20,6 +20,10 @@ class MeasureViewController: UIViewController {
         bind()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        stopAction()
+    }
+
     private func setupButton() {
         measureView.measurementButton.addTarget(self, action: #selector(measureAction), for: .touchUpInside)
         measureView.stopButton.addTarget(self, action: #selector(stopAction), for: .touchUpInside)
@@ -46,7 +50,7 @@ class MeasureViewController: UIViewController {
             action: #selector(saveAction)
         )
     }
-    
+
     private func setupDefault() {
         view = measureView
         view.backgroundColor = .white
@@ -77,7 +81,6 @@ class MeasureViewController: UIViewController {
     
     @objc
     private func stopAction() {
-        setupNavigationItem()
         measurementService.stopMeasurement()
         toggleSegmentedControl(isEnable: true)
         navigationItem.rightBarButtonItem = UIBarButtonItem(
@@ -123,7 +126,7 @@ class MeasureViewController: UIViewController {
         let motion = Motion(
             date: dateFormatter.string(from: Date()),
             measurementType: type,
-            time: duringTime,
+            runtime: String(format: "%.1f", duringTime),
             motionX: dataX,
             motionY: dataY,
             motionZ: dataZ

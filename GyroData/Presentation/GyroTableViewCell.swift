@@ -100,6 +100,6 @@ final class GyroTableViewCell: UITableViewCell {
     func configure(motion: Motion) {
         self.measurementTime.text = motion.date
         self.measurementType.text = motion.measurementType
-        self.measurementValue.text = "\(motion.motionZ)"
+        self.measurementValue.text = "\(motion.runtime)"
     }
 }

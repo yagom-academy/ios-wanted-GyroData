@@ -38,7 +38,7 @@ class MeasurementService {
             second += 0.1
             self?.duringTime = "\(second)"
             
-            if second == 60 {
+            if Int(second) == 60 {
                 self?.stopAction?()
             }
             
@@ -65,7 +65,7 @@ class MeasurementService {
             second += 0.1
             self?.duringTime = "\(second)"
             
-            if second == 60 {
+            if Int(second) == 60 {
                 self?.stopAction?()
             }
             
