@@ -17,7 +17,7 @@ class MainViewController: UIViewController {
     
     private var dataSource: DataSource?
     private var snapshot: Snapshot?
-    private let gyroStore = GyroStore(dataStack: CoreDataStack())
+    private let gyroStore = GyroStore(dataStack: CoreDataStack.shared)
     private var numberOfItem = 10
     
     private let tableView: UITableView = {
