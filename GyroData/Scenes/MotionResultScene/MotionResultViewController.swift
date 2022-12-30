@@ -75,15 +75,22 @@ class MotionResultViewController: UIViewController {
         super.viewWillAppear(animated)
         
         viewModel.load()
-        // startIndicator
     }
     
     func bind(to viewModel: MotionResultViewModel) {
-        viewModel.motionInformation.subscribe { [weak self] motionInformation in
-            guard let motionInformation = motionInformation else { return }
-            self?.configureUI(motionInformation: motionInformation)
-            self?.drawGraph(motion: motionInformation)
+        viewModel.motionInformation
+            .subscribe { [weak self] motionInformation in
+                guard let motionInformation = motionInformation else { return }
+                self?.configureUI(motionInformation: motionInformation)
+                self?.drawGraph(motion: motionInformation)
         }
+        
+        viewModel.error
+            .subscribe { [weak self] error in
+                if let description = error {
+                    self?.showAlert(message: description)
+                }
+            }
     }
     
     private func setupView() {
@@ -120,7 +127,7 @@ class MotionResultViewController: UIViewController {
     }
     
     func configureUI(motionInformation: MotionInformation) {
-        dateLabel.text = "\(motionInformation.motion.date)"
+        dateLabel.text = motionInformation.motion.date.convertToString()
     }
 
     func drawGraph(motion: MotionInformation) {

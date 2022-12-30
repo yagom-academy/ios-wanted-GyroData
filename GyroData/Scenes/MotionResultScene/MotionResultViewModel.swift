@@ -13,6 +13,7 @@ protocol MotionResultViewModelInput {
 
 protocol MotionResultViewModelOutput {
     var motionInformation: Observable<MotionInformation?> { get }
+    var error: Observable<String?> { get }
 }
 
 protocol MotionResultViewModelType: MotionResultViewModelInput, MotionResultViewModelOutput { }
@@ -27,13 +28,21 @@ class MotionResultViewModel: MotionResultViewModelType {
     /// Output
     
     var motionId: UUID?
+    var error: Observable<String?> = Observable(nil)
     var motionInformation: Observable<MotionInformation?> = Observable(nil)
     
     /// Input
     
     func load() {
         guard let motionId = motionId else { return }
-        motionInformation.value = motionFileManagerUseCase.fetch(motionId)
+        motionInformation.value = motionFileManagerUseCase.fetch(motionId) { result in
+            switch result {
+            case .success:
+                return
+            case .failure(let error):
+                self.error.value = error.errorDescription
+            }
+        }
     }
     
 }
