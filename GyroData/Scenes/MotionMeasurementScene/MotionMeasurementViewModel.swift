@@ -16,6 +16,7 @@ protocol MotionMeasurementViewModelInput {
 protocol MotionMeasurementViewModelOutput {
     var measurementedMotion: Observable<[MotionInformation]> { get }
     var error: Observable<String> { get }
+    var isMeasuring: Observable<Bool> { get }
 }
 
 protocol MotionMeasurementViewModelType: MotionMeasurementViewModelInput, MotionMeasurementViewModelOutput { }

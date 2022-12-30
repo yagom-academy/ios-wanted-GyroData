@@ -51,6 +51,7 @@ class MeasurementViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
+    private let saveBarButton = UIBarButtonItem()
     
     private let measurementviewModel = MotionMeasurementViewModel()
     private var motionType = MotionType.acc
@@ -97,16 +98,16 @@ class MeasurementViewController: UIViewController {
             .subscribe { [weak self] isMeasuring in
                 self?.segmentedControl.isEnabled = !isMeasuring
                 self?.stopButton.isEnabled = isMeasuring
+                self?.saveBarButton.isEnabled = !isMeasuring
             }
     }
 }
 
 extension MeasurementViewController {
     private func configureNavigationBar() {
-        let saveBarButton = UIBarButtonItem(title: "저장",
-                                            style: .done,
-                                            target: self,
-                                            action: #selector(saveButtonTapped))
+        saveBarButton.title = "저장"
+        saveBarButton.target = self
+        saveBarButton.action = #selector(saveButtonTapped)
         
         navigationItem.rightBarButtonItem = saveBarButton
         navigationItem.title = "측정하기"
