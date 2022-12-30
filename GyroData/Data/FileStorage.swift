@@ -12,8 +12,9 @@ final class FileStorage {
     private lazy var documentURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
     private lazy var directoryURL = documentURL.appendingPathComponent("Gyro-Data")
 
+    static let shared = FileStorage()
 
-    init() {
+    private init() {
         if !UserDefaults.standard.bool(forKey: "isFirst") {
             UserDefaults.standard.set(true, forKey: "isFirst")
             makeDirectory()

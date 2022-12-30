@@ -9,6 +9,7 @@ import CoreData
 
 final class MotionDataListStorage: MotionDataListStorageProtocol {
     private let coreDataStorage = CoreDataStorage.shared
+    private let fileStorage = FileStorage.shared
 
     func loadMotionRecords(page: Int, completion: @escaping (Result<FetchMotionDataListResponse, Error>) -> Void) {
         let context = coreDataStorage.persistentContainer.viewContext
@@ -39,11 +40,14 @@ final class MotionDataListStorage: MotionDataListStorageProtocol {
                 let request: NSFetchRequest = MotionRecordEntity.fetchRequest()
                 if let objectToDelete = try context.fetch(request).filter({ $0.motionRecordId == id }).first {
                     context.delete(objectToDelete)
-                    completion(.success(()))
                 }
                 try context.save()
             } catch {
                 completion(.failure(error))
+            }
+
+            self.fileStorage.deleteFile(id: id) { result in
+                completion(.success(()))
             }
         }
     }

@@ -41,3 +41,14 @@ extension MotionRecordDTO {
         return motionRecordEntity
     }
 }
+
+extension MotionRecord {
+    func toDTO() -> MotionRecordDTO {
+        return MotionRecordDTO(
+            id: id,
+            startDate: startDate,
+            msInterval: msInterval,
+            motionMode: motionMode == .accelerometer ? "acc" : "gyro" ,
+            coordinates: coordinates.map { return CoordinateDTO(x: $0.x, y: $0.y, z: $0.z) })
+    }
+}
