@@ -1,50 +1,26 @@
-## 팀 그라운드 룰
+## Gyro-Data
 
-**팀원**
+**작업기간: 2022/12/26 ~ 2022/12/30**
 
-- 아카페라
-- 네프
+**어플리케이션 설명:** 사용자 기기를 통해 accelerometer와 gyro 데이터를 측정하고, 그 결과값을 저장하고 다시 볼 수 있는 어플리케이션입니다.
 
+**작동화면**
 
-
-**팀원 일정**
-
-- 아카페라
-  - 학교 수업 제외 일정없음
-- 네프
-  - 동아리 회의 제외 일정없음
+| <img src="https://raw.githubusercontent.com/Neph3779/Blog-Image/forUpload/img/20221230180424.gif" alt="play+view+measure" style="zoom:50%;" /> | <img src="https://raw.githubusercontent.com/Neph3779/Blog-Image/forUpload/img/20221230180353.gif" alt="fileRemove" style="zoom: 67%;" /> | <img src="https://raw.githubusercontent.com/Neph3779/Blog-Image/forUpload/img/20221230180330.gif" alt="fileOpen" style="zoom:50%;" /> |
+| :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: |
+|                          앱의 동작                           |                          파일 삭제                           |                          파일 열기                           |
 
 
 
-## Convention
+## 팀원
 
-### 커밋 규칙
-
->  [{Type}] {#issueNumber} {내용}
-
-**Type List**
-
-- Feat
-- Fix
-- Refactor
-- Style
-- Docs
-- Chore
-- Test
-
-**기타**
-
-- 제목 끝에 마침표(.) 금지
+| ![img](https://cdn.discordapp.com/attachments/1056735148508463145/1058287727428255784/a3c6a55b70a47d71.jpg) | <img src="https://raw.githubusercontent.com/Neph3779/Blog-Image/forUpload/img/20221230163657.png" alt="logoOriginal" style="zoom: 33%;" /> |
+| :----------------------------------------------------------: | :----------------------------------------------------------: |
+|                 **윤영서 (aCafela-coffee)**                  |                      **천수현 (Neph)**                       |
 
 
 
-## UML
-
-https://www.figma.com/file/1vyeSsmY86fHYzlomfCf3D/GyroData-%EA%B5%AC%EC%A1%B0?node-id=1%3A127&t=3iRrJVWRskO48ASL-1
-
-
-
-## 작업 분할
+## 작업 분할 내역
 
 **GraphView**
 
@@ -52,13 +28,23 @@ https://www.figma.com/file/1vyeSsmY86fHYzlomfCf3D/GyroData-%EA%B5%AC%EC%A1%B0?no
 
 
 
-**네프**
+**천수현 (Neph)**
 
-- MotionDataList
-- MotionReplay
+- MotionDataList 화면 구현  (첫 번째 페이지) 
+- MotionReplay 화면 구현 (세 번째 페이지)
+- 앱의 Data Layer 제작 (Storage, CoreDataModel)
+- 앱의 Domain Layer 제작 (UseCase)
 
 
 
-아카페라
+**윤영서 (aCafela-coffee)**
 
-- MotionRecording
+- MotionRecording 화면 구현 (두 번째 페이지)
+- CMMotionManager를 통해 Accelerometer, Gyro 데이터를 받아오는 로직 제작
+- 앱의 Domain Layer 제작 (Entity)
+
+
+
+## 앱 구조 도식화 (UML)
+
+https://www.figma.com/file/1vyeSsmY86fHYzlomfCf3D/GyroData-%EA%B5%AC%EC%A1%B0?node-id=1%3A127&t=3iRrJVWRskO48ASL-1
