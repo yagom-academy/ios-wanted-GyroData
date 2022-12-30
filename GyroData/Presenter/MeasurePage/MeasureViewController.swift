@@ -17,18 +17,20 @@ class MeasureViewController: UIViewController {
     }()
     private lazy var saveButton: UIBarButtonItem = {
         let button = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(saveRecord(_:)))
+        button.isEnabled = false
         return button
     }()
     private let recordButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("측정", for: .normal)
         return button
     }()
     private let pauseButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("정지", for: .normal)
+        button.isEnabled = false
         return button
     }()
     
