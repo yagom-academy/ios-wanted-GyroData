@@ -93,8 +93,8 @@ class MeasurementViewController: UIViewController {
             }
         
         measurementviewModel.error
-            .subscribe { [weak self] description in
-                if description != "" {
+            .subscribe { [weak self] error in
+                if let description = error {
                     self?.showAlert(message: description)
                 }
             }
