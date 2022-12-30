@@ -78,11 +78,11 @@ final class GraphView: UIView {
             viewModel.pastValueForRed.append(value)
         case .blue:
             layer = blueLinesLayer
-            blueLabel.text = String(format: "y:%.0f", scaledValue)
+            blueLabel.text = String(format: "z:%.0f", scaledValue)
             viewModel.pastValueForBlue.append(value)
         case .green:
             layer = greenLinesLayer
-            greenLabel.text = String(format: "z:%.0f", scaledValue)
+            greenLabel.text = String(format: "y:%.0f", scaledValue)
             viewModel.pastValueForGreen.append(value)
         }
 
@@ -162,8 +162,8 @@ final class GraphView: UIView {
         }
         NSLayoutConstraint.activate([
             redLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: spacing),
-            blueLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            greenLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -spacing),
+            greenLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            blueLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -spacing),
             redLabel.topAnchor.constraint(equalTo: topAnchor, constant: spacing),
             blueLabel.topAnchor.constraint(equalTo: topAnchor, constant: spacing),
             greenLabel.topAnchor.constraint(equalTo: topAnchor, constant: spacing)
