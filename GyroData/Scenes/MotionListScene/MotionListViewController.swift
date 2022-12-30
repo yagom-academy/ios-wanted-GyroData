@@ -21,6 +21,11 @@ class MotionListViewController: UIViewController {
        return tableView
    }()
     
+    private let indicatorView: UIRefreshControl = {
+        let indicatorView = UIRefreshControl()
+        return indicatorView
+    }()
+    
     private var viewModel: MotionListViewModel = MotionListViewModel()
     
     override func viewDidLoad() {
@@ -34,7 +39,7 @@ class MotionListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        viewModel.loadItems(count: 10)
+        viewModel.loadItems()
     }
 
     private func setupView() {
@@ -87,7 +92,21 @@ extension MotionListViewController: UITableViewDataSource {
     }
     
     private func updateItem() {
-        motionListTableView.reloadData()
+        DispatchQueue.main.async {
+            self.motionListTableView.reloadData()
+        }
+    }
+    
+     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+         let offsetY = motionListTableView.contentOffset.y
+         let contentHeight = scrollView.contentSize.height
+         let height = scrollView.frame.height
+         
+         if offsetY > (contentHeight - height) {
+             if !viewModel.isloading.value {
+                 self.viewModel.loadItems()
+             }
+         }
     }
 }
 
