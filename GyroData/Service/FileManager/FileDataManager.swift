@@ -17,7 +17,7 @@ class FileDataManager: FileDataManagable {
     static let shared = FileDataManager()
     private let fileManager = FileManager.default
     private lazy var documentPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
-    private lazy var directoryPath = documentPath.appendingPathExtension("CoreMotion")
+    private lazy var directoryPath = documentPath.appendingPathComponent("CoreMotion")
     
     private init() {
         if !fileManager.fileExists(atPath: directoryPath.pathExtension) {

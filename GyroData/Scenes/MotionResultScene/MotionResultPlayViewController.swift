@@ -23,11 +23,15 @@ final class MotionResultPlayViewController: MotionResultViewController {
     
     private let timerLabel: UILabel = {
         let label = UILabel()
+        label.text = "0.0"
         label.font = .preferredFont(forTextStyle: .title2)
         label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
+    private var timer: Timer?
+    private var timerIndex = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +42,7 @@ final class MotionResultPlayViewController: MotionResultViewController {
     }
     
     private func setupView() {
+        graphView.clearSegmanet()
         addSubViews()
     }
     
@@ -45,6 +50,9 @@ final class MotionResultPlayViewController: MotionResultViewController {
         entireStackView.addArrangedSubview(playStackView)
         playStackView.addArrangedSubview(playButton)
         playStackView.addArrangedSubview(timerLabel)
+        
+        timerLabel.widthAnchor.constraint(equalTo: view.widthAnchor,
+                                          multiplier: 1/10).isActive = true
     }
     
     @objc private func playButtonTapped(_ sender: PlayButton) {
@@ -54,18 +62,59 @@ final class MotionResultPlayViewController: MotionResultViewController {
             stopDrawing()
         }
     }
+    
+    override func configureUI(motionInformation: MotionInformation) {
+        super.configureUI(motionInformation: motionInformation)
+        titleLabel.text = "Play"
+    }
+    
+    override func drawGraph(motion: MotionInformation) {
+        graphView.setupSegmentSize(height: view.bounds.width)
+    }
 }
 
 // MARK: play Graph
 
-extension MotionResultViewController {
+extension MotionResultPlayViewController {
     func startDrawing() {
         guard let motionInformation = viewModel.motionInformation.value else { return }
-        // graphView에서 graph 그리기
+        let xList = motionInformation.xData
+        let yList = motionInformation.yData
+        let zList = motionInformation.zData
+        let timeOut = min(motionInformation.xData.count, motionInformation.yData.count, motionInformation.zData.count)
+        var timeCount = Double.zero
+        
+        if timerIndex == timeOut {
+            graphView.clearSegmanet()
+            timerIndex = 0
+        }
+        
+        timer = Timer(timeInterval: MotionMeasurementNumber.updateInterval,
+                      repeats: true,
+                      block: { [self] timer in
+            
+            if timerIndex == timeOut {
+                timer.invalidate()
+                self.timer = nil
+                playButton.isSelected = false
+                return
+            }
+            
+            let motionData = [xList[timerIndex], yList[timerIndex], zList[timerIndex]]
+            graphView.add(motionData)
+            
+            timerIndex += 1
+            timeCount += MotionMeasurementNumber.updateInterval
+            timerLabel.text = String(format: "%.1f", timeCount)
+        })
+
+        if let timer = timer {
+            RunLoop.current.add(timer, forMode: .default)
+        }
     }
-    
+
     func stopDrawing() {
-        guard let motionInformation = viewModel.motionInformation.value else { return }
-        // graphView에서 graph 그리기
+        guard let currentTimer = timer else { return }
+        currentTimer.invalidate()
     }
 }

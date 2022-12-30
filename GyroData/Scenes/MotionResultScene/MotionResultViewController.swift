@@ -39,13 +39,14 @@ class MotionResultViewController: UIViewController {
     
     let titleLabel: UILabel = {
         let label = UILabel()
-        label.font = .preferredFont(forTextStyle: .title3)
+        label.text = "View"
+        label.font = .preferredFont(forTextStyle: .title1)
         label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    private let graphView: GraphView = {
+    let graphView: GraphView = {
         let graph = GraphView()
         graph.translatesAutoresizingMaskIntoConstraints = false
         return graph
@@ -82,7 +83,6 @@ class MotionResultViewController: UIViewController {
             guard let motionInformation = motionInformation else { return }
             self?.configureUI(motionInformation: motionInformation)
             self?.drawGraph(motion: motionInformation)
-            // stopIndicator
         }
     }
     
@@ -119,17 +119,27 @@ class MotionResultViewController: UIViewController {
         navigationItem.title = "다시보기"
     }
     
-    private func configureUI(motionInformation: MotionInformation) {
+    func configureUI(motionInformation: MotionInformation) {
         dateLabel.text = "\(motionInformation.motion.date)"
-        titleLabel.text = motionInformation.motion.motionType.rawValue
     }
 
-}
-
-// MARK: draw Graph
-
-extension MotionResultViewController {
     func drawGraph(motion: MotionInformation) {
-        // graphView에서 graph 그리기
+        let motionDatas = zip(motion.xData, zip(motion.yData, motion.zData))
+        let minCount = min(motion.xData.count, motion.yData.count, motion.zData.count)
+        let width = CGFloat((view.bounds.width - 60.0) / Double(minCount))
+       
+        graphView.clearSegmanet()
+        
+        if width < GraphNumber.segmentWidth {
+            graphView.setupSegmentSize(width: width, height: view.bounds.width)
+        } else {
+            graphView.setupSegmentSize(height: view.bounds.width)
+        }
+        
+        for (x, (y, z)) in motionDatas {
+            DispatchQueue.main.async {
+                self.graphView.add([x, y, z])
+            }
+        }
     }
 }
