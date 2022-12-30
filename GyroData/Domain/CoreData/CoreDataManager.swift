@@ -39,6 +39,7 @@ struct CoreDataManager {
                 contact.forEach {
                     let motion = Motion(date: $0.date ?? "",
                                         measurementType: $0.measurementType ?? "",
+                                        time: $0.time ?? "",
                                         motionX: $0.motionX,
                                         motionY: $0.motionY,
                                         motionZ: $0.motionZ)

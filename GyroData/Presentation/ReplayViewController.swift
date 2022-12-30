@@ -14,6 +14,8 @@ class ReplayViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupSubviews()
+        setupLayout()
         setupNavigationItem()
         setupDefault()
     }
@@ -28,12 +30,30 @@ class ReplayViewController: UIViewController {
 
         replayView.playButton.addTarget(self, action: #selector(activateTimer), for: .touchUpInside)
         
+        
+        view.backgroundColor = .white
+        
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         if motionInfo?.pageType == ReplayViewPageType.view {
             replayView.playStackView.isHidden = true
+            guard let motion = motionInfo?.data else { return }
+            
+            for i in 0..<motion.motionX.count {
+                self.replayView.chartsView.drawLine(
+                    x: motion.motionX[i],
+                    y: motion.motionY[i],
+                    z: motion.motionZ[i]
+                )
+            }
         }
-        
-        view = replayView
-        view.backgroundColor = .white
+    }
+    
+    private func setupSubviews() {
+        view.addSubview(replayView)
     }
     
     @objc
@@ -53,9 +73,111 @@ class ReplayViewController: UIViewController {
         )
 
         // TODO: 시간 Motion에 추가 후 바꾸기
-        Stopwatch.share.activateTimer(for: 6, 1)
         guard let motion = motionInfo?.data else { return }
-        replayView.chartsView.playChart(value: motion)
+        var second: Double = 0
+        var count = 0
+        Stopwatch.share.timer = Timer.scheduledTimer(
+            withTimeInterval: 0.1, repeats: true
+        ) { [weak self] timer in
+            if second == 60 || count >= motion.motionX.count {
+                Stopwatch.share.timer.invalidate()
+                second = 0
+                count = 0
+            }
+            
+            self?.replayView.chartsView.drawLine(
+                x: motion.motionX[count],
+                y: motion.motionY[count],
+                z: motion.motionZ[count]
+            )
+            let strX = String(format: "%.1f", motion.motionX[count])
+            let strY = String(format: "%.1f", motion.motionY[count])
+            let strZ = String(format: "%.1f", motion.motionZ[count])
+            
+            self?.replayView.chartsView.configureLabelText(
+                x: strX,
+                y: strY,
+                z: strZ
+            )
+            
+            let strTime = String(format: "%.1f", second)
+            
+            self?.replayView.configureTimeLabel(time: strTime)
+            
+            count += 1
+            second += 0.1
+        }
+    }
+    
+    private func setupLayout() {
+        self.view.addSubview(replayView.measurementTime)
+        self.view.addSubview(replayView.pageTypeLabel)
+        self.view.addSubview(replayView.chartsView)
+        self.view.addSubview(replayView.playStackView)
+        
+        replayView.playStackView.addArrangedSubview(replayView.playButton)
+        replayView.playStackView.addArrangedSubview(replayView.timeLabel)
+        
+        NSLayoutConstraint.activate([
+            replayView.measurementTime.leftAnchor.constraint(
+                equalTo: self.view.safeAreaLayoutGuide.leftAnchor,
+                constant: 30
+            ),
+            replayView.measurementTime.rightAnchor.constraint(
+                equalTo: self.view.safeAreaLayoutGuide.rightAnchor,
+                constant: -30
+            ),
+            replayView.measurementTime.topAnchor.constraint(
+                equalTo: self.view.safeAreaLayoutGuide.topAnchor,
+                constant: 15
+            ),
+            
+            replayView.pageTypeLabel.leftAnchor.constraint(
+                equalTo: self.view.safeAreaLayoutGuide.leftAnchor,
+                constant: 30
+            ),
+            replayView.pageTypeLabel.rightAnchor.constraint(
+                equalTo: self.view.safeAreaLayoutGuide.rightAnchor,
+                constant: -30
+            ),
+            replayView.pageTypeLabel.topAnchor.constraint(
+                equalTo: replayView.measurementTime.bottomAnchor,
+                constant: 5
+            ),
+            
+            replayView.chartsView.leftAnchor.constraint(
+                equalTo: self.view.safeAreaLayoutGuide.leftAnchor,
+                constant: 30
+            ),
+            replayView.chartsView.rightAnchor.constraint(
+                equalTo: self.view.safeAreaLayoutGuide.rightAnchor,
+                constant: -30
+            ),
+            replayView.chartsView.topAnchor.constraint(
+                equalTo: replayView.pageTypeLabel.bottomAnchor,
+                constant: 30
+            ),
+            replayView.chartsView.heightAnchor.constraint(
+                equalTo: replayView.chartsView.widthAnchor
+            ),
+            
+            replayView.playStackView.leftAnchor.constraint(
+                equalTo: self.view.safeAreaLayoutGuide.leftAnchor,
+                constant: 30
+            ),
+            replayView.playStackView.rightAnchor.constraint(
+                equalTo: self.view.safeAreaLayoutGuide.rightAnchor,
+                constant: -30
+            ),
+            replayView.playStackView.topAnchor.constraint(
+                equalTo: replayView.chartsView.bottomAnchor,
+                constant: 30
+            ),
+            replayView.playStackView.bottomAnchor.constraint(
+                equalTo: self.view.safeAreaLayoutGuide.bottomAnchor,
+                constant: -150
+            )
+        ])
     }
 }
 

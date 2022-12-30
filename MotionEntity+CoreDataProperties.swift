@@ -25,6 +25,7 @@ extension MotionEntity {
 
     @NSManaged public var date: String?
     @NSManaged public var measurementType: String?
+    @NSManaged public var time: String?
     @NSManaged public var motionX: [Double]
     @NSManaged public var motionY: [Double]
     @NSManaged public var motionZ: [Double]

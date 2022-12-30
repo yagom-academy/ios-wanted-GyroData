@@ -61,7 +61,6 @@ class MeasureViewController: UIViewController {
     }
     
     @objc func measureAction() {
-//        Stopwatch.share.isRunning = true
         measureView.stopButton.isHidden = false
         toggleSegmentedControl(isEnable: false)
         measureView.chartsView.setupDefaultValue()
@@ -97,6 +96,7 @@ class MeasureViewController: UIViewController {
         }
         
         let data = self.measurementService.getMeasurementResult()
+        let duringTime = self.measurementService.getDuringTime()
         
         if data.isEmpty {
             showFailureAlert(message: "데이터가 존재하지 않습니다.")
@@ -123,6 +123,7 @@ class MeasureViewController: UIViewController {
         let motion = Motion(
             date: dateFormatter.string(from: Date()),
             measurementType: type,
+            time: duringTime,
             motionX: dataX,
             motionY: dataY,
             motionZ: dataZ
@@ -144,14 +145,12 @@ class MeasureViewController: UIViewController {
     }
     
     private func bind() {
-        measurementService.gyroCoordinates.subscribe { coordinates in
-            guard let lastCoordinate = coordinates.last else { return }
+        measurementService.registAppandCoordinateAction { (x, y, z) in
+            self.measureView.chartsView.drawLine(x: x, y: y, z: z)
             
-            self.measureView.chartsView.drawChart(x:lastCoordinate.x, y: lastCoordinate.y, z: lastCoordinate.z)
-            
-            let strX = String(format: "%.1f", lastCoordinate.x)
-            let strY = String(format: "%.1f", lastCoordinate.y)
-            let strZ = String(format: "%.1f", lastCoordinate.z)
+            let strX = String(format: "%.1f", x)
+            let strY = String(format: "%.1f", y)
+            let strZ = String(format: "%.1f", z)
             
             self.measureView.chartsView.configureLabelText(x: strX, y: strY, z: strZ)
         }

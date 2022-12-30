@@ -10,6 +10,7 @@ import UIKit
 struct Motion: Hashable {
     let date: String
     let measurementType: String
+    let time: String
     let motionX: [Double]
     let motionY: [Double]
     let motionZ: [Double]

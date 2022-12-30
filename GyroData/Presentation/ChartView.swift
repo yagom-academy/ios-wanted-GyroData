@@ -122,62 +122,9 @@ final class ChartView: UIView {
         self.layer.addSublayer(layer)
     }
     
-    func playChart(value: Motion) {
-        let xOffset = frame.width / CGFloat(600)
-        let yOffset = frame.height / CGFloat(2)
-        
-        pathX.move(to: CGPoint(x: current, y: CGFloat(value.motionX[0])))
-        pathY.move(to: CGPoint(x: current, y: CGFloat(value.motionY[0])))
-        pathZ.move(to: CGPoint(x: current, y: CGFloat(value.motionZ[0])))
-        
-        for v in 0..<value.motionX.count {
-            current += xOffset
-            
-            let x = value.motionX[v]
-            let y = value.motionY[v]
-            let z = value.motionZ[v]
-            
-            while x * scale >= 150 || x * scale <= -150
-                    || y * scale >= 150 || y * scale <= -150
-                    || z * scale >= 150 || z * scale <= -150 {
-                scale -= scale * 0.2
-            }
-            
-            let mX = x * scale + Double(yOffset)
-            let mY = y * scale + Double(yOffset)
-            let mZ = z * scale + Double(yOffset)
-            
-            print("\(mX) \(mY) \(mZ)")
-            
-            pathX.addLine(to: CGPoint(x: current, y: CGFloat(mX)))
-            pathY.addLine(to: CGPoint(x: current, y: CGFloat(mY)))
-            pathZ.addLine(to: CGPoint(x: current, y: CGFloat(mZ)))
-        }
-        
-        setupLayers()
-        
-        self.layer.addSublayer(layerX)
-        self.layer.addSublayer(layerY)
-        self.layer.addSublayer(layerZ)
-        
-        layerX.removeAnimation(forKey: Key.xAnimationName.rawValue)
-        layerY.removeAnimation(forKey: Key.yAnimationName.rawValue)
-        layerZ.removeAnimation(forKey: Key.zAnimationName.rawValue)
-        // 애니메이션 필요 없는 경우 return
-        let animation = CABasicAnimation(keyPath: "strokeEnd")
-        animation.fromValue = 0
-        animation.toValue = 1
-        animation.duration = value.
-        animation.fillMode = .forwards
-        
-        layerX.add(animation, forKey: Key.xAnimationName.rawValue)
-        layerY.add(animation, forKey: Key.yAnimationName.rawValue)
-        layerZ.add(animation, forKey: Key.zAnimationName.rawValue)
-    }
-    
-    func drawChart(x: Double, y: Double, z: Double) {
+    func drawLine(x: Double, y: Double, z: Double) {
         let xOffset = Double(frame.width / 600)
-        let yOffset = frame.height / CGFloat(2)
+        let yOffset = bounds.height / CGFloat(2)
         
         pathX.move(to: CGPoint(x: current, y: lastValueOfX))
         pathY.move(to: CGPoint(x: current, y: lastValueOfY))

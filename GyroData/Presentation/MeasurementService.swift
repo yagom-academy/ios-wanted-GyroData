@@ -11,28 +11,39 @@ class MeasurementService {
     private let manager = CMMotionManager()
     private(set) var timer = Timer()
     
-    var gyroCoordinates: Observable<[(x: Double, y: Double, z: Double)]> = Observable([])
+    var gyroCoordinates: [(x: Double, y: Double, z: Double)] = [] {
+        didSet {
+            guard let coordinate = gyroCoordinates.last else { return }
+            addAction?(coordinate)
+        }
+    }
 
+    private var addAction: (((x: Double, y: Double, z: Double)) -> Void)?
+    
     private var stopAction: (() -> Void)?
     
+    private var duringTime = ""
+    
     func measureAccelerometer() {
-        gyroCoordinates.value = []
+        gyroCoordinates = []
         manager.startAccelerometerUpdates()
         manager.accelerometerUpdateInterval = 0.1
         
-        var second = 0
+        var second: Double = 0
         
         timer = Timer.scheduledTimer(
             withTimeInterval: 0.1,
             repeats: true
         ) { [weak self] timer in
-            second += 1
+            second += 0.1
+            self?.duringTime = "\(second)"
             
-            if second == 600 {
+            if second == 60 {
                 self?.stopAction?()
             }
+            
             if let data = self?.manager.accelerometerData {
-                self?.gyroCoordinates.value.append(
+                self?.gyroCoordinates.append(
                     (x: data.acceleration.x,
                      y: data.acceleration.y,
                      z: data.acceleration.z)
@@ -42,23 +53,24 @@ class MeasurementService {
     }
     
     func measureGyro() {
-        gyroCoordinates.value = []
+        gyroCoordinates = []
         manager.startGyroUpdates()
         manager.gyroUpdateInterval = 0.1
         
-        var second = 0
+        var second: Double = 0
 
         timer = Timer.scheduledTimer(
             withTimeInterval: 0.1, repeats: true
         ) { [weak self] timer in
-            second += 1
+            second += 0.1
+            self?.duringTime = "\(second)"
             
-            if second == 600 {
+            if second == 60 {
                 self?.stopAction?()
             }
             
             if let data = self?.manager.gyroData {
-                self?.gyroCoordinates.value.append(
+                self?.gyroCoordinates.append(
                     (x: data.rotationRate.x,
                      y: data.rotationRate.y,
                      z: data.rotationRate.z)
@@ -72,12 +84,20 @@ class MeasurementService {
     }
 
     func getMeasurementResult() -> [(x: Double, y: Double, z: Double)] {
-        let result = gyroCoordinates.value
-        gyroCoordinates.value = []
+        let result = gyroCoordinates
+        gyroCoordinates = []
         return result
+    }
+    
+    func getDuringTime() -> String {
+        return self.duringTime
     }
     
     func registStopAction(action: @escaping (() -> Void)) {
         stopAction = action
+    }
+    
+    func registAppandCoordinateAction(action: @escaping (((x: Double, y: Double, z: Double)) -> Void)) {
+        addAction = action
     }
 }

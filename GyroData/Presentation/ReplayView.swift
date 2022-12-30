@@ -62,81 +62,14 @@ class ReplayView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        setupLayout()
+//        setupLayout()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupLayout() {
-        self.addSubview(measurementTime)
-        self.addSubview(pageTypeLabel)
-        self.addSubview(chartsView)
-        self.addSubview(playStackView)
-        
-        playStackView.addArrangedSubview(playButton)
-        playStackView.addArrangedSubview(timeLabel)
-        
-        NSLayoutConstraint.activate([
-            measurementTime.leftAnchor.constraint(
-                equalTo: self.safeAreaLayoutGuide.leftAnchor,
-                constant: 30
-            ),
-            measurementTime.rightAnchor.constraint(
-                equalTo: self.safeAreaLayoutGuide.rightAnchor,
-                constant: -30
-            ),
-            measurementTime.topAnchor.constraint(
-                equalTo: self.safeAreaLayoutGuide.topAnchor,
-                constant: 15
-            ),
-            
-            pageTypeLabel.leftAnchor.constraint(
-                equalTo: self.safeAreaLayoutGuide.leftAnchor,
-                constant: 30
-            ),
-            pageTypeLabel.rightAnchor.constraint(
-                equalTo: self.safeAreaLayoutGuide.rightAnchor,
-                constant: -30
-            ),
-            pageTypeLabel.topAnchor.constraint(
-                equalTo: measurementTime.bottomAnchor,
-                constant: 5
-            ),
-            
-            chartsView.leftAnchor.constraint(
-                equalTo: self.safeAreaLayoutGuide.leftAnchor,
-                constant: 30
-            ),
-            chartsView.rightAnchor.constraint(
-                equalTo: self.safeAreaLayoutGuide.rightAnchor,
-                constant: -30
-            ),
-            chartsView.topAnchor.constraint(
-                equalTo: pageTypeLabel.bottomAnchor,
-                constant: 30
-            ),
-            chartsView.heightAnchor.constraint(
-                equalTo: chartsView.widthAnchor
-            ),
-            
-            playStackView.leftAnchor.constraint(
-                equalTo: self.safeAreaLayoutGuide.leftAnchor,
-                constant: 30
-            ),
-            playStackView.rightAnchor.constraint(
-                equalTo: self.safeAreaLayoutGuide.rightAnchor,
-                constant: -30
-            ),
-            playStackView.topAnchor.constraint(
-                equalTo: chartsView.bottomAnchor,
-                constant: 30
-            ),
-            playStackView.bottomAnchor.constraint(
-                equalTo: self.safeAreaLayoutGuide.bottomAnchor,
-                constant: -150
-            )
-        ])
+    func configureTimeLabel(time: String) {
+        self.timeLabel.text = "\(time)"
     }
 }
