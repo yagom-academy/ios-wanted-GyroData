@@ -81,7 +81,7 @@ class FirstTableViewCell: UITableViewCell {
         ])
     }
     
-    func setText(date: String, type: String, time: String) {
+    func setText(date: String?, type: String?, time: String) {
         self.dateLabel.text = date
         self.typeLabel.text = type
         self.timeLabel.text = time
@@ -89,5 +89,9 @@ class FirstTableViewCell: UITableViewCell {
     
     func getDate() -> String? {
         return self.dateLabel.text
+    }
+    
+    func getType() -> String? {
+        return self.typeLabel.text
     }
 }

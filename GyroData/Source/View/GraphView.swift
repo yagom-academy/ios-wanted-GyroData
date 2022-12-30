@@ -19,9 +19,6 @@ final class GraphView: UIView {
     var currentX: CGFloat = 0
     
     // xyz별로 그려질 때 필요한 변수
-    
-    //var zeroPath: UIBezierPath! //TODO: 격자용으로 만들었는데 모했읍니다..ㅜㅜ
-    
     var XgraphPath: UIBezierPath!
     var YgraphPath: UIBezierPath!
     var ZgraphPath: UIBezierPath!
@@ -85,12 +82,10 @@ final class GraphView: UIView {
         XgraphPath.move(to: CGPoint(x: 0, y: self.frame.height))
         YgraphPath.move(to: CGPoint(x: 0, y: self.frame.height))
         ZgraphPath.move(to: CGPoint(x: 0, y: self.frame.height))
-        
-        //zeroPath.move(to: CGPoint(x: 0, y: self.frame.height))
     }
     
     func drawNewData(graphData: GraphPoint) {
-        currentX += self.frame.width / 60
+        currentX += self.frame.width / 6000
         let newXPosition = CGPoint(x: CGFloat(currentX), y: self.frame.height/2 - graphData.xValue)
         let newYPosition = CGPoint(x: CGFloat(currentX), y: self.frame.height/2 - graphData.yValue)
         let newZPosition = CGPoint(x: CGFloat(currentX), y: self.frame.height/2 - graphData.zValue)
@@ -108,7 +103,6 @@ final class GraphView: UIView {
         self.graphZLayer.path = newZPath
     }
     
-    // 격자형 view 만들기
     func drawBackgroundGraph(_ rect: CGRect) {
         let colummLinePath = UIBezierPath()
         let rowLinePath = UIBezierPath()

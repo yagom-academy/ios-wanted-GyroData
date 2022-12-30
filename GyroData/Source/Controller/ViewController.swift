@@ -42,7 +42,8 @@ class ViewController: UIViewController {
             else {
                 return UITableViewCell()
             }
-            cell.setText(date: item.measurementDate!, type: item.sensorType!, time: "\(item.measurementTime)")
+            
+            cell.setText(date: item.measurementDate, type: item.sensorType, time: "\(item.measurementTime)")
             
             return cell
         }
@@ -103,11 +104,22 @@ extension ViewController: UITableViewDelegate {
         
         let deleteAction = UIContextualAction(style: .normal, title: "Delete") { (UIContextualAction, UIView, success: @escaping (Bool) -> Void) in
             let cell = tableView.cellForRow(at: indexPath) as! FirstTableViewCell
-            let date = cell.getDate()
-            let deleteData = try! self.gyroStore.readDetailData(measurementDate: date!)
-            try! self.gyroStore.delete(measurementDate: date!)
-            self.snapshot?.deleteItems(deleteData)
-            self.dataSource?.apply(self.snapshot!)
+            
+            guard let date = cell.getDate(),
+                  let type = cell.getType() else {
+                return
+            }
+            
+            FileManager.default.remove(path: "\(date)+\(type)")
+            
+            do {
+                let deleteData = try self.gyroStore.readDetailData(measurementDate: date)
+                try self.gyroStore.delete(measurementDate: date)
+                self.snapshot?.deleteItems(deleteData)
+                self.dataSource?.apply(self.snapshot!)
+            } catch {
+                print(error)
+            }
             
             success(true)
         }
@@ -132,8 +144,6 @@ extension ViewController: UITableViewDelegate {
     }
 }
 
-//TODO: 뷰컨에서 넘어오는 데이터 처리 구현 해주시면됩니당
-
 extension ViewController: RecordViewControllerPopDelegate {
     func saveMeasureData(registTime: Date, type: SensorType, samplingCount: Double) {
         let date = DateFormatterManager.shared.convertToDateString(from: registTime)
@@ -148,20 +158,5 @@ extension ViewController: RecordViewControllerPopDelegate {
         } catch {
             print(error)
         }
-    }
-}
-
-//TODO: 폴더 정리 필요!!
-class DateFormatterManager {
-    static let shared = DateFormatterManager()
-    private let formatter = DateFormatter()
-    
-    var dateFormatter: DateFormatter {
-        self.formatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
-        return formatter
-    }
-    
-    func convertToDateString(from date: Date) -> String {
-        return self.dateFormatter.string(from: date)
     }
 }

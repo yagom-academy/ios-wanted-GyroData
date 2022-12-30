@@ -21,6 +21,7 @@
 		63F01BC128D44FC500C53A39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */; };
 		722944CB295A7D49000C4302 /* GyroDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722944CA295A7D49000C4302 /* GyroDataTests.swift */; };
 		722944D2295A9978000C4302 /* FirstTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722944D1295A9978000C4302 /* FirstTableViewCell.swift */; };
+		724D6577295E6E5F006C98E9 /* DateFormatterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724D6576295E6E5F006C98E9 /* DateFormatterManager.swift */; };
 		7256AD832959832300E14DC6 /* SensorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7256AD822959832300E14DC6 /* SensorType.swift */; };
 		7256AD8D2959B29100E14DC6 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7256AD8C2959B29100E14DC6 /* CoreDataStack.swift */; };
 		7256AD8F2959B2B400E14DC6 /* GyroStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7256AD8E2959B2B400E14DC6 /* GyroStore.swift */; };
@@ -58,6 +59,7 @@
 		722944C8295A7D49000C4302 /* GyroDataTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GyroDataTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		722944CA295A7D49000C4302 /* GyroDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroDataTests.swift; sourceTree = "<group>"; };
 		722944D1295A9978000C4302 /* FirstTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FirstTableViewCell.swift; path = GyroData/Source/View/FirstTableViewCell.swift; sourceTree = SOURCE_ROOT; };
+		724D6576295E6E5F006C98E9 /* DateFormatterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterManager.swift; sourceTree = "<group>"; };
 		7256AD822959832300E14DC6 /* SensorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensorType.swift; sourceTree = "<group>"; };
 		7256AD8C2959B29100E14DC6 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		7256AD8E2959B2B400E14DC6 /* GyroStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroStore.swift; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 				45BD4023295989F500B37A25 /* MeasureData.swift */,
 				45BD40252959FF0700B37A25 /* MotionData.swift */,
 				45FB1A54295B406100A9D43B /* GraphPoint.swift */,
+				7256AD822959832300E14DC6 /* SensorType.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -161,10 +164,11 @@
 		45BD40152959766C00B37A25 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
-				45FB1A53295AFA7B00A9D43B /* GraphManager */,
+				724D6575295E6E49006C98E9 /* DateFormatterManager */,
 				45BD401E295984F500B37A25 /* MotionManager */,
 				45BD401B295977AC00B37A25 /* FileManager */,
 				45BD40172959770500B37A25 /* CoreData */,
+				45FB1A53295AFA7B00A9D43B /* GraphManager */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -173,7 +177,6 @@
 			isa = PBXGroup;
 			children = (
 				45BD40182959772000B37A25 /* GyroModel.xcdatamodeld */,
-				7256AD822959832300E14DC6 /* SensorType.swift */,
 				7256AD8C2959B29100E14DC6 /* CoreDataStack.swift */,
 				7256AD8E2959B2B400E14DC6 /* GyroStore.swift */,
 			);
@@ -238,6 +241,14 @@
 				722944CA295A7D49000C4302 /* GyroDataTests.swift */,
 			);
 			path = GyroDataTests;
+			sourceTree = "<group>";
+		};
+		724D6575295E6E49006C98E9 /* DateFormatterManager */ = {
+			isa = PBXGroup;
+			children = (
+				724D6576295E6E5F006C98E9 /* DateFormatterManager.swift */,
+			);
+			path = DateFormatterManager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -350,6 +361,7 @@
 				63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */,
 				7256AD8F2959B2B400E14DC6 /* GyroStore.swift in Sources */,
 				7256AD832959832300E14DC6 /* SensorType.swift in Sources */,
+				724D6577295E6E5F006C98E9 /* DateFormatterManager.swift in Sources */,
 				72757A91295D7BB3002DE163 /* Gyro+CoreDataClass.swift in Sources */,
 				45BD4028295AEBFC00B37A25 /* GraphView.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,

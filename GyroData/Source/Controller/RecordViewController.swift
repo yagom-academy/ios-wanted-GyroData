@@ -12,7 +12,6 @@ enum GraphViewValue {
     static let samplingCount: Int = 6000
 }
 
-//TODO: 메인 뷰컨에 테이블뷰 셀에 보여질 데이터 딜리게이트로 넘겨야함.
 // 측정시간(start 버튼눌린 첫 시간) Date, 측정타입 String, 측정시간(recordData 개수) Double
 
 protocol RecordViewControllerPopDelegate: AnyObject {
@@ -43,7 +42,6 @@ final class RecordViewController: UIViewController {
             } else {
                 segmentType = .acc
             }
-            print("Segment Changed :\(segmentType)")
         }
     }
     
@@ -151,10 +149,9 @@ final class RecordViewController: UIViewController {
     }
     
     // 버튼 동작
-    
     @objc func startButtonDidTap() {
         recordingStartTime = Date()
-        if recordData.count == GraphViewValue.samplingCount { // 측정완료 되었을 때 또 측정 누르면 그냥 처음부터 되도록
+        if recordData.count == GraphViewValue.samplingCount {
             recordingStartTime = Date()
             currentX = 0
             recordData = [] 
@@ -168,7 +165,12 @@ final class RecordViewController: UIViewController {
     }
     
     @objc func saveNaviButtonDidTap() {
-        let path = "\(recordingStartTime)+\(segmentType)"
+        guard let startTime = recordingStartTime else {
+            return
+        }
+        
+        let dateString = DateFormatterManager.shared.convertToDateString(from: startTime)
+        let path = "\(dateString)+\(segmentType.rawValue)"
         
         let motionData = MotionData(
             path: path,
@@ -178,8 +180,6 @@ final class RecordViewController: UIViewController {
         FileManager.default.save(path: path, to: motionData) { [weak self] (result: Result<Bool, Error>) in
             switch result {
             case .success(_) :
-                print("Save Success")
-
                 //pop
                 self?.delegateData()
                 self?.navigationController?.popViewController(animated: true)
@@ -198,7 +198,7 @@ final class RecordViewController: UIViewController {
         saveMeasureData(
             registTime: recordingStartTime,
             type: segmentType,
-            samplingCount: Double(self.recordData.count / 3)
+            samplingCount: Double(self.recordData.count / 10) // 데이터 개수 핸드폰으로 테스트
         )
     }
     
@@ -214,13 +214,13 @@ final class RecordViewController: UIViewController {
         MotionManager.shared.startRecording(type: segmentType)
         { [weak self] (measuredData: MeasureData) in
             self?.recordData.append(measuredData)
-            print(self?.recordData.count)
+            
             DispatchQueue.main.async {
                 // xyz정보가 담긴 구조체와 x 좌표를 위한 현재 몇번째 측정치인지에 대한 count값
                 self?.drawMeasurePoint(measureData: measuredData, offset: (self?.recordData.count)!)
             }
             
-            if self?.recordData.count ?? 0 >= GraphViewValue.samplingCount { // TODO: 60초 데이터 기준일땐 6000으로 바꾸기
+            if self?.recordData.count ?? 0 >= GraphViewValue.samplingCount {
                 print("??")
                 self?.stopRecording()
             }
