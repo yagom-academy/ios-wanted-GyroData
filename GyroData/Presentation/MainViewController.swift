@@ -1,5 +1,5 @@
 //
-//  GyroViewController.swift
+//  MainViewController.swift
 //  GyroData
 //
 //  Created by bonf, seohyeon2 on 2022/12/26.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class GyroViewController: UIViewController {
+final class MainViewController: UIViewController {
     private enum Section {
         case main
     }
@@ -97,12 +97,15 @@ final class GyroViewController: UIViewController {
             )
             
             snapshot.appendItems(coreData)
-            dataSource?.apply(snapshot, animatingDifferences: false)
+            
+            DispatchQueue.main.async {
+                self.dataSource?.apply(self.snapshot, animatingDifferences: false)
+            }
         }
     }
 }
 
-extension GyroViewController: UITableViewDelegate {
+extension MainViewController: UITableViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.contentOffset.y > (scrollView.contentSize.height - scrollView.bounds.height) {
             MotionDataLoad()
