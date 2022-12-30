@@ -81,12 +81,13 @@ final class DetailView: UIView {
 }
 
 extension DetailView {
-    func setupMode(data: MeasuredData, type: DetailType) {
-        graphContainerView.graphView.retrieveData(data: data)
+    func setupMode(with viewModel: DetailViewModel) {
+        graphContainerView.graphView.retrieveData(data: viewModel.model)
+        viewModel.delegate = graphContainerView.graphView
         
-        dateLabel.text = data.date.translateToString()
-        typeLabel.text = type.rawValue
-        if type == .view {
+        dateLabel.text = viewModel.model.date.translateToString()
+        typeLabel.text = viewModel.currenType.rawValue
+        if viewModel.currenType == .view {
             playButton.isHidden = true
             timerLabel.isHidden = true
             graphContainerView.graphView.drawMode = .image

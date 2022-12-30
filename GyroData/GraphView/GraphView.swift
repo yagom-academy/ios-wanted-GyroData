@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol GraphDrawable {
+protocol GraphDrawable: AnyObject {
     var data: MeasuredData? { get }
     
     func retrieveData(data: MeasuredData)

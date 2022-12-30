@@ -23,34 +23,6 @@ final class ListViewController: UIViewController {
         listViewModel.fetchData()
     }
     
-    private func setupInitialView() {
-        self.view = listView
-        listView.backgroundColor = .systemBackground
-        listView.tableView.delegate = self
-        listView.tableView.dataSource = self
-    }
-    
-    private func setupBinding() {
-        listViewModel.models.bind { [weak self] _ in
-            self?.listView.tableView.reloadData()
-        }
-    }
-    
-    private func setupNavigationBar() {
-        let rightButton: UIBarButtonItem = {
-             let button = UIBarButtonItem(
-                title: "측정",
-                style: .plain,
-                target: self,
-                action: #selector(rightButtonTapped)
-             )
-             
-             return button
-         }()
-        self.navigationItem.title = "목록"
-        self.navigationItem.rightBarButtonItem = rightButton
-    }
-    
     @objc func rightButtonTapped() {
         let vc = MeasureViewController()
         navigationController?.pushViewController(vc, animated: true)
@@ -100,5 +72,36 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
             self.listViewModel.deleteData(data: data)
         }
         return deleteAction
+    }
+}
+
+private extension ListViewController {
+    
+    func setupInitialView() {
+        self.view = listView
+        listView.backgroundColor = .systemBackground
+        listView.tableView.delegate = self
+        listView.tableView.dataSource = self
+    }
+    
+    func setupBinding() {
+        listViewModel.models.bind { [weak self] _ in
+            self?.listView.tableView.reloadData()
+        }
+    }
+    
+    func setupNavigationBar() {
+        let rightButton: UIBarButtonItem = {
+             let button = UIBarButtonItem(
+                title: "측정",
+                style: .plain,
+                target: self,
+                action: #selector(rightButtonTapped)
+             )
+             
+             return button
+         }()
+        self.navigationItem.title = "목록"
+        self.navigationItem.rightBarButtonItem = rightButton
     }
 }

@@ -36,6 +36,7 @@ final class MeasureViewController: UIViewController {
         DefaultAlertBuilder(title: "알림", message: "저장 하시겠습니까?", preferredStyle: .alert)
             .setButton(name: "예", style: .default) {
                 self.measureViewModel.saveCoreMotion()
+                self.navigationItem.rightBarButtonItem?.isEnabled = false
             }
             .setButton(name: "아니오", style: .destructive, nil)
             .showAlert(on: self)
@@ -47,6 +48,7 @@ final class MeasureViewController: UIViewController {
     
     @objc func stopButtonDidTapped() {
         measureViewModel.stopCoreMotion()
+        self.navigationItem.rightBarButtonItem?.isEnabled = true
     }
 }
 
@@ -65,6 +67,7 @@ private extension MeasureViewController {
         }()
         self.navigationItem.title = "측정하기"
         self.navigationItem.rightBarButtonItem = rightButton
+        self.navigationItem.rightBarButtonItem?.isEnabled = false
     }
     
     func setupButtons() {
