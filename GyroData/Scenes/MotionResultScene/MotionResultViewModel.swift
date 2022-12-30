@@ -18,7 +18,6 @@ protocol MotionResultViewModelOutput {
 protocol MotionResultViewModelType: MotionResultViewModelInput, MotionResultViewModelOutput { }
 
 class MotionResultViewModel: MotionResultViewModelType {
-    let sampleData = MotionInformation(motion: Motion(motionType: .gyro, date: Date(), time: 60.0), xData: [1.23232323, 1.55555555, -2.434343343], yData: [0.2111112, -1.20000005555, 1.434343343], zData: [-1.23232323, 3.001115555, 2.434343343])
     private let motionFileManagerUseCase = MotionFileManagerUseCase()
     
     init(_ motion: Motion) {
