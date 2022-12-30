@@ -15,7 +15,7 @@ final class ViewModel {
     var errorMessage = ""
     
     func onCreate(item: GyroItem) {
-        useCase.createItem(item)
+        useCase.createItem(item)d
     }
     
     func onRead() {

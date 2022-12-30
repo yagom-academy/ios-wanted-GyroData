@@ -11,11 +11,11 @@ final class UseCase {
     
     let repository = DataStore()
     
-    func createItem(_ item: GyroItem) {
+    func createItem(_ item: MeasureItem) {
         repository.createGyro(item: item)
     }
     
-    func readItem(completion: @escaping (Result<[GyroItem], Error>) -> ()) {
+    func readItem(completion: @escaping (Result<[MeasureItem], Error>) -> ()) {
         repository.readGyro { [weak self] result in
             switch result {
             case let .success(entities):
@@ -31,9 +31,9 @@ final class UseCase {
         
     }
     
-    private func convertItems(_ items: [ModelEntity]) -> [GyroItem] {
+    private func convertItems(_ items: [ModelEntity]) -> [MeasureItem] {
         return items.map {
-            GyroItem(sensorType: $0.sensorType,
+            MeasureItem(sensorType: $0.sensorType,
                      figure: $0.figure,
                      date: $0.date)
         }

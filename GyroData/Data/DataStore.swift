@@ -13,7 +13,7 @@ final class DataStore {
     private let appDelegate = UIApplication.shared.delegate as? AppDelegate
     private lazy var context: NSManagedObjectContext? = appDelegate?.persistentContainer.viewContext
     
-    func createGyro(item: GyroItem) {
+    func createGyro(item: MeasureItem) {
         guard let context = context,
         let entity = NSEntityDescription.entity(forEntityName: String(describing: ModelEntity.self), in: context) else { return }
         
