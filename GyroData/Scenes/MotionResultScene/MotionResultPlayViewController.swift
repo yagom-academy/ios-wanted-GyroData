@@ -40,6 +40,7 @@ final class MotionResultPlayViewController: MotionResultViewController {
     }
     
     private func setupView() {
+        graphView.clearSegmanet()
         addSubViews()
     }
     
@@ -55,6 +56,10 @@ final class MotionResultPlayViewController: MotionResultViewController {
         } else {
             stopDrawing()
         }
+    }
+    
+    override func drawGraph(motion: MotionInformation) {
+        graphView.setupSegmentSize(height: view.bounds.width)
     }
 }
 
