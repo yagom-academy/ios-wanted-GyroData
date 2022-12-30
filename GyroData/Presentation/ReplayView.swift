@@ -50,7 +50,7 @@ class ReplayView: UIView {
         return button
     }()
     
-    let timeLabel: UILabel = {
+    let runtimeLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
         label.font = UIFont.preferredFont(forTextStyle: .title3)
@@ -68,6 +68,6 @@ class ReplayView: UIView {
     }
     
     func configureTimeLabel(time: String) {
-        self.timeLabel.text = "\(time)"
+        self.runtimeLabel.text = "\(time)"
     }
 }
