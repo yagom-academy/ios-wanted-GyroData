@@ -38,6 +38,8 @@ final class GraphView: UIView {
     
     private var index = 0
     private var previousMotion: MotionValue = MotionValue(timestamp: TimeInterval(), x: 0, y: 0, z: 0)
+    private var currentScaleY: CGFloat = 1
+    private var multiplyer: CGFloat = 30
     
     private lazy var labelStackView: UIStackView = {
         let stackView = UIStackView(axis: .horizontal, alignment: .center, distribution: .fill, spacing: 20)
@@ -70,8 +72,21 @@ final class GraphView: UIView {
         return label
     }()
     
+    private lazy var baseGridView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .clear
+        return view
+    }()
+    
+    private lazy var linesView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .clear
+        return view
+    }()
+    
     override func draw(_ rect: CGRect) {
-        self.layer.addSublayer(drawBaseLayer())
+        super.draw(rect)
+        baseGridView.layer.addSublayer(drawBaseLayer())
     }
     
     override init(frame: CGRect) {
@@ -83,10 +98,18 @@ final class GraphView: UIView {
     }
     
     private func setUpLabel() {
-        addSubviews(labelStackView)
+        addSubviews(labelStackView, baseGridView, linesView)
         NSLayoutConstraint.activate([
             labelStackView.topAnchor.constraint(equalTo: topAnchor, constant: 4),
-            labelStackView.centerXAnchor.constraint(equalTo: centerXAnchor)
+            labelStackView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            baseGridView.topAnchor.constraint(equalTo: topAnchor),
+            baseGridView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            baseGridView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            baseGridView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            linesView.topAnchor.constraint(equalTo: topAnchor),
+            linesView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            linesView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            linesView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
 }
@@ -110,9 +133,14 @@ extension GraphView {
     }
     
     func clean() {
-        layer.sublayers = nil
-        layer.addSublayer(drawBaseLayer())
+        linesView.layer.sublayers = nil
         index = 0
+    }
+    
+    func updateScale() {
+        currentScaleY /= 1.1
+        multiplyer /= 1.1
+        linesView.transform = CGAffineTransform(scaleX: 1, y: currentScaleY)
     }
     
 }
@@ -162,9 +190,9 @@ private extension GraphView {
     
     func drawLine(type: GraphType, data: Double) {
         switch type {
-        case .x: self.layer.addSublayer(createLineLayer(data: data, prevMotion: previousMotion.x, type: type))
-        case .y: self.layer.addSublayer(createLineLayer(data: data, prevMotion: previousMotion.y, type: type))
-        case .z: self.layer.addSublayer(createLineLayer(data: data, prevMotion: previousMotion.z, type: type))
+        case .x: linesView.layer.addSublayer(createLineLayer(data: data, prevMotion: previousMotion.x, type: type))
+        case .y: linesView.layer.addSublayer(createLineLayer(data: data, prevMotion: previousMotion.y, type: type))
+        case .z: linesView.layer.addSublayer(createLineLayer(data: data, prevMotion: previousMotion.z, type: type))
         }
     }
     
@@ -174,9 +202,15 @@ private extension GraphView {
         let pointer: CGFloat = Constant.borderWidth + offset * CGFloat(index)
         let layer = CAShapeLayer()
         let path = UIBezierPath()
-        path.move(to: CGPoint(x: pointer, y: initHeight + prevMotion * Constant.multiplyer))
-        let newPosition = CGPoint(x: pointer, y: initHeight + (data) * Constant.multiplyer)
+        while 
+        path.move(to: CGPoint(x: pointer, y: initHeight + prevMotion * multiplyer))
+        let newY = initHeight + (data) * multiplyer
+        let newPosition = CGPoint(x: pointer, y: newY)
+        if self.point(inside: newPosition, with: nil) == false {
+            updateScale()
+        }
         path.addLine(to: newPosition)
+        print(linesView.layer.bounds.height, self.frame.height, newY)
         layer.fillColor = type.color.cgColor
         layer.strokeColor = type.color.cgColor
         layer.lineWidth = Constant.lineWidth
