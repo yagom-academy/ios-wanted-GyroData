@@ -8,8 +8,7 @@
 import UIKit
 
 final class MotionRecordingViewController: UIViewController {
-    private lazy var motionRecordingViewModel = MotionRecordingViewModel(msInterval: msInterval, motionMode: .accelerometer, updateCompletion: drawGraphFor1Hz)
-    private let msInterval = 100
+    private lazy var motionRecordingViewModel = MotionRecordingViewModel(motionMode: .accelerometer, updateCompletion: drawGraphFor1Hz)
 
     private let recordButton = {
         let button = UIButton(type: .system)

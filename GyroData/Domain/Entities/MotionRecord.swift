@@ -10,7 +10,6 @@ import Foundation
 struct MotionRecord {
     let id: UUID
     let startDate: Date
-    let msInterval: Int
     let motionMode: MotionMode
     let coordinates: [Coordinate]
 }

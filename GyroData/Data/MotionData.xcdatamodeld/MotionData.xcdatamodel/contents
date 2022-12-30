@@ -4,7 +4,6 @@
         <attribute name="coordinates" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[[Double]]"/>
         <attribute name="motionMode" optional="YES" attributeType="String"/>
         <attribute name="motionRecordId" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="msInterval" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="startDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
     </entity>
 </model>
