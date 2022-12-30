@@ -26,7 +26,7 @@ protocol AnalyzeListViewModelInterface {
     var output: AnalyzeListViewModelOutputInterface { get }
 }
 
-final class AnalyzeListViewModel: AnalyzeListViewModelInterface {
+final class AnalyzeListViewModel: AnalyzeListViewModelInterface, AnalyzeListViewModelOutputInterface {
     var analysisPublisher = PassthroughSubject<[GyroData], Never>()
     var selectedItemPublisher = PassthroughSubject<[GraphModel], Never>()
     
@@ -78,20 +78,11 @@ extension AnalyzeListViewModel: AnalyzeListViewModelInputInterface {
     }
     
     func cellDidTap(indexPath: IndexPath) {
-        guard let id = analysis[indexPath.row].id else {
+        guard let id = analysis[indexPath.row].id,
+              let fetchedData = GraphFileManager.shared.loadJsonFile(fileName: id) else {
             return
         }
-        
-        guard let fetchedData = GraphFileManager.shared.loadJsonFile(fileName: id) else {
-            return
-        }
-        
         graph = fetchedData
-    }
-}
-
-extension AnalyzeListViewModel: AnalyzeListViewModelOutputInterface {
-    func data전달() {
-        
+        selectedItemPublisher.send(graph)
     }
 }

@@ -96,7 +96,7 @@ extension AnalyzeListViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        self.listViewModel.input.cellDidTap(indexPath: indexPath)
     }
     
     func bind() {
