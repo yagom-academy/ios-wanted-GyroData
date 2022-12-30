@@ -21,6 +21,7 @@ class ReplayViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         if motionInfo?.pageType == ReplayViewPageType.view {
             replayView.playButton.isHidden = true
             replayView.runtimeLabel.isHidden = true
@@ -53,10 +54,7 @@ class ReplayViewController: UIViewController {
 
         replayView.playButton.addTarget(self, action: #selector(activateTimer), for: .touchUpInside)
         
-        
         view.backgroundColor = .white
-        
-        
     }
     
     private func setupSubviews() {

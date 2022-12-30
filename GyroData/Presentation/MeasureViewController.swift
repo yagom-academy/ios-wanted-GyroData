@@ -21,6 +21,7 @@ class MeasureViewController: UIViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         stopAction()
     }
 
