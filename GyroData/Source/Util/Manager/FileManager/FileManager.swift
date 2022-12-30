@@ -68,7 +68,7 @@ extension FileManager: MeasureDataSavingInFileManagerProtocol {
         do {
             try self.removeItem(at: url)
         } catch {
-            print(error)
+            print("error \(error)")
         }
     }
     
@@ -81,6 +81,3 @@ extension FileManager: MeasureDataSavingInFileManagerProtocol {
         return fileURL
     }
 }
-
-//TODO: 그래프 View 범위를 벗어나지 않도록 확인 한번 하기 (7) -> 마지막에 시간 남으면
-//TODO: 리드미 작성하기. (*******)

@@ -79,13 +79,13 @@ final class GraphView: UIView {
         graphZLayer.lineWidth = 2
         
         //각 축의 데이터 시작지점 이동
-        XgraphPath.move(to: CGPoint(x: 0, y: self.frame.height))
-        YgraphPath.move(to: CGPoint(x: 0, y: self.frame.height))
-        ZgraphPath.move(to: CGPoint(x: 0, y: self.frame.height))
+        XgraphPath.move(to: CGPoint(x: 0, y: self.frame.height/2))
+        YgraphPath.move(to: CGPoint(x: 0, y: self.frame.height/2))
+        ZgraphPath.move(to: CGPoint(x: 0, y: self.frame.height/2))
     }
     
     func drawNewData(graphData: GraphPoint) {
-        currentX += self.frame.width / 6000
+        currentX += self.frame.width / 600
         let newXPosition = CGPoint(x: CGFloat(currentX), y: self.frame.height/2 - graphData.xValue)
         let newYPosition = CGPoint(x: CGFloat(currentX), y: self.frame.height/2 - graphData.yValue)
         let newZPosition = CGPoint(x: CGFloat(currentX), y: self.frame.height/2 - graphData.zValue)

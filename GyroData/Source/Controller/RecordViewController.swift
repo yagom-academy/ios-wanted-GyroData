@@ -9,7 +9,7 @@ import UIKit
 import CoreMotion
 
 enum GraphViewValue {
-    static let samplingCount: Int = 6000
+    static let samplingCount: Int = 600
 }
 
 // 측정시간(start 버튼눌린 첫 시간) Date, 측정타입 String, 측정시간(recordData 개수) Double
@@ -233,7 +233,6 @@ final class RecordViewController: UIViewController {
             }
             
             if self?.recordData.count ?? 0 >= GraphViewValue.samplingCount {
-                print("??")
                 self?.stopRecording()
             }
         }
@@ -249,11 +248,21 @@ final class RecordViewController: UIViewController {
     
     private func drawMeasurePoint(measureData: MeasureData, offset: Int) {
         var currentPoint = GraphPoint(0, 0, 0)
-        currentPoint.xValue = measureData.lotationX
-        currentPoint.yValue = measureData.lotationY
-        currentPoint.zValue = measureData.lotationZ
+        currentPoint.xValue = processLogic(measureData.lotationX)
+        currentPoint.yValue = processLogic(measureData.lotationY)
+        currentPoint.zValue = processLogic(measureData.lotationZ)
         
         graphView.drawNewData(graphData: currentPoint)
+    }
+    
+    private func processLogic(_ data: Double) -> Double {
+        let standardHeight = self.graphView.frame.height / 2
+        
+        if abs(data) > standardHeight {
+            return data * 0.2
+        } else {
+            return data
+        }
     }
 }
 
