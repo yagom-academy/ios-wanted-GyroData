@@ -12,6 +12,7 @@ final class MeasurementReplayViewController: UIViewController {
     // MARK: Properties
     
     private let playType: PlayType
+    private var timer: Timer?
     
     private let dateLabel: UILabel = {
         let label = UILabel()
@@ -253,6 +254,18 @@ final class MeasurementReplayViewController: UIViewController {
     
     @objc private func playButtonTapped() {
         graphView.startAnimation()
+        var timeCount: Double = 0.0
+                
+        if playButton.image(for: .normal) == UIImage(systemName: "play.fill") {
+            playButton.setImage(UIImage(systemName: "stop.fill"), for: .normal)
+            timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
+                self.playTimeLabel.text = String(format: "%.2f", timeCount)
+                timeCount += 0.1
+            }
+        } else if playButton.image(for: .normal) == UIImage(systemName: "stop.fill") {
+            playButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+            timer?.invalidate()
+        }
     }
     
     @objc private func backButtonTapped() {
