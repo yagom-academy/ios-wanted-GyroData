@@ -32,7 +32,7 @@ class MotionMeasurementManager {
         }
     }
     
-    func startMeasurement(_ motionType: MotionType, on graphView: GraphView) {
+    func startMeasurement(_ motionType: MotionType, on graphView: GraphView, _ completionHandler: @escaping () -> Void) {
         timeCount = Double.zero
         
         checkAvailableAndStart(motionType)
@@ -47,6 +47,7 @@ class MotionMeasurementManager {
             
             if checkOutofTime(timeCount) {
                 timer.invalidate()
+                completionHandler()
             }
             
             drawGraph(motionType, on: graphView)

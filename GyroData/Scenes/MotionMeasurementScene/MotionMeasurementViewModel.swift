@@ -50,7 +50,9 @@ class MotionMeasurementViewModel: MotionMeasurementViewModelType {
     
     func startMeasurement(_ motionType: MotionType, on graphView: GraphView) {
         isMeasuring.value = true
-        MotionMeasurementManager.shared.startMeasurement(motionType ,on: graphView)
+        MotionMeasurementManager.shared.startMeasurement(motionType, on: graphView) {
+            self.isMeasuring.value = false
+        }
     }
     
     func stopMeasurement(_ motionType: MotionType) {
