@@ -85,4 +85,8 @@ extension AnalyzeListViewController: UITableViewDelegate, UITableViewDataSource 
         
         return UISwipeActionsConfiguration(actions: [delete, play])
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+    }
 }

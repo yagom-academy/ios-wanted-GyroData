@@ -13,9 +13,8 @@ protocol AnalyzeListViewModelInputInterface {
     func onViewDidLoad()
     func onViewWillAppear()
     func playButtonDidTap(indexPath: IndexPath)
-    func deleteButtonDidTap()
-    func cellDidTap()
-    func measurementButtonDidTap()
+    func deleteButtonDidTap(indexPath: IndexPath)
+    func cellDidTap(indexPath: IndexPath)
 }
 
 protocol AnalyzeListViewModelOutputInterface {
@@ -37,23 +36,23 @@ final class AnalyzeListViewModel: AnalyzeListViewModelInterface {
     // MARK: AnalyzeViewModelOutputInterface
     var analysis: [GyroData] = []
     var graph: [GraphModel] = []
-}
-
-extension AnalyzeListViewModel: AnalyzeListViewModelInputInterface {
-    func onViewDidLoad() {
+    
+    private func fetchCoreData() {
         guard let fetchedData = CoreDataManager.shared.read() else {
             return
         }
         
         analysis = fetchedData
     }
+}
+
+extension AnalyzeListViewModel: AnalyzeListViewModelInputInterface {
+    func onViewDidLoad() {
+        fetchCoreData()
+    }
     
     func onViewWillAppear() {
-        guard let fetchedData = CoreDataManager.shared.read() else {
-            return
-        }
-        
-        analysis = fetchedData
+        fetchCoreData()
     }
 
     func playButtonDidTap(indexPath: IndexPath) {
@@ -65,16 +64,27 @@ extension AnalyzeListViewModel: AnalyzeListViewModelInputInterface {
         graph = fetchedData
     }
     
-    func deleteButtonDidTap() {
+    func deleteButtonDidTap(indexPath: IndexPath) {
+        guard let id = analysis[indexPath.row].id else {
+            return
+        }
         
+        GraphFileManager.shared.deleteJsonFile(fileName: id)
+        CoreDataManager.shared.delete(data: analysis[indexPath.row])
+        
+        fetchCoreData()
     }
     
-    func cellDidTap() {
+    func cellDidTap(indexPath: IndexPath) {
+        guard let id = analysis[indexPath.row].id else {
+            return
+        }
         
-    }
-    
-    func measurementButtonDidTap() {
+        guard let fetchedData = GraphFileManager.shared.loadJsonFile(fileName: id) else {
+            return
+        }
         
+        graph = fetchedData
     }
 }
 
