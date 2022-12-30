@@ -9,6 +9,9 @@ import UIKit
 
 class MeasureViewController: UIViewController {
     
+    let viewModel = MeasureViewModel()
+    var graphView = GraphView()
+
     private let segmentControl: UISegmentedControl = {
         let control = UISegmentedControl(items: SensorType.allCases.map({ $0.rawValue }))
         control.translatesAutoresizingMaskIntoConstraints = false
@@ -20,16 +23,18 @@ class MeasureViewController: UIViewController {
         button.isEnabled = false
         return button
     }()
-    private let recordButton: UIButton = {
+    private lazy var recordButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("측정", for: .normal)
+        button.addTarget(self, action: #selector(recordButtonTapped(_:)), for: .touchUpInside)
         return button
     }()
-    private let pauseButton: UIButton = {
+    private lazy var pauseButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("정지", for: .normal)
+        button.addTarget(self, action: #selector(pauseButtonTapped(_:)), for: .touchUpInside)
         button.isEnabled = false
         return button
     }()
@@ -41,6 +46,8 @@ class MeasureViewController: UIViewController {
         setSegment()
         pauseButtonLayout()
         recordButtonLayout()
+        graphViewLayout()
+        bind()
     }
     
     private func setSegment() {
@@ -75,6 +82,56 @@ class MeasureViewController: UIViewController {
         ])
     }
     
+    func createGraphLayer(values: [CGFloat], color: UIColor) -> CAShapeLayer {
+        let layer = CAShapeLayer()
+        let path = UIBezierPath()
+        
+        var currentX: CGFloat = 10
+        
+        let xOffset = self.view.frame.width / CGFloat(values.count)
+        
+        let centerY = self.view.frame.height / 2
+        
+        let centerYPosition = CGPoint(x: currentX, y: centerY)
+        path.move(to: centerYPosition)
+        
+        for i in 0..<values.count {
+            currentX += xOffset
+            path.addLine(to: CGPoint(x: currentX, y: centerY - values[i]))
+        }
+        
+        layer.fillColor = nil
+        layer.strokeColor = color.cgColor
+        layer.lineWidth = 2
+        layer.path = path.cgPath
+        
+        return layer
+    }
+    
+    func bind() {
+        viewModel.gyroItem.subscribe { gyroItem in
+            guard let x = gyroItem.x,
+                  let y = gyroItem.y,
+                  let z = gyroItem.z else { return }
+            let graphX = self.createGraphLayer(values: x, color: .red)
+            let graphY = self.createGraphLayer(values: y, color: .green)
+            let graphZ = self.createGraphLayer(values: z, color: .blue)
+            
+            [graphX, graphY, graphZ].forEach {
+                self.graphView.layer.addSublayer($0)
+            }
+        }
+    }
+    
+    private func graphViewLayout() {
+        let frame = CGRect(x: self.view.frame.width / 10, y: self.view.frame.height / 4, width: self.view.frame.width * (4/5), height: self.view.frame.width * (4/5))
+        let graphView = GraphView()
+        view.addSubview(graphView)
+        graphView.frame = frame
+        graphView.layer.borderColor = UIColor.black.cgColor
+        graphView.layer.borderWidth = 3
+    }
+    
     @objc private func changeTypeOfMeasurement(_ sender: Any) {
         switch segmentControl.selectedSegmentIndex {
         case 0:
@@ -84,6 +141,16 @@ class MeasureViewController: UIViewController {
         default:
             return
         }
+    }
+    
+    @objc private func recordButtonTapped(_ sender: UIButton) {
+        pauseButton.isEnabled = true
+        viewModel.onStart()
+    }
+    
+    @objc private func pauseButtonTapped(_ sender: UIButton) {
+        pauseButton.isEnabled = false
+        viewModel.onStop()
     }
     
     @objc private func saveRecord(_ sender: Any) {
