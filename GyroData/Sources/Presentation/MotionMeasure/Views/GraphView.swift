@@ -136,13 +136,6 @@ extension GraphView {
         linesView.layer.sublayers = nil
         index = 0
     }
-    
-    func updateScale() {
-        currentScaleY /= 1.1
-        multiplyer /= 1.1
-        linesView.transform = CGAffineTransform(scaleX: 1, y: currentScaleY)
-    }
-    
 }
 
 private extension GraphView {
@@ -198,19 +191,17 @@ private extension GraphView {
     
     func createLineLayer(data: Double, prevMotion: Double, type: GraphType) -> CAShapeLayer {
         let offset = (self.frame.width - Constant.borderWidth * 2) / CGFloat(GraphConstant.timeout)
-        let initHeight: CGFloat = self.frame.height / 2
+        let initY = self.frame.minY
         let pointer: CGFloat = Constant.borderWidth + offset * CGFloat(index)
         let layer = CAShapeLayer()
         let path = UIBezierPath()
-        while 
-        path.move(to: CGPoint(x: pointer, y: initHeight + prevMotion * multiplyer))
-        let newY = initHeight + (data) * multiplyer
-        let newPosition = CGPoint(x: pointer, y: newY)
-        if self.point(inside: newPosition, with: nil) == false {
-            updateScale()
-        }
+        
+        let computePrevPosintion = validatePosition(prevMotion * Constant.multiplyer)
+        path.move(to: CGPoint(x: pointer, y: computePrevPosintion))
+        let newPointer = pointer + offset
+        let computeValue = validatePosition(data * Constant.multiplyer)
+        let newPosition = CGPoint(x: newPointer, y: computeValue)
         path.addLine(to: newPosition)
-        print(linesView.layer.bounds.height, self.frame.height, newY)
         layer.fillColor = type.color.cgColor
         layer.strokeColor = type.color.cgColor
         layer.lineWidth = Constant.lineWidth
@@ -235,5 +226,12 @@ private extension GraphView {
             zLabel.text = "z : " + String(format: format, Int(data * Constant.multiplyer))
         }
     }
+    
+    func validatePosition(_ value: Double) -> Double {
+            let initHeight: CGFloat = self.frame.height / 2
+            if value > initHeight { return initHeight + initHeight }
+            if value < -initHeight { return 0 }
+            return value + initHeight
+        }
     
 }
