@@ -37,7 +37,7 @@ final class MotionReplayViewController: UIViewController {
     private var timer = Timer()
 
     init(replayType: ReplayType, motionRecord: MotionRecord) {
-        viewModel = MotionReplayViewModel(replayType: replayType, record: motionRecord)
+        viewModel = MotionReplayViewModel(replayType: replayType, id: motionRecord.id)
         graphView = GraphView(xScale: CGFloat(motionRecord.coordinates.count))
         super.init(nibName: nil, bundle: nil)
     }
@@ -58,9 +58,12 @@ final class MotionReplayViewController: UIViewController {
     }
 
     override func viewDidLayoutSubviews() {
-        if viewModel.replayType == .view && !viewModel.isDrawingGraphView {
-            viewModel.isDrawingGraphView = true
-            showFinishedGraphView()
+        viewModel.fetchMotionData { [weak self] in
+            guard let self = self else { return }
+            if self.viewModel.replayType == .view && !self.viewModel.isDrawingGraphView {
+                self.viewModel.isDrawingGraphView = true
+                self.showFinishedGraphView()
+            }
         }
     }
 
@@ -99,7 +102,7 @@ final class MotionReplayViewController: UIViewController {
     }
 
     private func setUpLabelContents() {
-        dateLabel.text = viewModel?.record.startDate.toString()
+        dateLabel.text = viewModel?.record?.startDate.toString()
         typeLabel.text = viewModel?.replayType.name
     }
 
@@ -110,8 +113,9 @@ final class MotionReplayViewController: UIViewController {
 
     private func playGraphView() {
         graphView.reset()
-        let record = viewModel.record
+        guard let record = viewModel.record else { return }
         viewModel.isDrawingGraphView = true
+
         var index = 0
         var time: Double = 0
 
@@ -141,7 +145,7 @@ final class MotionReplayViewController: UIViewController {
 
     @objc
     private func playButtonTapped(_ sender: UIButton) {
-        if viewModel.playButtonState == .play {
+        if viewModel.playButtonState == .play && viewModel.record != nil {
             viewModel.playButtonState = .stop
             playButton.setImage(UIImage(systemName: "stop.fill"), for: .normal)
             playGraphView()

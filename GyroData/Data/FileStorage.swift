@@ -23,7 +23,6 @@ final class FileStorage {
 
     func saveFile(motionRecordData: MotionRecordDTO, completion: @escaping (Result<Void, Error>) -> Void) {
         // TODO: ios 16 분기처리 통해 deprecate된 메서드 사용 중지
-        let directoryURL = documentURL.appendingPathComponent("Gyro-Data")
         let fileURL = directoryURL.appendingPathComponent("\(motionRecordData.id).txt")
         guard let motionRecordJson = try? JSONEncoder().encode(motionRecordData),
               let data = String(data: motionRecordJson, encoding: .utf8) else { return }

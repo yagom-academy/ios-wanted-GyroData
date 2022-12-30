@@ -18,7 +18,10 @@
 		32AA1E97295DBF50002259C3 /* MotionRecordDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32AA1E96295DBF50002259C3 /* MotionRecordDTO.swift */; };
 		32B01338295A844B005C8750 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B01337295A844B005C8750 /* GraphView.swift */; };
 		32B0133A295A871C005C8750 /* GraphViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B01339295A871C005C8750 /* GraphViewModel.swift */; };
+		32C20245295EB41400BCDCCB /* MotionReplayStorageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C20244295EB41400BCDCCB /* MotionReplayStorageProtocol.swift */; };
+		32C20247295EB4D900BCDCCB /* FetchMotionDataUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C20246295EB4D900BCDCCB /* FetchMotionDataUseCase.swift */; };
 		32E5748F295DD5B100E297D9 /* FileStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E5748E295DD5B100E297D9 /* FileStorage.swift */; };
+		32E57491295EB3FC00E297D9 /* MotionReplayStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E57490295EB3FC00E297D9 /* MotionReplayStorage.swift */; };
 		32F77CC0295C7AA400A78CCD /* MotionData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 32F77CBE295C7AA400A78CCD /* MotionData.xcdatamodeld */; };
 		32F77CC5295C7BDA00A78CCD /* MotionRecordEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F77CC1295C7BDA00A78CCD /* MotionRecordEntity+CoreDataClass.swift */; };
 		32F77CC6295C7BDA00A78CCD /* MotionRecordEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F77CC2295C7BDA00A78CCD /* MotionRecordEntity+CoreDataProperties.swift */; };
@@ -51,7 +54,10 @@
 		32AA1E96295DBF50002259C3 /* MotionRecordDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionRecordDTO.swift; sourceTree = "<group>"; };
 		32B01337295A844B005C8750 /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		32B01339295A871C005C8750 /* GraphViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphViewModel.swift; sourceTree = "<group>"; };
+		32C20244295EB41400BCDCCB /* MotionReplayStorageProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionReplayStorageProtocol.swift; sourceTree = "<group>"; };
+		32C20246295EB4D900BCDCCB /* FetchMotionDataUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchMotionDataUseCase.swift; sourceTree = "<group>"; };
 		32E5748E295DD5B100E297D9 /* FileStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileStorage.swift; sourceTree = "<group>"; };
+		32E57490295EB3FC00E297D9 /* MotionReplayStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionReplayStorage.swift; sourceTree = "<group>"; };
 		32F77CBF295C7AA400A78CCD /* MotionData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MotionData.xcdatamodel; sourceTree = "<group>"; };
 		32F77CC1295C7BDA00A78CCD /* MotionRecordEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MotionRecordEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		32F77CC2295C7BDA00A78CCD /* MotionRecordEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MotionRecordEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -120,6 +126,7 @@
 				32F77CC9295C7DB700A78CCD /* CoreDataStorage.swift */,
 				32F77CCB295C81A800A78CCD /* MotionDataListStorage.swift */,
 				32040C0C295D696B00317CA8 /* MotionRecordingStorage.swift */,
+				32E57490295EB3FC00E297D9 /* MotionReplayStorage.swift */,
 				32F77CBE295C7AA400A78CCD /* MotionData.xcdatamodeld */,
 				32F77CC1295C7BDA00A78CCD /* MotionRecordEntity+CoreDataClass.swift */,
 				32F77CC2295C7BDA00A78CCD /* MotionRecordEntity+CoreDataProperties.swift */,
@@ -146,6 +153,7 @@
 			children = (
 				32A17EF6295D8D77007D8A8F /* MotionRecordingStorageProtocol.swift */,
 				32FD288F295BE4A6006B6871 /* MotionDataListStorageProtocol.swift */,
+				32C20244295EB41400BCDCCB /* MotionReplayStorageProtocol.swift */,
 			);
 			path = StorageInterfaces;
 			sourceTree = "<group>";
@@ -154,6 +162,7 @@
 			isa = PBXGroup;
 			children = (
 				32A17EF4295D8D6C007D8A8F /* SaveMotionDataUseCase.swift */,
+				32C20246295EB4D900BCDCCB /* FetchMotionDataUseCase.swift */,
 				32FD288D295BE44D006B6871 /* FetchMotionDataListUseCase.swift */,
 				32FDB344295BE62A0095F6A5 /* DeleteMotionDataUseCase.swift */,
 			);
@@ -309,6 +318,7 @@
 				32B0133A295A871C005C8750 /* GraphViewModel.swift in Sources */,
 				32AA1E97295DBF50002259C3 /* MotionRecordDTO.swift in Sources */,
 				32F77CCA295C7DB700A78CCD /* CoreDataStorage.swift in Sources */,
+				32C20245295EB41400BCDCCB /* MotionReplayStorageProtocol.swift in Sources */,
 				32FDB34D295C19B60095F6A5 /* MotionReplayViewModel.swift in Sources */,
 				32FDB349295C18C80095F6A5 /* ReplayType.swift in Sources */,
 				329E7EEB295B05D000537466 /* MotionRecord.swift in Sources */,
@@ -318,10 +328,12 @@
 				32FD288E295BE44D006B6871 /* FetchMotionDataListUseCase.swift in Sources */,
 				32FD288C295B2EFB006B6871 /* MotionDataListViewModel.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
+				32C20247295EB4D900BCDCCB /* FetchMotionDataUseCase.swift in Sources */,
 				32A17EF7295D8D77007D8A8F /* MotionRecordingStorageProtocol.swift in Sources */,
 				329E7EE7295B052D00537466 /* Coordinate.swift in Sources */,
 				32A17EF5295D8D6C007D8A8F /* SaveMotionDataUseCase.swift in Sources */,
 				32B01338295A844B005C8750 /* GraphView.swift in Sources */,
+				32E57491295EB3FC00E297D9 /* MotionReplayStorage.swift in Sources */,
 				32040C0D295D696B00317CA8 /* MotionRecordingStorage.swift in Sources */,
 				32F77CC0295C7AA400A78CCD /* MotionData.xcdatamodeld in Sources */,
 				32F77CCC295C81A800A78CCD /* MotionDataListStorage.swift in Sources */,
