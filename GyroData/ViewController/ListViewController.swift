@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 struct Value {
     let time: String
@@ -43,10 +44,9 @@ class ListViewController: BaseViewController {
     }()
     // MARK: - Properties
     private let viewTitle: String = "목록"
-    
-    private let value: [Value] = [Value(time: "2022/09/08 14:50:43", type: "Acceleroment", value: "43.4"),
-                                  Value(time: "2022/09/07 15:10:11", type: "Gyro", value: "60.0"),
-                                  Value(time: "2022/09/06 09:33:30", type: "Acceleroment", value: "30.4")]
+    private var measureDataList: [MeasureData] = []
+    private var loadCount: Int = 0
+    private var indexPage: Int = 0
     
     // MARK: - LifeCycles
     override func viewDidLoad() {
@@ -55,12 +55,17 @@ class ListViewController: BaseViewController {
         configureUI()
         constraints()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fetchMeasureDataList()
+    }
 }
 
 // MARK: - ConfigureTableView
 extension ListViewController {
     private func configureTableView() {
-        tableView.register(CustomCell.self, forCellReuseIdentifier: CustomCell.cellId)
+        tableView.register(ListCell.self, forCellReuseIdentifier: ListCell.cellId)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
@@ -91,10 +96,10 @@ extension ListViewController {
         self.vStackView.translatesAutoresizingMaskIntoConstraints = false
         
         let layout = [
-            self.vStackView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20),
-            self.vStackView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            self.vStackView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: 20),
-            self.vStackView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20)
+            self.vStackView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            self.vStackView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            self.vStackView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+            self.vStackView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
         ]
         
         NSLayoutConstraint.activate(layout)
@@ -111,11 +116,52 @@ extension ListViewController {
         NSLayoutConstraint.activate(layout)
     }
 }
-
+// MARK: - Action
+extension ListViewController {
+    @objc private func didTapMeasurementButton() {
+        let measureVC = MeasureViewController()
+        self.navigationController?.pushViewController(measureVC, animated: true)
+    }
+    
+    private func scrollToBottom(indexPath: IndexPath) {
+        if indexPath.row + 1 == self.measureDataList.count {
+                print("load more")
+                if !(loadCount % 2 == 0) {
+                    indexPage += 1
+                    print("index: \(indexPage)")
+                }
+                loadCount += 1
+                print("loadCount: \(loadCount)")
+            }
+    }
+}
+// MARK: - DataBinding
+extension ListViewController {
+    func fetchMeasureDataList() {
+        let request = MeasureData.fetchRequest()
+        request.fetchLimit = 20
+        request.fetchOffset = measureDataList.count
+        
+        do {
+            let motionDataList = try CoreDataManager.shared.context.fetch(request)
+            self.measureDataList += motionDataList
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        } catch {
+            print(error)
+        }
+    }
+}
+// MARK: - TableView
 extension ListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let play = UIContextualAction(style: .normal, title: "Play") { (UIContextualAction, UIView, success: @escaping (Bool) -> Void) in
-            print("play 클릭 됨")
+            let showVC = ShowViewController()
+            showVC.viewType = .replay
+            showVC.setMeasureData(data: self.measureDataList[indexPath.row])
+            
+            self.navigationController?.pushViewController(showVC, animated: true)
         }
         play.backgroundColor = .systemGreen
         
@@ -126,29 +172,35 @@ extension ListViewController: UITableViewDelegate {
         
         return UISwipeActionsConfiguration(actions:[delete, play])
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let showVC = ShowViewController()
+        showVC.viewType = .preview
+        showVC.setMeasureData(data: self.measureDataList[indexPath.row])
+        
+        self.navigationController?.pushViewController(showVC, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        scrollToBottom(indexPath: indexPath)
+    }
 }
 
 extension ListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return value.count
+        return measureDataList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: CustomCell.cellId, for: indexPath) as? CustomCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ListCell.cellId, for: indexPath) as? ListCell else {
             return UITableViewCell()
         }
         
-        cell.timeLabel.text = value[indexPath.row].time
-        cell.typeLabel.text = value[indexPath.row].type
-        cell.valueLabel.text = value[indexPath.row].value
+        cell.timeLabel.text = measureDataList[indexPath.row].measureDate
+        cell.typeLabel.text = measureDataList[indexPath.row].sensorType
+        cell.valueLabel.text = measureDataList[indexPath.row].measureTime
         
         return cell
     }
 }
 
-// MARK: - Action
-extension ListViewController {
-    @objc private func didTapMeasurementButton() {
-        print("measurement")
-    }
-}
