@@ -184,7 +184,6 @@
 			children = (
 				200E57D2295AABCE00D3EF5A /* GraphView.swift */,
 				2038320B295D313A00B58F53 /* SubViews */,
-				20383202295D1E5100B58F53 /* Extension */,
 				203831FD295D1DD900B58F53 /* Entities */,
 			);
 			path = GraphView;
@@ -254,6 +253,7 @@
 		F3516205295B1140008AB1A3 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				20383202295D1E5100B58F53 /* Extension */,
 				20E26445295C375E00C66E8A /* GraphView */,
 				20383203295D1E6F00B58F53 /* MeasurementManager */,
 				F3516206295B114C008AB1A3 /* Observable */,
