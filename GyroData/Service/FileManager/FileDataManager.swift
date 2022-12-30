@@ -13,7 +13,7 @@ protocol FileDataManagable {
     func fetch<T: Codable>(_ id: UUID, completion: @escaping (Result<Void, FileManagerError>) -> Void) -> T?
 }
 
-class FileDataManager: FileDataManagable {
+final class FileDataManager: FileDataManagable {
     static let shared = FileDataManager()
     private let fileManager = FileManager.default
     private lazy var documentPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]

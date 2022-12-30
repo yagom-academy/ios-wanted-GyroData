@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MotionListViewController: UIViewController {
+final class MotionListViewController: UIViewController {
 
     private lazy var motionListTableView: UITableView = {
        let tableView = UITableView()

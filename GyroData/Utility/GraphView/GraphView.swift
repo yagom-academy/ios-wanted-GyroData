@@ -7,7 +7,7 @@
 
 import UIKit
 
-class GraphView: UIView {
+final class GraphView: UIView {
     private let xDataLabel = MotionLabel(motionData: .x, frame: .zero)
     private let yDataLabel = MotionLabel(motionData: .y, frame: .zero)
     private let zDataLabel = MotionLabel(motionData: .z, frame: .zero)

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PlayButton: UIButton {
+final class PlayButton: UIButton {
 
     override init(frame: CGRect) {
         super.init(frame: frame)

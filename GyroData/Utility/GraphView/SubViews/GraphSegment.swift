@@ -7,7 +7,7 @@
 
 import UIKit
 
-class GraphSegment: UIView {
+final class GraphSegment: UIView {
     private(set) var dataPoint = [Double]()
     private let startPoint: [Double]
     private var valueRange = GraphNumber.initialRange

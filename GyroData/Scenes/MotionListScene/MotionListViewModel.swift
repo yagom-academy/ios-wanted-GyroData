@@ -13,7 +13,7 @@ protocol MotionListViewModelOutput {
 
 protocol MotionListViewModelType: MotionListViewModelInput, MotionListViewModelOutput { }
 
-class MotionListViewModel: MotionListViewModelType {
+final class MotionListViewModel: MotionListViewModelType {
     let motionCoreDataUseCase = MotionCoreDataUseCase()
     
     var count = 10

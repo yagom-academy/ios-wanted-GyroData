@@ -14,7 +14,7 @@ protocol CoreDataManagable {
     func fetch<T: Storable>(_ request: NSFetchRequest<T>) -> [T]?
 }
 
-class CoreDataManager: CoreDataManagable {
+final class CoreDataManager: CoreDataManagable {
     weak var coreDataStack: CoreDataStack?
     
     init(coreDataStack: CoreDataStack = .shared) {

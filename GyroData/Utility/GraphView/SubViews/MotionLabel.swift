@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MotionLabel: UILabel {
+final class MotionLabel: UILabel {
     init(motionData: MotionData, frame: CGRect) {
         super.init(frame: frame)
         setupLabel(with: motionData)

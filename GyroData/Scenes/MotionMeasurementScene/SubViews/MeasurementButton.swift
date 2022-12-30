@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MeasurementButton: UIButton {
+final class MeasurementButton: UIButton {
     override var isHighlighted: Bool {
         didSet {
             if isHighlighted {

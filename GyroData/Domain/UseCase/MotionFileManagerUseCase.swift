@@ -7,7 +7,7 @@
 
 import Foundation
 
-class MotionFileManagerUseCase {
+final class MotionFileManagerUseCase {
     private let fileDataManager = FileDataManager.shared
     
     func save(_ motion: Motion, motinData: [[Double]], completion: @escaping (Result<Void, FileManagerError>) -> Void) {

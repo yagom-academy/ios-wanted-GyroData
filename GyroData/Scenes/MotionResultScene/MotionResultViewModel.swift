@@ -18,7 +18,7 @@ protocol MotionResultViewModelOutput {
 
 protocol MotionResultViewModelType: MotionResultViewModelInput, MotionResultViewModelOutput { }
 
-class MotionResultViewModel: MotionResultViewModelType {
+final class MotionResultViewModel: MotionResultViewModelType {
     private let motionFileManagerUseCase = MotionFileManagerUseCase()
     
     init(_ motion: Motion) {

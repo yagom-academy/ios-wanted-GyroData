@@ -21,7 +21,7 @@ protocol MotionMeasurementViewModelOutput {
 
 protocol MotionMeasurementViewModelType: MotionMeasurementViewModelInput, MotionMeasurementViewModelOutput { }
 
-class MotionMeasurementViewModel: MotionMeasurementViewModelType {
+final class MotionMeasurementViewModel: MotionMeasurementViewModelType {
     private let motionCoreDataUseCase = MotionCoreDataUseCase()
     private let motionFileManagerUseCase = MotionFileManagerUseCase()
     

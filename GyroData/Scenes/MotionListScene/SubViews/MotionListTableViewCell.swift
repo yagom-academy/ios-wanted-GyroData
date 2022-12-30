@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MotionListTableViewCell: UITableViewCell {
+final class MotionListTableViewCell: UITableViewCell {
 
     static let cellIdentifier = "MotionListCell"
     

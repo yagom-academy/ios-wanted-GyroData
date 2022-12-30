@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MeasurementViewController: UIViewController {
+final class MeasurementViewController: UIViewController {
     private let entireStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical

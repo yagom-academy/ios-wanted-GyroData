@@ -7,7 +7,7 @@
 
 import CoreMotion
 
-class MotionMeasurementManager {
+final class MotionMeasurementManager {
     static let shared = MotionMeasurementManager()
     private let motionManager = CMMotionManager()
     private var timer: Timer?

@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-class MotionCoreDataUseCase {
+final class MotionCoreDataUseCase {
     let coreDataManager = CoreDataManager()
     
     func save(item: Motion, completion: @escaping (Result<Void, CoreDataError>) -> Void) {
