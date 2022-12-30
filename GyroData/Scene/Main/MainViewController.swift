@@ -136,10 +136,9 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
 //        cell.setupTypeLabelText("Aaccelometer")
 //        cell.setupTypeMeasurementLabelText("100")
 //
-        guard let cell = self.listTableView.dequeueReusableCell(withIdentifier:
-                                                                MainTableViewCell.reuseIdentifier,
-                                                                for: indexPath)
-                                            as? MainTableViewCell else { return UITableViewCell() }
+        guard let cell = self.listTableView.dequeueReusableCell(
+            withIdentifier: MainTableViewCell.reuseIdentifier,
+            for: indexPath) as? MainTableViewCell else { return UITableViewCell() }
         cell.configure(with: gyroData[indexPath.row])
         return cell
     }
