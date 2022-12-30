@@ -69,6 +69,7 @@ class MeasurementViewController: UIViewController {
     private func setupView() {
         addSubViews()
         setupConstraints()
+        setupIndicatorView()
         view.backgroundColor = .systemBackground
     }
     
@@ -94,6 +95,12 @@ class MeasurementViewController: UIViewController {
         ])
     }
     
+    private func setupIndicatorView() {
+        indicatorView.frame = view.frame
+        indicatorView.color = .systemGray
+        view.addSubview(indicatorView)
+    }
+
     private func bind() {
         measurementviewModel.isMeasuring
             .subscribe { [weak self] isMeasuring in
@@ -180,9 +187,6 @@ extension MeasurementViewController {
     }
     
     private func showLoading() {
-        indicatorView.frame = view.frame
-        indicatorView.color = .systemGray
-        view.addSubview(indicatorView)
         indicatorView.startAnimating()
     }
     
