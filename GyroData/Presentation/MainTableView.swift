@@ -1,5 +1,5 @@
 //
-//  GyroTableView.swift
+//  MainTableView.swift
 //  GyroData
 //
 //  Created by bonf, seohyeon2 on 2022/12/26.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class GyroTableView: UITableView {
+final class MainTableView: UITableView {
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
         setupDefault()
@@ -18,7 +18,7 @@ final class GyroTableView: UITableView {
     }
     
     private func setupDefault() {
-        self.register(GyroTableViewCell.self, forCellReuseIdentifier: GyroTableViewCell.id)
+        self.register(MainTableViewCell.self, forCellReuseIdentifier: MainTableViewCell.id)
         self.separatorStyle = .none
     }
 }

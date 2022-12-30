@@ -34,8 +34,8 @@ class ReplayView: UIView {
 
     let playStackView: UIStackView = {
         let stackView = UIStackView()
-        stackView.alignment = .center
-        stackView.distribution = .fill
+        stackView.alignment = .fill
+        stackView.distribution = .fillProportionally
         stackView.axis = .horizontal
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView

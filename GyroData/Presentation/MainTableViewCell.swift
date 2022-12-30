@@ -1,5 +1,5 @@
 //
-//  GyroTableViewCell.swift
+//  MainTableViewCell.swift
 //  GyroData
 //
 //  Created by bonf, seohyeon2 on 2022/12/26.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class GyroTableViewCell: UITableViewCell {
+final class MainTableViewCell: UITableViewCell {
     static let id = "GyroCell"
     
     private let measurementTime: UILabel = {

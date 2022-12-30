@@ -14,7 +14,7 @@ final class MainViewController: UIViewController {
     
     private var dataSource: UITableViewDiffableDataSource<Section, Motion>?
     private var snapshot = NSDiffableDataSourceSnapshot<Section, Motion>()
-    private let gyroListView = GyroTableView()
+    private let gyroListView = MainTableView()
     private let coreDataManager = CoreDataManager()
     
     override func viewDidLoad() {
@@ -42,7 +42,7 @@ final class MainViewController: UIViewController {
     }
     
     private func setupDefault() {
-        gyroListView.register(GyroTableViewCell.self, forCellReuseIdentifier: "measurementListViewCell")
+        gyroListView.register(MainTableViewCell.self, forCellReuseIdentifier: "measurementListViewCell")
         gyroListView.delegate = self
         gyroListView.translatesAutoresizingMaskIntoConstraints = false
 
@@ -52,7 +52,7 @@ final class MainViewController: UIViewController {
                 guard let cell = tableView.dequeueReusableCell(
                     withIdentifier: "measurementListViewCell",
                     for: indexPath
-                ) as? GyroTableViewCell else {
+                ) as? MainTableViewCell else {
                     return nil
                 }
 
@@ -97,10 +97,7 @@ final class MainViewController: UIViewController {
             )
             
             snapshot.appendItems(coreData)
-            
-            DispatchQueue.main.async {
-                self.dataSource?.apply(self.snapshot, animatingDifferences: false)
-            }
+            dataSource?.apply(snapshot, animatingDifferences: false)
         }
     }
 }
@@ -116,16 +113,15 @@ extension MainViewController: UITableViewDelegate {
         _ tableView: UITableView,
         didSelectRowAt indexPath: IndexPath
     ) {
-        guard let motion = self.dataSource?.snapshot().itemIdentifiers[indexPath.item] else {
+        guard let motion = self.dataSource?.snapshot().itemIdentifiers[indexPath.item],
+              let data = FileManager.default.load(for: motion) else {
             return
         }
-        
-        // TODO: fileManager로 데이터 갈아끼기
-        
+
         let replayViewController = ReplayViewController()
         weak var sendDataDelegate: SendDataDelegate? = replayViewController
-        sendDataDelegate?.sendData(MotionInfo(data: motion, pageType: ReplayViewPageType.view))
-        
+        sendDataDelegate?.sendData(MotionInfo(data: data, pageType: ReplayViewPageType.view))
+
         self.navigationController?.pushViewController(
             replayViewController,
             animated: true
@@ -141,16 +137,16 @@ extension MainViewController: UITableViewDelegate {
             title: "Play"
         ) { [weak self] _, _, _ in
             
-            guard let self = self,
-                  let motion = self.dataSource?.snapshot().itemIdentifiers[indexPath.item] else {
+            guard let motion = self?.dataSource?.snapshot().itemIdentifiers[indexPath.item],
+                  let data = FileManager.default.load(for: motion) else {
                 return
             }
 
             let replayViewController = ReplayViewController()
             weak var sendDataDelegate: SendDataDelegate? = replayViewController
-            sendDataDelegate?.sendData(MotionInfo(data: motion, pageType: ReplayViewPageType.play))
+            sendDataDelegate?.sendData(MotionInfo(data: data, pageType: ReplayViewPageType.play))
             
-            self.navigationController?.pushViewController(
+            self?.navigationController?.pushViewController(
                 replayViewController,
                 animated: true
             )
@@ -168,10 +164,11 @@ extension MainViewController: UITableViewDelegate {
             
             let data = self.snapshot.itemIdentifiers[indexPath.item]
             self.coreDataManager.delete(data: data)
+            FileManager.default.delete(for: data)
             self.snapshot.deleteItems([data])
             self.dataSource?.applySnapshotUsingReloadData(self.snapshot)
         }
-    
+
         return UISwipeActionsConfiguration(actions: [deleteAction, playAction])
     }
 }
