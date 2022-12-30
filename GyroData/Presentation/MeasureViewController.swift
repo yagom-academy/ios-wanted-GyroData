@@ -135,6 +135,8 @@ class MeasureViewController: UIViewController {
         measureView.indicator.center = view.center
         measureView.indicator.startAnimating()
         
+        FileManager.default.addFile(for: motion)
+        
         coreDataManager.save(data: motion) { result in
             self.measureView.indicator.stopAnimating()
             

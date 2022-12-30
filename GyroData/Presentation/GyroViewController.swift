@@ -45,7 +45,8 @@ final class GyroViewController: UIViewController {
         gyroListView.register(GyroTableViewCell.self, forCellReuseIdentifier: "measurementListViewCell")
         gyroListView.delegate = self
         gyroListView.translatesAutoresizingMaskIntoConstraints = false
-        
+        FileManager.default.createAppDirectory()
+
         dataSource = UITableViewDiffableDataSource<Section, Motion>(
             tableView: gyroListView,
             cellProvider: { tableView, indexPath, itemIdentifier in
@@ -116,6 +117,8 @@ extension GyroViewController: UITableViewDelegate {
         guard let motion = self.dataSource?.snapshot().itemIdentifiers[indexPath.item] else {
             return
         }
+        
+        // TODO: fileManager로 데이터 갈아끼기
         
         let replayViewController = ReplayViewController()
         weak var sendDataDelegate: SendDataDelegate? = replayViewController

@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct Motion: Hashable {
+struct Motion: Hashable, Codable {
     let date: String
     let measurementType: String
     let runtime: String

@@ -72,7 +72,6 @@ class ReplayViewController: UIViewController {
             for: .normal
         )
 
-        // TODO: 시간 Motion에 추가 후 바꾸기
         guard let motion = motionInfo?.data else { return }
         var second: Double = 0
         var count = 0
