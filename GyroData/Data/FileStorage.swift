@@ -23,7 +23,7 @@ final class FileStorage {
 
     func saveFile(motionRecordData: MotionRecordDTO, completion: @escaping (Result<Void, Error>) -> Void) {
         // TODO: ios 16 분기처리 통해 deprecate된 메서드 사용 중지
-        let fileURL = directoryURL.appendingPathComponent("\(motionRecordData.id).txt")
+        let fileURL = directoryURL.appendingPathComponent("\(motionRecordData.id).json")
         guard let motionRecordJson = try? JSONEncoder().encode(motionRecordData),
               let data = String(data: motionRecordJson, encoding: .utf8) else { return }
 
@@ -37,7 +37,7 @@ final class FileStorage {
     }
 
     func loadFile(id: UUID, completion: @escaping (Result<MotionRecordDTO, Error>) -> Void) {
-        let filePath = directoryURL.appendingPathComponent("\(id).txt")
+        let filePath = directoryURL.appendingPathComponent("\(id).json")
 
         do {
             let data = try Data(contentsOf: filePath)
@@ -50,7 +50,7 @@ final class FileStorage {
     }
 
     func deleteFile(id: UUID, completion: @escaping (Result<Void, Error>) -> Void) {
-        let filePath = directoryURL.appendingPathComponent("\(id).txt")
+        let filePath = directoryURL.appendingPathComponent("\(id).json")
         do {
             try fileManager.removeItem(at: filePath)
             completion(.success(()))
