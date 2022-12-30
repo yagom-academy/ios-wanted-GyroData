@@ -51,6 +51,7 @@ class MeasurementViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
+    private let indicatorView = UIActivityIndicatorView(style: .large)
     private let saveBarButton = UIBarButtonItem()
     
     private let measurementviewModel = MotionMeasurementViewModel()
@@ -105,6 +106,15 @@ class MeasurementViewController: UIViewController {
             .subscribe { [weak self] description in
                 if description != "" {
                     self?.showAlert(message: description)
+                }
+            }
+        
+        measurementviewModel.loading
+            .subscribe { [weak self] isLoading in
+                if isLoading {
+                    self?.showLoading()
+                } else {
+                    self?.hideLoading()
                 }
             }
     }
@@ -167,5 +177,16 @@ extension MeasurementViewController {
         
         alert.addAction(UIAlertAction(title: "확인", style: .default))
         self.present(alert, animated: true)
+    }
+    
+    private func showLoading() {
+        indicatorView.frame = view.frame
+        indicatorView.color = .systemGray
+        view.addSubview(indicatorView)
+        indicatorView.startAnimating()
+    }
+    
+    private func hideLoading() {
+        indicatorView.removeFromSuperview()
     }
 }

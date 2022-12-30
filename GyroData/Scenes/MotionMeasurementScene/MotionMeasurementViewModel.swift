@@ -14,9 +14,9 @@ protocol MotionMeasurementViewModelInput {
 }
 
 protocol MotionMeasurementViewModelOutput {
-    var measurementedMotion: Observable<[MotionInformation]> { get }
-    var error: Observable<String> { get }
-    var isMeasuring: Observable<Bool> { get }
+    var error: Observable<String> { get set }
+    var isMeasuring: Observable<Bool> { get set }
+    var loading: Observable<Bool> { get set }
 }
 
 protocol MotionMeasurementViewModelType: MotionMeasurementViewModelInput, MotionMeasurementViewModelOutput { }
@@ -25,10 +25,10 @@ class MotionMeasurementViewModel: MotionMeasurementViewModelType {
     private let motionCoreDataUseCase = MotionCoreDataUseCase()
     
     /// Output
-    
-    var measurementedMotion: Observable<[MotionInformation]> = Observable([])
+
     var error: Observable<String> = Observable("")
     var isMeasuring: Observable<Bool> = Observable(false)
+    var loading: Observable<Bool> = Observable(false)
     
     /// Input
     
@@ -45,6 +45,7 @@ class MotionMeasurementViewModel: MotionMeasurementViewModelType {
         
         motionCoreDataUseCase.save(item: newMotion)
         //TODO: - motionCoreDataUseCase.save(item: motion, motinData: datas)
+        loading.value = false
     }
     
     func startMeasurement(_ motionType: MotionType, on graphView: GraphView) {
