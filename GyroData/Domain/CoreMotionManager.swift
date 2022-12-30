@@ -13,7 +13,7 @@ final class CoreMotionManager {
     let motion = CMMotionManager()
     var timer: Timer?
     
-    func startGyros(completion: @escaping (GyroItem) -> ()) {
+    func startGyros(completion: @escaping (CGFloat, CGFloat, CGFloat) -> ()) {
        if motion.isGyroAvailable {
           motion.gyroUpdateInterval = 1.0 / 60.0
           motion.startGyroUpdates()
@@ -25,8 +25,7 @@ final class CoreMotionManager {
                  let y = data.rotationRate.y
                  let z = data.rotationRate.z
                  
-                 let item = GyroItem(x: x, y: y, z: z)
-                 completion(item)
+                 completion(x, y, z)
              }
           })
            RunLoop.current.add(timer!, forMode: .default)

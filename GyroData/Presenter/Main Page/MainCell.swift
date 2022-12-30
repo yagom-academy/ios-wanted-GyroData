@@ -60,7 +60,7 @@ class MainCell: UITableViewCell {
         return stackView
     }()
     
-    func configureCell(gyroItem: GyroItem) {
+    func configureCell(gyroItem: MeasureItem) {
         sensorTypeLabel.text = gyroItem.sensorType
         recordedDateLabel.text = gyroItem.date
         valueLabel.text = gyroItem.figure

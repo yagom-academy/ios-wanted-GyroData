@@ -11,11 +11,11 @@ final class ViewModel {
     
     let useCase = UseCase()
     
-    var gyroList = [GyroItem]()
+    var gyroList = [MeasureItem]()
     var errorMessage = ""
     
-    func onCreate(item: GyroItem) {
-        useCase.createItem(item)d
+    func onCreate(item: MeasureItem) {
+        
     }
     
     func onRead() {

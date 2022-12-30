@@ -10,9 +10,17 @@ import Foundation
 final class MeasureViewModel {
     
     let manager = CoreMotionManager()
+    var gyroItem = Observable(GyroItem(x: [], y: [], z: []))
     
+    func onStart() {
+        manager.startGyros { [weak self] x, y, z in
+            self?.gyroItem.value.x?.append(x)
+            self?.gyroItem.value.y?.append(y)
+            self?.gyroItem.value.z?.append(z)
+        }
+    }
     
-    func startMeasure() {
-        
+    func onStop() {
+        manager.stopGyros()
     }
 }

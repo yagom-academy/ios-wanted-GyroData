@@ -8,7 +8,7 @@
 import Foundation
 
 struct GyroItem {
-    let x: CGFloat?
-    let y: CGFloat?
-    let z: CGFloat?
+    var x: [CGFloat]?
+    var y: [CGFloat]?
+    var z: [CGFloat]?
 }
