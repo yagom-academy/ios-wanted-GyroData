@@ -149,9 +149,15 @@ extension MotionPlayViewController {
         
         view.addSubview(graphView)
         NSLayoutConstraint.activate([
-            graphView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: ConstantLayout.offset),
-            graphView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -ConstantLayout.offset),
-            graphView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: ConstantLayout.offset),
+            graphView.leadingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.leadingAnchor,
+                constant: ConstantLayout.offset
+            ),
+            graphView.trailingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.trailingAnchor,
+                constant: -ConstantLayout.offset
+            ),
+            graphView.topAnchor.constraint(equalTo: labelStackView.bottomAnchor, constant: 20),
             graphView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5)
         ])
         

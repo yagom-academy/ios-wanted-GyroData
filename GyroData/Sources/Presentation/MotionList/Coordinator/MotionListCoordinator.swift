@@ -41,12 +41,22 @@ private extension MotionListCoordinator {
     }
     
     private func makeMotionDetailViewController(motionEntity: MotionEntity) -> UIViewController {
-        let viewController = MotionPlayViewController(viewModel: DefaultMotionPlayViewModel(motionEntity: motionEntity, viewType: .view))
+        let viewController = MotionPlayViewController(
+            viewModel: DefaultMotionPlayViewModel(
+                motionEntity: motionEntity,
+                viewType: .view
+            )
+        )
         return viewController
     }
     
     private func makeMotionPlayViewController(motionEntity: MotionEntity) -> UIViewController {
-        let viewController = MotionPlayViewController(viewModel: DefaultMotionPlayViewModel(motionEntity: motionEntity, viewType: .play))
+        let viewController = MotionPlayViewController(
+            viewModel: DefaultMotionPlayViewModel(
+                motionEntity: motionEntity,
+                viewType: .play
+            )
+        )
         return viewController
     }
     

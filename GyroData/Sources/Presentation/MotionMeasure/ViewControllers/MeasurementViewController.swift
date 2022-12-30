@@ -159,7 +159,7 @@ final class MeasurementViewController: UIViewController {
         return button
     }()
     
-    //MARK - func
+    // MARK: - func
     func drawGraph(data: MotionValue?) {
         DispatchQueue.main.async {
             self.graphView.drawGraph(data: data)

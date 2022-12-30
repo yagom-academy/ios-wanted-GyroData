@@ -70,6 +70,3 @@ final class DefaultMotionPlayViewModel: MotionPlayViewModel {
         playStatus.value = .stop
     }
 }
-
-
-

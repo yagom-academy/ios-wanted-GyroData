@@ -96,7 +96,13 @@ final class DefaultMeasermentViewModel: MeasermentViewModel {
         status.value = .save
         DispatchQueue.global().async {
             let timeInterval = TimeInterval( Double(self.motions.value.count) * 0.1)
-            let saveData = Motion(uuid: UUID(), type: type, values: self.motions.value, date: Date(), duration: timeInterval)
+            let saveData = Motion(
+                uuid: UUID(),
+                type: type, 
+                values: self.motions.value, 
+                date: Date(), 
+                duration: timeInterval
+            )
             self.storage.insert(saveData)
             do {
                 try MotionFileManager.shared.save(data: saveData.toFile())

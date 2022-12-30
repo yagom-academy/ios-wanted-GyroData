@@ -23,7 +23,7 @@ final class GraphView: UIView {
     }
     
     private enum GraphType {
-        case x,y,z
+        case x, y, z
         
         var color: UIColor {
             switch self {
