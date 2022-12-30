@@ -17,7 +17,9 @@ final class MotionDataListViewModel {
 
     func viewWillAppear() {
         initializeViewModel()
-        fetchMotionDataList(page: pageToLoad)
+        fetchMotionDataList(page: pageToLoad) { _ in
+            self.reloadData?()
+        }
     }
 
     func deleteCellSwipeActionDone(indexPath: IndexPath, completion: @escaping () -> Void) {
@@ -33,9 +35,10 @@ final class MotionDataListViewModel {
             isFetching = true
             fetchMotionDataList(page: pageToLoad) { [weak self] fetchedCount in
                 guard let self = self, fetchedCount > 0 else { return }
-                completion((self.records.count - fetchedCount ..< self.records.endIndex - 1).map {
+                let indexPaths = (self.records.count - fetchedCount ..< self.records.endIndex).map {
                     return IndexPath(row: $0, section: 0)
-                })
+                }
+                completion(indexPaths)
             }
         }
     }
@@ -56,7 +59,6 @@ final class MotionDataListViewModel {
                 self.pageToLoad = response.currentPage + 1
                 self.hasNextPage = response.hasNextPage
                 self.isFetching = false
-                self.reloadData?()
                 completion?(response.records.count)
             case .failure(let error):
                 print(error)
