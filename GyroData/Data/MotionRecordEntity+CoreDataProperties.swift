@@ -25,7 +25,7 @@ extension MotionRecordEntity {
         return MotionRecord(
             id: motionRecordId,
             startDate: startDate,
-            motionMode: .accelerometer,
+            motionMode: motionMode == "acc" ? .accelerometer : .gyroscope,
             coordinates: coordinates.map { Coordinate(x: $0[0], y: $0[1], z: $0[2]) }
         )
     }
