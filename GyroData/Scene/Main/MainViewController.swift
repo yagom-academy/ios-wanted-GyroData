@@ -10,7 +10,7 @@ import UIKit
 final class MainViewController: UIViewController {
     
     // MARK: Properties
-    private var listCount = 10
+    
     private var gyroData: [GyroModel] = []
     private let dataManager = MotionDataManager.shared
     
@@ -124,7 +124,11 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         _ tableView: UITableView,
         numberOfRowsInSection section: Int
     ) -> Int {
-        return listCount
+        if gyroData.count <= 10 {
+            return gyroData.count
+        } else {
+            return 10
+        }
     }
     
     func tableView(
@@ -200,8 +204,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell,
                    forRowAt indexPath: IndexPath) {
-        if indexPath.row + 1 == listCount {
-            listCount += 10
+        if indexPath.row + 1 == gyroData.count {
             self.listTableView.reloadData()
             fetchData(manager: dataManager)
         }
