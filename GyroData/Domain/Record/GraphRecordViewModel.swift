@@ -25,23 +25,23 @@ protocol GraphRecordViewModelInterface {
     var output: GraphRecordViewModelOutputInterface { get }
 }
 
-class GraphRecordViewModel: GraphRecordViewModelInterface, GraphRecordViewModelOutputInterface {
+final class GraphRecordViewModel: GraphRecordViewModelInterface, GraphRecordViewModelOutputInterface {
     var input: GraphRecordViewModelInputInterface { self }
     var output: GraphRecordViewModelOutputInterface { self }
-    var store: AnyCancellable?
+    private var cancelable = Set<AnyCancellable>()
     var secondPublisher = PassthroughSubject<String, Never>()
     var playCompletePublisher = PassthroughSubject<Void, Never>()
     var analyzeModelPublisher = PassthroughSubject<AnalysisData, Never>()
     private var timer: Timer?
     private var currentSecond: String = ""
-    @Published var model: [GraphModel] = []
+    @Published private var model: [GraphModel] = []
     @Published var environmentGraphModel: EnvironmentGraphModel = .init()
     
     init(model: [GraphModel]) {
         self.model = model
     }
     
-    func playGraph() {
+    private func playGraph() {
         var storedModel = model
         model = []
         timer = Timer(fire: Date(), interval: 0.1, repeats: true, block: { [weak self] (timer) in
@@ -86,12 +86,12 @@ extension GraphRecordViewModel: GraphRecordViewModelInputInterface {
 
 extension GraphRecordViewModel: ObservableObject {
     func bind() {
-        store = $model
+        $model
             .sink { [weak self] graphData in
                 guard let self = self else {
                     return
                 }
                 self.environmentGraphModel.graphModels = graphData
-            }
+            }.store(in: &cancelable)
     }
 }

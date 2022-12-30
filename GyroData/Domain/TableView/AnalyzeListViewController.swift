@@ -8,11 +8,11 @@
 import UIKit
 import Combine
 
-class AnalyzeListViewController: UIViewController {
-    let listViewModel = AnalyzeListViewModel()
-    var store = Set<AnyCancellable>()
-    
-    let analysisTableView : UITableView = {
+final class AnalyzeListViewController: UIViewController {
+    private let listViewModel = AnalyzeListViewModel()
+    private var cancelable = Set<AnyCancellable>()
+
+    private let analysisTableView : UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(AnalysisTableViewCell.self, forCellReuseIdentifier: AnalysisTableViewCell.identifier)
@@ -57,12 +57,12 @@ class AnalyzeListViewController: UIViewController {
         analysisTableView.reloadData()
     }
     
-    func setTableView() {
+    private func setTableView() {
         self.analysisTableView.delegate = self
         self.analysisTableView.dataSource = self
     }
     
-    @objc func tabButton() {
+    @objc private func tabButton() {
         self.navigationController?.pushViewController(AnalyzeViewController(), animated: true)
     }
 }
@@ -99,7 +99,7 @@ extension AnalyzeListViewController: UITableViewDelegate, UITableViewDataSource 
         self.listViewModel.input.cellDidTap(indexPath: indexPath)
     }
     
-    func bind() {
+    private func bind() {
         listViewModel.selectedItemPublisher
             .sink { [weak self] model in
                 guard let self = self else { return }
@@ -109,7 +109,7 @@ extension AnalyzeListViewController: UITableViewDelegate, UITableViewDataSource 
                     animated: true
                 )
             }
-            .store(in: &store)
+            .store(in: &cancelable)
         
         listViewModel.playModePublisher
             .sink { [weak self] model in
@@ -119,6 +119,6 @@ extension AnalyzeListViewController: UITableViewDelegate, UITableViewDataSource 
                     animated: true
                 )
             }
-            .store(in: &store)
+            .store(in: &cancelable)
     }
 }

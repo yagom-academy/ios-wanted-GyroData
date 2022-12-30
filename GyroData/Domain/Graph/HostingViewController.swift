@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-class HostingViewController: UIHostingController<AnyView> {
-    init(model2: EnvironmentGraphModel) {
-        super.init(rootView: AnyView(GraphView().environmentObject(model2)))
+final class HostingViewController: UIHostingController<AnyView> {
+    init(model: EnvironmentGraphModel) {
+        super.init(rootView: AnyView(GraphView().environmentObject(model)))
     }
     
     @objc required dynamic init?(coder: NSCoder) {

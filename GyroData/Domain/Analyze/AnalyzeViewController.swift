@@ -114,7 +114,7 @@ final class AnalyzeViewController: UIViewController {
     @ObservedObject private var viewModel = AnalyzeViewModel(analysisManager: AnalysisManager())
     private var cancelable = Set<AnyCancellable>()
     private var swiftUIChartsView = GraphView()
-    private lazy var hostView = HostingViewController(model2: viewModel.environment)
+    private lazy var hostView = HostingViewController(model: viewModel.environment)
     private lazy var graphView: UIView = {
         guard let chartView = hostView.view else {
             return UIView(frame: .zero)
@@ -126,13 +126,13 @@ final class AnalyzeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.viewModel.input.onViewWillAppear()
-        bindEvents()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
         setupUI()
+        bindEvents()
     }
     
     private func setup() {
@@ -268,29 +268,29 @@ final class AnalyzeViewController: UIViewController {
 
 extension AnalyzeViewController {
     
-    @objc func tappedAnalyzeButton() {
+    @objc private func tappedAnalyzeButton() {
         viewModel.input.tapAnalyzeButton()
         segmentControl.isEnabled = false
         saveButtonItem.isEnabled = false
         analyzeButton.isEnabled = false
     }
     
-    @objc func tappedStopButton() {
+    @objc private func tappedStopButton() {
         viewModel.input.tapStopButton()
         segmentControl.isEnabled = true
         saveButtonItem.isEnabled = true
         analyzeButton.isEnabled = true
     }
     
-    @objc func tappedBackButton() {
+    @objc private func tappedBackButton() {
         self.navigationController?.popViewController(animated: true)
     }
     
-    @objc func tappedSaveButton() {
+    @objc private func tappedSaveButton() {
         viewModel.input.tapSaveButton()
     }
     
-    @objc func changeSegmentMode() {
+    @objc private func changeSegmentMode() {
         viewModel.input.changeAnalyzeMode(segmentControl.selectedSegmentIndex)
     }
 }

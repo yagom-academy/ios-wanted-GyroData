@@ -29,7 +29,7 @@ protocol AnalyzeViewModelInterface {
 }
 
 final class AnalyzeViewModel: AnalyzeViewModelInterface, AnalyzeViewModelOutputInterface {
-    var store: AnyCancellable?
+    private var cancelable = Set<AnyCancellable>()
 
     // MARK: AnalyzeViewModelInterface
     var input: AnalyzeViewModelInputInterface { self }
@@ -42,7 +42,7 @@ final class AnalyzeViewModel: AnalyzeViewModelInterface, AnalyzeViewModelOutputI
     var analyzeModelPublisher = PassthroughSubject<AnalysisData, Never>()
     
     @Published var environment: EnvironmentGraphModel = .init()
-    @Published var analysis: [GraphModel] = []
+    @Published private var analysis: [GraphModel] = []
     
     private let analysisManager: AnalysisManager
     private var timer: Timer?
@@ -139,10 +139,11 @@ extension AnalyzeViewModel: AnalyzeViewModelInputInterface {
 
 extension AnalyzeViewModel: ObservableObject {
     func bind() {
-        store = $analysis
+        $analysis
             .sink { [weak self] model in
                 guard let self = self else { return }
                 self.environment.graphModels = model
             }
+            .store(in: &cancelable)
     }
 }

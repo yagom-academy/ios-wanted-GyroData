@@ -9,9 +9,9 @@ import UIKit
 import SwiftUI
 import Combine
 
-class GraphRecordViewController: UIViewController {
-    var graphRecordViewModel: GraphRecordViewModel
-    var cancelable = Set<AnyCancellable>()
+final class GraphRecordViewController: UIViewController {
+    private var graphRecordViewModel: GraphRecordViewModel
+    private var cancelable = Set<AnyCancellable>()
     
     init(graphRecordviewModel: GraphRecordViewModel) {
         self.graphRecordViewModel = graphRecordviewModel
@@ -91,7 +91,7 @@ class GraphRecordViewController: UIViewController {
         return label
     }()
     
-    private lazy var graphView: UIView = HostingViewController(model2: graphRecordViewModel.environmentGraphModel).view
+    private lazy var graphView: UIView = HostingViewController(model: graphRecordViewModel.environmentGraphModel).view
     
     private lazy var playButton: UIButton = {
         let button = UIButton(type: .system)
@@ -128,7 +128,7 @@ class GraphRecordViewController: UIViewController {
         return label
     }()
     
-    func setup() {
+    private func setup() {
         self.view.backgroundColor = UIColor(r: 39, g: 40, b: 46, a: 1)
         view.addSubviews(
             dateLabel,
@@ -145,7 +145,7 @@ class GraphRecordViewController: UIViewController {
         locationStackView.addArrangedSubview(zLabel)
     }
     
-    func setupUI() {
+    private func setupUI() {
         graphView.backgroundColor = .white
         graphView.layer.cornerRadius = 10
         
@@ -229,13 +229,13 @@ extension GraphRecordViewController {
             .store(in: &cancelable)
     }
     
-    @objc func tappedPlayButton() {
+    @objc private func tappedPlayButton() {
         graphRecordViewModel.input.tappedPlayButton()
         self.stopButton.isHidden = false
         self.playButton.isHidden = true
     }
     
-    @objc func tappedStopButton() {
+    @objc private func tappedStopButton() {
         graphRecordViewModel.input.tappedStopButton()
         self.stopButton.isHidden = true
         self.playButton.isHidden = false

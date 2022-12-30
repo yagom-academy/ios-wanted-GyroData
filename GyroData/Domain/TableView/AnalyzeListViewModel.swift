@@ -37,13 +37,12 @@ final class AnalyzeListViewModel: AnalyzeListViewModelInterface, AnalyzeListView
 
     // MARK: AnalyzeViewModelOutputInterface
     var analysis: [GyroData] = []
-    var graph: [GraphModel] = []
+    private var graph: [GraphModel] = []
     
     private func fetchCoreData() {
         guard let fetchedData = CoreDataManager.shared.read() else {
             return
         }
-        
         analysis = fetchedData
     }
 }
