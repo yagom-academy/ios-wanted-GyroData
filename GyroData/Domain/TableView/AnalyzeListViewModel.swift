@@ -2,7 +2,7 @@
 //  AnalyzeListViewModel.swift
 //  GyroData
 //
-//  Created by unchain on 2022/12/30.
+//  Created by Ellen J, unchain, yeton on 2022/12/30.
 //
 
 import Foundation

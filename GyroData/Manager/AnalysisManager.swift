@@ -2,7 +2,7 @@
 //  AnalysisManager.swift
 //  GyroData
 //
-//  Created by Ellen J on 2022/12/26.
+//  Created by Ellen J, unchain, yeton on 2022/12/26.
 //
 
 import Foundation
