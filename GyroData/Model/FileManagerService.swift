@@ -18,12 +18,7 @@ class FileManagerService {
         do {
             let encodeData = try jsonEncoder.encode(data)
             let fileURL = documentURL.appending(path: data.measureDate + ".json")
-            
-            do {
-                try encodeData.write(to: fileURL)
-            } catch {
-                throw FileError.writeError
-            }
+            try encodeData.write(to: fileURL)
         } catch {
             throw FileError.encodeError
         }

@@ -347,7 +347,7 @@ extension MeasureViewController {
     private func initData(sensorType: SensorType) {
         let date = Date()
         let formatter = DateFormatter()
-        formatter.dateFormat = "y/M/d HH:mm:ss"
+        formatter.dateFormat = "y-M-d_HH:mm:ss"
         self.graphView.clear()
         self.graphView.setMax(max: sensorType.max)
         

@@ -181,11 +181,10 @@ extension ListViewController: UITableViewDelegate {
         play.backgroundColor = .systemGreen
         
         let delete = UIContextualAction(style: .normal, title: "Delete") { (UIContextualAction, UIView, success: @escaping (Bool) -> Void) in
+            FileManagerService.shared.deleteMeasureFile(fileName: self.measureDataList[indexPath.row].measureDate!)
             CoreDataManager.shared.context.delete(self.measureDataList[indexPath.row])
             self.measureDataList.remove(at: indexPath.row)
             CoreDataManager.shared.saveContext()
-            
-            FileManagerService.shared.deleteMeasureFile(fileName: self.measureDataList[indexPath.row].measureDate!)
             
             self.tableView.reloadData()
             self.fetchOffset -= 1
@@ -222,8 +221,10 @@ extension ListViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ListCell.cellId, for: indexPath) as? ListCell else {
             return UITableViewCell()
         }
+        let time = measureDataList[indexPath.row].measureDate
+        let replaceTime = (time?.replacingOccurrences(of: "-", with: "/"))?.replacingOccurrences(of: "_", with: " ")
         
-        cell.timeLabel.text = measureDataList[indexPath.row].measureDate
+        cell.timeLabel.text = replaceTime
         cell.typeLabel.text = measureDataList[indexPath.row].sensorType
         cell.valueLabel.text = measureDataList[indexPath.row].measureTime
         

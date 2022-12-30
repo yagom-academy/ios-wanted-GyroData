@@ -114,8 +114,15 @@ class ShowViewController: BaseViewController {
 // MARK: - ConfigureUI
 extension ShowViewController {
     private func configureUI() {
+        setDateLabel()
         configureNavigationBar()
         checkViewType()
+    }
+    
+    private func setDateLabel() {
+        let time = measureData?.measureDate
+        let replaceTime = (time?.replacingOccurrences(of: "-", with: "/"))?.replacingOccurrences(of: "_", with: " ")
+        self.timeLabel.text = replaceTime
     }
     
     private func configureNavigationBar() {
@@ -250,6 +257,7 @@ extension ShowViewController {
                 
                 if self.playTime >= self.measureData?.xData.count ?? 0 {
                     self.timer?.invalidate()
+                    self.playButton.setImage(UIImage(systemName: "play.fill", withConfiguration: imageConfig), for: .normal)
                     
                     return
                 }
