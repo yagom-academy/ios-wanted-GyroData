@@ -63,3 +63,9 @@ extension MainViewController: UITableViewDataSource {
         return cell
     }
 }
+
+extension MainViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.navigationController?.pushViewController(DetailViewController(), animated: true)
+    }
+}
