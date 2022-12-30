@@ -11,10 +11,11 @@ final class GraphSegment: UIView {
     private(set) var dataPoint = [Double]()
     private let startPoint: [Double]
     private var valueRange = GraphNumber.initialRange
+    private let segmentWidth: CGFloat
     
-    init(startPoint: [Double]) {
+    init(startPoint: [Double], segmentWidth: CGFloat) {
         self.startPoint = startPoint
-        
+        self.segmentWidth = segmentWidth
         super.init(frame: .zero)
     }
     
@@ -33,7 +34,7 @@ final class GraphSegment: UIView {
             let startValue = startPoint[line.rawValue]
             let startPoint = CGPoint(x: bounds.size.width,
                                      y: scaledValue(startValue))
-            let endPoint = CGPoint(x: bounds.size.width - GraphNumber.segmentWidth,
+            let endPoint = CGPoint(x: bounds.size.width - segmentWidth,
                                    y: scaledValue(dataPoint[line.rawValue]))
             
             context.move(to: startPoint)

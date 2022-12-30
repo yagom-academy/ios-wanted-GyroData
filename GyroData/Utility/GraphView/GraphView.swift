@@ -89,7 +89,7 @@ final class GraphView: UIView {
             startPoint = GraphNumber.initialPoint
         }
         
-        let newSegment = GraphSegment(startPoint: startPoint)
+        let newSegment = GraphSegment(startPoint: startPoint, segmentWidth: segmentWidth)
         newSegment.backgroundColor = .clear
         newSegment.frame = CGRect(x: .zero,
                                   y: .zero,
