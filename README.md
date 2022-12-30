@@ -112,7 +112,7 @@
 
 ### MVVM + Coordinator 구조
 
-![](https://i.imgur.com/8qxKASW.png)
+![](https://i.imgur.com/Y1Bjij0.png)
 
 &nbsp;
 
