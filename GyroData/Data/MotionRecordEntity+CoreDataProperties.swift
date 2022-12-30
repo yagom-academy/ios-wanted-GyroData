@@ -18,7 +18,6 @@ extension MotionRecordEntity {
 
     @NSManaged public var motionRecordId: UUID
     @NSManaged public var startDate: Date
-    @NSManaged public var msInterval: Int64
     @NSManaged public var motionMode: String
     @NSManaged public var coordinates: [[Double]]
 
@@ -26,7 +25,6 @@ extension MotionRecordEntity {
         return MotionRecord(
             id: motionRecordId,
             startDate: startDate,
-            msInterval: Int(msInterval),
             motionMode: .accelerometer,
             coordinates: coordinates.map { Coordinate(x: $0[0], y: $0[1], z: $0[2]) }
         )

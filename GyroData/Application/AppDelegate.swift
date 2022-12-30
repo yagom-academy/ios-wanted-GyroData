@@ -33,8 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             randomCoordinates.append(randomCoordinate)
         }
 
-        let record = MotionRecord(id: UUID(), startDate: Date(),
-                                  msInterval: 10, motionMode: .accelerometer,
+        let record = MotionRecord(id: UUID(), startDate: Date(), motionMode: .accelerometer,
                                   coordinates: randomCoordinates)
 
         MotionRecordingStorage().saveRecord(record: record) { result in

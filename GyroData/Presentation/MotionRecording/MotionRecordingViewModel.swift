@@ -34,25 +34,20 @@ final class MotionRecordingViewModel {
     private var startDate = Date()
     private var motionManager = CMMotionManager()
     private var coordinates = [Coordinate]()
-    private var updateTimeInterval: TimeInterval {
-        didSet {
-            motionManager.accelerometerUpdateInterval = updateTimeInterval
-            motionManager.gyroUpdateInterval = updateTimeInterval
-        }
-    }
+    private let updateTimeInterval: TimeInterval = 0.1
     private var updateCompletion: (Coordinate) -> Void
 
-    init(msInterval: Int, motionMode: MotionMode, updateCompletion: @escaping (Coordinate) -> Void) {
+    init(motionMode: MotionMode, updateCompletion: @escaping (Coordinate) -> Void) {
         self.motionMode = motionMode
-        updateTimeInterval = Double(msInterval) / 1000
         self.updateCompletion = updateCompletion
+        motionManager.accelerometerUpdateInterval = updateTimeInterval
+        motionManager.gyroUpdateInterval = updateTimeInterval
     }
 
     func saveRecord() {
         let motionRecord = MotionRecord(
             id: UUID(),
             startDate: startDate,
-            msInterval: Int(updateTimeInterval),
             motionMode: motionMode,
             coordinates: coordinates
         )
