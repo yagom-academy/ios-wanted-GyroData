@@ -6,9 +6,11 @@
 //
 
 import UIKit
+import Combine
 
 class AnalyzeListViewController: UIViewController {
     let listViewModel = AnalyzeListViewModel()
+    var store: AnyCancellable?
     
     let analysisTableView : UITableView = {
         let tableView = UITableView()
@@ -45,6 +47,7 @@ class AnalyzeListViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = analyzeButton
         setTableView()
         listViewModel.input.onViewDidLoad()
+        bind()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -79,7 +82,6 @@ extension AnalyzeListViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let play = UIContextualAction(style: .normal, title: "Play") { (UIContextualAction, UIView, success: @escaping (Bool) -> Void) in
             self.listViewModel.input.playButtonDidTap(indexPath: indexPath)
-            self.navigationController?.pushViewController(GraphRecordViewController(), animated: true)
         }
         
         let delete = UIContextualAction(style: .normal, title: "Delete") { (UIContextualAction, UIView, success: @escaping (Bool) -> Void) in
@@ -95,5 +97,16 @@ extension AnalyzeListViewController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+    }
+    
+    func bind() {
+        store = listViewModel.selectedItemPublisher
+            .sink { [weak self] model in
+                guard let self = self else {
+                    return
+                }
+                
+                self.navigationController?.pushViewController(GraphRecordViewController(graphRecordviewModel: GraphRecordViewModel(model: model)), animated: true)
+            }
     }
 }

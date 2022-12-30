@@ -8,7 +8,6 @@
 import SwiftUI
 
 class HostingViewController: UIHostingController<AnyView> {
-    
     init(model2: EnvironmentGraphModel) {
         super.init(rootView: AnyView(GraphView().environmentObject(model2)))
     }

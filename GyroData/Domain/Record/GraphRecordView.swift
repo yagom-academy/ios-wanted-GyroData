@@ -1,5 +1,5 @@
 //
-//  GraphRecordView.swift
+//  GraphRecordViewController.swift
 //  GyroData
 //
 //  Created by unchain, Ellen J, yeton on 2022/12/28.
@@ -8,7 +8,26 @@
 import UIKit
 import SwiftUI
 
-class GraphRecordView: UIView {
+class GraphRecordViewController: UIViewController {
+    var graphRecordViewModel: GraphRecordViewModel
+    
+    init(graphRecordviewModel: GraphRecordViewModel) {
+        self.graphRecordViewModel = graphRecordviewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        graphRecordViewModel.input.onViewDidLoad()
+        setup()
+        setupUI()
+    }
+    
     private lazy var verticalStackView: UIStackView = {
         var stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -37,19 +56,7 @@ class GraphRecordView: UIView {
         return label
     }()
     
-    private lazy var graphView: UIView = {
-        return UIView()
-    }()
-    
-    //    private func setupHostView() -> UIView {
-    //        let host = UIHostingController(rootView: GraphView())
-    //        guard let chartView = host.view else {
-    //            return UIView(frame: .zero)
-    //        }
-    //        chartView.translatesAutoresizingMaskIntoConstraints = false
-    //        chartView.backgroundColor = UIColor(r: 16, g: 17, b: 21, a: 1)
-    //        return chartView
-    //    }
+    private lazy var graphView: UIView = HostingViewController(model2: graphRecordViewModel.environmentGraphModel).view
     
     private lazy var pausePlayButton: UIButton = {
         let button = UIButton(type: .system)
@@ -74,19 +81,8 @@ class GraphRecordView: UIView {
         return label
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        setup()
-        setupUI()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     func setup() {
-        addSubviews(verticalStackView, graphView, pausePlayButton, timerLabel)
+        view.addSubviews(verticalStackView, graphView, pausePlayButton, timerLabel)
         
         [dateLabel, viewNameLabel].forEach {
             verticalStackView.addArrangedSubview($0)
@@ -94,20 +90,20 @@ class GraphRecordView: UIView {
     }
     
     func setupUI() {
-        self.backgroundColor = .white
+        graphView.backgroundColor = .white
         graphView.layer.cornerRadius = 10
         
         NSLayoutConstraint.activate([
             // MARK: - verticalStackView
-            verticalStackView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 30),
-            verticalStackView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            verticalStackView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 30),
+            verticalStackView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             verticalStackView.bottomAnchor.constraint(equalTo: graphView.topAnchor, constant: -15)
         ])
         
         NSLayoutConstraint.activate([
             // MARK: - graphView
-            graphView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            graphView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 80),
+            graphView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            graphView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 80),
             graphView.widthAnchor.constraint(equalToConstant: 300),
             graphView.heightAnchor.constraint(equalToConstant: 300)
         ])
@@ -115,7 +111,7 @@ class GraphRecordView: UIView {
         NSLayoutConstraint.activate([
             // MARK: - pausePlayButton
             pausePlayButton.topAnchor.constraint(equalTo: graphView.bottomAnchor, constant: 35),
-            pausePlayButton.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            pausePlayButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             pausePlayButton.widthAnchor.constraint(equalToConstant: 30)
         ])
         
@@ -124,7 +120,7 @@ class GraphRecordView: UIView {
             timerLabel.topAnchor.constraint(equalTo: graphView.bottomAnchor, constant: 35),
             timerLabel.widthAnchor.constraint(equalToConstant: 30),
             timerLabel.leadingAnchor.constraint(equalTo: pausePlayButton.trailingAnchor, constant: 80),
-            timerLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10)
+            timerLabel.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -10)
         ])
     }
 }
