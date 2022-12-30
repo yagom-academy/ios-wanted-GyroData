@@ -8,6 +8,6 @@
 import Foundation
 
 protocol MotionDataListStorageProtocol {
-    func loadMotionRecords(page: Int, completion: @escaping (Result<[MotionRecord], Error>) -> Void)
+    func loadMotionRecords(page: Int, completion: @escaping (Result<FetchMotionDataListResponse, Error>) -> Void)
     func deleteRecord(id: UUID, completion: @escaping (Result<Void, Error>) -> Void)
 }

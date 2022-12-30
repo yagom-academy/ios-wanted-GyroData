@@ -34,14 +34,10 @@ final class MotionReplayViewController: UIViewController {
         label.font = UIFont.preferredFont(forTextStyle: .largeTitle)
         return label
     }()
-    private var timer: DispatchSourceTimer = {
-        let timer = DispatchSource.makeTimerSource(queue: .main)
-        timer.schedule(deadline: .now(), repeating: 0.1)
-        return timer
-    }()
+    private var timer = Timer()
 
     init(replayType: ReplayType, motionRecord: MotionRecord) {
-        viewModel = MotionReplayViewModel(replayType: replayType, record: motionRecord)
+        viewModel = MotionReplayViewModel(replayType: replayType, id: motionRecord.id)
         graphView = GraphView(xScale: CGFloat(motionRecord.coordinates.count))
         super.init(nibName: nil, bundle: nil)
     }
@@ -62,9 +58,12 @@ final class MotionReplayViewController: UIViewController {
     }
 
     override func viewDidLayoutSubviews() {
-        if viewModel.replayType == .view && !viewModel.didGraphViewStartedDrawing {
-            viewModel.didGraphViewStartedDrawing = true
-            showFinishedGraphView()
+        viewModel.fetchMotionData { [weak self] in
+            guard let self = self else { return }
+            if self.viewModel.replayType == .view && !self.viewModel.isDrawingGraphView {
+                self.viewModel.isDrawingGraphView = true
+                self.showFinishedGraphView()
+            }
         }
     }
 
@@ -103,7 +102,7 @@ final class MotionReplayViewController: UIViewController {
     }
 
     private func setUpLabelContents() {
-        dateLabel.text = viewModel?.record.startDate.toString()
+        dateLabel.text = viewModel?.record?.startDate.toString()
         typeLabel.text = viewModel?.replayType.name
     }
 
@@ -113,20 +112,23 @@ final class MotionReplayViewController: UIViewController {
     }
 
     private func playGraphView() {
-        let record = viewModel.record
-        viewModel.didGraphViewStartedDrawing = true
+        graphView.reset()
+        guard let record = viewModel.record else { return }
+        viewModel.isDrawingGraphView = true
+
         var index = 0
         var time: Double = 0
 
-        timer.setEventHandler { [weak self] in
+        timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] timer in
             self?.graphView.drawGraphFor1Hz(layerType: .red, value: record.coordinates[index].x)
             self?.graphView.drawGraphFor1Hz(layerType: .green, value: record.coordinates[index].y)
             self?.graphView.drawGraphFor1Hz(layerType: .blue, value: record.coordinates[index].z)
             index += 1
             time += 0.1
             if index >= record.coordinates.count {
-                self?.timer.suspend()
+                timer.invalidate()
                 self?.playButton.isSelected = true
+                self?.viewModel.isDrawingGraphView = false
             }
             self?.timerLabel.text = "\(String(format:"%.1f", time))"
         }
@@ -143,15 +145,14 @@ final class MotionReplayViewController: UIViewController {
 
     @objc
     private func playButtonTapped(_ sender: UIButton) {
-        if viewModel.playButtonState == .play {
+        if viewModel.playButtonState == .play && viewModel.record != nil {
             viewModel.playButtonState = .stop
             playButton.setImage(UIImage(systemName: "stop.fill"), for: .normal)
-            if !viewModel.didGraphViewStartedDrawing { playGraphView() }
-            timer.resume()
+            playGraphView()
         } else {
             viewModel.playButtonState = .play
             playButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
-            timer.suspend()
+            timer.invalidate()
         }
     }
 }

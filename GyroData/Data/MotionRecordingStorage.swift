@@ -9,6 +9,7 @@ import Foundation
 
 final class MotionRecordingStorage: MotionRecordingStorageProtocol {
     private let coreDataStorage = CoreDataStorage.shared
+    private let fileStorage = FileStorage.shared
 
     func saveRecord(record: MotionRecord, completion: @escaping (Result<Void, Error>) -> Void) {
         let context = coreDataStorage.persistentContainer.viewContext
@@ -24,7 +25,17 @@ final class MotionRecordingStorage: MotionRecordingStorageProtocol {
                 try context.save()
                 completion(.success(Void()))
             } catch {
+                print(error)
                 completion(.failure(error))
+            }
+
+            self.fileStorage.saveFile(motionRecordData: record.toDTO()) { result in
+                switch result {
+                case .success:
+                    completion(.success(()))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
             }
         }
     }

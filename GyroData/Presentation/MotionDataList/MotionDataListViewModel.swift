@@ -11,9 +11,12 @@ final class MotionDataListViewModel {
     private let fetchMotionDataListUseCase = FetchMotionDataListUseCase()
     private let deleteMotionDataListUseCase = DeleteMotionDataUseCase()
     private var pageToLoad = 0
+    var hasNextPage = true
     var reloadData: (() -> Void)?
+    var isFetching = false
 
     func viewWillAppear() {
+        initializeViewModel()
         fetchMotionDataList(page: pageToLoad)
     }
 
@@ -25,13 +28,37 @@ final class MotionDataListViewModel {
         }
     }
 
-    private func fetchMotionDataList(page: Int) {
+    func fetchNextPage(completion: @escaping ([IndexPath]) -> Void) {
+        if !isFetching && hasNextPage {
+            isFetching = true
+            fetchMotionDataList(page: pageToLoad) { [weak self] fetchedCount in
+                guard let self = self else { return }
+                completion((self.records.count - fetchedCount ... self.records.endIndex).map {
+                    return IndexPath(row: $0, section: 0)
+                })
+                self.isFetching = false
+            }
+        }
+    }
+
+    private func initializeViewModel() {
+        hasNextPage = true
+        pageToLoad = 0
+        records.removeAll()
+    }
+
+    private func fetchMotionDataList(page: Int, completion: ((Int) -> Void)? = nil) {
+        isFetching = true
         fetchMotionDataListUseCase.execute(page: page) { [weak self] result in
             guard let self = self else { return }
             switch result {
-            case .success(let records):
-                self.records = records
+            case .success(let response):
+                self.records += response.records
+                self.pageToLoad = response.currentPage + 1
+                self.hasNextPage = response.hasNextPage
+                self.isFetching = false
                 self.reloadData?()
+                completion?(response.records.count)
             case .failure(let error):
                 print(error)
             }

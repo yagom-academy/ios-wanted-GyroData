@@ -9,13 +9,27 @@ import Foundation
 
 final class MotionReplayViewModel {
     let replayType: ReplayType
-    let record: MotionRecord
-    var didGraphViewStartedDrawing = false
+    let recordId: UUID
+    var record: MotionRecord?
+    var isDrawingGraphView = false
     var playButtonState: PlayButtonState = .play
+    private let fetchMotionDataUseCase = FetchMotionDataUseCase()
 
-    init(replayType: ReplayType, record: MotionRecord) {
+    init(replayType: ReplayType, id: UUID) {
         self.replayType = replayType
-        self.record = record
+        self.recordId = id
+    }
+
+    func fetchMotionData(completion: @escaping () -> Void) {
+        fetchMotionDataUseCase.execute(id: recordId) { result in
+            switch result {
+            case .success(let record):
+                self.record = record
+                completion()
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 }
 

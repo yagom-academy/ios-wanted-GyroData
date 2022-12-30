@@ -18,7 +18,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = UINavigationController(rootViewController: MotionDataListViewController())
         window?.makeKeyAndVisible()
-
         return true
     }
 
