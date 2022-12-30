@@ -58,7 +58,6 @@ final class CoreDataManager {
         if context.hasChanges {
             do {
                 try context.save()
-//                read()
             } catch {
                 print(error.localizedDescription)
             }

@@ -13,7 +13,7 @@ class HostingViewController: UIHostingController<AnyView> {
         super.init(rootView: AnyView(GraphView().environmentObject(model2)))
     }
     
-    @objc required dynamic init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    @objc required dynamic init?(coder: NSCoder) {
+        super.init(coder: coder)
     }
 }

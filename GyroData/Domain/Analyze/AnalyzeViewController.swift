@@ -32,7 +32,7 @@ final class AnalyzeViewController: UIViewController {
         segmentControl.addTarget(self, action: #selector(changeSegmentMode), for: .valueChanged)
         return segmentControl
     }()
-        
+
     private lazy var analyzeButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = UIColor(r: 101, g: 159, b: 247, a: 1)
@@ -50,7 +50,7 @@ final class AnalyzeViewController: UIViewController {
         button.addTarget(self, action: #selector(tappedStopButton), for: .touchUpInside)
         return button
     }()
-        
+
     private lazy var titleLabelItem: UILabel = {
         let label = UILabel()
         label.text = "측정하기"
@@ -79,28 +79,28 @@ final class AnalyzeViewController: UIViewController {
     
     @ObservedObject private var viewModel = AnalyzeViewModel(analysisManager: AnalysisManager())
     private var swiftUIChartsView = GraphView()
-    private lazy var hostView = HostingViewController(model2: viewModel.environmnt)
+    private lazy var hostView = HostingViewController(model2: viewModel.environment)
     private lazy var graphView: UIView = {
         guard let chartView = hostView.view else {
             return UIView(frame: .zero)
         }
         return chartView
     }()
-    private var cancellables = Set<AnyCancellable>()
+    private var cancelStore: AnyCancellable?
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
         self.viewModel.input.onViewWillAppear()
-//        viewModel.bind()
         bindEvents()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         self.viewModel.input.onViewDidLoad()
         setup()
         setupUI()
-//        viewModel.bind()
     }
     
     private func setup() {
@@ -192,7 +192,7 @@ final class AnalyzeViewController: UIViewController {
     }
     
     private func bindEvents() {
-        viewModel.isLoadingPublisher
+        cancelStore = viewModel.isLoadingPublisher
             .sink { [weak self] isLoading in
                 guard let self = self else { return }
                 if isLoading {
@@ -201,14 +201,12 @@ final class AnalyzeViewController: UIViewController {
                     self.activityIndicator.stopAnimating()
                 }
             }
-            .store(in: &cancellables)
         
-        viewModel.dissmissPublisher
+        cancelStore = viewModel.dismissPublisher
             .sink { [weak self] _ in
                 guard let self = self else { return }
                 self.navigationController?.popViewController(animated: true)
             }
-            .store(in: &cancellables)
     }
 }
 

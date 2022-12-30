@@ -44,7 +44,6 @@ class AnalyzeListViewController: UIViewController {
         self.navigationItem.titleView = titleLabel
         self.navigationItem.rightBarButtonItem = analyzeButton
         setTableView()
-        CoreDataManager.shared.read()
     }
     
     func setTableView() {

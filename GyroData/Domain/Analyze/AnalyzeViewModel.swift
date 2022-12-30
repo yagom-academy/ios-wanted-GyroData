@@ -14,7 +14,7 @@ protocol AnalyzeViewModelInputInterface {
     func tapAnalyzeButton()
     func tapStopButton()
     func tapSaveButton()
-    func changeAnalyzeMode(_ segmentcontrolNumber: Int)
+    func changeAnalyzeMode(_ segmentControlNumber: Int)
 }
 
 protocol AnalyzeViewModelOutputInterface {
@@ -37,9 +37,9 @@ final class AnalyzeViewModel: AnalyzeViewModelInterface, AnalyzeViewModelOutputI
     // MARK: AnalyzeViewModelOutputInterface
     var analysisPublisher = PassthroughSubject<[GraphModel], Never>()
     var isLoadingPublisher = PassthroughSubject<Bool, Never>()
-    var dissmissPublisher = PassthroughSubject<Void, Never>()
+    var dismissPublisher = PassthroughSubject<Void, Never>()
     
-    @Published var environmnt: EnvironmentGraphModel = .init()
+    @Published var environment: EnvironmentGraphModel = .init()
     @Published var analysis: [GraphModel] = []
     
     private let analysisManager: AnalysisManager
@@ -61,7 +61,7 @@ final class AnalyzeViewModel: AnalyzeViewModelInterface, AnalyzeViewModelOutputI
             guard let self = self else { return }
             let date = timer.fireDate.timeIntervalSince1970
             let measureTime = date - now
-            let data = self.analysisManager.startAnalyse()
+            let data = self.analysisManager.startAnalyze()
             self.analysis.append(.init(x: data.x, y: data.y, z: data.z, measurementTime: measureTime))
             print(self.analysis)
         })
@@ -75,7 +75,7 @@ final class AnalyzeViewModel: AnalyzeViewModelInterface, AnalyzeViewModelOutputI
         if timer != nil {
             timer?.invalidate()
             timer = nil
-            analysisManager.stopAnalyse()
+            analysisManager.stopAnalyze()
         }
     }
 }
@@ -94,7 +94,7 @@ extension AnalyzeViewModel: AnalyzeViewModelInputInterface {
     
     func tapStopButton() {
         stopTimer()
-        analysisManager.stopAnalyse()
+        analysisManager.stopAnalyze()
         print(analysis)
     }
     
@@ -123,7 +123,7 @@ extension AnalyzeViewModel: AnalyzeViewModelInputInterface {
                 print(self.cellModel)
             }
             self.isLoadingPublisher.send(false)
-            self.dissmissPublisher.send(())
+            self.dismissPublisher.send(())
         }
     }
     
@@ -137,7 +137,7 @@ extension AnalyzeViewModel: ObservableObject {
         store = $analysis
             .sink { [weak self] model in
                 guard let self = self else { return }
-                self.environmnt.graphModels = model
+                self.environment.graphModels = model
             }
     }
 }

@@ -9,14 +9,13 @@ import Charts
 import SwiftUI
 import Combine
 
-
 struct GraphView: View {
     @EnvironmentObject var environment: EnvironmentGraphModel
     
     var body: some View {
         ZStack(alignment: .top) {
             GroupBox {
-                FigureView(viewModel2: environment)
+                FigureView(viewModel: environment)
                 Chart {
                     ForEach(environment.graphModels, id: \.measurementTime) { data in
                         LineMark(
@@ -55,7 +54,7 @@ struct GraphView: View {
     }
     
     struct FigureView: View {
-        @ObservedObject var viewModel2 : EnvironmentGraphModel
+        @ObservedObject var viewModel: EnvironmentGraphModel
         var body: some View {
             HStack {
                 Text("xdata")

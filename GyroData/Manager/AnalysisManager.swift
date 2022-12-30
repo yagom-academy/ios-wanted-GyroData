@@ -11,14 +11,14 @@ import CoreMotion
 typealias AnalysisData = (x: Double, y: Double, z: Double)
 
 protocol AnalysisManagerType {
-    func startAnalyse() -> AnalysisData
-    func stopAnalyse()
+    func startAnalyze() -> AnalysisData
+    func stopAnalyze()
 }
 
 struct AnalysisManager: AnalysisManagerType {
     private let motion = CMMotionManager()
     
-    func startAnalyse() -> AnalysisData {
+    func startAnalyze() -> AnalysisData {
         guard motion.isAccelerometerAvailable else {
             return (x: 0, y: 0, z: 0)
         }
@@ -31,7 +31,7 @@ struct AnalysisManager: AnalysisManagerType {
         return (x: data.x, y: data.y, z: data.z)
     }
     
-    func stopAnalyse() {
+    func stopAnalyze() {
         motion.stopAccelerometerUpdates()
     }
 }
