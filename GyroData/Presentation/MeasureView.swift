@@ -45,8 +45,17 @@ class MeasureView: UIView {
         let button = UIButton()
         button.setTitle("정지", for: .normal)
         button.setTitleColor(.systemBlue, for: .normal)
+        button.isHidden = true
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
+    }()
+    
+    let indicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView()
+        indicator.style = .large
+        indicator.color = .systemBlue
+
+        return indicator
     }()
     
     override init(frame: CGRect) {
@@ -63,6 +72,7 @@ class MeasureView: UIView {
         self.addSubview(chartsView)
         self.addSubview(measurementButton)
         self.addSubview(stopButton)
+        self.addSubview(indicator)
         
         NSLayoutConstraint.activate([
             measurementSegmentedControl.leftAnchor.constraint(

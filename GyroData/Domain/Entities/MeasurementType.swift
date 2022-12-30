@@ -12,7 +12,7 @@ enum MeasurementType {
     var name: String {
         switch self {
         case .acc:
-            return "Acc"
+            return "Accelerometer"
         case .gyro:
             return "Gyro"
         }

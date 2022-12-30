@@ -9,26 +9,34 @@ import CoreMotion
 
 class MeasurementService {
     private let manager = CMMotionManager()
-    private var timer = Timer()
+    private(set) var timer = Timer()
     
-    var accCoordinates: Observable<[(x: Double, y: Double, z: Double)]> = Observable([])
     var gyroCoordinates: Observable<[(x: Double, y: Double, z: Double)]> = Observable([])
 
+    private var stopAction: (() -> Void)?
+    
     func measureAccelerometer() {
-        accCoordinates.value = []
+        gyroCoordinates.value = []
         manager.startAccelerometerUpdates()
         manager.accelerometerUpdateInterval = 0.1
         
         var second = 0
-        timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] timer in
+        
+        timer = Timer.scheduledTimer(
+            withTimeInterval: 0.1,
+            repeats: true
+        ) { [weak self] timer in
             second += 1
             
             if second == 600 {
-                timer.invalidate()
+                self?.stopAction?()
             }
             if let data = self?.manager.accelerometerData {
-                let coordinate = (data.acceleration.x, data.acceleration.y, data.acceleration.z)
-                self?.accCoordinates.value.append(coordinate)
+                self?.gyroCoordinates.value.append(
+                    (x: data.acceleration.x,
+                     y: data.acceleration.y,
+                     z: data.acceleration.z)
+                )
             }
         }
     }
@@ -39,21 +47,37 @@ class MeasurementService {
         manager.gyroUpdateInterval = 0.1
         
         var second = 0
-        timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] timer in
+
+        timer = Timer.scheduledTimer(
+            withTimeInterval: 0.1, repeats: true
+        ) { [weak self] timer in
             second += 1
             
             if second == 600 {
-                timer.invalidate()
+                self?.stopAction?()
             }
             
             if let data = self?.manager.gyroData {
-                let coordinate = (data.rotationRate.x, data.rotationRate.y, data.rotationRate.z)
-                self?.gyroCoordinates.value.append(coordinate)
+                self?.gyroCoordinates.value.append(
+                    (x: data.rotationRate.x,
+                     y: data.rotationRate.y,
+                     z: data.rotationRate.z)
+                )
             }
         }
     }
     
     func stopMeasurement() {
         timer.invalidate()
+    }
+
+    func getMeasurementResult() -> [(x: Double, y: Double, z: Double)] {
+        let result = gyroCoordinates.value
+        gyroCoordinates.value = []
+        return result
+    }
+    
+    func registStopAction(action: @escaping (() -> Void)) {
+        stopAction = action
     }
 }

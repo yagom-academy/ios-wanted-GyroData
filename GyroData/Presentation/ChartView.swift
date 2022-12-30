@@ -61,6 +61,7 @@ final class ChartView: UIView {
     private var lastValueOfZ: Double = 0
     
     private var current: Double = 0
+    private var scale: Double = 30
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -123,25 +124,34 @@ final class ChartView: UIView {
     
     func playChart(value: Motion) {
         let xOffset = frame.width / CGFloat(600)
+        let yOffset = frame.height / CGFloat(2)
         
-        var currentX: CGFloat = 0
-        var currentY: CGFloat = 0
-        var currentZ: CGFloat = 0
-        
-        pathX.move(to: CGPoint(x: currentX, y: CGFloat(value.motionX[0])))
-        pathY.move(to: CGPoint(x: currentY, y: CGFloat(value.motionY[0])))
-        pathZ.move(to: CGPoint(x: currentZ, y: CGFloat(value.motionZ[0])))
+        pathX.move(to: CGPoint(x: current, y: CGFloat(value.motionX[0])))
+        pathY.move(to: CGPoint(x: current, y: CGFloat(value.motionY[0])))
+        pathZ.move(to: CGPoint(x: current, y: CGFloat(value.motionZ[0])))
         
         for v in 0..<value.motionX.count {
-            currentX += xOffset
-            currentY += xOffset
-            currentZ += xOffset
-            let newPosition1: CGPoint = CGPoint(x: currentX, y: CGFloat(value.motionX[v]))
-            let newPosition2: CGPoint = CGPoint(x: currentY, y: CGFloat(value.motionY[v]))
-            let newPosition3: CGPoint = CGPoint(x: currentZ, y: CGFloat(value.motionZ[v]))
-            pathX.addLine(to: newPosition1)
-            pathY.addLine(to: newPosition2)
-            pathZ.addLine(to: newPosition3)
+            current += xOffset
+            
+            let x = value.motionX[v]
+            let y = value.motionY[v]
+            let z = value.motionZ[v]
+            
+            while x * scale >= 150 || x * scale <= -150
+                    || y * scale >= 150 || y * scale <= -150
+                    || z * scale >= 150 || z * scale <= -150 {
+                scale -= scale * 0.2
+            }
+            
+            let mX = x * scale + Double(yOffset)
+            let mY = y * scale + Double(yOffset)
+            let mZ = z * scale + Double(yOffset)
+            
+            print("\(mX) \(mY) \(mZ)")
+            
+            pathX.addLine(to: CGPoint(x: current, y: CGFloat(mX)))
+            pathY.addLine(to: CGPoint(x: current, y: CGFloat(mY)))
+            pathZ.addLine(to: CGPoint(x: current, y: CGFloat(mZ)))
         }
         
         setupLayers()
@@ -157,7 +167,7 @@ final class ChartView: UIView {
         let animation = CABasicAnimation(keyPath: "strokeEnd")
         animation.fromValue = 0
         animation.toValue = 1
-        animation.duration = 60
+        animation.duration = value.
         animation.fillMode = .forwards
         
         layerX.add(animation, forKey: Key.xAnimationName.rawValue)
@@ -175,9 +185,15 @@ final class ChartView: UIView {
         
         current += xOffset
         
-        let mX = x * 30 + Double(yOffset)
-        let mY = y * 30 + Double(yOffset)
-        let mZ = z * 30 + Double(yOffset)
+        while x * scale >= 150 || x * scale <= -150
+                || y * scale >= 150 || y * scale <= -150
+                || z * scale >= 150 || z * scale <= -150 {
+            scale -= scale * 0.2
+        }
+        
+        let mX = x * scale + Double(yOffset)
+        let mY = y * scale + Double(yOffset)
+        let mZ = z * scale + Double(yOffset)
         
         pathX.addLine(to: CGPoint(x: current, y: mX))
         pathY.addLine(to: CGPoint(x: current, y: mY))

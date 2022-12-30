@@ -25,6 +25,10 @@ final class GyroViewController: UIViewController {
         setupDefault()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        MotionDataLoad()
+    }
+
     private func setupNavigationItem() {
         navigationItem.title = "목록"
         view.backgroundColor = .white
@@ -57,9 +61,6 @@ final class GyroViewController: UIViewController {
             })
         
         snapshot.appendSections([.main])
-        snapshot.appendItems(coreDataManager.fetch())
-        
-        dataSource?.apply(snapshot)
     }
 
     private func setupSubviews() {
@@ -81,15 +82,47 @@ final class GyroViewController: UIViewController {
             animated: true
         )
     }
+
+    private func MotionDataLoad() {
+        let snapshotCount = dataSource?.snapshot().numberOfItems ?? 0
+        let coreDataList = coreDataManager.fetch(
+            request: MotionEntity.fetchRequest()
+        )
+        
+        if snapshotCount < coreDataList.count {
+            let coreData = coreDataManager.fetch(
+                request: MotionEntity.fetchRequestWithOptions(
+                    offset: snapshotCount
+                )
+            )
+            
+            snapshot.appendItems(coreData)
+            dataSource?.apply(snapshot, animatingDifferences: false)
+        }
+    }
 }
 
 extension GyroViewController: UITableViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y > (scrollView.contentSize.height - scrollView.bounds.height) {
+            MotionDataLoad()
+        }
+    }
+    
     func tableView(
         _ tableView: UITableView,
         didSelectRowAt indexPath: IndexPath
     ) {
+        guard let motion = self.dataSource?.snapshot().itemIdentifiers[indexPath.item] else {
+            return
+        }
+        
+        let replayViewController = ReplayViewController()
+        weak var sendDataDelegate: SendDataDelegate? = replayViewController
+        sendDataDelegate?.sendData(MotionInfo(data: motion, pageType: ReplayViewPageType.view))
+        
         self.navigationController?.pushViewController(
-            ReplayViewController(pageType: ReplayViewPageType.view),
+            replayViewController,
             animated: true
         )
     }
@@ -103,12 +136,17 @@ extension GyroViewController: UITableViewDelegate {
             title: "Play"
         ) { [weak self] _, _, _ in
             
-            guard let self = self else {
+            guard let self = self,
+                  let motion = self.dataSource?.snapshot().itemIdentifiers[indexPath.item] else {
                 return
             }
+
+            let replayViewController = ReplayViewController()
+            weak var sendDataDelegate: SendDataDelegate? = replayViewController
+            sendDataDelegate?.sendData(MotionInfo(data: motion, pageType: ReplayViewPageType.play))
             
             self.navigationController?.pushViewController(
-                ReplayViewController(pageType: ReplayViewPageType.play),
+                replayViewController,
                 animated: true
             )
         }
