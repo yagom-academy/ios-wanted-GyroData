@@ -63,8 +63,8 @@ final class GraphView: UIView, TickReceivable, GraphDrawable {
     }()
     
     private var sensorValueIndex = 0
-    private var data: MeasuredData?
-    private var drawMode: DrawMode = .play
+    var data: MeasuredData?
+    var drawMode: DrawMode = .play
     
     private let zeroX: CGFloat = 0
     private lazy var zeroY: CGFloat = self.frame.height / CGFloat(2)
