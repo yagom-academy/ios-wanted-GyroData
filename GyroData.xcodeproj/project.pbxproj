@@ -3,27 +3,95 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		200E57D1295A9FD900D3EF5A /* MeasurementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200E57D0295A9FD900D3EF5A /* MeasurementViewController.swift */; };
+		200E57D3295AABCE00D3EF5A /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200E57D2295AABCE00D3EF5A /* GraphView.swift */; };
+		203831FF295D1DF200B58F53 /* GraphNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203831FE295D1DF200B58F53 /* GraphNumber.swift */; };
+		20383201295D1E1500B58F53 /* MotionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20383200295D1E1500B58F53 /* MotionData.swift */; };
+		20383208295D28FA00B58F53 /* Measurementable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20383207295D28FA00B58F53 /* Measurementable.swift */; };
+		2038320A295D311900B58F53 /* MotionLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20383209295D311900B58F53 /* MotionLabel.swift */; };
+		20383215295D5E6000B58F53 /* FileDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20383214295D5E6000B58F53 /* FileDataManager.swift */; };
+		20383217295D666D00B58F53 /* MotionFileManagerUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20383216295D666D00B58F53 /* MotionFileManagerUseCase.swift */; };
+		2038321D295DD8B500B58F53 /* MotionMeasurementViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2038321C295DD8B500B58F53 /* MotionMeasurementViewModel.swift */; };
+		204CCBEE295E9C5E006A6893 /* MeasurementButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204CCBED295E9C5E006A6893 /* MeasurementButton.swift */; };
+		20BC9AFE295C1713009A7F7A /* CGContext+GridGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20BC9AFD295C1713009A7F7A /* CGContext+GridGraph.swift */; };
+		20BC9B00295C1771009A7F7A /* GraphSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20BC9AFF295C1771009A7F7A /* GraphSegment.swift */; };
+		20BC9B02295C17FF009A7F7A /* MotionMeasurementManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20BC9B01295C17FF009A7F7A /* MotionMeasurementManager.swift */; };
 		63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB428D44FC400C53A39 /* AppDelegate.swift */; };
 		63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB628D44FC400C53A39 /* SceneDelegate.swift */; };
-		63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB828D44FC400C53A39 /* ViewController.swift */; };
-		63F01BBC28D44FC400C53A39 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBA28D44FC400C53A39 /* Main.storyboard */; };
 		63F01BBE28D44FC500C53A39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBD28D44FC500C53A39 /* Assets.xcassets */; };
 		63F01BC128D44FC500C53A39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */; };
+		F35161F5295AC2DA008AB1A3 /* MotionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35161F4295AC2DA008AB1A3 /* MotionListViewController.swift */; };
+		F35161F7295ACC0C008AB1A3 /* MotionListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35161F6295ACC0C008AB1A3 /* MotionListTableViewCell.swift */; };
+		F35161FA295AE790008AB1A3 /* MotionListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35161F9295AE790008AB1A3 /* MotionListViewModel.swift */; };
+		F35161FD295AEACA008AB1A3 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35161FC295AEACA008AB1A3 /* Observable.swift */; };
+		F3516200295AF1C2008AB1A3 /* MotionInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35161FF295AF1C2008AB1A3 /* MotionInformation.swift */; };
+		F3516224295BF5C6008AB1A3 /* MotionInfo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F3516222295BF5C6008AB1A3 /* MotionInfo.xcdatamodeld */; };
+		F3516227295BF65F008AB1A3 /* MotionInfo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3516225295BF65F008AB1A3 /* MotionInfo+CoreDataClass.swift */; };
+		F3516228295BF65F008AB1A3 /* MotionInfo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3516226295BF65F008AB1A3 /* MotionInfo+CoreDataProperties.swift */; };
+		F351622A295BF723008AB1A3 /* Storable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3516229295BF723008AB1A3 /* Storable.swift */; };
+		F351622C295BF783008AB1A3 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = F351622B295BF783008AB1A3 /* CoreDataStack.swift */; };
+		F351622E295BF7B1008AB1A3 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F351622D295BF7B1008AB1A3 /* CoreDataManager.swift */; };
+		F3516232295BF83C008AB1A3 /* MotionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3516231295BF83C008AB1A3 /* MotionType.swift */; };
+		F3516235295BF8CA008AB1A3 /* MotionCoreDataUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3516234295BF8CA008AB1A3 /* MotionCoreDataUseCase.swift */; };
+		F37A2451295C88850006B552 /* MotionResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37A2450295C88850006B552 /* MotionResultViewController.swift */; };
+		F37A2453295C91760006B552 /* MotionResultPlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37A2452295C91760006B552 /* MotionResultPlayViewController.swift */; };
+		F37A2456295C95660006B552 /* PlayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37A2455295C95660006B552 /* PlayButton.swift */; };
+		F37A2458295C9B050006B552 /* MotionResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37A2457295C9B050006B552 /* MotionResultViewModel.swift */; };
+		F37A245A295C9B870006B552 /* Motion.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37A2459295C9B870006B552 /* Motion.swift */; };
+		F37A245D295CBDB40006B552 /* MotionResultType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37A245C295CBDB40006B552 /* MotionResultType.swift */; };
+		F3AFF7E5295ECEC700D631AB /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3AFF7E4295ECEC700D631AB /* Date+Extension.swift */; };
+		F3AFF7EA295EEF6100D631AB /* CoreDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3AFF7E9295EEF6100D631AB /* CoreDataError.swift */; };
+		F3AFF7EC295F02FB00D631AB /* FileManagerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3AFF7EB295F02FB00D631AB /* FileManagerError.swift */; };
+		F3AFF7EE295F06D300D631AB /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3AFF7ED295F06D300D631AB /* UIViewController+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		200E57D0295A9FD900D3EF5A /* MeasurementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementViewController.swift; sourceTree = "<group>"; };
+		200E57D2295AABCE00D3EF5A /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
+		203831FE295D1DF200B58F53 /* GraphNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphNumber.swift; sourceTree = "<group>"; };
+		20383200295D1E1500B58F53 /* MotionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionData.swift; sourceTree = "<group>"; };
+		20383207295D28FA00B58F53 /* Measurementable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Measurementable.swift; sourceTree = "<group>"; };
+		20383209295D311900B58F53 /* MotionLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionLabel.swift; sourceTree = "<group>"; };
+		20383214295D5E6000B58F53 /* FileDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDataManager.swift; sourceTree = "<group>"; };
+		20383216295D666D00B58F53 /* MotionFileManagerUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionFileManagerUseCase.swift; sourceTree = "<group>"; };
+		2038321C295DD8B500B58F53 /* MotionMeasurementViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionMeasurementViewModel.swift; sourceTree = "<group>"; };
+		204CCBED295E9C5E006A6893 /* MeasurementButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementButton.swift; sourceTree = "<group>"; };
+		20BC9AFD295C1713009A7F7A /* CGContext+GridGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGContext+GridGraph.swift"; sourceTree = "<group>"; };
+		20BC9AFF295C1771009A7F7A /* GraphSegment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphSegment.swift; sourceTree = "<group>"; };
+		20BC9B01295C17FF009A7F7A /* MotionMeasurementManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionMeasurementManager.swift; sourceTree = "<group>"; };
 		63F01BB128D44FC400C53A39 /* GyroData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GyroData.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63F01BB428D44FC400C53A39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63F01BB628D44FC400C53A39 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		63F01BB828D44FC400C53A39 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		63F01BBB28D44FC400C53A39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		63F01BBD28D44FC500C53A39 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		63F01BC028D44FC500C53A39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		63F01BC228D44FC500C53A39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F35161F4295AC2DA008AB1A3 /* MotionListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionListViewController.swift; sourceTree = "<group>"; };
+		F35161F6295ACC0C008AB1A3 /* MotionListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionListTableViewCell.swift; sourceTree = "<group>"; };
+		F35161F9295AE790008AB1A3 /* MotionListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionListViewModel.swift; sourceTree = "<group>"; };
+		F35161FC295AEACA008AB1A3 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		F35161FF295AF1C2008AB1A3 /* MotionInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionInformation.swift; sourceTree = "<group>"; };
+		F3516223295BF5C6008AB1A3 /* MotionInfo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MotionInfo.xcdatamodel; sourceTree = "<group>"; };
+		F3516225295BF65F008AB1A3 /* MotionInfo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MotionInfo+CoreDataClass.swift"; sourceTree = "<group>"; };
+		F3516226295BF65F008AB1A3 /* MotionInfo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MotionInfo+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		F3516229295BF723008AB1A3 /* Storable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storable.swift; sourceTree = "<group>"; };
+		F351622B295BF783008AB1A3 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		F351622D295BF7B1008AB1A3 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		F3516231295BF83C008AB1A3 /* MotionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionType.swift; sourceTree = "<group>"; };
+		F3516234295BF8CA008AB1A3 /* MotionCoreDataUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionCoreDataUseCase.swift; sourceTree = "<group>"; };
+		F37A2450295C88850006B552 /* MotionResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionResultViewController.swift; sourceTree = "<group>"; };
+		F37A2452295C91760006B552 /* MotionResultPlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionResultPlayViewController.swift; sourceTree = "<group>"; };
+		F37A2455295C95660006B552 /* PlayButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayButton.swift; sourceTree = "<group>"; };
+		F37A2457295C9B050006B552 /* MotionResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionResultViewModel.swift; sourceTree = "<group>"; };
+		F37A2459295C9B870006B552 /* Motion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Motion.swift; sourceTree = "<group>"; };
+		F37A245C295CBDB40006B552 /* MotionResultType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionResultType.swift; sourceTree = "<group>"; };
+		F3AFF7E4295ECEC700D631AB /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		F3AFF7E9295EEF6100D631AB /* CoreDataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataError.swift; sourceTree = "<group>"; };
+		F3AFF7EB295F02FB00D631AB /* FileManagerError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerError.swift; sourceTree = "<group>"; };
+		F3AFF7ED295F06D300D631AB /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +105,106 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		203831FC295D1D4800B58F53 /* MotionMeasurementScene */ = {
+			isa = PBXGroup;
+			children = (
+				200E57D0295A9FD900D3EF5A /* MeasurementViewController.swift */,
+				2038321C295DD8B500B58F53 /* MotionMeasurementViewModel.swift */,
+				204CCBEC295E9C44006A6893 /* SubViews */,
+			);
+			path = MotionMeasurementScene;
+			sourceTree = "<group>";
+		};
+		203831FD295D1DD900B58F53 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				203831FE295D1DF200B58F53 /* GraphNumber.swift */,
+				20383200295D1E1500B58F53 /* MotionData.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		20383202295D1E5100B58F53 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				20BC9AFD295C1713009A7F7A /* CGContext+GridGraph.swift */,
+				F3AFF7E4295ECEC700D631AB /* Date+Extension.swift */,
+				F3AFF7ED295F06D300D631AB /* UIViewController+Extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		20383203295D1E6F00B58F53 /* MeasurementManager */ = {
+			isa = PBXGroup;
+			children = (
+				20BC9B01295C17FF009A7F7A /* MotionMeasurementManager.swift */,
+				20383206295D28E100B58F53 /* Protocol */,
+			);
+			path = MeasurementManager;
+			sourceTree = "<group>";
+		};
+		20383206295D28E100B58F53 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				20383207295D28FA00B58F53 /* Measurementable.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		2038320B295D313A00B58F53 /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				20BC9AFF295C1771009A7F7A /* GraphSegment.swift */,
+				20383209295D311900B58F53 /* MotionLabel.swift */,
+			);
+			path = SubViews;
+			sourceTree = "<group>";
+		};
+		20383213295D5E4D00B58F53 /* FileManager */ = {
+			isa = PBXGroup;
+			children = (
+				20383214295D5E6000B58F53 /* FileDataManager.swift */,
+				F3AFF7EB295F02FB00D631AB /* FileManagerError.swift */,
+			);
+			path = FileManager;
+			sourceTree = "<group>";
+		};
+		204CCBEC295E9C44006A6893 /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				204CCBED295E9C5E006A6893 /* MeasurementButton.swift */,
+			);
+			path = SubViews;
+			sourceTree = "<group>";
+		};
+		204CCBEF295F11A3006A6893 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				63F01BB428D44FC400C53A39 /* AppDelegate.swift */,
+				63F01BB628D44FC400C53A39 /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		207F0E6E295F1619008F02DE /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */,
+				63F01BBD28D44FC500C53A39 /* Assets.xcassets */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		20E26445295C375E00C66E8A /* GraphView */ = {
+			isa = PBXGroup;
+			children = (
+				200E57D2295AABCE00D3EF5A /* GraphView.swift */,
+				2038320B295D313A00B58F53 /* SubViews */,
+				203831FD295D1DD900B58F53 /* Entities */,
+			);
+			path = GraphView;
+			sourceTree = "<group>";
+		};
 		63F01BA828D44FC400C53A39 = {
 			isa = PBXGroup;
 			children = (
@@ -56,15 +224,141 @@
 		63F01BB328D44FC400C53A39 /* GyroData */ = {
 			isa = PBXGroup;
 			children = (
-				63F01BB428D44FC400C53A39 /* AppDelegate.swift */,
-				63F01BB628D44FC400C53A39 /* SceneDelegate.swift */,
-				63F01BB828D44FC400C53A39 /* ViewController.swift */,
-				63F01BBA28D44FC400C53A39 /* Main.storyboard */,
-				63F01BBD28D44FC500C53A39 /* Assets.xcassets */,
-				63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */,
 				63F01BC228D44FC500C53A39 /* Info.plist */,
+				F35161F2295AC259008AB1A3 /* Scenes */,
+				F351622F295BF7D7008AB1A3 /* Domain */,
+				F351621F295BF5A7008AB1A3 /* Service */,
+				207F0E6E295F1619008F02DE /* Resource */,
+				F3516205295B1140008AB1A3 /* Utility */,
+				204CCBEF295F11A3006A6893 /* Application */,
 			);
 			path = GyroData;
+			sourceTree = "<group>";
+		};
+		F35161F2295AC259008AB1A3 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				F37A244F295C88650006B552 /* MotionResultScene */,
+				203831FC295D1D4800B58F53 /* MotionMeasurementScene */,
+				F35161F3295AC288008AB1A3 /* MotionListScene */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		F35161F3295AC288008AB1A3 /* MotionListScene */ = {
+			isa = PBXGroup;
+			children = (
+				F35161F4295AC2DA008AB1A3 /* MotionListViewController.swift */,
+				F35161F9295AE790008AB1A3 /* MotionListViewModel.swift */,
+				F35161F8295AD7B5008AB1A3 /* SubViews */,
+			);
+			path = MotionListScene;
+			sourceTree = "<group>";
+		};
+		F35161F8295AD7B5008AB1A3 /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				F35161F6295ACC0C008AB1A3 /* MotionListTableViewCell.swift */,
+			);
+			path = SubViews;
+			sourceTree = "<group>";
+		};
+		F3516205295B1140008AB1A3 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				20383202295D1E5100B58F53 /* Extension */,
+				20E26445295C375E00C66E8A /* GraphView */,
+				20383203295D1E6F00B58F53 /* MeasurementManager */,
+				F3516206295B114C008AB1A3 /* Observable */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		F3516206295B114C008AB1A3 /* Observable */ = {
+			isa = PBXGroup;
+			children = (
+				F35161FC295AEACA008AB1A3 /* Observable.swift */,
+			);
+			path = Observable;
+			sourceTree = "<group>";
+		};
+		F351621F295BF5A7008AB1A3 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				20383213295D5E4D00B58F53 /* FileManager */,
+				F3516220295BF5A7008AB1A3 /* CoreData */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		F3516220295BF5A7008AB1A3 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				F3AFF7E9295EEF6100D631AB /* CoreDataError.swift */,
+				F351622B295BF783008AB1A3 /* CoreDataStack.swift */,
+				F351622D295BF7B1008AB1A3 /* CoreDataManager.swift */,
+				F3516221295BF5A7008AB1A3 /* Entities */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		F3516221295BF5A7008AB1A3 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				F3516225295BF65F008AB1A3 /* MotionInfo+CoreDataClass.swift */,
+				F3516226295BF65F008AB1A3 /* MotionInfo+CoreDataProperties.swift */,
+				F3516222295BF5C6008AB1A3 /* MotionInfo.xcdatamodeld */,
+				F3516229295BF723008AB1A3 /* Storable.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		F351622F295BF7D7008AB1A3 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				F3516233295BF8B8008AB1A3 /* UseCase */,
+				F3516230295BF7F4008AB1A3 /* Entities */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		F3516230295BF7F4008AB1A3 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				F35161FF295AF1C2008AB1A3 /* MotionInformation.swift */,
+				F3516231295BF83C008AB1A3 /* MotionType.swift */,
+				F37A2459295C9B870006B552 /* Motion.swift */,
+				F37A245C295CBDB40006B552 /* MotionResultType.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		F3516233295BF8B8008AB1A3 /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				F3516234295BF8CA008AB1A3 /* MotionCoreDataUseCase.swift */,
+				20383216295D666D00B58F53 /* MotionFileManagerUseCase.swift */,
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
+		F37A244F295C88650006B552 /* MotionResultScene */ = {
+			isa = PBXGroup;
+			children = (
+				F37A2450295C88850006B552 /* MotionResultViewController.swift */,
+				F37A2452295C91760006B552 /* MotionResultPlayViewController.swift */,
+				F37A2457295C9B050006B552 /* MotionResultViewModel.swift */,
+				F37A2454295C952F0006B552 /* SubViews */,
+			);
+			path = MotionResultScene;
+			sourceTree = "<group>";
+		};
+		F37A2454295C952F0006B552 /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				F37A2455295C95660006B552 /* PlayButton.swift */,
+			);
+			path = SubViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -98,12 +392,12 @@
 				LastUpgradeCheck = 1400;
 				TargetAttributes = {
 					63F01BB028D44FC400C53A39 = {
-						CreatedOnToolsVersion = 14.0;
+						CreatedOnToolsVersion = 13.4;
 					};
 				};
 			};
 			buildConfigurationList = 63F01BAC28D44FC400C53A39 /* Build configuration list for PBXProject "GyroData" */;
-			compatibilityVersion = "Xcode 14.0";
+			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -127,7 +421,6 @@
 			files = (
 				63F01BC128D44FC500C53A39 /* LaunchScreen.storyboard in Resources */,
 				63F01BBE28D44FC500C53A39 /* Assets.xcassets in Resources */,
-				63F01BBC28D44FC400C53A39 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,23 +431,50 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */,
+				F351622C295BF783008AB1A3 /* CoreDataStack.swift in Sources */,
+				F37A245A295C9B870006B552 /* Motion.swift in Sources */,
+				F351622A295BF723008AB1A3 /* Storable.swift in Sources */,
+				F3516224295BF5C6008AB1A3 /* MotionInfo.xcdatamodeld in Sources */,
+				2038321D295DD8B500B58F53 /* MotionMeasurementViewModel.swift in Sources */,
+				20383217295D666D00B58F53 /* MotionFileManagerUseCase.swift in Sources */,
+				20383215295D5E6000B58F53 /* FileDataManager.swift in Sources */,
+				20383201295D1E1500B58F53 /* MotionData.swift in Sources */,
+				20383208295D28FA00B58F53 /* Measurementable.swift in Sources */,
+				F3AFF7EC295F02FB00D631AB /* FileManagerError.swift in Sources */,
+				F35161F7295ACC0C008AB1A3 /* MotionListTableViewCell.swift in Sources */,
+				F35161FA295AE790008AB1A3 /* MotionListViewModel.swift in Sources */,
+				F3516200295AF1C2008AB1A3 /* MotionInformation.swift in Sources */,
+				F37A2458295C9B050006B552 /* MotionResultViewModel.swift in Sources */,
+				200E57D1295A9FD900D3EF5A /* MeasurementViewController.swift in Sources */,
+				F37A245D295CBDB40006B552 /* MotionResultType.swift in Sources */,
+				F37A2456295C95660006B552 /* PlayButton.swift in Sources */,
+				F3AFF7E5295ECEC700D631AB /* Date+Extension.swift in Sources */,
+				F3516228295BF65F008AB1A3 /* MotionInfo+CoreDataProperties.swift in Sources */,
+				F37A2453295C91760006B552 /* MotionResultPlayViewController.swift in Sources */,
+				F3AFF7EA295EEF6100D631AB /* CoreDataError.swift in Sources */,
+				203831FF295D1DF200B58F53 /* GraphNumber.swift in Sources */,
+				F35161FD295AEACA008AB1A3 /* Observable.swift in Sources */,
+				20BC9B00295C1771009A7F7A /* GraphSegment.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
+				F35161F5295AC2DA008AB1A3 /* MotionListViewController.swift in Sources */,
+				F3AFF7EE295F06D300D631AB /* UIViewController+Extension.swift in Sources */,
+				20BC9B02295C17FF009A7F7A /* MotionMeasurementManager.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
+				200E57D3295AABCE00D3EF5A /* GraphView.swift in Sources */,
+				20BC9AFE295C1713009A7F7A /* CGContext+GridGraph.swift in Sources */,
+				F351622E295BF7B1008AB1A3 /* CoreDataManager.swift in Sources */,
+				F37A2451295C88850006B552 /* MotionResultViewController.swift in Sources */,
+				2038320A295D311900B58F53 /* MotionLabel.swift in Sources */,
+				204CCBEE295E9C5E006A6893 /* MeasurementButton.swift in Sources */,
+				F3516227295BF65F008AB1A3 /* MotionInfo+CoreDataClass.swift in Sources */,
+				F3516235295BF8CA008AB1A3 /* MotionCoreDataUseCase.swift in Sources */,
+				F3516232295BF83C008AB1A3 /* MotionType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		63F01BBA28D44FC400C53A39 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				63F01BBB28D44FC400C53A39 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -216,7 +536,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -270,7 +590,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -285,13 +605,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GyroData/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -301,6 +621,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.GyroData;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -312,13 +633,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GyroData/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -328,6 +649,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.GyroData;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -356,6 +678,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		F3516222295BF5C6008AB1A3 /* MotionInfo.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				F3516223295BF5C6008AB1A3 /* MotionInfo.xcdatamodel */,
+			);
+			currentVersion = F3516223295BF5C6008AB1A3 /* MotionInfo.xcdatamodel */;
+			path = MotionInfo.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 63F01BA928D44FC400C53A39 /* Project object */;
 }
