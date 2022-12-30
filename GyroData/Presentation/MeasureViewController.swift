@@ -126,7 +126,7 @@ class MeasureViewController: UIViewController {
         let motion = Motion(
             date: dateFormatter.string(from: Date()),
             measurementType: type,
-            runtime: String(format: "%.1f", duringTime),
+            runtime: String(format: "%.1f", Double(duringTime) ?? 0),
             motionX: dataX,
             motionY: dataY,
             motionZ: dataZ
