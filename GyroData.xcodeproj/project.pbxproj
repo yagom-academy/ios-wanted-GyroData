@@ -44,6 +44,7 @@
 		F37A2458295C9B050006B552 /* MotionResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37A2457295C9B050006B552 /* MotionResultViewModel.swift */; };
 		F37A245A295C9B870006B552 /* MotionInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37A2459295C9B870006B552 /* MotionInformation.swift */; };
 		F37A245D295CBDB40006B552 /* MotionResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37A245C295CBDB40006B552 /* MotionResult.swift */; };
+		F3AFF7E5295ECEC700D631AB /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3AFF7E4295ECEC700D631AB /* Date+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -86,6 +87,7 @@
 		F37A2457295C9B050006B552 /* MotionResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionResultViewModel.swift; sourceTree = "<group>"; };
 		F37A2459295C9B870006B552 /* MotionInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionInformation.swift; sourceTree = "<group>"; };
 		F37A245C295CBDB40006B552 /* MotionResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionResult.swift; sourceTree = "<group>"; };
+		F3AFF7E4295ECEC700D631AB /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				20BC9AFD295C1713009A7F7A /* CGContext+GridGraph.swift */,
+				F3AFF7E4295ECEC700D631AB /* Date+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -423,6 +426,7 @@
 				200E57D1295A9FD900D3EF5A /* MeasurementViewController.swift in Sources */,
 				F37A245D295CBDB40006B552 /* MotionResult.swift in Sources */,
 				F37A2456295C95660006B552 /* PlayButton.swift in Sources */,
+				F3AFF7E5295ECEC700D631AB /* Date+Extension.swift in Sources */,
 				F3516228295BF65F008AB1A3 /* MotionInfo+CoreDataProperties.swift in Sources */,
 				F37A2453295C91760006B552 /* MotionResultPlayViewController.swift in Sources */,
 				203831FF295D1DF200B58F53 /* GraphNumber.swift in Sources */,
