@@ -18,6 +18,7 @@
 		32AA1E97295DBF50002259C3 /* MotionRecordDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32AA1E96295DBF50002259C3 /* MotionRecordDTO.swift */; };
 		32B01338295A844B005C8750 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B01337295A844B005C8750 /* GraphView.swift */; };
 		32B0133A295A871C005C8750 /* GraphViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B01339295A871C005C8750 /* GraphViewModel.swift */; };
+		32E5748F295DD5B100E297D9 /* FileStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E5748E295DD5B100E297D9 /* FileStorage.swift */; };
 		32F77CC0295C7AA400A78CCD /* MotionData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 32F77CBE295C7AA400A78CCD /* MotionData.xcdatamodeld */; };
 		32F77CC5295C7BDA00A78CCD /* MotionRecordEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F77CC1295C7BDA00A78CCD /* MotionRecordEntity+CoreDataClass.swift */; };
 		32F77CC6295C7BDA00A78CCD /* MotionRecordEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F77CC2295C7BDA00A78CCD /* MotionRecordEntity+CoreDataProperties.swift */; };
@@ -50,6 +51,7 @@
 		32AA1E96295DBF50002259C3 /* MotionRecordDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionRecordDTO.swift; sourceTree = "<group>"; };
 		32B01337295A844B005C8750 /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		32B01339295A871C005C8750 /* GraphViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphViewModel.swift; sourceTree = "<group>"; };
+		32E5748E295DD5B100E297D9 /* FileStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileStorage.swift; sourceTree = "<group>"; };
 		32F77CBF295C7AA400A78CCD /* MotionData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MotionData.xcdatamodel; sourceTree = "<group>"; };
 		32F77CC1295C7BDA00A78CCD /* MotionRecordEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MotionRecordEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		32F77CC2295C7BDA00A78CCD /* MotionRecordEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MotionRecordEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 				32F77CBE295C7AA400A78CCD /* MotionData.xcdatamodeld */,
 				32F77CC1295C7BDA00A78CCD /* MotionRecordEntity+CoreDataClass.swift */,
 				32F77CC2295C7BDA00A78CCD /* MotionRecordEntity+CoreDataProperties.swift */,
+				32E5748E295DD5B100E297D9 /* FileStorage.swift */,
 				32AA1E94295DBF0D002259C3 /* CoordinateDTO.swift */,
 				32AA1E96295DBF50002259C3 /* MotionRecordDTO.swift */,
 			);
@@ -297,6 +300,7 @@
 				3A6D2624295B258800FFD7F1 /* MotionRecordingViewController.swift in Sources */,
 				32FDB34B295C18F20095F6A5 /* MotionReplayViewController.swift in Sources */,
 				329E7EE9295B058200537466 /* MotionMode.swift in Sources */,
+				32E5748F295DD5B100E297D9 /* FileStorage.swift in Sources */,
 				32FD2890295BE4A6006B6871 /* MotionDataListStorageProtocol.swift in Sources */,
 				329E7EED295B1A0100537466 /* MotionDataListViewController.swift in Sources */,
 				32FDB345295BE62A0095F6A5 /* DeleteMotionDataUseCase.swift in Sources */,
