@@ -77,18 +77,22 @@ final class MeasurementViewController: UIViewController {
                 self?.saveButton.isHidden = false
                 self?.cancleButton.isEnabled = true
                 self?.segmentControl.isEnabled = false
-            case .save:
-                self?.indicatorView.startAnimating()
             case .done:
-                self?.indicatorView.stopAnimating()
                 self?.coordinator?.popViewController()
             }
         }
         
-        viewModel.errorMessage.observe(on: self) { [weak self] value in
-            if let message = value {
-                self?.indicatorView.stopAnimating()
+        viewModel.errorMessage.observe(on: self) { [weak self] message in
+            if let message {
                 self?.showErrorAlert(message: message)
+            }
+        }
+        
+        viewModel.isLoading.observe(on: self) { [weak self] isLoading in
+            if isLoading {
+                self?.indicatorView.startAnimating()
+            } else {
+                self?.indicatorView.stopAnimating()
             }
         }
     }
