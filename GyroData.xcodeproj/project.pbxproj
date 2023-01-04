@@ -7,23 +7,83 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		02432C11295990960035AEDD /* Motion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02432C10295990960035AEDD /* Motion.swift */; };
+		02432C132959909C0035AEDD /* CoreMotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02432C122959909C0035AEDD /* CoreMotionManager.swift */; };
+		02432C172959937D0035AEDD /* CoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02432C162959937D0035AEDD /* CoreDataStorage.swift */; };
+		02432C1A2959938E0035AEDD /* CoreDataStorage.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 02432C182959938E0035AEDD /* CoreDataStorage.xcdatamodeld */; };
+		02432C1F295994930035AEDD /* MotionEntity+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02432C1E295994930035AEDD /* MotionEntity+Mapping.swift */; };
+		02432C222959A38C0035AEDD /* CoreDataMotionStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02432C212959A38C0035AEDD /* CoreDataMotionStorage.swift */; };
+		02432C262959A8420035AEDD /* MotionStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02432C252959A8420035AEDD /* MotionStorage.swift */; };
+		02432C282959CAFB0035AEDD /* MotionFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02432C272959CAFB0035AEDD /* MotionFileManager.swift */; };
+		0247ED2F295A6F5400212A78 /* MotionList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0247ED2E295A6F5400212A78 /* MotionList.swift */; };
+		0247ED56295A8C3000212A78 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0247ED55295A8C3000212A78 /* AppCoordinator.swift */; };
+		0247ED58295A8C5000212A78 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0247ED57295A8C5000212A78 /* Coordinator.swift */; };
+		0247ED5A295A8CBE00212A78 /* MotionListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0247ED59295A8CBE00212A78 /* MotionListCoordinator.swift */; };
+		0247ED5C295A8D1200212A78 /* MotionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0247ED5B295A8D1200212A78 /* MotionListViewController.swift */; };
+		0247ED5E295A8D3300212A78 /* MotionListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0247ED5D295A8D3300212A78 /* MotionListViewModel.swift */; };
+		0247ED60295A8D8C00212A78 /* MotionListCoordinatorInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0247ED5F295A8D8C00212A78 /* MotionListCoordinatorInterface.swift */; };
+		0247ED65295A923500212A78 /* UIView+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0247ED64295A923500212A78 /* UIView+extension.swift */; };
+		0247ED68295A927900212A78 /* UIStackView+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0247ED67295A927900212A78 /* UIStackView+extension.swift */; };
+		0247ED6A295A929300212A78 /* NSObject+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0247ED69295A929300212A78 /* NSObject+extension.swift */; };
+		0247ED6C295A92AB00212A78 /* UITableView+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0247ED6B295A92AB00212A78 /* UITableView+extension.swift */; };
+		0247ED72295A949D00212A78 /* MotionDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0247ED71295A949D00212A78 /* MotionDataCell.swift */; };
+		0247ED74295A963D00212A78 /* UIFont+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0247ED73295A963D00212A78 /* UIFont+extension.swift */; };
+		0247ED7B295AB72600212A78 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0247ED7A295AB72600212A78 /* Observable.swift */; };
+		0247ED7D295ABA9700212A78 /* Collection+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0247ED7C295ABA9700212A78 /* Collection+extension.swift */; };
+		0247ED7F295ABFDC00212A78 /* Date+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0247ED7E295ABFDC00212A78 /* Date+extension.swift */; };
 		63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB428D44FC400C53A39 /* AppDelegate.swift */; };
 		63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB628D44FC400C53A39 /* SceneDelegate.swift */; };
-		63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB828D44FC400C53A39 /* ViewController.swift */; };
-		63F01BBC28D44FC400C53A39 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBA28D44FC400C53A39 /* Main.storyboard */; };
 		63F01BBE28D44FC500C53A39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBD28D44FC500C53A39 /* Assets.xcassets */; };
 		63F01BC128D44FC500C53A39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */; };
+		E13ACFEC295AFB5000265ED2 /* MeasermentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13ACFEB295AFB5000265ED2 /* MeasermentViewModel.swift */; };
+		E13ACFF0295B15DA00265ED2 /* MeasurementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13ACFEF295B15DA00265ED2 /* MeasurementViewController.swift */; };
+		E1A09573295EB7BD0073D668 /* GraphConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A09572295EB7BD0073D668 /* GraphConstant.swift */; };
+		E1A5A235295DBE920086DADB /* UIViewController+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A5A234295DBE920086DADB /* UIViewController+extension.swift */; };
+		E1F1D33E295BD5CE00E5C521 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F1D33D295BD5CE00E5C521 /* GraphView.swift */; };
+		E1F1D344295C328A00E5C521 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F1D343295C328A00E5C521 /* RoundButton.swift */; };
+		E1F1D34A295C5EBB00E5C521 /* MotionDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F1D349295C5EBB00E5C521 /* MotionDetailViewModel.swift */; };
+		E1F1D34F295CAF8300E5C521 /* MotionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F1D34E295CAF8300E5C521 /* MotionDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		02432C10295990960035AEDD /* Motion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Motion.swift; sourceTree = "<group>"; };
+		02432C122959909C0035AEDD /* CoreMotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMotionManager.swift; sourceTree = "<group>"; };
+		02432C162959937D0035AEDD /* CoreDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStorage.swift; sourceTree = "<group>"; };
+		02432C192959938E0035AEDD /* MotionEntity.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MotionEntity.xcdatamodel; sourceTree = "<group>"; };
+		02432C1E295994930035AEDD /* MotionEntity+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MotionEntity+Mapping.swift"; sourceTree = "<group>"; };
+		02432C212959A38C0035AEDD /* CoreDataMotionStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataMotionStorage.swift; sourceTree = "<group>"; };
+		02432C252959A8420035AEDD /* MotionStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionStorage.swift; sourceTree = "<group>"; };
+		02432C272959CAFB0035AEDD /* MotionFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionFileManager.swift; sourceTree = "<group>"; };
+		0247ED2E295A6F5400212A78 /* MotionList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionList.swift; sourceTree = "<group>"; };
+		0247ED55295A8C3000212A78 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		0247ED57295A8C5000212A78 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		0247ED59295A8CBE00212A78 /* MotionListCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionListCoordinator.swift; sourceTree = "<group>"; };
+		0247ED5B295A8D1200212A78 /* MotionListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionListViewController.swift; sourceTree = "<group>"; };
+		0247ED5D295A8D3300212A78 /* MotionListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionListViewModel.swift; sourceTree = "<group>"; };
+		0247ED5F295A8D8C00212A78 /* MotionListCoordinatorInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionListCoordinatorInterface.swift; sourceTree = "<group>"; };
+		0247ED64295A923500212A78 /* UIView+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+extension.swift"; sourceTree = "<group>"; };
+		0247ED67295A927900212A78 /* UIStackView+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+extension.swift"; sourceTree = "<group>"; };
+		0247ED69295A929300212A78 /* NSObject+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+extension.swift"; sourceTree = "<group>"; };
+		0247ED6B295A92AB00212A78 /* UITableView+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+extension.swift"; sourceTree = "<group>"; };
+		0247ED71295A949D00212A78 /* MotionDataCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDataCell.swift; sourceTree = "<group>"; };
+		0247ED73295A963D00212A78 /* UIFont+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+extension.swift"; sourceTree = "<group>"; };
+		0247ED7A295AB72600212A78 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		0247ED7C295ABA9700212A78 /* Collection+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+extension.swift"; sourceTree = "<group>"; };
+		0247ED7E295ABFDC00212A78 /* Date+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+extension.swift"; sourceTree = "<group>"; };
 		63F01BB128D44FC400C53A39 /* GyroData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GyroData.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63F01BB428D44FC400C53A39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63F01BB628D44FC400C53A39 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		63F01BB828D44FC400C53A39 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		63F01BBB28D44FC400C53A39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		63F01BBD28D44FC500C53A39 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		63F01BC028D44FC500C53A39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		63F01BC228D44FC500C53A39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E13ACFEB295AFB5000265ED2 /* MeasermentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasermentViewModel.swift; sourceTree = "<group>"; };
+		E13ACFEF295B15DA00265ED2 /* MeasurementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementViewController.swift; sourceTree = "<group>"; };
+		E1A09572295EB7BD0073D668 /* GraphConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphConstant.swift; sourceTree = "<group>"; };
+		E1A5A234295DBE920086DADB /* UIViewController+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+extension.swift"; sourceTree = "<group>"; };
+		E1F1D33D295BD5CE00E5C521 /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
+		E1F1D343295C328A00E5C521 /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
+		E1F1D349295C5EBB00E5C521 /* MotionDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDetailViewModel.swift; sourceTree = "<group>"; };
+		E1F1D34E295CAF8300E5C521 /* MotionDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +97,182 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		02432BFD29598DDF0035AEDD /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				02432BFE29598DE40035AEDD /* App */,
+				0247ED66295A924100212A78 /* Extension */,
+				02432C142959910B0035AEDD /* Model */,
+				0247ED51295A8C0B00212A78 /* Presentation */,
+				02432C152959910F0035AEDD /* Utility */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		02432BFE29598DE40035AEDD /* App */ = {
+			isa = PBXGroup;
+			children = (
+				63F01BB428D44FC400C53A39 /* AppDelegate.swift */,
+				63F01BB628D44FC400C53A39 /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		02432C142959910B0035AEDD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				02432C10295990960035AEDD /* Motion.swift */,
+				0247ED2E295A6F5400212A78 /* MotionList.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		02432C152959910F0035AEDD /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				02432C202959A36A0035AEDD /* CoreDataStorage */,
+				02432C122959909C0035AEDD /* CoreMotionManager.swift */,
+				02432C272959CAFB0035AEDD /* MotionFileManager.swift */,
+				0247ED7A295AB72600212A78 /* Observable.swift */,
+				E1A09572295EB7BD0073D668 /* GraphConstant.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		02432C202959A36A0035AEDD /* CoreDataStorage */ = {
+			isa = PBXGroup;
+			children = (
+				02432C242959A8210035AEDD /* MotionStorage */,
+				02432C182959938E0035AEDD /* CoreDataStorage.xcdatamodeld */,
+				02432C162959937D0035AEDD /* CoreDataStorage.swift */,
+			);
+			path = CoreDataStorage;
+			sourceTree = "<group>";
+		};
+		02432C232959A7FE0035AEDD /* EntityMapping */ = {
+			isa = PBXGroup;
+			children = (
+				02432C1E295994930035AEDD /* MotionEntity+Mapping.swift */,
+			);
+			path = EntityMapping;
+			sourceTree = "<group>";
+		};
+		02432C242959A8210035AEDD /* MotionStorage */ = {
+			isa = PBXGroup;
+			children = (
+				02432C232959A7FE0035AEDD /* EntityMapping */,
+				02432C212959A38C0035AEDD /* CoreDataMotionStorage.swift */,
+				02432C252959A8420035AEDD /* MotionStorage.swift */,
+			);
+			path = MotionStorage;
+			sourceTree = "<group>";
+		};
+		0247ED50295A8B9B00212A78 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				63F01BBD28D44FC500C53A39 /* Assets.xcassets */,
+				63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		0247ED51295A8C0B00212A78 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				E1F1D345295C5DB300E5C521 /* MotionPlay */,
+				0247ED63295A8EEA00212A78 /* Coordinators */,
+				0247ED52295A8C0F00212A78 /* MotionList */,
+				0247ED77295AB50E00212A78 /* MotionMeasure */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		0247ED52295A8C0F00212A78 /* MotionList */ = {
+			isa = PBXGroup;
+			children = (
+				0247ED78295AB52900212A78 /* Coordinator */,
+				0247ED61295A8DFB00212A78 /* ViewControllers */,
+				0247ED62295A8E0600212A78 /* ViewModels */,
+				0247ED70295A948800212A78 /* Views */,
+			);
+			path = MotionList;
+			sourceTree = "<group>";
+		};
+		0247ED61295A8DFB00212A78 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				0247ED5B295A8D1200212A78 /* MotionListViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		0247ED62295A8E0600212A78 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				0247ED5D295A8D3300212A78 /* MotionListViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		0247ED63295A8EEA00212A78 /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				0247ED55295A8C3000212A78 /* AppCoordinator.swift */,
+				0247ED57295A8C5000212A78 /* Coordinator.swift */,
+			);
+			path = Coordinators;
+			sourceTree = "<group>";
+		};
+		0247ED66295A924100212A78 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				0247ED6D295A932100212A78 /* UI */,
+				0247ED69295A929300212A78 /* NSObject+extension.swift */,
+				0247ED7C295ABA9700212A78 /* Collection+extension.swift */,
+				0247ED7E295ABFDC00212A78 /* Date+extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		0247ED6D295A932100212A78 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				0247ED64295A923500212A78 /* UIView+extension.swift */,
+				0247ED67295A927900212A78 /* UIStackView+extension.swift */,
+				0247ED73295A963D00212A78 /* UIFont+extension.swift */,
+				0247ED6B295A92AB00212A78 /* UITableView+extension.swift */,
+				E1A5A234295DBE920086DADB /* UIViewController+extension.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		0247ED70295A948800212A78 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0247ED71295A949D00212A78 /* MotionDataCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		0247ED77295AB50E00212A78 /* MotionMeasure */ = {
+			isa = PBXGroup;
+			children = (
+				E1F1D33C295BD5A600E5C521 /* Views */,
+				E13ACFF5295B31B100265ED2 /* ViewModels */,
+				E13ACFF4295B31A500265ED2 /* ViewControllers */,
+			);
+			path = MotionMeasure;
+			sourceTree = "<group>";
+		};
+		0247ED78295AB52900212A78 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				0247ED59295A8CBE00212A78 /* MotionListCoordinator.swift */,
+				0247ED5F295A8D8C00212A78 /* MotionListCoordinatorInterface.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
 		63F01BA828D44FC400C53A39 = {
 			isa = PBXGroup;
 			children = (
@@ -56,15 +292,61 @@
 		63F01BB328D44FC400C53A39 /* GyroData */ = {
 			isa = PBXGroup;
 			children = (
-				63F01BB428D44FC400C53A39 /* AppDelegate.swift */,
-				63F01BB628D44FC400C53A39 /* SceneDelegate.swift */,
-				63F01BB828D44FC400C53A39 /* ViewController.swift */,
-				63F01BBA28D44FC400C53A39 /* Main.storyboard */,
-				63F01BBD28D44FC500C53A39 /* Assets.xcassets */,
-				63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */,
+				0247ED50295A8B9B00212A78 /* Resources */,
+				02432BFD29598DDF0035AEDD /* Sources */,
 				63F01BC228D44FC500C53A39 /* Info.plist */,
 			);
 			path = GyroData;
+			sourceTree = "<group>";
+		};
+		E13ACFF4295B31A500265ED2 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				E13ACFEF295B15DA00265ED2 /* MeasurementViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		E13ACFF5295B31B100265ED2 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				E13ACFEB295AFB5000265ED2 /* MeasermentViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		E1F1D33C295BD5A600E5C521 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E1F1D33D295BD5CE00E5C521 /* GraphView.swift */,
+				E1F1D343295C328A00E5C521 /* RoundButton.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E1F1D345295C5DB300E5C521 /* MotionPlay */ = {
+			isa = PBXGroup;
+			children = (
+				E1F1D34D295CAF6400E5C521 /* ViewControllers */,
+				E1F1D347295C5E6400E5C521 /* ViewModels */,
+			);
+			path = MotionPlay;
+			sourceTree = "<group>";
+		};
+		E1F1D347295C5E6400E5C521 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				E1F1D349295C5EBB00E5C521 /* MotionDetailViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		E1F1D34D295CAF6400E5C521 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				E1F1D34E295CAF8300E5C521 /* MotionDetailViewController.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -77,6 +359,7 @@
 				63F01BAD28D44FC400C53A39 /* Sources */,
 				63F01BAE28D44FC400C53A39 /* Frameworks */,
 				63F01BAF28D44FC400C53A39 /* Resources */,
+				02432BFC29598D510035AEDD /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -127,34 +410,76 @@
 			files = (
 				63F01BC128D44FC500C53A39 /* LaunchScreen.storyboard in Resources */,
 				63F01BBE28D44FC500C53A39 /* Assets.xcassets in Resources */,
-				63F01BBC28D44FC400C53A39 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		02432BFC29598D510035AEDD /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if test -d \"/opt/homebrew/bin/\"; then\n  PATH=\"/opt/homebrew/bin/:${PATH}\"\nfi\n\nexport PATH\n\nif which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		63F01BAD28D44FC400C53A39 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */,
+				02432C172959937D0035AEDD /* CoreDataStorage.swift in Sources */,
+				E1A09573295EB7BD0073D668 /* GraphConstant.swift in Sources */,
+				0247ED72295A949D00212A78 /* MotionDataCell.swift in Sources */,
+				02432C132959909C0035AEDD /* CoreMotionManager.swift in Sources */,
+				0247ED74295A963D00212A78 /* UIFont+extension.swift in Sources */,
+				0247ED5E295A8D3300212A78 /* MotionListViewModel.swift in Sources */,
+				E1F1D33E295BD5CE00E5C521 /* GraphView.swift in Sources */,
+				0247ED56295A8C3000212A78 /* AppCoordinator.swift in Sources */,
+				02432C1A2959938E0035AEDD /* CoreDataStorage.xcdatamodeld in Sources */,
+				0247ED5A295A8CBE00212A78 /* MotionListCoordinator.swift in Sources */,
+				02432C222959A38C0035AEDD /* CoreDataMotionStorage.swift in Sources */,
+				0247ED58295A8C5000212A78 /* Coordinator.swift in Sources */,
+				0247ED7F295ABFDC00212A78 /* Date+extension.swift in Sources */,
+				E1F1D34A295C5EBB00E5C521 /* MotionDetailViewModel.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
+				E13ACFEC295AFB5000265ED2 /* MeasermentViewModel.swift in Sources */,
+				0247ED7B295AB72600212A78 /* Observable.swift in Sources */,
+				E1F1D344295C328A00E5C521 /* RoundButton.swift in Sources */,
+				0247ED5C295A8D1200212A78 /* MotionListViewController.swift in Sources */,
+				02432C282959CAFB0035AEDD /* MotionFileManager.swift in Sources */,
+				E1F1D34F295CAF8300E5C521 /* MotionDetailViewController.swift in Sources */,
+				02432C11295990960035AEDD /* Motion.swift in Sources */,
+				0247ED6C295A92AB00212A78 /* UITableView+extension.swift in Sources */,
+				0247ED68295A927900212A78 /* UIStackView+extension.swift in Sources */,
+				0247ED65295A923500212A78 /* UIView+extension.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
+				0247ED6A295A929300212A78 /* NSObject+extension.swift in Sources */,
+				E1A5A235295DBE920086DADB /* UIViewController+extension.swift in Sources */,
+				0247ED2F295A6F5400212A78 /* MotionList.swift in Sources */,
+				02432C1F295994930035AEDD /* MotionEntity+Mapping.swift in Sources */,
+				02432C262959A8420035AEDD /* MotionStorage.swift in Sources */,
+				0247ED60295A8D8C00212A78 /* MotionListCoordinatorInterface.swift in Sources */,
+				E13ACFF0295B15DA00265ED2 /* MeasurementViewController.swift in Sources */,
+				0247ED7D295ABA9700212A78 /* Collection+extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		63F01BBA28D44FC400C53A39 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				63F01BBB28D44FC400C53A39 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -287,11 +612,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4645UMZ6U4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GyroData/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -314,11 +639,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4645UMZ6U4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GyroData/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -356,6 +681,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		02432C182959938E0035AEDD /* CoreDataStorage.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				02432C192959938E0035AEDD /* MotionEntity.xcdatamodel */,
+			);
+			currentVersion = 02432C192959938E0035AEDD /* MotionEntity.xcdatamodel */;
+			path = CoreDataStorage.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 63F01BA928D44FC400C53A39 /* Project object */;
 }
