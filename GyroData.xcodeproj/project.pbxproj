@@ -3,24 +3,78 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		32040C0D295D696B00317CA8 /* MotionRecordingStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32040C0C295D696B00317CA8 /* MotionRecordingStorage.swift */; };
+		329E7EE7295B052D00537466 /* Coordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329E7EE6295B052D00537466 /* Coordinate.swift */; };
+		329E7EE9295B058200537466 /* MotionMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329E7EE8295B058200537466 /* MotionMode.swift */; };
+		329E7EEB295B05D000537466 /* MotionRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329E7EEA295B05D000537466 /* MotionRecord.swift */; };
+		329E7EED295B1A0100537466 /* MotionDataListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329E7EEC295B1A0100537466 /* MotionDataListViewController.swift */; };
+		32A17EF5295D8D6C007D8A8F /* SaveMotionDataUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A17EF4295D8D6C007D8A8F /* SaveMotionDataUseCase.swift */; };
+		32A17EF7295D8D77007D8A8F /* MotionRecordingStorageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A17EF6295D8D77007D8A8F /* MotionRecordingStorageProtocol.swift */; };
+		32AA1E95295DBF0D002259C3 /* CoordinateDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32AA1E94295DBF0D002259C3 /* CoordinateDTO.swift */; };
+		32AA1E97295DBF50002259C3 /* MotionRecordDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32AA1E96295DBF50002259C3 /* MotionRecordDTO.swift */; };
+		32B01338295A844B005C8750 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B01337295A844B005C8750 /* GraphView.swift */; };
+		32B0133A295A871C005C8750 /* GraphViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B01339295A871C005C8750 /* GraphViewModel.swift */; };
+		32C20245295EB41400BCDCCB /* MotionReplayStorageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C20244295EB41400BCDCCB /* MotionReplayStorageProtocol.swift */; };
+		32C20247295EB4D900BCDCCB /* FetchMotionDataUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C20246295EB4D900BCDCCB /* FetchMotionDataUseCase.swift */; };
+		32E5748F295DD5B100E297D9 /* FileStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E5748E295DD5B100E297D9 /* FileStorage.swift */; };
+		32E57491295EB3FC00E297D9 /* MotionReplayStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E57490295EB3FC00E297D9 /* MotionReplayStorage.swift */; };
+		32F77CC0295C7AA400A78CCD /* MotionData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 32F77CBE295C7AA400A78CCD /* MotionData.xcdatamodeld */; };
+		32F77CC5295C7BDA00A78CCD /* MotionRecordEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F77CC1295C7BDA00A78CCD /* MotionRecordEntity+CoreDataClass.swift */; };
+		32F77CC6295C7BDA00A78CCD /* MotionRecordEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F77CC2295C7BDA00A78CCD /* MotionRecordEntity+CoreDataProperties.swift */; };
+		32F77CCA295C7DB700A78CCD /* CoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F77CC9295C7DB700A78CCD /* CoreDataStorage.swift */; };
+		32F77CCC295C81A800A78CCD /* MotionDataListStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F77CCB295C81A800A78CCD /* MotionDataListStorage.swift */; };
+		32FD288A295B2588006B6871 /* RecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32FD2889295B2588006B6871 /* RecordTableViewCell.swift */; };
+		32FD288C295B2EFB006B6871 /* MotionDataListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32FD288B295B2EFB006B6871 /* MotionDataListViewModel.swift */; };
+		32FD288E295BE44D006B6871 /* FetchMotionDataListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32FD288D295BE44D006B6871 /* FetchMotionDataListUseCase.swift */; };
+		32FD2890295BE4A6006B6871 /* MotionDataListStorageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32FD288F295BE4A6006B6871 /* MotionDataListStorageProtocol.swift */; };
+		32FDB345295BE62A0095F6A5 /* DeleteMotionDataUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32FDB344295BE62A0095F6A5 /* DeleteMotionDataUseCase.swift */; };
+		32FDB349295C18C80095F6A5 /* ReplayType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32FDB348295C18C80095F6A5 /* ReplayType.swift */; };
+		32FDB34B295C18F20095F6A5 /* MotionReplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32FDB34A295C18F20095F6A5 /* MotionReplayViewController.swift */; };
+		32FDB34D295C19B60095F6A5 /* MotionReplayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32FDB34C295C19B60095F6A5 /* MotionReplayViewModel.swift */; };
+		3A6D2624295B258800FFD7F1 /* MotionRecordingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6D2622295B258800FFD7F1 /* MotionRecordingViewController.swift */; };
+		3A9BFE94295BF25D007824C6 /* MotionRecordingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9BFE93295BF25D007824C6 /* MotionRecordingViewModel.swift */; };
 		63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB428D44FC400C53A39 /* AppDelegate.swift */; };
-		63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB628D44FC400C53A39 /* SceneDelegate.swift */; };
-		63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB828D44FC400C53A39 /* ViewController.swift */; };
-		63F01BBC28D44FC400C53A39 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBA28D44FC400C53A39 /* Main.storyboard */; };
 		63F01BBE28D44FC500C53A39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBD28D44FC500C53A39 /* Assets.xcassets */; };
 		63F01BC128D44FC500C53A39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		32040C0C295D696B00317CA8 /* MotionRecordingStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionRecordingStorage.swift; sourceTree = "<group>"; };
+		329E7EE6295B052D00537466 /* Coordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinate.swift; sourceTree = "<group>"; };
+		329E7EE8295B058200537466 /* MotionMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionMode.swift; sourceTree = "<group>"; };
+		329E7EEA295B05D000537466 /* MotionRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionRecord.swift; sourceTree = "<group>"; };
+		329E7EEC295B1A0100537466 /* MotionDataListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDataListViewController.swift; sourceTree = "<group>"; };
+		32A17EF4295D8D6C007D8A8F /* SaveMotionDataUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaveMotionDataUseCase.swift; sourceTree = "<group>"; };
+		32A17EF6295D8D77007D8A8F /* MotionRecordingStorageProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionRecordingStorageProtocol.swift; sourceTree = "<group>"; };
+		32AA1E94295DBF0D002259C3 /* CoordinateDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateDTO.swift; sourceTree = "<group>"; };
+		32AA1E96295DBF50002259C3 /* MotionRecordDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionRecordDTO.swift; sourceTree = "<group>"; };
+		32B01337295A844B005C8750 /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
+		32B01339295A871C005C8750 /* GraphViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphViewModel.swift; sourceTree = "<group>"; };
+		32C20244295EB41400BCDCCB /* MotionReplayStorageProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionReplayStorageProtocol.swift; sourceTree = "<group>"; };
+		32C20246295EB4D900BCDCCB /* FetchMotionDataUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchMotionDataUseCase.swift; sourceTree = "<group>"; };
+		32E5748E295DD5B100E297D9 /* FileStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileStorage.swift; sourceTree = "<group>"; };
+		32E57490295EB3FC00E297D9 /* MotionReplayStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionReplayStorage.swift; sourceTree = "<group>"; };
+		32F77CBF295C7AA400A78CCD /* MotionData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MotionData.xcdatamodel; sourceTree = "<group>"; };
+		32F77CC1295C7BDA00A78CCD /* MotionRecordEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MotionRecordEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		32F77CC2295C7BDA00A78CCD /* MotionRecordEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MotionRecordEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		32F77CC9295C7DB700A78CCD /* CoreDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStorage.swift; sourceTree = "<group>"; };
+		32F77CCB295C81A800A78CCD /* MotionDataListStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDataListStorage.swift; sourceTree = "<group>"; };
+		32FD2889295B2588006B6871 /* RecordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordTableViewCell.swift; sourceTree = "<group>"; };
+		32FD288B295B2EFB006B6871 /* MotionDataListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDataListViewModel.swift; sourceTree = "<group>"; };
+		32FD288D295BE44D006B6871 /* FetchMotionDataListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchMotionDataListUseCase.swift; sourceTree = "<group>"; };
+		32FD288F295BE4A6006B6871 /* MotionDataListStorageProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDataListStorageProtocol.swift; sourceTree = "<group>"; };
+		32FDB344295BE62A0095F6A5 /* DeleteMotionDataUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteMotionDataUseCase.swift; sourceTree = "<group>"; };
+		32FDB348295C18C80095F6A5 /* ReplayType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplayType.swift; sourceTree = "<group>"; };
+		32FDB34A295C18F20095F6A5 /* MotionReplayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionReplayViewController.swift; sourceTree = "<group>"; };
+		32FDB34C295C19B60095F6A5 /* MotionReplayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionReplayViewModel.swift; sourceTree = "<group>"; };
+		3A6D2622295B258800FFD7F1 /* MotionRecordingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionRecordingViewController.swift; sourceTree = "<group>"; };
+		3A9BFE93295BF25D007824C6 /* MotionRecordingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionRecordingViewModel.swift; sourceTree = "<group>"; };
 		63F01BB128D44FC400C53A39 /* GyroData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GyroData.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63F01BB428D44FC400C53A39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		63F01BB628D44FC400C53A39 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		63F01BB828D44FC400C53A39 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		63F01BBB28D44FC400C53A39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		63F01BBD28D44FC500C53A39 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		63F01BC028D44FC500C53A39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		63F01BC228D44FC500C53A39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -37,6 +91,121 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		32A17EF8295D8E49007D8A8F /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				63F01BB428D44FC400C53A39 /* AppDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		32A17EF9295D8E57007D8A8F /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				32A17F03295D8F13007D8A8F /* Graph */,
+				32A17F01295D8EFE007D8A8F /* MotionDataList */,
+				32A17F04295D8F1D007D8A8F /* MotionRecording */,
+				32A17F02295D8F09007D8A8F /* MotionReplay */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		32A17EFA295D8E64007D8A8F /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				32A17EFE295D8EC2007D8A8F /* Entities */,
+				32A17F00295D8ED5007D8A8F /* UseCases */,
+				32A17EFF295D8ECA007D8A8F /* StorageInterfaces */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		32A17EFB295D8E74007D8A8F /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				32F77CC9295C7DB700A78CCD /* CoreDataStorage.swift */,
+				32F77CCB295C81A800A78CCD /* MotionDataListStorage.swift */,
+				32040C0C295D696B00317CA8 /* MotionRecordingStorage.swift */,
+				32E57490295EB3FC00E297D9 /* MotionReplayStorage.swift */,
+				32F77CBE295C7AA400A78CCD /* MotionData.xcdatamodeld */,
+				32F77CC1295C7BDA00A78CCD /* MotionRecordEntity+CoreDataClass.swift */,
+				32F77CC2295C7BDA00A78CCD /* MotionRecordEntity+CoreDataProperties.swift */,
+				32E5748E295DD5B100E297D9 /* FileStorage.swift */,
+				32AA1E94295DBF0D002259C3 /* CoordinateDTO.swift */,
+				32AA1E96295DBF50002259C3 /* MotionRecordDTO.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		32A17EFE295D8EC2007D8A8F /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				329E7EE6295B052D00537466 /* Coordinate.swift */,
+				32FDB348295C18C80095F6A5 /* ReplayType.swift */,
+				329E7EE8295B058200537466 /* MotionMode.swift */,
+				329E7EEA295B05D000537466 /* MotionRecord.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		32A17EFF295D8ECA007D8A8F /* StorageInterfaces */ = {
+			isa = PBXGroup;
+			children = (
+				32A17EF6295D8D77007D8A8F /* MotionRecordingStorageProtocol.swift */,
+				32FD288F295BE4A6006B6871 /* MotionDataListStorageProtocol.swift */,
+				32C20244295EB41400BCDCCB /* MotionReplayStorageProtocol.swift */,
+			);
+			path = StorageInterfaces;
+			sourceTree = "<group>";
+		};
+		32A17F00295D8ED5007D8A8F /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				32A17EF4295D8D6C007D8A8F /* SaveMotionDataUseCase.swift */,
+				32C20246295EB4D900BCDCCB /* FetchMotionDataUseCase.swift */,
+				32FD288D295BE44D006B6871 /* FetchMotionDataListUseCase.swift */,
+				32FDB344295BE62A0095F6A5 /* DeleteMotionDataUseCase.swift */,
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
+		32A17F01295D8EFE007D8A8F /* MotionDataList */ = {
+			isa = PBXGroup;
+			children = (
+				329E7EEC295B1A0100537466 /* MotionDataListViewController.swift */,
+				32FD288B295B2EFB006B6871 /* MotionDataListViewModel.swift */,
+				32FD2889295B2588006B6871 /* RecordTableViewCell.swift */,
+			);
+			path = MotionDataList;
+			sourceTree = "<group>";
+		};
+		32A17F02295D8F09007D8A8F /* MotionReplay */ = {
+			isa = PBXGroup;
+			children = (
+				32FDB34A295C18F20095F6A5 /* MotionReplayViewController.swift */,
+				32FDB34C295C19B60095F6A5 /* MotionReplayViewModel.swift */,
+			);
+			path = MotionReplay;
+			sourceTree = "<group>";
+		};
+		32A17F03295D8F13007D8A8F /* Graph */ = {
+			isa = PBXGroup;
+			children = (
+				32B01337295A844B005C8750 /* GraphView.swift */,
+				32B01339295A871C005C8750 /* GraphViewModel.swift */,
+			);
+			path = Graph;
+			sourceTree = "<group>";
+		};
+		32A17F04295D8F1D007D8A8F /* MotionRecording */ = {
+			isa = PBXGroup;
+			children = (
+				3A6D2622295B258800FFD7F1 /* MotionRecordingViewController.swift */,
+				3A9BFE93295BF25D007824C6 /* MotionRecordingViewModel.swift */,
+			);
+			path = MotionRecording;
+			sourceTree = "<group>";
+		};
 		63F01BA828D44FC400C53A39 = {
 			isa = PBXGroup;
 			children = (
@@ -56,10 +225,10 @@
 		63F01BB328D44FC400C53A39 /* GyroData */ = {
 			isa = PBXGroup;
 			children = (
-				63F01BB428D44FC400C53A39 /* AppDelegate.swift */,
-				63F01BB628D44FC400C53A39 /* SceneDelegate.swift */,
-				63F01BB828D44FC400C53A39 /* ViewController.swift */,
-				63F01BBA28D44FC400C53A39 /* Main.storyboard */,
+				32A17EF8295D8E49007D8A8F /* Application */,
+				32A17EF9295D8E57007D8A8F /* Presentation */,
+				32A17EFA295D8E64007D8A8F /* Domain */,
+				32A17EFB295D8E74007D8A8F /* Data */,
 				63F01BBD28D44FC500C53A39 /* Assets.xcassets */,
 				63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */,
 				63F01BC228D44FC500C53A39 /* Info.plist */,
@@ -103,7 +272,7 @@
 				};
 			};
 			buildConfigurationList = 63F01BAC28D44FC400C53A39 /* Build configuration list for PBXProject "GyroData" */;
-			compatibilityVersion = "Xcode 14.0";
+			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -127,7 +296,6 @@
 			files = (
 				63F01BC128D44FC500C53A39 /* LaunchScreen.storyboard in Resources */,
 				63F01BBE28D44FC500C53A39 /* Assets.xcassets in Resources */,
-				63F01BBC28D44FC400C53A39 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,23 +306,43 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */,
+				3A6D2624295B258800FFD7F1 /* MotionRecordingViewController.swift in Sources */,
+				32FDB34B295C18F20095F6A5 /* MotionReplayViewController.swift in Sources */,
+				329E7EE9295B058200537466 /* MotionMode.swift in Sources */,
+				32E5748F295DD5B100E297D9 /* FileStorage.swift in Sources */,
+				32FD2890295BE4A6006B6871 /* MotionDataListStorageProtocol.swift in Sources */,
+				329E7EED295B1A0100537466 /* MotionDataListViewController.swift in Sources */,
+				32FDB345295BE62A0095F6A5 /* DeleteMotionDataUseCase.swift in Sources */,
+				32FD288A295B2588006B6871 /* RecordTableViewCell.swift in Sources */,
+				32AA1E95295DBF0D002259C3 /* CoordinateDTO.swift in Sources */,
+				32B0133A295A871C005C8750 /* GraphViewModel.swift in Sources */,
+				32AA1E97295DBF50002259C3 /* MotionRecordDTO.swift in Sources */,
+				32F77CCA295C7DB700A78CCD /* CoreDataStorage.swift in Sources */,
+				32C20245295EB41400BCDCCB /* MotionReplayStorageProtocol.swift in Sources */,
+				32FDB34D295C19B60095F6A5 /* MotionReplayViewModel.swift in Sources */,
+				32FDB349295C18C80095F6A5 /* ReplayType.swift in Sources */,
+				329E7EEB295B05D000537466 /* MotionRecord.swift in Sources */,
+				32F77CC5295C7BDA00A78CCD /* MotionRecordEntity+CoreDataClass.swift in Sources */,
+				32F77CC6295C7BDA00A78CCD /* MotionRecordEntity+CoreDataProperties.swift in Sources */,
+				3A9BFE94295BF25D007824C6 /* MotionRecordingViewModel.swift in Sources */,
+				32FD288E295BE44D006B6871 /* FetchMotionDataListUseCase.swift in Sources */,
+				32FD288C295B2EFB006B6871 /* MotionDataListViewModel.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
-				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
+				32C20247295EB4D900BCDCCB /* FetchMotionDataUseCase.swift in Sources */,
+				32A17EF7295D8D77007D8A8F /* MotionRecordingStorageProtocol.swift in Sources */,
+				329E7EE7295B052D00537466 /* Coordinate.swift in Sources */,
+				32A17EF5295D8D6C007D8A8F /* SaveMotionDataUseCase.swift in Sources */,
+				32B01338295A844B005C8750 /* GraphView.swift in Sources */,
+				32E57491295EB3FC00E297D9 /* MotionReplayStorage.swift in Sources */,
+				32040C0D295D696B00317CA8 /* MotionRecordingStorage.swift in Sources */,
+				32F77CC0295C7AA400A78CCD /* MotionData.xcdatamodeld in Sources */,
+				32F77CCC295C81A800A78CCD /* MotionDataListStorage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		63F01BBA28D44FC400C53A39 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				63F01BBB28D44FC400C53A39 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -216,7 +404,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -270,7 +458,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -287,13 +475,13 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 267JUTDVY2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GyroData/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -301,6 +489,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.GyroData;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -314,13 +505,13 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 267JUTDVY2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GyroData/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -328,6 +519,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.GyroData;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -356,6 +550,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		32F77CBE295C7AA400A78CCD /* MotionData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				32F77CBF295C7AA400A78CCD /* MotionData.xcdatamodel */,
+			);
+			currentVersion = 32F77CBF295C7AA400A78CCD /* MotionData.xcdatamodel */;
+			path = MotionData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 63F01BA928D44FC400C53A39 /* Project object */;
 }
