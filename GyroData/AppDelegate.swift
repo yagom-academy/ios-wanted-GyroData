@@ -2,10 +2,11 @@
 //  AppDelegate.swift
 //  GyroData
 //
-//  Created by kjs on 2022/09/16.
+//  Created by unchain, Ellen J, yeton on 2022/09/16.
 //
 
 import UIKit
+import CoreData
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
