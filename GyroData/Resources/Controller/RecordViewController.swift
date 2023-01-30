@@ -107,14 +107,27 @@ private extension RecordViewController {
         if monitor.isAccelerometerActive {
             monitor.stopAccelerometerUpdates()
             convertButtonsState(isEnable: true)
+            saveJsonData()
             return
         }
         
         if monitor.isGyroActive {
             monitor.stopGyroUpdates()
             convertButtonsState(isEnable: true)
+            saveJsonData()
             return
         }
+    }
+    
+    func saveJsonData() {
+        let transition = values.convertTransition()
+        
+        guard let encodeData = try? JSONEncoder().encode(transition) else {
+            return
+        }
+        
+        NSLog(String(data: encodeData, encoding: .utf8) ?? "")
+        // TODO: - Json Data 저장하기
     }
     
     func convertButtonsState(isEnable: Bool) {
