@@ -42,4 +42,15 @@ final class PersistentContainerManager {
             return []
         }
     }
+
+    func fetchGyroModels() -> [GyroModel] {
+        let gyroModelObjects = fetchGyroModelObject()
+        let gyroModels = gyroModelObjects.map {
+            GyroModel(saveDate: $0.saveDate,
+                      sensorType: SensorType(rawValue: $0.sensorType) ?? SensorType.Accelerometer,
+                      recordTime: $0.recordTime,
+                      jsonName: $0.jsonName)
+        }
+        return gyroModels
+    }
 }

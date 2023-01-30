@@ -16,11 +16,11 @@ extension GyroModelObject {
         return NSFetchRequest<GyroModelObject>(entityName: "GyroModelObject")
     }
 
-    @NSManaged public var saveDate: String?
-    @NSManaged public var sensorType: String?
+    @NSManaged public var saveDate: String
+    @NSManaged public var sensorType: String
     @NSManaged public var recordTime: Double
-    @NSManaged public var jsonName: String?
-    @NSManaged public var id: UUID?
+    @NSManaged public var jsonName: String
+    @NSManaged public var id: UUID
 
 }
 
