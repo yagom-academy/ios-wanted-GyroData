@@ -47,6 +47,7 @@ final class ViewController: UIViewController {
     }
 }
 
+// MARK: - UITableViewDataSource
 extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 10
@@ -62,7 +63,22 @@ extension ViewController: UITableViewDataSource {
     }
 }
 
+// MARK: - UITableViewDelegate
 extension ViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let playAction = UIContextualAction(style: .normal, title: "Play") { (action, view, completionHandler) in
+            print("play 클릭")
+            completionHandler(false)
+        }
+        playAction.backgroundColor = .systemGreen
 
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completionHandler) in
+            print("delete 클릭")
+            completionHandler(true)
+        }
+        deleteAction.backgroundColor = .systemRed
+
+        return UISwipeActionsConfiguration(actions: [deleteAction, playAction])
+    }
 }
 
