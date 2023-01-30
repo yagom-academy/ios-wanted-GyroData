@@ -26,6 +26,7 @@ final class ViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
+        tableView.separatorStyle = .none
     }
 
     override func viewDidLayoutSubviews() {

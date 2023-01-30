@@ -13,25 +13,25 @@ class CustomTableViewCell: UITableViewCell {
     let dateView: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "test"
+        label.font = UIFont.systemFont(ofSize: 16)
+        label.text = "2022/09/08 14:50:51"
         return label
     }()
 
     let sensorTypeView: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 30)
-        label.text = "Sensor"
+        label.font = UIFont.systemFont(ofSize: 24)
+        label.text = "Accelerometer"
         return label
     }()
 
     let runningTimeView: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 60)
-        label.text = "60"
-        label.textAlignment = .center
-        label.backgroundColor = .blue
+        label.font = UIFont.systemFont(ofSize: 48)
+        label.text = "60.0"
+        label.textAlignment = .left
         return label
     }()
 
@@ -41,7 +41,6 @@ class CustomTableViewCell: UITableViewCell {
         stackView.axis = .vertical
         stackView.alignment = .leading
         stackView.distribution = .fillEqually
-        stackView.backgroundColor = .brown
         return stackView
     }()
 
@@ -57,6 +56,7 @@ class CustomTableViewCell: UITableViewCell {
     }
 
     private func configureSubViews() {
+        let leftMargin: CGFloat = contentView.frame.width/10
         verticalStackView.addArrangedSubview(dateView)
         verticalStackView.addArrangedSubview(sensorTypeView)
         contentView.addSubview(verticalStackView)
@@ -66,11 +66,16 @@ class CustomTableViewCell: UITableViewCell {
             verticalStackView.topAnchor.constraint(equalTo: contentView.topAnchor),
             verticalStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             verticalStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            verticalStackView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.5),
+            verticalStackView.trailingAnchor.constraint(equalTo: runningTimeView.leadingAnchor),
             runningTimeView.leadingAnchor.constraint(equalTo: verticalStackView.trailingAnchor),
             runningTimeView.topAnchor.constraint(equalTo: contentView.topAnchor),
             runningTimeView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            runningTimeView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            runningTimeView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            verticalStackView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.65),
+            runningTimeView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.35)
         ])
+
+        verticalStackView.isLayoutMarginsRelativeArrangement = true
+        verticalStackView.layoutMargins = UIEdgeInsets(top: 0, left: leftMargin, bottom: 0, right: 0)
     }
 }
