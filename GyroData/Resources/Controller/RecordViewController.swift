@@ -8,6 +8,12 @@
 import UIKit
 
 class RecordViewController: UIViewController {
+    let segmentControl: UISegmentedControl = {
+        let control = UISegmentedControl(items: ["Acc", "Gyro"])
+        control.selectedSegmentIndex = 0
+        return control
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
