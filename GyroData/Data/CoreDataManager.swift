@@ -66,7 +66,8 @@ final class CoreDataManager {
             }
             
             context.delete(firstData)
-            
+            try context.save()
+                
             return .success(())
         } catch {
             return .failure(error)
