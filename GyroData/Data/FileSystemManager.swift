@@ -7,6 +7,12 @@
 
 import Foundation
 
+enum FileSystemError: Error {
+    case encodeError
+    case saveError
+    case unknownError
+}
+
 final class FileSystemManager {
     private enum FileConstant {
         static let directoryName = "Sensor_JSON_Folder"
@@ -19,7 +25,7 @@ final class FileSystemManager {
     
     init() {
         documentPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[.zero]
-        directoryPath = documentPath.appendingPathExtension(FileConstant.directoryName)
+        directoryPath = documentPath.appendingPathComponent(FileConstant.directoryName)
         createDirectory()
     }
     
@@ -44,5 +50,24 @@ final class FileSystemManager {
         
         guard let data = try? encoder.encode(data) else { return nil }
         return data
+    }
+}
+
+extension FileSystemManager {
+    func save(data: MeasureData, completionHandler: @escaping (FileSystemError) -> (Void)) {
+        let dataPath = directoryPath.appendingPathComponent(
+            data.date.description + FileConstant.jsonExtensionName
+        )
+        
+        guard let data = convertJSON(from: data) else {
+            completionHandler(.encodeError)
+            return
+        }
+        
+        do {
+            try data.write(to: dataPath)
+        } catch {
+            completionHandler(.saveError)
+        }
     }
 }
