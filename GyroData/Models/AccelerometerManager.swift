@@ -7,12 +7,12 @@
 
 import CoreMotion
 
-class AccelerometerManager {
+class AccelerometerManager: SensorManageable {
     private let motionManager = CMMotionManager()
-    private var timer: Timer?
-    private var sensorTimer: Timer?
+    private var timer = Timer()
+    private var sensorTimer = Timer()
 
-    func measure(interval: TimeInterval = 0.1, timeout: TimeInterval = 600, completion: @escaping (CMAcceleration) -> ()) {
+    func measure(interval: TimeInterval, timeout: TimeInterval, completion: @escaping (axis) -> ()) {
         motionManager.accelerometerUpdateInterval = interval
         motionManager.startAccelerometerUpdates()
 
@@ -23,13 +23,13 @@ class AccelerometerManager {
         sensorTimer = Timer.scheduledTimer(withTimeInterval: interval, repeats: true) { [weak self] _ in
             guard let acceleration = self?.motionManager.accelerometerData?.acceleration else { return }
 
-            completion(acceleration)
+            completion(axis(x: acceleration.x, y: acceleration.y, z: acceleration.z))
         }
     }
 
     func stop() {
         motionManager.stopAccelerometerUpdates()
-        timer?.invalidate()
-        sensorTimer?.invalidate()
+        timer.invalidate()
+        sensorTimer.invalidate()
     }
 }
