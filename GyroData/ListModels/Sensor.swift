@@ -7,8 +7,12 @@
 
 import Foundation
 
-enum Sensor: Hashable {
+enum Sensor: String, Hashable {
     
-    case Gyro
-    case Accelerometer
+    case Gyro = "Gyro"
+    case Accelerometer = "Accelerometer"
+    
+    var name: String {
+        return self.rawValue
+    }
 }

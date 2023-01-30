@@ -9,7 +9,7 @@ import UIKit
 
 final class ListView: UIView {
     
-    private let tableView: UITableView = {
+    private(set) var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.separatorStyle = .none

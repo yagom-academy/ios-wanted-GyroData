@@ -28,8 +28,12 @@ final class ListCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configureHierarchy()
         configureLayout()
-        
-
+    }
+    
+    func setup(date: String, sensorName: String, value: String) {
+        dateLabel.text = date
+        sensorNameLabel.text = sensorName
+        valueLabel.text = value
     }
     
     private func configureHierarchy() {
