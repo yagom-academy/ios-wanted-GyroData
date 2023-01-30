@@ -17,6 +17,7 @@ class RecordViewController: UIViewController {
     let recordButton: UIButton = {
         let button = UIButton()
         button.setTitle("측정", for: .normal)
+        button.setTitleColor(.gray, for: .disabled)
         button.layer.backgroundColor = UIColor.systemBlue.cgColor
         button.layer.cornerRadius = 5
         return button
@@ -64,23 +65,32 @@ extension RecordViewController {
     }
     
     @objc func didTapRecordButton() {
-        guard !monitor.isAccelerometerActive && !monitor.isGyroActive else {
-            return
-        }
-        
         let segmentIndex = segmentControl.selectedSegmentIndex
         
-        if segmentIndex == 0 {
+        switch segmentIndex {
+        case 0:
             startMonitoringAccelerometer()
-        } else if segmentIndex == 1 {
+        case 1:
             startMonitoringGyro()
-        } else {
+        default:
             return
         }
+        
+        recordButton.isEnabled = false
     }
     
     @objc func didTapCancelButton() {
+        if monitor.isAccelerometerActive {
+            monitor.stopAccelerometerUpdates()
+            recordButton.isEnabled = true
+            return
+        }
         
+        if monitor.isGyroActive {
+            monitor.stopGyroUpdates()
+            recordButton.isEnabled = true
+            return
+        }
     }
     
     @objc func didTapSaveButton() {
