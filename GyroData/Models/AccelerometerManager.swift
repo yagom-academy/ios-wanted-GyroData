@@ -5,15 +5,31 @@
 //  Created by 로빈 on 2023/01/30.
 //
 
-import Foundation
 import CoreMotion
 
 class AccelerometerManager {
-    func measure() {
-        print("가속도계 측정")
+    private let motionManager = CMMotionManager()
+    private var timer: Timer?
+    private var sensorTimer: Timer?
+
+    func measure(interval: TimeInterval = 0.1, timeout: TimeInterval = 600, completion: @escaping (CMAcceleration) -> ()) {
+        motionManager.accelerometerUpdateInterval = interval
+        motionManager.startAccelerometerUpdates()
+
+        timer = Timer.scheduledTimer(withTimeInterval: timeout, repeats: false) { [weak self] _ in
+            self?.stop()
+        }
+
+        sensorTimer = Timer.scheduledTimer(withTimeInterval: interval, repeats: true) { [weak self] _ in
+            guard let acceleration = self?.motionManager.accelerometerData?.acceleration else { return }
+
+            completion(acceleration)
+        }
     }
 
     func stop() {
-        print("가속도계 측정정지")
+        motionManager.stopAccelerometerUpdates()
+        timer?.invalidate()
+        sensorTimer?.invalidate()
     }
 }
