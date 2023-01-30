@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1A087CCD2987D3CE00FC2056 /* MeasurementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A087CCC2987D3CE00FC2056 /* MeasurementViewController.swift */; };
+		1A087CD42987F72000FC2056 /* MeasurementManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A087CD32987F72000FC2056 /* MeasurementManager.swift */; };
 		1A087CD62987F74800FC2056 /* AccelerometerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A087CD52987F74800FC2056 /* AccelerometerManager.swift */; };
 		1A087CD82987F77000FC2056 /* GyroManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A087CD72987F77000FC2056 /* GyroManager.swift */; };
 		1A087CDA2987F7DF00FC2056 /* Sensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A087CD92987F7DF00FC2056 /* Sensor.swift */; };
@@ -20,6 +21,7 @@
 
 /* Begin PBXFileReference section */
 		1A087CCC2987D3CE00FC2056 /* MeasurementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementViewController.swift; sourceTree = "<group>"; };
+		1A087CD32987F72000FC2056 /* MeasurementManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementManager.swift; sourceTree = "<group>"; };
 		1A087CD52987F74800FC2056 /* AccelerometerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccelerometerManager.swift; sourceTree = "<group>"; };
 		1A087CD72987F77000FC2056 /* GyroManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroManager.swift; sourceTree = "<group>"; };
 		1A087CD92987F7DF00FC2056 /* Sensor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sensor.swift; sourceTree = "<group>"; };
@@ -58,6 +60,7 @@
 		1A087CC92987CDFF00FC2056 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				1A087CD32987F72000FC2056 /* MeasurementManager.swift */,
 				1A087CD52987F74800FC2056 /* AccelerometerManager.swift */,
 				1A087CD72987F77000FC2056 /* GyroManager.swift */,
 				1A087CD92987F7DF00FC2056 /* Sensor.swift */,
@@ -180,6 +183,7 @@
 			files = (
 				1A087CD82987F77000FC2056 /* GyroManager.swift in Sources */,
 				63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */,
+				1A087CD42987F72000FC2056 /* MeasurementManager.swift in Sources */,
 				1A087CDA2987F7DF00FC2056 /* Sensor.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
