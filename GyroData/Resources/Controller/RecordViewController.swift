@@ -10,6 +10,18 @@ import UIKit
 class RecordViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        configureUI()
+    }
+}
+
+extension RecordViewController {
+    func configureUI() {
+        setBackgroundColor()
+        setNavigationBar()
+    }
+    
+    func setBackgroundColor() {
         view.backgroundColor = .systemBackground
     }
     
