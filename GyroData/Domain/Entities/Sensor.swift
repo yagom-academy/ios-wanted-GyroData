@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Sensor {
+enum Sensor: Encodable {
     case accelerometer
     case gyroscope
 }

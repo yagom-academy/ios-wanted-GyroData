@@ -10,6 +10,7 @@ import Foundation
 final class FileSystemManager {
     private enum FileConstant {
         static let directoryName = "Sensor_JSON_Folder"
+        static let jsonExtensionName = ".json"
     }
     
     private let fileManager = FileManager.default
@@ -33,5 +34,15 @@ final class FileSystemManager {
             //TODO: - Error Alert
             print(error.localizedDescription)
         }
+    }
+    
+    private func convertJSON(from data: MeasureData) -> Data? {
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
+        encoder.keyEncodingStrategy = .convertToSnakeCase
+        encoder.dateEncodingStrategy = .iso8601
+        
+        guard let data = try? encoder.encode(data) else { return nil }
+        return data
     }
 }
