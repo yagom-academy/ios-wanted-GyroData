@@ -21,7 +21,7 @@ extension SensorData {
     @NSManaged public var zValue: Double
     @NSManaged public var type: Int16
     @NSManaged public var runTime: Double
-    @NSManaged public var date: Date?
+    @NSManaged public var date: Date
 
 }
 

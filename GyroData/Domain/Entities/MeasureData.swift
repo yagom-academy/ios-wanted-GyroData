@@ -13,5 +13,5 @@ struct MeasureData {
     let zValue: Double
     let runTime: Double
     let date: Date
-    let type: Sensor
+    let type: Sensor?
 }

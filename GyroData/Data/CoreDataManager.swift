@@ -8,7 +8,7 @@
 import CoreData
 import Foundation
 
-class CoreDataManager {
+final class CoreDataManager {
     private let persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "SensorData")
         container.loadPersistentStores { _, error in
@@ -18,7 +18,7 @@ class CoreDataManager {
         }
         return container
     }()
-    lazy var context = persistentContainer.viewContext
+    private lazy var context = persistentContainer.viewContext
     
     func save(_ model: MeasureData) -> Result<Void, Error> {
         let content = SensorData(context: self.context)
@@ -36,5 +36,36 @@ class CoreDataManager {
         } catch {
             return .failure(error)
         }
+    }
+
+    func fetch(offset: Int, limit: Int) -> Result<[MeasureData], Error> {
+        let request = SensorData.fetchRequest()
+        
+        request.fetchOffset = offset
+        request.fetchLimit = limit
+        
+        do {
+            let result = try context.fetch(request)
+            let models = result.map(translateModel)
+            
+            return .success(models)
+        } catch {
+            return .failure(error)
+        }
+    }
+}
+
+private extension CoreDataManager {
+    func translateModel(from entity: SensorData) -> MeasureData {
+        let model = MeasureData(
+            xValue: entity.xValue,
+            yValue: entity.yValue,
+            zValue: entity.zValue,
+            runTime: entity.runTime,
+            date: entity.date,
+            type: Sensor(rawValue: Int(entity.type))
+        )
+        
+        return model
     }
 }
