@@ -37,6 +37,8 @@ class RecordViewController: UIViewController {
         super.viewDidLoad()
         configureUI()
         setButtonAction()
+        
+        convertButtonState(isEnable: true)
     }
 }
 
@@ -75,21 +77,31 @@ extension RecordViewController {
         default:
             return
         }
-        
-        recordButton.isEnabled = false
+        convertButtonState(isEnable: false)
     }
     
     @objc func didTapCancelButton() {
         if monitor.isAccelerometerActive {
             monitor.stopAccelerometerUpdates()
-            recordButton.isEnabled = true
+            convertButtonState(isEnable: true)
             return
         }
         
         if monitor.isGyroActive {
             monitor.stopGyroUpdates()
-            recordButton.isEnabled = true
+            convertButtonState(isEnable: true)
             return
+        }
+    }
+    
+    private func convertButtonState(isEnable: Bool) {
+        recordButton.isEnabled = isEnable
+        cancelButton.isHidden = isEnable
+        
+        if recordButton.isEnabled {
+            recordButton.layer.backgroundColor = UIColor.systemBlue.cgColor
+        } else {
+            recordButton.layer.backgroundColor = UIColor.systemGroupedBackground.cgColor
         }
     }
     
