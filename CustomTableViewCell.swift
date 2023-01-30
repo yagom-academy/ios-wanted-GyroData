@@ -10,27 +10,29 @@ import UIKit
 class CustomTableViewCell: UITableViewCell {
 
     // MARK: - Property
-    let dateView: UITextView = {
-        let textView = UITextView()
-        textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.text = "test"
-        return textView
+    let dateView: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "test"
+        return label
     }()
 
-    let sensorTypeView: UITextView = {
-        let textView = UITextView()
-        textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.font = UIFont.systemFont(ofSize: 30)
-        textView.text = "Sensor"
-        return textView
+    let sensorTypeView: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 30)
+        label.text = "Sensor"
+        return label
     }()
 
-    let runningTimeView: UITextView = {
-        let textView = UITextView()
-        textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.font = UIFont.systemFont(ofSize: 60)
-        textView.text = "60"
-        return textView
+    let runningTimeView: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 60)
+        label.text = "60"
+        label.textAlignment = .center
+        label.backgroundColor = .blue
+        return label
     }()
 
     let verticalStackView: UIStackView = {
@@ -38,7 +40,8 @@ class CustomTableViewCell: UITableViewCell {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.alignment = .leading
-        stackView.distribution = .fill
+        stackView.distribution = .fillEqually
+        stackView.backgroundColor = .brown
         return stackView
     }()
 
@@ -62,8 +65,9 @@ class CustomTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             verticalStackView.topAnchor.constraint(equalTo: contentView.topAnchor),
             verticalStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            verticalStackView.trailingAnchor.constraint(equalTo: runningTimeView.leadingAnchor),
             verticalStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            verticalStackView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.5),
+            runningTimeView.leadingAnchor.constraint(equalTo: verticalStackView.trailingAnchor),
             runningTimeView.topAnchor.constraint(equalTo: contentView.topAnchor),
             runningTimeView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             runningTimeView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
