@@ -47,16 +47,24 @@ private extension RecordViewController {
     func startMonitoringAccelerometer() {
         guard monitor.isAccelerometerAvailable else { return }
         
-        monitor.startAccelerometerUpdates(to: .main) { data, error in
-            print(data)
-        }
+        monitor.startAccelerometerUpdates(to: .main, withHandler: handleLogData)
     }
     
     func startMonitoringGyro() {
         guard monitor.isGyroAvailable else { return }
         
-        monitor.startGyroUpdates(to: .main) { data, error in
-            print(data)
+        monitor.startGyroUpdates(to: .main, withHandler: handleLogData)
+    }
+    
+    func handleLogData(data: CMLogItem?, error: Error?) {
+        if error != nil { return }
+        
+        guard let data = data else { return }
+        
+        if let accelerometerData = data as? CMAccelerometerData {
+            print(accelerometerData.acceleration)
+        } else if let gyroData = data as? CMGyroData {
+            print(gyroData.rotationRate)
         }
     }
 }
