@@ -25,10 +25,41 @@ extension RecordViewController {
     func configureUI() {
         setBackgroundColor()
         setNavigationBar()
+        setAdditionalSafeArea()
+        
+        addChildView()
+        setLayout()
     }
     
     func setBackgroundColor() {
         view.backgroundColor = .systemBackground
+    }
+    
+    func setAdditionalSafeArea() {
+        let padding: CGFloat = 10
+        
+        additionalSafeAreaInsets.top += padding
+        additionalSafeAreaInsets.bottom += padding
+        additionalSafeAreaInsets.left += padding
+        additionalSafeAreaInsets.right += padding
+    }
+    
+    func addChildView() {
+        [segmentControl].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            view.addSubview($0)
+        }
+    }
+    
+    func setLayout() {
+        let safeArea = view.safeAreaLayoutGuide
+        
+        NSLayoutConstraint.activate([
+            segmentControl.topAnchor.constraint(equalTo: safeArea.topAnchor),
+            segmentControl.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor),
+            segmentControl.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
+            segmentControl.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor)
+        ])
     }
     
     func setNavigationBar() {
