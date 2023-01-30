@@ -13,6 +13,18 @@ struct GyroModel: Identifiable {
     let sensorType: SensorType
     let recordTime: Double
     let jsonName: String
+
+    init(id: UUID = UUID(),
+         saveDate: String,
+         sensorType: SensorType,
+         recordTime: Double,
+         jsonName: String) {
+        self.id = id
+        self.saveDate = saveDate
+        self.sensorType = sensorType
+        self.recordTime = recordTime
+        self.jsonName = jsonName
+    }
 }
 
 enum SensorType: String {
