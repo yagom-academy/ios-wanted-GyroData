@@ -12,6 +12,11 @@
 		63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB828D44FC400C53A39 /* ViewController.swift */; };
 		63F01BBE28D44FC500C53A39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBD28D44FC500C53A39 /* Assets.xcassets */; };
 		63F01BC128D44FC500C53A39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */; };
+		AC52BAAC2987E9930057CA56 /* SensorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52BAAB2987E9930057CA56 /* SensorData.swift */; };
+		AC52BAAE2987E9C60057CA56 /* TransactionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52BAAD2987E9C60057CA56 /* TransactionService.swift */; };
+		AC52BAB02987E9D10057CA56 /* Sensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52BAAF2987E9D10057CA56 /* Sensor.swift */; };
+		AC52BAB22987EA180057CA56 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52BAB12987EA180057CA56 /* CoreDataManager.swift */; };
+		AC52BAB42987EA2A0057CA56 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52BAB32987EA2A0057CA56 /* FileManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +27,11 @@
 		63F01BBD28D44FC500C53A39 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		63F01BC028D44FC500C53A39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		63F01BC228D44FC500C53A39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AC52BAAB2987E9930057CA56 /* SensorData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensorData.swift; sourceTree = "<group>"; };
+		AC52BAAD2987E9C60057CA56 /* TransactionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionService.swift; sourceTree = "<group>"; };
+		AC52BAAF2987E9D10057CA56 /* Sensor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sensor.swift; sourceTree = "<group>"; };
+		AC52BAB12987EA180057CA56 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		AC52BAB32987EA2A0057CA56 /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,11 +67,40 @@
 				63F01BB428D44FC400C53A39 /* AppDelegate.swift */,
 				63F01BB628D44FC400C53A39 /* SceneDelegate.swift */,
 				63F01BB828D44FC400C53A39 /* ViewController.swift */,
+				AC52BAA82987E8F80057CA56 /* Domain */,
+				AC52BAA92987E8FD0057CA56 /* Data */,
 				63F01BBD28D44FC500C53A39 /* Assets.xcassets */,
 				63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */,
 				63F01BC228D44FC500C53A39 /* Info.plist */,
 			);
 			path = GyroData;
+			sourceTree = "<group>";
+		};
+		AC52BAA82987E8F80057CA56 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				AC52BAAA2987E9380057CA56 /* Entities */,
+				AC52BAAD2987E9C60057CA56 /* TransactionService.swift */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		AC52BAA92987E8FD0057CA56 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				AC52BAB12987EA180057CA56 /* CoreDataManager.swift */,
+				AC52BAB32987EA2A0057CA56 /* FileManager.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		AC52BAAA2987E9380057CA56 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				AC52BAAB2987E9930057CA56 /* SensorData.swift */,
+				AC52BAAF2987E9D10057CA56 /* Sensor.swift */,
+			);
+			path = Entities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -135,8 +174,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */,
+				AC52BAB02987E9D10057CA56 /* Sensor.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
+				AC52BAAE2987E9C60057CA56 /* TransactionService.swift in Sources */,
+				AC52BAB22987EA180057CA56 /* CoreDataManager.swift in Sources */,
+				AC52BAAC2987E9930057CA56 /* SensorData.swift in Sources */,
+				AC52BAB42987EA2A0057CA56 /* FileManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
