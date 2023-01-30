@@ -12,4 +12,15 @@ class RecordViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
     }
+    
+    func setNavigationBar() {
+        navigationItem.title = "측정"
+        
+        let saveButton = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(didTapSaveButton))
+        navigationItem.rightBarButtonItem = saveButton
+    }
+    
+    @objc func didTapSaveButton() {
+        // TODO: 저장 메서드 생성
+    }
 }
