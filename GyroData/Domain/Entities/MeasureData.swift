@@ -1,15 +1,17 @@
 //
-//  SensorData.swift
+//  MeasureData.swift
 //  GyroData
 //
-//  Created by 이정민 on 2023/01/30.
+//  Created by Kyo, JPush on 2023/01/30.
 //
 
 import Foundation
 
-struct SensorData {
+struct MeasureData {
     let xValue: Double
     let yValue: Double
     let zValue: Double
+    let runTime: Double
+    let date: Date
     let type: Sensor
 }
