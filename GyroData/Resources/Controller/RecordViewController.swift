@@ -45,12 +45,16 @@ final class RecordViewController: UIViewController {
 // MARK: Core Motion Manager Method
 private extension RecordViewController {
     func startMonitoringAccelerometer() {
+        guard monitor.isAccelerometerAvailable else { return }
+        
         monitor.startAccelerometerUpdates(to: .main) { data, error in
             print(data)
         }
     }
     
     func startMonitoringGyro() {
+        guard monitor.isGyroAvailable else { return }
+        
         monitor.startGyroUpdates(to: .main) { data, error in
             print(data)
         }
