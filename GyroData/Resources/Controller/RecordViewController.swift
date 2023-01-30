@@ -122,12 +122,22 @@ private extension RecordViewController {
     func saveJsonData() {
         let transition = values.convertTransition()
         
-        guard let encodeData = try? JSONEncoder().encode(transition) else {
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
+        
+        guard let encodeData = try? encoder.encode(transition) else {
             return
         }
         
-        NSLog(String(data: encodeData, encoding: .utf8) ?? "")
-        // TODO: - Json Data 저장하기
+        if let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+            let pathWithFileName = documentDirectory.appendingPathComponent("\(Date().description).json")
+            
+            do {
+                try encodeData.write(to: pathWithFileName)
+            } catch {
+                NSLog(error.localizedDescription)
+            }
+        }
     }
     
     func convertButtonsState(isEnable: Bool) {
