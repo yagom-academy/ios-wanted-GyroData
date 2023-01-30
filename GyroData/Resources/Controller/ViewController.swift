@@ -17,6 +17,7 @@ final class ViewController: UIViewController {
     }()
 
     private let cellReuseIdentifier = "CustomCell"
+    private var cellCount = 10
 
     // MARK: - Method
     override func viewDidLoad() {
@@ -50,7 +51,7 @@ final class ViewController: UIViewController {
 // MARK: - UITableViewDataSource
 extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return cellCount
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

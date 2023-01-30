@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		09E3104E2987E1B50088E0EB /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E3104D2987E1B50088E0EB /* CustomTableViewCell.swift */; };
+		09E3105329882DED0088E0EB /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 09E3105129882DED0088E0EB /* DataModel.xcdatamodeld */; };
 		63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB428D44FC400C53A39 /* AppDelegate.swift */; };
 		63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB628D44FC400C53A39 /* SceneDelegate.swift */; };
 		63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB828D44FC400C53A39 /* ViewController.swift */; };
@@ -17,6 +18,7 @@
 
 /* Begin PBXFileReference section */
 		09E3104D2987E1B50088E0EB /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = SOURCE_ROOT; };
+		09E3105229882DED0088E0EB /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		63F01BB128D44FC400C53A39 /* GyroData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GyroData.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63F01BB428D44FC400C53A39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63F01BB628D44FC400C53A39 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -45,6 +47,7 @@
 				63F01BC228D44FC500C53A39 /* Info.plist */,
 				63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */,
 				63F01BB628D44FC400C53A39 /* SceneDelegate.swift */,
+				09E3105129882DED0088E0EB /* DataModel.xcdatamodeld */,
 			);
 			path = SupportFiles;
 			sourceTree = "<group>";
@@ -178,6 +181,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */,
+				09E3105329882DED0088E0EB /* DataModel.xcdatamodeld in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				09E3104E2987E1B50088E0EB /* CustomTableViewCell.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
@@ -388,6 +392,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		09E3105129882DED0088E0EB /* DataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				09E3105229882DED0088E0EB /* DataModel.xcdatamodel */,
+			);
+			currentVersion = 09E3105229882DED0088E0EB /* DataModel.xcdatamodel */;
+			path = DataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 63F01BA928D44FC400C53A39 /* Project object */;
 }
