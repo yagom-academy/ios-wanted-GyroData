@@ -3,9 +3,9 @@
 //  GyroData
 //
 //  Copyright (c) 2023 Minii All rights reserved.
-        
 
 import UIKit
+import CoreMotion
 
 class RecordViewController: UIViewController {
     let segmentControl: UISegmentedControl = {
@@ -30,10 +30,26 @@ class RecordViewController: UIViewController {
         return button
     }()
     
+    let monitor = CMMotionManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         configureUI()
+    }
+}
+
+// MARK: Core Motion Manager Method
+extension RecordViewController {
+    func startMonitoringAccelerometer() {
+        monitor.startAccelerometerUpdates(to: .main) { data, error in
+            print(data)
+        }
+    }
+    
+    func startMonitoringGyro() {
+        monitor.startGyroUpdates(to: .main) { data, error in
+            print(data)
+        }
     }
 }
 
