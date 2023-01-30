@@ -64,7 +64,19 @@ extension RecordViewController {
     }
     
     @objc func didTapRecordButton() {
+        guard !monitor.isAccelerometerActive && !monitor.isGyroActive else {
+            return
+        }
         
+        let segmentIndex = segmentControl.selectedSegmentIndex
+        
+        if segmentIndex == 0 {
+            startMonitoringAccelerometer()
+        } else if segmentIndex == 1 {
+            startMonitoringGyro()
+        } else {
+            return
+        }
     }
     
     @objc func didTapCancelButton() {
