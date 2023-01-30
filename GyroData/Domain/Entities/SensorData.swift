@@ -6,3 +6,10 @@
 //
 
 import Foundation
+
+struct SensorData {
+    let xValue: Double
+    let yValue: Double
+    let zValue: Double
+    let type: Sensor
+}
