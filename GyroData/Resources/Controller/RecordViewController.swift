@@ -35,6 +35,7 @@ class RecordViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        setButtonAction()
     }
 }
 
@@ -54,6 +55,28 @@ extension RecordViewController {
 }
 
 extension RecordViewController {
+    func setButtonAction() {
+        let saveButton = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(didTapSaveButton))
+        navigationItem.rightBarButtonItem = saveButton
+        
+        recordButton.addTarget(self, action: #selector(didTapRecordButton), for: .touchUpInside)
+        cancelButton.addTarget(self, action: #selector(didTapCancelButton), for: .touchUpInside)
+    }
+    
+    @objc func didTapRecordButton() {
+        
+    }
+    
+    @objc func didTapCancelButton() {
+        
+    }
+    
+    @objc func didTapSaveButton() {
+        // TODO: 저장 메서드 생성
+    }
+}
+
+extension RecordViewController {
     func configureUI() {
         setBackgroundColor()
         setNavigationBar()
@@ -61,6 +84,10 @@ extension RecordViewController {
         
         addChildView()
         setLayout()
+    }
+
+    func setNavigationBar() {
+        navigationItem.title = "측정"
     }
     
     func setBackgroundColor() {
@@ -102,16 +129,5 @@ extension RecordViewController {
             cancelButton.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
             cancelButton.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: -50)
         ])
-    }
-    
-    func setNavigationBar() {
-        navigationItem.title = "측정"
-        
-        let saveButton = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(didTapSaveButton))
-        navigationItem.rightBarButtonItem = saveButton
-    }
-    
-    @objc func didTapSaveButton() {
-        // TODO: 저장 메서드 생성
     }
 }
