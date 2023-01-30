@@ -53,6 +53,25 @@ final class CoreDataManager {
             return .failure(error)
         }
     }
+    
+    func delete(_ model: MeasureData) -> Result<Void, Error> {
+        let request = SensorData.fetchRequest()
+        
+        request.predicate = NSPredicate(format: "date == %@", model.date as CVarArg)
+        
+        do {
+            let result = try context.fetch(request)
+            guard let firstData = result.first else {
+                return .failure(CoreDataError.invalidData)
+            }
+            
+            context.delete(firstData)
+            
+            return .success(())
+        } catch {
+            return .failure(error)
+        }
+    }
 }
 
 private extension CoreDataManager {

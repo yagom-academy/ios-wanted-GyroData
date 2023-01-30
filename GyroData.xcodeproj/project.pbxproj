@@ -20,6 +20,7 @@
 		AC52BAC12987F8BA0057CA56 /* SensorData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AC52BABF2987F8BA0057CA56 /* SensorData.xcdatamodeld */; };
 		AC52BAC42987F91A0057CA56 /* SensorData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52BAC22987F91A0057CA56 /* SensorData+CoreDataClass.swift */; };
 		AC52BAC52987F91A0057CA56 /* SensorData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52BAC32987F91A0057CA56 /* SensorData+CoreDataProperties.swift */; };
+		AC52BAC829880B770057CA56 /* CoreDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52BAC729880B770057CA56 /* CoreDataError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		AC52BAC02987F8BA0057CA56 /* SensorData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SensorData.xcdatamodel; sourceTree = "<group>"; };
 		AC52BAC22987F91A0057CA56 /* SensorData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SensorData+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		AC52BAC32987F91A0057CA56 /* SensorData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SensorData+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		AC52BAC729880B770057CA56 /* CoreDataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +75,7 @@
 				63F01BB428D44FC400C53A39 /* AppDelegate.swift */,
 				63F01BB628D44FC400C53A39 /* SceneDelegate.swift */,
 				63F01BB828D44FC400C53A39 /* ViewController.swift */,
+				AC52BAC629880B660057CA56 /* Utils */,
 				AC52BAA82987E8F80057CA56 /* Domain */,
 				AC52BAA92987E8FD0057CA56 /* Data */,
 				63F01BBD28D44FC500C53A39 /* Assets.xcassets */,
@@ -118,6 +121,14 @@
 				AC52BABF2987F8BA0057CA56 /* SensorData.xcdatamodeld */,
 			);
 			path = CoreData;
+			sourceTree = "<group>";
+		};
+		AC52BAC629880B660057CA56 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				AC52BAC729880B770057CA56 /* CoreDataError.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -201,6 +212,7 @@
 				AC52BAAC2987E9930057CA56 /* MeasureData.swift in Sources */,
 				AC52BAB42987EA2A0057CA56 /* FileSystemManager.swift in Sources */,
 				AC52BAC12987F8BA0057CA56 /* SensorData.xcdatamodeld in Sources */,
+				AC52BAC829880B770057CA56 /* CoreDataError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
