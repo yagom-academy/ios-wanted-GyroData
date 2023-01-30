@@ -32,4 +32,14 @@ final class PersistentContainerManager {
             }
         }
     }
+
+    private func fetchGyroModelObject() -> [GyroModelObject] {
+        do {
+            let request = GyroModelObject.fetchRequest()
+            return try persistentContainer.viewContext.fetch(request)
+        } catch {
+            print(error.localizedDescription)
+            return []
+        }
+    }
 }
