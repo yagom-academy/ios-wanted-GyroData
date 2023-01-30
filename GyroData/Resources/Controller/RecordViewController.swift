@@ -22,6 +22,14 @@ class RecordViewController: UIViewController {
         return button
     }()
     
+    let cancelButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("취소", for: .normal)
+        button.layer.backgroundColor = UIColor.systemBlue.cgColor
+        button.layer.cornerRadius = 5
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -53,7 +61,7 @@ extension RecordViewController {
     }
     
     func addChildView() {
-        [segmentControl, recordButton].forEach {
+        [segmentControl, recordButton, cancelButton].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview($0)
         }
@@ -71,7 +79,12 @@ extension RecordViewController {
             recordButton.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor),
             recordButton.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
             recordButton.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
-            recordButton.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: -100)
+            recordButton.bottomAnchor.constraint(equalTo: cancelButton.topAnchor, constant: -20),
+            
+            cancelButton.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor),
+            cancelButton.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
+            cancelButton.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
+            cancelButton.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: -50)
         ])
     }
     
