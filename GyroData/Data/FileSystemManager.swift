@@ -19,5 +19,19 @@ final class FileSystemManager {
     init() {
         documentPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[.zero]
         directoryPath = documentPath.appendingPathExtension(FileConstant.directoryName)
+        createDirectory()
+    }
+    
+    private func createDirectory() {
+        guard !fileManager.fileExists(atPath: directoryPath.path) else { return }
+        do {
+            try fileManager.createDirectory(
+                at: directoryPath,
+                withIntermediateDirectories: false
+            )
+        } catch let error {
+            //TODO: - Error Alert
+            print(error.localizedDescription)
+        }
     }
 }
