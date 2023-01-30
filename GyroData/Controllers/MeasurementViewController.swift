@@ -18,6 +18,13 @@ final class MeasurementViewController: UIViewController {
         return controller
     }()
 
+    private let graph: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .systemYellow
+        return view
+    }()
+
     private lazy var saveBarButton: UIBarButtonItem = {
         let button = UIBarButtonItem(title: "저장", primaryAction: makeSaveButtonAction())
         return button
@@ -53,12 +60,41 @@ final class MeasurementViewController: UIViewController {
         super.viewDidLoad()
 
         configureNavigationBar()
+        configureView()
+        configureConstraints()
     }
 
     // MARK: NavigationBar
     private func configureNavigationBar() {
         navigationItem.title = "측정하기"
         navigationItem.rightBarButtonItem = saveBarButton
+    }
+
+    // MARK: configure View
+    private func configureView() {
+        view.addSubview(measurementButton)
+        view.addSubview(stopButton)
+        view.addSubview(segmentedController)
+        view.addSubview(graph)
+    }
+
+    private func configureConstraints() {
+        NSLayoutConstraint.activate([
+            segmentedController.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
+            segmentedController.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            segmentedController.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+
+            graph.topAnchor.constraint(equalTo: segmentedController.bottomAnchor, constant: 16),
+            graph.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            graph.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            graph.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.4),
+
+            measurementButton.topAnchor.constraint(equalTo: graph.bottomAnchor, constant: 16),
+            measurementButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+
+            stopButton.topAnchor.constraint(equalTo: measurementButton.bottomAnchor, constant: 16),
+            stopButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+        ])
     }
 
     // MARK: Actions
