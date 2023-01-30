@@ -38,7 +38,7 @@ class RecordViewController: UIViewController {
         configureUI()
         setButtonAction()
         
-        convertButtonState(isEnable: true)
+        convertButtonsState(isEnable: true)
     }
 }
 
@@ -77,24 +77,24 @@ extension RecordViewController {
         default:
             return
         }
-        convertButtonState(isEnable: false)
+        convertButtonsState(isEnable: false)
     }
     
     @objc func didTapCancelButton() {
         if monitor.isAccelerometerActive {
             monitor.stopAccelerometerUpdates()
-            convertButtonState(isEnable: true)
+            convertButtonsState(isEnable: true)
             return
         }
         
         if monitor.isGyroActive {
             monitor.stopGyroUpdates()
-            convertButtonState(isEnable: true)
+            convertButtonsState(isEnable: true)
             return
         }
     }
     
-    private func convertButtonState(isEnable: Bool) {
+    private func convertButtonsState(isEnable: Bool) {
         recordButton.isEnabled = isEnable
         cancelButton.isHidden = isEnable
         
