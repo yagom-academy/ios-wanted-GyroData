@@ -21,6 +21,7 @@ class CustomTableViewCell: UITableViewCell {
         let textView = UITextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.font = UIFont.systemFont(ofSize: 30)
+        textView.text = "Sensor"
         return textView
     }()
 
@@ -28,6 +29,7 @@ class CustomTableViewCell: UITableViewCell {
         let textView = UITextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.font = UIFont.systemFont(ofSize: 60)
+        textView.text = "60"
         return textView
     }()
 
