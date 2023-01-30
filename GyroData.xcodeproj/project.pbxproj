@@ -10,6 +10,7 @@
 		414E53092987DE1B000221E2 /* Sensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414E53082987DE1B000221E2 /* Sensor.swift */; };
 		414E530B2987DE9E000221E2 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414E530A2987DE9E000221E2 /* ListViewController.swift */; };
 		414E530F2987E052000221E2 /* Measurement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414E530E2987E052000221E2 /* Measurement.swift */; };
+		414E53112987E0CC000221E2 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414E53102987E0CC000221E2 /* ListView.swift */; };
 		63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB428D44FC400C53A39 /* AppDelegate.swift */; };
 		63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB628D44FC400C53A39 /* SceneDelegate.swift */; };
 		63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB828D44FC400C53A39 /* ViewController.swift */; };
@@ -21,6 +22,7 @@
 		414E53082987DE1B000221E2 /* Sensor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sensor.swift; sourceTree = "<group>"; };
 		414E530A2987DE9E000221E2 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		414E530E2987E052000221E2 /* Measurement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Measurement.swift; sourceTree = "<group>"; };
+		414E53102987E0CC000221E2 /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 		63F01BB128D44FC400C53A39 /* GyroData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GyroData.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63F01BB428D44FC400C53A39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63F01BB628D44FC400C53A39 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -74,6 +76,7 @@
 		414E53072987DE01000221E2 /* ListViews */ = {
 			isa = PBXGroup;
 			children = (
+				414E53102987E0CC000221E2 /* ListView.swift */,
 			);
 			path = ListViews;
 			sourceTree = "<group>";
@@ -178,6 +181,7 @@
 				63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */,
 				414E53092987DE1B000221E2 /* Sensor.swift in Sources */,
 				414E530F2987E052000221E2 /* Measurement.swift in Sources */,
+				414E53112987E0CC000221E2 /* ListView.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				414E530B2987DE9E000221E2 /* ListViewController.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
