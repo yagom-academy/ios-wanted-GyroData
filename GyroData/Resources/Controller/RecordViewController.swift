@@ -7,7 +7,7 @@
 import UIKit
 import CoreMotion
 
-class RecordViewController: UIViewController {
+final class RecordViewController: UIViewController {
     let segmentControl: UISegmentedControl = {
         let control = UISegmentedControl(items: ["Acc", "Gyro"])
         control.selectedSegmentIndex = 0
@@ -43,7 +43,7 @@ class RecordViewController: UIViewController {
 }
 
 // MARK: Core Motion Manager Method
-extension RecordViewController {
+private extension RecordViewController {
     func startMonitoringAccelerometer() {
         monitor.startAccelerometerUpdates(to: .main) { data, error in
             print(data)
@@ -57,7 +57,7 @@ extension RecordViewController {
     }
 }
 
-extension RecordViewController {
+private extension RecordViewController {
     func setButtonAction() {
         let saveButton = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(didTapSaveButton))
         navigationItem.rightBarButtonItem = saveButton
@@ -94,7 +94,7 @@ extension RecordViewController {
         }
     }
     
-    private func convertButtonsState(isEnable: Bool) {
+    func convertButtonsState(isEnable: Bool) {
         recordButton.isEnabled = isEnable
         cancelButton.isHidden = isEnable
         
@@ -110,7 +110,7 @@ extension RecordViewController {
     }
 }
 
-extension RecordViewController {
+private extension RecordViewController {
     func configureUI() {
         setBackgroundColor()
         setNavigationBar()
