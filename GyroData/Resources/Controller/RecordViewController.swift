@@ -32,6 +32,7 @@ final class RecordViewController: UIViewController {
     }()
     
     let monitor = CMMotionManager()
+    var values: [String: [Any]] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,10 +63,22 @@ private extension RecordViewController {
         guard let data = data else { return }
         
         if let accelerometerData = data as? CMAccelerometerData {
-            print(accelerometerData.acceleration)
+            setAccelerometerData(data: accelerometerData.acceleration)
         } else if let gyroData = data as? CMGyroData {
-            print(gyroData.rotationRate)
+            setGyroData(data: gyroData.rotationRate)
         }
+    }
+    
+    func setAccelerometerData(data: CMAcceleration) {
+        values["x", default: []].append(data.x)
+        values["y", default: []].append(data.y)
+        values["z", default: []].append(data.z)
+    }
+    
+    func setGyroData(data: CMRotationRate) {
+        values["x", default: []].append(data.x)
+        values["y", default: []].append(data.y)
+        values["z", default: []].append(data.z)
     }
 }
 
