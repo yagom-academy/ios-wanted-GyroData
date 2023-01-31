@@ -63,7 +63,11 @@ final class MainViewController: UIViewController {
     // MARK: Action Methods
     
     @objc private func tapRightBarButton() {
+        let addViewController = AddViewController()
         
+        addViewController.modalPresentationStyle = .fullScreen
+        
+        navigationController?.pushViewController(addViewController, animated: true)
     }
 }
 

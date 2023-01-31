@@ -14,6 +14,7 @@
 		63F01BC128D44FC500C53A39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */; };
 		D03B067B2988D228002BEB96 /* MotionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03B067A2988D228002BEB96 /* MotionData.swift */; };
 		D03B067D2988DBFC002BEB96 /* CustomDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03B067C2988DBFC002BEB96 /* CustomDataCell.swift */; };
+		D03B06802988E656002BEB96 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03B067F2988E656002BEB96 /* AddViewController.swift */; };
 		F6C594382988D01500705625 /* NavigationTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C594372988D01500705625 /* NavigationTitleView.swift */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +28,7 @@
 		63F01BC228D44FC500C53A39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D03B067A2988D228002BEB96 /* MotionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionData.swift; sourceTree = "<group>"; };
 		D03B067C2988DBFC002BEB96 /* CustomDataCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDataCell.swift; sourceTree = "<group>"; };
+		D03B067F2988E656002BEB96 /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		F6C594372988D01500705625 /* NavigationTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationTitleView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -91,6 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				F6C594392988D03D00705625 /* Main */,
+				D03B067E2988E5D7002BEB96 /* Add */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -101,6 +104,14 @@
 				D03B067A2988D228002BEB96 /* MotionData.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		D03B067E2988E5D7002BEB96 /* Add */ = {
+			isa = PBXGroup;
+			children = (
+				D03B067F2988E656002BEB96 /* AddViewController.swift */,
+			);
+			path = Add;
 			sourceTree = "<group>";
 		};
 		F6C594392988D03D00705625 /* Main */ = {
@@ -193,6 +204,7 @@
 			files = (
 				63F01BB928D44FC400C53A39 /* MainViewController.swift in Sources */,
 				F6C594382988D01500705625 /* NavigationTitleView.swift in Sources */,
+				D03B06802988E656002BEB96 /* AddViewController.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
 				D03B067D2988DBFC002BEB96 /* CustomDataCell.swift in Sources */,
