@@ -8,63 +8,18 @@
 import UIKit
 
 final class MeasurementViewController: UIViewController {
-    // MARK: View Properties
-    private var graphView: LineGraphView = {
-        let view = LineGraphView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .white
-        return view
-    }()
-
-    private lazy var segmentedController: UISegmentedControl = {
-        let controller = UISegmentedControl(items: ["Acc", "Gyro"])
-        controller.translatesAutoresizingMaskIntoConstraints = false
-        controller.selectedSegmentIndex = 0
-        controller.selectedSegmentTintColor = .systemBlue
-        return controller
-    }()
-
-    private let graph: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .systemYellow
-        return view
-    }()
-
-    private lazy var saveBarButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(title: "저장", primaryAction: makeSaveButtonAction())
-        return button
-    }()
-
-    private lazy var measurementButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("측정", for: .normal)
-        button.setTitleColor(.systemBlue, for: .normal)
-        button.addAction(makeMeasurementButtonAction(), for: .touchUpInside)
-        return button
-    }()
-
-    private lazy var stopButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("정지", for: .normal)
-        button.setTitleColor(.systemBlue, for: .normal)
-        button.addAction(makeStopButtonAction(), for: .touchUpInside)
-        return button
-    }()
-
     // MARK: Properties
+    private let measurementView: MeasurementView = {
+        let view = MeasurementView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
     private let manager: SensorManager
     private var data: [AxisValue] = []
 
     private var selectedSensor: Sensor {
-        guard let selectedSensor = Sensor(rawValue: segmentedController.selectedSegmentIndex) else { fatalError() }
-        return selectedSensor
-    }
-
-    private var numberOfSegments: Int {
-        return segmentedController.numberOfSegments
+        return measurementView.selectedSensor
     }
 
     // MARK: View Life Cycle
@@ -74,6 +29,7 @@ final class MeasurementViewController: UIViewController {
         configureNavigationBar()
         configureView()
         configureConstraints()
+        configureViewButtonActions()
     }
 
     // MARK: Initialization
@@ -91,68 +47,47 @@ final class MeasurementViewController: UIViewController {
 
     // MARK: NavigationBar
     private func configureNavigationBar() {
+        let savaAction = UIAction { [weak self] _ in
+            self?.saveSensorData()
+        }
+
+        let saveButton = UIBarButtonItem(title: "저장", primaryAction: savaAction)
+
         navigationItem.title = "측정하기"
-        navigationItem.rightBarButtonItem = saveBarButton
+        navigationItem.rightBarButtonItem = saveButton
     }
 
-    // MARK: configure View
     private func configureView() {
-        view.addSubview(measurementButton)
-        view.addSubview(stopButton)
-        view.addSubview(segmentedController)
-        view.addSubview(graphView)
+        view.addSubview(measurementView)
     }
 
     private func configureConstraints() {
         NSLayoutConstraint.activate([
-            segmentedController.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
-            segmentedController.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            segmentedController.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
-
-            graphView.topAnchor.constraint(equalTo: segmentedController.bottomAnchor, constant: 16),
-            graphView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            graphView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
-            graphView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.4),
-
-            measurementButton.topAnchor.constraint(equalTo: graphView.bottomAnchor, constant: 16),
-            measurementButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-
-            stopButton.topAnchor.constraint(equalTo: measurementButton.bottomAnchor, constant: 16),
-            stopButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            measurementView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            measurementView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            measurementView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            measurementView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
 
-    // MARK: Actions
-    private func makeSaveButtonAction() -> UIAction {
-        let action = UIAction { [weak self] _ in
-            self?.saveSensorData()
-        }
-
-        return action
-    }
-
-    private func makeMeasurementButtonAction() -> UIAction {
-        let action = UIAction { [weak self] _ in
+    private func configureViewButtonActions() {
+        let measureButtonAction = UIAction { [weak self] _ in
             self?.measure()
         }
 
-        return action
-    }
-
-    private func makeStopButtonAction() -> UIAction {
-        let action = UIAction { [weak self] _ in
+        let stopButtonAction = UIAction { [weak self] _ in
             self?.stop()
         }
 
-        return action
+        measurementView.configureMeasurementButtonAction(measureButtonAction)
+        measurementView.configureStopButtonAction(stopButtonAction)
     }
 
-    // MARK: Methods
     private func measure() {
         data.removeAll()
         clearGraph()
-        
-        manager.measure(sensor: selectedSensor, interval: 0.1, timeout: 60) { [weak self] data in
+
+        manager.measure(sensor: selectedSensor, interval: 0.1, timeout: 600) { [weak self] data in
             guard let data else {
                 self?.setEnabledSegments()
                 return
@@ -177,28 +112,18 @@ final class MeasurementViewController: UIViewController {
     }
 
     private func setDisabledSegments() {
-        for segmentIndex in 0..<numberOfSegments {
-            // 선택되지 않은 세그먼트 제외 모두 비활성화
-            if !(segmentedController.selectedSegmentIndex == segmentIndex) {
-                segmentedController.setEnabled(false, forSegmentAt: segmentIndex)
-            }
-        }
+        measurementView.setDisabledSegments()
     }
 
     private func setEnabledSegments() {
-        for segmentIndex in 0..<numberOfSegments {
-            // 비활성화된 세그먼트 활성화
-            if !segmentedController.isEnabledForSegment(at: segmentIndex) {
-                segmentedController.setEnabled(true, forSegmentAt: segmentIndex)
-            }
-        }
+        measurementView.setEnabledSegments()
     }
 
     private func drawGraph(with data: AxisValue) {
-        graphView.addData(data)
+        measurementView.drawGraph(with: data)
     }
 
     private func clearGraph() {
-        graphView.setData([])
+        measurementView.clearGraph()
     }
 }
