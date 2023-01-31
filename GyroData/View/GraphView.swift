@@ -63,7 +63,6 @@ class GraphView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureLayout()
-        configureLayer()
         backgroundColor = .white
     }
     
@@ -137,11 +136,9 @@ class GraphView: UIView {
     }
     
     func drawLine(x: Double, y: Double, z: Double) {
-        if offsetPoint >= frame.width {
-            return
-        }
-        
         let startYPoint = frame.height / 2
+        updateCoordinateLabel(x: x, y: y, z: z)
+        
         xPath.move(to: CGPoint(x: offsetPoint, y: startYPoint + currentXPoint))
         yPath.move(to: CGPoint(x: offsetPoint, y: startYPoint + currentYPoint))
         zPath.move(to: CGPoint(x: offsetPoint, y: startYPoint + currentZPoint))
@@ -159,5 +156,32 @@ class GraphView: UIView {
         xLayer.path = xPath.cgPath
         yLayer.path = yPath.cgPath
         zLayer.path = zPath.cgPath
+    }
+    
+    func reset() {
+        xLayer.path = nil
+        yLayer.path = nil
+        zLayer.path = nil
+        xLayer.removeFromSuperlayer()
+        yLayer.removeFromSuperlayer()
+        zLayer.removeFromSuperlayer()
+    }
+    
+    func configureData() {
+        reset()
+        configureLayer()
+        currentXPoint = 0
+        currentYPoint = 0
+        currentZPoint = 0
+        offsetPoint = 0
+        xPath.removeAllPoints()
+        yPath.removeAllPoints()
+        zPath.removeAllPoints()
+    }
+    
+    func updateCoordinateLabel(x: Double, y: Double, z: Double) {
+        xLabel.text = "x: \(x)"
+        yLabel.text = "y: \(y)"
+        zLabel.text = "z: \(z)"
     }
 }

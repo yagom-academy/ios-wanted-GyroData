@@ -11,11 +11,7 @@ import CoreMotion
 class MotionManager {
     var manager = CMMotionManager()
     
-    var interval: Double = 0.0
-    
-    func configureInterval() {
-        interval = 0.1
-    }
+    var interval: Double = 0.1
     
     func start(type: MotionType, completion: @escaping (MotionData) -> Void) {
         switch type {

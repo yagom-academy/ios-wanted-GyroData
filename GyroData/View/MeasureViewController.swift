@@ -112,6 +112,7 @@ class MeasureViewController: UIViewController {
     }
     
     @objc func measureButtonTapped() {
+        graphView.configureData()
         motionManager.start(type: motionType) { data in
             DispatchQueue.main.async {
                 switch self.motionType {
@@ -132,5 +133,6 @@ class MeasureViewController: UIViewController {
     
     @objc func stopButtonTapped() {
         motionManager.stop()
+        graphView.reset()
     }
 }
