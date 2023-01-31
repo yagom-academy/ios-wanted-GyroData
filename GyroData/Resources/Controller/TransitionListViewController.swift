@@ -96,7 +96,7 @@ extension TransitionListViewController: UIScrollViewDelegate {
                 DispatchQueue.main.async {
                     self?.tableView.tableFooterView = nil
                 }
-                
+
                 self?.cellCount += count
                 guard let currentCellCount = self?.cellCount,
                       let maxCellCount = self?.transitionMetaDatas.count else {
