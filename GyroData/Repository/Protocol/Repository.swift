@@ -6,9 +6,10 @@
 //
 
 protocol Repository {
+    associatedtype Domain: Identifiable
     associatedtype Entity: Identifiable
     
-    func create(_ entity: Entity) throws
+    func create(_ domain: Domain) throws
     func read(from offset: Int) throws -> [Entity]
     func read(with id: String) throws -> Entity
     func delete(with id: String) throws -> Entity
