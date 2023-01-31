@@ -25,12 +25,7 @@ final class FileSystemManager {
     
     private func createDirectory() {
         guard !fileManager.fileExists(atPath: directoryPath.path) else { return }
-        do {
-            try fileManager.createDirectory(at: directoryPath, withIntermediateDirectories: false)
-        } catch let error {
-            //TODO: - Error Alert
-            print(error.localizedDescription)
-        }
+        try? fileManager.createDirectory(at: directoryPath, withIntermediateDirectories: false)
     }
     
     private func convertJSON(from data: MeasureData) -> Data? {
@@ -45,7 +40,7 @@ final class FileSystemManager {
 }
 
 extension FileSystemManager {
-    func save(data: MeasureData) throws {
+    func save(_ data: MeasureData) throws {
         let dataPath = directoryPath.appendingPathComponent(
             data.date.description + FileConstant.jsonExtensionName
         )
@@ -74,7 +69,7 @@ extension FileSystemManager {
         }
     }
     
-    func delete(date: Date) throws {
+    func delete(_ date: Date) throws {
         let dataPath = directoryPath.appendingPathComponent(
             date.description + FileConstant.jsonExtensionName
         )

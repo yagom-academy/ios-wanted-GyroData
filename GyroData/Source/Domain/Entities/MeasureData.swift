@@ -8,9 +8,9 @@
 import Foundation
 
 struct MeasureData: Encodable {
-    let xValue: Double
-    let yValue: Double
-    let zValue: Double
+    let xValue: [Double]
+    let yValue: [Double]
+    let zValue: [Double]
     let runTime: Double
     let date: Date
     let type: Sensor?
