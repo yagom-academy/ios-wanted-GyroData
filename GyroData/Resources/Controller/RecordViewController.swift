@@ -39,12 +39,6 @@ final class RecordViewController: UIViewController {
         super.viewDidLoad()
         configureUI()
         setButtonAction()
-<<<<<<< HEAD
-        coreMotionManager.delegate = self
-
-=======
-        
->>>>>>> parent of d70a65a (chore: ViewController -> TransitionListViewController 이름변경 및 RecordViewController와 컨벤션 통일)
         convertButtonsState(isEnable: true)
     }
 }
@@ -61,7 +55,6 @@ extension RecordViewController: CoreMotionDelegate {
     }
 }
 
-<<<<<<< HEAD
 // MARK: - FileManagerLogic
 private extension RecordViewController {
     func saveJsonData() {
@@ -86,8 +79,6 @@ private extension RecordViewController {
 }
 
 // MARK: - ButtonMethod
-=======
->>>>>>> parent of d70a65a (chore: ViewController -> TransitionListViewController 이름변경 및 RecordViewController와 컨벤션 통일)
 private extension RecordViewController {
     func setButtonAction() {
         let saveButton = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(didTapSaveButton))
@@ -161,7 +152,6 @@ private extension RecordViewController {
         }
     }
     
-<<<<<<< HEAD
     func resetTransitionValues() {
         if !values.isEmpty { values.removeAll() }
     }
@@ -185,8 +175,6 @@ private extension RecordViewController {
         convertButtonsState(isEnable: true)
     }
 
-=======
->>>>>>> parent of d70a65a (chore: ViewController -> TransitionListViewController 이름변경 및 RecordViewController와 컨벤션 통일)
     @objc func didTapSaveButton() {
         // TODO: 저장 메서드 생성
     }
