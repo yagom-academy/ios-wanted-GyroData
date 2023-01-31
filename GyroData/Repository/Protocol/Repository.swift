@@ -10,6 +10,6 @@ protocol Repository {
     
     func create(_ entity: Entity) throws
     func read(from offset: Int) throws -> [Entity]
-    func read(of id: String) throws -> Entity
-    func delete(of id: String) throws -> Entity
+    func read(with id: String) throws -> Entity
+    func delete(with id: String) throws -> Entity
 }
