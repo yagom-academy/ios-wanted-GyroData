@@ -8,6 +8,7 @@
 import CoreData
 
 final class CoreDataManager: CoreDataManageable {
+    typealias FetchRequest = NSFetchRequest<MotionDataEntity>
     static let shared = CoreDataManager()
     private lazy var persistentContainer = {
         let container = NSPersistentContainer(name: "MotionData")
@@ -21,34 +22,29 @@ final class CoreDataManager: CoreDataManageable {
     private var context: NSManagedObjectContext {
         persistentContainer.viewContext
     }
-
-    private init() {
+    private var request: FetchRequest {
+        MotionDataEntity.fetchRequest()
     }
+
+    private init() { }
 
     private func saveContext() throws {
         guard context.hasChanges else { return }
         try context.save()
     }
 
-    private func fetchMotionDataEntities() throws -> [MotionDataEntity] {
-        let request = MotionDataEntity.fetchRequest()
+    private func fetchMotionDataEntities(_ request: FetchRequest) throws -> [MotionDataEntity] {
         return try context.fetch(request)
     }
 
-    func readAll() throws -> [MotionData] {
-        let motionDataEntities = try fetchMotionDataEntities()
-        return motionDataEntities.compactMap { motionDataEntity in
-            guard let motionDataType = MotionDataType.init(rawValue: motionDataEntity.motionDataType) else {
-                return nil
-            }
-            return MotionData(id: motionDataEntity.id,
-                              createdAt: motionDataEntity.createdAt,
-                              length: motionDataEntity.length,
-                              motionDataType: motionDataType)
-        }
+    func read(offset: Int, limit: Int) throws -> [MotionDataEntity] {
+        let request = MotionDataEntity.fetchRequest()
+        request.fetchOffset = offset
+        request.fetchLimit = limit
+        return try fetchMotionDataEntities(request)
     }
 
-    func add(_ motionData: MotionData) throws {
+    func save(_ motionData: MotionData) throws {
         let motionDataEntity = MotionDataEntity(context: context)
         motionDataEntity.id = motionData.id
         motionDataEntity.createdAt = motionData.createdAt
@@ -57,9 +53,9 @@ final class CoreDataManager: CoreDataManageable {
         try saveContext()
     }
 
-    func delete(_ motionData: MotionData) throws {
-        let motionDataEntities = try fetchMotionDataEntities()
-        guard let motionDataEntity = motionDataEntities.first(where: { $0.id == motionData.id }) else { return }
+    func delete(_ id: UUID) throws {
+        let motionDataEntities = try fetchMotionDataEntities(request)
+        guard let motionDataEntity = motionDataEntities.first(where: { $0.id == id }) else { return }
         context.delete(motionDataEntity)
         try saveContext()
     }

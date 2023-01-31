@@ -5,8 +5,10 @@
 //  Created by junho lee on 2023/01/31.
 //
 
+import Foundation
+
 protocol CoreDataManageable {
-    func readAll() throws -> [MotionData]
-    func add(_ motionData: MotionData) throws
-    func delete(_ motionData: MotionData) throws
+    func read(offset: Int, limit: Int) throws -> [MotionDataEntity]
+    func save(_ motionData: MotionData) throws
+    func delete(_ id: UUID) throws
 }
