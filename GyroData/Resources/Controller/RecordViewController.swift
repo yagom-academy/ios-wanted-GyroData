@@ -33,7 +33,7 @@ final class RecordViewController: UIViewController {
         return button
     }()
     
-    let monitor = CMMotionManager()
+    let coreMotionManager = CoreMotionManager()
     var values: [TransitionValue] = []
 
     // MARK: - LifeCycle
@@ -42,42 +42,24 @@ final class RecordViewController: UIViewController {
 
         configureUI()
         setButtonAction()
+        coreMotionManager.delegate = self
 
         convertButtonsState(isEnable: true)
     }
 }
 
-// MARK: Core Motion Manager Method
-private extension RecordViewController {
-    func setUpCoreMotionIntervals() {
-        monitor.accelerometerUpdateInterval = 0.1
-        monitor.gyroUpdateInterval = 0.1
-    }
-    
-    func startMonitoringAccelerometer() {
-        guard monitor.isAccelerometerAvailable else { return }
-        
-        monitor.startAccelerometerUpdates(to: .main, withHandler: handleLogData)
-    }
-    
-    func startMonitoringGyro() {
-        guard monitor.isGyroAvailable else { return }
-        
-        monitor.startGyroUpdates(to: .main, withHandler: handleLogData)
-    }
-    
-    func handleLogData(data: CMLogItem?, error: Error?) {
-        if error != nil { return }
-        
-        guard let data = data else { return }
-        
-        if let accelerometerData = data as? CMAccelerometerData {
-            setAccelerometerData(data: accelerometerData.acceleration)
-        } else if let gyroData = data as? CMGyroData {
-            setGyroData(data: gyroData.rotationRate)
+extension RecordViewController: CoreMotionDelegate {
+    func coreMotionManager(transitionData: CMLogItem) {
+        if let data = transitionData as? CMAccelerometerData {
+            setAccelerometerData(data: data.acceleration)
+        } else if let data = transitionData as? CMGyroData {
+            setGyroData(data: data.rotationRate)
         }
     }
-    
+}
+
+// MARK: Core Motion Manager Method
+private extension RecordViewController {
     func setAccelerometerData(data: CMAcceleration) {
         let value = (data.x, data.y, data.z)
         values.append(value)
@@ -146,29 +128,29 @@ private extension RecordViewController {
         
         resetTransitionValues()
         
-        switch segmentIndex {
-        case 0:
-            startMonitoringAccelerometer()
-        case 1:
-            startMonitoringGyro()
-        default:
-            return
-        }
+//        switch segmentIndex {
+//        case 0:
+//            startMonitoringAccelerometer()
+//        case 1:
+//            startMonitoringGyro()
+//        default:
+//            return
+//        }
         convertButtonsState(isEnable: false)
     }
 
     @objc func didTapCancelButton() {
-        if monitor.isAccelerometerActive {
-            monitor.stopAccelerometerUpdates()
-            convertButtonsState(isEnable: true)
-            return
-        }
-
-        if monitor.isGyroActive {
-            monitor.stopGyroUpdates()
-            convertButtonsState(isEnable: true)
-            return
-        }
+//        if monitor.isAccelerometerActive {
+//            monitor.stopAccelerometerUpdates()
+//            convertButtonsState(isEnable: true)
+//            return
+//        }
+//
+//        if monitor.isGyroActive {
+//            monitor.stopGyroUpdates()
+//            convertButtonsState(isEnable: true)
+//            return
+//        }
     }
 
     @objc func didTapSaveButton() {
