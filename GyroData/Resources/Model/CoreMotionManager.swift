@@ -26,7 +26,51 @@ class CoreMotionManager {
         guard checkAvailable(sensor: type) else { return }
         monitoringStart(sensor: type)
     }
+
+    func cancelUpdateData() {
+        if motionMonitor.isAccelerometerActive {
+            motionMonitor.stopAccelerometerUpdates()
+        }
+        
+        if motionMonitor.isGyroActive {
+            motionMonitor.stopGyroUpdates()
+        }
+    }
+}
+
+// MARK: - ObjcMethod
+private extension CoreMotionManager {
+    @objc func updateAccelerometer() {
+        time += 1
+        
+        if time > 600 {
+            resetTimer()
+            return
+        }
+        
+        motionMonitor.startAccelerometerUpdates()
+        if let value = motionMonitor.accelerometerData {
+            delegate?.coreMotionManager(transitionData: value)
+        }
+    }
     
+    @objc func updateGyro() {
+        time += 1
+        
+        if time > 600 {
+            resetTimer()
+            return
+        }
+        
+        motionMonitor.startGyroUpdates()
+        if let value = motionMonitor.gyroData {
+            delegate?.coreMotionManager(transitionData: value)
+        }
+    }
+}
+
+// MARK: - CoreMotion with Timer
+private extension CoreMotionManager {
     func checkAvailable(sensor: SensorType) -> Bool {
         switch sensor {
         case .Accelerometer:
@@ -57,50 +101,7 @@ class CoreMotionManager {
         }
     }
     
-    func cancelUpdateData() {
-        if motionMonitor.isAccelerometerActive {
-            motionMonitor.stopAccelerometerUpdates()
-        }
-        
-        if motionMonitor.isGyroActive {
-            motionMonitor.stopGyroUpdates()
-        }
-    }
-}
-
-// MARK: - ObjcMethod
-extension CoreMotionManager {
-    @objc func updateAccelerometer() {
-        time += 1
-        
-        if time > 600 {
-            resetTimer()
-            return
-        }
-        
-        motionMonitor.startAccelerometerUpdates()
-        if let value = motionMonitor.accelerometerData {
-            delegate?.coreMotionManager(transitionData: value)
-        }
-    }
-    
-    @objc func updateGyro() {
-        time += 1
-        
-        if time > 600 {
-            resetTimer()
-            return
-        }
-        
-        motionMonitor.startGyroUpdates()
-        if let value = motionMonitor.gyroData {
-            delegate?.coreMotionManager(transitionData: value)
-        }
-    }
-}
-
-extension CoreMotionManager {
-    private func resetTimer() {
+    func resetTimer() {
         timer?.invalidate()
         cancelUpdateData()
         timer = nil
