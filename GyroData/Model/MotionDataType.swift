@@ -5,16 +5,7 @@
 //  Created by junho, summercat on 2023/01/30.
 //
 
-enum MotionDataType: CustomStringConvertible, Codable {
-    case accelerometer
-    case gyro
-
-    var description: String {
-        switch self {
-        case .accelerometer:
-            return "Accelerometer"
-        case .gyro:
-            return "Gyro"
-        }
-    }
+enum MotionDataType: String, Codable {
+    case accelerometer = "Accelerometer"
+    case gyro = "Gyro"
 }
