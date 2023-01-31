@@ -35,7 +35,7 @@ class MeasureListViewController: UIViewController {
         self.dataSource = setupTableViewDataSource()
         setupNavigation()
         setupViews()
-        
+        tableView.delegate = self
         appendData()
     }
     
@@ -82,5 +82,25 @@ class MeasureListViewController: UIViewController {
             SampleData(createdAt: "3", sensorType: "", measureTime: "")
         ])
         dataSource?.apply(snapshot)
+    }
+}
+
+extension MeasureListViewController: UITableViewDelegate {
+    func tableView(
+        _ tableView: UITableView,
+        trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
+    ) -> UISwipeActionsConfiguration? {
+        let playAction = UIContextualAction(style: .normal,
+                                            title: "Play") { (_, _, success) in
+            
+        }
+        playAction.backgroundColor = .systemGreen
+        
+        let deleteAction = UIContextualAction(style: .destructive,
+                                              title: "Delete") { (_, _, success) in
+            
+        }
+        
+        return UISwipeActionsConfiguration(actions: [deleteAction,playAction])
     }
 }
