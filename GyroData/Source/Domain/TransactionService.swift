@@ -38,4 +38,24 @@ extension TransactionService {
             return .failure(.loadError)
         }
     }
+    
+    func save(data: MeasureData) -> Error? {
+        do {
+            try fileManager.save(data)
+            try coreDataManager.save(data)
+            return nil
+        } catch {
+            return error
+        }
+    }
+    
+    func delete(date: Date) -> Error? {
+        do {
+            try coreDataManager.delete(date)
+            try fileManager.delete(date)
+            return nil
+        } catch {
+            return error
+        }
+    }
 }
