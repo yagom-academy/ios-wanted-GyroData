@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3C3B28412988B7990044939A /* FileSystemError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3B28402988B7990044939A /* FileSystemError.swift */; };
 		63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB428D44FC400C53A39 /* AppDelegate.swift */; };
 		63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB628D44FC400C53A39 /* SceneDelegate.swift */; };
 		63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB828D44FC400C53A39 /* ViewController.swift */; };
@@ -22,7 +21,30 @@
 		AC52BAC42987F91A0057CA56 /* SensorData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52BAC22987F91A0057CA56 /* SensorData+CoreDataClass.swift */; };
 		AC52BAC52987F91A0057CA56 /* SensorData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52BAC32987F91A0057CA56 /* SensorData+CoreDataProperties.swift */; };
 		AC52BAC829880B770057CA56 /* CoreDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52BAC729880B770057CA56 /* CoreDataError.swift */; };
+		AC52BACB2988D1440057CA56 /* FileSystemError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52BACA2988D1440057CA56 /* FileSystemError.swift */; };
+		AC52BADB2988D29A0057CA56 /* CoreDataManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52BADA2988D29A0057CA56 /* CoreDataManagerTests.swift */; };
+		AC52BAE02988D3410057CA56 /* CoreDataManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52BADF2988D3410057CA56 /* CoreDataManagerMock.swift */; };
+		AC52BAE22988D35C0057CA56 /* FileSystemManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52BAE12988D35C0057CA56 /* FileSystemManagerMock.swift */; };
+		AC52BAE52988D3C30057CA56 /* FileSystemManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52BAE42988D3C30057CA56 /* FileSystemManagerTests.swift */; };
+		AC52BAE62988D3C90057CA56 /* FileSystemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52BAB32987EA2A0057CA56 /* FileSystemManager.swift */; };
+		AC52BAE72988D3CC0057CA56 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52BAB12987EA180057CA56 /* CoreDataManager.swift */; };
+		AC52BAE82988D3D50057CA56 /* SensorData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52BAC22987F91A0057CA56 /* SensorData+CoreDataClass.swift */; };
+		AC52BAE92988D3D70057CA56 /* SensorData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52BAC32987F91A0057CA56 /* SensorData+CoreDataProperties.swift */; };
+		AC52BAEA2988D3DA0057CA56 /* FileSystemError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52BACA2988D1440057CA56 /* FileSystemError.swift */; };
+		AC52BAEB2988D3DC0057CA56 /* CoreDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52BAC729880B770057CA56 /* CoreDataError.swift */; };
+		AC52BAEC2988D3E10057CA56 /* MeasureData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52BAAB2987E9930057CA56 /* MeasureData.swift */; };
+		AC52BAED2988D3E30057CA56 /* Sensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52BAAF2987E9D10057CA56 /* Sensor.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		AC52BAD42988D2540057CA56 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 63F01BA928D44FC400C53A39 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 63F01BB028D44FC400C53A39;
+			remoteInfo = GyroData;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		3C3B28402988B7990044939A /* FileSystemError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSystemError.swift; sourceTree = "<group>"; };
@@ -42,6 +64,12 @@
 		AC52BAC22987F91A0057CA56 /* SensorData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SensorData+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		AC52BAC32987F91A0057CA56 /* SensorData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SensorData+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		AC52BAC729880B770057CA56 /* CoreDataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataError.swift; sourceTree = "<group>"; };
+		AC52BACA2988D1440057CA56 /* FileSystemError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileSystemError.swift; sourceTree = "<group>"; };
+		AC52BAD02988D2540057CA56 /* GyroDataTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GyroDataTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC52BADA2988D29A0057CA56 /* CoreDataManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManagerTests.swift; sourceTree = "<group>"; };
+		AC52BADF2988D3410057CA56 /* CoreDataManagerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManagerMock.swift; sourceTree = "<group>"; };
+		AC52BAE12988D35C0057CA56 /* FileSystemManagerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSystemManagerMock.swift; sourceTree = "<group>"; };
+		AC52BAE42988D3C30057CA56 /* FileSystemManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSystemManagerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,22 +80,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AC52BACD2988D2540057CA56 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3C3B283F2988B7710044939A /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-				3C3B28402988B7990044939A /* FileSystemError.swift */,
-			);
-			path = Utils;
-			sourceTree = "<group>";
-		};
 		63F01BA828D44FC400C53A39 = {
 			isa = PBXGroup;
 			children = (
 				63F01BB328D44FC400C53A39 /* GyroData */,
+				AC52BAD12988D2540057CA56 /* GyroDataTests */,
 				63F01BB228D44FC400C53A39 /* Products */,
+				AC52BAC92988D1120057CA56 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -75,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				63F01BB128D44FC400C53A39 /* GyroData.app */,
+				AC52BAD02988D2540057CA56 /* GyroDataTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -86,7 +116,6 @@
 				63F01BB628D44FC400C53A39 /* SceneDelegate.swift */,
 				63F01BB828D44FC400C53A39 /* ViewController.swift */,
 				AC52BAC629880B660057CA56 /* Utils */,
-				AC52BAA82987E8F80057CA56 /* Domain */,
 				AC52BAA92987E8FD0057CA56 /* Data */,
 				AC52BAA82987E8F80057CA56 /* Domain */,
 				63F01BBD28D44FC500C53A39 /* Assets.xcassets */,
@@ -137,9 +166,61 @@
 		AC52BAC629880B660057CA56 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				AC52BACA2988D1440057CA56 /* FileSystemError.swift */,
 				AC52BAC729880B770057CA56 /* CoreDataError.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		AC52BAC92988D1120057CA56 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				3C3B28402988B7990044939A /* FileSystemError.swift */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		AC52BAD12988D2540057CA56 /* GyroDataTests */ = {
+			isa = PBXGroup;
+			children = (
+				AC52BADD2988D2D40057CA56 /* Common */,
+				AC52BAE32988D3630057CA56 /* FileSystemManagerTests */,
+				AC52BADC2988D2AB0057CA56 /* CoreDataManagerTests */,
+			);
+			path = GyroDataTests;
+			sourceTree = "<group>";
+		};
+		AC52BADC2988D2AB0057CA56 /* CoreDataManagerTests */ = {
+			isa = PBXGroup;
+			children = (
+				AC52BADA2988D29A0057CA56 /* CoreDataManagerTests.swift */,
+			);
+			path = CoreDataManagerTests;
+			sourceTree = "<group>";
+		};
+		AC52BADD2988D2D40057CA56 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				AC52BADE2988D2D90057CA56 /* Mock */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		AC52BADE2988D2D90057CA56 /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				AC52BADF2988D3410057CA56 /* CoreDataManagerMock.swift */,
+				AC52BAE12988D35C0057CA56 /* FileSystemManagerMock.swift */,
+			);
+			path = Mock;
+			sourceTree = "<group>";
+		};
+		AC52BAE32988D3630057CA56 /* FileSystemManagerTests */ = {
+			isa = PBXGroup;
+			children = (
+				AC52BAE42988D3C30057CA56 /* FileSystemManagerTests.swift */,
+			);
+			path = FileSystemManagerTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -162,6 +243,24 @@
 			productReference = 63F01BB128D44FC400C53A39 /* GyroData.app */;
 			productType = "com.apple.product-type.application";
 		};
+		AC52BACF2988D2540057CA56 /* GyroDataTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AC52BAD62988D2540057CA56 /* Build configuration list for PBXNativeTarget "GyroDataTests" */;
+			buildPhases = (
+				AC52BACC2988D2540057CA56 /* Sources */,
+				AC52BACD2988D2540057CA56 /* Frameworks */,
+				AC52BACE2988D2540057CA56 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AC52BAD52988D2540057CA56 /* PBXTargetDependency */,
+			);
+			name = GyroDataTests;
+			productName = GyroDataTests;
+			productReference = AC52BAD02988D2540057CA56 /* GyroDataTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -169,11 +268,16 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1400;
+				LastSwiftUpdateCheck = 1420;
 				LastUpgradeCheck = 1400;
 				TargetAttributes = {
 					63F01BB028D44FC400C53A39 = {
 						CreatedOnToolsVersion = 14.0;
+					};
+					AC52BACF2988D2540057CA56 = {
+						CreatedOnToolsVersion = 14.2;
+						LastSwiftMigration = 1420;
+						TestTargetID = 63F01BB028D44FC400C53A39;
 					};
 				};
 			};
@@ -191,6 +295,7 @@
 			projectRoot = "";
 			targets = (
 				63F01BB028D44FC400C53A39 /* GyroData */,
+				AC52BACF2988D2540057CA56 /* GyroDataTests */,
 			);
 		};
 /* End PBXProject section */
@@ -205,6 +310,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AC52BACE2988D2540057CA56 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -213,7 +325,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */,
-				3C3B28412988B7990044939A /* FileSystemError.swift in Sources */,
 				AC52BAB02987E9D10057CA56 /* Sensor.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
@@ -225,10 +336,38 @@
 				AC52BAB42987EA2A0057CA56 /* FileSystemManager.swift in Sources */,
 				AC52BAC12987F8BA0057CA56 /* SensorData.xcdatamodeld in Sources */,
 				AC52BAC829880B770057CA56 /* CoreDataError.swift in Sources */,
+				AC52BACB2988D1440057CA56 /* FileSystemError.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AC52BACC2988D2540057CA56 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AC52BAE72988D3CC0057CA56 /* CoreDataManager.swift in Sources */,
+				AC52BAED2988D3E30057CA56 /* Sensor.swift in Sources */,
+				AC52BAEA2988D3DA0057CA56 /* FileSystemError.swift in Sources */,
+				AC52BAEC2988D3E10057CA56 /* MeasureData.swift in Sources */,
+				AC52BAE62988D3C90057CA56 /* FileSystemManager.swift in Sources */,
+				AC52BAE02988D3410057CA56 /* CoreDataManagerMock.swift in Sources */,
+				AC52BADB2988D29A0057CA56 /* CoreDataManagerTests.swift in Sources */,
+				AC52BAE82988D3D50057CA56 /* SensorData+CoreDataClass.swift in Sources */,
+				AC52BAE92988D3D70057CA56 /* SensorData+CoreDataProperties.swift in Sources */,
+				AC52BAEB2988D3DC0057CA56 /* CoreDataError.swift in Sources */,
+				AC52BAE52988D3C30057CA56 /* FileSystemManagerTests.swift in Sources */,
+				AC52BAE22988D35C0057CA56 /* FileSystemManagerMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		AC52BAD52988D2540057CA56 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 63F01BB028D44FC400C53A39 /* GyroData */;
+			targetProxy = AC52BAD42988D2540057CA56 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */ = {
@@ -408,6 +547,63 @@
 			};
 			name = Release;
 		};
+		AC52BAD72988D2540057CA56 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.6;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.GyroData.GyroDataTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "GyroDataTests/GyroDataTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GyroData.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/GyroData";
+			};
+			name = Debug;
+		};
+		AC52BAD82988D2540057CA56 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.6;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.GyroData.GyroDataTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "GyroDataTests/GyroDataTests-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GyroData.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/GyroData";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -425,6 +621,15 @@
 			buildConfigurations = (
 				63F01BC628D44FC500C53A39 /* Debug */,
 				63F01BC728D44FC500C53A39 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AC52BAD62988D2540057CA56 /* Build configuration list for PBXNativeTarget "GyroDataTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AC52BAD72988D2540057CA56 /* Debug */,
+				AC52BAD82988D2540057CA56 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
