@@ -22,7 +22,7 @@
 		EB8E417E2988EA6000FE26D3 /* MotionDataEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8E417C2988EA6000FE26D3 /* MotionDataEntity+CoreDataClass.swift */; };
 		EB8E417F2988EA6000FE26D3 /* MotionDataEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8E417D2988EA6000FE26D3 /* MotionDataEntity+CoreDataProperties.swift */; };
 		EB8E41812988EB0900FE26D3 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8E41802988EB0900FE26D3 /* CoreDataManager.swift */; };
-		EB8E41832988F2FC00FE26D3 /* CoreDataManageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8E41822988F2FC00FE26D3 /* CoreDataManageable.swift */; };
+		EB8E41832988F2FC00FE26D3 /* CoreDataManagerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8E41822988F2FC00FE26D3 /* CoreDataManagerType.swift */; };
 		EB96E7702987B8F500F9DF79 /* MotionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB96E76F2987B8F500F9DF79 /* MotionData.swift */; };
 		EB96E7722987C8DE00F9DF79 /* Coordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB96E7712987C8DE00F9DF79 /* Coordinate.swift */; };
 		EB96E7742987C93C00F9DF79 /* MotionDataType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB96E7732987C93C00F9DF79 /* MotionDataType.swift */; };
@@ -46,7 +46,7 @@
 		EB8E417C2988EA6000FE26D3 /* MotionDataEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MotionDataEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		EB8E417D2988EA6000FE26D3 /* MotionDataEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MotionDataEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		EB8E41802988EB0900FE26D3 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
-		EB8E41822988F2FC00FE26D3 /* CoreDataManageable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManageable.swift; sourceTree = "<group>"; };
+		EB8E41822988F2FC00FE26D3 /* CoreDataManagerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManagerType.swift; sourceTree = "<group>"; };
 		EB96E76F2987B8F500F9DF79 /* MotionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionData.swift; sourceTree = "<group>"; };
 		EB96E7712987C8DE00F9DF79 /* Coordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinate.swift; sourceTree = "<group>"; };
 		EB96E7732987C93C00F9DF79 /* MotionDataType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDataType.swift; sourceTree = "<group>"; };
@@ -100,7 +100,7 @@
 				EB8E417C2988EA6000FE26D3 /* MotionDataEntity+CoreDataClass.swift */,
 				EB8E417D2988EA6000FE26D3 /* MotionDataEntity+CoreDataProperties.swift */,
 				EB8E41802988EB0900FE26D3 /* CoreDataManager.swift */,
-				EB8E41822988F2FC00FE26D3 /* CoreDataManageable.swift */,
+				EB8E41822988F2FC00FE26D3 /* CoreDataManagerType.swift */,
 				EB96E76F2987B8F500F9DF79 /* MotionData.swift */,
 				EB96E7712987C8DE00F9DF79 /* Coordinate.swift */,
 				EB96E7732987C93C00F9DF79 /* MotionDataType.swift */,
@@ -185,7 +185,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */,
-				EB8E41832988F2FC00FE26D3 /* CoreDataManageable.swift in Sources */,
+				EB8E41832988F2FC00FE26D3 /* CoreDataManagerType.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				579C4D902988A40300D3949F /* MotionManagerType.swift in Sources */,
 				579C4D9A2988CBA400D3949F /* DataStorage.swift in Sources */,

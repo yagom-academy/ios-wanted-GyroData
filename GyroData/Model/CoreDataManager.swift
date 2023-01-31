@@ -7,7 +7,7 @@
 
 import CoreData
 
-final class CoreDataManager: CoreDataManageable {
+final class CoreDataManager: CoreDataManagerType {
     typealias FetchRequest = NSFetchRequest<MotionDataEntity>
     static let shared = CoreDataManager()
     private lazy var persistentContainer = {
