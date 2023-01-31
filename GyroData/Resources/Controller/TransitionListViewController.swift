@@ -27,14 +27,6 @@ final class TransitionListViewController: UIViewController {
     }
 }
 
-// MARK: - ObjcMethod
-extension TransitionListViewController {
-    @objc func didTapRecordButton() {
-        let controller = RecordViewController()
-        navigationController?.pushViewController(controller, animated: true)
-    }
-}
-
 // MARK: - UITableViewDataSource
 extension TransitionListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -70,9 +62,17 @@ extension TransitionListViewController: UITableViewDelegate {
     }
 }
 
+// MARK: - ObjcMethod
+private extension TransitionListViewController {
+    @objc func didTapRecordButton() {
+        let controller = RecordViewController()
+        navigationController?.pushViewController(controller, animated: true)
+    }
+}
+
 // MARK: - UIConfiguration
-extension TransitionListViewController {
-    private func configureUI() {
+private extension TransitionListViewController {
+    func configureUI() {
         view.backgroundColor = .systemBackground
         setNavigationBar()
         tableView.dataSource = self
@@ -82,7 +82,7 @@ extension TransitionListViewController {
         setUpLayouts()
     }
 
-    private func setUpLayouts() {
+    func setUpLayouts() {
         view.addSubview(tableView)
 
         NSLayoutConstraint.activate([
