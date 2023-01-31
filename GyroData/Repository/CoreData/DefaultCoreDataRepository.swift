@@ -9,6 +9,7 @@ import CoreData
 
 enum CoreDataError: Error {
     case invalidEntity
+    case invalidID
 }
 
 struct DefaultCoreDataRepository: CoreDataRepository {
@@ -51,14 +52,21 @@ struct DefaultCoreDataRepository: CoreDataRepository {
     }
     
     func read(from offset: Int) throws -> [MotionMO] {
-        return []
-    }
-    
-    func read(with id: String) throws -> MotionMO {
-        return MotionMO(context: context)
+        let request = MotionMO.fetchRequest()
+        request.fetchOffset = offset
+        request.fetchLimit = offset + 9
+        
+        let result = try context.fetch(request)
+        return result
     }
     
     func delete(_ id: String) throws {
+        let request = MotionMO.fetchRequest()
+        request.predicate = NSPredicate(format: "id == %@", id)
         
+        guard let target = try context.fetch(request).first else { throw CoreDataError.invalidID }
+        context.delete(target)
+        
+        try context.save()
     }
 }
