@@ -12,9 +12,16 @@ final class FileManager {
     static var shared = FileManager()
     private let coreDataManager = CoreDataManager()
     private let jsonDataManager = JSONDataManager()
-    private var motionDataList: [MotionData] = []
+    private var motionDataList: [MotionData] = [] {
+        didSet {
+            NotificationCenter.default.post(name: Notification.Name("motionDataChanged"),
+                                            object: nil)
+        }
+    }
     
-    private init() {}
+    private init() {
+        updateMotionDataList()
+    }
     
     private func updateMotionDataList() {
         motionDataList = coreDataManager.readMotionDataEntity().map { $0.toDomain() }
@@ -22,7 +29,6 @@ final class FileManager {
     }
     
     func fetchData() -> [MotionData] {
-        updateMotionDataList()
         return motionDataList
     }
     
@@ -37,10 +43,12 @@ final class FileManager {
                                     value: value,
                                     id: UUID())
         try coreDataManager.create(entity: motionData)
+        updateMotionDataList()
     }
     
     func deleteMotionData(index: Int) {
         let motiondata = motionDataList[index]
         coreDataManager.delete(motionDataId: motiondata.id)
+        updateMotionDataList()
     }
 }

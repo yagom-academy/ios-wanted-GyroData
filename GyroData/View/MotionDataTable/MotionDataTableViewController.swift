@@ -29,6 +29,7 @@ final class MotionDataTableViewController: UIViewController {
         configureUI()
         configureDataSource()
         configureSnapshot(list: motionDataListViewModel?.fetchMotionDataList() ?? [])
+        configureViewModel()
     }
     
     private func configureUI() {
@@ -61,6 +62,12 @@ final class MotionDataTableViewController: UIViewController {
         navigationItem.rightBarButtonItem = createMeasurementButton()
     }
     
+    private func configureViewModel() {
+        motionDataListViewModel?.bindMotionDataList { [weak self] in
+            self?.configureSnapshot(list: self?.motionDataListViewModel?.fetchMotionDataList() ?? [])
+        }
+    }
+    
     private func createMeasurementButton() -> UIBarButtonItem {
         let button = UIBarButtonItem(title: "측정", primaryAction: createPushAction())
         
@@ -70,7 +77,9 @@ final class MotionDataTableViewController: UIViewController {
     private func createPushAction() -> UIAction {
         let action = UIAction { _ in
             let measurementMotionDataViewController = MeasurementMotionDataViewController()
-            self.navigationController?.pushViewController(measurementMotionDataViewController, animated: true)
+//            self.navigationController?.pushViewController(measurementMotionDataViewController, animated: true)
+            
+            self.motionDataListViewModel?.creatMotionData()
         }
         
         return action

@@ -9,16 +9,20 @@ import Foundation
 
 final class MotionDataTableViewModel {
     
-    private var fileManager: FileManager {
-        didSet {
-            motionDataListHandler?()
-        }
-    }
-    
+    private var fileManager: FileManager
     private var motionDataListHandler: (() -> ())?
     
     init() {
         self.fileManager = FileManager.shared
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(motionDataBind),
+                                               name: Notification.Name("motionDataChanged"),
+                                               object: nil)
+    }
+    
+    @objc
+    private func motionDataBind() {
+        motionDataListHandler?()
     }
     
     func bindMotionDataList(handler: @escaping () -> ()) {
@@ -26,14 +30,15 @@ final class MotionDataTableViewModel {
     }
     
     func fetchMotionDataList() -> [MotionData] {
-//        return fileManager.fetchData()
-        return [MotionData(date: Date(), type: .accelerometer, time: 15.0, value: [], id: UUID()),
-                MotionData(date: Date(), type: .gyro, time: 19.0, value: [], id: UUID()),
-                MotionData(date: Date(), type: .accelerometer, time: 35.7, value: [], id: UUID()),]
+        return fileManager.fetchData()
     }
     
     func fetchMotionData(index: Int) -> MotionData {
         return fileManager.fetchData()[index]
+    }
+    
+    func creatMotionData() {
+        try? fileManager.createMotionData(type: .gyro, time: 37.4, value: [])
     }
     
     func deleteMotionData(index: Int) {
