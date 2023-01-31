@@ -128,13 +128,19 @@ private extension RecordViewController {
             recordButton.layer.backgroundColor = UIColor.systemGroupedBackground.cgColor
         }
     }
+    
+    func resetTransitionValues() {
+        if !values.isEmpty { values.removeAll() }
+    }
 }
 
 // MARK: - ObjcMethod
 private extension RecordViewController {
     @objc func didTapRecordButton() {
         let segmentIndex = segmentControl.selectedSegmentIndex
-
+        
+        resetTransitionValues()
+        
         switch segmentIndex {
         case 0:
             startMonitoringAccelerometer()
@@ -150,14 +156,12 @@ private extension RecordViewController {
         if monitor.isAccelerometerActive {
             monitor.stopAccelerometerUpdates()
             convertButtonsState(isEnable: true)
-            saveJsonData()
             return
         }
 
         if monitor.isGyroActive {
             monitor.stopGyroUpdates()
             convertButtonsState(isEnable: true)
-            saveJsonData()
             return
         }
     }
