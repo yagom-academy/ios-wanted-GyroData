@@ -112,15 +112,9 @@
 		63F01BB328D44FC400C53A39 /* GyroData */ = {
 			isa = PBXGroup;
 			children = (
-				63F01BB428D44FC400C53A39 /* AppDelegate.swift */,
-				63F01BB628D44FC400C53A39 /* SceneDelegate.swift */,
 				63F01BB828D44FC400C53A39 /* ViewController.swift */,
-				AC52BAC629880B660057CA56 /* Utils */,
-				AC52BAA92987E8FD0057CA56 /* Data */,
-				AC52BAA82987E8F80057CA56 /* Domain */,
-				63F01BBD28D44FC500C53A39 /* Assets.xcassets */,
-				63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */,
-				63F01BC228D44FC500C53A39 /* Info.plist */,
+				AC52BAF02988D4BA0057CA56 /* Source */,
+				AC52BAEF2988D48D0057CA56 /* Resource */,
 			);
 			path = GyroData;
 			sourceTree = "<group>";
@@ -163,13 +157,12 @@
 			path = CoreData;
 			sourceTree = "<group>";
 		};
-		AC52BAC629880B660057CA56 /* Utils */ = {
+		AC52BAC629880B660057CA56 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				AC52BACA2988D1440057CA56 /* FileSystemError.swift */,
-				AC52BAC729880B770057CA56 /* CoreDataError.swift */,
+				AC52BAEE2988D45C0057CA56 /* Error */,
 			);
-			path = Utils;
+			path = Common;
 			sourceTree = "<group>";
 		};
 		AC52BAC92988D1120057CA56 /* Recovered References */ = {
@@ -221,6 +214,45 @@
 				AC52BAE42988D3C30057CA56 /* FileSystemManagerTests.swift */,
 			);
 			path = FileSystemManagerTests;
+			sourceTree = "<group>";
+		};
+		AC52BAEE2988D45C0057CA56 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				AC52BACA2988D1440057CA56 /* FileSystemError.swift */,
+				AC52BAC729880B770057CA56 /* CoreDataError.swift */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
+		AC52BAEF2988D48D0057CA56 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				63F01BBD28D44FC500C53A39 /* Assets.xcassets */,
+				63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */,
+				63F01BC228D44FC500C53A39 /* Info.plist */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		AC52BAF02988D4BA0057CA56 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				AC52BAA82987E8F80057CA56 /* Domain */,
+				AC52BAA92987E8FD0057CA56 /* Data */,
+				AC52BAC629880B660057CA56 /* Common */,
+				AC52BAF12988D4C20057CA56 /* Application */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		AC52BAF12988D4C20057CA56 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				63F01BB428D44FC400C53A39 /* AppDelegate.swift */,
+				63F01BB628D44FC400C53A39 /* SceneDelegate.swift */,
+			);
+			path = Application;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
