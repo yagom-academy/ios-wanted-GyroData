@@ -20,12 +20,28 @@ struct MotionDTO: Codable, Identifiable {
 extension MotionDTO: DomainConvertible {
     func asDomain() -> Motion? {
         guard let type = Motion.MeasurementType.init(rawValue: self.type) else { return nil }
-        return Motion(id: self.id,
-                      date: Date(timeIntervalSince1970: self.date),
-                      type: type,
-                      time: self.time,
-                      data: Motion.MeasurementData(x: self.x,
-                                                   y: self.y,
-                                                   z: self.z))
+        return Motion(
+            id: self.id,
+            date: Date(timeIntervalSince1970: self.date),
+            type: type,
+            time: self.time,
+            data: Motion.MeasurementData(
+                x: self.x,
+                y: self.y,
+                z: self.z
+            )
+        )
+    }
+}
+
+extension MotionDTO {
+    init(from motion: Motion) {
+        self.id = motion.id
+        self.date = motion.date.timeIntervalSince1970
+        self.type = motion.type.rawValue
+        self.time = motion.time
+        self.x = motion.data.x
+        self.y = motion.data.y
+        self.z = motion.data.z
     }
 }
