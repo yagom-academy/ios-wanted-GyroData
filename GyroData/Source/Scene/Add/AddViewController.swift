@@ -6,11 +6,13 @@
 //
 
 import UIKit
+import CoreMotion
 
 class AddViewController: UIViewController {
     private let segmentControl: UISegmentedControl = {
         let segmentControl = UISegmentedControl(items: ["Acc", "Gyro"])
         segmentControl.backgroundColor = .white
+        segmentControl.selectedSegmentIndex = 0
         return segmentControl
     }()
     private let graphView: UIView = {
@@ -41,13 +43,19 @@ class AddViewController: UIViewController {
         stackView.spacing = 30
         return stackView
     }()
-    
+    private let motionManager = CMMotionManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureView()
         configureLayout()
+        configureButtonAction()
+    }
+    
+    private func configureButtonAction() {
+        playButton.addTarget(self, action: #selector(updateGravityData), for: .touchDown)
+        stopButton.addTarget(self, action: #selector(stopGravityData), for: .touchDown)
     }
     
     private func configureView() {
@@ -86,7 +94,7 @@ class AddViewController: UIViewController {
                 multiplier: 0.4
             ),
             
-            playButton.heightAnchor.constraint(equalToConstant: 20),
+            playButton.heightAnchor.constraint(equalToConstant: view.frame.size.height * 0.02),
             
             mainStackView.widthAnchor.constraint(
                 equalTo: view.safeAreaLayoutGuide.widthAnchor ,
@@ -109,5 +117,31 @@ class AddViewController: UIViewController {
     
     @objc private func saveMotionData() {
         
+    }
+    
+    @objc private func updateGravityData() {
+        print(motionManager.isAccelerometerAvailable)
+        
+        motionManager.accelerometerUpdateInterval = 0.1
+        motionManager.gyroUpdateInterval = 0.1
+        motionManager.startAccelerometerUpdates(to: .main) { data, error in
+            if error == nil {
+                guard let accelerometerData = data else { return }
+
+                print(accelerometerData.acceleration)
+            }
+        }
+        motionManager.startGyroUpdates(to: .main) { data, error in
+            if error == nil {
+                guard let gyroData = data else { return }
+
+                print(gyroData)
+            }
+        }
+    }
+    
+    @objc private func stopGravityData() {
+        motionManager.stopAccelerometerUpdates()
+        motionManager.stopGyroUpdates()
     }
 }

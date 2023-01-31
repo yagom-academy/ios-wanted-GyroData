@@ -63,8 +63,7 @@ final class MainViewController: UIViewController {
     // MARK: Action Methods
     
     @objc private func tapRightBarButton() {
-//        let addViewController = AddViewController()
-        let addViewController = ReplayViewController()
+        let addViewController = AddViewController()
         
         addViewController.modalPresentationStyle = .fullScreen
         
@@ -95,6 +94,16 @@ extension MainViewController: UITableViewDelegate {
         playAction.backgroundColor = .systemGreen
         
         return UISwipeActionsConfiguration(actions: [deleteAction, playAction])
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let replayViewController = ReplayViewController()
+        
+        replayViewController.modalPresentationStyle = .fullScreen
+        
+        navigationController?.pushViewController(replayViewController, animated: true)
+        
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 
