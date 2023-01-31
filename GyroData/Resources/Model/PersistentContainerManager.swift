@@ -44,13 +44,20 @@ final class PersistentContainerManager {
     }
 
     func fetchTransitionMetaDatas() -> [TransitionMetaData] {
-        let transitionMetaDataObjects = fetchTransitionMetaDataObjects()
-        let transitionMetaDatas = transitionMetaDataObjects.map {
+        let fetchTransitionMetaDataObjects = fetchTransitionMetaDataObjects()
+        let transitionMetaDatas = fetchTransitionMetaDataObjects.map {
             TransitionMetaData(saveDate: $0.saveDate,
                                sensorType: SensorType(rawValue: $0.sensorType) ?? SensorType.Accelerometer,
                                recordTime: $0.recordTime,
                                jsonName: $0.jsonName)
         }
         return transitionMetaDatas
+    }
+
+    func deleteTransitionMetaData(data: TransitionMetaData) {
+        let fetchTransitionMetaDataObjects = fetchTransitionMetaDataObjects()
+        guard let transitionMetaDataObject = fetchTransitionMetaDataObjects.first(where: { $0.id == data.id }) else { return }
+        persistentContainer.viewContext.delete(transitionMetaDataObject)
+        saveContext()
     }
 }
