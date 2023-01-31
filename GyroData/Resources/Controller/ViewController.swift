@@ -19,40 +19,16 @@ final class ViewController: UIViewController {
     private let cellReuseIdentifier = "CustomCell"
     private var cellCount = 10
 
-    // MARK: - Method
+    // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .systemBackground
-        setNavigationBar()
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
-        tableView.separatorStyle = .none
+        configureUI()
     }
+}
 
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-
-        configureSubViews()
-    }
-
-    private func configureSubViews() {
-        view.addSubview(tableView)
-
-        NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
-    }
-    
-    func setNavigationBar() {
-        let button = UIBarButtonItem(title: "측정", style: .plain, target: self, action: #selector(didTapRecordButton))
-        self.navigationItem.rightBarButtonItem = button
-    }
-    
+// MARK: - ObjcMethod
+extension ViewController {
     @objc func didTapRecordButton() {
         let controller = RecordViewController()
         navigationController?.pushViewController(controller, animated: true)
@@ -94,3 +70,31 @@ extension ViewController: UITableViewDelegate {
     }
 }
 
+// MARK: - UIConfiguration
+extension ViewController {
+    private func configureUI() {
+        view.backgroundColor = .systemBackground
+        setNavigationBar()
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
+        tableView.separatorStyle = .none
+        setUpLayouts()
+    }
+
+    private func setUpLayouts() {
+        view.addSubview(tableView)
+
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+    }
+
+    func setNavigationBar() {
+        let button = UIBarButtonItem(title: "측정", style: .plain, target: self, action: #selector(didTapRecordButton))
+        self.navigationItem.rightBarButtonItem = button
+    }
+}
