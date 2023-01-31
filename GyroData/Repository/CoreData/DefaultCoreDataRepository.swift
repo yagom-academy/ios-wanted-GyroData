@@ -26,8 +26,12 @@ struct DefaultCoreDataRepository: CoreDataRepository {
         return container
     }()
     
-    private var context: NSManagedObjectContext {
-        return persistentContainer.viewContext
+    private let context: NSManagedObjectContext
+    
+    init() {
+        let context = persistentContainer.viewContext
+        context.automaticallyMergesChangesFromParent = true
+        self.context = context
     }
     
     func create(_ domain: Motion) throws {
