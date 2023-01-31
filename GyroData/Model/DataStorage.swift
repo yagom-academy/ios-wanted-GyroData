@@ -10,6 +10,8 @@ import Foundation
 enum DiskStorageError: Error {
     case cannotFindDocumentDirectory
     case cannotCreateDirectory
+    case cannotSaveFile
+    case cannotEncodeData
 }
 
 final class DataStorage: DataStorageType {
@@ -26,8 +28,15 @@ final class DataStorage: DataStorageType {
         try createDirectory(with: directoryURL)
     }
     
-    func save(_ data: MotionData, with fileName: String) throws {
-        //
+    func save(_ data: MotionData) throws {
+        let url = directoryURL.appendingPathComponent(data.id.description)
+        let jsonData = try encode(data)
+        
+        do {
+            try jsonData.write(to: url)
+        } catch {
+            throw DiskStorageError.cannotSaveFile
+        }
     }
     
     func read() {
@@ -52,7 +61,16 @@ final class DataStorage: DataStorageType {
         }
     }
     
-    private func encode() { }
+    private func encode(_ data: MotionData) throws -> Data {
+        let encoder: JSONEncoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
+        
+        do {
+            return try encoder.encode(data)
+        } catch {
+            throw DiskStorageError.cannotEncodeData
+        }
+    }
     
     private func decode() { }
 }

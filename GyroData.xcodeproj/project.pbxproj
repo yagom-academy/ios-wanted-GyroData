@@ -87,11 +87,11 @@
 				EB96E76F2987B8F500F9DF79 /* MotionData.swift */,
 				EB96E7712987C8DE00F9DF79 /* Coordinate.swift */,
 				EB96E7732987C93C00F9DF79 /* MotionDataType.swift */,
+				579C4D912988A40A00D3949F /* MotionManager.swift */,
+				579C4D8F2988A40300D3949F /* MotionManagerType.swift */,
 				579C4D9B2988CBA900D3949F /* DataStorageType.swift */,
 				579C4D992988CBA400D3949F /* DataStorage.swift */,
 				579C4D9D2988CF7300D3949F /* FileManagerType.swift */,
-				579C4D8F2988A40300D3949F /* MotionManagerType.swift */,
-				579C4D912988A40A00D3949F /* MotionManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
