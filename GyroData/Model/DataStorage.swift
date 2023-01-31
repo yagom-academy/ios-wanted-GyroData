@@ -26,7 +26,7 @@ final class DataStorage: DataStorageType {
         let url = directoryURL.appendingPathComponent(fileName)
         
         do {
-            let data: Data = try Data(contentsOf: url)
+            let data = try Data(contentsOf: url)
             return try decode(data)
         } catch {
             throw DataStorageError.cannotReadFile
