@@ -7,7 +7,12 @@
 
 import Foundation
 
-struct MeasureData: Encodable {
+struct MeasureData: Codable {
+    enum Sensor: Int, Codable {
+        case accelerometer
+        case gyroscope
+    }
+    
     let xValue: [Double]
     let yValue: [Double]
     let zValue: [Double]
