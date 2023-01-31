@@ -10,8 +10,8 @@ import Foundation
 final class MotionDataListViewModel {
     enum Action {
         case recordButtonTapped(closure: (RecordMotionDataViewModel) -> Void)
-        case view(at: IndexPath)
-        case play(at: IndexPath)
+        case view(at: IndexPath, closure: (MotionDataViewModel) -> Void)
+        case play(at: IndexPath, closure: (MotionDataViewModel) -> Void)
         case delete(at: IndexPath)
         case scrollToBottom
     }
@@ -29,21 +29,34 @@ final class MotionDataListViewModel {
     func action(_ action: Action) {
         switch action {
         case let .recordButtonTapped(closure):
-            createRecordMotionDataViewModel(closure)
-        case let .view(indexPath):
+            createNewMotionData(closure)
+        case let .view(indexPath, closure):
+            let data = fetchMotionData(at: indexPath)
+            showMotionData(data, closure)
             break
-        case let .play(indexPath):
+        case let .play(indexPath, closure):
+            let data = fetchMotionData(at: indexPath)
+            showMotionData(data, closure)
             break
         case let .delete(indexPath):
+            delete(at: indexPath)
             break
         case .scrollToBottom:
+            updateMotionData()
             break
         }
     }
     
+    private func createNewMotionData(_ closure: @escaping (RecordMotionDataViewModel) -> Void) { }
+    
+    private func showMotionData(_ data: MotionData, _ closure: @escaping (MotionDataViewModel) -> Void) { }
+    
+    // 코어데이터에서 10개씩 꺼내오는 메서드
     private func updateMotionData() { }
     
-    private func add(_ data: MotionData) { }
+    private func add(_ data: MotionData) {
+        motionData.append(data)
+    }
     
     private func numberOfData() -> Int {
         return motionData.count
@@ -53,5 +66,5 @@ final class MotionDataListViewModel {
         return MotionData(motionDataType: .accelerometer)
     }
     
-    private func createRecordMotionDataViewModel(_ closure: @escaping (RecordMotionDataViewModel) -> Void) { }
+    private func delete(at indexPath: IndexPath) { }
 }
