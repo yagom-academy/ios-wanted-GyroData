@@ -156,7 +156,11 @@ private extension TransitionListViewController {
 
     func setNavigationBar() {
         let rightBarButton = UIBarButtonItem(title: "측정", style: .plain, target: self, action: #selector(didTapRecordButton))
-        self.navigationItem.rightBarButtonItem = rightBarButton
+        let titleLable = UILabel()
+        titleLable.text = "목록"
+        titleLable.font = UIFont.systemFont(ofSize: 30)
+        navigationItem.rightBarButtonItem = rightBarButton
+        navigationItem.titleView = titleLable
     }
 
     func createSpinnerFooter() -> UIView {
