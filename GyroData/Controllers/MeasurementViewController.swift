@@ -138,4 +138,22 @@ final class MeasurementViewController: UIViewController {
     private func saveSensorData() {
         fatalError()
     }
+
+    private func setDisabledSegments() {
+        for segmentIndex in 0..<numberOfSegments {
+            // 선택되지 않은 세그먼트 제외 모두 비활성화
+            if !(segmentedController.selectedSegmentIndex == segmentIndex) {
+                segmentedController.setEnabled(false, forSegmentAt: segmentIndex)
+            }
+        }
+    }
+
+    private func setEnabledSegments() {
+        for segmentIndex in 0..<numberOfSegments {
+            // 비활성화된 세그먼트 활성화
+            if !segmentedController.isEnabledForSegment(at: segmentIndex) {
+                segmentedController.setEnabled(true, forSegmentAt: segmentIndex)
+            }
+        }
+    }
 }
