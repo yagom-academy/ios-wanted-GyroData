@@ -213,12 +213,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				18D110632988078F0088ED79 /* Transition.swift in Sources */,
-<<<<<<< HEAD
-				180E78462988FC4A006DCA3F /* CoreMotionManager.swift in Sources */,
-				63F01BB928D44FC400C53A39 /* TransitionListViewController.swift in Sources */,
-=======
 				63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */,
->>>>>>> parent of d70a65a (chore: ViewController -> TransitionListViewController 이름변경 및 RecordViewController와 컨벤션 통일)
 				09E3105F298845DD0088E0EB /* TransitionMetaData.swift in Sources */,
 				09E3105329882DED0088E0EB /* DataModel.xcdatamodeld in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
