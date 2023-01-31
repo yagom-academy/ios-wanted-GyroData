@@ -88,10 +88,15 @@ extension TransitionListViewController: UITableViewDelegate {
 extension TransitionListViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let position = scrollView.contentOffset.y
-        print(position)
-        print(tableView.contentSize.height - scrollView.frame.size.height + 100)
+
         if position > tableView.contentSize.height - scrollView.frame.size.height + 100 {
+            tableView.tableFooterView = createSpinnerFooter()
+
             bringAdditionalTransitionMetaData { [weak self] count in
+                DispatchQueue.main.async {
+                    self?.tableView.tableFooterView = nil
+                }
+                
                 self?.cellCount += count
                 guard let currentCellCount = self?.cellCount,
                       let maxCellCount = self?.transitionMetaDatas.count else {
@@ -144,5 +149,16 @@ private extension TransitionListViewController {
     func setNavigationBar() {
         let rightBarButton = UIBarButtonItem(title: "측정", style: .plain, target: self, action: #selector(didTapRecordButton))
         self.navigationItem.rightBarButtonItem = rightBarButton
+    }
+
+    func createSpinnerFooter() -> UIView {
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 100))
+        let spinner = UIActivityIndicatorView()
+
+        spinner.center = footerView.center
+        footerView.addSubview(spinner)
+        spinner.startAnimating()
+
+        return footerView
     }
 }
