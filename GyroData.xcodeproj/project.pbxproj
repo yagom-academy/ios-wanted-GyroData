@@ -14,6 +14,7 @@
 		63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB828D44FC400C53A39 /* ViewController.swift */; };
 		63F01BBE28D44FC500C53A39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBD28D44FC500C53A39 /* Assets.xcassets */; };
 		63F01BC128D44FC500C53A39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */; };
+		B20D4BDF29894BEE00ADC6B6 /* MotionDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B20D4BDD29894BEE00ADC6B6 /* MotionDataModel.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		63F01BBD28D44FC500C53A39 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		63F01BC028D44FC500C53A39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		63F01BC228D44FC500C53A39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B20D4BDE29894BEE00ADC6B6 /* MotionDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MotionDataModel.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 				5785B3712988B1A500DD61B2 /* Resource */,
 				5785B3702988B13900DD61B2 /* Source */,
 				63F01BC228D44FC500C53A39 /* Info.plist */,
+				B20D4BDD29894BEE00ADC6B6 /* MotionDataModel.xcdatamodeld */,
 			);
 			path = GyroData;
 			sourceTree = "<group>";
@@ -185,6 +188,7 @@
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
 				0CC8B83A2988BA580011E5FB /* MotionType.swift in Sources */,
 				0CC8B8382988B73C0011E5FB /* MotionData.swift in Sources */,
+				B20D4BDF29894BEE00ADC6B6 /* MotionDataModel.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -390,6 +394,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		B20D4BDD29894BEE00ADC6B6 /* MotionDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				B20D4BDE29894BEE00ADC6B6 /* MotionDataModel.xcdatamodel */,
+			);
+			currentVersion = B20D4BDE29894BEE00ADC6B6 /* MotionDataModel.xcdatamodel */;
+			path = MotionDataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 63F01BA928D44FC400C53A39 /* Project object */;
 }
