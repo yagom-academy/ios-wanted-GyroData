@@ -68,13 +68,13 @@ extension TransitionListViewController: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 extension TransitionListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let playAction = UIContextualAction(style: .normal, title: "Play") { (action, view, completionHandler) in
+        let playAction = UIContextualAction(style: .normal, title: nil) { (action, view, completionHandler) in
             print("play 클릭")
             completionHandler(false)
         }
         playAction.backgroundColor = .systemGreen
 
-        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] (action, view, completionHandler) in
+        let deleteAction = UIContextualAction(style: .destructive, title: nil) { [weak self] (action, view, completionHandler) in
             print("delete 클릭")
 //            guard let data = self?.transitionMetaDatas[indexPath.row] else { return }
             self?.transitionMetaDatas.remove(at: indexPath.row)
@@ -166,5 +166,19 @@ private extension TransitionListViewController {
         spinner.startAnimating()
 
         return footerView
+    }
+
+    func createSwipeActionImage(text: String) -> UIImage? {
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 30)
+        label.textColor = UIColor.white
+        label.text = text
+        label.sizeToFit()
+        let renderer = UIGraphicsImageRenderer(bounds: label.bounds)
+        let image = renderer.image { rendererContext in
+            label.layer.render(in: rendererContext.cgContext)
+        }
+
+        return image
     }
 }
