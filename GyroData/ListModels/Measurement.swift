@@ -11,5 +11,6 @@ struct Measurement: Hashable {
     
     let sensor: Sensor
     let date: Date
-    let value: Double
+    let time: Double
+    let value: [AxisValue]
 }

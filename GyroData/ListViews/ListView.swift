@@ -2,7 +2,7 @@
 //  ListView.swift
 //  GyroData
 //
-//  Created by 써니쿠키, 로빈 on 2023/01/30.
+//  Created by 써니쿠키 on 2023/01/30.
 //
 
 import UIKit
