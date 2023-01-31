@@ -19,6 +19,15 @@
 		D381D27B2988E58700567C6B /* MotionGraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D381D2722988E58700567C6B /* MotionGraphViewController.swift */; };
 		D381D27C2988E58700567C6B /* MotionsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D381D2742988E58700567C6B /* MotionsListViewController.swift */; };
 		D381D27D2988E58700567C6B /* MotionsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D381D2752988E58700567C6B /* MotionsListViewModel.swift */; };
+		E3D84A9A2988E6D400FDA64F /* MotionDeletable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D84A992988E6D400FDA64F /* MotionDeletable.swift */; };
+		E3D84A9C2988E6EF00FDA64F /* MotionCreatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D84A9B2988E6EF00FDA64F /* MotionCreatable.swift */; };
+		E3D84A9E2988E70400FDA64F /* CoreDataMotionReadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D84A9D2988E70400FDA64F /* CoreDataMotionReadable.swift */; };
+		E3D84AA02988E71800FDA64F /* FileManagerMotionReadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D84A9F2988E71800FDA64F /* FileManagerMotionReadable.swift */; };
+		E3D84AA22988E72E00FDA64F /* MotionCreateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D84AA12988E72E00FDA64F /* MotionCreateService.swift */; };
+		E3D84AA42988E74800FDA64F /* MotionDeleteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D84AA32988E74800FDA64F /* MotionDeleteService.swift */; };
+		E3D84AA62988E75B00FDA64F /* CoreDataMotionReadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D84AA52988E75B00FDA64F /* CoreDataMotionReadService.swift */; };
+		E3D84AA82988E76700FDA64F /* FileManagerMotionReadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D84AA72988E76700FDA64F /* FileManagerMotionReadService.swift */; };
+		E3D84AAC2988E7F000FDA64F /* Motion.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D84AAB2988E7F000FDA64F /* Motion.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +45,15 @@
 		D381D2722988E58700567C6B /* MotionGraphViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionGraphViewController.swift; sourceTree = "<group>"; };
 		D381D2742988E58700567C6B /* MotionsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionsListViewController.swift; sourceTree = "<group>"; };
 		D381D2752988E58700567C6B /* MotionsListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionsListViewModel.swift; sourceTree = "<group>"; };
+		E3D84A992988E6D400FDA64F /* MotionDeletable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDeletable.swift; sourceTree = "<group>"; };
+		E3D84A9B2988E6EF00FDA64F /* MotionCreatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionCreatable.swift; sourceTree = "<group>"; };
+		E3D84A9D2988E70400FDA64F /* CoreDataMotionReadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataMotionReadable.swift; sourceTree = "<group>"; };
+		E3D84A9F2988E71800FDA64F /* FileManagerMotionReadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerMotionReadable.swift; sourceTree = "<group>"; };
+		E3D84AA12988E72E00FDA64F /* MotionCreateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionCreateService.swift; sourceTree = "<group>"; };
+		E3D84AA32988E74800FDA64F /* MotionDeleteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDeleteService.swift; sourceTree = "<group>"; };
+		E3D84AA52988E75B00FDA64F /* CoreDataMotionReadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataMotionReadService.swift; sourceTree = "<group>"; };
+		E3D84AA72988E76700FDA64F /* FileManagerMotionReadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerMotionReadService.swift; sourceTree = "<group>"; };
+		E3D84AAB2988E7F000FDA64F /* Motion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Motion.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				D381D2692988E58700567C6B /* Scene */,
+				E3D84AA92988E79B00FDA64F /* Domain */,
 				63F01BB428D44FC400C53A39 /* AppDelegate.swift */,
 				63F01BB628D44FC400C53A39 /* SceneDelegate.swift */,
 				63F01BBD28D44FC500C53A39 /* Assets.xcassets */,
@@ -123,6 +142,46 @@
 				D381D2752988E58700567C6B /* MotionsListViewModel.swift */,
 			);
 			path = MotionsList;
+			sourceTree = "<group>";
+		};
+		E3D84A962988E67400FDA64F /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				E3D84A972988E69400FDA64F /* Protocol */,
+				E3D84AA12988E72E00FDA64F /* MotionCreateService.swift */,
+				E3D84AA32988E74800FDA64F /* MotionDeleteService.swift */,
+				E3D84AA52988E75B00FDA64F /* CoreDataMotionReadService.swift */,
+				E3D84AA72988E76700FDA64F /* FileManagerMotionReadService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		E3D84A972988E69400FDA64F /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				E3D84A9B2988E6EF00FDA64F /* MotionCreatable.swift */,
+				E3D84A992988E6D400FDA64F /* MotionDeletable.swift */,
+				E3D84A9D2988E70400FDA64F /* CoreDataMotionReadable.swift */,
+				E3D84A9F2988E71800FDA64F /* FileManagerMotionReadable.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		E3D84AA92988E79B00FDA64F /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				E3D84A962988E67400FDA64F /* Service */,
+				E3D84AAA2988E7C900FDA64F /* Entity */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		E3D84AAA2988E7C900FDA64F /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				E3D84AAB2988E7F000FDA64F /* Motion.swift */,
+			);
+			path = Entity;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -195,16 +254,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3D84A9A2988E6D400FDA64F /* MotionDeletable.swift in Sources */,
+				E3D84A9C2988E6EF00FDA64F /* MotionCreatable.swift in Sources */,
 				D381D2782988E58700567C6B /* MotionMeasureViewController.swift in Sources */,
 				D381D27B2988E58700567C6B /* MotionGraphViewController.swift in Sources */,
 				D381D2792988E58700567C6B /* MotionMeasureViewModel.swift in Sources */,
+				E3D84AA62988E75B00FDA64F /* CoreDataMotionReadService.swift in Sources */,
+				E3D84AAC2988E7F000FDA64F /* Motion.swift in Sources */,
 				D381D2772988E58700567C6B /* MotionPlayViewController.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				D381D27A2988E58700567C6B /* MotionGraphViewModel.swift in Sources */,
+				E3D84AA82988E76700FDA64F /* FileManagerMotionReadService.swift in Sources */,
 				D381D27C2988E58700567C6B /* MotionsListViewController.swift in Sources */,
 				D381D2762988E58700567C6B /* MotionPlayViewModel.swift in Sources */,
+				E3D84AA22988E72E00FDA64F /* MotionCreateService.swift in Sources */,
 				D381D27D2988E58700567C6B /* MotionsListViewModel.swift in Sources */,
+				E3D84AA02988E71800FDA64F /* FileManagerMotionReadable.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
+				E3D84AA42988E74800FDA64F /* MotionDeleteService.swift in Sources */,
+				E3D84A9E2988E70400FDA64F /* CoreDataMotionReadable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
