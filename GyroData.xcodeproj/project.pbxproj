@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		09DBC66F2988CE26003228DB /* TransitionMetaDataObject+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09DBC66D2988CE26003228DB /* TransitionMetaDataObject+CoreDataClass.swift */; };
+		09DBC6702988CE26003228DB /* TransitionMetaDataObject+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09DBC66E2988CE26003228DB /* TransitionMetaDataObject+CoreDataProperties.swift */; };
+		09E3104E2987E1B50088E0EB /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E3104D2987E1B50088E0EB /* CustomTableViewCell.swift */; };
+		09E3105329882DED0088E0EB /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 09E3105129882DED0088E0EB /* DataModel.xcdatamodeld */; };
+		09E3105D298838870088E0EB /* PersistentContainerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E3105C298838870088E0EB /* PersistentContainerManager.swift */; };
+		09E3105F298845DD0088E0EB /* TransitionMetaData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E3105E298845DD0088E0EB /* TransitionMetaData.swift */; };
 		18D110612987BB770088ED79 /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D110602987BB770088ED79 /* RecordViewController.swift */; };
 		18D110632988078F0088ED79 /* Transition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D110622988078F0088ED79 /* Transition.swift */; };
 		18D1106629880B7D0088ED79 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D1106529880B7D0088ED79 /* Array+Extension.swift */; };
@@ -18,6 +24,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		09DBC66D2988CE26003228DB /* TransitionMetaDataObject+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TransitionMetaDataObject+CoreDataClass.swift"; sourceTree = "<group>"; };
+		09DBC66E2988CE26003228DB /* TransitionMetaDataObject+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TransitionMetaDataObject+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		09E3104D2987E1B50088E0EB /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomTableViewCell.swift; path = GyroData/Resources/View/CustomTableViewCell.swift; sourceTree = SOURCE_ROOT; };
+		09E3105229882DED0088E0EB /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
+		09E3105C298838870088E0EB /* PersistentContainerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentContainerManager.swift; sourceTree = "<group>"; };
+		09E3105E298845DD0088E0EB /* TransitionMetaData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionMetaData.swift; sourceTree = "<group>"; };
 		18D110602987BB770088ED79 /* RecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
 		18D110622988078F0088ED79 /* Transition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transition.swift; sourceTree = "<group>"; };
 		18D1106529880B7D0088ED79 /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
@@ -41,6 +53,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		09DBC6712988CED7003228DB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				09E3104D2987E1B50088E0EB /* CustomTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		18D1105B2987AB6F0088ED79 /* SupportFiles */ = {
 			isa = PBXGroup;
 			children = (
@@ -49,6 +69,7 @@
 				63F01BC228D44FC500C53A39 /* Info.plist */,
 				63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */,
 				63F01BB628D44FC400C53A39 /* SceneDelegate.swift */,
+				09E3105129882DED0088E0EB /* DataModel.xcdatamodeld */,
 			);
 			path = SupportFiles;
 			sourceTree = "<group>";
@@ -56,9 +77,9 @@
 		18D1105C2987AB960088ED79 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				09DBC6712988CED7003228DB /* View */,
 				18D1106429880B6F0088ED79 /* Extensions */,
 				18D1105F2987ABC50088ED79 /* Controller */,
-				18D1105E2987ABC20088ED79 /* View */,
 				18D1105D2987ABBE0088ED79 /* Model */,
 			);
 			path = Resources;
@@ -67,16 +88,13 @@
 		18D1105D2987ABBE0088ED79 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				09DBC66D2988CE26003228DB /* TransitionMetaDataObject+CoreDataClass.swift */,
+				09DBC66E2988CE26003228DB /* TransitionMetaDataObject+CoreDataProperties.swift */,
+				09E3105C298838870088E0EB /* PersistentContainerManager.swift */,
+				09E3105E298845DD0088E0EB /* TransitionMetaData.swift */,
 				18D110622988078F0088ED79 /* Transition.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		18D1105E2987ABC20088ED79 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		18D1105F2987ABC50088ED79 /* Controller */ = {
@@ -193,7 +211,13 @@
 			files = (
 				18D110632988078F0088ED79 /* Transition.swift in Sources */,
 				63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */,
+				09E3105F298845DD0088E0EB /* TransitionMetaData.swift in Sources */,
+				09E3105329882DED0088E0EB /* DataModel.xcdatamodeld in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
+				09E3105D298838870088E0EB /* PersistentContainerManager.swift in Sources */,
+				09E3104E2987E1B50088E0EB /* CustomTableViewCell.swift in Sources */,
+				09DBC66F2988CE26003228DB /* TransitionMetaDataObject+CoreDataClass.swift in Sources */,
+				09DBC6702988CE26003228DB /* TransitionMetaDataObject+CoreDataProperties.swift in Sources */,
 				18D1106629880B7D0088ED79 /* Array+Extension.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
 				18D110612987BB770088ED79 /* RecordViewController.swift in Sources */,
@@ -406,6 +430,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		09E3105129882DED0088E0EB /* DataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				09E3105229882DED0088E0EB /* DataModel.xcdatamodel */,
+			);
+			currentVersion = 09E3105229882DED0088E0EB /* DataModel.xcdatamodel */;
+			path = DataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 63F01BA928D44FC400C53A39 /* Project object */;
 }
