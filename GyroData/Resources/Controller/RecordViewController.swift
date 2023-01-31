@@ -120,6 +120,7 @@ private extension RecordViewController {
     func convertButtonsState(isEnable: Bool) {
         recordButton.isEnabled = isEnable
         cancelButton.isHidden = isEnable
+        segmentControl.isEnabled = isEnable
         
         if recordButton.isEnabled {
             recordButton.layer.backgroundColor = UIColor.systemBlue.cgColor
