@@ -58,4 +58,24 @@ final class TransactionServiceTests: XCTestCase {
             XCTFail()
         }
     }
+    
+    func test_delete_data_success() {
+        // given
+        dummys.forEach({
+            transactionService.save(data: $0)
+        })
+        
+        // when
+        transactionService.delete(date: dummys[0].date)
+        
+        // then
+        let measureData = transactionService.dataLoad(offset: 0, limit: 0)
+        
+        switch measureData {
+        case .success(let dataList):
+            XCTAssertEqual(dataList.count, dummys.count - 1)
+        case .failure(_):
+            XCTFail()
+        }
+    }
 }
