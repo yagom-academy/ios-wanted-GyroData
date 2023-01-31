@@ -10,13 +10,15 @@ import Foundation
 final class FileManager {
     
     static var shared = FileManager()
-    private let coreDataManager: CoreDataManager = CoreDataManager()
+    private let coreDataManager = CoreDataManager()
+    private let jsonDataManager = JSONDataManager()
     private var motionDataList: [MotionData] = []
     
     private init() {}
     
     private func updateMotionDataList() {
         motionDataList = coreDataManager.readMotionDataEntity().map { $0.toDomain() }
+        jsonDataManager.createJSONData(domainData: motionDataList)
     }
     
     func fetchData() -> [MotionData] {
@@ -40,6 +42,5 @@ final class FileManager {
     func deleteMotionData(index: Int) {
         let motiondata = motionDataList[index]
         coreDataManager.delete(motionDataId: motiondata.id)
-        updateMotionDataList()
     }
 }

@@ -12,7 +12,7 @@ final class JSONDataManager {
     let encoder = JSONEncoder()
     let decoder = JSONDecoder()
 
-    var jsonString: String?
+    private var jsonString: String?
 
     func encode(domainData: Encodable) -> Data? {
         let jsonData = try? encoder.encode(domainData)
