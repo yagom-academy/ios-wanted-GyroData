@@ -5,6 +5,8 @@
 //  Created by Ayaan, Wonbi on 2023/01/31.
 //
 
+import Foundation
+
 struct DefaultFileManagerRepository: FileManagerRepository {
     typealias Domain = Motion
     typealias Entity = MotionDTO
