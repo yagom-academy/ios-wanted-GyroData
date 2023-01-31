@@ -57,7 +57,7 @@ class CoreDataManager {
     }
 
     // MARK: - READ
-    func readDiaryEntity() -> [MotionDataEntity] {
+    func readMotionDataEntity() -> [MotionDataEntity] {
         return fetchMotionDataEntity()
     }
 

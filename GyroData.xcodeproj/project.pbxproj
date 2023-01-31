@@ -19,6 +19,7 @@
 		BF128AB12988AFC700C3CB7B /* MotionDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BF128AAF2988AFC700C3CB7B /* MotionDataModel.xcdatamodeld */; };
 		BF128AB42988CAA700C3CB7B /* MotionDataEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF128AB22988CAA700C3CB7B /* MotionDataEntity+CoreDataClass.swift */; };
 		BF128AB52988CAA700C3CB7B /* MotionDataEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF128AB32988CAA700C3CB7B /* MotionDataEntity+CoreDataProperties.swift */; };
+		BF128AB82988DCCD00C3CB7B /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF128AB72988DCCD00C3CB7B /* FileManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		BF128AB02988AFC700C3CB7B /* MotionDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MotionDataModel.xcdatamodel; sourceTree = "<group>"; };
 		BF128AB22988CAA700C3CB7B /* MotionDataEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MotionDataEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		BF128AB32988CAA700C3CB7B /* MotionDataEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MotionDataEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		BF128AB72988DCCD00C3CB7B /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 			isa = PBXGroup;
 			children = (
 				BF128AB62988CAB200C3CB7B /* CoreData */,
+				BF128AB72988DCCD00C3CB7B /* FileManager.swift */,
 				11B34A8B2988A6AB00DA3A56 /* MotionData.swift */,
 				11B34A8D2988AA2100DA3A56 /* MotionType.swift */,
 			);
@@ -234,6 +237,7 @@
 				BF128AB12988AFC700C3CB7B /* MotionDataModel.xcdatamodeld in Sources */,
 				BF128AAD2988AEB000C3CB7B /* MotionDataTableViewModel.swift in Sources */,
 				11B34A8E2988AA2100DA3A56 /* MotionType.swift in Sources */,
+				BF128AB82988DCCD00C3CB7B /* FileManager.swift in Sources */,
 				BF128AB42988CAA700C3CB7B /* MotionDataEntity+CoreDataClass.swift in Sources */,
 				1138F2492988D09200007C11 /* CoreDataManager.swift in Sources */,
 				11B34A8C2988A6AB00DA3A56 /* MotionData.swift in Sources */,
