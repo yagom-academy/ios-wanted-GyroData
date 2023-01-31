@@ -12,7 +12,7 @@ final class DataStorage: DataStorageType {
     private let directoryURL: URL
     
     init(fileManager: FileManagerType = FileManager.default, directoryName: String) throws {
-        guard let documentDirectory: URL = fileManager.urls(
+        guard let documentDirectory = fileManager.urls(
             for: .documentDirectory,
             in: .userDomainMask
         ).first else { throw DataStorageError.cannotFindDocumentDirectory }
