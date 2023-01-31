@@ -150,6 +150,8 @@ final class MeasurementViewController: UIViewController {
     // MARK: Methods
     private func measure() {
         data.removeAll()
+        clearGraph()
+        
         manager.measure(sensor: selectedSensor, interval: 0.1, timeout: 60) { [weak self] data in
             guard let data else {
                 self?.setEnabledSegments()
@@ -157,6 +159,8 @@ final class MeasurementViewController: UIViewController {
             }
 
             self?.data.append(data)
+            print(data)
+            self?.drawGraph(with: data)
         }
 
         setDisabledSegments()
@@ -188,5 +192,13 @@ final class MeasurementViewController: UIViewController {
                 segmentedController.setEnabled(true, forSegmentAt: segmentIndex)
             }
         }
+    }
+
+    private func drawGraph(with data: AxisData) {
+        graphView.addData(data)
+    }
+
+    private func clearGraph() {
+        graphView.setData([])
     }
 }
