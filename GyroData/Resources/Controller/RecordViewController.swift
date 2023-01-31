@@ -34,6 +34,7 @@ final class RecordViewController: UIViewController {
     }()
     
     let coreMotionManager = CoreMotionManager()
+    var selectedSensor: SensorType?
     var values: [TransitionValue] = []
 
     // MARK: - LifeCycle
@@ -97,6 +98,7 @@ private extension RecordViewController {
         recordButton.isEnabled = isEnable
         cancelButton.isHidden = isEnable
         segmentControl.isEnabled = isEnable
+        navigationItem.rightBarButtonItem?.isEnabled = isEnable
         
         if recordButton.isEnabled {
             recordButton.layer.backgroundColor = UIColor.systemBlue.cgColor
@@ -115,6 +117,7 @@ private extension RecordViewController {
     @objc func didTapRecordButton() {
         let segmentIndex = segmentControl.selectedSegmentIndex
         guard let sensor = SensorType(rawInt: segmentIndex) else { return }
+        selectedSensor = sensor
         
         resetTransitionValues()
         coreMotionManager.startUpdateData(with: sensor)
