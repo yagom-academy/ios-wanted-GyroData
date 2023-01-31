@@ -9,7 +9,6 @@ import UIKit
 import CoreMotion
 
 class MeasureViewController: UIViewController {
-    
     let motionManager = MotionManager()
     
     var motionType: MotionType = .acc
@@ -28,8 +27,8 @@ class MeasureViewController: UIViewController {
         return control
     }()
     
-    var graphView: UIView = {
-        let view = UIView()
+    var graphView: GraphView = {
+        let view = GraphView()
         view.layer.borderWidth = 2
         view.layer.borderColor = UIColor.black.cgColor
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -113,7 +112,22 @@ class MeasureViewController: UIViewController {
     }
     
     @objc func measureButtonTapped() {
-        motionManager.start(type: motionType)
+        motionManager.start(type: motionType) { data in
+            DispatchQueue.main.async {
+                switch self.motionType {
+                case .acc:
+                    guard let accData = data as? CMAccelerometerData else { return }
+                    self.graphView.drawLine(x: accData.acceleration.x,
+                                       y: accData.acceleration.y,
+                                       z: accData.acceleration.z)
+                case .gyro:
+                    guard let gyroData = data as? CMGyroData else { return }
+                    self.graphView.drawLine(x: gyroData.rotationRate.x,
+                                            y: gyroData.rotationRate.y,
+                                            z: gyroData.rotationRate.z)
+                }
+            }
+        }
     }
     
     @objc func stopButtonTapped() {

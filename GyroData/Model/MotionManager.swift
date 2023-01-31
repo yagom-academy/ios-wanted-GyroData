@@ -2,7 +2,7 @@
 //  File.swift
 //  GyroData
 //
-//  Created by leewonseok on 2023/01/31.
+//  Created by stone, LJ on 2023/01/31.
 //
 
 import Foundation
@@ -16,22 +16,13 @@ class MotionManager {
     func configureInterval() {
         interval = 0.1
     }
-    func acclerometerMode() {
-        manager.accelerometerUpdateInterval = interval
-        manager.startAccelerometerUpdates(to: OperationQueue()) { (data ,error) in
-            guard let data else { return }
-            print("\(data.acceleration.x)")
-            print("\(data.acceleration.y)")
-            print("\(data.acceleration.z)")
-        }
-    }
     
-    func start(type: MotionType) {
+    func start(type: MotionType, completion: @escaping (MotionData) -> Void) {
         switch type {
         case .acc:
-            acclerometerMode()
+            acclerometerMode(completion: completion)
         case .gyro:
-            gyroMode()
+            gyroMode(completion: completion)
         }
     }
     
@@ -40,13 +31,19 @@ class MotionManager {
         manager.stopAccelerometerUpdates()
     }
     
-    func gyroMode() {
+    func acclerometerMode(completion: @escaping (MotionData) -> Void) {
+        manager.accelerometerUpdateInterval = interval
+        manager.startAccelerometerUpdates(to: OperationQueue()) { (data ,error) in
+            guard let data else { return }
+            completion(data)
+        }
+    }
+    
+    func gyroMode(completion: @escaping (MotionData) -> Void) {
         manager.gyroUpdateInterval = interval
         manager.startGyroUpdates(to: OperationQueue()) { (data, error) in
             guard let data else { return }
-            print("\(data.rotationRate.x)")
-            print("\(data.rotationRate.y)")
-            print("\(data.rotationRate.z)")
+            completion(data)
         }
     }
 }
