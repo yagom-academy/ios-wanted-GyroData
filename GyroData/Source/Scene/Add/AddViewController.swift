@@ -9,6 +9,8 @@ import UIKit
 import CoreMotion
 
 class AddViewController: UIViewController {
+    private var motionDataList = [MotionDataModel]()
+    
     private let segmentControl: UISegmentedControl = {
         let segmentControl = UISegmentedControl(items: ["Acc", "Gyro"])
         segmentControl.backgroundColor = .white
@@ -116,26 +118,43 @@ class AddViewController: UIViewController {
     }
     
     @objc private func saveMotionData() {
-        
+        //TODO: CoreData 저장 구현
+        navigationController?.popViewController(animated: true)
     }
     
     @objc private func updateGravityData() {
-        print(motionManager.isAccelerometerAvailable)
-        
         motionManager.accelerometerUpdateInterval = 0.1
         motionManager.gyroUpdateInterval = 0.1
+        
         motionManager.startAccelerometerUpdates(to: .main) { data, error in
             if error == nil {
                 guard let accelerometerData = data else { return }
-
-                print(accelerometerData.acceleration)
+                
+                self.motionDataList.append(
+                    MotionDataModel(
+                        x: accelerometerData.acceleration.x,
+                        y: accelerometerData.acceleration.y,
+                        z: accelerometerData.acceleration.z
+                    )
+                )
+                
+                return
             }
         }
+        
         motionManager.startGyroUpdates(to: .main) { data, error in
             if error == nil {
                 guard let gyroData = data else { return }
-
-                print(gyroData)
+                
+                self.motionDataList.append(
+                    MotionDataModel(
+                        x: gyroData.rotationRate.x,
+                        y: gyroData.rotationRate.y,
+                        z: gyroData.rotationRate.z
+                    )
+                )
+                
+                return
             }
         }
     }
@@ -143,5 +162,7 @@ class AddViewController: UIViewController {
     @objc private func stopGravityData() {
         motionManager.stopAccelerometerUpdates()
         motionManager.stopGyroUpdates()
+        
+        print(motionDataList)
     }
 }

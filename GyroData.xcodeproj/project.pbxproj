@@ -15,6 +15,7 @@
 		D03B067B2988D228002BEB96 /* MotionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03B067A2988D228002BEB96 /* MotionData.swift */; };
 		D03B067D2988DBFC002BEB96 /* CustomDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03B067C2988DBFC002BEB96 /* CustomDataCell.swift */; };
 		D03B06802988E656002BEB96 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03B067F2988E656002BEB96 /* AddViewController.swift */; };
+		F6AAD48029895426008A79B5 /* MotionDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AAD47F29895426008A79B5 /* MotionDataModel.swift */; };
 		F6C594382988D01500705625 /* NavigationTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C594372988D01500705625 /* NavigationTitleView.swift */; };
 		F6C7FB672989084F00CD92FD /* ReplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C7FB662989084F00CD92FD /* ReplayViewController.swift */; };
 /* End PBXBuildFile section */
@@ -30,6 +31,7 @@
 		D03B067A2988D228002BEB96 /* MotionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionData.swift; sourceTree = "<group>"; };
 		D03B067C2988DBFC002BEB96 /* CustomDataCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDataCell.swift; sourceTree = "<group>"; };
 		D03B067F2988E656002BEB96 /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
+		F6AAD47F29895426008A79B5 /* MotionDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDataModel.swift; sourceTree = "<group>"; };
 		F6C594372988D01500705625 /* NavigationTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationTitleView.swift; sourceTree = "<group>"; };
 		F6C7FB662989084F00CD92FD /* ReplayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplayViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -104,6 +106,7 @@
 		D03B06792988C49F002BEB96 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				F6AAD47F29895426008A79B5 /* MotionDataModel.swift */,
 				D03B067A2988D228002BEB96 /* MotionData.swift */,
 			);
 			path = Model;
@@ -216,6 +219,7 @@
 				63F01BB928D44FC400C53A39 /* MainViewController.swift in Sources */,
 				F6C7FB672989084F00CD92FD /* ReplayViewController.swift in Sources */,
 				F6C594382988D01500705625 /* NavigationTitleView.swift in Sources */,
+				F6AAD48029895426008A79B5 /* MotionDataModel.swift in Sources */,
 				D03B06802988E656002BEB96 /* AddViewController.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
