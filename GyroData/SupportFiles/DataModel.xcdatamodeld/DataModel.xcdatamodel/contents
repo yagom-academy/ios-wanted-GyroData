@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21513" systemVersion="22D49" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="GyroModelObject" representedClassName="GyroModelObject" syncable="YES">
+    <entity name="TransitionMetaDataObject" representedClassName="TransitionMetaDataObject" syncable="YES">
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="jsonName" optional="YES" attributeType="String"/>
         <attribute name="recordTime" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>

@@ -33,9 +33,9 @@ final class PersistentContainerManager {
         }
     }
 
-    private func fetchGyroModelObject() -> [GyroModelObject] {
+    private func fetchGyroModelObject() -> [TransitionMetaDataObject] {
         do {
-            let request = GyroModelObject.fetchRequest()
+            let request = TransitionMetaDataObject.fetchRequest()
             return try persistentContainer.viewContext.fetch(request)
         } catch {
             print(error.localizedDescription)
@@ -43,10 +43,10 @@ final class PersistentContainerManager {
         }
     }
 
-    func fetchGyroModels() -> [GyroModel] {
+    func fetchGyroModels() -> [TransitionMetaData] {
         let gyroModelObjects = fetchGyroModelObject()
         let gyroModels = gyroModelObjects.map {
-            GyroModel(saveDate: $0.saveDate,
+            TransitionMetaData(saveDate: $0.saveDate,
                       sensorType: SensorType(rawValue: $0.sensorType) ?? SensorType.Accelerometer,
                       recordTime: $0.recordTime,
                       jsonName: $0.jsonName)

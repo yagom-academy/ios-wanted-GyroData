@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct GyroModel: Identifiable {
+struct TransitionMetaData: Identifiable {
     let id: UUID
     let saveDate: String
     let sensorType: SensorType
