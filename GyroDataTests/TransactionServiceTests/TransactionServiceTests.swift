@@ -8,28 +8,54 @@
 import XCTest
 
 final class TransactionServiceTests: XCTestCase {
-
+    
+    var transactionService: TransactionService!
+    var coreDataManagerStub: DataManageable!
+    var fileManagerStub: FileManageable!
+    let dummys = MeasureDataDummy.Dummys
+    
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        coreDataManagerStub = CoreDataManagerStub()
+        fileManagerStub = FileSystemManagerStub()
+        
+        transactionService = TransactionService(
+            coreDataManager: coreDataManagerStub,
+            fileManager: fileManagerStub
+        )
     }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    
+    func test_save_and_fetch_data_success() {
+        // given
+        let decoder = JSONDecoder()
+        
+        dummys.forEach({
+            transactionService.save(data: $0)
+        })
+        
+        // when
+        let measureData = transactionService.dataLoad(offset: 0, limit: 0)
+        let jsonData = transactionService.jsonDataLoad(date: Date())
+        
+        // then
+        switch measureData {
+        case .success(let dataList):
+            for i in 0..<dataList.count {
+                XCTAssertEqual(dataList[i].date, dummys[i].date)
+            }
+        case .failure(_):
+            XCTFail()
+        }
+        
+        switch jsonData {
+        case .success(let jsonData):
+            do {
+                let model = try decoder.decode(MeasureData.self, from: jsonData)
+                XCTAssertEqual(model.date, dummys[0].date)
+            } catch {
+                XCTFail()
+            }
+        case .failure(_):
+            XCTFail()
         }
     }
-
 }
