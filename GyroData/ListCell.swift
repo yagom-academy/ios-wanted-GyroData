@@ -9,30 +9,29 @@ import UIKit
 
 class ListCell: UITableViewCell {
     static let identifier = ListCell.description()
-    var date: Date?
-    var title: String?
-    var second: Double?
     
     let dateLabel: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .preferredFont(forTextStyle: .caption1)
         return label
     }()
     
     let titleLabel: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .preferredFont(forTextStyle: .title1)
         return label
     }()
     
     let secondLabel: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = label.font.withSize(50)
+        label.textAlignment = .right
         return label
     }()
     
     let labelStackView: UIStackView = {
         let stackView = UIStackView()
+        stackView.axis = .vertical
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -45,6 +44,7 @@ class ListCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        configureLayout()
         
     }
     
@@ -52,17 +52,26 @@ class ListCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func configureData(title: String, date: Date, second: Double) {
+        titleLabel.text = title
+        dateLabel.text = date.description
+        secondLabel.text = "\(second)"
+    }
+    
     func configureLayout() {
-        labelStackView.addArrangedSubview(dateLabel)
-        labelStackView.addArrangedSubview(titleLabel)
+        addSubview(stackView)
         stackView.addArrangedSubview(labelStackView)
         stackView.addArrangedSubview(secondLabel)
-        self.addSubview(stackView)
+        labelStackView.addArrangedSubview(dateLabel)
+        labelStackView.addArrangedSubview(titleLabel)
+        
+        
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: self.topAnchor),
-            stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor)
+            stackView.topAnchor.constraint(equalTo: topAnchor, constant: 15),
+            stackView.bottomAnchor.constraint(equalTo: bottomAnchor,constant: -15),
+            stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
+            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
+            
         ])
     }
 }
