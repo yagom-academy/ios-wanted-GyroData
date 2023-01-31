@@ -29,6 +29,7 @@
 		D381D2A1298935BA00567C6B /* CoreDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D381D2A0298935BA00567C6B /* CoreDataRepository.swift */; };
 		D381D2A32989363C00567C6B /* FileManagerRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D381D2A22989363C00567C6B /* FileManagerRepository.swift */; };
 		D381D2A52989393D00567C6B /* DefaultFileManagerRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D381D2A42989393D00567C6B /* DefaultFileManagerRepository.swift */; };
+		D381D2AD2989555500567C6B /* GyroDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D381D2AC2989555500567C6B /* GyroDataTests.swift */; };
 		E3D84A9A2988E6D400FDA64F /* MotionDeletable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D84A992988E6D400FDA64F /* MotionDeletable.swift */; };
 		E3D84A9C2988E6EF00FDA64F /* MotionCreatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D84A9B2988E6EF00FDA64F /* MotionCreatable.swift */; };
 		E3D84A9E2988E70400FDA64F /* CoreDataMotionReadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D84A9D2988E70400FDA64F /* CoreDataMotionReadable.swift */; };
@@ -42,6 +43,16 @@
 		E3D84AB12988F7C800FDA64F /* CMRotationRate+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D84AB02988F7C800FDA64F /* CMRotationRate+.swift */; };
 		E3D84AB32988F81200FDA64F /* CMAcceleration+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D84AB22988F81200FDA64F /* CMAcceleration+.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D381D2AE2989555500567C6B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 63F01BA928D44FC400C53A39 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 63F01BB028D44FC400C53A39;
+			remoteInfo = GyroData;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		63F01BB128D44FC400C53A39 /* GyroData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GyroData.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -68,6 +79,8 @@
 		D381D2A0298935BA00567C6B /* CoreDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataRepository.swift; sourceTree = "<group>"; };
 		D381D2A22989363C00567C6B /* FileManagerRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerRepository.swift; sourceTree = "<group>"; };
 		D381D2A42989393D00567C6B /* DefaultFileManagerRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFileManagerRepository.swift; sourceTree = "<group>"; };
+		D381D2AA2989555500567C6B /* GyroDataTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GyroDataTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D381D2AC2989555500567C6B /* GyroDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroDataTests.swift; sourceTree = "<group>"; };
 		E3D84A992988E6D400FDA64F /* MotionDeletable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDeletable.swift; sourceTree = "<group>"; };
 		E3D84A9B2988E6EF00FDA64F /* MotionCreatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionCreatable.swift; sourceTree = "<group>"; };
 		E3D84A9D2988E70400FDA64F /* CoreDataMotionReadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataMotionReadable.swift; sourceTree = "<group>"; };
@@ -90,6 +103,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D381D2A72989555500567C6B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -97,6 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				63F01BB328D44FC400C53A39 /* GyroData */,
+				D381D2AB2989555500567C6B /* GyroDataTests */,
 				63F01BB228D44FC400C53A39 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -105,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				63F01BB128D44FC400C53A39 /* GyroData.app */,
+				D381D2AA2989555500567C6B /* GyroDataTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -244,6 +266,14 @@
 			path = Protocol;
 			sourceTree = "<group>";
 		};
+		D381D2AB2989555500567C6B /* GyroDataTests */ = {
+			isa = PBXGroup;
+			children = (
+				D381D2AC2989555500567C6B /* GyroDataTests.swift */,
+			);
+			path = GyroDataTests;
+			sourceTree = "<group>";
+		};
 		E3D84A962988E67400FDA64F /* Service */ = {
 			isa = PBXGroup;
 			children = (
@@ -315,6 +345,24 @@
 			productReference = 63F01BB128D44FC400C53A39 /* GyroData.app */;
 			productType = "com.apple.product-type.application";
 		};
+		D381D2A92989555500567C6B /* GyroDataTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D381D2B22989555500567C6B /* Build configuration list for PBXNativeTarget "GyroDataTests" */;
+			buildPhases = (
+				D381D2A62989555500567C6B /* Sources */,
+				D381D2A72989555500567C6B /* Frameworks */,
+				D381D2A82989555500567C6B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D381D2AF2989555500567C6B /* PBXTargetDependency */,
+			);
+			name = GyroDataTests;
+			productName = GyroDataTests;
+			productReference = D381D2AA2989555500567C6B /* GyroDataTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -322,11 +370,15 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1400;
+				LastSwiftUpdateCheck = 1410;
 				LastUpgradeCheck = 1400;
 				TargetAttributes = {
 					63F01BB028D44FC400C53A39 = {
 						CreatedOnToolsVersion = 14.0;
+					};
+					D381D2A92989555500567C6B = {
+						CreatedOnToolsVersion = 14.1;
+						TestTargetID = 63F01BB028D44FC400C53A39;
 					};
 				};
 			};
@@ -344,6 +396,7 @@
 			projectRoot = "";
 			targets = (
 				63F01BB028D44FC400C53A39 /* GyroData */,
+				D381D2A92989555500567C6B /* GyroDataTests */,
 			);
 		};
 /* End PBXProject section */
@@ -355,6 +408,13 @@
 			files = (
 				63F01BC128D44FC500C53A39 /* LaunchScreen.storyboard in Resources */,
 				63F01BBE28D44FC500C53A39 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D381D2A82989555500567C6B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -400,7 +460,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D381D2A62989555500567C6B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D381D2AD2989555500567C6B /* GyroDataTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D381D2AF2989555500567C6B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 63F01BB028D44FC400C53A39 /* GyroData */;
+			targetProxy = D381D2AE2989555500567C6B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */ = {
@@ -594,6 +670,48 @@
 			};
 			name = Release;
 		};
+		D381D2B02989555500567C6B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				MACOSX_DEPLOYMENT_TARGET = 12.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Ayaan.GyroDataTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GyroData.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/GyroData";
+			};
+			name = Debug;
+		};
+		D381D2B12989555500567C6B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				MACOSX_DEPLOYMENT_TARGET = 12.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Ayaan.GyroDataTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GyroData.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/GyroData";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -611,6 +729,15 @@
 			buildConfigurations = (
 				63F01BC628D44FC500C53A39 /* Debug */,
 				63F01BC728D44FC500C53A39 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D381D2B22989555500567C6B /* Build configuration list for PBXNativeTarget "GyroDataTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D381D2B02989555500567C6B /* Debug */,
+				D381D2B12989555500567C6B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
