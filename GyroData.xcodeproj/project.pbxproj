@@ -39,6 +39,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		541432542988DE250035E113 /* LifeCycle */ = {
+			isa = PBXGroup;
+			children = (
+				63F01BB428D44FC400C53A39 /* AppDelegate.swift */,
+				63F01BB628D44FC400C53A39 /* SceneDelegate.swift */,
+			);
+			path = LifeCycle;
+			sourceTree = "<group>";
+		};
+		541432552988DE320035E113 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				90B52AB02988A6280029D018 /* ListCell.swift */,
+				541432522988B2D40035E113 /* MeasureViewController.swift */,
+				63F01BB828D44FC400C53A39 /* ViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		541432562988DE4A0035E113 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				63F01BBD28D44FC500C53A39 /* Assets.xcassets */,
+				63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */,
+				63F01BC228D44FC500C53A39 /* Info.plist */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
 		63F01BA828D44FC400C53A39 = {
 			isa = PBXGroup;
 			children = (
@@ -58,14 +87,9 @@
 		63F01BB328D44FC400C53A39 /* GyroData */ = {
 			isa = PBXGroup;
 			children = (
-				63F01BB428D44FC400C53A39 /* AppDelegate.swift */,
-				63F01BB628D44FC400C53A39 /* SceneDelegate.swift */,
-				63F01BB828D44FC400C53A39 /* ViewController.swift */,
-				541432522988B2D40035E113 /* MeasureViewController.swift */,
-				90B52AB02988A6280029D018 /* ListCell.swift */,
-				63F01BBD28D44FC500C53A39 /* Assets.xcassets */,
-				63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */,
-				63F01BC228D44FC500C53A39 /* Info.plist */,
+				541432562988DE4A0035E113 /* Resource */,
+				541432552988DE320035E113 /* View */,
+				541432542988DE250035E113 /* LifeCycle */,
 			);
 			path = GyroData;
 			sourceTree = "<group>";
