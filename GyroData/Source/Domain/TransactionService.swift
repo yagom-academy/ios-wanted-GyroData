@@ -8,14 +8,23 @@
 import Foundation
 
 final class TransactionService {
-    private var list: [MeasureData] = []
+    private var list: [MeasureData] = [] {
+        didSet {
+            dataHandler?(list)
+        }
+    }
+    private var dataHandler: (([MeasureData]) -> Void)?
     
     private let coreDataManager: DataManageable
     private let fileManager: FileManageable
-    
+
     init(coreDataManager: DataManageable, fileManager: FileManageable) {
         self.coreDataManager = coreDataManager
         self.fileManager = fileManager
+    }
+    
+    func bindData(handler: @escaping (([MeasureData]) -> Void)) {
+        dataHandler = handler
     }
 }
 
