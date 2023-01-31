@@ -25,28 +25,18 @@ final class CoreDataManager: CoreDataManageable {
     private init() {
     }
 
-    private func saveContext() {
+    private func saveContext() throws {
         guard context.hasChanges else { return }
-        do {
-            try context.save()
-        } catch {
-            print(error.localizedDescription)
-        }
+        try context.save()
     }
 
-    private func fetchMotionDataEntities() -> [MotionDataEntity] {
-        do {
-            let request = MotionDataEntity.fetchRequest()
-            let result = try context.fetch(request)
-            return result
-        } catch {
-            print(error.localizedDescription)
-            return []
-        }
+    private func fetchMotionDataEntities() throws -> [MotionDataEntity] {
+        let request = MotionDataEntity.fetchRequest()
+        return try context.fetch(request)
     }
 
-    func readAll() -> [MotionData] {
-        let motionDataEntities = fetchMotionDataEntities()
+    func readAll() throws -> [MotionData] {
+        let motionDataEntities = try fetchMotionDataEntities()
         return motionDataEntities.compactMap { motionDataEntity in
             guard let motionDataType = MotionDataType.init(rawValue: motionDataEntity.motionDataType) else {
                 return nil
@@ -58,19 +48,19 @@ final class CoreDataManager: CoreDataManageable {
         }
     }
 
-    func add(_ motionData: MotionData) {
+    func add(_ motionData: MotionData) throws {
         let motionDataEntity = MotionDataEntity(context: context)
         motionDataEntity.id = motionData.id
         motionDataEntity.createdAt = motionData.createdAt
         motionDataEntity.length = motionData.length
         motionDataEntity.motionDataType = motionData.motionDataType.rawValue
-        saveContext()
+        try saveContext()
     }
 
-    func delete(_ motionData: MotionData) {
-        let motionDataEntities = fetchMotionDataEntities()
+    func delete(_ motionData: MotionData) throws {
+        let motionDataEntities = try fetchMotionDataEntities()
         guard let motionDataEntity = motionDataEntities.first(where: { $0.id == motionData.id }) else { return }
         context.delete(motionDataEntity)
-        saveContext()
+        try saveContext()
     }
 }

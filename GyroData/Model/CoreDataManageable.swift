@@ -6,7 +6,7 @@
 //
 
 protocol CoreDataManageable {
-    func readAll() -> [MotionData]
-    func add(_ motionData: MotionData)
-    func delete(_ motionData: MotionData)
+    func readAll() throws -> [MotionData]
+    func add(_ motionData: MotionData) throws
+    func delete(_ motionData: MotionData) throws
 }
