@@ -156,6 +156,7 @@ private extension TransitionListViewController {
 
     func setNavigationBar() {
         let rightBarButton = UIBarButtonItem(title: "측정", style: .plain, target: self, action: #selector(didTapRecordButton))
+        rightBarButton.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 24)], for: .normal)
         let titleLable = UILabel()
         titleLable.text = "목록"
         titleLable.font = UIFont.systemFont(ofSize: 30)
