@@ -24,6 +24,9 @@
 		D381D2882988E8BF00567C6B /* FileManagerRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D381D2872988E8BF00567C6B /* FileManagerRepository.swift */; };
 		D381D28B2988E8E100567C6B /* MotionDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = D381D28A2988E8E100567C6B /* MotionDTO.swift */; };
 		D381D28D2988E95B00567C6B /* DomainConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = D381D28C2988E95B00567C6B /* DomainConvertible.swift */; };
+		D381D2932988EA5900567C6B /* GyroData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D381D2912988EA5900567C6B /* GyroData.xcdatamodeld */; };
+		D381D29A2988EC5B00567C6B /* MotionMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D381D2982988EC5B00567C6B /* MotionMO+CoreDataClass.swift */; };
+		D381D29B2988EC5B00567C6B /* MotionMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D381D2992988EC5B00567C6B /* MotionMO+CoreDataProperties.swift */; };
 		E3D84A9A2988E6D400FDA64F /* MotionDeletable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D84A992988E6D400FDA64F /* MotionDeletable.swift */; };
 		E3D84A9C2988E6EF00FDA64F /* MotionCreatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D84A9B2988E6EF00FDA64F /* MotionCreatable.swift */; };
 		E3D84A9E2988E70400FDA64F /* CoreDataMotionReadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D84A9D2988E70400FDA64F /* CoreDataMotionReadable.swift */; };
@@ -55,6 +58,9 @@
 		D381D2872988E8BF00567C6B /* FileManagerRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerRepository.swift; sourceTree = "<group>"; };
 		D381D28A2988E8E100567C6B /* MotionDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDTO.swift; sourceTree = "<group>"; };
 		D381D28C2988E95B00567C6B /* DomainConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainConvertible.swift; sourceTree = "<group>"; };
+		D381D2922988EA5900567C6B /* GyroData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GyroData.xcdatamodel; sourceTree = "<group>"; };
+		D381D2982988EC5B00567C6B /* MotionMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MotionMO+CoreDataClass.swift"; sourceTree = "<group>"; };
+		D381D2992988EC5B00567C6B /* MotionMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MotionMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E3D84A992988E6D400FDA64F /* MotionDeletable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDeletable.swift; sourceTree = "<group>"; };
 		E3D84A9B2988E6EF00FDA64F /* MotionCreatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionCreatable.swift; sourceTree = "<group>"; };
 		E3D84A9D2988E70400FDA64F /* CoreDataMotionReadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataMotionReadable.swift; sourceTree = "<group>"; };
@@ -104,6 +110,7 @@
 				63F01BBD28D44FC500C53A39 /* Assets.xcassets */,
 				63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */,
 				63F01BC228D44FC500C53A39 /* Info.plist */,
+				D381D2912988EA5900567C6B /* GyroData.xcdatamodeld */,
 			);
 			path = GyroData;
 			sourceTree = "<group>";
@@ -195,6 +202,8 @@
 		D381D2862988E8AE00567C6B /* Entity */ = {
 			isa = PBXGroup;
 			children = (
+				D381D2982988EC5B00567C6B /* MotionMO+CoreDataClass.swift */,
+				D381D2992988EC5B00567C6B /* MotionMO+CoreDataProperties.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -326,11 +335,13 @@
 				E3D84AAC2988E7F000FDA64F /* Motion.swift in Sources */,
 				D381D28D2988E95B00567C6B /* DomainConvertible.swift in Sources */,
 				D381D2832988E89B00567C6B /* Repository.swift in Sources */,
+				D381D2932988EA5900567C6B /* GyroData.xcdatamodeld in Sources */,
 				D381D2772988E58700567C6B /* MotionPlayViewController.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				D381D27A2988E58700567C6B /* MotionGraphViewModel.swift in Sources */,
 				E3D84AA82988E76700FDA64F /* FileManagerMotionReadService.swift in Sources */,
 				D381D28B2988E8E100567C6B /* MotionDTO.swift in Sources */,
+				D381D29B2988EC5B00567C6B /* MotionMO+CoreDataProperties.swift in Sources */,
 				D381D27C2988E58700567C6B /* MotionsListViewController.swift in Sources */,
 				D381D2852988E8AB00567C6B /* CoreDataRepository.swift in Sources */,
 				D381D2762988E58700567C6B /* MotionPlayViewModel.swift in Sources */,
@@ -341,6 +352,7 @@
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
 				E3D84AA42988E74800FDA64F /* MotionDeleteService.swift in Sources */,
 				E3D84A9E2988E70400FDA64F /* CoreDataMotionReadable.swift in Sources */,
+				D381D29A2988EC5B00567C6B /* MotionMO+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -558,6 +570,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		D381D2912988EA5900567C6B /* GyroData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				D381D2922988EA5900567C6B /* GyroData.xcdatamodel */,
+			);
+			currentVersion = D381D2922988EA5900567C6B /* GyroData.xcdatamodel */;
+			path = GyroData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 63F01BA928D44FC400C53A39 /* Project object */;
 }
