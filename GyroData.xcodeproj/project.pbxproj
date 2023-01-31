@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1138F2492988D09200007C11 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1138F2482988D09200007C11 /* CoreDataManager.swift */; };
 		11B34A8C2988A6AB00DA3A56 /* MotionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B34A8B2988A6AB00DA3A56 /* MotionData.swift */; };
 		11B34A8E2988AA2100DA3A56 /* MotionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B34A8D2988AA2100DA3A56 /* MotionType.swift */; };
 		63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB428D44FC400C53A39 /* AppDelegate.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1138F2482988D09200007C11 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		11B34A8B2988A6AB00DA3A56 /* MotionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionData.swift; sourceTree = "<group>"; };
 		11B34A8D2988AA2100DA3A56 /* MotionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionType.swift; sourceTree = "<group>"; };
 		63F01BB128D44FC400C53A39 /* GyroData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GyroData.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -150,6 +152,7 @@
 				BF128AB22988CAA700C3CB7B /* MotionDataEntity+CoreDataClass.swift */,
 				BF128AB32988CAA700C3CB7B /* MotionDataEntity+CoreDataProperties.swift */,
 				BF128AAF2988AFC700C3CB7B /* MotionDataModel.xcdatamodeld */,
+				1138F2482988D09200007C11 /* CoreDataManager.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -232,6 +235,7 @@
 				BF128AAD2988AEB000C3CB7B /* MotionDataTableViewModel.swift in Sources */,
 				11B34A8E2988AA2100DA3A56 /* MotionType.swift in Sources */,
 				BF128AB42988CAA700C3CB7B /* MotionDataEntity+CoreDataClass.swift in Sources */,
+				1138F2492988D09200007C11 /* CoreDataManager.swift in Sources */,
 				11B34A8C2988A6AB00DA3A56 /* MotionData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
