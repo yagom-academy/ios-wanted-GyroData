@@ -94,11 +94,18 @@ class MeasureListViewController: UIViewController {
     
     @objc
     private func presentMeasureViewController() {
-        self.navigationController?.pushViewController(MeasureViewController(), animated: true)
+        let measureViewController = MeasureListViewController()
+        navigationController?.pushViewController(measureViewController, animated: true)
     }
 }
 
 extension MeasureListViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let detailViewController = DetailViewController()
+        navigationController?.pushViewController(detailViewController, animated: true)
+    }
+    
     func tableView(
         _ tableView: UITableView,
         trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath

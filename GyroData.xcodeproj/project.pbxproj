@@ -15,6 +15,7 @@
 		B4AC807A2988CBCC0095621A /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AC80792988CBCC0095621A /* ReusableView.swift */; };
 		B4AC807C2988E4310095621A /* MeasureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AC807B2988E4310095621A /* MeasureViewController.swift */; };
 		D2C94E2A2988BE9F00F70389 /* MeasureTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C94E292988BE9F00F70389 /* MeasureTableViewCell.swift */; };
+		D2E60FBE2988FAF500BBC1B9 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E60FBD2988FAF500BBC1B9 /* DetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		B4AC80792988CBCC0095621A /* ReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
 		B4AC807B2988E4310095621A /* MeasureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureViewController.swift; sourceTree = "<group>"; };
 		D2C94E292988BE9F00F70389 /* MeasureTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureTableViewCell.swift; sourceTree = "<group>"; };
+		D2E60FBD2988FAF500BBC1B9 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				63F01BB828D44FC400C53A39 /* MeasureListViewController.swift */,
 				D2C94E292988BE9F00F70389 /* MeasureTableViewCell.swift */,
 				B4AC807B2988E4310095621A /* MeasureViewController.swift */,
+				D2E60FBD2988FAF500BBC1B9 /* DetailViewController.swift */,
 				63F01BBD28D44FC500C53A39 /* Assets.xcassets */,
 				63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */,
 				63F01BC228D44FC500C53A39 /* Info.plist */,
@@ -157,6 +160,7 @@
 				B4AC807C2988E4310095621A /* MeasureViewController.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
+				D2E60FBE2988FAF500BBC1B9 /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

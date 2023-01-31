@@ -67,10 +67,8 @@ final class MeasureTableViewCell: UITableViewCell, ReusableView {
     }
     
     private func setupViews() {
-        verticalStackView.addArrangedSubview(createdAtLabel)
-        verticalStackView.addArrangedSubview(sensorTypeLabel)
-        horizontalStackView.addArrangedSubview(verticalStackView)
-        horizontalStackView.addArrangedSubview(measurementTimeLabel)
+        [createdAtLabel, sensorTypeLabel].forEach(verticalStackView.addArrangedSubview(_:))
+        [verticalStackView, measurementTimeLabel].forEach(horizontalStackView.addArrangedSubview(_:))
         contentView.addSubview(horizontalStackView)
         
         // TODO: - Layout 수정
