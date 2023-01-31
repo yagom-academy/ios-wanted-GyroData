@@ -44,7 +44,6 @@ class CustomTableViewCell: UITableViewCell {
         return stackView
     }()
 
-    // MARK: - Method
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
@@ -54,8 +53,11 @@ class CustomTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
 
-    private func configureSubViews() {
+// MARK: - UIConfiguration
+private extension CustomTableViewCell {
+    func configureSubViews() {
         let leftMargin: CGFloat = contentView.frame.width/10
         verticalStackView.addArrangedSubview(dateView)
         verticalStackView.addArrangedSubview(sensorTypeView)
@@ -77,5 +79,11 @@ class CustomTableViewCell: UITableViewCell {
 
         verticalStackView.isLayoutMarginsRelativeArrangement = true
         verticalStackView.layoutMargins = UIEdgeInsets(top: 0, left: leftMargin, bottom: 0, right: 0)
+    }
+
+    func configureCell(data: TransitionMetaData) {
+        dateView.text = data.saveDate
+        sensorTypeView.text = data.sensorType.rawValue
+        runningTimeView.text = String(data.recordTime)
     }
 }
