@@ -56,8 +56,8 @@ class CustomTableViewCell: UITableViewCell {
 }
 
 // MARK: - UIConfiguration
-private extension CustomTableViewCell {
-    func configureSubViews() {
+extension CustomTableViewCell {
+    private func configureSubViews() {
         let leftMargin: CGFloat = contentView.frame.width/10
         verticalStackView.addArrangedSubview(dateView)
         verticalStackView.addArrangedSubview(sensorTypeView)

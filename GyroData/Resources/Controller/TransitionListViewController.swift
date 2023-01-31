@@ -18,6 +18,8 @@ final class TransitionListViewController: UIViewController {
 
     private let cellReuseIdentifier = "CustomCell"
     private var transitionMetaDatas: [TransitionMetaData] = []
+    private var isPaginating = false
+    private var calledBringPageCount = 0
     private var cellCount = 10
 
     // MARK: - LifeCycle
@@ -25,23 +27,26 @@ final class TransitionListViewController: UIViewController {
         super.viewDidLoad()
 
         configureUI()
-        for _ in 0...25 {
+        for count in 0...25 {
             transitionMetaDatas.append(
                 TransitionMetaData(saveDate: "2022/09/10 15:11:45",
                                    sensorType: .Accelerometer,
-                                   recordTime: 16.3,
+                                   recordTime: Double(count),
                                    jsonName: "asdf")
             )
         }
     }
 }
 
-//// MARK: - Method
-//private extension TransitionListViewController {
-//    func bringAdditionalTransitionMetaData() {
-//
-//    }
-//}
+// MARK: - Method
+private extension TransitionListViewController {
+    // Error타입 만들어주기
+    func bringAdditionalTransitionMetaData(completion: @escaping (Int) -> Void) {
+        DispatchQueue.global().asyncAfter(deadline: .now() + 5) {
+            completion(10)
+        }
+    }
+}
 
 // MARK: - UITableViewDataSource
 extension TransitionListViewController: UITableViewDataSource {
@@ -51,6 +56,7 @@ extension TransitionListViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let customCell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath) as? CustomTableViewCell ?? CustomTableViewCell()
+        customCell.configureCell(data: transitionMetaDatas[indexPath.row])
         return customCell
     }
 
@@ -84,8 +90,8 @@ extension TransitionListViewController: UIScrollViewDelegate {
         let position = scrollView.contentOffset.y
         print(position)
         print(tableView.contentSize.height - scrollView.frame.size.height + 100)
-        if position > tableView.contentSize.height - scrollView.frame.size.height - 100 {
-            print("닿았다!")
+        if position > tableView.contentSize.height - scrollView.frame.size.height + 100 {
+            
         }
     }
 }
