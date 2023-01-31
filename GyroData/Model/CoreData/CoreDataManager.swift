@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-class CoreDataManager {
+final class CoreDataManager {
 
     lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "MotionDataModel")
