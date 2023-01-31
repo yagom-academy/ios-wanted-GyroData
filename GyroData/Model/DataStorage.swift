@@ -69,7 +69,7 @@ final class DataStorage: DataStorageType {
     }
     
     private func encode(_ data: MotionData) throws -> Data {
-        let encoder: JSONEncoder = JSONEncoder()
+        let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
         
         do {
