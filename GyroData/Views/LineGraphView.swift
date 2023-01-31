@@ -40,14 +40,14 @@ class LineGraphView: UIView {
         return stackView
     }()
 
-    private var data: [AxisData] = [] {
+    private var data: [AxisValue] = [] {
         didSet {
             setNeedsDisplay()
         }
     }
 
     // MARK: Initialization
-    init(data: [AxisData] = []) {
+    init(data: [AxisValue] = []) {
         self.data = data
         super.init(frame: .zero)
 
@@ -61,11 +61,11 @@ class LineGraphView: UIView {
     }
 
     // MARK: configure Data
-    func setData(_ data: [AxisData]) {
+    func setData(_ data: [AxisValue]) {
         self.data = data
     }
 
-    func addData(_ data: AxisData) {
+    func addData(_ data: AxisValue) {
         self.data.append(data)
     }
 
@@ -86,7 +86,7 @@ class LineGraphView: UIView {
         ])
     }
 
-    private func configureLabel(with data: AxisData) {
+    private func configureLabel(with data: AxisValue) {
         axisXLabel.text = String(format: "x: %.4f", data.x)
         axisYLabel.text = String(format: "y: %.4f", data.y)
         axisZLabel.text = String(format: "z: %.4f", data.z)

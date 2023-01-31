@@ -7,12 +7,73 @@
 
 import UIKit
 
+struct SampleData {
+    static let data = [Measurement(sensor: .Gyro, date: Date(),
+                                   time: 25.5331, value: [AxisValue(x: 10, y: 10, z: 10)]),
+                       Measurement(sensor: .Gyro, date: Date(),
+                                   time: 11.5222, value: [AxisValue(x: 10, y: 10, z: 10)]),
+                       Measurement(sensor: .Accelerometer, date: Date(),
+                                   time: 12.2253, value: [AxisValue(x: 10, y: 10, z: 10)]),
+                       Measurement(sensor: .Gyro, date: Date(),
+                                   time: 60.0224, value: [AxisValue(x: 10, y: 10, z: 10)]),
+                       Measurement(sensor: .Accelerometer, date: Date(),
+                                   time: 211.5335, value: [AxisValue(x: 10, y: 10, z: 10)]),
+                       Measurement(sensor: .Gyro, date: Date(),
+                                   time: 50.323234, value: [AxisValue(x: 10, y: 10, z: 10)]),
+                       Measurement(sensor: .Accelerometer, date: Date(),
+                                   time: 225.5333, value: [AxisValue(x: 10, y: 10, z: 10)]),
+                       Measurement(sensor: .Gyro, date: Date(),
+                                   time: 235.53223, value: [AxisValue(x: 10, y: 10, z: 10)]),
+                       Measurement(sensor: .Gyro, date: Date(),
+                                   time: 141.522, value: [AxisValue(x: 10, y: 10, z: 10)]),
+                       Measurement(sensor: .Accelerometer, date: Date(),
+                                   time: 152.225, value: [AxisValue(x: 10, y: 10, z: 10)]),
+                       Measurement(sensor: .Gyro, date: Date(),
+                                   time: 610.022, value: [AxisValue(x: 10, y: 10, z: 10)]),
+                       Measurement(sensor: .Accelerometer, date: Date(),
+                                   time: 211.2533, value: [AxisValue(x: 10, y: 10, z: 10)]),
+                       Measurement(sensor: .Gyro, date: Date(),
+                                   time: 50.32323, value: [AxisValue(x: 10, y: 10, z: 10)]),
+                       Measurement(sensor: .Accelerometer, date: Date(),
+                                   time: 25.45333, value: [AxisValue(x: 10, y: 10, z: 10)]),
+                       Measurement(sensor: .Gyro, date: Date(),
+                                   time: 25.533, value: [AxisValue(x: 10, y: 10, z: 10)]),
+                       Measurement(sensor: .Gyro, date: Date(),
+                                   time: 11.6522, value: [AxisValue(x: 10, y: 10, z: 10)]),
+                       Measurement(sensor: .Accelerometer, date: Date(),
+                                   time: 12.7225, value: [AxisValue(x: 10, y: 10, z: 10)]),
+                       Measurement(sensor: .Gyro, date: Date(),
+                                   time: 60.8022, value: [AxisValue(x: 10, y: 10, z: 10)]),
+                       Measurement(sensor: .Accelerometer, date: Date(),
+                                   time: 211.9533, value: [AxisValue(x: 10, y: 10, z: 10)]),
+                       Measurement(sensor: .Gyro, date: Date(),
+                                   time: 50.032323, value: [AxisValue(x: 10, y: 10, z: 10)]),
+                       Measurement(sensor: .Accelerometer, date: Date(),
+                                   time: 25.125333, value: [AxisValue(x: 10, y: 10, z: 10)]),
+                       Measurement(sensor: .Gyro, date: Date(),
+                                   time: 25.34533, value: [AxisValue(x: 10, y: 10, z: 10)]),
+                       Measurement(sensor: .Gyro, date: Date(),
+                                   time: 11.55622, value: [AxisValue(x: 10, y: 10, z: 10)]),
+                       Measurement(sensor: .Accelerometer, date: Date(),
+                                   time: 12.27825, value: [AxisValue(x: 10, y: 10, z: 10)]),
+                       Measurement(sensor: .Gyro, date: Date(),
+                                   time: 60.09022, value: [AxisValue(x: 10, y: 10, z: 10)]),
+                       Measurement(sensor: .Accelerometer, date: Date(),
+                                   time: 211.51233, value: [AxisValue(x: 10, y: 10, z: 10)]),
+                       Measurement(sensor: .Gyro, date: Date(),
+                                   time: 50.3122323, value: [AxisValue(x: 10, y: 10, z: 10)]),
+                       Measurement(sensor: .Accelerometer, date: Date(),
+                                   time: 25.512333, value: [AxisValue(x: 10, y: 10, z: 10)]),
+
+    ]
+}
+
 final class ListViewController: UIViewController {
     
     private typealias DataSource = UITableViewDiffableDataSource<Section, Measurement>
     private typealias SnapShot = NSDiffableDataSourceSnapshot<Section, Measurement>
     
-    private let measurements: [Measurement] = []
+    private let measurements: [Measurement] = SampleData.data
     private let listView: ListView = ListView()
     private var dataSource: DataSource? = nil
     private var snapShot: SnapShot = SnapShot()

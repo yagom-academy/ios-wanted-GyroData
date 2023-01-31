@@ -56,7 +56,7 @@ final class MeasurementViewController: UIViewController {
 
     // MARK: Properties
     private let manager: SensorManager
-    private var data: [AxisData] = []
+    private var data: [AxisValue] = []
 
     private var selectedSensor: Sensor {
         guard let selectedSensor = Sensor(rawValue: segmentedController.selectedSegmentIndex) else { fatalError() }
@@ -77,7 +77,7 @@ final class MeasurementViewController: UIViewController {
     }
 
     // MARK: Initialization
-    init(manager: SensorManager = SensorManager(), data: [AxisData] = []) {
+    init(manager: SensorManager = SensorManager(), data: [AxisValue] = []) {
         self.manager = manager
         self.data = data
 
@@ -194,7 +194,7 @@ final class MeasurementViewController: UIViewController {
         }
     }
 
-    private func drawGraph(with data: AxisData) {
+    private func drawGraph(with data: AxisValue) {
         graphView.addData(data)
     }
 

@@ -1,14 +1,16 @@
 //
-//  SensorData.swift
+//  Measurement.swift
 //  GyroData
 //
+//  Created by 써니쿠키, 로빈 on 2023/01/30.
 //
 
 import Foundation
 
-struct Measurement {
+struct Measurement: Hashable {
+    
     let sensor: Sensor
-    let value: [AxisData]
-    let time: Double
     let date: Date
+    let time: Double
+    let value: [AxisValue]
 }

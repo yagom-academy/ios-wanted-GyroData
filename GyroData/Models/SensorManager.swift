@@ -11,7 +11,7 @@ class SensorManager {
     private let motionManager = CMMotionManager()
     private var timer = Timer()
 
-    func measure(sensor: Sensor, interval: TimeInterval, timeout: TimeInterval, completion: @escaping (AxisData?) -> ()) {
+    func measure(sensor: Sensor, interval: TimeInterval, timeout: TimeInterval, completion: @escaping (AxisValue?) -> ()) {
         timer = Timer.scheduledTimer(withTimeInterval: timeout * interval, repeats: false) { [weak self] _ in
             self?.stop { _ in
                 completion(nil)
@@ -43,19 +43,19 @@ class SensorManager {
         completion(true)
     }
 
-    private func fetchAccelerometerData(interval: TimeInterval, completion: @escaping (AxisData) -> ()) {
+    private func fetchAccelerometerData(interval: TimeInterval, completion: @escaping (AxisValue) -> ()) {
         motionManager.accelerometerUpdateInterval = interval
         motionManager.startAccelerometerUpdates(to: .main) { accelerometerData, _ in
             guard let acceleration = accelerometerData?.acceleration else { return }
-            completion(AxisData(x: acceleration.x, y: acceleration.y, z: acceleration.z))
+            completion(AxisValue(x: acceleration.x, y: acceleration.y, z: acceleration.z))
         }
     }
 
-    private func fetchGyroData(interval: TimeInterval, completion: @escaping (AxisData) -> ()) {
+    private func fetchGyroData(interval: TimeInterval, completion: @escaping (AxisValue) -> ()) {
         motionManager.gyroUpdateInterval = interval
         motionManager.startGyroUpdates(to: .main) { gyroData, _ in
             guard let rotationRate = gyroData?.rotationRate else { return }
-            completion(AxisData(x: rotationRate.x, y: rotationRate.y, z: rotationRate.z))
+            completion(AxisValue(x: rotationRate.x, y: rotationRate.y, z: rotationRate.z))
         }
     }
 }
