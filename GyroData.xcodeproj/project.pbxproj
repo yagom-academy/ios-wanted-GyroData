@@ -41,6 +41,8 @@
 		AC52BB3F2989493B0057CA56 /* DataManageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB15C4329893DAE0049E390 /* DataManageable.swift */; };
 		AC52BB402989493D0057CA56 /* FileManageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB15C4529893DC60049E390 /* FileManageable.swift */; };
 		AC52BB4329895C5C0057CA56 /* MeasureDataDummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52BB4229895C5C0057CA56 /* MeasureDataDummy.swift */; };
+		AC52BB45298967B50057CA56 /* Sensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52BB44298967B50057CA56 /* Sensor.swift */; };
+		AC52BB46298967B50057CA56 /* Sensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52BB44298967B50057CA56 /* Sensor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +83,7 @@
 		AC52BAE12988D35C0057CA56 /* FileSystemManagerStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSystemManagerStub.swift; sourceTree = "<group>"; };
 		AC52BB3C298948E20057CA56 /* TransactionServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionServiceTests.swift; sourceTree = "<group>"; };
 		AC52BB4229895C5C0057CA56 /* MeasureDataDummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureDataDummy.swift; sourceTree = "<group>"; };
+		AC52BB44298967B50057CA56 /* Sensor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sensor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -189,6 +192,7 @@
 			isa = PBXGroup;
 			children = (
 				AC52BAAB2987E9930057CA56 /* MeasureData.swift */,
+				AC52BB44298967B50057CA56 /* Sensor.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -396,6 +400,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */,
+				AC52BB45298967B50057CA56 /* Sensor.swift in Sources */,
 				3CB15C4429893DAE0049E390 /* DataManageable.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
@@ -421,6 +426,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AC52BB4329895C5C0057CA56 /* MeasureDataDummy.swift in Sources */,
+				AC52BB46298967B50057CA56 /* Sensor.swift in Sources */,
 				AC52BAE72988D3CC0057CA56 /* CoreDataManager.swift in Sources */,
 				AC52BB402989493D0057CA56 /* FileManageable.swift in Sources */,
 				AC52BAEA2988D3DA0057CA56 /* FileSystemError.swift in Sources */,

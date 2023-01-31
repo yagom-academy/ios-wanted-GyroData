@@ -27,7 +27,7 @@ final class CoreDataManager {
             zValue: entity.zValue,
             runTime: entity.runTime,
             date: entity.date,
-            type: MeasureData.Sensor(rawValue: Int(entity.type))
+            type: Sensor(rawValue: Int(entity.type))
         )
         
         return model
