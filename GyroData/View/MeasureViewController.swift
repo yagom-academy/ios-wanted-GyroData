@@ -12,6 +12,7 @@ class MeasureViewController: UIViewController {
     let motionManager = MotionManager()
     
     var motionType: MotionType = .acc
+    var coordinates:[(Double, Double, Double)] = []
     
     let segmentedControl: UISegmentedControl = {
         let control = UISegmentedControl(items: ["Acc", "Gyro"])
@@ -118,11 +119,15 @@ class MeasureViewController: UIViewController {
                 switch self.motionType {
                 case .acc:
                     guard let accData = data as? CMAccelerometerData else { return }
+                    self.coordinates.append((accData.acceleration.x,
+                                             accData.acceleration.y, accData.acceleration.z))
                     self.graphView.drawLine(x: accData.acceleration.x,
                                        y: accData.acceleration.y,
                                        z: accData.acceleration.z)
                 case .gyro:
                     guard let gyroData = data as? CMGyroData else { return }
+                    self.coordinates.append((gyroData.rotationRate.x,
+                                             gyroData.rotationRate.y, gyroData.rotationRate.z))
                     self.graphView.drawLine(x: gyroData.rotationRate.x,
                                             y: gyroData.rotationRate.y,
                                             z: gyroData.rotationRate.z)

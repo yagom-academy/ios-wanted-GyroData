@@ -145,9 +145,9 @@ class GraphView: UIView {
         
         offsetPoint += frame.width / 600
         
-        currentXPoint = x
-        currentYPoint = y
-        currentZPoint = z
+        currentXPoint = x * 5
+        currentYPoint = y * 5
+        currentZPoint = z * 5
         
         xPath.addLine(to: CGPoint(x: offsetPoint, y: startYPoint + currentXPoint))
         yPath.addLine(to: CGPoint(x: offsetPoint, y: startYPoint + currentYPoint))
