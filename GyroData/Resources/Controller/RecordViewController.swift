@@ -91,20 +91,19 @@ private extension RecordViewController {
 
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
-
-        guard let encodeData = try? encoder.encode(transition) else {
+        
+        let documentDirectories = FileManager
+            .default
+            .urls(for: .documentDirectory, in: .userDomainMask)
+        
+        guard let encodeData = try? encoder.encode(transition),
+              let documentDirectory = documentDirectories.first else {
             return
         }
+        
+        let pathWithFileName = documentDirectory.appendingPathComponent("\(Date().description).json")
 
-        if let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-            let pathWithFileName = documentDirectory.appendingPathComponent("\(Date().description).json")
-
-            do {
-                try encodeData.write(to: pathWithFileName)
-            } catch {
-                NSLog(error.localizedDescription)
-            }
-        }
+        try? encodeData.write(to: pathWithFileName)
     }
 }
 
