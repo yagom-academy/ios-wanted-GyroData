@@ -30,7 +30,24 @@ struct DefaultCoreDataRepository: CoreDataRepository {
     }
     
     func create(_ domain: Motion) throws {
+        guard let entity = NSEntityDescription.entity(
+            forEntityName: "MotionMO",
+            in: context
+        ) else {
+            throw CoreDataError.invalidEntity
+        }
         
+        let motionMO = NSManagedObject(entity: entity, insertInto: context)
+        
+        motionMO.setValue(domain.id, forKey: "id")
+        motionMO.setValue(domain.date.timeIntervalSince1970, forKey: "date")
+        motionMO.setValue(domain.type.rawValue, forKey: "type")
+        motionMO.setValue(domain.time, forKey: "time")
+        motionMO.setValue(domain.data.x, forKey: "x")
+        motionMO.setValue(domain.data.y, forKey: "y")
+        motionMO.setValue(domain.data.z, forKey: "z")
+        
+        try context.save()
     }
     
     func read(from offset: Int) throws -> [MotionMO] {
