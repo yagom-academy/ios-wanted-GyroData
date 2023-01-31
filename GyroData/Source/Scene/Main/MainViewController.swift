@@ -69,7 +69,29 @@ final class MainViewController: UIViewController {
 
 // MARK: - UITableViewDelegate
 
-extension MainViewController: UITableViewDelegate {}
+extension MainViewController: UITableViewDelegate {
+    func tableView(
+        _ tableView: UITableView,
+        trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
+    ) -> UISwipeActionsConfiguration? {
+        let playAction = UIContextualAction(
+            style: .normal,
+            title: "Play"
+        ) { _, _, _ in
+            // TODO: Play 실행 구현
+        }
+        let deleteAction = UIContextualAction(
+            style: .destructive,
+            title: "Delete"
+        ) { _, _, _ in
+            // TODO: Delete 실행 구현
+        }
+        
+        playAction.backgroundColor = .systemGreen
+        
+        return UISwipeActionsConfiguration(actions: [deleteAction, playAction])
+    }
+}
 
 // MARK: - UITableViewDataSource
 
