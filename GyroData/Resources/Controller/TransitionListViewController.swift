@@ -17,6 +17,7 @@ final class TransitionListViewController: UIViewController {
     }()
 
     private let cellReuseIdentifier = "CustomCell"
+    private var transitionMetaDatas: [TransitionMetaData] = []
     private var cellCount = 10
 
     // MARK: - LifeCycle
@@ -24,8 +25,23 @@ final class TransitionListViewController: UIViewController {
         super.viewDidLoad()
 
         configureUI()
+        for _ in 0...25 {
+            transitionMetaDatas.append(
+                TransitionMetaData(saveDate: "2022/09/10 15:11:45",
+                                   sensorType: .Accelerometer,
+                                   recordTime: 16.3,
+                                   jsonName: "asdf")
+            )
+        }
     }
 }
+
+//// MARK: - Method
+//private extension TransitionListViewController {
+//    func bringAdditionalTransitionMetaData() {
+//
+//    }
+//}
 
 // MARK: - UITableViewDataSource
 extension TransitionListViewController: UITableViewDataSource {
