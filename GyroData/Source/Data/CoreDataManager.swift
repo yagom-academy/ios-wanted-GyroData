@@ -34,7 +34,7 @@ final class CoreDataManager {
     }
 }
 
-extension CoreDataManager {
+extension CoreDataManager: DataManageable {
     func save(_ model: MeasureData) throws {
         let content = SensorData(context: self.context)
         

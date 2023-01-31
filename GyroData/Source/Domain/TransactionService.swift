@@ -10,10 +10,10 @@ import Foundation
 final class TransactionService {
     private var list: [MeasureData] = []
     
-    private let coreDataManager: CoreDataManager
-    private let fileManager: FileSystemManager
+    private let coreDataManager: DataManageable
+    private let fileManager: FileManageable
     
-    init(coreDataManager: CoreDataManager, fileManager: FileSystemManager) {
+    init(coreDataManager: DataManageable, fileManager: FileManageable) {
         self.coreDataManager = coreDataManager
         self.fileManager = fileManager
     }

@@ -39,7 +39,7 @@ final class FileSystemManager {
     }
 }
 
-extension FileSystemManager {
+extension FileSystemManager: FileManageable {
     func save(_ data: MeasureData) throws {
         let dataPath = directoryPath.appendingPathComponent(
             data.date.description + FileConstant.jsonExtensionName
