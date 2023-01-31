@@ -79,11 +79,9 @@ final class DataStorage: DataStorageType {
         }
     }
     
-    private func decode(_ data: Data) throws -> MotionData {
-        let decoder: JSONDecoder = JSONDecoder()
-        
+    private func decode(_ data: Data) throws -> MotionData {       
         do {
-            return try decoder.decode(MotionData.self, from: data)
+            return try JSONDecoder().decode(MotionData.self, from: data)
         } catch {
             throw DataStorageError.cannotDecodeData
         }
