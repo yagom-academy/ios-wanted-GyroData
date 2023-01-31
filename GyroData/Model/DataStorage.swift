@@ -55,7 +55,7 @@ final class DataStorage: DataStorageType {
     }
     
     private func createDirectory(with url: URL) throws {
-        guard !fileManager.fileExists(atPath: url.path) else { return }
+        guard fileManager.fileExists(atPath: url.path) == false else { return }
         
         do {
             try fileManager.createDirectory(
