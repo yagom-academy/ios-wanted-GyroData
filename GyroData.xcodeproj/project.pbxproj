@@ -16,6 +16,7 @@
 		D03B067D2988DBFC002BEB96 /* CustomDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03B067C2988DBFC002BEB96 /* CustomDataCell.swift */; };
 		D03B06802988E656002BEB96 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03B067F2988E656002BEB96 /* AddViewController.swift */; };
 		F6C594382988D01500705625 /* NavigationTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C594372988D01500705625 /* NavigationTitleView.swift */; };
+		F6C7FB672989084F00CD92FD /* ReplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C7FB662989084F00CD92FD /* ReplayViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		D03B067C2988DBFC002BEB96 /* CustomDataCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDataCell.swift; sourceTree = "<group>"; };
 		D03B067F2988E656002BEB96 /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		F6C594372988D01500705625 /* NavigationTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationTitleView.swift; sourceTree = "<group>"; };
+		F6C7FB662989084F00CD92FD /* ReplayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplayViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +96,7 @@
 			children = (
 				F6C594392988D03D00705625 /* Main */,
 				D03B067E2988E5D7002BEB96 /* Add */,
+				F6C7FB682989091E00CD92FD /* Replay */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -130,6 +133,14 @@
 				D03B067C2988DBFC002BEB96 /* CustomDataCell.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		F6C7FB682989091E00CD92FD /* Replay */ = {
+			isa = PBXGroup;
+			children = (
+				F6C7FB662989084F00CD92FD /* ReplayViewController.swift */,
+			);
+			path = Replay;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -203,6 +214,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				63F01BB928D44FC400C53A39 /* MainViewController.swift in Sources */,
+				F6C7FB672989084F00CD92FD /* ReplayViewController.swift in Sources */,
 				F6C594382988D01500705625 /* NavigationTitleView.swift in Sources */,
 				D03B06802988E656002BEB96 /* AddViewController.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,

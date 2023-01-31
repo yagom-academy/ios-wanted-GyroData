@@ -63,7 +63,8 @@ final class MainViewController: UIViewController {
     // MARK: Action Methods
     
     @objc private func tapRightBarButton() {
-        let addViewController = AddViewController()
+//        let addViewController = AddViewController()
+        let addViewController = ReplayViewController()
         
         addViewController.modalPresentationStyle = .fullScreen
         
