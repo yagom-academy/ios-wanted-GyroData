@@ -5,7 +5,9 @@
 //  Created by ash and som on 2023/01/31.
 //
 
-struct GyroData {
+import Foundation
+
+struct GyroData: Codable{
     let x: [Double]
     let y: [Double]
     let z: [Double]

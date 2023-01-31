@@ -7,4 +7,7 @@
 
 import Foundation
 
-enum MotionMode { }
+enum MotionMode {
+    case view
+    case play
+}
