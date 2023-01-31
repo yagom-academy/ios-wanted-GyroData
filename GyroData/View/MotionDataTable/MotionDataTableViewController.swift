@@ -92,9 +92,34 @@ extension MotionDataTableViewController {
         var layoutConfig = UICollectionLayoutListConfiguration(appearance: .plain)
         layoutConfig.showsSeparators = false
 
+        layoutConfig.trailingSwipeActionsConfigurationProvider = makeSwipeActions
+
+
+
         let listLayout = UICollectionViewCompositionalLayout.list(using: layoutConfig)
 
         return listLayout
+    }
+
+    private func makeSwipeActions(for indexPath: IndexPath?) -> UISwipeActionsConfiguration? {
+        guard let indexPath = indexPath, let id = dataSource?.itemIdentifier(for: indexPath) else { return nil }
+
+        let playAction = UIContextualAction(style: .normal, title: "Play") { action, view, completion in
+            let replayMotionViewControll = ReplayMotionViewController()
+            self.navigationController?.pushViewController(replayMotionViewControll, animated: true)
+            self.collectionView.deselectItem(at: indexPath, animated: true)
+            
+            completion(false)
+        }
+        playAction.backgroundColor = .systemGreen
+
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] action, view, completion in
+            self?.motionDataListViewModel?.deleteMotionData(index: indexPath.item)
+
+            completion(false)
+        }
+
+        return UISwipeActionsConfiguration(actions: [deleteAction, playAction])
     }
 
     func configureDataSource() {
@@ -116,21 +141,6 @@ extension MotionDataTableViewController {
         snapshot.appendItems(list)
 
         dataSource?.apply(snapshot)
-    }
-}
-
-extension MotionDataTableViewController {
-
-    private func handleSwipe(for action: UIContextualAction, item: MotionData) {
-
-        let alert = UIAlertController(title: action.title,
-                                      message: String(item.time),
-                                      preferredStyle: .alert)
-
-        let okAction = UIAlertAction(title:"OK", style: .default, handler: { (_) in })
-        alert.addAction(okAction)
-
-        present(alert, animated: true, completion:nil)
     }
 }
 
