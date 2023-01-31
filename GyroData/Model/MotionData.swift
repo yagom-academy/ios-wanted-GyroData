@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MotionData {
+struct MotionData: Identifiable {
     let id: UUID
     var createdAt: Date
     var length: Double
