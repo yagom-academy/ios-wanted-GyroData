@@ -16,12 +16,13 @@ final class DataStorage: DataStorageType {
             for: .documentDirectory,
             in: .userDomainMask
         ).first else { throw DataStorageError.cannotFindDocumentDirectory }
+        
         self.fileManager = fileManager
         directoryURL = documentDirectory.appendingPathComponent(directoryName)
         try createDirectory(with: directoryURL)
     }
     
-    func read(with fileName: String) throws -> MotionData {
+    func read(_ fileName: String) throws -> MotionData {
         let url = directoryURL.appendingPathComponent(fileName)
         
         do {
@@ -43,7 +44,7 @@ final class DataStorage: DataStorageType {
         }
     }
     
-    func delete(with fileName: String) throws {
+    func delete(_ fileName: String) throws {
         let url = directoryURL.appendingPathComponent(fileName)
         
         do {
