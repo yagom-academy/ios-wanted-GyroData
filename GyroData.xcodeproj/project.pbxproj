@@ -47,7 +47,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3C3B28402988B7990044939A /* FileSystemError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSystemError.swift; sourceTree = "<group>"; };
 		63F01BB128D44FC400C53A39 /* GyroData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GyroData.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63F01BB428D44FC400C53A39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63F01BB628D44FC400C53A39 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -96,7 +95,6 @@
 				63F01BB328D44FC400C53A39 /* GyroData */,
 				AC52BAD12988D2540057CA56 /* GyroDataTests */,
 				63F01BB228D44FC400C53A39 /* Products */,
-				AC52BAC92988D1120057CA56 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -163,14 +161,6 @@
 				AC52BAEE2988D45C0057CA56 /* Error */,
 			);
 			path = Common;
-			sourceTree = "<group>";
-		};
-		AC52BAC92988D1120057CA56 /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-				3C3B28402988B7990044939A /* FileSystemError.swift */,
-			);
-			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		AC52BAD12988D2540057CA56 /* GyroDataTests */ = {
