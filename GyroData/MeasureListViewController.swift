@@ -5,6 +5,13 @@ import UIKit
 
 class MeasureListViewController: UIViewController {
     
+    private enum Constant {
+        static let title = "목록"
+        static let measureButtonTitle = "측정"
+        static let playSwipeAction = "Play"
+        static let deleteSwipeAction = "Delete"
+    }
+    
     enum Schedule: Hashable {
         case main
     }
@@ -23,7 +30,7 @@ class MeasureListViewController: UIViewController {
         
         tableView.separatorStyle = .none
         tableView.register(MeasureTableViewCell.self,
-                           forCellReuseIdentifier: "MeasureTableViewCell")
+                           forCellReuseIdentifier: MeasureTableViewCell.reuseIdentifier)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
         return tableView
@@ -41,8 +48,8 @@ class MeasureListViewController: UIViewController {
     }
     
     private func setupNavigation() {
-        navigationItem.title = "목록"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "측정",
+        navigationItem.title = Constant.title
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: Constant.measureButtonTitle,
                                                             style: .plain,
                                                             target: self,
                                                             action: #selector(presentMeasureViewController))
@@ -97,13 +104,13 @@ extension MeasureListViewController: UITableViewDelegate {
         trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
     ) -> UISwipeActionsConfiguration? {
         let playAction = UIContextualAction(style: .normal,
-                                            title: "Play") { (_, _, success) in
+                                            title: Constant.playSwipeAction) { (_, _, success) in
             
         }
         playAction.backgroundColor = .systemGreen
         
         let deleteAction = UIContextualAction(style: .destructive,
-                                              title: "Delete") { (_, _, success) in
+                                              title: Constant.deleteSwipeAction) { (_, _, success) in
             
         }
         
