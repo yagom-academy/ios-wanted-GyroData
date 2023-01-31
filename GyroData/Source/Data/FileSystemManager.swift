@@ -45,7 +45,7 @@ final class FileSystemManager {
 }
 
 extension FileSystemManager {
-    func save(data: MeasureData) throws {
+    func save(_ data: MeasureData) throws {
         let dataPath = directoryPath.appendingPathComponent(
             data.date.description + FileConstant.jsonExtensionName
         )
@@ -74,7 +74,7 @@ extension FileSystemManager {
         }
     }
     
-    func delete(date: Date) throws {
+    func delete(_ date: Date) throws {
         let dataPath = directoryPath.appendingPathComponent(
             date.description + FileConstant.jsonExtensionName
         )
