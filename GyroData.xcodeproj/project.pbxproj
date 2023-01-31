@@ -9,8 +9,9 @@
 /* Begin PBXBuildFile section */
 		1A087CCD2987D3CE00FC2056 /* MeasurementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A087CCC2987D3CE00FC2056 /* MeasurementViewController.swift */; };
 		1A087CDA2987F7DF00FC2056 /* Sensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A087CD92987F7DF00FC2056 /* Sensor.swift */; };
-		1A087CE3298833ED00FC2056 /* Axis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A087CE2298833ED00FC2056 /* Axis.swift */; };
+		1A087CE3298833ED00FC2056 /* AxisData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A087CE2298833ED00FC2056 /* AxisData.swift */; };
 		1A087CE529884ED300FC2056 /* SensorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A087CE429884ED300FC2056 /* SensorManager.swift */; };
+		1A087CE72988CB8300FC2056 /* Measurement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A087CE62988CB8300FC2056 /* Measurement.swift */; };
 		63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB428D44FC400C53A39 /* AppDelegate.swift */; };
 		63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB628D44FC400C53A39 /* SceneDelegate.swift */; };
 		63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB828D44FC400C53A39 /* ViewController.swift */; };
@@ -21,8 +22,9 @@
 /* Begin PBXFileReference section */
 		1A087CCC2987D3CE00FC2056 /* MeasurementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementViewController.swift; sourceTree = "<group>"; };
 		1A087CD92987F7DF00FC2056 /* Sensor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sensor.swift; sourceTree = "<group>"; };
-		1A087CE2298833ED00FC2056 /* Axis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Axis.swift; sourceTree = "<group>"; };
+		1A087CE2298833ED00FC2056 /* AxisData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxisData.swift; sourceTree = "<group>"; };
 		1A087CE429884ED300FC2056 /* SensorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensorManager.swift; sourceTree = "<group>"; };
+		1A087CE62988CB8300FC2056 /* Measurement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Measurement.swift; sourceTree = "<group>"; };
 		63F01BB128D44FC400C53A39 /* GyroData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GyroData.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63F01BB428D44FC400C53A39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63F01BB628D44FC400C53A39 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -59,8 +61,9 @@
 			isa = PBXGroup;
 			children = (
 				1A087CD92987F7DF00FC2056 /* Sensor.swift */,
-				1A087CE2298833ED00FC2056 /* Axis.swift */,
+				1A087CE2298833ED00FC2056 /* AxisData.swift */,
 				1A087CE429884ED300FC2056 /* SensorManager.swift */,
+				1A087CE62988CB8300FC2056 /* Measurement.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -184,7 +187,8 @@
 				1A087CE529884ED300FC2056 /* SensorManager.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
 				1A087CCD2987D3CE00FC2056 /* MeasurementViewController.swift in Sources */,
-				1A087CE3298833ED00FC2056 /* Axis.swift in Sources */,
+				1A087CE3298833ED00FC2056 /* AxisData.swift in Sources */,
+				1A087CE72988CB8300FC2056 /* Measurement.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
