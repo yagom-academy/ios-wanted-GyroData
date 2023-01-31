@@ -40,8 +40,8 @@ final class MotionDataTableViewController: UIViewController {
 
     private func configureCollection() {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createListLayout())
-        collectionView.register(UICollectionViewListCell.self,
-                                forCellWithReuseIdentifier: "cell")
+        collectionView.register(MotionListCell.self,
+                                forCellWithReuseIdentifier: MotionListCell.reuseIdentifier)
         collectionView.delegate = self
         view.addSubview(collectionView)
     }
@@ -81,18 +81,22 @@ extension MotionDataTableViewController {
 
     private func createListLayout() -> UICollectionViewCompositionalLayout {
         var layoutConfig = UICollectionLayoutListConfiguration(appearance: .plain)
+        layoutConfig.showsSeparators = false
 
         let listLayout = UICollectionViewCompositionalLayout.list(using: layoutConfig)
+
         return listLayout
     }
 
     func configureDataSource() {
-        let cellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, MotionData> { (cell, indexPath, motionData) in
-            
+        let cellRegistration = UICollectionView.CellRegistration<MotionListCell, MotionData> { (cell, indexPath, motionData) in
+            cell.timeLabel.text = motionData.time.description
+            cell.typeLabel.text = motionData.type.rawValue
+            cell.dateLabel.text = motionData.date.description
         }
 
         dataSource = UICollectionViewDiffableDataSource<Int, MotionData>(collectionView: collectionView) {
-            (collectionView: UICollectionView, indexPath: IndexPath, motionData: MotionData) -> UICollectionViewListCell? in
+            (collectionView: UICollectionView, indexPath: IndexPath, motionData: MotionData) -> MotionListCell in
             return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: motionData)
         }
     }
