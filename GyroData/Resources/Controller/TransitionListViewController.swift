@@ -73,6 +73,7 @@ extension TransitionListViewController: UITableViewDelegate {
             completionHandler(false)
         }
         playAction.backgroundColor = .systemGreen
+        playAction.image = createSwipeActionImage(text: "Play")
 
         let deleteAction = UIContextualAction(style: .destructive, title: nil) { [weak self] (action, view, completionHandler) in
             print("delete 클릭")
@@ -85,6 +86,7 @@ extension TransitionListViewController: UITableViewDelegate {
             completionHandler(true)
         }
         deleteAction.backgroundColor = .systemRed
+        deleteAction.image = createSwipeActionImage(text: "Delete")
 
         return UISwipeActionsConfiguration(actions: [deleteAction, playAction])
     }
