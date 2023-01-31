@@ -11,6 +11,14 @@
 		63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB628D44FC400C53A39 /* SceneDelegate.swift */; };
 		63F01BBE28D44FC500C53A39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBD28D44FC500C53A39 /* Assets.xcassets */; };
 		63F01BC128D44FC500C53A39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */; };
+		D381D2762988E58700567C6B /* MotionPlayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D381D26B2988E58700567C6B /* MotionPlayViewModel.swift */; };
+		D381D2772988E58700567C6B /* MotionPlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D381D26C2988E58700567C6B /* MotionPlayViewController.swift */; };
+		D381D2782988E58700567C6B /* MotionMeasureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D381D26E2988E58700567C6B /* MotionMeasureViewController.swift */; };
+		D381D2792988E58700567C6B /* MotionMeasureViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D381D26F2988E58700567C6B /* MotionMeasureViewModel.swift */; };
+		D381D27A2988E58700567C6B /* MotionGraphViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D381D2712988E58700567C6B /* MotionGraphViewModel.swift */; };
+		D381D27B2988E58700567C6B /* MotionGraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D381D2722988E58700567C6B /* MotionGraphViewController.swift */; };
+		D381D27C2988E58700567C6B /* MotionsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D381D2742988E58700567C6B /* MotionsListViewController.swift */; };
+		D381D27D2988E58700567C6B /* MotionsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D381D2752988E58700567C6B /* MotionsListViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +28,14 @@
 		63F01BBD28D44FC500C53A39 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		63F01BC028D44FC500C53A39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		63F01BC228D44FC500C53A39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D381D26B2988E58700567C6B /* MotionPlayViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionPlayViewModel.swift; sourceTree = "<group>"; };
+		D381D26C2988E58700567C6B /* MotionPlayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionPlayViewController.swift; sourceTree = "<group>"; };
+		D381D26E2988E58700567C6B /* MotionMeasureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionMeasureViewController.swift; sourceTree = "<group>"; };
+		D381D26F2988E58700567C6B /* MotionMeasureViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionMeasureViewModel.swift; sourceTree = "<group>"; };
+		D381D2712988E58700567C6B /* MotionGraphViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionGraphViewModel.swift; sourceTree = "<group>"; };
+		D381D2722988E58700567C6B /* MotionGraphViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionGraphViewController.swift; sourceTree = "<group>"; };
+		D381D2742988E58700567C6B /* MotionsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionsListViewController.swift; sourceTree = "<group>"; };
+		D381D2752988E58700567C6B /* MotionsListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionsListViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +68,7 @@
 		63F01BB328D44FC400C53A39 /* GyroData */ = {
 			isa = PBXGroup;
 			children = (
+				D381D2692988E58700567C6B /* Scene */,
 				63F01BB428D44FC400C53A39 /* AppDelegate.swift */,
 				63F01BB628D44FC400C53A39 /* SceneDelegate.swift */,
 				63F01BBD28D44FC500C53A39 /* Assets.xcassets */,
@@ -59,6 +76,53 @@
 				63F01BC228D44FC500C53A39 /* Info.plist */,
 			);
 			path = GyroData;
+			sourceTree = "<group>";
+		};
+		D381D2692988E58700567C6B /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				D381D26A2988E58700567C6B /* MotionPlay */,
+				D381D26D2988E58700567C6B /* MotionMeasure */,
+				D381D2702988E58700567C6B /* MotionGraph */,
+				D381D2732988E58700567C6B /* MotionsList */,
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
+		D381D26A2988E58700567C6B /* MotionPlay */ = {
+			isa = PBXGroup;
+			children = (
+				D381D26B2988E58700567C6B /* MotionPlayViewModel.swift */,
+				D381D26C2988E58700567C6B /* MotionPlayViewController.swift */,
+			);
+			path = MotionPlay;
+			sourceTree = "<group>";
+		};
+		D381D26D2988E58700567C6B /* MotionMeasure */ = {
+			isa = PBXGroup;
+			children = (
+				D381D26E2988E58700567C6B /* MotionMeasureViewController.swift */,
+				D381D26F2988E58700567C6B /* MotionMeasureViewModel.swift */,
+			);
+			path = MotionMeasure;
+			sourceTree = "<group>";
+		};
+		D381D2702988E58700567C6B /* MotionGraph */ = {
+			isa = PBXGroup;
+			children = (
+				D381D2712988E58700567C6B /* MotionGraphViewModel.swift */,
+				D381D2722988E58700567C6B /* MotionGraphViewController.swift */,
+			);
+			path = MotionGraph;
+			sourceTree = "<group>";
+		};
+		D381D2732988E58700567C6B /* MotionsList */ = {
+			isa = PBXGroup;
+			children = (
+				D381D2742988E58700567C6B /* MotionsListViewController.swift */,
+				D381D2752988E58700567C6B /* MotionsListViewModel.swift */,
+			);
+			path = MotionsList;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -131,7 +195,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D381D2782988E58700567C6B /* MotionMeasureViewController.swift in Sources */,
+				D381D27B2988E58700567C6B /* MotionGraphViewController.swift in Sources */,
+				D381D2792988E58700567C6B /* MotionMeasureViewModel.swift in Sources */,
+				D381D2772988E58700567C6B /* MotionPlayViewController.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
+				D381D27A2988E58700567C6B /* MotionGraphViewModel.swift in Sources */,
+				D381D27C2988E58700567C6B /* MotionsListViewController.swift in Sources */,
+				D381D2762988E58700567C6B /* MotionPlayViewModel.swift in Sources */,
+				D381D27D2988E58700567C6B /* MotionsListViewModel.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
