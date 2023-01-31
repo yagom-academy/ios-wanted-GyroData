@@ -27,6 +27,7 @@
 		BF128AC029892D2700C3CB7B /* ReplayMotionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF128ABF29892D2700C3CB7B /* ReplayMotionViewController.swift */; };
 		BF128AC229892D5700C3CB7B /* MeasurementMotionDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF128AC129892D5700C3CB7B /* MeasurementMotionDataViewModel.swift */; };
 		BF128AC429892D7200C3CB7B /* ReplayMotionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF128AC329892D7200C3CB7B /* ReplayMotionViewModel.swift */; };
+		BF128AC6298948BE00C3CB7B /* DateFormatter+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF128AC5298948BE00C3CB7B /* DateFormatter+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		BF128ABF29892D2700C3CB7B /* ReplayMotionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplayMotionViewController.swift; sourceTree = "<group>"; };
 		BF128AC129892D5700C3CB7B /* MeasurementMotionDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementMotionDataViewModel.swift; sourceTree = "<group>"; };
 		BF128AC329892D7200C3CB7B /* ReplayMotionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplayMotionViewModel.swift; sourceTree = "<group>"; };
+		BF128AC5298948BE00C3CB7B /* DateFormatter+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "DateFormatter+.swift"; path = "GyroData/ViewModel/ReplayMotion/DateFormatter+.swift"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +176,7 @@
 		BF128AAE2988AEBF00C3CB7B /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				BF128AC5298948BE00C3CB7B /* DateFormatter+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -293,6 +296,7 @@
 			files = (
 				BF128AC029892D2700C3CB7B /* ReplayMotionViewController.swift in Sources */,
 				63F01BB928D44FC400C53A39 /* MotionDataTableViewController.swift in Sources */,
+				BF128AC6298948BE00C3CB7B /* DateFormatter+.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
 				BF128AB52988CAA700C3CB7B /* MotionDataEntity+CoreDataProperties.swift in Sources */,

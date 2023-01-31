@@ -77,9 +77,7 @@ final class MotionDataTableViewController: UIViewController {
     private func createPushAction() -> UIAction {
         let action = UIAction { _ in
             let measurementMotionDataViewController = MeasurementMotionDataViewController()
-//            self.navigationController?.pushViewController(measurementMotionDataViewController, animated: true)
-            
-            self.motionDataListViewModel?.creatMotionData()
+            self.navigationController?.pushViewController(measurementMotionDataViewController, animated: true)
         }
         
         return action
@@ -126,7 +124,7 @@ extension MotionDataTableViewController {
         let cellRegistration = UICollectionView.CellRegistration<MotionListCell, MotionData> { (cell, indexPath, motionData) in
             cell.timeLabel.text = motionData.time.description
             cell.typeLabel.text = motionData.type.rawValue
-            cell.dateLabel.text = motionData.date.description
+            cell.dateLabel.text = DateFormatter.measurementFormatter.string(from: motionData.date)
         }
 
         dataSource = UICollectionViewDiffableDataSource<Int, MotionData>(collectionView: collectionView) {

@@ -37,10 +37,6 @@ final class MotionDataTableViewModel {
         return fileManager.fetchData()[index]
     }
     
-    func creatMotionData() {
-        try? fileManager.createMotionData(type: .gyro, time: 37.4, value: [])
-    }
-    
     func deleteMotionData(index: Int) {
         fileManager.deleteMotionData(index: index)
     }
