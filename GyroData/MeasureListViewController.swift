@@ -4,7 +4,20 @@
 import UIKit
 
 class MeasureListViewController: UIViewController {
-
+    
+    enum Schedule: Hashable {
+        case main
+    }
+    
+    struct SampleData: Hashable {
+        var createdAt: String
+        var sensorType: String
+        var measureTime: String
+    }
+    
+    typealias DataSource = UITableViewDiffableDataSource<Schedule, SampleData>
+    typealias Snapshot = NSDiffableDataSourceSnapshot<Schedule, SampleData>
+    
     private let tableView: UITableView = {
         let tableView = UITableView()
         
@@ -15,10 +28,15 @@ class MeasureListViewController: UIViewController {
         return tableView
     }()
     
+    private var dataSource: DataSource?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.dataSource = setupTableViewDataSource()
         setupNavigation()
         setupViews()
+        
+        appendData()
     }
     
     private func setupNavigation() {
@@ -37,5 +55,32 @@ class MeasureListViewController: UIViewController {
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
+    }
+    
+    private func setupTableViewDataSource() -> DataSource {
+        let dataSource = DataSource(tableView: tableView) { tableView, indexPath, item in
+            guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: MeasureTableViewCell.reuseIdentifier,
+                for: indexPath
+            ) as? MeasureTableViewCell else { return UITableViewCell() }
+            
+            cell.configure()
+            
+            return cell
+        }
+        
+        return dataSource
+    }
+    
+    private func appendData() {
+        var snapshot = Snapshot()
+        
+        snapshot.appendSections([.main])
+        snapshot.appendItems([
+            SampleData(createdAt: "1", sensorType: "", measureTime: ""),
+            SampleData(createdAt: "2", sensorType: "", measureTime: ""),
+            SampleData(createdAt: "3", sensorType: "", measureTime: "")
+        ])
+        dataSource?.apply(snapshot)
     }
 }
