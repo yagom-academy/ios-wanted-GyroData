@@ -8,11 +8,11 @@
 import Foundation
 import simd
 
-struct MotionData {
+struct MotionData: Codable {
 
     let date: Date
     let type: MotionType
     let time: Double
     let value: [SIMD3<Double>]
+    let id: UUID
 }
-

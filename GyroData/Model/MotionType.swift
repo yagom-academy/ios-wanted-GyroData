@@ -5,8 +5,8 @@
 //  Created by Aaron, Gundy on 2023/01/31.
 //
 
-enum MotionType {
+enum MotionType: String, Codable {
 
-    case accelerometer
-    case gyro
+    case accelerometer = "Accelerometer"
+    case gyro = "Gyro"
 }
