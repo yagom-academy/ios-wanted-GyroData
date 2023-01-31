@@ -7,11 +7,14 @@
 
 import Foundation
 
-enum DiskStorageError: Error {
+enum DataStorageError: Error {
     case cannotFindDocumentDirectory
     case cannotCreateDirectory
+    case cannotReadFile
     case cannotSaveFile
+    case cannotDeleteData
     case cannotEncodeData
+    case cannotDecodeData
 }
 
 final class DataStorage: DataStorageType {
@@ -22,10 +25,21 @@ final class DataStorage: DataStorageType {
         guard let documentDirectory: URL = fileManager.urls(
             for: .documentDirectory,
             in: .userDomainMask
-        ).first else { throw DiskStorageError.cannotFindDocumentDirectory }
+        ).first else { throw DataStorageError.cannotFindDocumentDirectory }
         self.fileManager = fileManager
         directoryURL = documentDirectory.appendingPathComponent(directoryName)
         try createDirectory(with: directoryURL)
+    }
+    
+    func read(with fileName: String) throws -> MotionData {
+        let url = directoryURL.appendingPathComponent(fileName)
+        
+        do {
+            let data: Data = try Data(contentsOf: url)
+            return try decode(data)
+        } catch {
+            throw DataStorageError.cannotReadFile
+        }
     }
     
     func save(_ data: MotionData) throws {
@@ -35,16 +49,18 @@ final class DataStorage: DataStorageType {
         do {
             try jsonData.write(to: url)
         } catch {
-            throw DiskStorageError.cannotSaveFile
+            throw DataStorageError.cannotSaveFile
         }
     }
     
-    func read() {
-        //
-    }
-    
-    func delete() {
-        //
+    func delete(with fileName: String) throws {
+        let url = directoryURL.appendingPathComponent(fileName)
+        
+        do {
+            try fileManager.removeItem(at: url)
+        } catch {
+            throw DataStorageError.cannotDeleteData
+        }
     }
     
     func createDirectory(with url: URL) throws {
@@ -57,7 +73,7 @@ final class DataStorage: DataStorageType {
                 attributes: nil
             )
         } catch {
-            throw DiskStorageError.cannotCreateDirectory
+            throw DataStorageError.cannotCreateDirectory
         }
     }
     
@@ -68,9 +84,17 @@ final class DataStorage: DataStorageType {
         do {
             return try encoder.encode(data)
         } catch {
-            throw DiskStorageError.cannotEncodeData
+            throw DataStorageError.cannotEncodeData
         }
     }
     
-    private func decode() { }
+    private func decode(_ data: Data) throws -> MotionData {
+        let decoder: JSONDecoder = JSONDecoder()
+        
+        do {
+            return try decoder.decode(MotionData.self, from: data)
+        } catch {
+            throw DataStorageError.cannotDecodeData
+        }
+    }
 }

@@ -11,6 +11,7 @@ protocol FileManagerType {
     func urls(for directory: FileManager.SearchPathDirectory, in domainMask: FileManager.SearchPathDomainMask) -> [URL]
     func createDirectory(at url: URL, withIntermediateDirectories createIntermediates: Bool, attributes: [FileAttributeKey : Any]?) throws
     func fileExists(atPath path: String) -> Bool
+    func removeItem(at URL: URL) throws
 }
 
 extension FileManager: FileManagerType { }
