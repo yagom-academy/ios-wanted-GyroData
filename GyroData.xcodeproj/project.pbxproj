@@ -36,6 +36,9 @@
 		E3D84AA62988E75B00FDA64F /* CoreDataMotionReadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D84AA52988E75B00FDA64F /* CoreDataMotionReadService.swift */; };
 		E3D84AA82988E76700FDA64F /* FileManagerMotionReadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D84AA72988E76700FDA64F /* FileManagerMotionReadService.swift */; };
 		E3D84AAC2988E7F000FDA64F /* Motion.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D84AAB2988E7F000FDA64F /* Motion.swift */; };
+		E3D84AAF2988F76200FDA64F /* MotionDataType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D84AAE2988F76200FDA64F /* MotionDataType.swift */; };
+		E3D84AB12988F7C800FDA64F /* CMRotationRate+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D84AB02988F7C800FDA64F /* CMRotationRate+.swift */; };
+		E3D84AB32988F81200FDA64F /* CMAcceleration+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D84AB22988F81200FDA64F /* CMAcceleration+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +73,9 @@
 		E3D84AA52988E75B00FDA64F /* CoreDataMotionReadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataMotionReadService.swift; sourceTree = "<group>"; };
 		E3D84AA72988E76700FDA64F /* FileManagerMotionReadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerMotionReadService.swift; sourceTree = "<group>"; };
 		E3D84AAB2988E7F000FDA64F /* Motion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Motion.swift; sourceTree = "<group>"; };
+		E3D84AAE2988F76200FDA64F /* MotionDataType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDataType.swift; sourceTree = "<group>"; };
+		E3D84AB02988F7C800FDA64F /* CMRotationRate+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CMRotationRate+.swift"; sourceTree = "<group>"; };
+		E3D84AB22988F81200FDA64F /* CMAcceleration+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CMAcceleration+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -242,6 +248,7 @@
 		E3D84AA92988E79B00FDA64F /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				E3D84AAD2988F74800FDA64F /* Utility */,
 				E3D84A962988E67400FDA64F /* Service */,
 				E3D84AAA2988E7C900FDA64F /* Entity */,
 			);
@@ -254,6 +261,16 @@
 				E3D84AAB2988E7F000FDA64F /* Motion.swift */,
 			);
 			path = Entity;
+			sourceTree = "<group>";
+		};
+		E3D84AAD2988F74800FDA64F /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				E3D84AAE2988F76200FDA64F /* MotionDataType.swift */,
+				E3D84AB02988F7C800FDA64F /* CMRotationRate+.swift */,
+				E3D84AB22988F81200FDA64F /* CMAcceleration+.swift */,
+			);
+			path = Utility;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -327,6 +344,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E3D84A9A2988E6D400FDA64F /* MotionDeletable.swift in Sources */,
+				E3D84AB32988F81200FDA64F /* CMAcceleration+.swift in Sources */,
 				E3D84A9C2988E6EF00FDA64F /* MotionCreatable.swift in Sources */,
 				D381D2782988E58700567C6B /* MotionMeasureViewController.swift in Sources */,
 				D381D27B2988E58700567C6B /* MotionGraphViewController.swift in Sources */,
@@ -343,10 +361,12 @@
 				D381D28B2988E8E100567C6B /* MotionDTO.swift in Sources */,
 				D381D29B2988EC5B00567C6B /* MotionMO+CoreDataProperties.swift in Sources */,
 				D381D27C2988E58700567C6B /* MotionsListViewController.swift in Sources */,
+				E3D84AB12988F7C800FDA64F /* CMRotationRate+.swift in Sources */,
 				D381D2852988E8AB00567C6B /* CoreDataRepository.swift in Sources */,
 				D381D2762988E58700567C6B /* MotionPlayViewModel.swift in Sources */,
 				D381D2882988E8BF00567C6B /* FileManagerRepository.swift in Sources */,
 				E3D84AA22988E72E00FDA64F /* MotionCreateService.swift in Sources */,
+				E3D84AAF2988F76200FDA64F /* MotionDataType.swift in Sources */,
 				D381D27D2988E58700567C6B /* MotionsListViewModel.swift in Sources */,
 				E3D84AA02988E71800FDA64F /* FileManagerMotionReadable.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
