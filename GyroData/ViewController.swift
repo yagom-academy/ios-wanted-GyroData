@@ -1,9 +1,5 @@
-//
-//  ViewController.swift
-//  GyroData
-//
-//  Created by kjs on 2022/09/16.
-//
+//  GyroData - SceneDelegate.swift
+//  Created by zhilly, woong on 2023/01/31
 
 import UIKit
 
@@ -11,7 +7,6 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
     }
 
 
