@@ -12,6 +12,7 @@ protocol CoreMotionDelegate: AnyObject {
 
 class CoreMotionManager {
     private let motionMonitor = CMMotionManager()
+    private var timer: Timer?
     private var time: Int = 0
     
     weak var delegate: CoreMotionDelegate?
@@ -22,34 +23,38 @@ class CoreMotionManager {
     }
     
     func startUpdateData(with type: SensorType) {
-        switch type {
+        guard checkAvailable(sensor: type) else { return }
+        monitoringStart(sensor: type)
+    }
+    
+    func checkAvailable(sensor: SensorType) -> Bool {
+        switch sensor {
         case .Accelerometer:
-            monitoringAccelerometer()
+            return motionMonitor.isAccelerometerAvailable
         case .Gyro:
-            monitoringGyro()
+            return motionMonitor.isGyroAvailable
         }
     }
     
-    func monitoringAccelerometer() {
-        guard motionMonitor.isAccelerometerAvailable else { return }
-        motionMonitor.startAccelerometerUpdates(to: .main, withHandler: handleLogData)
-    }
-    
-    func monitoringGyro() {
-        guard motionMonitor.isGyroAvailable else { return }
-        motionMonitor.startGyroUpdates(to: .main, withHandler: handleLogData)
-    }
-    
-    func handleLogData(data: CMLogItem?, error: Error?) {
-        guard error == nil, let data = data else { return }
-        time += 1
-        
-        guard time <= 600 else {
-            cancelUpdateData()
-            return
+    func monitoringStart(sensor: SensorType) {
+        switch sensor {
+        case .Accelerometer:
+            timer = Timer.scheduledTimer(
+                timeInterval: 0.1,
+                target: self,
+                selector: #selector(updateAccelerometer),
+                userInfo: nil,
+                repeats: true
+            )
+        case .Gyro:
+            timer = Timer.scheduledTimer(
+                timeInterval: 0.1,
+                target: self,
+                selector: #selector(updateGyro),
+                userInfo: nil,
+                repeats: true
+            )
         }
-        
-        delegate?.coreMotionManager(transitionData: data)
     }
     
     func cancelUpdateData() {
@@ -60,5 +65,45 @@ class CoreMotionManager {
         if motionMonitor.isGyroActive {
             motionMonitor.stopGyroUpdates()
         }
+    }
+}
+
+// MARK: - ObjcMethod
+extension CoreMotionManager {
+    @objc func updateAccelerometer() {
+        time += 1
+        
+        if time > 600 {
+            resetTimer()
+            return
+        }
+        
+        motionMonitor.startAccelerometerUpdates()
+        if let value = motionMonitor.accelerometerData {
+            delegate?.coreMotionManager(transitionData: value)
+        }
+    }
+    
+    @objc func updateGyro() {
+        time += 1
+        
+        if time > 600 {
+            resetTimer()
+            return
+        }
+        
+        motionMonitor.startGyroUpdates()
+        if let value = motionMonitor.gyroData {
+            delegate?.coreMotionManager(transitionData: value)
+        }
+    }
+}
+
+extension CoreMotionManager {
+    private func resetTimer() {
+        timer?.invalidate()
+        cancelUpdateData()
+        timer = nil
+        time = 0
     }
 }
