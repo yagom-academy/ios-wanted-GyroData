@@ -3,13 +3,13 @@
 
 import UIKit
 
-class MesureListViewController: UIViewController {
+class MeasureListViewController: UIViewController {
 
     private let tableView: UITableView = {
         let tableView = UITableView()
         
-        tableView.register(MesureTableViewCell.self,
-                           forCellReuseIdentifier: "MesureTableViewCell")
+        tableView.register(MeasureTableViewCell.self,
+                           forCellReuseIdentifier: "MeasureTableViewCell")
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
         return tableView

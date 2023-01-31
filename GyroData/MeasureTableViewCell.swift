@@ -1,9 +1,9 @@
-//  GyroData - MesureTableViewCell.swift
+//  GyroData - MeasureTableViewCell.swift
 //  Created by zhilly, woong on 2023/01/31
 
 import UIKit
 
-class MesureTableViewCell: UITableViewCell {
+class MeasureTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
