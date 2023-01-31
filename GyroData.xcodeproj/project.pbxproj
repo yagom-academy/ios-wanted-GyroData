@@ -19,15 +19,16 @@
 		D381D27B2988E58700567C6B /* MotionGraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D381D2722988E58700567C6B /* MotionGraphViewController.swift */; };
 		D381D27C2988E58700567C6B /* MotionsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D381D2742988E58700567C6B /* MotionsListViewController.swift */; };
 		D381D27D2988E58700567C6B /* MotionsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D381D2752988E58700567C6B /* MotionsListViewModel.swift */; };
-		D381D2832988E89B00567C6B /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D381D2822988E89B00567C6B /* Repository.swift */; };
-		D381D2852988E8AB00567C6B /* CoreDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D381D2842988E8AB00567C6B /* CoreDataRepository.swift */; };
-		D381D2882988E8BF00567C6B /* FileManagerRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D381D2872988E8BF00567C6B /* FileManagerRepository.swift */; };
+		D381D2852988E8AB00567C6B /* DefaultCoreDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D381D2842988E8AB00567C6B /* DefaultCoreDataRepository.swift */; };
+		D381D2882988E8BF00567C6B /* DefaultFileManagerRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D381D2872988E8BF00567C6B /* DefaultFileManagerRepository.swift */; };
 		D381D28B2988E8E100567C6B /* MotionDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = D381D28A2988E8E100567C6B /* MotionDTO.swift */; };
 		D381D28D2988E95B00567C6B /* DomainConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = D381D28C2988E95B00567C6B /* DomainConvertible.swift */; };
 		D381D2932988EA5900567C6B /* GyroData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D381D2912988EA5900567C6B /* GyroData.xcdatamodeld */; };
 		D381D29A2988EC5B00567C6B /* MotionMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D381D2982988EC5B00567C6B /* MotionMO+CoreDataClass.swift */; };
 		D381D29B2988EC5B00567C6B /* MotionMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D381D2992988EC5B00567C6B /* MotionMO+CoreDataProperties.swift */; };
 		D381D29D2988FE2900567C6B /* MotionMO+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D381D29C2988FE2900567C6B /* MotionMO+.swift */; };
+		D381D2A1298935BA00567C6B /* CoreDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D381D2A0298935BA00567C6B /* CoreDataRepository.swift */; };
+		D381D2A32989363C00567C6B /* FileManagerRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D381D2A22989363C00567C6B /* FileManagerRepository.swift */; };
 		E3D84A9A2988E6D400FDA64F /* MotionDeletable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D84A992988E6D400FDA64F /* MotionDeletable.swift */; };
 		E3D84A9C2988E6EF00FDA64F /* MotionCreatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D84A9B2988E6EF00FDA64F /* MotionCreatable.swift */; };
 		E3D84A9E2988E70400FDA64F /* CoreDataMotionReadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D84A9D2988E70400FDA64F /* CoreDataMotionReadable.swift */; };
@@ -57,15 +58,16 @@
 		D381D2722988E58700567C6B /* MotionGraphViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionGraphViewController.swift; sourceTree = "<group>"; };
 		D381D2742988E58700567C6B /* MotionsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionsListViewController.swift; sourceTree = "<group>"; };
 		D381D2752988E58700567C6B /* MotionsListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionsListViewModel.swift; sourceTree = "<group>"; };
-		D381D2822988E89B00567C6B /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
-		D381D2842988E8AB00567C6B /* CoreDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataRepository.swift; sourceTree = "<group>"; };
-		D381D2872988E8BF00567C6B /* FileManagerRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerRepository.swift; sourceTree = "<group>"; };
+		D381D2842988E8AB00567C6B /* DefaultCoreDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCoreDataRepository.swift; sourceTree = "<group>"; };
+		D381D2872988E8BF00567C6B /* DefaultFileManagerRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFileManagerRepository.swift; sourceTree = "<group>"; };
 		D381D28A2988E8E100567C6B /* MotionDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDTO.swift; sourceTree = "<group>"; };
 		D381D28C2988E95B00567C6B /* DomainConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainConvertible.swift; sourceTree = "<group>"; };
 		D381D2922988EA5900567C6B /* GyroData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GyroData.xcdatamodel; sourceTree = "<group>"; };
 		D381D2982988EC5B00567C6B /* MotionMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MotionMO+CoreDataClass.swift"; sourceTree = "<group>"; };
 		D381D2992988EC5B00567C6B /* MotionMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MotionMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		D381D29C2988FE2900567C6B /* MotionMO+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MotionMO+.swift"; sourceTree = "<group>"; };
+		D381D2A0298935BA00567C6B /* CoreDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataRepository.swift; sourceTree = "<group>"; };
+		D381D2A22989363C00567C6B /* FileManagerRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerRepository.swift; sourceTree = "<group>"; };
 		E3D84A992988E6D400FDA64F /* MotionDeletable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDeletable.swift; sourceTree = "<group>"; };
 		E3D84A9B2988E6EF00FDA64F /* MotionCreatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionCreatable.swift; sourceTree = "<group>"; };
 		E3D84A9D2988E70400FDA64F /* CoreDataMotionReadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataMotionReadable.swift; sourceTree = "<group>"; };
@@ -183,7 +185,6 @@
 		D381D27F2988E86200567C6B /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
-				D381D2822988E89B00567C6B /* Repository.swift */,
 				D381D28C2988E95B00567C6B /* DomainConvertible.swift */,
 			);
 			path = Protocol;
@@ -192,8 +193,9 @@
 		D381D2802988E86800567C6B /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				D381D29E2989355500567C6B /* Protocol */,
 				D381D2862988E8AE00567C6B /* Entity */,
-				D381D2842988E8AB00567C6B /* CoreDataRepository.swift */,
+				D381D2842988E8AB00567C6B /* DefaultCoreDataRepository.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -201,8 +203,9 @@
 		D381D2812988E86E00567C6B /* FileManager */ = {
 			isa = PBXGroup;
 			children = (
+				D381D29F2989355E00567C6B /* Protocol */,
 				D381D2892988E8C400567C6B /* Entity */,
-				D381D2872988E8BF00567C6B /* FileManagerRepository.swift */,
+				D381D2872988E8BF00567C6B /* DefaultFileManagerRepository.swift */,
 			);
 			path = FileManager;
 			sourceTree = "<group>";
@@ -223,6 +226,22 @@
 				D381D28A2988E8E100567C6B /* MotionDTO.swift */,
 			);
 			path = Entity;
+			sourceTree = "<group>";
+		};
+		D381D29E2989355500567C6B /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				D381D2A0298935BA00567C6B /* CoreDataRepository.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		D381D29F2989355E00567C6B /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				D381D2A22989363C00567C6B /* FileManagerRepository.swift */,
+			);
+			path = Protocol;
 			sourceTree = "<group>";
 		};
 		E3D84A962988E67400FDA64F /* Service */ = {
@@ -351,24 +370,25 @@
 				E3D84A9C2988E6EF00FDA64F /* MotionCreatable.swift in Sources */,
 				D381D2782988E58700567C6B /* MotionMeasureViewController.swift in Sources */,
 				D381D27B2988E58700567C6B /* MotionGraphViewController.swift in Sources */,
+				D381D2A1298935BA00567C6B /* CoreDataRepository.swift in Sources */,
 				D381D2792988E58700567C6B /* MotionMeasureViewModel.swift in Sources */,
 				E3D84AA62988E75B00FDA64F /* CoreDataMotionReadService.swift in Sources */,
 				E3D84AAC2988E7F000FDA64F /* Motion.swift in Sources */,
 				D381D28D2988E95B00567C6B /* DomainConvertible.swift in Sources */,
-				D381D2832988E89B00567C6B /* Repository.swift in Sources */,
 				D381D2932988EA5900567C6B /* GyroData.xcdatamodeld in Sources */,
 				D381D2772988E58700567C6B /* MotionPlayViewController.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				D381D27A2988E58700567C6B /* MotionGraphViewModel.swift in Sources */,
+				D381D2A32989363C00567C6B /* FileManagerRepository.swift in Sources */,
 				E3D84AA82988E76700FDA64F /* FileManagerMotionReadService.swift in Sources */,
 				D381D28B2988E8E100567C6B /* MotionDTO.swift in Sources */,
 				D381D29B2988EC5B00567C6B /* MotionMO+CoreDataProperties.swift in Sources */,
 				D381D27C2988E58700567C6B /* MotionsListViewController.swift in Sources */,
 				D381D29D2988FE2900567C6B /* MotionMO+.swift in Sources */,
 				E3D84AB12988F7C800FDA64F /* CMRotationRate+.swift in Sources */,
-				D381D2852988E8AB00567C6B /* CoreDataRepository.swift in Sources */,
+				D381D2852988E8AB00567C6B /* DefaultCoreDataRepository.swift in Sources */,
 				D381D2762988E58700567C6B /* MotionPlayViewModel.swift in Sources */,
-				D381D2882988E8BF00567C6B /* FileManagerRepository.swift in Sources */,
+				D381D2882988E8BF00567C6B /* DefaultFileManagerRepository.swift in Sources */,
 				E3D84AA22988E72E00FDA64F /* MotionCreateService.swift in Sources */,
 				E3D84AAF2988F76200FDA64F /* MotionDataType.swift in Sources */,
 				D381D27D2988E58700567C6B /* MotionsListViewModel.swift in Sources */,
