@@ -1,5 +1,5 @@
 //
-//  RecordMotionDataViewController.swift
+//  MotionDataDetailViewController.swift
 //  GyroData
 //
 //  Created by Jiyoung Lee on 2023/01/31.
@@ -7,10 +7,10 @@
 
 import UIKit
 
-final class RecordMotionDataViewController: UIViewController {
-    private let viewModel: RecordMotionDataViewModel
+final class MotionDataDetailViewController: UIViewController {
+    private let viewModel: MotionDataDetailViewModel
 
-    init(viewModel: RecordMotionDataViewModel) {
+    init(viewModel: MotionDataDetailViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
