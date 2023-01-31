@@ -128,6 +128,7 @@ private extension RecordViewController {
         
         resetTransitionValues()
         
+        
 //        switch segmentIndex {
 //        case 0:
 //            startMonitoringAccelerometer()

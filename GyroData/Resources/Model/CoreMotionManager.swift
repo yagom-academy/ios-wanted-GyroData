@@ -11,7 +11,8 @@ protocol CoreMotionDelegate: AnyObject {
 }
 
 class CoreMotionManager {
-    let motionMonitor = CMMotionManager()
+    private let motionMonitor = CMMotionManager()
+    private var time: Int = 0
     
     weak var delegate: CoreMotionDelegate?
     
@@ -40,11 +41,24 @@ class CoreMotionManager {
     }
     
     func handleLogData(data: CMLogItem?, error: Error?) {
-        guard error == nil,
-              let data = data else {
+        guard error == nil, let data = data else { return }
+        time += 1
+        
+        guard time <= 600 else {
+            cancelUpdateData()
             return
         }
         
         delegate?.coreMotionManager(transitionData: data)
+    }
+    
+    func cancelUpdateData() {
+        if motionMonitor.isAccelerometerActive {
+            motionMonitor.stopAccelerometerUpdates()
+        }
+        
+        if motionMonitor.isGyroActive {
+            motionMonitor.stopGyroUpdates()
+        }
     }
 }
