@@ -49,6 +49,11 @@ final class RecordViewController: UIViewController {
 
 // MARK: Core Motion Manager Method
 private extension RecordViewController {
+    func setUpCoreMotionIntervals() {
+        monitor.accelerometerUpdateInterval = 0.1
+        monitor.gyroUpdateInterval = 0.1
+    }
+    
     func startMonitoringAccelerometer() {
         guard monitor.isAccelerometerAvailable else { return }
         
