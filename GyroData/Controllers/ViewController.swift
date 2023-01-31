@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  GyroData
 //
-//  Created by 써니쿠키, 로빈 on 2022/09/16.
+//  Created by 써니쿠키 on 2022/09/16.
 //
 
 import UIKit
