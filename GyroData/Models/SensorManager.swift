@@ -47,7 +47,6 @@ class SensorManager {
         motionManager.accelerometerUpdateInterval = interval
         motionManager.startAccelerometerUpdates(to: .main) { accelerometerData, _ in
             guard let acceleration = accelerometerData?.acceleration else { return }
-            print(acceleration)
             completion(AxisData(x: acceleration.x, y: acceleration.y, z: acceleration.z))
         }
     }
@@ -56,7 +55,6 @@ class SensorManager {
         motionManager.gyroUpdateInterval = interval
         motionManager.startGyroUpdates(to: .main) { gyroData, _ in
             guard let rotationRate = gyroData?.rotationRate else { return }
-            print(rotationRate)
             completion(AxisData(x: rotationRate.x, y: rotationRate.y, z: rotationRate.z))
         }
     }
