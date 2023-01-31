@@ -23,7 +23,8 @@ final class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
+        setNavigationBar()
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
@@ -45,6 +46,16 @@ final class ViewController: UIViewController {
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
+    }
+    
+    func setNavigationBar() {
+        let button = UIBarButtonItem(title: "측정", style: .plain, target: self, action: #selector(didTapRecordButton))
+        self.navigationItem.rightBarButtonItem = button
+    }
+    
+    @objc func didTapRecordButton() {
+        let controller = RecordViewController()
+        navigationController?.pushViewController(controller, animated: true)
     }
 }
 
