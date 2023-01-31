@@ -23,6 +23,7 @@ final class ListViewController: UIViewController {
         registerListCell()
         configureDataSource()
         applySnapshot()
+        setupNavigationBar()
     }
     
     private func registerListCell() {
@@ -37,12 +38,12 @@ final class ListViewController: UIViewController {
             let cellIdentifier = ListCell.reuseIdentifier
             
             let listCell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier)
-                    as? ListCell
+            as? ListCell
             
-            listCell?.setup(date: measurement.date.description,
-                       sensorName: measurement.sensor.name,
-                       value: String(measurement.time))
-        
+            listCell?.setup(date: measurement.date.makeSlashFormat(),
+                            sensorName: measurement.sensor.name,
+                            value: String(format: "%.1f", measurement.time))
+            
             return listCell
         }
     }
@@ -51,6 +52,28 @@ final class ListViewController: UIViewController {
         snapShot.appendSections([.main])
         snapShot.appendItems(measurements)
         dataSource?.apply(snapShot)
+    }
+}
+
+//MARK: - NavigationBar
+extension ListViewController {
+    
+    private func setupNavigationBar() {
+        navigationController?.navigationBar.topItem?.title = "목록"
+        
+        let measurementButton = UIBarButtonItem(title: "측정",
+                                                image: nil,
+                                                primaryAction: presentMeasurementPage(),
+                                                menu: nil)
+        
+        navigationController?.navigationBar.topItem?.rightBarButtonItem = measurementButton
+    }
+    
+    private func presentMeasurementPage() -> UIAction {
+        return UIAction { _ in
+            print("Measurement Page 이동")
+            // 구현 예정
+        }
     }
 }
 

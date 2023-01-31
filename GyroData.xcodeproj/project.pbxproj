@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		414C7A702988CE2A00452C25 /* AxisValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414C7A6F2988CE2A00452C25 /* AxisValue.swift */; };
+		414C7A772988DFDB00452C25 /* Date +.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414C7A762988DFDB00452C25 /* Date +.swift */; };
 		414E53092987DE1B000221E2 /* Sensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414E53082987DE1B000221E2 /* Sensor.swift */; };
 		414E530B2987DE9E000221E2 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414E530A2987DE9E000221E2 /* ListViewController.swift */; };
 		414E530F2987E052000221E2 /* Measurement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414E530E2987E052000221E2 /* Measurement.swift */; };
@@ -24,6 +25,7 @@
 
 /* Begin PBXFileReference section */
 		414C7A6F2988CE2A00452C25 /* AxisValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxisValue.swift; sourceTree = "<group>"; };
+		414C7A762988DFDB00452C25 /* Date +.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date +.swift"; sourceTree = "<group>"; };
 		414E53082987DE1B000221E2 /* Sensor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sensor.swift; sourceTree = "<group>"; };
 		414E530A2987DE9E000221E2 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		414E530E2987E052000221E2 /* Measurement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Measurement.swift; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 			children = (
 				414E53152987E6DB000221E2 /* UILabel +.swift */,
 				414E53172987E915000221E2 /* UIStackView +.swift */,
+				414C7A762988DFDB00452C25 /* Date +.swift */,
 			);
 			path = "Extension +";
 			sourceTree = "<group>";
@@ -202,6 +205,7 @@
 				414E53092987DE1B000221E2 /* Sensor.swift in Sources */,
 				414E53162987E6DB000221E2 /* UILabel +.swift in Sources */,
 				414E530F2987E052000221E2 /* Measurement.swift in Sources */,
+				414C7A772988DFDB00452C25 /* Date +.swift in Sources */,
 				414E53112987E0CC000221E2 /* ListView.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				414E53182987E915000221E2 /* UIStackView +.swift in Sources */,
