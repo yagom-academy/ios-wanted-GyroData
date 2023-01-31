@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1A087CCD2987D3CE00FC2056 /* MeasurementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A087CCC2987D3CE00FC2056 /* MeasurementViewController.swift */; };
+		1A087CD02987DDBB00FC2056 /* LineGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A087CCF2987DDBB00FC2056 /* LineGraphView.swift */; };
 		1A087CDA2987F7DF00FC2056 /* Sensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A087CD92987F7DF00FC2056 /* Sensor.swift */; };
 		1A087CE3298833ED00FC2056 /* AxisData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A087CE2298833ED00FC2056 /* AxisData.swift */; };
 		1A087CE529884ED300FC2056 /* SensorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A087CE429884ED300FC2056 /* SensorManager.swift */; };
@@ -21,6 +22,7 @@
 
 /* Begin PBXFileReference section */
 		1A087CCC2987D3CE00FC2056 /* MeasurementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementViewController.swift; sourceTree = "<group>"; };
+		1A087CCF2987DDBB00FC2056 /* LineGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineGraphView.swift; sourceTree = "<group>"; };
 		1A087CD92987F7DF00FC2056 /* Sensor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sensor.swift; sourceTree = "<group>"; };
 		1A087CE2298833ED00FC2056 /* AxisData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxisData.swift; sourceTree = "<group>"; };
 		1A087CE429884ED300FC2056 /* SensorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensorManager.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 		1A087CCB2987CE1A00FC2056 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1A087CCF2987DDBB00FC2056 /* LineGraphView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -182,6 +185,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */,
+				1A087CD02987DDBB00FC2056 /* LineGraphView.swift in Sources */,
 				1A087CDA2987F7DF00FC2056 /* Sensor.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				1A087CE529884ED300FC2056 /* SensorManager.swift in Sources */,
