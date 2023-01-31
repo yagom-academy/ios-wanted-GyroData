@@ -23,11 +23,8 @@ final class MotionDataTableViewModel {
         self.motionDataListHandler = handler
     }
     
-    func fetchMotionDataList() -> [(date: String, type: String, time: String)] {
-        let list = fileManager.fetchData().map {
-            ($0.date.description, $0.type.rawValue, $0.time.description)
-        }
-        return list
+    func fetchMotionDataList() -> [MotionData] {
+        return fileManager.fetchData()
     }
     
     func fetchMotionData(index: Int) -> MotionData {

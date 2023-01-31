@@ -8,7 +8,7 @@
 import Foundation
 import simd
 
-struct MotionData: Codable {
+struct MotionData: Codable, Hashable {
 
     let date: Date
     let type: MotionType
