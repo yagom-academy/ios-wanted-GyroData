@@ -45,7 +45,7 @@ class MeasureListViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "측정",
                                                             style: .plain,
                                                             target: self,
-                                                            action: nil)
+                                                            action: #selector(presentMeasureViewController))
     }
     
     private func setupViews() {
@@ -83,6 +83,11 @@ class MeasureListViewController: UIViewController {
             SampleData(createdAt: "3", sensorType: "", measureTime: "")
         ])
         dataSource?.apply(snapshot)
+    }
+    
+    @objc
+    private func presentMeasureViewController() {
+        self.navigationController?.pushViewController(MeasureViewController(), animated: true)
     }
 }
 

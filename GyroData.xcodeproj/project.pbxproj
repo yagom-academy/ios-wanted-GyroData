@@ -13,6 +13,7 @@
 		63F01BBE28D44FC500C53A39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBD28D44FC500C53A39 /* Assets.xcassets */; };
 		63F01BC128D44FC500C53A39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */; };
 		B4AC807A2988CBCC0095621A /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AC80792988CBCC0095621A /* ReusableView.swift */; };
+		B4AC807C2988E4310095621A /* MeasureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AC807B2988E4310095621A /* MeasureViewController.swift */; };
 		D2C94E2A2988BE9F00F70389 /* MeasureTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C94E292988BE9F00F70389 /* MeasureTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -25,6 +26,7 @@
 		63F01BC028D44FC500C53A39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		63F01BC228D44FC500C53A39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B4AC80792988CBCC0095621A /* ReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
+		B4AC807B2988E4310095621A /* MeasureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureViewController.swift; sourceTree = "<group>"; };
 		D2C94E292988BE9F00F70389 /* MeasureTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -63,6 +65,7 @@
 				63F01BB628D44FC400C53A39 /* SceneDelegate.swift */,
 				63F01BB828D44FC400C53A39 /* MeasureListViewController.swift */,
 				D2C94E292988BE9F00F70389 /* MeasureTableViewCell.swift */,
+				B4AC807B2988E4310095621A /* MeasureViewController.swift */,
 				63F01BBD28D44FC500C53A39 /* Assets.xcassets */,
 				63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */,
 				63F01BC228D44FC500C53A39 /* Info.plist */,
@@ -151,6 +154,7 @@
 				B4AC807A2988CBCC0095621A /* ReusableView.swift in Sources */,
 				D2C94E2A2988BE9F00F70389 /* MeasureTableViewCell.swift in Sources */,
 				63F01BB928D44FC400C53A39 /* MeasureListViewController.swift in Sources */,
+				B4AC807C2988E4310095621A /* MeasureViewController.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
 			);
