@@ -19,11 +19,16 @@ final class ListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view = listView
+        drawView()
         registerListCell()
         configureDataSource()
         applySnapshot()
         setupNavigationBar()
+    }
+    
+    private func drawView() {
+        view = listView
+        listView.tableView.delegate = self
     }
     
     private func registerListCell() {
@@ -52,6 +57,28 @@ final class ListViewController: UIViewController {
         snapShot.appendSections([.main])
         snapShot.appendItems(measurements)
         dataSource?.apply(snapShot)
+    }
+}
+
+//MARK: - TableViewDelegate
+extension ListViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView,
+                   trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath)
+    -> UISwipeActionsConfiguration? {
+       
+        let playAction = UIContextualAction(style: .normal, title: "Play") { _, _, _ in
+            print("데이터 Play")
+            // 액션 구현 예정
+        }
+        playAction.backgroundColor = .systemGreen
+        
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") {  _, _, _ in
+            print("Cell, Date 삭제")
+            // 액션 구현 예정
+        }
+        
+        return UISwipeActionsConfiguration(actions: [deleteAction, playAction])
     }
 }
 
