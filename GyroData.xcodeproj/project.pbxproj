@@ -56,15 +56,63 @@
 		63F01BB328D44FC400C53A39 /* GyroData */ = {
 			isa = PBXGroup;
 			children = (
+				AEA15D772988A65200EF6EBF /* App */,
+				AEA15D782988A66800EF6EBF /* Common */,
+				AEA15D7A2988A6BE00EF6EBF /* Model */,
+				AEA15D7B2988A6C900EF6EBF /* View */,
+				AEA15D792988A6AC00EF6EBF /* ViewModel */,
+				AEA15D7C2988A6E000EF6EBF /* Resource */,
+			);
+			path = GyroData;
+			sourceTree = "<group>";
+		};
+		AEA15D772988A65200EF6EBF /* App */ = {
+			isa = PBXGroup;
+			children = (
 				63F01BB428D44FC400C53A39 /* AppDelegate.swift */,
 				63F01BB628D44FC400C53A39 /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		AEA15D782988A66800EF6EBF /* Common */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		AEA15D792988A6AC00EF6EBF /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		AEA15D7A2988A6BE00EF6EBF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		AEA15D7B2988A6C900EF6EBF /* View */ = {
+			isa = PBXGroup;
+			children = (
 				63F01BB828D44FC400C53A39 /* ViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		AEA15D7C2988A6E000EF6EBF /* Resource */ = {
+			isa = PBXGroup;
+			children = (
 				63F01BBA28D44FC400C53A39 /* Main.storyboard */,
 				63F01BBD28D44FC500C53A39 /* Assets.xcassets */,
 				63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */,
 				63F01BC228D44FC500C53A39 /* Info.plist */,
 			);
-			path = GyroData;
+			path = Resource;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -288,7 +336,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = GyroData/Info.plist;
+				INFOPLIST_FILE = GyroData/Resource/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -315,7 +363,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = GyroData/Info.plist;
+				INFOPLIST_FILE = GyroData/Resource/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
