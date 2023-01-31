@@ -10,8 +10,8 @@ import Foundation
 final class MotionDataListViewModel {
     enum Action {
         case recordButtonTapped(closure: (RecordMotionDataViewModel) -> Void)
-        case view(at: IndexPath, closure: (MotionDataViewModel) -> Void)
-        case play(at: IndexPath, closure: (MotionDataViewModel) -> Void)
+        case view(at: IndexPath, closure: (MotionDataDetailViewModel) -> Void)
+        case play(at: IndexPath, closure: (MotionDataDetailViewModel) -> Void)
         case delete(at: IndexPath)
         case scrollToBottom
     }
@@ -49,7 +49,7 @@ final class MotionDataListViewModel {
     
     private func createNewMotionData(_ closure: @escaping (RecordMotionDataViewModel) -> Void) { }
     
-    private func showMotionData(_ data: MotionData, _ closure: @escaping (MotionDataViewModel) -> Void) { }
+    private func showMotionData(_ data: MotionData, _ closure: @escaping (MotionDataDetailViewModel) -> Void) { }
     
     // 코어데이터에서 10개씩 꺼내오는 메서드
     private func updateMotionData() { }
