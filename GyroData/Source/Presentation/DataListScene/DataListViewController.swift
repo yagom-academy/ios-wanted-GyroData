@@ -7,9 +7,29 @@
 
 import UIKit
 
-class DataListViewController: UIViewController {
+final class DataListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNavigationBar()
+        setupView()
+        setupConstraint()
+    }
+    
+    private let tableView = UITableView()
+    
+}
+
+extension DataListViewController {
+    private func setupNavigationBar() {
+        
+    }
+    
+    private func setupView() {
+    
+    }
+    
+    private func setupConstraint() {
+        
     }
 }
