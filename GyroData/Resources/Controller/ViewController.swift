@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class TransitionListViewController: UIViewController {
+final class ViewController: UIViewController {
 
     // MARK: - Property
     private lazy var tableView: UITableView = {
@@ -27,8 +27,16 @@ final class TransitionListViewController: UIViewController {
     }
 }
 
+// MARK: - ObjcMethod
+extension ViewController {
+    @objc func didTapRecordButton() {
+        let controller = RecordViewController()
+        navigationController?.pushViewController(controller, animated: true)
+    }
+}
+
 // MARK: - UITableViewDataSource
-extension TransitionListViewController: UITableViewDataSource {
+extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cellCount
     }
@@ -44,7 +52,7 @@ extension TransitionListViewController: UITableViewDataSource {
 }
 
 // MARK: - UITableViewDelegate
-extension TransitionListViewController: UITableViewDelegate {
+extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let playAction = UIContextualAction(style: .normal, title: "Play") { (action, view, completionHandler) in
             print("play 클릭")
@@ -62,17 +70,9 @@ extension TransitionListViewController: UITableViewDelegate {
     }
 }
 
-// MARK: - ObjcMethod
-extension TransitionListViewController {
-    @objc func didTapRecordButton() {
-        let controller = RecordViewController()
-        navigationController?.pushViewController(controller, animated: true)
-    }
-}
-
 // MARK: - UIConfiguration
-private extension TransitionListViewController {
-    func configureUI() {
+extension ViewController {
+    private func configureUI() {
         view.backgroundColor = .systemBackground
         setNavigationBar()
         tableView.dataSource = self
@@ -82,7 +82,7 @@ private extension TransitionListViewController {
         setUpLayouts()
     }
 
-    func setUpLayouts() {
+    private func setUpLayouts() {
         view.addSubview(tableView)
 
         NSLayoutConstraint.activate([

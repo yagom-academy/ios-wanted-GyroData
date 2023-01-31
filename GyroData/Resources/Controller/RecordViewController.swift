@@ -8,8 +8,6 @@ import UIKit
 import CoreMotion
 
 final class RecordViewController: UIViewController {
-
-    // MARK: - Property
     let segmentControl: UISegmentedControl = {
         let control = UISegmentedControl(items: ["Acc", "Gyro"])
         control.selectedSegmentIndex = 0
@@ -36,15 +34,17 @@ final class RecordViewController: UIViewController {
     let coreMotionManager = CoreMotionManager()
     var selectedSensor: SensorType?
     var values: [TransitionValue] = []
-
-    // MARK: - LifeCycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         configureUI()
         setButtonAction()
+<<<<<<< HEAD
         coreMotionManager.delegate = self
 
+=======
+        
+>>>>>>> parent of d70a65a (chore: ViewController -> TransitionListViewController 이름변경 및 RecordViewController와 컨벤션 통일)
         convertButtonsState(isEnable: true)
     }
 }
@@ -61,6 +61,7 @@ extension RecordViewController: CoreMotionDelegate {
     }
 }
 
+<<<<<<< HEAD
 // MARK: - FileManagerLogic
 private extension RecordViewController {
     func saveJsonData() {
@@ -85,6 +86,8 @@ private extension RecordViewController {
 }
 
 // MARK: - ButtonMethod
+=======
+>>>>>>> parent of d70a65a (chore: ViewController -> TransitionListViewController 이름변경 및 RecordViewController와 컨벤션 통일)
 private extension RecordViewController {
     func setButtonAction() {
         let saveButton = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(didTapSaveButton))
@@ -92,6 +95,57 @@ private extension RecordViewController {
         
         recordButton.addTarget(self, action: #selector(didTapRecordButton), for: .touchUpInside)
         cancelButton.addTarget(self, action: #selector(didTapCancelButton), for: .touchUpInside)
+    }
+    
+    @objc func didTapRecordButton() {
+        let segmentIndex = segmentControl.selectedSegmentIndex
+        
+        switch segmentIndex {
+        case 0:
+            startMonitoringAccelerometer()
+        case 1:
+            startMonitoringGyro()
+        default:
+            return
+        }
+        convertButtonsState(isEnable: false)
+    }
+    
+    @objc func didTapCancelButton() {
+        if monitor.isAccelerometerActive {
+            monitor.stopAccelerometerUpdates()
+            convertButtonsState(isEnable: true)
+            saveJsonData()
+            return
+        }
+        
+        if monitor.isGyroActive {
+            monitor.stopGyroUpdates()
+            convertButtonsState(isEnable: true)
+            saveJsonData()
+            return
+        }
+    }
+    
+    func saveJsonData() {
+        let transition = values.convertTransition()
+        
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
+        
+        guard let encodeData = try? encoder.encode(transition) else {
+            return
+        }
+        
+        if let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+            let pathWithFileName = documentDirectory.appendingPathComponent("\(Date().description).json")
+            
+            do {
+                try encodeData.write(to: pathWithFileName)
+            } catch {
+                NSLog(error.localizedDescription)
+            }
+        }
     }
     
     func convertButtonsState(isEnable: Bool) {
@@ -107,6 +161,7 @@ private extension RecordViewController {
         }
     }
     
+<<<<<<< HEAD
     func resetTransitionValues() {
         if !values.isEmpty { values.removeAll() }
     }
@@ -130,12 +185,13 @@ private extension RecordViewController {
         convertButtonsState(isEnable: true)
     }
 
+=======
+>>>>>>> parent of d70a65a (chore: ViewController -> TransitionListViewController 이름변경 및 RecordViewController와 컨벤션 통일)
     @objc func didTapSaveButton() {
         // TODO: 저장 메서드 생성
     }
 }
 
-// MARK: - UIConfiguration
 private extension RecordViewController {
     func configureUI() {
         setBackgroundColor()
