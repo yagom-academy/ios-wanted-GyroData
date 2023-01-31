@@ -45,46 +45,44 @@ final class FileSystemManager {
 }
 
 extension FileSystemManager {
-    func save(data: MeasureData) -> Result<Void, FileSystemError> {
+    func save(data: MeasureData) throws {
         let dataPath = directoryPath.appendingPathComponent(
             data.date.description + FileConstant.jsonExtensionName
         )
         
         guard let data = convertJSON(from: data) else {
-            return .failure(.encodeError)
+            throw FileSystemError.encodeError
         }
         
         do {
             try data.write(to: dataPath)
-            return .success(())
         } catch {
-            return .failure(.saveError)
+            throw FileSystemError.saveError
         }
     }
     
-    func load(date: Date) -> Result<Data, FileSystemError> {
+    func fetch(date: Date) throws -> Data {
         let dataPath = directoryPath.appendingPathComponent(
             date.description + FileConstant.jsonExtensionName
         )
         
         do {
             let data = try Data(contentsOf: dataPath)
-            return .success(data)
+            return data
         } catch {
-            return .failure(.loadError)
+            throw FileSystemError.loadError
         }
     }
     
-    func delete(date: Date) -> Result<Void, FileSystemError> {
+    func delete(date: Date) throws {
         let dataPath = directoryPath.appendingPathComponent(
             date.description + FileConstant.jsonExtensionName
         )
         
         do {
             try fileManager.removeItem(at: dataPath)
-            return .success(())
         } catch {
-            return .failure(.deleteError)
+            throw FileSystemError.deleteError
         }
     }
 }
