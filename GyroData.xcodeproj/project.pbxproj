@@ -12,6 +12,7 @@
 		579C4D9A2988CBA400D3949F /* DataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579C4D992988CBA400D3949F /* DataStorage.swift */; };
 		579C4D9C2988CBA900D3949F /* DataStorageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579C4D9B2988CBA900D3949F /* DataStorageType.swift */; };
 		579C4D9E2988CF7300D3949F /* FileManagerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579C4D9D2988CF7300D3949F /* FileManagerType.swift */; };
+		57C8B7D0298900700010E58E /* DataStorageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C8B7CF298900700010E58E /* DataStorageError.swift */; };
 		63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB428D44FC400C53A39 /* AppDelegate.swift */; };
 		63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB628D44FC400C53A39 /* SceneDelegate.swift */; };
 		63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB828D44FC400C53A39 /* ViewController.swift */; };
@@ -28,6 +29,7 @@
 		579C4D992988CBA400D3949F /* DataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStorage.swift; sourceTree = "<group>"; };
 		579C4D9B2988CBA900D3949F /* DataStorageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStorageType.swift; sourceTree = "<group>"; };
 		579C4D9D2988CF7300D3949F /* FileManagerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerType.swift; sourceTree = "<group>"; };
+		57C8B7CF298900700010E58E /* DataStorageError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStorageError.swift; sourceTree = "<group>"; };
 		63F01BB128D44FC400C53A39 /* GyroData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GyroData.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63F01BB428D44FC400C53A39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63F01BB628D44FC400C53A39 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 				579C4D8F2988A40300D3949F /* MotionManagerType.swift */,
 				579C4D9B2988CBA900D3949F /* DataStorageType.swift */,
 				579C4D992988CBA400D3949F /* DataStorage.swift */,
+				57C8B7CF298900700010E58E /* DataStorageError.swift */,
 				579C4D9D2988CF7300D3949F /* FileManagerType.swift */,
 			);
 			path = Model;
@@ -176,6 +179,7 @@
 				579C4D9C2988CBA900D3949F /* DataStorageType.swift in Sources */,
 				579C4D9E2988CF7300D3949F /* FileManagerType.swift in Sources */,
 				EB96E7722987C8DE00F9DF79 /* Coordinate.swift in Sources */,
+				57C8B7D0298900700010E58E /* DataStorageError.swift in Sources */,
 				579C4D922988A40A00D3949F /* MotionManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

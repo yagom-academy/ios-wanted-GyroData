@@ -7,16 +7,6 @@
 
 import Foundation
 
-enum DataStorageError: Error {
-    case cannotFindDocumentDirectory
-    case cannotCreateDirectory
-    case cannotReadFile
-    case cannotSaveFile
-    case cannotDeleteData
-    case cannotEncodeData
-    case cannotDecodeData
-}
-
 final class DataStorage: DataStorageType {
     private let fileManager: FileManagerType
     private let directoryURL: URL
@@ -63,7 +53,7 @@ final class DataStorage: DataStorageType {
         }
     }
     
-    func createDirectory(with url: URL) throws {
+    private func createDirectory(with url: URL) throws {
         guard !fileManager.fileExists(atPath: url.path) else { return }
         
         do {
