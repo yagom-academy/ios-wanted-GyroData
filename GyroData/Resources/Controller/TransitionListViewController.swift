@@ -74,8 +74,14 @@ extension TransitionListViewController: UITableViewDelegate {
         }
         playAction.backgroundColor = .systemGreen
 
-        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completionHandler) in
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] (action, view, completionHandler) in
             print("delete 클릭")
+//            guard let data = self?.transitionMetaDatas[indexPath.row] else { return }
+            self?.transitionMetaDatas.remove(at: indexPath.row)
+//            PersistentContainerManager.shared.deleteTransitionMetaData(data: data)
+            DispatchQueue.main.async {
+                tableView.reloadData()
+            }
             completionHandler(true)
         }
         deleteAction.backgroundColor = .systemRed
