@@ -51,27 +51,13 @@ final class RecordViewController: UIViewController {
 extension RecordViewController: CoreMotionDelegate {
     func coreMotionManager(transitionData: CMLogItem) {
         if let data = transitionData as? CMAccelerometerData {
-            setAccelerometerData(data: data.acceleration)
+            let value = data.acceleration
+            values.append((value.x, value.y, value.z))
         } else if let data = transitionData as? CMGyroData {
-            setGyroData(data: data.rotationRate)
+            let value = data.rotationRate
+            values.append((value.x, value.y, value.z))
         }
     }
-    
-    private func setAccelerometerData(data: CMAcceleration) {
-        let value = (data.x, data.y, data.z)
-        print(value)
-        values.append(value)
-    }
-    
-    private func setGyroData(data: CMRotationRate) {
-        let value = (data.x, data.y, data.z)
-        values.append(value)
-    }
-}
-
-// MARK: Core Motion Manager Method
-private extension RecordViewController {
-    
 }
 
 // MARK: - FileManagerLogic
