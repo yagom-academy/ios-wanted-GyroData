@@ -8,12 +8,16 @@
 import UIKit
 
 final class NavigationTitleView: UIView {
-    let titleLabel: UILabel = {
+    // MARK: Private Properties
+    
+    private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .headline)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
+    // MARK: Initializer
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -25,6 +29,14 @@ final class NavigationTitleView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: Internal Methods
+    
+    func configureTitleLabel(title: String) {
+        titleLabel.text = title
+    }
+    
+    // MARK: Private Methods
+    
     private func configureLayout() {
         addSubview(titleLabel)
         
@@ -34,9 +46,5 @@ final class NavigationTitleView: UIView {
             titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
             titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
-    }
-    
-    func configureTitleLabel(title: String) {
-        titleLabel.text = title
     }
 }
