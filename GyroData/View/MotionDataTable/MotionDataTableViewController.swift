@@ -26,15 +26,23 @@ final class MotionDataTableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        configureHierarchy()
-        configureLayout()
-
+        configureUI()
         configureDataSource()
         configureSnapshot(list: motionDataListViewModel?.fetchMotionDataList() ?? [])
     }
+    
+    private func configureUI() {
+        view.backgroundColor = .systemBackground
+        configureCollection()
+        configureLayout()
+        configureNavigationBar()
+    }
 
-    private func configureHierarchy() {
+    private func configureCollection() {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createListLayout())
+        collectionView.register(UICollectionViewListCell.self,
+                                forCellWithReuseIdentifier: "cell")
+        collectionView.delegate = self
         view.addSubview(collectionView)
     }
 
@@ -47,29 +55,51 @@ final class MotionDataTableViewController: UIViewController {
             collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
+    
+    private func configureNavigationBar() {
+        navigationItem.title = "목록"
+        navigationItem.rightBarButtonItem = createMeasurementButton()
+    }
+    
+    private func createMeasurementButton() -> UIBarButtonItem {
+        let button = UIBarButtonItem(title: "측정", primaryAction: createPushAction())
+        
+        return button
+    }
+    
+    private func createPushAction() -> UIAction {
+        let action = UIAction { _ in
+            let measurementMotionDataViewController = MeasurementMotionDataViewController()
+            self.navigationController?.pushViewController(measurementMotionDataViewController, animated: true)
+        }
+        
+        return action
+    }
 }
 
 extension MotionDataTableViewController {
 
     private func createListLayout() -> UICollectionViewCompositionalLayout {
-        var layoutConfig = UICollectionLayoutListConfiguration(appearance: .insetGrouped)
+        var layoutConfig = UICollectionLayoutListConfiguration(appearance: .plain)
 
         let listLayout = UICollectionViewCompositionalLayout.list(using: layoutConfig)
         return listLayout
     }
 
     func configureDataSource() {
-        let cellRegistration = UICollectionView.CellRegistration<UICollectionViewCell, MotionData> { (cell, indexPath, motionData) in
+        let cellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, MotionData> { (cell, indexPath, motionData) in
+            
         }
 
         dataSource = UICollectionViewDiffableDataSource<Int, MotionData>(collectionView: collectionView) {
-            (collectionView: UICollectionView, indexPath: IndexPath, motionData: MotionData) -> UICollectionViewCell? in
+            (collectionView: UICollectionView, indexPath: IndexPath, motionData: MotionData) -> UICollectionViewListCell? in
             return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: motionData)
         }
     }
 
     func configureSnapshot(list: [MotionData]) {
         var snapshot = NSDiffableDataSourceSnapshot<Int, MotionData>()
+        snapshot.appendSections([0])
         snapshot.appendItems(list)
 
         dataSource?.apply(snapshot)
@@ -88,5 +118,14 @@ extension MotionDataTableViewController {
         alert.addAction(okAction)
 
         present(alert, animated: true, completion:nil)
+    }
+}
+
+extension MotionDataTableViewController: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let replayMotionViewControll = ReplayMotionViewController()
+        navigationController?.pushViewController(replayMotionViewControll, animated: true)
+        collectionView.deselectItem(at: indexPath, animated: true)
     }
 }

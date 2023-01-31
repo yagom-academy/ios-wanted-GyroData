@@ -21,6 +21,10 @@
 		BF128AB42988CAA700C3CB7B /* MotionDataEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF128AB22988CAA700C3CB7B /* MotionDataEntity+CoreDataClass.swift */; };
 		BF128AB52988CAA700C3CB7B /* MotionDataEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF128AB32988CAA700C3CB7B /* MotionDataEntity+CoreDataProperties.swift */; };
 		BF128AB82988DCCD00C3CB7B /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF128AB72988DCCD00C3CB7B /* FileManager.swift */; };
+		BF128ABC29892BB400C3CB7B /* MeasurementMotionDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF128ABB29892BB400C3CB7B /* MeasurementMotionDataViewController.swift */; };
+		BF128AC029892D2700C3CB7B /* ReplayMotionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF128ABF29892D2700C3CB7B /* ReplayMotionViewController.swift */; };
+		BF128AC229892D5700C3CB7B /* MeasurementMotionDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF128AC129892D5700C3CB7B /* MeasurementMotionDataViewModel.swift */; };
+		BF128AC429892D7200C3CB7B /* ReplayMotionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF128AC329892D7200C3CB7B /* ReplayMotionViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +44,10 @@
 		BF128AB22988CAA700C3CB7B /* MotionDataEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MotionDataEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		BF128AB32988CAA700C3CB7B /* MotionDataEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MotionDataEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		BF128AB72988DCCD00C3CB7B /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
+		BF128ABB29892BB400C3CB7B /* MeasurementMotionDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementMotionDataViewController.swift; sourceTree = "<group>"; };
+		BF128ABF29892D2700C3CB7B /* ReplayMotionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplayMotionViewController.swift; sourceTree = "<group>"; };
+		BF128AC129892D5700C3CB7B /* MeasurementMotionDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementMotionDataViewModel.swift; sourceTree = "<group>"; };
+		BF128AC329892D7200C3CB7B /* ReplayMotionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplayMotionViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +73,8 @@
 			isa = PBXGroup;
 			children = (
 				BF128AAA2988AE5900C3CB7B /* MotionDataTable */,
+				BF128AB929892B6A00C3CB7B /* MeasurementMotionData */,
+				BF128ABD29892CFC00C3CB7B /* ReplayMotion */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -73,6 +83,8 @@
 			isa = PBXGroup;
 			children = (
 				BF128AAB2988AE9600C3CB7B /* MotionDataTable */,
+				BF128ABA29892B8E00C3CB7B /* MeasurementMotionData */,
+				BF128ABE29892D0E00C3CB7B /* ReplayMotion */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -171,6 +183,38 @@
 			path = CoreData;
 			sourceTree = "<group>";
 		};
+		BF128AB929892B6A00C3CB7B /* MeasurementMotionData */ = {
+			isa = PBXGroup;
+			children = (
+				BF128ABB29892BB400C3CB7B /* MeasurementMotionDataViewController.swift */,
+			);
+			path = MeasurementMotionData;
+			sourceTree = "<group>";
+		};
+		BF128ABA29892B8E00C3CB7B /* MeasurementMotionData */ = {
+			isa = PBXGroup;
+			children = (
+				BF128AC129892D5700C3CB7B /* MeasurementMotionDataViewModel.swift */,
+			);
+			path = MeasurementMotionData;
+			sourceTree = "<group>";
+		};
+		BF128ABD29892CFC00C3CB7B /* ReplayMotion */ = {
+			isa = PBXGroup;
+			children = (
+				BF128ABF29892D2700C3CB7B /* ReplayMotionViewController.swift */,
+			);
+			path = ReplayMotion;
+			sourceTree = "<group>";
+		};
+		BF128ABE29892D0E00C3CB7B /* ReplayMotion */ = {
+			isa = PBXGroup;
+			children = (
+				BF128AC329892D7200C3CB7B /* ReplayMotionViewModel.swift */,
+			);
+			path = ReplayMotion;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -241,15 +285,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF128AC029892D2700C3CB7B /* ReplayMotionViewController.swift in Sources */,
 				63F01BB928D44FC400C53A39 /* MotionDataTableViewController.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
 				BF128AB52988CAA700C3CB7B /* MotionDataEntity+CoreDataProperties.swift in Sources */,
+				BF128AC429892D7200C3CB7B /* ReplayMotionViewModel.swift in Sources */,
 				BF128AB12988AFC700C3CB7B /* MotionDataModel.xcdatamodeld in Sources */,
 				BF128AAD2988AEB000C3CB7B /* MotionDataTableViewModel.swift in Sources */,
 				11B34A8E2988AA2100DA3A56 /* MotionType.swift in Sources */,
 				BF128AB82988DCCD00C3CB7B /* FileManager.swift in Sources */,
+				BF128AC229892D5700C3CB7B /* MeasurementMotionDataViewModel.swift in Sources */,
 				BF128AB42988CAA700C3CB7B /* MotionDataEntity+CoreDataClass.swift in Sources */,
+				BF128ABC29892BB400C3CB7B /* MeasurementMotionDataViewController.swift in Sources */,
 				1138F2492988D09200007C11 /* CoreDataManager.swift in Sources */,
 				11B34A8C2988A6AB00DA3A56 /* MotionData.swift in Sources */,
 				1138F24C2988E68000007C11 /* JSONDataManager.swift in Sources */,
