@@ -20,7 +20,22 @@ final class CoreDataManager {
     }()
     private lazy var context = persistentContainer.viewContext
     
-    func save(_ model: MeasureData) -> Result<Void, Error> {
+    private func translateModel(from entity: SensorData) -> MeasureData {
+        let model = MeasureData(
+            xValue: entity.xValue,
+            yValue: entity.yValue,
+            zValue: entity.zValue,
+            runTime: entity.runTime,
+            date: entity.date,
+            type: Sensor(rawValue: Int(entity.type))
+        )
+        
+        return model
+    }
+}
+
+extension CoreDataManager {
+    func save(_ model: MeasureData) throws {
         let content = SensorData(context: self.context)
         
         content.setValue(model.xValue, forKey: "xValue")
@@ -32,13 +47,12 @@ final class CoreDataManager {
         
         do {
             try context.save()
-            return .success(())
         } catch {
-            return .failure(error)
+            throw error
         }
     }
 
-    func fetch(offset: Int, limit: Int) -> Result<[MeasureData], Error> {
+    func fetch(offset: Int, limit: Int) throws -> [MeasureData]  {
         let request = SensorData.fetchRequest()
         
         request.fetchOffset = offset
@@ -47,14 +61,13 @@ final class CoreDataManager {
         do {
             let result = try context.fetch(request)
             let models = result.map(translateModel)
-            
-            return .success(models)
+            return models
         } catch {
-            return .failure(error)
+            throw error
         }
     }
     
-    func delete(_ model: MeasureData) -> Result<Void, Error> {
+    func delete(_ model: MeasureData) throws {
         let request = SensorData.fetchRequest()
         
         request.predicate = NSPredicate(format: "date == %@", model.date as CVarArg)
@@ -62,30 +75,13 @@ final class CoreDataManager {
         do {
             let result = try context.fetch(request)
             guard let firstData = result.first else {
-                return .failure(CoreDataError.invalidData)
+                throw CoreDataError.invalidData
             }
             
             context.delete(firstData)
             try context.save()
-                
-            return .success(())
         } catch {
-            return .failure(error)
+            throw error
         }
-    }
-}
-
-private extension CoreDataManager {
-    func translateModel(from entity: SensorData) -> MeasureData {
-        let model = MeasureData(
-            xValue: entity.xValue,
-            yValue: entity.yValue,
-            zValue: entity.zValue,
-            runTime: entity.runTime,
-            date: entity.date,
-            type: Sensor(rawValue: Int(entity.type))
-        )
-        
-        return model
     }
 }
