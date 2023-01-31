@@ -5,7 +5,7 @@
 //  Created by junho, summercat on 2023/01/30.
 //
 
-enum MotionDataType: CustomStringConvertible {
+enum MotionDataType: CustomStringConvertible, Codable {
     case accelerometer
     case gyro
 

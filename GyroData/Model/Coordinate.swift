@@ -7,7 +7,7 @@
 
 import CoreMotion
 
-struct Coordinate {
+struct Coordinate: Codable {
     var x: Double
     var y: Double
     var z: Double
