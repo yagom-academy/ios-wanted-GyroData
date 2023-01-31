@@ -136,17 +136,25 @@ class LineGraphView: UIView {
             }
         }
 
-        // axis-x graph
         let axisXpath = CGMutablePath()
+        let axisYpath = CGMutablePath()
+        let axisZpath = CGMutablePath()
+
         axisXpath.move(to: CGPoint(x: 0, y: height))
+        axisYpath.move(to: CGPoint(x: 0, y: height))
+        axisZpath.move(to: CGPoint(x: 0, y: height))
 
         for (index, axisData) in data.enumerated() {
             configureLabel(with: axisData)
             maxValue = max(maxValue, abs(axisData.x), abs(axisData.y), abs(axisData.z))
             let x = CGFloat(index) * xOffset
             let axisXPosition = height - axisData.x * yOffset
+            let axisYPosition = height - axisData.y * yOffset
+            let axisZPosition = height - axisData.z * yOffset
 
             axisXpath.addLine(to: CGPoint(x: x, y: axisXPosition))
+            axisYpath.addLine(to: CGPoint(x: x, y: axisYPosition))
+            axisZpath.addLine(to: CGPoint(x: x, y: axisZPosition))
         }
 
         context.setLineWidth(1)
@@ -154,36 +162,10 @@ class LineGraphView: UIView {
         context.setStrokeColor(UIColor.red.cgColor)
         context.strokePath()
 
-        // axis-y graph
-        let axisYpath = CGMutablePath()
-        axisYpath.move(to: CGPoint(x: 0, y: height))
-
-        for (index, axisData) in data.enumerated() {
-            maxValue = max(maxValue, abs(axisData.x), abs(axisData.y), abs(axisData.z))
-            let x = CGFloat(index) * xOffset
-            let axisYPosition = height - axisData.y * yOffset
-
-            axisYpath.addLine(to: CGPoint(x: x, y: axisYPosition))
-        }
-
-        context.setLineWidth(1)
         context.addPath(axisYpath)
         context.setStrokeColor(UIColor.green.cgColor)
         context.strokePath()
 
-        // axis-z graph
-        let axisZpath = CGMutablePath()
-        axisZpath.move(to: CGPoint(x: 0, y: height))
-
-        for (index, axisData) in data.enumerated() {
-            maxValue = max(maxValue, abs(axisData.x), abs(axisData.y), abs(axisData.z))
-            let x = CGFloat(index) * xOffset
-            let axisZPosition = height - axisData.z * yOffset
-
-            axisZpath.addLine(to: CGPoint(x: x, y: axisZPosition))
-        }
-
-        context.setLineWidth(1)
         context.addPath(axisZpath)
         context.setStrokeColor(UIColor.blue.cgColor)
         context.strokePath()
