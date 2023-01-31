@@ -8,9 +8,9 @@
 import Foundation
 
 enum FileDataManagerError: Error {
-    case save
-    case fetch
-    case delete
+    case saveFailure
+    case fetchFailure
+    case deleteFailure
 }
 
 protocol FileDataManageable {
@@ -42,7 +42,7 @@ final class FileDataManager: FileDataManageable {
                 try source.write(to: dataPath)
                 completion(.success(()))
             } catch {
-                completion(.failure(.save))
+                completion(.failure(.saveFailure))
             }
 
         }
@@ -57,7 +57,7 @@ final class FileDataManager: FileDataManageable {
             completion(.success(()))
             return data
         } catch {
-            completion(.failure(.fetch))
+            completion(.failure(.fetchFailure))
         }
 
         return nil
@@ -70,7 +70,7 @@ final class FileDataManager: FileDataManageable {
             try fileManager.removeItem(at: dataPath)
             completion(.success(()))
         } catch {
-            completion(.failure(.delete))
+            completion(.failure(.deleteFailure))
         }
     }
 }
