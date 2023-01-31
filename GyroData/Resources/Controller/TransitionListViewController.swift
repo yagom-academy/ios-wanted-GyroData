@@ -62,6 +62,18 @@ extension TransitionListViewController: UITableViewDelegate {
     }
 }
 
+// MARK: - UIScrollViewDelegate
+extension TransitionListViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let position = scrollView.contentOffset.y
+        print(position)
+        print(tableView.contentSize.height - scrollView.frame.size.height + 100)
+        if position > tableView.contentSize.height - scrollView.frame.size.height - 100 {
+            print("닿았다!")
+        }
+    }
+}
+
 // MARK: - ObjcMethod
 private extension TransitionListViewController {
     @objc func didTapRecordButton() {
@@ -86,7 +98,7 @@ private extension TransitionListViewController {
         view.addSubview(tableView)
 
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
@@ -94,7 +106,7 @@ private extension TransitionListViewController {
     }
 
     func setNavigationBar() {
-        let button = UIBarButtonItem(title: "측정", style: .plain, target: self, action: #selector(didTapRecordButton))
-        self.navigationItem.rightBarButtonItem = button
+        let rightBarButton = UIBarButtonItem(title: "측정", style: .plain, target: self, action: #selector(didTapRecordButton))
+        self.navigationItem.rightBarButtonItem = rightBarButton
     }
 }
