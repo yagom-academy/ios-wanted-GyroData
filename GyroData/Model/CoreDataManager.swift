@@ -19,6 +19,7 @@ final class CoreDataManager: CoreDataManageable {
         }
         return container
     }()
+    
     private var context: NSManagedObjectContext {
         persistentContainer.viewContext
     }
