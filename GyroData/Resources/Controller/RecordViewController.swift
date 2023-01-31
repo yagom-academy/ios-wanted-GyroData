@@ -56,19 +56,22 @@ extension RecordViewController: CoreMotionDelegate {
             setGyroData(data: data.rotationRate)
         }
     }
+    
+    private func setAccelerometerData(data: CMAcceleration) {
+        let value = (data.x, data.y, data.z)
+        print(value)
+        values.append(value)
+    }
+    
+    private func setGyroData(data: CMRotationRate) {
+        let value = (data.x, data.y, data.z)
+        values.append(value)
+    }
 }
 
 // MARK: Core Motion Manager Method
 private extension RecordViewController {
-    func setAccelerometerData(data: CMAcceleration) {
-        let value = (data.x, data.y, data.z)
-        values.append(value)
-    }
     
-    func setGyroData(data: CMRotationRate) {
-        let value = (data.x, data.y, data.z)
-        values.append(value)
-    }
 }
 
 // MARK: - FileManagerLogic
@@ -125,33 +128,16 @@ private extension RecordViewController {
 private extension RecordViewController {
     @objc func didTapRecordButton() {
         let segmentIndex = segmentControl.selectedSegmentIndex
+        guard let sensor = SensorType(rawInt: segmentIndex) else { return }
         
         resetTransitionValues()
-        
-        
-//        switch segmentIndex {
-//        case 0:
-//            startMonitoringAccelerometer()
-//        case 1:
-//            startMonitoringGyro()
-//        default:
-//            return
-//        }
+        coreMotionManager.startUpdateData(with: sensor)
         convertButtonsState(isEnable: false)
     }
 
     @objc func didTapCancelButton() {
-//        if monitor.isAccelerometerActive {
-//            monitor.stopAccelerometerUpdates()
-//            convertButtonsState(isEnable: true)
-//            return
-//        }
-//
-//        if monitor.isGyroActive {
-//            monitor.stopGyroUpdates()
-//            convertButtonsState(isEnable: true)
-//            return
-//        }
+        coreMotionManager.cancelUpdateData()
+        convertButtonsState(isEnable: true)
     }
 
     @objc func didTapSaveButton() {
