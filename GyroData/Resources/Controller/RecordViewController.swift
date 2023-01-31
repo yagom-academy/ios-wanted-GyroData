@@ -8,12 +8,14 @@ import UIKit
 import CoreMotion
 
 final class RecordViewController: UIViewController {
+
+    // MARK: - Property
     let segmentControl: UISegmentedControl = {
         let control = UISegmentedControl(items: ["Acc", "Gyro"])
         control.selectedSegmentIndex = 0
         return control
     }()
-    
+
     let recordButton: UIButton = {
         let button = UIButton()
         button.setTitle("측정", for: .normal)
@@ -22,7 +24,7 @@ final class RecordViewController: UIViewController {
         button.layer.cornerRadius = 5
         return button
     }()
-    
+
     let cancelButton: UIButton = {
         let button = UIButton()
         button.setTitle("취소", for: .normal)
@@ -30,28 +32,55 @@ final class RecordViewController: UIViewController {
         button.layer.cornerRadius = 5
         return button
     }()
-    
-    let coreMotionManager = CoreMotionManager()
-    var selectedSensor: SensorType?
+
+    let monitor = CMMotionManager()
     var values: [TransitionValue] = []
-    
+
+    // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
+
         configureUI()
         setButtonAction()
+
         convertButtonsState(isEnable: true)
     }
 }
 
-extension RecordViewController: CoreMotionDelegate {
-    func coreMotionManager(transitionData: CMLogItem) {
-        if let data = transitionData as? CMAccelerometerData {
-            let value = data.acceleration
-            values.append((value.x, value.y, value.z))
-        } else if let data = transitionData as? CMGyroData {
-            let value = data.rotationRate
-            values.append((value.x, value.y, value.z))
+// MARK: Core Motion Manager Method
+private extension RecordViewController {
+    func startMonitoringAccelerometer() {
+        guard monitor.isAccelerometerAvailable else { return }
+
+        monitor.startAccelerometerUpdates(to: .main, withHandler: handleLogData)
+    }
+
+    func startMonitoringGyro() {
+        guard monitor.isGyroAvailable else { return }
+
+        monitor.startGyroUpdates(to: .main, withHandler: handleLogData)
+    }
+
+    func handleLogData(data: CMLogItem?, error: Error?) {
+        if error != nil { return }
+
+        guard let data = data else { return }
+
+        if let accelerometerData = data as? CMAccelerometerData {
+            setAccelerometerData(data: accelerometerData.acceleration)
+        } else if let gyroData = data as? CMGyroData {
+            setGyroData(data: gyroData.rotationRate)
         }
+    }
+
+    func setAccelerometerData(data: CMAcceleration) {
+        let value = (data.x, data.y, data.z)
+        values.append(value)
+    }
+
+    func setGyroData(data: CMRotationRate) {
+        let value = (data.x, data.y, data.z)
+        values.append(value)
     }
 }
 
@@ -62,19 +91,20 @@ private extension RecordViewController {
 
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
-        
-        let documentDirectories = FileManager
-            .default
-            .urls(for: .documentDirectory, in: .userDomainMask)
-        
-        guard let encodeData = try? encoder.encode(transition),
-              let documentDirectory = documentDirectories.first else {
+
+        guard let encodeData = try? encoder.encode(transition) else {
             return
         }
-        
-        let pathWithFileName = documentDirectory.appendingPathComponent("\(Date().description).json")
 
-        try? encodeData.write(to: pathWithFileName)
+        if let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+            let pathWithFileName = documentDirectory.appendingPathComponent("\(Date().description).json")
+
+            do {
+                try encodeData.write(to: pathWithFileName)
+            } catch {
+                NSLog(error.localizedDescription)
+            }
+        }
     }
 }
 
@@ -83,14 +113,28 @@ private extension RecordViewController {
     func setButtonAction() {
         let saveButton = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(didTapSaveButton))
         navigationItem.rightBarButtonItem = saveButton
-        
+
         recordButton.addTarget(self, action: #selector(didTapRecordButton), for: .touchUpInside)
         cancelButton.addTarget(self, action: #selector(didTapCancelButton), for: .touchUpInside)
     }
-    
+
+    func convertButtonsState(isEnable: Bool) {
+        recordButton.isEnabled = isEnable
+        cancelButton.isHidden = isEnable
+
+        if recordButton.isEnabled {
+            recordButton.layer.backgroundColor = UIColor.systemBlue.cgColor
+        } else {
+            recordButton.layer.backgroundColor = UIColor.systemGroupedBackground.cgColor
+        }
+    }
+}
+
+// MARK: - ObjcMethod
+private extension RecordViewController {
     @objc func didTapRecordButton() {
         let segmentIndex = segmentControl.selectedSegmentIndex
-        
+
         switch segmentIndex {
         case 0:
             startMonitoringAccelerometer()
@@ -101,7 +145,7 @@ private extension RecordViewController {
         }
         convertButtonsState(isEnable: false)
     }
-    
+
     @objc func didTapCancelButton() {
         if monitor.isAccelerometerActive {
             monitor.stopAccelerometerUpdates()
@@ -109,7 +153,7 @@ private extension RecordViewController {
             saveJsonData()
             return
         }
-        
+
         if monitor.isGyroActive {
             monitor.stopGyroUpdates()
             convertButtonsState(isEnable: true)
@@ -117,75 +161,19 @@ private extension RecordViewController {
             return
         }
     }
-    
-    func saveJsonData() {
-        let transition = values.convertTransition()
-        
-        let encoder = JSONEncoder()
-        encoder.outputFormatting = .prettyPrinted
-        
-        guard let encodeData = try? encoder.encode(transition) else {
-            return
-        }
-        
-        if let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-            let pathWithFileName = documentDirectory.appendingPathComponent("\(Date().description).json")
-            
-            do {
-                try encodeData.write(to: pathWithFileName)
-            } catch {
-                NSLog(error.localizedDescription)
-            }
-        }
-    }
-    
-    func convertButtonsState(isEnable: Bool) {
-        recordButton.isEnabled = isEnable
-        cancelButton.isHidden = isEnable
-        segmentControl.isEnabled = isEnable
-        navigationItem.rightBarButtonItem?.isEnabled = isEnable
-        
-        if recordButton.isEnabled {
-            recordButton.layer.backgroundColor = UIColor.systemBlue.cgColor
-        } else {
-            recordButton.layer.backgroundColor = UIColor.systemGroupedBackground.cgColor
-        }
-    }
-    
-    func resetTransitionValues() {
-        if !values.isEmpty { values.removeAll() }
-    }
-}
-
-
-// MARK: - ObjcMethod
-private extension RecordViewController {
-    @objc func didTapRecordButton() {
-        let segmentIndex = segmentControl.selectedSegmentIndex
-        guard let sensor = SensorType(rawInt: segmentIndex) else { return }
-        selectedSensor = sensor
-        
-        resetTransitionValues()
-        coreMotionManager.startUpdateData(with: sensor)
-        convertButtonsState(isEnable: false)
-    }
-
-    @objc func didTapCancelButton() {
-        coreMotionManager.cancelUpdateData()
-        convertButtonsState(isEnable: true)
-    }
 
     @objc func didTapSaveButton() {
         // TODO: 저장 메서드 생성
     }
 }
 
+// MARK: - UIConfiguration
 private extension RecordViewController {
     func configureUI() {
         setBackgroundColor()
         setNavigationBar()
         setAdditionalSafeArea()
-        
+
         addChildView()
         setLayout()
     }
@@ -193,41 +181,41 @@ private extension RecordViewController {
     func setNavigationBar() {
         navigationItem.title = "측정"
     }
-    
+
     func setBackgroundColor() {
         view.backgroundColor = .systemBackground
     }
-    
+
     func setAdditionalSafeArea() {
         let padding: CGFloat = 10
-        
+
         additionalSafeAreaInsets.top += padding
         additionalSafeAreaInsets.bottom += padding
         additionalSafeAreaInsets.left += padding
         additionalSafeAreaInsets.right += padding
     }
-    
+
     func addChildView() {
         [segmentControl, recordButton, cancelButton].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview($0)
         }
     }
-    
+
     func setLayout() {
         let safeArea = view.safeAreaLayoutGuide
-        
+
         NSLayoutConstraint.activate([
             segmentControl.topAnchor.constraint(equalTo: safeArea.topAnchor),
             segmentControl.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor),
             segmentControl.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
             segmentControl.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
-            
+
             recordButton.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor),
             recordButton.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
             recordButton.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
             recordButton.bottomAnchor.constraint(equalTo: cancelButton.topAnchor, constant: -20),
-            
+
             cancelButton.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor),
             cancelButton.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
             cancelButton.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),

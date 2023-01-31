@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ViewController: UIViewController {
+final class TransitionListViewController: UIViewController {
 
     // MARK: - Property
     private lazy var tableView: UITableView = {
@@ -28,7 +28,7 @@ final class ViewController: UIViewController {
 }
 
 // MARK: - ObjcMethod
-extension ViewController {
+extension TransitionListViewController {
     @objc func didTapRecordButton() {
         let controller = RecordViewController()
         navigationController?.pushViewController(controller, animated: true)
@@ -36,7 +36,7 @@ extension ViewController {
 }
 
 // MARK: - UITableViewDataSource
-extension ViewController: UITableViewDataSource {
+extension TransitionListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cellCount
     }
@@ -52,7 +52,7 @@ extension ViewController: UITableViewDataSource {
 }
 
 // MARK: - UITableViewDelegate
-extension ViewController: UITableViewDelegate {
+extension TransitionListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let playAction = UIContextualAction(style: .normal, title: "Play") { (action, view, completionHandler) in
             print("play 클릭")
@@ -71,7 +71,7 @@ extension ViewController: UITableViewDelegate {
 }
 
 // MARK: - UIConfiguration
-extension ViewController {
+extension TransitionListViewController {
     private func configureUI() {
         view.backgroundColor = .systemBackground
         setNavigationBar()
