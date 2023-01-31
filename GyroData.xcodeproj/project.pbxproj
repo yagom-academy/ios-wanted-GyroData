@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		579C4D902988A40300D3949F /* MotionManagerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579C4D8F2988A40300D3949F /* MotionManagerType.swift */; };
+		579C4D922988A40A00D3949F /* MotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579C4D912988A40A00D3949F /* MotionManager.swift */; };
 		63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB428D44FC400C53A39 /* AppDelegate.swift */; };
 		63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB628D44FC400C53A39 /* SceneDelegate.swift */; };
 		63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB828D44FC400C53A39 /* ViewController.swift */; };
@@ -18,6 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		579C4D8F2988A40300D3949F /* MotionManagerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionManagerType.swift; sourceTree = "<group>"; };
+		579C4D912988A40A00D3949F /* MotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionManager.swift; sourceTree = "<group>"; };
 		63F01BB128D44FC400C53A39 /* GyroData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GyroData.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63F01BB428D44FC400C53A39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63F01BB628D44FC400C53A39 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -77,6 +81,8 @@
 				EB96E76F2987B8F500F9DF79 /* MotionData.swift */,
 				EB96E7712987C8DE00F9DF79 /* Coordinate.swift */,
 				EB96E7732987C93C00F9DF79 /* MotionDataType.swift */,
+				579C4D8F2988A40300D3949F /* MotionManagerType.swift */,
+				579C4D912988A40A00D3949F /* MotionManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -153,10 +159,12 @@
 			files = (
 				63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
+				579C4D902988A40300D3949F /* MotionManagerType.swift in Sources */,
 				EB96E7702987B8F500F9DF79 /* MotionData.swift in Sources */,
 				EB96E7742987C93C00F9DF79 /* MotionDataType.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
 				EB96E7722987C8DE00F9DF79 /* Coordinate.swift in Sources */,
+				579C4D922988A40A00D3949F /* MotionManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,6 +303,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3Q4UQ436SX;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GyroData/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -306,7 +315,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.GyroData;
+				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.GyroData1111;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -321,6 +330,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3Q4UQ436SX;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GyroData/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -332,7 +342,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.GyroData;
+				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.GyroData1111;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
