@@ -91,7 +91,21 @@ extension TransitionListViewController: UIScrollViewDelegate {
         print(position)
         print(tableView.contentSize.height - scrollView.frame.size.height + 100)
         if position > tableView.contentSize.height - scrollView.frame.size.height + 100 {
-            
+            bringAdditionalTransitionMetaData { [weak self] count in
+                self?.cellCount += count
+                guard let currentCellCount = self?.cellCount,
+                      let maxCellCount = self?.transitionMetaDatas.count else {
+                    return
+                }
+
+                if currentCellCount > maxCellCount {
+                    self?.cellCount = maxCellCount
+                }
+
+                DispatchQueue.main.async {
+                    self?.tableView.reloadData()
+                }
+            }
         }
     }
 }
