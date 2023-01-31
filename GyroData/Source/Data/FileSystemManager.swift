@@ -25,12 +25,7 @@ final class FileSystemManager {
     
     private func createDirectory() {
         guard !fileManager.fileExists(atPath: directoryPath.path) else { return }
-        do {
-            try fileManager.createDirectory(at: directoryPath, withIntermediateDirectories: false)
-        } catch let error {
-            //TODO: - Error Alert
-            print(error.localizedDescription)
-        }
+        try? fileManager.createDirectory(at: directoryPath, withIntermediateDirectories: false)
     }
     
     private func convertJSON(from data: MeasureData) -> Data? {
