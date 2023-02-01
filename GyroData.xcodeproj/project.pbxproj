@@ -24,12 +24,12 @@
 		AEA15D842988A9A500EF6EBF /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA15D832988A9A500EF6EBF /* FileManager.swift */; };
 		AEA15D862988A9C200EF6EBF /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA15D852988A9C200EF6EBF /* Observable.swift */; };
 		AEA15D882988AA2500EF6EBF /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA15D872988AA2500EF6EBF /* ListViewModel.swift */; };
-		AEA15D8A2988AA5800EF6EBF /* GyroMeasurementViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA15D892988AA5800EF6EBF /* GyroMeasurementViewModel.swift */; };
+		AEA15D8A2988AA5800EF6EBF /* MeasurementViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA15D892988AA5800EF6EBF /* MeasurementViewModel.swift */; };
 		AEA15D8C2988AA9200EF6EBF /* GyroReplayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA15D8B2988AA9200EF6EBF /* GyroReplayViewModel.swift */; };
 		AEA15D8E2988AAE100EF6EBF /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA15D8D2988AAE100EF6EBF /* GraphView.swift */; };
 		AEA15D902988AB1600EF6EBF /* GyroMeasurementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA15D8F2988AB1600EF6EBF /* GyroMeasurementViewController.swift */; };
 		AEA15D922988AB2800EF6EBF /* GyroReplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA15D912988AB2800EF6EBF /* GyroReplayViewController.swift */; };
-		AEA15D972988AB9F00EF6EBF /* CoordinateColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA15D962988AB9F00EF6EBF /* CoordinateColor.swift */; };
+		AEA15D972988AB9F00EF6EBF /* CoordinateData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA15D962988AB9F00EF6EBF /* CoordinateData.swift */; };
 		AEA15D992988ABBC00EF6EBF /* GraphMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA15D982988ABBC00EF6EBF /* GraphMode.swift */; };
 		AEA15D9B2988ABD500EF6EBF /* MotionMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA15D9A2988ABD500EF6EBF /* MotionMode.swift */; };
 /* End PBXBuildFile section */
@@ -54,12 +54,12 @@
 		AEA15D832988A9A500EF6EBF /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 		AEA15D852988A9C200EF6EBF /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		AEA15D872988AA2500EF6EBF /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
-		AEA15D892988AA5800EF6EBF /* GyroMeasurementViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroMeasurementViewModel.swift; sourceTree = "<group>"; };
+		AEA15D892988AA5800EF6EBF /* MeasurementViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementViewModel.swift; sourceTree = "<group>"; };
 		AEA15D8B2988AA9200EF6EBF /* GyroReplayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroReplayViewModel.swift; sourceTree = "<group>"; };
 		AEA15D8D2988AAE100EF6EBF /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		AEA15D8F2988AB1600EF6EBF /* GyroMeasurementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroMeasurementViewController.swift; sourceTree = "<group>"; };
 		AEA15D912988AB2800EF6EBF /* GyroReplayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroReplayViewController.swift; sourceTree = "<group>"; };
-		AEA15D962988AB9F00EF6EBF /* CoordinateColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateColor.swift; sourceTree = "<group>"; };
+		AEA15D962988AB9F00EF6EBF /* CoordinateData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateData.swift; sourceTree = "<group>"; };
 		AEA15D982988ABBC00EF6EBF /* GraphMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphMode.swift; sourceTree = "<group>"; };
 		AEA15D9A2988ABD500EF6EBF /* MotionMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionMode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -122,7 +122,7 @@
 				AEA15D932988AB6F00EF6EBF /* Manager */,
 				AEA15D852988A9C200EF6EBF /* Observable.swift */,
 				AE44131529892D480005BD92 /* Measurable.swift */,
-				AEA15D962988AB9F00EF6EBF /* CoordinateColor.swift */,
+				AEA15D962988AB9F00EF6EBF /* CoordinateData.swift */,
 				AEA15D982988ABBC00EF6EBF /* GraphMode.swift */,
 				AEA15D9A2988ABD500EF6EBF /* MotionMode.swift */,
 			);
@@ -133,6 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				AEA15D872988AA2500EF6EBF /* ListViewModel.swift */,
+				AEA15D892988AA5800EF6EBF /* MeasurementViewModel.swift */,
 				AEA15D892988AA5800EF6EBF /* GyroMeasurementViewModel.swift */,
 				AEA15D8B2988AA9200EF6EBF /* GyroReplayViewModel.swift */,
 			);
@@ -254,14 +255,14 @@
 				2668C6032988B8D20017C9DD /* GyroInformation.xcdatamodeld in Sources */,
 				AEA15D862988A9C200EF6EBF /* Observable.swift in Sources */,
 				63F01BB928D44FC400C53A39 /* GyroListViewController.swift in Sources */,
-				AEA15D8A2988AA5800EF6EBF /* GyroMeasurementViewModel.swift in Sources */,
+				AEA15D8A2988AA5800EF6EBF /* MeasurementViewModel.swift in Sources */,
 				AEA15D822988A96C00EF6EBF /* CoreDataManager.swift in Sources */,
 				AEA15D992988ABBC00EF6EBF /* GraphMode.swift in Sources */,
 				AE44131629892D480005BD92 /* Measurable.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				AE441314298923280005BD92 /* MeasurementManager.swift in Sources */,
 				AEA15D842988A9A500EF6EBF /* FileManager.swift in Sources */,
-				AEA15D972988AB9F00EF6EBF /* CoordinateColor.swift in Sources */,
+				AEA15D972988AB9F00EF6EBF /* CoordinateData.swift in Sources */,
 				AEA15D8C2988AA9200EF6EBF /* GyroReplayViewModel.swift in Sources */,
 				AEA15D802988A94800EF6EBF /* GyroData.swift in Sources */,
 				2668C6072988B9BD0017C9DD /* GyroInformation+CoreDataProperties.swift in Sources */,

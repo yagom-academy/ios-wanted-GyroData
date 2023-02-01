@@ -11,6 +11,17 @@ enum FileDataManagerError: Error {
     case saveFailure
     case fetchFailure
     case deleteFailure
+
+    var message: String {
+        switch self {
+        case .saveFailure:
+            return "저장에 실패하였습니다."
+        case .fetchFailure:
+            return "파일을 불러오는 것에 실패하였습니다."
+        case .deleteFailure:
+            return "삭제에 실패하였습니다."
+        }
+    }
 }
 
 protocol FileDataManageable {
@@ -20,6 +31,7 @@ protocol FileDataManageable {
 }
 
 final class FileDataManager: FileDataManageable {
+    static let shared: FileDataManager = FileDataManager()
     private let fileManager = FileManager.default
     private lazy var documentPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
     private lazy var directoryPath = documentPath.appendingPathComponent("CoreMotion")
