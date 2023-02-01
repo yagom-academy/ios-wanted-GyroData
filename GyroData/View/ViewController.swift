@@ -8,7 +8,6 @@
 import UIKit
 
 class ViewController: UIViewController {
-    let manager = CoreDataManager.shared
     var motionDataList: [MotionEntity] = []
     
     let tableView: UITableView = {
@@ -58,7 +57,7 @@ class ViewController: UIViewController {
     }
     
     func configureData() {
-        guard let hasList = manager.fetchData(entity: MotionEntity.self) else { return }
+        guard let hasList = CoreDataManager.shared.fetchData(entity: MotionEntity.self) else { return }
         motionDataList = hasList
     }
 }
@@ -82,7 +81,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         let delete = UIContextualAction(style: .normal, title: "Delete") { (UIContextualAction, UIView, success: @escaping (Bool) -> Void) in
-            self.manager.delete(entity: self.motionDataList[indexPath.row])
+            CoreDataManager.shared.delete(entity: self.motionDataList[indexPath.row])
             self.motionDataList.remove(at: indexPath.row)
             success(true)
             tableView.reloadData()
