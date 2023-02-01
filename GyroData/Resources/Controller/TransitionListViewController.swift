@@ -42,7 +42,7 @@ final class TransitionListViewController: UIViewController {
 private extension TransitionListViewController {
     // Error타입 만들어주기
     func bringAdditionalTransitionMetaData(completion: @escaping (Int) -> Void) {
-        DispatchQueue.global().asyncAfter(deadline: .now() + 5) {
+        DispatchQueue.global().asyncAfter(deadline: .now() + 3) {
             completion(10)
         }
     }
@@ -61,7 +61,7 @@ extension TransitionListViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return view.frame.height/6
+        return view.frame.height/7
     }
 }
 
