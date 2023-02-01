@@ -47,6 +47,7 @@ final class MeasurementViewController: UIViewController {
         configureLayout()
         configureButton()
         configureIndicatorView()
+        bind()
     }
 
     private func configureNavigationBar() {
