@@ -10,12 +10,15 @@ import Foundation
 final class RecordMotionDataViewModel {
     enum Action {
         case changeSegment(to: Int)
-        case start
-        case stop
+        case start(selectedIndex: Int, closure: () -> Void)
+        case stop(closure: () -> Void)
+    }
+    
+    enum ThrowableAction {
         case save
     }
     
-    private var motionData: MotionData
+    private var motionData: MotionData?
     private let coreDataManager: CoreDataManagerType
     private var dataStorage: DataStorageType?
     private let motionManager: MotionManagerType
@@ -23,11 +26,9 @@ final class RecordMotionDataViewModel {
     private var onAdd: ((MotionData) -> Void)?
     
     init(
-        motionDataType: MotionDataType,
         coreDataManager: CoreDataManagerType = CoreDataManager.shared,
         motionManager: MotionManagerType = MotionManager()
     ) {
-        motionData = MotionData(motionDataType: motionDataType)
         self.coreDataManager = coreDataManager
         self.motionManager = motionManager
     }
@@ -40,17 +41,21 @@ final class RecordMotionDataViewModel {
         onAdd = closure
     }
     
-    func action(_ action: Action) throws {
+    func action(_ action: Action)  {
         switch action {
         case let .changeSegment(index):
             selectedIndex(index)
-        case .start:
-            start()
-        case .stop:
-            stop()
+        case let .start(index, closure):
+            start(selectedIndex: index, closure)
+        case let .stop(closure):
+            stop(closure)
+        }
+    }
+    
+    func throwableAction(_ action: ThrowableAction) throws {
+        switch action {
         case .save:
-            try saveToCoreData()
-            try saveToDataStorage()
+            try save()
         }
     }
     

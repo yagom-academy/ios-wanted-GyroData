@@ -45,7 +45,7 @@ final class RecordMotionDataViewController: UIViewController {
     }()
     
     init() {
-        viewModel = RecordMotionDataViewModel(motionDataType: MotionDataType.allCases.map { $0 } [0])
+        viewModel = RecordMotionDataViewModel()
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -57,6 +57,17 @@ final class RecordMotionDataViewController: UIViewController {
         super.viewDidLoad()
         setupNavigationBar()
         setupViews()
+        configureButtonActions()
+        bind()
+    }
+    
+    private func bind() {
+        viewModel.bindOnUpdate { coordinate in
+            print(coordinate)
+        }
+        viewModel.bindOnAdd { motionData in
+            print(motionData)
+        }
     }
     
     private func setupNavigationBar() {
@@ -74,7 +85,7 @@ final class RecordMotionDataViewController: UIViewController {
     private func rightBarButtonAction() -> UIAction {
         return UIAction(handler: { _ in
             do {
-                try self.viewModel.action(.save)
+                try self.viewModel.throwableAction(.save)
             } catch CoreDataError.cannotSaveData {
                 self.showAlert(alertTitle: CoreDataError.cannotSaveData.localizedDescription)
             } catch DataStorageError.cannotSaveFile {
@@ -116,11 +127,7 @@ final class RecordMotionDataViewController: UIViewController {
         return UIAction(
             title: title,
             handler: { _ in
-                do {
-                    try self.viewModel.action(.changeSegment(to: index))
-                } catch {
-                    return
-                }
+                self.viewModel.action(.changeSegment(to: index))
             }
         )
     }
