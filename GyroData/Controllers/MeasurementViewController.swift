@@ -73,7 +73,7 @@ final class MeasurementViewController: UIViewController {
 
         sensorManager.measure(sensor: selectedSensor, interval: 0.1, timeout: 60) { [weak self] data in
             guard let data else {
-                self?.setEnabledSegments()
+                self?.setEnabledUserInteraction()
                 return
             }
 
@@ -82,12 +82,12 @@ final class MeasurementViewController: UIViewController {
             self?.drawGraph(with: data)
         }
 
-        setDisabledSegments()
+        setDisabledUserInteraction()
     }
 
     private func stop() {
         sensorManager.stop { [weak self] _ in
-            self?.setEnabledSegments()
+            self?.setEnabledUserInteraction()
             self?.updateMeasurementData()
         }
     }
@@ -108,12 +108,14 @@ final class MeasurementViewController: UIViewController {
         }
     }
     
-    private func setDisabledSegments() {
+    private func setDisabledUserInteraction() {
         measurementView.setDisabledSegments()
+        navigationItem.rightBarButtonItem?.isEnabled = false
     }
 
-    private func setEnabledSegments() {
+    private func setEnabledUserInteraction() {
         measurementView.setEnabledSegments()
+        navigationItem.rightBarButtonItem?.isEnabled = true
     }
 
     private func drawGraph(with data: AxisValue) {
