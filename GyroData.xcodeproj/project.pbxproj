@@ -26,7 +26,7 @@
 		AEA15D862988A9C200EF6EBF /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA15D852988A9C200EF6EBF /* Observable.swift */; };
 		AEA15D882988AA2500EF6EBF /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA15D872988AA2500EF6EBF /* ListViewModel.swift */; };
 		AEA15D8A2988AA5800EF6EBF /* MeasurementViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA15D892988AA5800EF6EBF /* MeasurementViewModel.swift */; };
-		AEA15D8C2988AA9200EF6EBF /* GyroReplayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA15D8B2988AA9200EF6EBF /* GyroReplayViewModel.swift */; };
+		AEA15D8C2988AA9200EF6EBF /* ReplayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA15D8B2988AA9200EF6EBF /* ReplayViewModel.swift */; };
 		AEA15D8E2988AAE100EF6EBF /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA15D8D2988AAE100EF6EBF /* GraphView.swift */; };
 		AEA15D902988AB1600EF6EBF /* MeasurementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA15D8F2988AB1600EF6EBF /* MeasurementViewController.swift */; };
 		AEA15D922988AB2800EF6EBF /* GyroReplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA15D912988AB2800EF6EBF /* GyroReplayViewController.swift */; };
@@ -57,7 +57,7 @@
 		AEA15D852988A9C200EF6EBF /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		AEA15D872988AA2500EF6EBF /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
 		AEA15D892988AA5800EF6EBF /* MeasurementViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementViewModel.swift; sourceTree = "<group>"; };
-		AEA15D8B2988AA9200EF6EBF /* GyroReplayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroReplayViewModel.swift; sourceTree = "<group>"; };
+		AEA15D8B2988AA9200EF6EBF /* ReplayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplayViewModel.swift; sourceTree = "<group>"; };
 		AEA15D8D2988AAE100EF6EBF /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		AEA15D8F2988AB1600EF6EBF /* MeasurementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementViewController.swift; sourceTree = "<group>"; };
 		AEA15D912988AB2800EF6EBF /* GyroReplayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroReplayViewController.swift; sourceTree = "<group>"; };
@@ -145,7 +145,7 @@
 			children = (
 				AEA15D872988AA2500EF6EBF /* ListViewModel.swift */,
 				AEA15D892988AA5800EF6EBF /* MeasurementViewModel.swift */,
-				AEA15D8B2988AA9200EF6EBF /* GyroReplayViewModel.swift */,
+				AEA15D8B2988AA9200EF6EBF /* ReplayViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -274,7 +274,7 @@
 				AE441314298923280005BD92 /* MeasurementManager.swift in Sources */,
 				AEA15D842988A9A500EF6EBF /* FileManager.swift in Sources */,
 				AEA15D972988AB9F00EF6EBF /* CoordinateData.swift in Sources */,
-				AEA15D8C2988AA9200EF6EBF /* GyroReplayViewModel.swift in Sources */,
+				AEA15D8C2988AA9200EF6EBF /* ReplayViewModel.swift in Sources */,
 				AEA15D802988A94800EF6EBF /* GyroData.swift in Sources */,
 				2668C6072988B9BD0017C9DD /* GyroInformation+CoreDataProperties.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
