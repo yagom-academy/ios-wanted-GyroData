@@ -20,22 +20,25 @@ extension CoreDataManageable {
             throw CoreDataError.appDelegateError
         }
         
-        let managedContext = appDelegate.persistentContainer.viewContext
-        guard let entity = NSEntityDescription.entity(
-            forEntityName: Constant.entityName,
-            in: managedContext
-        ) else {
-            throw CoreDataError.fetchError
+        let backgroundContext = appDelegate.backgroundContext
+        
+        backgroundContext.perform {
+            guard let entity = NSEntityDescription.entity(
+                forEntityName: Constant.entityName,
+                in: backgroundContext
+            ) else {
+                return
+            }
+            
+            let object = NSManagedObject(entity: entity, insertInto: backgroundContext)
+            
+            object.setValue(motionData.duration, forKey: Constant.duration)
+            object.setValue(motionData.id, forKey: Constant.id)
+            object.setValue(motionData.measuredDate, forKey: Constant.measuredDate)
+            object.setValue(motionData.type, forKey: Constant.type)
+            
+            appDelegate.saveContext()
         }
-        
-        let object = NSManagedObject(entity: entity, insertInto: managedContext)
-        
-        object.setValue(motionData.duration, forKey: Constant.duration)
-        object.setValue(motionData.id, forKey: Constant.id)
-        object.setValue(motionData.measuredDate, forKey: Constant.measuredDate)
-        object.setValue(motionData.type, forKey: Constant.type)
-        
-        appDelegate.saveContext()
     }
     
     func readCoreData() -> Result<[MotionEntity], CoreDataError> {

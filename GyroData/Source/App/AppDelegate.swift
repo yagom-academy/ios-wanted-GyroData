@@ -40,6 +40,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return container
     }()
     
+    lazy var backgroundContext: NSManagedObjectContext = {
+        return persistentContainer.newBackgroundContext()
+    }()
+    
     func saveContext() {
         let context = persistentContainer.viewContext
         
