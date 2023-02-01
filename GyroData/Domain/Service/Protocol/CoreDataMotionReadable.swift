@@ -5,8 +5,6 @@
 //  Created by Ayaan, Wonbi on 2023/01/31.
 //
 
-import Foundation
-
 protocol CoreDataMotionReadable {
     associatedtype Domain: Identifiable
     associatedtype T: CoreDataRepository
