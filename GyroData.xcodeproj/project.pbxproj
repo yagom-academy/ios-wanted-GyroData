@@ -22,6 +22,8 @@
 		F6AAD48029895426008A79B5 /* MotionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AAD47F29895426008A79B5 /* MotionData.swift */; };
 		F6C594382988D01500705625 /* NavigationTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C594372988D01500705625 /* NavigationTitleView.swift */; };
 		F6C7FB672989084F00CD92FD /* ReplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C7FB662989084F00CD92FD /* ReplayViewController.swift */; };
+		FCCFAB5E298A8C4800308398 /* CoreDataProcessible.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCFAB5D298A8C4800308398 /* CoreDataProcessible.swift */; };
+		FCCFAB60298A90F000308398 /* CoreDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCFAB5F298A90F000308398 /* CoreDataError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +44,8 @@
 		F6AAD47F29895426008A79B5 /* MotionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionData.swift; sourceTree = "<group>"; };
 		F6C594372988D01500705625 /* NavigationTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationTitleView.swift; sourceTree = "<group>"; };
 		F6C7FB662989084F00CD92FD /* ReplayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplayViewController.swift; sourceTree = "<group>"; };
+		FCCFAB5D298A8C4800308398 /* CoreDataProcessible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataProcessible.swift; sourceTree = "<group>"; };
+		FCCFAB5F298A90F000308398 /* CoreDataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +127,8 @@
 		D03B06792988C49F002BEB96 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				FCCFAB5D298A8C4800308398 /* CoreDataProcessible.swift */,
+				FCCFAB5F298A90F000308398 /* CoreDataError.swift */,
 				F6AAD47F29895426008A79B5 /* MotionData.swift */,
 				D03B067A2988D228002BEB96 /* MotionData1.swift */,
 			);
@@ -202,7 +208,7 @@
 				};
 			};
 			buildConfigurationList = 63F01BAC28D44FC400C53A39 /* Build configuration list for PBXProject "GyroData" */;
-			compatibilityVersion = "Xcode 14.0";
+			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -238,6 +244,7 @@
 			files = (
 				63F01BB928D44FC400C53A39 /* MainViewController.swift in Sources */,
 				F6C7FB672989084F00CD92FD /* ReplayViewController.swift in Sources */,
+				FCCFAB60298A90F000308398 /* CoreDataError.swift in Sources */,
 				F6C594382988D01500705625 /* NavigationTitleView.swift in Sources */,
 				D026C77D298A8A6A00FBBF8E /* Motion+CoreDataClass.swift in Sources */,
 				D026C776298A87CD00FBBF8E /* MotionDataModel.xcdatamodeld in Sources */,
@@ -248,6 +255,7 @@
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
 				D026C77E298A8A6A00FBBF8E /* Motion+CoreDataProperties.swift in Sources */,
 				D03B067D2988DBFC002BEB96 /* CustomDataCell.swift in Sources */,
+				FCCFAB5E298A8C4800308398 /* CoreDataProcessible.swift in Sources */,
 				D03B067B2988D228002BEB96 /* MotionData1.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
