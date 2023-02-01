@@ -7,8 +7,14 @@
 
 import UIKit
 
+protocol DataListConfigurable {
+    func setupData(_ datas: [MeasureData])
+    func setupSelectData(_ data: MeasureData)
+}
+
 final class DataListViewController: UIViewController {
     typealias DataSource = UITableViewDiffableDataSource<Section, MeasureData>
+    typealias Snapshot = NSDiffableDataSourceSnapshot<Section, MeasureData>
 
     private enum Constant {
         static let title = "목록"
@@ -19,7 +25,6 @@ final class DataListViewController: UIViewController {
     }
     
     private let tableView = UITableView()
-    private let viewModel = DataListViewModel()
     
     private lazy var dataSource = configureDataSoruce()
     
@@ -28,16 +33,21 @@ final class DataListViewController: UIViewController {
         setupNavigationBar()
         setupView()
         setupConstraint()
-        setupBind()
-    }
-    
-    private func setupBind() {
-        viewModel.bindData { datas in
-            //TODO: Code Implementation
-        }
     }
 }
 
+// MARK: - DataListConfigurable
+extension DataListViewController: DataListConfigurable {
+    func setupData(_ datas: [MeasureData]) {
+        applySnapshot(datas: datas, true)
+    }
+    
+    func setupSelectData(_ data: MeasureData) {
+        //TODO: Receive To DetailViewController
+    }
+}
+
+// MARK: - Configure DataSource, Snapshot
 extension DataListViewController {
     private func configureDataSoruce() -> DataSource {
         let dataSource = DataSource(tableView: tableView) { tableView, indexPath, data in
@@ -54,6 +64,14 @@ extension DataListViewController {
             return cell
         }
         return dataSource
+    }
+    
+    private func applySnapshot(datas: [MeasureData], _ animaingDifferences: Bool) {
+        var snapshot = Snapshot()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(datas)
+        
+        dataSource.apply(snapshot, animatingDifferences: true)
     }
 }
 
