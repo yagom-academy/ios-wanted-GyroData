@@ -33,7 +33,7 @@ final class PersistentContainerManager {
         }
     }
 
-    private func fetchGyroModelObject() -> [TransitionMetaDataObject] {
+    private func fetchTransitionMetaDataObjects() -> [TransitionMetaDataObject] {
         do {
             let request = TransitionMetaDataObject.fetchRequest()
             return try persistentContainer.viewContext.fetch(request)
@@ -43,14 +43,21 @@ final class PersistentContainerManager {
         }
     }
 
-    func fetchGyroModels() -> [TransitionMetaData] {
-        let gyroModelObjects = fetchGyroModelObject()
-        let gyroModels = gyroModelObjects.map {
+    func fetchTransitionMetaDatas() -> [TransitionMetaData] {
+        let fetchTransitionMetaDataObjects = fetchTransitionMetaDataObjects()
+        let transitionMetaDatas = fetchTransitionMetaDataObjects.map {
             TransitionMetaData(saveDate: $0.saveDate,
-                      sensorType: SensorType(rawValue: $0.sensorType) ?? SensorType.Accelerometer,
-                      recordTime: $0.recordTime,
-                      jsonName: $0.jsonName)
+                               sensorType: SensorType(rawValue: $0.sensorType) ?? SensorType.Accelerometer,
+                               recordTime: $0.recordTime,
+                               jsonName: $0.jsonName)
         }
-        return gyroModels
+        return transitionMetaDatas
+    }
+
+    func deleteTransitionMetaData(data: TransitionMetaData) {
+        let fetchTransitionMetaDataObjects = fetchTransitionMetaDataObjects()
+        guard let transitionMetaDataObject = fetchTransitionMetaDataObjects.first(where: { $0.id == data.id }) else { return }
+        persistentContainer.viewContext.delete(transitionMetaDataObject)
+        saveContext()
     }
 }
