@@ -15,11 +15,18 @@ struct DefaultFileManagerRepository: FileManagerRepository {
         FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
     }
     
-    func create(_ domain: Motion) throws {
-        let motionDTO = MotionDTO(from: domain)
-        let fileURL = directory.appendingPathExtension("\(motionDTO.id).json")
-        let JSONData = try JSONEncoder().encode(motionDTO)
-        try JSONData.write(to: fileURL)
+    func create(_ domain: Motion, completion: @escaping (Result<MotionDTO, Error>) -> Void) {
+        DispatchQueue.global().async {
+            let motionDTO = MotionDTO(from: domain)
+            let fileURL = directory.appendingPathExtension("\(motionDTO.id).json")
+            do {
+                let JSONData = try JSONEncoder().encode(motionDTO)
+                try JSONData.write(to: fileURL)
+            } catch {
+                completion(.failure(error))
+            }
+            completion(.success(motionDTO))
+        }
     }
 
     func read(with id: String) throws -> MotionDTO {
