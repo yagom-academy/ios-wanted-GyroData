@@ -8,9 +8,7 @@
 import Foundation
 
 protocol FileManagerProtocol {
-    associatedtype MotionMeasures
-    
-    func save(fileName: UUID, _ motionMeasures: MotionMeasures, completion: @escaping (Result<Void, Error>) -> Void)
-    func load(fileName: UUID) -> MotionMeasures
-    func delete(fileName: UUID)
+    func save(fileName: UUID, _ motionMeasures: MotionMeasures) throws
+    func load(fileName: UUID, completion: @escaping (Result<MotionMeasures, FileManagingError>) -> Void)
+    func delete(fileName: UUID) throws
 }
