@@ -65,7 +65,7 @@ class CustomDataCell: UITableViewCell {
     
     // MARK: Internal Methods
     
-    func configureLabel(data: MotionData) {
+    func configureLabel(data: MotionData1) {
         dateLabel.text = data.date.description
         titleLabel.text = data.title
         valueLabel.text = String(data.value)

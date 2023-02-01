@@ -10,7 +10,7 @@ import UIKit
 final class MainViewController: UIViewController {
     // MARK: Private Properties
     
-    private let motionDataList: [MotionData] = [MotionData(date: Date(), title: "Gyro", value: 60.4)]
+    private let motionDataList: [MotionData1] = [MotionData1(date: Date(), title: "Gyro", value: 60.4)]
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false

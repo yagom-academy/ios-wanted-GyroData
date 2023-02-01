@@ -25,24 +25,24 @@ final class ReplayViewController: UIViewController {
 //        let replayData = [MotionDataModel]()
     
     // mokData
-    let replayData = [MotionDataModel(x: 1, y: 2, z: -0.5),
-                      MotionDataModel(x: -1, y: 2, z: 0.5),
-                      MotionDataModel(x: 1, y: 2, z: -0.5),
-                      MotionDataModel(x: -1, y: 2, z: 0.5),
-                      MotionDataModel(x: 1, y: 2, z: -0.5),
-                      MotionDataModel(x: -1, y: 2, z: 0.5),
-                      MotionDataModel(x: 1, y: 2, z: -0.5),
-                      MotionDataModel(x: -1, y: 2, z: 0.05),
-                      MotionDataModel(x: 1, y: 2, z: -0.5),
-                      MotionDataModel(x: -1, y: 2, z: 0.5),
-                      MotionDataModel(x: 1, y: 2, z: -0.5),
-                      MotionDataModel(x: -1, y: 2, z: 0.5),
-                      MotionDataModel(x: 1, y: 2, z: -0.5),
-                      MotionDataModel(x: -10, y: 2, z: 0.5),
-                      MotionDataModel(x: 1, y: 2, z: -0.5),
-                      MotionDataModel(x: -1, y: 2, z: 0.5),
-                      MotionDataModel(x: 1, y: 20, z: -0.5),
-                      MotionDataModel(x: -1, y: 2, z: 0.5)]
+    let replayData = [MotionData(x: 1, y: 2, z: -0.5),
+                      MotionData(x: -1, y: 2, z: 0.5),
+                      MotionData(x: 1, y: 2, z: -0.5),
+                      MotionData(x: -1, y: 2, z: 0.5),
+                      MotionData(x: 1, y: 2, z: -0.5),
+                      MotionData(x: -1, y: 2, z: 0.5),
+                      MotionData(x: 1, y: 2, z: -0.5),
+                      MotionData(x: -1, y: 2, z: 0.05),
+                      MotionData(x: 1, y: 2, z: -0.5),
+                      MotionData(x: -1, y: 2, z: 0.5),
+                      MotionData(x: 1, y: 2, z: -0.5),
+                      MotionData(x: -1, y: 2, z: 0.5),
+                      MotionData(x: 1, y: 2, z: -0.5),
+                      MotionData(x: -10, y: 2, z: 0.5),
+                      MotionData(x: 1, y: 2, z: -0.5),
+                      MotionData(x: -1, y: 2, z: 0.5),
+                      MotionData(x: 1, y: 20, z: -0.5),
+                      MotionData(x: -1, y: 2, z: 0.5)]
     
     private let dateLabel: UILabel = {
         let label = UILabel()

@@ -9,7 +9,7 @@ import UIKit
 import CoreMotion
 
 class AddViewController: UIViewController {
-    private var motionDataList = [MotionDataModel]()
+    private var motionDataList = [MotionData]()
     
     private let segmentControl: UISegmentedControl = {
         let segmentControl = UISegmentedControl(items: ["Acc", "Gyro"])
@@ -133,7 +133,7 @@ class AddViewController: UIViewController {
                 if error == nil {
                     guard let accelerometerData = data else { return }
 
-                    let recordData = MotionDataModel(
+                    let recordData = MotionData(
                         x: accelerometerData.acceleration.x,
                         y: accelerometerData.acceleration.y,
                         z: accelerometerData.acceleration.z
@@ -153,7 +153,7 @@ class AddViewController: UIViewController {
                 if error == nil {
                     guard let gyroData = data else { return }
                     
-                    let recordData = MotionDataModel(
+                    let recordData = MotionData(
                         x: gyroData.rotationRate.x,
                         y: gyroData.rotationRate.y,
                         z: gyroData.rotationRate.z

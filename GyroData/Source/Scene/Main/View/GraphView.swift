@@ -40,7 +40,7 @@ class GraphView: UIView {
         return stackView
     }()
     
-    var motionDatas: MotionDataModel? {
+    var motionDatas: MotionData? {
         didSet {
             guard let motionDatas = motionDatas else { return }
             
@@ -190,7 +190,7 @@ class GraphView: UIView {
         dataListZ = .init()
     }
     
-    func totalData(data: [MotionDataModel]) {
+    func totalData(data: [MotionData]) {
         
         data.forEach { motionDatas in
             dataListX.append(motionDatas.x)
