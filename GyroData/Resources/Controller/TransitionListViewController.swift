@@ -17,8 +17,7 @@ final class TransitionListViewController: UIViewController {
     }()
 
     private let cellReuseIdentifier = "CustomCell"
-    private var calledBringPageCount = 0
-    private var cellCount = 10
+    private var isPaginating = false
     private var pageCount = 0
 
     // MARK: - LifeCycle
@@ -47,6 +46,7 @@ private extension TransitionListViewController {
             let data = PersistentContainerManager.shared.fetchTenTransitionMetaDatas(pageCount: self.pageCount)
             self.pageCount += 1
             completion(data)
+            self.isPaginating = false
         }
     }
 }
@@ -98,6 +98,9 @@ extension TransitionListViewController: UIScrollViewDelegate {
         let position = scrollView.contentOffset.y
 
         if position > tableView.contentSize.height - scrollView.frame.size.height + 100 {
+            guard !isPaginating else { return }
+            isPaginating = true
+            print(isPaginating)
             tableView.tableFooterView = createSpinnerFooter()
 
             bringAdditionalTransitionMetaData { [weak self] data in
