@@ -30,7 +30,7 @@ final class TransitionListViewController: UIViewController {
         
         // TODO: - UI Test 코드 (삭제 예정)
         for count in 0...25 {
-            transitionMetaDatas.append(
+            TransitionMetaData.transitionMetaDatas.append(
                 TransitionMetaData(saveDate: "2022/09/10 15:11:45",
                                    sensorType: .Accelerometer,
                                    recordTime: Double(count),
