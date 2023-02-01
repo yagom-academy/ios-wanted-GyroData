@@ -15,6 +15,7 @@ protocol MeasureDelegate: AnyObject {
     func nonGyroscopeMeasurable()
     
     func updateData(_ data: [Values])
+    func endMeasuringData()
 }
 
 final class SensorMeasureService {
@@ -48,6 +49,7 @@ final class SensorMeasureService {
     
     func measureStop() {
         timer.invalidate()
+        delegate?.endMeasuringData()
     }
 }
 
@@ -67,11 +69,18 @@ private extension SensorMeasureService {
                 
                 self.data.append(accelerationData)
             }
+            
+            if self.isTimeOver(duration, from: timer.fireDate) {
+                timer.invalidate()
+            }
         }
         
         RunLoop.current.add(timer, forMode: .common)
     }
     
+    func isTimeOver(_ duration: TimeInterval, from fireDate: Date) -> Bool {
+        Date().timeIntervalSince(fireDate) > duration ? true : false
+    }
     
     func gyroscopeMeasureStart(_ interval: TimeInterval, _ duration: TimeInterval) {
         motionManager.gyroUpdateInterval = interval
