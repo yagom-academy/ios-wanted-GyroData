@@ -68,7 +68,7 @@ class CustomDataCell: UITableViewCell {
     func configureLabel(data: MotionData1) {
         dateLabel.text = data.date.description
         titleLabel.text = data.title
-        valueLabel.text = String(data.value)
+        valueLabel.text = String(data.runningTime)
     }
     
     // MARK: Private Methods
