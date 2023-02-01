@@ -34,7 +34,7 @@ struct DefaultCoreDataRepository: CoreDataRepository {
         self.context = context
     }
     
-    func create(_ domain: Motion, completion: @escaping (Result<MotionMO, Error>) -> Void) {
+    func create(_ domain: Motion, completion: @escaping (Result<Void, Error>) -> Void) {
         context.perform {
             guard let entity = NSEntityDescription.entity(
                 forEntityName: "MotionMO",
@@ -58,7 +58,7 @@ struct DefaultCoreDataRepository: CoreDataRepository {
             } catch {
                 completion(.failure(error))
             }
-            completion(.success(motionMO))
+            completion(.success(()))
         }
     }
     

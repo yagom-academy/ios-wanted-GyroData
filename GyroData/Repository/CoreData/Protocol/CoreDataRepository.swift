@@ -9,7 +9,7 @@ protocol CoreDataRepository {
     associatedtype Domain: Identifiable
     associatedtype Entity: Identifiable
     
-    func create(_ domain: Domain, completion: @escaping (Result<Entity, Error>) -> Void)
+    func create(_ domain: Domain, completion: @escaping (Result<Void, Error>) -> Void)
     func read(from offset: Int) throws -> [Entity]
     func delete(_ id: String) throws
 }

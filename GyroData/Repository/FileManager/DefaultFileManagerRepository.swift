@@ -15,7 +15,7 @@ struct DefaultFileManagerRepository: FileManagerRepository {
         FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
     }
     
-    func create(_ domain: Motion, completion: @escaping (Result<MotionDTO, Error>) -> Void) {
+    func create(_ domain: Motion, completion: @escaping (Result<Void, Error>) -> Void) {
         DispatchQueue.global().async {
             let motionDTO = MotionDTO(from: domain)
             let fileURL = directory.appendingPathExtension("\(motionDTO.id).json")
@@ -25,7 +25,7 @@ struct DefaultFileManagerRepository: FileManagerRepository {
             } catch {
                 completion(.failure(error))
             }
-            completion(.success(motionDTO))
+            completion(.success(()))
         }
     }
 
