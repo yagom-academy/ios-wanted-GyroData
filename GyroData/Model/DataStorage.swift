@@ -22,15 +22,10 @@ final class DataStorage: DataStorageType {
         try createDirectory(with: directoryURL)
     }
     
-    func read(_ fileName: String) throws -> MotionData {
-        let url = directoryURL.appendingPathComponent(fileName)
-        
-        do {
-            let data = try Data(contentsOf: url)
-            return try decode(data)
-        } catch {
-            throw DataStorageError.cannotReadFile
-        }
+    func read(_ fileName: String) -> MotionData? {
+        let url = directoryURL.appendingPathComponent(fileName + FileType.json)
+        let data = try? Data(contentsOf: url)
+        return decode(data)
     }
     
     func save(_ data: MotionData) throws {
@@ -44,14 +39,9 @@ final class DataStorage: DataStorageType {
         }
     }
     
-    func delete(_ fileName: String) throws {
-        let url = directoryURL.appendingPathComponent(fileName)
-        
-        do {
-            try fileManager.removeItem(at: url)
-        } catch {
-            throw DataStorageError.cannotDeleteData
-        }
+    func delete(_ fileName: String) {
+        let url = directoryURL.appendingPathComponent(fileName + FileType.json)
+        try? fileManager.removeItem(at: url)
     }
     
     private func createDirectory(with url: URL) throws {
@@ -79,11 +69,8 @@ final class DataStorage: DataStorageType {
         }
     }
     
-    private func decode(_ data: Data) throws -> MotionData {       
-        do {
-            return try JSONDecoder().decode(MotionData.self, from: data)
-        } catch {
-            throw DataStorageError.cannotDecodeData
-        }
+    private func decode(_ data: Data?) -> MotionData? {
+        guard let data = data else { return nil }
+        return try? JSONDecoder().decode(MotionData.self, from: data)
     }
 }
