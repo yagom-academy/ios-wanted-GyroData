@@ -71,7 +71,7 @@ struct DefaultCoreDataRepository: CoreDataRepository {
         return result
     }
     
-    func delete(_ id: String) throws {
+    func delete(with id: String) throws {
         let request = MotionMO.fetchRequest()
         request.predicate = NSPredicate(format: "id == %@", id)
         

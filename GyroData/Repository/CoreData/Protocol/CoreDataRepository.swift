@@ -11,5 +11,5 @@ protocol CoreDataRepository {
     
     func create(_ domain: Domain, completion: @escaping (Result<Entity, Error>) -> Void)
     func read(from offset: Int) throws -> [Entity]
-    func delete(_ id: String) throws
+    func delete(with id: String) throws
 }
