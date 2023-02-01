@@ -8,9 +8,31 @@
 import CoreMotion
 import Foundation
 
-protocol MotionMeasureManagerable {
-    func startGyroscope(handler: @escaping () -> Void)
-    func stopGyroscope(handler: @escaping () -> Void)
-    func startAccelerometer(handler: @escaping () -> Void)
-    func stopAccelerometer(handler: @escaping () -> Void)
+protocol MotionManagerable {
+    func start(handler: @escaping () -> Void)
+    func stop()
+}
+
+final class GyroMotionManager: MotionManagerable {
+    private let motionManager = CMMotionManager()
+    
+    func start(handler: @escaping () -> Void) {
+        
+    }
+
+    func stop() {
+        motionManager.stopGyroUpdates()
+    }
+}
+
+final class AccelerometerMotionManager: MotionManagerable {
+    private let motionManager = CMMotionManager()
+    
+    func start(handler: @escaping () -> Void) {
+        
+    }
+    
+    func stop() {
+        motionManager.stopAccelerometerUpdates()
+    }
 }
