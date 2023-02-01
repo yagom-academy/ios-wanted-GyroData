@@ -11,11 +11,6 @@ class MotionManager {
     private var time: Int = 0
     private var timer: Timer?
     
-    init() {
-        manager.accelerometerUpdateInterval = 0.1
-        manager.gyroUpdateInterval = 0.1
-    }
-    
     func startRecord(with sensor: SensorType) {
         switch sensor {
         case .Accelerometer:

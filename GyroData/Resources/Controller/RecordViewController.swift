@@ -33,7 +33,7 @@ final class RecordViewController: UIViewController {
         return button
     }()
     
-    let monitor = CMMotionManager()
+    private let motionManager = MotionManager()
     var values: [TransitionValue] = []
 
     // MARK: - LifeCycle
@@ -44,43 +44,6 @@ final class RecordViewController: UIViewController {
         setButtonAction()
 
         convertButtonsState(isEnable: true)
-    }
-}
-
-// MARK: Core Motion Manager Method
-private extension RecordViewController {
-    func startMonitoringAccelerometer() {
-        guard monitor.isAccelerometerAvailable else { return }
-        
-        monitor.startAccelerometerUpdates(to: .main, withHandler: handleLogData)
-    }
-    
-    func startMonitoringGyro() {
-        guard monitor.isGyroAvailable else { return }
-        
-        monitor.startGyroUpdates(to: .main, withHandler: handleLogData)
-    }
-    
-    func handleLogData(data: CMLogItem?, error: Error?) {
-        if error != nil { return }
-        
-        guard let data = data else { return }
-        
-        if let accelerometerData = data as? CMAccelerometerData {
-            setAccelerometerData(data: accelerometerData.acceleration)
-        } else if let gyroData = data as? CMGyroData {
-            setGyroData(data: gyroData.rotationRate)
-        }
-    }
-    
-    func setAccelerometerData(data: CMAcceleration) {
-        let value = (data.x, data.y, data.z)
-        values.append(value)
-    }
-    
-    func setGyroData(data: CMRotationRate) {
-        let value = (data.x, data.y, data.z)
-        values.append(value)
     }
 }
 
@@ -134,32 +97,15 @@ private extension RecordViewController {
 private extension RecordViewController {
     @objc func didTapRecordButton() {
         let segmentIndex = segmentControl.selectedSegmentIndex
-
-        switch segmentIndex {
-        case 0:
-            startMonitoringAccelerometer()
-        case 1:
-            startMonitoringGyro()
-        default:
-            return
-        }
+        guard let sensor = SensorType(rawInt: segmentIndex) else { return }
+        
+        motionManager.startRecord(with: sensor)
         convertButtonsState(isEnable: false)
     }
 
     @objc func didTapCancelButton() {
-        if monitor.isAccelerometerActive {
-            monitor.stopAccelerometerUpdates()
-            convertButtonsState(isEnable: true)
-            saveJsonData()
-            return
-        }
-
-        if monitor.isGyroActive {
-            monitor.stopGyroUpdates()
-            convertButtonsState(isEnable: true)
-            saveJsonData()
-            return
-        }
+        motionManager.stopRecord()
+        convertButtonsState(isEnable: true)
     }
 
     @objc func didTapSaveButton() {
@@ -221,5 +167,18 @@ private extension RecordViewController {
             cancelButton.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
             cancelButton.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: -50)
         ])
+    }
+}
+
+private extension SensorType {
+    init?(rawInt: Int) {
+        switch rawInt {
+        case 0:
+            self.init(rawValue: "Accelerometer")
+        case 1:
+            self.init(rawValue: "Gyro")
+        default:
+            return nil
+        }
     }
 }
