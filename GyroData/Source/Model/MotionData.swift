@@ -10,7 +10,3 @@ struct MotionData: Codable {
     let y: Double
     let z: Double
 }
-
-struct MotionDatas: Codable {
-    let datas: [MotionData]
-}

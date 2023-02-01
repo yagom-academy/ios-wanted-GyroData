@@ -122,12 +122,21 @@ class AddViewController: UIViewController {
     }
     
     @objc private func saveMotionData() {
-        //TODO: CoreData 저장 구현
+        jsonMotionData = try? JSONEncoder().encode(motionDataList)
+        
         guard let jsonMotionData = jsonMotionData else { return }
         guard let dataString = String(data: jsonMotionData, encoding: .utf8) else { return }
         
+        var titleText = ""
+        
+        if segmentControl.selectedSegmentIndex == 0 {
+            titleText = "Acc"
+        } else if segmentControl.selectedSegmentIndex == 1 {
+            titleText = "Gyro"
+        }
+        
         let dataForm = MotionDataForm(
-            title: segmentControl.description,
+            title: titleText,
             date: currentDate,
             runningTime: Double(motionDataList.count) / 10,
             jsonData: dataString
@@ -139,6 +148,9 @@ class AddViewController: UIViewController {
     }
     
     @objc private func updateMotionData() {
+        motionDataList = .init()
+        jsonMotionData = .init()
+        
         if segmentControl.selectedSegmentIndex == 0 {
             graphView.stopDrawLines()
             
@@ -181,12 +193,6 @@ class AddViewController: UIViewController {
     @objc private func stopGravityData() {
         motionManager.stopAccelerometerUpdates()
         motionManager.stopGyroUpdates()
-        
-        do {
-            jsonMotionData = try JSONEncoder().encode(MotionDatas(datas: motionDataList))
-        } catch {
-            print(error.localizedDescription)
-        }
         
         graphView.stopDrawLines()
     }

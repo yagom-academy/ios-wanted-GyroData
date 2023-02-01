@@ -36,8 +36,9 @@ final class MainViewController: UIViewController {
     // MARK: Private Methods
     
     private func fetchMotionCoreData() {
-        if let entity = fetchMotionData() {
-            motionDataList = entity
+        if let motionData = fetchMotionData() {
+            motionDataList = motionData
+            
             tableView.reloadData()
         }
     }
@@ -92,7 +93,6 @@ extension MainViewController: UITableViewDelegate {
             style: .normal,
             title: "Play"
         ) { _, _, _ in
-            // TODO: Play 실행 구현
             let replayViewController = ReplayViewController(mode: .play)
             
             self.navigationController?.pushViewController(replayViewController, animated: true)
@@ -101,7 +101,11 @@ extension MainViewController: UITableViewDelegate {
             style: .destructive,
             title: "Delete"
         ) { _, _, _ in
-            // TODO: Delete 실행 구현
+            let deleteData = self.motionDataList.remove(at: indexPath.row)
+            guard let id = deleteData.id else { return }
+            
+            self.deleteDate(id: id)
+            tableView.reloadData()
         }
         
         playAction.backgroundColor = .systemGreen
@@ -147,8 +151,8 @@ extension MainViewController: CoreDataProcessible {
         let result = readCoreData()
         
         switch result {
-        case .success(let entity):
-            return entity
+        case .success(let data):
+            return data
         case .failure(_):
             return nil
         }
