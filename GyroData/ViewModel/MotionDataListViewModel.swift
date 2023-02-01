@@ -70,7 +70,27 @@ final class MotionDataListViewModel {
         self.onError = onError
     }
 
-    func fetchMotionData() { }
+    func fetchMotionData() {
+        let offset = numberOfData()
+        let limit = pagingLimit
+        do {
+            var motionData = [MotionData]()
+            motionData = try coreDataManager.read(offset: offset, limit: limit).compactMap { entity in
+                guard let motionDataType = MotionDataType(rawValue: entity.motionDataType) else { return nil }
+                return MotionData(
+                    id: entity.id,
+                    createdAt: entity.createdAt,
+                    length: entity.length,
+                    motionDataType: motionDataType
+                )
+            }
+            if motionData.isEmpty == false {
+                self.motionData.append(contentsOf: motionData)
+            }
+        } catch {
+            onError?(error.localizedDescription)
+        }
+    }
 }
 
 extension MotionDataListViewModel {
