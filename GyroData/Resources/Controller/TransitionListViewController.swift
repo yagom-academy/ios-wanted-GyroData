@@ -17,10 +17,9 @@ final class TransitionListViewController: UIViewController {
     }()
 
     private let cellReuseIdentifier = "CustomCell"
-    private var transitionMetaDatas: [TransitionMetaData] = []
-    private var isPaginating = false
     private var calledBringPageCount = 0
     private var cellCount = 10
+    private var pageCount = 0
 
     // MARK: - LifeCycle
     override func viewDidLoad() {
@@ -29,23 +28,25 @@ final class TransitionListViewController: UIViewController {
         configureUI()
         
         // TODO: - UI Test 코드 (삭제 예정)
-        for count in 0...25 {
-            TransitionMetaData.transitionMetaDatas.append(
-                TransitionMetaData(saveDate: "2022/09/10 15:11:45",
-                                   sensorType: .Accelerometer,
-                                   recordTime: Double(count),
-                                   jsonName: "asdf")
-            )
-        }
+//        for count in 0...35 {
+//            let data = TransitionMetaData(saveDate: "2022/09/10 15:11:45",
+//                                          sensorType: .Accelerometer,
+//                                          recordTime: Double(count),
+//                                          jsonName: "asdf")
+//            PersistentContainerManager.shared.createNewGyroObject(metaData: data)
+//        }
     }
 }
 
 // MARK: - Method
 private extension TransitionListViewController {
     // Error타입 만들어주기
-    func bringAdditionalTransitionMetaData(completion: @escaping (Int) -> Void) {
-        DispatchQueue.global().asyncAfter(deadline: .now() + 3) {
-            completion(10)
+    func bringAdditionalTransitionMetaData(completion: @escaping ([TransitionMetaData]) -> Void) {
+        DispatchQueue.global().asyncAfter(deadline: .now() + 3) { [weak self] in
+            guard let self = self else { return }
+            let data = PersistentContainerManager.shared.fetchTenTransitionMetaDatas(pageCount: self.pageCount)
+            self.pageCount += 1
+            completion(data)
         }
     }
 }
@@ -53,12 +54,12 @@ private extension TransitionListViewController {
 // MARK: - UITableViewDataSource
 extension TransitionListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cellCount
+        return TransitionMetaData.transitionMetaDatas.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let customCell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath) as? CustomTableViewCell ?? CustomTableViewCell()
-        customCell.configureCell(data: transitionMetaDatas[indexPath.row])
+        customCell.configureCell(data: TransitionMetaData.transitionMetaDatas[indexPath.row])
         return customCell
     }
 
@@ -76,8 +77,8 @@ extension TransitionListViewController: UITableViewDelegate {
         playAction.backgroundColor = .systemGreen
         playAction.image = createSwipeActionImage(text: "Play")
 
-        let deleteAction = UIContextualAction(style: .destructive, title: nil) { [weak self] (action, view, completionHandler) in
-            self?.transitionMetaDatas.remove(at: indexPath.row)
+        let deleteAction = UIContextualAction(style: .destructive, title: nil) { (action, view, completionHandler) in
+            TransitionMetaData.transitionMetaDatas.remove(at: indexPath.row)
             
             DispatchQueue.main.async {
                 tableView.reloadData()
@@ -99,23 +100,13 @@ extension TransitionListViewController: UIScrollViewDelegate {
         if position > tableView.contentSize.height - scrollView.frame.size.height + 100 {
             tableView.tableFooterView = createSpinnerFooter()
 
-            bringAdditionalTransitionMetaData { [weak self] count in
-                DispatchQueue.main.async {
-                    self?.tableView.tableFooterView = nil
-                }
-
-                self?.cellCount += count
-                guard let currentCellCount = self?.cellCount,
-                      let maxCellCount = self?.transitionMetaDatas.count else {
-                    return
-                }
-
-                if currentCellCount > maxCellCount {
-                    self?.cellCount = maxCellCount
-                }
+            bringAdditionalTransitionMetaData { [weak self] data in
+                guard let self = self else { return }
+                TransitionMetaData.transitionMetaDatas.append(contentsOf: data)
 
                 DispatchQueue.main.async {
-                    self?.tableView.reloadData()
+                    self.tableView.tableFooterView = nil
+                    self.tableView.reloadData()
                 }
             }
         }
