@@ -39,16 +39,6 @@ final class CoreMotionManager {
         }
     }
     
-    func stopAccelerometers() {
-        if self.timer != nil {
-            self.timer?.invalidate()
-            self.timer = nil
-            
-            self.motion.stopAccelerometerUpdates()
-        }
-    }
-    
-    
     func startAccelerometers(completion: @escaping (MeasureData) -> Void) {
         if self.motion.isAccelerometerAvailable {
             self.motion.accelerometerUpdateInterval = 1.0 / 60.0
@@ -68,6 +58,15 @@ final class CoreMotionManager {
             })
             
             RunLoop.current.add(self.timer ?? Timer(), forMode: .default)
+        }
+    }
+    
+    func stopAccelerometers() {
+        if self.timer != nil {
+            self.timer?.invalidate()
+            self.timer = nil
+            
+            self.motion.stopAccelerometerUpdates()
         }
     }
 }

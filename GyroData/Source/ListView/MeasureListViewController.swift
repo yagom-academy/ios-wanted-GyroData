@@ -3,7 +3,7 @@
 
 import UIKit
 
-class MeasureListViewController: UIViewController {
+final class MeasureListViewController: UIViewController {
     
     private enum Constant {
         static let title = "목록"

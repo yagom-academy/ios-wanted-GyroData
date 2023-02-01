@@ -4,7 +4,7 @@
 import UIKit
 
 class DetailViewController: UIViewController {
-
+    
     private enum Constant {
         static let replayMode = "View"
         static let saveButtonTitle = "저장"
@@ -32,7 +32,7 @@ class DetailViewController: UIViewController {
         
         return label
     }()
-
+    
     private let graphView: UIView = {
         let view = UIView()
         
@@ -69,7 +69,7 @@ class DetailViewController: UIViewController {
         
         [createdAtLabel, replayModeLabel].forEach(labelStackView.addArrangedSubview(_:))
         [labelStackView, graphView].forEach(view.addSubview(_:))
-
+        
         NSLayoutConstraint.activate([
             labelStackView.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 10),
             labelStackView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 30),

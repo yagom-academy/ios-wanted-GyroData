@@ -15,6 +15,7 @@
 		B4A2F5D7298A1ABB004BA0ED /* CoreMotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A2F5D6298A1ABB004BA0ED /* CoreMotionManager.swift */; };
 		B4AC807A2988CBCC0095621A /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AC80792988CBCC0095621A /* ReusableView.swift */; };
 		B4AC807C2988E4310095621A /* MeasureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AC807B2988E4310095621A /* MeasureViewController.swift */; };
+		B4C661E2298A47D800A18C60 /* SensorMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C661E1298A47D800A18C60 /* SensorMode.swift */; };
 		D2C94E2A2988BE9F00F70389 /* MeasureTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C94E292988BE9F00F70389 /* MeasureTableViewCell.swift */; };
 		D2DA2C20298A3313006B4FC3 /* MeasureViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2DA2C1F298A3313006B4FC3 /* MeasureViewModel.swift */; };
 		D2DA2C22298A3387006B4FC3 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2DA2C21298A3387006B4FC3 /* Observable.swift */; };
@@ -33,6 +34,7 @@
 		B4A2F5D6298A1ABB004BA0ED /* CoreMotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMotionManager.swift; sourceTree = "<group>"; };
 		B4AC80792988CBCC0095621A /* ReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
 		B4AC807B2988E4310095621A /* MeasureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureViewController.swift; sourceTree = "<group>"; };
+		B4C661E1298A47D800A18C60 /* SensorMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensorMode.swift; sourceTree = "<group>"; };
 		D2C94E292988BE9F00F70389 /* MeasureTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureTableViewCell.swift; sourceTree = "<group>"; };
 		D2DA2C1F298A3313006B4FC3 /* MeasureViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureViewModel.swift; sourceTree = "<group>"; };
 		D2DA2C21298A3387006B4FC3 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 		B4A2F5DA298A39DB004BA0ED /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				B4C661E0298A47C500A18C60 /* Enum */,
 				63F01BBD28D44FC500C53A39 /* Assets.xcassets */,
 				63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */,
 			);
@@ -158,6 +161,14 @@
 				B4AC80792988CBCC0095621A /* ReusableView.swift */,
 			);
 			path = Protocol;
+			sourceTree = "<group>";
+		};
+		B4C661E0298A47C500A18C60 /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				B4C661E1298A47D800A18C60 /* SensorMode.swift */,
+			);
+			path = Enum;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -236,6 +247,7 @@
 				63F01BB928D44FC400C53A39 /* MeasureListViewController.swift in Sources */,
 				B4AC807C2988E4310095621A /* MeasureViewController.swift in Sources */,
 				B4A2F5D7298A1ABB004BA0ED /* CoreMotionManager.swift in Sources */,
+				B4C661E2298A47D800A18C60 /* SensorMode.swift in Sources */,
 				D2DA2C20298A3313006B4FC3 /* MeasureViewModel.swift in Sources */,
 				D2DA2C22298A3387006B4FC3 /* Observable.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,

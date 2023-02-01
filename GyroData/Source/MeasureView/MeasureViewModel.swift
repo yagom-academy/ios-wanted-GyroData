@@ -3,14 +3,9 @@
 
 import Foundation
 
-enum SensorMode {
-    case Gyro
-    case Acc
-}
-
-class MeasureViewModel {
+final class MeasureViewModel {
     var measureDatas: Observable<[MeasureData]> = Observable([])
-    let coreMotionManager = CoreMotionManager()
+    private let coreMotionManager = CoreMotionManager()
     
     func startMeasure(mode: SensorMode) {
         switch mode {
