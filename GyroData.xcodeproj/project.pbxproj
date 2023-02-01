@@ -20,6 +20,7 @@
 		D2DA2C20298A3313006B4FC3 /* MeasureViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2DA2C1F298A3313006B4FC3 /* MeasureViewModel.swift */; };
 		D2DA2C22298A3387006B4FC3 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2DA2C21298A3387006B4FC3 /* Observable.swift */; };
 		D2DA2C24298A389C006B4FC3 /* MeasureData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2DA2C23298A389C006B4FC3 /* MeasureData.swift */; };
+		D2DA2C28298A4CD7006B4FC3 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2DA2C27298A4CD7006B4FC3 /* GraphView.swift */; };
 		D2E60FBE2988FAF500BBC1B9 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E60FBD2988FAF500BBC1B9 /* DetailViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +40,7 @@
 		D2DA2C1F298A3313006B4FC3 /* MeasureViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureViewModel.swift; sourceTree = "<group>"; };
 		D2DA2C21298A3387006B4FC3 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		D2DA2C23298A389C006B4FC3 /* MeasureData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureData.swift; sourceTree = "<group>"; };
+		D2DA2C27298A4CD7006B4FC3 /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		D2E60FBD2988FAF500BBC1B9 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -151,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				D2E60FBD2988FAF500BBC1B9 /* DetailViewController.swift */,
+				D2DA2C27298A4CD7006B4FC3 /* GraphView.swift */,
 			);
 			path = DetailView;
 			sourceTree = "<group>";
@@ -247,6 +250,7 @@
 				63F01BB928D44FC400C53A39 /* MeasureListViewController.swift in Sources */,
 				B4AC807C2988E4310095621A /* MeasureViewController.swift in Sources */,
 				B4A2F5D7298A1ABB004BA0ED /* CoreMotionManager.swift in Sources */,
+				D2DA2C28298A4CD7006B4FC3 /* GraphView.swift in Sources */,
 				B4C661E2298A47D800A18C60 /* SensorMode.swift in Sources */,
 				D2DA2C20298A3313006B4FC3 /* MeasureViewModel.swift in Sources */,
 				D2DA2C22298A3387006B4FC3 /* Observable.swift in Sources */,
