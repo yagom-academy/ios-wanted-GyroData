@@ -8,7 +8,7 @@ final class CoreMotionManager {
     private var motion = CMMotionManager()
     private var timer: Timer?
     
-    func startGyros() {
+    func startGyros(completion: @escaping (MeasureData) -> Void) {
         if motion.isGyroAvailable {
             self.motion.gyroUpdateInterval = 1.0 / 60.0
             self.motion.startGyroUpdates()
@@ -22,12 +22,11 @@ final class CoreMotionManager {
                     let x = data.rotationRate.x
                     let y = data.rotationRate.y
                     let z = data.rotationRate.z
-                    
-                    print("\(x), \(y), \(z)")
+                    completion(.init(x: x, y: y, z: z))
                 }
             })
             
-            RunLoop.current.add(self.timer!, forMode: .default)
+            RunLoop.current.add(self.timer ?? Timer(), forMode: .default)
         }
     }
     
@@ -40,7 +39,7 @@ final class CoreMotionManager {
         }
     }
     
-    func startAccelerometers() {
+    func startAccelerometers(completion: @escaping (MeasureData) -> Void) {
         if self.motion.isAccelerometerAvailable {
             self.motion.accelerometerUpdateInterval = 1.0 / 60.0
             self.motion.startAccelerometerUpdates()
@@ -54,11 +53,11 @@ final class CoreMotionManager {
                     let y = data.acceleration.y
                     let z = data.acceleration.z
                     
-                    print("\(x), \(y), \(z)")
+                    completion(.init(x: x, y: y, z: z))
                 }
             })
             
-            RunLoop.current.add(self.timer!, forMode: .default)
+            RunLoop.current.add(self.timer ?? Timer(), forMode: .default)
         }
     }
 }
