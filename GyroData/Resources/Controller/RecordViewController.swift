@@ -34,7 +34,8 @@ final class RecordViewController: UIViewController {
     }()
     
     private let motionManager = MotionManager()
-    var values: [TransitionValue] = []
+    private var recordTime: Double = 0
+    private var values: [TransitionValue] = []
 
     // MARK: - LifeCycle
     override func viewDidLoad() {
@@ -52,6 +53,10 @@ extension RecordViewController: MotionManagerDelegate {
     func motionManager(send manager: MotionManager, sendData: CMLogItem?) {
         guard let data = sendData else { return }
         saveData(data: data)
+    }
+    
+    func motionManager(stop manager: MotionManager, sendTime: Double) {
+        self.recordTime = sendTime
     }
 }
 

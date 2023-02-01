@@ -8,6 +8,7 @@ import CoreMotion
 
 protocol MotionManagerDelegate: AnyObject {
     func motionManager(send manager: MotionManager, sendData: CMLogItem?)
+    func motionManager(stop manager: MotionManager, sendTime: Double)
 }
 
 final class MotionManager {
@@ -33,6 +34,8 @@ final class MotionManager {
         if manager.isGyroActive {
             manager.stopGyroUpdates()
         }
+        
+        resetTimer()
     }
 }
 
@@ -64,6 +67,8 @@ private extension MotionManager {
     func resetTimer() {
         timer?.invalidate()
         timer = nil
+        
+        delegate?.motionManager(stop: self, sendTime: Double(time) / 10.0)
         time = 0
     }
 }
