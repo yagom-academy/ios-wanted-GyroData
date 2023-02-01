@@ -61,18 +61,55 @@ final class RecordMotionDataViewModel {
     
     private func selectedIndex(_ index: Int) {
         let selectedType = MotionDataType.allCases[index]
-        motionData.motionDataType = selectedType
+        motionData = MotionData(motionDataType: selectedType)
     }
     
-    private func start() { }
+    // start에서 하는 일
+    // 1. 배열에 값 append
+    // 2. 뷰컨에서 graphView에 그리도록 하는 클로저 실행
+    private func start(selectedIndex: Int, _ closure: () -> Void) {
+        motionData = MotionData(motionDataType: MotionDataType.allCases.map { $0 } [selectedIndex])
+        switch motionData?.motionDataType {
+        case .accelerometer:
+            motionManager.startAccelerometer { coordinate in
+                self.motionData?.coordinates.append(coordinate)
+                self.onUpdate?(coordinate)
+            }
+        case .gyro:
+            motionManager.startGyro { coordinate in
+                self.motionData?.coordinates.append(coordinate)
+                self.onUpdate?(coordinate)
+            }
+        case .none:
+            return
+        }
+        closure()
+    }
     
-    private func stop() { }
+    private func stop(_ closure: () -> Void) {
+        switch motionData?.motionDataType {
+        case .accelerometer:
+            motionManager.stopAccelerometer()
+        case .gyro:
+            motionManager.stopGyro()
+        case .none:
+            return
+        }
+        closure()
+    }
+    
+    private func save() throws {
+        try saveToCoreData()
+        try saveToDataStorage()
+    }
     
     private func saveToCoreData() throws {
+        guard let motionData = motionData else { return }
         try coreDataManager.save(motionData)
     }
     
     private func saveToDataStorage() throws {
+        guard let motionData = motionData else { return }
         try dataStorage?.save(motionData)
     }
     
