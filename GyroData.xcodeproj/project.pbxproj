@@ -70,19 +70,8 @@
 		63F01BB328D44FC400C53A39 /* GyroData */ = {
 			isa = PBXGroup;
 			children = (
-				B4A2F5D8298A1CC0004BA0ED /* Manager */,
-				B4AC80782988CBBB0095621A /* Protocol */,
-				63F01BB428D44FC400C53A39 /* AppDelegate.swift */,
-				63F01BB628D44FC400C53A39 /* SceneDelegate.swift */,
-				63F01BB828D44FC400C53A39 /* MeasureListViewController.swift */,
-				D2C94E292988BE9F00F70389 /* MeasureTableViewCell.swift */,
-				B4AC807B2988E4310095621A /* MeasureViewController.swift */,
-				D2DA2C1F298A3313006B4FC3 /* MeasureViewModel.swift */,
-				D2DA2C23298A389C006B4FC3 /* MeasureData.swift */,
-				D2E60FBD2988FAF500BBC1B9 /* DetailViewController.swift */,
-				D2DA2C21298A3387006B4FC3 /* Observable.swift */,
-				63F01BBD28D44FC500C53A39 /* Assets.xcassets */,
-				63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */,
+				B4A2F5D9298A39D4004BA0ED /* Source */,
+				B4A2F5DA298A39DB004BA0ED /* Resource */,
 				63F01BC228D44FC500C53A39 /* Info.plist */,
 			);
 			path = GyroData;
@@ -94,6 +83,73 @@
 				B4A2F5D6298A1ABB004BA0ED /* CoreMotionManager.swift */,
 			);
 			path = Manager;
+			sourceTree = "<group>";
+		};
+		B4A2F5D9298A39D4004BA0ED /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				B4A2F5DB298A39F8004BA0ED /* App */,
+				B4A2F5D8298A1CC0004BA0ED /* Manager */,
+				B4AC80782988CBBB0095621A /* Protocol */,
+				B4A2F5DE298A3A4E004BA0ED /* Model */,
+				B4A2F5DC298A3A12004BA0ED /* ListView */,
+				B4A2F5DD298A3A38004BA0ED /* MeasureView */,
+				B4A2F5DF298A3A56004BA0ED /* DetailView */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		B4A2F5DA298A39DB004BA0ED /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				63F01BBD28D44FC500C53A39 /* Assets.xcassets */,
+				63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		B4A2F5DB298A39F8004BA0ED /* App */ = {
+			isa = PBXGroup;
+			children = (
+				63F01BB428D44FC400C53A39 /* AppDelegate.swift */,
+				63F01BB628D44FC400C53A39 /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		B4A2F5DC298A3A12004BA0ED /* ListView */ = {
+			isa = PBXGroup;
+			children = (
+				63F01BB828D44FC400C53A39 /* MeasureListViewController.swift */,
+				D2C94E292988BE9F00F70389 /* MeasureTableViewCell.swift */,
+			);
+			path = ListView;
+			sourceTree = "<group>";
+		};
+		B4A2F5DD298A3A38004BA0ED /* MeasureView */ = {
+			isa = PBXGroup;
+			children = (
+				B4AC807B2988E4310095621A /* MeasureViewController.swift */,
+				D2DA2C1F298A3313006B4FC3 /* MeasureViewModel.swift */,
+			);
+			path = MeasureView;
+			sourceTree = "<group>";
+		};
+		B4A2F5DE298A3A4E004BA0ED /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D2DA2C23298A389C006B4FC3 /* MeasureData.swift */,
+				D2DA2C21298A3387006B4FC3 /* Observable.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B4A2F5DF298A3A56004BA0ED /* DetailView */ = {
+			isa = PBXGroup;
+			children = (
+				D2E60FBD2988FAF500BBC1B9 /* DetailViewController.swift */,
+			);
+			path = DetailView;
 			sourceTree = "<group>";
 		};
 		B4AC80782988CBBB0095621A /* Protocol */ = {
