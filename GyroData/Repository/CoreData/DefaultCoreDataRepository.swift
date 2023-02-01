@@ -29,30 +29,37 @@ struct DefaultCoreDataRepository: CoreDataRepository {
     private let context: NSManagedObjectContext
     
     init() {
-        let context = persistentContainer.viewContext
+        let context = persistentContainer.newBackgroundContext()
         context.automaticallyMergesChangesFromParent = true
         self.context = context
     }
     
-    func create(_ domain: Motion) throws {
-        guard let entity = NSEntityDescription.entity(
-            forEntityName: "MotionMO",
-            in: context
-        ) else {
-            throw CoreDataError.invalidEntity
+    func create(_ domain: Motion, completion: @escaping (Result<MotionMO, Error>) -> Void) {
+        context.perform {
+            guard let entity = NSEntityDescription.entity(
+                forEntityName: "MotionMO",
+                in: self.context
+            ) else {
+                return completion(.failure(CoreDataError.invalidEntity))
+            }
+            
+            let motionMO = MotionMO(entity: entity, insertInto: self.context)
+            
+            motionMO.setValue(domain.id, forKey: "id")
+            motionMO.setValue(domain.date.timeIntervalSince1970, forKey: "date")
+            motionMO.setValue(domain.type.rawValue, forKey: "type")
+            motionMO.setValue(domain.time, forKey: "time")
+            motionMO.setValue(domain.data.x, forKey: "x")
+            motionMO.setValue(domain.data.y, forKey: "y")
+            motionMO.setValue(domain.data.z, forKey: "z")
+            
+            do {
+                try self.context.save()
+            } catch {
+                completion(.failure(error))
+            }
+            completion(.success(motionMO))
         }
-        
-        let motionMO = NSManagedObject(entity: entity, insertInto: context)
-        
-        motionMO.setValue(domain.id, forKey: "id")
-        motionMO.setValue(domain.date.timeIntervalSince1970, forKey: "date")
-        motionMO.setValue(domain.type.rawValue, forKey: "type")
-        motionMO.setValue(domain.time, forKey: "time")
-        motionMO.setValue(domain.data.x, forKey: "x")
-        motionMO.setValue(domain.data.y, forKey: "y")
-        motionMO.setValue(domain.data.z, forKey: "z")
-        
-        try context.save()
     }
     
     func read(from offset: Int) throws -> [MotionMO] {
