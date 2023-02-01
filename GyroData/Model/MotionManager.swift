@@ -44,7 +44,7 @@ class MotionManager {
             }
             self.second += 0.1
             guard let data = self.manager.accelerometerData else { return }
-            completion(self.convert(motionData: data))
+            completion(self.convert(measureData: data))
         })
     }
     
@@ -57,18 +57,18 @@ class MotionManager {
             }
             self.second += 0.1
             guard let data = self.manager.gyroData else { return }
-            completion(self.convert(motionData: data))
+            completion(self.convert(measureData: data))
         })
     }
     
-    func convert(motionData: MotionData) -> Coordinate {
+    func convert(measureData: MeasureData) -> Coordinate {
         var (x,y,z) = (0.0, 0.0, 0.0)
         
-        if let data = motionData as? CMAccelerometerData {
+        if let data = measureData as? CMAccelerometerData {
             x = data.acceleration.x
             y = data.acceleration.y
             z = data.acceleration.z
-        } else if let data = motionData as? CMGyroData {
+        } else if let data = measureData as? CMGyroData {
             x = data.rotationRate.x
             y = data.rotationRate.y
             z = data.rotationRate.z
