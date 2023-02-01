@@ -35,6 +35,7 @@ final class RecordViewController: UIViewController {
     
     private let motionManager = MotionManager()
     private var recordTime: Double = 0
+    private var recordedSensor: SensorType = .Accelerometer
     private var values: [TransitionValue] = []
     
     // MARK: - LifeCycle
@@ -100,6 +101,7 @@ private extension RecordViewController {
     @objc func didTapRecordButton() {
         let segmentIndex = segmentControl.selectedSegmentIndex
         guard let sensor = SensorType(rawInt: segmentIndex) else { return }
+        recordedSensor = sensor
         
         if !values.isEmpty {
             values.removeAll()
@@ -117,11 +119,25 @@ private extension RecordViewController {
     
     @objc func didTapSaveButton() {
         let transitionData = values.convertTransition()
+        guard let filePath = SystemFileManager.createFilePath() else { return }
         
         DispatchQueue.global().async {
-            let _ = SystemFileManager().saveData(value: transitionData)
+            let _ = SystemFileManager().saveData(path: filePath, value: transitionData)
             
             // TODO: - Handle Error
+        }
+        
+        DispatchQueue.global().async { [weak self] in
+            guard let self = self else { return }
+            
+            let transitionMeta = TransitionMetaData(
+                saveDate: Date().description,
+                sensorType: self.recordedSensor,
+                recordTime: self.recordTime,
+                jsonName: filePath.absoluteString
+            )
+            
+            PersistentContainerManager.shared.createNewGyroObject(metaData: transitionMeta)
         }
     }
 }

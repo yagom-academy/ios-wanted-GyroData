@@ -9,15 +9,11 @@ import Foundation
 class SystemFileManager {
     private let manager = FileManager.default
     
-    func saveData<T: Codable>(value: T) -> Bool {
+    func saveData<T: Codable>(path: URL, value: T) -> Bool {
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
         
         guard let encodeData = try? encoder.encode(value) else {
-            return false
-        }
-        
-        guard let path = createFilePath() else {
             return false
         }
         
@@ -28,8 +24,8 @@ class SystemFileManager {
         return true
     }
     
-    private func createFilePath() -> URL? {
-        let documentDirectories = manager.urls(for: .documentDirectory, in: .userDomainMask)
+    static func createFilePath() -> URL? {
+        let documentDirectories = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         
         guard let documentDirectory = documentDirectories.first else { return nil }
         
