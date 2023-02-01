@@ -64,9 +64,6 @@ final class RecordMotionDataViewModel {
         motionData = MotionData(motionDataType: selectedType)
     }
     
-    // start에서 하는 일
-    // 1. 배열에 값 append
-    // 2. 뷰컨에서 graphView에 그리도록 하는 클로저 실행
     private func start(selectedIndex: Int, _ closure: () -> Void) {
         motionData = MotionData(motionDataType: MotionDataType.allCases.map { $0 } [selectedIndex])
         switch motionData?.motionDataType {
@@ -99,6 +96,8 @@ final class RecordMotionDataViewModel {
     }
     
     private func save() throws {
+        guard let motionData = motionData else { throw MotionDataError.emptyData }
+        dataStorage = try DataStorage(directoryName: motionData.motionDataType.rawValue)
         try saveToCoreData()
         try saveToDataStorage()
     }

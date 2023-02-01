@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5720DCD9298A47BC0045E95D /* CoreDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5720DCD8298A47BC0045E95D /* CoreDataError.swift */; };
+		5720DCDB298A848D0045E95D /* MotionDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5720DCDA298A848D0045E95D /* MotionDataError.swift */; };
 		5760AC872989412A00534EF0 /* RecordMotionDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5760AC862989412A00534EF0 /* RecordMotionDataViewController.swift */; };
 		5760AC892989414C00534EF0 /* MotionDataDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5760AC882989414C00534EF0 /* MotionDataDetailViewController.swift */; };
 		5760AC8B2989415D00534EF0 /* MotionDataListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5760AC8A2989415D00534EF0 /* MotionDataListViewModel.swift */; };
@@ -37,6 +38,7 @@
 
 /* Begin PBXFileReference section */
 		5720DCD8298A47BC0045E95D /* CoreDataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataError.swift; sourceTree = "<group>"; };
+		5720DCDA298A848D0045E95D /* MotionDataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDataError.swift; sourceTree = "<group>"; };
 		5760AC862989412A00534EF0 /* RecordMotionDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordMotionDataViewController.swift; sourceTree = "<group>"; };
 		5760AC882989414C00534EF0 /* MotionDataDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDataDetailViewController.swift; sourceTree = "<group>"; };
 		5760AC8A2989415D00534EF0 /* MotionDataListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDataListViewModel.swift; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 				EB96E7732987C93C00F9DF79 /* MotionDataType.swift */,
 				579C4D912988A40A00D3949F /* MotionManager.swift */,
 				579C4D8F2988A40300D3949F /* MotionManagerType.swift */,
+				5720DCDA298A848D0045E95D /* MotionDataError.swift */,
 				579C4D9B2988CBA900D3949F /* DataStorageType.swift */,
 				579C4D992988CBA400D3949F /* DataStorage.swift */,
 				57C8B7CF298900700010E58E /* DataStorageError.swift */,
@@ -226,6 +229,7 @@
 				579C4D902988A40300D3949F /* MotionManagerType.swift in Sources */,
 				579C4D9A2988CBA400D3949F /* DataStorage.swift in Sources */,
 				5760AC8B2989415D00534EF0 /* MotionDataListViewModel.swift in Sources */,
+				5720DCDB298A848D0045E95D /* MotionDataError.swift in Sources */,
 				EB8E417F2988EA6000FE26D3 /* MotionDataEntity+CoreDataProperties.swift in Sources */,
 				5760AC8D2989416600534EF0 /* RecordMotionDataViewModel.swift in Sources */,
 				5760AC892989414C00534EF0 /* MotionDataDetailViewController.swift in Sources */,
@@ -383,7 +387,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 3Q4UQ436SX;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GyroData/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -395,7 +399,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.GyroData;
+				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.GyroData1111;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -410,7 +414,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 3Q4UQ436SX;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GyroData/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -422,7 +426,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.GyroData;
+				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.GyroData1111;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

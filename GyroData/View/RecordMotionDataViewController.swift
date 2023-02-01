@@ -14,6 +14,7 @@ final class RecordMotionDataViewController: UIViewController {
             static let rightBarButtonTitle = "저장"
             static let measure = "측정"
             static let stop = "정지"
+            static let confirm = "확인"
         }
         
         enum Layout {
@@ -84,6 +85,8 @@ final class RecordMotionDataViewController: UIViewController {
         return UIAction(handler: { _ in
             do {
                 try self.viewModel.throwableAction(.save)
+            } catch MotionDataError.emptyData {
+                self.showAlert(alertTitle: MotionDataError.emptyData.localizedDescription)
             } catch CoreDataError.cannotSaveData {
                 self.showAlert(alertTitle: CoreDataError.cannotSaveData.localizedDescription)
             } catch DataStorageError.cannotSaveFile {
@@ -137,7 +140,6 @@ final class RecordMotionDataViewController: UIViewController {
     
     private func measureButtonAction() -> UIAction {
         return UIAction(handler: { _ in
-            print(self.stopButton.isEnabled)
             self.viewModel.action(.start(
                 selectedIndex: self.segmentedControl.selectedSegmentIndex,
                 closure: self.toggleButtons)
@@ -161,6 +163,11 @@ final class RecordMotionDataViewController: UIViewController {
             title: alertTitle,
             message: .none,
             preferredStyle: .alert)
+        let okAction = UIAlertAction(
+            title: Constant.Namespace.confirm,
+            style: .default
+        )
+        alertController.addAction(okAction)
         present(alertController, animated: true)
     }
 }
