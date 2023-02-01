@@ -14,13 +14,15 @@ final class FileManagerRepositoryMock: FileManagerRepository {
     var isCalledCreateFunction: Bool = false
     var isCalledReadFunction: Bool = false
     var isCalledDeleteFunction: Bool = false
-    let returnValueOfReadFunction: GyroData.MotionDTO = .init(id: .init(),
-                                                              date: .init(),
-                                                              type: .init(),
-                                                              time: .init(),
-                                                              x: [],
-                                                              y: [],
-                                                              z: [])
+    let returnValueOfReadFunction: GyroData.MotionDTO = .init(
+        id: .init(),
+        date: .init(),
+        type: .init(),
+        time: .init(),
+        x: [],
+        y: [],
+        z: []
+    )
     
     func create(_ domain: GyroData.Motion, completion: @escaping (Result<Void, Error>) -> Void) {
         isCalledCreateFunction = true
