@@ -9,7 +9,7 @@ import UIKit
 
 final class MainViewController: UIViewController {
     // MARK: Private Properties
-    private let motionDataList: [MotionData1] = [MotionData1(date: Date(), title: "Gyro", runningTime: 60.4)]
+    private var motionDataList: [Motion] = []
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -27,7 +27,20 @@ final class MainViewController: UIViewController {
         configureTableView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        fetchMotionCoreData()
+    }
+    
     // MARK: Private Methods
+    
+    private func fetchMotionCoreData() {
+        if let entity = fetchMotionData() {
+            motionDataList = entity
+            tableView.reloadData()
+        }
+    }
     
     private func configureTableView() {
         tableView.delegate = self
@@ -124,5 +137,20 @@ extension MainViewController: UITableViewDataSource {
         cell.configureLabel(data: motionData)
         
         return cell
+    }
+}
+
+// MARK: - CoreDataProcessible
+
+extension MainViewController: CoreDataProcessible {
+    func fetchMotionData() -> [Motion]? {
+        let result = readCoreData()
+        
+        switch result {
+        case .success(let entity):
+            return entity
+        case .failure(_):
+            return nil
+        }
     }
 }

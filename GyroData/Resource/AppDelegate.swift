@@ -13,7 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // MARK: CoreData Setting
     lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "Motion")
+        let container = NSPersistentContainer(name: "MotionDataModel")
         container.loadPersistentStores { _, error in
             if let error = error {
                 fatalError("Unable to load persistent stores: \(error)")

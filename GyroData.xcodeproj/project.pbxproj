@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,7 +15,7 @@
 		D026C776298A87CD00FBBF8E /* MotionDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D026C774298A87CD00FBBF8E /* MotionDataModel.xcdatamodeld */; };
 		D026C77D298A8A6A00FBBF8E /* Motion+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D026C77B298A8A6A00FBBF8E /* Motion+CoreDataClass.swift */; };
 		D026C77E298A8A6A00FBBF8E /* Motion+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D026C77C298A8A6A00FBBF8E /* Motion+CoreDataProperties.swift */; };
-		D03B067B2988D228002BEB96 /* MotionData1.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03B067A2988D228002BEB96 /* MotionData1.swift */; };
+		D026C781298AAC9300FBBF8E /* MotionDataForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = D026C780298AAC9300FBBF8E /* MotionDataForm.swift */; };
 		D03B067D2988DBFC002BEB96 /* CustomDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03B067C2988DBFC002BEB96 /* CustomDataCell.swift */; };
 		D03B06802988E656002BEB96 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03B067F2988E656002BEB96 /* AddViewController.swift */; };
 		F69C9F6F298A2D6A00F59A71 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69C9F6E298A2D6A00F59A71 /* GraphView.swift */; };
@@ -37,7 +37,7 @@
 		D026C775298A87CD00FBBF8E /* MotionDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MotionDataModel.xcdatamodel; sourceTree = "<group>"; };
 		D026C77B298A8A6A00FBBF8E /* Motion+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Motion+CoreDataClass.swift"; path = "GyroData/Source/CoreData/Motion+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		D026C77C298A8A6A00FBBF8E /* Motion+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Motion+CoreDataProperties.swift"; path = "GyroData/Source/CoreData/Motion+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
-		D03B067A2988D228002BEB96 /* MotionData1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionData1.swift; sourceTree = "<group>"; };
+		D026C780298AAC9300FBBF8E /* MotionDataForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionDataForm.swift; sourceTree = "<group>"; };
 		D03B067C2988DBFC002BEB96 /* CustomDataCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDataCell.swift; sourceTree = "<group>"; };
 		D03B067F2988E656002BEB96 /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		F69C9F6E298A2D6A00F59A71 /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
@@ -130,7 +130,7 @@
 				FCCFAB5D298A8C4800308398 /* CoreDataProcessible.swift */,
 				FCCFAB5F298A90F000308398 /* CoreDataError.swift */,
 				F6AAD47F29895426008A79B5 /* MotionData.swift */,
-				D03B067A2988D228002BEB96 /* MotionData1.swift */,
+				D026C780298AAC9300FBBF8E /* MotionDataForm.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -245,6 +245,7 @@
 				63F01BB928D44FC400C53A39 /* MainViewController.swift in Sources */,
 				F6C7FB672989084F00CD92FD /* ReplayViewController.swift in Sources */,
 				FCCFAB60298A90F000308398 /* CoreDataError.swift in Sources */,
+				D026C781298AAC9300FBBF8E /* MotionDataForm.swift in Sources */,
 				F6C594382988D01500705625 /* NavigationTitleView.swift in Sources */,
 				D026C77D298A8A6A00FBBF8E /* Motion+CoreDataClass.swift in Sources */,
 				D026C776298A87CD00FBBF8E /* MotionDataModel.xcdatamodeld in Sources */,
@@ -256,7 +257,6 @@
 				D026C77E298A8A6A00FBBF8E /* Motion+CoreDataProperties.swift in Sources */,
 				D03B067D2988DBFC002BEB96 /* CustomDataCell.swift in Sources */,
 				FCCFAB5E298A8C4800308398 /* CoreDataProcessible.swift in Sources */,
-				D03B067B2988D228002BEB96 /* MotionData1.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

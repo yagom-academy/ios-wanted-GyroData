@@ -9,9 +9,9 @@ import CoreData
 import UIKit
 
 protocol CoreDataProcessible {
-    func readCoreData()
-    func saveCoreData()
-    func deleteCoreData()
+    func readCoreData() -> Result<[Motion], CoreDataError>
+    func saveCoreData(motion: Motion)
+    func deleteDate(id: UUID)
 }
 
 extension CoreDataProcessible {

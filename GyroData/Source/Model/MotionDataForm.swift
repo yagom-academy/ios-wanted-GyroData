@@ -1,5 +1,5 @@
 //
-//  MotionData.swift
+//  MotionDataForm.swift
 //  GyroData
 //
 //  Created by Baem, Dragon on 2023/01/31.
@@ -7,8 +7,9 @@
 
 import Foundation
 
-struct MotionData1 {
-    let date: Date
+struct MotionDataForm {
     let title: String
+    let date: Date
     let runningTime: Double
+    let jsonData: String
 }
