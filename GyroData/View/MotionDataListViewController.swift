@@ -9,6 +9,7 @@ import UIKit
 
 class MotionDataListViewController: UIViewController {
     private let tableView = UITableView(frame: .zero, style: .plain)
+    private let viewModel = MotionDataListViewModel()
 
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -48,13 +49,17 @@ class MotionDataListViewController: UIViewController {
 
 extension MotionDataListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return viewModel.numberOfData()
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(
+        guard let cell = tableView.dequeueReusableCell(
             withIdentifier: MotionDataListTableViewCell.identifier, for: indexPath
-        )
+        ) as? MotionDataListTableViewCell else { return MotionDataListTableViewCell() }
+        guard let motionData = viewModel.motionData(at: indexPath) else { return cell }
+        cell.configureSubviewsText(createdAt: motionData.createdAt.dateTimeString(),
+                                   type: motionData.motionDataType.rawValue,
+                                   length: motionData.length.description)
         return cell
     }
 }
