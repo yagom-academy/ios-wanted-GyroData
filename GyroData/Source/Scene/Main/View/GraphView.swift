@@ -183,4 +183,21 @@ class GraphView: UIView {
         })
         linePath.stroke()
     }
+    
+    func clear() {
+        dataListX = .init()
+        dataListY = .init()
+        dataListZ = .init()
+    }
+    
+    func totalData(data: [MotionDataModel]) {
+        
+        data.forEach { motionDatas in
+            dataListX.append(motionDatas.x)
+            dataListY.append(motionDatas.y)
+            dataListZ.append(motionDatas.z)
+        }
+        
+        setNeedsDisplay()
+    }
 }
