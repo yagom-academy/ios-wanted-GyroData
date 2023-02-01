@@ -12,6 +12,8 @@ final class RecordMotionDataViewController: UIViewController {
         enum Namespace {
             static let navigationTitle = "측정하기"
             static let rightBarButtonTitle = "저장"
+            static let measure = "측정"
+            static let stop = "정지"
         }
         
         enum Layout {
@@ -28,12 +30,22 @@ final class RecordMotionDataViewController: UIViewController {
         return stack
     }()
     private let segmentedControl = UISegmentedControl()
+    private let graphView = GraphView(frame: .zero)
+    private let measureButton: UIButton = {
+        let button = UIButton()
+        button.setTitle(Constant.Namespace.measure, for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
+        return button
+    }()
+    private let stopButton: UIButton = {
+        let button = UIButton()
+        button.setTitle(Constant.Namespace.stop, for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
+        return button
+    }()
     
     init() {
-        viewModel = RecordMotionDataViewModel(
-            motionDataType: MotionDataType
-                .allCases
-                .map { $0 } [0])
+        viewModel = RecordMotionDataViewModel(motionDataType: MotionDataType.allCases.map { $0 } [0])
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -63,15 +75,17 @@ final class RecordMotionDataViewController: UIViewController {
     
     private func setupViews() {
         view.backgroundColor = .systemBackground
-        configureSegmentedControl()
         view.addSubview(stackView)
-        stackView.addArrangedSubview(segmentedControl)
+        [segmentedControl, graphView, measureButton, stopButton]
+            .forEach { stackView.addArrangedSubview($0) }
         
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
             stackView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor)
         ])
+        
+        configureSegmentedControl()
     }
     
     private func configureSegmentedControl() {
@@ -79,8 +93,7 @@ final class RecordMotionDataViewController: UIViewController {
         for (index, item) in segments.enumerated() {
             segmentedControl.insertSegment(
                 action: UIAction(title: item) { _ in
-                    self.viewModel.action(.changeSegment(selectedIndex: index))
-                },
+                    self.viewModel.action(.changeSegment(to: index))},
                 at: index,
                 animated: true
             )
