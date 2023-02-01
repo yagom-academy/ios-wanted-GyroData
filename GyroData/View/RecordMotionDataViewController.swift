@@ -41,6 +41,7 @@ final class RecordMotionDataViewController: UIViewController {
         let button = UIButton()
         button.setTitle(Constant.Namespace.stop, for: .normal)
         button.setTitleColor(.systemBlue, for: .normal)
+        button.isEnabled = false
         return button
     }()
     
@@ -130,6 +131,32 @@ final class RecordMotionDataViewController: UIViewController {
                 self.viewModel.action(.changeSegment(to: index))
             }
         )
+    }
+    
+    private func configureButtonActions() {
+        measureButton.addAction(measureButtonAction(), for: .touchUpInside)
+        stopButton.addAction(stopbuttonAction(), for: .touchUpInside)
+    }
+    
+    private func measureButtonAction() -> UIAction {
+        return UIAction(handler: { _ in
+            print(self.stopButton.isEnabled)
+            self.viewModel.action(.start(
+                selectedIndex: self.segmentedControl.selectedSegmentIndex,
+                closure: self.toggleButtons)
+            )
+        })
+    }
+    
+    private func stopbuttonAction() -> UIAction {
+        return UIAction(handler: { _ in
+            self.viewModel.action(.stop(closure: self.toggleButtons))
+        })
+    }
+    
+    private func toggleButtons() {
+        stopButton.isEnabled.toggle()
+        navigationItem.rightBarButtonItem?.isEnabled.toggle()
     }
     
     private func showAlert(alertTitle: String) {
