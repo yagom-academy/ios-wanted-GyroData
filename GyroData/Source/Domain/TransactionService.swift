@@ -36,7 +36,6 @@ extension TransactionService {
         } catch {
             return .failure(error)
         }
-        
     }
     
     func jsonDataLoad(date: Date) -> Result<Data, FileSystemError> {
@@ -48,23 +47,51 @@ extension TransactionService {
         }
     }
     
-    func save(data: MeasureData) -> Error? {
-        do {
-            try fileManager.save(data)
-            try coreDataManager.save(data)
-            return nil
-        } catch {
-            return error
+    func save(data: MeasureData, completion: @escaping (Result<Void, Error>) -> Void) {
+        let group = DispatchGroup()
+        
+        DispatchQueue.global().async(group: group) {
+            do {
+                try self.coreDataManager.save(data)
+            } catch {
+                return completion(.failure(error))
+            }
         }
+        
+        DispatchQueue.global().async(group: group) {
+            do {
+                try self.fileManager.save(data)
+            } catch {
+                return completion(.failure(error))
+            }
+        }
+        
+        group.wait()
+        self.list.append(data)
+        completion(.success(()))
     }
     
-    func delete(date: Date) -> Error? {
-        do {
-            try coreDataManager.delete(date)
-            try fileManager.delete(date)
-            return nil
-        } catch {
-            return error
+    func delete(date: Date, completion: @escaping (Result<Void, Error>) -> Void) {
+        let group = DispatchGroup()
+        
+        DispatchQueue.global().async(group: group) {
+            do {
+                try self.coreDataManager.delete(date)
+            } catch {
+                return completion(.failure(error))
+            }
         }
+        
+        DispatchQueue.global().async(group: group) {
+            do {
+                try self.fileManager.delete(date)
+            } catch {
+                return completion(.failure(error))
+            }
+        }
+        
+        group.wait()
+        self.list = self.list.filter({ $0.date != date })
+        completion(.success(()))
     }
 }
