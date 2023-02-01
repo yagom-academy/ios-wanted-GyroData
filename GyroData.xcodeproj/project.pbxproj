@@ -32,8 +32,7 @@
 		09E3105229882DED0088E0EB /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		09E3105C298838870088E0EB /* PersistentContainerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentContainerManager.swift; sourceTree = "<group>"; };
 		09E3105E298845DD0088E0EB /* TransitionMetaData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionMetaData.swift; sourceTree = "<group>"; };
-		183BD42A298A0232005B480E /* MotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionManager.swift; sourceTree = "<group>"; };
-		183BD42C298A09F2005B480E /* SystemFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemFileManager.swift; sourceTree = "<group>"; };
+		180E78452988FC4A006DCA3F /* CoreMotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMotionManager.swift; sourceTree = "<group>"; };
 		18D110602987BB770088ED79 /* RecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
 		18D110622988078F0088ED79 /* Transition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transition.swift; sourceTree = "<group>"; };
 		18D1106529880B7D0088ED79 /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
@@ -99,6 +98,8 @@
 				18D110622988078F0088ED79 /* Transition.swift */,
 				183BD42A298A0232005B480E /* MotionManager.swift */,
 				183BD42C298A09F2005B480E /* SystemFileManager.swift */,
+				180E78452988FC4A006DCA3F /* CoreMotionManager.swift */,
+
 			);
 			path = Model;
 			sourceTree = "<group>";

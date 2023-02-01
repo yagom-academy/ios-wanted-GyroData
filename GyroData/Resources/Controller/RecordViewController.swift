@@ -15,7 +15,7 @@ final class RecordViewController: UIViewController {
         control.selectedSegmentIndex = 0
         return control
     }()
-    
+
     let recordButton: UIButton = {
         let button = UIButton()
         button.setTitle("측정", for: .normal)
@@ -24,7 +24,7 @@ final class RecordViewController: UIViewController {
         button.layer.cornerRadius = 5
         return button
     }()
-    
+
     let cancelButton: UIButton = {
         let button = UIButton()
         button.setTitle("취소", for: .normal)
@@ -79,15 +79,15 @@ private extension RecordViewController {
     func setButtonAction() {
         let saveButton = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(didTapSaveButton))
         navigationItem.rightBarButtonItem = saveButton
-        
+
         recordButton.addTarget(self, action: #selector(didTapRecordButton), for: .touchUpInside)
         cancelButton.addTarget(self, action: #selector(didTapCancelButton), for: .touchUpInside)
     }
-    
+
     func convertButtonsState(isEnable: Bool) {
         recordButton.isEnabled = isEnable
         cancelButton.isHidden = isEnable
-        
+
         if recordButton.isEnabled {
             recordButton.layer.backgroundColor = UIColor.systemBlue.cgColor
         } else {
@@ -148,7 +148,7 @@ private extension RecordViewController {
         setBackgroundColor()
         setNavigationBar()
         setAdditionalSafeArea()
-        
+
         addChildView()
         setLayout()
     }
@@ -156,41 +156,41 @@ private extension RecordViewController {
     func setNavigationBar() {
         navigationItem.title = "측정"
     }
-    
+
     func setBackgroundColor() {
         view.backgroundColor = .systemBackground
     }
-    
+
     func setAdditionalSafeArea() {
         let padding: CGFloat = 10
-        
+
         additionalSafeAreaInsets.top += padding
         additionalSafeAreaInsets.bottom += padding
         additionalSafeAreaInsets.left += padding
         additionalSafeAreaInsets.right += padding
     }
-    
+
     func addChildView() {
         [segmentControl, recordButton, cancelButton].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview($0)
         }
     }
-    
+
     func setLayout() {
         let safeArea = view.safeAreaLayoutGuide
-        
+
         NSLayoutConstraint.activate([
             segmentControl.topAnchor.constraint(equalTo: safeArea.topAnchor),
             segmentControl.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor),
             segmentControl.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
             segmentControl.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
-            
+
             recordButton.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor),
             recordButton.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
             recordButton.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
             recordButton.bottomAnchor.constraint(equalTo: cancelButton.topAnchor, constant: -20),
-            
+
             cancelButton.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor),
             cancelButton.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
             cancelButton.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
