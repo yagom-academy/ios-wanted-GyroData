@@ -125,16 +125,16 @@ class AddViewController: UIViewController {
         motionManager.startAccelerometerUpdates(to: .main) { data, error in
             if error == nil {
                 guard let accelerometerData = data else { return }
-                
+
                 let recordData = MotionDataModel(
                     x: accelerometerData.acceleration.x,
                     y: accelerometerData.acceleration.y,
                     z: accelerometerData.acceleration.z
                 )
-                
+
                 self.motionDataList.append(recordData)
                 self.graphView.motionDatas = recordData
-                
+
                 return
             }
         }
@@ -142,16 +142,16 @@ class AddViewController: UIViewController {
         motionManager.startGyroUpdates(to: .main) { data, error in
             if error == nil {
                 guard let gyroData = data else { return }
-                
+
                 let recordData = MotionDataModel(
                     x: gyroData.rotationRate.x,
                     y: gyroData.rotationRate.y,
                     z: gyroData.rotationRate.z
                 )
-                
+
                 self.motionDataList.append(recordData)
                 self.graphView.motionDatas = recordData
-                
+
                 return
             }
         }
@@ -160,7 +160,5 @@ class AddViewController: UIViewController {
     @objc private func stopGravityData() {
         motionManager.stopAccelerometerUpdates()
         motionManager.stopGyroUpdates()
-        
-        print(motionDataList)
     }
 }

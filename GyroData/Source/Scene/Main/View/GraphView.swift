@@ -11,6 +11,7 @@ class GraphView: UIView {
     var motionDatas: MotionDataModel? {
         didSet {
             guard let motionDatas = motionDatas else { return }
+            
             dataListX.append(motionDatas.x)
             dataListY.append(motionDatas.y)
             dataListZ.append(motionDatas.z)
@@ -24,37 +25,39 @@ class GraphView: UIView {
     private var dataListZ = [Double]()
     
     override func draw(_ rect: CGRect) {
-        UIColor.systemGray.setStroke()
-        let xAxisPath = UIBezierPath()
-        xAxisPath.lineWidth = 1
-        xAxisPath.move(to: CGPoint(x: rect.origin.x, y: rect.midY))
-        xAxisPath.addLine(to: CGPoint(x: rect.origin.x + rect.width, y: rect.midY))
-        xAxisPath.stroke()
+        let xPath = UIBezierPath()
         
+        xPath.lineWidth = 1
+        xPath.move(to: CGPoint(x: rect.origin.x, y: rect.midY))
+        xPath.addLine(to: CGPoint(x: rect.origin.x + rect.width, y: rect.midY))
+        UIColor.systemGray.setStroke()
+        xPath.stroke()
+
         drawLines(rect, color: .red, dataList: dataListX)
         drawLines(rect, color: .blue, dataList: dataListY)
         drawLines(rect, color: .green, dataList: dataListZ)
     }
     
     private func drawLines(_ rect: CGRect, color: UIColor, dataList: [Double]) {
-        
-        let mappedDataList = dataList.map { value in
-            rect.midY - CGFloat(value)
+        let ratioDataList = dataList.map { value in
+            rect.midY - CGFloat(value) * 10
         }
+        var xPosition: CGFloat = 0
+        let xInterval = rect.width / 600
+        let linePath = UIBezierPath()
         
         color.setStroke()
-        var x: CGFloat = 0
-        let space = rect.width / CGFloat(mappedDataList.count - 1)
-        let linePath = UIBezierPath()
         linePath.lineWidth = 1
-        mappedDataList.forEach({ value in
-            let point = CGPoint(x: x, y: value)
+        ratioDataList.forEach({ value in
+            let point = CGPoint(x: xPosition, y: value)
+            
             if linePath.isEmpty {
                 linePath.move(to: point)
             } else {
                 linePath.addLine(to: point)
             }
-            x += space
+            
+            xPosition += xInterval
         })
         linePath.stroke()
     }

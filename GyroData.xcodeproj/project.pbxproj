@@ -91,7 +91,6 @@
 			children = (
 				D03B06782988C498002BEB96 /* Scene */,
 				D03B06792988C49F002BEB96 /* Model */,
-				F69C9F6E298A2D6A00F59A71 /* GraphView.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -100,8 +99,6 @@
 			isa = PBXGroup;
 			children = (
 				F6C594392988D03D00705625 /* Main */,
-				D03B067E2988E5D7002BEB96 /* Add */,
-				F6C7FB682989091E00CD92FD /* Replay */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -127,6 +124,8 @@
 			isa = PBXGroup;
 			children = (
 				63F01BB828D44FC400C53A39 /* MainViewController.swift */,
+				D03B067E2988E5D7002BEB96 /* Add */,
+				F6C7FB682989091E00CD92FD /* Replay */,
 				F6C5943A2988D04700705625 /* View */,
 			);
 			path = Main;
@@ -135,6 +134,7 @@
 		F6C5943A2988D04700705625 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				F69C9F6E298A2D6A00F59A71 /* GraphView.swift */,
 				F6C594372988D01500705625 /* NavigationTitleView.swift */,
 				D03B067C2988DBFC002BEB96 /* CustomDataCell.swift */,
 			);
