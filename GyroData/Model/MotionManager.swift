@@ -13,9 +13,10 @@ class MotionManager {
     var timer: Timer?
     var second: Double = 0.0
     
-    var interval: Double = 0.1
+    var interval: Double = 0.0
     
-    func start(type: MotionType, completion: @escaping (MotionData) -> Void) {
+    func start(type: MotionType, completion: @escaping (Coordinate) -> Void) {
+        second = 0
         switch type {
         case .acc:
             accelerometerMode(completion: completion)
@@ -24,13 +25,17 @@ class MotionManager {
         }
     }
     
+    func confgiureTimeInterval(interval: Double) {
+        self.interval = interval
+    }
+    
     func stop() {
         timer?.invalidate()
         manager.stopGyroUpdates()
         manager.stopAccelerometerUpdates()
     }
     
-    func accelerometerMode(completion: @escaping (MotionData) -> Void) {
+    func accelerometerMode(completion: @escaping (Coordinate) -> Void) {
         manager.accelerometerUpdateInterval = interval
         manager.startAccelerometerUpdates()
         timer = Timer.scheduledTimer(withTimeInterval: interval, repeats: true, block: { _ in
@@ -39,11 +44,11 @@ class MotionManager {
             }
             self.second += 0.1
             guard let data = self.manager.accelerometerData else { return }
-            completion(data)
+            completion(self.convert(motionData: data))
         })
     }
     
-    func gyroMode(completion: @escaping (MotionData) -> Void) {
+    func gyroMode(completion: @escaping (Coordinate) -> Void) {
         manager.gyroUpdateInterval = interval
         manager.startGyroUpdates()
         timer = Timer.scheduledTimer(withTimeInterval: interval, repeats: true, block: { _ in
@@ -52,7 +57,24 @@ class MotionManager {
             }
             self.second += 0.1
             guard let data = self.manager.gyroData else { return }
-            completion(data)
+            completion(self.convert(motionData: data))
         })
     }
+    
+    func convert(motionData: MotionData) -> Coordinate {
+        var (x,y,z) = (0.0, 0.0, 0.0)
+        
+        if let data = motionData as? CMAccelerometerData {
+            x = data.acceleration.x
+            y = data.acceleration.y
+            z = data.acceleration.z
+        } else if let data = motionData as? CMGyroData {
+            x = data.rotationRate.x
+            y = data.rotationRate.y
+            z = data.rotationRate.z
+        }
+        
+        return Coordinate(x: x.decimalPlace(3), y: y.decimalPlace(3), z: z.decimalPlace(3))
+    }
+    
 }

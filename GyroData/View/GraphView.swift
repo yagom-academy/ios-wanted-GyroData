@@ -13,7 +13,6 @@ class GraphView: UIView {
     let xLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "x: 123"
         label.textAlignment = .center
         label.textColor = .red
         return label
@@ -22,7 +21,6 @@ class GraphView: UIView {
     let yLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "y: 123"
         label.textAlignment = .center
         label.textColor = .blue
         return label
@@ -31,7 +29,6 @@ class GraphView: UIView {
     let zLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "z: 123"
         label.textAlignment = .center
         label.textColor = .green
         return label
@@ -46,13 +43,13 @@ class GraphView: UIView {
         return stackView
     }()
     
-    let xLayer = CAShapeLayer()
-    let yLayer = CAShapeLayer()
-    let zLayer = CAShapeLayer()
+    var xLayer: CAShapeLayer?
+    var yLayer: CAShapeLayer?
+    var zLayer: CAShapeLayer?
     
-    let xPath = UIBezierPath()
-    let yPath = UIBezierPath()
-    let zPath = UIBezierPath()
+    var xPath: UIBezierPath?
+    var yPath: UIBezierPath?
+    var zPath: UIBezierPath?
     
     var currentXPoint: CGFloat = 0
     var currentYPoint: CGFloat = 0
@@ -118,30 +115,30 @@ class GraphView: UIView {
     }
     
     func configureLayer() {
-        xLayer.lineWidth = 1
-        xLayer.strokeColor = UIColor.red.cgColor
-        xLayer.path = xPath.cgPath
+        xLayer?.lineWidth = 1
+        xLayer?.strokeColor = UIColor.red.cgColor
+        xLayer?.path = xPath?.cgPath
         
-        yLayer.lineWidth = 1
-        yLayer.strokeColor = UIColor.green.cgColor
-        yLayer.path = yPath.cgPath
+        yLayer?.lineWidth = 1
+        yLayer?.strokeColor = UIColor.green.cgColor
+        yLayer?.path = yPath?.cgPath
         
-        zLayer.lineWidth = 1
-        zLayer.strokeColor = UIColor.blue.cgColor
-        zLayer.path = zPath.cgPath
+        zLayer?.lineWidth = 1
+        zLayer?.strokeColor = UIColor.blue.cgColor
+        zLayer?.path = zPath?.cgPath
         
-        layer.addSublayer(xLayer)
-        layer.addSublayer(yLayer)
-        layer.addSublayer(zLayer)
+        layer.addSublayer(xLayer!)
+        layer.addSublayer(yLayer!)
+        layer.addSublayer(zLayer!)
     }
     
     func drawLine(x: Double, y: Double, z: Double) {
         let startYPoint = frame.height / 2
         updateCoordinateLabel(x: x, y: y, z: z)
         
-        xPath.move(to: CGPoint(x: offsetPoint, y: startYPoint + currentXPoint))
-        yPath.move(to: CGPoint(x: offsetPoint, y: startYPoint + currentYPoint))
-        zPath.move(to: CGPoint(x: offsetPoint, y: startYPoint + currentZPoint))
+        xPath?.move(to: CGPoint(x: offsetPoint, y: startYPoint + currentXPoint))
+        yPath?.move(to: CGPoint(x: offsetPoint, y: startYPoint + currentYPoint))
+        zPath?.move(to: CGPoint(x: offsetPoint, y: startYPoint + currentZPoint))
         
         offsetPoint += frame.width / 600
         
@@ -149,34 +146,41 @@ class GraphView: UIView {
         currentYPoint = y * 5
         currentZPoint = z * 5
         
-        xPath.addLine(to: CGPoint(x: offsetPoint, y: startYPoint + currentXPoint))
-        yPath.addLine(to: CGPoint(x: offsetPoint, y: startYPoint + currentYPoint))
-        zPath.addLine(to: CGPoint(x: offsetPoint, y: startYPoint + currentZPoint))
+        xPath?.addLine(to: CGPoint(x: offsetPoint, y: startYPoint + currentXPoint))
+        yPath?.addLine(to: CGPoint(x: offsetPoint, y: startYPoint + currentYPoint))
+        zPath?.addLine(to: CGPoint(x: offsetPoint, y: startYPoint + currentZPoint))
         
-        xLayer.path = xPath.cgPath
-        yLayer.path = yPath.cgPath
-        zLayer.path = zPath.cgPath
+        xLayer?.path = xPath?.cgPath
+        yLayer?.path = yPath?.cgPath
+        zLayer?.path = zPath?.cgPath
     }
     
     func reset() {
-        xLayer.path = nil
-        yLayer.path = nil
-        zLayer.path = nil
-        xLayer.removeFromSuperlayer()
-        yLayer.removeFromSuperlayer()
-        zLayer.removeFromSuperlayer()
+        xLayer?.removeFromSuperlayer()
+        yLayer?.removeFromSuperlayer()
+        zLayer?.removeFromSuperlayer()
+        
+        xLayer = CAShapeLayer()
+        yLayer = CAShapeLayer()
+        zLayer = CAShapeLayer()
+        
+        xPath = UIBezierPath()
+        yPath = UIBezierPath()
+        zPath = UIBezierPath()
+        
+        xLabel.text = "x: 0"
+        yLabel.text = "y: 0"
+        zLabel.text = "z: 0"
+        
+        currentXPoint = 0
+        currentYPoint = 0
+        currentZPoint = 0
+        offsetPoint = 0
     }
     
     func configureData() {
         reset()
         configureLayer()
-        currentXPoint = 0
-        currentYPoint = 0
-        currentZPoint = 0
-        offsetPoint = 0
-        xPath.removeAllPoints()
-        yPath.removeAllPoints()
-        zPath.removeAllPoints()
     }
     
     func updateCoordinateLabel(x: Double, y: Double, z: Double) {

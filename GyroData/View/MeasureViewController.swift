@@ -12,7 +12,7 @@ class MeasureViewController: UIViewController {
     let motionManager = MotionManager()
     
     var motionType: MotionType = .acc
-    var coordinates:[(Double, Double, Double)] = []
+    var coordinates: [Coordinate] = []
     
     let segmentedControl: UISegmentedControl = {
         let control = UISegmentedControl(items: ["Acc", "Gyro"])
@@ -113,31 +113,23 @@ class MeasureViewController: UIViewController {
     }
     
     @objc func measureButtonTapped() {
+        navigationItem.rightBarButtonItem?.isEnabled = false
+        segmentedControl.isEnabled = false
         graphView.configureData()
+        
+        motionManager.confgiureTimeInterval(interval: 0.1)
         motionManager.start(type: motionType) { data in
             DispatchQueue.main.async {
-                switch self.motionType {
-                case .acc:
-                    guard let accData = data as? CMAccelerometerData else { return }
-                    self.coordinates.append((accData.acceleration.x,
-                                             accData.acceleration.y, accData.acceleration.z))
-                    self.graphView.drawLine(x: accData.acceleration.x,
-                                       y: accData.acceleration.y,
-                                       z: accData.acceleration.z)
-                case .gyro:
-                    guard let gyroData = data as? CMGyroData else { return }
-                    self.coordinates.append((gyroData.rotationRate.x,
-                                             gyroData.rotationRate.y, gyroData.rotationRate.z))
-                    self.graphView.drawLine(x: gyroData.rotationRate.x,
-                                            y: gyroData.rotationRate.y,
-                                            z: gyroData.rotationRate.z)
-                }
+                self.coordinates.append(data)
+                self.graphView.drawLine(x: data.x, y: data.y, z: data.z)
             }
         }
     }
     
     @objc func stopButtonTapped() {
+        navigationItem.rightBarButtonItem?.isEnabled = true
+        segmentedControl.isEnabled = true
+        
         motionManager.stop()
-        graphView.reset()
     }
 }
