@@ -10,6 +10,7 @@ import UIKit
 class MotionDataListViewController: UIViewController {
     private let tableView = UITableView(frame: .zero, style: .plain)
     private let viewModel = MotionDataListViewModel()
+    private var isLoading = false
 
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -121,6 +122,14 @@ extension MotionDataListViewController: UITableViewDelegate {
             let viewController = MotionDataDetailViewController(viewModel: motionDataDetailViewModel)
             self?.navigationController?.pushViewController(viewController, animated: true)
         }))
+    }
+
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == viewModel.numberOfData() - 1, isLoading == false {
+            isLoading = true
+            viewModel.fetchMotionData()
+            isLoading = false
+        }
     }
 
     func tableView(
