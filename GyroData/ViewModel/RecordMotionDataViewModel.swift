@@ -9,7 +9,7 @@ import Foundation
 
 final class RecordMotionDataViewModel {
     enum Action {
-        case changeSegment(selectedIndex: Int)
+        case changeSegment(to: Int)
         case start
         case stop
         case save
@@ -43,7 +43,7 @@ final class RecordMotionDataViewModel {
     func action(_ action: Action) {
         switch action {
         case let .changeSegment(index):
-            select(index: index)
+            selectedIndex(index)
         case .start:
             start()
         case .stop:
@@ -53,11 +53,9 @@ final class RecordMotionDataViewModel {
         }
     }
     
-    private func select(index: Int) {
-        print(index)
-        let type = MotionDataType.allCases[index]
-        motionData.motionDataType = type
-        
+    private func selectedIndex(_ index: Int) {
+        let selectedType = MotionDataType.allCases[index]
+        motionData.motionDataType = selectedType
     }
     
     private func start() { }
