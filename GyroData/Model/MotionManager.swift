@@ -19,7 +19,7 @@ final class MotionManager: MotionManagerType {
     private let motion: CMMotionManager = CMMotionManager()
     private var timer: Timer = Timer()
     
-    // TODO: - "측정"의 의미를 담아 rename
+    // TODO: - 측정한 길이(시간) 넘기는 방법 어떻게 해야하죠?
     func startAccelerometer(_ closure: @escaping (Coordinate) -> Void) {
         guard motion.isAccelerometerAvailable else { return }
         motion.showsDeviceMovementDisplay = true
