@@ -15,6 +15,7 @@ protocol MeasurementInput {
 
 protocol MeasurementOutput {
     var isMeasuring: Observable<Bool> { get }
+    var isLoading: Observable<Bool?> { get set }
     var error: Observable<String?> { get }
 }
 
@@ -24,6 +25,7 @@ struct MeasurementViewModel: MeasurementInput, MeasurementOutput {
     private let measurementManager = MeasurementManager.shared
 
     var isMeasuring: Observable<Bool> = Observable(value: false)
+    var isLoading: Observable<Bool?> = Observable(value: nil)
     var error: Observable<String?> = Observable(value: nil)
     
     func save(_ graphMode: GraphMode, data: [[Double]]) {
@@ -68,6 +70,7 @@ struct MeasurementViewModel: MeasurementInput, MeasurementOutput {
             // TODO: 리팩토링 부분
             switch result {
             case .success(let success):
+                self.isLoading.value = false
                 print("성공")
             case .failure(let failure):
                 failure.message
