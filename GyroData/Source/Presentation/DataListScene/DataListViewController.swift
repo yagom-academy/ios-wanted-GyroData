@@ -8,12 +8,20 @@
 import UIKit
 
 final class DataListViewController: UIViewController {
+    typealias DataSource = UITableViewDiffableDataSource<Section, MeasureData>
+
     private enum Constant {
         static let title = "목록"
     }
     
+    enum Section {
+        case main
+    }
+    
     private let tableView = UITableView()
     private let viewModel = DataListViewModel()
+    
+    private lazy var dataSource = configureDataSoruce()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +35,25 @@ final class DataListViewController: UIViewController {
         viewModel.bindData { datas in
             //TODO: Code Implementation
         }
+    }
+}
+
+extension DataListViewController {
+    private func configureDataSoruce() -> DataSource {
+        let dataSource = DataSource(tableView: tableView) { tableView, indexPath, data in
+            guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: MeasureDataCell.identifier,
+                for: indexPath
+            ) as? MeasureDataCell else {
+                
+                let errorCell = UITableViewCell()
+                return errorCell
+            }
+            
+            //TODO: Cell Setup
+            return cell
+        }
+        return dataSource
     }
 }
 
