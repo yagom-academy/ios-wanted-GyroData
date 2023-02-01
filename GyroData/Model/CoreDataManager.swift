@@ -42,6 +42,7 @@ final class CoreDataManager: CoreDataManagerType {
         let request = MotionDataEntity.fetchRequest()
         request.fetchOffset = offset
         request.fetchLimit = limit
+        request.sortDescriptors = [NSSortDescriptor(key: "createdAt", ascending: false)]
         do {
             return try fetchMotionDataEntities(request)
         } catch {
