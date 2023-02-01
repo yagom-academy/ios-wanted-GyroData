@@ -1,5 +1,5 @@
 //
-//  GyroListViewModel.swift
+//  ListViewModel.swift
 //  GyroData
 //
 //  Created by ash and som on 2023/01/31.
