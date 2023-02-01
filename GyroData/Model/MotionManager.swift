@@ -38,8 +38,8 @@ final class MotionManager: MotionManagerType {
                 self.stopAccelerometer()
                 return
             }
-            if let data = self.motion.deviceMotion {
-                let coordinate = Coordinate(data.userAcceleration)
+            if let data = self.motion.accelerometerData {
+                let coordinate = Coordinate(data.acceleration)
                 // 이 클로저는 백그라운드 큐에서 돌아가게 된다.
                 // TODO: - 그래프 그리는 부분(UI업데이트)는 메인 큐에서 돌아갈 수 있도록 메인큐로 보내주는 작업이 필요하다.
                 closure(coordinate)
@@ -76,7 +76,7 @@ final class MotionManager: MotionManagerType {
                 self.stopAccelerometer()
                 return
             }
-            if let data = self.motion.deviceMotion {
+            if let data = self.motion.gyroData {
                 let coordinate = Coordinate(data.rotationRate)
                 // 이 클로저는 백그라운드 큐에서 돌아가게 된다.
                 // TODO: - 그래프 그리는 부분(UI업데이트)는 메인 큐에서 돌아갈 수 있도록 메인큐로 보내주는 작업이 필요하다.
