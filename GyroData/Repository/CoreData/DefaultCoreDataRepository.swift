@@ -12,7 +12,7 @@ enum CoreDataError: Error {
     case invalidID
 }
 
-final class DefaultCoreDataRepository: CoreDataRepository {
+struct DefaultCoreDataRepository: CoreDataRepository {
     typealias Domain = Motion
     typealias Entity = MotionMO
     
