@@ -1,13 +1,13 @@
 //
-//  GyroDataTests.swift
+//  FileManagerMotionReadServiceTests.swift
 //  GyroDataTests
 //
-//  Created by Ayaan on 2023/01/31.
+//  Created by Ayaan, Wonbi on 2023/02/01.
 //
 
 import XCTest
 
-final class GyroDataTests: XCTestCase {
+final class FileManagerMotionReadServiceTests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -27,7 +27,7 @@ final class GyroDataTests: XCTestCase {
 
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
-        measure {
+        self.measure {
             // Put the code you want to measure the time of here.
         }
     }
