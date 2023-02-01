@@ -51,6 +51,8 @@ class LineGraphView: UIView {
         self.data = data
         super.init(frame: .zero)
 
+        backgroundColor = .white
+
         configureView()
         configureConstraints()
     }
@@ -78,6 +80,8 @@ class LineGraphView: UIView {
     }
 
     private func configureConstraints() {
+        translatesAutoresizingMaskIntoConstraints = false
+
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: topAnchor),
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -94,6 +98,8 @@ class LineGraphView: UIView {
 
     // MARK: Draw Methods
     override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        
         drawGrid(column: 8, row: 8)
         drawGraph()
     }

@@ -9,17 +9,12 @@ import UIKit
 
 final class MeasurementViewController: UIViewController {
     // MARK: Properties
-    private let measurementView: MeasurementView = {
-        let view = MeasurementView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-
+    private let measurementView = MeasurementView()
     private let sensorManager: SensorManager
     private let fileManager: SensorFileManager
 
-    private var measurementData = Measurement(sensor: .Accelerometer, date: Date(), time: 0, axisValue: [])
-    private var axisValue: [AxisValue] = []
+    private var measurementData = Measurement(sensor: .Accelerometer, date: Date(), time: 0, axisValues: [])
+    private var axisValues: [AxisValue] = []
 
     private var selectedSensor: Sensor {
         return measurementView.selectedSensor
@@ -29,12 +24,10 @@ final class MeasurementViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        configureNavigationBar()
-        configureView()
-        configureConstraints()
-        configureViewButtonActions()
+        view = measurementView
 
-        print(fileManager.fetchData())
+        configureNavigationBar()
+        configureViewButtonActions()
     }
 
     // MARK: Initialization
@@ -62,19 +55,6 @@ final class MeasurementViewController: UIViewController {
         navigationItem.rightBarButtonItem = saveButton
     }
 
-    private func configureView() {
-        view.addSubview(measurementView)
-    }
-
-    private func configureConstraints() {
-        NSLayoutConstraint.activate([
-            measurementView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            measurementView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            measurementView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            measurementView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-        ])
-    }
-
     private func configureViewButtonActions() {
         let measureButtonAction = UIAction { [weak self] _ in
             self?.measure()
@@ -89,7 +69,7 @@ final class MeasurementViewController: UIViewController {
     }
 
     private func measure() {
-        measurementData = Measurement(sensor: selectedSensor, date: Date(), time: 0, axisValue: [])
+        measurementData = Measurement(sensor: selectedSensor, date: Date(), time: 0, axisValues: [])
         clearGraph()
 
         sensorManager.measure(sensor: selectedSensor, interval: 0.1, timeout: 60) { [weak self] data in
@@ -98,7 +78,7 @@ final class MeasurementViewController: UIViewController {
                 return
             }
 
-            self?.measurementData.axisValue.append(data)
+            self?.measurementData.axisValues.append(data)
             print(data)
             self?.drawGraph(with: data)
         }
@@ -114,8 +94,8 @@ final class MeasurementViewController: UIViewController {
     }
 
     private func updateMeasurementData() {
-        measurementData.axisValue = axisValue
-        measurementData.time = 0.1 * Double(measurementData.axisValue.count)
+        measurementData.axisValues = axisValues
+        measurementData.time = 0.1 * Double(measurementData.axisValues.count)
     }
 
     private func saveSensorData() {

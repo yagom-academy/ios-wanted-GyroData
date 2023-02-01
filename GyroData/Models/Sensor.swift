@@ -7,17 +7,17 @@
 
 import Foundation
 
-enum Sensor: Int, Hashable {
+enum Sensor: Int, Hashable, Codable {
     
-    case Gyro
     case Accelerometer
+    case Gyro
     
     var name: String {
         switch self {
-        case .Gyro:
-            return "Gyro"
         case .Accelerometer:
             return "Accelerometer"
+        case .Gyro:
+            return "Gyro"
         }
     }
 }

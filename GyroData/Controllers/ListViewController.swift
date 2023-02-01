@@ -127,9 +127,8 @@ extension ListViewController {
     }
     
     private func presentMeasurementPage() -> UIAction {
-        return UIAction { _ in
-            print("Measurement Page 이동")
-            // 구현 예정
+        return UIAction { [weak self] _ in
+            self?.navigationController?.pushViewController(MeasurementViewController(), animated: false)
         }
     }
 }

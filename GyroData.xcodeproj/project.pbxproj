@@ -10,6 +10,8 @@
 		1A087CEF2989344700FC2056 /* LineGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A087CEE2989344600FC2056 /* LineGraphView.swift */; };
 		1A087CF82989348800FC2056 /* SensorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A087CF42989348800FC2056 /* SensorManager.swift */; };
 		1A087CFA2989353400FC2056 /* MeasurementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A087CF92989353300FC2056 /* MeasurementViewController.swift */; };
+		1A087D0C298A96CE00FC2056 /* SensorFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A087D0B298A96CE00FC2056 /* SensorFileManager.swift */; };
+		1A087D0E298A976E00FC2056 /* MeasurementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A087D0D298A976E00FC2056 /* MeasurementView.swift */; };
 		4143584C298A277E00D243C5 /* GyroCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4143584A298A277E00D243C5 /* GyroCoreData.xcdatamodeld */; };
 		414C7A702988CE2A00452C25 /* AxisValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414C7A6F2988CE2A00452C25 /* AxisValue.swift */; };
 		414C7A772988DFDB00452C25 /* Date +.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414C7A762988DFDB00452C25 /* Date +.swift */; };
@@ -37,6 +39,8 @@
 		1A087CEE2989344600FC2056 /* LineGraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineGraphView.swift; sourceTree = "<group>"; };
 		1A087CF42989348800FC2056 /* SensorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SensorManager.swift; sourceTree = "<group>"; };
 		1A087CF92989353300FC2056 /* MeasurementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeasurementViewController.swift; sourceTree = "<group>"; };
+		1A087D0B298A96CE00FC2056 /* SensorFileManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SensorFileManager.swift; path = GyroData/Models/DataStorage/FileManager/SensorFileManager.swift; sourceTree = SOURCE_ROOT; };
+		1A087D0D298A976E00FC2056 /* MeasurementView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeasurementView.swift; sourceTree = "<group>"; };
 		4143584B298A277E00D243C5 /* GyroCoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GyroCoreData.xcdatamodel; sourceTree = "<group>"; };
 		414C7A6F2988CE2A00452C25 /* AxisValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxisValue.swift; sourceTree = "<group>"; };
 		414C7A762988DFDB00452C25 /* Date +.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date +.swift"; sourceTree = "<group>"; };
@@ -101,6 +105,7 @@
 				414E53102987E0CC000221E2 /* ListView.swift */,
 				414E53122987E503000221E2 /* ListCell.swift */,
 				41539B9F298A94D600B7A446 /* ReviewPageView.swift */,
+				1A087D0D298A976E00FC2056 /* MeasurementView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -117,6 +122,14 @@
 			name = Models;
 			path = GyroData/Models;
 			sourceTree = SOURCE_ROOT;
+		};
+		1A087D0F298A9F7B00FC2056 /* FileManager */ = {
+			isa = PBXGroup;
+			children = (
+				1A087D0B298A96CE00FC2056 /* SensorFileManager.swift */,
+			);
+			path = FileManager;
+			sourceTree = "<group>";
 		};
 		414E53142987E6BC000221E2 /* Extension + */ = {
 			isa = PBXGroup;
@@ -146,6 +159,7 @@
 				41539B97298A62D500B7A446 /* DataHandleableProtocol.swift */,
 				41539B99298A635D00B7A446 /* DataHandleError.swift */,
 				41539B8D298A605300B7A446 /* CoreData */,
+				1A087D0F298A9F7B00FC2056 /* FileManager */,
 			);
 			path = DataStorage;
 			sourceTree = "<group>";
@@ -252,6 +266,7 @@
 				414E53162987E6DB000221E2 /* UILabel +.swift in Sources */,
 				414E530F2987E052000221E2 /* Measurement.swift in Sources */,
 				414C7A772988DFDB00452C25 /* Date +.swift in Sources */,
+				1A087D0C298A96CE00FC2056 /* SensorFileManager.swift in Sources */,
 				41539B93298A612E00B7A446 /* JSONEncoder +.swift in Sources */,
 				414E53112987E0CC000221E2 /* ListView.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
@@ -264,6 +279,7 @@
 				41539B9C298A6D7000B7A446 /* CoreDataManager+DataHandleable.swift in Sources */,
 				1A087CF82989348800FC2056 /* SensorManager.swift in Sources */,
 				414C7A702988CE2A00452C25 /* AxisValue.swift in Sources */,
+				1A087D0E298A976E00FC2056 /* MeasurementView.swift in Sources */,
 				41539B95298A61C000B7A446 /* JSONDecoder +.swift in Sources */,
 				414E530B2987DE9E000221E2 /* ListViewController.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,

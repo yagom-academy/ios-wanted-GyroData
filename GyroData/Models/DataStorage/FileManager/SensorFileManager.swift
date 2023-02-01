@@ -32,7 +32,10 @@ class SensorFileManager: DataHandleable {
 
             for url in contents {
                 let data = try Data(contentsOf: url)
-                let measurement = try JSONDecoder().decode(Measurement.self, from: data)
+                guard let measurement = try? JSONDecoder().decode(Measurement.self, from: data) else {
+                    return .failure(.decodingError)
+                }
+                
                 fetchedData.append(measurement)
             }
             

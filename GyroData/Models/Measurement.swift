@@ -7,10 +7,10 @@
 
 import Foundation
 
-struct Measurement: Hashable {
+struct Measurement: Hashable, Codable {
     
     let sensor: Sensor
     let date: Date
-    let time: Double
-    let axisValues: [AxisValue]
+    var time: Double
+    var axisValues: [AxisValue]
 }

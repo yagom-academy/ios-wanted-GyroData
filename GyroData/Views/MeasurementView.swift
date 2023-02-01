@@ -9,12 +9,7 @@ import UIKit
 
 final class MeasurementView: UIView {
     // MARK: Properties
-    private var graphView: LineGraphView = {
-        let view = LineGraphView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .white
-        return view
-    }()
+    private var graphView = LineGraphView()
 
     private let segmentedController: UISegmentedControl = {
         let controller = UISegmentedControl(items: ["Acc", "Gyro"])
@@ -72,20 +67,20 @@ final class MeasurementView: UIView {
 
     private func configureConstraints() {
         NSLayoutConstraint.activate([
-            segmentedController.topAnchor.constraint(equalTo: topAnchor, constant: 16),
-            segmentedController.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            segmentedController.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            segmentedController.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
+            segmentedController.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            segmentedController.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
 
             graphView.topAnchor.constraint(equalTo: segmentedController.bottomAnchor, constant: 16),
-            graphView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            graphView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            graphView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.4),
+            graphView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            graphView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            graphView.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor, multiplier: 0.4),
 
             measurementButton.topAnchor.constraint(equalTo: graphView.bottomAnchor, constant: 16),
-            measurementButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            measurementButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
 
             stopButton.topAnchor.constraint(equalTo: measurementButton.bottomAnchor, constant: 16),
-            stopButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            stopButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
         ])
     }
 
