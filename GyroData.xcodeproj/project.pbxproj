@@ -23,6 +23,7 @@
 		63F01BBE28D44FC500C53A39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBD28D44FC500C53A39 /* Assets.xcassets */; };
 		63F01BC128D44FC500C53A39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */; };
 		EB14D214298A4A00003732C3 /* CoreDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB14D213298A4A00003732C3 /* CoreDataError.swift */; };
+		EB14D21B298A9C59003732C3 /* MotionDataListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB14D21A298A9C59003732C3 /* MotionDataListTableViewCell.swift */; };
 		EB8E417B2988E8FA00FE26D3 /* MotionData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EB8E41792988E8FA00FE26D3 /* MotionData.xcdatamodeld */; };
 		EB8E417E2988EA6000FE26D3 /* MotionDataEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8E417C2988EA6000FE26D3 /* MotionDataEntity+CoreDataClass.swift */; };
 		EB8E417F2988EA6000FE26D3 /* MotionDataEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8E417D2988EA6000FE26D3 /* MotionDataEntity+CoreDataProperties.swift */; };
@@ -53,6 +54,7 @@
 		63F01BC028D44FC500C53A39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		63F01BC228D44FC500C53A39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EB14D213298A4A00003732C3 /* CoreDataError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataError.swift; sourceTree = "<group>"; };
+		EB14D21A298A9C59003732C3 /* MotionDataListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionDataListTableViewCell.swift; sourceTree = "<group>"; };
 		EB8E417A2988E8FA00FE26D3 /* MotionData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MotionData.xcdatamodel; sourceTree = "<group>"; };
 		EB8E417C2988EA6000FE26D3 /* MotionDataEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MotionDataEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		EB8E417D2988EA6000FE26D3 /* MotionDataEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MotionDataEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				EBBD3F532989378B0058EA45 /* MotionDataListViewController.swift */,
+				EB14D21A298A9C59003732C3 /* MotionDataListTableViewCell.swift */,
 				5760AC862989412A00534EF0 /* RecordMotionDataViewController.swift */,
 				5760AC882989414C00534EF0 /* MotionDataDetailViewController.swift */,
 			);
@@ -219,6 +222,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB8E41832988F2FC00FE26D3 /* CoreDataManagerType.swift in Sources */,
+				EB14D21B298A9C59003732C3 /* MotionDataListTableViewCell.swift in Sources */,
 				EB14D214298A4A00003732C3 /* CoreDataError.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				579C4D902988A40300D3949F /* MotionManagerType.swift in Sources */,
