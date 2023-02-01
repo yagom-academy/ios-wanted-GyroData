@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-struct CoreDataManager: DataHandleable {
+struct CoreDataManager: MeasurementDataHandleable {
     
     typealias DataType = Measurement
     

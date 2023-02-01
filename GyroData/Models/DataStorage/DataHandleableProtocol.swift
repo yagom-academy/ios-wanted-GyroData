@@ -17,3 +17,7 @@ protocol DataHandleable {
     
     func deleteData(_ data: DataType) throws -> Void
 }
+
+protocol MeasurementDataHandleable: DataHandleable  where DataType == Measurement {
+    
+}

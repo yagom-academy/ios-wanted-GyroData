@@ -128,7 +128,9 @@ extension ListViewController {
     
     private func presentMeasurementPage() -> UIAction {
         return UIAction { [weak self] _ in
-            self?.navigationController?.pushViewController(MeasurementViewController(), animated: false)
+            self?.navigationController?.pushViewController(
+                MeasurementViewController(dataManagers: [CoreDataManager(), SensorFileManager()]),
+                animated: false)
         }
     }
 }

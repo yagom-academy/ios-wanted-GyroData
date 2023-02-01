@@ -2,7 +2,7 @@
 //  ReviewPageView.swift
 //  GyroData
 //
-//  Created by 맹선아 on 2023/02/01.
+//  Created by 써니쿠키 on 2023/02/01.
 //
 
 import UIKit

@@ -10,8 +10,8 @@ import UIKit
 final class MeasurementViewController: UIViewController {
     // MARK: Properties
     private let measurementView = MeasurementView()
-    private let sensorManager: SensorManager
-    private let fileManager: SensorFileManager
+    private let sensorManager: SensorManager = SensorManager()
+    private let dataManagers: [any MeasurementDataHandleable]
 
     private var measurementData = Measurement(sensor: .Accelerometer, date: Date(), time: 0, axisValues: [])
     private var axisValues: [AxisValue] = []
@@ -31,9 +31,8 @@ final class MeasurementViewController: UIViewController {
     }
 
     // MARK: Initialization
-    init(sensorManager: SensorManager = SensorManager(), fileManager: SensorFileManager = SensorFileManager()) {
-        self.sensorManager = sensorManager
-        self.fileManager = fileManager
+    init(dataManagers: [any MeasurementDataHandleable]) {
+        self.dataManagers = dataManagers
 
         super.init(nibName: nil, bundle: nil)
     }
@@ -92,20 +91,22 @@ final class MeasurementViewController: UIViewController {
             self?.updateMeasurementData()
         }
     }
-
+    
     private func updateMeasurementData() {
         measurementData.axisValues = axisValues
         measurementData.time = 0.1 * Double(measurementData.axisValues.count)
     }
-
+    
     private func saveSensorData() {
         do {
-            try fileManager.saveData(measurementData)
+            for manager in dataManagers {
+                try manager.saveData(measurementData)
+            }
         } catch {
             fatalError("얼럿추가해야됨")
         }
     }
-
+    
     private func setDisabledSegments() {
         measurementView.setDisabledSegments()
     }
