@@ -6,3 +6,19 @@
 //
 
 import Foundation
+
+final class DataListViewModel {
+    private var measureDatas:[MeasureData] = [] {
+        didSet {
+            dataHandler?(measureDatas)
+        }
+    }
+    
+    private var dataHandler: (([MeasureData]) -> Void)?
+}
+
+extension DataListViewModel {
+    func bindData(handler: @escaping ([MeasureData]) -> Void) {
+        dataHandler = handler
+    }
+}
