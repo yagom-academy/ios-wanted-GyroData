@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct GyroInformationModel: Identifiable {
+struct GyroInformationModel: Identifiable, Codable {
     var id: UUID = UUID()
-    var date: Date?
-    var time: TimeInterval?
-    var graphMode: GraphMode?
+    var date: Date
+    var time: TimeInterval
+    var graphMode: GraphMode
 }

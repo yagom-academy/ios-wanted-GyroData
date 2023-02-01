@@ -16,7 +16,7 @@ enum CoreDataError: Error {
 
 protocol CoreDataManagable {
     func save(_ info: GyroInformationModel) throws
-    func fetch() throws -> [GyroInformationModel]
+    func fetch(limit: Int) throws -> [GyroInformationModel]
     func delete(_ info: GyroInformationModel) throws
 }
 
@@ -44,6 +44,8 @@ final class CoreDataManager: CoreDataManagable {
         return NSEntityDescription.entity(forEntityName: "GyroInformation", in: context)
     }
     
+    private var fetchOffset: Int = 0
+    
     private func saveToContext() throws {
         if context.hasChanges {
             do {
@@ -55,7 +57,9 @@ final class CoreDataManager: CoreDataManagable {
     }
     
     func save(_ info: GyroInformationModel) throws {
-        guard let entity = entity else { return }
+        guard let entity = entity else {
+            throw CoreDataError.saveFailure
+        }
         
         let managedObject = NSManagedObject(entity: entity,
                                             insertInto: context)
@@ -67,22 +71,32 @@ final class CoreDataManager: CoreDataManagable {
         try? saveToContext()
     }
     
-    private func fetchGyroInformation() throws -> [GyroInformation]? {
+    private func fetchAllGyroInformations() throws -> [GyroInformation]? {
         let request = GyroInformation.fetchRequest()
         let results = try? context.fetch(request)
         return results
     }
     
-    func fetch() throws -> [GyroInformationModel] {
+    private func fetchGyroInformations(limit: Int) throws -> [GyroInformation]? {
+        let request = GyroInformation.fetchRequest()
+        request.fetchOffset = self.fetchOffset
+        request.fetchLimit = limit
+        let results = try? context.fetch(request)
+        
+        self.fetchOffset += limit
+        return results
+    }
+    
+    func fetch(limit: Int) throws -> [GyroInformationModel] {
         var gyroInformationModels: [GyroInformationModel] = []
-        guard let fetchResults = try? fetchGyroInformation() else {
-            return []
+        guard let fetchResults = try? fetchGyroInformations(limit: limit) else {
+            throw CoreDataError.fetchFailure
         }
         
         for result in fetchResults {
             if let id = result.id {
                 let gyroInformationModel = GyroInformationModel(id: id,
-                                                                date: result.date,
+                                                                date: result.date ?? Date(),
                                                                 time: result.time,
                                                                 graphMode: result.graphModeValue)
                 
@@ -93,8 +107,10 @@ final class CoreDataManager: CoreDataManagable {
     }
     
     func delete(_ info: GyroInformationModel) throws {
-        let fetchResults = try? fetchGyroInformation()
-        guard let infoItem = fetchResults?.filter({ $0.id == info.id }).first else { return }
+        let fetchResults = try? fetchAllGyroInformations()
+        guard let infoItem = fetchResults?.filter({ $0.id == info.id }).first else {
+            throw CoreDataError.deleteFailure
+        }
         
         context.delete(infoItem)
         try? saveToContext()
