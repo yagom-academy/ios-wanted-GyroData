@@ -40,7 +40,7 @@ final class RecordMotionDataViewModel {
         onAdd = closure
     }
     
-    func action(_ action: Action) {
+    func action(_ action: Action) throws {
         switch action {
         case let .changeSegment(index):
             selectedIndex(index)
@@ -49,7 +49,8 @@ final class RecordMotionDataViewModel {
         case .stop:
             stop()
         case .save:
-            save()
+            try saveToCoreData()
+            try saveToDataStorage()
         }
     }
     
@@ -62,7 +63,13 @@ final class RecordMotionDataViewModel {
     
     private func stop() { }
     
-    private func save() { }
+    private func saveToCoreData() throws {
+        try coreDataManager.save(motionData)
+    }
+    
+    private func saveToDataStorage() throws {
+        try dataStorage?.save(motionData)
+    }
     
     func motionDataTypes() -> [String] {
         return MotionDataType.allCases.map { $0.rawValue }

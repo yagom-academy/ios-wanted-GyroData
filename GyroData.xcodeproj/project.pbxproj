@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5720DCD9298A47BC0045E95D /* CoreDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5720DCD8298A47BC0045E95D /* CoreDataError.swift */; };
 		5760AC872989412A00534EF0 /* RecordMotionDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5760AC862989412A00534EF0 /* RecordMotionDataViewController.swift */; };
 		5760AC892989414C00534EF0 /* MotionDataDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5760AC882989414C00534EF0 /* MotionDataDetailViewController.swift */; };
 		5760AC8B2989415D00534EF0 /* MotionDataListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5760AC8A2989415D00534EF0 /* MotionDataListViewModel.swift */; };
@@ -35,6 +36,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5720DCD8298A47BC0045E95D /* CoreDataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataError.swift; sourceTree = "<group>"; };
 		5760AC862989412A00534EF0 /* RecordMotionDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordMotionDataViewController.swift; sourceTree = "<group>"; };
 		5760AC882989414C00534EF0 /* MotionDataDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDataDetailViewController.swift; sourceTree = "<group>"; };
 		5760AC8A2989415D00534EF0 /* MotionDataListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDataListViewModel.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				EB8E417C2988EA6000FE26D3 /* MotionDataEntity+CoreDataClass.swift */,
+				5720DCD8298A47BC0045E95D /* CoreDataError.swift */,
 				EB8E417D2988EA6000FE26D3 /* MotionDataEntity+CoreDataProperties.swift */,
 				EB8E41802988EB0900FE26D3 /* CoreDataManager.swift */,
 				EB8E41822988F2FC00FE26D3 /* CoreDataManagerType.swift */,
@@ -229,6 +232,7 @@
 				5760AC872989412A00534EF0 /* RecordMotionDataViewController.swift in Sources */,
 				EB96E7702987B8F500F9DF79 /* MotionData.swift in Sources */,
 				5760AC8F2989416D00534EF0 /* MotionDataDetailViewModel.swift in Sources */,
+				5720DCD9298A47BC0045E95D /* CoreDataError.swift in Sources */,
 				EB8E417E2988EA6000FE26D3 /* MotionDataEntity+CoreDataClass.swift in Sources */,
 				EB8E41812988EB0900FE26D3 /* CoreDataManager.swift in Sources */,
 				EB96E7742987C93C00F9DF79 /* MotionDataType.swift in Sources */,

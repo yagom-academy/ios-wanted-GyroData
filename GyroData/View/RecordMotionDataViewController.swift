@@ -67,10 +67,22 @@ final class RecordMotionDataViewController: UIViewController {
     private func configureRightBarButton() -> UIBarButtonItem {
         return UIBarButtonItem(
             title: Constant.Namespace.rightBarButtonTitle,
-            primaryAction: UIAction { [weak self] _ in
-                self?.viewModel.action(.save)
-            }
+            primaryAction: rightBarButtonAction()
         )
+    }
+    
+    private func rightBarButtonAction() -> UIAction {
+        return UIAction(handler: { _ in
+            do {
+                try self.viewModel.action(.save)
+            } catch CoreDataError.cannotSaveData {
+                self.showAlert(alertTitle: CoreDataError.cannotSaveData.localizedDescription)
+            } catch DataStorageError.cannotSaveFile {
+                self.showAlert(alertTitle: DataStorageError.cannotSaveFile.localizedDescription)
+            } catch {
+                return
+            }
+        })
     }
     
     private func setupViews() {
@@ -92,12 +104,32 @@ final class RecordMotionDataViewController: UIViewController {
         let segments = viewModel.motionDataTypes()
         for (index, item) in segments.enumerated() {
             segmentedControl.insertSegment(
-                action: UIAction(title: item) { _ in
-                    self.viewModel.action(.changeSegment(to: index))},
+                action: segmentAction(title: item, index: index),
                 at: index,
                 animated: true
             )
         }
         segmentedControl.selectedSegmentIndex = .zero
+    }
+    
+    private func segmentAction(title: String, index: Int) -> UIAction {
+        return UIAction(
+            title: title,
+            handler: { _ in
+                do {
+                    try self.viewModel.action(.changeSegment(to: index))
+                } catch {
+                    return
+                }
+            }
+        )
+    }
+    
+    private func showAlert(alertTitle: String) {
+        let alertController = UIAlertController(
+            title: alertTitle,
+            message: .none,
+            preferredStyle: .alert)
+        present(alertController, animated: true)
     }
 }
