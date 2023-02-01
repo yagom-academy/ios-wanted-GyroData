@@ -52,10 +52,10 @@ class ListCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureData(title: String, date: Date, second: Double) {
+    func configureData(title: String?, date: Date?, second: Double?) {
         titleLabel.text = title
-        dateLabel.text = date.description
-        secondLabel.text = "\(second)"
+        dateLabel.text = date?.description
+        secondLabel.text = "\(second!)"
     }
     
     func configureLayout() {

@@ -8,6 +8,9 @@
 import UIKit
 
 class ViewController: UIViewController {
+    let manager = CoreDataManager.shared
+    var motionDataList: [MotionEntity] = []
+    
     let tableView: UITableView = {
         let tableView = UITableView()
         tableView.register(ListCell.self, forCellReuseIdentifier: ListCell.identifier)
@@ -21,6 +24,7 @@ class ViewController: UIViewController {
         configureNavigationBar()
         configureTableView()
         configureLayout()
+        configureData()
     }
     
     func configureNavigationBar() {
@@ -52,26 +56,36 @@ class ViewController: UIViewController {
         ])
         
     }
+    
+    func configureData() {
+        guard let hasList = manager.fetchData(entity: MotionEntity.self) else { return }
+        motionDataList = hasList
+    }
 }
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return motionDataList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ListCell.identifier, for: indexPath) as? ListCell else {
             return ListCell()
         }
-        
-        cell.configureData(title: "Accc", date: Date(), second: 30.0)
+    
+        cell.configureData(title: motionDataList[indexPath.row].measureType,
+                           date: motionDataList[indexPath.row].date,
+                           second: motionDataList[indexPath.row].time)
         return cell
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         let delete = UIContextualAction(style: .normal, title: "Delete") { (UIContextualAction, UIView, success: @escaping (Bool) -> Void) in
+            self.manager.delete(entity: self.motionDataList[indexPath.row])
+            self.motionDataList.remove(at: indexPath.row)
             success(true)
+            tableView.reloadData()
         }
         
         delete.backgroundColor = .systemRed
