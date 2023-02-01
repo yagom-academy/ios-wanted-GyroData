@@ -7,7 +7,43 @@
 
 import UIKit
 
-class ReplayViewController: UIViewController {
+final class ReplayViewController: UIViewController {
+    
+    enum Mode: String {
+        case view = "View"
+        case play = "Play"
+    }
+    
+    enum State {
+        case stop
+        case play
+    }
+    let mode: Mode
+    var state = State.stop
+    var timer = Timer()
+    var timerData = Int.init()
+    //    let replayData = [MotionDataModel]()
+    
+    // mokData
+    let replayData = [MotionDataModel(x: 1, y: 2, z: -0.5),
+                      MotionDataModel(x: -1, y: 2, z: 0.5),
+                      MotionDataModel(x: 1, y: 2, z: -0.5),
+                      MotionDataModel(x: -1, y: 2, z: 0.5),
+                      MotionDataModel(x: 1, y: 2, z: -0.5),
+                      MotionDataModel(x: -1, y: 2, z: 0.5),
+                      MotionDataModel(x: 1, y: 2, z: -0.5),
+                      MotionDataModel(x: -1, y: 2, z: 0.05),
+                      MotionDataModel(x: 1, y: 2, z: -0.5),
+                      MotionDataModel(x: -1, y: 2, z: 0.5),
+                      MotionDataModel(x: 1, y: 2, z: -0.5),
+                      MotionDataModel(x: -1, y: 2, z: 0.5),
+                      MotionDataModel(x: 1, y: 2, z: -0.5),
+                      MotionDataModel(x: -10, y: 2, z: 0.5),
+                      MotionDataModel(x: 1, y: 2, z: -0.5),
+                      MotionDataModel(x: -1, y: 2, z: 0.5),
+                      MotionDataModel(x: 1, y: 20, z: -0.5),
+                      MotionDataModel(x: -1, y: 2, z: 0.5)]
+    
     private let dateLabel: UILabel = {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .caption1)
@@ -20,14 +56,12 @@ class ReplayViewController: UIViewController {
         label.font = .preferredFont(forTextStyle: .title1)
         return label
     }()
-    private let graphView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .brown // 삭제
-        return view
-    }()
+    
+    private let graphView = GraphView()
     private let playToggleButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "play.fill"), for: .normal)
+        button.addTarget(nil, action: #selector(tapToggleButton), for: .touchUpInside)
         return button
     }()
     private let timerLabel: UILabel = {
@@ -61,12 +95,62 @@ class ReplayViewController: UIViewController {
         stackview.translatesAutoresizingMaskIntoConstraints = false
         return stackview
     }()
-
+    
+    init(mode: Mode) {
+        self.mode = mode
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureView()
         configureLayout()
+        configureMode()
+    }
+    
+    func configureMode() {
+        switch mode {
+        case .view:
+            titleLabel.text = mode.rawValue
+            graphView.totalData(data: replayData)
+            bottomStackView.removeFromSuperview()
+        case .play:
+            titleLabel.text = mode.rawValue
+        }
+    }
+    
+    @objc func tapToggleButton() {
+        switch state {
+        case .stop:
+            timer = Timer.scheduledTimer(
+                timeInterval: 0.1,
+                target: self,
+                selector: #selector(timerCallBack),
+                userInfo: nil,
+                repeats: true
+            )
+            playToggleButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+            timerData = Int.init()
+            graphView.clear()
+            state = .play
+            
+        case .play:
+            timer.invalidate()
+            playToggleButton.setImage(UIImage(systemName: "stop.fill"), for: .normal)
+            state = .stop
+        }
+    }
+    
+    @objc func timerCallBack() {
+        if replayData.count <= timerData { return }
+        graphView.motionDatas = replayData[timerData]
+        timerData += 1
+        timerLabel.text = String(timerData/10)
     }
     
     private func configureView() {

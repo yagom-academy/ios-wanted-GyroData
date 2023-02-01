@@ -83,6 +83,8 @@ extension MainViewController: UITableViewDelegate {
             title: "Play"
         ) { _, _, _ in
             // TODO: Play 실행 구현
+            let replayViewController = ReplayViewController(mode: .view)
+            self.navigationController?.pushViewController(replayViewController, animated: true)
         }
         let deleteAction = UIContextualAction(
             style: .destructive,
@@ -97,7 +99,7 @@ extension MainViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let replayViewController = ReplayViewController()
+        let replayViewController = ReplayViewController(mode: .play)
         
         replayViewController.modalPresentationStyle = .fullScreen
         
