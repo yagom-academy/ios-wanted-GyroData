@@ -3,7 +3,7 @@
 
 import UIKit
 
-class MeasureListViewController: UIViewController {
+final class MeasureListViewController: UIViewController {
     
     private enum Constant {
         static let title = "목록"
@@ -48,11 +48,14 @@ class MeasureListViewController: UIViewController {
     }
     
     private func setupNavigation() {
+        let pushMeasureViewAction = UIAction { _ in
+            let measureViewController = MeasureViewController()
+            self.push(viewController: measureViewController)
+        }
+        
         navigationItem.title = Constant.title
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: Constant.measureButtonTitle,
-                                                            style: .plain,
-                                                            target: self,
-                                                            action: #selector(presentMeasureViewController))
+                                                            primaryAction: pushMeasureViewAction)
     }
     
     private func setupViews() {
@@ -92,18 +95,18 @@ class MeasureListViewController: UIViewController {
         dataSource?.apply(snapshot)
     }
     
-    @objc
-    private func presentMeasureViewController() {
-        let measureViewController = MeasureListViewController()
-        navigationController?.pushViewController(measureViewController, animated: true)
+    private func push(viewController: UIViewController) {
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }
 
 extension MeasureListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
         let detailViewController = DetailViewController()
-        navigationController?.pushViewController(detailViewController, animated: true)
+        push(viewController: detailViewController)
     }
     
     func tableView(

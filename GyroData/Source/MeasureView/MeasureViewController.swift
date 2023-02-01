@@ -14,6 +14,8 @@ final class MeasureViewController: UIViewController {
         static let saveButtonTitle = "저장"
     }
     
+    let measureViewModel = MeasureViewModel()
+    
     private let segmentedControl: UISegmentedControl = {
         let segmentedControl = UISegmentedControl(items: [Constant.leftSegmentedItem,
                                                           Constant.rightSegmentedItem])
@@ -22,6 +24,7 @@ final class MeasureViewController: UIViewController {
                                                 for: UIControl.State.selected)
         segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black],
                                                 for: UIControl.State.normal)
+        segmentedControl.selectedSegmentIndex = 0
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         
         return segmentedControl
@@ -67,16 +70,37 @@ final class MeasureViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigation()
+        setupButtons()
         setupViews()
     }
     
+    private func bind() {
+        measureViewModel.measureDatas.bind { data in
+            //TODO: 그래프를 그리는 메서드
+        }
+    }
+    
+    
     private func setupNavigation() {
         navigationItem.title = Constant.title
-        navigationController?.navigationBar.topItem?.title = .init()
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: Constant.saveButtonTitle,
                                                             style: .plain,
                                                             target: self,
                                                             action: nil)
+    }
+    
+    private func setupButtons() {
+        let measureAction = UIAction { _ in
+            let mode: SensorMode = self.segmentedControl.selectedSegmentIndex == 0 ? .Acc : .Gyro
+            self.measureViewModel.startMeasure(mode: mode)
+        }
+        measureButton.addAction(measureAction, for: .touchUpInside)
+        
+        let stopAction = UIAction { _ in
+            let mode: SensorMode = self.segmentedControl.selectedSegmentIndex == 0 ? .Acc : .Gyro
+            self.measureViewModel.stopMeasure(mode: mode)
+        }
+        stopButton.addAction(stopAction, for: .touchUpInside)
     }
     
     private func setupViews() {
@@ -96,7 +120,7 @@ final class MeasureViewController: UIViewController {
             graphView.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor),
             graphView.widthAnchor.constraint(equalTo: segmentedControl.widthAnchor),
             graphView.heightAnchor.constraint(equalTo: graphView.widthAnchor, multiplier: 1),
-
+            
             buttonStackView.topAnchor.constraint(equalTo: graphView.bottomAnchor, constant: 30),
             buttonStackView.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor),
             buttonStackView.widthAnchor.constraint(equalTo: segmentedControl.widthAnchor)
