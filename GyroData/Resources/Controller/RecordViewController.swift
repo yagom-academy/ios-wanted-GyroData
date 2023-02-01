@@ -53,6 +53,7 @@ final class RecordViewController: UIViewController {
 extension RecordViewController: MotionManagerDelegate {
     func motionManager(send manager: MotionManager, sendData: CMLogItem?) {
         guard let data = sendData else { return }
+        print(data)
         saveData(data: data)
     }
     

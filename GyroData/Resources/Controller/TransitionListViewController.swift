@@ -27,6 +27,8 @@ final class TransitionListViewController: UIViewController {
         super.viewDidLoad()
 
         configureUI()
+        
+        // TODO: - UI Test 코드 (삭제 예정)
         for count in 0...25 {
             transitionMetaDatas.append(
                 TransitionMetaData(saveDate: "2022/09/10 15:11:45",
@@ -69,17 +71,14 @@ extension TransitionListViewController: UITableViewDataSource {
 extension TransitionListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let playAction = UIContextualAction(style: .normal, title: nil) { (action, view, completionHandler) in
-            print("play 클릭")
             completionHandler(false)
         }
         playAction.backgroundColor = .systemGreen
         playAction.image = createSwipeActionImage(text: "Play")
 
         let deleteAction = UIContextualAction(style: .destructive, title: nil) { [weak self] (action, view, completionHandler) in
-            print("delete 클릭")
-//            guard let data = self?.transitionMetaDatas[indexPath.row] else { return }
             self?.transitionMetaDatas.remove(at: indexPath.row)
-//            PersistentContainerManager.shared.deleteTransitionMetaData(data: data)
+            
             DispatchQueue.main.async {
                 tableView.reloadData()
             }

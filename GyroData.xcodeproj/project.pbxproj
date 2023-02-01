@@ -17,6 +17,7 @@
 		183BD42D298A09F2005B480E /* (null) in Sources */ = {isa = PBXBuildFile; };
 		18A4DAFA298A228A00B7BC1D /* SystemFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A4DAF9298A228A00B7BC1D /* SystemFileManager.swift */; };
 		18A4DAFC298A22B200B7BC1D /* MotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A4DAFB298A22B200B7BC1D /* MotionManager.swift */; };
+		18A4DB02298A29D700B7BC1D /* Sensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A4DB01298A29D700B7BC1D /* Sensor.swift */; };
 		18D110612987BB770088ED79 /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D110602987BB770088ED79 /* RecordViewController.swift */; };
 		18D110632988078F0088ED79 /* Transition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D110622988078F0088ED79 /* Transition.swift */; };
 		18D1106629880B7D0088ED79 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D1106529880B7D0088ED79 /* Array+Extension.swift */; };
@@ -36,6 +37,7 @@
 		09E3105E298845DD0088E0EB /* TransitionMetaData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionMetaData.swift; sourceTree = "<group>"; };
 		18A4DAF9298A228A00B7BC1D /* SystemFileManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemFileManager.swift; sourceTree = "<group>"; };
 		18A4DAFB298A22B200B7BC1D /* MotionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionManager.swift; sourceTree = "<group>"; };
+		18A4DB01298A29D700B7BC1D /* Sensor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sensor.swift; sourceTree = "<group>"; };
 		18D110602987BB770088ED79 /* RecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
 		18D110622988078F0088ED79 /* Transition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transition.swift; sourceTree = "<group>"; };
 		18D1106529880B7D0088ED79 /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
@@ -67,6 +69,42 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		18A4DAFD298A293E00B7BC1D /* Motion */ = {
+			isa = PBXGroup;
+			children = (
+				18A4DAFB298A22B200B7BC1D /* MotionManager.swift */,
+			);
+			path = Motion;
+			sourceTree = "<group>";
+		};
+		18A4DAFE298A294600B7BC1D /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				09E3105C298838870088E0EB /* PersistentContainerManager.swift */,
+				09DBC66D2988CE26003228DB /* TransitionMetaDataObject+CoreDataClass.swift */,
+				09DBC66E2988CE26003228DB /* TransitionMetaDataObject+CoreDataProperties.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		18A4DAFF298A295000B7BC1D /* SystemFile */ = {
+			isa = PBXGroup;
+			children = (
+				18A4DAF9298A228A00B7BC1D /* SystemFileManager.swift */,
+			);
+			path = SystemFile;
+			sourceTree = "<group>";
+		};
+		18A4DB00298A295F00B7BC1D /* Transition */ = {
+			isa = PBXGroup;
+			children = (
+				18D110622988078F0088ED79 /* Transition.swift */,
+				09E3105E298845DD0088E0EB /* TransitionMetaData.swift */,
+				18A4DB01298A29D700B7BC1D /* Sensor.swift */,
+			);
+			path = Transition;
+			sourceTree = "<group>";
+		};
 		18D1105B2987AB6F0088ED79 /* SupportFiles */ = {
 			isa = PBXGroup;
 			children = (
@@ -94,13 +132,10 @@
 		18D1105D2987ABBE0088ED79 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				18A4DAFB298A22B200B7BC1D /* MotionManager.swift */,
-				18A4DAF9298A228A00B7BC1D /* SystemFileManager.swift */,
-				09DBC66D2988CE26003228DB /* TransitionMetaDataObject+CoreDataClass.swift */,
-				09DBC66E2988CE26003228DB /* TransitionMetaDataObject+CoreDataProperties.swift */,
-				09E3105C298838870088E0EB /* PersistentContainerManager.swift */,
-				09E3105E298845DD0088E0EB /* TransitionMetaData.swift */,
-				18D110622988078F0088ED79 /* Transition.swift */,
+				18A4DAFE298A294600B7BC1D /* CoreData */,
+				18A4DAFD298A293E00B7BC1D /* Motion */,
+				18A4DAFF298A295000B7BC1D /* SystemFile */,
+				18A4DB00298A295F00B7BC1D /* Transition */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -108,8 +143,8 @@
 		18D1105F2987ABC50088ED79 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				63F01BB828D44FC400C53A39 /* TransitionListViewController.swift */,
 				18D110602987BB770088ED79 /* RecordViewController.swift */,
+				63F01BB828D44FC400C53A39 /* TransitionListViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -218,6 +253,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				183BD42D298A09F2005B480E /* (null) in Sources */,
+				18A4DB02298A29D700B7BC1D /* Sensor.swift in Sources */,
 				18D110632988078F0088ED79 /* Transition.swift in Sources */,
 				183BD42B298A0232005B480E /* (null) in Sources */,
 				63F01BB928D44FC400C53A39 /* TransitionListViewController.swift in Sources */,
