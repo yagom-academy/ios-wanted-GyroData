@@ -6,30 +6,95 @@
 //
 
 import XCTest
+@testable import GyroData
 
 final class MotionCreateServiceTests: XCTestCase {
+    var coreDataRepository: CoreDataRepositoryMock!
+    var fileManagerRepository: FileManagerRepositoryMock!
+    var service: GyroData.MotionCreateService<CoreDataRepositoryMock, FileManagerRepositoryMock>!
+    
+    let dateDummy = "2023/02/01 20:57:00"
+    let typeDummy = 0
+    let timeDummy = "60.0"
+    let dataDummy: [MotionDataType] = []
 
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        coreDataRepository = CoreDataRepositoryMock()
+        fileManagerRepository = FileManagerRepositoryMock()
+        service = GyroData.MotionCreateService(coreDataRepository: coreDataRepository,
+                                               fileManagerRepository: fileManagerRepository)
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        coreDataRepository = nil
+        fileManagerRepository = nil
+        service = nil
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+    
+    func test_create_with_invalid_date_then_completion_argument_and_repository_isCalledCreateFunction_is_false() {
+        let expectation = XCTestExpectation(description: "Invalid Date Test")
+        let invalidDateDummy = "Wrong Date Dummy"
+        service.create(
+            date: invalidDateDummy,
+            type: typeDummy,
+            time: timeDummy,
+            data: dataDummy) { isCreateSuccess in
+                XCTAssertFalse(isCreateSuccess)
+                expectation.fulfill()
+            }
+        
+        wait(for: [expectation], timeout: 5.0)
+        XCTAssertFalse(service.coreDataRepository.isCalledCreateFunction)
+        XCTAssertFalse(service.fileManagerRepository.isCalledCreateFunction)
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    func test_create_with_invalid_type_then_completion_argument_and_repository_isCalledCreateFunction_is_false() {
+        let expectation = XCTestExpectation(description: "Invalid Type Test")
+        let invalidTypeDummy = 3
+        service.create(
+            date: dateDummy,
+            type: invalidTypeDummy,
+            time: timeDummy,
+            data: dataDummy) { isCreateSuccess in
+                XCTAssertFalse(isCreateSuccess)
+                expectation.fulfill()
+            }
+        
+        wait(for: [expectation], timeout: 5.0)
+        XCTAssertFalse(service.coreDataRepository.isCalledCreateFunction)
+        XCTAssertFalse(service.fileManagerRepository.isCalledCreateFunction)
     }
-
+    
+    func test_create_with_invalid_time_then_completion_argument_and_repository_isCalledCreateFunction_is_false() {
+        let expectation = XCTestExpectation(description: "Invalid Time Test")
+        let invalidTimeDummy = "Wrong Time Dummy"
+        service.create(
+            date: dateDummy,
+            type: typeDummy,
+            time: invalidTimeDummy,
+            data: dataDummy) { isCreateSuccess in
+                XCTAssertFalse(isCreateSuccess)
+                expectation.fulfill()
+            }
+        
+        wait(for: [expectation], timeout: 5.0)
+        XCTAssertFalse(service.coreDataRepository.isCalledCreateFunction)
+        XCTAssertFalse(service.fileManagerRepository.isCalledCreateFunction)
+    }
+    
+    func test_create_with_valid_data_then_completion_argument_and_repository_isCalledCreateFunction_is_true() {
+        let expectation = XCTestExpectation(description: "Valid Data Test")
+        service.create(
+            date: dateDummy,
+            type: typeDummy,
+            time: timeDummy,
+            data: dataDummy) { isCreateSuccess in
+                XCTAssertTrue(isCreateSuccess)
+                expectation.fulfill()
+            }
+        
+        wait(for: [expectation], timeout: 5.0)
+        XCTAssertTrue(service.coreDataRepository.isCalledCreateFunction)
+        XCTAssertTrue(service.fileManagerRepository.isCalledCreateFunction)
+    }
 }
