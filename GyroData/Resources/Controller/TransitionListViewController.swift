@@ -25,29 +25,7 @@ final class TransitionListViewController: UIViewController {
         super.viewDidLoad()
 
         configureUI()
-        
-        // TODO: - UI Test 코드 (삭제 예정)
-//        for count in 0...35 {
-//            let data = TransitionMetaData(saveDate: "2022/09/10 15:11:45",
-//                                          sensorType: .Accelerometer,
-//                                          recordTime: Double(count),
-//                                          jsonName: "asdf")
-//            PersistentContainerManager.shared.createNewGyroObject(metaData: data)
-//        }
-    }
-}
-
-// MARK: - Method
-private extension TransitionListViewController {
-    // Error타입 만들어주기
-    func bringAdditionalTransitionMetaData(completion: @escaping ([TransitionMetaData]) -> Void) {
-        DispatchQueue.global().asyncAfter(deadline: .now() + 3) { [weak self] in
-            guard let self = self else { return }
-            let data = PersistentContainerManager.shared.fetchTenTransitionMetaDatas(pageCount: self.pageCount)
-            self.pageCount += 1
-            completion(data)
-            self.isPaginating = false
-        }
+        loadListData()
     }
 }
 
@@ -64,7 +42,7 @@ extension TransitionListViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return view.frame.height/7
+        return view.frame.height / 7
     }
 }
 
@@ -95,12 +73,12 @@ extension TransitionListViewController: UITableViewDelegate {
 // MARK: - UIScrollViewDelegate
 extension TransitionListViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let triggerHeight = tableView.contentSize.height - scrollView.frame.size.height + 100
         let position = scrollView.contentOffset.y
 
-        if position > tableView.contentSize.height - scrollView.frame.size.height + 100 {
+        if triggerHeight > 0 && position > triggerHeight {
             guard !isPaginating else { return }
             isPaginating = true
-            print(isPaginating)
             tableView.tableFooterView = createSpinnerFooter()
 
             bringAdditionalTransitionMetaData { [weak self] data in
@@ -112,6 +90,32 @@ extension TransitionListViewController: UIScrollViewDelegate {
                     self.tableView.reloadData()
                 }
             }
+        }
+    }
+}
+
+// MARK: - Method
+private extension TransitionListViewController {
+    // Error타입 만들어주기
+    func bringAdditionalTransitionMetaData(completion: @escaping ([TransitionMetaData]) -> Void) {
+        DispatchQueue.global().asyncAfter(deadline: .now() + 3) { [weak self] in
+            guard let self = self else { return }
+            let data = PersistentContainerManager.shared.fetchTenTransitionMetaDatas(pageCount: self.pageCount)
+            self.pageCount += 1
+            completion(data)
+            self.isPaginating = false
+        }
+    }
+
+    func loadListData() {
+        let data = PersistentContainerManager.shared.fetchTenTransitionMetaDatas(pageCount: pageCount)
+        pageCount += 1
+        isPaginating = false
+        TransitionMetaData.transitionMetaDatas.append(contentsOf: data)
+
+        DispatchQueue.main.async {
+            self.tableView.tableFooterView = nil
+            self.tableView.reloadData()
         }
     }
 }
