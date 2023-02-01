@@ -32,8 +32,8 @@ class ViewController: UIViewController {
     }
     
     @objc func rightButtonTapped() {
-        let vc = MeasureViewController()
-        navigationController?.pushViewController(vc, animated: true)
+        let measureViewController = MeasureViewController()
+        navigationController?.pushViewController(measureViewController, animated: true)
     }
     
     func configureTableView() {
@@ -67,6 +67,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         cell.configureData(title: "Accc", date: Date(), second: 30.0)
         return cell
     }
+    
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         let delete = UIContextualAction(style: .normal, title: "Delete") { (UIContextualAction, UIView, success: @escaping (Bool) -> Void) in
@@ -81,6 +82,5 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         play.backgroundColor = .systemGreen
         
         return UISwipeActionsConfiguration(actions:[delete, play])
-        
     }
 }

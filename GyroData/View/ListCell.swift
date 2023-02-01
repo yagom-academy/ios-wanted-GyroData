@@ -71,10 +71,6 @@ class ListCell: UITableViewCell {
             stackView.bottomAnchor.constraint(equalTo: bottomAnchor,constant: -15),
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
-            
         ])
     }
 }
-
-
-
