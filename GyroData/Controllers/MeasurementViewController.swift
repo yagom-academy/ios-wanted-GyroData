@@ -71,9 +71,10 @@ final class MeasurementViewController: UIViewController {
         measurementData = Measurement(sensor: selectedSensor, date: Date(), time: 0, axisValues: [])
         clearGraph()
 
+        // 테스트를 위해 타임아웃60(0.1*60 = 6초).최종제출전 타임아웃 600(60초)로 수정할 예정.
         sensorManager.measure(sensor: selectedSensor, interval: 0.1, timeout: 60) { [weak self] data in
             guard let data else {
-                self?.setEnabledUserInteraction()
+                self?.stop()
                 return
             }
 

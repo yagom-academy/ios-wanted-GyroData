@@ -9,13 +9,16 @@ import CoreMotion
 
 class SensorManager {
     private let motionManager = CMMotionManager()
-    private var timer = Timer()
+    private var timer: Timer?
 
     func measure(sensor: Sensor, interval: TimeInterval, timeout: TimeInterval, completion: @escaping (AxisValue?) -> ()) {
-        timer = Timer.scheduledTimer(withTimeInterval: timeout * interval, repeats: false) { [weak self] _ in
-            self?.stop { _ in
-                completion(nil)
-            }
+        // 측정중에 측정버튼 누르는 경우 타이머 초기화해주기 위함
+        if timer != nil {
+            stop(completion: nil)
+        }
+
+        timer = Timer.scheduledTimer(withTimeInterval: timeout * interval, repeats: false) { _ in
+            completion(nil)
         }
 
         switch sensor {
@@ -30,7 +33,7 @@ class SensorManager {
         }
     }
 
-    func stop(completion: @escaping (Bool) -> ()) {
+    func stop(completion: ((Bool) -> ())?) {
         if motionManager.isAccelerometerActive {
             motionManager.stopAccelerometerUpdates()
         }
@@ -39,8 +42,9 @@ class SensorManager {
             motionManager.stopGyroUpdates()
         }
 
-        timer.invalidate()
-        completion(true)
+        timer?.invalidate()
+        timer = nil
+        completion?(true)
     }
 
     private func fetchAccelerometerData(interval: TimeInterval, completion: @escaping (AxisValue) -> ()) {
