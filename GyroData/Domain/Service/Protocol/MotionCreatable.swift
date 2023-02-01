@@ -5,11 +5,12 @@
 //  Created by Ayaan, Wonbi on 2023/01/31.
 //
 
-import Foundation
-
 protocol MotionCreatable {
-    var coreDataRepository: any CoreDataRepository { get }
-    var fileManagerRepository: any FileManagerRepository { get }
+    associatedtype T: CoreDataRepository
+    associatedtype U: FileManagerRepository
     
-    func create(date: Date, type: Int, data: MotionDataType, completion: @escaping (Bool) -> Void)
+    var coreDataRepository: T { get }
+    var fileManagerRepository: U { get }
+    
+    func create(date: String, type: Int, time: String, data: [MotionDataType], completion: @escaping (Bool) -> Void)
 }
