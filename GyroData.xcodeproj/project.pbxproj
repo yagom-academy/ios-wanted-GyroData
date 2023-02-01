@@ -12,6 +12,7 @@
 		5760AC8B2989415D00534EF0 /* MotionDataListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5760AC8A2989415D00534EF0 /* MotionDataListViewModel.swift */; };
 		5760AC8D2989416600534EF0 /* RecordMotionDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5760AC8C2989416600534EF0 /* RecordMotionDataViewModel.swift */; };
 		5760AC8F2989416D00534EF0 /* MotionDataDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5760AC8E2989416D00534EF0 /* MotionDataDetailViewModel.swift */; };
+		5760AC91298A1F5A00534EF0 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5760AC90298A1F5A00534EF0 /* GraphView.swift */; };
 		579C4D902988A40300D3949F /* MotionManagerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579C4D8F2988A40300D3949F /* MotionManagerType.swift */; };
 		579C4D922988A40A00D3949F /* MotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579C4D912988A40A00D3949F /* MotionManager.swift */; };
 		579C4D9A2988CBA400D3949F /* DataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579C4D992988CBA400D3949F /* DataStorage.swift */; };
@@ -39,6 +40,7 @@
 		5760AC8A2989415D00534EF0 /* MotionDataListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDataListViewModel.swift; sourceTree = "<group>"; };
 		5760AC8C2989416600534EF0 /* RecordMotionDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordMotionDataViewModel.swift; sourceTree = "<group>"; };
 		5760AC8E2989416D00534EF0 /* MotionDataDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDataDetailViewModel.swift; sourceTree = "<group>"; };
+		5760AC90298A1F5A00534EF0 /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		579C4D8F2988A40300D3949F /* MotionManagerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionManagerType.swift; sourceTree = "<group>"; };
 		579C4D912988A40A00D3949F /* MotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionManager.swift; sourceTree = "<group>"; };
 		579C4D992988CBA400D3949F /* DataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStorage.swift; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 				EBBD3F532989378B0058EA45 /* MotionDataListViewController.swift */,
 				5760AC862989412A00534EF0 /* RecordMotionDataViewController.swift */,
 				5760AC882989414C00534EF0 /* MotionDataDetailViewController.swift */,
+				5760AC90298A1F5A00534EF0 /* GraphView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -232,6 +235,7 @@
 				EB8E417B2988E8FA00FE26D3 /* MotionData.xcdatamodeld in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
 				579C4D9C2988CBA900D3949F /* DataStorageType.swift in Sources */,
+				5760AC91298A1F5A00534EF0 /* GraphView.swift in Sources */,
 				EBBD3F542989378B0058EA45 /* MotionDataListViewController.swift in Sources */,
 				579C4D9E2988CF7300D3949F /* FileManagerType.swift in Sources */,
 				EB96E7722987C8DE00F9DF79 /* Coordinate.swift in Sources */,
