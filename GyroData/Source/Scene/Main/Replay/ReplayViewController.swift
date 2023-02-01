@@ -22,7 +22,7 @@ final class ReplayViewController: UIViewController {
     var state = State.stop
     var timer = Timer()
     var timerData = Int.init()
-    //    let replayData = [MotionDataModel]()
+//        let replayData = [MotionDataModel]()
     
     // mokData
     let replayData = [MotionDataModel(x: 1, y: 2, z: -0.5),
@@ -134,14 +134,14 @@ final class ReplayViewController: UIViewController {
                 userInfo: nil,
                 repeats: true
             )
-            playToggleButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+            playToggleButton.setImage(UIImage(systemName: "stop.fill"), for: .normal)
             timerData = Int.init()
             graphView.clear()
             state = .play
             
         case .play:
             timer.invalidate()
-            playToggleButton.setImage(UIImage(systemName: "stop.fill"), for: .normal)
+            playToggleButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
             state = .stop
         }
     }
@@ -150,7 +150,7 @@ final class ReplayViewController: UIViewController {
         if replayData.count <= timerData { return }
         graphView.motionDatas = replayData[timerData]
         timerData += 1
-        timerLabel.text = String(timerData/10)
+        timerLabel.text = String(Double(timerData) / 10 )
     }
     
     private func configureView() {

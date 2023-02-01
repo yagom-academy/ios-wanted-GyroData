@@ -65,8 +65,6 @@ final class MainViewController: UIViewController {
     @objc private func tapRightBarButton() {
         let addViewController = AddViewController()
         
-        addViewController.modalPresentationStyle = .fullScreen
-        
         navigationController?.pushViewController(addViewController, animated: true)
     }
 }
@@ -83,7 +81,8 @@ extension MainViewController: UITableViewDelegate {
             title: "Play"
         ) { _, _, _ in
             // TODO: Play 실행 구현
-            let replayViewController = ReplayViewController(mode: .view)
+            let replayViewController = ReplayViewController(mode: .play)
+            
             self.navigationController?.pushViewController(replayViewController, animated: true)
         }
         let deleteAction = UIContextualAction(
@@ -99,9 +98,7 @@ extension MainViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let replayViewController = ReplayViewController(mode: .play)
-        
-        replayViewController.modalPresentationStyle = .fullScreen
+        let replayViewController = ReplayViewController(mode: .view)
         
         navigationController?.pushViewController(replayViewController, animated: true)
         
