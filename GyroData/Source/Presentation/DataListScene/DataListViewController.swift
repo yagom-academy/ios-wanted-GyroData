@@ -13,12 +13,20 @@ final class DataListViewController: UIViewController {
     }
     
     private let tableView = UITableView()
+    private let viewModel = DataListViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
         setupView()
         setupConstraint()
+        setupBind()
+    }
+    
+    private func setupBind() {
+        viewModel.bindData { datas in
+            //TODO: Code Implementation
+        }
     }
 }
 
