@@ -29,6 +29,9 @@ class ReviewPageView: UIView {
     init(pageState: PageState) {
         self.pageState = pageState
         super.init(frame: .zero)
+        
+        configureHierarchy()
+        configureLayout(pageState: pageState)
     }
     
     required init?(coder: NSCoder) {
@@ -47,16 +50,14 @@ class ReviewPageView: UIView {
         timeLabel.text = text
     }
     
-    private func configureHierarchy(pageState: PageState) {
-        switch pageState {
-        case .resultView:
-            [dateLabel, pageStateLabel, lineGraphView].forEach { view in
-                graphStackView.addArrangedSubview(view)
-            }
-            
-            self.addSubview(graphStackView)
-            fallthrough
-        case .resultPlay:
+    private func configureHierarchy() {
+        [dateLabel, pageStateLabel, lineGraphView].forEach { view in
+            graphStackView.addArrangedSubview(view)
+        }
+        
+        self.addSubview(graphStackView)
+        
+        if pageState == .resultPlay {
             [PlayButton, timeLabel].forEach { view in
                 playStackView.addArrangedSubview(view)
             }
@@ -69,8 +70,8 @@ class ReviewPageView: UIView {
         switch pageState {
         case .resultView:
             configureGraphStackViewLayout()
-            fallthrough
         case .resultPlay:
+            configureGraphStackViewLayout()
             configurePlayStackViewLayout()
         }
     }

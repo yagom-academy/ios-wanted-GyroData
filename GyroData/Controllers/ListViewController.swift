@@ -12,19 +12,31 @@ final class ListViewController: UIViewController {
     private typealias DataSource = UITableViewDiffableDataSource<Section, Measurement>
     private typealias SnapShot = NSDiffableDataSourceSnapshot<Section, Measurement>
     
-    private let measurements: [Measurement] = []
+    private var measurements: [Measurement] = []
     private let listView: ListView = ListView()
     private var dataSource: DataSource? = nil
     private var snapShot: SnapShot = SnapShot()
     private var isPaging: Bool = false
+    private var coreDataManager: some MeasurementDataHandleable = CoreDataManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         drawView()
+        initialFetchMeasurementData()
         registerListCell()
         configureDataSource()
         applySnapshot()
         setupNavigationBar()
+    }
+    
+    private func initialFetchMeasurementData() {
+        switch coreDataManager.fetchData() {
+        case .success(let fetchedMeasurements):
+            measurements = fetchedMeasurements
+        case .failure(let dataHandlerError):
+            print(dataHandlerError.description)
+            // Alert 처리
+        }
     }
     
     private func drawView() {
@@ -127,10 +139,12 @@ extension ListViewController {
     }
     
     private func presentMeasurementPage() -> UIAction {
+        let measurementViewController = MeasurementViewController(
+            dataManagers: [coreDataManager, SensorFileManager()])
+            
         return UIAction { [weak self] _ in
-            self?.navigationController?.pushViewController(
-                MeasurementViewController(dataManagers: [CoreDataManager(), SensorFileManager()]),
-                animated: false)
+            self?.navigationController?.pushViewController(measurementViewController,
+                                                          animated: false)
         }
     }
 }

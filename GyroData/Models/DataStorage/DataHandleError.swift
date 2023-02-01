@@ -18,7 +18,8 @@ enum DataHandleError: Error {
 }
 
 extension DataHandleError: LocalizedError {
-    public var errorDescription: String? {
+    
+    var description: String {
         switch self {
         case .saveFailError(let error):
             return "Data Save Failed with Error: \(error.localizedDescription)"
