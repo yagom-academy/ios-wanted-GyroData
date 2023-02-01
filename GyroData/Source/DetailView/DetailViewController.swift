@@ -60,7 +60,6 @@ class DetailViewController: UIViewController {
     
     private func setupNavigation() {
         navigationItem.title = Constant.title
-        navigationController?.navigationBar.topItem?.title = .init()
     }
     
     private func setupViews() {

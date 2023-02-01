@@ -72,7 +72,6 @@ final class MeasureViewController: UIViewController {
     
     private func setupNavigation() {
         navigationItem.title = Constant.title
-        navigationController?.navigationBar.topItem?.title = .init()
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: Constant.saveButtonTitle,
                                                             style: .plain,
                                                             target: self,
