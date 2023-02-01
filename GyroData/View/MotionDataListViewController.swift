@@ -24,6 +24,8 @@ class MotionDataListViewController: UIViewController {
         super.viewDidLoad()
         configureTableView()
         configureHierarchy()
+        bindToViewModel()
+        viewModel.fetchMotionData()
     }
 
     private func configureTableView() {
@@ -44,6 +46,18 @@ class MotionDataListViewController: UIViewController {
             tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
+    }
+
+    private func bindToViewModel() {
+        viewModel.bind(onUpdate: { [weak self] in
+            DispatchQueue.main.async {
+                self?.reloadTableViewData()
+            }
+        })
+    }
+
+    private func reloadTableViewData() {
+        tableView.reloadData()
     }
 }
 
