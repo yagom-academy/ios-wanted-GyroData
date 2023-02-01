@@ -83,6 +83,26 @@ private extension SensorMeasureService {
     }
     
     func gyroscopeMeasureStart(_ interval: TimeInterval, _ duration: TimeInterval) {
+        guard motionManager.isGyroAvailable else {
+            delegate?.nonGyroscopeMeasurable()
+            return
+        }
+        
         motionManager.gyroUpdateInterval = interval
+        motionManager.startGyroUpdates()
+        
+        timer = Timer(fire: Date(), interval: interval / duration, repeats: true) { timer in
+            if let data = self.motionManager.gyroData {
+                let gyroData = (data.rotationRate.x, data.rotationRate.y, data.rotationRate.z)
+                
+                self.data.append(gyroData)
+            }
+            
+            if self.isTimeOver(duration, from: timer.fireDate) {
+                timer.invalidate()
+            }
+        }
+        
+        RunLoop.current.add(timer, forMode: .common)
     }
 }
