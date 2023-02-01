@@ -106,7 +106,26 @@ class MeasureViewController: UIViewController {
         ])
     }
     
-    @objc func saveButtonTapped() { }
+    @objc func saveButtonTapped() {
+        if coordinates.isEmpty {
+//            값이 없으면 데이터가 없다는 알림
+//            데이터 저장은 비동기로 처리하고 Activity Indicator를 표시해주세요.
+//            저장이 성공하면 Indicator를 닫고, 첫 번째 페이지로 이동합니다.
+//            저장이 실패하면 Indicator를 닫고, 페이지를 이동하지않고 실패 이유를 Alert으로 띄웁니다.
+            return
+        }
+        
+        // 얘네 둘을 비동기로 처리하고 둘다 완료가 되면 인디케이터를 닫도록 해야함
+        // -> DispatchGroup
+        let id = UUID()
+        CoreDataManager.shared.create(entity: MotionEntity.self) { entity in
+            entity.id = id
+            entity.date = Date()
+            entity.time = motionManager.second
+            entity.measureType = motionType.rawValue
+        }
+        FileManager.default.save(path: id.uuidString, data: coordinates)
+    }
     
     @objc func didChangeValue(_ segment: UISegmentedControl) {
         motionType = segment.selectedSegmentIndex == 0 ? .acc : .gyro
