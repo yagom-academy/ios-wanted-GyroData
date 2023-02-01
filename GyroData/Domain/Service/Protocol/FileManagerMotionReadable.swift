@@ -7,7 +7,7 @@
 
 protocol FileManagerMotionReadable {
     associatedtype T: FileManagerRepository
-    associatedtype Domain
+    associatedtype Domain: Identifiable
     
     var repository: T { get }
     
