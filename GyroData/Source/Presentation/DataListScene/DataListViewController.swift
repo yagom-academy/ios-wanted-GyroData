@@ -26,6 +26,7 @@ final class DataListViewController: UIViewController {
     
     private let tableView = UITableView()
     
+    private lazy var viewModel = DataListViewModel(delegate: self)
     private lazy var dataSource = configureDataSoruce()
     
     override func viewDidLoad() {

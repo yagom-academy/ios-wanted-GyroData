@@ -8,17 +8,30 @@
 import Foundation
 
 final class DataListViewModel {
+    private let transactionSevice = TransactionService(
+        coreDataManager: CoreDataManager(),
+        fileManager: FileSystemManager()
+    )
+    
+    private let delegate: DataListConfigurable?
+    
     private var measureDatas:[MeasureData] = [] {
         didSet {
-            dataHandler?(measureDatas)
+            delegate?.setupData(measureDatas)
         }
     }
     
-    private var dataHandler: (([MeasureData]) -> Void)?
+    init(delegate: DataListConfigurable) {
+        self.delegate = delegate
+        setupData()
+    }
 }
 
+// MARK: - Bind With TransactionService
 extension DataListViewModel {
-    func bindData(handler: @escaping ([MeasureData]) -> Void) {
-        dataHandler = handler
+    func setupData() {
+        transactionSevice.bindData { [weak self] datas in
+            self?.measureDatas = datas
+        }
     }
 }
