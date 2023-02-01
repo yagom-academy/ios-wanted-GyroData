@@ -8,7 +8,7 @@ import UIKit
 import CoreMotion
 
 final class RecordViewController: UIViewController {
-
+    
     // MARK: - Property
     let segmentControl: UISegmentedControl = {
         let control = UISegmentedControl(items: ["Acc", "Gyro"])
@@ -36,15 +36,15 @@ final class RecordViewController: UIViewController {
     private let motionManager = MotionManager()
     private var recordTime: Double = 0
     private var values: [TransitionValue] = []
-
+    
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         configureUI()
         motionManager.delegate = self
         setButtonAction()
-
+        
         convertButtonsState(isEnable: true)
     }
 }
@@ -69,30 +69,6 @@ private extension RecordViewController {
         } else if let gyroData = data as? CMGyroData {
             let valueSet = gyroData.rotationRate
             values.append((valueSet.x, valueSet.y, valueSet.z))
-        }
-    }
-}
-
-// MARK: - FileManagerLogic
-private extension RecordViewController {
-    func saveJsonData() {
-        let transition = values.convertTransition()
-
-        let encoder = JSONEncoder()
-        encoder.outputFormatting = .prettyPrinted
-
-        guard let encodeData = try? encoder.encode(transition) else {
-            return
-        }
-
-        if let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-            let pathWithFileName = documentDirectory.appendingPathComponent("\(Date().description).json")
-
-            do {
-                try encodeData.write(to: pathWithFileName)
-            } catch {
-                NSLog(error.localizedDescription)
-            }
         }
     }
 }
@@ -133,14 +109,20 @@ private extension RecordViewController {
         motionManager.startRecord(with: sensor)
         convertButtonsState(isEnable: false)
     }
-
+    
     @objc func didTapCancelButton() {
         motionManager.stopRecord()
         convertButtonsState(isEnable: true)
     }
-
+    
     @objc func didTapSaveButton() {
-        // TODO: 저장 메서드 생성
+        let transitionData = values.convertTransition()
+        
+        DispatchQueue.global().async {
+            let _ = SystemFileManager().saveData(value: transitionData)
+            
+            // TODO: - Handle Error
+        }
     }
 }
 
@@ -154,7 +136,7 @@ private extension RecordViewController {
         addChildView()
         setLayout()
     }
-
+    
     func setNavigationBar() {
         navigationItem.title = "측정"
     }
