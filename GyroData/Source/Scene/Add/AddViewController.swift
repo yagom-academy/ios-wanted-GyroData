@@ -17,11 +17,7 @@ class AddViewController: UIViewController {
         segmentControl.selectedSegmentIndex = 0
         return segmentControl
     }()
-    private let graphView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .brown
-        return view
-    }()
+    private let graphView = GraphView()
     private let playButton: UIButton = {
         let button = UIButton()
         button.setTitle("측정", for: .normal)
@@ -130,13 +126,14 @@ class AddViewController: UIViewController {
             if error == nil {
                 guard let accelerometerData = data else { return }
                 
-                self.motionDataList.append(
-                    MotionDataModel(
-                        x: accelerometerData.acceleration.x,
-                        y: accelerometerData.acceleration.y,
-                        z: accelerometerData.acceleration.z
-                    )
+                let recordData = MotionDataModel(
+                    x: accelerometerData.acceleration.x,
+                    y: accelerometerData.acceleration.y,
+                    z: accelerometerData.acceleration.z
                 )
+                
+                self.motionDataList.append(recordData)
+                self.graphView.motionDatas = recordData
                 
                 return
             }
@@ -146,13 +143,14 @@ class AddViewController: UIViewController {
             if error == nil {
                 guard let gyroData = data else { return }
                 
-                self.motionDataList.append(
-                    MotionDataModel(
-                        x: gyroData.rotationRate.x,
-                        y: gyroData.rotationRate.y,
-                        z: gyroData.rotationRate.z
-                    )
+                let recordData = MotionDataModel(
+                    x: gyroData.rotationRate.x,
+                    y: gyroData.rotationRate.y,
+                    z: gyroData.rotationRate.z
                 )
+                
+                self.motionDataList.append(recordData)
+                self.graphView.motionDatas = recordData
                 
                 return
             }
