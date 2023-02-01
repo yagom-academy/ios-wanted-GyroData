@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol DataListConfigurable {
+protocol DataListConfigurable: AnyObject {
     func setupData(_ datas: [MeasureData])
     func setupSelectData(_ data: MeasureData)
 }
@@ -88,7 +88,7 @@ extension DataListViewController {
     
     private func setupView() {
         view.addSubview(tableView)
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
     }
     
     private func setupConstraint() {
