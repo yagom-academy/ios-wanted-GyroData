@@ -23,6 +23,7 @@
 		41539B90298A607100B7A446 /* MeasurementCoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41539B8E298A607100B7A446 /* MeasurementCoreModel.swift */; };
 		41539B93298A612E00B7A446 /* JSONEncoder +.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41539B92298A612E00B7A446 /* JSONEncoder +.swift */; };
 		41539B95298A61C000B7A446 /* JSONDecoder +.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41539B94298A61C000B7A446 /* JSONDecoder +.swift */; };
+		41539B98298A62D500B7A446 /* DataHandleableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41539B97298A62D500B7A446 /* DataHandleableProtocol.swift */; };
 		63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB428D44FC400C53A39 /* AppDelegate.swift */; };
 		63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB628D44FC400C53A39 /* SceneDelegate.swift */; };
 		63F01BBE28D44FC500C53A39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBD28D44FC500C53A39 /* Assets.xcassets */; };
@@ -46,6 +47,7 @@
 		41539B8E298A607100B7A446 /* MeasurementCoreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementCoreModel.swift; sourceTree = "<group>"; };
 		41539B92298A612E00B7A446 /* JSONEncoder +.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONEncoder +.swift"; sourceTree = "<group>"; };
 		41539B94298A61C000B7A446 /* JSONDecoder +.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONDecoder +.swift"; sourceTree = "<group>"; };
+		41539B97298A62D500B7A446 /* DataHandleableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataHandleableProtocol.swift; sourceTree = "<group>"; };
 		63F01BB128D44FC400C53A39 /* GyroData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GyroData.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63F01BB428D44FC400C53A39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63F01BB628D44FC400C53A39 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -99,7 +101,7 @@
 		1A087CF02989348800FC2056 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				41539B8D298A605300B7A446 /* CoreData */,
+				41539B96298A620900B7A446 /* DataStorage */,
 				1A087CF42989348800FC2056 /* SensorManager.swift */,
 				414E530E2987E052000221E2 /* Measurement.swift */,
 				414E53082987DE1B000221E2 /* Sensor.swift */,
@@ -128,6 +130,15 @@
 				4143584A298A277E00D243C5 /* GyroCoreData.xcdatamodeld */,
 			);
 			path = CoreData;
+			sourceTree = "<group>";
+		};
+		41539B96298A620900B7A446 /* DataStorage */ = {
+			isa = PBXGroup;
+			children = (
+				41539B97298A62D500B7A446 /* DataHandleableProtocol.swift */,
+				41539B8D298A605300B7A446 /* CoreData */,
+			);
+			path = DataStorage;
 			sourceTree = "<group>";
 		};
 		63F01BA828D44FC400C53A39 = {
@@ -237,6 +248,7 @@
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				414E53182987E915000221E2 /* UIStackView +.swift in Sources */,
 				41539B90298A607100B7A446 /* MeasurementCoreModel.swift in Sources */,
+				41539B98298A62D500B7A446 /* DataHandleableProtocol.swift in Sources */,
 				414E53132987E503000221E2 /* ListCell.swift in Sources */,
 				1A087CF82989348800FC2056 /* SensorManager.swift in Sources */,
 				414C7A702988CE2A00452C25 /* AxisValue.swift in Sources */,
