@@ -9,9 +9,10 @@ import CoreMotion
 import UIKit
 
 final class MeasurementManager {
+    static let shared: MeasurementManager = MeasurementManager()
     private let motionManager = CMMotionManager()
     private var timer: Timer?
-    private var timeCount = Double.zero
+    var timeCount = Double.zero
 
     private init() {
         motionManager.accelerometerUpdateInterval = 0.1
