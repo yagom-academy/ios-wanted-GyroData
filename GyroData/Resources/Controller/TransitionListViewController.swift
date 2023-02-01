@@ -155,10 +155,10 @@ private extension TransitionListViewController {
 
     func setNavigationBar() {
         let rightBarButton = UIBarButtonItem(title: "측정", style: .plain, target: self, action: #selector(didTapRecordButton))
-        rightBarButton.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 24)], for: .normal)
+        rightBarButton.setTitleTextAttributes([.font: UIFont.preferredFont(forTextStyle: .title3)], for: .normal)
         let titleLable = UILabel()
         titleLable.text = "목록"
-        titleLable.font = UIFont.systemFont(ofSize: 30)
+        titleLable.font = UIFont.preferredFont(forTextStyle: .title1)
         navigationItem.rightBarButtonItem = rightBarButton
         navigationItem.titleView = titleLable
     }
@@ -176,7 +176,11 @@ private extension TransitionListViewController {
 
     func createSwipeActionImage(text: String) -> UIImage? {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 30)
+        let metrics = UIFontMetrics(forTextStyle: .title2)
+        let desc = UIFontDescriptor.preferredFontDescriptor(withTextStyle: .title2)
+        let font = UIFont.systemFont(ofSize: desc.pointSize, weight: .heavy)
+        label.font = metrics.scaledFont(for: font)
+        label.font = UIFont.preferredFont(for: .title2, weight: .heavy)
         label.textColor = UIColor.white
         label.text = text
         label.sizeToFit()
