@@ -10,7 +10,7 @@ import UIKit
 
 protocol CoreDataProcessible {
     func readCoreData() -> Result<[Motion], CoreDataError>
-    func saveCoreData(motion: Motion)
+    func saveCoreData(motion: MotionDataForm)
     func deleteDate(id: UUID)
 }
 
@@ -29,7 +29,7 @@ extension CoreDataProcessible {
         return .failure(.readError)
     }
     
-    func saveCoreData(motion: Motion) {
+    func saveCoreData(motion: MotionDataForm) {
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
         guard let context = appDelegate?.persistentContainer.viewContext else { return }
         let entity = NSEntityDescription.entity(forEntityName: "Motion", in: context)

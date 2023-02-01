@@ -10,6 +10,8 @@ import CoreMotion
 
 class AddViewController: UIViewController {
     private var motionDataList = [MotionData]()
+    private var jsonMotionData: Data?
+    private let currentDate = Date()
     
     private let segmentControl: UISegmentedControl = {
         let segmentControl = UISegmentedControl(items: ["Acc", "Gyro"])
@@ -121,6 +123,18 @@ class AddViewController: UIViewController {
     
     @objc private func saveMotionData() {
         //TODO: CoreData 저장 구현
+        guard let jsonMotionData = jsonMotionData else { return }
+        guard let dataString = String(data: jsonMotionData, encoding: .utf8) else { return }
+        
+        let dataForm = MotionDataForm(
+            title: segmentControl.description,
+            date: currentDate,
+            runningTime: Double(motionDataList.count) / 10,
+            jsonData: dataString
+        )
+        
+        saveCoreData(motion: dataForm)
+        
         navigationController?.popViewController(animated: true)
     }
     
@@ -141,8 +155,6 @@ class AddViewController: UIViewController {
 
                     self.motionDataList.append(recordData)
                     self.graphView.motionDatas = recordData
-
-                    return
                 }
             }
         } else if segmentControl.selectedSegmentIndex == 1 {
@@ -161,8 +173,6 @@ class AddViewController: UIViewController {
                     
                     self.motionDataList.append(recordData)
                     self.graphView.motionDatas = recordData
-                    
-                    return
                 }
             }
         }
@@ -172,6 +182,16 @@ class AddViewController: UIViewController {
         motionManager.stopAccelerometerUpdates()
         motionManager.stopGyroUpdates()
         
+        do {
+            jsonMotionData = try JSONEncoder().encode(MotionDatas(datas: motionDataList))
+        } catch {
+            print(error.localizedDescription)
+        }
+        
         graphView.stopDrawLines()
     }
+}
+
+extension AddViewController: CoreDataProcessible {
+    
 }
