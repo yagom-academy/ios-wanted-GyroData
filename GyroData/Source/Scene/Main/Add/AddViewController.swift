@@ -17,7 +17,13 @@ class AddViewController: UIViewController {
         segmentControl.selectedSegmentIndex = 0
         return segmentControl
     }()
-    private let graphView = GraphView()
+    private let graphView: GraphView = {
+        let view = GraphView()
+        view.backgroundColor = .systemBackground
+        view.layer.borderWidth = 3
+        view.layer.borderColor = UIColor.black.cgColor
+        return view
+    }()
     private let playButton: UIButton = {
         let button = UIButton()
         button.setTitle("측정", for: .normal)
@@ -52,7 +58,7 @@ class AddViewController: UIViewController {
     }
     
     private func configureButtonAction() {
-        playButton.addTarget(self, action: #selector(updateGravityData), for: .touchDown)
+        playButton.addTarget(self, action: #selector(updateMotionData), for: .touchDown)
         stopButton.addTarget(self, action: #selector(stopGravityData), for: .touchDown)
     }
     
@@ -118,41 +124,46 @@ class AddViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
-    @objc private func updateGravityData() {
-        motionManager.accelerometerUpdateInterval = 0.1
-        motionManager.gyroUpdateInterval = 0.1
-        
-        motionManager.startAccelerometerUpdates(to: .main) { data, error in
-            if error == nil {
-                guard let accelerometerData = data else { return }
+    @objc private func updateMotionData() {
+        if segmentControl.selectedSegmentIndex == 0 {
+            graphView.stopDrawLines()
+            
+            motionManager.accelerometerUpdateInterval = 0.1
+            motionManager.startAccelerometerUpdates(to: .main) { data, error in
+                if error == nil {
+                    guard let accelerometerData = data else { return }
 
-                let recordData = MotionDataModel(
-                    x: accelerometerData.acceleration.x,
-                    y: accelerometerData.acceleration.y,
-                    z: accelerometerData.acceleration.z
-                )
+                    let recordData = MotionDataModel(
+                        x: accelerometerData.acceleration.x,
+                        y: accelerometerData.acceleration.y,
+                        z: accelerometerData.acceleration.z
+                    )
 
-                self.motionDataList.append(recordData)
-                self.graphView.motionDatas = recordData
+                    self.motionDataList.append(recordData)
+                    self.graphView.motionDatas = recordData
 
-                return
+                    return
+                }
             }
-        }
-        
-        motionManager.startGyroUpdates(to: .main) { data, error in
-            if error == nil {
-                guard let gyroData = data else { return }
-
-                let recordData = MotionDataModel(
-                    x: gyroData.rotationRate.x,
-                    y: gyroData.rotationRate.y,
-                    z: gyroData.rotationRate.z
-                )
-
-                self.motionDataList.append(recordData)
-                self.graphView.motionDatas = recordData
-
-                return
+        } else if segmentControl.selectedSegmentIndex == 1 {
+            graphView.stopDrawLines()
+            
+            motionManager.gyroUpdateInterval = 0.1
+            motionManager.startGyroUpdates(to: .main) { data, error in
+                if error == nil {
+                    guard let gyroData = data else { return }
+                    
+                    let recordData = MotionDataModel(
+                        x: gyroData.rotationRate.x,
+                        y: gyroData.rotationRate.y,
+                        z: gyroData.rotationRate.z
+                    )
+                    
+                    self.motionDataList.append(recordData)
+                    self.graphView.motionDatas = recordData
+                    
+                    return
+                }
             }
         }
     }
@@ -160,5 +171,7 @@ class AddViewController: UIViewController {
     @objc private func stopGravityData() {
         motionManager.stopAccelerometerUpdates()
         motionManager.stopGyroUpdates()
+        
+        graphView.stopDrawLines()
     }
 }
