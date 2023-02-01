@@ -54,10 +54,26 @@ class MotionDataListViewController: UIViewController {
                 self?.reloadTableViewData()
             }
         })
+        viewModel.bind(onError: { [weak self] errorMessage in
+            DispatchQueue.main.async {
+                self?.showAlert(title: errorMessage)
+            }
+        })
     }
 
     private func reloadTableViewData() {
         tableView.reloadData()
+    }
+
+    private func showAlert(title: String) {
+        let alertController = UIAlertController(
+            title: title,
+            message: .none,
+            preferredStyle: .alert
+        )
+        let okayAction = UIAlertAction(title: "확인", style: .default)
+        alertController.addAction(okayAction)
+        self.present(alertController, animated: true)
     }
 }
 
