@@ -13,12 +13,27 @@ final class RecordMotionDataViewController: UIViewController {
             static let navigationTitle = "측정하기"
             static let rightBarButtonTitle = "저장"
         }
+        
+        enum Layout {
+            static let stackSpacing = CGFloat(8)
+        }
     }
     
     private let viewModel: RecordMotionDataViewModel
+    private let stackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.spacing = Constant.Layout.stackSpacing
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
+    private let segmentedControl = UISegmentedControl()
     
-    init(viewModel: RecordMotionDataViewModel) {
-        self.viewModel = viewModel
+    init() {
+        viewModel = RecordMotionDataViewModel(
+            motionDataType: MotionDataType
+                .allCases
+                .map { $0 } [0])
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -29,6 +44,7 @@ final class RecordMotionDataViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
+        setupViews()
     }
     
     private func setupNavigationBar() {
@@ -43,5 +59,32 @@ final class RecordMotionDataViewController: UIViewController {
                 self?.viewModel.action(.save)
             }
         )
+    }
+    
+    private func setupViews() {
+        view.backgroundColor = .systemBackground
+        configureSegmentedControl()
+        view.addSubview(stackView)
+        stackView.addArrangedSubview(segmentedControl)
+        
+        NSLayoutConstraint.activate([
+            stackView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
+            stackView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor)
+        ])
+    }
+    
+    private func configureSegmentedControl() {
+        let segments = viewModel.motionDataTypes()
+        for (index, item) in segments.enumerated() {
+            segmentedControl.insertSegment(
+                action: UIAction(title: item) { _ in
+                    self.viewModel.action(.changeSegment(selectedIndex: index))
+                },
+                at: index,
+                animated: true
+            )
+        }
+        segmentedControl.selectedSegmentIndex = .zero
     }
 }
