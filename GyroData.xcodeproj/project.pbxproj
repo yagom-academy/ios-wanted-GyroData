@@ -24,6 +24,7 @@
 		63F01BC128D44FC500C53A39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */; };
 		EB14D214298A4A00003732C3 /* CoreDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB14D213298A4A00003732C3 /* CoreDataError.swift */; };
 		EB14D21B298A9C59003732C3 /* MotionDataListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB14D21A298A9C59003732C3 /* MotionDataListTableViewCell.swift */; };
+		EB14D21D298A9DEF003732C3 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB14D21C298A9DEF003732C3 /* Date+.swift */; };
 		EB8E417B2988E8FA00FE26D3 /* MotionData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EB8E41792988E8FA00FE26D3 /* MotionData.xcdatamodeld */; };
 		EB8E417E2988EA6000FE26D3 /* MotionDataEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8E417C2988EA6000FE26D3 /* MotionDataEntity+CoreDataClass.swift */; };
 		EB8E417F2988EA6000FE26D3 /* MotionDataEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8E417D2988EA6000FE26D3 /* MotionDataEntity+CoreDataProperties.swift */; };
@@ -55,6 +56,7 @@
 		63F01BC228D44FC500C53A39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EB14D213298A4A00003732C3 /* CoreDataError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataError.swift; sourceTree = "<group>"; };
 		EB14D21A298A9C59003732C3 /* MotionDataListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionDataListTableViewCell.swift; sourceTree = "<group>"; };
+		EB14D21C298A9DEF003732C3 /* Date+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		EB8E417A2988E8FA00FE26D3 /* MotionData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MotionData.xcdatamodel; sourceTree = "<group>"; };
 		EB8E417C2988EA6000FE26D3 /* MotionDataEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MotionDataEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		EB8E417D2988EA6000FE26D3 /* MotionDataEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MotionDataEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -111,12 +113,21 @@
 				63F01BBD28D44FC500C53A39 /* Assets.xcassets */,
 				63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */,
 				63F01BC228D44FC500C53A39 /* Info.plist */,
+				EB14D21E298A9DF3003732C3 /* Extension */,
 				EB96E7752987C98400F9DF79 /* Model */,
 				EBBD3F522989375F0058EA45 /* View */,
 				5760AC852989410C00534EF0 /* ViewModel */,
 				EB8E41792988E8FA00FE26D3 /* MotionData.xcdatamodeld */,
 			);
 			path = GyroData;
+			sourceTree = "<group>";
+		};
+		EB14D21E298A9DF3003732C3 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				EB14D21C298A9DEF003732C3 /* Date+.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		EB96E7752987C98400F9DF79 /* Model */ = {
@@ -228,6 +239,7 @@
 				579C4D902988A40300D3949F /* MotionManagerType.swift in Sources */,
 				579C4D9A2988CBA400D3949F /* DataStorage.swift in Sources */,
 				5760AC8B2989415D00534EF0 /* MotionDataListViewModel.swift in Sources */,
+				EB14D21D298A9DEF003732C3 /* Date+.swift in Sources */,
 				EB8E417F2988EA6000FE26D3 /* MotionDataEntity+CoreDataProperties.swift in Sources */,
 				5760AC8D2989416600534EF0 /* RecordMotionDataViewModel.swift in Sources */,
 				5760AC892989414C00534EF0 /* MotionDataDetailViewController.swift in Sources */,
