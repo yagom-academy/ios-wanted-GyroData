@@ -125,6 +125,11 @@ private extension RecordViewController {
         let segmentIndex = segmentControl.selectedSegmentIndex
         guard let sensor = SensorType(rawInt: segmentIndex) else { return }
         
+        if !values.isEmpty {
+            values.removeAll()
+            recordTime = .zero
+        }
+        
         motionManager.startRecord(with: sensor)
         convertButtonsState(isEnable: false)
     }
