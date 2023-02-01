@@ -41,9 +41,30 @@ final class RecordViewController: UIViewController {
         super.viewDidLoad()
 
         configureUI()
+        motionManager.delegate = self
         setButtonAction()
 
         convertButtonsState(isEnable: true)
+    }
+}
+
+extension RecordViewController: MotionManagerDelegate {
+    func motionManager(send manager: MotionManager, sendData: CMLogItem?) {
+        guard let data = sendData else { return }
+        saveData(data: data)
+    }
+}
+
+// MARK: - Business Logic
+private extension RecordViewController {
+    func saveData(data: CMLogItem) {
+        if let accelerometerData = data as? CMAccelerometerData {
+            let valueSet = accelerometerData.acceleration
+            values.append((valueSet.x, valueSet.y, valueSet.z))
+        } else if let gyroData = data as? CMGyroData {
+            let valueSet = gyroData.rotationRate
+            values.append((valueSet.x, valueSet.y, valueSet.z))
+        }
     }
 }
 

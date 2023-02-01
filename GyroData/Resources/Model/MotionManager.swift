@@ -6,10 +6,15 @@
 
 import CoreMotion
 
-class MotionManager {
+protocol MotionManagerDelegate: AnyObject {
+    func motionManager(send manager: MotionManager, sendData: CMLogItem?)
+}
+
+final class MotionManager {
     private let manager = CMMotionManager()
     private var time: Int = 0
     private var timer: Timer?
+    weak var delegate: MotionManagerDelegate?
     
     func startRecord(with sensor: SensorType) {
         switch sensor {
@@ -75,7 +80,7 @@ private extension MotionManager {
         
         manager.startAccelerometerUpdates()
         let data = manager.accelerometerData
-        
+        delegate?.motionManager(send: self, sendData: data)
     }
     
     @objc func monitoringGyro() {
@@ -88,6 +93,6 @@ private extension MotionManager {
         
         manager.startGyroUpdates()
         let data = manager.gyroData
-        
+        delegate?.motionManager(send: self, sendData: data)
     }
 }
