@@ -17,7 +17,8 @@ final class MotionDataDetailViewModel {
     private let viewType: DetailViewType
     private let motionData: MotionData
     private var dataStorage: DataStorageType?
-    private var setText: ((String) -> Void)?
+    private var navigationTitle: ((String) -> Void)?
+    private var viewTypeText: ((String) -> Void)?
     private var showButton: (() -> Void)?
     private var onUpdate: ((Coordinate) -> Void)?
     
@@ -33,10 +34,12 @@ final class MotionDataDetailViewModel {
     }
     
     func bind(
-        setText: @escaping (String) -> Void,
+        navigationTitle: @escaping (String) -> Void,
+        viewTypeText: @escaping (String) -> Void,
         showButton: @escaping () -> Void
     ) {
-        self.setText = setText
+        self.navigationTitle = navigationTitle
+        self.viewTypeText = viewTypeText
         self.showButton = showButton
     }
     
@@ -47,6 +50,7 @@ final class MotionDataDetailViewModel {
     func action(_ action: Action) {
         switch action {
         case .onAppear:
+            setNavigationTitle()
             setDetailViewType()
         case .play:
             play()
@@ -55,12 +59,16 @@ final class MotionDataDetailViewModel {
         }
     }
     
+    private func setNavigationTitle() {
+        navigationTitle?(motionData.createdAt.description)
+    }
+    
     private func setDetailViewType() {
         switch viewType {
         case .view:
-            setText?(viewType.rawValue)
+            viewTypeText?(viewType.rawValue)
         case .play:
-            setText?(viewType.rawValue)
+            viewTypeText?(viewType.rawValue)
             showButton?()
         }
     }

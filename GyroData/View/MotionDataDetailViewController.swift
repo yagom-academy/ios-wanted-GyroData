@@ -48,7 +48,8 @@ final class MotionDataDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.bind(
-            setText: setViewTypeLabelText,
+            navigationTitle: setNavigationTitle,
+            viewTypeText: setViewTypeLabelText,
             showButton: showPlayPauseButton
         )
     }
@@ -56,6 +57,10 @@ final class MotionDataDetailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewModel.action(.onAppear)
+    }
+    
+    private func setNavigationTitle(with text: String) {
+        title = text
     }
     
     private func setViewTypeLabelText(with text: String) {
