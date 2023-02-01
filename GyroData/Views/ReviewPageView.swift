@@ -47,6 +47,65 @@ class ReviewPageView: UIView {
         timeLabel.text = text
     }
     
+    private func configureHierarchy(pageState: PageState) {
+        switch pageState {
+        case .resultView:
+            [dateLabel, pageStateLabel, lineGraphView].forEach { view in
+                graphStackView.addArrangedSubview(view)
+            }
+            
+            self.addSubview(graphStackView)
+            fallthrough
+        case .resultPlay:
+            [PlayButton, timeLabel].forEach { view in
+                playStackView.addArrangedSubview(view)
+            }
+            
+            self.addSubview(playStackView)
+        }
+    }
+    
+    private func configureLayout(pageState: PageState) {
+        switch pageState {
+        case .resultView:
+            configureGraphStackViewLayout()
+            fallthrough
+        case .resultPlay:
+            configurePlayStackViewLayout()
+        }
+    }
+    
+    private func configureGraphStackViewLayout() {
+        graphStackView.setCustomSpacing(5, after: dateLabel)
+        pageStateLabel.setContentHuggingPriority(.init(1), for: .vertical)
+        
+        NSLayoutConstraint.activate([
+            graphStackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor,
+                                                constant: 10),
+            graphStackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor,
+                                                    constant: 30),
+            graphStackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor,
+                                                     constant: -30),
+            graphStackView.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor,
+                                                   multiplier: 0.6),
+            
+            lineGraphView.widthAnchor.constraint(equalTo: graphStackView.widthAnchor),
+            lineGraphView.heightAnchor.constraint(equalTo: lineGraphView.widthAnchor)
+        ])
+    }
+    
+    private func configurePlayStackViewLayout() {
+        NSLayoutConstraint.activate([
+            playStackView.topAnchor.constraint(equalTo: graphStackView.bottomAnchor, constant: 30),
+            playStackView.trailingAnchor.constraint(equalTo: graphStackView.trailingAnchor),
+            playStackView.widthAnchor.constraint(equalTo: graphStackView.widthAnchor,
+                                                 multiplier: 0.6),
+            
+            PlayButton.widthAnchor.constraint(equalTo: graphStackView.widthAnchor,
+                                              multiplier: 0.2),
+            PlayButton.heightAnchor.constraint(equalTo: PlayButton.widthAnchor),
+        ])
+    }
 }
 
 extension ReviewPageView {
