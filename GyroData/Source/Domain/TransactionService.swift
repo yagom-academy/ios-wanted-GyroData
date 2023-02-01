@@ -48,14 +48,28 @@ extension TransactionService {
         }
     }
     
-    func save(data: MeasureData) -> Error? {
-        do {
-            try fileManager.save(data)
-            try coreDataManager.save(data)
-            return nil
-        } catch {
-            return error
+    func save(data: MeasureData, completion: @escaping (Result<Void, Error>) -> Void) {
+        let group = DispatchGroup()
+        
+        DispatchQueue.global().async(group: group) {
+            do {
+                try self.coreDataManager.save(data)
+            } catch {
+                return completion(.failure(error))
+            }
         }
+        
+        DispatchQueue.global().async(group: group) {
+            do {
+                try self.fileManager.save(data)
+            } catch {
+                return completion(.failure(error))
+            }
+        }
+        
+        group.wait()
+        self.list.append(data)
+        completion(.success(()))
     }
     
     func delete(date: Date) -> Error? {

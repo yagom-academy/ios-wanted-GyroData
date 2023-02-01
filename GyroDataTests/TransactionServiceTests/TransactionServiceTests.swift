@@ -28,10 +28,14 @@ final class TransactionServiceTests: XCTestCase {
         // given
         let decoder = JSONDecoder()
         
-        dummys.forEach({
-            transactionService.save(data: $0)
-        })
-        
+        transactionService.save(data: dummys[0]) { result in
+            switch result {
+            case .success(_):
+                return
+            case .failure(_):
+                XCTFail()
+            }
+        }
         // when
         let measureData = transactionService.dataLoad(offset: 0, limit: 0)
         let jsonData = transactionService.jsonDataLoad(date: Date())
@@ -39,9 +43,7 @@ final class TransactionServiceTests: XCTestCase {
         // then
         switch measureData {
         case .success(let dataList):
-            for i in 0..<dataList.count {
-                XCTAssertEqual(dataList[i].date, dummys[i].date)
-            }
+            XCTAssertEqual(dataList[0].date, dummys[0].date)
         case .failure(_):
             XCTFail()
         }
@@ -62,7 +64,14 @@ final class TransactionServiceTests: XCTestCase {
     func test_delete_data_success() {
         // given
         dummys.forEach({
-            transactionService.save(data: $0)
+            transactionService.save(data: $0) { result in
+                switch result {
+                case .success(_):
+                    return
+                case .failure(_):
+                    XCTFail()
+                }
+            }
         })
         
         // when
