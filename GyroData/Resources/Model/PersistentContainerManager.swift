@@ -32,6 +32,19 @@ final class PersistentContainerManager {
             }
         }
     }
+    
+    func createNewGyroObject(metaData: TransitionMetaData) {
+        let context = persistentContainer.viewContext
+        let newObject = TransitionMetaDataObject(context: context)
+        
+        newObject.setValue(metaData.saveDate, forKey: "saveDate")
+        newObject.setValue(metaData.sensorType.rawValue, forKey: "sensorType")
+        newObject.setValue(metaData.recordTime, forKey: "recordTime")
+        newObject.setValue(metaData.jsonName, forKey: "jsonName")
+        newObject.setValue(metaData.id, forKey: "id")
+        
+        saveContext()
+    }
 
     private func fetchTransitionMetaDataObjects() -> [TransitionMetaDataObject] {
         do {
