@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct AxisValue: Hashable {
+struct AxisValue: Hashable, Codable {
     
     let x: Double
     let y: Double
