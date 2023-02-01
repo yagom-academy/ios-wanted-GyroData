@@ -11,19 +11,27 @@ class FileHandleManager: FileManagerProtocol {
     private let fileManager: FileManager = FileManager.default
     private let directoryPath: URL
     
-    init() {
+    init?() {
         let libraryPath: URL = fileManager.urls(for: .libraryDirectory, in: .userDomainMask)[0]
         directoryPath = libraryPath.appendingPathComponent("json")
-        createFolder()
+        do {
+            try createFolder()
+        } catch {
+            return nil
+        }
     }
     
-    private func createFolder() {
+    private func createFolder() throws {
         guard !fileManager.fileExists(atPath: directoryPath.path) else { return }
         
         do {
-            try fileManager.createDirectory(at: directoryPath, withIntermediateDirectories: false, attributes: nil)
-        } catch let error {
-            print(error.localizedDescription)
+            try fileManager.createDirectory(
+                at: directoryPath,
+                withIntermediateDirectories: false,
+                attributes: nil
+            )
+        } catch {
+            throw FileManagingError.createDirectoryFailed
         }
     }
     
@@ -44,13 +52,19 @@ class FileHandleManager: FileManagerProtocol {
         }
     }
     
-    func load(fileName: UUID, completion: @escaping (Result<MotionMeasures, FileManagingError>) -> Void) {
+    func load(
+        fileName: UUID,
+        completion: @escaping (Result<MotionMeasures, FileManagingError>) -> Void
+    ) {
         let decoder = JSONDecoder()
         let textPath = directoryPath.appendingPathComponent("\(fileName).json")
         
         do {
             let dataFromPath: Data = try Data(contentsOf: textPath)
-            guard let decodedData = try? decoder.decode(MotionMeasures.self, from: dataFromPath) else {
+            guard let decodedData = try? decoder.decode(
+                MotionMeasures.self,
+                from: dataFromPath
+            ) else {
                 completion(.failure(.decodeFailed))
                 return
             }

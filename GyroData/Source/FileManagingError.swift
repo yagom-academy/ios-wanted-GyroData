@@ -8,6 +8,7 @@
 enum FileManagingError: Error {
     case encodeFailed
     case decodeFailed
+    case createDirectoryFailed
     case saveFailed
     case loadFailed
     case deleteFailed
