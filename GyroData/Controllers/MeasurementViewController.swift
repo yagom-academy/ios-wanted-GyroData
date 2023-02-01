@@ -10,7 +10,7 @@ import UIKit
 final class MeasurementViewController: UIViewController {
     // MARK: Properties
     private let measurementView = MeasurementView()
-    private let sensorManager: SensorManager = SensorManager()
+    private let sensorManager = SensorManager()
     private let dataManagers: [any MeasurementDataHandleable]
 
     private var measurementData = Measurement(sensor: .Accelerometer, date: Date(), time: 0, axisValues: [])
@@ -44,11 +44,11 @@ final class MeasurementViewController: UIViewController {
 
     // MARK: NavigationBar
     private func configureNavigationBar() {
-        let savaAction = UIAction { [weak self] _ in
+        let saveAction = UIAction { [weak self] _ in
             self?.saveSensorData()
         }
 
-        let saveButton = UIBarButtonItem(title: "저장", primaryAction: savaAction)
+        let saveButton = UIBarButtonItem(title: "저장", primaryAction: saveAction)
 
         navigationItem.title = "측정하기"
         navigationItem.rightBarButtonItem = saveButton
@@ -77,7 +77,7 @@ final class MeasurementViewController: UIViewController {
                 return
             }
 
-            self?.measurementData.axisValues.append(data)
+            self?.axisValues.append(data)
             print(data)
             self?.drawGraph(with: data)
         }
@@ -98,6 +98,7 @@ final class MeasurementViewController: UIViewController {
     }
     
     private func saveSensorData() {
+        // 비동기 저장 구현해야함
         do {
             for manager in dataManagers {
                 try manager.saveData(measurementData)
