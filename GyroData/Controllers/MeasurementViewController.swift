@@ -15,8 +15,11 @@ final class MeasurementViewController: UIViewController {
         return view
     }()
 
-    private let manager: SensorManager
-    private var data: [AxisValue] = []
+    private let sensorManager: SensorManager
+    private let fileManager: SensorFileManager
+
+    private var measurementData = Measurement(sensor: .Accelerometer, date: Date(), time: 0, axisValue: [])
+    private var axisValue: [AxisValue] = []
 
     private var selectedSensor: Sensor {
         return measurementView.selectedSensor
@@ -30,12 +33,14 @@ final class MeasurementViewController: UIViewController {
         configureView()
         configureConstraints()
         configureViewButtonActions()
+
+        print(fileManager.fetchData())
     }
 
     // MARK: Initialization
-    init(manager: SensorManager = SensorManager(), data: [AxisValue] = []) {
-        self.manager = manager
-        self.data = data
+    init(sensorManager: SensorManager = SensorManager(), fileManager: SensorFileManager = SensorFileManager()) {
+        self.sensorManager = sensorManager
+        self.fileManager = fileManager
 
         super.init(nibName: nil, bundle: nil)
     }
@@ -84,16 +89,16 @@ final class MeasurementViewController: UIViewController {
     }
 
     private func measure() {
-        data.removeAll()
+        measurementData = Measurement(sensor: selectedSensor, date: Date(), time: 0, axisValue: [])
         clearGraph()
 
-        manager.measure(sensor: selectedSensor, interval: 0.1, timeout: 600) { [weak self] data in
+        sensorManager.measure(sensor: selectedSensor, interval: 0.1, timeout: 60) { [weak self] data in
             guard let data else {
                 self?.setEnabledSegments()
                 return
             }
 
-            self?.data.append(data)
+            self?.measurementData.axisValue.append(data)
             print(data)
             self?.drawGraph(with: data)
         }
@@ -102,13 +107,23 @@ final class MeasurementViewController: UIViewController {
     }
 
     private func stop() {
-        manager.stop { _ in
-            self.setEnabledSegments()
+        sensorManager.stop { [weak self] _ in
+            self?.setEnabledSegments()
+            self?.updateMeasurementData()
         }
     }
 
+    private func updateMeasurementData() {
+        measurementData.axisValue = axisValue
+        measurementData.time = 0.1 * Double(measurementData.axisValue.count)
+    }
+
     private func saveSensorData() {
-        fatalError()
+        do {
+            try fileManager.saveData(measurementData)
+        } catch {
+            fatalError("얼럿추가해야됨")
+        }
     }
 
     private func setDisabledSegments() {
