@@ -116,4 +116,10 @@ extension MotionDataListViewController: UITableViewDataSource {
 }
 
 extension MotionDataListViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        viewModel.action(.view(at: indexPath, handler: { [weak self] motionDataDetailViewModel in
+            let viewController = MotionDataDetailViewController(viewModel: motionDataDetailViewModel)
+            self?.navigationController?.pushViewController(viewController, animated: true)
+        }))
+    }
 }
