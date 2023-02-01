@@ -36,7 +36,6 @@ extension TransactionService {
         } catch {
             return .failure(error)
         }
-        
     }
     
     func jsonDataLoad(date: Date) -> Result<Data, FileSystemError> {
@@ -72,13 +71,27 @@ extension TransactionService {
         completion(.success(()))
     }
     
-    func delete(date: Date) -> Error? {
-        do {
-            try coreDataManager.delete(date)
-            try fileManager.delete(date)
-            return nil
-        } catch {
-            return error
+    func delete(date: Date, completion: @escaping (Result<Void, Error>) -> Void) {
+        let group = DispatchGroup()
+        
+        DispatchQueue.global().async(group: group) {
+            do {
+                try self.coreDataManager.delete(date)
+            } catch {
+                return completion(.failure(error))
+            }
         }
+        
+        DispatchQueue.global().async(group: group) {
+            do {
+                try self.fileManager.delete(date)
+            } catch {
+                return completion(.failure(error))
+            }
+        }
+        
+        group.wait()
+        self.list = self.list.filter({ $0.date != date })
+        completion(.success(()))
     }
 }

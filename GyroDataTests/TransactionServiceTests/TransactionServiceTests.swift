@@ -75,7 +75,14 @@ final class TransactionServiceTests: XCTestCase {
         })
         
         // when
-        transactionService.delete(date: dummys[0].date)
+        transactionService.delete(date: dummys[0].date) { result in
+            switch result {
+            case .success(_):
+                return
+            case .failure(_):
+                XCTFail()
+            }
+        }
         
         // then
         let measureData = transactionService.dataLoad(offset: 0, limit: 0)
