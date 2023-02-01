@@ -33,22 +33,22 @@ final class RecordMotionDataViewModel {
         self.motionManager = motionManager
     }
     
-    func bindOnUpdate(_ closure: @escaping (Coordinate) -> Void) {
-        onUpdate = closure
+    func bind(onUpdate: @escaping (Coordinate) -> Void) {
+        self.onUpdate = onUpdate
     }
     
-    func bindOnAdd(_ closure: @escaping (MotionData) -> Void) {
-        onAdd = closure
+    func bind(onAdd: @escaping (MotionData) -> Void) {
+        self.onAdd = onAdd
     }
     
     func action(_ action: Action)  {
         switch action {
         case let .changeSegment(index):
             selectedIndex(index)
-        case let .start(index, closure):
-            start(selectedIndex: index, closure)
-        case let .stop(closure):
-            stop(closure)
+        case let .start(index, handler):
+            start(selectedIndex: index, handler)
+        case let .stop(handler):
+            stop(handler)
         }
     }
     

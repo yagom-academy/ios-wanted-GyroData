@@ -63,11 +63,8 @@ final class RecordMotionDataViewController: UIViewController {
     }
     
     private func bind() {
-        viewModel.bindOnUpdate { coordinate in
+        viewModel.bind(onUpdate: ) { coordinate in
             print(coordinate)
-        }
-        viewModel.bindOnAdd { motionData in
-            print(motionData)
         }
     }
     
