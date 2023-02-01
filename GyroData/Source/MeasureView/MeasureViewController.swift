@@ -30,8 +30,8 @@ final class MeasureViewController: UIViewController {
         return segmentedControl
     }()
     
-    private let graphView: UIView = {
-        let view = UIView()
+    private let graphView: GraphView = {
+        let view = GraphView()
         
         view.backgroundColor = .systemGray6
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -72,11 +72,14 @@ final class MeasureViewController: UIViewController {
         setupNavigation()
         setupButtons()
         setupViews()
+        //bind()
     }
     
     private func bind() {
         measureViewModel.measureDatas.bind { data in
             //TODO: 그래프를 그리는 메서드
+            //self.graphView.drawGraph(data: data)
+            self.graphView.drawStroke(data: data.last ?? MeasureData(x: 0, y: 0, z: 0))
         }
     }
     
@@ -93,12 +96,14 @@ final class MeasureViewController: UIViewController {
         let measureAction = UIAction { _ in
             let mode: SensorMode = self.segmentedControl.selectedSegmentIndex == 0 ? .Acc : .Gyro
             self.measureViewModel.startMeasure(mode: mode)
+            self.bind()
         }
         measureButton.addAction(measureAction, for: .touchUpInside)
         
         let stopAction = UIAction { _ in
             let mode: SensorMode = self.segmentedControl.selectedSegmentIndex == 0 ? .Acc : .Gyro
             self.measureViewModel.stopMeasure(mode: mode)
+            self.bind()
         }
         stopButton.addAction(stopAction, for: .touchUpInside)
     }

@@ -4,10 +4,12 @@
 import UIKit
 
 class GraphView: UIView {
+    var startX: CGFloat = 0
+    var startY: CGFloat = 0
+    var startZ: CGFloat = 0
     
     override func draw(_ rect: CGRect) {
         drawGrid()
-        drawGraph()
     }
     
     private func drawGrid() {
@@ -16,6 +18,7 @@ class GraphView: UIView {
         
         var pointLeft = CGPoint(x: 0, y: gridWidth)
         var pointRight = CGPoint(x: bounds.size.width, y: gridWidth)
+        
         while pointLeft.y < bounds.height {
             gridPath.move(to: pointLeft)
             gridPath.addLine(to: pointRight)
@@ -25,6 +28,7 @@ class GraphView: UIView {
         
         var pointTop = CGPoint(x: gridWidth, y: 0)
         var pointBottom = CGPoint(x: gridWidth, y: bounds.size.height)
+        
         while pointTop.x < bounds.width {
             gridPath.move(to: pointTop)
             gridPath.addLine(to: pointBottom)
@@ -33,16 +37,18 @@ class GraphView: UIView {
         }
         
         let gridLayer = CAShapeLayer()
+        
         gridLayer.frame = bounds
         gridLayer.path = gridPath.cgPath
         gridLayer.strokeColor = UIColor.black.cgColor
         gridLayer.lineWidth = 0.4
+        
         layer.addSublayer(gridLayer)
     }
     
-    private func drawGraph() {
+    func drawGraph(data: [MeasureData]) {
         let path = UIBezierPath()
-        let data = Sample.data
+        //let data = Sample.data
         let widthSize: Double = Double(self.frame.size.width / 60)
         var startX: Double = 0
         
@@ -50,13 +56,28 @@ class GraphView: UIView {
         path.lineJoinStyle = .miter
         path.usesEvenOddFillRule = true
         UIColor.systemBlue.set()
-        path.move(to: CGPoint(x: startX, y: convertDrawingData(item: data[0][0])))
+        path.move(to: CGPoint(x: startX, y: convertDrawingData(item: data[0].x)))
         
         for item in data {
-            let yData = convertDrawingData(item: item[0])
+            let yData = convertDrawingData(item: item.x)
             path.addLine(to: CGPoint(x: startX, y: yData))
             startX += widthSize
         }
+        path.stroke()
+    }
+    
+    func drawStroke(data: MeasureData) {
+        UIColor.systemBlue.set()
+        
+        let widthSize: Double = Double(self.frame.size.width / 60)
+        let path = UIBezierPath()
+        path.lineWidth = 1
+        path.lineJoinStyle = .miter
+        path.usesEvenOddFillRule = true
+        path.move(to: CGPoint(x: startX, y: convertDrawingData(item: startY)))
+        startX += widthSize
+
+        path.addLine(to: CGPoint(x: startX, y: data.x))
         path.stroke()
     }
     

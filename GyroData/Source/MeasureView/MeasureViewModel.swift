@@ -4,7 +4,7 @@
 import Foundation
 
 final class MeasureViewModel {
-    var measureDatas: Observable<[MeasureData]> = Observable([])
+    var measureDatas: Observable<[MeasureData]> = Observable([MeasureData(x: 0, y: 0, z: 0)])
     private let coreMotionManager = CoreMotionManager()
     
     func startMeasure(mode: SensorMode) {
@@ -12,6 +12,8 @@ final class MeasureViewModel {
         case .Gyro:
             coreMotionManager.startGyros { [weak self] data in
                 self?.measureDatas.value.append(data)
+                print("startGyros")
+                print(data)
             }
         case .Acc:
             coreMotionManager.startAccelerometers { [weak self] data in
