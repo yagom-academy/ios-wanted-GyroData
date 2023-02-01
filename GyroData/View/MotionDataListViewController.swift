@@ -23,6 +23,7 @@ class MotionDataListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
+        configureNavigationItem()
         configureHierarchy()
         bindToViewModel()
         viewModel.fetchMotionData()
@@ -35,6 +36,16 @@ class MotionDataListViewController: UIViewController {
         )
         tableView.dataSource = self
         tableView.delegate = self
+    }
+
+    private func configureNavigationItem() {
+        navigationItem.title = "목록"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            title: "측정",
+            style: .plain,
+            target: self,
+            action: #selector(didPressRecordButton)
+        )
     }
 
     private func configureHierarchy() {
@@ -74,6 +85,16 @@ class MotionDataListViewController: UIViewController {
         let okayAction = UIAlertAction(title: "확인", style: .default)
         alertController.addAction(okayAction)
         self.present(alertController, animated: true)
+    }
+}
+
+extension MotionDataListViewController {
+    @objc
+    private func didPressRecordButton(_ sender: UIBarButtonItem) {
+        viewModel.action(.tappedRecordButton(handler: { [weak self] recordMotionDataViewModel in
+            let viewController = RecordMotionDataViewController(viewModel: recordMotionDataViewModel)
+            self?.navigationController?.pushViewController(viewController, animated: true)
+        }))
     }
 }
 
