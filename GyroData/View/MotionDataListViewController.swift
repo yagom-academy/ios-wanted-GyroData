@@ -122,4 +122,33 @@ extension MotionDataListViewController: UITableViewDelegate {
             self?.navigationController?.pushViewController(viewController, animated: true)
         }))
     }
+
+    func tableView(
+        _ tableView: UITableView,
+        trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
+    ) -> UISwipeActionsConfiguration? {
+        let swipeActionsConfiguration = UISwipeActionsConfiguration(
+            actions: [makeDeleteContextualAction(indexPath), makePlayContextualAction(indexPath)]
+        )
+        return swipeActionsConfiguration
+    }
+
+    private func makePlayContextualAction(_ indexPath: IndexPath) -> UIContextualAction {
+        let title = "Play"
+        return UIContextualAction(style: .normal, title: title) { [weak self] _, _, completion in
+            self?.viewModel.action(.play(at: indexPath, handler: { motionDataDetailViewModel in
+                let viewController = MotionDataDetailViewController(viewModel: motionDataDetailViewModel)
+                self?.navigationController?.pushViewController(viewController, animated: true)
+                completion(true)
+            }))
+        }
+    }
+
+    private func makeDeleteContextualAction(_ indexPath: IndexPath) -> UIContextualAction {
+        let title = "Delete"
+        return UIContextualAction(style: .destructive, title: title) { [weak self] _, _, completion in
+            self?.viewModel.action(.delete(at: indexPath))
+            completion(true)
+        }
+    }
 }
