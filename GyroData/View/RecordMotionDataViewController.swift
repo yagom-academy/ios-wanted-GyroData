@@ -59,8 +59,9 @@ final class RecordMotionDataViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupNavigationBar()
-        setupViews()
+        configureNavigationBar()
+        configureHierarchy()
+        configureLayout()
         configureSegmentedControl()
         configureButtonActions()
         bind()
@@ -95,12 +96,14 @@ final class RecordMotionDataViewController: UIViewController {
         })
     }
     
-    private func setupViews() {
+    private func configureHierarchy() {
         view.backgroundColor = .systemBackground
         view.addSubview(stackView)
         [segmentedControl, graphView, measureButton, stopButton]
             .forEach { stackView.addArrangedSubview($0) }
-        
+    }
+    
+    private func configureLayout() {
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
             stackView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
