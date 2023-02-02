@@ -17,6 +17,7 @@
 		D35E3361298A828E00EF0484 /* MotionDeleteServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35E3360298A828E00EF0484 /* MotionDeleteServiceTests.swift */; };
 		D35E3363298A82AC00EF0484 /* CoreDataMotionReadServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35E3362298A82AC00EF0484 /* CoreDataMotionReadServiceTests.swift */; };
 		D35E3365298A82C100EF0484 /* FileManagerMotionReadServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35E3364298A82C100EF0484 /* FileManagerMotionReadServiceTests.swift */; };
+		D381174C298BA2D400CFDDF0 /* MotionMeasurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D381174B298BA2D400CFDDF0 /* MotionMeasurable.swift */; };
 		D381D2762988E58700567C6B /* MotionPlayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D381D26B2988E58700567C6B /* MotionPlayViewModel.swift */; };
 		D381D2772988E58700567C6B /* MotionPlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D381D26C2988E58700567C6B /* MotionPlayViewController.swift */; };
 		D381D2782988E58700567C6B /* MotionMeasureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D381D26E2988E58700567C6B /* MotionMeasureViewController.swift */; };
@@ -72,6 +73,7 @@
 		D35E3360298A828E00EF0484 /* MotionDeleteServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDeleteServiceTests.swift; sourceTree = "<group>"; };
 		D35E3362298A82AC00EF0484 /* CoreDataMotionReadServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataMotionReadServiceTests.swift; sourceTree = "<group>"; };
 		D35E3364298A82C100EF0484 /* FileManagerMotionReadServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerMotionReadServiceTests.swift; sourceTree = "<group>"; };
+		D381174B298BA2D400CFDDF0 /* MotionMeasurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionMeasurable.swift; sourceTree = "<group>"; };
 		D381D26B2988E58700567C6B /* MotionPlayViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionPlayViewModel.swift; sourceTree = "<group>"; };
 		D381D26C2988E58700567C6B /* MotionPlayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionPlayViewController.swift; sourceTree = "<group>"; };
 		D381D26E2988E58700567C6B /* MotionMeasureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionMeasureViewController.swift; sourceTree = "<group>"; };
@@ -324,6 +326,7 @@
 				E3D84A992988E6D400FDA64F /* MotionDeletable.swift */,
 				E3D84A9D2988E70400FDA64F /* CoreDataMotionReadable.swift */,
 				E3D84A9F2988E71800FDA64F /* FileManagerMotionReadable.swift */,
+				D381174B298BA2D400CFDDF0 /* MotionMeasurable.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -480,6 +483,7 @@
 				E3D84AB12988F7C800FDA64F /* CMRotationRate+.swift in Sources */,
 				D381D2852988E8AB00567C6B /* DefaultCoreDataRepository.swift in Sources */,
 				D381D2762988E58700567C6B /* MotionPlayViewModel.swift in Sources */,
+				D381174C298BA2D400CFDDF0 /* MotionMeasurable.swift in Sources */,
 				E3D84AA22988E72E00FDA64F /* MotionCreateService.swift in Sources */,
 				E3D84AAF2988F76200FDA64F /* MotionDataType.swift in Sources */,
 				D381D27D2988E58700567C6B /* MotionsListViewModel.swift in Sources */,
