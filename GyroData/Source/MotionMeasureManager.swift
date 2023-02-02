@@ -15,17 +15,23 @@ protocol MotionManagerable {
 
 final class GyroMotionManager: MotionManagerable {
     private let motionManager = CMMotionManager()
+    private let measureTimer: MeasureTimer
     
-    init(interval: TimeInterval) {
+    init(duration: Double, interval: TimeInterval) {
+        measureTimer = MeasureTimer(duration: duration, interval: interval)
         configureUpdateInterval(interval)
     }
     
     func start(handler: @escaping () -> Void) {
         motionManager.startAccelerometerUpdates()
+        measureTimer.activate {
+            handler()
+        }
     }
 
     func stop() {
         motionManager.stopGyroUpdates()
+        measureTimer.stop()
     }
     
     private func configureUpdateInterval(_ interval: TimeInterval) {
@@ -35,17 +41,23 @@ final class GyroMotionManager: MotionManagerable {
 
 final class AccelerometerMotionManager: MotionManagerable {
     private let motionManager = CMMotionManager()
+    private let measureTimer: MeasureTimer
     
-    init(interval: TimeInterval) {
+    init(duration: Double, interval: TimeInterval) {
+        measureTimer = MeasureTimer(duration: duration, interval: interval)
         configureUpdateInterval(interval)
     }
     
     func start(handler: @escaping () -> Void) {
         motionManager.startAccelerometerUpdates()
+        measureTimer.activate {
+            handler()
+        }
     }
     
     func stop() {
         motionManager.stopAccelerometerUpdates()
+        measureTimer.stop()
     }
     
     private func configureUpdateInterval(_ interval: TimeInterval) {

@@ -16,19 +16,20 @@ final class MeasureTimer {
     private var state: State = .suspended
     private var interval: Double
     private var duration: Double
-    private var eventHandler: (() -> Void)?
     private var timer: Timer?
     private var isOverdue: Bool {
         return duration < interval
     }
 
-    init(duration: Double, interval: Double, eventHandler: (() -> Void)? = nil) {
+    init(duration: Double, interval: Double) {
         self.duration = duration
         self.interval = interval
-        self.eventHandler = eventHandler
     }
     
-    func activate() {
+    func activate(eventHandler: @escaping (() -> Void)) {
+        guard state != .active else { return }
+        state = .active
+        
         timer = Timer.scheduledTimer(
             withTimeInterval: interval,
             repeats: true,
@@ -40,12 +41,13 @@ final class MeasureTimer {
                     return
                 }
 
-                self.eventHandler?()
+                eventHandler()
                 self.duration -= self.interval
         })
     }
     
     func stop() {
         timer?.invalidate()
+        state = .suspended
     }
 }
