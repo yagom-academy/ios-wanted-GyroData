@@ -20,19 +20,27 @@ final class MotionMeasurementViewModel {
     }
 
     private let createService: MotionCreatable
+    private let measurementService: MotionMeasurable
     private weak var delegate: MotionMeasurementViewModelDelegate?
     
-    init(createService: MotionCreatable, delegate: MotionMeasurementViewModelDelegate? = nil) {
+    init(
+        createService: MotionCreatable,
+        measurementService: MotionMeasurable,
+        delegate: MotionMeasurementViewModelDelegate? = nil
+    ) {
         self.createService = createService
+        self.measurementService = measurementService
         self.delegate = delegate
     }
     
     func action(_ action: Action) {
         switch action {
         case let .measurementStart(type):
-            break
+            guard let type = Motion.MeasurementType(rawValue: type) else { return }
+            measurementService.measure(type: type)
         case let .measurementStop(type):
-            break
+            guard let type = Motion.MeasurementType(rawValue: type) else { return }
+            measurementService.stopMeasurement(type: type)
         case let .motionCreate(date, type, time, data):
             createMotionWith(date: date, type: type, time: time, data: data)
         }
@@ -53,5 +61,16 @@ private extension MotionMeasurementViewModel {
                 self?.delegate?.motionMeasurementViewModel(alertStyleToPresent: .motionCreatingFailed)
             }
         }
+    }
+}
+
+extension MotionMeasurementViewModel: MotionMeasurementServiceDelegate {
+    func motionMeasurementService(measuredData: MotionDataType?, time: Double) {
+        guard let data = measuredData else { return }
+        delegate?.motionMeasurementViewModel(measuredData: data, takenCurrentTime: time)
+    }
+    
+    func motionMeasurementService(isCompletedService: Bool) {
+        delegate?.motionMeasurementViewModel(isCompletedInMotionMeasurement: true)
     }
 }
