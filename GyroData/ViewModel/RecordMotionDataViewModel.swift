@@ -80,10 +80,10 @@ final class RecordMotionDataViewModel {
         case .none:
             return
         }
-        closure()
+        handler()
     }
     
-    private func stop(_ closure: () -> Void) {
+    private func stop(_ handler: () -> Void) {
         switch motionData?.motionDataType {
         case .accelerometer:
             motionManager.stopAccelerometer()
@@ -92,7 +92,7 @@ final class RecordMotionDataViewModel {
         case .none:
             return
         }
-        closure()
+        handler()
     }
     
     private func save() throws {

@@ -67,7 +67,7 @@ final class RecordMotionDataViewController: UIViewController {
     }
 
     
-    private func setupNavigationBar() {
+    private func configureNavigationBar() {
         title = Constant.Namespace.navigationTitle
         navigationItem.rightBarButtonItem = configureRightBarButton()
     }
@@ -138,14 +138,14 @@ final class RecordMotionDataViewController: UIViewController {
         return UIAction(handler: { _ in
             self.viewModel.action(.start(
                 selectedIndex: self.segmentedControl.selectedSegmentIndex,
-                closure: self.toggleButtons)
+                handler: self.toggleButtons)
             )
         })
     }
     
     private func stopButtonAction() -> UIAction {
         return UIAction(handler: { _ in
-            self.viewModel.action(.stop(closure: self.toggleButtons))
+            self.viewModel.action(.stop(handler: self.toggleButtons))
         })
     }
     
