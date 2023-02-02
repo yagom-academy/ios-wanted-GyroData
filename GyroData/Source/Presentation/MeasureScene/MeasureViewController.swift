@@ -14,6 +14,8 @@ class MeasureViewController: UIViewController {
         static let margin = CGFloat(16)
         static let saveFailAlertTitle = "저장 실패"
         static let saveFailAlertActionTitle = "확인"
+        static let measureStartButtonTitle = "측정"
+        static let measureStopButtonTitle = "정지"
     }
     
     private let segmentedControl: UISegmentedControl = {
@@ -30,8 +32,24 @@ class MeasureViewController: UIViewController {
     private let graphView: GraphView = {
         let graphView = GraphView(interval: 0.1, duration: 60)
         graphView.translatesAutoresizingMaskIntoConstraints = false
-        
+        graphView.backgroundColor = .systemGray6
         return graphView
+    }()
+    
+    private let measureStartButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitleColor(.systemBlue, for: .normal)
+        button.titleLabel?.font = .preferredFont(forTextStyle: .title2)
+        return button
+    }()
+    
+    private let measureStopButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitleColor(.systemBlue, for: .normal)
+        button.titleLabel?.font = .preferredFont(forTextStyle: .title2)
+        return button
     }()
     
     private let activityIndicatorView: UIActivityIndicatorView = {
@@ -58,7 +76,8 @@ class MeasureViewController: UIViewController {
         super.viewDidLoad()
         setupNavigationBar()
         setupSegmentControl()
-        
+        setupGraphView()
+        setupMeasureButtons()
         setupActivityIndicator()
     }
 }
@@ -82,12 +101,47 @@ private extension MeasureViewController {
     func setupSegmentControl() {
         view.addSubview(segmentedControl)
         
+        segmentedControl.selectedSegmentIndex = 0
+        
         let safeArea = view.safeAreaLayoutGuide
         
         NSLayoutConstraint.activate([
             segmentedControl.topAnchor.constraint(equalTo: safeArea.topAnchor),
             segmentedControl.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: Constant.margin),
             segmentedControl.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -Constant.margin),
+        ])
+    }
+    
+    func setupGraphView() {
+        view.addSubview(graphView)
+        
+        let safeArea = view.safeAreaLayoutGuide
+        
+        NSLayoutConstraint.activate([
+            graphView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: Constant.margin),
+            graphView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: Constant.margin),
+            graphView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -Constant.margin),
+            graphView.heightAnchor.constraint(equalTo: graphView.widthAnchor)
+        ])
+    }
+    
+    func setupMeasureButtons() {
+        [measureStartButton, measureStopButton].forEach { view.addSubview($0) }
+        
+        measureStartButton.setTitle(Constant.measureStartButtonTitle, for: .normal)
+        measureStopButton.setTitle(Constant.measureStopButtonTitle, for: .normal)
+        
+        measureStartButton.addTarget(self, action: #selector(measureStartButtonTapped), for: .touchUpInside)
+        measureStopButton.addTarget(self, action: #selector(methodmeasureStopButtonTapped), for: .touchUpInside)
+        
+        let safeArea = view.safeAreaLayoutGuide
+        
+        NSLayoutConstraint.activate([
+            measureStartButton.topAnchor.constraint(equalTo: graphView.bottomAnchor, constant: Constant.margin * 2),
+            measureStartButton.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: Constant.margin),
+            
+            measureStopButton.topAnchor.constraint(equalTo: measureStartButton.bottomAnchor, constant: Constant.margin * 2),
+            measureStopButton.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: Constant.margin)
         ])
     }
     
@@ -103,6 +157,14 @@ extension MeasureViewController {
         activityIndicatorView.startAnimating()
         let segment = segmentedControl.selectedSegmentIndex
         viewModel.action(.sensorTypeChanged(sensorType: Sensor(rawValue: segment)))
+    }
+    
+    @objc func measureStartButtonTapped(_ sender: UIButton) {
+        viewModel.action(.mesureStartButtonTapped)
+    }
+    
+    @objc func methodmeasureStopButtonTapped(_ sender: UIButton) {
+        viewModel.action(.measureEndbuttonTapped)
     }
 }
 
