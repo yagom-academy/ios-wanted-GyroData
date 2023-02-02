@@ -46,6 +46,7 @@ final class MotionDataDetailViewController: UIViewController {
         label.adjustsFontForContentSizeCategory = true
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "0.0"
+        label.isHidden = true
         return label
     }()
 
@@ -64,9 +65,9 @@ final class MotionDataDetailViewController: UIViewController {
         configureViews()
         setButtonAction()
         viewModel.bind(
-            navigationTitle: setNavigationTitle,
-            viewTypeText: setViewTypeLabelText,
-            showButton: showPlayPauseButton
+            setNavigationTitle: setNavigationTitle,
+            setViewTypeText: setViewTypeLabelText,
+            showPlayViewComponents: showPlayStopButtonAndTimerLabel
         )
         viewModel.bind { coordinate, timerText in
             // draw
@@ -87,7 +88,8 @@ final class MotionDataDetailViewController: UIViewController {
         viewTypeLabel.text = text
     }
     
-    private func showPlayPauseButton() {
+    private func showPlayStopButtonAndTimerLabel() {
+        timerLabel.isHidden = false
         playStopButton.isHidden = false
     }
     

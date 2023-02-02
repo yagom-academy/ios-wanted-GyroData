@@ -46,9 +46,9 @@ final class MotionDataDetailViewModel {
     private let viewType: DetailViewType
     private let motionData: MotionData
     private var dataStorage: DataStorageType?
-    private var navigationTitle: ((String) -> Void)?
-    private var viewTypeText: ((String) -> Void)?
-    private var showButton: (() -> Void)?
+    private var setNavigationTitle: ((String) -> Void)?
+    private var setViewTypeText: ((String) -> Void)?
+    private var showPlayViewComponents: (() -> Void)?
     private var isPlaying: ButtonState = ButtonState.isStopped
     private var onUpdate: ((Coordinate, String) -> Void)?
     private var timer: Timer?
@@ -66,13 +66,13 @@ final class MotionDataDetailViewModel {
     }
     
     func bind(
-        navigationTitle: @escaping (String) -> Void,
-        viewTypeText: @escaping (String) -> Void,
-        showButton: @escaping () -> Void
+        setNavigationTitle: @escaping (String) -> Void,
+        setViewTypeText: @escaping (String) -> Void,
+        showPlayViewComponents: @escaping () -> Void
     ) {
-        self.navigationTitle = navigationTitle
-        self.viewTypeText = viewTypeText
-        self.showButton = showButton
+        self.setNavigationTitle = setNavigationTitle
+        self.setViewTypeText = setViewTypeText
+        self.showPlayViewComponents = showPlayViewComponents
     }
     
     func bind(onUpdate: @escaping ((Coordinate, String) -> Void)) {
@@ -82,7 +82,7 @@ final class MotionDataDetailViewModel {
     func action(_ action: Action) {
         switch action {
         case .onAppear:
-            setNavigationTitle()
+            setNavigationTitle?(motionData.createdAt.dateTimeString())
             setDetailViewType()
         case let .buttonTapped(handler):
             isPlaying.toggle()
@@ -96,17 +96,13 @@ final class MotionDataDetailViewModel {
         }
     }
     
-    private func setNavigationTitle() {
-        navigationTitle?(motionData.createdAt.dateTimeString())
-    }
-    
     private func setDetailViewType() {
         switch viewType {
         case .view:
-            viewTypeText?(viewType.rawValue)
+            setViewTypeText?(viewType.rawValue)
         case .play:
-            viewTypeText?(viewType.rawValue)
-            showButton?()
+            setViewTypeText?(viewType.rawValue)
+            showPlayViewComponents?()
         }
     }
     
