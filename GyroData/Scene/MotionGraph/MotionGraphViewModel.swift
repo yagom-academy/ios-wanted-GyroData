@@ -6,3 +6,21 @@
 //
 
 import Foundation
+
+protocol MotionViewDelegate: AnyObject {
+    func motionViewModel(willDisplayMotion motion: Motion)
+}
+
+struct MotionGraphViewModel {
+    enum Action {
+        case viewWillAppear
+    }
+    
+    func action(_ action: Action) {
+        switch action {
+        case .viewWillAppear:
+            break
+        }
+    }
+}
+
