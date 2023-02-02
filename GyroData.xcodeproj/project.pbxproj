@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		09D60BFE298A485300568B32 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D60BFD298A485300568B32 /* UIFont+Extension.swift */; };
 		09DBC66F2988CE26003228DB /* TransitionMetaDataObject+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09DBC66D2988CE26003228DB /* TransitionMetaDataObject+CoreDataClass.swift */; };
 		09DBC6702988CE26003228DB /* TransitionMetaDataObject+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09DBC66E2988CE26003228DB /* TransitionMetaDataObject+CoreDataProperties.swift */; };
 		09E3104E2987E1B50088E0EB /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E3104D2987E1B50088E0EB /* CustomTableViewCell.swift */; };
@@ -29,6 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		09D60BFD298A485300568B32 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 		09DBC66D2988CE26003228DB /* TransitionMetaDataObject+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TransitionMetaDataObject+CoreDataClass.swift"; sourceTree = "<group>"; };
 		09DBC66E2988CE26003228DB /* TransitionMetaDataObject+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TransitionMetaDataObject+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		09E3104D2987E1B50088E0EB /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomTableViewCell.swift; path = GyroData/Resources/View/CustomTableViewCell.swift; sourceTree = SOURCE_ROOT; };
@@ -153,6 +155,7 @@
 			isa = PBXGroup;
 			children = (
 				18D1106529880B7D0088ED79 /* Array+Extension.swift */,
+				09D60BFD298A485300568B32 /* UIFont+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -258,6 +261,7 @@
 				183BD42B298A0232005B480E /* (null) in Sources */,
 				63F01BB928D44FC400C53A39 /* TransitionListViewController.swift in Sources */,
 				09E3105F298845DD0088E0EB /* TransitionMetaData.swift in Sources */,
+				09D60BFE298A485300568B32 /* UIFont+Extension.swift in Sources */,
 				09E3105329882DED0088E0EB /* DataModel.xcdatamodeld in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				09E3105D298838870088E0EB /* PersistentContainerManager.swift in Sources */,

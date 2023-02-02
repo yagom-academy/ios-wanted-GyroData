@@ -46,7 +46,7 @@ final class PersistentContainerManager {
         saveContext()
     }
 
-    private func fetchTransitionMetaDataObjects() -> [TransitionMetaDataObject] {
+    private func fetchAllTransitionMetaDataObjects() -> [TransitionMetaDataObject] {
         do {
             let request = TransitionMetaDataObject.fetchRequest()
             return try persistentContainer.viewContext.fetch(request)
@@ -56,9 +56,21 @@ final class PersistentContainerManager {
         }
     }
 
-    func fetchTransitionMetaDatas() -> [TransitionMetaData] {
-        let fetchTransitionMetaDataObjects = fetchTransitionMetaDataObjects()
-        let transitionMetaDatas = fetchTransitionMetaDataObjects.map {
+    private func fetchTenTransitionMetaDataObjects(pageCount: Int) -> [TransitionMetaDataObject] {
+        do {
+            let request = TransitionMetaDataObject.fetchRequest()
+            request.fetchOffset = pageCount * 10
+            request.fetchLimit = 10
+            return try persistentContainer.viewContext.fetch(request)
+        } catch {
+            print(error.localizedDescription)
+            return []
+        }
+    }
+
+    func fetchTenTransitionMetaDatas(pageCount: Int) -> [TransitionMetaData] {
+        let fetchTenTransitionMetaDataObjects = fetchTenTransitionMetaDataObjects(pageCount: pageCount)
+        let transitionMetaDatas = fetchTenTransitionMetaDataObjects.map {
             TransitionMetaData(saveDate: $0.saveDate,
                                sensorType: SensorType(rawValue: $0.sensorType) ?? SensorType.Accelerometer,
                                recordTime: $0.recordTime,
@@ -68,7 +80,7 @@ final class PersistentContainerManager {
     }
 
     func deleteTransitionMetaData(data: TransitionMetaData) {
-        let fetchTransitionMetaDataObjects = fetchTransitionMetaDataObjects()
+        let fetchTransitionMetaDataObjects = fetchAllTransitionMetaDataObjects()
         guard let transitionMetaDataObject = fetchTransitionMetaDataObjects.first(where: { $0.id == data.id }) else { return }
         persistentContainer.viewContext.delete(transitionMetaDataObject)
         saveContext()
