@@ -9,9 +9,8 @@ import Foundation
 
 final class RecordMotionDataViewModel {
     enum Action {
-        case changeSegment(to: Int)
-        case start(selectedIndex: Int, closure: () -> Void)
-        case stop(closure: () -> Void)
+        case start(selectedIndex: Int, handler: () -> Void)
+        case stop(handler: () -> Void)
     }
     
     enum ThrowableAction {
@@ -43,8 +42,6 @@ final class RecordMotionDataViewModel {
     
     func action(_ action: Action) {
         switch action {
-        case let .changeSegment(index):
-            selectedIndex(index)
         case let .start(index, handler):
             start(selectedIndex: index, handler)
         case let .stop(handler):
@@ -59,12 +56,7 @@ final class RecordMotionDataViewModel {
         }
     }
     
-    private func selectedIndex(_ index: Int) {
-        let selectedType = MotionDataType.allCases[index]
-        motionData = MotionData(motionDataType: selectedType)
-    }
-    
-    private func start(selectedIndex: Int, _ closure: () -> Void) {
+    private func start(selectedIndex: Int, _ handler: () -> Void) {
         motionData = MotionData(motionDataType: MotionDataType.allCases.map { $0 } [selectedIndex])
         switch motionData?.motionDataType {
         case .accelerometer:

@@ -112,7 +112,7 @@ final class RecordMotionDataViewController: UIViewController {
         let segments = viewModel.motionDataTypes()
         for (index, item) in segments.enumerated() {
             segmentedControl.insertSegment(
-                action: segmentAction(title: item, index: index),
+                withTitle: item,
                 at: index,
                 animated: true
             )
@@ -120,18 +120,9 @@ final class RecordMotionDataViewController: UIViewController {
         segmentedControl.selectedSegmentIndex = .zero
     }
     
-    private func segmentAction(title: String, index: Int) -> UIAction {
-        return UIAction(
-            title: title,
-            handler: { _ in
-                self.viewModel.action(.changeSegment(to: index))
-            }
-        )
-    }
-    
     private func configureButtonActions() {
         measureButton.addAction(measureButtonAction(), for: .touchUpInside)
-        stopButton.addAction(stopbuttonAction(), for: .touchUpInside)
+        stopButton.addAction(stopButtonAction(), for: .touchUpInside)
     }
     
     private func measureButtonAction() -> UIAction {
