@@ -14,27 +14,26 @@ final class ReplayViewController: UIViewController {
         case play = "Play"
     }
     
-    enum State {
+    private enum State {
         case stop
         case play
     }
-    let mode: Mode
-    var state = State.stop
-    var timer = Timer()
-    var timerData = Int.init()
     
-    let jsondata: String
-    var replayData = [MotionData]()
+    private let mode: Mode
+    private var state = State.stop
+    private var timer = Timer()
+    private var timerData = Int.init()
+    
+    private let motionData: Motion
+    private var replayData = [MotionData]()
     
     private let dateLabel: UILabel = {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .caption1)
-        label.text = Date().description //삭제
         return label
     }()
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "View" //삭제
         label.font = .preferredFont(forTextStyle: .title1)
         return label
     }()
@@ -78,9 +77,9 @@ final class ReplayViewController: UIViewController {
         return stackview
     }()
     
-    init(mode: Mode, jsonData: String) {
+    init(mode: Mode, motionData: Motion) {
         self.mode = mode
-        self.jsondata = jsonData
+        self.motionData = motionData
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -94,24 +93,9 @@ final class ReplayViewController: UIViewController {
         configureView()
         configureLayout()
         fetchRecodedData()
-        configureMode()
     }
     
-    func configureMode() {
-        switch mode {
-        case .view:
-            titleLabel.text = mode.rawValue
-            replayData.forEach { motiondata in
-                graphView.motionDatas = motiondata
-            }
-            
-            bottomStackView.removeFromSuperview()
-        case .play:
-            titleLabel.text = mode.rawValue
-        }
-    }
-    
-    @objc func tapToggleButton() {
+    @objc private func tapToggleButton() {
         switch state {
         case .stop:
             timer = Timer.scheduledTimer(
@@ -133,7 +117,7 @@ final class ReplayViewController: UIViewController {
         }
     }
     
-    @objc func timerCallBack() {
+    @objc private func timerCallBack() {
         if replayData.count <= timerData { return }
         graphView.motionDatas = replayData[timerData]
         timerData += 1
@@ -193,12 +177,28 @@ final class ReplayViewController: UIViewController {
     }
      
     private func fetchRecodedData() {
-        guard let data = jsondata.data(using: .utf8) else { return }
+        guard let data = motionData.jsonData?.data(using: .utf8) else { return }
         
         do {
             replayData = try JSONDecoder().decode([MotionData].self, from: data)
         } catch {
             print(error.localizedDescription)
         }
+        
+        configureMode()
+    }
+    
+    private func configureMode() {
+        switch mode {
+        case .view:
+            titleLabel.text = mode.rawValue
+            replayData.forEach { motiondata in
+                graphView.motionDatas = motiondata
+            }
+            bottomStackView.removeFromSuperview()
+        case .play:
+            titleLabel.text = mode.rawValue
+        }
+        dateLabel.text = motionData.date?.description
     }
 }

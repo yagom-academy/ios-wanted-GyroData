@@ -100,8 +100,8 @@ extension MainViewController: UITableViewDelegate {
             style: .normal,
             title: "Play"
         ) { _, _, _ in
-            guard let jsonData = self.motionDataList[indexPath.row].jsonData else { return }
-            let replayViewController = ReplayViewController(mode: .play, jsonData: jsonData)
+            let data = self.motionDataList[indexPath.row]
+            let replayViewController = ReplayViewController(mode: .play, motionData: data)
             
             self.navigationController?.pushViewController(replayViewController, animated: true)
         }
@@ -122,8 +122,8 @@ extension MainViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let jsonData = self.motionDataList[indexPath.row].jsonData else { return }
-        let replayViewController = ReplayViewController(mode: .view, jsonData: jsonData)
+        let data = self.motionDataList[indexPath.row]
+        let replayViewController = ReplayViewController(mode: .view, motionData: data)
         
         navigationController?.pushViewController(replayViewController, animated: true)
         
