@@ -17,7 +17,6 @@ final class SensorMeasureService {
         }
     }
     
-//    private var timer: Timer = .init()
     private var timer: Timer?
     private let motionManager: CMMotionManager = .init()
     private var fireDate: Date = Date()
