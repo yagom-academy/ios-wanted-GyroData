@@ -90,6 +90,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         delete.backgroundColor = .systemRed
         
         let play = UIContextualAction(style: .normal, title: "Play") { (UIContextualAction, UIView, success: @escaping (Bool) -> Void) in
+            let measureResultViewController = MeasureResultViewController()
+            self.navigationController?.pushViewController(measureResultViewController, animated: true)
             success(true)
         }
         play.backgroundColor = .systemGreen
