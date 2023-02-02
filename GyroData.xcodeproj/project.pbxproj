@@ -26,6 +26,7 @@
 		B4C661E2298A47D800A18C60 /* SensorMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C661E1298A47D800A18C60 /* SensorMode.swift */; };
 		D2BF0BF5298BE7A2002DDF61 /* NotificationName+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BF0BF4298BE7A2002DDF61 /* NotificationName+Extension.swift */; };
 		D2C94E2A2988BE9F00F70389 /* MeasureTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C94E292988BE9F00F70389 /* MeasureTableViewCell.swift */; };
+		D2D47A37298C2CE100233477 /* MeasureListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D47A36298C2CE100233477 /* MeasureListViewModel.swift */; };
 		D2DA2C20298A3313006B4FC3 /* MeasureViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2DA2C1F298A3313006B4FC3 /* MeasureViewModel.swift */; };
 		D2DA2C22298A3387006B4FC3 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2DA2C21298A3387006B4FC3 /* Observable.swift */; };
 		D2DA2C24298A389C006B4FC3 /* SensorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2DA2C23298A389C006B4FC3 /* SensorData.swift */; };
@@ -55,6 +56,7 @@
 		B4C661E1298A47D800A18C60 /* SensorMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensorMode.swift; sourceTree = "<group>"; };
 		D2BF0BF4298BE7A2002DDF61 /* NotificationName+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationName+Extension.swift"; sourceTree = "<group>"; };
 		D2C94E292988BE9F00F70389 /* MeasureTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureTableViewCell.swift; sourceTree = "<group>"; };
+		D2D47A36298C2CE100233477 /* MeasureListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureListViewModel.swift; sourceTree = "<group>"; };
 		D2DA2C1F298A3313006B4FC3 /* MeasureViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureViewModel.swift; sourceTree = "<group>"; };
 		D2DA2C21298A3387006B4FC3 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		D2DA2C23298A389C006B4FC3 /* SensorData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensorData.swift; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 			children = (
 				63F01BB828D44FC400C53A39 /* MeasureListViewController.swift */,
 				D2C94E292988BE9F00F70389 /* MeasureTableViewCell.swift */,
+				D2D47A36298C2CE100233477 /* MeasureListViewModel.swift */,
 			);
 			path = ListView;
 			sourceTree = "<group>";
@@ -309,6 +312,7 @@
 				D2DA2C24298A389C006B4FC3 /* SensorData.swift in Sources */,
 				B4564284298C17970060DEC4 /* CoreDataManageable.swift in Sources */,
 				B456428C298C191D0060DEC4 /* Motion.xcdatamodeld in Sources */,
+				D2D47A37298C2CE100233477 /* MeasureListViewModel.swift in Sources */,
 				B4564287298C17B70060DEC4 /* CoreDataManager.swift in Sources */,
 				B456428F298C1A7F0060DEC4 /* MotionCoreModel+CoreDataClass.swift in Sources */,
 				63F01BB928D44FC400C53A39 /* MeasureListViewController.swift in Sources */,

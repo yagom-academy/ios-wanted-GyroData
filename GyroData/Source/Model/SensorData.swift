@@ -3,7 +3,7 @@
 
 import Foundation
 
-struct SensorData: Hashable, Equatable {
+struct SensorData: Hashable, Equatable, Codable {
     var x: [Double]
     var y: [Double]
     var z: [Double]

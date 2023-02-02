@@ -3,7 +3,7 @@
 
 import CoreData.NSManagedObject
 
-protocol ManagedObjectModel: Hashable {
+protocol ManagedObjectModel: Hashable, Codable {
     associatedtype Object: NSManagedObject
     var objectID: String? { get set }
     

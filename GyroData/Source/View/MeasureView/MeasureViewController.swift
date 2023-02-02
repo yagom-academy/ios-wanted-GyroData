@@ -15,6 +15,9 @@ final class MeasureViewController: UIViewController {
     }
     
     let measureViewModel = MeasureViewModel()
+    private var sensorMode: SensorMode {
+        return self.segmentedControl.selectedSegmentIndex == 0 ? .Acc : .Gyro
+    }
     
     private let segmentedControl: UISegmentedControl = {
         let segmentedControl = UISegmentedControl(items: [Constant.leftSegmentedItem,
@@ -96,13 +99,20 @@ final class MeasureViewController: UIViewController {
     }
     
     private func setupNavigation() {
+        let saveAction = UIAction { _ in
+            
+            DispatchQueue.main.async {
+                self.measureViewModel.add(sensorMode: self.sensorMode,
+                                          sensorData: self.measureViewModel.measureDatas.value)
+            }
+        }
+        
         navigationItem.title = Constant.title
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: Constant.saveButtonTitle,
-                                                            style: .plain,
-                                                            target: self,
-                                                            action: nil)
+                                                            primaryAction: saveAction)
         self.navigationItem.rightBarButtonItem?.isEnabled = false
     }
+
     
     private func setupButtons() {
         let measureAction = UIAction { _ in

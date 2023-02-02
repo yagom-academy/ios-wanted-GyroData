@@ -16,14 +16,8 @@ final class MeasureListViewController: UIViewController {
         case main
     }
     
-    struct SampleData: Hashable {
-        var createdAt: String
-        var sensorType: String
-        var measureTime: String
-    }
-    
-    typealias DataSource = UITableViewDiffableDataSource<Schedule, SampleData>
-    typealias Snapshot = NSDiffableDataSourceSnapshot<Schedule, SampleData>
+    typealias DataSource = UITableViewDiffableDataSource<Schedule, MotionData>
+    typealias Snapshot = NSDiffableDataSourceSnapshot<Schedule, MotionData>
     
     private let tableView: UITableView = {
         let tableView = UITableView()
@@ -37,6 +31,7 @@ final class MeasureListViewController: UIViewController {
     }()
     
     private var dataSource: DataSource?
+    private var measureListViewModel = MeasureListViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,12 +39,18 @@ final class MeasureListViewController: UIViewController {
         setupNavigation()
         setupViews()
         tableView.delegate = self
-        appendData()
+    }
+    
+    private func bind() {
+        measureListViewModel.model.bind { [weak self] item in
+            self?.appendData(item: item)
+        }
     }
     
     private func setupNavigation() {
         let pushMeasureViewAction = UIAction { _ in
             let measureViewController = MeasureViewController()
+//            measureViewController.
             self.push(viewController: measureViewController)
         }
         
@@ -83,15 +84,11 @@ final class MeasureListViewController: UIViewController {
         return dataSource
     }
     
-    private func appendData() {
+    private func appendData(item: [MotionData]) {
         var snapshot = Snapshot()
         
         snapshot.appendSections([.main])
-        snapshot.appendItems([
-            SampleData(createdAt: "1", sensorType: "", measureTime: ""),
-            SampleData(createdAt: "2", sensorType: "", measureTime: ""),
-            SampleData(createdAt: "3", sensorType: "", measureTime: "")
-        ])
+        snapshot.appendItems(item)
         dataSource?.apply(snapshot)
     }
     
