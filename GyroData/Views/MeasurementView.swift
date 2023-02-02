@@ -39,6 +39,14 @@ final class MeasurementView: UIView {
         return segmentedController.numberOfSegments
     }
 
+    private let indicatorView: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .large)
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        indicator.hidesWhenStopped = true
+        indicator.stopAnimating()
+        return indicator
+    }()
+
     var selectedSensor: Sensor {
         guard let selectedSensor = Sensor(rawValue: segmentedController.selectedSegmentIndex) else { fatalError() }
         return selectedSensor
@@ -63,6 +71,7 @@ final class MeasurementView: UIView {
         addSubview(stopButton)
         addSubview(segmentedController)
         addSubview(graphView)
+        addSubview(indicatorView)
     }
 
     private func configureConstraints() {
@@ -81,6 +90,9 @@ final class MeasurementView: UIView {
 
             stopButton.topAnchor.constraint(equalTo: measurementButton.bottomAnchor, constant: 16),
             stopButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            
+            indicatorView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            indicatorView.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
     }
 
@@ -116,5 +128,13 @@ final class MeasurementView: UIView {
 
     func drawGraph(with data: AxisValue) {
         graphView.addData(data)
+    }
+
+    func startActivityIndicator() {
+        indicatorView.startAnimating()
+    }
+
+    func stopActivityIndicator() {
+        indicatorView.stopAnimating()
     }
 }
