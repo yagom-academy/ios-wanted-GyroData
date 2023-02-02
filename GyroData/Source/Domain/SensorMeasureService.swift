@@ -17,15 +17,10 @@ final class SensorMeasureService {
         }
     }
     
-    private weak var delegate: MeasureServiceDelegate?
     private var timer: Timer = .init()
-    private let motionManager: CMMotionManager
+    private let motionManager: CMMotionManager = .init()
     private var fireDate: Date = Date()
-    
-    init(delegate: MeasureServiceDelegate) {
-        self.delegate = delegate
-        self.motionManager = .init()
-    }
+    weak var delegate: MeasureServiceDelegate?
     
     func measureStart(_ sensorType: Sensor, interval: TimeInterval, duration: TimeInterval) {
         switch sensorType {

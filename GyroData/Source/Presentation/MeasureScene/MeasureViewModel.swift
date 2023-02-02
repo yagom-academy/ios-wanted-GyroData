@@ -36,10 +36,9 @@ class MeasureViewModel {
     )
     private let measureService: SensorMeasureService
     
-    private weak var delegate: MeasureViewDelegate?
+    weak var delegate: MeasureViewDelegate?
     
-    init(delegate: MeasureViewDelegate, measureService: SensorMeasureService) {
-        self.delegate = delegate
+    init(measureService: SensorMeasureService) {
         self.measureService = measureService
     }
     
