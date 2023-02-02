@@ -8,6 +8,7 @@
 import UIKit
 
 final class DetailViewController: UIViewController {
+    private let viewModel: DetailViewModel
     private let dateLabel = UILabel(textStyle: .body)
     private let typeLabel = UILabel(textStyle: .title1)
     
@@ -27,16 +28,34 @@ final class DetailViewController: UIViewController {
         return view
     }()
     
+    init(viewModel: DetailViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
         setupConstraint()
+        setupBind()
+    }
+    
+    func setupBind() {
+        viewModel.bindData { [weak self] data in
+            self?.dateLabel.text = data.date.description
+            self?.typeLabel.text = "View"
+        }
     }
 }
 
 extension DetailViewController {
     private func setupView() {
         title = "다시보기"
+        view.backgroundColor = .systemBackground
         [labelStackView, graphView].forEach(view.addSubview(_:))
     }
     
@@ -49,7 +68,9 @@ extension DetailViewController {
             
             graphView.topAnchor.constraint(equalTo: labelStackView.bottomAnchor, constant: 30),
             graphView.leadingAnchor.constraint(equalTo: labelStackView.leadingAnchor),
-            graphView.trailingAnchor.constraint(equalTo: labelStackView.trailingAnchor)
+            graphView.trailingAnchor.constraint(equalTo: labelStackView.trailingAnchor),
+            
+            graphView.heightAnchor.constraint(equalTo: graphView.widthAnchor)
         ])
     }
 }
