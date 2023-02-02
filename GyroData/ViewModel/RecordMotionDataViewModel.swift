@@ -88,11 +88,13 @@ final class RecordMotionDataViewModel {
     }
     
     private func save() throws {
-        guard let motionData = motionData else { throw MotionDataError.emptyData }
+        guard var motionData = motionData else { throw MotionDataError.emptyData }
+        motionData.length = round(Double(motionData.coordinates.count)) / 10
         dataStorage = try DataStorage(directoryName: motionData.motionDataType.rawValue)
         try saveToCoreData()
         try saveToDataStorage()
         onAdd?(motionData)
+        self.motionData = nil
     }
     
     private func saveToCoreData() throws {
