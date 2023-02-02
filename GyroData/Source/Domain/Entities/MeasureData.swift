@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MeasureData: Encodable, Hashable {
+struct MeasureData: Codable, Hashable {
     let xValue: [Double]
     let yValue: [Double]
     let zValue: [Double]
