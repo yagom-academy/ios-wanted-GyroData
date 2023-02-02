@@ -10,7 +10,7 @@ import UIKit
 final class MeasurementViewController: UIViewController {
     // MARK: Properties
     private let measurementView = MeasurementView()
-    private let sensorManager: SensorManager = SensorManager()
+    private let sensorManager = SensorManager()
     private let dataManagers: [any MeasurementDataHandleable]
 
     private var measurementData = Measurement(sensor: .Accelerometer, date: Date(), time: 0, axisValues: [])
@@ -44,11 +44,11 @@ final class MeasurementViewController: UIViewController {
 
     // MARK: NavigationBar
     private func configureNavigationBar() {
-        let savaAction = UIAction { [weak self] _ in
+        let saveAction = UIAction { [weak self] _ in
             self?.saveSensorData()
         }
 
-        let saveButton = UIBarButtonItem(title: "저장", primaryAction: savaAction)
+        let saveButton = UIBarButtonItem(title: "저장", primaryAction: saveAction)
 
         navigationItem.title = "측정하기"
         navigationItem.rightBarButtonItem = saveButton
@@ -67,27 +67,28 @@ final class MeasurementViewController: UIViewController {
         measurementView.configureStopButtonAction(stopButtonAction)
     }
 
+    // MARK: Measure
     private func measure() {
         measurementData = Measurement(sensor: selectedSensor, date: Date(), time: 0, axisValues: [])
         clearGraph()
 
-        sensorManager.measure(sensor: selectedSensor, interval: 0.1, timeout: 60) { [weak self] data in
+        sensorManager.measure(sensor: selectedSensor, interval: 0.1, timeout: 600) { [weak self] data in
             guard let data else {
-                self?.setEnabledSegments()
+                self?.stop()
                 return
             }
 
-            self?.measurementData.axisValues.append(data)
+            self?.axisValues.append(data)
             print(data)
             self?.drawGraph(with: data)
         }
 
-        setDisabledSegments()
+        setDisabledUserInteraction()
     }
 
     private func stop() {
         sensorManager.stop { [weak self] _ in
-            self?.setEnabledSegments()
+            self?.setEnabledUserInteraction()
             self?.updateMeasurementData()
         }
     }
@@ -96,30 +97,69 @@ final class MeasurementViewController: UIViewController {
         measurementData.axisValues = axisValues
         measurementData.time = 0.1 * Double(measurementData.axisValues.count)
     }
-    
+
+    // MARK: Save Data
     private func saveSensorData() {
-        do {
-            for manager in dataManagers {
-                try manager.saveData(measurementData)
+        if measurementData.axisValues == [] {
+            showAlert(title: "Error", message: "저장할 데이터가 없습니다.")
+            print(DataHandleError.noDataError(detail: "측정한 데이터가 없습니다."))
+            return
+        }
+
+        startActivityIndicator()
+
+        storeDataInDevice {
+            self.stopActivityIndicator()
+
+            DispatchQueue.main.async {
+                self.navigationController?.popViewController(animated: false)
             }
-        } catch {
-            fatalError("얼럿추가해야됨")
         }
     }
-    
-    private func setDisabledSegments() {
+
+    private func storeDataInDevice(completion: @escaping ()->()) {
+        DispatchQueue.global(qos: .default).asyncAfter(deadline: .now() + 0.5) {
+            do {
+                for manager in self.dataManagers {
+                    try manager.saveData(self.measurementData)
+                }
+            } catch {
+                self.showAlert(title: "Error", message: "데이터를 저장할 수 없습니다.")
+                print(DataHandleError.saveFailError(error: error).description)
+            }
+
+            completion()
+        }
+    }
+
+    // MARK: UserInteraction
+    private func setDisabledUserInteraction() {
         measurementView.setDisabledSegments()
+        navigationItem.rightBarButtonItem?.isEnabled = false
     }
 
-    private func setEnabledSegments() {
+    private func setEnabledUserInteraction() {
         measurementView.setEnabledSegments()
+        navigationItem.rightBarButtonItem?.isEnabled = true
     }
 
+    // MARK: Draw Graph
     private func drawGraph(with data: AxisValue) {
         measurementView.drawGraph(with: data)
     }
 
     private func clearGraph() {
         measurementView.clearGraph()
+    }
+
+    // MARK: Indicator
+    private func startActivityIndicator() {
+        self.measurementView.startActivityIndicator()
+    }
+
+    private func stopActivityIndicator() {
+        DispatchQueue.main.async {
+            self.measurementView.stopActivityIndicator()
+        }
     }
 }

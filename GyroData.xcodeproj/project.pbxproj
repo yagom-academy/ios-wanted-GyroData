@@ -12,6 +12,7 @@
 		1A087CFA2989353400FC2056 /* MeasurementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A087CF92989353300FC2056 /* MeasurementViewController.swift */; };
 		1A087D0C298A96CE00FC2056 /* SensorFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A087D0B298A96CE00FC2056 /* SensorFileManager.swift */; };
 		1A087D0E298A976E00FC2056 /* MeasurementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A087D0D298A976E00FC2056 /* MeasurementView.swift */; };
+		1A92956F298B9B3B004B5B20 /* UIViewController +.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A92956E298B9B3B004B5B20 /* UIViewController +.swift */; };
 		4143584C298A277E00D243C5 /* GyroCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4143584A298A277E00D243C5 /* GyroCoreData.xcdatamodeld */; };
 		414C7A702988CE2A00452C25 /* AxisValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414C7A6F2988CE2A00452C25 /* AxisValue.swift */; };
 		414C7A772988DFDB00452C25 /* Date +.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414C7A762988DFDB00452C25 /* Date +.swift */; };
@@ -42,6 +43,7 @@
 		1A087CF92989353300FC2056 /* MeasurementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeasurementViewController.swift; sourceTree = "<group>"; };
 		1A087D0B298A96CE00FC2056 /* SensorFileManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SensorFileManager.swift; path = GyroData/Models/DataStorage/FileManager/SensorFileManager.swift; sourceTree = SOURCE_ROOT; };
 		1A087D0D298A976E00FC2056 /* MeasurementView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeasurementView.swift; sourceTree = "<group>"; };
+		1A92956E298B9B3B004B5B20 /* UIViewController +.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController +.swift"; sourceTree = "<group>"; };
 		4143584B298A277E00D243C5 /* GyroCoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GyroCoreData.xcdatamodel; sourceTree = "<group>"; };
 		414C7A6F2988CE2A00452C25 /* AxisValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxisValue.swift; sourceTree = "<group>"; };
 		414C7A762988DFDB00452C25 /* Date +.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date +.swift"; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 				414C7A762988DFDB00452C25 /* Date +.swift */,
 				41539B92298A612E00B7A446 /* JSONEncoder +.swift */,
 				41539B94298A61C000B7A446 /* JSONDecoder +.swift */,
+				1A92956E298B9B3B004B5B20 /* UIViewController +.swift */,
 			);
 			path = "Extension +";
 			sourceTree = "<group>";
@@ -274,6 +277,7 @@
 				414E53112987E0CC000221E2 /* ListView.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				414E53182987E915000221E2 /* UIStackView +.swift in Sources */,
+				1A92956F298B9B3B004B5B20 /* UIViewController +.swift in Sources */,
 				41539B9A298A635D00B7A446 /* DataHandleError.swift in Sources */,
 				41539BA0298A94D600B7A446 /* ReviewPageView.swift in Sources */,
 				41539B90298A607100B7A446 /* MeasurementCoreModel.swift in Sources */,
