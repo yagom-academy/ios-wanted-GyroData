@@ -8,10 +8,10 @@
 import Foundation
 
 struct MeasureData: Codable, Hashable {
-    var xValue: [Double]
-    var yValue: [Double]
-    var zValue: [Double]
+    let xValue: [Double]
+    let yValue: [Double]
+    let zValue: [Double]
     let runTime: Double
     let date: Date
-    var type: Sensor?
+    let type: Sensor?
 }

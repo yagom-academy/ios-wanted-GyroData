@@ -15,4 +15,5 @@ protocol MeasureServiceDelegate: AnyObject {
     
     func updateData(_ data: Values)
     func endMeasuringData()
+    func emitWasteTime(_ wasteTime: TimeInterval)
 }

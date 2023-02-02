@@ -67,7 +67,14 @@ private extension SensorMeasureService {
     }
     
     func isTimeOver(_ duration: TimeInterval, from fireDate: Date) -> Bool {
-        return Date().timeIntervalSince(fireDate) > duration ? true : false
+        let wasteTime = Date().timeIntervalSince(fireDate)
+
+        if wasteTime > duration {
+            delegate?.emitWasteTime(wasteTime)
+            return true
+        } else {
+            return false
+        }
     }
     
     func gyroscopeMeasureStart(_ interval: TimeInterval, _ duration: TimeInterval) {

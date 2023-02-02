@@ -37,6 +37,7 @@ class MeasureViewModel {
     init(delegate: MeasureViewDelegate, measureService: SensorMeasureService) {
         self.delegate = delegate
         self.measureService = measureService
+        self.measureData = MeasureData()
     }
     
     func action(_ action: Action) {
