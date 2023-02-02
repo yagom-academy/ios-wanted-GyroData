@@ -11,9 +11,10 @@ class MeasureViewModel {
     typealias Values = (x: Double, y: Double, z: Double)
     
     enum Action {
-        case mesureStartButtonTapped(sensorType: Sensor)
+        case mesureStartButtonTapped
         case measureEndbuttonTapped
         case saveButtonTapped
+        case sensorTypeChanged(sensorType: Sensor?)
     }
     
     private var sensorMeasureValues: Values = (0, 0, 0) {
@@ -44,13 +45,16 @@ class MeasureViewModel {
     
     func action(_ action: Action) {
         switch action {
-        case .mesureStartButtonTapped(sensorType: let sensorType):
+        case .mesureStartButtonTapped:
+            guard let sensorType = sensorType else { return }
             startDate = Date()
             measureService.measureStart(sensorType, interval: 0.1, duration: 60)
         case .measureEndbuttonTapped:
             measureService.measureStop()
         case .saveButtonTapped:
             saveMeasureData()
+        case .sensorTypeChanged(sensorType: let sensorType):
+            self.sensorType = sensorType
         }
     }
 }
