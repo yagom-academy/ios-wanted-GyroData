@@ -221,6 +221,23 @@ private extension RecordViewController {
         yPath.move(to: CGPoint(x: currentX, y: centerY - yValues[0]))
         zPath.move(to: CGPoint(x: currentX, y: centerY - zValues[0]))
     }
+
+    func addGraphViewSublayer(layer: CAShapeLayer, path: UIBezierPath) {
+        switch layer {
+        case xLayer:
+            layer.strokeColor = UIColor.systemRed.cgColor
+        case yLayer:
+            layer.strokeColor = UIColor.systemGreen.cgColor
+        case zLayer:
+            layer.strokeColor = UIColor.systemBlue.cgColor
+        default:
+            return
+        }
+        layer.fillColor = nil
+        layer.lineWidth = 2
+        layer.path = path.cgPath
+        graphView.layer.addSublayer(layer)
+    }
 }
 
 // MARK: - UIConfiguration
