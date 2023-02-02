@@ -39,6 +39,7 @@ final class MeasureListViewController: UIViewController {
         setupNavigation()
         setupViews()
         tableView.delegate = self
+        bind()
     }
     
     private func bind() {
@@ -50,7 +51,6 @@ final class MeasureListViewController: UIViewController {
     private func setupNavigation() {
         let pushMeasureViewAction = UIAction { _ in
             let measureViewController = MeasureViewController()
-//            measureViewController.
             self.push(viewController: measureViewController)
         }
         
@@ -76,7 +76,9 @@ final class MeasureListViewController: UIViewController {
                 for: indexPath
             ) as? MeasureTableViewCell else { return UITableViewCell() }
             
-            cell.configure()
+            cell.configure(createdAt: item.createdAt,
+                           sensorType: item.sensorType.rawValue,
+                           runtime: item.runtime)
             
             return cell
         }

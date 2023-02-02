@@ -80,9 +80,9 @@ final class MeasureTableViewCell: UITableViewCell, ReusableView {
         ])
     }
     
-    func configure() {
-        createdAtLabel.text = "2022/09/08 13:23:43"
-        sensorTypeLabel.text = "Accelerometer"
-        measurementTimeLabel.text = "40.3"
+    func configure(createdAt: Date, sensorType: String, runtime: Double) {
+        createdAtLabel.text = DateFormatter().string(from: createdAt)
+        sensorTypeLabel.text = sensorType
+        measurementTimeLabel.text = "\(String(format: "%.1f", runtime))"
     }
 }

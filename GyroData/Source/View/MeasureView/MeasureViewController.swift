@@ -100,11 +100,9 @@ final class MeasureViewController: UIViewController {
     
     private func setupNavigation() {
         let saveAction = UIAction { _ in
+            self.measureViewModel.add(sensorMode: self.sensorMode,
+                                      sensorData: self.measureViewModel.measureDatas.value)
             
-            DispatchQueue.main.async {
-                self.measureViewModel.add(sensorMode: self.sensorMode,
-                                          sensorData: self.measureViewModel.measureDatas.value)
-            }
         }
         
         navigationItem.title = Constant.title
@@ -112,7 +110,7 @@ final class MeasureViewController: UIViewController {
                                                             primaryAction: saveAction)
         self.navigationItem.rightBarButtonItem?.isEnabled = false
     }
-
+    
     
     private func setupButtons() {
         let measureAction = UIAction { _ in
@@ -145,9 +143,8 @@ final class MeasureViewController: UIViewController {
                                                      for: UIControl.State.normal)
         self.measureButton.setTitleColor(.gray, for: .normal)
         self.stopButton.setTitleColor(.systemBlue, for: .normal)
-
-        let mode: SensorMode = self.segmentedControl.selectedSegmentIndex == 0 ? .Acc : .Gyro
-        self.measureViewModel.startMeasure(mode: mode)
+        
+        self.measureViewModel.startMeasure(mode: self.sensorMode)
     }
     
     @objc
@@ -165,7 +162,7 @@ final class MeasureViewController: UIViewController {
         self.stopButton.setTitleColor(.gray, for: .normal)
         
         let mode: SensorMode = self.segmentedControl.selectedSegmentIndex == 0 ? .Acc : .Gyro
-        self.measureViewModel.stopMeasure(mode: mode)
+        self.measureViewModel.stopMeasure(mode: self.sensorMode)
     }
     
     private func resetGraphView() {
