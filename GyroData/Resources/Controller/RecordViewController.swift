@@ -67,9 +67,9 @@ final class RecordViewController: UIViewController {
     private let xPath = UIBezierPath()
     private let yPath = UIBezierPath()
     private let zPath = UIBezierPath()
-    private let xValues: [CGFloat] = [50,20,70,80,10,40,30,90,60,40]
-    private let yValues: [CGFloat] = [60,10,20,50,90,70,40,20,90,50]
-    private let zValues: [CGFloat] = [0,50,30,40,20,60,40,90,10,80]
+//    private let xValues: [CGFloat] = [50,20,70,80,10,40,30,90,60,40]
+//    private let yValues: [CGFloat] = [60,10,20,50,90,70,40,20,90,50]
+//    private let zValues: [CGFloat] = [0,50,30,40,20,60,40,90,10,80]
     private var currentX: CGFloat = 0
     
     private let motionManager = MotionManager()
@@ -89,10 +89,14 @@ final class RecordViewController: UIViewController {
     }
 }
 
+//
+// MARK 붙이기!
+//
 extension RecordViewController: MotionManagerDelegate {
     func motionManager(send manager: MotionManager, sendData: CMLogItem?) {
         guard let data = sendData else { return }
         print(data)
+        callDrawLine(data: data)
         saveData(data: data)
     }
     
@@ -215,13 +219,6 @@ private extension RecordViewController {
         graphView.layer.addSublayer(gridLayer)
     }
 
-    func settingPathStartPosition() {
-        let centerY = graphView.frame.height / 2
-        xPath.move(to: CGPoint(x: currentX, y: centerY - xValues[0]))
-        yPath.move(to: CGPoint(x: currentX, y: centerY - yValues[0]))
-        zPath.move(to: CGPoint(x: currentX, y: centerY - zValues[0]))
-    }
-
     func addGraphViewSublayer(layer: CAShapeLayer, path: UIBezierPath) {
         switch layer {
         case xLayer:
@@ -237,6 +234,22 @@ private extension RecordViewController {
         layer.lineWidth = 2
         layer.path = path.cgPath
         graphView.layer.addSublayer(layer)
+    }
+
+    func callDrawLine(data: CMLogItem) {
+        let xOffset: CGFloat = graphView.frame.width / CGFloat(600 - 1)
+        let centerY = graphView.frame.height / 2
+
+        switch segmentControl.selectedSegmentIndex {
+        case 0:
+            guard let data = data as? CMAccelerometerData else { return }
+//            drawAccelermeterLine(xOffset, centerY, data)
+        case 1:
+            guard let data = data as? CMGyroData else { return }
+//            drawGyroLine(xOffset, centerY, data)
+        default:
+            return
+        }
     }
 }
 
