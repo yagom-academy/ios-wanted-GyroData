@@ -12,6 +12,8 @@ class MeasureViewController: UIViewController {
         static let title = "측정하기"
         static let rightBarButtonItemTitle = "저장"
         static let margin = CGFloat(16)
+        static let saveFailAlertTitle = "저장 실패"
+        static let saveFailAlertActionTitle = "확인"
     }
     
     private let segmentedControl: UISegmentedControl = {
@@ -84,6 +86,79 @@ private extension MeasureViewController {
 // MARK: - objc Method
 extension MeasureViewController {
     @objc func rightBarButtonTapped(_ sender: UIBarButtonItem) {
-        // TODO: - 저장 버튼
+        let segment = segmentedControl.selectedSegmentIndex
+        viewModel.action(.sensorTypeChanged(sensorType: Sensor(rawValue: segment)))
     }
 }
+
+extension MeasureViewController: MeasureViewDelegate {
+    func updateValue(_ values: Values) {
+        graphView.drawData(data: values)
+    }
+    
+    func nonAccelerometerMeasurable() {
+        
+    }
+    
+    func nonGyroscopeMeasurable() {
+        
+    }
+    
+    func endMeasuringData() {
+        
+    }
+    
+    func saveSuccess() {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    func saveFail(_ error: Error) {
+        let alertController = UIAlertController(
+            title: Constant.saveFailAlertTitle,
+            message: error.localizedDescription,
+            preferredStyle: .alert
+        )
+        let defaultAction = UIAlertAction(
+            title: Constant.saveFailAlertActionTitle,
+            style: .default
+        )
+        
+        alertController.addAction(defaultAction)
+        
+        present(alertController, animated: true)
+    }
+    
+    
+}
+
+
+import SwiftUI
+
+struct PreView: PreviewProvider {
+    static var previews: some View {
+        let service = SensorMeasureService()
+        let viewModel = MeasureViewModel(measureService: service)
+        
+        MeasureViewController(viewModel: viewModel).toPreview()
+    }
+}
+
+
+#if DEBUG
+extension UIViewController {
+    private struct Preview: UIViewControllerRepresentable {
+        let viewController: UIViewController
+        
+        func makeUIViewController(context: Context) -> UIViewController {
+            return viewController
+        }
+        
+        func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
+        }
+    }
+    
+    func toPreview() -> some View {
+        Preview(viewController: self)
+    }
+}
+#endif
