@@ -22,6 +22,8 @@ class AddViewController: UIViewController {
     private let motionManager = CMMotionManager()
     private var motionDataList = [MotionData]()
     private var jsonMotionData: Data?
+    private var timer: Timer?
+    private var measureTime: Int = 0
     
     private let segmentControl: UISegmentedControl = {
         let segmentControl = UISegmentedControl(items: ["Acc", "Gyro"])
@@ -162,7 +164,7 @@ class AddViewController: UIViewController {
             let dataForm = MotionDataForm(
                 title: titleText,
                 date: currentDate,
-                runningTime: Double(motionDataList.count) / 10,
+                runningTime: Double(measureTime) / 10,
                 jsonData: dataString
             )
             
@@ -173,10 +175,14 @@ class AddViewController: UIViewController {
     }
     
     @objc private func startMeasurement() {
-        motionDataList = .init()
-        jsonMotionData = .init()
         graphView.stopDrawLines()
         
+        motionDataList = .init()
+        jsonMotionData = .init()
+        segmentControl.isUserInteractionEnabled = false
+        
+        startTimer()
+            
         switch segmentControl.selectedSegmentIndex {
         case MeasurementUnit.acc.rawValue:
             motionManager.accelerometerUpdateInterval = 0.1
@@ -226,11 +232,46 @@ class AddViewController: UIViewController {
         }
     }
     
-    @objc private func stopMeasurement() {
-        motionManager.stopAccelerometerUpdates()
-        motionManager.stopGyroUpdates()
+    public func startTimer() {
+        stopTimer()
+        measureTime = .init()
+
+        timer = Timer.scheduledTimer(
+            timeInterval: TimeInterval(0.1),
+            target: self,
+            selector: #selector(timerCallback),
+            userInfo: nil,
+            repeats: true
+        )
+    }
+    
+    private func stopTimer() {
+        if timer != nil && timer?.isValid != nil {
+            timer?.invalidate()
+        }
+    }
+     
+    @objc func timerCallback() {
+        measureTime += 1
         
-        graphView.stopDrawLines()
+        if Int(measureTime) == 600 {
+            stopTimer()
+            motionManager.stopAccelerometerUpdates()
+            motionManager.stopGyroUpdates()
+            segmentControl.isUserInteractionEnabled = true
+        }
+    }
+
+    
+    @objc private func stopMeasurement() {
+        if measureTime != 0 {
+            motionManager.stopAccelerometerUpdates()
+            motionManager.stopGyroUpdates()
+            segmentControl.isUserInteractionEnabled = true
+            
+            stopTimer()
+            graphView.stopDrawLines()
+        }
     }
 }
 
