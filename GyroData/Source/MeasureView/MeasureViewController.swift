@@ -86,27 +86,59 @@ final class MeasureViewController: UIViewController {
         }
     }
     
-    
     private func setupNavigation() {
         navigationItem.title = Constant.title
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: Constant.saveButtonTitle,
                                                             style: .plain,
                                                             target: self,
                                                             action: nil)
+        self.navigationItem.rightBarButtonItem?.isEnabled = false
     }
     
     private func setupButtons() {
         let measureAction = UIAction { _ in
-            let mode: SensorMode = self.segmentedControl.selectedSegmentIndex == 0 ? .Acc : .Gyro
-            self.measureViewModel.startMeasure(mode: mode)
+            self.tappedMeasureButton()
         }
         measureButton.addAction(measureAction, for: .touchUpInside)
         
         let stopAction = UIAction { _ in
-            let mode: SensorMode = self.segmentedControl.selectedSegmentIndex == 0 ? .Acc : .Gyro
-            self.measureViewModel.stopMeasure(mode: mode)
+            self.tappedStopButton()
         }
         stopButton.addAction(stopAction, for: .touchUpInside)
+    }
+    
+    private func tappedMeasureButton() {
+        self.segmentedControl.isUserInteractionEnabled = false
+        self.measureButton.isUserInteractionEnabled = false
+        self.stopButton.isUserInteractionEnabled = true
+        self.navigationItem.rightBarButtonItem?.isEnabled = false
+        
+        self.segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.gray],
+                                                     for: UIControl.State.selected)
+        self.segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.gray],
+                                                     for: UIControl.State.normal)
+        self.measureButton.setTitleColor(.gray, for: .normal)
+        self.stopButton.setTitleColor(.systemBlue, for: .normal)
+
+        let mode: SensorMode = self.segmentedControl.selectedSegmentIndex == 0 ? .Acc : .Gyro
+        self.measureViewModel.startMeasure(mode: mode)
+    }
+    
+    private func tappedStopButton() {
+        self.segmentedControl.isUserInteractionEnabled = true
+        self.measureButton.isUserInteractionEnabled = true
+        self.stopButton.isUserInteractionEnabled = false
+        self.navigationItem.rightBarButtonItem?.isEnabled = true
+        
+        self.segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black],
+                                                     for: UIControl.State.selected)
+        self.segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black],
+                                                     for: UIControl.State.normal)
+        self.measureButton.setTitleColor(.systemBlue, for: .normal)
+        self.stopButton.setTitleColor(.gray, for: .normal)
+        
+        let mode: SensorMode = self.segmentedControl.selectedSegmentIndex == 0 ? .Acc : .Gyro
+        self.measureViewModel.stopMeasure(mode: mode)
     }
     
     private func setupViews() {
