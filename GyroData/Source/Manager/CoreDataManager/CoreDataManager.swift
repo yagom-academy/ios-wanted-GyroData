@@ -34,7 +34,7 @@ final class CoreDataManager: CoreDataManageable {
         
         motionObject.setValue(motionData.createdAt, forKey: "createdAt")
         motionObject.setValue(motionData.runtime, forKey: "runtime")
-        motionObject.setValue(motionData.sensorType, forKey: "sensorType")
+        motionObject.setValue(motionData.sensorType.rawValue, forKey: "sensorType")
         motionObject.setValue(motionData.sensorData.x, forKey: "xData")
         motionObject.setValue(motionData.sensorData.y, forKey: "yData")
         motionObject.setValue(motionData.sensorData.z, forKey: "zData")
