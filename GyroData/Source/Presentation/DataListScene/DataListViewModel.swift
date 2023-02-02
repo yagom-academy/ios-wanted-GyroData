@@ -11,8 +11,8 @@ final class DataListViewModel {
     enum Action {
         case cellSelect(index: Int)
         case measure
-        case play
-        case delete
+        case play(index: Int)
+        case delete(index: Int)
     }
     
     private let transactionSevice = TransactionService(
@@ -48,10 +48,22 @@ extension DataListViewModel {
             delegate?.setupSelectData(measureDatas[index])
         case .measure:
             delegate?.setupMeasure()
-        case .play:
-            delegate?.setupPlay()
-        case .delete:
-            delegate?.setupDelete()
+        case .play(let index):
+            delegate?.setupPlay(measureDatas[index])
+        case .delete(let index):
+            deleteData(index: index)
+        }
+    }
+    
+    private func deleteData(index: Int) {
+        transactionSevice.delete(date: measureDatas[index].date) { result in
+            switch result {
+            case .success(_):
+                return
+            case .failure(let error):
+                //TODO: Alert Delegate
+                print(error)
+            }
         }
     }
 }
