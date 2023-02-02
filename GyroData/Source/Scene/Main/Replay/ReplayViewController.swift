@@ -11,7 +11,7 @@ final class ReplayViewController: UIViewController {
     
     enum Mode: String {
         case view = "View"
-        case play = "Play"
+        case play = "Replay"
     }
     
     enum State {
@@ -22,27 +22,9 @@ final class ReplayViewController: UIViewController {
     var state = State.stop
     var timer = Timer()
     var timerData = Int.init()
-//        let replayData = [MotionDataModel]()
     
-    // mokData
-    let replayData = [MotionData(x: 1, y: 2, z: -0.5),
-                      MotionData(x: -1, y: 2, z: 0.5),
-                      MotionData(x: 1, y: 2, z: -0.5),
-                      MotionData(x: -1, y: 2, z: 0.5),
-                      MotionData(x: 1, y: 2, z: -0.5),
-                      MotionData(x: -1, y: 2, z: 0.5),
-                      MotionData(x: 1, y: 2, z: -0.5),
-                      MotionData(x: -1, y: 2, z: 0.05),
-                      MotionData(x: 1, y: 2, z: -0.5),
-                      MotionData(x: -1, y: 2, z: 0.5),
-                      MotionData(x: 1, y: 2, z: -0.5),
-                      MotionData(x: -1, y: 2, z: 0.5),
-                      MotionData(x: 1, y: 2, z: -0.5),
-                      MotionData(x: -10, y: 2, z: 0.5),
-                      MotionData(x: 1, y: 2, z: -0.5),
-                      MotionData(x: -1, y: 2, z: 0.5),
-                      MotionData(x: 1, y: 20, z: -0.5),
-                      MotionData(x: -1, y: 2, z: 0.5)]
+    let jsondata: String
+    var replayData = [MotionData]()
     
     private let dateLabel: UILabel = {
         let label = UILabel()
@@ -96,8 +78,9 @@ final class ReplayViewController: UIViewController {
         return stackview
     }()
     
-    init(mode: Mode) {
+    init(mode: Mode, jsonData: String) {
         self.mode = mode
+        self.jsondata = jsonData
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -111,6 +94,7 @@ final class ReplayViewController: UIViewController {
         configureView()
         configureLayout()
         configureMode()
+        fetchRecodedData()
     }
     
     func configureMode() {
@@ -203,5 +187,15 @@ final class ReplayViewController: UIViewController {
             ),
             bottomStackView.trailingAnchor.constraint(equalTo: graphView.trailingAnchor)
         ])
+    }
+     
+    private func fetchRecodedData() {
+        guard let data = jsondata.data(using: .utf8) else { return }
+        
+        do {
+            replayData = try JSONDecoder().decode([MotionData].self, from: data)
+        } catch {
+            print(error.localizedDescription)
+        }
     }
 }
