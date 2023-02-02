@@ -43,10 +43,9 @@ class FileHandleManager: FileManagerProtocol {
             guard let jsonData = try? encoder.encode(motionMeasures) else {
                 throw FileManagingError.encodeFailed
             }
-            let textPath: URL = directoryPath.appendingPathComponent("\(fileName).json")
+            let jsonPath: URL = directoryPath.appendingPathComponent("\(fileName).json")
             
-            try jsonData.write(to: textPath)
-            
+            try jsonData.write(to: jsonPath)
         } catch {
             throw FileManagingError.saveFailed
         }
@@ -57,10 +56,10 @@ class FileHandleManager: FileManagerProtocol {
         completion: @escaping (Result<MotionMeasures, FileManagingError>) -> Void
     ) {
         let decoder = JSONDecoder()
-        let textPath = directoryPath.appendingPathComponent("\(fileName).json")
+        let jsonPath = directoryPath.appendingPathComponent("\(fileName).json")
         
         do {
-            let dataFromPath: Data = try Data(contentsOf: textPath)
+            let dataFromPath: Data = try Data(contentsOf: jsonPath)
             guard let decodedData = try? decoder.decode(
                 MotionMeasures.self,
                 from: dataFromPath
@@ -76,10 +75,10 @@ class FileHandleManager: FileManagerProtocol {
     }
     
     func delete(fileName: UUID) throws {
-        let textPath = directoryPath.appendingPathComponent("\(fileName).json")
+        let jsonPath = directoryPath.appendingPathComponent("\(fileName).json")
         
         do {
-            try fileManager.removeItem(at: textPath)
+            try fileManager.removeItem(at: jsonPath)
         } catch {
             throw FileManagingError.deleteFailed
         }
