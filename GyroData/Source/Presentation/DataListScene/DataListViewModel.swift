@@ -13,7 +13,7 @@ final class DataListViewModel {
         fileManager: FileSystemManager()
     )
     
-    private let delegate: DataListConfigurable?
+    private weak var delegate: DataListConfigurable?
     
     private var measureDatas:[MeasureData] = [] {
         didSet {

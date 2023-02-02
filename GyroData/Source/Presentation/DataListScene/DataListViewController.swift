@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol DataListConfigurable {
+protocol DataListConfigurable: AnyObject {
     func setupData(_ datas: [MeasureData])
     func setupSelectData(_ data: MeasureData)
 }
@@ -24,7 +24,7 @@ final class DataListViewController: UIViewController {
         case main
     }
     
-    private let tableView = UITableView()
+    private let tableView = UITableView(frame: .zero, style: .plain)
     
     private lazy var viewModel = DataListViewModel(delegate: self)
     private lazy var dataSource = configureDataSoruce()
@@ -61,7 +61,7 @@ extension DataListViewController {
                 return errorCell
             }
             
-            //TODO: Cell Setup
+            cell.setupData(data: data)
             return cell
         }
         return dataSource
@@ -88,7 +88,9 @@ extension DataListViewController {
     
     private func setupView() {
         view.addSubview(tableView)
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.register(MeasureDataCell.self, forCellReuseIdentifier: MeasureDataCell.identifier)
     }
     
     private func setupConstraint() {
