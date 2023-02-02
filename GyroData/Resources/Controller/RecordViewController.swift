@@ -239,6 +239,11 @@ private extension RecordViewController {
             $0.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview($0)
         }
+
+        [xPositionLabel, yPositionLabel, zPositionLabel].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            graphView.addSubview($0)
+        }
     }
 
     func setLayout() {
@@ -263,7 +268,16 @@ private extension RecordViewController {
             cancelButton.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor),
             cancelButton.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
             cancelButton.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
-            cancelButton.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: -50)
+            cancelButton.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: -50),
+
+            xPositionLabel.topAnchor.constraint(equalTo: graphView.topAnchor, constant: 20),
+            xPositionLabel.leadingAnchor.constraint(equalTo: graphView.leadingAnchor, constant: 40),
+
+            zPositionLabel.topAnchor.constraint(equalTo: graphView.topAnchor, constant: 20),
+            zPositionLabel.trailingAnchor.constraint(equalTo: graphView.trailingAnchor, constant: -40),
+
+            yPositionLabel.topAnchor.constraint(equalTo: graphView.topAnchor, constant: 20),
+            yPositionLabel.centerXAnchor.constraint(equalTo: graphView.centerXAnchor)
         ])
     }
 }
