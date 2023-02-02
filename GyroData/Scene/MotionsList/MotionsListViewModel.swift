@@ -22,15 +22,15 @@ struct MotionsListViewModel {
         case motionPlay(indexPath: IndexPath)
     }
     
-    var motions: [Motion] = [] {
+    private var motions: [Motion] = [] {
         didSet {
             delegate?.motionsListViewModel(didChange: motions)
         }
     }
     
-    let readService: CoreDataMotionReadable
-    let deleteService: MotionDeletable
-    weak var delegate: MotionsListViewModelDelegate?
+    private let readService: CoreDataMotionReadable
+    private let deleteService: MotionDeletable
+    private weak var delegate: MotionsListViewModelDelegate?
     
     mutating func action(_ action: Action) {
         switch action {
