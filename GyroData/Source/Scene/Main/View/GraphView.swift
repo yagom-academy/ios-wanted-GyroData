@@ -9,6 +9,7 @@ import UIKit
 
 class GraphView: UIView {
     private let dataLinePath = UIBezierPath()
+    private var graphXSize: CGFloat = 600
     private var dataListX = [Double]()
     private var dataListY = [Double]()
     private var dataListZ = [Double]()
@@ -165,7 +166,7 @@ class GraphView: UIView {
             rect.midY - CGFloat(value) * 10
         }
         var xPosition: CGFloat = 0
-        let xInterval = rect.width / 600
+        let xInterval = rect.width / graphXSize
         let linePath = UIBezierPath()
         
         color.setStroke()
@@ -188,5 +189,9 @@ class GraphView: UIView {
         dataListX = .init()
         dataListY = .init()
         dataListZ = .init()
+    }
+    
+    func changeGraphXSize(graphXSize: CGFloat) {
+        self.graphXSize = graphXSize * 10
     }
 }

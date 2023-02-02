@@ -19,12 +19,13 @@ final class ReplayViewController: UIViewController {
         case play
     }
     
+    // MARK: Private Properties
+    
     private let mode: Mode
+    private let motionData: Motion
     private var state = State.stop
     private var timer = Timer()
     private var timerData = Int.init()
-    
-    private let motionData: Motion
     private var replayData = [MotionData]()
     
     private let dateLabel: UILabel = {
@@ -37,7 +38,6 @@ final class ReplayViewController: UIViewController {
         label.font = .preferredFont(forTextStyle: .title1)
         return label
     }()
-    
     private let graphView = GraphView()
     private let playToggleButton: UIButton = {
         let button = UIButton()
@@ -87,6 +87,8 @@ final class ReplayViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -94,6 +96,8 @@ final class ReplayViewController: UIViewController {
         configureLayout()
         fetchRecodedData()
     }
+    
+    // MARK: Action Methods
     
     @objc private func tapToggleButton() {
         switch state {
@@ -123,6 +127,8 @@ final class ReplayViewController: UIViewController {
         timerData += 1
         timerLabel.text = String(Double(timerData) / 10 )
     }
+    
+    // MARK: Private Methods
     
     private func configureView() {
         view.backgroundColor = .systemBackground
@@ -185,6 +191,7 @@ final class ReplayViewController: UIViewController {
             print(error.localizedDescription)
         }
         
+        graphView.changeGraphXSize(graphXSize: motionData.runningTime)
         configureMode()
     }
     
