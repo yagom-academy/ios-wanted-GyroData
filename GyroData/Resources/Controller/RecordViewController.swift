@@ -243,13 +243,31 @@ private extension RecordViewController {
         switch segmentControl.selectedSegmentIndex {
         case 0:
             guard let data = data as? CMAccelerometerData else { return }
-//            drawAccelermeterLine(xOffset, centerY, data)
+            drawAccelermeterLine(xOffset, centerY, data)
         case 1:
             guard let data = data as? CMGyroData else { return }
 //            drawGyroLine(xOffset, centerY, data)
         default:
             return
         }
+    }
+
+    func drawAccelermeterLine(_ xOffset: CGFloat, _ centerY: CGFloat, _ data: CMAccelerometerData) {
+        currentX += xOffset
+        let newXPosition = CGPoint(x: currentX, y: centerY - data.acceleration.x)
+        xPath.addLine(to: newXPosition)
+        let newYPosition = CGPoint(x: currentX, y: centerY - data.acceleration.y)
+        yPath.addLine(to: newYPosition)
+        let newZPosition = CGPoint(x: currentX, y: centerY - data.acceleration.z)
+        zPath.addLine(to: newZPosition)
+
+        xPositionLabel.text = "x: \(data.acceleration.x)"
+        yPositionLabel.text = "y: \(data.acceleration.y)"
+        zPositionLabel.text = "z: \(data.acceleration.z)"
+
+        addGraphViewSublayer(layer: xLayer, path: xPath)
+        addGraphViewSublayer(layer: yLayer, path: yPath)
+        addGraphViewSublayer(layer: zLayer, path: zPath)
     }
 }
 
