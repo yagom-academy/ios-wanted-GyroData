@@ -24,23 +24,27 @@ struct DefaultCoreDataRepository: CoreDataRepository {
     }()
     
     private let context: NSManagedObjectContext
+    private let backgroundContext: NSManagedObjectContext
     
     init() {
-        let context = persistentContainer.newBackgroundContext()
-        context.automaticallyMergesChangesFromParent = true
-        self.context = context
+        let backgroundContext = persistentContainer.newBackgroundContext()
+        backgroundContext.automaticallyMergesChangesFromParent = true
+        self.backgroundContext = backgroundContext
+        
+        persistentContainer.viewContext.automaticallyMergesChangesFromParent = true
+        context = persistentContainer.viewContext
     }
     
     func create(_ domain: Motion, completion: @escaping (Result<Void, Error>) -> Void) {
-        context.perform {
+        backgroundContext.perform {
             guard let entity = NSEntityDescription.entity(
                 forEntityName: "MotionMO",
-                in: self.context
+                in: self.backgroundContext
             ) else {
                 return completion(.failure(CoreDataError.invalidEntity))
             }
             
-            let motionMO = MotionMO(entity: entity, insertInto: self.context)
+            let motionMO = MotionMO(entity: entity, insertInto: self.backgroundContext)
             
             motionMO.setValue(domain.id, forKey: "id")
             motionMO.setValue(domain.date.timeIntervalSince1970, forKey: "date")
@@ -51,7 +55,7 @@ struct DefaultCoreDataRepository: CoreDataRepository {
             motionMO.setValue(domain.data.z, forKey: "z")
             
             do {
-                try self.context.save()
+                try self.backgroundContext.save()
             } catch {
                 completion(.failure(error))
             }
@@ -66,6 +70,12 @@ struct DefaultCoreDataRepository: CoreDataRepository {
         
         let result = try context.fetch(request)
         return result
+    }
+    
+    func count() throws -> Int {
+        let request = MotionMO.fetchRequest()
+        let count = try self.context.count(for: request)
+        return count
     }
     
     func delete(with id: String) throws {
