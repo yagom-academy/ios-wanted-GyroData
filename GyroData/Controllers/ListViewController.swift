@@ -83,9 +83,11 @@ extension ListViewController: UITableViewDelegate {
                    trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath)
     
     -> UISwipeActionsConfiguration? {
-        let playAction = UIContextualAction(style: .normal, title: "Play") { _, _, _ in
+        let playAction = UIContextualAction(style: .normal, title: "Play") { [weak self] _, _, _ in
+            guard let self = self else { return }
             let reviewPageViewController = ReviewPageViewController(
-                reviewPageView: ReviewPageView(pageState: .resultPlay))
+                reviewPageView: ReviewPageView(pageState: .resultPlay),
+                measurement: self.measurements[indexPath.item])
             
             self.navigationController?.pushViewController(reviewPageViewController, animated: false)
         }
@@ -111,12 +113,10 @@ extension ListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.cellForRow(at: indexPath)?.isSelected = false
-        presentDetailPage()
-    }
-    
-    private func presentDetailPage() {
+
         let reviewPageViewController = ReviewPageViewController(
-            reviewPageView: ReviewPageView(pageState: .resultView))
+            reviewPageView: ReviewPageView(pageState: .resultView),
+            measurement: measurements[indexPath.item])
         
         self.navigationController?.pushViewController(reviewPageViewController, animated: false)
     }

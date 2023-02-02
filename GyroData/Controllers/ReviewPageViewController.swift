@@ -10,14 +10,16 @@ import UIKit
 class ReviewPageViewController: UIViewController {
     
     private let reviewPageView: ReviewPageView
+    private let measurement: Measurement
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view = reviewPageView
     }
     
-    init(reviewPageView: ReviewPageView) {
+    init(reviewPageView: ReviewPageView, measurement: Measurement) {
         self.reviewPageView = reviewPageView
+        self.measurement = measurement
         super.init(nibName: nil, bundle: nil)
     }
     
