@@ -29,7 +29,7 @@ final class DataStorage: DataStorageType {
     }
     
     func save(_ data: MotionData) throws {
-        let url = directoryURL.appendingPathComponent(data.id.description)
+        let url = directoryURL.appendingPathComponent(data.id.description + FileType.json)
         let jsonData = try encode(data)
         
         do {
