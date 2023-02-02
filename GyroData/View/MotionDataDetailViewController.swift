@@ -66,7 +66,8 @@ final class MotionDataDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        configureViews()
+        configureHierarchy()
+        configureLayout()
         setButtonAction()
         viewModel.bind(
             setNavigationTitle: setNavigationTitle,
@@ -97,11 +98,13 @@ final class MotionDataDetailViewController: UIViewController {
         playStopButton.isHidden = false
     }
     
-    private func configureViews() {
+    private func configureHierarchy() {
         [viewTypeLabel, graphView, playStopButton, timerLabel]
             .forEach { view.addSubview($0) }
         playStopButton.addSubview(imageView)
-
+    }
+    
+    private func configureLayout() {
         NSLayoutConstraint.activate([
             viewTypeLabel.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
             viewTypeLabel.leadingAnchor.constraint(equalTo: graphView.leadingAnchor)
