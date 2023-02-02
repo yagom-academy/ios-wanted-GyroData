@@ -6,7 +6,7 @@
 //
 
 protocol DataStorageType {
-    func read(_ fileName: String) throws -> MotionData
+    func read(_ fileName: String) -> MotionData?
     func save(_ data: MotionData) throws
     func delete(_ fileName: String) throws
 }

@@ -25,6 +25,10 @@
 		EB14D214298A4A00003732C3 /* CoreDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB14D213298A4A00003732C3 /* CoreDataError.swift */; };
 		EB14D21B298A9C59003732C3 /* MotionDataListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB14D21A298A9C59003732C3 /* MotionDataListTableViewCell.swift */; };
 		EB14D21D298A9DEF003732C3 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB14D21C298A9DEF003732C3 /* Date+.swift */; };
+		EB14D240298BA774003732C3 /* DetailViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB14D23F298BA774003732C3 /* DetailViewType.swift */; };
+		EB14D242298BA792003732C3 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB14D241298BA792003732C3 /* GraphView.swift */; };
+		EB14D244298BA7B3003732C3 /* FileType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB14D243298BA7B2003732C3 /* FileType.swift */; };
+		EB14D246298BA7E7003732C3 /* MotionDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB14D245298BA7E7003732C3 /* MotionDataError.swift */; };
 		EB8E417B2988E8FA00FE26D3 /* MotionData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EB8E41792988E8FA00FE26D3 /* MotionData.xcdatamodeld */; };
 		EB8E417E2988EA6000FE26D3 /* MotionDataEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8E417C2988EA6000FE26D3 /* MotionDataEntity+CoreDataClass.swift */; };
 		EB8E417F2988EA6000FE26D3 /* MotionDataEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8E417D2988EA6000FE26D3 /* MotionDataEntity+CoreDataProperties.swift */; };
@@ -57,6 +61,10 @@
 		EB14D213298A4A00003732C3 /* CoreDataError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataError.swift; sourceTree = "<group>"; };
 		EB14D21A298A9C59003732C3 /* MotionDataListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionDataListTableViewCell.swift; sourceTree = "<group>"; };
 		EB14D21C298A9DEF003732C3 /* Date+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
+		EB14D23F298BA774003732C3 /* DetailViewType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewType.swift; sourceTree = "<group>"; };
+		EB14D241298BA792003732C3 /* GraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
+		EB14D243298BA7B2003732C3 /* FileType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileType.swift; sourceTree = "<group>"; };
+		EB14D245298BA7E7003732C3 /* MotionDataError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionDataError.swift; sourceTree = "<group>"; };
 		EB8E417A2988E8FA00FE26D3 /* MotionData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MotionData.xcdatamodel; sourceTree = "<group>"; };
 		EB8E417C2988EA6000FE26D3 /* MotionDataEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MotionDataEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		EB8E417D2988EA6000FE26D3 /* MotionDataEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MotionDataEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -140,7 +148,10 @@
 				EB14D213298A4A00003732C3 /* CoreDataError.swift */,
 				EB96E76F2987B8F500F9DF79 /* MotionData.swift */,
 				EB96E7712987C8DE00F9DF79 /* Coordinate.swift */,
+				EB14D23F298BA774003732C3 /* DetailViewType.swift */,
+				EB14D243298BA7B2003732C3 /* FileType.swift */,
 				EB96E7732987C93C00F9DF79 /* MotionDataType.swift */,
+				EB14D245298BA7E7003732C3 /* MotionDataError.swift */,
 				579C4D912988A40A00D3949F /* MotionManager.swift */,
 				579C4D8F2988A40300D3949F /* MotionManagerType.swift */,
 				579C4D9B2988CBA900D3949F /* DataStorageType.swift */,
@@ -154,6 +165,7 @@
 		EBBD3F522989375F0058EA45 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				EB14D241298BA792003732C3 /* GraphView.swift */,
 				EBBD3F532989378B0058EA45 /* MotionDataListViewController.swift */,
 				EB14D21A298A9C59003732C3 /* MotionDataListTableViewCell.swift */,
 				5760AC862989412A00534EF0 /* RecordMotionDataViewController.swift */,
@@ -239,8 +251,10 @@
 				579C4D902988A40300D3949F /* MotionManagerType.swift in Sources */,
 				579C4D9A2988CBA400D3949F /* DataStorage.swift in Sources */,
 				5760AC8B2989415D00534EF0 /* MotionDataListViewModel.swift in Sources */,
+				EB14D244298BA7B3003732C3 /* FileType.swift in Sources */,
 				EB14D21D298A9DEF003732C3 /* Date+.swift in Sources */,
 				EB8E417F2988EA6000FE26D3 /* MotionDataEntity+CoreDataProperties.swift in Sources */,
+				EB14D240298BA774003732C3 /* DetailViewType.swift in Sources */,
 				5760AC8D2989416600534EF0 /* RecordMotionDataViewModel.swift in Sources */,
 				5760AC892989414C00534EF0 /* MotionDataDetailViewController.swift in Sources */,
 				5760AC872989412A00534EF0 /* RecordMotionDataViewController.swift in Sources */,
@@ -251,6 +265,8 @@
 				EB96E7742987C93C00F9DF79 /* MotionDataType.swift in Sources */,
 				EB8E417B2988E8FA00FE26D3 /* MotionData.xcdatamodeld in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
+				EB14D242298BA792003732C3 /* GraphView.swift in Sources */,
+				EB14D246298BA7E7003732C3 /* MotionDataError.swift in Sources */,
 				579C4D9C2988CBA900D3949F /* DataStorageType.swift in Sources */,
 				EBBD3F542989378B0058EA45 /* MotionDataListViewController.swift in Sources */,
 				579C4D9E2988CF7300D3949F /* FileManagerType.swift in Sources */,

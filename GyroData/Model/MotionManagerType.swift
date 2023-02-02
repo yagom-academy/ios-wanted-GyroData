@@ -8,8 +8,8 @@
 import Foundation
 
 protocol MotionManagerType {
-    func startAccelerometer(_ closure: @escaping (Coordinate) -> Void)
+    func startAccelerometer(_ handler: @escaping (Coordinate) -> Void)
     func stopAccelerometer()
-    func startGyro(_ closure: @escaping (Coordinate) -> Void)
+    func startGyro(_ handler: @escaping (Coordinate) -> Void)
     func stopGyro()
 }

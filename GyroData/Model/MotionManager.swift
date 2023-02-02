@@ -19,8 +19,8 @@ final class MotionManager: MotionManagerType {
     private let motion: CMMotionManager = CMMotionManager()
     private var timer: Timer = Timer()
     
-    // TODO: - "측정"의 의미를 담아 rename
-    func startAccelerometer(_ closure: @escaping (Coordinate) -> Void) {
+    // TODO: - 측정한 길이(시간) 넘기는 방법 어떻게 해야하죠?
+    func startAccelerometer(_ handler: @escaping (Coordinate) -> Void) {
         guard motion.isAccelerometerAvailable else { return }
         motion.showsDeviceMovementDisplay = true
         motion.accelerometerUpdateInterval = Constant.Namespace.updateInterval
@@ -38,11 +38,11 @@ final class MotionManager: MotionManagerType {
                 self.stopAccelerometer()
                 return
             }
-            if let data = self.motion.deviceMotion {
-                let coordinate = Coordinate(data.userAcceleration)
+            if let data = self.motion.accelerometerData {
+                let coordinate = Coordinate(data.acceleration)
                 // 이 클로저는 백그라운드 큐에서 돌아가게 된다.
                 // TODO: - 그래프 그리는 부분(UI업데이트)는 메인 큐에서 돌아갈 수 있도록 메인큐로 보내주는 작업이 필요하다.
-                closure(coordinate)
+                handler(coordinate)
             }
         }
         
@@ -58,7 +58,7 @@ final class MotionManager: MotionManagerType {
         motion.stopAccelerometerUpdates()
     }
     
-    func startGyro(_ closure: @escaping (Coordinate) -> Void) {
+    func startGyro(_ handler: @escaping (Coordinate) -> Void) {
         guard motion.isGyroAvailable else { return }
         motion.showsDeviceMovementDisplay = true
         motion.gyroUpdateInterval = Constant.Namespace.updateInterval
@@ -76,11 +76,11 @@ final class MotionManager: MotionManagerType {
                 self.stopAccelerometer()
                 return
             }
-            if let data = self.motion.deviceMotion {
+            if let data = self.motion.gyroData {
                 let coordinate = Coordinate(data.rotationRate)
                 // 이 클로저는 백그라운드 큐에서 돌아가게 된다.
                 // TODO: - 그래프 그리는 부분(UI업데이트)는 메인 큐에서 돌아갈 수 있도록 메인큐로 보내주는 작업이 필요하다.
-                closure(coordinate)
+                handler(coordinate)
             }
         }
         

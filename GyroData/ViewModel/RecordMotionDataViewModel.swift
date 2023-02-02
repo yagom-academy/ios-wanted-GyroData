@@ -2,70 +2,109 @@
 //  RecordMotionDataViewModel.swift
 //  GyroData
 //
-//  Created by Jiyoung Lee on 2023/01/31.
+//  Created by summercat on 2023/01/31.
 //
 
 import Foundation
 
 final class RecordMotionDataViewModel {
     enum Action {
-        case changeSegment(selectedSegmentIndex: Int)
-        case start
-        case stop
+        case start(selectedIndex: Int, handler: () -> Void)
+        case stop(handler: () -> Void)
+    }
+    
+    enum ThrowableAction {
         case save
     }
     
-    private let motionData: MotionData
+    private var motionData: MotionData?
     private let coreDataManager: CoreDataManagerType
-    private let dataStorage: DataStorageType
+    private var dataStorage: DataStorageType?
     private let motionManager: MotionManagerType
     private var onUpdate: ((Coordinate) -> Void)?
     private var onAdd: ((MotionData) -> Void)?
     
     init(
-        motionData: MotionData,
         coreDataManager: CoreDataManagerType = CoreDataManager.shared,
-        dataStorage: DataStorageType,
-        motionManager: MotionManagerType
+        motionManager: MotionManagerType = MotionManager()
     ) {
-        self.motionData = motionData
         self.coreDataManager = coreDataManager
-        self.dataStorage = dataStorage
         self.motionManager = motionManager
     }
     
-    func bindOnUpdate(_ closure: @escaping (Coordinate) -> Void) {
-        onUpdate = closure
+    func bind(onUpdate: @escaping (Coordinate) -> Void) {
+        self.onUpdate = onUpdate
     }
     
-    func bindOnAdd(_ closure: @escaping (MotionData) -> Void) {
-        onAdd = closure
+    func bind(onAdd: @escaping (MotionData) -> Void) {
+        self.onAdd = onAdd
     }
     
     func action(_ action: Action) {
         switch action {
-        case let .changeSegment(index):
-            select(index: index)
-        case .start:
-            start()
-        case .stop:
-            stop()
-        case .save:
-            save()
+        case let .start(index, handler):
+            start(selectedIndex: index, handler)
+        case let .stop(handler):
+            stop(handler)
         }
     }
     
-    private func select(index: Int) {
-        let type = MotionDataType.allCases[index]
+    func throwableAction(_ action: ThrowableAction) throws {
+        switch action {
+        case .save:
+            try save()
+        }
     }
     
-    private func start() { }
+    private func start(selectedIndex: Int, _ handler: () -> Void) {
+        motionData = MotionData(motionDataType: MotionDataType.allCases.map { $0 } [selectedIndex])
+        switch motionData?.motionDataType {
+        case .accelerometer:
+            motionManager.startAccelerometer { coordinate in
+                self.motionData?.coordinates.append(coordinate)
+                self.onUpdate?(coordinate)
+            }
+        case .gyro:
+            motionManager.startGyro { coordinate in
+                self.motionData?.coordinates.append(coordinate)
+                self.onUpdate?(coordinate)
+            }
+        case .none:
+            return
+        }
+        handler()
+    }
     
-    private func stop() { }
+    private func stop(_ handler: () -> Void) {
+        switch motionData?.motionDataType {
+        case .accelerometer:
+            motionManager.stopAccelerometer()
+        case .gyro:
+            motionManager.stopGyro()
+        case .none:
+            return
+        }
+        handler()
+    }
     
-    private func save() { }
+    private func save() throws {
+        guard let motionData = motionData else { throw MotionDataError.emptyData }
+        dataStorage = try DataStorage(directoryName: motionData.motionDataType.rawValue)
+        try saveToCoreData()
+        try saveToDataStorage()
+    }
     
-    func segmentControl() -> [String] {
+    private func saveToCoreData() throws {
+        guard let motionData = motionData else { return }
+        try coreDataManager.save(motionData)
+    }
+    
+    private func saveToDataStorage() throws {
+        guard let motionData = motionData else { return }
+        try dataStorage?.save(motionData)
+    }
+    
+    func motionDataTypes() -> [String] {
         return MotionDataType.allCases.map { $0.rawValue }
     }
 }

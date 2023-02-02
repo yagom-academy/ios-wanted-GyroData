@@ -31,25 +31,30 @@ final class MotionDataListViewModel {
     }
 
     private func createNewRecordMotionDataViewModel(_ handler: @escaping (RecordMotionDataViewModel) -> Void) {
-        guard let dataStorage = try? DataStorage(directoryName: "") else { return }
-        let newMotionData = MotionData(motionDataType: .accelerometer)
-        let motionManager = MotionManager()
-        let newRecordMotionDataViewModel = RecordMotionDataViewModel(
-            motionData: newMotionData,
-            dataStorage: dataStorage,
-            motionManager: motionManager
-        )
-        newRecordMotionDataViewModel.bindOnAdd { [weak self] motionData in
+        let newRecordMotionDataViewModel = RecordMotionDataViewModel(motionManager: MotionManager())
+        newRecordMotionDataViewModel.bind(onAdd: { [weak self] motionData in
             self?.add(motionData)
-        }
+        })
         handler(newRecordMotionDataViewModel)
     }
 
-    private func createMotionDataDetailViewModel(
+    private func createMotionDataDetailViewModelToView(
         _ data: MotionData,
         _ handler: @escaping (MotionDataDetailViewModel) -> Void
     ) {
-        let motionDataDetailViewModel = MotionDataDetailViewModel(motionData: data)
+        guard let motionDataDetailViewModel = try? MotionDataDetailViewModel(viewType: .view, motionData: data) else {
+            return
+        }
+        handler(motionDataDetailViewModel)
+    }
+
+    private func createMotionDataDetailViewModelToPlay(
+        _ data: MotionData,
+        _ handler: @escaping (MotionDataDetailViewModel) -> Void
+    ) {
+        guard let motionDataDetailViewModel = try? MotionDataDetailViewModel(viewType: .play, motionData: data) else {
+            return
+        }
         handler(motionDataDetailViewModel)
     }
 
@@ -102,11 +107,11 @@ final class MotionDataListViewModel {
             createNewRecordMotionDataViewModel(handler)
         case let .view(indexPath, handler):
             guard let data = motionData(at: indexPath) else { break }
-            createMotionDataDetailViewModel(data, handler)
+            createMotionDataDetailViewModelToView(data, handler)
             break
         case let .play(indexPath, handler):
             guard let data = motionData(at: indexPath) else { break }
-            createMotionDataDetailViewModel(data, handler)
+            createMotionDataDetailViewModelToPlay(data, handler)
             break
         case let .delete(indexPath):
             delete(at: indexPath)
