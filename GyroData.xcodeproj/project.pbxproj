@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		263C05ED298B5AEF00207921 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263C05EC298B5AEF00207921 /* GridView.swift */; };
 		264B949B298A2DC7007289BC /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264B949A298A2DC7007289BC /* ListTableViewCell.swift */; };
 		2668C6032988B8D20017C9DD /* GyroInformation.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2668C6012988B8D20017C9DD /* GyroInformation.xcdatamodeld */; };
 		2668C6062988B9BD0017C9DD /* GyroInformation+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2668C6042988B9BD0017C9DD /* GyroInformation+CoreDataClass.swift */; };
@@ -36,6 +37,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		263C05EC298B5AEF00207921 /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
 		264B949A298A2DC7007289BC /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
 		2668C6022988B8D20017C9DD /* GyroInformation.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GyroInformation.xcdatamodel; sourceTree = "<group>"; };
 		2668C6042988B9BD0017C9DD /* GyroInformation+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GyroInformation+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 				AEA15D8F2988AB1600EF6EBF /* GyroMeasurementViewController.swift */,
 				AEA15D912988AB2800EF6EBF /* GyroReplayViewController.swift */,
 				AEA15D8D2988AAE100EF6EBF /* GraphView.swift */,
+				263C05EC298B5AEF00207921 /* GridView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -264,6 +267,7 @@
 				AE44131629892D480005BD92 /* Measurable.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				AE441314298923280005BD92 /* MeasurementManager.swift in Sources */,
+				263C05ED298B5AEF00207921 /* GridView.swift in Sources */,
 				AEA15D842988A9A500EF6EBF /* FileManager.swift in Sources */,
 				AEA15D972988AB9F00EF6EBF /* CoordinateData.swift in Sources */,
 				AEA15D8C2988AA9200EF6EBF /* GyroReplayViewModel.swift in Sources */,
