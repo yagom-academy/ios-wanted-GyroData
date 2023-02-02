@@ -48,7 +48,7 @@ class MeasureViewModel {
         case .mesureStartButtonTapped:
             guard let sensorType = sensorType else { return }
             startDate = Date()
-            measureService.measureStart(sensorType, interval: 0.1, duration: 60)
+            measureService.measureStart(startDate, sensorType, interval: 0.1, duration: 60)
         case .measureEndbuttonTapped:
             measureService.measureStop()
         case .saveButtonTapped:
