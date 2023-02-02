@@ -67,12 +67,12 @@ final class MeasurementViewController: UIViewController {
         measurementView.configureStopButtonAction(stopButtonAction)
     }
 
+    // MARK: Measure
     private func measure() {
         measurementData = Measurement(sensor: selectedSensor, date: Date(), time: 0, axisValues: [])
         clearGraph()
 
-        // 테스트를 위해 타임아웃60(0.1*60 = 6초).최종제출전 타임아웃 600(60초)로 수정할 예정.
-        sensorManager.measure(sensor: selectedSensor, interval: 0.1, timeout: 60) { [weak self] data in
+        sensorManager.measure(sensor: selectedSensor, interval: 0.1, timeout: 600) { [weak self] data in
             guard let data else {
                 self?.stop()
                 return
@@ -97,24 +97,42 @@ final class MeasurementViewController: UIViewController {
         measurementData.axisValues = axisValues
         measurementData.time = 0.1 * Double(measurementData.axisValues.count)
     }
-    
+
+    // MARK: Save Data
     private func saveSensorData() {
         if measurementData.axisValues == [] {
-            showAlert(title: "Error",
-                      message: DataHandleError.noDataError(detail: "측정한 데이터가 없습니다.").description)
+            showAlert(title: "Error", message: "저장할 데이터가 없습니다.")
+            print(DataHandleError.noDataError(detail: "측정한 데이터가 없습니다."))
+            return
         }
 
-        do {
-            for manager in dataManagers {
-                try manager.saveData(measurementData)
-                // 데이터 저장은 비동기로 처리하고 Activity Indicator를 표시해주세요.
-                // 저장이 성공하면 Indicator를 닫고, 첫 번째 페이지로 이동합니다.
+        startActivityIndicator()
+
+        storeDataInDevice {
+            self.stopActivityIndicator()
+
+            DispatchQueue.main.async {
+                self.navigationController?.popViewController(animated: false)
             }
-        } catch {
-            showAlert(title: "Error", message: DataHandleError.saveFailError(error: error).description)
         }
     }
-    
+
+    private func storeDataInDevice(completion: @escaping ()->()) {
+        DispatchQueue.global(qos: .default).asyncAfter(deadline: .now() + 0.5) {
+            do {
+                for manager in self.dataManagers {
+                    try manager.saveData(self.measurementData)
+                }
+            } catch {
+                self.showAlert(title: "Error", message: "데이터를 저장할 수 없습니다.")
+                print(DataHandleError.saveFailError(error: error).description)
+            }
+
+            completion()
+        }
+    }
+
+    // MARK: UserInteraction
     private func setDisabledUserInteraction() {
         measurementView.setDisabledSegments()
         navigationItem.rightBarButtonItem?.isEnabled = false
@@ -125,11 +143,23 @@ final class MeasurementViewController: UIViewController {
         navigationItem.rightBarButtonItem?.isEnabled = true
     }
 
+    // MARK: Draw Graph
     private func drawGraph(with data: AxisValue) {
         measurementView.drawGraph(with: data)
     }
 
     private func clearGraph() {
         measurementView.clearGraph()
+    }
+
+    // MARK: Indicator
+    private func startActivityIndicator() {
+        self.measurementView.startActivityIndicator()
+    }
+
+    private func stopActivityIndicator() {
+        DispatchQueue.main.async {
+            self.measurementView.stopActivityIndicator()
+        }
     }
 }
