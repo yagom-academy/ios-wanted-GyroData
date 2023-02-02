@@ -246,7 +246,7 @@ private extension RecordViewController {
             drawAccelermeterLine(xOffset, centerY, data)
         case 1:
             guard let data = data as? CMGyroData else { return }
-//            drawGyroLine(xOffset, centerY, data)
+            drawGyroLine(xOffset, centerY, data)
         default:
             return
         }
@@ -264,6 +264,24 @@ private extension RecordViewController {
         xPositionLabel.text = "x: \(data.acceleration.x)"
         yPositionLabel.text = "y: \(data.acceleration.y)"
         zPositionLabel.text = "z: \(data.acceleration.z)"
+
+        addGraphViewSublayer(layer: xLayer, path: xPath)
+        addGraphViewSublayer(layer: yLayer, path: yPath)
+        addGraphViewSublayer(layer: zLayer, path: zPath)
+    }
+
+    func drawGyroLine(_ xOffset: CGFloat, _ centerY: CGFloat, _ data: CMGyroData) {
+        currentX += xOffset
+        let newXPosition = CGPoint(x: currentX, y: centerY - data.rotationRate.x)
+        xPath.addLine(to: newXPosition)
+        let newYPosition = CGPoint(x: currentX, y: centerY - data.rotationRate.y)
+        yPath.addLine(to: newYPosition)
+        let newZPosition = CGPoint(x: currentX, y: centerY - data.rotationRate.z)
+        zPath.addLine(to: newZPosition)
+
+        xPositionLabel.text = "x: \(data.rotationRate.x)"
+        yPositionLabel.text = "y: \(data.rotationRate.y)"
+        zPositionLabel.text = "z: \(data.rotationRate.z)"
 
         addGraphViewSublayer(layer: xLayer, path: xPath)
         addGraphViewSublayer(layer: yLayer, path: yPath)
