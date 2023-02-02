@@ -6,11 +6,10 @@
 //
 
 enum DataStorageError: Error {
+    case cannotFindDirectory
     case cannotFindDocumentDirectory
     case cannotCreateDirectory
-    case cannotReadFile
     case cannotSaveFile
-    case cannotDeleteData
     case cannotEncodeData
     case cannotDecodeData
 }
