@@ -45,8 +45,11 @@
 		AC52BB4329895C5C0057CA56 /* MeasureDataDummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52BB4229895C5C0057CA56 /* MeasureDataDummy.swift */; };
 		AC52BB45298967B50057CA56 /* Sensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52BB44298967B50057CA56 /* Sensor.swift */; };
 		AC52BB46298967B50057CA56 /* Sensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52BB44298967B50057CA56 /* Sensor.swift */; };
-		AC52BB8B298B4D4B0057CA56 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52BB8A298B4D4B0057CA56 /* GraphView.swift */; };
 		AC52BB49298A34070057CA56 /* SensorMeasureService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52BB47298A34070057CA56 /* SensorMeasureService.swift */; };
+		AC52BB8B298B4D4B0057CA56 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52BB8A298B4D4B0057CA56 /* GraphView.swift */; };
+		AC52BB8C298BAD000057CA56 /* SensorMeasureService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52BB47298A34070057CA56 /* SensorMeasureService.swift */; };
+		AC52BB8E298BAD890057CA56 /* MeasureServiceDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52BB8D298BAD890057CA56 /* MeasureServiceDelegate.swift */; };
+		AC52BB91298BAE8C0057CA56 /* MeasureViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52BB90298BAE8C0057CA56 /* MeasureViewDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,8 +93,10 @@
 		AC52BB3C298948E20057CA56 /* TransactionServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionServiceTests.swift; sourceTree = "<group>"; };
 		AC52BB4229895C5C0057CA56 /* MeasureDataDummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureDataDummy.swift; sourceTree = "<group>"; };
 		AC52BB44298967B50057CA56 /* Sensor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sensor.swift; sourceTree = "<group>"; };
-		AC52BB8A298B4D4B0057CA56 /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		AC52BB47298A34070057CA56 /* SensorMeasureService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensorMeasureService.swift; sourceTree = "<group>"; };
+		AC52BB8A298B4D4B0057CA56 /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
+		AC52BB8D298BAD890057CA56 /* MeasureServiceDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureServiceDelegate.swift; sourceTree = "<group>"; };
+		AC52BB90298BAE8C0057CA56 /* MeasureViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureViewDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +123,7 @@
 				3CB15C4329893DAE0049E390 /* DataManageable.swift */,
 				3CB15C4529893DC60049E390 /* FileManageable.swift */,
 				3CFD20D5298A3BAF00269FC9 /* Identifiable.swift */,
+				AC52BB8D298BAD890057CA56 /* MeasureServiceDelegate.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -125,6 +131,7 @@
 		3CB15C47298944D40049E390 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				AC52BB8F298BAE720057CA56 /* Protocol */,
 				AC52BB88298B4D2E0057CA56 /* Common */,
 				3CB15C48298944F10049E390 /* DataListScene */,
 				3CB15C4D298945790049E390 /* MeasureScene */,
@@ -334,6 +341,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		AC52BB8F298BAE720057CA56 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				AC52BB90298BAE8C0057CA56 /* MeasureViewDelegate.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -440,11 +455,14 @@
 				AC52BB8B298B4D4B0057CA56 /* GraphView.swift in Sources */,
 				3CB15C4429893DAE0049E390 /* DataManageable.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
+				AC52BB8E298BAD890057CA56 /* MeasureServiceDelegate.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
+				AC52BB91298BAE8C0057CA56 /* MeasureViewDelegate.swift in Sources */,
 				3CB15C4C2989456E0049E390 /* DataListViewModel.swift in Sources */,
 				AC52BAC52987F91A0057CA56 /* SensorData+CoreDataProperties.swift in Sources */,
 				3CFD20D9298A5F6A00269FC9 /* UIComponent+Extension.swift in Sources */,
 				AC52BAAE2987E9C60057CA56 /* TransactionService.swift in Sources */,
+				AC52BB8C298BAD000057CA56 /* SensorMeasureService.swift in Sources */,
 				3CB15C4629893DC60049E390 /* FileManageable.swift in Sources */,
 				AC52BAC42987F91A0057CA56 /* SensorData+CoreDataClass.swift in Sources */,
 				AC52BAB22987EA180057CA56 /* CoreDataManager.swift in Sources */,
@@ -452,7 +470,6 @@
 				AC52BAB42987EA2A0057CA56 /* FileSystemManager.swift in Sources */,
 				3CFD20D6298A3BAF00269FC9 /* Identifiable.swift in Sources */,
 				3CB15C4A298945620049E390 /* DataListViewController.swift in Sources */,
-				AC52BB48298A34070057CA56 /* SensorMeasureService.swift in Sources */,
 				AC52BAC12987F8BA0057CA56 /* SensorData.xcdatamodeld in Sources */,
 				3CB15C4F298945D50049E390 /* MeasureViewController.swift in Sources */,
 				3CB15C51298945E40049E390 /* MeasureViewModel.swift in Sources */,
