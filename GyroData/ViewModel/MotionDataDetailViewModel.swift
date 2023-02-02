@@ -8,11 +8,40 @@
 import Foundation
 
 final class MotionDataDetailViewModel {
+    enum Constant {
+        enum Namespace {
+            static let timeInterval = 1.0 / 10.0
+        }
+    }
+    
     enum Action {
         case onAppear
-        case play
-        case pause
+        case buttonTapped(handler: (String) -> Void)
     }
+    
+    enum ButtonState {
+        case isPlaying
+        case isStopped
+        
+        mutating func toggle() {
+            switch self {
+            case .isPlaying:
+                self = .isStopped
+            case .isStopped:
+                self = .isPlaying
+            }
+        }
+        
+        var buttonImage: String {
+            switch self {
+            case .isPlaying:
+                return "stop.fill"
+            case .isStopped:
+                return "play.fill"
+            }
+        }
+    }
+
     
     private let viewType: DetailViewType
     private let motionData: MotionData
@@ -20,12 +49,15 @@ final class MotionDataDetailViewModel {
     private var navigationTitle: ((String) -> Void)?
     private var viewTypeText: ((String) -> Void)?
     private var showButton: (() -> Void)?
-    private var onUpdate: ((Coordinate) -> Void)?
+    private var isPlaying: ButtonState = ButtonState.isStopped
+    private var onUpdate: ((Coordinate, String) -> Void)?
+    private var timer: Timer?
+    private var startTime: Date = Date()
     
     init(
         viewType: DetailViewType,
         motionData: MotionData,
-        onUpdate: ((Coordinate) -> Void)? = nil
+        onUpdate: ((Coordinate, String) -> Void)? = nil
     ) throws {
         self.viewType = viewType
         self.motionData = motionData
@@ -43,7 +75,7 @@ final class MotionDataDetailViewModel {
         self.showButton = showButton
     }
     
-    func bind(onUpdate: @escaping ((Coordinate) -> Void)) {
+    func bind(onUpdate: @escaping ((Coordinate, String) -> Void)) {
         self.onUpdate = onUpdate
     }
     
@@ -52,10 +84,15 @@ final class MotionDataDetailViewModel {
         case .onAppear:
             setNavigationTitle()
             setDetailViewType()
-        case .play:
-            play()
-        case .pause:
-            pause()
+        case let .buttonTapped(handler):
+            isPlaying.toggle()
+            handler(isPlaying.buttonImage)
+            switch isPlaying {
+            case .isPlaying:
+                play()
+            case .isStopped:
+                pause()
+            }
         }
     }
     
@@ -81,9 +118,27 @@ final class MotionDataDetailViewModel {
         }
     }
     
-    private func play() { }
+    private func play() {
+        guard let coordinates = fetchCoordinateData() else { return }
+        var reversed = Array(coordinates.reversed())
+        startTime = Date()
+        timer = Timer.scheduledTimer(
+            withTimeInterval: Constant.Namespace.timeInterval,
+            repeats: true,
+            block: { _ in
+                guard reversed.isEmpty == false else {
+                    self.pause()
+                    return
+                }
+                let elapsedTime = Date().timeIntervalSince(self.startTime)
+                let truncatedTime = round(elapsedTime * 10) / 10
+                self.onUpdate?(reversed.removeLast(), truncatedTime.description)
+        })
+    }
     
-    private func pause() { }
+    private func pause() {
+        timer?.invalidate()
+    }
     
     private func fetchCoordinateData() -> [Coordinate]? {
         let data = dataStorage?.read(motionData.id.description)

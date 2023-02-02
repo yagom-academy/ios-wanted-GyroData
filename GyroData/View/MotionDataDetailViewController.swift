@@ -35,10 +35,6 @@ final class MotionDataDetailViewController: UIViewController {
             UIImage(systemName: Constant.Namespace.playButton),
             for: .normal
         )
-        button.setImage(
-            UIImage(systemName: Constant.Namespace.stopButton),
-            for: .selected
-        )
         button.isHidden = true
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -49,6 +45,7 @@ final class MotionDataDetailViewController: UIViewController {
         label.font = .preferredFont(forTextStyle: .title1)
         label.adjustsFontForContentSizeCategory = true
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "0.0"
         return label
     }()
 
@@ -64,11 +61,16 @@ final class MotionDataDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViews()
+        setButtonAction()
         viewModel.bind(
             navigationTitle: setNavigationTitle,
             viewTypeText: setViewTypeLabelText,
             showButton: showPlayPauseButton
         )
+        viewModel.bind { coordinate, timerText in
+            // draw
+            self.timerLabel.text = timerText
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -115,5 +117,18 @@ final class MotionDataDetailViewController: UIViewController {
             timerLabel.leadingAnchor.constraint(equalTo: playStopButton.trailingAnchor, constant: Constant.Layout.spacing),
             timerLabel.trailingAnchor.constraint(lessThanOrEqualTo: view.layoutMarginsGuide.trailingAnchor, constant: -Constant.Layout.spacing)
         ])
+    }
+    
+    private func setButtonAction() {
+        playStopButton.addAction(
+            UIAction { _ in
+                self.viewModel.action(.buttonTapped(handler: { buttonImage in
+                    self.playStopButton.setImage(
+                        UIImage(systemName: buttonImage),
+                        for: .normal
+                )
+                })) },
+            for: .touchUpInside
+        )
     }
 }
