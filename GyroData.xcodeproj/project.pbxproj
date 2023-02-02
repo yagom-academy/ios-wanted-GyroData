@@ -12,6 +12,7 @@
 		5414325B2988E5310035E113 /* MotionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5414325A2988E5310035E113 /* MotionType.swift */; };
 		5414325D2988ED190035E113 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5414325C2988ED190035E113 /* GraphView.swift */; };
 		5414325F2988F44B0035E113 /* MeasureData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5414325E2988F44B0035E113 /* MeasureData.swift */; };
+		54364529298BB92400127FB1 /* MesearViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54364528298BB92400127FB1 /* MesearViewType.swift */; };
 		549CF9EE298A8CC400BDCFF2 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549CF9ED298A8CC400BDCFF2 /* FileManager.swift */; };
 		54F715212989FE6D0070A76B /* Coordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F715202989FE6D0070A76B /* Coordinate.swift */; };
 		54F71523298A02410070A76B /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F71522298A02410070A76B /* Double+Extension.swift */; };
@@ -34,6 +35,7 @@
 		5414325A2988E5310035E113 /* MotionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionType.swift; sourceTree = "<group>"; };
 		5414325C2988ED190035E113 /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		5414325E2988F44B0035E113 /* MeasureData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureData.swift; sourceTree = "<group>"; };
+		54364528298BB92400127FB1 /* MesearViewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MesearViewType.swift; sourceTree = "<group>"; };
 		549CF9ED298A8CC400BDCFF2 /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 		54F715202989FE6D0070A76B /* Coordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinate.swift; sourceTree = "<group>"; };
 		54F71522298A02410070A76B /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 				549CF9ED298A8CC400BDCFF2 /* FileManager.swift */,
 				5414325E2988F44B0035E113 /* MeasureData.swift */,
 				54F715202989FE6D0070A76B /* Coordinate.swift */,
+				54364528298BB92400127FB1 /* MesearViewType.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -217,6 +220,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */,
+				54364529298BB92400127FB1 /* MesearViewType.swift in Sources */,
 				5414325B2988E5310035E113 /* MotionType.swift in Sources */,
 				541432592988DED70035E113 /* MotionManager.swift in Sources */,
 				90B4690C298A39E000FBD3CC /* CoreDataManager.swift in Sources */,
@@ -371,7 +375,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = FJ638G3PDK;
+				DEVELOPMENT_TEAM = 93AK3FXMP3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GyroData/Resource/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
