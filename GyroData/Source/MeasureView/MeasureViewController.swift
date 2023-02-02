@@ -77,8 +77,12 @@ final class MeasureViewController: UIViewController {
     
     private func bind() {
         measureViewModel.measureDatas.bind { data in
-            self.graphView.drawLine(x: data.x.last ?? 0, y: data.y.last ?? 0, z: data.z.last ?? 0)
-            self.graphView.configure(label: self.graphView.xLabel, type: "x", value: data.x.last ?? 0)
+            self.graphView.drawLine(xPoint: data.x.last,
+                                    yPoint: data.y.last,
+                                    zPoint: data.z.last)
+            self.graphView.configure(xPoint: data.x.last,
+                                     yPoint: data.y.last,
+                                     zPoint: data.z.last)
         }
     }
     

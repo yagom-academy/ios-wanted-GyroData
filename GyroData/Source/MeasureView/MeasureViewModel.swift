@@ -12,15 +12,11 @@ final class MeasureViewModel {
         switch mode {
         case .Gyro:
             coreMotionManager.startGyros { [weak self] data in
-                self?.measureDatas.value.x = data.x
-                self?.measureDatas.value.y = data.y
-                self?.measureDatas.value.z = data.z
+                self?.measureDatas.value = data
             }
         case .Acc:
             coreMotionManager.startAccelerometers { [weak self] data in
-                self?.measureDatas.value.x = data.x
-                self?.measureDatas.value.y = data.y
-                self?.measureDatas.value.z = data.z
+                self?.measureDatas.value = data
             }
         }
     }
