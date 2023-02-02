@@ -45,7 +45,7 @@
 		AC52BB4329895C5C0057CA56 /* MeasureDataDummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52BB4229895C5C0057CA56 /* MeasureDataDummy.swift */; };
 		AC52BB45298967B50057CA56 /* Sensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52BB44298967B50057CA56 /* Sensor.swift */; };
 		AC52BB46298967B50057CA56 /* Sensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52BB44298967B50057CA56 /* Sensor.swift */; };
-		AC52BB48298A34070057CA56 /* SensorMeasureService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52BB47298A34070057CA56 /* SensorMeasureService.swift */; };
+		AC52BB8B298B4D4B0057CA56 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52BB8A298B4D4B0057CA56 /* GraphView.swift */; };
 		AC52BB49298A34070057CA56 /* SensorMeasureService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52BB47298A34070057CA56 /* SensorMeasureService.swift */; };
 /* End PBXBuildFile section */
 
@@ -90,6 +90,7 @@
 		AC52BB3C298948E20057CA56 /* TransactionServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionServiceTests.swift; sourceTree = "<group>"; };
 		AC52BB4229895C5C0057CA56 /* MeasureDataDummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureDataDummy.swift; sourceTree = "<group>"; };
 		AC52BB44298967B50057CA56 /* Sensor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sensor.swift; sourceTree = "<group>"; };
+		AC52BB8A298B4D4B0057CA56 /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		AC52BB47298A34070057CA56 /* SensorMeasureService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensorMeasureService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -124,6 +125,7 @@
 		3CB15C47298944D40049E390 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				AC52BB88298B4D2E0057CA56 /* Common */,
 				3CB15C48298944F10049E390 /* DataListScene */,
 				3CB15C4D298945790049E390 /* MeasureScene */,
 			);
@@ -316,6 +318,22 @@
 			path = Dummy;
 			sourceTree = "<group>";
 		};
+		AC52BB88298B4D2E0057CA56 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				AC52BB89298B4D350057CA56 /* Views */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		AC52BB89298B4D350057CA56 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				AC52BB8A298B4D4B0057CA56 /* GraphView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -419,6 +437,7 @@
 			files = (
 				3CFD20D4298A35BF00269FC9 /* MeasureDataCell.swift in Sources */,
 				AC52BB45298967B50057CA56 /* Sensor.swift in Sources */,
+				AC52BB8B298B4D4B0057CA56 /* GraphView.swift in Sources */,
 				3CB15C4429893DAE0049E390 /* DataManageable.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
