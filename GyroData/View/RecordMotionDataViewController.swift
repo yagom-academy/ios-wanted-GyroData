@@ -47,6 +47,8 @@ final class RecordMotionDataViewController: UIViewController {
         button.isEnabled = false
         return button
     }()
+
+    private let activityIndicator = UIActivityIndicatorView(style: .large)
     
     init(viewModel: RecordMotionDataViewModel) {
         self.viewModel = viewModel
@@ -65,8 +67,8 @@ final class RecordMotionDataViewController: UIViewController {
         configureSegmentedControl()
         configureButtonActions()
         bind()
+        configureActivityIndicator()
     }
-
     
     private func configureNavigationBar() {
         title = Constant.Namespace.navigationTitle
@@ -76,23 +78,26 @@ final class RecordMotionDataViewController: UIViewController {
     private func configureRightBarButton() -> UIBarButtonItem {
         return UIBarButtonItem(
             title: Constant.Namespace.rightBarButtonTitle,
-            primaryAction: rightBarButtonAction()
+            primaryAction: saveButtonAction()
         )
     }
     
-    private func rightBarButtonAction() -> UIAction {
+    private func saveButtonAction() -> UIAction {
         return UIAction(handler: { _ in
-            do {
-                try self.viewModel.throwableAction(.save)
-                self.navigationController?.popViewController(animated: true)
-            } catch MotionDataError.emptyData {
-                self.showAlert(alertTitle: MotionDataError.emptyData.localizedDescription)
-            } catch CoreDataError.cannotSaveData {
-                self.showAlert(alertTitle: CoreDataError.cannotSaveData.localizedDescription)
-            } catch DataStorageError.cannotSaveFile {
-                self.showAlert(alertTitle: DataStorageError.cannotSaveFile.localizedDescription)
-            } catch {
-                return
+            self.startActivityIndicator()
+            DispatchQueue.global().async {
+                do {
+                    try self.viewModel.throwableAction(.save)
+                    DispatchQueue.main.async {
+                        self.stopActivityIndicator()
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                } catch {
+                    DispatchQueue.main.async {
+                        self.stopActivityIndicator()
+                        self.showAlert(alertTitle: error.localizedDescription)
+                    }
+                }
             }
         })
     }
@@ -100,6 +105,7 @@ final class RecordMotionDataViewController: UIViewController {
     private func configureHierarchy() {
         view.backgroundColor = .systemBackground
         view.addSubview(stackView)
+        view.addSubview(activityIndicator)
         [segmentedControl, graphView, measureButton, stopButton]
             .forEach { stackView.addArrangedSubview($0) }
     }
@@ -159,12 +165,27 @@ final class RecordMotionDataViewController: UIViewController {
             style: .default
         )
         alertController.addAction(okAction)
-        present(alertController, animated: true)
+        DispatchQueue.main.async {
+            self.present(alertController, animated: true)
+        }
     }
     
     private func bind() {
         viewModel.bind(onUpdate: ) { coordinate in
             print(coordinate)
         }
+    }
+
+    private func configureActivityIndicator() {
+        activityIndicator.center = view.center
+        activityIndicator.hidesWhenStopped = true
+    }
+
+    private func startActivityIndicator() {
+        activityIndicator.startAnimating()
+    }
+
+    private func stopActivityIndicator() {
+        activityIndicator.stopAnimating()
     }
 }
