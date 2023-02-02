@@ -8,12 +8,22 @@
 import UIKit
 
 final class MeasurementViewController: UIViewController {
-    private let stackView: UIStackView = {
+    private let mainStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.distribution = .fill
         stackView.alignment = .fill
         stackView.spacing = 16
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+
+    private let buttonStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.distribution = .fill
+        stackView.alignment = .leading
+        stackView.spacing = 8
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -26,15 +36,28 @@ final class MeasurementViewController: UIViewController {
         return segmentedControl
     }()
 
-    private let graphView: UIView = {
-        let graphView = UIView()
+    private let graphView: GraphView = {
+        let graphView = GraphView()
         graphView.translatesAutoresizingMaskIntoConstraints = false
         return graphView
     }()
 
-    private let saveButton = UIBarButtonItem()
-    private let measurementButton = UIButton()
-    private let stopButton = UIButton()
+    private lazy var saveButton = UIBarButtonItem(title: "저장", primaryAction: tappedSaveButton())
+
+    private let measurementButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("측정", for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
+        return button
+    }()
+
+    private let stopButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("정지", for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
+        return button
+    }()
+
     private let indicatorView = UIActivityIndicatorView(style: .large)
 
     private let measurementViewModel = MeasurementViewModel()
@@ -51,29 +74,28 @@ final class MeasurementViewController: UIViewController {
     }
 
     private func configureNavigationBar() {
-        saveButton.title = "저장"
-        saveButton.target = self
-        saveButton.primaryAction = tappedSaveButton()
-
         navigationItem.rightBarButtonItem = saveButton
         navigationItem.title = "측정하기"
     }
 
     private func configureView() {
-        view.addSubview(stackView)
-        stackView.addArrangedSubview(segmentedControl)
-        stackView.addArrangedSubview(graphView)
-        stackView.addArrangedSubview(measurementButton)
-        stackView.addArrangedSubview(stopButton)
+        view.backgroundColor = .white
+        view.addSubview(mainStackView)
+        mainStackView.addArrangedSubview(segmentedControl)
+        mainStackView.addArrangedSubview(graphView)
+        mainStackView.addArrangedSubview(buttonStackView)
+        buttonStackView.addArrangedSubview(measurementButton)
+        buttonStackView.addArrangedSubview(stopButton)
     }
 
     private func configureLayout() {
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
-            stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
-            stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
-            graphView.heightAnchor.constraint(equalTo: view.widthAnchor)
+            mainStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
+            mainStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            mainStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            mainStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -100),
+            graphView.heightAnchor.constraint(equalTo: view.widthAnchor),
+            graphView.widthAnchor.constraint(equalTo: graphView.heightAnchor)
         ])
     }
 
