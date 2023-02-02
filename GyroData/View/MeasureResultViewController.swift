@@ -29,6 +29,7 @@ class MeasureResultViewController: UIViewController {
     
     let dateLabel: UILabel = {
         let label = UILabel()
+        label.text = Date().formatted("yyyy/MM/dd HH:mm:ss")
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -177,5 +178,4 @@ class MeasureResultViewController: UIViewController {
             timeLabel.leadingAnchor.constraint(equalTo: buttonStackView.trailingAnchor)
         ])
     }
-    
 }

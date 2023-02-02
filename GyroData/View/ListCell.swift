@@ -54,7 +54,7 @@ class ListCell: UITableViewCell {
     
     func configureData(title: String?, date: Date?, second: Double?) {
         titleLabel.text = title
-        dateLabel.text = date?.description
+        dateLabel.text = date?.formatted("yyyy/MM/dd HH:mm:ss")
         secondLabel.text = "\(second!)"
     }
     
