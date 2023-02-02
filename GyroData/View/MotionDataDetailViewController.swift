@@ -26,6 +26,7 @@ final class MotionDataDetailViewController: UIViewController {
         label.adjustsFontForContentSizeCategory = true
         return label
     }()
+
     private let graphView = GraphView()
     private let playStopButton: UIButton = {
         let button = UIButton()
@@ -40,6 +41,7 @@ final class MotionDataDetailViewController: UIViewController {
         button.isHidden = true
         return button
     }()
+
     private let timerLabel: UILabel = {
        let label = UILabel()
         label.font = .preferredFont(forTextStyle: .title1)
