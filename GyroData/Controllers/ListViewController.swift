@@ -105,8 +105,10 @@ extension ListViewController: UITableViewDelegate {
     }
     
     private func presentDetailPage() {
-        //구현예정: 3번째 페이지연결
-        print("자세히보기")
+        let reviewPageViewController = ReviewPageViewController(
+            reviewPageView: ReviewPageView(pageState: .resultView))
+        
+        self.navigationController?.pushViewController(reviewPageViewController, animated: false)
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

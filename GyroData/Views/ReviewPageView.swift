@@ -32,6 +32,7 @@ class ReviewPageView: UIView {
         
         configureHierarchy()
         configureLayout(pageState: pageState)
+        setupPageStateLabelText(pageState: pageState)
     }
     
     required init?(coder: NSCoder) {
@@ -42,12 +43,12 @@ class ReviewPageView: UIView {
         dateLabel.text = text
     }
     
-    func setupPageStateLabelText(_ text: String) {
-        pageStateLabel.text = text
-    }
-    
     func setupTimeLabelText(_ text: String) {
         timeLabel.text = text
+    }
+    
+    func setupPageStateLabelText(pageState: PageState) {
+            pageStateLabel.text = pageState.pageName
     }
     
     private func configureHierarchy() {
