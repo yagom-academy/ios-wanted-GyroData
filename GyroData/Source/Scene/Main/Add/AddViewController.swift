@@ -9,9 +9,21 @@ import UIKit
 import CoreMotion
 
 class AddViewController: UIViewController {
+    // MARK: Enumerations
+    
+    enum MeasurementUnit: Int {
+        case acc = 0
+        case gyro = 1
+    }
+    
+    // MARK: Private Properties
+    
+    private let currentDate = Date()
+    private let motionManager = CMMotionManager()
     private var motionDataList = [MotionData]()
     private var jsonMotionData: Data?
-    private let currentDate = Date()
+    private var timer: Timer?
+    private var measureTime: Int = 0
     
     private let segmentControl: UISegmentedControl = {
         let segmentControl = UISegmentedControl(items: ["Acc", "Gyro"])
@@ -30,6 +42,7 @@ class AddViewController: UIViewController {
         let button = UIButton()
         button.setTitle("측정", for: .normal)
         button.titleLabel?.font = .preferredFont(forTextStyle: .title2)
+        button.contentHorizontalAlignment = .left
         button.setTitleColor(.systemBlue, for: .normal)
         return button
     }()
@@ -37,6 +50,7 @@ class AddViewController: UIViewController {
         let button = UIButton()
         button.setTitle("정지", for: .normal)
         button.titleLabel?.font = .preferredFont(forTextStyle: .title2)
+        button.contentHorizontalAlignment = .left
         button.setTitleColor(.systemBlue, for: .normal)
         return button
     }()
@@ -49,7 +63,8 @@ class AddViewController: UIViewController {
         stackView.spacing = 30
         return stackView
     }()
-    private let motionManager = CMMotionManager()
+    
+    // MARK: Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,9 +74,11 @@ class AddViewController: UIViewController {
         configureButtonAction()
     }
     
+    // MARK: Private Methods
+    
     private func configureButtonAction() {
-        playButton.addTarget(self, action: #selector(updateMotionData), for: .touchDown)
-        stopButton.addTarget(self, action: #selector(stopGravityData), for: .touchDown)
+        playButton.addTarget(self, action: #selector(startMeasurement), for: .touchDown)
+        stopButton.addTarget(self, action: #selector(stopMeasurement), for: .touchDown)
     }
     
     private func configureView() {
@@ -100,7 +117,10 @@ class AddViewController: UIViewController {
                 multiplier: 0.4
             ),
             
-            playButton.heightAnchor.constraint(equalToConstant: view.frame.size.height * 0.02),
+            playButton.heightAnchor.constraint(equalToConstant: view.frame.size.height * 0.055),
+            playButton.widthAnchor.constraint(equalToConstant: view.frame.size.width * 0.15),
+            
+            stopButton.widthAnchor.constraint(equalToConstant: view.frame.size.width * 0.15),
             
             mainStackView.widthAnchor.constraint(
                 equalTo: view.safeAreaLayoutGuide.widthAnchor ,
@@ -121,83 +141,140 @@ class AddViewController: UIViewController {
         ])
     }
     
+    // MARK: Action Methods
+    
     @objc private func saveMotionData() {
         jsonMotionData = try? JSONEncoder().encode(motionDataList)
         
-        guard let jsonMotionData = jsonMotionData else { return }
-        guard let dataString = String(data: jsonMotionData, encoding: .utf8) else { return }
+        guard let jsonMotionData = jsonMotionData,
+              let dataString = String(data: jsonMotionData, encoding: .utf8) else { return }
         
-        var titleText = ""
-        
-        if segmentControl.selectedSegmentIndex == 0 {
-            titleText = "Acc"
-        } else if segmentControl.selectedSegmentIndex == 1 {
-            titleText = "Gyro"
+        if dataString != "[]" {
+            var titleText = String()
+            
+            switch segmentControl.selectedSegmentIndex {
+            case MeasurementUnit.acc.rawValue:
+                titleText = "Acc"
+            case MeasurementUnit.gyro.rawValue:
+                titleText = "Gyro"
+            default:
+                break
+            }
+            
+            let dataForm = MotionDataForm(
+                title: titleText,
+                date: currentDate,
+                runningTime: Double(measureTime) / 10,
+                jsonData: dataString
+            )
+            
+            saveCoreData(motion: dataForm)
         }
-        
-        let dataForm = MotionDataForm(
-            title: titleText,
-            date: currentDate,
-            runningTime: Double(motionDataList.count) / 10,
-            jsonData: dataString
-        )
-        
-        saveCoreData(motion: dataForm)
         
         navigationController?.popViewController(animated: true)
     }
     
-    @objc private func updateMotionData() {
+    @objc private func startMeasurement() {
+        graphView.stopDrawLines()
+        
         motionDataList = .init()
         jsonMotionData = .init()
+        segmentControl.isUserInteractionEnabled = false
         
-        if segmentControl.selectedSegmentIndex == 0 {
-            graphView.stopDrawLines()
+        startTimer()
             
+        switch segmentControl.selectedSegmentIndex {
+        case MeasurementUnit.acc.rawValue:
             motionManager.accelerometerUpdateInterval = 0.1
             motionManager.startAccelerometerUpdates(to: .main) { data, error in
                 if error == nil {
-                    guard let accelerometerData = data else { return }
-
-                    let recordData = MotionData(
-                        x: accelerometerData.acceleration.x,
-                        y: accelerometerData.acceleration.y,
-                        z: accelerometerData.acceleration.z
-                    )
-
-                    self.motionDataList.append(recordData)
-                    self.graphView.motionDatas = recordData
+                    if let accData = data {
+                        self.measureMotion(type: .acc, data: accData)
+                    }
                 }
             }
-        } else if segmentControl.selectedSegmentIndex == 1 {
-            graphView.stopDrawLines()
-            
+        case MeasurementUnit.gyro.rawValue:
             motionManager.gyroUpdateInterval = 0.1
             motionManager.startGyroUpdates(to: .main) { data, error in
                 if error == nil {
-                    guard let gyroData = data else { return }
-                    
-                    let recordData = MotionData(
-                        x: gyroData.rotationRate.x,
-                        y: gyroData.rotationRate.y,
-                        z: gyroData.rotationRate.z
-                    )
-                    
-                    self.motionDataList.append(recordData)
-                    self.graphView.motionDatas = recordData
+                    if let gyroData = data {
+                        self.measureMotion(type: .gyro, data: gyroData)
+                    }
                 }
             }
+        default:
+            break
         }
     }
     
-    @objc private func stopGravityData() {
-        motionManager.stopAccelerometerUpdates()
-        motionManager.stopGyroUpdates()
+    private func measureMotion(type: MeasurementUnit, data: CMLogItem) {
+        switch type {
+        case .acc:
+            guard let totalData = data as? CMAccelerometerData else { return }
+            let recordData = MotionData(
+                x: totalData.acceleration.x,
+                y: totalData.acceleration.y,
+                z: totalData.acceleration.z
+            )
+            
+            motionDataList.append(recordData)
+            graphView.motionDatas = recordData
+        case .gyro:
+            guard let totalData = data as? CMGyroData else { return }
+            let recordData = MotionData(
+                x: totalData.rotationRate.x,
+                y: totalData.rotationRate.y,
+                z: totalData.rotationRate.z
+            )
+            
+            motionDataList.append(recordData)
+            graphView.motionDatas = recordData
+        }
+    }
+    
+    public func startTimer() {
+        stopTimer()
+        measureTime = .init()
+
+        timer = Timer.scheduledTimer(
+            timeInterval: TimeInterval(0.1),
+            target: self,
+            selector: #selector(timerCallback),
+            userInfo: nil,
+            repeats: true
+        )
+    }
+    
+    private func stopTimer() {
+        if timer != nil && timer?.isValid != nil {
+            timer?.invalidate()
+        }
+    }
+     
+    @objc func timerCallback() {
+        measureTime += 1
         
-        graphView.stopDrawLines()
+        if Int(measureTime) == 600 {
+            stopTimer()
+            motionManager.stopAccelerometerUpdates()
+            motionManager.stopGyroUpdates()
+            segmentControl.isUserInteractionEnabled = true
+        }
+    }
+
+    
+    @objc private func stopMeasurement() {
+        if measureTime != 0 {
+            motionManager.stopAccelerometerUpdates()
+            motionManager.stopGyroUpdates()
+            segmentControl.isUserInteractionEnabled = true
+            
+            stopTimer()
+            graphView.stopDrawLines()
+        }
     }
 }
 
-extension AddViewController: CoreDataProcessible {
-    
-}
+// MARK: - CoreDataProcessible
+
+extension AddViewController: CoreDataProcessible {}
