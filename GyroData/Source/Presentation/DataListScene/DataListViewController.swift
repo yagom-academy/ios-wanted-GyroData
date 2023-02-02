@@ -81,17 +81,26 @@ extension DataListViewController: UITableViewDelegate {
         trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
     ) -> UISwipeActionsConfiguration? {
         
-        let play = UIContextualAction(style: .normal, title: "Play") { [weak self] _, _, _ in
+        let play = UIContextualAction(style: .normal, title: nil) { [weak self] _, _, _ in
             self?.viewModel.action(.play(index: indexPath.row))
         }
         
-        let delete = UIContextualAction(style: .normal, title: "Delete") { [weak self] _, _, _ in
+        let delete = UIContextualAction(style: .normal, title: nil) { [weak self] _, _, _ in
             self?.viewModel.action(.delete(index: indexPath.row))
         }
         
+        let playLabel = UILabel(title: "Play", textStyle: .title1, backgroundColor: .systemGreen)
+        
+        play.image = UIImage(view: playLabel)
         play.backgroundColor = .systemGreen
+        
+        let deleteLabel = UILabel(title: "Delete", textStyle: .title1, backgroundColor: .systemRed)
+        
+        delete.image = UIImage(view: deleteLabel)
         delete.backgroundColor = .systemRed
-        let swipeConfiguration = UISwipeActionsConfiguration(actions: [play, delete])
+        
+        let swipeConfiguration = UISwipeActionsConfiguration(actions: [delete, play])
+        swipeConfiguration.performsFirstActionWithFullSwipe = false
         
         return swipeConfiguration
     }
