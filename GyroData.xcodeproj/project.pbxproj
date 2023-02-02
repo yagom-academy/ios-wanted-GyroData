@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		5720DCD9298A47BC0045E95D /* CoreDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5720DCD8298A47BC0045E95D /* CoreDataError.swift */; };
 		5720DCDB298A848D0045E95D /* MotionDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5720DCDA298A848D0045E95D /* MotionDataError.swift */; };
+		5720DCDD298ABDDA0045E95D /* DetailViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5720DCDC298ABDDA0045E95D /* DetailViewType.swift */; };
+		573A7B83298AC946007AEF9D /* FileType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573A7B82298AC946007AEF9D /* FileType.swift */; };
 		5760AC872989412A00534EF0 /* RecordMotionDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5760AC862989412A00534EF0 /* RecordMotionDataViewController.swift */; };
 		5760AC892989414C00534EF0 /* MotionDataDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5760AC882989414C00534EF0 /* MotionDataDetailViewController.swift */; };
 		5760AC8B2989415D00534EF0 /* MotionDataListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5760AC8A2989415D00534EF0 /* MotionDataListViewModel.swift */; };
@@ -39,6 +41,8 @@
 /* Begin PBXFileReference section */
 		5720DCD8298A47BC0045E95D /* CoreDataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataError.swift; sourceTree = "<group>"; };
 		5720DCDA298A848D0045E95D /* MotionDataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDataError.swift; sourceTree = "<group>"; };
+		5720DCDC298ABDDA0045E95D /* DetailViewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewType.swift; sourceTree = "<group>"; };
+		573A7B82298AC946007AEF9D /* FileType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileType.swift; sourceTree = "<group>"; };
 		5760AC862989412A00534EF0 /* RecordMotionDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordMotionDataViewController.swift; sourceTree = "<group>"; };
 		5760AC882989414C00534EF0 /* MotionDataDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDataDetailViewController.swift; sourceTree = "<group>"; };
 		5760AC8A2989415D00534EF0 /* MotionDataListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDataListViewModel.swift; sourceTree = "<group>"; };
@@ -132,6 +136,7 @@
 				EB96E76F2987B8F500F9DF79 /* MotionData.swift */,
 				EB96E7712987C8DE00F9DF79 /* Coordinate.swift */,
 				EB96E7732987C93C00F9DF79 /* MotionDataType.swift */,
+				5720DCDC298ABDDA0045E95D /* DetailViewType.swift */,
 				579C4D912988A40A00D3949F /* MotionManager.swift */,
 				579C4D8F2988A40300D3949F /* MotionManagerType.swift */,
 				5720DCDA298A848D0045E95D /* MotionDataError.swift */,
@@ -139,6 +144,7 @@
 				579C4D992988CBA400D3949F /* DataStorage.swift */,
 				57C8B7CF298900700010E58E /* DataStorageError.swift */,
 				579C4D9D2988CF7300D3949F /* FileManagerType.swift */,
+				573A7B82298AC946007AEF9D /* FileType.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -239,12 +245,14 @@
 				5720DCD9298A47BC0045E95D /* CoreDataError.swift in Sources */,
 				EB8E417E2988EA6000FE26D3 /* MotionDataEntity+CoreDataClass.swift in Sources */,
 				EB8E41812988EB0900FE26D3 /* CoreDataManager.swift in Sources */,
+				5720DCDD298ABDDA0045E95D /* DetailViewType.swift in Sources */,
 				EB96E7742987C93C00F9DF79 /* MotionDataType.swift in Sources */,
 				EB8E417B2988E8FA00FE26D3 /* MotionData.xcdatamodeld in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
 				579C4D9C2988CBA900D3949F /* DataStorageType.swift in Sources */,
 				5760AC91298A1F5A00534EF0 /* GraphView.swift in Sources */,
 				EBBD3F542989378B0058EA45 /* MotionDataListViewController.swift in Sources */,
+				573A7B83298AC946007AEF9D /* FileType.swift in Sources */,
 				579C4D9E2988CF7300D3949F /* FileManagerType.swift in Sources */,
 				EB96E7722987C8DE00F9DF79 /* Coordinate.swift in Sources */,
 				57C8B7D0298900700010E58E /* DataStorageError.swift in Sources */,
