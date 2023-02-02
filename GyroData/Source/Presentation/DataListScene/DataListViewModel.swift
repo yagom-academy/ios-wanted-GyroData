@@ -34,4 +34,8 @@ extension DataListViewModel {
             self?.measureDatas = datas
         }
     }
+    
+    func fetchSelectedData(index: Int) {
+        delegate?.setupSelectData(measureDatas[index])
+    }
 }
