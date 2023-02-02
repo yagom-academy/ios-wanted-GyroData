@@ -95,7 +95,7 @@ final class MotionDataListViewModel {
 
 extension MotionDataListViewModel {
     enum Action {
-        case tappedRecordButton(handler: (RecordMotionDataViewModel) -> Void)
+        case record(handler: (RecordMotionDataViewModel) -> Void)
         case view(at: IndexPath, handler: (MotionDataDetailViewModel) -> Void)
         case play(at: IndexPath, handler: (MotionDataDetailViewModel) -> Void)
         case delete(at: IndexPath)
@@ -104,7 +104,7 @@ extension MotionDataListViewModel {
 
     func action(_ action: Action) {
         switch action {
-        case let .tappedRecordButton(handler):
+        case let .record(handler):
             createNewRecordMotionDataViewModel(handler)
         case let .view(indexPath, handler):
             guard let data = motionData(at: indexPath) else { break }
