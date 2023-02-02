@@ -9,7 +9,10 @@ import UIKit
 import CoreMotion
 
 class AddViewController: UIViewController {
+    // MARK: Private Properties
+    
     private let currentDate = Date()
+    private let motionManager = CMMotionManager()
     private var motionDataList = [MotionData]()
     private var jsonMotionData: Data?
     
@@ -51,7 +54,8 @@ class AddViewController: UIViewController {
         stackView.spacing = 30
         return stackView
     }()
-    private let motionManager = CMMotionManager()
+    
+    // MARK: Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,6 +64,8 @@ class AddViewController: UIViewController {
         configureLayout()
         configureButtonAction()
     }
+    
+    // MARK: Private Methods
     
     private func configureButtonAction() {
         playButton.addTarget(self, action: #selector(updateMotionData), for: .touchDown)
@@ -125,6 +131,8 @@ class AddViewController: UIViewController {
             )
         ])
     }
+    
+    // MARK: Action Methods
     
     @objc private func saveMotionData() {
         jsonMotionData = try? JSONEncoder().encode(motionDataList)
@@ -203,6 +211,6 @@ class AddViewController: UIViewController {
     }
 }
 
-extension AddViewController: CoreDataProcessible {
-    
-}
+// MARK: - CoreDataProcessible
+
+extension AddViewController: CoreDataProcessible {}
