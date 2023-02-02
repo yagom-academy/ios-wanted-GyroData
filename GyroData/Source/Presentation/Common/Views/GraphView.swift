@@ -79,7 +79,7 @@ class GraphView: UIView {
         self.interval = interval
         self.duration = duration
         self.segmentOffset = duration / interval
-        self.boundary = 4
+        self.boundary = 3
         super.init(frame: .zero)
         setupStackView()
     }
