@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MotionLogListViewController.swift
 //  GyroData
 //
 //  Created by kjs on 2022/09/16.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class ViewController: UIViewController {
+final class MotionLogListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
