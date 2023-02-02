@@ -36,7 +36,7 @@ class DetailViewController: UIViewController {
     private let graphView: GraphView = {
         let view = GraphView()
         
-        view.backgroundColor = .systemGray6
+        view.backgroundColor = .clear
         view.translatesAutoresizingMaskIntoConstraints = false
         
         return view
