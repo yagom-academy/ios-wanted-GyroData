@@ -81,6 +81,7 @@ extension ListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView,
                    trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath)
+    
     -> UISwipeActionsConfiguration? {
         let playAction = UIContextualAction(style: .normal, title: "Play") { _, _, _ in
             let reviewPageViewController = ReviewPageViewController(
@@ -91,9 +92,18 @@ extension ListViewController: UITableViewDelegate {
         
         playAction.backgroundColor = .systemGreen
         
-        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") {  _, _, _ in
-            print("Cell, Date 삭제")
-            // 액션 구현 예정
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") {
+            [weak self] _, _, _ in
+            guard let self = self else { return }
+            self.dataManagers.forEach { dataManager in
+                do {
+                    try dataManager.deleteData(self.measurements[indexPath.item])
+                }
+                catch {
+                    print(DataHandleError.deleteFailError(error: error))
+                    //알럿처리
+                }
+            }
         }
         
         return UISwipeActionsConfiguration(actions: [deleteAction, playAction])
