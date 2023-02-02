@@ -2,16 +2,54 @@
 //  RecordMotionDataViewController.swift
 //  GyroData
 //
-//  Created by Jiyoung Lee on 2023/01/31.
+//  Created by summercat on 2023/01/31.
 //
 
 import UIKit
 
 final class RecordMotionDataViewController: UIViewController {
+    enum Constant {
+        enum Namespace {
+            static let navigationTitle = "측정하기"
+            static let rightBarButtonTitle = "저장"
+            static let measure = "측정"
+            static let stop = "정지"
+            static let confirm = "확인"
+        }
+        
+        enum Layout {
+            static let stackSpacing = CGFloat(8)
+        }
+    }
+    
     private let viewModel: RecordMotionDataViewModel
+    private let stackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.spacing = Constant.Layout.stackSpacing
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
 
-    init(viewModel: RecordMotionDataViewModel) {
-        self.viewModel = viewModel
+    private let segmentedControl = UISegmentedControl()
+    private let graphView = GraphView(frame: .zero)
+    private let measureButton: UIButton = {
+        let button = UIButton()
+        button.setTitle(Constant.Namespace.measure, for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
+        return button
+    }()
+
+    private let stopButton: UIButton = {
+        let button = UIButton()
+        button.setTitle(Constant.Namespace.stop, for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
+        button.isEnabled = false
+        return button
+    }()
+    
+    init() {
+        viewModel = RecordMotionDataViewModel()
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -21,5 +59,111 @@ final class RecordMotionDataViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureNavigationBar()
+        configureHierarchy()
+        configureLayout()
+        configureSegmentedControl()
+        configureButtonActions()
+        bind()
+    }
+
+    
+    private func configureNavigationBar() {
+        title = Constant.Namespace.navigationTitle
+        navigationItem.rightBarButtonItem = configureRightBarButton()
+    }
+    
+    private func configureRightBarButton() -> UIBarButtonItem {
+        return UIBarButtonItem(
+            title: Constant.Namespace.rightBarButtonTitle,
+            primaryAction: rightBarButtonAction()
+        )
+    }
+    
+    private func rightBarButtonAction() -> UIAction {
+        return UIAction(handler: { _ in
+            do {
+                try self.viewModel.throwableAction(.save)
+            } catch MotionDataError.emptyData {
+                self.showAlert(alertTitle: MotionDataError.emptyData.localizedDescription)
+            } catch CoreDataError.cannotSaveData {
+                self.showAlert(alertTitle: CoreDataError.cannotSaveData.localizedDescription)
+            } catch DataStorageError.cannotSaveFile {
+                self.showAlert(alertTitle: DataStorageError.cannotSaveFile.localizedDescription)
+            } catch {
+                return
+            }
+        })
+    }
+    
+    private func configureHierarchy() {
+        view.backgroundColor = .systemBackground
+        view.addSubview(stackView)
+        [segmentedControl, graphView, measureButton, stopButton]
+            .forEach { stackView.addArrangedSubview($0) }
+    }
+    
+    private func configureLayout() {
+        NSLayoutConstraint.activate([
+            stackView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
+            stackView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor)
+        ])
+    }
+    
+    private func configureSegmentedControl() {
+        let segments = viewModel.motionDataTypes()
+        for (index, item) in segments.enumerated() {
+            segmentedControl.insertSegment(
+                withTitle: item,
+                at: index,
+                animated: true
+            )
+        }
+        segmentedControl.selectedSegmentIndex = .zero
+    }
+    
+    private func configureButtonActions() {
+        measureButton.addAction(measureButtonAction(), for: .touchUpInside)
+        stopButton.addAction(stopButtonAction(), for: .touchUpInside)
+    }
+    
+    private func measureButtonAction() -> UIAction {
+        return UIAction(handler: { _ in
+            self.viewModel.action(.start(
+                selectedIndex: self.segmentedControl.selectedSegmentIndex,
+                handler: self.toggleButtons)
+            )
+        })
+    }
+    
+    private func stopButtonAction() -> UIAction {
+        return UIAction(handler: { _ in
+            self.viewModel.action(.stop(handler: self.toggleButtons))
+        })
+    }
+    
+    private func toggleButtons() {
+        stopButton.isEnabled.toggle()
+        navigationItem.rightBarButtonItem?.isEnabled.toggle()
+    }
+    
+    private func showAlert(alertTitle: String) {
+        let alertController = UIAlertController(
+            title: alertTitle,
+            message: .none,
+            preferredStyle: .alert)
+        let okAction = UIAlertAction(
+            title: Constant.Namespace.confirm,
+            style: .default
+        )
+        alertController.addAction(okAction)
+        present(alertController, animated: true)
+    }
+    
+    private func bind() {
+        viewModel.bind(onUpdate: ) { coordinate in
+            print(coordinate)
+        }
     }
 }

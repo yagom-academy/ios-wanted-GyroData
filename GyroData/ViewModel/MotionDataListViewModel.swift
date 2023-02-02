@@ -9,9 +9,9 @@ import Foundation
 
 final class MotionDataListViewModel {
     enum Action {
-        case recordButtonTapped(closure: (RecordMotionDataViewModel) -> Void)
-        case view(at: IndexPath, closure: (MotionDataDetailViewModel) -> Void)
-        case play(at: IndexPath, closure: (MotionDataDetailViewModel) -> Void)
+        case recordButtonTapped(handler: (RecordMotionDataViewModel) -> Void)
+        case view(at: IndexPath, handler: (MotionDataDetailViewModel) -> Void)
+        case play(at: IndexPath, handler: (MotionDataDetailViewModel) -> Void)
         case delete(at: IndexPath)
         case scrollToBottom
     }
@@ -28,15 +28,15 @@ final class MotionDataListViewModel {
     
     func action(_ action: Action) {
         switch action {
-        case let .recordButtonTapped(closure):
-            createNewMotionData(closure)
-        case let .view(indexPath, closure):
+        case let .recordButtonTapped(handler):
+            createNewMotionData(handler)
+        case let .view(indexPath, handler):
             let data = fetchMotionData(at: indexPath)
-            showMotionData(data, closure)
+            showMotionData(data, handler)
             break
-        case let .play(indexPath, closure):
+        case let .play(indexPath, handler):
             let data = fetchMotionData(at: indexPath)
-            showMotionData(data, closure)
+            showMotionData(data, handler)
             break
         case let .delete(indexPath):
             delete(at: indexPath)
@@ -47,9 +47,9 @@ final class MotionDataListViewModel {
         }
     }
     
-    private func createNewMotionData(_ closure: @escaping (RecordMotionDataViewModel) -> Void) { }
+    private func createNewMotionData(_ handler: @escaping (RecordMotionDataViewModel) -> Void) { }
     
-    private func showMotionData(_ data: MotionData, _ closure: @escaping (MotionDataDetailViewModel) -> Void) { }
+    private func showMotionData(_ data: MotionData, _ handler: @escaping (MotionDataDetailViewModel) -> Void) { }
     
     // 코어데이터에서 10개씩 꺼내오는 메서드
     private func updateMotionData() { }
