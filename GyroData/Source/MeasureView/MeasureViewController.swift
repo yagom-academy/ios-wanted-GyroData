@@ -72,8 +72,14 @@ final class MeasureViewController: UIViewController {
         super.viewDidLoad()
         setupNavigation()
         setupButtons()
+        setupNotification()
         setupViews()
         bind()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(true)
+        removeNotification()
     }
     
     private func bind() {
@@ -130,6 +136,7 @@ final class MeasureViewController: UIViewController {
         self.measureViewModel.startMeasure(mode: mode)
     }
     
+    @objc
     private func tappedStopButton() {
         self.segmentedControl.isUserInteractionEnabled = true
         self.measureButton.isUserInteractionEnabled = true
@@ -150,6 +157,19 @@ final class MeasureViewController: UIViewController {
     private func tappedSegmentedControl() {
         self.graphView.resetView()
         self.measureViewModel.resetMeasureDatas()
+    }
+    
+    private func setupNotification() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(tappedStopButton),
+                                               name: .timeOver,
+                                               object: nil)
+    }
+    
+    private func removeNotification() {
+        NotificationCenter.default.removeObserver(self,
+                                                  name: .timeOver,
+                                                  object: nil)
     }
     
     private func setupViews() {
