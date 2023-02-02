@@ -8,16 +8,6 @@
 import CoreMotion
 import Foundation
 
-protocol MeasureDelegate: AnyObject {
-    typealias Values = (x: Double, y: Double, z: Double)
-    
-    func nonAccelerometerMeasurable()
-    func nonGyroscopeMeasurable()
-    
-    func updateData(_ data: Values)
-    func endMeasuringData()
-}
-
 final class SensorMeasureService {
     typealias Values = (x: Double, y: Double, z: Double)
     
@@ -27,11 +17,11 @@ final class SensorMeasureService {
         }
     }
     
-    private weak var delegate: MeasureDelegate?
+    private weak var delegate: MeasureServiceDelegate?
     private var timer: Timer = .init()
     private let motionManager: CMMotionManager
     
-    init(delegate: MeasureDelegate) {
+    init(delegate: MeasureServiceDelegate) {
         self.delegate = delegate
         self.motionManager = .init()
     }
