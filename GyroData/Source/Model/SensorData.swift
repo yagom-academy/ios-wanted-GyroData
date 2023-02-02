@@ -3,13 +3,7 @@
 
 import Foundation
 
-struct MeasureData {
-    let date: Date
-    let sensor: SensorMode
-    var sensorData: SensorData
-}
-
-struct SensorData {
+struct SensorData: Hashable, Equatable {
     var x: [Double]
     var y: [Double]
     var z: [Double]
