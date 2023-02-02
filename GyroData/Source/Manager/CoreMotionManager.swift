@@ -25,7 +25,7 @@ final class CoreMotionManager {
                 
                 self.second += 0.1
 
-                if self.second >= 5.0 {
+                if self.second >= 60.0 {
                     NotificationCenter.default.post(name: .timeOver, object: nil)
                     self.stopGyros()
                 }

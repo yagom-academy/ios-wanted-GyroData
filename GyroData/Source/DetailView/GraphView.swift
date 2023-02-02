@@ -174,7 +174,10 @@ extension GraphView {
     }
     
     private func convertDrawingData(item: Double?) -> Double {
-        return ((item ?? 0 * -1) * 15) + Double(self.frame.size.height / 2)
+        let value = (item ?? 0) * -15
+        let heightSize = Double(self.frame.size.height / 2)
+        
+        return value + heightSize
     }
     
     func resetView() {

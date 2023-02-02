@@ -33,6 +33,8 @@ final class MeasureViewController: UIViewController {
     private let graphView: GraphView = {
         let view = GraphView()
         
+        view.layer.borderWidth = 2
+        view.layer.borderColor = UIColor.black.cgColor
         view.backgroundColor = .clear
         view.translatesAutoresizingMaskIntoConstraints = false
         
@@ -114,12 +116,14 @@ final class MeasureViewController: UIViewController {
         stopButton.addAction(stopAction, for: .touchUpInside)
         
         let segmentedControlAction = UIAction { _ in
-            self.tappedSegmentedControl()
+            self.resetGraphView()
         }
         segmentedControl.addAction(segmentedControlAction, for: .valueChanged)
     }
     
     private func tappedMeasureButton() {
+        resetGraphView()
+        
         self.segmentedControl.isUserInteractionEnabled = false
         self.measureButton.isUserInteractionEnabled = false
         self.stopButton.isUserInteractionEnabled = true
@@ -154,7 +158,7 @@ final class MeasureViewController: UIViewController {
         self.measureViewModel.stopMeasure(mode: mode)
     }
     
-    private func tappedSegmentedControl() {
+    private func resetGraphView() {
         self.graphView.resetView()
         self.measureViewModel.resetMeasureDatas()
     }
