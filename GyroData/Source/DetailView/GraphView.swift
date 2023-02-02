@@ -51,7 +51,6 @@ class GraphView: UIView {
     
     init() {
         super.init(frame: .zero)
-        
         setupViews()
     }
     
@@ -160,6 +159,7 @@ extension GraphView {
     private func addLine(currentPoint: Double, targetPoint: Double, color: CGColor) {
         let path = UIBezierPath()
         let layer = CAShapeLayer()
+        layer.name = "ChartData"
         let widthSize: Double = Double(self.frame.size.width / 600)
         
         path.lineWidth = 0
@@ -175,5 +175,20 @@ extension GraphView {
     
     private func convertDrawingData(item: Double?) -> Double {
         return ((item ?? 0 * -1) * 15) + Double(self.frame.size.height / 2)
+    }
+    
+    func resetView() {
+        startX = 0
+        currentX = 0
+        currentY = 0
+        currentZ = 0
+        
+        guard let layers = layer.sublayers else { return }
+        
+        layers.forEach { layer in
+            if layer.name == "ChartData" {
+                layer.removeFromSuperlayer()
+            }
+        }
     }
 }

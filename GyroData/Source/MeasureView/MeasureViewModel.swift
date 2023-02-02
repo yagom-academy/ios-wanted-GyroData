@@ -29,4 +29,10 @@ final class MeasureViewModel {
             coreMotionManager.stopAccelerometers()
         }
     }
+    
+    func resetMeasureDatas() {
+        measureDatas.value.x.removeAll()
+        measureDatas.value.y.removeAll()
+        measureDatas.value.z.removeAll()
+    }
 }

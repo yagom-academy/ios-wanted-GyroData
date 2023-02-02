@@ -7,6 +7,7 @@ import CoreMotion
 final class CoreMotionManager {
     private var motion = CMMotionManager()
     private var timer: Timer?
+    var second: Double = 0
     
     private var xData: [Double] = []
     private var yData: [Double] = []
@@ -21,6 +22,12 @@ final class CoreMotionManager {
                                interval: (10.0 / 60.0),
                                repeats: true,
                                block: { (timer) in
+                
+                self.second += 0.1
+
+                if self.second >= 60.0 {
+                    self.stopGyros()
+                }
                 
                 if let data = self.motion.gyroData {
                     self.xData.append(data.rotationRate.x)
@@ -53,6 +60,13 @@ final class CoreMotionManager {
                                interval: (10.0 / 60.0),
                                repeats: true,
                                block: { (timer) in
+ 
+                self.second += 0.1
+
+                if self.second >= 10.0 {
+                    self.stopAccelerometers()
+                }
+                
                 if let data = self.motion.accelerometerData {
                     self.xData.append(data.acceleration.x)
                     self.yData.append(data.acceleration.y)

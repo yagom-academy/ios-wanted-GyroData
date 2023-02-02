@@ -52,7 +52,8 @@ final class MeasureViewController: UIViewController {
         let button = UIButton()
         
         button.setTitle(Constant.stopButtonTitle, for: .normal)
-        button.setTitleColor(.systemBlue, for: .normal)
+        button.setTitleColor(.gray, for: .normal)
+        button.isUserInteractionEnabled = false
         
         return button
     }()
@@ -105,6 +106,11 @@ final class MeasureViewController: UIViewController {
             self.tappedStopButton()
         }
         stopButton.addAction(stopAction, for: .touchUpInside)
+        
+        let segmentedControlAction = UIAction { _ in
+            self.tappedSegmentedControl()
+        }
+        segmentedControl.addAction(segmentedControlAction, for: .valueChanged)
     }
     
     private func tappedMeasureButton() {
@@ -139,6 +145,11 @@ final class MeasureViewController: UIViewController {
         
         let mode: SensorMode = self.segmentedControl.selectedSegmentIndex == 0 ? .Acc : .Gyro
         self.measureViewModel.stopMeasure(mode: mode)
+    }
+    
+    private func tappedSegmentedControl() {
+        self.graphView.resetView()
+        self.measureViewModel.resetMeasureDatas()
     }
     
     private func setupViews() {
