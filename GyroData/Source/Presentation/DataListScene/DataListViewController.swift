@@ -11,8 +11,7 @@ protocol DataListConfigurable: AnyObject {
     func setupData(_ datas: [MeasureData])
     func setupSelectData(_ data: MeasureData)
     func setupMeasure()
-    func setupPlay()
-    func setupDelete()
+    func setupPlay(_ data: MeasureData)
 }
 
 final class DataListViewController: UIViewController {
@@ -57,12 +56,8 @@ extension DataListViewController: DataListConfigurable {
         navigationController?.pushViewController(MeasureViewController(), animated: true)
     }
     
-    func setupPlay() {
+    func setupPlay(_ data: MeasureData) {
         //TODO: Move to Play View
-    }
-    
-    func setupDelete() {
-        //TODO: Data Delete
     }
 }
 
@@ -73,12 +68,32 @@ extension DataListViewController {
     }
 }
 
+// MARK: - TableView Delegate Method
 extension DataListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         viewModel.action(.cellSelect(index: indexPath.row))
     }
+    
+    func tableView(
+        _ tableView: UITableView,
+        trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
+    ) -> UISwipeActionsConfiguration? {
+        
+        let play = UIContextualAction(style: .normal, title: "Play") { [weak self] _, _, _ in
+            self?.viewModel.action(.play(index: indexPath.row))
+        }
+        
+        let delete = UIContextualAction(style: .normal, title: "Delete") { [weak self] _, _, _ in
+            self?.viewModel.action(.delete(index: indexPath.row))
+        }
+        
+        play.backgroundColor = .systemGreen
+        delete.backgroundColor = .systemRed
+        let swipeConfiguration = UISwipeActionsConfiguration(actions: [play, delete])
+        
+        return swipeConfiguration
+    }
 }
-
 
 // MARK: - Configure DataSource, Snapshot
 extension DataListViewController {
