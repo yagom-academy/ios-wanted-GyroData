@@ -17,7 +17,9 @@ final class ListViewController: UIViewController {
     private var dataSource: DataSource? = nil
     private var snapShot: SnapShot = SnapShot()
     private var isPaging: Bool = false
-    private var coreDataManager: some MeasurementDataHandleable = CoreDataManager()
+    private let coreDataManager = CoreDataManager()
+    private let sensorFileManager = SensorFileManager()
+    lazy var dataManagers: [any MeasurementDataHandleable] = [coreDataManager, sensorFileManager]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -141,12 +143,10 @@ extension ListViewController {
     }
     
     private func presentMeasurementPage() -> UIAction {
-        let measurementViewController = MeasurementViewController(
-            dataManagers: [coreDataManager, SensorFileManager()])
-            
         return UIAction { [weak self] _ in
-            self?.navigationController?.pushViewController(measurementViewController,
-                                                          animated: false)
+            guard let self = self else { return }
+            let measureViewController = MeasurementViewController(dataManagers: self.dataManagers)
+            self.navigationController?.pushViewController(measureViewController, animated: false)
         }
     }
 }
