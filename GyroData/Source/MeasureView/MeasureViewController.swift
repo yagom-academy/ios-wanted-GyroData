@@ -30,10 +30,12 @@ final class MeasureViewController: UIViewController {
         return segmentedControl
     }()
     
-    private let graphView: UIView = {
-        let view = UIView()
+    private let graphView: GraphView = {
+        let view = GraphView()
         
-        view.backgroundColor = .systemGray6
+        view.layer.borderWidth = 2
+        view.layer.borderColor = UIColor.black.cgColor
+        view.backgroundColor = .clear
         view.translatesAutoresizingMaskIntoConstraints = false
         
         return view
@@ -52,7 +54,8 @@ final class MeasureViewController: UIViewController {
         let button = UIButton()
         
         button.setTitle(Constant.stopButtonTitle, for: .normal)
-        button.setTitleColor(.systemBlue, for: .normal)
+        button.setTitleColor(.gray, for: .normal)
+        button.isUserInteractionEnabled = false
         
         return button
     }()
@@ -71,15 +74,26 @@ final class MeasureViewController: UIViewController {
         super.viewDidLoad()
         setupNavigation()
         setupButtons()
+        setupNotification()
         setupViews()
+        bind()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(true)
+        removeNotification()
     }
     
     private func bind() {
         measureViewModel.measureDatas.bind { data in
-            //TODO: 그래프를 그리는 메서드
+            self.graphView.drawLine(xPoint: data.x.last,
+                                    yPoint: data.y.last,
+                                    zPoint: data.z.last)
+            self.graphView.configure(xPoint: data.x.last,
+                                     yPoint: data.y.last,
+                                     zPoint: data.z.last)
         }
     }
-    
     
     private func setupNavigation() {
         navigationItem.title = Constant.title
@@ -87,20 +101,79 @@ final class MeasureViewController: UIViewController {
                                                             style: .plain,
                                                             target: self,
                                                             action: nil)
+        self.navigationItem.rightBarButtonItem?.isEnabled = false
     }
     
     private func setupButtons() {
         let measureAction = UIAction { _ in
-            let mode: SensorMode = self.segmentedControl.selectedSegmentIndex == 0 ? .Acc : .Gyro
-            self.measureViewModel.startMeasure(mode: mode)
+            self.tappedMeasureButton()
         }
         measureButton.addAction(measureAction, for: .touchUpInside)
         
         let stopAction = UIAction { _ in
-            let mode: SensorMode = self.segmentedControl.selectedSegmentIndex == 0 ? .Acc : .Gyro
-            self.measureViewModel.stopMeasure(mode: mode)
+            self.tappedStopButton()
         }
         stopButton.addAction(stopAction, for: .touchUpInside)
+        
+        let segmentedControlAction = UIAction { _ in
+            self.resetGraphView()
+        }
+        segmentedControl.addAction(segmentedControlAction, for: .valueChanged)
+    }
+    
+    private func tappedMeasureButton() {
+        resetGraphView()
+        
+        self.segmentedControl.isUserInteractionEnabled = false
+        self.measureButton.isUserInteractionEnabled = false
+        self.stopButton.isUserInteractionEnabled = true
+        self.navigationItem.rightBarButtonItem?.isEnabled = false
+        
+        self.segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.gray],
+                                                     for: UIControl.State.selected)
+        self.segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.gray],
+                                                     for: UIControl.State.normal)
+        self.measureButton.setTitleColor(.gray, for: .normal)
+        self.stopButton.setTitleColor(.systemBlue, for: .normal)
+
+        let mode: SensorMode = self.segmentedControl.selectedSegmentIndex == 0 ? .Acc : .Gyro
+        self.measureViewModel.startMeasure(mode: mode)
+    }
+    
+    @objc
+    private func tappedStopButton() {
+        self.segmentedControl.isUserInteractionEnabled = true
+        self.measureButton.isUserInteractionEnabled = true
+        self.stopButton.isUserInteractionEnabled = false
+        self.navigationItem.rightBarButtonItem?.isEnabled = true
+        
+        self.segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black],
+                                                     for: UIControl.State.selected)
+        self.segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black],
+                                                     for: UIControl.State.normal)
+        self.measureButton.setTitleColor(.systemBlue, for: .normal)
+        self.stopButton.setTitleColor(.gray, for: .normal)
+        
+        let mode: SensorMode = self.segmentedControl.selectedSegmentIndex == 0 ? .Acc : .Gyro
+        self.measureViewModel.stopMeasure(mode: mode)
+    }
+    
+    private func resetGraphView() {
+        self.graphView.resetView()
+        self.measureViewModel.resetMeasureDatas()
+    }
+    
+    private func setupNotification() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(tappedStopButton),
+                                               name: .timeOver,
+                                               object: nil)
+    }
+    
+    private func removeNotification() {
+        NotificationCenter.default.removeObserver(self,
+                                                  name: .timeOver,
+                                                  object: nil)
     }
     
     private func setupViews() {

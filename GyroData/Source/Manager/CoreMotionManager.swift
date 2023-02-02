@@ -7,8 +7,13 @@ import CoreMotion
 final class CoreMotionManager {
     private var motion = CMMotionManager()
     private var timer: Timer?
+    var second: Double = 0
     
-    func startGyros(completion: @escaping (MeasureData) -> Void) {
+    private var xData: [Double] = []
+    private var yData: [Double] = []
+    private var zData: [Double] = []
+    
+    func startGyros(completion: @escaping (SensorData) -> Void) {
         if motion.isGyroAvailable {
             self.motion.gyroUpdateInterval = 1.0 / 60.0
             self.motion.startGyroUpdates()
@@ -18,11 +23,19 @@ final class CoreMotionManager {
                                repeats: true,
                                block: { (timer) in
                 
+                self.second += 0.1
+
+                if self.second >= 60.0 {
+                    NotificationCenter.default.post(name: .timeOver, object: nil)
+                    self.stopGyros()
+                }
+                
                 if let data = self.motion.gyroData {
-                    let x = data.rotationRate.x
-                    let y = data.rotationRate.y
-                    let z = data.rotationRate.z
-                    completion(.init(x: x, y: y, z: z))
+                    self.xData.append(data.rotationRate.x)
+                    self.yData.append(data.rotationRate.y)
+                    self.zData.append(data.rotationRate.z)
+
+                    completion(.init(x: self.xData, y: self.yData, z: self.zData))
                 }
             })
             
@@ -39,7 +52,7 @@ final class CoreMotionManager {
         }
     }
     
-    func startAccelerometers(completion: @escaping (MeasureData) -> Void) {
+    func startAccelerometers(completion: @escaping (SensorData) -> Void) {
         if self.motion.isAccelerometerAvailable {
             self.motion.accelerometerUpdateInterval = 1.0 / 60.0
             self.motion.startAccelerometerUpdates()
@@ -48,12 +61,20 @@ final class CoreMotionManager {
                                interval: (10.0 / 60.0),
                                repeats: true,
                                block: { (timer) in
+ 
+                self.second += 0.1
+
+                if self.second >= 60.0 {
+                    NotificationCenter.default.post(name: .timeOver, object: nil)
+                    self.stopAccelerometers()
+                }
+                
                 if let data = self.motion.accelerometerData {
-                    let x = data.acceleration.x
-                    let y = data.acceleration.y
-                    let z = data.acceleration.z
-                    
-                    completion(.init(x: x, y: y, z: z))
+                    self.xData.append(data.acceleration.x)
+                    self.yData.append(data.acceleration.y)
+                    self.zData.append(data.acceleration.z)
+
+                    completion(.init(x: self.xData, y: self.yData, z: self.zData))
                 }
             })
             
