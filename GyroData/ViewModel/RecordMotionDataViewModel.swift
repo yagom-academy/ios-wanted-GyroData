@@ -41,7 +41,7 @@ final class RecordMotionDataViewModel {
         self.onAdd = onAdd
     }
     
-    func action(_ action: Action)  {
+    func action(_ action: Action) {
         switch action {
         case let .changeSegment(index):
             selectedIndex(index)
