@@ -92,6 +92,7 @@ final class RecordMotionDataViewModel {
         dataStorage = try DataStorage(directoryName: motionData.motionDataType.rawValue)
         try saveToCoreData()
         try saveToDataStorage()
+        onAdd?(motionData)
     }
     
     private func saveToCoreData() throws {
