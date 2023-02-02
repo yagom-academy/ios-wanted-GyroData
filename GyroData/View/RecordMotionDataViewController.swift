@@ -37,6 +37,7 @@ final class RecordMotionDataViewController: UIViewController {
         let button = UIButton()
         button.setTitle(Constant.Namespace.measure, for: .normal)
         button.setTitleColor(.systemBlue, for: .normal)
+        button.setTitleColor(.systemGray, for: .disabled)
         return button
     }()
 
@@ -44,6 +45,7 @@ final class RecordMotionDataViewController: UIViewController {
         let button = UIButton()
         button.setTitle(Constant.Namespace.stop, for: .normal)
         button.setTitleColor(.systemBlue, for: .normal)
+        button.setTitleColor(.systemGray, for: .disabled)
         button.isEnabled = false
         return button
     }()
@@ -151,6 +153,7 @@ final class RecordMotionDataViewController: UIViewController {
     }
     
     private func toggleButtons() {
+        measureButton.isEnabled.toggle()
         stopButton.isEnabled.toggle()
         navigationItem.rightBarButtonItem?.isEnabled.toggle()
     }
