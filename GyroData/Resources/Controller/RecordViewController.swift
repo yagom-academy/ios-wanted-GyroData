@@ -214,6 +214,13 @@ private extension RecordViewController {
         gridLayer.path = gridPath.cgPath
         graphView.layer.addSublayer(gridLayer)
     }
+
+    func settingPathStartPosition() {
+        let centerY = graphView.frame.height / 2
+        xPath.move(to: CGPoint(x: currentX, y: centerY - xValues[0]))
+        yPath.move(to: CGPoint(x: currentX, y: centerY - yValues[0]))
+        zPath.move(to: CGPoint(x: currentX, y: centerY - zValues[0]))
+    }
 }
 
 // MARK: - UIConfiguration
