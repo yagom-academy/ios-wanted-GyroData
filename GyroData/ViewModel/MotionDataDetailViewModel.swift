@@ -60,7 +60,7 @@ final class MotionDataDetailViewModel {
     }
     
     private func setNavigationTitle() {
-        navigationTitle?(motionData.createdAt.description)
+        navigationTitle?(motionData.createdAt.dateTimeString())
     }
     
     private func setDetailViewType() {
