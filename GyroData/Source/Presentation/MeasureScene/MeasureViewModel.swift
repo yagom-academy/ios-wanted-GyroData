@@ -98,11 +98,8 @@ extension MeasureViewModel: MeasureServiceDelegate {
         sensorMeasureValues = data
     }
     
-    func endMeasuringData() {
-        delegate?.endMeasuringData()
-    }
-    
-    func emitWasteTime(_ wasteTime: TimeInterval) {
+    func endMeasuringData(_ wasteTime: TimeInterval) {
         self.wasteTime = wasteTime
+        delegate?.endMeasuringData()
     }
 }

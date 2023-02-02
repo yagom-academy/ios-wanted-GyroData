@@ -14,6 +14,5 @@ protocol MeasureServiceDelegate: AnyObject {
     func nonGyroscopeMeasurable()
     
     func updateData(_ data: Values)
-    func endMeasuringData()
-    func emitWasteTime(_ wasteTime: TimeInterval)
+    func endMeasuringData(_ wasteTime: TimeInterval)
 }

@@ -20,6 +20,7 @@ final class SensorMeasureService {
     private weak var delegate: MeasureServiceDelegate?
     private var timer: Timer = .init()
     private let motionManager: CMMotionManager
+    private var fireDate: Date = Date()
     
     init(delegate: MeasureServiceDelegate) {
         self.delegate = delegate
@@ -37,7 +38,8 @@ final class SensorMeasureService {
     
     func measureStop() {
         timer.invalidate()
-        delegate?.endMeasuringData()
+        let wasteTime = fireDate.timeIntervalSince(Date())
+        delegate?.endMeasuringData(wasteTime)
     }
 }
 
@@ -47,19 +49,21 @@ private extension SensorMeasureService {
             delegate?.nonAccelerometerMeasurable()
             return
         }
-        let fireDate = Date()
         
         motionManager.accelerometerUpdateInterval = interval
         motionManager.startAccelerometerUpdates()
-        
-        timer = Timer(timeInterval: interval, repeats: true) { timer in
+        fireDate = Date()
+            
+        timer = Timer(timeInterval: interval, repeats: true) { [weak self] _ in
+            guard let self = self else { return }
             if let data = self.motionManager.accelerometerData {
                 let accelerationData = (x: data.acceleration.x, y: data.acceleration.y, z: data.acceleration.z)
                 self.data = accelerationData
             }
             
-            if self.isTimeOver(duration, from: fireDate) {
-                self.timer.invalidate()
+            if self.isTimeOver(duration, from: self.fireDate) {
+                self.measureStop()
+                self.motionManager.stopAccelerometerUpdates()
             }
         }
         
@@ -67,14 +71,7 @@ private extension SensorMeasureService {
     }
     
     func isTimeOver(_ duration: TimeInterval, from fireDate: Date) -> Bool {
-        let wasteTime = Date().timeIntervalSince(fireDate)
-
-        if wasteTime > duration {
-            delegate?.emitWasteTime(wasteTime)
-            return true
-        } else {
-            return false
-        }
+        fireDate.timeIntervalSince(fireDate) > duration ? true : false
     }
     
     func gyroscopeMeasureStart(_ interval: TimeInterval, _ duration: TimeInterval) {
@@ -85,15 +82,18 @@ private extension SensorMeasureService {
         
         motionManager.gyroUpdateInterval = interval
         motionManager.startGyroUpdates()
+        fireDate = Date()
         
-        timer = Timer(timeInterval: interval, repeats: true) { timer in
+        timer = Timer(timeInterval: interval, repeats: true) { [weak self] _ in
+            guard let self = self else { return }
             if let data = self.motionManager.gyroData {
                 let gyroData = (data.rotationRate.x, data.rotationRate.y, data.rotationRate.z)
                 self.data = gyroData
             }
             
-            if self.isTimeOver(duration, from: timer.fireDate) {
-                timer.invalidate()
+            if self.isTimeOver(duration, from: self.fireDate) {
+                self.measureStop()
+                self.motionManager.stopGyroUpdates()
             }
         }
         
