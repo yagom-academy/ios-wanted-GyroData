@@ -60,6 +60,7 @@
 		0CC8B8362988B7230011E5FB /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				57D312A3298A14F1001963C5 /* MotionMeasures.swift */,
 				0CC8B8372988B73C0011E5FB /* MotionData.swift */,
 				0CC8B8392988BA580011E5FB /* MotionType.swift */,
 			);
@@ -70,17 +71,11 @@
 			isa = PBXGroup;
 			children = (
 				5785B3722988B31D00DD61B2 /* App */,
+				B2409080298BAF50008DC79B /* Protocol */,
+				B2409081298BAF68008DC79B /* Error */,
+				B2409082298BAFE5008DC79B /* Service */,
 				0CC8B8362988B7230011E5FB /* Model */,
 				5785B3732988B33300DD61B2 /* View */,
-				B24090592989624E008DC79B /* CoreDataManageable.swift */,
-				B240905B298A4531008DC79B /* CoreDataError.swift */,
-				0C27E403298A492C00C570C4 /* MotionMeasureManager.swift */,
-				0C27E427298B9EBE00C570C4 /* MeasureTimer.swift */,
-				5785B396298A0CCF00DD61B2 /* FileManagerProtocol.swift */,
-				57D312A3298A14F1001963C5 /* MotionMeasures.swift */,
-				57D312A5298A15A1001963C5 /* FileHandleManager.swift */,
-				57D312A7298A532C001963C5 /* FileManagingError.swift */,
-
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -136,6 +131,34 @@
 				B20D4BDD29894BEE00ADC6B6 /* MotionDataModel.xcdatamodeld */,
 			);
 			path = GyroData;
+			sourceTree = "<group>";
+		};
+		B2409080298BAF50008DC79B /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				B24090592989624E008DC79B /* CoreDataManageable.swift */,
+				5785B396298A0CCF00DD61B2 /* FileManagerProtocol.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		B2409081298BAF68008DC79B /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				B240905B298A4531008DC79B /* CoreDataError.swift */,
+				57D312A7298A532C001963C5 /* FileManagingError.swift */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
+		B2409082298BAFE5008DC79B /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				0C27E427298B9EBE00C570C4 /* MeasureTimer.swift */,
+				0C27E403298A492C00C570C4 /* MotionMeasureManager.swift */,
+				57D312A5298A15A1001963C5 /* FileHandleManager.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -221,7 +244,7 @@
 				57D312A6298A15A1001963C5 /* FileHandleManager.swift in Sources */,
 				0CC8B8382988B73C0011E5FB /* MotionData.swift in Sources */,
 				0C27E428298B9EBE00C570C4 /* MeasureTimer.swift in Sources */,
-				B20D4BDF29894BEE00ADC6B6 /* MotionDataModel.xcdatamodeld in Sources */
+				B20D4BDF29894BEE00ADC6B6 /* MotionDataModel.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
