@@ -100,10 +100,9 @@ extension MotionDataListViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: MotionDataListTableViewCell.identifier, for: indexPath
         ) as? MotionDataListTableViewCell else { return MotionDataListTableViewCell() }
-        guard let motionData = viewModel.motionData(at: indexPath) else { return cell }
-        cell.configureSubviewsText(createdAt: motionData.createdAt.dateTimeString(),
-                                   type: motionData.motionDataType.rawValue,
-                                   length: motionData.length.description)
+        viewModel.configureCell(for: indexPath) { createdAt, type, length in
+            cell.configureSubviewsText(createdAt: createdAt, type: type, length: length)
+        }
         return cell
     }
 }
