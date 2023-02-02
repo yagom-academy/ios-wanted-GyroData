@@ -12,8 +12,8 @@ class AddViewController: UIViewController {
     // MARK: Enumerations
     
     enum MeasurementUnit: Int {
-        case acc = 0
-        case gyro = 1
+        case acc
+        case gyro
     }
     
     // MARK: Private Properties
