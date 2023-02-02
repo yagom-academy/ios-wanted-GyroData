@@ -8,7 +8,15 @@
 import UIKit
 
 class MeasureResultViewController: UIViewController {
-    var graphView = GraphView()
+    var data: [Coordinate] = []
+    
+    var graphView: GraphView = {
+        let view = GraphView()
+        view.layer.borderWidth = 2
+        view.layer.borderColor = UIColor.black.cgColor
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
     
     let dateLabel: UILabel = {
         let label = UILabel()
@@ -26,21 +34,23 @@ class MeasureResultViewController: UIViewController {
     
     let playButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(systemName: "play.fill"), for: .normal)
+        let imageConfig = UIImage.SymbolConfiguration(pointSize: 50, weight: .light)
+        button.setImage(UIImage(systemName: "play.fill", withConfiguration: imageConfig), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
     let stopButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(systemName: "stop.fill"), for: .normal)
+        let imageConfig = UIImage.SymbolConfiguration(pointSize: 50, weight: .light)
+        button.setImage(UIImage(systemName: "stop.fill", withConfiguration: imageConfig), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
     let timeLabel: UILabel = {
         let label = UILabel()
-        label.text = "시간" //함수로 주입받기
+        label.text = "00.0"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -49,38 +59,41 @@ class MeasureResultViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         configureLayout()
-        // Do any additional setup after loading the view.
     }
     
     func configureLayout() {
         view.addSubview(dateLabel)
         view.addSubview(pageLabel)
         view.addSubview(graphView)
-//        view.addSubview(playButton)
-//        view.addSubview(timeLabel)
+        view.addSubview(playButton)
+        view.addSubview(timeLabel)
         
         NSLayoutConstraint.activate([
-            dateLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 15),
-            dateLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            dateLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15),
+            dateLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             
             pageLabel.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 10),
             pageLabel.leadingAnchor.constraint(equalTo: dateLabel.leadingAnchor),
             
             graphView.topAnchor.constraint(equalTo: pageLabel.bottomAnchor, constant: 20),
-            graphView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.5),
+            graphView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
             graphView.heightAnchor.constraint(equalTo: graphView.widthAnchor),
-            graphView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            graphView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
 
-//
-//            playButton.topAnchor.constraint(equalTo: graphView.bottomAnchor, constant: 30),
-//            playButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+
+            playButton.topAnchor.constraint(equalTo: graphView.bottomAnchor, constant: 30),
+            playButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            playButton.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.4),
             
-//            timeLabel.topAnchor.constraint(equalTo: graphView.bottomAnchor, constant: 30),
-//            timeLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
-            
-            
+            timeLabel.centerYAnchor.constraint(equalTo: playButton.centerYAnchor),
+            timeLabel.leadingAnchor.constraint(equalTo: playButton.trailingAnchor)
         ])
     }
     
-
+    func configureData(date: Date?, page: String?, data: [Coordinate]?) {
+        dateLabel.text = "\(date!)"
+        pageLabel.text = page
+        guard let data else { return }
+        self.data = data
+    }
 }

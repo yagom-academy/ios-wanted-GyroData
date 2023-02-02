@@ -91,6 +91,10 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         
         let play = UIContextualAction(style: .normal, title: "Play") { (UIContextualAction, UIView, success: @escaping (Bool) -> Void) in
             let measureResultViewController = MeasureResultViewController()
+            guard let uuid = self.motionDataList[indexPath.row].id else { return }
+            measureResultViewController.configureData(date: self.motionDataList[indexPath.row].date,
+                                                      page: "Play",
+                                                      data: FileManager.default.load(path: uuid.uuidString))
             self.navigationController?.pushViewController(measureResultViewController, animated: true)
             success(true)
         }
