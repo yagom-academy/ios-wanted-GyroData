@@ -6,7 +6,7 @@
 //
 
 import CoreMotion
-import UIKit
+import Foundation
 
 final class MeasurementManager {
     static let shared: MeasurementManager = MeasurementManager()
@@ -19,7 +19,7 @@ final class MeasurementManager {
         motionManager.gyroUpdateInterval = 0.1
     }
 
-    func start(_ graphMode: GraphMode, _ view: UIView, _ completionHandler: @escaping () -> Void) {
+    func start(_ graphMode: GraphMode, _ graphView: GraphView, _ completionHandler: @escaping () -> Void) {
         timeCount = Double.zero
 
         checkAvailable(to: graphMode)
@@ -35,7 +35,7 @@ final class MeasurementManager {
                 completionHandler()
             }
 
-            drawMotionGraph(graphMode, view)
+            drawMotionGraph(graphMode, graphView)
         })
 
         if let timer = timer {
@@ -58,7 +58,7 @@ final class MeasurementManager {
         return round(value * 10) / 10 == 60.0
     }
 
-    private func drawMotionGraph(_ graphMode: GraphMode, _ view: UIView) {
+    private func drawMotionGraph(_ graphMode: GraphMode, _ graphView: GraphView) {
         let measurementData: Measurable?
 
         switch graphMode {
@@ -70,7 +70,7 @@ final class MeasurementManager {
 
         guard let data = measurementData else { return }
 
-        // TODO: 그래프 뷰가 data의 x, y, z 좌표를 가지고 그려야 함!
+        graphView.add([data.x, data.y, data.z])
     }
 
     func stop(_ graphMode: GraphMode) {

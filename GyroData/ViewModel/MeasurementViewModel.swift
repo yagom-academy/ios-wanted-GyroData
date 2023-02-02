@@ -5,11 +5,11 @@
 //  Created by ash and som on 2023/01/31.
 //
 
-import UIKit
+import Foundation
 
 protocol MeasurementInput {
     func save(_ graphMode: GraphMode, data: [[Double]])
-    func startMeasurement(_ graphMode: GraphMode, on view: UIView)
+    func startMeasurement(_ graphMode: GraphMode, on graphView: GraphView)
     func stopMeasurement(_ graphMode: GraphMode)
 }
 
@@ -39,9 +39,9 @@ struct MeasurementViewModel: MeasurementInput, MeasurementOutput {
         saveToFile(newGyroData, data: data)
     }
 
-    func startMeasurement(_ graphMode: GraphMode, on view: UIView) {
+    func startMeasurement(_ graphMode: GraphMode, on graphView: GraphView) {
         isMeasuring.value = true
-        measurementManager.start(graphMode, view) {
+        measurementManager.start(graphMode, graphView) {
             self.isMeasuring.value = false
         }
     }

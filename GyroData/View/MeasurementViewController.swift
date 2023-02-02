@@ -36,9 +36,10 @@ final class MeasurementViewController: UIViewController {
         return segmentedControl
     }()
 
-    private let graphView: GridView = {
-        let graphView = GridView()
+    private let graphView: GraphView = {
+        let graphView = GraphView()
         graphView.layer.borderWidth = 2
+        graphView.backgroundColor = .white
         graphView.translatesAutoresizingMaskIntoConstraints = false
         return graphView
     }()
@@ -137,10 +138,10 @@ final class MeasurementViewController: UIViewController {
 
 extension MeasurementViewController {
     private func tappedSaveButton() -> UIAction {
-        // TODO: 그래프 뷰에서 데이터 받아오기
         return UIAction { [weak self] _ in
             guard let graphMode = self?.graphMode else { return }
-            self?.measurementViewModel.save(graphMode, data: [[0.1]])
+            guard let segmentData = self?.graphView.segmentData else { return }
+            self?.measurementViewModel.save(graphMode, data: segmentData)
         }
     }
 
