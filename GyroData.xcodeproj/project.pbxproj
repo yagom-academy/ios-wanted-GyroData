@@ -16,6 +16,8 @@
 		3CFD20D4298A35BF00269FC9 /* MeasureDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFD20D3298A35BF00269FC9 /* MeasureDataCell.swift */; };
 		3CFD20D6298A3BAF00269FC9 /* Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFD20D5298A3BAF00269FC9 /* Identifiable.swift */; };
 		3CFD20D9298A5F6A00269FC9 /* UIComponent+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFD20D8298A5F6A00269FC9 /* UIComponent+Extension.swift */; };
+		3CFD20DC298BCD6000269FC9 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFD20DB298BCD6000269FC9 /* DetailViewModel.swift */; };
+		3CFD20E0298BCEDE00269FC9 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFD20DF298BCEDE00269FC9 /* DetailViewController.swift */; };
 		63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB428D44FC400C53A39 /* AppDelegate.swift */; };
 		63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB628D44FC400C53A39 /* SceneDelegate.swift */; };
 		63F01BBE28D44FC500C53A39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBD28D44FC500C53A39 /* Assets.xcassets */; };
@@ -47,7 +49,6 @@
 		AC52BB46298967B50057CA56 /* Sensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52BB44298967B50057CA56 /* Sensor.swift */; };
 		AC52BB49298A34070057CA56 /* SensorMeasureService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52BB47298A34070057CA56 /* SensorMeasureService.swift */; };
 		AC52BB8B298B4D4B0057CA56 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52BB8A298B4D4B0057CA56 /* GraphView.swift */; };
-		AC52BB8C298BAD000057CA56 /* SensorMeasureService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52BB47298A34070057CA56 /* SensorMeasureService.swift */; };
 		AC52BB8E298BAD890057CA56 /* MeasureServiceDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52BB8D298BAD890057CA56 /* MeasureServiceDelegate.swift */; };
 		AC52BB91298BAE8C0057CA56 /* MeasureViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52BB90298BAE8C0057CA56 /* MeasureViewDelegate.swift */; };
 /* End PBXBuildFile section */
@@ -72,6 +73,8 @@
 		3CFD20D3298A35BF00269FC9 /* MeasureDataCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureDataCell.swift; sourceTree = "<group>"; };
 		3CFD20D5298A3BAF00269FC9 /* Identifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifiable.swift; sourceTree = "<group>"; };
 		3CFD20D8298A5F6A00269FC9 /* UIComponent+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIComponent+Extension.swift"; sourceTree = "<group>"; };
+		3CFD20DB298BCD6000269FC9 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
+		3CFD20DF298BCEDE00269FC9 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		63F01BB128D44FC400C53A39 /* GyroData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GyroData.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63F01BB428D44FC400C53A39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63F01BB628D44FC400C53A39 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -135,6 +138,7 @@
 				AC52BB88298B4D2E0057CA56 /* Common */,
 				3CB15C48298944F10049E390 /* DataListScene */,
 				3CB15C4D298945790049E390 /* MeasureScene */,
+				3CFD20DA298BCD3500269FC9 /* ReviewScene */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -164,6 +168,15 @@
 				3CFD20D8298A5F6A00269FC9 /* UIComponent+Extension.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		3CFD20DA298BCD3500269FC9 /* ReviewScene */ = {
+			isa = PBXGroup;
+			children = (
+				3CFD20DB298BCD6000269FC9 /* DetailViewModel.swift */,
+				3CFD20DF298BCEDE00269FC9 /* DetailViewController.swift */,
+			);
+			path = ReviewScene;
 			sourceTree = "<group>";
 		};
 		63F01BA828D44FC400C53A39 = {
@@ -464,9 +477,11 @@
 				AC52BAAE2987E9C60057CA56 /* TransactionService.swift in Sources */,
 				AC52BB8C298BAD000057CA56 /* SensorMeasureService.swift in Sources */,
 				3CB15C4629893DC60049E390 /* FileManageable.swift in Sources */,
+				3CFD20DC298BCD6000269FC9 /* DetailViewModel.swift in Sources */,
 				AC52BAC42987F91A0057CA56 /* SensorData+CoreDataClass.swift in Sources */,
 				AC52BAB22987EA180057CA56 /* CoreDataManager.swift in Sources */,
 				AC52BAAC2987E9930057CA56 /* MeasureData.swift in Sources */,
+				3CFD20E0298BCEDE00269FC9 /* DetailViewController.swift in Sources */,
 				AC52BAB42987EA2A0057CA56 /* FileSystemManager.swift in Sources */,
 				3CFD20D6298A3BAF00269FC9 /* Identifiable.swift in Sources */,
 				3CB15C4A298945620049E390 /* DataListViewController.swift in Sources */,

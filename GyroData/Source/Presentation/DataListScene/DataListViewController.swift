@@ -34,6 +34,7 @@ final class DataListViewController: UIViewController {
         setupNavigationBar()
         setupView()
         setupConstraint()
+        viewModel.addData()
     }
 }
 
@@ -44,9 +45,16 @@ extension DataListViewController: DataListConfigurable {
     }
     
     func setupSelectData(_ data: MeasureData) {
-        //TODO: Receive To DetailViewController
+        navigationController?.pushViewController(DetailViewController(viewModel: DetailViewModel(data: data)), animated: true)
     }
 }
+
+extension DataListViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        viewModel.fetchSelectedData(index: indexPath.row)
+    }
+}
+
 
 // MARK: - Configure DataSource, Snapshot
 extension DataListViewController {
@@ -81,7 +89,7 @@ extension DataListViewController {
         title = Constant.title
         let appearance = UINavigationBarAppearance()
         appearance.backgroundColor = .systemGray5
-        
+        tableView.delegate = self
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
     }
