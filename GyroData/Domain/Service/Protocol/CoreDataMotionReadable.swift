@@ -9,4 +9,5 @@ protocol CoreDataMotionReadable {
     var coreDataRepository: CoreDataRepository { get }
     
     func read(from offset: Int) -> [Motion]?
+    func count() -> Int?
 }
