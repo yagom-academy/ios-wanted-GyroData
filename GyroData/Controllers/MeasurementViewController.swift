@@ -99,13 +99,19 @@ final class MeasurementViewController: UIViewController {
     }
     
     private func saveSensorData() {
-        // 비동기 저장 구현해야함
+        if measurementData.axisValues == [] {
+            showAlert(title: "Error",
+                      message: DataHandleError.noDataError(detail: "측정한 데이터가 없습니다.").description)
+        }
+
         do {
             for manager in dataManagers {
                 try manager.saveData(measurementData)
+                // 데이터 저장은 비동기로 처리하고 Activity Indicator를 표시해주세요.
+                // 저장이 성공하면 Indicator를 닫고, 첫 번째 페이지로 이동합니다.
             }
         } catch {
-            fatalError("얼럿추가해야됨")
+            showAlert(title: "Error", message: DataHandleError.saveFailError(error: error).description)
         }
     }
     
