@@ -28,6 +28,9 @@
 		BF128AC229892D5700C3CB7B /* MeasurementMotionDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF128AC129892D5700C3CB7B /* MeasurementMotionDataViewModel.swift */; };
 		BF128AC429892D7200C3CB7B /* ReplayMotionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF128AC329892D7200C3CB7B /* ReplayMotionViewModel.swift */; };
 		BF128AC6298948BE00C3CB7B /* DateFormatter+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF128AC5298948BE00C3CB7B /* DateFormatter+.swift */; };
+		BFBD6B6D298BB07A0057D637 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBD6B6C298BB07A0057D637 /* GraphView.swift */; };
+		BFBD6B6F298BB0F90057D637 /* GraphViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBD6B6E298BB0F90057D637 /* GraphViewDataSource.swift */; };
+		BFBD6B71298BB4EF0057D637 /* GraphViewDataSource+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBD6B70298BB4EF0057D637 /* GraphViewDataSource+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +57,9 @@
 		BF128AC129892D5700C3CB7B /* MeasurementMotionDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementMotionDataViewModel.swift; sourceTree = "<group>"; };
 		BF128AC329892D7200C3CB7B /* ReplayMotionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplayMotionViewModel.swift; sourceTree = "<group>"; };
 		BF128AC5298948BE00C3CB7B /* DateFormatter+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "DateFormatter+.swift"; path = "GyroData/ViewModel/ReplayMotion/DateFormatter+.swift"; sourceTree = SOURCE_ROOT; };
+		BFBD6B6C298BB07A0057D637 /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
+		BFBD6B6E298BB0F90057D637 /* GraphViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphViewDataSource.swift; sourceTree = "<group>"; };
+		BFBD6B70298BB4EF0057D637 /* GraphViewDataSource+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "GraphViewDataSource+.swift"; path = "GyroData/View/GraphViewDataSource+.swift"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +87,8 @@
 				BF128AAA2988AE5900C3CB7B /* MotionDataTable */,
 				BF128AB929892B6A00C3CB7B /* MeasurementMotionData */,
 				BF128ABD29892CFC00C3CB7B /* ReplayMotion */,
+				BFBD6B6C298BB07A0057D637 /* GraphView.swift */,
+				BFBD6B6E298BB0F90057D637 /* GraphViewDataSource.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -177,6 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				BF128AC5298948BE00C3CB7B /* DateFormatter+.swift */,
+				BFBD6B70298BB4EF0057D637 /* GraphViewDataSource+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -294,10 +303,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFBD6B71298BB4EF0057D637 /* GraphViewDataSource+.swift in Sources */,
 				BF128AC029892D2700C3CB7B /* ReplayMotionViewController.swift in Sources */,
 				63F01BB928D44FC400C53A39 /* MotionDataTableViewController.swift in Sources */,
 				BF128AC6298948BE00C3CB7B /* DateFormatter+.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
+				BFBD6B6F298BB0F90057D637 /* GraphViewDataSource.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
 				BF128AB52988CAA700C3CB7B /* MotionDataEntity+CoreDataProperties.swift in Sources */,
 				BF128AC429892D7200C3CB7B /* ReplayMotionViewModel.swift in Sources */,
@@ -309,6 +320,7 @@
 				BF128AB42988CAA700C3CB7B /* MotionDataEntity+CoreDataClass.swift in Sources */,
 				1170085229893867001DFB60 /* Reusable.swift in Sources */,
 				BF128ABC29892BB400C3CB7B /* MeasurementMotionDataViewController.swift in Sources */,
+				BFBD6B6D298BB07A0057D637 /* GraphView.swift in Sources */,
 				1138F2492988D09200007C11 /* CoreDataManager.swift in Sources */,
 				11B34A8C2988A6AB00DA3A56 /* MotionData.swift in Sources */,
 				1138F24C2988E68000007C11 /* JSONDataManager.swift in Sources */,
