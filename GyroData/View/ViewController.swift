@@ -78,6 +78,12 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let measureResultViewController = MeasureResultViewController(data: self.motionDataList[indexPath.row],
+                                                                      pageType: .view)
+        self.navigationController?.pushViewController(measureResultViewController, animated: true)
+    }
+    
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         let delete = UIContextualAction(style: .normal, title: "Delete") { (UIContextualAction, UIView, success: @escaping (Bool) -> Void) in
@@ -90,11 +96,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         delete.backgroundColor = .systemRed
         
         let play = UIContextualAction(style: .normal, title: "Play") { (UIContextualAction, UIView, success: @escaping (Bool) -> Void) in
-            let measureResultViewController = MeasureResultViewController()
-            guard let uuid = self.motionDataList[indexPath.row].id else { return }
-            measureResultViewController.configureData(date: self.motionDataList[indexPath.row].date,
-                                                      page: "Play",
-                                                      data: FileManager.default.load(path: uuid.uuidString))
+            let measureResultViewController = MeasureResultViewController(data: self.motionDataList[indexPath.row],
+                                                                          pageType: .play)
             self.navigationController?.pushViewController(measureResultViewController, animated: true)
             success(true)
         }
