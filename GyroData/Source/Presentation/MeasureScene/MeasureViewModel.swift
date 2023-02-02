@@ -40,6 +40,7 @@ class MeasureViewModel {
     
     init(measureService: SensorMeasureService) {
         self.measureService = measureService
+        setDelegate()
     }
     
     func action(_ action: Action) {
@@ -78,6 +79,10 @@ private extension MeasureViewModel {
                 self.delegate?.saveFail(error)
             }
         }
+    }
+    
+    func setDelegate() {
+        self.measureService.delegate = self
     }
 }
 

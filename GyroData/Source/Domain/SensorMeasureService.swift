@@ -17,9 +17,11 @@ final class SensorMeasureService {
         }
     }
     
-    private var timer: Timer = .init()
+    private var timer: Timer?
     private let motionManager: CMMotionManager = .init()
     private var fireDate: Date = Date()
+    private var wasteTime: TimeInterval = .zero
+    
     weak var delegate: MeasureServiceDelegate?
     
     func measureStart(_ sensorType: Sensor, interval: TimeInterval, duration: TimeInterval) {
@@ -32,8 +34,9 @@ final class SensorMeasureService {
     }
     
     func measureStop() {
-        timer.invalidate()
-        let wasteTime = fireDate.timeIntervalSince(Date())
+        timer?.invalidate()
+        timer = nil
+        print(wasteTime)
         delegate?.endMeasuringData(wasteTime)
     }
 }
@@ -54,6 +57,7 @@ private extension SensorMeasureService {
             if let data = self.motionManager.accelerometerData {
                 let accelerationData = (x: data.acceleration.x, y: data.acceleration.y, z: data.acceleration.z)
                 self.data = accelerationData
+                print(accelerationData)
             }
             
             if self.isTimeOver(duration, from: self.fireDate) {
@@ -62,11 +66,18 @@ private extension SensorMeasureService {
             }
         }
         
-        RunLoop.current.add(timer, forMode: .common)
+        addTimerInLoop(timer)
     }
     
     func isTimeOver(_ duration: TimeInterval, from fireDate: Date) -> Bool {
-        fireDate.timeIntervalSince(fireDate) > duration ? true : false
+        let wasteTime = Date().timeIntervalSince(fireDate)
+        
+        if wasteTime > duration {
+            self.wasteTime = wasteTime
+            return true
+        } else {
+            return false
+        }
     }
     
     func gyroscopeMeasureStart(_ interval: TimeInterval, _ duration: TimeInterval) {
@@ -92,6 +103,12 @@ private extension SensorMeasureService {
             }
         }
         
-        RunLoop.current.add(timer, forMode: .common)
+        addTimerInLoop(timer)
+    }
+    
+    func addTimerInLoop(_ timer: Timer?) {
+        if let timer = timer {
+            RunLoop.current.add(timer, forMode: .common)
+        }
     }
 }
