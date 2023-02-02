@@ -34,6 +34,13 @@ class MeasureViewController: UIViewController {
         return graphView
     }()
     
+    private let activityIndicatorView: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView()
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        
+        return indicator
+    }()
+    
     private let viewModel: MeasureViewModel
     
     init(viewModel: MeasureViewModel) {
@@ -51,6 +58,8 @@ class MeasureViewController: UIViewController {
         super.viewDidLoad()
         setupNavigationBar()
         setupSegmentControl()
+        
+        setupActivityIndicator()
     }
 }
 
@@ -81,11 +90,17 @@ private extension MeasureViewController {
             segmentedControl.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -Constant.margin),
         ])
     }
+    
+    func setupActivityIndicator() {
+        activityIndicatorView.center = self.view.center
+        // do test 
+    }
 }
 
 // MARK: - objc Method
 extension MeasureViewController {
     @objc func rightBarButtonTapped(_ sender: UIBarButtonItem) {
+        activityIndicatorView.startAnimating()
         let segment = segmentedControl.selectedSegmentIndex
         viewModel.action(.sensorTypeChanged(sensorType: Sensor(rawValue: segment)))
     }
@@ -109,10 +124,12 @@ extension MeasureViewController: MeasureViewDelegate {
     }
     
     func saveSuccess() {
+        activityIndicatorView.stopAnimating()
         self.navigationController?.popViewController(animated: true)
     }
     
     func saveFail(_ error: Error) {
+        activityIndicatorView.stopAnimating()
         let alertController = UIAlertController(
             title: Constant.saveFailAlertTitle,
             message: error.localizedDescription,
@@ -127,10 +144,7 @@ extension MeasureViewController: MeasureViewDelegate {
         
         present(alertController, animated: true)
     }
-    
-    
 }
-
 
 import SwiftUI
 

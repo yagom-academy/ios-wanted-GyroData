@@ -54,7 +54,9 @@ extension DataListViewController: DataListConfigurable {
     }
     
     func setupMeasure() {
-        navigationController?.pushViewController(MeasureViewController(), animated: true)
+        let service = SensorMeasureService()
+        let viewModel = MeasureViewModel(measureService: service)
+        navigationController?.pushViewController(MeasureViewController(viewModel: viewModel), animated: true)
     }
     
     func setupPlay() {
