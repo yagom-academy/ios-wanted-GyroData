@@ -190,7 +190,7 @@ private extension GraphView {
     func mappingValuesToFrame(values: Values) -> Values {
         let mappingValues = [values.x, values.y, values.z].map {
             let mappingValue = $0 / (boundary * 2)
-            let positionFromFrame = (self.frame.height / 2.0) - mappingValue
+            let positionFromFrame = self.frame.height * (0.5 - mappingValue)
             
             return positionFromFrame
         }
