@@ -61,6 +61,7 @@ final class RecordMotionDataViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .systemBackground
         configureNavigationBar()
         configureHierarchy()
         configureLayout()
@@ -103,7 +104,6 @@ final class RecordMotionDataViewController: UIViewController {
     }
     
     private func configureHierarchy() {
-        view.backgroundColor = .systemBackground
         view.addSubview(stackView)
         view.addSubview(activityIndicator)
         [segmentedControl, graphView, measureButton, stopButton]

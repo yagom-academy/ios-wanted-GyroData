@@ -60,6 +60,7 @@ final class MotionDataDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .systemBackground
         configureViews()
         setButtonAction()
         viewModel.bind(
