@@ -61,15 +61,11 @@ final class RecordMotionDataViewController: UIViewController {
         super.viewDidLoad()
         setupNavigationBar()
         setupViews()
+        configureSegmentedControl()
         configureButtonActions()
         bind()
     }
-    
-    private func bind() {
-        viewModel.bind(onUpdate: ) { coordinate in
-            print(coordinate)
-        }
-    }
+
     
     private func setupNavigationBar() {
         title = Constant.Namespace.navigationTitle
@@ -110,8 +106,6 @@ final class RecordMotionDataViewController: UIViewController {
             stackView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor)
         ])
-        
-        configureSegmentedControl()
     }
     
     private func configureSegmentedControl() {
@@ -171,5 +165,11 @@ final class RecordMotionDataViewController: UIViewController {
         )
         alertController.addAction(okAction)
         present(alertController, animated: true)
+    }
+    
+    private func bind() {
+        viewModel.bind(onUpdate: ) { coordinate in
+            print(coordinate)
+        }
     }
 }
