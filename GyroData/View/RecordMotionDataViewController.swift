@@ -30,6 +30,7 @@ final class RecordMotionDataViewController: UIViewController {
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
+
     private let segmentedControl = UISegmentedControl()
     private let graphView = GraphView(frame: .zero)
     private let measureButton: UIButton = {
@@ -38,6 +39,7 @@ final class RecordMotionDataViewController: UIViewController {
         button.setTitleColor(.systemBlue, for: .normal)
         return button
     }()
+
     private let stopButton: UIButton = {
         let button = UIButton()
         button.setTitle(Constant.Namespace.stop, for: .normal)
