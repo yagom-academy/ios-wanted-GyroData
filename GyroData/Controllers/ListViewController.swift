@@ -80,11 +80,13 @@ extension ListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView,
                    trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath)
     -> UISwipeActionsConfiguration? {
-        
         let playAction = UIContextualAction(style: .normal, title: "Play") { _, _, _ in
-            print("데이터 Play")
-            // 액션 구현 예정
+            let reviewPageViewController = ReviewPageViewController(
+                reviewPageView: ReviewPageView(pageState: .resultPlay))
+            
+            self.navigationController?.pushViewController(reviewPageViewController, animated: false)
         }
+        
         playAction.backgroundColor = .systemGreen
         
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") {  _, _, _ in
