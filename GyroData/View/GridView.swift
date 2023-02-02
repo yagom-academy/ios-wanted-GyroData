@@ -18,7 +18,7 @@ class GridView: UIView {
         let offset = frame.width / 8
         var index: CGFloat = offset
         
-        for _ in 0..<7 {
+        for _ in 0...7 {
             let xPath = UIBezierPath()
             let yPath = UIBezierPath()
             
@@ -34,7 +34,7 @@ class GridView: UIView {
             index += offset
         }
         
-        gridLayer.strokeColor = UIColor.white.cgColor
+        gridLayer.strokeColor = UIColor.black.cgColor
         gridLayer.lineWidth = 0.2
         gridLayer.path = multiPath
         

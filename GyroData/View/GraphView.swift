@@ -34,6 +34,15 @@ final class GraphView: UIView {
         stackView.axis = .horizontal
         return stackView
     }()
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        configureLayout()
+    }
+
+    required init(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     func configureLayout() {
         addSubview(labelStackView)
@@ -50,7 +59,7 @@ final class GraphView: UIView {
         ])
     }
     
-    private func drawGraphLines(_ rect: CGRect, color: UIColor, dataList: [Double], maximumCount: CGFloat) {
+    func drawGraphLines(_ rect: CGRect, color: UIColor, dataList: [Double], maximumCount: CGFloat) {
         let mappedDataList = dataList.map { value in
             rect.midY - CGFloat(value) * 5
         }

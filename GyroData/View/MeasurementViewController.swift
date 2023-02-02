@@ -21,7 +21,7 @@ final class MeasurementViewController: UIViewController {
     private let buttonStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.distribution = .fill
+        stackView.distribution = .fillEqually
         stackView.alignment = .leading
         stackView.spacing = 8
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -36,8 +36,9 @@ final class MeasurementViewController: UIViewController {
         return segmentedControl
     }()
 
-    private let graphView: GraphView = {
-        let graphView = GraphView()
+    private let graphView: GridView = {
+        let graphView = GridView()
+        graphView.layer.borderWidth = 2
         graphView.translatesAutoresizingMaskIntoConstraints = false
         return graphView
     }()
