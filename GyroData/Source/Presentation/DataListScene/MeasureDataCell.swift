@@ -51,7 +51,6 @@ final class MeasureDataCell: UITableViewCell {
         dateLabel.text = data.date.description
         sensorLabel.text = "\(type)"
         runTimeLabel.text = String(data.runTime)
-        print(data)
     }
 }
 

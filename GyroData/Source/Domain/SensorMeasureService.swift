@@ -36,7 +36,6 @@ final class SensorMeasureService {
     func measureStop() {
         timer?.invalidate()
         timer = nil
-        print(wasteTime)
         delegate?.endMeasuringData(wasteTime)
     }
 }
@@ -57,7 +56,6 @@ private extension SensorMeasureService {
             if let data = self.motionManager.accelerometerData {
                 let accelerationData = (x: data.acceleration.x, y: data.acceleration.y, z: data.acceleration.z)
                 self.data = accelerationData
-                print(accelerationData)
             }
             
             if self.isTimeOver(duration, from: self.fireDate) {

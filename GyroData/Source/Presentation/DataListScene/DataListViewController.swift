@@ -34,7 +34,6 @@ final class DataListViewController: UIViewController {
         setupNavigationBar()
         setupView()
         setupConstraint()
-        viewModel.addData()
     }
 }
 
@@ -45,7 +44,10 @@ extension DataListViewController: DataListConfigurable {
     }
     
     func setupSelectData(_ data: MeasureData) {
-        navigationController?.pushViewController(DetailViewController(viewModel: DetailViewModel(data: data)), animated: true)
+        navigationController?.pushViewController(
+            DetailViewController(viewModel: DetailViewModel(data: data)),
+            animated: true
+        )
     }
 }
 
