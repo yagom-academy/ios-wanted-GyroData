@@ -16,4 +16,14 @@ struct CoreDataMotionReadService: CoreDataMotionReadable {
             return nil
         }
     }
+    
+    func count() -> Int? {
+        do {
+            let count = try coreDataRepository.count()
+            return count
+        } catch {
+            print(error.localizedDescription)
+            return nil
+        }
+    }
 }

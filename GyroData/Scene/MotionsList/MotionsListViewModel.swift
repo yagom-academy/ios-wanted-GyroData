@@ -46,29 +46,33 @@ struct MotionsListViewModel {
             tapMotionPlayAction(indexPath: indexPath)
         }
     }
-    
-    mutating private func setInitialMotions() {
+}
+
+private extension MotionsListViewModel {
+    mutating func setInitialMotions() {
         guard let initialMotions = readService.read(from: 0) else { return }
         
         motions = initialMotions
     }
     
-    mutating private func setNextPageMotions() {
-        guard motions.count % 10 == 0 else { return }
-        
-        let currentPage: Int = Int(motions.count / 10)
-        guard let nextPageMotions = readService.read(from: currentPage * 10), !nextPageMotions.isEmpty else { return }
+    mutating func setNextPageMotions() {
+        guard let count = readService.count(),
+              count > motions.count,
+              let nextPageMotions = readService.read(from: motions.count)
+        else {
+            return
+        }
         
         motions += nextPageMotions
     }
     
-    private func tapMotionAction(indexPath: IndexPath) {
+    func tapMotionAction(indexPath: IndexPath) {
         let selectedMotion = motions[indexPath.row]
         
         delegate?.motionsListViewModel(selectedGraphMotion: selectedMotion)
     }
     
-    mutating private func tapMotionDeleteAction(indexPath: IndexPath) {
+    mutating func tapMotionDeleteAction(indexPath: IndexPath) {
         let selectedMotion = motions[indexPath.row]
         
         if deleteService.delete(selectedMotion.id) {
@@ -76,7 +80,7 @@ struct MotionsListViewModel {
         }
     }
     
-    private func tapMotionPlayAction(indexPath: IndexPath) {
+    func tapMotionPlayAction(indexPath: IndexPath) {
         let selectedMotion = motions[indexPath.row]
         
         delegate?.motionsListViewModel(selectedPlayMotion: selectedMotion)

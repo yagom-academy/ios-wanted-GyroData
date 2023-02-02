@@ -68,6 +68,12 @@ struct DefaultCoreDataRepository: CoreDataRepository {
         return result
     }
     
+    func count() throws -> Int {
+        let request = MotionMO.fetchRequest()
+        let count = try self.context.count(for: request)
+        return count
+    }
+    
     func delete(with id: String) throws {
         let request = MotionMO.fetchRequest()
         request.predicate = NSPredicate(format: "id == %@", id)
