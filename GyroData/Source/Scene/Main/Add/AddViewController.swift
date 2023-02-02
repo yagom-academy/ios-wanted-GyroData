@@ -9,12 +9,20 @@ import UIKit
 import CoreMotion
 
 class AddViewController: UIViewController {
+    // MARK: Enumerations
+    
+    enum MeasureUnit: Int {
+        case acc = 0
+        case gyro = 1
+    }
+    
     // MARK: Private Properties
     
     private let currentDate = Date()
     private let motionManager = CMMotionManager()
     private var motionDataList = [MotionData]()
     private var jsonMotionData: Data?
+    private var timer: Timer?
     
     private let segmentControl: UISegmentedControl = {
         let segmentControl = UISegmentedControl(items: ["Acc", "Gyro"])
@@ -142,9 +150,9 @@ class AddViewController: UIViewController {
         
         var titleText = ""
         
-        if segmentControl.selectedSegmentIndex == 0 {
+        if segmentControl.selectedSegmentIndex == MeasureUnit.acc.rawValue {
             titleText = "Acc"
-        } else if segmentControl.selectedSegmentIndex == 1 {
+        } else if segmentControl.selectedSegmentIndex == MeasureUnit.gyro.rawValue {
             titleText = "Gyro"
         }
         
@@ -164,42 +172,44 @@ class AddViewController: UIViewController {
         motionDataList = .init()
         jsonMotionData = .init()
         
-        if segmentControl.selectedSegmentIndex == 0 {
+        switch segmentControl.selectedSegmentIndex {
+        case 0:
             graphView.stopDrawLines()
             
             motionManager.accelerometerUpdateInterval = 0.1
             motionManager.startAccelerometerUpdates(to: .main) { data, error in
                 if error == nil {
-                    guard let accelerometerData = data else { return }
-
-                    let recordData = MotionData(
-                        x: accelerometerData.acceleration.x,
-                        y: accelerometerData.acceleration.y,
-                        z: accelerometerData.acceleration.z
-                    )
-
-                    self.motionDataList.append(recordData)
-                    self.graphView.motionDatas = recordData
+                    if let accData = data {
+                        self.measureMotion(type: .acc, data: accData)
+                    }
                 }
             }
-        } else if segmentControl.selectedSegmentIndex == 1 {
+        case 1:
             graphView.stopDrawLines()
             
             motionManager.gyroUpdateInterval = 0.1
             motionManager.startGyroUpdates(to: .main) { data, error in
                 if error == nil {
-                    guard let gyroData = data else { return }
-                    
-                    let recordData = MotionData(
-                        x: gyroData.rotationRate.x,
-                        y: gyroData.rotationRate.y,
-                        z: gyroData.rotationRate.z
-                    )
-                    
-                    self.motionDataList.append(recordData)
-                    self.graphView.motionDatas = recordData
+                    if let gyroData = data {
+                        self.measureMotion(type: .gyro, data: gyroData)
+                    }
                 }
             }
+        default:
+            break
+        }
+    }
+    
+    private func measureMotion(type: MeasureUnit, data: CMLogItem) {
+        if let data = data as? CMGyroData {
+            let recordData = MotionData(
+                x: data.rotationRate.x,
+                y: data.rotationRate.y,
+                z: data.rotationRate.z
+            )
+            
+            self.motionDataList.append(recordData)
+            self.graphView.motionDatas = recordData
         }
     }
     
