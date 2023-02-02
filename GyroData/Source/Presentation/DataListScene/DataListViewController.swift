@@ -10,6 +10,9 @@ import UIKit
 protocol DataListConfigurable: AnyObject {
     func setupData(_ datas: [MeasureData])
     func setupSelectData(_ data: MeasureData)
+    func setupMeasure()
+    func setupPlay()
+    func setupDelete()
 }
 
 final class DataListViewController: UIViewController {
@@ -49,11 +52,30 @@ extension DataListViewController: DataListConfigurable {
             animated: true
         )
     }
+    
+    func setupMeasure() {
+        navigationController?.pushViewController(MeasureViewController(), animated: true)
+    }
+    
+    func setupPlay() {
+        //TODO: Move to Play View
+    }
+    
+    func setupDelete() {
+        //TODO: Data Delete
+    }
+}
+
+// MARK: - Action
+extension DataListViewController {
+    @objc private func measureButtonTapped() {
+        viewModel.action(.measure)
+    }
 }
 
 extension DataListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        viewModel.fetchSelectedData(index: indexPath.row)
+        viewModel.action(.cellSelect(index: indexPath.row))
     }
 }
 
@@ -94,6 +116,15 @@ extension DataListViewController {
         tableView.delegate = self
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        
+        let measureBarButton = UIBarButtonItem(
+            title: "측정",
+            style: .plain,
+            target: self,
+            action: #selector(measureButtonTapped)
+        )
+        
+        navigationItem.rightBarButtonItem = measureBarButton
     }
     
     private func setupView() {

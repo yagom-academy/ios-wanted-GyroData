@@ -8,6 +8,13 @@
 import Foundation
 
 final class DataListViewModel {
+    enum Action {
+        case cellSelect(index: Int)
+        case measure
+        case play
+        case delete
+    }
+    
     private let transactionSevice = TransactionService(
         coreDataManager: CoreDataManager(),
         fileManager: FileSystemManager()
@@ -35,7 +42,16 @@ extension DataListViewModel {
         }
     }
     
-    func fetchSelectedData(index: Int) {
-        delegate?.setupSelectData(measureDatas[index])
+    func action(_ action: Action) {
+        switch action {
+        case .cellSelect(let index):
+            delegate?.setupSelectData(measureDatas[index])
+        case .measure:
+            delegate?.setupMeasure()
+        case .play:
+            delegate?.setupPlay()
+        case .delete:
+            delegate?.setupDelete()
+        }
     }
 }
