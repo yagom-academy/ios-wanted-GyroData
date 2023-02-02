@@ -18,7 +18,7 @@ final class TransitionListViewController: UIViewController {
 
     private let cellReuseIdentifier = "CustomCell"
     private var isPaginating = false
-    private var pageCount = 0
+    private var pageIndex = 0
 
     // MARK: - LifeCycle
     override func viewDidLoad() {
@@ -100,16 +100,16 @@ private extension TransitionListViewController {
     func bringAdditionalTransitionMetaData(completion: @escaping ([TransitionMetaData]) -> Void) {
         DispatchQueue.global().asyncAfter(deadline: .now() + 3) { [weak self] in
             guard let self = self else { return }
-            let data = PersistentContainerManager.shared.fetchTenTransitionMetaDatas(pageCount: self.pageCount)
-            self.pageCount += 1
+            let data = PersistentContainerManager.shared.fetchTenTransitionMetaDatas(pageCount: self.pageIndex)
+            self.pageIndex += 1
             completion(data)
             self.isPaginating = false
         }
     }
 
     func loadListData() {
-        let data = PersistentContainerManager.shared.fetchTenTransitionMetaDatas(pageCount: pageCount)
-        pageCount += 1
+        let data = PersistentContainerManager.shared.fetchTenTransitionMetaDatas(pageCount: pageIndex)
+        pageIndex += 1
         isPaginating = false
         TransitionMetaData.transitionMetaDatas.append(contentsOf: data)
 
