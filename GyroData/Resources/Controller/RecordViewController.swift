@@ -60,6 +60,17 @@ final class RecordViewController: UIViewController {
         button.layer.cornerRadius = 5
         return button
     }()
+
+    private let xLayer = CAShapeLayer()
+    private let yLayer = CAShapeLayer()
+    private let zLayer = CAShapeLayer()
+    private let xPath = UIBezierPath()
+    private let yPath = UIBezierPath()
+    private let zPath = UIBezierPath()
+    private let xValues: [CGFloat] = [50,20,70,80,10,40,30,90,60,40]
+    private let yValues: [CGFloat] = [60,10,20,50,90,70,40,20,90,50]
+    private let zValues: [CGFloat] = [0,50,30,40,20,60,40,90,10,80]
+    private var currentX: CGFloat = 0
     
     private let motionManager = MotionManager()
     private var recordTime: Double = 0
