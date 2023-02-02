@@ -11,7 +11,7 @@ final class ReplayViewController: UIViewController {
     
     enum Mode: String {
         case view = "View"
-        case play = "Replay"
+        case play = "Play"
     }
     
     enum State {
@@ -93,15 +93,18 @@ final class ReplayViewController: UIViewController {
         
         configureView()
         configureLayout()
-        configureMode()
         fetchRecodedData()
+        configureMode()
     }
     
     func configureMode() {
         switch mode {
         case .view:
             titleLabel.text = mode.rawValue
-            graphView.totalData(data: replayData)
+            replayData.forEach { motiondata in
+                graphView.motionDatas = motiondata
+            }
+            
             bottomStackView.removeFromSuperview()
         case .play:
             titleLabel.text = mode.rawValue

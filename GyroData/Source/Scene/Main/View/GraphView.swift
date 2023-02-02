@@ -189,15 +189,4 @@ class GraphView: UIView {
         dataListY = .init()
         dataListZ = .init()
     }
-    
-    func totalData(data: [MotionData]) {
-        
-        data.forEach { motionDatas in
-            dataListX.append(motionDatas.x)
-            dataListY.append(motionDatas.y)
-            dataListZ.append(motionDatas.z)
-        }
-        
-        setNeedsDisplay()
-    }
 }

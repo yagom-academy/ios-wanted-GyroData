@@ -116,7 +116,7 @@ extension MainViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let jsonData = self.motionDataList[indexPath.row].jsonData else { return }
-        let replayViewController = ReplayViewController(mode: .play, jsonData: jsonData)
+        let replayViewController = ReplayViewController(mode: .view, jsonData: jsonData)
         
         navigationController?.pushViewController(replayViewController, animated: true)
         
