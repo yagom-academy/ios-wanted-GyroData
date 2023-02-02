@@ -6,5 +6,7 @@
 //
 
 enum CoreDataError: Error {
+    case cannotReadData
     case cannotSaveData
+    case cannotDeleteData
 }

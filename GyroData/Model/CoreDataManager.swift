@@ -42,7 +42,12 @@ final class CoreDataManager: CoreDataManagerType {
         let request = MotionDataEntity.fetchRequest()
         request.fetchOffset = offset
         request.fetchLimit = limit
-        return try fetchMotionDataEntities(request)
+        request.sortDescriptors = [NSSortDescriptor(key: "createdAt", ascending: false)]
+        do {
+            return try fetchMotionDataEntities(request)
+        } catch {
+            throw CoreDataError.cannotReadData
+        }
     }
 
     func save(_ motionData: MotionData) throws {
@@ -51,13 +56,21 @@ final class CoreDataManager: CoreDataManagerType {
         motionDataEntity.createdAt = motionData.createdAt
         motionDataEntity.length = motionData.length
         motionDataEntity.motionDataType = motionData.motionDataType.rawValue
-        try saveContext()
+        do {
+            try saveContext()
+        } catch {
+            throw CoreDataError.cannotSaveData
+        }
     }
 
     func delete(_ id: UUID) throws {
         let motionDataEntities = try fetchMotionDataEntities(request)
         guard let motionDataEntity = motionDataEntities.first(where: { $0.id == id }) else { return }
         context.delete(motionDataEntity)
-        try saveContext()
+        do {
+            try saveContext()
+        } catch {
+            throw CoreDataError.cannotDeleteData
+        }
     }
 }
