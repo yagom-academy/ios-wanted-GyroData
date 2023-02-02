@@ -15,27 +15,25 @@ final class ListViewController: UIViewController {
         return tableView
     }()
     
-    private let listViewModel = ListViewModel()
+    private var listViewModel = ListViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureNavigationBar()
         configureTableView()
     }
     
-    func configureNavigationbar() {
+    func configureNavigationBar() {
         navigationItem.title = "목록"
         
         let measurementButtonAction = UIAction { [weak self] _ in
-            self?.present(GyroMeasurementViewController(), animated: true)
+            let measurementViewController = MeasurementViewController()
+            self?.navigationController?.pushViewController(measurementViewController, animated: true)
         }
-        
-        let measurementButtonItem = UIBarButtonItem()
-        measurementButtonItem.title = "측정"
-        measurementButtonItem.style = .plain
-        measurementButtonItem.primaryAction = measurementButtonAction
+
+        let measurementButtonItem = UIBarButtonItem(title: "측정", primaryAction: measurementButtonAction)
         
         navigationItem.rightBarButtonItem = measurementButtonItem
-        
     }
     
     func configureTableView() {
@@ -83,43 +81,55 @@ extension ListViewController: UITableViewDataSource {
 
 extension ListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // cellItem 넘겨주는 코드 추후 필요
         // view 상태로 가게 됨
-        let nextViewController = GyroReplayViewController()
+        guard let information = listViewModel.gyroInformations.value else { return }
+        let nextViewController = ReplayViewController(
+            replayViewModel: ReplayViewModel(
+                information: information[indexPath.row]
+            )
+        )
+
         present(nextViewController, animated: true)
     }
-    
+
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let playAction = makePlayAction(tableView, indexPath: indexPath)
         let deleteAction = makeDeleteAction(tableView, indexPath: indexPath)
         let configuration = UISwipeActionsConfiguration(actions: [playAction, deleteAction])
         return configuration
     }
-    
+
     func makePlayAction(_ tableView: UITableView, indexPath: IndexPath) -> UIContextualAction {
-        let play = UIContextualAction(style: .normal, title: "Play") { _ in
-            guard let cellItem = tableView.dataSource.itemIdentifier(for: indexPath) else { return }
-            
-            // cellItem 넘겨주는 코드 추후 필요
+        let playAction = UIContextualAction(style: .normal, title: "Play") { [weak self] _,_,_  in
             // play 상태로 가게 됨
-            let nextViewController = GyroReplayViewController()
-            present(nextViewController, animated: true)
+            guard let information = self?.listViewModel.gyroInformations.value else { return }
+            let nextViewController = ReplayViewController(
+                replayViewModel: ReplayViewModel(
+                    information: information[indexPath.row]
+                )
+            )
+
+            self?.present(nextViewController, animated: true)
         }
+
+        return playAction
     }
-    
+
     func makeDeleteAction(_ tableView: UITableView, indexPath: IndexPath) -> UIContextualAction {
-        let delete = UIContextualAction(style: .normal, title: "Delete") { _ in
-            guard let cellItem = tableView.dataSource.itemIdentifier(for: indexPath) else { return }
-            
-            listViewModel.deleteGyroInformation(cellItem)
+        let deleteAction = UIContextualAction(style: .normal, title: "Delete") { [weak self] _,_,_  in
+            guard let information = self?.listViewModel.gyroInformations.value else { return }
+
+            self?.listViewModel.deleteGyroInformation(information[indexPath.row])
         }
+
+        return deleteAction
     }
 }
 
 extension ListViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if self.tableView.contentOffset.y > tableView.contentSize.height - tableView.bounds.size.height {
-            if !listViewModel.isLoading {
+            if listViewModel.isLoading.value == false {
                 listViewModel.fetchGyroInformations(limit: 10)
             }
         }

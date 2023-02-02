@@ -74,6 +74,7 @@ final class ReplayViewController: UIViewController {
     private let replayViewModel: ReplayViewModel
     private var timer: Timer?
     private var timerIndex = 0
+//    private let motionMode: MotionMode
 
     init(replayViewModel: ReplayViewModel) {
         self.replayViewModel = replayViewModel
@@ -124,9 +125,9 @@ final class ReplayViewController: UIViewController {
             guard let motion = motion else { return }
             switch motion {
             case .view: break
-                self?.configureViewMode()
+                self.configureViewMode()
             case .play: break
-                self?.configurePlayMode()
+                self.configurePlayMode()
             }
         }
 

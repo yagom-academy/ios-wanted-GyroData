@@ -117,7 +117,7 @@ extension MeasurementViewController {
         // TODO: 그래프 뷰에서 데이터 받아오기
         return UIAction { [weak self] _ in
             guard let graphMode = self?.graphMode else { return }
-            self?.measurementViewModel.save(graphMode, data: [[Double]])
+            self?.measurementViewModel.save(graphMode, data: [[0.1]])
         }
     }
 
