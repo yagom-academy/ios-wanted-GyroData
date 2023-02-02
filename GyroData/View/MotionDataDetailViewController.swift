@@ -87,8 +87,8 @@ final class MotionDataDetailViewController: UIViewController {
     
     private func configureViews() {
         [viewTypeLabel, graphView, playStopButton, timerLabel]
-            .forEach { addSubview($0) }
-        
+            .forEach { view.addSubview($0) }
+
         NSLayoutConstraint.activate([
             viewTypeLabel.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
             viewTypeLabel.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
