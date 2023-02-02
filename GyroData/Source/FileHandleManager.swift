@@ -76,7 +76,13 @@ class FileHandleManager: FileManagerProtocol {
     }
     
     func delete(fileName: UUID) throws {
+        let textPath = directoryPath.appendingPathComponent("\(fileName).json")
         
+        do {
+            try fileManager.removeItem(at: textPath)
+        } catch {
+            throw FileManagingError.deleteFailed
+        }
     }
 }
 
