@@ -5,9 +5,15 @@ import UIKit
 
 // MARK: - Configure
 class GraphView: UIView {
-    var xData: [Double] = []
+    lazy var widthSize: Double = Double(self.frame.size.width / 600)
+    var startX: Double = 0
+    
+    var currentX: Double = 0
+    var currentY: Double = 0
+    var currentZ: Double = 0
 
-    private let xLabel: UILabel = {
+
+    let xLabel: UILabel = {
         let label = UILabel()
         
         label.text = "x:"
@@ -16,7 +22,7 @@ class GraphView: UIView {
         return label
     }()
     
-    private let yLabel: UILabel = {
+    let yLabel: UILabel = {
         let label = UILabel()
         
         label.text = "y:"
@@ -25,7 +31,7 @@ class GraphView: UIView {
         return label
     }()
     
-    private let zLabel: UILabel = {
+    let zLabel: UILabel = {
         let label = UILabel()
         
         label.text = "z:"
@@ -71,10 +77,8 @@ class GraphView: UIView {
         ])
     }
     
-    func configure(x: Double, y: Double, z: Double) {
-        xLabel.text = "x: \(String(format: "%.4f", x))"
-        yLabel.text = "y: \(String(format: "%.4f", y))"
-        zLabel.text = "z: \(String(format: "%.4f", z))"
+    func configure(label: UILabel, type: String, value: Double) {
+        label.text = "\(type): \(String(format: "%.4f", value))"
     }
 }
 
@@ -115,32 +119,52 @@ extension GraphView {
     }
     
     // TODO: Graph를 한번에 그리는 메서드
-    
-    // TODO: Graph를 하나씩 그리는 메서드
-    func drawGraph(data: SensorData) {
-        self.xData = data.x
+    func drawGraph(data: [Double], color: CGColor) {
+        
         let path = UIBezierPath()
-        let widthSize: Double = Double(self.frame.size.width / 60)
-        var startX: Double = 0
+        let layer = CAShapeLayer()
         
-        path.lineWidth = 1
-        path.lineJoinStyle = .miter
-        path.usesEvenOddFillRule = true
-        UIColor.systemBlue.set()
-        path.move(to: CGPoint(x: startX, y: convertDrawingData(item: data.x.last)))
+        let widthSize: Double = Double(self.frame.size.width / 600)
+        var startPoint: Double = 0
         
-        for item in xData {
-            let yData = convertDrawingData(item: item)
-            print(yData)
-            path.addLine(to: CGPoint(x: startX, y: yData))
-            startX += widthSize
-            path.stroke()
+        path.move(to: CGPoint(x: startPoint, y: convertDrawingData(item: data.first)))
+        
+        for item in data {
+            let drawingData = convertDrawingData(item: item)
+            path.addLine(to: CGPoint(x: startPoint, y: drawingData))
+            startPoint += widthSize
+            layer.path = path.cgPath
+            layer.fillColor = nil
+            layer.strokeColor = color
         }
         
-        path.stroke()
+        self.layer.addSublayer(layer)
+        
+    }
+    
+    // TODO: Graph를 하나씩 그리는 메서드
+    
+    func drawLine(x: Double, y: Double, z: Double) {
+        drawLine2(targetPoint: x, currentPoint: currentX, color: UIColor.red.cgColor)
+        drawLine2(targetPoint: y, currentPoint: currentY, color: UIColor.green.cgColor)
+        drawLine2(targetPoint: z, currentPoint: currentZ, color: UIColor.blue.cgColor)
+        
+        startX += widthSize
+    }
+    
+    func drawLine2(targetPoint: Double, currentPoint: Double, color: CGColor) {
+        let path = UIBezierPath()
+        let layer = CAShapeLayer()
+        
+        path.move(to: CGPoint(x: startX, y: currentPoint))
+        path.addLine(to: CGPoint(x: startX + widthSize, y: targetPoint))
+        layer.path = path.cgPath
+        layer.fillColor = nil
+        layer.strokeColor = color
+        self.layer.addSublayer(layer)
     }
     
     private func convertDrawingData(item: Double?) -> Double {
-        return ((item ?? 0 * -1) * 30) + Double(self.frame.size.height / 2)
+        return ((item ?? 0 * -1) * 15) + Double(self.frame.size.height / 2)
     }
 }

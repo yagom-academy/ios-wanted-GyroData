@@ -5,6 +5,7 @@ import Foundation
 
 final class MeasureViewModel {
     var measureDatas: Observable<SensorData> = .init(SensorData(x: [], y: [], z: []))
+
     private let coreMotionManager = CoreMotionManager()
     
     func startMeasure(mode: SensorMode) {
