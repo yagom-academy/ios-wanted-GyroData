@@ -121,7 +121,7 @@ class MeasureViewController: UIViewController {
         CoreDataManager.shared.create(entity: MotionEntity.self) { entity in
             entity.id = id
             entity.date = Date()
-            entity.time = motionManager.second.timeDecimal() ?? 0.0
+            entity.time = motionManager.second.decimalPlace(1)
             entity.measureType = motionType.rawValue
         }
         FileManager.default.save(path: id.uuidString, data: coordinates)
