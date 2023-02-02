@@ -11,3 +11,14 @@ enum Sensor: Int, Codable {
     case accelerometer
     case gyroscope
 }
+
+extension Sensor: CustomStringConvertible {
+    var description: String {
+        switch self {
+        case .accelerometer:
+            return "Accelerometer"
+        case .gyroscope:
+            return "Gyro"
+        }
+    }
+}
