@@ -18,7 +18,6 @@ final class RecordViewController: UIViewController {
 
     private let graphView: UIView = {
         let graphView = UIView()
-        graphView.translatesAutoresizingMaskIntoConstraints = false
         graphView.backgroundColor = .systemBackground
         graphView.layer.borderWidth = 3
         return graphView
@@ -26,7 +25,6 @@ final class RecordViewController: UIViewController {
 
     private let xPositionLabel: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .systemRed
         label.text = "x:"
         return label
@@ -34,7 +32,6 @@ final class RecordViewController: UIViewController {
 
     private let yPositionLabel: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .systemGreen
         label.text = "y:"
         return label
@@ -42,7 +39,6 @@ final class RecordViewController: UIViewController {
 
     private let zPositionLabel: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .systemBlue
         label.text = "z:"
         return label
@@ -204,7 +200,7 @@ private extension RecordViewController {
     }
 
     func addChildView() {
-        [segmentControl, recordButton, cancelButton].forEach {
+        [segmentControl, recordButton, cancelButton, graphView, xPositionLabel, yPositionLabel, zPositionLabel].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview($0)
         }
@@ -218,6 +214,11 @@ private extension RecordViewController {
             segmentControl.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor),
             segmentControl.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
             segmentControl.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
+
+            graphView.topAnchor.constraint(equalTo: segmentControl.bottomAnchor, constant: 20),
+            graphView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
+            graphView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
+            graphView.heightAnchor.constraint(equalTo: graphView.widthAnchor),
 
             recordButton.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor),
             recordButton.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
