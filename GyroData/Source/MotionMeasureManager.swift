@@ -16,23 +16,39 @@ protocol MotionManagerable {
 final class GyroMotionManager: MotionManagerable {
     private let motionManager = CMMotionManager()
     
+    init(interval: TimeInterval) {
+        configureUpdateInterval(interval)
+    }
+    
     func start(handler: @escaping () -> Void) {
-        
+        motionManager.startAccelerometerUpdates()
     }
 
     func stop() {
         motionManager.stopGyroUpdates()
+    }
+    
+    private func configureUpdateInterval(_ interval: TimeInterval) {
+        motionManager.gyroUpdateInterval = interval
     }
 }
 
 final class AccelerometerMotionManager: MotionManagerable {
     private let motionManager = CMMotionManager()
     
+    init(interval: TimeInterval) {
+        configureUpdateInterval(interval)
+    }
+    
     func start(handler: @escaping () -> Void) {
-        
+        motionManager.startAccelerometerUpdates()
     }
     
     func stop() {
         motionManager.stopAccelerometerUpdates()
+    }
+    
+    private func configureUpdateInterval(_ interval: TimeInterval) {
+        motionManager.gyroUpdateInterval = interval
     }
 }
