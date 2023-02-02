@@ -8,6 +8,14 @@
 import Foundation
 
 final class MotionDataListViewModel {
+    enum Action {
+        case record(handler: (RecordMotionDataViewModel) -> Void)
+        case view(at: IndexPath, handler: (MotionDataDetailViewModel) -> Void)
+        case play(at: IndexPath, handler: (MotionDataDetailViewModel) -> Void)
+        case delete(at: IndexPath)
+        case fetchData
+    }
+
     private var motionData: [MotionData] = [] {
         didSet {
             onUpdate?()
@@ -88,32 +96,6 @@ final class MotionDataListViewModel {
         self.onError = onError
     }
 
-    func numberOfData() -> Int {
-        return motionData.count
-    }
-
-    func configureCell(
-        for indexPath: IndexPath,
-        handler: (_ createdAt: String, _ type: String, _ length: String) -> Void
-    ) {
-        guard let motionData = motionData(at: indexPath) else { return }
-        handler(
-            motionData.createdAt.dateTimeString(),
-            motionData.motionDataType.rawValue,
-            motionData.length.description
-        )
-    }
-}
-
-extension MotionDataListViewModel {
-    enum Action {
-        case record(handler: (RecordMotionDataViewModel) -> Void)
-        case view(at: IndexPath, handler: (MotionDataDetailViewModel) -> Void)
-        case play(at: IndexPath, handler: (MotionDataDetailViewModel) -> Void)
-        case delete(at: IndexPath)
-        case fetchData
-    }
-
     func action(_ action: Action) {
         switch action {
         case let .record(handler):
@@ -134,5 +116,20 @@ extension MotionDataListViewModel {
             break
         }
     }
-}
 
+    func numberOfData() -> Int {
+        return motionData.count
+    }
+
+    func configureCell(
+        for indexPath: IndexPath,
+        handler: (_ createdAt: String, _ type: String, _ length: String) -> Void
+    ) {
+        guard let motionData = motionData(at: indexPath) else { return }
+        handler(
+            motionData.createdAt.dateTimeString(),
+            motionData.motionDataType.rawValue,
+            motionData.length.description
+        )
+    }
+}
