@@ -9,8 +9,8 @@ import Foundation
 
 protocol MotionsListViewModelDelegate: AnyObject {
     func motionsListViewModel(didChange motions: [Motion])
-    func motionsListViewModel(selectedGraphMotion motion: Motion)
-    func motionsListViewModel(selectedPlayMotion motion: Motion)
+    func motionsListViewModel(selectedGraphMotionID id: String)
+    func motionsListViewModel(selectedPlayMotionID id: String)
 }
 
 struct MotionsListViewModel {
@@ -69,7 +69,7 @@ private extension MotionsListViewModel {
     func tapMotionAction(indexPath: IndexPath) {
         let selectedMotion = motions[indexPath.row]
         
-        delegate?.motionsListViewModel(selectedGraphMotion: selectedMotion)
+        delegate?.motionsListViewModel(selectedGraphMotionID: selectedMotion.id)
     }
     
     mutating func tapMotionDeleteAction(indexPath: IndexPath) {
@@ -83,6 +83,6 @@ private extension MotionsListViewModel {
     func tapMotionPlayAction(indexPath: IndexPath) {
         let selectedMotion = motions[indexPath.row]
         
-        delegate?.motionsListViewModel(selectedPlayMotion: selectedMotion)
+        delegate?.motionsListViewModel(selectedPlayMotionID: selectedMotion.id)
     }
 }
