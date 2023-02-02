@@ -6,9 +6,6 @@
 //
 
 protocol MotionMeasurable {
-    var timeInterval: Double { get set }
-    var timeLimit: Double { get set }
-    
     func measure(type: Motion.MeasurementType)
     func stopMeasurement(type: Motion.MeasurementType)
 }
