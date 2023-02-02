@@ -27,17 +27,21 @@ final class MotionDataDetailViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-
+    
     private let graphView = GraphView()
     private let playStopButton: UIButton = {
         let button = UIButton()
-        button.setImage(
-            UIImage(systemName: Constant.Namespace.playButton),
-            for: .normal
-        )
         button.isHidden = true
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
+    }()
+    
+    private let imageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.image = UIImage(systemName: Constant.Namespace.playButton)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
     }()
 
     private let timerLabel: UILabel = {
@@ -96,32 +100,39 @@ final class MotionDataDetailViewController: UIViewController {
     private func configureViews() {
         [viewTypeLabel, graphView, playStopButton, timerLabel]
             .forEach { view.addSubview($0) }
+        playStopButton.addSubview(imageView)
 
         NSLayoutConstraint.activate([
             viewTypeLabel.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
-            viewTypeLabel.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor)
+            viewTypeLabel.leadingAnchor.constraint(equalTo: graphView.leadingAnchor)
         ])
         
         graphView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             graphView.topAnchor.constraint(equalTo: viewTypeLabel.bottomAnchor, constant: Constant.Layout.spacing),
             graphView.centerXAnchor.constraint(equalTo: view.layoutMarginsGuide.centerXAnchor),
-            graphView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.8),
+            graphView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
             graphView.heightAnchor.constraint(equalTo: graphView.widthAnchor)
         ])
         
         NSLayoutConstraint.activate([
             playStopButton.topAnchor.constraint(equalTo: graphView.bottomAnchor, constant: Constant.Layout.spacing),
-            playStopButton.centerXAnchor.constraint(equalTo: view.layoutMarginsGuide.centerXAnchor)
+            playStopButton.centerXAnchor.constraint(equalTo: view.layoutMarginsGuide.centerXAnchor),
+            playStopButton.widthAnchor.constraint(equalTo: view.layoutMarginsGuide.widthAnchor, multiplier: 0.2),
+            playStopButton.heightAnchor.constraint(equalTo: playStopButton.widthAnchor)
         ])
         
         NSLayoutConstraint.activate([
-            timerLabel.topAnchor.constraint(equalTo: graphView.bottomAnchor, constant: Constant.Layout.spacing),
-            timerLabel.leadingAnchor.constraint(equalTo: playStopButton.trailingAnchor, constant: Constant.Layout.spacing),
-            timerLabel.trailingAnchor.constraint(lessThanOrEqualTo: view.layoutMarginsGuide.trailingAnchor, constant: -Constant.Layout.spacing)
+            timerLabel.centerYAnchor.constraint(equalTo: playStopButton.centerYAnchor),
+            timerLabel.trailingAnchor.constraint(equalTo: graphView.trailingAnchor)
+        ])
+        
+        NSLayoutConstraint.activate([
+            imageView.widthAnchor.constraint(equalTo: view.layoutMarginsGuide.widthAnchor, multiplier: 0.2),
+            imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor)
         ])
     }
-    
+
     private func setButtonAction() {
         playStopButton.addAction(
             UIAction { _ in
