@@ -103,7 +103,9 @@ extension ListViewController: UITableViewDelegate {
                 }
                 catch {
                     print(DataHandleError.deleteFailError(error: error))
-                    //알럿처리
+                    UIAlertController.show(title: "Error",
+                                           message: "데이터 삭제에 실패했습니다.",
+                                           target: self)
                 }
             }
         }
