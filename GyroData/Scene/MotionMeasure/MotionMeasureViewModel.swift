@@ -34,7 +34,24 @@ final class MotionMeasurementViewModel {
         case let .measurementStop(type):
             break
         case let .motionCreate(date, type, time, data):
-            break
+            createMotionWith(date: date, type: type, time: time, data: data)
+        }
+    }
+}
+
+private extension MotionMeasurementViewModel {
+    func createMotionWith(date: String, type: Int, time: String, data: [MotionDataType]) {
+        createService.create(
+            date: date,
+            type: type,
+            time: time,
+            data: data
+        ) { [weak self] isSuccess in
+            if isSuccess {
+                self?.delegate?.motionMeasurementViewModel(isSucceedInCreating: isSuccess)
+            } else {
+                self?.delegate?.motionMeasurementViewModel(alertStyleToPresent: .motionCreatingFailed)
+            }
         }
     }
 }
