@@ -23,7 +23,6 @@ class ViewController: UIViewController {
         configureNavigationBar()
         configureTableView()
         configureLayout()
-        configureData()
     }
     
     func configureNavigationBar() {
@@ -42,6 +41,11 @@ class ViewController: UIViewController {
     func configureTableView() {
         tableView.delegate = self
         tableView.dataSource = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        configureData()
+        tableView.reloadData()
     }
     
     func configureLayout() {

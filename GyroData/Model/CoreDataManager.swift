@@ -31,6 +31,10 @@ class CoreDataManager {
     
     func fetchData<T: NSManagedObject>(entity: T.Type) -> [T]? {
         let fetchRequest = NSFetchRequest<T>(entityName: T.self.description())
+        
+        let dateOrder = NSSortDescriptor(key: "date", ascending: false)
+        fetchRequest.sortDescriptors = [dateOrder]
+
         let context = self.persistentContainer.viewContext
         
         do{
