@@ -16,6 +16,38 @@ final class RecordViewController: UIViewController {
         return control
     }()
 
+    private let graphView: UIView = {
+        let graphView = UIView()
+        graphView.translatesAutoresizingMaskIntoConstraints = false
+        graphView.backgroundColor = .systemBackground
+        graphView.layer.borderWidth = 3
+        return graphView
+    }()
+
+    private let xPositionLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .systemRed
+        label.text = "x:"
+        return label
+    }()
+
+    private let yPositionLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .systemGreen
+        label.text = "y:"
+        return label
+    }()
+
+    private let zPositionLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .systemBlue
+        label.text = "z:"
+        return label
+    }()
+
     let recordButton: UIButton = {
         let button = UIButton()
         button.setTitle("측정", for: .normal)
