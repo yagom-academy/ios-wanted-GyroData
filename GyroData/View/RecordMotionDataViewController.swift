@@ -48,8 +48,8 @@ final class RecordMotionDataViewController: UIViewController {
         return button
     }()
     
-    init() {
-        viewModel = RecordMotionDataViewModel()
+    init(viewModel: RecordMotionDataViewModel) {
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
     

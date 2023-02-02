@@ -85,7 +85,7 @@ extension MotionDataListViewController {
     @objc
     private func didPressRecordButton(_ sender: UIBarButtonItem) {
         viewModel.action(.record(handler: { [weak self] recordMotionDataViewModel in
-            let viewController = RecordMotionDataViewController()
+            let viewController = RecordMotionDataViewController(viewModel: recordMotionDataViewModel)
             self?.navigationController?.pushViewController(viewController, animated: true)
         }))
     }
