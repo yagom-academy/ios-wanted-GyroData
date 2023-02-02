@@ -81,10 +81,7 @@ class GraphView: UIView {
         self.segmentOffset = duration / interval
         self.boundary = 4
         super.init(frame: .zero)
-        
         setupStackView()
-        
-        
     }
     
     required init?(coder: NSCoder) {
@@ -95,8 +92,6 @@ class GraphView: UIView {
         super.draw(rect)
         setupBaseLine()
         self.bringSubviewToFront(labelStackView)
-        
-        drawData(data: (100, 200, 300))
     }
     
     func drawData(data: Values) {
@@ -105,17 +100,21 @@ class GraphView: UIView {
         let zPath = UIBezierPath()
         
         let lastValues = segmentValues.last ?? (0, 0, 0)
-        let convertedValues = mappingToFrame(values: lastValues)
-        let lastPosition = (Double(segmentValues.count) * segmentOffset)
+        let widthInterval = self.frame.width / segmentOffset
+        
+        let lastPosition = (Double(segmentValues.count) * widthInterval)
+        
+        let convertedValues = mappingValuesToFrame(values: lastValues)
+        let convertedNewValues = mappingValuesToFrame(values: data)
         
         let xStartPoint = CGPoint(x: lastPosition, y: convertedValues.x)
-        let xEndPoint = CGPoint(x: lastPosition + segmentOffset, y: data.x)
+        let xEndPoint = CGPoint(x: lastPosition + widthInterval, y: convertedNewValues.x)
         
         let yStartPoint = CGPoint(x: lastPosition, y: convertedValues.y)
-        let yEndPoint = CGPoint(x: lastPosition + segmentOffset, y: data.y)
+        let yEndPoint = CGPoint(x: lastPosition + widthInterval, y: convertedNewValues.y)
         
         let zStartPoint = CGPoint(x: lastPosition, y: convertedValues.z)
-        let zEndPoint = CGPoint(x: lastPosition + segmentOffset, y: data.z)
+        let zEndPoint = CGPoint(x: lastPosition + widthInterval, y: convertedNewValues.z)
         
         UIColor.systemRed.setStroke()
         xPath.move(to: xStartPoint)
@@ -133,6 +132,10 @@ class GraphView: UIView {
         zPath.stroke()
         
         segmentValues.append(data)
+        self.xLabel.text = "x: \(Double(round(1000 * data.x) / 1000))"
+        self.yLabel.text = "y: \(Double(round(1000 * data.y) / 1000))"
+        self.zLabel.text = "z: \(Double(round(1000 * data.z) / 1000))"
+        self.setNeedsLayout()
     }
 }
 
@@ -184,7 +187,7 @@ private extension GraphView {
         self.layer.addSublayer(layer)
     }
     
-    func mappingToFrame(values: Values) -> Values {
+    func mappingValuesToFrame(values: Values) -> Values {
         let mappingValues = [values.x, values.y, values.z].map {
             let mappingValue = $0 / (boundary * 2)
             let positionFromFrame = (self.frame.height / 2.0) - mappingValue
