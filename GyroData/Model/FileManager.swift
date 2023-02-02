@@ -7,9 +7,12 @@
 
 import Foundation
 
+enum FileManagerError: Error {
+    case writeError
+}
 
 extension FileManager {
-    func save(path: String, data: [Coordinate]) {
+    func save(path: String, data: [Coordinate], completion: @escaping(Result<Void, FileManagerError>) -> Void) {
         let documentsDirectory = self.urls(for: .documentDirectory, in: .userDomainMask)[0]
         let directoryURL = documentsDirectory.appendingPathComponent("MotionData")
         let fileURL = directoryURL.appendingPathComponent("\(path).json")
@@ -24,8 +27,10 @@ extension FileManager {
             
             let data = try JSONEncoder().encode(data)
             try data.write(to: fileURL)
+            
+            completion(.success(()))
         } catch {
-            //에러 처리
+            completion(.failure(.writeError))
         }
     }
     
@@ -40,8 +45,19 @@ extension FileManager {
             
             return data
         } catch {
-            //에러처리
             return nil
+        }
+    }
+    
+    func delete(path: String) {
+        let documentsDirectory = self.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        let directoryURL = documentsDirectory.appendingPathComponent("MotionData")
+        let fileURL = directoryURL.appendingPathComponent("\(path).json")
+
+        do {
+            try self.removeItem(atPath: "\(fileURL)")
+        } catch {
+            print("remove File Error")
         }
     }
 }
