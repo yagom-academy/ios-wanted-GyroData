@@ -16,33 +16,36 @@ class MeasureViewModel {
         case saveButtonTapped
     }
     
-    private var measureData: MeasureData {
+    private var sensorMeasureValues: Values = (0, 0, 0) {
         didSet {
-            if let xValue = measureData.xValue.last,
-               let yValue = measureData.yValue.last,
-               let zValue = measureData.zValue.last {
-                
-                let lastData: Values = (xValue, yValue, zValue)
-                delegate?.updateValue(lastData)
-            }
+            delegate?.updateValue(sensorMeasureValues)
         }
     }
+    
+    private var xValues: [Double] = []
+    private var yValues: [Double] = []
+    private var zValues: [Double] = []
+    private var startDate: Date = .init()
+    private var wasteTime: TimeInterval = .zero
+    private var sensorType: Sensor?
+    
     private let transactionSevice = TransactionService(
         coreDataManager: CoreDataManager(),
         fileManager: FileSystemManager()
     )
     private let measureService: SensorMeasureService
+    
     private weak var delegate: MeasureViewDelegate?
     
     init(delegate: MeasureViewDelegate, measureService: SensorMeasureService) {
         self.delegate = delegate
         self.measureService = measureService
-        self.measureData = MeasureData()
     }
     
     func action(_ action: Action) {
         switch action {
         case .mesureStartButtonTapped(sensorType: let sensorType):
+            startDate = Date()
             measureService.measureStart(sensorType, interval: 0.1, duration: 60)
         case .measureEndbuttonTapped:
             measureService.measureStop()
@@ -54,6 +57,15 @@ class MeasureViewModel {
 
 private extension MeasureViewModel {
     func saveMeasureData() {
+        let measureData = MeasureData(
+            xValue: xValues,
+            yValue: yValues,
+            zValue: zValues,
+            runTime: wasteTime,
+            date: startDate,
+            type: sensorType
+        )
+        
         transactionSevice.save(data: measureData) { [weak self] result in
             guard let self = self else { return }
             switch result {
@@ -76,12 +88,17 @@ extension MeasureViewModel: MeasureServiceDelegate {
     }
     
     func updateData(_ data: Values) {
-        self.measureData.xValue.append(data.x)
-        self.measureData.yValue.append(data.y)
-        self.measureData.zValue.append(data.z)
+        xValues.append(data.x)
+        yValues.append(data.y)
+        zValues.append(data.z)
+        sensorMeasureValues = data
     }
     
     func endMeasuringData() {
         delegate?.endMeasuringData()
+    }
+    
+    func emitWasteTime(_ wasteTime: TimeInterval) {
+        self.wasteTime = wasteTime
     }
 }
