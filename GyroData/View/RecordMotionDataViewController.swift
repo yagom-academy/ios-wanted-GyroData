@@ -84,6 +84,7 @@ final class RecordMotionDataViewController: UIViewController {
         return UIAction(handler: { _ in
             do {
                 try self.viewModel.throwableAction(.save)
+                self.navigationController?.popViewController(animated: true)
             } catch MotionDataError.emptyData {
                 self.showAlert(alertTitle: MotionDataError.emptyData.localizedDescription)
             } catch CoreDataError.cannotSaveData {
