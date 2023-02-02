@@ -53,24 +53,7 @@ final class MotionDataListViewModel {
         motionData.remove(at: indexPath.row)
     }
 
-    func numberOfData() -> Int {
-        return motionData.count
-    }
-
-    func motionData(at indexPath: IndexPath) -> MotionData? {
-        guard indexPath.row < motionData.count else { return nil }
-        return motionData[indexPath.row]
-    }
-
-    func bind(onUpdate: @escaping () -> Void) {
-        self.onUpdate = onUpdate
-    }
-
-    func bind(onError: @escaping (String) -> Void) {
-        self.onError = onError
-    }
-
-    func fetchMotionData() {
+    private func fetchMotionData() {
         let offset = numberOfData()
         let limit = pagingLimit
         do {
@@ -91,6 +74,23 @@ final class MotionDataListViewModel {
             onError?(error.localizedDescription)
         }
     }
+
+    func numberOfData() -> Int {
+        return motionData.count
+    }
+
+    func motionData(at indexPath: IndexPath) -> MotionData? {
+        guard indexPath.row < motionData.count else { return nil }
+        return motionData[indexPath.row]
+    }
+
+    func bind(onUpdate: @escaping () -> Void) {
+        self.onUpdate = onUpdate
+    }
+
+    func bind(onError: @escaping (String) -> Void) {
+        self.onError = onError
+    }
 }
 
 extension MotionDataListViewModel {
@@ -99,7 +99,7 @@ extension MotionDataListViewModel {
         case view(at: IndexPath, handler: (MotionDataDetailViewModel) -> Void)
         case play(at: IndexPath, handler: (MotionDataDetailViewModel) -> Void)
         case delete(at: IndexPath)
-        case scrollToBottom
+        case fetchData
     }
 
     func action(_ action: Action) {
@@ -117,7 +117,7 @@ extension MotionDataListViewModel {
         case let .delete(indexPath):
             delete(at: indexPath)
             break
-        case .scrollToBottom:
+        case .fetchData:
             fetchMotionData()
             break
         }

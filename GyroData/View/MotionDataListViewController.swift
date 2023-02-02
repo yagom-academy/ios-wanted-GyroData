@@ -19,7 +19,7 @@ class MotionDataListViewController: UIViewController {
         configureNavigationItem()
         configureHierarchy()
         bindToViewModel()
-        viewModel.fetchMotionData()
+        viewModel.action(.fetchData)
     }
 
     private func configureTableView() {
@@ -119,7 +119,7 @@ extension MotionDataListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row == viewModel.numberOfData() - 1, isLoading == false {
             isLoading = true
-            viewModel.fetchMotionData()
+            viewModel.action(.fetchData)
             isLoading = false
         }
     }
