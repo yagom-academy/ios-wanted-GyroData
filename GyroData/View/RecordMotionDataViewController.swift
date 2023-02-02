@@ -141,18 +141,19 @@ final class RecordMotionDataViewController: UIViewController {
         return UIAction(handler: { _ in
             self.viewModel.action(.start(
                 selectedIndex: self.segmentedControl.selectedSegmentIndex,
-                handler: self.toggleButtons)
+                handler: self.toggleControlsAvailability)
             )
         })
     }
     
     private func stopButtonAction() -> UIAction {
         return UIAction(handler: { _ in
-            self.viewModel.action(.stop(handler: self.toggleButtons))
+            self.viewModel.action(.stop(handler: self.toggleControlsAvailability))
         })
     }
     
-    private func toggleButtons() {
+    private func toggleControlsAvailability() {
+        segmentedControl.isEnabled.toggle()
         measureButton.isEnabled.toggle()
         stopButton.isEnabled.toggle()
         navigationItem.rightBarButtonItem?.isEnabled.toggle()
