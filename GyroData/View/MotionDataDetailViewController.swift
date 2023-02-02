@@ -24,6 +24,7 @@ final class MotionDataDetailViewController: UIViewController {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .title1)
         label.adjustsFontForContentSizeCategory = true
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
@@ -39,6 +40,7 @@ final class MotionDataDetailViewController: UIViewController {
             for: .selected
         )
         button.isHidden = true
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
 
@@ -46,6 +48,7 @@ final class MotionDataDetailViewController: UIViewController {
        let label = UILabel()
         label.font = .preferredFont(forTextStyle: .title1)
         label.adjustsFontForContentSizeCategory = true
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
@@ -82,7 +85,7 @@ final class MotionDataDetailViewController: UIViewController {
     }
     
     private func showPlayPauseButton() {
-        playStopButton.isHidden = true
+        playStopButton.isHidden = false
     }
     
     private func configureViews() {
@@ -91,11 +94,23 @@ final class MotionDataDetailViewController: UIViewController {
 
         NSLayoutConstraint.activate([
             viewTypeLabel.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
-            viewTypeLabel.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
+            viewTypeLabel.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor)
+        ])
+        
+        graphView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
             graphView.topAnchor.constraint(equalTo: viewTypeLabel.bottomAnchor, constant: Constant.Layout.spacing),
             graphView.centerXAnchor.constraint(equalTo: view.layoutMarginsGuide.centerXAnchor),
+            graphView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.8),
+            graphView.heightAnchor.constraint(equalTo: graphView.widthAnchor)
+        ])
+        
+        NSLayoutConstraint.activate([
             playStopButton.topAnchor.constraint(equalTo: graphView.bottomAnchor, constant: Constant.Layout.spacing),
-            playStopButton.centerXAnchor.constraint(equalTo: view.layoutMarginsGuide.centerXAnchor),
+            playStopButton.centerXAnchor.constraint(equalTo: view.layoutMarginsGuide.centerXAnchor)
+        ])
+        
+        NSLayoutConstraint.activate([
             timerLabel.topAnchor.constraint(equalTo: graphView.bottomAnchor, constant: Constant.Layout.spacing),
             timerLabel.leadingAnchor.constraint(equalTo: playStopButton.trailingAnchor, constant: Constant.Layout.spacing),
             timerLabel.trailingAnchor.constraint(lessThanOrEqualTo: view.layoutMarginsGuide.trailingAnchor, constant: -Constant.Layout.spacing)
