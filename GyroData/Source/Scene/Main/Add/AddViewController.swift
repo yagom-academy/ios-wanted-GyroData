@@ -9,9 +9,9 @@ import UIKit
 import CoreMotion
 
 class AddViewController: UIViewController {
+    private let currentDate = Date()
     private var motionDataList = [MotionData]()
     private var jsonMotionData: Data?
-    private let currentDate = Date()
     
     private let segmentControl: UISegmentedControl = {
         let segmentControl = UISegmentedControl(items: ["Acc", "Gyro"])
@@ -30,6 +30,7 @@ class AddViewController: UIViewController {
         let button = UIButton()
         button.setTitle("측정", for: .normal)
         button.titleLabel?.font = .preferredFont(forTextStyle: .title2)
+        button.contentHorizontalAlignment = .left
         button.setTitleColor(.systemBlue, for: .normal)
         return button
     }()
@@ -37,6 +38,7 @@ class AddViewController: UIViewController {
         let button = UIButton()
         button.setTitle("정지", for: .normal)
         button.titleLabel?.font = .preferredFont(forTextStyle: .title2)
+        button.contentHorizontalAlignment = .left
         button.setTitleColor(.systemBlue, for: .normal)
         return button
     }()
@@ -100,7 +102,10 @@ class AddViewController: UIViewController {
                 multiplier: 0.4
             ),
             
-            playButton.heightAnchor.constraint(equalToConstant: view.frame.size.height * 0.02),
+            playButton.heightAnchor.constraint(equalToConstant: view.frame.size.height * 0.055),
+            playButton.widthAnchor.constraint(equalToConstant: view.frame.size.width * 0.15),
+            
+            stopButton.widthAnchor.constraint(equalToConstant: view.frame.size.width * 0.15),
             
             mainStackView.widthAnchor.constraint(
                 equalTo: view.safeAreaLayoutGuide.widthAnchor ,

@@ -54,6 +54,13 @@ final class MainViewController: UIViewController {
         
         view.backgroundColor = .systemBackground
         navigationItem.titleView = titleView
+        navigationItem.backBarButtonItem = UIBarButtonItem(
+            title: String(),
+            style: .plain,
+            target: self,
+            action: nil
+        )
+        navigationItem.backBarButtonItem?.tintColor = .black
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             title: "측정",
             style: .plain,
