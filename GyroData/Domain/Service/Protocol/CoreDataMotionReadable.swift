@@ -6,10 +6,7 @@
 //
 
 protocol CoreDataMotionReadable {
-    associatedtype Domain: Identifiable
-    associatedtype T: CoreDataRepository
+    var coreDataRepository: CoreDataRepository { get }
     
-    var coreDataRepository: T { get }
-    
-    func read(from offset: Int) -> [Domain]?
+    func read(from offset: Int) -> [Motion]?
 }

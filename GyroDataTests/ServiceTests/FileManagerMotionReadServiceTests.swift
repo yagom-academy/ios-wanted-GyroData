@@ -10,7 +10,7 @@ import XCTest
 
 final class FileManagerMotionReadServiceTests: XCTestCase {
     var fileManagerRepository: FileManagerRepositoryMock!
-    var service: GyroData.FileManagerMotionReadService<FileManagerRepositoryMock>!
+    var service: GyroData.FileManagerMotionReadService!
 
     override func setUpWithError() throws {
         fileManagerRepository = FileManagerRepositoryMock()
@@ -27,9 +27,9 @@ final class FileManagerMotionReadServiceTests: XCTestCase {
         let _ = service.read(with: "")
         
         // when
-        let isReadCalled = service.repository.isCalledReadFunction
-        let isCreateCalled = service.repository.isCalledCreateFunction
-        let isDeleteCalled = service.repository.isCalledDeleteFunction
+        let isReadCalled = fileManagerRepository.isCalledReadFunction
+        let isCreateCalled = fileManagerRepository.isCalledCreateFunction
+        let isDeleteCalled = fileManagerRepository.isCalledDeleteFunction
         
         // then
         XCTAssertEqual(true, isReadCalled)

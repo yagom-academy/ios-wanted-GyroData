@@ -11,7 +11,7 @@ import XCTest
 final class MotionDeleteServiceTests: XCTestCase {
     var coreDataRepository: CoreDataRepositoryMock!
     var fileManagerRepository: FileManagerRepositoryMock!
-    var service: GyroData.MotionDeleteService<CoreDataRepositoryMock, FileManagerRepositoryMock>!
+    var service: GyroData.MotionDeleteService!
 
     override func setUpWithError() throws {
         coreDataRepository = CoreDataRepositoryMock()
@@ -33,8 +33,8 @@ final class MotionDeleteServiceTests: XCTestCase {
         let _ = service.delete("")
         
         // when
-        let isCoreDataDeleteCalled = service.coreDataRepository.isCalledDeleteFunction
-        let isFileManagerDeleteCalled = service.fileManagerRepository.isCalledDeleteFunction
+        let isCoreDataDeleteCalled = coreDataRepository.isCalledDeleteFunction
+        let isFileManagerDeleteCalled = fileManagerRepository.isCalledDeleteFunction
         
         // then
         XCTAssertEqual(true, isCoreDataDeleteCalled)

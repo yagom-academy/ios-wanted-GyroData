@@ -11,7 +11,7 @@ import XCTest
 
 final class CoreDataMotionReadServiceTests: XCTestCase {
     var coreDataRepository: CoreDataRepositoryMock!
-    var service: CoreDataMotionReadService<CoreDataRepositoryMock>!
+    var service: CoreDataMotionReadService!
 
     override func setUpWithError() throws {
         coreDataRepository = CoreDataRepositoryMock()
@@ -32,6 +32,6 @@ final class CoreDataMotionReadServiceTests: XCTestCase {
         
         //then
         XCTAssertNotNil(result)
-        XCTAssertTrue(service.coreDataRepository.isCalledReadFunction)
+        XCTAssertTrue(coreDataRepository.isCalledReadFunction)
     }
 }

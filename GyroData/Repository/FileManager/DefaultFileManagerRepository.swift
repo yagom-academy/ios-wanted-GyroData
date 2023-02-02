@@ -8,9 +8,6 @@
 import Foundation
 
 struct DefaultFileManagerRepository: FileManagerRepository {
-    typealias Domain = Motion
-    typealias Entity = MotionDTO
-    
     private var directory: URL {
         FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
     }

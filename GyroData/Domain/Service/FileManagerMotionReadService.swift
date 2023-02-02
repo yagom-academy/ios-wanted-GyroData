@@ -5,8 +5,8 @@
 //  Created by Ayaan, Wonbi on 2023/01/31.
 //
 
-struct FileManagerMotionReadService<T: FileManagerRepository>: FileManagerMotionReadable where T.Domain == Motion, T.Entity == MotionDTO {
-    let repository: T
+struct FileManagerMotionReadService: FileManagerMotionReadable {
+    let repository: FileManagerRepository
     
     func read(with id: String) -> Motion? {
         do {

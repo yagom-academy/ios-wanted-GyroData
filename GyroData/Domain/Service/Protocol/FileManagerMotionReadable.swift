@@ -6,10 +6,7 @@
 //
 
 protocol FileManagerMotionReadable {
-    associatedtype T: FileManagerRepository
-    associatedtype Domain: Identifiable
+    var repository: FileManagerRepository { get }
     
-    var repository: T { get }
-    
-    func read(with id: String) -> Domain?
+    func read(with id: String) -> Motion?
 }

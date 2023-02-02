@@ -6,10 +6,7 @@
 //
 
 protocol CoreDataRepository {
-    associatedtype Domain: Identifiable
-    associatedtype Entity: Identifiable
-    
-    func create(_ domain: Domain, completion: @escaping (Result<Void, Error>) -> Void)
-    func read(from offset: Int) throws -> [Entity]
+    func create(_ domain: Motion, completion: @escaping (Result<Void, Error>) -> Void)
+    func read(from offset: Int) throws -> [MotionMO]
     func delete(with id: String) throws
 }

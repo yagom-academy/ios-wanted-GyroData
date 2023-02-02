@@ -5,13 +5,9 @@
 //  Created by Ayaan, Wonbi on 2023/01/31.
 //
 
-struct MotionDeleteService<T: CoreDataRepository,
-                           U: FileManagerRepository>: MotionDeletable where T.Domain == Motion,
-                                                                            T.Entity == MotionMO,
-                                                                            U.Domain == Motion,
-                                                                            U.Entity == MotionDTO {
-    let coreDataRepository: T
-    let fileManagerRepository: U
+struct MotionDeleteService: MotionDeletable {
+    let coreDataRepository: CoreDataRepository
+    let fileManagerRepository: FileManagerRepository
     
     func delete(_ id: String) -> Bool {
         do {

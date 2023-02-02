@@ -7,13 +7,9 @@
 
 import Foundation
 
-struct MotionCreateService<T: CoreDataRepository,
-                           U: FileManagerRepository>: MotionCreatable where T.Domain == Motion,
-                                                                            T.Entity == MotionMO,
-                                                                            U.Domain == Motion,
-                                                                            U.Entity == MotionDTO {
-    let coreDataRepository: T
-    let fileManagerRepository: U
+struct MotionCreateService: MotionCreatable {
+    let coreDataRepository: CoreDataRepository
+    let fileManagerRepository: FileManagerRepository
     
     private let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()

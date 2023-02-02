@@ -11,7 +11,7 @@ import XCTest
 final class MotionCreateServiceTests: XCTestCase {
     var coreDataRepository: CoreDataRepositoryMock!
     var fileManagerRepository: FileManagerRepositoryMock!
-    var service: GyroData.MotionCreateService<CoreDataRepositoryMock, FileManagerRepositoryMock>!
+    var service: GyroData.MotionCreateService!
     
     let dateDummy = "2023/02/01 20:57:00"
     let typeDummy = 0
@@ -44,8 +44,8 @@ final class MotionCreateServiceTests: XCTestCase {
             }
         
         wait(for: [expectation], timeout: 5.0)
-        XCTAssertFalse(service.coreDataRepository.isCalledCreateFunction)
-        XCTAssertFalse(service.fileManagerRepository.isCalledCreateFunction)
+        XCTAssertFalse(coreDataRepository.isCalledCreateFunction)
+        XCTAssertFalse(fileManagerRepository.isCalledCreateFunction)
     }
     
     func test_create_with_invalid_type_then_completion_argument_and_repository_isCalledCreateFunction_is_false() {
@@ -61,8 +61,8 @@ final class MotionCreateServiceTests: XCTestCase {
             }
         
         wait(for: [expectation], timeout: 5.0)
-        XCTAssertFalse(service.coreDataRepository.isCalledCreateFunction)
-        XCTAssertFalse(service.fileManagerRepository.isCalledCreateFunction)
+        XCTAssertFalse(coreDataRepository.isCalledCreateFunction)
+        XCTAssertFalse(fileManagerRepository.isCalledCreateFunction)
     }
     
     func test_create_with_invalid_time_then_completion_argument_and_repository_isCalledCreateFunction_is_false() {
@@ -78,8 +78,8 @@ final class MotionCreateServiceTests: XCTestCase {
             }
         
         wait(for: [expectation], timeout: 5.0)
-        XCTAssertFalse(service.coreDataRepository.isCalledCreateFunction)
-        XCTAssertFalse(service.fileManagerRepository.isCalledCreateFunction)
+        XCTAssertFalse(coreDataRepository.isCalledCreateFunction)
+        XCTAssertFalse(fileManagerRepository.isCalledCreateFunction)
     }
     
     func test_create_with_valid_data_then_completion_argument_and_repository_isCalledCreateFunction_is_true() {
@@ -94,7 +94,7 @@ final class MotionCreateServiceTests: XCTestCase {
             }
         
         wait(for: [expectation], timeout: 5.0)
-        XCTAssertTrue(service.coreDataRepository.isCalledCreateFunction)
-        XCTAssertTrue(service.fileManagerRepository.isCalledCreateFunction)
+        XCTAssertTrue(coreDataRepository.isCalledCreateFunction)
+        XCTAssertTrue(fileManagerRepository.isCalledCreateFunction)
     }
 }

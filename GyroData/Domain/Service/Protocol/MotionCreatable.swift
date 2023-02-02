@@ -6,11 +6,8 @@
 //
 
 protocol MotionCreatable {
-    associatedtype T: CoreDataRepository
-    associatedtype U: FileManagerRepository
-    
-    var coreDataRepository: T { get }
-    var fileManagerRepository: U { get }
+    var coreDataRepository: CoreDataRepository { get }
+    var fileManagerRepository: FileManagerRepository { get }
     
     func create(date: String, type: Int, time: String, data: [MotionDataType], completion: @escaping (Bool) -> Void)
 }

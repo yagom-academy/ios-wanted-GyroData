@@ -13,9 +13,6 @@ enum CoreDataError: Error {
 }
 
 struct DefaultCoreDataRepository: CoreDataRepository {
-    typealias Domain = Motion
-    typealias Entity = MotionMO
-    
     private let persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "GyroData")
         container.loadPersistentStores(completionHandler: { (_, error) in

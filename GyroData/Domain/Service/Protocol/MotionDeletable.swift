@@ -6,11 +6,8 @@
 //
 
 protocol MotionDeletable {
-    associatedtype T: CoreDataRepository
-    associatedtype U: FileManagerRepository
-    
-    var coreDataRepository: T { get }
-    var fileManagerRepository: U { get }
+    var coreDataRepository: CoreDataRepository { get }
+    var fileManagerRepository: FileManagerRepository { get }
     
     func delete(_ id: String) -> Bool
 }

@@ -6,10 +6,7 @@
 //
 
 protocol FileManagerRepository {
-    associatedtype Domain: Identifiable
-    associatedtype Entity: Identifiable
-    
-    func create(_ domain: Domain, completion: @escaping (Result<Void, Error>) -> Void)
-    func read(with id: String) throws -> Entity
+    func create(_ domain: Motion, completion: @escaping (Result<Void, Error>) -> Void)
+    func read(with id: String) throws -> MotionDTO
     func delete(with id: String) throws
 }

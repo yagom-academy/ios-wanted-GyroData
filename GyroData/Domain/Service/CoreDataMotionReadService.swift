@@ -5,10 +5,7 @@
 //  Created by Ayaan, Wonbi on 2023/01/31.
 //
 
-struct CoreDataMotionReadService<T: CoreDataRepository>: CoreDataMotionReadable where T.Entity == MotionMO,
-                                                                                      T.Domain == Motion {
-    typealias CoreDataRepository = T
-    
+struct CoreDataMotionReadService: CoreDataMotionReadable {
     let coreDataRepository: CoreDataRepository
     
     func read(from offset: Int) -> [Motion]? {
