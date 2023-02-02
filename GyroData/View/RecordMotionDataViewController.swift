@@ -149,7 +149,7 @@ final class RecordMotionDataViewController: UIViewController {
         })
     }
     
-    private func stopbuttonAction() -> UIAction {
+    private func stopButtonAction() -> UIAction {
         return UIAction(handler: { _ in
             self.viewModel.action(.stop(closure: self.toggleButtons))
         })
