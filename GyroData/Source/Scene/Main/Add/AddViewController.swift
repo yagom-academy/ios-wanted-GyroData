@@ -11,7 +11,7 @@ import CoreMotion
 class AddViewController: UIViewController {
     // MARK: Enumerations
     
-    enum MeasureUnit: Int {
+    enum MeasurementUnit: Int {
         case acc = 0
         case gyro = 1
     }
@@ -22,7 +22,6 @@ class AddViewController: UIViewController {
     private let motionManager = CMMotionManager()
     private var motionDataList = [MotionData]()
     private var jsonMotionData: Data?
-    private var timer: Timer?
     
     private let segmentControl: UISegmentedControl = {
         let segmentControl = UISegmentedControl(items: ["Acc", "Gyro"])
@@ -76,8 +75,8 @@ class AddViewController: UIViewController {
     // MARK: Private Methods
     
     private func configureButtonAction() {
-        playButton.addTarget(self, action: #selector(updateMotionData), for: .touchDown)
-        stopButton.addTarget(self, action: #selector(stopGravityData), for: .touchDown)
+        playButton.addTarget(self, action: #selector(startMeasurement), for: .touchDown)
+        stopButton.addTarget(self, action: #selector(stopMeasurement), for: .touchDown)
     }
     
     private func configureView() {
@@ -145,37 +144,41 @@ class AddViewController: UIViewController {
     @objc private func saveMotionData() {
         jsonMotionData = try? JSONEncoder().encode(motionDataList)
         
-        guard let jsonMotionData = jsonMotionData else { return }
-        guard let dataString = String(data: jsonMotionData, encoding: .utf8) else { return }
+        guard let jsonMotionData = jsonMotionData,
+              let dataString = String(data: jsonMotionData, encoding: .utf8) else { return }
         
-        var titleText = ""
-        
-        if segmentControl.selectedSegmentIndex == MeasureUnit.acc.rawValue {
-            titleText = "Acc"
-        } else if segmentControl.selectedSegmentIndex == MeasureUnit.gyro.rawValue {
-            titleText = "Gyro"
+        if dataString != "[]" {
+            var titleText = String()
+            
+            switch segmentControl.selectedSegmentIndex {
+            case MeasurementUnit.acc.rawValue:
+                titleText = "Acc"
+            case MeasurementUnit.gyro.rawValue:
+                titleText = "Gyro"
+            default:
+                break
+            }
+            
+            let dataForm = MotionDataForm(
+                title: titleText,
+                date: currentDate,
+                runningTime: Double(motionDataList.count) / 10,
+                jsonData: dataString
+            )
+            
+            saveCoreData(motion: dataForm)
         }
-        
-        let dataForm = MotionDataForm(
-            title: titleText,
-            date: currentDate,
-            runningTime: Double(motionDataList.count) / 10,
-            jsonData: dataString
-        )
-        
-        saveCoreData(motion: dataForm)
         
         navigationController?.popViewController(animated: true)
     }
     
-    @objc private func updateMotionData() {
+    @objc private func startMeasurement() {
         motionDataList = .init()
         jsonMotionData = .init()
+        graphView.stopDrawLines()
         
         switch segmentControl.selectedSegmentIndex {
-        case 0:
-            graphView.stopDrawLines()
-            
+        case MeasurementUnit.acc.rawValue:
             motionManager.accelerometerUpdateInterval = 0.1
             motionManager.startAccelerometerUpdates(to: .main) { data, error in
                 if error == nil {
@@ -184,9 +187,7 @@ class AddViewController: UIViewController {
                     }
                 }
             }
-        case 1:
-            graphView.stopDrawLines()
-            
+        case MeasurementUnit.gyro.rawValue:
             motionManager.gyroUpdateInterval = 0.1
             motionManager.startGyroUpdates(to: .main) { data, error in
                 if error == nil {
@@ -200,20 +201,32 @@ class AddViewController: UIViewController {
         }
     }
     
-    private func measureMotion(type: MeasureUnit, data: CMLogItem) {
-        if let data = data as? CMGyroData {
+    private func measureMotion(type: MeasurementUnit, data: CMLogItem) {
+        switch type {
+        case .acc:
+            guard let totalData = data as? CMAccelerometerData else { return }
             let recordData = MotionData(
-                x: data.rotationRate.x,
-                y: data.rotationRate.y,
-                z: data.rotationRate.z
+                x: totalData.acceleration.x,
+                y: totalData.acceleration.y,
+                z: totalData.acceleration.z
             )
             
-            self.motionDataList.append(recordData)
-            self.graphView.motionDatas = recordData
+            motionDataList.append(recordData)
+            graphView.motionDatas = recordData
+        case .gyro:
+            guard let totalData = data as? CMGyroData else { return }
+            let recordData = MotionData(
+                x: totalData.rotationRate.x,
+                y: totalData.rotationRate.y,
+                z: totalData.rotationRate.z
+            )
+            
+            motionDataList.append(recordData)
+            graphView.motionDatas = recordData
         }
     }
     
-    @objc private func stopGravityData() {
+    @objc private func stopMeasurement() {
         motionManager.stopAccelerometerUpdates()
         motionManager.stopGyroUpdates()
         
