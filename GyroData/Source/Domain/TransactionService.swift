@@ -54,7 +54,9 @@ extension TransactionService {
             do {
                 try self.coreDataManager.save(data)
             } catch {
-                return completion(.failure(error))
+                DispatchQueue.main.async {
+                    return completion(.failure(error))
+                }
             }
         }
         
@@ -62,7 +64,9 @@ extension TransactionService {
             do {
                 try self.fileManager.save(data)
             } catch {
-                return completion(.failure(error))
+                DispatchQueue.main.async {
+                    return completion(.failure(error))
+                }
             }
         }
         
