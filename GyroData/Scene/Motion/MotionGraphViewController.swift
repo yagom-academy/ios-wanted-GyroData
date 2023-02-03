@@ -76,6 +76,12 @@ final class MotionGraphViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         setupButton()
+        viewModel.configureDelegate(self)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.action(.viewWillAppear)
     }
 }
 
@@ -116,5 +122,11 @@ private extension MotionGraphViewController {
         playButton.setInactiveHandler {
             //write active inaction
         }
+    }
+}
+
+extension MotionGraphViewController: MotionViewDelegate {
+    func motionViewModel(willDisplayMotion motion: Motion) {
+        dateLabel.text = motion.date.description
     }
 }
