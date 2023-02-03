@@ -6,11 +6,12 @@
 //
 
 final class DetailViewModel {
-    
     private let model: MotionData
     private let pageType: PageType
     
-    init(_ motionData: MotionData, type: PageType) {
+    private let title: String = "다시보기"
+    
+    init(_ motionData: MotionData, by type: PageType) {
         model = motionData
         pageType = type
     }
