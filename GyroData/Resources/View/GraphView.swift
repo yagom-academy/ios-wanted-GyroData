@@ -95,6 +95,7 @@ extension GraphView {
         addGraphViewSublayer(layer: xLayer, path: xPath)
         addGraphViewSublayer(layer: yLayer, path: yPath)
         addGraphViewSublayer(layer: zLayer, path: zPath)
+        self.layoutIfNeeded()
     }
 
     private func addGraphViewSublayer(layer: CAShapeLayer, path: UIBezierPath) {
