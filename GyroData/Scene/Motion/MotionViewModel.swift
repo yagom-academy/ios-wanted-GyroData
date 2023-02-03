@@ -11,7 +11,7 @@ protocol MotionViewDelegate: AnyObject {
     func motionViewModel(willDisplayMotion motion: Motion)
 }
 
-struct MotionViewModel {
+final class MotionViewModel {
     enum Action {
         case viewWillAppear
     }
@@ -20,11 +20,20 @@ struct MotionViewModel {
     private let readService: FileManagerMotionReadService
     private weak var delegate: MotionViewDelegate?
     
+    init(motionID: String, readService: FileManagerMotionReadService) {
+        self.motionID = motionID
+        self.readService = readService
+    }
+    
     func action(_ action: Action) {
         switch action {
         case .viewWillAppear:
             fetchMotion(with: motionID)
         }
+    }
+    
+    func configureDelegate(_ delegate: MotionViewDelegate) {
+        self.delegate = delegate
     }
 }
 
