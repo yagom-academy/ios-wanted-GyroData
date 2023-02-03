@@ -15,7 +15,9 @@ protocol MotionsListViewModelDelegate: AnyObject {
 
 final class MotionsListViewModel {
     typealias CellData = (date: String, measurementType: String, time: String)
-    
+    enum Constant {
+        static let dateFormat = "yyyy/MM/dd HH:mm:ss"
+    }
     enum Action {
         case viewDidApear
         case nextPageRequest
@@ -60,7 +62,7 @@ final class MotionsListViewModel {
     }
     
     func fetchCellData(from motion: Motion) -> CellData {
-        let date: String = motion.date.description
+        let date: String = motion.date.formatted(by: Constant.dateFormat)
         let measurementType: String = motion.type.text
         let time: String = String(motion.time)
         
