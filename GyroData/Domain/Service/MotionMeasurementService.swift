@@ -22,9 +22,7 @@ final class MotionMeasurementService: MotionMeasurable {
     private var stopTimer: Timer?
     private weak var delegate: MotionMeasurementServiceDelegate?
     
-    init(delegate: MotionMeasurementServiceDelegate? = nil) {
-        self.delegate = delegate
-    }
+    init() { }
     
     deinit {
         stopTimer?.invalidate()
@@ -50,6 +48,10 @@ final class MotionMeasurementService: MotionMeasurable {
         delegate?.motionMeasurementService(isCompletedService: true)
         stopTimer?.invalidate()
         stopTimer = nil
+    }
+    
+    func configureDelegate(_ delegate: MotionMeasurementServiceDelegate) {
+        self.delegate = delegate
     }
 }
 
