@@ -24,6 +24,7 @@
 		DF5D8C86298CDD6900E7312D /* Acceletometer+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5D8C7C298CDD6900E7312D /* Acceletometer+CoreDataProperties.swift */; };
 		DF5D8C87298CDD6900E7312D /* Velocity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5D8C7D298CDD6900E7312D /* Velocity+CoreDataClass.swift */; };
 		DF5D8C88298CDD6900E7312D /* Velocity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5D8C7E298CDD6900E7312D /* Velocity+CoreDataProperties.swift */; };
+		DF5D8C90298D157400E7312D /* CoreMotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5D8C8F298D157400E7312D /* CoreMotionManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		DF5D8C7C298CDD6900E7312D /* Acceletometer+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Acceletometer+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		DF5D8C7D298CDD6900E7312D /* Velocity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Velocity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		DF5D8C7E298CDD6900E7312D /* Velocity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Velocity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		DF5D8C8F298D157400E7312D /* CoreMotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMotionManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				DF5D8C40298BB33600E7312D /* CoreDataPlatform */,
+				DF5D8C8E298D154F00E7312D /* CoreMotionPlatform */,
 				DF5D8C43298BB80100E7312D /* Repository */,
 			);
 			path = Data;
@@ -178,6 +181,22 @@
 				DF5D8C41298BB34300E7312D /* CoreDataStack.swift */,
 			);
 			path = CoreDataStack;
+			sourceTree = "<group>";
+		};
+		DF5D8C8E298D154F00E7312D /* CoreMotionPlatform */ = {
+			isa = PBXGroup;
+			children = (
+				DF5D8C91298D157700E7312D /* CoreMotionManager */,
+			);
+			path = CoreMotionPlatform;
+			sourceTree = "<group>";
+		};
+		DF5D8C91298D157700E7312D /* CoreMotionManager */ = {
+			isa = PBXGroup;
+			children = (
+				DF5D8C8F298D157400E7312D /* CoreMotionManager.swift */,
+			);
+			path = CoreMotionManager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -262,6 +281,7 @@
 				DF5D8C60298CC73300E7312D /* MotionData_v1.xcdatamodeld in Sources */,
 				DF5D8C80298CDD6900E7312D /* Acceleration+CoreDataProperties.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
+				DF5D8C90298D157400E7312D /* CoreMotionManager.swift in Sources */,
 				DF5D8C81298CDD6900E7312D /* MotionData+CoreDataClass.swift in Sources */,
 				DF5D8C7F298CDD6900E7312D /* Acceleration+CoreDataClass.swift in Sources */,
 				DF5D8C87298CDD6900E7312D /* Velocity+CoreDataClass.swift in Sources */,
