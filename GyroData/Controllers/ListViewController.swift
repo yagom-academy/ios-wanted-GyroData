@@ -103,17 +103,22 @@ extension ListViewController: UITableViewDelegate {
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") {
             [weak self] _, _, _ in
             guard let self = self else { return }
-            self.dataManagers.forEach { dataManager in
-                do {
+            
+            do {
+                try self.dataManagers.forEach { dataManager in
                     try dataManager.deleteData(self.measurements[indexPath.item])
                 }
-                catch {
-                    print(DataHandleError.deleteFailError(error: error))
-                    UIAlertController.show(title: "Error",
-                                           message: "데이터 삭제에 실패했습니다.",
-                                           target: self)
-                }
+                
+                self.measurements.remove(at: indexPath.item)
+                self.applySnapshot()
             }
+            catch {
+                print(DataHandleError.deleteFailError(error: error))
+                UIAlertController.show(title: "Error",
+                                       message: "데이터 삭제에 실패했습니다.",
+                                       target: self)
+            }
+            
         }
         
         return UISwipeActionsConfiguration(actions: [deleteAction, playAction])
@@ -121,7 +126,7 @@ extension ListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.cellForRow(at: indexPath)?.isSelected = false
-
+        
         let reviewPageViewController = ReviewPageViewController(
             reviewPageView: ReviewPageView(pageState: .resultView),
             measurement: measurements[indexPath.item])
@@ -135,7 +140,7 @@ extension ListViewController: UITableViewDelegate {
         isPaging = true
         coreDataManager.changeFetchOffset(isInitialFetch: false)
         self.listView.tableView.tableFooterView = generateSpinnerFooter()
-    
+        
         switch coreDataManager.fetchData() {
         case .success(let fetchedMeasurements):
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
@@ -157,7 +162,7 @@ extension ListViewController: UITableViewDelegate {
         
         return offsetY > contentHeight - frameHeight && contentHeight > frameHeight
     }
-
+    
     private func generateSpinnerFooter() -> UIView {
         let footerView = UIView(frame: CGRect(x: .zero, y: .zero,
                                               width: view.frame.size.width, height: 100))

@@ -90,6 +90,19 @@ class CoreDataManager: MeasurementDataHandleable {
         }
     }
     
+    func deleteAll() throws {
+        let request = NSFetchRequest<MeasurementCoreModel>(entityName: "MeasurementCoreModel")
+        
+        do {
+            let measurementsWillDelete = try context.fetch(request)
+            measurementsWillDelete.forEach { measurement in
+                context.delete(measurement)
+            }
+            
+            try context.save()
+        }
+    }
+    
     private func convertTypeToMeasurement(from measurementCoreModel: MeasurementCoreModel) throws
     -> Measurement {
         let date = measurementCoreModel.date
