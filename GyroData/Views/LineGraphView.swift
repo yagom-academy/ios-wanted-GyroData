@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LineGraphView: UIView {
+final class LineGraphView: UIView {
     private let axisXLabel: UILabel = {
         let label = UILabel()
         label.text = "x: 0"

@@ -7,7 +7,7 @@
 
 import CoreMotion
 
-class SensorManager {
+final class SensorManager {
     private let motionManager = CMMotionManager()
     private var timer: Timer?
 

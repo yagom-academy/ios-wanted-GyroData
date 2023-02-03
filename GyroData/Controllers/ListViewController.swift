@@ -12,14 +12,15 @@ final class ListViewController: UIViewController {
     private typealias DataSource = UITableViewDiffableDataSource<Section, Measurement>
     private typealias SnapShot = NSDiffableDataSourceSnapshot<Section, Measurement>
     
-    private var measurements: [Measurement] = []
     private let listView: ListView = ListView()
+    private let dataManagers: [any MeasurementDataHandleable] = [CoreDataManager(),
+                                                                 SensorFileManager()]
+    
+    private var measurements: [Measurement] = []
     private var dataSource: DataSource? = nil
     private var snapShot: SnapShot = SnapShot()
     private var isPaging: Bool = false
-    private let coreDataManager = CoreDataManager()
-    private let sensorFileManager = SensorFileManager()
-    lazy var dataManagers: [any MeasurementDataHandleable] = [coreDataManager, sensorFileManager]
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +37,8 @@ final class ListViewController: UIViewController {
     }
     
     private func initialFetchMeasurementData() {
+        guard let coreDataManager = dataManagers[0] as? CoreDataManager else { return }
+        
         coreDataManager.changeFetchOffset(isInitialFetch: true)
         
         switch coreDataManager.fetchData() {
@@ -135,7 +138,8 @@ extension ListViewController: UITableViewDelegate {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        guard !isPaging && isScrollOnLastCell(scrollView) else { return }
+        guard let coreDataManager = dataManagers[0] as? CoreDataManager,
+              !isPaging && isScrollOnLastCell(scrollView) else { return }
         
         isPaging = true
         coreDataManager.changeFetchOffset(isInitialFetch: false)

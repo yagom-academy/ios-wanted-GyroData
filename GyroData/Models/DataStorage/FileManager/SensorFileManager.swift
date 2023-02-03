@@ -7,7 +7,7 @@
 
 import Foundation
 
-class SensorFileManager: MeasurementDataHandleable {
+final class SensorFileManager: MeasurementDataHandleable {
     typealias DataType = Measurement
 
     private let fileManager: FileManager

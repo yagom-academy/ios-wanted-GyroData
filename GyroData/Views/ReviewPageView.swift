@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ReviewPageView: UIView {
+final class ReviewPageView: UIView {
     
     private let pageState: PageState
     private let dateLabel = UILabel(font: .body)
@@ -42,6 +42,7 @@ class ReviewPageView: UIView {
         setupPageStateLabelText(pageState: pageState)
     }
     
+    @available (*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -50,11 +51,38 @@ class ReviewPageView: UIView {
         dateLabel.text = text
     }
     
-    func setupTimeLabelText(_ text: String) {
-        timeLabel.text = text
+    func showGraph(with data: [AxisValue]) {
+        lineGraphView.setData(data)
+    }
+
+    func clearGraph() {
+        lineGraphView.setData([])
+    }
+
+    func drawGraph(with data: AxisValue) {
+        lineGraphView.addData(data)
+    }
+
+    func configureButtonAction(action: UIAction) {
+        playButton.addAction(action, for: .touchUpInside)
+    }
+
+    func configureTimeLabel(string: String) {
+        timeLabel.text = string
+    }
+
+    func togglePlayButton() {
+        if playButton.isSelected {
+            playButton.isSelected = false
+            playButton.setBackgroundImage(UIImage(systemName: "stop.fill"), for: .normal)
+            clearGraph()
+        } else {
+            playButton.isSelected = true
+            playButton.setBackgroundImage(UIImage(systemName: "play.fill"), for: .normal)
+        }
     }
     
-    func setupPageStateLabelText(pageState: PageState) {
+    private func setupPageStateLabelText(pageState: PageState) {
             pageStateLabel.text = pageState.pageName
     }
     
@@ -114,37 +142,6 @@ class ReviewPageView: UIView {
                                               multiplier: 0.2),
             playButton.heightAnchor.constraint(equalTo: playButton.widthAnchor),
         ])
-    }
-
-    func showGraph(with data: [AxisValue]) {
-        lineGraphView.setData(data)
-    }
-
-    func clearGraph() {
-        lineGraphView.setData([])
-    }
-
-    func drawGraph(with data: AxisValue) {
-        lineGraphView.addData(data)
-    }
-
-    func configureButtonAction(action: UIAction) {
-        playButton.addAction(action, for: .touchUpInside)
-    }
-
-    func configureTimeLabel(string: String) {
-        timeLabel.text = string
-    }
-
-    func togglePlayButton() {
-        if playButton.isSelected {
-            playButton.isSelected = false
-            playButton.setBackgroundImage(UIImage(systemName: "stop.fill"), for: .normal)
-            clearGraph()
-        } else {
-            playButton.isSelected = true
-            playButton.setBackgroundImage(UIImage(systemName: "play.fill"), for: .normal)
-        }
     }
 }
 

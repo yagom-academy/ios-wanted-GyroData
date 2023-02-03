@@ -65,38 +65,7 @@ final class MeasurementView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-    // MARK: configure View
-    private func configureView() {
-        addSubview(measurementButton)
-        addSubview(stopButton)
-        addSubview(segmentedController)
-        addSubview(graphView)
-        addSubview(indicatorView)
-    }
-
-    private func configureConstraints() {
-        NSLayoutConstraint.activate([
-            segmentedController.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
-            segmentedController.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            segmentedController.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
-
-            graphView.topAnchor.constraint(equalTo: segmentedController.bottomAnchor, constant: 16),
-            graphView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            graphView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
-            graphView.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor, multiplier: 0.4),
-
-            measurementButton.topAnchor.constraint(equalTo: graphView.bottomAnchor, constant: 16),
-            measurementButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
-
-            stopButton.topAnchor.constraint(equalTo: measurementButton.bottomAnchor, constant: 16),
-            stopButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            
-            indicatorView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            indicatorView.centerYAnchor.constraint(equalTo: centerYAnchor)
-        ])
-    }
-
+    
     func setDisabledSegments() {
         for segmentIndex in 0..<numberOfSegments {
             // 선택되지 않은 세그먼트 제외 모두 비활성화
@@ -137,5 +106,36 @@ final class MeasurementView: UIView {
 
     func stopActivityIndicator() {
         indicatorView.stopAnimating()
+    }
+
+    // MARK: configure View
+    private func configureView() {
+        addSubview(measurementButton)
+        addSubview(stopButton)
+        addSubview(segmentedController)
+        addSubview(graphView)
+        addSubview(indicatorView)
+    }
+
+    private func configureConstraints() {
+        NSLayoutConstraint.activate([
+            segmentedController.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
+            segmentedController.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            segmentedController.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
+
+            graphView.topAnchor.constraint(equalTo: segmentedController.bottomAnchor, constant: 16),
+            graphView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            graphView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            graphView.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor, multiplier: 0.4),
+
+            measurementButton.topAnchor.constraint(equalTo: graphView.bottomAnchor, constant: 16),
+            measurementButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
+
+            stopButton.topAnchor.constraint(equalTo: measurementButton.bottomAnchor, constant: 16),
+            stopButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            
+            indicatorView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            indicatorView.centerYAnchor.constraint(equalTo: centerYAnchor)
+        ])
     }
 }
