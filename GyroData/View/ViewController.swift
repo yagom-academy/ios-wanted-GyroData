@@ -9,6 +9,7 @@ import UIKit
 
 class ViewController: UIViewController {
     var motionDataList: [MotionEntity] = []
+    var currentPage = 0
     
     let tableView: UITableView = {
         let tableView = UITableView()
@@ -44,8 +45,7 @@ class ViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        configureData()
-        tableView.reloadData()
+        fetchData()
     }
     
     func configureLayout() {
@@ -60,9 +60,11 @@ class ViewController: UIViewController {
         
     }
     
-    func configureData() {
-        guard let hasList = CoreDataManager.shared.fetchData(entity: MotionEntity.self) else { return }
+    func fetchData() {
+        guard let hasList = CoreDataManager.shared.fetchData(entity: MotionEntity.self, pageCount: 10, offset: currentPage * 10) else { return }
         motionDataList = hasList
+    
+        tableView.reloadData()
     }
 }
 
@@ -75,11 +77,15 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ListCell.identifier, for: indexPath) as? ListCell else {
             return ListCell()
         }
-    
+        
         cell.configureData(title: motionDataList[indexPath.row].measureType,
                            date: motionDataList[indexPath.row].date,
                            second: motionDataList[indexPath.row].time)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

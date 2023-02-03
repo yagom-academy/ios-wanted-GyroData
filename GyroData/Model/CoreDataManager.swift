@@ -36,10 +36,11 @@ class CoreDataManager {
         }
     }
     
-    func fetchData<T: NSManagedObject>(entity: T.Type) -> [T]? {
+    func fetchData<T: NSManagedObject>(entity: T.Type, pageCount: Int, offset: Int) -> [T]? {
         let fetchRequest = NSFetchRequest<T>(entityName: T.self.description())
-        
         let dateOrder = NSSortDescriptor(key: "date", ascending: false)
+        fetchRequest.fetchLimit = pageCount
+        fetchRequest.fetchOffset = offset
         fetchRequest.sortDescriptors = [dateOrder]
 
         let context = self.persistentContainer.viewContext
