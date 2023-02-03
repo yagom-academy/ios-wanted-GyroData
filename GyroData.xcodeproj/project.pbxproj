@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C81E3B2298CDDC500B5BC59 /* AlertBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C81E3B1298CDDC500B5BC59 /* AlertBuilder.swift */; };
+		3C81E3B4298CE07100B5BC59 /* ErrorAlertBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C81E3B3298CE07100B5BC59 /* ErrorAlertBuilder.swift */; };
+		3C81E3B7298CE09F00B5BC59 /* AlertDirector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C81E3B6298CE09F00B5BC59 /* AlertDirector.swift */; };
 		3CB15C4429893DAE0049E390 /* DataManageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB15C4329893DAE0049E390 /* DataManageable.swift */; };
 		3CB15C4629893DC60049E390 /* FileManageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB15C4529893DC60049E390 /* FileManageable.swift */; };
 		3CB15C4A298945620049E390 /* DataListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB15C49298945620049E390 /* DataListViewController.swift */; };
@@ -65,6 +68,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3C81E3B1298CDDC500B5BC59 /* AlertBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertBuilder.swift; sourceTree = "<group>"; };
+		3C81E3B3298CE07100B5BC59 /* ErrorAlertBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlertBuilder.swift; sourceTree = "<group>"; };
+		3C81E3B6298CE09F00B5BC59 /* AlertDirector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertDirector.swift; sourceTree = "<group>"; };
 		3CB15C4329893DAE0049E390 /* DataManageable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManageable.swift; sourceTree = "<group>"; };
 		3CB15C4529893DC60049E390 /* FileManageable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManageable.swift; sourceTree = "<group>"; };
 		3CB15C49298945620049E390 /* DataListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataListViewController.swift; sourceTree = "<group>"; };
@@ -121,6 +127,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3C81E3B0298CDDB100B5BC59 /* Builder */ = {
+			isa = PBXGroup;
+			children = (
+				3C81E3B1298CDDC500B5BC59 /* AlertBuilder.swift */,
+				3C81E3B3298CE07100B5BC59 /* ErrorAlertBuilder.swift */,
+			);
+			path = Builder;
+			sourceTree = "<group>";
+		};
+		3C81E3B5298CE09100B5BC59 /* Director */ = {
+			isa = PBXGroup;
+			children = (
+				3C81E3B6298CE09F00B5BC59 /* AlertDirector.swift */,
+			);
+			path = Director;
+			sourceTree = "<group>";
+		};
 		3CB15C4229893D9B0049E390 /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
@@ -250,6 +273,8 @@
 		AC52BAC629880B660057CA56 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				3C81E3B5298CE09100B5BC59 /* Director */,
+				3C81E3B0298CDDB100B5BC59 /* Builder */,
 				3CFD20D7298A5F5A00269FC9 /* Extension */,
 				AC52BAEE2988D45C0057CA56 /* Error */,
 			);
@@ -477,6 +502,8 @@
 				AC52BAC52987F91A0057CA56 /* SensorData+CoreDataProperties.swift in Sources */,
 				3CFD20D9298A5F6A00269FC9 /* UIComponent+Extension.swift in Sources */,
 				AC52BAAE2987E9C60057CA56 /* TransactionService.swift in Sources */,
+				3C81E3B4298CE07100B5BC59 /* ErrorAlertBuilder.swift in Sources */,
+				3C81E3B7298CE09F00B5BC59 /* AlertDirector.swift in Sources */,
 				3CB15C4629893DC60049E390 /* FileManageable.swift in Sources */,
 				3CFD20DC298BCD6000269FC9 /* DetailViewModel.swift in Sources */,
 				AC52BAC42987F91A0057CA56 /* SensorData+CoreDataClass.swift in Sources */,
@@ -484,6 +511,7 @@
 				AC52BAAC2987E9930057CA56 /* MeasureData.swift in Sources */,
 				3CFD20E0298BCEDE00269FC9 /* DetailViewController.swift in Sources */,
 				AC52BAB42987EA2A0057CA56 /* FileSystemManager.swift in Sources */,
+				3C81E3B2298CDDC500B5BC59 /* AlertBuilder.swift in Sources */,
 				3CFD20D6298A3BAF00269FC9 /* Identifiable.swift in Sources */,
 				3CB15C4A298945620049E390 /* DataListViewController.swift in Sources */,
 				AC52BAC12987F8BA0057CA56 /* SensorData.xcdatamodeld in Sources */,
