@@ -24,6 +24,7 @@
 		18A4DAFA298A228A00B7BC1D /* SystemFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A4DAF9298A228A00B7BC1D /* SystemFileManager.swift */; };
 		18A4DAFC298A22B200B7BC1D /* MotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A4DAFB298A22B200B7BC1D /* MotionManager.swift */; };
 		18A4DB02298A29D700B7BC1D /* Sensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A4DB01298A29D700B7BC1D /* Sensor.swift */; };
+		18CA2FAD298CF38800C3F4CF /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CA2FAC298CF38800C3F4CF /* Date+Extension.swift */; };
 		18D110612987BB770088ED79 /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D110602987BB770088ED79 /* RecordViewController.swift */; };
 		18D110632988078F0088ED79 /* Transition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D110622988078F0088ED79 /* Transition.swift */; };
 		18D1106629880B7D0088ED79 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D1106529880B7D0088ED79 /* Array+Extension.swift */; };
@@ -50,6 +51,7 @@
 		18A4DAF9298A228A00B7BC1D /* SystemFileManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemFileManager.swift; sourceTree = "<group>"; };
 		18A4DAFB298A22B200B7BC1D /* MotionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionManager.swift; sourceTree = "<group>"; };
 		18A4DB01298A29D700B7BC1D /* Sensor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sensor.swift; sourceTree = "<group>"; };
+		18CA2FAC298CF38800C3F4CF /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		18D110602987BB770088ED79 /* RecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
 		18D110622988078F0088ED79 /* Transition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transition.swift; sourceTree = "<group>"; };
 		18D1106529880B7D0088ED79 /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 			children = (
 				18D1106529880B7D0088ED79 /* Array+Extension.swift */,
 				09D60BFD298A485300568B32 /* UIFont+Extension.swift */,
+				18CA2FAC298CF38800C3F4CF /* Date+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -291,6 +294,7 @@
 				18A4DB02298A29D700B7BC1D /* Sensor.swift in Sources */,
 				18D110632988078F0088ED79 /* Transition.swift in Sources */,
 				183BD42B298A0232005B480E /* (null) in Sources */,
+				18CA2FAD298CF38800C3F4CF /* Date+Extension.swift in Sources */,
 				63F01BB928D44FC400C53A39 /* TransitionListViewController.swift in Sources */,
 				18186204298CCA9D0072CD7F /* AlertBuilder.swift in Sources */,
 				18186209298CCACD0072CD7F /* Uploadable.swift in Sources */,

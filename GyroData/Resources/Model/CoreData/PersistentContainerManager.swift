@@ -38,7 +38,7 @@ final class PersistentContainerManager {
     func createNewGyroObject(metaData: TransitionMetaData) -> Bool {
         let context = persistentContainer.viewContext
         let newObject = TransitionMetaDataObject(context: context)
-        
+        print("path in core Data \(metaData.jsonName)")
         newObject.setValue(metaData.saveDate, forKey: "saveDate")
         newObject.setValue(metaData.sensorType.rawValue, forKey: "sensorType")
         newObject.setValue(metaData.recordTime, forKey: "recordTime")

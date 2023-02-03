@@ -54,7 +54,7 @@
          self.metaData = metaData
          super.init(nibName: nil, bundle: nil)
          
-         SystemFileManager().readData(path: metaData.jsonName, type: Transition.self) { result in
+         SystemFileManager().readData(fileName: metaData.jsonName, type: Transition.self) { result in
              switch result {
              case .success(let data):
                  self.transitionData = data
