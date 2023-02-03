@@ -42,7 +42,18 @@ class GraphView: UIView {
     private var scale: Double
     
     private var timer: Timer?
-    private var timerIntervalPoint = 0
+    private var timerIntervalPoint = 0 {
+        didSet {
+            timerHandler?(Double(timerIntervalPoint) / 10.0)
+        }
+    }
+    
+    private var timerHandler: ((TimeInterval) -> Void)?
+    
+    func timeIntervalBind(handler: ((TimeInterval) -> Void)?) {
+        handler?(Double(timerIntervalPoint))
+        timerHandler = handler
+    }
     
     private let labelStackView: UIStackView = {
         let stackView = UIStackView()

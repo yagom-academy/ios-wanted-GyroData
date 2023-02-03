@@ -63,7 +63,8 @@ extension DataListViewController: DataListConfigurable {
     }
     
     func setupPlay(_ data: MeasureData) {
-        //TODO: Move to Play View
+        let viewModel = PlayViewModel(entireData: data)
+        navigationController?.pushViewController(PlayViewController(viewModel: viewModel), animated: true)
     }
 }
 
