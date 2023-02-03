@@ -10,24 +10,18 @@ import Foundation
 final class ReplayMotionViewModel {
 
     private var fileManager: FileManager
+    private var motionData: MotionData!
+    private var replayType: ReplayType
 
-    private var motionDataListHandler: (() -> ())?
-
-    init() {
+    init(index: IndexPath, type: ReplayType) {
         self.fileManager = FileManager.shared
+        self.replayType = type
+        self.motionData = fetchMotionData(index: index.item)
+
     }
 
-    @objc
-    private func motionDataBind() {
-        motionDataListHandler?()
-    }
-
-    func bindMotionDataList(handler: @escaping () -> ()) {
-        self.motionDataListHandler = handler
-    }
-
-    func fetchMotionDataList() -> [MotionData] {
-        return fileManager.fetchData()
+    func fetchMotionData(index: Int) -> MotionData {
+        return fileManager.fetchData(index: index)
     }
 
     func bindPlayButton() {
@@ -42,8 +36,8 @@ final class ReplayMotionViewModel {
 
     }
 
-    func bindCellData() {
-        
+    func bindCellData() -> (MotionData, ReplayType) {
+        return (motionData, replayType)
     }
 
 

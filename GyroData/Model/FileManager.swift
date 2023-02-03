@@ -12,7 +12,7 @@ final class FileManager {
     static var shared = FileManager()
     private let coreDataManager = CoreDataManager()
     private let jsonDataManager = JSONDataManager()
-    private var motionDataList: [MotionData] = [] {
+    var motionDataList: [MotionData] = [] {
         didSet {
             NotificationCenter.default.post(name: Notification.Name("motionDataChanged"),
                                             object: nil)
