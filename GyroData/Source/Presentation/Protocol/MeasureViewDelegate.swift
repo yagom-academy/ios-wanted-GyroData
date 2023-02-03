@@ -11,8 +11,6 @@ protocol MeasureViewDelegate: AnyObject {
     typealias Values = (x: Double, y: Double, z: Double)
     
     func updateValue(_ values: Values)
-    func nonAccelerometerMeasurable()
-    func nonGyroscopeMeasurable()
     func endMeasuringData()
     
     func saveSuccess()

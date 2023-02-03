@@ -92,6 +92,7 @@ class MeasureViewController: UIViewController {
 private extension MeasureViewController {
     func setViewModelDelegate() {
         self.viewModel.delegate = self
+        self.viewModel.alertDelegate = self
     }
     
     func setupNavigationBar() {
@@ -198,38 +199,6 @@ extension MeasureViewController: MeasureViewDelegate {
         graphView.setNeedsDisplay()
     }
     
-    func nonAccelerometerMeasurable() {
-        let alertController = UIAlertController(
-            title: "센서 에러",
-            message: "가속도 센서 사용 불가",
-            preferredStyle: .alert
-        )
-        let defaultAction = UIAlertAction(
-            title: Constant.saveFailAlertActionTitle,
-            style: .default
-        )
-        
-        alertController.addAction(defaultAction)
-        
-        present(alertController, animated: true)
-    }
-    
-    func nonGyroscopeMeasurable() {
-        let alertController = UIAlertController(
-            title: "센서 에러",
-            message: "자이로 센서 사용 불가",
-            preferredStyle: .alert
-        )
-        let defaultAction = UIAlertAction(
-            title: Constant.saveFailAlertActionTitle,
-            style: .default
-        )
-        
-        alertController.addAction(defaultAction)
-        
-        present(alertController, animated: true)
-    }
-    
     func endMeasuringData() {
         setUserInteractive(true)
     }
@@ -241,20 +210,19 @@ extension MeasureViewController: MeasureViewDelegate {
     
     func saveFail(_ error: Error) {
         activityIndicatorView.stopAnimating()
-        let alertController = UIAlertController(
-            title: Constant.saveFailAlertTitle,
-            message: error.localizedDescription,
-            preferredStyle: .alert
-        )
-        let defaultAction = UIAlertAction(
-            title: Constant.saveFailAlertActionTitle,
-            style: .default
-        )
-        
-        alertController.addAction(defaultAction)
-        
-        present(alertController, animated: true)
     }
+}
+
+extension MeasureViewController: AlertPresentable {
+    func presentErrorAlert(title: String, message: String) {
+        let errorAlert = AlertDirector().setupErrorAlert(
+            builder: ErrorAlertBuilder(),
+            title: title,
+            errorMessage: message
+        )
+        present(errorAlert, animated: true)
+    }
+
 }
 
 //import SwiftUI

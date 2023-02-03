@@ -8,11 +8,11 @@
 import UIKit
 
 final class AlertDirector {
-    func setupErrorAlert(builder: AlertBuilder, errorMessage: String) -> UIAlertController {
+    func setupErrorAlert(builder: AlertBuilder, title: String, errorMessage: String) -> UIAlertController {
         let alert = builder
-            .setTitle("오류")
+            .setTitle(title)
             .setMessage(errorMessage)
-            .setAction(title: "취소", style: .cancel, handler: nil)
+            .setAction(title: "확인", style: .default, handler: nil)
             .makeAlert()
             
         return alert
