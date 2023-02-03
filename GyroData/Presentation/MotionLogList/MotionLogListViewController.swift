@@ -18,12 +18,9 @@ final class MotionLogListViewController: UIViewController {
     // MARK: View(s)
     
     private let motionLogListCollectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.minimumLineSpacing = 10
-        layout.scrollDirection = .vertical
         let collectionView = UICollectionView(
             frame: .zero,
-            collectionViewLayout: layout
+            collectionViewLayout: .init()
         )
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
@@ -38,9 +35,28 @@ final class MotionLogListViewController: UIViewController {
         configureViewStyles()
         configureViewConstraints()
         configureNavigationItems()
+        configureMotionLogListCollectionView()
     }
     
     //MARK: Private Function(s)
+    
+    private func configureMotionLogListCollectionView() {
+        let layout = UICollectionViewFlowLayout()
+        layout.minimumLineSpacing = 10
+        layout.scrollDirection = .vertical
+        layout.itemSize = .init(
+            width: view.frame.width,
+            height: 120
+        )
+        
+        motionLogListCollectionView.collectionViewLayout = layout
+        motionLogListCollectionView.delegate = self
+        motionLogListCollectionView.dataSource = self
+        motionLogListCollectionView.register(
+            MotionLogCell.self,
+            forCellWithReuseIdentifier: MotionLogCell.identifier
+        )
+    }
     
     private func configureViewStyles() {
         view.backgroundColor = .white
@@ -81,5 +97,35 @@ final class MotionLogListViewController: UIViewController {
                     equalTo: view.trailingAnchor
                 ),
         ])
+    }
+}
+
+/*
+ MARK: Testing collectionView
+ TODO: change to DiffableDataSource
+ */
+
+extension MotionLogListViewController: UICollectionViewDelegate { }
+
+extension MotionLogListViewController: UICollectionViewDataSource {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        numberOfItemsInSection section: Int
+    ) -> Int {
+        return 20
+    }
+    
+    func collectionView(
+        _ collectionView: UICollectionView,
+        cellForItemAt indexPath: IndexPath
+    ) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: "cell",
+            for: indexPath
+        ) as? MotionLogCell
+        else {
+            return MotionLogCell()
+        }
+        return cell
     }
 }

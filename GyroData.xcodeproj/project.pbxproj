@@ -25,6 +25,8 @@
 		DF5D8C87298CDD6900E7312D /* Velocity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5D8C7D298CDD6900E7312D /* Velocity+CoreDataClass.swift */; };
 		DF5D8C88298CDD6900E7312D /* Velocity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5D8C7E298CDD6900E7312D /* Velocity+CoreDataProperties.swift */; };
 		DF5D8C90298D157400E7312D /* CoreMotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5D8C8F298D157400E7312D /* CoreMotionManager.swift */; };
+		DF5D8C93298D1D1C00E7312D /* MotionLogCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5D8C92298D1D1C00E7312D /* MotionLogCell.swift */; };
+		DF5D8C96298D2F4000E7312D /* UIStackView + addMultiplearrangedSubviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5D8C95298D2F4000E7312D /* UIStackView + addMultiplearrangedSubviews.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +50,8 @@
 		DF5D8C7D298CDD6900E7312D /* Velocity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Velocity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		DF5D8C7E298CDD6900E7312D /* Velocity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Velocity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		DF5D8C8F298D157400E7312D /* CoreMotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMotionManager.swift; sourceTree = "<group>"; };
+		DF5D8C92298D1D1C00E7312D /* MotionLogCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionLogCell.swift; sourceTree = "<group>"; };
+		DF5D8C95298D2F4000E7312D /* UIStackView + addMultiplearrangedSubviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView + addMultiplearrangedSubviews.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +88,7 @@
 				DF5D8C36298BAD3E00E7312D /* Presentation */,
 				DF5D8C35298BAD3900E7312D /* Domain */,
 				DF5D8C3F298BB2C400E7312D /* Data */,
+				DF5D8C94298D2F2500E7312D /* Uitilities */,
 				DF5D8C34298BAD3100E7312D /* Resource */,
 			);
 			path = GyroData;
@@ -127,6 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				63F01BB828D44FC400C53A39 /* MotionLogListViewController.swift */,
+				DF5D8C92298D1D1C00E7312D /* MotionLogCell.swift */,
 			);
 			path = MotionLogList;
 			sourceTree = "<group>";
@@ -197,6 +203,14 @@
 				DF5D8C8F298D157400E7312D /* CoreMotionManager.swift */,
 			);
 			path = CoreMotionManager;
+			sourceTree = "<group>";
+		};
+		DF5D8C94298D2F2500E7312D /* Uitilities */ = {
+			isa = PBXGroup;
+			children = (
+				DF5D8C95298D2F4000E7312D /* UIStackView + addMultiplearrangedSubviews.swift */,
+			);
+			path = Uitilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -272,6 +286,7 @@
 				DF5D8C83298CDD6900E7312D /* Gyro+CoreDataClass.swift in Sources */,
 				DF5D8C88298CDD6900E7312D /* Velocity+CoreDataProperties.swift in Sources */,
 				DF5D8C82298CDD6900E7312D /* MotionData+CoreDataProperties.swift in Sources */,
+				DF5D8C93298D1D1C00E7312D /* MotionLogCell.swift in Sources */,
 				63F01BB928D44FC400C53A39 /* MotionLogListViewController.swift in Sources */,
 				DF5D8C84298CDD6900E7312D /* Gyro+CoreDataProperties.swift in Sources */,
 				DF5D8C86298CDD6900E7312D /* Acceletometer+CoreDataProperties.swift in Sources */,
@@ -285,6 +300,7 @@
 				DF5D8C81298CDD6900E7312D /* MotionData+CoreDataClass.swift in Sources */,
 				DF5D8C7F298CDD6900E7312D /* Acceleration+CoreDataClass.swift in Sources */,
 				DF5D8C87298CDD6900E7312D /* Velocity+CoreDataClass.swift in Sources */,
+				DF5D8C96298D2F4000E7312D /* UIStackView + addMultiplearrangedSubviews.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -423,6 +439,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 299MY3M6HX;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GyroData/Resource/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
