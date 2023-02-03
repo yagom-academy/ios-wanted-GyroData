@@ -61,6 +61,41 @@ class MeasureViewController: UIViewController {
         return button
     }()
     
+    let indicatorView: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView(style: .large)
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        return activityIndicator
+    }()
+    
+    lazy var emptyAlert: UIAlertController = {
+        var alert = UIAlertController(title: "알림", message: """
+                                                            저장할 데이터가 없습니다.
+                                                            측정 후 다시 시도해주세요.
+                                                            """, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "확인", style: .default, handler: { _ in
+            self.indicatorView.stopAnimating()
+            self.indicatorView.removeFromSuperview()
+        })
+        alert.addAction(okAction)
+        
+        return alert
+    }()
+    
+    lazy var failAlert: UIAlertController = {
+        var alert = UIAlertController(title: "저장 실패", message: """
+                                                                저장이 실패하였습니다.
+                                                                다시 시도해주세요.
+                                                                """, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "확인", style: .default, handler: { _ in
+            self.indicatorView.stopAnimating()
+            self.indicatorView.removeFromSuperview()
+        })
+        alert.addAction(okAction)
+        
+        return alert
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
@@ -89,6 +124,7 @@ class MeasureViewController: UIViewController {
         view.addSubview(buttonStackView)
         buttonStackView.addArrangedSubview(measureButton)
         buttonStackView.addArrangedSubview(stopButton)
+        view.addSubview(indicatorView)
         
         NSLayoutConstraint.activate([
             segmentedControl.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8),
@@ -102,27 +138,41 @@ class MeasureViewController: UIViewController {
             
             buttonStackView.topAnchor.constraint(equalTo: graphView.bottomAnchor, constant: 30),
             buttonStackView.leadingAnchor.constraint(equalTo: segmentedControl.leadingAnchor),
-            buttonStackView.trailingAnchor.constraint(equalTo: segmentedControl.trailingAnchor)
+            buttonStackView.trailingAnchor.constraint(equalTo: segmentedControl.trailingAnchor),
+            
+            indicatorView.centerXAnchor.constraint(equalTo: graphView.centerXAnchor),
+            indicatorView.centerYAnchor.constraint(equalTo: graphView.centerYAnchor)
         ])
     }
     
     @objc func saveButtonTapped() {
+        self.indicatorView.startAnimating()
         if coordinates.isEmpty {
+            self.delay(3) {
+                self.present(self.emptyAlert, animated: true)
+            }
+            self.dismiss(animated: true)
             return
         }
-        
         let id = UUID()
         FileManager.default.save(path: id.uuidString, data: coordinates) { result in
-            switch result {
-            case .success:
-                CoreDataManager.shared.create(entity: MotionEntity.self) { entity in
-                    entity.id = id
-                    entity.date = Date()
-                    entity.time = self.motionManager.second.decimalPlace(1)
-                    entity.measureType = self.motionType.rawValue
+            self.delay(3) {
+                switch result {
+                case .success:
+                    CoreDataManager.shared.create(entity: MotionEntity.self) { entity in
+                        entity.id = id
+                        entity.date = Date()
+                        entity.time = self.motionManager.second.decimalPlace(1)
+                        entity.measureType = self.motionType.rawValue
+                    }
+                    self.dismiss(animated: true)
+                    self.indicatorView.stopAnimating()
+                    self.indicatorView.removeFromSuperview()
+                    self.moveListPage()
+                case .failure(_):
+                    self.present(self.failAlert, animated: true)
+                    self.dismiss(animated: true)
                 }
-            case .failure(_):
-                break
             }
         }
     }
@@ -136,7 +186,7 @@ class MeasureViewController: UIViewController {
         segmentedControl.isEnabled = false
         graphView.configureData()
         
-        motionManager.confgiureTimeInterval(interval: 0.1)
+        motionManager.configureTimeInterval(interval: 0.1)
         motionManager.start(type: motionType) { data in
             DispatchQueue.main.async {
                 self.coordinates.append(data)
@@ -150,5 +200,14 @@ class MeasureViewController: UIViewController {
         segmentedControl.isEnabled = true
         
         motionManager.stop()
+    }
+    
+    func delay(_ delay: Double, closure: @escaping () -> ()) {
+        let when = DispatchTime.now() + delay
+        DispatchQueue.main.asyncAfter(deadline: when, execute: closure)
+    }
+    
+    func moveListPage() {
+        self.navigationController?.popViewController(animated: true)
     }
 }

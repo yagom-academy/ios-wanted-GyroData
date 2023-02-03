@@ -10,7 +10,7 @@ import UIKit
 class MeasureResultViewController: UIViewController {
     var motionData: MotionEntity
     var coordinates: [Coordinate] = []
-    var pageType: MesearViewType
+    var pageType: MeasureViewType
     var timer: Timer?
      
     var second: Double = 0.0 {
@@ -70,7 +70,14 @@ class MeasureResultViewController: UIViewController {
         return label
     }()
     
-    init(data: MotionEntity,pageType: MesearViewType) {
+    let indicatorView: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView(style: .large)
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        return activityIndicator
+    }()
+    
+    init(data: MotionEntity, pageType: MeasureViewType) {
         self.motionData = data
         self.pageType = pageType
         super.init(nibName: nil, bundle: nil)
@@ -83,6 +90,7 @@ class MeasureResultViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+        configureNavigationBar()
         configureData()
         configureLayout()
         configureAction()
@@ -100,9 +108,13 @@ class MeasureResultViewController: UIViewController {
     func configureGraphView() {
         graphView.configureData()
         if pageType == .view {
-            coordinates.forEach { coordinate in
-                graphView.drawLine(x: coordinate.x, y: coordinate.y, z: coordinate.z)
+            indicatorView.startAnimating()
+            delay(3) {
+                self.coordinates.forEach { coordinate in
+                    self.graphView.drawLine(x: coordinate.x, y: coordinate.y, z: coordinate.z)
+                }
             }
+            indicatorView.stopAnimating()
         }
     }
     
@@ -112,18 +124,19 @@ class MeasureResultViewController: UIViewController {
         
         coordinates = fileData
         pageLabel.text = pageType.rawValue
-        dateLabel.text = "\(motionData.date!)"
+        dateLabel.text = "\(motionData.date!.formatted("yyyy/MM/dd HH:mm:ss"))"
         
         stopButton.isHidden = true
         if pageType == .view {
-            playButton.isHidden = true
-            timeLabel.isHidden = true
+            playButton.isHidden = false
+            stopButton.isHidden = true
         }
     }
     
     @objc func playDrawGraph() {
         var currentIndex: Int = 0
-        
+        pageType = .play
+        pageLabel.text = pageType.rawValue
         graphView.configureData()
         timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { _ in
             if currentIndex >= self.coordinates.count {
@@ -153,6 +166,7 @@ class MeasureResultViewController: UIViewController {
         view.addSubview(graphView)
         view.addSubview(buttonStackView)
         view.addSubview(timeLabel)
+        view.addSubview(indicatorView)
         buttonStackView.addArrangedSubview(playButton)
         buttonStackView.addArrangedSubview(stopButton)
         
@@ -177,5 +191,10 @@ class MeasureResultViewController: UIViewController {
             timeLabel.centerYAnchor.constraint(equalTo: buttonStackView.centerYAnchor),
             timeLabel.leadingAnchor.constraint(equalTo: buttonStackView.trailingAnchor)
         ])
+    }
+    
+    func delay(_ delay: Double, closure: @escaping () -> ()) {
+        let when = DispatchTime.now() + delay
+        DispatchQueue.main.asyncAfter(deadline: when, execute: closure)
     }
 }
