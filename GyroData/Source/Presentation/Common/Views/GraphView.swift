@@ -31,6 +31,10 @@ class GraphView: UIView {
     typealias Values = (x: Double, y: Double, z: Double)
     typealias Positions = (x: Double, y: Double, z: Double)
     
+    enum Constant {
+        static let scale = Double(5)
+    }
+    
     enum Segment {
         case x
         case y
@@ -49,13 +53,12 @@ class GraphView: UIView {
     }
     
     private var segmentValues: [Values] = []
-    private var segmentPositions: [Positions] = []
     private let segmentOffset: Double
     
     private let interval: TimeInterval
     private let duration: TimeInterval
     
-    private var boundary: Double
+    private var scale: Double
     
     private let labelStackView: UIStackView = {
         let stackView = UIStackView()
@@ -96,7 +99,7 @@ class GraphView: UIView {
         self.interval = interval
         self.duration = duration
         self.segmentOffset = duration / interval
-        self.boundary = 3
+        self.scale = Constant.scale
         super.init(frame: .zero)
         setupStackView()
     }
@@ -113,12 +116,15 @@ class GraphView: UIView {
     
     func dataInit() {
         segmentValues = []
-        segmentPositions = []
-        layer.sublayers = [layer.sublayers![0]]
-        setupStackView()
+        scale = Constant.scale
+        initView()
     }
     
     func drawData(data: Values) {
+        if isOverScale(data) {
+            reDrawEntireData()
+        }
+        
         let xlayer = CAShapeLayer()
         let ylayer = CAShapeLayer()
         let zlayer = CAShapeLayer()
@@ -193,6 +199,12 @@ private extension GraphView {
         [xLabel, yLabel, zLabel].forEach { labelStackView.addArrangedSubview($0) }
     }
     
+    func initView() {
+        layer.sublayers = [layer.sublayers![0]]
+        segmentValues = []
+        setupStackView()
+    }
+    
     func setupBaseLine() {
         let layer = CAShapeLayer()
         let path = UIBezierPath()
@@ -230,13 +242,38 @@ private extension GraphView {
     
     func mappingValuesToFrame(values: Values) -> Values {
         let mappingValues = [values.x, values.y, values.z].map {
-            let mappingValue = $0 / (boundary * 2)
+            let mappingValue = $0 / (scale * 2)
             let positionFromFrame = self.frame.height * (0.5 - mappingValue)
             
             return positionFromFrame
         }
         
         return (mappingValues[0], mappingValues[1], mappingValues[2])
+    }
+    
+    func isOverScale(_ data: Values) -> Bool {
+        let maxValue = [data.x, data.y, data.z].map({ abs($0) }).max() ?? scale
+        
+        if maxValue > scale {
+            adjustScale(maxValue)
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func adjustScale(_ scale: Double) {
+        self.scale = self.scale + scale * 0.2
+    }
+    
+    func reDrawEntireData() {
+        let entireData = segmentValues
+        
+        initView()
+        
+        entireData.forEach {
+            drawData(data: $0)
+        }
     }
 }
 
