@@ -55,6 +55,9 @@
 		AC52BB8B298B4D4B0057CA56 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52BB8A298B4D4B0057CA56 /* GraphView.swift */; };
 		AC52BB8E298BAD890057CA56 /* MeasureServiceDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52BB8D298BAD890057CA56 /* MeasureServiceDelegate.swift */; };
 		AC52BB91298BAE8C0057CA56 /* MeasureViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52BB90298BAE8C0057CA56 /* MeasureViewDelegate.swift */; };
+		ACA06576298D37140078D7A7 /* PlayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA06575298D37140078D7A7 /* PlayViewModel.swift */; };
+		ACA06578298D371D0078D7A7 /* PlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA06577298D371D0078D7A7 /* PlayViewController.swift */; };
+		ACA0657A298D39590078D7A7 /* PlayViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA06579298D39590078D7A7 /* PlayViewDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,6 +110,9 @@
 		AC52BB8A298B4D4B0057CA56 /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		AC52BB8D298BAD890057CA56 /* MeasureServiceDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureServiceDelegate.swift; sourceTree = "<group>"; };
 		AC52BB90298BAE8C0057CA56 /* MeasureViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureViewDelegate.swift; sourceTree = "<group>"; };
+		ACA06575298D37140078D7A7 /* PlayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayViewModel.swift; sourceTree = "<group>"; };
+		ACA06577298D371D0078D7A7 /* PlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayViewController.swift; sourceTree = "<group>"; };
+		ACA06579298D39590078D7A7 /* PlayViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayViewDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +169,7 @@
 				3CB15C48298944F10049E390 /* DataListScene */,
 				3CB15C4D298945790049E390 /* MeasureScene */,
 				3CFD20DA298BCD3500269FC9 /* ReviewScene */,
+				ACA06574298D36EE0078D7A7 /* PlayScene */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -384,8 +391,18 @@
 			isa = PBXGroup;
 			children = (
 				AC52BB90298BAE8C0057CA56 /* MeasureViewDelegate.swift */,
+				ACA06579298D39590078D7A7 /* PlayViewDelegate.swift */,
 			);
 			path = Protocol;
+			sourceTree = "<group>";
+		};
+		ACA06574298D36EE0078D7A7 /* PlayScene */ = {
+			isa = PBXGroup;
+			children = (
+				ACA06575298D37140078D7A7 /* PlayViewModel.swift */,
+				ACA06577298D371D0078D7A7 /* PlayViewController.swift */,
+			);
+			path = PlayScene;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -497,6 +514,7 @@
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				AC52BB8E298BAD890057CA56 /* MeasureServiceDelegate.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
+				ACA06578298D371D0078D7A7 /* PlayViewController.swift in Sources */,
 				AC52BB91298BAE8C0057CA56 /* MeasureViewDelegate.swift in Sources */,
 				3CB15C4C2989456E0049E390 /* DataListViewModel.swift in Sources */,
 				AC52BAC52987F91A0057CA56 /* SensorData+CoreDataProperties.swift in Sources */,
@@ -508,8 +526,10 @@
 				3CFD20DC298BCD6000269FC9 /* DetailViewModel.swift in Sources */,
 				AC52BAC42987F91A0057CA56 /* SensorData+CoreDataClass.swift in Sources */,
 				AC52BAB22987EA180057CA56 /* CoreDataManager.swift in Sources */,
+				ACA06576298D37140078D7A7 /* PlayViewModel.swift in Sources */,
 				AC52BAAC2987E9930057CA56 /* MeasureData.swift in Sources */,
 				3CFD20E0298BCEDE00269FC9 /* DetailViewController.swift in Sources */,
+				ACA0657A298D39590078D7A7 /* PlayViewDelegate.swift in Sources */,
 				AC52BAB42987EA2A0057CA56 /* FileSystemManager.swift in Sources */,
 				3C81E3B2298CDDC500B5BC59 /* AlertBuilder.swift in Sources */,
 				3CFD20D6298A3BAF00269FC9 /* Identifiable.swift in Sources */,
@@ -688,6 +708,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = S63496UWBR;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GyroData/Resource/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -699,7 +720,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.GyroData;
+				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.GyroDatafff;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -714,6 +735,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = S63496UWBR;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GyroData/Resource/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -725,7 +747,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.GyroData;
+				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.GyroDatafff;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
