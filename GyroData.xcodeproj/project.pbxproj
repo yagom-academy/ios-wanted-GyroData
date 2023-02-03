@@ -17,6 +17,7 @@
 		18186204298CCA9D0072CD7F /* AlertBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18186203298CCA9D0072CD7F /* AlertBuilder.swift */; };
 		18186207298CCAB80072CD7F /* UploadError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18186206298CCAB80072CD7F /* UploadError.swift */; };
 		18186209298CCACD0072CD7F /* Uploadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18186208298CCACD0072CD7F /* Uploadable.swift */; };
+		18186313298CE4050072CD7F /* PlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18186312298CE4050072CD7F /* PlayViewController.swift */; };
 		183BD42B298A0232005B480E /* (null) in Sources */ = {isa = PBXBuildFile; };
 		183BD42D298A09F2005B480E /* (null) in Sources */ = {isa = PBXBuildFile; };
 		18A4DAFA298A228A00B7BC1D /* SystemFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A4DAF9298A228A00B7BC1D /* SystemFileManager.swift */; };
@@ -43,6 +44,7 @@
 		18186203298CCA9D0072CD7F /* AlertBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertBuilder.swift; sourceTree = "<group>"; };
 		18186206298CCAB80072CD7F /* UploadError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadError.swift; sourceTree = "<group>"; };
 		18186208298CCACD0072CD7F /* Uploadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Uploadable.swift; sourceTree = "<group>"; };
+		18186312298CE4050072CD7F /* PlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayViewController.swift; sourceTree = "<group>"; };
 		18A4DAF9298A228A00B7BC1D /* SystemFileManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemFileManager.swift; sourceTree = "<group>"; };
 		18A4DAFB298A22B200B7BC1D /* MotionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionManager.swift; sourceTree = "<group>"; };
 		18A4DB01298A29D700B7BC1D /* Sensor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sensor.swift; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 			children = (
 				18D110602987BB770088ED79 /* RecordViewController.swift */,
 				63F01BB828D44FC400C53A39 /* TransitionListViewController.swift */,
+				18186312298CE4050072CD7F /* PlayViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -296,6 +299,7 @@
 				09E3104E2987E1B50088E0EB /* CustomTableViewCell.swift in Sources */,
 				09DBC66F2988CE26003228DB /* TransitionMetaDataObject+CoreDataClass.swift in Sources */,
 				09DBC6702988CE26003228DB /* TransitionMetaDataObject+CoreDataProperties.swift in Sources */,
+				18186313298CE4050072CD7F /* PlayViewController.swift in Sources */,
 				18D1106629880B7D0088ED79 /* Array+Extension.swift in Sources */,
 				18A4DAFA298A228A00B7BC1D /* SystemFileManager.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
