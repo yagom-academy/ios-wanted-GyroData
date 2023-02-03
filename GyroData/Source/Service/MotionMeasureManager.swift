@@ -9,8 +9,14 @@ import CoreMotion
 import Foundation
 
 protocol MotionManagerable {
-    func start(handler: @escaping () -> Void)
+    func start(handler: @escaping (MotionCoordinate) -> Void)
     func stop()
+}
+
+struct MotionCoordinate {
+    let x: Double
+    let y: Double
+    let z: Double
 }
 
 final class GyroMotionManager: MotionManagerable {
@@ -22,10 +28,11 @@ final class GyroMotionManager: MotionManagerable {
         configureUpdateInterval(interval)
     }
     
-    func start(handler: @escaping () -> Void) {
+    func start(handler: @escaping (MotionCoordinate) -> Void) {
         motionManager.startAccelerometerUpdates()
-        measureTimer.activate {
-            handler()
+        measureTimer.activate { [weak self] in
+            guard let coordinate = self?.createGyroCoordinate() else { return }
+            handler(coordinate)
         }
     }
 
@@ -36,6 +43,15 @@ final class GyroMotionManager: MotionManagerable {
     
     private func configureUpdateInterval(_ interval: TimeInterval) {
         motionManager.gyroUpdateInterval = interval
+    }
+    
+    private func createGyroCoordinate() -> MotionCoordinate? {
+        guard let measureData =  motionManager.accelerometerData?.acceleration else {
+            return nil
+        }
+        
+        let coordinate = MotionCoordinate(x: measureData.x, y: measureData.y, z: measureData.z)
+        return coordinate
     }
 }
 
@@ -48,10 +64,11 @@ final class AccelerometerMotionManager: MotionManagerable {
         configureUpdateInterval(interval)
     }
     
-    func start(handler: @escaping () -> Void) {
+    func start(handler: @escaping (MotionCoordinate) -> Void) {
         motionManager.startAccelerometerUpdates()
-        measureTimer.activate {
-            handler()
+        measureTimer.activate { [weak self] in
+            guard let coordinate = self?.createAccelerometerCoordinate() else { return }
+            handler(coordinate)
         }
     }
     
@@ -61,6 +78,15 @@ final class AccelerometerMotionManager: MotionManagerable {
     }
     
     private func configureUpdateInterval(_ interval: TimeInterval) {
-        motionManager.gyroUpdateInterval = interval
+        motionManager.accelerometerUpdateInterval = interval
+    }
+    
+    private func createAccelerometerCoordinate() -> MotionCoordinate? {
+        guard let measureData =  motionManager.accelerometerData?.acceleration else {
+            return nil
+        }
+        
+        let coordinate = MotionCoordinate(x: measureData.x, y: measureData.y, z: measureData.z)
+        return coordinate
     }
 }

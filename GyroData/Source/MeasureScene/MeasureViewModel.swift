@@ -20,6 +20,12 @@ final class MeasureViewModel {
         interval: 0.1
     )
     
+    private var measuredMotion: MotionMeasures? {
+        didSet {
+
+        }
+    }
+    
     private var canChangeMotionType: Bool = true {
         didSet {
             canChangeMotionTypeHandler?(canChangeMotionType)
@@ -32,19 +38,19 @@ final class MeasureViewModel {
         switch action {
         case .motionTypeChange(let type):
             verifyMotionType(with: type)
-            break
         case .measure:
             startMeasure()
-            break
         case .stop:
             stopMeasure()
-            break
         case .save:
             // TODO: 저장
             break
         }
     }
-    
+}
+
+// MARK: Business Logic
+extension MeasureViewModel {
     private func verifyMotionType(with type: String?) {
         guard let type = type,
               let motionType = MotionType(rawValue: type)
@@ -72,8 +78,16 @@ final class MeasureViewModel {
     
     private func startMeasure() {
         canChangeMotionType = false
-        motionManager.start {
-            print("하이요")
+        measuredMotion =  MotionMeasures(
+            axisX: [],
+            axisY: [],
+            axisZ: []
+        )
+        
+        motionManager.start { [weak self] measuredCoordinate in
+            self?.measuredMotion?.axisX.append(measuredCoordinate.x)
+            self?.measuredMotion?.axisY.append(measuredCoordinate.y)
+            self?.measuredMotion?.axisZ.append(measuredCoordinate.z)
         }
     }
     
