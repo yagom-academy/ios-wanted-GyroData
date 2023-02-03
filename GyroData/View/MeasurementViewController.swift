@@ -142,6 +142,7 @@ extension MeasurementViewController {
             guard let graphMode = self?.graphMode else { return }
             guard let segmentData = self?.graphView.segmentData else { return }
             self?.measurementViewModel.save(graphMode, data: segmentData)
+            self?.navigationController?.popViewController(animated: true)
         }
     }
 
