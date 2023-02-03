@@ -117,7 +117,7 @@ extension MotionsListViewController: UITableViewDelegate {
         trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
     ) -> UISwipeActionsConfiguration? {
         let playAction = UIContextualAction(style: .normal, title: "Play") { [weak self] _, view, completion in
-            self?.viewModel.action(.motionDelete(indexPath: indexPath))
+            self?.viewModel.action(.motionPlay(indexPath: indexPath))
             completion(true)
         }
         

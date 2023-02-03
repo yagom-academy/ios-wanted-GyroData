@@ -8,14 +8,6 @@
 import Foundation
 
 struct Motion: Hashable, Identifiable {
-    static func == (lhs: Motion, rhs: Motion) -> Bool {
-        return lhs.id == rhs.id
-    }
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
-    }
-    
     struct MeasurementData {
         var x: [Double]
         var y: [Double]
@@ -41,4 +33,12 @@ struct Motion: Hashable, Identifiable {
     let type: MeasurementType
     let time: Double
     var data: MeasurementData
+    
+    static func == (lhs: Motion, rhs: Motion) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
 }
