@@ -39,6 +39,8 @@ class ReviewPageViewController: UIViewController {
             }
             reviewPageView.configureButtonAction(action: action)
         }
+        
+        reviewPageView.setupDateLabelText(measurement.date.makeSlashFormat())
     }
 
     private func resetTimer() {

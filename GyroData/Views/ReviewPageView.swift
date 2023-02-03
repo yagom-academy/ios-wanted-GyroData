@@ -12,7 +12,7 @@ class ReviewPageView: UIView {
     private let pageState: PageState
     private let dateLabel = UILabel(font: .body)
     private let pageStateLabel = UILabel(font: .title1)
-    private let timeLabel = UILabel(font: .title1, textAlignment: .right)
+    private let timeLabel = UILabel(text: "0.0", font: .title1, textAlignment: .right)
     private let lineGraphView = LineGraphView()
     private let playButton: UIButton = {
         let button = UIButton(frame: .zero)
