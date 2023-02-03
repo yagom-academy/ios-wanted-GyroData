@@ -65,8 +65,12 @@ final class RecordViewController: UIViewController {
 // MARK: - Motion Manager Delegate
 extension RecordViewController: MotionManagerDelegate {
     func motionManager(send manager: MotionManager, sendData: CMLogItem?) {
-        guard let data = sendData else { return }
-
+        guard let data = sendData,
+              let sensor = SensorType(rawInt: segmentControl.selectedSegmentIndex) else {
+            return
+        }
+        
+        graphView.callDrawLine(data, sensor)
         saveData(data: data)
     }
     
