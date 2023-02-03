@@ -91,9 +91,11 @@ extension MainListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let measureResultViewController = MeasureDetailViewController(data: self.motionDataList[indexPath.row],
-                                                                      pageType: .view)
-        self.navigationController?.pushViewController(measureResultViewController, animated: true)
+        let measureDetailViewModel =  MeasureDetailViewModel(motionData: motionDataList[indexPath.row],
+                                                             pageType: .view)
+        let measureDetailViewController = MeasureDetailViewController(viewModel: measureDetailViewModel)
+        
+        self.navigationController?.pushViewController(measureDetailViewController, animated: true)
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -108,9 +110,11 @@ extension MainListViewController: UITableViewDelegate, UITableViewDataSource {
         delete.backgroundColor = .systemRed
         
         let play = UIContextualAction(style: .normal, title: "Play") { (UIContextualAction, UIView, success: @escaping (Bool) -> Void) in
-            let measureResultViewController = MeasureDetailViewController(data: self.motionDataList[indexPath.row],
-                                                                          pageType: .play)
-            self.navigationController?.pushViewController(measureResultViewController, animated: true)
+            let measureDetailViewModel =  MeasureDetailViewModel(motionData: self.motionDataList[indexPath.row],
+                                                                 pageType: .play)
+            
+            let measureDetailViewController = MeasureDetailViewController(viewModel: measureDetailViewModel)
+            self.navigationController?.pushViewController(measureDetailViewController, animated: true)
             success(true)
         }
         play.backgroundColor = .systemGreen

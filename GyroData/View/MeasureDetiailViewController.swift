@@ -8,16 +8,7 @@
 import UIKit
 
 class MeasureDetailViewController: UIViewController {
-    var motionData: MotionEntity
-    var coordinates: [Coordinate] = []
-    var pageType: MeasureViewType
-    var timer: Timer?
-     
-    var second: Double = 0.0 {
-        didSet {
-            timeLabel.text = "\(second)"
-        }
-    }
+    let viewModel: MeasureDetailViewModel
     
     var graphView: GraphView = {
         let view = GraphView()
@@ -30,7 +21,6 @@ class MeasureDetailViewController: UIViewController {
     let dateLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = Date().formatted("yyyy/MM/dd HH:mm:ss")
         return label
     }()
     
@@ -68,7 +58,6 @@ class MeasureDetailViewController: UIViewController {
     let timeLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "0.0"
         label.textColor = .label
         return label
     }()
@@ -76,13 +65,13 @@ class MeasureDetailViewController: UIViewController {
     let indicatorView: UIActivityIndicatorView = {
         let activityIndicator = UIActivityIndicatorView(style: .large)
         activityIndicator.hidesWhenStopped = true
+        activityIndicator.color = .black
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         return activityIndicator
     }()
     
-    init(data: MotionEntity, pageType: MeasureViewType) {
-        self.motionData = data
-        self.pageType = pageType
+    init(viewModel: MeasureDetailViewModel) {
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -94,78 +83,18 @@ class MeasureDetailViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         configureNavigationBar()
-        configureData()
         configureLayout()
         configureAction()
+        configureBind()
+        configureData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        indicatorView.startAnimating()
+        viewModel.loading = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
         configureGraphView()
-    }
-    
-    func configureAction() {
-        playButton.addTarget(self, action: #selector(playDrawGraph), for: .touchUpInside)
-        stopButton.addTarget(self, action: #selector(stopDrawGraph), for: .touchUpInside)
-    }
-    
-    func configureGraphView() {
-        graphView.configureData()
-        indicatorView.stopAnimating()
-        if pageType == .view {
-            self.coordinates.forEach { coordinate in
-                self.graphView.drawLine(x: coordinate.x, y: coordinate.y, z: coordinate.z)
-            }
-        }
-    }
-    
-    func configureData() {
-        guard let fileId = motionData.id,
-              let fileData = FileManager.default.load(path: fileId.uuidString) else { return }
-        
-        coordinates = fileData
-        pageLabel.text = pageType.rawValue
-        dateLabel.text = "\(motionData.date!.formatted("yyyy/MM/dd HH:mm:ss"))"
-        
-        stopButton.isHidden = true
-        if pageType == .view {
-            playButton.isHidden = false
-            stopButton.isHidden = true
-        }
-    }
-    
-    @objc func playDrawGraph() {
-        var currentIndex: Int = 0
-        pageType = .play
-        pageLabel.text = pageType.rawValue
-        graphView.configureData()
-        timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { _ in
-            if currentIndex >= self.coordinates.count {
-                self.stopDrawGraph()
-                return
-            }
-            
-            self.graphView.drawLine(x: self.coordinates[currentIndex].x,
-                                    y: self.coordinates[currentIndex].y,
-                                    z: self.coordinates[currentIndex].z)
-            currentIndex += 1
-            self.second = Double(currentIndex) / 10
-        })
-        stopButton.isHidden = false
-        playButton.isHidden = true
-    }
-    
-    @objc func stopDrawGraph() {
-        timer?.invalidate()
-        stopButton.isHidden = true
-        playButton.isHidden = false
-    }
-    
-    func configureNavigationBar() {
-        navigationItem.title = "다시보기"
     }
     
     func configureLayout() {
@@ -204,4 +133,62 @@ class MeasureDetailViewController: UIViewController {
             indicatorView.centerYAnchor.constraint(equalTo: graphView.centerYAnchor)
         ])
     }
+    
+    func configureNavigationBar() {
+        navigationItem.title = "다시보기"
+    }
+    
+    func configureBind() {
+        viewModel.bindStartLoading {
+            self.indicatorView.startAnimating()
+        }
+        
+        viewModel.bindStopLoading {
+            self.indicatorView.stopAnimating()
+        }
+        
+        viewModel.bindDrawGraphView { coordinate in
+            self.graphView.drawLine(x: coordinate.x, y: coordinate.y, z: coordinate.z)
+        }
+        
+        viewModel.bindSecond {
+            self.timeLabel.text = $0?.description
+        }
+        
+        viewModel.bindPlayButton {
+            self.playButton.isHidden = $0
+        }
+        
+        viewModel.bindStopButton {
+            self.stopButton.isHidden = $0
+        }
+        
+    }
+    
+    func configureAction() {
+        playButton.addTarget(self, action: #selector(playDrawGraph), for: .touchUpInside)
+        stopButton.addTarget(self, action: #selector(stopDrawGraph), for: .touchUpInside)
+    }
+    
+    func configureGraphView() {
+        graphView.configureData()
+        viewModel.graphViewLoad()
+    }
+    
+    func configureData() {
+        viewModel.fetchData()
+        viewModel.load()
+        pageLabel.text = viewModel.pageType.rawValue
+        dateLabel.text = viewModel.motionData.date?.formatted("yyyy/MM/dd HH:mm:ss")
+    }
+    
+    @objc func playDrawGraph() {
+        graphView.configureData()
+        viewModel.start()
+    }
+    
+    @objc func stopDrawGraph() {
+        viewModel.stop()
+    }
+    
 }

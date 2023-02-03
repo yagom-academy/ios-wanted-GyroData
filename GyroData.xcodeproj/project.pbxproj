@@ -15,6 +15,7 @@
 		541C9ECD298CD6C2003787EE /* MeasureListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541C9ECC298CD6C2003787EE /* MeasureListViewModel.swift */; };
 		541C9ECF298CD6CD003787EE /* MeasureViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541C9ECE298CD6CD003787EE /* MeasureViewModel.swift */; };
 		54364529298BB92400127FB1 /* MeasureViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54364528298BB92400127FB1 /* MeasureViewType.swift */; };
+		5459F7B5298CF33E0033CFB2 /* MeasureDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5459F7B4298CF33E0033CFB2 /* MeasureDetailViewModel.swift */; };
 		5482A0E6298CD32800DABE2A /* ListCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5482A0E5298CD32800DABE2A /* ListCellViewModel.swift */; };
 		549CF9EE298A8CC400BDCFF2 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549CF9ED298A8CC400BDCFF2 /* FileManager.swift */; };
 		54F715212989FE6D0070A76B /* Coordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F715202989FE6D0070A76B /* Coordinate.swift */; };
@@ -42,6 +43,7 @@
 		541C9ECC298CD6C2003787EE /* MeasureListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureListViewModel.swift; sourceTree = "<group>"; };
 		541C9ECE298CD6CD003787EE /* MeasureViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureViewModel.swift; sourceTree = "<group>"; };
 		54364528298BB92400127FB1 /* MeasureViewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureViewType.swift; sourceTree = "<group>"; };
+		5459F7B4298CF33E0033CFB2 /* MeasureDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureDetailViewModel.swift; sourceTree = "<group>"; };
 		5482A0E5298CD32800DABE2A /* ListCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCellViewModel.swift; sourceTree = "<group>"; };
 		549CF9ED298A8CC400BDCFF2 /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 		54F715202989FE6D0070A76B /* Coordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinate.swift; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 				5482A0E5298CD32800DABE2A /* ListCellViewModel.swift */,
 				541C9ECC298CD6C2003787EE /* MeasureListViewModel.swift */,
 				541C9ECE298CD6CD003787EE /* MeasureViewModel.swift */,
+				5459F7B4298CF33E0033CFB2 /* MeasureDetailViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -275,6 +278,7 @@
 				9036AACB298BDD3700D04157 /* Date+Extension.swift in Sources */,
 				90B46909298A394A00FBD3CC /* MotionEntity+CoreDataProperties.swift in Sources */,
 				5414325D2988ED190035E113 /* GraphView.swift in Sources */,
+				5459F7B5298CF33E0033CFB2 /* MeasureDetailViewModel.swift in Sources */,
 				54F715212989FE6D0070A76B /* Coordinate.swift in Sources */,
 				90B46905298A389B00FBD3CC /* MotionData.xcdatamodeld in Sources */,
 			);

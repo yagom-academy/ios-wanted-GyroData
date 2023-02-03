@@ -61,6 +61,7 @@ class MeasureViewController: UIViewController {
     let indicatorView: UIActivityIndicatorView = {
         let activityIndicator = UIActivityIndicatorView(style: .large)
         activityIndicator.hidesWhenStopped = true
+        activityIndicator.color = .black
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         return activityIndicator
     }()
@@ -98,20 +99,6 @@ class MeasureViewController: UIViewController {
         
     }
     
-    func configureNavigationBar() {
-        navigationItem.title = "측정하기"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "저장",
-                                                            style: .plain,
-                                                            target: self,
-                                                            action: #selector(saveButtonTapped))
-    }
-    
-    func configureAction() {
-        self.segmentedControl.addTarget(self,action: #selector(didChangeValue(_:)), for: .valueChanged)
-        measureButton.addTarget(self, action: #selector(measureButtonTapped), for: .touchUpInside)
-        stopButton.addTarget(self, action: #selector(stopButtonTapped), for: .touchUpInside)
-    }
-    
     func configureLayout() {
         view.addSubview(segmentedControl)
         view.addSubview(graphView)
@@ -139,6 +126,21 @@ class MeasureViewController: UIViewController {
         ])
     }
     
+    func configureNavigationBar() {
+        navigationItem.title = "측정하기"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "저장",
+                                                            style: .plain,
+                                                            target: self,
+                                                            action: #selector(saveButtonTapped))
+    }
+    
+    func configureAction() {
+        self.segmentedControl.addTarget(self,action: #selector(didChangeValue(_:)), for: .valueChanged)
+        measureButton.addTarget(self, action: #selector(measureButtonTapped), for: .touchUpInside)
+        stopButton.addTarget(self, action: #selector(stopButtonTapped), for: .touchUpInside)
+    }
+    
+    
     func configureData() {
         viewModel.load()
     }
@@ -162,7 +164,7 @@ class MeasureViewController: UIViewController {
         }
         
         viewModel.bindSaveHandler {
-            self.moveListPage()
+            self.navigationController?.popViewController(animated: true)
         }
         
         viewModel.bindEmptyHandler {
@@ -193,9 +195,5 @@ class MeasureViewController: UIViewController {
     
     @objc func stopButtonTapped() {
         viewModel.stop()
-    }
-    
-    func moveListPage() {
-        self.navigationController?.popViewController(animated: true)
     }
 }
