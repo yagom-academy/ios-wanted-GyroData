@@ -24,20 +24,26 @@ final class ListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         drawView()
-        initialFetchMeasurementData()
         registerListCell()
         configureDataSource()
-        applySnapshot()
         setupNavigationBar()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        initialFetchMeasurementData()
+        applySnapshot()
+    }
+    
     private func initialFetchMeasurementData() {
+        coreDataManager.changeFetchOffset(isInitialFetch: true)
+        
         switch coreDataManager.fetchData() {
         case .success(let fetchedMeasurements):
             measurements = fetchedMeasurements
         case .failure(let dataHandlerError):
             print(dataHandlerError.description)
-            // Alert 처리
+            UIAlertController.show(title: "Error", message: "데이터 로딩에 실패했습니다", target: self)
         }
     }
     
@@ -129,16 +135,25 @@ extension ListViewController: UITableViewDelegate {
         let frameHeight = scrollView.frame.height
         
         guard isPaging == false,
-              offsetY > contentHeight - frameHeight else {
+              offsetY > contentHeight - frameHeight,
+              contentHeight > frameHeight else {
             return
         }
         
         isPaging = true
-        // 구현예정
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
-            print("paging")
+        coreDataManager.changeFetchOffset(isInitialFetch: false)
+        
+        switch coreDataManager.fetchData() {
+        case .success(let fetchedMeasurements):
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+                self?.measurements += fetchedMeasurements
+                self?.applySnapshot()
+                self?.isPaging = false
+            }
+        case .failure(let dataHandlerError):
+            print(dataHandlerError.description)
+            UIAlertController.show(title: "Error", message: "데이터 로딩에 실패했습니다", target: self)
         }
-        isPaging = false
     }
 }
 

@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-struct CoreDataManager: MeasurementDataHandleable {
+class CoreDataManager: MeasurementDataHandleable {
     
     typealias DataType = Measurement
     
@@ -25,6 +25,19 @@ struct CoreDataManager: MeasurementDataHandleable {
     
     private var context: NSManagedObjectContext {
         return persistentContainer.viewContext
+    }
+    
+    private let fetchLimit = 10
+    private var fetchOffset: Int = 0
+    private lazy var increaseOffset = makeOffsetIncreaser(by: fetchLimit)
+    
+    func changeFetchOffset(isInitialFetch: Bool) {
+        if isInitialFetch {
+            increaseOffset = makeOffsetIncreaser(by: fetchLimit)
+            fetchOffset = 0
+        } else {
+            fetchOffset = increaseOffset()
+        }
     }
     
     func saveData(_ data: DataType) throws {
@@ -44,6 +57,9 @@ struct CoreDataManager: MeasurementDataHandleable {
     
     func fetchData() -> Result<[Measurement], DataHandleError> {
         let request = NSFetchRequest<MeasurementCoreModel>(entityName: "MeasurementCoreModel")
+        request.fetchLimit = fetchLimit
+        request.fetchOffset = fetchOffset
+        
         var measurements: [Measurement] = []
         
         do {
@@ -89,5 +105,14 @@ struct CoreDataManager: MeasurementDataHandleable {
         }
         
         return  Measurement(sensor: sensor, date: date, time: time, axisValues: decodedAxisValues)
+    }
+    
+    private func makeOffsetIncreaser(by amount: Int) -> () -> Int {
+        var offset = 0
+        func increase() -> Int {
+            offset += amount
+            return offset
+        }
+        return increase
     }
 }
