@@ -8,22 +8,64 @@
 import UIKit
 
 class MotionsListViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    enum Constant {
+        static let title = "목록"
+        static let measurementButtonTitle = "측정"
+        static let playActionTitle = "Play"
+        static let deleteActionTitle = "Delete"
+    }
+    private let tableView: UITableView = {
+       let tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        return tableView
+    }()
+    
+    private let measurementButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(title: "측정", primaryAction: nil)
+        return button
+    }()
+    
+    private let viewModel: MotionsListViewModel
+    
+    init(viewModel: MotionsListViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
-    */
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configureView()
+        configureLayout()
+    }
+}
+
+// MARK: UI Componenets
+extension MotionsListViewController {
+    private func configureView() {
+        view.backgroundColor = .systemBackground
+        view.addSubview(tableView)
+        
+        navigationItem.title = Constant.title
+        navigationItem.rightBarButtonItem = measurementButton
+    }
+    
+    private func configureLayout() {
+        let safeArea = view.safeAreaLayoutGuide
+        
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: safeArea.topAnchor),
+            tableView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor)
+        ])
+    }
+}
+
+
+    }
 
 }
