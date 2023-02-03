@@ -7,26 +7,6 @@
 
 import UIKit
 
-class SampleViewController: UIViewController {
-    let graphView: GraphView = {
-        let graphView = GraphView(interval: 0.1, duration: 60)
-        graphView.backgroundColor = .systemGray6
-        graphView.translatesAutoresizingMaskIntoConstraints = false
-        return graphView
-    }()
-    
-    override func viewDidLoad() {
-        view.addSubview(graphView)
-        
-        NSLayoutConstraint.activate([
-            graphView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            graphView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30),
-            graphView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30),
-            graphView.heightAnchor.constraint(equalTo: graphView.widthAnchor)
-        ])
-    }
-}
-
 class GraphView: UIView {
     typealias Values = (x: Double, y: Double, z: Double)
     typealias Positions = (x: Double, y: Double, z: Double)
@@ -60,6 +40,9 @@ class GraphView: UIView {
     private let duration: TimeInterval
     
     private var scale: Double
+    
+    private var timer: Timer?
+    private var timerIntervalPoint = 0
     
     private let labelStackView: UIStackView = {
         let stackView = UIStackView()
@@ -186,13 +169,33 @@ class GraphView: UIView {
         segmentValues.append(data)
     }
     
+    func setEntrieData(data: [Values]) {
+        self.segmentValues = data
+    }
+    
     func drawEntireData() {
         reDrawEntireData()
     }
     
-    func setEntrieData(data: [Values]) {
-        self.segmentValues = data
+    func playEntireData() {
+        timer = Timer(timeInterval: interval, repeats: true, block: { [weak self] timer in
+            guard let self = self else { return }
+            let data = self.segmentValues[self.timerIntervalPoint]
+            self.drawData(data: data)
+            self.timerIntervalPoint += 1
+            
+            if self.timerIntervalPoint == self.segmentValues.count {
+                timer.invalidate()
+                self.timerIntervalPoint = 0
+            }
+        })
     }
+    
+    func stopPlayingEntireData() {
+        timer?.invalidate()
+        self.timerIntervalPoint = 0
+    }
+    
 }
 
 private extension GraphView {
@@ -285,8 +288,6 @@ private extension GraphView {
         }
     }
 }
-
-
 
 
 
