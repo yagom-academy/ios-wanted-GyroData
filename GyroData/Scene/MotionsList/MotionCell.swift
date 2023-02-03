@@ -17,7 +17,7 @@ extension CellIdentifiable {
     }
 }
 
-class MotionCell: UITableViewCell, CellIdentifiable {
+final class MotionCell: UITableViewCell, CellIdentifiable {
     enum Constant {
         static let padding: Double = 16.0
         static let halfPadding: Double = 8.0
@@ -81,6 +81,10 @@ class MotionCell: UITableViewCell, CellIdentifiable {
     private func configureLayout() {
         let safeArea = contentView.safeAreaLayoutGuide
         
+        let mainStackViewBottomAnchor = mainStackView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor,
+                                                           constant: -Constant.halfPadding)
+        mainStackViewBottomAnchor.priority = .defaultHigh
+        
         NSLayoutConstraint.activate([
             mainStackView.topAnchor.constraint(equalTo: safeArea.topAnchor,
                                                constant: Constant.halfPadding),
@@ -88,8 +92,7 @@ class MotionCell: UITableViewCell, CellIdentifiable {
                                                    constant: Constant.padding),
             mainStackView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor,
                                                     constant: -Constant.padding),
-            mainStackView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor,
-                                                  constant: -Constant.halfPadding)
+            mainStackViewBottomAnchor
         ])
     }
     
