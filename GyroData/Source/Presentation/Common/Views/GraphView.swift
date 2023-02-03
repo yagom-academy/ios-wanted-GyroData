@@ -177,7 +177,7 @@ class GraphView: UIView {
         reDrawEntireData()
     }
     
-    func playEntireData() {
+    func playEntireDataFlow() {
         timer = Timer(timeInterval: interval, repeats: true, block: { [weak self] timer in
             guard let self = self else { return }
             let data = self.segmentValues[self.timerIntervalPoint]
@@ -191,7 +191,7 @@ class GraphView: UIView {
         })
     }
     
-    func stopPlayingEntireData() {
+    func stopEntireDataFlow() {
         timer?.invalidate()
         self.timerIntervalPoint = 0
     }
