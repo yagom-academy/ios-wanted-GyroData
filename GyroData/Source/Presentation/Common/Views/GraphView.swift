@@ -31,14 +31,35 @@ class GraphView: UIView {
     typealias Values = (x: Double, y: Double, z: Double)
     typealias Positions = (x: Double, y: Double, z: Double)
     
+    enum Constant {
+        static let scale = Double(5)
+        static let graphLineWidth = CGFloat(0.7)
+    }
+    
+    enum Segment {
+        case x
+        case y
+        case z
+        
+        var color: UIColor {
+            switch self {
+            case .x:
+                return .systemRed
+            case .y:
+                return .systemGreen
+            case .z:
+                return .systemBlue
+            }
+        }
+    }
+    
     private var segmentValues: [Values] = []
-    private var segmentPositions: [Positions] = []
     private let segmentOffset: Double
     
     private let interval: TimeInterval
     private let duration: TimeInterval
     
-    private var boundary: Double
+    private var scale: Double
     
     private let labelStackView: UIStackView = {
         let stackView = UIStackView()
@@ -52,26 +73,26 @@ class GraphView: UIView {
     
     private let xLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .systemRed
+        label.textColor = Segment.x.color
         label.font = .preferredFont(forTextStyle: .body, compatibleWith: .current)
-        label.text = "x : -1.234"
+        label.text = "x : 0"
         
         return label
     }()
     
     private let yLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .systemGreen
+        label.textColor = Segment.y.color
         label.font = .preferredFont(forTextStyle: .body, compatibleWith: .current)
-        label.text = "y : -1.234"
+        label.text = "y : 0"
         return label
     }()
     
     private let zLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .systemBlue
+        label.textColor = Segment.z.color
         label.font = .preferredFont(forTextStyle: .body, compatibleWith: .current)
-        label.text = "z : -1.234"
+        label.text = "z : 0"
         return label
     }()
     
@@ -79,7 +100,7 @@ class GraphView: UIView {
         self.interval = interval
         self.duration = duration
         self.segmentOffset = duration / interval
-        self.boundary = 3
+        self.scale = Constant.scale
         super.init(frame: .zero)
         setupStackView()
     }
@@ -94,7 +115,21 @@ class GraphView: UIView {
         self.bringSubviewToFront(labelStackView)
     }
     
+    func dataInit() {
+        segmentValues = []
+        scale = Constant.scale
+        initView()
+    }
+    
     func drawData(data: Values) {
+        if isOverScale(data) {
+            reDrawEntireData()
+        }
+        
+        let xlayer = CAShapeLayer()
+        let ylayer = CAShapeLayer()
+        let zlayer = CAShapeLayer()
+        
         let xPath = UIBezierPath()
         let yPath = UIBezierPath()
         let zPath = UIBezierPath()
@@ -116,26 +151,45 @@ class GraphView: UIView {
         let zStartPoint = CGPoint(x: lastPosition, y: convertedValues.z)
         let zEndPoint = CGPoint(x: lastPosition + widthInterval, y: convertedNewValues.z)
         
-        UIColor.systemRed.setStroke()
+        // path
         xPath.move(to: xStartPoint)
         xPath.addLine(to: xEndPoint)
-        xPath.stroke()
-        
-        UIColor.systemGreen.setStroke()
+
         yPath.move(to: yStartPoint)
         yPath.addLine(to: yEndPoint)
-        yPath.stroke()
         
-        UIColor.systemBlue.setStroke()
         zPath.move(to: zStartPoint)
         zPath.addLine(to: zEndPoint)
-        zPath.stroke()
         
-        segmentValues.append(data)
+        // layer
+        xlayer.strokeColor = Segment.x.color.cgColor
+        xlayer.lineWidth = Constant.graphLineWidth
+        xlayer.path = xPath.cgPath
+        
+        ylayer.strokeColor = Segment.y.color.cgColor
+        ylayer.lineWidth = Constant.graphLineWidth
+        ylayer.path = yPath.cgPath
+        
+        zlayer.strokeColor = Segment.z.color.cgColor
+        zlayer.lineWidth = Constant.graphLineWidth
+        zlayer.path = zPath.cgPath
+        
+        // add layer
+        self.layer.addSublayer(xlayer)
+        self.layer.addSublayer(ylayer)
+        self.layer.addSublayer(zlayer)
+        
         self.xLabel.text = "x: \(Double(round(1000 * data.x) / 1000))"
         self.yLabel.text = "y: \(Double(round(1000 * data.y) / 1000))"
         self.zLabel.text = "z: \(Double(round(1000 * data.z) / 1000))"
-        self.setNeedsLayout()
+        
+        segmentValues.append(data)
+    }
+    
+    func drawEntireData(_ entireData: [Values]) {
+        entireData.forEach {
+            drawData(data: $0)
+        }
     }
 }
 
@@ -150,6 +204,12 @@ private extension GraphView {
         ])
         
         [xLabel, yLabel, zLabel].forEach { labelStackView.addArrangedSubview($0) }
+    }
+    
+    func initView() {
+        layer.sublayers = [layer.sublayers![0]]
+        segmentValues = []
+        setupStackView()
     }
     
     func setupBaseLine() {
@@ -189,7 +249,7 @@ private extension GraphView {
     
     func mappingValuesToFrame(values: Values) -> Values {
         let mappingValues = [values.x, values.y, values.z].map {
-            let mappingValue = $0 / (boundary * 2)
+            let mappingValue = $0 / (scale * 2)
             let positionFromFrame = self.frame.height * (0.5 - mappingValue)
             
             return positionFromFrame
@@ -197,80 +257,106 @@ private extension GraphView {
         
         return (mappingValues[0], mappingValues[1], mappingValues[2])
     }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-import SwiftUI
-
-struct PreView: PreviewProvider {
-    static var previews: some View {
-        SampleViewController().toPreview()
-    }
-}
-
-
-#if DEBUG
-extension UIViewController {
-    private struct Preview: UIViewControllerRepresentable {
-        let viewController: UIViewController
+    
+    func isOverScale(_ data: Values) -> Bool {
+        let maxValue = [data.x, data.y, data.z].map({ abs($0) }).max() ?? scale
         
-        func makeUIViewController(context: Context) -> UIViewController {
-            return viewController
-        }
-        
-        func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
+        if maxValue > scale {
+            adjustScale(maxValue)
+            return true
+        } else {
+            return false
         }
     }
     
-    func toPreview() -> some View {
-        Preview(viewController: self)
+    func adjustScale(_ scale: Double) {
+        self.scale = self.scale + scale * 0.2
+    }
+    
+    func reDrawEntireData() {
+        let entireData = segmentValues
+        
+        initView()
+        
+        drawEntireData(entireData)
+//        entireData.forEach {
+//            drawData(data: $0)
+//        }
     }
 }
-#endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//
+//
+//import SwiftUI
+//
+//struct PreView: PreviewProvider {
+//    static var previews: some View {
+//        SampleViewController().toPreview()
+//    }
+//}
+//
+//
+//#if DEBUG
+//extension UIViewController {
+//    private struct Preview: UIViewControllerRepresentable {
+//        let viewController: UIViewController
+//
+//        func makeUIViewController(context: Context) -> UIViewController {
+//            return viewController
+//        }
+//
+//        func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
+//        }
+//    }
+//
+//    func toPreview() -> some View {
+//        Preview(viewController: self)
+//    }
+//}
+//#endif

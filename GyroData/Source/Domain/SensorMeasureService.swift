@@ -24,7 +24,9 @@ final class SensorMeasureService {
     
     weak var delegate: MeasureServiceDelegate?
     
-    func measureStart(_ sensorType: Sensor, interval: TimeInterval, duration: TimeInterval) {
+    func measureStart(_ startDate: Date, _ sensorType: Sensor, interval: TimeInterval, duration: TimeInterval) {
+        fireDate = startDate
+        
         switch sensorType {
         case .accelerometer:
             accelerometerMeasureStart(interval, duration)
@@ -49,13 +51,13 @@ private extension SensorMeasureService {
         
         motionManager.accelerometerUpdateInterval = interval
         motionManager.startAccelerometerUpdates()
-        fireDate = Date()
             
         timer = Timer(timeInterval: interval, repeats: true) { [weak self] _ in
             guard let self = self else { return }
             if let data = self.motionManager.accelerometerData {
                 let accelerationData = (x: data.acceleration.x, y: data.acceleration.y, z: data.acceleration.z)
                 self.data = accelerationData
+                self.wasteTime += interval
             }
             
             if self.isTimeOver(duration, from: self.fireDate) {
@@ -68,10 +70,7 @@ private extension SensorMeasureService {
     }
     
     func isTimeOver(_ duration: TimeInterval, from fireDate: Date) -> Bool {
-        let wasteTime = Date().timeIntervalSince(fireDate)
-        
         if wasteTime > duration {
-            self.wasteTime = wasteTime
             return true
         } else {
             return false
@@ -86,13 +85,13 @@ private extension SensorMeasureService {
         
         motionManager.gyroUpdateInterval = interval
         motionManager.startGyroUpdates()
-        fireDate = Date()
         
         timer = Timer(timeInterval: interval, repeats: true) { [weak self] _ in
             guard let self = self else { return }
             if let data = self.motionManager.gyroData {
                 let gyroData = (data.rotationRate.x, data.rotationRate.y, data.rotationRate.z)
                 self.data = gyroData
+                self.wasteTime += interval
             }
             
             if self.isTimeOver(duration, from: self.fireDate) {

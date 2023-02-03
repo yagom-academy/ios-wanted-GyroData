@@ -10,7 +10,7 @@ import UIKit
 protocol DataListConfigurable: AnyObject {
     func setupData(_ datas: [MeasureData])
     func setupSelectData(_ data: MeasureData)
-    func setupMeasure()
+    func setupMeasure(_ transactionService: TransactionService)
     func setupPlay(_ data: MeasureData)
 }
 
@@ -52,8 +52,10 @@ extension DataListViewController: DataListConfigurable {
         )
     }
     
-    func setupMeasure() {
-        navigationController?.pushViewController(MeasureViewController(), animated: true)
+    func setupMeasure(_ transactionService: TransactionService) {
+        let measureService = SensorMeasureService()
+        let viewModel = MeasureViewModel(measureService: measureService, transactionService: transactionService)
+        navigationController?.pushViewController(MeasureViewController(viewModel: viewModel), animated: true)
     }
     
     func setupPlay(_ data: MeasureData) {
@@ -71,6 +73,7 @@ extension DataListViewController {
 // MARK: - TableView Delegate Method
 extension DataListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         viewModel.action(.cellSelect(index: indexPath.row))
     }
     
