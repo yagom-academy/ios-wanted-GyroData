@@ -26,10 +26,10 @@ final class MeasureViewModel {
             verifyMotionType(with: type)
             break
         case .measure:
-            // TODO: 측정 시작
+            startMeasure()
             break
         case .stop:
-            // TODO: 정지
+            stopMeasure()
             break
         case .save:
             // TODO: 저장
@@ -60,5 +60,15 @@ final class MeasureViewModel {
                 interval: 0.1
             )
         }
+    }
+    
+    private func startMeasure() {
+        motionManager.start {
+            print("하이요")
+        }
+    }
+    
+    private func stopMeasure() {
+        motionManager.stop()
     }
 }
