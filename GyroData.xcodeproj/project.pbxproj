@@ -58,6 +58,7 @@
 		ACA06576298D37140078D7A7 /* PlayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA06575298D37140078D7A7 /* PlayViewModel.swift */; };
 		ACA0657A298D39590078D7A7 /* PlayViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA06579298D39590078D7A7 /* PlayViewDelegate.swift */; };
 		ACA0657C298D43900078D7A7 /* PlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA0657B298D43900078D7A7 /* PlayViewController.swift */; };
+		ACA0657E298D69670078D7A7 /* GraphViewPlayDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA0657D298D69670078D7A7 /* GraphViewPlayDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -113,6 +114,7 @@
 		ACA06575298D37140078D7A7 /* PlayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayViewModel.swift; sourceTree = "<group>"; };
 		ACA06579298D39590078D7A7 /* PlayViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayViewDelegate.swift; sourceTree = "<group>"; };
 		ACA0657B298D43900078D7A7 /* PlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayViewController.swift; sourceTree = "<group>"; };
+		ACA0657D298D69670078D7A7 /* GraphViewPlayDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphViewPlayDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -392,6 +394,7 @@
 			children = (
 				AC52BB90298BAE8C0057CA56 /* MeasureViewDelegate.swift */,
 				ACA06579298D39590078D7A7 /* PlayViewDelegate.swift */,
+				ACA0657D298D69670078D7A7 /* GraphViewPlayDelegate.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -515,10 +518,10 @@
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				AC52BB8E298BAD890057CA56 /* MeasureServiceDelegate.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
-				ACA06578298D371D0078D7A7 /* PlayViewController.swift in Sources */,
 				AC52BB91298BAE8C0057CA56 /* MeasureViewDelegate.swift in Sources */,
 				3CB15C4C2989456E0049E390 /* DataListViewModel.swift in Sources */,
 				AC52BAC52987F91A0057CA56 /* SensorData+CoreDataProperties.swift in Sources */,
+				ACA0657E298D69670078D7A7 /* GraphViewPlayDelegate.swift in Sources */,
 				3CFD20D9298A5F6A00269FC9 /* UIComponent+Extension.swift in Sources */,
 				AC52BAAE2987E9C60057CA56 /* TransactionService.swift in Sources */,
 				3C81E3B4298CE07100B5BC59 /* ErrorAlertBuilder.swift in Sources */,

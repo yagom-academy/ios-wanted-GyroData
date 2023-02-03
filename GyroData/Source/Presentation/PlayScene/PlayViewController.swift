@@ -63,6 +63,8 @@ class PlayViewController: UIViewController {
         setupPlayButton()
         setupStopButton()
         setupTimerLabel()
+        
+        setupBind()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -74,7 +76,7 @@ class PlayViewController: UIViewController {
 extension PlayViewController {
     func setupView() {
         view.backgroundColor = .systemBackground
-        navigationController?.title = "다시보기"
+        title = "다시보기"
     }
     
     func setupLabelStackView() {
@@ -104,7 +106,7 @@ extension PlayViewController {
             graphView.heightAnchor.constraint(equalTo: graphView.widthAnchor)
         ])
         
-        setupBind()
+        graphView.playDelegate = self
         graphView.setEntrieData(data: viewModel.fetchSegmentData())
     }
     
@@ -148,22 +150,31 @@ extension PlayViewController {
             timerLabel.topAnchor.constraint(equalTo: graphView.bottomAnchor, constant: 30),
             timerLabel.trailingAnchor.constraint(equalTo: graphView.trailingAnchor),
         ])
+        
+        timerLabel.text = String(format: "%.2f", viewModel.entireData.runTime)
     }
 }
 
 extension PlayViewController {
     @objc func playButtonTapped(_ sender: UIButton) {
+        graphView.playEntireDataFlow()
         stopButton.isHidden = false
         playButton.isHidden = true
     }
     
     @objc func stopButtonTapped(_ sender: UIButton) {
+        graphView.stopEntireDataFlow()
         stopButton.isHidden = true
         playButton.isHidden = false
     }
 }
 
-
+extension PlayViewController: GraphViewPlayDelegate {
+    func endPlayingGraphView() {
+        stopButton.isHidden = true
+        playButton.isHidden = false
+    }
+}
 
 import SwiftUI
 
