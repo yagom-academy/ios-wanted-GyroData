@@ -30,16 +30,14 @@ class MeasureViewModel {
     private var wasteTime: TimeInterval = .zero
     private var sensorType: Sensor?
     
-    private let transactionSevice = TransactionService(
-        coreDataManager: CoreDataManager(),
-        fileManager: FileSystemManager()
-    )
+    private let transactionSevice: TransactionService
     private let measureService: SensorMeasureService
     
     weak var delegate: MeasureViewDelegate?
     
-    init(measureService: SensorMeasureService) {
+    init(measureService: SensorMeasureService, transactionService: TransactionService) {
         self.measureService = measureService
+        self.transactionSevice = transactionService
         setDelegate()
     }
     

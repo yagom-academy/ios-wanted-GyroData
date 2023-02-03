@@ -36,14 +36,19 @@ final class CoreDataManager {
 
 extension CoreDataManager: DataManageable {
     func save(_ model: MeasureData) throws {
-        let content = SensorData(context: self.context)
+        guard let type = model.type?.rawValue,
+              let entity = NSEntityDescription.entity(forEntityName: "SensorData", in: context) else {
+            throw CoreDataError.invalidData
+        }
+        
+        let content = NSManagedObject(entity: entity, insertInto: context)
         
         content.setValue(model.xValue, forKey: "xValue")
         content.setValue(model.yValue, forKey: "yValue")
         content.setValue(model.zValue, forKey: "zValue")
         content.setValue(model.date, forKey: "date")
         content.setValue(model.runTime, forKey: "runTime")
-        content.setValue(model.type, forKey: "type")
+        content.setValue(Double(type), forKey: "type")
         
         do {
             try context.save()

@@ -57,6 +57,7 @@ private extension SensorMeasureService {
             if let data = self.motionManager.accelerometerData {
                 let accelerationData = (x: data.acceleration.x, y: data.acceleration.y, z: data.acceleration.z)
                 self.data = accelerationData
+                self.wasteTime += interval
             }
             
             if self.isTimeOver(duration, from: self.fireDate) {
@@ -69,10 +70,7 @@ private extension SensorMeasureService {
     }
     
     func isTimeOver(_ duration: TimeInterval, from fireDate: Date) -> Bool {
-        let wasteTime = Date().timeIntervalSince(fireDate)
-        
         if wasteTime > duration {
-            self.wasteTime = wasteTime
             return true
         } else {
             return false
@@ -93,6 +91,7 @@ private extension SensorMeasureService {
             if let data = self.motionManager.gyroData {
                 let gyroData = (data.rotationRate.x, data.rotationRate.y, data.rotationRate.z)
                 self.data = gyroData
+                self.wasteTime += interval
             }
             
             if self.isTimeOver(duration, from: self.fireDate) {

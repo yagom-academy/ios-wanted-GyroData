@@ -19,7 +19,7 @@ extension SensorData {
     @NSManaged public var xValue: [Double]
     @NSManaged public var yValue: [Double]
     @NSManaged public var zValue: [Double]
-    @NSManaged public var type: Int16
+    @NSManaged public var type: Double
     @NSManaged public var runTime: Double
     @NSManaged public var date: Date
 

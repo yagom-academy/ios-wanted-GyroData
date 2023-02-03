@@ -47,7 +47,7 @@ extension DataListViewModel {
         case .cellSelect(let index):
             delegate?.setupSelectData(measureDatas[index])
         case .measure:
-            delegate?.setupMeasure()
+            delegate?.setupMeasure(transactionSevice)
         case .play(let index):
             delegate?.setupPlay(measureDatas[index])
         case .delete(let index):
