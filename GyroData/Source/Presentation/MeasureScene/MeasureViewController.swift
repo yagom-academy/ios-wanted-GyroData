@@ -12,10 +12,16 @@ class MeasureViewController: UIViewController {
         static let title = "측정하기"
         static let rightBarButtonItemTitle = "저장"
         static let margin = CGFloat(16)
+        
         static let saveFailAlertTitle = "저장 실패"
         static let saveFailAlertActionTitle = "확인"
+        
         static let measureStartButtonTitle = "측정"
         static let measureStopButtonTitle = "정지"
+        
+        static let sensorErrorAlertTitle = "센서 에러"
+        static let accelerometerSensorErrorActionTitle = "가속도 센서 사용 불가"
+        static let gyroscopeSensorErrorActionTitle = "자이로 센서 사용 불가"
     }
     
     private let segmentedControl: UISegmentedControl = {
@@ -74,6 +80,7 @@ class MeasureViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .systemBackground
         setupNavigationBar()
         setupSegmentControl()
         setupGraphView()
@@ -94,19 +101,21 @@ private extension MeasureViewController {
             target: self,
             action: #selector(rightBarButtonTapped)
         )
+        rightBarButtonItem.isEnabled = false
         self.navigationItem.rightBarButtonItem = rightBarButtonItem
         self.navigationItem.title = Constant.title
+        
     }
     
     func setupSegmentControl() {
         view.addSubview(segmentedControl)
         
-        segmentedControl.selectedSegmentIndex = 0
+        segmentedControl.addTarget(self, action: #selector(segmentedControlValueChanged), for: .valueChanged)
         
         let safeArea = view.safeAreaLayoutGuide
         
         NSLayoutConstraint.activate([
-            segmentedControl.topAnchor.constraint(equalTo: safeArea.topAnchor),
+            segmentedControl.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: Constant.margin),
             segmentedControl.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: Constant.margin),
             segmentedControl.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -Constant.margin),
         ])
@@ -149,18 +158,33 @@ private extension MeasureViewController {
         activityIndicatorView.center = self.view.center
         // do test 
     }
+    
+    func setUserInteractive(_ setValue: Bool) {
+        segmentedControl.isEnabled = setValue
+        measureStartButton.isEnabled = setValue
+        navigationItem.rightBarButtonItem?.isEnabled = setValue
+        navigationItem.backBarButtonItem?.isEnabled = setValue
+    }
 }
 
 // MARK: - objc Method
 extension MeasureViewController {
     @objc func rightBarButtonTapped(_ sender: UIBarButtonItem) {
         activityIndicatorView.startAnimating()
-        let segment = segmentedControl.selectedSegmentIndex
-        viewModel.action(.sensorTypeChanged(sensorType: Sensor(rawValue: segment)))
+        viewModel.action(.saveButtonTapped)
+    }
+    
+    @objc func segmentedControlValueChanged(_ sender: UISegmentedControl) {
+        let segment = Sensor(rawValue: sender.selectedSegmentIndex)
+        viewModel.action(.sensorTypeChanged(sensorType: segment))
     }
     
     @objc func measureStartButtonTapped(_ sender: UIButton) {
-        viewModel.action(.mesureStartButtonTapped)
+        if segmentedControl.selectedSegmentIndex != -1 {
+            graphView.dataInit()
+            viewModel.action(.mesureStartButtonTapped)
+            setUserInteractive(false)
+        }
     }
     
     @objc func methodmeasureStopButtonTapped(_ sender: UIButton) {
@@ -171,18 +195,43 @@ extension MeasureViewController {
 extension MeasureViewController: MeasureViewDelegate {
     func updateValue(_ values: Values) {
         graphView.drawData(data: values)
+        graphView.setNeedsDisplay()
     }
     
     func nonAccelerometerMeasurable() {
+        let alertController = UIAlertController(
+            title: "센서 에러",
+            message: "가속도 센서 사용 불가",
+            preferredStyle: .alert
+        )
+        let defaultAction = UIAlertAction(
+            title: Constant.saveFailAlertActionTitle,
+            style: .default
+        )
         
+        alertController.addAction(defaultAction)
+        
+        present(alertController, animated: true)
     }
     
     func nonGyroscopeMeasurable() {
+        let alertController = UIAlertController(
+            title: "센서 에러",
+            message: "자이로 센서 사용 불가",
+            preferredStyle: .alert
+        )
+        let defaultAction = UIAlertAction(
+            title: Constant.saveFailAlertActionTitle,
+            style: .default
+        )
         
+        alertController.addAction(defaultAction)
+        
+        present(alertController, animated: true)
     }
     
     func endMeasuringData() {
-        
+        setUserInteractive(true)
     }
     
     func saveSuccess() {
