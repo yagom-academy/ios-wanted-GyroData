@@ -76,8 +76,11 @@ final class MotionDataTableViewController: UIViewController {
     
     private func createPushAction() -> UIAction {
         let action = UIAction { _ in
-            let measurementMotionDataViewController = MeasurementMotionDataViewController()
-            self.navigationController?.pushViewController(measurementMotionDataViewController, animated: true)
+//            let measurementMotionDataViewController = MeasurementMotionDataViewController()
+//            self.navigationController?.pushViewController(measurementMotionDataViewController, animated: true)
+            FileManager.shared.motionDataList = [
+                MotionData(date: Date(timeIntervalSince1970: 10000), type: .accelerometer, time: 20, value: [SIMD3(x: 1, y: 2, z: 3)], id: UUID())
+            ]
         }
         
         return action
@@ -89,10 +92,7 @@ extension MotionDataTableViewController {
     private func createListLayout() -> UICollectionViewCompositionalLayout {
         var layoutConfig = UICollectionLayoutListConfiguration(appearance: .plain)
         layoutConfig.showsSeparators = false
-
         layoutConfig.trailingSwipeActionsConfigurationProvider = makeSwipeActions
-
-
 
         let listLayout = UICollectionViewCompositionalLayout.list(using: layoutConfig)
 
@@ -103,7 +103,9 @@ extension MotionDataTableViewController {
         guard let indexPath = indexPath, let id = dataSource?.itemIdentifier(for: indexPath) else { return nil }
 
         let playAction = UIContextualAction(style: .normal, title: "Play") { action, view, completion in
-            let replayMotionViewControll = ReplayMotionViewController()
+            let replayMotionViewModel = ReplayMotionViewModel(index: indexPath, type: .play)
+            let replayMotionViewControll = ReplayMotionViewController(replayMotionViewModel: replayMotionViewModel)
+
             self.navigationController?.pushViewController(replayMotionViewControll, animated: true)
             self.collectionView.deselectItem(at: indexPath, animated: true)
             
@@ -145,7 +147,8 @@ extension MotionDataTableViewController {
 extension MotionDataTableViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let replayMotionViewControll = ReplayMotionViewController()
+        let replayMotionViewModel = ReplayMotionViewModel(index: indexPath, type: .view)
+        let replayMotionViewControll = ReplayMotionViewController(replayMotionViewModel: replayMotionViewModel)
         navigationController?.pushViewController(replayMotionViewControll, animated: true)
         collectionView.deselectItem(at: indexPath, animated: true)
     }
