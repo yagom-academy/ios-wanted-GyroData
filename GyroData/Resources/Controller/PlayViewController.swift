@@ -13,6 +13,7 @@
 
      private let playType: viewType
      private let metaData: TransitionMetaData
+     private var transitionData: Transition = Transition(x: [], y: [], z: [])
      private var playTime: Double = 0.0
 
      private let dateLabel: UILabel = {
@@ -52,6 +53,15 @@
          self.playType = viewType
          self.metaData = metaData
          super.init(nibName: nil, bundle: nil)
+         
+         SystemFileManager().readData(path: metaData.jsonName, type: Transition.self) { result in
+             switch result {
+             case .success(let data):
+                 self.transitionData = data
+             case .failure(let error):
+                 print(error)
+             }
+         }
      }
 
      required init?(coder: NSCoder) {
