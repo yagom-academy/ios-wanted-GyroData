@@ -21,8 +21,8 @@ final class RecordViewController: UIViewController {
         return indicator
     }()
     
-    private let graphView: UIView = {
-        let graphView = UIView()
+    private let graphView: GraphView = {
+        let graphView = GraphView(frame: .zero)
         graphView.backgroundColor = .systemBackground
         graphView.layer.borderWidth = 3
         return graphView
@@ -66,7 +66,7 @@ final class RecordViewController: UIViewController {
 extension RecordViewController: MotionManagerDelegate {
     func motionManager(send manager: MotionManager, sendData: CMLogItem?) {
         guard let data = sendData else { return }
-        
+
         saveData(data: data)
     }
     
