@@ -19,6 +19,7 @@ class MainViewController: UIViewController {
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(MotionDataCell.self, forCellReuseIdentifier: MotionDataCell.identifier)
+        tableView.separatorStyle = .none
         
         return tableView
     }()
@@ -34,7 +35,6 @@ class MainViewController: UIViewController {
         bindViewModel()
         configureSnapShot(motionDatas: mainViewModel.motionDatas)
         mainTableView.delegate = self
-        mainTableView.separatorStyle = .none
     }
     
     private func configureNavigationBar() {

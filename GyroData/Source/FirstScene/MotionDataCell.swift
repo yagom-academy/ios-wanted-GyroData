@@ -22,6 +22,7 @@ final class MotionDataCell: UITableViewCell {
         let label = UILabel()
         
         label.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        label.font = .preferredFont(forTextStyle: .caption1)
         
         return label
     }()
@@ -70,7 +71,7 @@ final class MotionDataCell: UITableViewCell {
                 constant: 40
             ),
             leftStackView.trailingAnchor.constraint(
-                equalTo: durationLabel.leadingAnchor,
+                lessThanOrEqualTo: durationLabel.leadingAnchor,
                 constant: -60
             ),
             leftStackView.topAnchor.constraint(equalTo: contentView.topAnchor),
@@ -80,7 +81,7 @@ final class MotionDataCell: UITableViewCell {
             durationLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             durationLabel.trailingAnchor.constraint(
                 equalTo: contentView.trailingAnchor,
-                constant: -20
+                constant: -40
             )
         ])
     }
