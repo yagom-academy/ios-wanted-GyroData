@@ -45,6 +45,7 @@ class MainListViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        motionDataList = []
         fetchData()
     }
     
@@ -85,9 +86,7 @@ extension MainListViewController: UITableViewDelegate, UITableViewDataSource {
             return ListCell()
         }
         
-        cell.configureData(title: motionDataList[indexPath.row].measureType,
-                           date: motionDataList[indexPath.row].date,
-                           second: motionDataList[indexPath.row].time)
+        cell.configureData(viewModel: ListCellViewModel(motionEntity: motionDataList[indexPath.row]))
         return cell
     }
     
