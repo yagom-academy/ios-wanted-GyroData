@@ -14,6 +14,8 @@ protocol MotionsListViewModelDelegate: AnyObject {
 }
 
 final class MotionsListViewModel {
+    typealias CellData = (date: String, measurementType: String, time: String)
+    
     enum Action {
         case viewWillApear
         case nextPageRequest
@@ -55,6 +57,14 @@ final class MotionsListViewModel {
     
     func setDelegate(_ delegate: MotionsListViewModelDelegate) {
         self.delegate = delegate
+    }
+    
+    func fetchCellData(from motion: Motion) -> CellData {
+        let date: String = motion.date.description
+        let measurementType: String = motion.type.text
+        let time: String = String(motion.time)
+        
+        return (date, measurementType, time)
     }
 }
 

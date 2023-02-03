@@ -7,7 +7,15 @@
 
 import Foundation
 
-struct Motion: Identifiable {
+struct Motion: Hashable, Identifiable {
+    static func == (lhs: Motion, rhs: Motion) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
     struct MeasurementData {
         var x: [Double]
         var y: [Double]

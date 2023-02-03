@@ -14,6 +14,7 @@ class MotionsListViewController: UIViewController {
         static let playActionTitle = "Play"
         static let deleteActionTitle = "Delete"
     }
+    
     private let tableView: UITableView = {
        let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -26,6 +27,7 @@ class MotionsListViewController: UIViewController {
     }()
     
     private let viewModel: MotionsListViewModel
+    private var dataSource: UITableViewDiffableDataSource<Int, Motion>?
     
     init(viewModel: MotionsListViewModel) {
         self.viewModel = viewModel
@@ -52,6 +54,7 @@ extension MotionsListViewController {
         navigationItem.title = Constant.title
         navigationItem.rightBarButtonItem = measurementButton
         
+        tableView.register(MotionCell.self, forCellReuseIdentifier: MotionCell.reuseIdentifier)
         tableView.delegate = self
         viewModel.setDelegate(self)
     }
@@ -76,7 +79,7 @@ extension MotionsListViewController: UITableViewDelegate {
 // MARK: MotionsListViewModelDelegate
 extension MotionsListViewController: MotionsListViewModelDelegate {
     func motionsListViewModel(didChange motions: [Motion]) {
-        
+        updateSnapshot(with: motions)
     }
     
     func motionsListViewModel(selectedGraphMotionID id: String) {
@@ -85,5 +88,34 @@ extension MotionsListViewController: MotionsListViewModelDelegate {
     
     func motionsListViewModel(selectedPlayMotionID id: String) {
         
+    }
+}
+
+// MARK: Diffable DataSource
+extension MotionsListViewController {
+    private func configureDataSource() {
+        dataSource = UITableViewDiffableDataSource<Int, Motion>(
+            tableView: tableView,
+            cellProvider: { [weak self] tableView, indexPath, motion in
+                guard let self,
+                      let cell = tableView.dequeueReusableCell(withIdentifier: MotionCell.reuseIdentifier,
+                                                               for: indexPath) as? MotionCell
+                else {
+                    return UITableViewCell()
+                }
+                
+                let cellData = self.viewModel.fetchCellData(from: motion)
+                cell.setUpCellData(date: cellData.date, measurementType: cellData.measurementType, time: cellData.time)
+                
+                return cell
+            }
+        )
+    }
+    
+    private func updateSnapshot(with motions: [Motion]) {
+        var snapshot = NSDiffableDataSourceSnapshot<Int, Motion>()
+        snapshot.appendSections([0])
+        snapshot.appendItems(motions)
+        dataSource?.apply(snapshot)
     }
 }
