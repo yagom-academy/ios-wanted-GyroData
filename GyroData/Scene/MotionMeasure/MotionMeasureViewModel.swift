@@ -5,6 +5,8 @@
 //  Created by Ayaan, Wonbi on 2023/01/31.
 //
 
+import Foundation
+
 protocol MotionMeasurementViewModelDelegate: AnyObject {
     func motionMeasurementViewModel(measuredData data: MotionDataType, takenCurrentTime time: Double)
     func motionMeasurementViewModel(isCompletedInMotionMeasurement: Bool)
@@ -13,10 +15,13 @@ protocol MotionMeasurementViewModelDelegate: AnyObject {
 }
 
 final class MotionMeasurementViewModel {
+    enum Constant {
+        static let dateFormat = "yyyy/MM/dd HH:mm:ss"
+    }
     enum Action {
         case measurementStart(type: Int)
         case measurementStop(type: Int)
-        case motionCreate(date: String, type: Int, time: String, data: [MotionDataType])
+        case motionCreate(type: Int, time: String, data: [MotionDataType])
     }
 
     private let createService: MotionCreatable
@@ -39,8 +44,8 @@ final class MotionMeasurementViewModel {
         case let .measurementStop(type):
             guard let type = Motion.MeasurementType(rawValue: type) else { return }
             measurementService.stopMeasurement(type: type)
-        case let .motionCreate(date, type, time, data):
-            createMotionWith(date: date, type: type, time: time, data: data)
+        case let .motionCreate(type, time, data):
+            createMotionWith(type: type, time: time, data: data)
         }
     }
     
@@ -60,9 +65,9 @@ private extension MotionMeasurementViewModel {
             })
     }
     
-    func createMotionWith(date: String, type: Int, time: String, data: [MotionDataType]) {
+    func createMotionWith(type: Int, time: String, data: [MotionDataType]) {
         createService.create(
-            date: date,
+            date: Date().formatted(by: Constant.dateFormat),
             type: type,
             time: time,
             data: data

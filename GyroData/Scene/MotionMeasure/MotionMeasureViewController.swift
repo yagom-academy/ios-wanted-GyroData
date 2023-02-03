@@ -15,7 +15,6 @@ final class MotionMeasureViewController: UIViewController {
         static let saveButtonTitle = "저장"
         static let accelerometerTitle = "Acc"
         static let gyroTitle = "Gyro"
-        static let dateFormat = "yyyy/MM/dd HH:mm:ss"
         static let margin = CGFloat(16.0)
         static let spacing = CGFloat(8.0)
     }
@@ -114,10 +113,12 @@ private extension MotionMeasureViewController {
     }
     
     @objc func saveMotion() {
-        viewModel.action(.motionCreate(date: Date().formatted(by: Constant.dateFormat),
-                                       type: measurementTypeSegmentedControl.selectedSegmentIndex,
-                                       time: "",
-                                       data: []))
+        viewModel.action(.motionCreate(
+            type: measurementTypeSegmentedControl.selectedSegmentIndex,
+            time: "46.5",
+            data: [])
+        )
+        showSaveIndicatorView()
     }
     
     @objc func measureMotion() {
