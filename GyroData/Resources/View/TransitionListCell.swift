@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CustomTableViewCell: UITableViewCell {
+class TransitionListCell: UITableViewCell {
 
     // MARK: - Property
     let dateView: UILabel = {
@@ -53,7 +53,7 @@ class CustomTableViewCell: UITableViewCell {
 }
 
 // MARK: - UIConfiguration
-extension CustomTableViewCell {
+extension TransitionListCell {
     private func configureSubViews() {
         let leftMargin: CGFloat = contentView.frame.width/10
         verticalStackView.addArrangedSubview(dateView)

@@ -36,7 +36,7 @@ extension TransitionListViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let customCell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath) as? CustomTableViewCell ?? CustomTableViewCell()
+        let customCell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath) as? TransitionListCell ?? TransitionListCell()
         customCell.configureCell(data: TransitionMetaData.transitionMetaDatas[indexPath.row])
         return customCell
     }
@@ -149,7 +149,7 @@ private extension TransitionListViewController {
         setNavigationBar()
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
+        tableView.register(TransitionListCell.self, forCellReuseIdentifier: cellReuseIdentifier)
         tableView.separatorStyle = .none
         setUpLayouts()
     }
