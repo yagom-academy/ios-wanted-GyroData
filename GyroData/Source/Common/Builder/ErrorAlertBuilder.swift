@@ -8,7 +8,7 @@
 import UIKit
 
 final class ErrorAlertBuilder: AlertBuilder {
-    var alert =  UIAlertController()
+    var alert =  UIAlertController(title: nil, message: nil, preferredStyle: .alert)
     
     func setTitle(_ title: String) -> AlertBuilder {
         alert.title = title
