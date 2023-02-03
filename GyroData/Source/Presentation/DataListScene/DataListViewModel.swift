@@ -23,7 +23,7 @@ final class DataListViewModel {
     private weak var delegate: DataListConfigurable?
     private weak var alertDelegate: AlertPresentable?
     
-    private var measureDatas:[MeasureData] = [] {
+    private var measureDatas: [MeasureData] = [] {
         didSet {
             delegate?.setupData(measureDatas)
         }

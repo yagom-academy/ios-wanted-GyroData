@@ -42,7 +42,19 @@ class GraphView: UIView {
     private var scale: Double
     
     private var timer: Timer?
-    private var timerIntervalPoint = 0
+    private var timerIntervalPoint = 0 {
+        didSet {
+            timerHandler?(Double(timerIntervalPoint) / 10.0)
+        }
+    }
+    
+    private var timerHandler: ((TimeInterval) -> Void)?
+    
+    weak var playDelegate: GraphViewPlayDelegate?
+    
+    func timeIntervalBind(handler: ((TimeInterval) -> Void)?) {
+        timerHandler = handler
+    }
     
     private let labelStackView: UIStackView = {
         let stackView = UIStackView()
@@ -178,21 +190,33 @@ class GraphView: UIView {
     }
     
     func playEntireDataFlow() {
+        let entireData = segmentValues
+        timerIntervalPoint = 0
+        initView()
+        
         timer = Timer(timeInterval: interval, repeats: true, block: { [weak self] timer in
             guard let self = self else { return }
-            let data = self.segmentValues[self.timerIntervalPoint]
+            let data = entireData[self.timerIntervalPoint]
+            
             self.drawData(data: data)
             self.timerIntervalPoint += 1
             
-            if self.timerIntervalPoint == self.segmentValues.count {
+            if entireData.count <= self.segmentValues.count {
                 timer.invalidate()
-                self.timerIntervalPoint = 0
+                self.timer = nil
+                self.playDelegate?.endPlayingGraphView()
+                
             }
         })
+        
+        if let timer = timer {
+            RunLoop.current.add(timer, forMode: .common)
+        }
     }
     
     func stopEntireDataFlow() {
         timer?.invalidate()
+        timer = nil
         self.timerIntervalPoint = 0
     }
     
@@ -290,75 +314,3 @@ private extension GraphView {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//
-//
-//import SwiftUI
-//
-//struct PreView: PreviewProvider {
-//    static var previews: some View {
-//        SampleViewController().toPreview()
-//    }
-//}
-//
-//
-//#if DEBUG
-//extension UIViewController {
-//    private struct Preview: UIViewControllerRepresentable {
-//        let viewController: UIViewController
-//
-//        func makeUIViewController(context: Context) -> UIViewController {
-//            return viewController
-//        }
-//
-//        func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
-//        }
-//    }
-//
-//    func toPreview() -> some View {
-//        Preview(viewController: self)
-//    }
-//}
-//#endif
