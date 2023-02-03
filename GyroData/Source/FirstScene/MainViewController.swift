@@ -30,6 +30,7 @@ class MainViewController: UIViewController {
         configureView()
         configureDataSource()
         configureSnapShot(motionDatas: mockData)
+        mainTableView.delegate = self
     }
     
     private func configureView() {
@@ -67,5 +68,11 @@ extension MainViewController {
         snapShot.appendItems(motionDatas)
         
         mainDataSource?.apply(snapShot, animatingDifferences: true)
+    }
+}
+
+extension MainViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
     }
 }

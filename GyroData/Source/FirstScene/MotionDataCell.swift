@@ -21,6 +21,8 @@ final class MotionDataCell: UITableViewCell {
     private let measuredDateLabel: UILabel = {
         let label = UILabel()
         
+        label.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        
         return label
     }()
     private let typeLabel: UILabel = {
@@ -64,18 +66,21 @@ final class MotionDataCell: UITableViewCell {
         NSLayoutConstraint.activate([
             leftStackView.leadingAnchor.constraint(
                 equalTo: contentView.leadingAnchor,
-                constant: 30
+                constant: 40
             ),
             leftStackView.trailingAnchor.constraint(
                 equalTo: durationLabel.leadingAnchor,
-                constant: -20
+                constant: -60
             ),
             leftStackView.topAnchor.constraint(equalTo: contentView.topAnchor),
             leftStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             
             durationLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
             durationLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            durationLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 30)
+            durationLabel.trailingAnchor.constraint(
+                equalTo: contentView.trailingAnchor,
+                constant: -20
+            )
         ])
     }
 }
