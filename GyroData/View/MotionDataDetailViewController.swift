@@ -75,7 +75,7 @@ final class MotionDataDetailViewController: UIViewController {
             showPlayViewComponents: showPlayStopButtonAndTimerLabel
         )
         viewModel.bind { coordinate, timerText in
-            // draw
+            self.graphView.drawChartLine(coordinate)
             self.timerLabel.text = timerText
         }
     }

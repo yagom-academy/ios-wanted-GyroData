@@ -27,6 +27,7 @@ final class RecordMotionDataViewController: UIViewController {
         let stack = UIStackView()
         stack.axis = .vertical
         stack.spacing = Constant.Layout.stackSpacing
+        stack.alignment = .center
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
@@ -116,7 +117,13 @@ final class RecordMotionDataViewController: UIViewController {
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
             stackView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor)
+            stackView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
+        ])
+
+        graphView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            graphView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.8),
+            graphView.heightAnchor.constraint(equalTo: graphView.widthAnchor)
         ])
     }
     
@@ -175,8 +182,10 @@ final class RecordMotionDataViewController: UIViewController {
     }
     
     private func bind() {
-        viewModel.bind(onUpdate: ) { coordinate in
-            print(coordinate)
+        viewModel.bind(onUpdate: ) { [weak self] coordinate in
+            DispatchQueue.main.async {
+                self?.graphView.drawChartLine(coordinate)
+            }
         }
     }
 
