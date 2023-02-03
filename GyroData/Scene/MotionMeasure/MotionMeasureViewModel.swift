@@ -35,7 +35,7 @@ final class MotionMeasurementViewModel {
         switch action {
         case let .measurementStart(type):
             guard let type = Motion.MeasurementType(rawValue: type) else { return }
-            measurementService.measure(type: type)
+            startMeasurementService(of: type)
         case let .measurementStop(type):
             guard let type = Motion.MeasurementType(rawValue: type) else { return }
             measurementService.stopMeasurement(type: type)
@@ -50,6 +50,16 @@ final class MotionMeasurementViewModel {
 }
 
 private extension MotionMeasurementViewModel {
+    func startMeasurementService(of type: Motion.MeasurementType) {
+        measurementService.measure(
+            type: type,
+            measurementHandler: { [weak self] data, time in
+                self?.delegate?.motionMeasurementViewModel(measuredData: data, takenCurrentTime: time)
+            }, completeHandler: { [weak self] isCompleted in
+                self?.delegate?.motionMeasurementViewModel(isCompletedInMotionMeasurement: true)
+            })
+    }
+    
     func createMotionWith(date: String, type: Int, time: String, data: [MotionDataType]) {
         createService.create(
             date: date,
@@ -63,16 +73,5 @@ private extension MotionMeasurementViewModel {
                 self?.delegate?.motionMeasurementViewModel(alertStyleToPresent: .motionCreatingFailed)
             }
         }
-    }
-}
-
-extension MotionMeasurementViewModel: MotionMeasurementServiceDelegate {
-    func motionMeasurementService(measuredData: MotionDataType?, time: Double) {
-        guard let data = measuredData else { return }
-        delegate?.motionMeasurementViewModel(measuredData: data, takenCurrentTime: time)
-    }
-    
-    func motionMeasurementService(isCompletedService: Bool) {
-        delegate?.motionMeasurementViewModel(isCompletedInMotionMeasurement: true)
     }
 }

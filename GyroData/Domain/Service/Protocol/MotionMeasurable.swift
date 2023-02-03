@@ -6,6 +6,9 @@
 //
 
 protocol MotionMeasurable {
-    func measure(type: Motion.MeasurementType)
+    func measure(
+        type: Motion.MeasurementType,
+        measurementHandler: @escaping (MotionDataType, Double) -> Void,
+        completeHandler: @escaping (Bool) -> Void)
     func stopMeasurement(type: Motion.MeasurementType)
 }

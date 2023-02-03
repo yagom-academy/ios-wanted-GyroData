@@ -7,35 +7,29 @@
 
 import CoreMotion
 
-protocol MotionMeasurementServiceDelegate: AnyObject {
-    func motionMeasurementService(measuredData: MotionDataType?, time: Double)
-    func motionMeasurementService(isCompletedService: Bool)
-}
-
 final class MotionMeasurementService: MotionMeasurable {
     enum Constant {
         static let timeInterval: Double = 0.1
-        static let timeLimit: Double = 60.0
+        static let timeLimit: Double = 60.01
     }
     private let measurementQueue = OperationQueue()
     private let motionManager = CMMotionManager()
-    private var stopTimer: Timer?
-    private weak var delegate: MotionMeasurementServiceDelegate?
     
-    init() { }
-    
-    deinit {
-        stopTimer?.invalidate()
-    }
-    
-    func measure(type: Motion.MeasurementType) {
+    func measure(
+        type: Motion.MeasurementType,
+        measurementHandler: @escaping (MotionDataType, Double) -> Void,
+        completeHandler: @escaping (Bool) -> Void
+    ) {
         switch type {
         case .acc:
-            measureAccelerometer()
+            measureAccelerometer(
+                measurementHandler: measurementHandler,
+                completeHandler: completeHandler)
         case .gyro:
-            measureGyro()
+            measureGyro(
+                measurementHandler: measurementHandler,
+                completeHandler: completeHandler)
         }
-        setTimeLimit(type: type)
     }
     
     func stopMeasurement(type: Motion.MeasurementType) {
@@ -45,43 +39,41 @@ final class MotionMeasurementService: MotionMeasurable {
         case .gyro:
             motionManager.stopGyroUpdates()
         }
-        delegate?.motionMeasurementService(isCompletedService: true)
-        stopTimer?.invalidate()
-        stopTimer = nil
-    }
-    
-    func configureDelegate(_ delegate: MotionMeasurementServiceDelegate) {
-        self.delegate = delegate
     }
 }
 
 private extension MotionMeasurementService {
-    func measureAccelerometer() {
+    func measureAccelerometer(
+        measurementHandler: @escaping (MotionDataType, Double) -> Void,
+        completeHandler: @escaping (Bool) -> Void
+    ) {
         var currentTime: Double = .zero
         motionManager.accelerometerUpdateInterval = Constant.timeInterval
         motionManager.startAccelerometerUpdates(to: measurementQueue) { [weak self] data, error in
-            guard let data = data else { return }
-            self?.delegate?.motionMeasurementService(measuredData: data.acceleration, time: currentTime)
+            guard let data = data, currentTime <= Constant.timeLimit else {
+                completeHandler(true)
+                self?.stopMeasurement(type: .acc)
+                return
+            }
+            measurementHandler(data.acceleration, currentTime)
             currentTime += Constant.timeInterval
         }
     }
     
-    func measureGyro() {
+    func measureGyro(
+        measurementHandler: @escaping (MotionDataType, Double) -> Void,
+        completeHandler: @escaping (Bool) -> Void
+    ) {
         var currentTime: Double = .zero
         motionManager.gyroUpdateInterval = Constant.timeInterval
         motionManager.startGyroUpdates(to: measurementQueue) { [weak self] data, error in
-            guard let data = data else { return }
-            self?.delegate?.motionMeasurementService(measuredData: data.rotationRate, time: currentTime)
+            guard let data = data, currentTime <= Constant.timeLimit else {
+                completeHandler(true)
+                self?.stopMeasurement(type: .gyro)
+                return
+            }
+            measurementHandler(data.rotationRate, currentTime)
             currentTime += Constant.timeInterval
-        }
-    }
-    
-    func setTimeLimit(type: Motion.MeasurementType) {
-        stopTimer = Timer.scheduledTimer(
-            withTimeInterval: Constant.timeLimit,
-            repeats: false
-        ) { [weak self] _ in
-            self?.stopMeasurement(type: type)
         }
     }
 }
