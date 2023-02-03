@@ -24,6 +24,7 @@
 		B240905A2989624E008DC79B /* CoreDataManageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24090592989624E008DC79B /* CoreDataManageable.swift */; };
 		B240905C298A4531008DC79B /* CoreDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B240905B298A4531008DC79B /* CoreDataError.swift */; };
 		B240908C298C8ED1008DC79B /* MotionDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B240908B298C8ED1008DC79B /* MotionDataCell.swift */; };
+		B240908E298C8F4B008DC79B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B240908D298C8F4B008DC79B /* MainViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		B24090592989624E008DC79B /* CoreDataManageable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManageable.swift; sourceTree = "<group>"; };
 		B240905B298A4531008DC79B /* CoreDataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataError.swift; sourceTree = "<group>"; };
 		B240908B298C8ED1008DC79B /* MotionDataCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDataCell.swift; sourceTree = "<group>"; };
+		B240908D298C8F4B008DC79B /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				B240908B298C8ED1008DC79B /* MotionDataCell.swift */,
+				B240908D298C8F4B008DC79B /* MainViewController.swift */,
 			);
 			path = FirstScene;
 			sourceTree = "<group>";
@@ -249,6 +252,7 @@
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
 				B240905C298A4531008DC79B /* CoreDataError.swift in Sources */,
 				B240908C298C8ED1008DC79B /* MotionDataCell.swift in Sources */,
+				B240908E298C8F4B008DC79B /* MainViewController.swift in Sources */,
 				B240905A2989624E008DC79B /* CoreDataManageable.swift in Sources */,
 				5785B397298A0CCF00DD61B2 /* FileManagerProtocol.swift in Sources */,
 				0CC8B83A2988BA580011E5FB /* MotionType.swift in Sources */,
