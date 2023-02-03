@@ -23,6 +23,7 @@
 		B20D4BDF29894BEE00ADC6B6 /* MotionDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B20D4BDD29894BEE00ADC6B6 /* MotionDataModel.xcdatamodeld */; };
 		B240905A2989624E008DC79B /* CoreDataManageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24090592989624E008DC79B /* CoreDataManageable.swift */; };
 		B240905C298A4531008DC79B /* CoreDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B240905B298A4531008DC79B /* CoreDataError.swift */; };
+		B240908C298C8ED1008DC79B /* MotionDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B240908B298C8ED1008DC79B /* MotionDataCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		B20D4BDE29894BEE00ADC6B6 /* MotionDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MotionDataModel.xcdatamodel; sourceTree = "<group>"; };
 		B24090592989624E008DC79B /* CoreDataManageable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManageable.swift; sourceTree = "<group>"; };
 		B240905B298A4531008DC79B /* CoreDataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataError.swift; sourceTree = "<group>"; };
+		B240908B298C8ED1008DC79B /* MotionDataCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDataCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 		5785B3702988B13900DD61B2 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				B240908A298C8EA3008DC79B /* FirstScene */,
 				5785B3722988B31D00DD61B2 /* App */,
 				B2409080298BAF50008DC79B /* Protocol */,
 				B2409081298BAF68008DC79B /* Error */,
@@ -161,6 +164,14 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
+		B240908A298C8EA3008DC79B /* FirstScene */ = {
+			isa = PBXGroup;
+			children = (
+				B240908B298C8ED1008DC79B /* MotionDataCell.swift */,
+			);
+			path = FirstScene;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -237,6 +248,7 @@
 				57D312A4298A14F1001963C5 /* MotionMeasures.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
 				B240905C298A4531008DC79B /* CoreDataError.swift in Sources */,
+				B240908C298C8ED1008DC79B /* MotionDataCell.swift in Sources */,
 				B240905A2989624E008DC79B /* CoreDataManageable.swift in Sources */,
 				5785B397298A0CCF00DD61B2 /* FileManagerProtocol.swift in Sources */,
 				0CC8B83A2988BA580011E5FB /* MotionType.swift in Sources */,
