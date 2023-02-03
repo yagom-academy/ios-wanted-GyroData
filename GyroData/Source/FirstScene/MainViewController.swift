@@ -23,6 +23,7 @@ class MainViewController: UIViewController {
         return tableView
     }()
     private var mainDataSource: DataSource?
+    private var mainViewModel: MainViewModel = .init()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +31,8 @@ class MainViewController: UIViewController {
         configureNavigationBar()
         configureView()
         configureDataSource()
-        configureSnapShot(motionDatas: mockData)
+        bindViewModel()
+        configureSnapShot(motionDatas: mainViewModel.motionDatas)
         mainTableView.delegate = self
         mainTableView.separatorStyle = .none
     }
@@ -57,11 +59,17 @@ class MainViewController: UIViewController {
             mainTableView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor)
         ])
     }
+    
+    private func bindViewModel() {
+        mainViewModel.bindData { [weak self] motionDatas in
+            self?.configureSnapShot(motionDatas: motionDatas)
+        }
+    }
 }
 
 extension MainViewController {
     private func configureDataSource() {
-        mainDataSource = DataSource(tableView: mainTableView) { tableView, indexPath, item in
+        mainDataSource = DataSource(tableView: mainTableView) { tableView, indexPath, data in
             guard let cell = tableView.dequeueReusableCell(
                 withIdentifier: MotionDataCell.identifier,
                 for: indexPath
@@ -69,8 +77,7 @@ extension MainViewController {
                 return UITableViewCell()
             }
             
-            let motionData = self.mockData[indexPath.row]
-            let cellViewModel = MotionCellViewModel(motionData: motionData)
+            let cellViewModel = MotionCellViewModel(motionData: data)
             
             cell.configureViewModel(cellViewModel)
             cellViewModel.convertCellData()
