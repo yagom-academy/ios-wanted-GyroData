@@ -49,6 +49,7 @@ final class RecordViewController: UIViewController {
     private var recordTime: Double = 0
     private var recordedSensor: SensorType = .Accelerometer
     private var values: [TransitionValue] = []
+    private var isRestart: Bool = false
     
     // MARK: - LifeCycle
     override func viewDidLoad() {
@@ -69,13 +70,17 @@ extension RecordViewController: MotionManagerDelegate {
               let sensor = SensorType(rawInt: segmentControl.selectedSegmentIndex) else {
             return
         }
-        
+        if isRestart {
+            graphView.settingInitialization()
+            isRestart = false
+        }
         graphView.callDrawLine(data, sensor)
         saveData(data: data)
     }
     
     func motionManager(stop manager: MotionManager, sendTime: Double) {
         self.recordTime = sendTime
+        isRestart = true
     }
 }
 
