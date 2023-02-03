@@ -55,6 +55,7 @@ class GraphView: UIView {
         super.draw(rect)
 
         makeGridBackground()
+        settingStartLines()
     }
 }
 
@@ -113,6 +114,13 @@ extension GraphView {
         layer.lineWidth = 2
         layer.path = path.cgPath
         self.layer.addSublayer(layer)
+    }
+
+    private func settingStartLines() {
+        let centerY = self.frame.height / 2
+        xPath.move(to: CGPoint(x: currentX, y: centerY))
+        yPath.move(to: CGPoint(x: currentX, y: centerY))
+        zPath.move(to: CGPoint(x: currentX, y: centerY))
     }
 }
 
