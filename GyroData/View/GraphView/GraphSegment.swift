@@ -10,7 +10,7 @@ import UIKit
 final class GraphSegment: UIView {
     private(set) var dataPoint = [Double]()
     private let startPoint: [Double]
-    private var valueRange = -4.0...4.0
+    private var valueRange = GraphContent.initialRange
     private let segmentWidth: CGFloat
 
     init(startPoint: [Double], segmentWidth: CGFloat) {
@@ -51,7 +51,7 @@ final class GraphSegment: UIView {
 
     private func scaledValue(_ value: Double) -> CGFloat {
         if value > valueRange.upperBound {
-            valueRange = -4.0...(value * 1.2)
+            valueRange = GraphContent.lowerBoundRange...(value + (value * 0.2))
         }
 
         let scale = Double(bounds.size.height) / (valueRange.upperBound - valueRange.lowerBound)

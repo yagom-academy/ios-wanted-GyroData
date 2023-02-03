@@ -39,6 +39,7 @@ final class GraphView: UIView {
         return stackView
     }()
 
+    private var segmentWidth = GraphContent.segmentWidth
     private var segments = [GraphSegment]()
     private var currentSegment: GraphSegment? {
         return segments.last
@@ -63,16 +64,15 @@ final class GraphView: UIView {
     
     func configureLayout() {
         addSubview(labelStackView)
-        
+
         labelStackView.addArrangedSubview(xLabel)
         labelStackView.addArrangedSubview(yLabel)
         labelStackView.addArrangedSubview(zLabel)
         
         NSLayoutConstraint.activate([
-            labelStackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            labelStackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
-            labelStackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
-            labelStackView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: 100)
+            labelStackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 8),
+            labelStackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            labelStackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16)
         ])
     }
 
@@ -107,9 +107,6 @@ final class GraphView: UIView {
     }
 
     private func addSegment() {
-        let segmentWidth = CGFloat(32)
-
-        // Determine the start point for the next segment.
         let startPoint: [Double]
         if let currentSegment = currentSegment {
             guard currentSegment.dataPoint.isEmpty == false else { return }
@@ -119,7 +116,7 @@ final class GraphView: UIView {
         }
 
         let segment = GraphSegment(startPoint: startPoint, segmentWidth: segmentWidth)
-        segment.backgroundColor = backgroundColor
+        segment.backgroundColor = .clear
         segment.frame = CGRect(x: .zero,
                                y: .zero,
                                width: segmentWidth,
@@ -131,7 +128,7 @@ final class GraphView: UIView {
 
     private func purgeSegments() {
         segments.forEach { segment in
-            if segment.frame.origin.x >= bounds.size.width {
+            if segment.frame.origin.x + segmentWidth >= bounds.size.width {
                 segment.removeFromSuperview()
             }
         }

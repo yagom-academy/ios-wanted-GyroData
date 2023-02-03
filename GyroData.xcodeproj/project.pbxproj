@@ -22,6 +22,7 @@
 		AE441326298BF0A50005BD92 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE441324298BF0A50005BD92 /* GraphView.swift */; };
 		AE441327298BF0A50005BD92 /* GraphSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE441325298BF0A50005BD92 /* GraphSegment.swift */; };
 		AE441329298BF0D30005BD92 /* CGContext + .swift in Sources */ = {isa = PBXBuildFile; fileRef = AE441328298BF0D30005BD92 /* CGContext + .swift */; };
+		AE44132F298CB3AC0005BD92 /* GraphContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE44132E298CB3AC0005BD92 /* GraphContent.swift */; };
 		AEA15D7E2988A90C00EF6EBF /* GyroInformationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA15D7D2988A90C00EF6EBF /* GyroInformationModel.swift */; };
 		AEA15D802988A94800EF6EBF /* GyroData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA15D7F2988A94800EF6EBF /* GyroData.swift */; };
 		AEA15D822988A96C00EF6EBF /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA15D812988A96C00EF6EBF /* CoreDataManager.swift */; };
@@ -55,6 +56,7 @@
 		AE441324298BF0A50005BD92 /* GraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		AE441325298BF0A50005BD92 /* GraphSegment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphSegment.swift; sourceTree = "<group>"; };
 		AE441328298BF0D30005BD92 /* CGContext + .swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGContext + .swift"; sourceTree = "<group>"; };
+		AE44132E298CB3AC0005BD92 /* GraphContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphContent.swift; sourceTree = "<group>"; };
 		AEA15D7D2988A90C00EF6EBF /* GyroInformationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroInformationModel.swift; sourceTree = "<group>"; };
 		AEA15D7F2988A94800EF6EBF /* GyroData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroData.swift; sourceTree = "<group>"; };
 		AEA15D812988A96C00EF6EBF /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 			children = (
 				AE441325298BF0A50005BD92 /* GraphSegment.swift */,
 				AE441324298BF0A50005BD92 /* GraphView.swift */,
+				AE44132E298CB3AC0005BD92 /* GraphContent.swift */,
 			);
 			path = GraphView;
 			sourceTree = "<group>";
@@ -297,6 +300,7 @@
 				2668C6062988B9BD0017C9DD /* GyroInformation+CoreDataClass.swift in Sources */,
 				AEA15D9B2988ABD500EF6EBF /* MotionMode.swift in Sources */,
 				AEA15D882988AA2500EF6EBF /* ListViewModel.swift in Sources */,
+				AE44132F298CB3AC0005BD92 /* GraphContent.swift in Sources */,
 				AEA15D7E2988A90C00EF6EBF /* GyroInformationModel.swift in Sources */,
 				AEA15D902988AB1600EF6EBF /* MeasurementViewController.swift in Sources */,
 				AEA15D922988AB2800EF6EBF /* ReplayViewController.swift in Sources */,
@@ -439,6 +443,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HAXVV3XLZ6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GyroData/Resource/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -450,7 +455,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.GyroData;
+				PRODUCT_BUNDLE_IDENTIFIER = "net.yagom.GyroData.-";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -465,6 +470,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HAXVV3XLZ6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GyroData/Resource/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -476,7 +482,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.GyroData;
+				PRODUCT_BUNDLE_IDENTIFIER = "net.yagom.GyroData.-";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
