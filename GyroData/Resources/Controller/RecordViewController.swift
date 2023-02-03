@@ -66,9 +66,7 @@ final class RecordViewController: UIViewController {
 extension RecordViewController: MotionManagerDelegate {
     func motionManager(send manager: MotionManager, sendData: CMLogItem?) {
         guard let data = sendData else { return }
-        print(data)
-        let sensorType: SensorType = segmentControl.selectedSegmentIndex == 0 ? .Accelerometer : .Gyro
-        graphView.callDrawLine(data, sensorType)
+
         saveData(data: data)
     }
     
@@ -83,20 +81,17 @@ extension RecordViewController: Uploadable {
         var isSuccessCoreData: Bool = false
         let uploadGroup = DispatchGroup()
         
-        guard let filePath = SystemFileManager.createFilePath() else {
-            completion(.failure(UploadError.urlCreationFailed))
-            return
-        }
+        let fileName = Date().fileName()
         
         let transitionValues = values.convertTransition()
         let metaData = TransitionMetaData(
             saveDate: Date().description,
             sensorType: recordedSensor,
             recordTime: recordTime,
-            jsonName: filePath.absoluteString
+            jsonName: fileName
         )
         
-        uploadJson(dispatchGroup: uploadGroup, path: filePath, transition: transitionValues) { result in
+        uploadJson(dispatchGroup: uploadGroup, fileName: fileName, transition: transitionValues) { result in
             switch result {
             case .success(let isSuccess):
                 isSuccessJson = isSuccess

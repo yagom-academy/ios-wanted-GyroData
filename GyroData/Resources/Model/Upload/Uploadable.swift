@@ -11,7 +11,7 @@ protocol Uploadable {
     
     func uploadJson(
         dispatchGroup: DispatchGroup,
-        path: URL,
+        fileName: String,
         transition: Transition,
         completion: @escaping (Result<Bool, UploadError>) -> Void
     )
@@ -26,12 +26,12 @@ protocol Uploadable {
 extension Uploadable {
     func uploadJson(
         dispatchGroup: DispatchGroup,
-        path: URL,
+        fileName: String,
         transition: Transition,
         completion: @escaping (Result<Bool, UploadError>) -> Void
     ) {
         dispatchGroup.enter()
-        let result = SystemFileManager().saveData(path: path, value: transition)
+        let result = SystemFileManager().saveData(fileName: fileName, value: transition)
         completion(.success(result))
         dispatchGroup.leave()
     }

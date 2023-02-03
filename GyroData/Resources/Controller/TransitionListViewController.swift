@@ -50,7 +50,10 @@ extension TransitionListViewController: UITableViewDataSource {
 extension TransitionListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let playAction = UIContextualAction(style: .normal, title: nil) { (action, view, completionHandler) in
-            completionHandler(false)
+            let metaData = TransitionMetaData.transitionMetaDatas[indexPath.row]
+            self.presentPlayView(with: .play, metaData: metaData)
+            
+            completionHandler(true)
         }
         playAction.backgroundColor = .systemGreen
         playAction.image = createSwipeActionImage(text: "Play")
@@ -67,6 +70,11 @@ extension TransitionListViewController: UITableViewDelegate {
         deleteAction.image = createSwipeActionImage(text: "Delete")
 
         return UISwipeActionsConfiguration(actions: [deleteAction, playAction])
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let metaData = TransitionMetaData.transitionMetaDatas[indexPath.row]
+        presentPlayView(with: .view, metaData: metaData)
     }
 }
 
@@ -117,6 +125,12 @@ private extension TransitionListViewController {
             self.tableView.tableFooterView = nil
             self.tableView.reloadData()
         }
+    }
+    
+    func presentPlayView(with type: PlayViewController.viewType, metaData: TransitionMetaData) {
+        let controller = PlayViewController(viewType: type, metaData: metaData)
+        
+        navigationController?.pushViewController(controller, animated: true)
     }
 }
 
