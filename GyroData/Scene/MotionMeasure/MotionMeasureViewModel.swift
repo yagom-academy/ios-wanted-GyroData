@@ -25,12 +25,10 @@ final class MotionMeasurementViewModel {
     
     init(
         createService: MotionCreatable,
-        measurementService: MotionMeasurable,
-        delegate: MotionMeasurementViewModelDelegate? = nil
+        measurementService: MotionMeasurable
     ) {
         self.createService = createService
         self.measurementService = measurementService
-        self.delegate = delegate
     }
     
     func action(_ action: Action) {
@@ -44,6 +42,10 @@ final class MotionMeasurementViewModel {
         case let .motionCreate(date, type, time, data):
             createMotionWith(date: date, type: type, time: time, data: data)
         }
+    }
+    
+    func configureDelegate(_ delegate: MotionMeasurementViewModelDelegate) {
+        self.delegate = delegate
     }
 }
 
