@@ -75,3 +75,40 @@ extension MeasurementMotionDataViewModel: GraphViewDataSource {
         return CGFloat(maximumValueCount)
     }
 }
+
+extension MeasurementMotionDataViewModel: MotionDataManageable {
+    
+    func startUpdates(_ motion: MotionType) {
+        reset()
+        switch motion {
+        case .accelerometer:
+            motionManager.startAccelerometerUpdates(to: .main) { [weak self] data, _ in
+                guard let count =  self?.motionData.count,
+                      let maximumCount = self?.maximumValueCount,
+                      count < maximumCount else {
+                    self?.motionManager.stopAccelerometerUpdates()
+                    return
+                }
+                if let data = data?.acceleration {
+                    let value: SIMD3<Double> = .init(x: data.x, y: data.y, z: data.z)
+                    self?.currentValue = value
+                    self?.motionData.append(value)
+                }
+            }
+        case .gyro:
+            motionManager.startGyroUpdates(to: .main) { [weak self] data, _ in
+                guard let count =  self?.motionData.count,
+                      let maximumCount = self?.maximumValueCount,
+                      count < maximumCount else {
+                    self?.motionManager.stopGyroUpdates()
+                    return
+                }
+                if let data = data?.rotationRate {
+                    let value: SIMD3<Double> = .init(x: data.x, y: data.y, z: data.z)
+                    self?.currentValue = value
+                    self?.motionData.append(value)
+                }
+            }
+        }
+    }
+}
