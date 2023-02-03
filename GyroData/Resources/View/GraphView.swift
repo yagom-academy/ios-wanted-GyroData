@@ -40,7 +40,7 @@ class GraphView: UIView {
     private let zPath = UIBezierPath()
     private var currentX: CGFloat = 0
 
-    // MARK: - 뭐로하지..??
+    // MARK: - LifeCycle
     override init(frame: CGRect) {
         super.init(frame: frame)
 
