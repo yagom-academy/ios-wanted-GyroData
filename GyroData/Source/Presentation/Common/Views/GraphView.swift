@@ -33,6 +33,7 @@ class GraphView: UIView {
     
     enum Constant {
         static let scale = Double(5)
+        static let graphLineWidth = CGFloat(0.7)
     }
     
     enum Segment {
@@ -162,15 +163,15 @@ class GraphView: UIView {
         
         // layer
         xlayer.strokeColor = Segment.x.color.cgColor
-        xlayer.lineWidth = 3
+        xlayer.lineWidth = Constant.graphLineWidth
         xlayer.path = xPath.cgPath
         
         ylayer.strokeColor = Segment.y.color.cgColor
-        ylayer.lineWidth = 3
+        ylayer.lineWidth = Constant.graphLineWidth
         ylayer.path = yPath.cgPath
         
         zlayer.strokeColor = Segment.z.color.cgColor
-        zlayer.lineWidth = 3
+        zlayer.lineWidth = Constant.graphLineWidth
         zlayer.path = zPath.cgPath
         
         // add layer
