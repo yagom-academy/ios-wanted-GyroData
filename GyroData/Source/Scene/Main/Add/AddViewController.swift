@@ -33,7 +33,6 @@ class AddViewController: UIViewController {
     }()
     private let graphView: GraphView = {
         let view = GraphView()
-        view.backgroundColor = .systemBackground
         view.layer.borderWidth = 3
         view.layer.borderColor = UIColor.black.cgColor
         return view

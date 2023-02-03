@@ -60,7 +60,7 @@ final class MainViewController: UIViewController {
             target: self,
             action: nil
         )
-        navigationItem.backBarButtonItem?.tintColor = .black
+        navigationItem.backBarButtonItem?.tintColor = .label
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             title: "측정",
             style: .plain,

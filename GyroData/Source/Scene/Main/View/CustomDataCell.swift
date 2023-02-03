@@ -84,16 +84,17 @@ class CustomDataCell: UITableViewCell {
     }
     
     private func configureLayout() {
+        let frameSize = frame.size.width
         setUpDateTitleStackView()
         setUpMainStackView()
         
         contentView.addSubview(mainStackView)
         
         NSLayoutConstraint.activate([
-            mainStackView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            mainStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            mainStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            mainStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
+            mainStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: (frameSize / 20)),
+            mainStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: (frameSize / 20)),
+            mainStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: (frameSize / 10)),
+            mainStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: (frameSize / 10))
         ])
     }
 }
