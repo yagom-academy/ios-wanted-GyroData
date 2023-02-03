@@ -22,4 +22,15 @@ class MeasureListViewModel {
             print(error.localizedDescription)
         }
     }
+    
+    func delete(index: Int) {
+        let deleteItem = model.value.remove(at: index)
+        
+        do {
+           try coreDataManager.remove(deleteItem)
+        } catch {
+            print(error.localizedDescription)
+        }
+        
+    }
 }

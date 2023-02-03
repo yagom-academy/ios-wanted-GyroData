@@ -125,7 +125,8 @@ extension MeasureListViewController: UITableViewDelegate {
         
         let deleteAction = UIContextualAction(style: .destructive,
                                               title: Constant.deleteSwipeAction) { (_, _, success) in
-            
+            self.measureListViewModel.delete(index: indexPath.row)
+            success(true)
         }
         
         return UISwipeActionsConfiguration(actions: [deleteAction,playAction])

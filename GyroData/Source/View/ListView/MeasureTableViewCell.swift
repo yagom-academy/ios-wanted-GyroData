@@ -71,7 +71,6 @@ final class MeasureTableViewCell: UITableViewCell, ReusableView {
         [verticalStackView, measurementTimeLabel].forEach(horizontalStackView.addArrangedSubview(_:))
         contentView.addSubview(horizontalStackView)
         
-        // TODO: - Layout 수정
         NSLayoutConstraint.activate([
             horizontalStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
             horizontalStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 30),
@@ -81,7 +80,9 @@ final class MeasureTableViewCell: UITableViewCell, ReusableView {
     }
     
     func configure(createdAt: Date, sensorType: String, runtime: Double) {
-        createdAtLabel.text = DateFormatter().string(from: createdAt)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
+        createdAtLabel.text = dateFormatter.string(from: createdAt)
         sensorTypeLabel.text = sensorType
         measurementTimeLabel.text = "\(String(format: "%.1f", runtime))"
     }
