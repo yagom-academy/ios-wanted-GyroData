@@ -27,10 +27,22 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configureNavigationBar()
         configureView()
         configureDataSource()
         configureSnapShot(motionDatas: mockData)
         mainTableView.delegate = self
+        mainTableView.separatorStyle = .none
+    }
+    
+    private func configureNavigationBar() {
+        navigationItem.title = "목록"
+        navigationItem.rightBarButtonItem = .init(
+            title: "측정",
+            style: .plain,
+            target: self,
+            action: nil
+        )
     }
     
     private func configureView() {
