@@ -35,6 +35,17 @@ class PlayViewModel {
             stopGraph()
         }
     }
+    
+    func fetchSegmentData() -> [Values] {
+        var segmentValues: [Values] = []
+
+        for i in 0..<entireData.xValue.count {
+            let values: Values = (entireData.xValue[i], entireData.yValue[i], entireData.zValue[i])
+            segmentValues.append(values)
+        }
+        
+        return segmentValues
+    }
 }
 
 // output

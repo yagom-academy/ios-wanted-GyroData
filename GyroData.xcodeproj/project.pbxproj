@@ -56,8 +56,8 @@
 		AC52BB8E298BAD890057CA56 /* MeasureServiceDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52BB8D298BAD890057CA56 /* MeasureServiceDelegate.swift */; };
 		AC52BB91298BAE8C0057CA56 /* MeasureViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52BB90298BAE8C0057CA56 /* MeasureViewDelegate.swift */; };
 		ACA06576298D37140078D7A7 /* PlayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA06575298D37140078D7A7 /* PlayViewModel.swift */; };
-		ACA06578298D371D0078D7A7 /* PlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA06577298D371D0078D7A7 /* PlayViewController.swift */; };
 		ACA0657A298D39590078D7A7 /* PlayViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA06579298D39590078D7A7 /* PlayViewDelegate.swift */; };
+		ACA0657C298D43900078D7A7 /* PlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA0657B298D43900078D7A7 /* PlayViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,8 +111,8 @@
 		AC52BB8D298BAD890057CA56 /* MeasureServiceDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureServiceDelegate.swift; sourceTree = "<group>"; };
 		AC52BB90298BAE8C0057CA56 /* MeasureViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureViewDelegate.swift; sourceTree = "<group>"; };
 		ACA06575298D37140078D7A7 /* PlayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayViewModel.swift; sourceTree = "<group>"; };
-		ACA06577298D371D0078D7A7 /* PlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayViewController.swift; sourceTree = "<group>"; };
 		ACA06579298D39590078D7A7 /* PlayViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayViewDelegate.swift; sourceTree = "<group>"; };
+		ACA0657B298D43900078D7A7 /* PlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -400,7 +400,7 @@
 			isa = PBXGroup;
 			children = (
 				ACA06575298D37140078D7A7 /* PlayViewModel.swift */,
-				ACA06577298D371D0078D7A7 /* PlayViewController.swift */,
+				ACA0657B298D43900078D7A7 /* PlayViewController.swift */,
 			);
 			path = PlayScene;
 			sourceTree = "<group>";
@@ -510,6 +510,7 @@
 				AC52BB45298967B50057CA56 /* Sensor.swift in Sources */,
 				AC52BB8B298B4D4B0057CA56 /* GraphView.swift in Sources */,
 				3CFD20E1298BF32100269FC9 /* SensorMeasureService.swift in Sources */,
+				ACA0657C298D43900078D7A7 /* PlayViewController.swift in Sources */,
 				3CB15C4429893DAE0049E390 /* DataManageable.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				AC52BB8E298BAD890057CA56 /* MeasureServiceDelegate.swift in Sources */,
