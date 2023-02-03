@@ -44,6 +44,11 @@ class MotionsListViewController: UIViewController {
         configureLayout()
         configureDataSource()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.action(.viewWillApear)
+    }
 }
 
 // MARK: UI Componenets
@@ -69,6 +74,35 @@ extension MotionsListViewController {
             tableView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor)
         ])
+    }
+}
+
+// MARK: Diffable DataSource
+extension MotionsListViewController {
+    private func configureDataSource() {
+        dataSource = UITableViewDiffableDataSource<Int, Motion>(
+            tableView: tableView,
+            cellProvider: { [weak self] tableView, indexPath, motion in
+                guard let self,
+                      let cell = tableView.dequeueReusableCell(withIdentifier: MotionCell.reuseIdentifier,
+                                                               for: indexPath) as? MotionCell
+                else {
+                    return UITableViewCell()
+                }
+                
+                let cellData = self.viewModel.fetchCellData(from: motion)
+                cell.setUpCellData(date: cellData.date, measurementType: cellData.measurementType, time: cellData.time)
+                
+                return cell
+            }
+        )
+    }
+    
+    private func updateSnapshot(with motions: [Motion]) {
+        var snapshot = NSDiffableDataSourceSnapshot<Int, Motion>()
+        snapshot.appendSections([0])
+        snapshot.appendItems(motions)
+        dataSource?.apply(snapshot)
     }
 }
 
@@ -118,31 +152,17 @@ extension MotionsListViewController: MotionsListViewModelDelegate {
     }
 }
 
-// MARK: Diffable DataSource
-extension MotionsListViewController {
-    private func configureDataSource() {
-        dataSource = UITableViewDiffableDataSource<Int, Motion>(
-            tableView: tableView,
-            cellProvider: { [weak self] tableView, indexPath, motion in
-                guard let self,
-                      let cell = tableView.dequeueReusableCell(withIdentifier: MotionCell.reuseIdentifier,
-                                                               for: indexPath) as? MotionCell
-                else {
-                    return UITableViewCell()
-                }
-                
-                let cellData = self.viewModel.fetchCellData(from: motion)
-                cell.setUpCellData(date: cellData.date, measurementType: cellData.measurementType, time: cellData.time)
-                
-                return cell
-            }
-        )
-    }
-    
-    private func updateSnapshot(with motions: [Motion]) {
-        var snapshot = NSDiffableDataSourceSnapshot<Int, Motion>()
-        snapshot.appendSections([0])
-        snapshot.appendItems(motions)
-        dataSource?.apply(snapshot)
+// MARK: UIScrollViewDelegate
+extension MotionsListViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard tableView.frame.height < scrollView.contentSize.height else { return }
+        
+        let endPoint: CGFloat = scrollView.contentOffset.y + scrollView.bounds.height
+        let isEndOfScroll: Bool = endPoint >= scrollView.contentSize.height * 0.9
+        
+        if isEndOfScroll {
+            print(endPoint)
+            viewModel.action(.nextPageRequest)
+        }
     }
 }
