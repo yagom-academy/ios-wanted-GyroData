@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0C27E404298A492C00C570C4 /* MotionMeasureManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C27E403298A492C00C570C4 /* MotionMeasureManager.swift */; };
 		0C27E428298B9EBE00C570C4 /* MeasureTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C27E427298B9EBE00C570C4 /* MeasureTimer.swift */; };
+		0C27E42B298BF0D700C570C4 /* MeasureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C27E42A298BF0D700C570C4 /* MeasureViewController.swift */; };
 		0CC8B8382988B73C0011E5FB /* MotionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CC8B8372988B73C0011E5FB /* MotionData.swift */; };
 		0CC8B83A2988BA580011E5FB /* MotionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CC8B8392988BA580011E5FB /* MotionType.swift */; };
 		5785B397298A0CCF00DD61B2 /* FileManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5785B396298A0CCF00DD61B2 /* FileManagerProtocol.swift */; };
@@ -28,6 +29,7 @@
 /* Begin PBXFileReference section */
 		0C27E403298A492C00C570C4 /* MotionMeasureManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionMeasureManager.swift; sourceTree = "<group>"; };
 		0C27E427298B9EBE00C570C4 /* MeasureTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureTimer.swift; sourceTree = "<group>"; };
+		0C27E42A298BF0D700C570C4 /* MeasureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureViewController.swift; sourceTree = "<group>"; };
 		0CC8B8372988B73C0011E5FB /* MotionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionData.swift; sourceTree = "<group>"; };
 		0CC8B8392988BA580011E5FB /* MotionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionType.swift; sourceTree = "<group>"; };
 		5785B396298A0CCF00DD61B2 /* FileManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerProtocol.swift; sourceTree = "<group>"; };
@@ -57,6 +59,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0C27E429298BF0C500C570C4 /* MeasureScene */ = {
+			isa = PBXGroup;
+			children = (
+				0C27E42A298BF0D700C570C4 /* MeasureViewController.swift */,
+			);
+			path = MeasureScene;
+			sourceTree = "<group>";
+		};
 		0CC8B8362988B7230011E5FB /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -70,6 +80,7 @@
 		5785B3702988B13900DD61B2 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				0C27E429298BF0C500C570C4 /* MeasureScene */,
 				5785B3722988B31D00DD61B2 /* App */,
 				B2409080298BAF50008DC79B /* Protocol */,
 				B2409081298BAF68008DC79B /* Error */,
@@ -234,6 +245,7 @@
 				63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				0C27E404298A492C00C570C4 /* MotionMeasureManager.swift in Sources */,
+				0C27E42B298BF0D700C570C4 /* MeasureViewController.swift in Sources */,
 				57D312A4298A14F1001963C5 /* MotionMeasures.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
 				B240905C298A4531008DC79B /* CoreDataError.swift in Sources */,
