@@ -55,7 +55,7 @@ class GraphView: UIView {
         super.draw(rect)
 
         makeGridBackground()
-        settingStartLines()
+        settingInitialization()
     }
 }
 
@@ -96,7 +96,6 @@ extension GraphView {
         addGraphViewSublayer(layer: xLayer, path: xPath)
         addGraphViewSublayer(layer: yLayer, path: yPath)
         addGraphViewSublayer(layer: zLayer, path: zPath)
-        self.layoutIfNeeded()
     }
 
     private func addGraphViewSublayer(layer: CAShapeLayer, path: UIBezierPath) {
@@ -114,6 +113,13 @@ extension GraphView {
         layer.lineWidth = 2
         layer.path = path.cgPath
         self.layer.addSublayer(layer)
+    }
+
+    func settingInitialization() {
+        [xLayer, yLayer, zLayer].forEach { $0.removeFromSuperlayer() }
+        [xPath, yPath, zPath].forEach { $0.removeAllPoints() }
+        currentX = 0
+        settingStartLines()
     }
 
     private func settingStartLines() {
