@@ -27,6 +27,7 @@
 		B240908E298C8F4B008DC79B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B240908D298C8F4B008DC79B /* MainViewController.swift */; };
 		B2409090298C9111008DC79B /* MotionCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B240908F298C9111008DC79B /* MotionCellViewModel.swift */; };
 		B2409092298CD339008DC79B /* DateFormatter +.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2409091298CD339008DC79B /* DateFormatter +.swift */; };
+		B2409094298CEE6C008DC79B /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2409093298CEE6C008DC79B /* MainViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		B240908D298C8F4B008DC79B /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		B240908F298C9111008DC79B /* MotionCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionCellViewModel.swift; sourceTree = "<group>"; };
 		B2409091298CD339008DC79B /* DateFormatter +.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter +.swift"; sourceTree = "<group>"; };
+		B2409093298CEE6C008DC79B /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +179,7 @@
 				B240908D298C8F4B008DC79B /* MainViewController.swift */,
 				B240908F298C9111008DC79B /* MotionCellViewModel.swift */,
 				B2409091298CD339008DC79B /* DateFormatter +.swift */,
+				B2409093298CEE6C008DC79B /* MainViewModel.swift */,
 			);
 			path = FirstScene;
 			sourceTree = "<group>";
@@ -264,6 +267,7 @@
 				5785B397298A0CCF00DD61B2 /* FileManagerProtocol.swift in Sources */,
 				B2409090298C9111008DC79B /* MotionCellViewModel.swift in Sources */,
 				0CC8B83A2988BA580011E5FB /* MotionType.swift in Sources */,
+				B2409094298CEE6C008DC79B /* MainViewModel.swift in Sources */,
 				57D312A8298A532C001963C5 /* FileManagingError.swift in Sources */,
 				57D312A6298A15A1001963C5 /* FileHandleManager.swift in Sources */,
 				0CC8B8382988B73C0011E5FB /* MotionData.swift in Sources */,
