@@ -48,7 +48,7 @@ final class RecordViewController: UIViewController {
     private let motionManager = MotionManager()
     private var recordTime: Double = 0
     private var recordedSensor: SensorType = .Accelerometer
-    private var values: [TransitionValue] = []
+    private var values: [Tick] = []
     
     // MARK: - LifeCycle
     override func viewDidLoad() {
@@ -83,7 +83,7 @@ extension RecordViewController: Uploadable {
         
         let fileName = Date().fileName()
         
-        let transitionValues = values.convertTransition()
+        let transitionValues = Transition(values: values)
         let metaData = TransitionMetaData(
             saveDate: Date().description,
             sensorType: recordedSensor,
@@ -134,10 +134,12 @@ private extension RecordViewController {
     func saveData(data: CMLogItem) {
         if let accelerometerData = data as? CMAccelerometerData {
             let valueSet = accelerometerData.acceleration
-            values.append((valueSet.x, valueSet.y, valueSet.z))
+            let tick = Tick(x: valueSet.x, y: valueSet.y, z: valueSet.z)
+            values.append(tick)
         } else if let gyroData = data as? CMGyroData {
             let valueSet = gyroData.rotationRate
-            values.append((valueSet.x, valueSet.y, valueSet.z))
+            let tick = Tick(x: valueSet.x, y: valueSet.y, z: valueSet.z)
+            values.append(tick)
         }
     }
 }

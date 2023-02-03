@@ -13,7 +13,7 @@
 
      private let playType: viewType
      private let metaData: TransitionMetaData
-     private var transitionData: Transition = Transition(x: [], y: [], z: [])
+     private var transitionData: Transition = Transition(values: [])
      private var playTime: Double = 0.0
 
      private let dateLabel: UILabel = {
