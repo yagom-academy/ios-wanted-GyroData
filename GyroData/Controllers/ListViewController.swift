@@ -130,23 +130,17 @@ extension ListViewController: UITableViewDelegate {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let offsetY = scrollView.contentOffset.y
-        let contentHeight = scrollView.contentSize.height
-        let frameHeight = scrollView.frame.height
-        
-        guard isPaging == false,
-              offsetY > contentHeight - frameHeight,
-              contentHeight > frameHeight else {
-            return
-        }
+        guard !isPaging && isScrollOnLastCell(scrollView) else { return }
         
         isPaging = true
         coreDataManager.changeFetchOffset(isInitialFetch: false)
-        
+        self.listView.tableView.tableFooterView = generateSpinnerFooter()
+    
         switch coreDataManager.fetchData() {
         case .success(let fetchedMeasurements):
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
                 self?.measurements += fetchedMeasurements
+                self?.listView.tableView.tableFooterView = nil
                 self?.applySnapshot()
                 self?.isPaging = false
             }
@@ -154,6 +148,26 @@ extension ListViewController: UITableViewDelegate {
             print(dataHandlerError.description)
             UIAlertController.show(title: "Error", message: "데이터 로딩에 실패했습니다", target: self)
         }
+    }
+    
+    private func isScrollOnLastCell(_ scrollView: UIScrollView) -> Bool {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let frameHeight = scrollView.frame.height
+        
+        return offsetY > contentHeight - frameHeight && contentHeight > frameHeight
+    }
+
+    private func generateSpinnerFooter() -> UIView {
+        let footerView = UIView(frame: CGRect(x: .zero, y: .zero,
+                                              width: view.frame.size.width, height: 100))
+        let spinner = UIActivityIndicatorView()
+        spinner.center = footerView.center
+        
+        footerView.addSubview(spinner)
+        spinner.startAnimating()
+        
+        return footerView
     }
 }
 
