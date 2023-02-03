@@ -71,6 +71,25 @@ final class MeasureViewController: UIViewController {
     }
 }
 
+// MARK: Action Method
+extension MeasureViewController {
+    @objc private func tapMeasureButton() {
+        
+    }
+    
+    @objc private func tapStopButton() {
+        
+    }
+    
+    @objc private func tapSaveButton() {
+        
+    }
+    
+    @objc private func tapSegmentControl(_ sender: UISegmentedControl) {
+
+    }
+}
+
 // MARK: UI Configuration
 extension MeasureViewController {
     private func configureSubview() {
@@ -109,7 +128,13 @@ extension MeasureViewController {
             title: "저장",
             style: .plain,
             target: self,
-            action: nil)
+            action: #selector(tapSegmentControl))
+    }
+    
+    private func configureSubviewsAction() {
+        measureButton.addTarget(self, action: #selector(tapMeasureButton), for: .touchUpInside)
+        stopButton.addTarget(self, action: #selector(tapStopButton), for: .touchUpInside)
+        segmentControl.addTarget(self, action: #selector(tapSegmentControl), for: .valueChanged)
     }
 }
 
