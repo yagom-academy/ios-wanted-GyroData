@@ -57,7 +57,7 @@ final class MotionDataCell: UITableViewCell {
     }
     
     private func configureContentView() {
-        [leftStackView, typeLabel].forEach {
+        [leftStackView, durationLabel].forEach {
             contentView.addSubview($0)
         }
         
@@ -67,15 +67,15 @@ final class MotionDataCell: UITableViewCell {
                 constant: 30
             ),
             leftStackView.trailingAnchor.constraint(
-                equalTo: typeLabel.leadingAnchor,
-                constant: 20
+                equalTo: durationLabel.leadingAnchor,
+                constant: -20
             ),
             leftStackView.topAnchor.constraint(equalTo: contentView.topAnchor),
             leftStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             
-            typeLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
-            typeLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            typeLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 30)
+            durationLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
+            durationLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            durationLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 30)
         ])
     }
 }
