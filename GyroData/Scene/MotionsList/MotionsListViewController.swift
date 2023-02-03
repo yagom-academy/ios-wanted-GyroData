@@ -42,6 +42,7 @@ class MotionsListViewController: UIViewController {
         super.viewDidLoad()
         configureView()
         configureLayout()
+        configureDataSource()
     }
 }
 
@@ -73,15 +74,21 @@ extension MotionsListViewController {
 
 // MARK: UITableViewDelegate
 extension MotionsListViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        viewModel.action(.motionTap(indexPath: indexPath))
+    }
+    
     func tableView(
         _ tableView: UITableView,
         trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
     ) -> UISwipeActionsConfiguration? {
-        let playAction = UIContextualAction(style: .normal, title: "Play") { _, view, completion in
+        let playAction = UIContextualAction(style: .normal, title: "Play") { [weak self] _, view, completion in
+            self?.viewModel.action(.motionDelete(indexPath: indexPath))
             completion(true)
         }
         
-        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { _, _, completion in
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] _, _, completion in
+            self?.viewModel.action(.motionDelete(indexPath: indexPath))
             completion(true)
         }
         
@@ -103,11 +110,11 @@ extension MotionsListViewController: MotionsListViewModelDelegate {
     }
     
     func motionsListViewModel(selectedGraphMotionID id: String) {
-        
+        // present MotionGraphViewController
     }
     
     func motionsListViewModel(selectedPlayMotionID id: String) {
-        
+        // present MotionPlayViewController
     }
 }
 
