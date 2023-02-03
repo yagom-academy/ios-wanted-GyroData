@@ -17,11 +17,11 @@
 		54F715212989FE6D0070A76B /* Coordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F715202989FE6D0070A76B /* Coordinate.swift */; };
 		63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB428D44FC400C53A39 /* AppDelegate.swift */; };
 		63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB628D44FC400C53A39 /* SceneDelegate.swift */; };
-		63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB828D44FC400C53A39 /* ViewController.swift */; };
+		63F01BB928D44FC400C53A39 /* MainListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB828D44FC400C53A39 /* MainListViewController.swift */; };
 		63F01BBE28D44FC500C53A39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBD28D44FC500C53A39 /* Assets.xcassets */; };
 		63F01BC128D44FC500C53A39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */; };
 		901CA175298BE820000CEAC9 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901CA174298BE820000CEAC9 /* Double+Extension.swift */; };
-		9036AAC9298B9EDC00D04157 /* MeasureResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9036AAC8298B9EDC00D04157 /* MeasureResultViewController.swift */; };
+		9036AAC9298B9EDC00D04157 /* MeasureDetiailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9036AAC8298B9EDC00D04157 /* MeasureDetiailViewController.swift */; };
 		9036AACB298BDD3700D04157 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9036AACA298BDD3700D04157 /* Date+Extension.swift */; };
 		90B46905298A389B00FBD3CC /* MotionData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 90B46903298A389B00FBD3CC /* MotionData.xcdatamodeld */; };
 		90B46908298A394A00FBD3CC /* MotionEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B46906298A394A00FBD3CC /* MotionEntity+CoreDataClass.swift */; };
@@ -42,12 +42,12 @@
 		63F01BB128D44FC400C53A39 /* GyroData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GyroData.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63F01BB428D44FC400C53A39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63F01BB628D44FC400C53A39 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		63F01BB828D44FC400C53A39 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		63F01BB828D44FC400C53A39 /* MainListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainListViewController.swift; sourceTree = "<group>"; };
 		63F01BBD28D44FC500C53A39 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		63F01BC028D44FC500C53A39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		63F01BC228D44FC500C53A39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		901CA174298BE820000CEAC9 /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
-		9036AAC8298B9EDC00D04157 /* MeasureResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureResultViewController.swift; sourceTree = "<group>"; };
+		9036AAC8298B9EDC00D04157 /* MeasureDetiailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureDetiailViewController.swift; sourceTree = "<group>"; };
 		9036AACA298BDD3700D04157 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		90B46904298A389B00FBD3CC /* MotionData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MotionData.xcdatamodel; sourceTree = "<group>"; };
 		90B46906298A394A00FBD3CC /* MotionEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MotionEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -81,8 +81,8 @@
 			children = (
 				90B52AB02988A6280029D018 /* ListCell.swift */,
 				541432522988B2D40035E113 /* MeasureViewController.swift */,
-				9036AAC8298B9EDC00D04157 /* MeasureResultViewController.swift */,
-				63F01BB828D44FC400C53A39 /* ViewController.swift */,
+				9036AAC8298B9EDC00D04157 /* MeasureDetiailViewController.swift */,
+				63F01BB828D44FC400C53A39 /* MainListViewController.swift */,
 				5414325C2988ED190035E113 /* GraphView.swift */,
 			);
 			path = View;
@@ -222,7 +222,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */,
+				63F01BB928D44FC400C53A39 /* MainListViewController.swift in Sources */,
 				54364529298BB92400127FB1 /* MeasureViewType.swift in Sources */,
 				5414325B2988E5310035E113 /* MotionType.swift in Sources */,
 				541432592988DED70035E113 /* MotionManager.swift in Sources */,
@@ -233,7 +233,7 @@
 				549CF9EE298A8CC400BDCFF2 /* FileManager.swift in Sources */,
 				541432532988B2D40035E113 /* MeasureViewController.swift in Sources */,
 				90B46908298A394A00FBD3CC /* MotionEntity+CoreDataClass.swift in Sources */,
-				9036AAC9298B9EDC00D04157 /* MeasureResultViewController.swift in Sources */,
+				9036AAC9298B9EDC00D04157 /* MeasureDetiailViewController.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
 				5414325F2988F44B0035E113 /* MeasureData.swift in Sources */,
 				9036AACB298BDD3700D04157 /* Date+Extension.swift in Sources */,

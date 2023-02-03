@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MainListViewController.swift
 //  GyroData
 //
 //  Created by kjs on 2022/09/16.
@@ -7,9 +7,9 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class MainListViewController: UIViewController {
     var motionDataList: [MotionEntity] = []
-    var currentPage = 0
+    var hasNextPage = false
     
     let tableView: UITableView = {
         let tableView = UITableView()
@@ -61,14 +61,21 @@ class ViewController: UIViewController {
     }
     
     func fetchData() {
-        guard let hasList = CoreDataManager.shared.fetchData(entity: MotionEntity.self, pageCount: 10, offset: currentPage * 10) else { return }
-        motionDataList = hasList
+        guard let hasList = CoreDataManager.shared.fetchData(entity: MotionEntity.self, pageCount: 10, offset: motionDataList.count) else { return }
+        
+        if hasList.count == 0 {
+            self.hasNextPage = false
+        } else {
+            self.hasNextPage = true
+        }
+        motionDataList.append(contentsOf: hasList)
     
         tableView.reloadData()
     }
 }
 
-extension ViewController: UITableViewDelegate, UITableViewDataSource {
+// MARK: - TableViewDelegate, DataSoruce
+extension MainListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return motionDataList.count
     }
@@ -84,12 +91,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-
-    }
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let measureResultViewController = MeasureResultViewController(data: self.motionDataList[indexPath.row],
+        let measureResultViewController = MeasureDetailViewController(data: self.motionDataList[indexPath.row],
                                                                       pageType: .view)
         self.navigationController?.pushViewController(measureResultViewController, animated: true)
     }
@@ -106,7 +109,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         delete.backgroundColor = .systemRed
         
         let play = UIContextualAction(style: .normal, title: "Play") { (UIContextualAction, UIView, success: @escaping (Bool) -> Void) in
-            let measureResultViewController = MeasureResultViewController(data: self.motionDataList[indexPath.row],
+            let measureResultViewController = MeasureDetailViewController(data: self.motionDataList[indexPath.row],
                                                                           pageType: .play)
             self.navigationController?.pushViewController(measureResultViewController, animated: true)
             success(true)
@@ -114,5 +117,20 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         play.backgroundColor = .systemGreen
         
         return UISwipeActionsConfiguration(actions:[delete, play])
+    }
+}
+
+// MARK: - Paging
+extension MainListViewController {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let height = scrollView.frame.height
+        
+        if offsetY > (contentHeight - height) {
+            if hasNextPage {
+                self.fetchData()
+            }
+        }
     }
 }

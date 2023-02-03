@@ -148,13 +148,12 @@ class MeasureViewController: UIViewController {
             return
         }
         
-        let id = UUID()
-        FileManager.default.save(path: id.uuidString, data: coordinates) { result in
+        FileManager.default.save(path: UUID().uuidString, data: coordinates) { result in
             self.indicatorView.stopAnimating()
             switch result {
-            case .success:
+            case .success(let path):
                 CoreDataManager.shared.create(entity: MotionEntity.self) { entity in
-                    entity.id = id
+                    entity.id = UUID(uuidString: path)
                     entity.date = Date()
                     entity.time = self.motionManager.second.decimalPlace(1)
                     entity.measureType = self.motionType.rawValue

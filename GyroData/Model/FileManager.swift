@@ -12,13 +12,13 @@ enum FileManagerError: Error {
 }
 
 extension FileManager {
-    func save(path: String, data: [Coordinate], completion: @escaping(Result<Void, FileManagerError>) -> Void) {
+    func save(path: String, data: [Coordinate], completion: @escaping(Result<String, FileManagerError>) -> Void) {
         let documentsDirectory = self.urls(for: .documentDirectory, in: .userDomainMask)[0]
         let directoryURL = documentsDirectory.appendingPathComponent("MotionData")
         let fileURL = directoryURL.appendingPathComponent("\(path).json")
 
         do {
-            if !self.fileExists(atPath: directoryURL.path) {
+            if self.fileExists(atPath: directoryURL.path) == false {
                 try self.createDirectory(at: directoryURL, withIntermediateDirectories: true, attributes: nil)
                 print("Directory created at:", directoryURL.path)
             } else {
@@ -28,7 +28,7 @@ extension FileManager {
             let data = try JSONEncoder().encode(data)
             try data.write(to: fileURL)
             
-            completion(.success(()))
+            completion(.success(path))
         } catch {
             completion(.failure(.writeError))
         }

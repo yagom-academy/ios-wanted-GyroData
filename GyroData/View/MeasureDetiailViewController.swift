@@ -1,5 +1,5 @@
 //
-//  MeasureResultViewController.swift
+//  MeasureDetailViewController.swift
 //  GyroData
 //
 //  Created by stone, LJ on 2023/02/02.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MeasureResultViewController: UIViewController {
+class MeasureDetailViewController: UIViewController {
     var motionData: MotionEntity
     var coordinates: [Coordinate] = []
     var pageType: MeasureViewType
