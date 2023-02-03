@@ -73,7 +73,27 @@ extension MotionsListViewController {
 
 // MARK: UITableViewDelegate
 extension MotionsListViewController: UITableViewDelegate {
-    
+    func tableView(
+        _ tableView: UITableView,
+        trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
+    ) -> UISwipeActionsConfiguration? {
+        let playAction = UIContextualAction(style: .normal, title: "Play") { _, view, completion in
+            completion(true)
+        }
+        
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { _, _, completion in
+            completion(true)
+        }
+        
+        playAction.backgroundColor = .systemGreen
+        playAction.image = UIImage(systemName: "play.fill")
+        deleteAction.image = UIImage(systemName: "trash.fill")
+        
+        let swipeConfiguration = UISwipeActionsConfiguration(actions: [deleteAction, playAction])
+        swipeConfiguration.performsFirstActionWithFullSwipe = false
+
+        return swipeConfiguration
+    }
 }
 
 // MARK: MotionsListViewModelDelegate
