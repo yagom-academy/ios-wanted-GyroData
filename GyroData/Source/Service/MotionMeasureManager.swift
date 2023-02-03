@@ -8,17 +8,6 @@
 import CoreMotion
 import Foundation
 
-protocol MotionManagerable {
-    func start(handler: @escaping (MotionCoordinate) -> Void)
-    func stop()
-}
-
-struct MotionCoordinate {
-    let x: Double
-    let y: Double
-    let z: Double
-}
-
 final class GyroMotionManager: MotionManagerable {
     private let motionManager = CMMotionManager()
     private let measureTimer: MeasureTimer
