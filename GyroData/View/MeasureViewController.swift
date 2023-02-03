@@ -68,29 +68,23 @@ class MeasureViewController: UIViewController {
         return activityIndicator
     }()
     
-    lazy var emptyAlert: UIAlertController = {
+    let emptyAlert: UIAlertController = {
         var alert = UIAlertController(title: "알림", message: """
                                                             저장할 데이터가 없습니다.
                                                             측정 후 다시 시도해주세요.
                                                             """, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "확인", style: .default, handler: { _ in
-            self.indicatorView.stopAnimating()
-            self.indicatorView.removeFromSuperview()
-        })
+        let okAction = UIAlertAction(title: "확인", style: .default)
         alert.addAction(okAction)
         
         return alert
     }()
     
-    lazy var failAlert: UIAlertController = {
+    let failAlert: UIAlertController = {
         var alert = UIAlertController(title: "저장 실패", message: """
                                                                 저장이 실패하였습니다.
                                                                 다시 시도해주세요.
                                                                 """, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "확인", style: .default, handler: { _ in
-            self.indicatorView.stopAnimating()
-            self.indicatorView.removeFromSuperview()
-        })
+        let okAction = UIAlertAction(title: "확인", style: .default)
         alert.addAction(okAction)
         
         return alert
@@ -147,32 +141,27 @@ class MeasureViewController: UIViewController {
     
     @objc func saveButtonTapped() {
         self.indicatorView.startAnimating()
+        
         if coordinates.isEmpty {
-            self.delay(3) {
-                self.present(self.emptyAlert, animated: true)
-            }
-            self.dismiss(animated: true)
+            self.indicatorView.stopAnimating()
+            self.present(self.emptyAlert, animated: true)
             return
         }
+        
         let id = UUID()
         FileManager.default.save(path: id.uuidString, data: coordinates) { result in
-            self.delay(3) {
-                switch result {
-                case .success:
-                    CoreDataManager.shared.create(entity: MotionEntity.self) { entity in
-                        entity.id = id
-                        entity.date = Date()
-                        entity.time = self.motionManager.second.decimalPlace(1)
-                        entity.measureType = self.motionType.rawValue
-                    }
-                    self.dismiss(animated: true)
-                    self.indicatorView.stopAnimating()
-                    self.indicatorView.removeFromSuperview()
-                    self.moveListPage()
-                case .failure(_):
-                    self.present(self.failAlert, animated: true)
-                    self.dismiss(animated: true)
+            self.indicatorView.stopAnimating()
+            switch result {
+            case .success:
+                CoreDataManager.shared.create(entity: MotionEntity.self) { entity in
+                    entity.id = id
+                    entity.date = Date()
+                    entity.time = self.motionManager.second.decimalPlace(1)
+                    entity.measureType = self.motionType.rawValue
                 }
+                self.moveListPage()
+            case .failure(_):
+                self.present(self.failAlert, animated: true)
             }
         }
     }
@@ -200,11 +189,6 @@ class MeasureViewController: UIViewController {
         segmentedControl.isEnabled = true
         
         motionManager.stop()
-    }
-    
-    func delay(_ delay: Double, closure: @escaping () -> ()) {
-        let when = DispatchTime.now() + delay
-        DispatchQueue.main.asyncAfter(deadline: when, execute: closure)
     }
     
     func moveListPage() {

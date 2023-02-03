@@ -99,6 +99,10 @@ class MeasureResultViewController: UIViewController {
         configureAction()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        indicatorView.startAnimating()
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         configureGraphView()
     }
@@ -110,14 +114,11 @@ class MeasureResultViewController: UIViewController {
     
     func configureGraphView() {
         graphView.configureData()
+        indicatorView.stopAnimating()
         if pageType == .view {
-            indicatorView.startAnimating()
-            delay(3) {
-                self.coordinates.forEach { coordinate in
-                    self.graphView.drawLine(x: coordinate.x, y: coordinate.y, z: coordinate.z)
-                }
+            self.coordinates.forEach { coordinate in
+                self.graphView.drawLine(x: coordinate.x, y: coordinate.y, z: coordinate.z)
             }
-            indicatorView.stopAnimating()
         }
     }
     
@@ -173,9 +174,10 @@ class MeasureResultViewController: UIViewController {
         view.addSubview(graphView)
         view.addSubview(buttonStackView)
         view.addSubview(timeLabel)
-        view.addSubview(indicatorView)
         buttonStackView.addArrangedSubview(playButton)
         buttonStackView.addArrangedSubview(stopButton)
+        view.addSubview(indicatorView)
+        
         
         NSLayoutConstraint.activate([
             dateLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15),
@@ -196,12 +198,10 @@ class MeasureResultViewController: UIViewController {
             buttonStackView.heightAnchor.constraint(equalToConstant: 80),
             
             timeLabel.centerYAnchor.constraint(equalTo: buttonStackView.centerYAnchor),
-            timeLabel.leadingAnchor.constraint(equalTo: buttonStackView.trailingAnchor)
+            timeLabel.leadingAnchor.constraint(equalTo: buttonStackView.trailingAnchor),
+            
+            indicatorView.centerXAnchor.constraint(equalTo: graphView.centerXAnchor),
+            indicatorView.centerYAnchor.constraint(equalTo: graphView.centerYAnchor)
         ])
-    }
-    
-    func delay(_ delay: Double, closure: @escaping () -> ()) {
-        let when = DispatchTime.now() + delay
-        DispatchQueue.main.asyncAfter(deadline: when, execute: closure)
     }
 }
