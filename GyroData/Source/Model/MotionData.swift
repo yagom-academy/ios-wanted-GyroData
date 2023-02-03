@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MotionData {
+struct MotionData: Hashable {
     let measuredDate: Date
     let duration: Double
     let type: MotionType
