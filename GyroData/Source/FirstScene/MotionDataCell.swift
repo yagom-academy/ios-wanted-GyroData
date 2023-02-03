@@ -40,6 +40,7 @@ final class MotionDataCell: UITableViewCell {
         
         return label
     }()
+    var viewModel: MotionCellViewModel?
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -82,5 +83,22 @@ final class MotionDataCell: UITableViewCell {
                 constant: -20
             )
         ])
+    }
+    
+    func configureViewModel(_ viewModel: MotionCellViewModel) {
+        self.viewModel = viewModel
+        bindViewModel()
+    }
+    
+    func bindViewModel() {
+        viewModel?.bindDate { [weak self] dateString in
+            self?.measuredDateLabel.text = dateString
+        }
+        viewModel?.bindType { [weak self] type in
+            self?.typeLabel.text = type
+        }
+        viewModel?.bindDuration { [weak self] duration in
+            self?.durationLabel.text = duration
+        }
     }
 }
