@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  MotionManager.swift
 //  GyroData
 //
 //  Created by stone, LJ on 2023/01/31.
@@ -25,7 +25,7 @@ class MotionManager {
         }
     }
     
-    func confgiureTimeInterval(interval: Double) {
+    func configureTimeInterval(interval: Double) {
         self.interval = interval
     }
     

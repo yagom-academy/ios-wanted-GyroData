@@ -184,8 +184,8 @@ class GraphView: UIView {
     }
     
     func updateCoordinateLabel(x: Double, y: Double, z: Double) {
-        xLabel.text = "x: \(x)"
-        yLabel.text = "y: \(y)"
-        zLabel.text = "z: \(z)"
+        xLabel.text = "x: \(x.decimalPlace(3))"
+        yLabel.text = "y: \(y.decimalPlace(3))"
+        zLabel.text = "z: \(z.decimalPlace(3))"
     }
 }

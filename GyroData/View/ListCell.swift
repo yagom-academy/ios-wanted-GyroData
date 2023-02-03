@@ -31,8 +31,8 @@ class ListCell: UITableViewCell {
     
     let labelStackView: UIStackView = {
         let stackView = UIStackView()
-        stackView.axis = .vertical
         stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
         return stackView
     }()
     
@@ -45,7 +45,6 @@ class ListCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configureLayout()
-        
     }
     
     required init?(coder: NSCoder) {
@@ -64,7 +63,6 @@ class ListCell: UITableViewCell {
         stackView.addArrangedSubview(secondLabel)
         labelStackView.addArrangedSubview(dateLabel)
         labelStackView.addArrangedSubview(titleLabel)
-        
         
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: topAnchor, constant: 15),

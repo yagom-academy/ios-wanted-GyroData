@@ -21,16 +21,16 @@ class MeasureResultViewController: UIViewController {
     
     var graphView: GraphView = {
         let view = GraphView()
+        view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.borderWidth = 2
         view.layer.borderColor = UIColor.black.cgColor
-        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     let dateLabel: UILabel = {
         let label = UILabel()
-        label.text = Date().formatted("yyyy/MM/dd HH:mm:ss")
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = Date().formatted("yyyy/MM/dd HH:mm:ss")
         return label
     }()
     
@@ -49,24 +49,27 @@ class MeasureResultViewController: UIViewController {
     
     let playButton: UIButton = {
         let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 50, weight: .light)
         button.setImage(UIImage(systemName: "play.fill", withConfiguration: imageConfig), for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
+        button.tintColor = .label
         return button
     }()
     
     let stopButton: UIButton = {
         let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 50, weight: .light)
         button.setImage(UIImage(systemName: "stop.fill", withConfiguration: imageConfig), for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
+        button.tintColor = .label
         return button
     }()
     
     let timeLabel: UILabel = {
         let label = UILabel()
-        label.text = "0.0"
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "0.0"
+        label.textColor = .label
         return label
     }()
     
@@ -158,6 +161,10 @@ class MeasureResultViewController: UIViewController {
         timer?.invalidate()
         stopButton.isHidden = true
         playButton.isHidden = false
+    }
+    
+    func configureNavigationBar() {
+        navigationItem.title = "다시보기"
     }
     
     func configureLayout() {

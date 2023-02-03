@@ -2,7 +2,7 @@
 //  FileManager.swift
 //  GyroData
 //
-//  Created by leewonseok on 2023/02/01.
+//  Created by stone, LJ on 2023/02/01.
 //
 
 import Foundation
