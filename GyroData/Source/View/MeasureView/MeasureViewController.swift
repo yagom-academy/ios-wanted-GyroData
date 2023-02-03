@@ -102,7 +102,7 @@ final class MeasureViewController: UIViewController {
         let saveAction = UIAction { _ in
             self.measureViewModel.add(sensorMode: self.sensorMode,
                                       sensorData: self.measureViewModel.measureDatas.value)
-            
+            self.navigationController?.popViewController(animated: true)
         }
         
         navigationItem.title = Constant.title
@@ -161,7 +161,6 @@ final class MeasureViewController: UIViewController {
         self.measureButton.setTitleColor(.systemBlue, for: .normal)
         self.stopButton.setTitleColor(.gray, for: .normal)
         
-        let mode: SensorMode = self.segmentedControl.selectedSegmentIndex == 0 ? .Acc : .Gyro
         self.measureViewModel.stopMeasure(mode: self.sensorMode)
     }
     

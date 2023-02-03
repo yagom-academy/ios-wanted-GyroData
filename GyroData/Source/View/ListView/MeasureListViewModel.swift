@@ -17,9 +17,7 @@ class MeasureListViewModel {
         
         do {
             fetchedData = try coreDataManager.fetchObjects()
-            fetchedData.forEach { item in
-                self.model.value.append(item)
-            }
+            self.model.value = fetchedData
         } catch {
             print(error.localizedDescription)
         }

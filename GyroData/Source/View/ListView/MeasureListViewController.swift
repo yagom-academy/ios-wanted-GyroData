@@ -42,6 +42,11 @@ final class MeasureListViewController: UIViewController {
         bind()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.measureListViewModel.fetchToCoreData()
+    }
+    
     private func bind() {
         measureListViewModel.model.bind { [weak self] item in
             self?.appendData(item: item)
@@ -91,7 +96,7 @@ final class MeasureListViewController: UIViewController {
         
         snapshot.appendSections([.main])
         snapshot.appendItems(item)
-        dataSource?.apply(snapshot)
+        dataSource?.apply(snapshot, animatingDifferences: false)
     }
     
     private func push(viewController: UIViewController) {
