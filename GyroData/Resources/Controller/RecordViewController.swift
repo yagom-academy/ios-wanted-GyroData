@@ -39,7 +39,7 @@ final class RecordViewController: UIViewController {
     
     let cancelButton: UIButton = {
         let button = UIButton()
-        button.setTitle("취소", for: .normal)
+        button.setTitle("정지", for: .normal)
         button.layer.backgroundColor = UIColor.systemBlue.cgColor
         button.layer.cornerRadius = 5
         return button
@@ -65,8 +65,10 @@ final class RecordViewController: UIViewController {
 // MARK: - Motion Manager Delegate
 extension RecordViewController: MotionManagerDelegate {
     func motionManager(send manager: MotionManager, sendData: CMLogItem?) {
-        guard let data = sendData else { return }
-
+        guard let data = sendData,
+              let sensor = SensorType(rawInt: segmentControl.selectedSegmentIndex) else { return }
+        
+        graphView.callDrawLine(data, sensor)
         saveData(data: data)
     }
     
