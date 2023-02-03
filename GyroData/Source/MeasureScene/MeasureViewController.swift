@@ -79,6 +79,8 @@ final class MeasureViewController: UIViewController {
         configureSubview()
         configureLayout()
         configureNavigation()
+        configureSubviewsAction()
+        bindToMeasureViewModel()
     }
     
     private func bindToMeasureViewModel() {
@@ -91,19 +93,21 @@ final class MeasureViewController: UIViewController {
 // MARK: Action Method
 extension MeasureViewController {
     @objc private func tapMeasureButton() {
-        
+        measureViewModel.action(.measure)
     }
     
     @objc private func tapStopButton() {
-        
+        measureViewModel.action(.stop)
     }
     
     @objc private func tapSaveButton() {
-        
+        measureViewModel.action(.save)
     }
     
     @objc private func tapSegmentControl(_ sender: UISegmentedControl) {
-
+        let selectedIndex = sender.selectedSegmentIndex
+        let selectedTitle = sender.titleForSegment(at: selectedIndex)
+        measureViewModel.action(.motionTypeChange(with: selectedTitle))
     }
 }
 
@@ -145,7 +149,7 @@ extension MeasureViewController {
             title: "저장",
             style: .plain,
             target: self,
-            action: #selector(tapSegmentControl))
+            action: #selector(tapSaveButton))
     }
     
     private func configureSubviewsAction() {
