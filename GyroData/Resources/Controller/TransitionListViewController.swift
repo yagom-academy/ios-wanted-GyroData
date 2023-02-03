@@ -83,6 +83,8 @@ extension TransitionListViewController: UIScrollViewDelegate {
 
             bringAdditionalTransitionMetaData { [weak self] data in
                 guard let self = self else { return }
+                self.pageIndex += 1
+                self.isPaginating = false
                 TransitionMetaData.transitionMetaDatas.append(contentsOf: data)
 
                 DispatchQueue.main.async {
@@ -101,9 +103,7 @@ private extension TransitionListViewController {
         DispatchQueue.global().asyncAfter(deadline: .now() + 3) { [weak self] in
             guard let self = self else { return }
             let data = PersistentContainerManager.shared.fetchTenTransitionMetaDatas(pageCount: self.pageIndex)
-            self.pageIndex += 1
             completion(data)
-            self.isPaginating = false
         }
     }
 

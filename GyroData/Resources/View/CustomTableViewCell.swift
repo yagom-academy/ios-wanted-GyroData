@@ -14,7 +14,6 @@ class CustomTableViewCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.preferredFont(forTextStyle: .callout)
-        label.text = "2022/09/08 14:50:51"
         return label
     }()
 
@@ -22,7 +21,6 @@ class CustomTableViewCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.preferredFont(forTextStyle: .title1)
-        label.text = "Accelerometer"
         return label
     }()
 
@@ -30,7 +28,6 @@ class CustomTableViewCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.preferredFont(for: .largeTitle, weight: .heavy)
-        label.text = "60.0"
         label.textAlignment = .left
         return label
     }()
