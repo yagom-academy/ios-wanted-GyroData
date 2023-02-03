@@ -60,3 +60,18 @@ final class MeasurementMotionDataViewModel {
         motionData = []
     }
 }
+
+extension MeasurementMotionDataViewModel: GraphViewDataSource {
+    
+    func dataList(graphView: GraphView) -> [[Double]] {
+        let xValues: [Double] = motionData.map({ $0.x })
+        let yValues: [Double] = motionData.map({ $0.y })
+        let zValues: [Double] = motionData.map({ $0.z })
+        
+        return [xValues, yValues, zValues]
+    }
+    
+    func maximumXValueCount(graphView: GraphView) -> CGFloat {
+        return CGFloat(maximumValueCount)
+    }
+}
