@@ -24,6 +24,29 @@ class SystemFileManager {
         return true
     }
     
+    func readData<T: Codable>(
+        path: String,
+        type: T.Type,
+        completion: @escaping (Result<T, FileReadError>) -> Void
+    ) {
+        guard let url = URL(string: path) else {
+            completion(.failure(.invalidURL))
+            return
+        }
+        
+        guard let data = try? Data(contentsOf: url) else {
+            completion(.failure(.decodeData))
+            return
+        }
+        
+        guard let decodeData = try? JSONDecoder().decode(T.self, from: data) else {
+            completion(.failure(.decodeJson))
+            return
+        }
+        
+        completion(.success(decodeData))
+    }
+    
     static func createFilePath() -> URL? {
         let documentDirectories = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         
