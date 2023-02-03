@@ -20,6 +20,10 @@ final class PersistentContainerManager {
         }
         return container
     }()
+    
+    private var context: NSManagedObjectContext {
+        return persistentContainer.viewContext
+    }
 
     func saveContext() {
         let context = PersistentContainerManager.shared.persistentContainer.viewContext
@@ -64,27 +68,14 @@ final class PersistentContainerManager {
         }
     }
 
-    private func fetchTenTransitionMetaDataObjects(pageCount: Int) -> [TransitionMetaDataObject] {
-        do {
-            let request = TransitionMetaDataObject.fetchRequest()
-            request.fetchOffset = pageCount * 10
-            request.fetchLimit = 10
-            return try persistentContainer.viewContext.fetch(request)
-        } catch {
-            print(error.localizedDescription)
+    func fetchTransitionMetaData(pageCount: Int, limit: Int = 10) -> [TransitionMetaData] {
+        let request = TransitionMetaDataObject.fetchRequest()
+        request.fetchOffset = pageCount * limit
+        request.fetchLimit = limit
+        guard let objects = try? context.fetch(request) else {
             return []
         }
-    }
-
-    func fetchTenTransitionMetaDatas(pageCount: Int) -> [TransitionMetaData] {
-        let fetchTenTransitionMetaDataObjects = fetchTenTransitionMetaDataObjects(pageCount: pageCount)
-        let transitionMetaDatas = fetchTenTransitionMetaDataObjects.map {
-            TransitionMetaData(saveDate: $0.saveDate,
-                               sensorType: SensorType(rawValue: $0.sensorType) ?? SensorType.Accelerometer,
-                               recordTime: $0.recordTime,
-                               jsonName: $0.jsonName)
-        }
-        return transitionMetaDatas
+        return objects.compactMap { $0.metaData }
     }
 
     func deleteTransitionMetaData(data: TransitionMetaData) {
