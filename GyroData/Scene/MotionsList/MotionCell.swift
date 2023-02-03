@@ -19,7 +19,8 @@ extension CellIdentifiable {
 
 class MotionCell: UITableViewCell, CellIdentifiable {
     enum Constant {
-        static let spacePadding: Double = 16.0
+        static let padding: Double = 16.0
+        static let halfPadding: Double = 8.0
     }
     
     private let dateLabel: UILabel = {
@@ -37,7 +38,6 @@ class MotionCell: UITableViewCell, CellIdentifiable {
     private let timeLabel: UILabel = {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .largeTitle)
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -46,28 +46,50 @@ class MotionCell: UITableViewCell, CellIdentifiable {
         stackView.axis = .vertical
         stackView.alignment = .leading
         stackView.distribution = .fill
-        stackView.spacing = Constant.spacePadding
+        stackView.spacing = Constant.padding
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private let mainStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.alignment = .center
+        stackView.distribution = .fill
+        stackView.spacing = Constant.padding
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
 
-    private func configureView() {
-        [contentsStackView, timeLabel].forEach {
-            addSubview($0)
-        }
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        configureSubviews()
+        configureLayout()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func configureSubviews() {
+        [dateLabel, measurementTypeLabel].forEach { contentsStackView.addArrangedSubview($0) }
+        [contentsStackView, timeLabel].forEach { mainStackView.addArrangedSubview($0) }
+        
+        contentView.addSubview(mainStackView)
     }
     
     private func configureLayout() {
+        let safeArea = contentView.safeAreaLayoutGuide
+        
         NSLayoutConstraint.activate([
-            contentsStackView.topAnchor.constraint(equalTo: self.topAnchor,
-                                                   constant: Constant.spacePadding),
-            contentsStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor,
-                                                       constant: Constant.spacePadding),
-            contentsStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            
-            timeLabel.leadingAnchor.constraint(equalTo: contentsStackView.trailingAnchor,
-                                               constant: Constant.spacePadding),
-            timeLabel.centerYAnchor.constraint(equalTo: contentsStackView.centerYAnchor)
+            mainStackView.topAnchor.constraint(equalTo: safeArea.topAnchor,
+                                               constant: Constant.halfPadding),
+            mainStackView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor,
+                                                   constant: Constant.padding),
+            mainStackView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor,
+                                                    constant: -Constant.padding),
+            mainStackView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor,
+                                                  constant: -Constant.halfPadding)
         ])
     }
     
