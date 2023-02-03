@@ -15,6 +15,15 @@ final class MotionGraphViewController: UIViewController {
     }
     enum Style {
         case play, view
+        
+        var title: String {
+            switch self {
+            case .play:
+                return "Play"
+            case .view:
+                return "View"
+            }
+        }
     }
     private let dateLabel: UILabel = {
         let label = UILabel()
@@ -22,10 +31,9 @@ final class MotionGraphViewController: UIViewController {
         label.text = "2023/02/03 16:00:00"
         return label
     }()
-    private let kindLabel: UILabel = {
+    private let styleLabel: UILabel = {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .title1)
-        label.text = "View"
         return label
     }()
     private let graphView = UIView()
@@ -78,7 +86,7 @@ private extension MotionGraphViewController {
         view.backgroundColor = .systemBackground
         title = Constant.title
         [spaceView, playButton, timeLabel].forEach(bottomStackView.addArrangedSubview(_:))
-        [dateLabel, kindLabel, graphView, bottomStackView].forEach(contentsStackView.addArrangedSubview(_:))
+        [dateLabel, styleLabel, graphView, bottomStackView].forEach(contentsStackView.addArrangedSubview(_:))
         view.addSubview(contentsStackView)
         
         NSLayoutConstraint.activate([
@@ -97,6 +105,7 @@ private extension MotionGraphViewController {
             spaceView.widthAnchor.constraint(equalTo: timeLabel.widthAnchor)
         ])
         
+        styleLabel.text = style.title
         bottomStackView.isHidden = style == .view
     }
     
