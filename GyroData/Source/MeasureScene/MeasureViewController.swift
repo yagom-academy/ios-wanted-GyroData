@@ -8,6 +8,8 @@
 import UIKit
 
 final class MeasureViewController: UIViewController {
+    private let measureViewModel: MeasureViewModel
+    
     private let measureButton: UIButton = {
         let button = UIButton()
         button.setTitle("측정", for: .normal)
@@ -63,11 +65,26 @@ final class MeasureViewController: UIViewController {
         return stackView
     }()
     
+    init(measureViewModel: MeasureViewModel) {
+        self.measureViewModel = measureViewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureSubview()
         configureLayout()
         configureNavigation()
+    }
+    
+    private func bindToMeasureViewModel() {
+        measureViewModel.bindCanChangeMotionType { [weak self] canChange in
+            self?.segmentControl.isUserInteractionEnabled = canChange
+        }
     }
 }
 

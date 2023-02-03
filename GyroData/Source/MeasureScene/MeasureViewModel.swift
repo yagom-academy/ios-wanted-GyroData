@@ -20,6 +20,14 @@ final class MeasureViewModel {
         interval: 0.1
     )
     
+    private var canChangeMotionType: Bool = true {
+        didSet {
+            canChangeMotionTypeHandler?(canChangeMotionType)
+        }
+    }
+    
+    private var canChangeMotionTypeHandler: ((Bool) -> Void)?
+    
     func action(_ action: Action) {
         switch action {
         case .motionTypeChange(let type):
@@ -63,12 +71,21 @@ final class MeasureViewModel {
     }
     
     private func startMeasure() {
+        canChangeMotionType = false
         motionManager.start {
             print("하이요")
         }
     }
     
     private func stopMeasure() {
+        canChangeMotionType = true
         motionManager.stop()
+    }
+}
+
+// MARK: Bind Method
+extension MeasureViewModel {
+    func bindCanChangeMotionType(handler: @escaping (Bool) -> Void) {
+        canChangeMotionTypeHandler = handler
     }
 }
