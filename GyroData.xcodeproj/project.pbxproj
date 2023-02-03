@@ -22,7 +22,6 @@
 		D3811725298B77D500CFDDF0 /* AlertStlye.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3811724298B77D500CFDDF0 /* AlertStlye.swift */; };
 		D381174C298BA2D400CFDDF0 /* MotionMeasurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D381174B298BA2D400CFDDF0 /* MotionMeasurable.swift */; };
 		D381174E298BA6CE00CFDDF0 /* MotionMeasurementService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D381174D298BA6CE00CFDDF0 /* MotionMeasurementService.swift */; };
-		D381D2772988E58700567C6B /* MotionPlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D381D26C2988E58700567C6B /* MotionPlayViewController.swift */; };
 		D381D2782988E58700567C6B /* MotionMeasureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D381D26E2988E58700567C6B /* MotionMeasureViewController.swift */; };
 		D381D2792988E58700567C6B /* MotionMeasureViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D381D26F2988E58700567C6B /* MotionMeasureViewModel.swift */; };
 		D381D27A2988E58700567C6B /* MotionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D381D2712988E58700567C6B /* MotionViewModel.swift */; };
@@ -52,6 +51,7 @@
 		E3D84AB12988F7C800FDA64F /* CMRotationRate+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D84AB02988F7C800FDA64F /* CMRotationRate+.swift */; };
 		E3D84AB32988F81200FDA64F /* CMAcceleration+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D84AB22988F81200FDA64F /* CMAcceleration+.swift */; };
 		E3F7B5A6298CB38300A7810A /* MotionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F7B5A5298CB38300A7810A /* MotionCell.swift */; };
+		E3F7B5AA298D3ED400A7810A /* ViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F7B5A9298D3ED400A7810A /* ViewControllerFactory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,7 +82,6 @@
 		D3811724298B77D500CFDDF0 /* AlertStlye.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertStlye.swift; sourceTree = "<group>"; };
 		D381174B298BA2D400CFDDF0 /* MotionMeasurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionMeasurable.swift; sourceTree = "<group>"; };
 		D381174D298BA6CE00CFDDF0 /* MotionMeasurementService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionMeasurementService.swift; sourceTree = "<group>"; };
-		D381D26C2988E58700567C6B /* MotionPlayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionPlayViewController.swift; sourceTree = "<group>"; };
 		D381D26E2988E58700567C6B /* MotionMeasureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionMeasureViewController.swift; sourceTree = "<group>"; };
 		D381D26F2988E58700567C6B /* MotionMeasureViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionMeasureViewModel.swift; sourceTree = "<group>"; };
 		D381D2712988E58700567C6B /* MotionViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionViewModel.swift; sourceTree = "<group>"; };
@@ -113,6 +112,7 @@
 		E3D84AB02988F7C800FDA64F /* CMRotationRate+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CMRotationRate+.swift"; sourceTree = "<group>"; };
 		E3D84AB22988F81200FDA64F /* CMAcceleration+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CMAcceleration+.swift"; sourceTree = "<group>"; };
 		E3F7B5A5298CB38300A7810A /* MotionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionCell.swift; sourceTree = "<group>"; };
+		E3F7B5A9298D3ED400A7810A /* ViewControllerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerFactory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,6 +194,7 @@
 				D3811726298B77F200CFDDF0 /* AlertFactory */,
 				D37A5888298C9E2900D90F15 /* Date+.swift */,
 				D37A588A298CFDD600D90F15 /* PlayButton.swift */,
+				E3F7B5A9298D3ED400A7810A /* ViewControllerFactory.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -229,7 +230,6 @@
 		D381D2702988E58700567C6B /* Motion */ = {
 			isa = PBXGroup;
 			children = (
-				D381D26C2988E58700567C6B /* MotionPlayViewController.swift */,
 				D381D2722988E58700567C6B /* MotionGraphViewController.swift */,
 				D381D2712988E58700567C6B /* MotionViewModel.swift */,
 			);
@@ -481,6 +481,7 @@
 			files = (
 				E3D84A9A2988E6D400FDA64F /* MotionDeletable.swift in Sources */,
 				D37A588B298CFDD600D90F15 /* PlayButton.swift in Sources */,
+				E3F7B5AA298D3ED400A7810A /* ViewControllerFactory.swift in Sources */,
 				E3D84AB32988F81200FDA64F /* CMAcceleration+.swift in Sources */,
 				E3D84A9C2988E6EF00FDA64F /* MotionCreatable.swift in Sources */,
 				D381D2782988E58700567C6B /* MotionMeasureViewController.swift in Sources */,
@@ -494,7 +495,6 @@
 				E3D84AAC2988E7F000FDA64F /* Motion.swift in Sources */,
 				D381D28D2988E95B00567C6B /* DomainConvertible.swift in Sources */,
 				D381D2932988EA5900567C6B /* GyroData.xcdatamodeld in Sources */,
-				D381D2772988E58700567C6B /* MotionPlayViewController.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				D381D27A2988E58700567C6B /* MotionViewModel.swift in Sources */,
 				D381D2A32989363C00567C6B /* FileManagerRepository.swift in Sources */,
