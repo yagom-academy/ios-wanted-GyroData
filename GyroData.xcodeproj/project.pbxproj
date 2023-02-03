@@ -32,6 +32,7 @@
 		BFBD6B6D298BB07A0057D637 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBD6B6C298BB07A0057D637 /* GraphView.swift */; };
 		BFBD6B6F298BB0F90057D637 /* GraphViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBD6B6E298BB0F90057D637 /* GraphViewDataSource.swift */; };
 		BFBD6B71298BB4EF0057D637 /* GraphViewDataSource+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBD6B70298BB4EF0057D637 /* GraphViewDataSource+.swift */; };
+		BFBD6B73298CC0160057D637 /* MotionDataManageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBD6B72298CC0160057D637 /* MotionDataManageable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,7 @@
 		BFBD6B6C298BB07A0057D637 /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		BFBD6B6E298BB0F90057D637 /* GraphViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphViewDataSource.swift; sourceTree = "<group>"; };
 		BFBD6B70298BB4EF0057D637 /* GraphViewDataSource+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "GraphViewDataSource+.swift"; path = "GyroData/View/GraphViewDataSource+.swift"; sourceTree = SOURCE_ROOT; };
+		BFBD6B72298CC0160057D637 /* MotionDataManageable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDataManageable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,6 +218,7 @@
 			isa = PBXGroup;
 			children = (
 				BF128AC129892D5700C3CB7B /* MeasurementMotionDataViewModel.swift */,
+				BFBD6B72298CC0160057D637 /* MotionDataManageable.swift */,
 			);
 			path = MeasurementMotionData;
 			sourceTree = "<group>";
@@ -313,6 +316,7 @@
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				BFBD6B6F298BB0F90057D637 /* GraphViewDataSource.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
+				BFBD6B73298CC0160057D637 /* MotionDataManageable.swift in Sources */,
 				BF128AB52988CAA700C3CB7B /* MotionDataEntity+CoreDataProperties.swift in Sources */,
 				BF128AC429892D7200C3CB7B /* ReplayMotionViewModel.swift in Sources */,
 				BF128AB12988AFC700C3CB7B /* MotionDataModel.xcdatamodeld in Sources */,
@@ -467,6 +471,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = RKG4N9K9YM;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GyroData/Resource/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -479,7 +484,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.GyroData;
+				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.GyroData.CoreMotion;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -494,6 +499,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = RKG4N9K9YM;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GyroData/Resource/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -506,7 +512,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.GyroData;
+				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.GyroData.CoreMotion;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
