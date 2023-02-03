@@ -98,6 +98,32 @@ extension MainViewController {
 
 extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return 90
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func tableView(
+        _ tableView: UITableView,
+        trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
+    ) -> UISwipeActionsConfiguration? {
+        let playButton = UIContextualAction(style: .normal, title: "Play") { _, _, _ in
+            print("play button pressed")
+        }
+        let deleteButton = UIContextualAction(style: .destructive, title: "Delete") { _, _, _ in
+            guard let cell = tableView.cellForRow(at: indexPath) as? MotionDataCell,
+                  let viewModel = cell.viewModel
+            else {
+                return
+            }
+            
+            print("\(viewModel)해당 셀이 삭제될 예정입니다.")
+        }
+        
+        playButton.backgroundColor = .systemGreen
+        
+        return UISwipeActionsConfiguration(actions: [deleteButton, playButton])
     }
 }
