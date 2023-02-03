@@ -15,56 +15,77 @@ final class TransitionListViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
-
-    private let cellReuseIdentifier = "CustomCell"
+    
+    private var metaDatas: [TransitionMetaData] = []
     private var isPaginating = false
-    private var pageIndex = 0
+    private var pageIndex = 1
 
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        configureUI()
+        
         loadListData()
+        configureUI()
     }
 }
 
 // MARK: - UITableViewDataSource
 extension TransitionListViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return TransitionMetaData.transitionMetaDatas.count
+    func tableView(
+        _ tableView: UITableView,
+        numberOfRowsInSection section: Int
+    ) -> Int {
+        return metaDatas.count
     }
 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let customCell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath) as? TransitionListCell ?? TransitionListCell()
-        customCell.configureCell(data: TransitionMetaData.transitionMetaDatas[indexPath.row])
-        return customCell
+    func tableView(
+        _ tableView: UITableView,
+        cellForRowAt indexPath: IndexPath
+    ) -> UITableViewCell {
+        guard let transitionListCell = tableView.dequeueReusableCell(
+            withIdentifier: TransitionListCell.identifier, for: indexPath
+        ) as? TransitionListCell else {
+            return UITableViewCell()
+        }
+        let metaData = metaDatas[indexPath.row]
+        transitionListCell.configureCell(data: metaData)
+        
+        return transitionListCell
     }
 
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(
+        _ tableView: UITableView,
+        heightForRowAt indexPath: IndexPath
+    ) -> CGFloat {
         return view.frame.height / 7
     }
 }
 
 // MARK: - UITableViewDelegate
 extension TransitionListViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let playAction = UIContextualAction(style: .normal, title: nil) { (action, view, completionHandler) in
-            let metaData = TransitionMetaData.transitionMetaDatas[indexPath.row]
+    func tableView(
+        _ tableView: UITableView,
+        trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
+    ) -> UISwipeActionsConfiguration? {
+        let playAction = UIContextualAction(style: .normal, title: nil) { [weak self] (_, _, completion) in
+            guard let self = self else { return }
+            let metaData = self.metaDatas[indexPath.row]
             self.presentPlayView(with: .play, metaData: metaData)
             
-            completionHandler(true)
+            completion(true)
         }
         playAction.backgroundColor = .systemGreen
         playAction.image = createSwipeActionImage(text: "Play")
 
-        let deleteAction = UIContextualAction(style: .destructive, title: nil) { (action, view, completionHandler) in
-            TransitionMetaData.transitionMetaDatas.remove(at: indexPath.row)
+        let deleteAction = UIContextualAction(style: .destructive, title: nil) { [weak self] (_, _, completion) in
+            // TODO: - 삭제 메서드 추가 및 CoreData 삭제 하기
+            guard let self = self else { return }
+            self.metaDatas.remove(at: indexPath.row)
             
             DispatchQueue.main.async {
                 tableView.reloadData()
             }
-            completionHandler(true)
+            completion(true)
         }
         deleteAction.backgroundColor = .systemRed
         deleteAction.image = createSwipeActionImage(text: "Delete")
@@ -72,7 +93,10 @@ extension TransitionListViewController: UITableViewDelegate {
         return UISwipeActionsConfiguration(actions: [deleteAction, playAction])
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(
+        _ tableView: UITableView,
+        didSelectRowAt indexPath: IndexPath
+    ) {
         let metaData = TransitionMetaData.transitionMetaDatas[indexPath.row]
         presentPlayView(with: .view, metaData: metaData)
     }
@@ -87,14 +111,14 @@ extension TransitionListViewController: UIScrollViewDelegate {
         if triggerHeight > 0 && position > triggerHeight {
             guard !isPaginating else { return }
             isPaginating = true
-            tableView.tableFooterView = createSpinnerFooter()
+            tableView.tableFooterView = createIndicatorFooter()
 
-            bringAdditionalTransitionMetaData { [weak self] data in
+            fetchData { [weak self] fetchedData in
                 guard let self = self else { return }
                 self.pageIndex += 1
                 self.isPaginating = false
-                TransitionMetaData.transitionMetaDatas.append(contentsOf: data)
-
+                self.metaDatas.append(contentsOf: fetchedData)
+                
                 DispatchQueue.main.async {
                     self.tableView.tableFooterView = nil
                     self.tableView.reloadData()
@@ -106,20 +130,22 @@ extension TransitionListViewController: UIScrollViewDelegate {
 
 // MARK: - Method
 private extension TransitionListViewController {
-    // Error타입 만들어주기
-    func bringAdditionalTransitionMetaData(completion: @escaping ([TransitionMetaData]) -> Void) {
-        DispatchQueue.global().asyncAfter(deadline: .now() + 3) { [weak self] in
+    func fetchData(completion: @escaping ([TransitionMetaData]) -> Void) {
+        DispatchQueue.global().asyncAfter(deadline: .now() + 1) { [weak self] in
             guard let self = self else { return }
-            let data = PersistentContainerManager.shared.fetchTenTransitionMetaDatas(pageCount: self.pageIndex)
-            completion(data)
+            
+            let fetchData = PersistentContainerManager
+                .shared
+                .fetchTransitionMetaData(pageCount: self.pageIndex)
+            completion(fetchData)
         }
     }
 
     func loadListData() {
-        let data = PersistentContainerManager.shared.fetchTenTransitionMetaDatas(pageCount: pageIndex)
+        let data = PersistentContainerManager.shared.fetchTransitionMetaData(pageCount: pageIndex)
         pageIndex += 1
         isPaginating = false
-        TransitionMetaData.transitionMetaDatas.append(contentsOf: data)
+        metaDatas.append(contentsOf: data)
 
         DispatchQueue.main.async {
             self.tableView.tableFooterView = nil
@@ -149,7 +175,10 @@ private extension TransitionListViewController {
         setNavigationBar()
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.register(TransitionListCell.self, forCellReuseIdentifier: cellReuseIdentifier)
+        tableView.register(
+            TransitionListCell.self,
+            forCellReuseIdentifier: TransitionListCell.identifier
+        )
         tableView.separatorStyle = .none
         setUpLayouts()
     }
@@ -175,13 +204,13 @@ private extension TransitionListViewController {
         navigationItem.titleView = titleLable
     }
 
-    func createSpinnerFooter() -> UIView {
+    func createIndicatorFooter() -> UIView {
         let footerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 100))
-        let spinner = UIActivityIndicatorView()
+        let indicator = UIActivityIndicatorView()
 
-        spinner.center = footerView.center
-        footerView.addSubview(spinner)
-        spinner.startAnimating()
+        indicator.center = footerView.center
+        footerView.addSubview(indicator)
+        indicator.startAnimating()
 
         return footerView
     }

@@ -8,7 +8,9 @@
 import UIKit
 
 class TransitionListCell: UITableViewCell {
-
+    
+    static let identifier = String(describing: TransitionListCell.self)
+    
     // MARK: - Property
     let dateView: UILabel = {
         let label = UILabel()
