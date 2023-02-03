@@ -1,15 +1,9 @@
-//
-//  GraphView.swift
-//  GyroData
-//
-//  Created by Aaron, Gundy on 2023/02/02.
-//
-
 import UIKit
 
 class GraphView: UIView {
     
     var dataSource: GraphViewDataSource?
+    var linePaths: [UIBezierPath] = []
     
     override func draw(_ rect: CGRect) {
         UIColor.systemGray.setStroke()
@@ -26,27 +20,32 @@ class GraphView: UIView {
             return
         }
         
+        linePaths = []
+        
         for index in 0..<numberOfLines {
+            let linePath = UIBezierPath()
+            linePath.lineWidth = 1
+            linePaths.append(linePath)
             drawLines(rect,
                       color: colorOfLines[index],
                       dataList: dataList[index],
-                      maximumXValueCount: maximumXValueCount)
+                      maximumXValueCount: maximumXValueCount,
+                      linePath: linePaths[index])
         }
     }
     
     private func drawLines(_ rect: CGRect,
                            color: UIColor,
                            dataList: [Double],
-                           maximumXValueCount: CGFloat) {
+                           maximumXValueCount: CGFloat,
+                           linePath: UIBezierPath) {
         
         var xValue: CGFloat = 0
         let yValueList = dataList.map { yValue in
             rect.midY - CGFloat(yValue) * 10
         }
         let spacing = rect.width / maximumXValueCount
-        let linePath = UIBezierPath()
         color.setStroke()
-        linePath.lineWidth = 1
         yValueList.forEach { yValue in
             let point = CGPoint(x: xValue, y: yValue)
             if linePath.isEmpty {
