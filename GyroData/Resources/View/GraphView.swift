@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreMotion
 
 class GraphView: UIView {
 
@@ -31,6 +32,14 @@ class GraphView: UIView {
         return label
     }()
 
+    private let xLayer = CAShapeLayer()
+    private let yLayer = CAShapeLayer()
+    private let zLayer = CAShapeLayer()
+    private let xPath = UIBezierPath()
+    private let yPath = UIBezierPath()
+    private let zPath = UIBezierPath()
+    private var currentX: CGFloat = 0
+
     // MARK: - 뭐로하지..??
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -46,6 +55,63 @@ class GraphView: UIView {
         super.draw(rect)
 
         makeGridBackground()
+    }
+}
+
+// MARK: - LineDrawMethod
+extension GraphView {
+    func callDrawLine(_ data: CMLogItem, _ sensorType: SensorType) {
+        switch sensorType {
+        case .Accelerometer:
+            guard let data = data as? CMAccelerometerData else { return }
+            let xValue = data.acceleration.x
+            let yValue = data.acceleration.y
+            let zValue = data.acceleration.z
+            drawLine(xValue, yValue, zValue)
+        case .Gyro:
+            guard let data = data as? CMGyroData else { return }
+            let xValue = data.rotationRate.x
+            let yValue = data.rotationRate.y
+            let zValue = data.rotationRate.z
+            drawLine(xValue, yValue, zValue)
+        }
+    }
+
+    private func drawLine(_ xValue: CGFloat, _ yValue: CGFloat, _ zValue: CGFloat) {
+        let xOffset: CGFloat = self.frame.width / CGFloat(600 - 1)
+        let centerY = self.frame.height / 2
+        currentX += xOffset
+        let newXPosition = CGPoint(x: currentX, y: centerY - xValue)
+        xPath.addLine(to: newXPosition)
+        let newYPosition = CGPoint(x: currentX, y: centerY - yValue)
+        yPath.addLine(to: newYPosition)
+        let newZPosition = CGPoint(x: currentX, y: centerY - zValue)
+        zPath.addLine(to: newZPosition)
+
+        xPositionLabel.text = "x: \(xValue)"
+        yPositionLabel.text = "y: \(yValue)"
+        zPositionLabel.text = "z: \(zValue)"
+
+        addGraphViewSublayer(layer: xLayer, path: xPath)
+        addGraphViewSublayer(layer: yLayer, path: yPath)
+        addGraphViewSublayer(layer: zLayer, path: zPath)
+    }
+
+    private func addGraphViewSublayer(layer: CAShapeLayer, path: UIBezierPath) {
+        switch layer {
+        case xLayer:
+            layer.strokeColor = UIColor.systemRed.cgColor
+        case yLayer:
+            layer.strokeColor = UIColor.systemGreen.cgColor
+        case zLayer:
+            layer.strokeColor = UIColor.systemBlue.cgColor
+        default:
+            return
+        }
+        layer.fillColor = nil
+        layer.lineWidth = 2
+        layer.path = path.cgPath
+        self.layer.addSublayer(layer)
     }
 }
 

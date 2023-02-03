@@ -45,14 +45,6 @@ final class RecordViewController: UIViewController {
         return button
     }()
     
-    private let xLayer = CAShapeLayer()
-    private let yLayer = CAShapeLayer()
-    private let zLayer = CAShapeLayer()
-    private let xPath = UIBezierPath()
-    private let yPath = UIBezierPath()
-    private let zPath = UIBezierPath()
-    private var currentX: CGFloat = 0
-    
     private let motionManager = MotionManager()
     private var recordTime: Double = 0
     private var recordedSensor: SensorType = .Accelerometer
@@ -75,7 +67,8 @@ extension RecordViewController: MotionManagerDelegate {
     func motionManager(send manager: MotionManager, sendData: CMLogItem?) {
         guard let data = sendData else { return }
         print(data)
-        callDrawLine(data: data)
+        let sensorType: SensorType = segmentControl.selectedSegmentIndex == 0 ? .Accelerometer : .Gyro
+        graphView.callDrawLine(data, sensorType)
         saveData(data: data)
     }
     
@@ -224,78 +217,6 @@ private extension RecordViewController {
             .build()
         
         present(alert, animated: true)
-    }
-}
-
-// MARK: - GraphViewConfiguration
-private extension RecordViewController {
-    func addGraphViewSublayer(layer: CAShapeLayer, path: UIBezierPath) {
-        switch layer {
-        case xLayer:
-            layer.strokeColor = UIColor.systemRed.cgColor
-        case yLayer:
-            layer.strokeColor = UIColor.systemGreen.cgColor
-        case zLayer:
-            layer.strokeColor = UIColor.systemBlue.cgColor
-        default:
-            return
-        }
-        layer.fillColor = nil
-        layer.lineWidth = 2
-        layer.path = path.cgPath
-        graphView.layer.addSublayer(layer)
-    }
-    
-    func callDrawLine(data: CMLogItem) {
-        let xOffset: CGFloat = graphView.frame.width / CGFloat(600 - 1)
-        let centerY = graphView.frame.height / 2
-        
-        switch segmentControl.selectedSegmentIndex {
-        case 0:
-            guard let data = data as? CMAccelerometerData else { return }
-            drawAccelermeterLine(xOffset, centerY, data)
-        case 1:
-            guard let data = data as? CMGyroData else { return }
-            drawGyroLine(xOffset, centerY, data)
-        default:
-            return
-        }
-    }
-    
-    func drawAccelermeterLine(_ xOffset: CGFloat, _ centerY: CGFloat, _ data: CMAccelerometerData) {
-        currentX += xOffset
-        let newXPosition = CGPoint(x: currentX, y: centerY - data.acceleration.x)
-        xPath.addLine(to: newXPosition)
-        let newYPosition = CGPoint(x: currentX, y: centerY - data.acceleration.y)
-        yPath.addLine(to: newYPosition)
-        let newZPosition = CGPoint(x: currentX, y: centerY - data.acceleration.z)
-        zPath.addLine(to: newZPosition)
-        
-//        xPositionLabel.text = "x: \(data.acceleration.x)"
-//        yPositionLabel.text = "y: \(data.acceleration.y)"
-//        zPositionLabel.text = "z: \(data.acceleration.z)"
-        
-        addGraphViewSublayer(layer: xLayer, path: xPath)
-        addGraphViewSublayer(layer: yLayer, path: yPath)
-        addGraphViewSublayer(layer: zLayer, path: zPath)
-    }
-    
-    func drawGyroLine(_ xOffset: CGFloat, _ centerY: CGFloat, _ data: CMGyroData) {
-        currentX += xOffset
-        let newXPosition = CGPoint(x: currentX, y: centerY - data.rotationRate.x)
-        xPath.addLine(to: newXPosition)
-        let newYPosition = CGPoint(x: currentX, y: centerY - data.rotationRate.y)
-        yPath.addLine(to: newYPosition)
-        let newZPosition = CGPoint(x: currentX, y: centerY - data.rotationRate.z)
-        zPath.addLine(to: newZPosition)
-        
-//        xPositionLabel.text = "x: \(data.rotationRate.x)"
-//        yPositionLabel.text = "y: \(data.rotationRate.y)"
-//        zPositionLabel.text = "z: \(data.rotationRate.z)"
-        
-        addGraphViewSublayer(layer: xLayer, path: xPath)
-        addGraphViewSublayer(layer: yLayer, path: yPath)
-        addGraphViewSublayer(layer: zLayer, path: zPath)
     }
 }
 
