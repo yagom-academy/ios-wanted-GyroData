@@ -78,7 +78,9 @@ extension TransactionService {
             do {
                 try self.coreDataManager.delete(date)
             } catch {
-                return completion(.failure(error))
+                DispatchQueue.main.async {
+                    return completion(.failure(error))
+                }
             }
         }
         
@@ -86,7 +88,9 @@ extension TransactionService {
             do {
                 try self.fileManager.delete(date)
             } catch {
-                return completion(.failure(error))
+                DispatchQueue.main.async {
+                    return completion(.failure(error))
+                }
             }
         }
         
