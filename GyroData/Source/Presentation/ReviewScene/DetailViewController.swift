@@ -44,10 +44,16 @@ final class DetailViewController: UIViewController {
         setupBind()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        graphView.drawEntireData()
+    }
+    
     func setupBind() {
-        viewModel.bindData { [weak self] data in
+        viewModel.bindData { [weak self] data, segmentedData in
             self?.dateLabel.text = data.date.description
             self?.typeLabel.text = "View"
+            self?.graphView.setEntrieData(data: segmentedData)
         }
     }
 }

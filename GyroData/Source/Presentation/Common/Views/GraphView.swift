@@ -186,10 +186,12 @@ class GraphView: UIView {
         segmentValues.append(data)
     }
     
-    func drawEntireData(_ entireData: [Values]) {
-        entireData.forEach {
-            drawData(data: $0)
-        }
+    func drawEntireData() {
+        reDrawEntireData()
+    }
+    
+    func setEntrieData(data: [Values]) {
+        self.segmentValues = data
     }
 }
 
@@ -278,10 +280,9 @@ private extension GraphView {
         
         initView()
         
-        drawEntireData(entireData)
-//        entireData.forEach {
-//            drawData(data: $0)
-//        }
+        entireData.forEach {
+            drawData(data: $0)
+        }
     }
 }
 
