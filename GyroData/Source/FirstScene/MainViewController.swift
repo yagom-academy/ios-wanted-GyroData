@@ -18,6 +18,7 @@ class MainViewController: UIViewController {
         let tableView = UITableView()
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.register(MotionDataCell.self, forCellReuseIdentifier: MotionDataCell.identifier)
         
         return tableView
     }()
@@ -28,6 +29,7 @@ class MainViewController: UIViewController {
         
         configureView()
         configureDataSource()
+        configureSnapShot(motionDatas: mockData)
     }
     
     private func configureView() {
@@ -56,5 +58,14 @@ extension MainViewController {
             
             return cell
         }
+    }
+    
+    private func configureSnapShot(motionDatas: [MotionData]) {
+        var snapShot = NSDiffableDataSourceSnapshot<Section, MotionData>()
+        
+        snapShot.appendSections([.main])
+        snapShot.appendItems(motionDatas)
+        
+        mainDataSource?.apply(snapShot, animatingDifferences: true)
     }
 }
