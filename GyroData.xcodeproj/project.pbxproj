@@ -18,6 +18,7 @@
 		D35E3363298A82AC00EF0484 /* CoreDataMotionReadServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35E3362298A82AC00EF0484 /* CoreDataMotionReadServiceTests.swift */; };
 		D35E3365298A82C100EF0484 /* FileManagerMotionReadServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35E3364298A82C100EF0484 /* FileManagerMotionReadServiceTests.swift */; };
 		D37A5889298C9E2900D90F15 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37A5888298C9E2900D90F15 /* Date+.swift */; };
+		D37A588B298CFDD600D90F15 /* PlayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37A588A298CFDD600D90F15 /* PlayButton.swift */; };
 		D3811725298B77D500CFDDF0 /* AlertStlye.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3811724298B77D500CFDDF0 /* AlertStlye.swift */; };
 		D381174C298BA2D400CFDDF0 /* MotionMeasurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D381174B298BA2D400CFDDF0 /* MotionMeasurable.swift */; };
 		D381174E298BA6CE00CFDDF0 /* MotionMeasurementService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D381174D298BA6CE00CFDDF0 /* MotionMeasurementService.swift */; };
@@ -76,6 +77,7 @@
 		D35E3362298A82AC00EF0484 /* CoreDataMotionReadServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataMotionReadServiceTests.swift; sourceTree = "<group>"; };
 		D35E3364298A82C100EF0484 /* FileManagerMotionReadServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerMotionReadServiceTests.swift; sourceTree = "<group>"; };
 		D37A5888298C9E2900D90F15 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
+		D37A588A298CFDD600D90F15 /* PlayButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayButton.swift; sourceTree = "<group>"; };
 		D3811724298B77D500CFDDF0 /* AlertStlye.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertStlye.swift; sourceTree = "<group>"; };
 		D381174B298BA2D400CFDDF0 /* MotionMeasurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionMeasurable.swift; sourceTree = "<group>"; };
 		D381174D298BA6CE00CFDDF0 /* MotionMeasurementService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionMeasurementService.swift; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 			children = (
 				D3811726298B77F200CFDDF0 /* AlertFactory */,
 				D37A5888298C9E2900D90F15 /* Date+.swift */,
+				D37A588A298CFDD600D90F15 /* PlayButton.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -474,6 +477,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E3D84A9A2988E6D400FDA64F /* MotionDeletable.swift in Sources */,
+				D37A588B298CFDD600D90F15 /* PlayButton.swift in Sources */,
 				E3D84AB32988F81200FDA64F /* CMAcceleration+.swift in Sources */,
 				E3D84A9C2988E6EF00FDA64F /* MotionCreatable.swift in Sources */,
 				D381D2782988E58700567C6B /* MotionMeasureViewController.swift in Sources */,
