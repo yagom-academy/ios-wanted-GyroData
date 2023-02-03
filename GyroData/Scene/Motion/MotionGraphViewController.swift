@@ -13,7 +13,10 @@ final class MotionGraphViewController: UIViewController {
         static let margin = CGFloat(16.0)
         static let spacing = CGFloat(8.0)
     }
-    private let timeLabel: UILabel = {
+    enum Style {
+        case play, view
+    }
+    private let dateLabel: UILabel = {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .body)
         label.text = "2023/02/03 16:00:00"
@@ -26,6 +29,21 @@ final class MotionGraphViewController: UIViewController {
         return label
     }()
     private let graphView = UIView()
+    private let playButton = PlayButton()
+    private let timeLabel: UILabel = {
+        let label = UILabel()
+        label.font = .preferredFont(forTextStyle: .title1)
+        label.textAlignment = .right
+        label.text = "00.0"
+        return label
+    }()
+    private let spaceView = UIView()
+    private let bottomStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = Constant.spacing
+        return stackView
+    }()
     private let contentsStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -33,10 +51,11 @@ final class MotionGraphViewController: UIViewController {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
-    
+    private let style: Style
     private let viewModel: MotionViewModel
     
-    init(viewModel: MotionViewModel) {
+    init(style: Style, viewModel: MotionViewModel) {
+        self.style = style
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -48,6 +67,7 @@ final class MotionGraphViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        setupButton()
     }
 }
 
@@ -57,8 +77,8 @@ private extension MotionGraphViewController {
         
         view.backgroundColor = .systemBackground
         title = Constant.title
-        
-        [timeLabel, kindLabel, graphView].forEach(contentsStackView.addArrangedSubview(_:))
+        [spaceView, playButton, timeLabel].forEach(bottomStackView.addArrangedSubview(_:))
+        [dateLabel, kindLabel, graphView, bottomStackView].forEach(contentsStackView.addArrangedSubview(_:))
         view.addSubview(contentsStackView)
         
         NSLayoutConstraint.activate([
@@ -71,7 +91,21 @@ private extension MotionGraphViewController {
             contentsStackView.bottomAnchor.constraint(lessThanOrEqualTo: safeArea.bottomAnchor,
                                                       constant: -Constant.margin),
             graphView.widthAnchor.constraint(equalTo: contentsStackView.widthAnchor),
-            graphView.widthAnchor.constraint(equalTo: graphView.heightAnchor)
+            graphView.widthAnchor.constraint(equalTo: graphView.heightAnchor),
+            playButton.heightAnchor.constraint(equalTo: safeArea.heightAnchor, multiplier: 0.06),
+            playButton.widthAnchor.constraint(equalTo: playButton.heightAnchor),
+            spaceView.widthAnchor.constraint(equalTo: timeLabel.widthAnchor)
         ])
+        
+        bottomStackView.isHidden = style == .view
+    }
+    
+    func setupButton() {
+        playButton.setActiveHandler {
+            //write active action
+        }
+        playButton.setInactiveHandler {
+            //write active inaction
+        }
     }
 }
