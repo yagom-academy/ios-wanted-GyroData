@@ -70,6 +70,7 @@ final class MotionMeasureViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         setupButtons()
+        viewModel.configureDelegate(self)
     }
 }
 
@@ -133,5 +134,28 @@ private extension MotionMeasureViewController {
         measureButton.isEnabled = true
         saveBarButton.isEnabled = true
         measurementTypeSegmentedControl.isEnabled = true
+    }
+}
+
+extension MotionMeasureViewController: MotionMeasurementViewModelDelegate {
+    func motionMeasurementViewModel(measuredData data: MotionDataType, takenCurrentTime time: Double) {
+        
+    }
+    
+    func motionMeasurementViewModel(isCompletedInMotionMeasurement: Bool) {
+        if isCompletedInMotionMeasurement {
+            stopButton.isEnabled = false
+            measureButton.isEnabled = true
+            saveBarButton.isEnabled = true
+            measurementTypeSegmentedControl.isEnabled = true
+        }
+    }
+    
+    func motionMeasurementViewModel(isSucceedInCreating: Bool) {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    func motionMeasurementViewModel(alertStyleToPresent: AlertStyle) {
+        
     }
 }
