@@ -10,6 +10,8 @@ import UIKit
 class ListCell: UITableViewCell {
     static let identifier = ListCell.description()
     
+    var viewModel: ListCellViewModel?
+    
     let dateLabel: UILabel = {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .caption1)
@@ -51,10 +53,18 @@ class ListCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureData(title: String?, date: Date?, second: Double?) {
-        titleLabel.text = title
-        dateLabel.text = date?.formatted("yyyy/MM/dd HH:mm:ss")
-        secondLabel.text = "\(second!)"
+    func configureData(viewModel: ListCellViewModel) {
+        self.viewModel = viewModel
+        configureBind()
+        viewModel.load()
+    }
+    
+    func configureBind() {
+        viewModel?.bind(handler: { entity in
+            self.titleLabel.text = entity.measureType
+            self.dateLabel.text =  entity.date?.formatted("yyyy/MM/dd HH:mm:ss")
+            self.secondLabel.text = "\(entity.time)"
+        })
     }
     
     func configureLayout() {

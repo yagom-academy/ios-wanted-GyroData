@@ -9,13 +9,10 @@ import UIKit
 import CoreMotion
 
 class MeasureViewController: UIViewController {
-    let motionManager = MotionManager()
-    
-    var motionType: MotionType = .acc
-    var coordinates: [Coordinate] = []
+    let viewModel = MeasureViewModel()
     
     let segmentedControl: UISegmentedControl = {
-        let control = UISegmentedControl(items: ["Acc", "Gyro"])
+        let control = UISegmentedControl(items: [MotionType.acc.rawValue, MotionType.gyro.rawValue])
         control.selectedSegmentIndex = 0
         control.layer.borderWidth = 1
         control.selectedSegmentTintColor = .systemBlue
@@ -96,6 +93,9 @@ class MeasureViewController: UIViewController {
         configureNavigationBar()
         configureLayout()
         configureAction()
+        configureBind()
+        configureData()
+        
     }
     
     func configureNavigationBar() {
@@ -139,55 +139,60 @@ class MeasureViewController: UIViewController {
         ])
     }
     
-    @objc func saveButtonTapped() {
-        self.indicatorView.startAnimating()
+    func configureData() {
+        viewModel.load()
+    }
+    
+    func configureBind() {
+        viewModel.bindType { index in
+            self.segmentedControl.selectedSegmentIndex = index
+        }
         
-        if coordinates.isEmpty {
+        viewModel.bindStartLoading {
+            self.indicatorView.startAnimating()
+        }
+        
+        viewModel.bindStopLoading {
             self.indicatorView.stopAnimating()
+        }
+        
+        viewModel.bindMeasureHandler {
+            self.navigationItem.rightBarButtonItem?.isEnabled = $0
+            self.segmentedControl.isEnabled = $0
+        }
+        
+        viewModel.bindSaveHandler {
+            self.moveListPage()
+        }
+        
+        viewModel.bindEmptyHandler {
             self.present(self.emptyAlert, animated: true)
-            return
         }
         
-        FileManager.default.save(path: UUID().uuidString, data: coordinates) { result in
-            self.indicatorView.stopAnimating()
-            switch result {
-            case .success(let path):
-                CoreDataManager.shared.create(entity: MotionEntity.self) { entity in
-                    entity.id = UUID(uuidString: path)
-                    entity.date = Date()
-                    entity.time = self.motionManager.second.decimalPlace(1)
-                    entity.measureType = self.motionType.rawValue
-                }
-                self.moveListPage()
-            case .failure(_):
-                self.present(self.failAlert, animated: true)
-            }
+        viewModel.bindFailHandler {
+            self.present(self.failAlert, animated: true)
         }
+        
+        viewModel.bindDrawGraphView { coordinate in
+            self.graphView.drawLine(x: coordinate.x, y: coordinate.y, z: coordinate.z)
+        }
+    }
+    
+    @objc func saveButtonTapped() {
+        viewModel.save()
     }
     
     @objc func didChangeValue(_ segment: UISegmentedControl) {
-        motionType = segment.selectedSegmentIndex == 0 ? .acc : .gyro
+        viewModel.motionTypeIndex = segment.selectedSegmentIndex
     }
     
     @objc func measureButtonTapped() {
-        navigationItem.rightBarButtonItem?.isEnabled = false
-        segmentedControl.isEnabled = false
         graphView.configureData()
-        
-        motionManager.configureTimeInterval(interval: 0.1)
-        motionManager.start(type: motionType) { data in
-            DispatchQueue.main.async {
-                self.coordinates.append(data)
-                self.graphView.drawLine(x: data.x, y: data.y, z: data.z)
-            }
-        }
+        viewModel.measure()
     }
     
     @objc func stopButtonTapped() {
-        navigationItem.rightBarButtonItem?.isEnabled = true
-        segmentedControl.isEnabled = true
-        
-        motionManager.stop()
+        viewModel.stop()
     }
     
     func moveListPage() {
