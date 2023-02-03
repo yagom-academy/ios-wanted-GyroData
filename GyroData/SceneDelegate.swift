@@ -14,21 +14,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
         
-        let coreDataRepository = DefaultCoreDataRepository()
-        let fileManagerRepository = DefaultFileManagerRepository()
-        
-        let coreDataReadService = CoreDataMotionReadService(coreDataRepository: coreDataRepository)
-        let motionDeleteService = MotionDeleteService(
-            coreDataRepository: coreDataRepository,
-            fileManagerRepository: fileManagerRepository
-        )
-        
-        let motionsListViewModel = MotionsListViewModel(
-            readService: coreDataReadService,
-            deleteService: motionDeleteService
-        )
-        
-        let rootViewController = MotionsListViewController(viewModel: motionsListViewModel)
+        let rootViewController = ViewControllerFactory.makeViewController(type: .list)
         let navigationController = UINavigationController(rootViewController: rootViewController)
         
         window.rootViewController = navigationController

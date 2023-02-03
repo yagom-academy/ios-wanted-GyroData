@@ -21,11 +21,6 @@ class MotionsListViewController: UIViewController {
         return tableView
     }()
     
-    private let measurementButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(title: "측정", primaryAction: nil)
-        return button
-    }()
-    
     private let viewModel: MotionsListViewModel
     private var dataSource: UITableViewDiffableDataSource<Int, Motion>?
     
@@ -45,9 +40,9 @@ class MotionsListViewController: UIViewController {
         configureDataSource()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        viewModel.action(.viewWillApear)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        viewModel.action(.viewDidApear)
     }
 }
 
@@ -58,7 +53,10 @@ extension MotionsListViewController {
         view.addSubview(tableView)
         
         navigationItem.title = Constant.title
-        navigationItem.rightBarButtonItem = measurementButton
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            title: Constant.measurementButtonTitle,
+            primaryAction: UIAction(handler: tapMeasurementButton)
+        )
         
         tableView.register(MotionCell.self, forCellReuseIdentifier: MotionCell.reuseIdentifier)
         tableView.delegate = self
@@ -74,6 +72,12 @@ extension MotionsListViewController {
             tableView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor)
         ])
+    }
+    
+    private func tapMeasurementButton(_ action: UIAction) {
+        let motionMeasurementViewController = ViewControllerFactory.makeViewController(type: .measurement)
+        
+        navigationController?.pushViewController(motionMeasurementViewController, animated: true)
     }
 }
 
@@ -144,11 +148,15 @@ extension MotionsListViewController: MotionsListViewModelDelegate {
     }
     
     func motionsListViewModel(selectedGraphMotionID id: String) {
-        // present MotionGraphViewController
+       let motionGraphViewController = ViewControllerFactory.makeViewController(type: .graph(style: .view, id: id))
+        
+        navigationController?.pushViewController(motionGraphViewController, animated: true)
     }
     
     func motionsListViewModel(selectedPlayMotionID id: String) {
-        // present MotionPlayViewController
+        let motionPlayViewController = ViewControllerFactory.makeViewController(type: .graph(style: .play, id: id))
+        
+        navigationController?.pushViewController(motionPlayViewController, animated: true)
     }
 }
 

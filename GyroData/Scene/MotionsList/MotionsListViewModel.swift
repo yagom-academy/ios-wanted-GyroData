@@ -17,7 +17,7 @@ final class MotionsListViewModel {
     typealias CellData = (date: String, measurementType: String, time: String)
     
     enum Action {
-        case viewWillApear
+        case viewDidApear
         case nextPageRequest
         case motionTap(indexPath: IndexPath)
         case motionDelete(indexPath: IndexPath)
@@ -42,7 +42,7 @@ final class MotionsListViewModel {
     
     func action(_ action: Action) {
         switch action {
-        case .viewWillApear:
+        case .viewDidApear:
             setInitialMotions()
         case .nextPageRequest:
             setNextPageMotions()
