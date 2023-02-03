@@ -93,6 +93,7 @@
 			children = (
 				63F01BBD28D44FC500C53A39 /* Assets.xcassets */,
 				63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */,
+				90B46903298A389B00FBD3CC /* MotionData.xcdatamodeld */,
 				63F01BC228D44FC500C53A39 /* Info.plist */,
 			);
 			path = Resource;
@@ -101,18 +102,35 @@
 		541432572988DED00035E113 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				541432562988DE4A0035E113 /* Resource */,
+				5482A0E3298CCE9300DABE2A /* Utils */,
 				90B4690A298A397A00FBD3CC /* CoreData */,
-				541432582988DED70035E113 /* MotionManager.swift */,
-				90B4690B298A39E000FBD3CC /* CoreDataManager.swift */,
 				5414325A2988E5310035E113 /* MotionType.swift */,
-				549CF9ED298A8CC400BDCFF2 /* FileManager.swift */,
 				5414325E2988F44B0035E113 /* MeasureData.swift */,
 				54F715202989FE6D0070A76B /* Coordinate.swift */,
 				54364528298BB92400127FB1 /* MeasureViewType.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5482A0E2298CCE8A00DABE2A /* Extension */ = {
+			isa = PBXGroup;
+			children = (
 				9036AACA298BDD3700D04157 /* Date+Extension.swift */,
 				901CA174298BE820000CEAC9 /* Double+Extension.swift */,
 			);
-			path = Model;
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		5482A0E3298CCE9300DABE2A /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				90B4690B298A39E000FBD3CC /* CoreDataManager.swift */,
+				549CF9ED298A8CC400BDCFF2 /* FileManager.swift */,
+				541432582988DED70035E113 /* MotionManager.swift */,
+				5482A0E2298CCE8A00DABE2A /* Extension */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		63F01BA828D44FC400C53A39 = {
@@ -135,7 +153,6 @@
 			isa = PBXGroup;
 			children = (
 				541432572988DED00035E113 /* Model */,
-				541432562988DE4A0035E113 /* Resource */,
 				541432552988DE320035E113 /* View */,
 				541432542988DE250035E113 /* LifeCycle */,
 			);
@@ -147,7 +164,6 @@
 			children = (
 				90B46906298A394A00FBD3CC /* MotionEntity+CoreDataClass.swift */,
 				90B46907298A394A00FBD3CC /* MotionEntity+CoreDataProperties.swift */,
-				90B46903298A389B00FBD3CC /* MotionData.xcdatamodeld */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
