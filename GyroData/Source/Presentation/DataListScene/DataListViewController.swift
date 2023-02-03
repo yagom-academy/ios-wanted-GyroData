@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol AlertPresentable: AnyObject {
+    func presentErrorAlert(message: String)
+}
+
 protocol DataListConfigurable: AnyObject {
     func setupData(_ datas: [MeasureData])
     func setupSelectData(_ data: MeasureData)
@@ -39,7 +43,7 @@ final class DataListViewController: UIViewController {
     }
 }
 
-// MARK: - DataListConfigurable
+// MARK: - DataListConfigurable Protocol
 extension DataListViewController: DataListConfigurable {
     func setupData(_ datas: [MeasureData]) {
         applySnapshot(datas: datas, true)
@@ -58,6 +62,17 @@ extension DataListViewController: DataListConfigurable {
     
     func setupPlay(_ data: MeasureData) {
         //TODO: Move to Play View
+    }
+}
+
+// MARK: - AlertPresentable Protocol
+extension DataListViewController: AlertPresentable {
+    func presentErrorAlert(message: String) {
+        let errorAlert = AlertDirector().setupErrorAlert(
+            builder: ErrorAlertBuilder(),
+            errorMessage: message
+        )
+        present(errorAlert, animated: true)
     }
 }
 
