@@ -34,6 +34,7 @@ class MeasureViewModel {
     private let measureService: SensorMeasureService
     
     weak var delegate: MeasureViewDelegate?
+    weak var alertDelegate: AlertPresentable?
     
     init(measureService: SensorMeasureService, transactionService: TransactionService) {
         self.measureService = measureService
@@ -75,6 +76,23 @@ private extension MeasureViewModel {
                 self.delegate?.saveSuccess()
             case .failure(let error):
                 self.delegate?.saveFail(error)
+                if let coreDataError = error as? CoreDataError {
+                    self.alertDelegate?.presentErrorAlert(
+                        title: "오류발생",
+                        message: coreDataError.errorDescription ?? ""
+                    )
+                    return
+                } else if let fileError = error as? FileSystemError {
+                    self.alertDelegate?.presentErrorAlert(
+                        title: "오류발생",
+                        message: fileError.errorDescription ?? ""
+                    )
+                    return
+                }
+                self.alertDelegate?.presentErrorAlert(
+                    title: "오류발생",
+                    message: error.localizedDescription
+                )
             }
         }
     }
@@ -86,11 +104,11 @@ private extension MeasureViewModel {
 
 extension MeasureViewModel: MeasureServiceDelegate {
     func nonAccelerometerMeasurable() {
-        delegate?.nonAccelerometerMeasurable()
+        alertDelegate?.presentErrorAlert(title: "센서 에러", message: "가속도 센서 사용 불가")
     }
     
     func nonGyroscopeMeasurable() {
-        delegate?.nonGyroscopeMeasurable()
+        alertDelegate?.presentErrorAlert(title: "센서 에러", message: "자이로 센서 사용 불가")
     }
     
     func updateData(_ data: Values) {

@@ -8,7 +8,7 @@
 import UIKit
 
 protocol AlertPresentable: AnyObject {
-    func presentErrorAlert(message: String)
+    func presentErrorAlert(title: String, message: String)
 }
 
 protocol DataListConfigurable: AnyObject {
@@ -70,9 +70,10 @@ extension DataListViewController: DataListConfigurable {
 
 // MARK: - AlertPresentable Protocol
 extension DataListViewController: AlertPresentable {
-    func presentErrorAlert(message: String) {
+    func presentErrorAlert(title: String, message: String) {
         let errorAlert = AlertDirector().setupErrorAlert(
             builder: ErrorAlertBuilder(),
+            title: title,
             errorMessage: message
         )
         present(errorAlert, animated: true)

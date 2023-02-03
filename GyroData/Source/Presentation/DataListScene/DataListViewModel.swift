@@ -64,13 +64,22 @@ extension DataListViewModel {
                 return
             case .failure(let error):
                 if let coreDataError = error as? CoreDataError {
-                    self?.alertDelegate?.presentErrorAlert(message: coreDataError.errorDescription ?? "")
+                    self?.alertDelegate?.presentErrorAlert(
+                        title: "오류발생",
+                        message: coreDataError.errorDescription ?? ""
+                    )
                     return
                 } else if let fileError = error as? FileSystemError {
-                    self?.alertDelegate?.presentErrorAlert(message: fileError.errorDescription ?? "")
+                    self?.alertDelegate?.presentErrorAlert(
+                        title: "오류발생",
+                        message: fileError.errorDescription ?? ""
+                    )
                     return
                 }
-                self?.alertDelegate?.presentErrorAlert(message: error.localizedDescription)
+                self?.alertDelegate?.presentErrorAlert(
+                    title: "오류발생",
+                    message: error.localizedDescription
+                )
             }
         }
     }
