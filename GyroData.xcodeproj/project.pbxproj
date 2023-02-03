@@ -15,6 +15,8 @@
 		57D312A4298A14F1001963C5 /* MotionMeasures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D312A3298A14F1001963C5 /* MotionMeasures.swift */; };
 		57D312A6298A15A1001963C5 /* FileHandleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D312A5298A15A1001963C5 /* FileHandleManager.swift */; };
 		57D312A8298A532C001963C5 /* FileManagingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D312A7298A532C001963C5 /* FileManagingError.swift */; };
+		57D312AB298CF3A4001963C5 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D312AA298CF3A4001963C5 /* DetailViewController.swift */; };
+		57D312AD298CF3B0001963C5 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D312AC298CF3B0001963C5 /* DetailViewModel.swift */; };
 		63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB428D44FC400C53A39 /* AppDelegate.swift */; };
 		63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB628D44FC400C53A39 /* SceneDelegate.swift */; };
 		63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB828D44FC400C53A39 /* ViewController.swift */; };
@@ -34,6 +36,8 @@
 		57D312A3298A14F1001963C5 /* MotionMeasures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionMeasures.swift; sourceTree = "<group>"; };
 		57D312A5298A15A1001963C5 /* FileHandleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileHandleManager.swift; sourceTree = "<group>"; };
 		57D312A7298A532C001963C5 /* FileManagingError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagingError.swift; sourceTree = "<group>"; };
+		57D312AA298CF3A4001963C5 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		57D312AC298CF3B0001963C5 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		63F01BB128D44FC400C53A39 /* GyroData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GyroData.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63F01BB428D44FC400C53A39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63F01BB628D44FC400C53A39 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -101,9 +105,19 @@
 		5785B3732988B33300DD61B2 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				57D312A9298CF38F001963C5 /* DetailView */,
 				63F01BB828D44FC400C53A39 /* ViewController.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		57D312A9298CF38F001963C5 /* DetailView */ = {
+			isa = PBXGroup;
+			children = (
+				57D312AA298CF3A4001963C5 /* DetailViewController.swift */,
+				57D312AC298CF3B0001963C5 /* DetailViewModel.swift */,
+			);
+			path = DetailView;
 			sourceTree = "<group>";
 		};
 		63F01BA828D44FC400C53A39 = {
@@ -243,8 +257,10 @@
 				57D312A8298A532C001963C5 /* FileManagingError.swift in Sources */,
 				57D312A6298A15A1001963C5 /* FileHandleManager.swift in Sources */,
 				0CC8B8382988B73C0011E5FB /* MotionData.swift in Sources */,
+				57D312AB298CF3A4001963C5 /* DetailViewController.swift in Sources */,
 				0C27E428298B9EBE00C570C4 /* MeasureTimer.swift in Sources */,
 				B20D4BDF29894BEE00ADC6B6 /* MotionDataModel.xcdatamodeld in Sources */,
+				57D312AD298CF3B0001963C5 /* DetailViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
