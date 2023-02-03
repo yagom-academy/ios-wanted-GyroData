@@ -51,4 +51,16 @@ class SensorFileManager: MeasurementDataHandleable {
 
         try fileManager.removeItem(at: fileURL)
     }
+
+    func deleteAll() throws {
+        do {
+            let contents = try fileManager.contentsOfDirectory(at: documentURL, includingPropertiesForKeys: nil, options: [])
+
+            for url in contents {
+                try fileManager.removeItem(at: url)
+            }
+        } catch let error {
+            throw DataHandleError.deleteFailError(error: error)
+        }
+    }
 }

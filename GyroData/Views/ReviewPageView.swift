@@ -14,7 +14,7 @@ class ReviewPageView: UIView {
     private let pageStateLabel = UILabel(font: .title1)
     private let timeLabel = UILabel(font: .title1, textAlignment: .right)
     private let lineGraphView = LineGraphView()
-    private let PlayButton: UIButton = {
+    private let playButton: UIButton = {
         let button = UIButton(frame: .zero)
         let playImage = UIImage(systemName: "play.fill")
         button.setBackgroundImage(playImage, for: .normal)
@@ -25,11 +25,18 @@ class ReviewPageView: UIView {
     }()
     private let graphStackView = UIStackView(axis: .vertical, alignment: .leading, spacing: 30)
     private let playStackView = UIStackView(distribution: .fill, alignment: .center)
+
+    var state: PageState {
+        return pageState
+    }
+
+    var isPlayButton: Bool {
+        return playButton.isSelected
+    }
     
     init(pageState: PageState) {
         self.pageState = pageState
         super.init(frame: .zero)
-        
         configureHierarchy()
         configureLayout(pageState: pageState)
         setupPageStateLabelText(pageState: pageState)
@@ -59,7 +66,7 @@ class ReviewPageView: UIView {
         self.addSubview(graphStackView)
         
         if pageState == .resultPlay {
-            [PlayButton, timeLabel].forEach { view in
+            [playButton, timeLabel].forEach { view in
                 playStackView.addArrangedSubview(view)
             }
             
@@ -103,10 +110,41 @@ class ReviewPageView: UIView {
             playStackView.widthAnchor.constraint(equalTo: graphStackView.widthAnchor,
                                                  multiplier: 0.6),
             
-            PlayButton.widthAnchor.constraint(equalTo: graphStackView.widthAnchor,
+            playButton.widthAnchor.constraint(equalTo: graphStackView.widthAnchor,
                                               multiplier: 0.2),
-            PlayButton.heightAnchor.constraint(equalTo: PlayButton.widthAnchor),
+            playButton.heightAnchor.constraint(equalTo: playButton.widthAnchor),
         ])
+    }
+
+    func showGraph(with data: [AxisValue]) {
+        lineGraphView.setData(data)
+    }
+
+    func clearGraph() {
+        lineGraphView.setData([])
+    }
+
+    func drawGraph(with data: AxisValue) {
+        lineGraphView.addData(data)
+    }
+
+    func configureButtonAction(action: UIAction) {
+        playButton.addAction(action, for: .touchUpInside)
+    }
+
+    func configureTimeLabel(string: String) {
+        timeLabel.text = string
+    }
+
+    func togglePlayButton() {
+        if playButton.isSelected {
+            playButton.isSelected = false
+            playButton.setBackgroundImage(UIImage(systemName: "stop.fill"), for: .normal)
+            clearGraph()
+        } else {
+            playButton.isSelected = true
+            playButton.setBackgroundImage(UIImage(systemName: "play.fill"), for: .normal)
+        }
     }
 }
 
