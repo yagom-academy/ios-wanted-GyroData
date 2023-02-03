@@ -21,31 +21,37 @@ final class PersistentContainerManager {
         return container
     }()
 
-    @discardableResult
-    func saveContext() -> Bool {
+    func saveContext() {
         let context = PersistentContainerManager.shared.persistentContainer.viewContext
         
-        guard context.hasChanges else { return false }
+        guard context.hasChanges else { return }
         
         do {
             try context.save()
-            return true
         } catch {
-            return false
+            return
         }
     }
     
-    func createNewGyroObject(metaData: TransitionMetaData) -> Bool {
+    func createNewGyroObject(
+        metaData: TransitionMetaData,
+        completion: @escaping (Result<Void, FileWriteError>) -> Void
+    ) {
         let context = persistentContainer.viewContext
         let newObject = TransitionMetaDataObject(context: context)
-        print("path in core Data \(metaData.jsonName)")
+        
         newObject.setValue(metaData.saveDate, forKey: "saveDate")
         newObject.setValue(metaData.sensorType.rawValue, forKey: "sensorType")
         newObject.setValue(metaData.recordTime, forKey: "recordTime")
         newObject.setValue(metaData.jsonName, forKey: "jsonName")
         newObject.setValue(metaData.id, forKey: "id")
         
-        return saveContext()
+        guard let _ = try? context.save() else {
+            completion(.failure(.writeError))
+            return
+        }
+        
+        completion(.success(()))
     }
 
     private func fetchAllTransitionMetaDataObjects() -> [TransitionMetaDataObject] {

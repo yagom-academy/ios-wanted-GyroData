@@ -11,3 +11,9 @@ enum FileReadError: Error {
     case decodeData
     case decodeJson
 }
+
+enum FileWriteError: Error {
+    case invalidURL
+    case encodeData
+    case writeError
+}

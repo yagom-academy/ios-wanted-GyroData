@@ -93,8 +93,8 @@ extension RecordViewController: Uploadable {
         
         uploadJson(dispatchGroup: uploadGroup, fileName: fileName, transition: transitionValues) { result in
             switch result {
-            case .success(let isSuccess):
-                isSuccessJson = isSuccess
+            case .success:
+                isSuccessJson = true
             case .failure:
                 isSuccessJson = false
             }
@@ -102,9 +102,8 @@ extension RecordViewController: Uploadable {
         
         uploadCoreDataObject(dispatchGroup: uploadGroup, metaData: metaData) { result in
             switch result {
-            case .success(let isSuccess):
-                isSuccessCoreData = isSuccess
-                
+            case .success:
+                isSuccessCoreData = true
             case .failure:
                 isSuccessCoreData = false
             }
