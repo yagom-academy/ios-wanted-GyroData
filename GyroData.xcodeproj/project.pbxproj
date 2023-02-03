@@ -102,8 +102,6 @@
 		541432572988DED00035E113 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				541432562988DE4A0035E113 /* Resource */,
-				5482A0E3298CCE9300DABE2A /* Utils */,
 				90B4690A298A397A00FBD3CC /* CoreData */,
 				5414325A2988E5310035E113 /* MotionType.swift */,
 				5414325E2988F44B0035E113 /* MeasureData.swift */,
@@ -152,6 +150,8 @@
 		63F01BB328D44FC400C53A39 /* GyroData */ = {
 			isa = PBXGroup;
 			children = (
+				541432562988DE4A0035E113 /* Resource */,
+				5482A0E3298CCE9300DABE2A /* Utils */,
 				541432572988DED00035E113 /* Model */,
 				541432552988DE320035E113 /* View */,
 				541432542988DE250035E113 /* LifeCycle */,
