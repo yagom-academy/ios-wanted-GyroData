@@ -12,12 +12,23 @@ enum CoreDataError: Error {
     case saveFailure
     case fetchFailure
     case deleteFailure
+    
+    var message: String {
+        switch self {
+        case .saveFailure:
+            return "저장에 실패하였습니다."
+        case .fetchFailure:
+            return "파일을 불러오는 것에 실패하였습니다."
+        case .deleteFailure:
+            return "삭제에 실패하였습니다."
+        }
+    }
 }
 
 protocol CoreDataManagable {
-    func save(_ info: GyroInformationModel) throws
+    func save(_ info: GyroInformationModel, completion: @escaping (Result<Void, CoreDataError>) -> Void)
     func fetch(limit: Int) throws -> [GyroInformationModel]
-    func delete(_ info: GyroInformationModel) throws
+    func delete(_ info: GyroInformationModel, completion: @escaping (Result<Void, CoreDataError>) -> Void)
 }
 
 final class CoreDataManager: CoreDataManagable {
@@ -46,19 +57,21 @@ final class CoreDataManager: CoreDataManagable {
     
     private var fetchOffset: Int = 0
     
-    private func saveToContext() throws {
+    private func saveToContext(completion: @escaping (Result<Void, CoreDataError>) -> Void) {
         if context.hasChanges {
             do {
                 try context.save()
+                completion(.success(()))
             } catch {
-                throw error
+                completion(.failure(.saveFailure))
             }
         }
     }
     
-    func save(_ info: GyroInformationModel) throws {
+    func save(_ info: GyroInformationModel, completion: @escaping (Result<Void, CoreDataError>) -> Void) {
         guard let entity = entity else {
-            throw CoreDataError.saveFailure
+            completion(.failure(.saveFailure))
+            return
         }
         
         let managedObject = NSManagedObject(entity: entity,
@@ -66,9 +79,9 @@ final class CoreDataManager: CoreDataManagable {
         managedObject.setValue(info.id, forKey: "id")
         managedObject.setValue(info.date, forKey: "date")
         managedObject.setValue(info.time, forKey: "time")
-        managedObject.setValue(info.graphMode, forKey: "graphMode")
+        managedObject.setValue(info.graphMode.rawValue, forKey: "graphMode")
         
-        try? saveToContext()
+        saveToContext(completion: completion)
     }
     
     private func fetchAllGyroInformations() throws -> [GyroInformation]? {
@@ -106,13 +119,14 @@ final class CoreDataManager: CoreDataManagable {
         return gyroInformationModels
     }
     
-    func delete(_ info: GyroInformationModel) throws {
+    func delete(_ info: GyroInformationModel, completion: @escaping (Result<Void, CoreDataError>) -> Void) {
         let fetchResults = try? fetchAllGyroInformations()
         guard let infoItem = fetchResults?.filter({ $0.id == info.id }).first else {
-            throw CoreDataError.deleteFailure
+            completion(.failure(.deleteFailure))
+            return
         }
         
         context.delete(infoItem)
-        try? saveToContext()
+        saveToContext(completion: completion)
     }
 }

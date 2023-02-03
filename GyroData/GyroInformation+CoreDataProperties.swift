@@ -18,7 +18,7 @@ extension GyroInformation {
     @NSManaged public var id: UUID?
     @NSManaged public var date: Date?
     @NSManaged public var time: Double
-    @NSManaged fileprivate var graphMode: String?
+    @NSManaged public var graphMode: String?
     
     var graphModeValue: GraphMode {
         get {

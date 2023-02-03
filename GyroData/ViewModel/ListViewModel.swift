@@ -18,6 +18,7 @@ protocol ListOutput {
     var gyroInformations: Observable<[GyroInformationModel]> { get set }
     var numberOfSections: Int { get set }
     var numberOfRowsInSection: Observable<Int> { get set }
+    var error: Observable<String?> { get }
 }
 
 struct ListViewModel: ListInput, ListOutput {
@@ -26,6 +27,7 @@ struct ListViewModel: ListInput, ListOutput {
     var isLoading: Observable<Bool> = Observable(value: false)
     var numberOfSections: Int = 1
     var numberOfRowsInSection: Observable<Int> = Observable(value: 10)
+    var error: Observable<String?> = Observable(value: nil)
     
     init() {
         fetchGyroInformations(limit: 10)
@@ -48,14 +50,14 @@ struct ListViewModel: ListInput, ListOutput {
     }
     
     func deleteGyroInformation(_ info: GyroInformationModel) {
-        do {
-            try coreDataManager.delete(info)
-            
-            guard let index = gyroInformations.value?.firstIndex(where: {$0.id == info.id}) else { return }
-            
-            gyroInformations.value?.remove(at: index)
-        } catch {
-            print(error.localizedDescription)
+        coreDataManager.delete(info) { result in
+            switch result {
+            case .success:
+                guard let index = gyroInformations.value?.firstIndex(where: {$0.id == info.id}) else { return }
+                gyroInformations.value?.remove(at: index)
+            case .failure(let failure):
+                self.error.value = failure.message
+            }
         }
     }
 }

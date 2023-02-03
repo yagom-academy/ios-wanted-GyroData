@@ -52,10 +52,13 @@ struct MeasurementViewModel: MeasurementInput, MeasurementOutput {
     }
 
     private func saveToCoreData(_ information: GyroInformationModel) {
-        do {
-            try coreDataManager.save(information)
-        } catch  {
-            print(error.localizedDescription)
+        coreDataManager.save(information) { result in
+            switch result {
+            case .success:
+                self.isLoading.value = false
+            case .failure(let failure):
+                self.error.value = failure.message
+            }
         }
     }
 
@@ -67,13 +70,11 @@ struct MeasurementViewModel: MeasurementInput, MeasurementOutput {
 
         fileDataManager.save(data: gyroData,
                              id: information.id) { result in
-            // TODO: 리팩토링 부분
             switch result {
-            case .success(let success):
+            case .success:
                 self.isLoading.value = false
-                print("성공")
             case .failure(let failure):
-                failure.message
+                self.error.value = failure.message
             }
         }
     }
