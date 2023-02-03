@@ -69,6 +69,12 @@ extension MainViewController {
                 return UITableViewCell()
             }
             
+            let motionData = self.mockData[indexPath.row]
+            let cellViewModel = MotionCellViewModel(motionData: motionData)
+            
+            cell.configureViewModel(cellViewModel)
+            cellViewModel.convertCellData()
+            
             return cell
         }
     }
