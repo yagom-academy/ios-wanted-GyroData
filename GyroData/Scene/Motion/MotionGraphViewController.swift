@@ -7,23 +7,71 @@
 
 import UIKit
 
-class MotionGraphViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+final class MotionGraphViewController: UIViewController {
+    enum Constant {
+        static let title = "다시보기"
+        static let margin = CGFloat(16.0)
+        static let spacing = CGFloat(8.0)
+    }
+    private let timeLabel: UILabel = {
+        let label = UILabel()
+        label.font = .preferredFont(forTextStyle: .body)
+        label.text = "2023/02/03 16:00:00"
+        return label
+    }()
+    private let kindLabel: UILabel = {
+        let label = UILabel()
+        label.font = .preferredFont(forTextStyle: .title1)
+        label.text = "View"
+        return label
+    }()
+    private let graphView = UIView()
+    private let contentsStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = Constant.spacing
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private let viewModel: MotionViewModel
+    
+    init(viewModel: MotionViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
-    */
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupUI()
+    }
+}
 
+private extension MotionGraphViewController {
+    func setupUI() {
+        let safeArea = view.safeAreaLayoutGuide
+        
+        view.backgroundColor = .systemBackground
+        title = Constant.title
+        
+        [timeLabel, kindLabel, graphView].forEach(contentsStackView.addArrangedSubview(_:))
+        view.addSubview(contentsStackView)
+        
+        NSLayoutConstraint.activate([
+            contentsStackView.topAnchor.constraint(equalTo: safeArea.topAnchor,
+                                                   constant: Constant.margin),
+            contentsStackView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor,
+                                                       constant: Constant.margin),
+            contentsStackView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor,
+                                                        constant: -Constant.margin),
+            contentsStackView.bottomAnchor.constraint(lessThanOrEqualTo: safeArea.bottomAnchor,
+                                                      constant: -Constant.margin),
+            graphView.widthAnchor.constraint(equalTo: contentsStackView.widthAnchor),
+            graphView.widthAnchor.constraint(equalTo: graphView.heightAnchor)
+        ])
+    }
 }
