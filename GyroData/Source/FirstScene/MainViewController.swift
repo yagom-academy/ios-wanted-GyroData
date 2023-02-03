@@ -14,6 +14,8 @@ class MainViewController: UIViewController {
         case main
     }
     
+    //MARK: Properties
+    
     private let mainTableView: UITableView = {
         let tableView = UITableView()
         
@@ -26,6 +28,8 @@ class MainViewController: UIViewController {
     private var mainDataSource: DataSource?
     private var mainViewModel: MainViewModel = .init()
 
+    //MARK: LifeCycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,6 +40,8 @@ class MainViewController: UIViewController {
         configureSnapShot(motionDatas: mainViewModel.motionDatas)
         mainTableView.delegate = self
     }
+    
+    //MARK: Private Methods
     
     private func configureNavigationBar() {
         navigationItem.title = "목록"
@@ -67,6 +73,8 @@ class MainViewController: UIViewController {
     }
 }
 
+//MARK: - UITableViewDiffableDataSource
+
 extension MainViewController {
     private func configureDataSource() {
         mainDataSource = DataSource(tableView: mainTableView) { tableView, indexPath, data in
@@ -95,6 +103,8 @@ extension MainViewController {
         mainDataSource?.apply(snapShot, animatingDifferences: true)
     }
 }
+
+//MARK: - UITableViewDelegate
 
 extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
