@@ -8,8 +8,7 @@
 import UIKit
 
 class MainListViewController: UIViewController {
-    var motionDataList: [MotionEntity] = []
-    var hasNextPage = false
+    let viewModel = MainListViewModel()
     
     let tableView: UITableView = {
         let tableView = UITableView()
@@ -24,6 +23,7 @@ class MainListViewController: UIViewController {
         configureNavigationBar()
         configureTableView()
         configureLayout()
+        configureBind()
     }
     
     func configureNavigationBar() {
@@ -45,10 +45,10 @@ class MainListViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        motionDataList = []
-        fetchData()
+        viewModel.clearData()
+        viewModel.fetchData()
     }
-    
+
     func configureLayout() {
         view.addSubview(tableView)
         
@@ -60,25 +60,18 @@ class MainListViewController: UIViewController {
         ])
         
     }
-    
-    func fetchData() {
-        guard let hasList = CoreDataManager.shared.fetchData(entity: MotionEntity.self, pageCount: 10, offset: motionDataList.count) else { return }
-        
-        if hasList.count == 0 {
-            self.hasNextPage = false
-        } else {
-            self.hasNextPage = true
+    func configureBind() {
+        viewModel.bindTableView {
+            self.tableView.reloadData()
         }
-        motionDataList.append(contentsOf: hasList)
-    
-        tableView.reloadData()
     }
+    
 }
 
 // MARK: - TableViewDelegate, DataSoruce
 extension MainListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return motionDataList.count
+        return viewModel.motionDataList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -86,12 +79,12 @@ extension MainListViewController: UITableViewDelegate, UITableViewDataSource {
             return ListCell()
         }
         
-        cell.configureData(viewModel: ListCellViewModel(motionEntity: motionDataList[indexPath.row]))
+        cell.configureData(viewModel: ListCellViewModel(motionEntity: viewModel.motionDataList[indexPath.row]))
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let measureDetailViewModel =  MeasureDetailViewModel(motionData: motionDataList[indexPath.row],
+        let measureDetailViewModel =  MeasureDetailViewModel(motionData: viewModel.motionDataList[indexPath.row],
                                                              pageType: .view)
         let measureDetailViewController = MeasureDetailViewController(viewModel: measureDetailViewModel)
         
@@ -101,16 +94,14 @@ extension MainListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         let delete = UIContextualAction(style: .normal, title: "Delete") { (UIContextualAction, UIView, success: @escaping (Bool) -> Void) in
-            CoreDataManager.shared.delete(entity: self.motionDataList[indexPath.row])
-            self.motionDataList.remove(at: indexPath.row)
+            self.viewModel.deleteData(dataIndex: indexPath.row)
             success(true)
-            tableView.reloadData()
         }
         
         delete.backgroundColor = .systemRed
         
         let play = UIContextualAction(style: .normal, title: "Play") { (UIContextualAction, UIView, success: @escaping (Bool) -> Void) in
-            let measureDetailViewModel =  MeasureDetailViewModel(motionData: self.motionDataList[indexPath.row],
+            let measureDetailViewModel =  MeasureDetailViewModel(motionData: self.viewModel.motionDataList[indexPath.row],
                                                                  pageType: .play)
             
             let measureDetailViewController = MeasureDetailViewController(viewModel: measureDetailViewModel)
@@ -131,9 +122,7 @@ extension MainListViewController {
         let height = scrollView.frame.height
         
         if offsetY > (contentHeight - height) {
-            if hasNextPage {
-                self.fetchData()
-            }
+            viewModel.paing()
         }
     }
 }
