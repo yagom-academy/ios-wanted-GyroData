@@ -16,6 +16,34 @@ final class RecordViewController: UIViewController {
         return control
     }()
 
+    private let graphView: UIView = {
+        let graphView = UIView()
+        graphView.backgroundColor = .systemBackground
+        graphView.layer.borderWidth = 3
+        return graphView
+    }()
+
+    private let xPositionLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .systemRed
+        label.text = "x:"
+        return label
+    }()
+
+    private let yPositionLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .systemGreen
+        label.text = "y:"
+        return label
+    }()
+
+    private let zPositionLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .systemBlue
+        label.text = "z:"
+        return label
+    }()
+
     let recordButton: UIButton = {
         let button = UIButton()
         button.setTitle("측정", for: .normal)
@@ -32,6 +60,17 @@ final class RecordViewController: UIViewController {
         button.layer.cornerRadius = 5
         return button
     }()
+
+    private let xLayer = CAShapeLayer()
+    private let yLayer = CAShapeLayer()
+    private let zLayer = CAShapeLayer()
+    private let xPath = UIBezierPath()
+    private let yPath = UIBezierPath()
+    private let zPath = UIBezierPath()
+//    private let xValues: [CGFloat] = [50,20,70,80,10,40,30,90,60,40]
+//    private let yValues: [CGFloat] = [60,10,20,50,90,70,40,20,90,50]
+//    private let zValues: [CGFloat] = [0,50,30,40,20,60,40,90,10,80]
+    private var currentX: CGFloat = 0
     
     private let motionManager = MotionManager()
     private var recordTime: Double = 0
@@ -50,10 +89,14 @@ final class RecordViewController: UIViewController {
     }
 }
 
+//
+// MARK 붙이기!
+//
 extension RecordViewController: MotionManagerDelegate {
     func motionManager(send manager: MotionManager, sendData: CMLogItem?) {
         guard let data = sendData else { return }
         print(data)
+        callDrawLine(data: data)
         saveData(data: data)
     }
     
@@ -143,6 +186,109 @@ private extension RecordViewController {
     }
 }
 
+// MARK: - GraphViewConfiguration
+private extension RecordViewController {
+    func makeGridBackground() {
+        graphView.layoutIfNeeded()
+        let gridLayer = CAShapeLayer()
+        let gridPath = UIBezierPath()
+        let divideCount = 8
+        let xOffset = (graphView.frame.width - 20) / CGFloat(divideCount)
+        let yOffset = (graphView.frame.height - 20) / CGFloat(divideCount)
+        var currentX: CGFloat = 10
+        var currentY: CGFloat = 10
+
+        for index in 1...divideCount + 1 {
+            gridPath.move(to: CGPoint(x: currentX, y: currentY))
+            gridPath.addLine(to: CGPoint(x: graphView.frame.width - 10, y: currentY))
+            currentY = 10 + CGFloat(index) * yOffset
+        }
+
+        currentY = 10
+
+        for index in 1...divideCount + 1 {
+            gridPath.move(to: CGPoint(x: currentX, y: currentY))
+            gridPath.addLine(to: CGPoint(x: currentX, y: graphView.frame.height - 10))
+            currentX = 10 + CGFloat(index) * xOffset
+        }
+
+        gridLayer.fillColor = nil
+        gridLayer.strokeColor = UIColor.systemGray.cgColor
+        gridLayer.lineWidth = 2
+        gridLayer.path = gridPath.cgPath
+        graphView.layer.addSublayer(gridLayer)
+    }
+
+    func addGraphViewSublayer(layer: CAShapeLayer, path: UIBezierPath) {
+        switch layer {
+        case xLayer:
+            layer.strokeColor = UIColor.systemRed.cgColor
+        case yLayer:
+            layer.strokeColor = UIColor.systemGreen.cgColor
+        case zLayer:
+            layer.strokeColor = UIColor.systemBlue.cgColor
+        default:
+            return
+        }
+        layer.fillColor = nil
+        layer.lineWidth = 2
+        layer.path = path.cgPath
+        graphView.layer.addSublayer(layer)
+    }
+
+    func callDrawLine(data: CMLogItem) {
+        let xOffset: CGFloat = graphView.frame.width / CGFloat(600 - 1)
+        let centerY = graphView.frame.height / 2
+
+        switch segmentControl.selectedSegmentIndex {
+        case 0:
+            guard let data = data as? CMAccelerometerData else { return }
+            drawAccelermeterLine(xOffset, centerY, data)
+        case 1:
+            guard let data = data as? CMGyroData else { return }
+            drawGyroLine(xOffset, centerY, data)
+        default:
+            return
+        }
+    }
+
+    func drawAccelermeterLine(_ xOffset: CGFloat, _ centerY: CGFloat, _ data: CMAccelerometerData) {
+        currentX += xOffset
+        let newXPosition = CGPoint(x: currentX, y: centerY - data.acceleration.x)
+        xPath.addLine(to: newXPosition)
+        let newYPosition = CGPoint(x: currentX, y: centerY - data.acceleration.y)
+        yPath.addLine(to: newYPosition)
+        let newZPosition = CGPoint(x: currentX, y: centerY - data.acceleration.z)
+        zPath.addLine(to: newZPosition)
+
+        xPositionLabel.text = "x: \(data.acceleration.x)"
+        yPositionLabel.text = "y: \(data.acceleration.y)"
+        zPositionLabel.text = "z: \(data.acceleration.z)"
+
+        addGraphViewSublayer(layer: xLayer, path: xPath)
+        addGraphViewSublayer(layer: yLayer, path: yPath)
+        addGraphViewSublayer(layer: zLayer, path: zPath)
+    }
+
+    func drawGyroLine(_ xOffset: CGFloat, _ centerY: CGFloat, _ data: CMGyroData) {
+        currentX += xOffset
+        let newXPosition = CGPoint(x: currentX, y: centerY - data.rotationRate.x)
+        xPath.addLine(to: newXPosition)
+        let newYPosition = CGPoint(x: currentX, y: centerY - data.rotationRate.y)
+        yPath.addLine(to: newYPosition)
+        let newZPosition = CGPoint(x: currentX, y: centerY - data.rotationRate.z)
+        zPath.addLine(to: newZPosition)
+
+        xPositionLabel.text = "x: \(data.rotationRate.x)"
+        yPositionLabel.text = "y: \(data.rotationRate.y)"
+        zPositionLabel.text = "z: \(data.rotationRate.z)"
+
+        addGraphViewSublayer(layer: xLayer, path: xPath)
+        addGraphViewSublayer(layer: yLayer, path: yPath)
+        addGraphViewSublayer(layer: zLayer, path: zPath)
+    }
+}
+
 // MARK: - UIConfiguration
 private extension RecordViewController {
     func configureUI() {
@@ -152,6 +298,7 @@ private extension RecordViewController {
 
         addChildView()
         setLayout()
+        makeGridBackground()
     }
     
     func setNavigationBar() {
@@ -172,9 +319,14 @@ private extension RecordViewController {
     }
 
     func addChildView() {
-        [segmentControl, recordButton, cancelButton].forEach {
+        [segmentControl, recordButton, cancelButton, graphView, xPositionLabel, yPositionLabel, zPositionLabel].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview($0)
+        }
+
+        [xPositionLabel, yPositionLabel, zPositionLabel].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            graphView.addSubview($0)
         }
     }
 
@@ -187,6 +339,11 @@ private extension RecordViewController {
             segmentControl.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
             segmentControl.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
 
+            graphView.topAnchor.constraint(equalTo: segmentControl.bottomAnchor, constant: 20),
+            graphView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            graphView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            graphView.heightAnchor.constraint(equalTo: graphView.widthAnchor),
+
             recordButton.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor),
             recordButton.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
             recordButton.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
@@ -195,7 +352,16 @@ private extension RecordViewController {
             cancelButton.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor),
             cancelButton.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
             cancelButton.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
-            cancelButton.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: -50)
+            cancelButton.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: -50),
+
+            xPositionLabel.topAnchor.constraint(equalTo: graphView.topAnchor, constant: 20),
+            xPositionLabel.leadingAnchor.constraint(equalTo: graphView.leadingAnchor, constant: 40),
+
+            zPositionLabel.topAnchor.constraint(equalTo: graphView.topAnchor, constant: 20),
+            zPositionLabel.trailingAnchor.constraint(equalTo: graphView.trailingAnchor, constant: -40),
+
+            yPositionLabel.topAnchor.constraint(equalTo: graphView.topAnchor, constant: 20),
+            yPositionLabel.centerXAnchor.constraint(equalTo: graphView.centerXAnchor)
         ])
     }
 }
