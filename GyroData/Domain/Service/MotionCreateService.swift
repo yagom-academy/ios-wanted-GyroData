@@ -29,36 +29,37 @@ struct MotionCreateService: MotionCreatable {
             let data = Motion.MeasurementData(x: data.map({ $0.x }), y: data.map({ $0.y }), z: data.map({ $0.z }))
             let motion = Motion(id: UUID().uuidString, date: date, type: type, time: time, data: data)
   
-            completion(saveToRepository(motion))
+            saveToRepository(motion, completion: completion)
         }
     }
     
-    private func saveToRepository(_ motion: Motion) -> Bool {
+    private func saveToRepository(_ motion: Motion, completion: @escaping (Bool) -> Void) {
         var isSuccess: Bool = false
         let dispatchGroup = DispatchGroup()
         
         DispatchQueue.global().async(group: dispatchGroup) {
-            coreDataRepository.create(motion) { result in
-                switch result {
-                case .success():
-                    isSuccess = true
-                case .failure(let error):
-                    print(error.localizedDescription)
-                    isSuccess = false
-                }
+            switch coreDataRepository.create(motion) {
+            case .success():
+                isSuccess = true
+            case .failure(let error):
+                print(error.localizedDescription)
+                isSuccess = false
             }
-            fileManagerRepository.create(motion) { result in
-                switch result {
-                case .success():
-                    isSuccess = true
-                case .failure(let error):
-                    print(error.localizedDescription)
-                    isSuccess = false
-                }
+            Thread.sleep(forTimeInterval: 2)
+        }
+        
+        DispatchQueue.global().async(group: dispatchGroup) {
+            switch fileManagerRepository.create(motion) {
+            case .success():
+                isSuccess = true
+            case .failure(let error):
+                print(error.localizedDescription)
+                isSuccess = false
             }
         }
-        dispatchGroup.wait()
         
-        return isSuccess
+        dispatchGroup.notify(queue: .main) {
+            completion(isSuccess)
+        }
     }
 }

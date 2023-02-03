@@ -6,7 +6,7 @@
 //
 
 protocol FileManagerRepository {
-    func create(_ domain: Motion, completion: @escaping (Result<Void, Error>) -> Void)
+    func create(_ domain: Motion) -> Result<Void, Error>
     func read(with id: String) throws -> MotionDTO
     func delete(with id: String) throws
 }

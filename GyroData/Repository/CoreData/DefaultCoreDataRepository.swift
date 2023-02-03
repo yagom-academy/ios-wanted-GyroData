@@ -35,31 +35,29 @@ struct DefaultCoreDataRepository: CoreDataRepository {
         context = persistentContainer.viewContext
     }
     
-    func create(_ domain: Motion, completion: @escaping (Result<Void, Error>) -> Void) {
-        backgroundContext.perform {
-            guard let entity = NSEntityDescription.entity(
-                forEntityName: "MotionMO",
-                in: self.backgroundContext
-            ) else {
-                return completion(.failure(CoreDataError.invalidEntity))
-            }
-            
-            let motionMO = MotionMO(entity: entity, insertInto: self.backgroundContext)
-            
-            motionMO.setValue(domain.id, forKey: "id")
-            motionMO.setValue(domain.date.timeIntervalSince1970, forKey: "date")
-            motionMO.setValue(domain.type.rawValue, forKey: "type")
-            motionMO.setValue(domain.time, forKey: "time")
-            motionMO.setValue(domain.data.x, forKey: "x")
-            motionMO.setValue(domain.data.y, forKey: "y")
-            motionMO.setValue(domain.data.z, forKey: "z")
-            
-            do {
-                try self.backgroundContext.save()
-            } catch {
-                completion(.failure(error))
-            }
-            completion(.success(()))
+    func create(_ domain: Motion) -> Result<Void, Error> {
+        guard let entity = NSEntityDescription.entity(
+            forEntityName: "MotionMO",
+            in: context
+        ) else {
+            return .failure(CoreDataError.invalidEntity)
+        }
+        
+        let motionMO = MotionMO(entity: entity, insertInto: self.backgroundContext)
+        
+        motionMO.setValue(domain.id, forKey: "id")
+        motionMO.setValue(domain.date.timeIntervalSince1970, forKey: "date")
+        motionMO.setValue(domain.type.rawValue, forKey: "type")
+        motionMO.setValue(domain.time, forKey: "time")
+        motionMO.setValue(domain.data.x, forKey: "x")
+        motionMO.setValue(domain.data.y, forKey: "y")
+        motionMO.setValue(domain.data.z, forKey: "z")
+        
+        do {
+            try self.backgroundContext.save()
+            return .success(())
+        } catch {
+            return .failure(error)
         }
     }
     
