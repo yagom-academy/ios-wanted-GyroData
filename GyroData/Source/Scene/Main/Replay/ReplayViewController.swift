@@ -206,6 +206,11 @@ final class ReplayViewController: UIViewController {
         case .play:
             titleLabel.text = mode.rawValue
         }
-        dateLabel.text = motionData.date?.description
+        
+        if let formatDate = motionData.date {
+            let format = DateFormatter()
+            format.dateFormat = "yyyy/MM/dd HH:mm:ss"
+            dateLabel.text = format.string(from: formatDate)
+        }
     }
 }

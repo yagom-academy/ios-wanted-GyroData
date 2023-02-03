@@ -22,13 +22,14 @@ class CustomDataCell: UITableViewCell {
     }()
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.font = .preferredFont(forTextStyle: .title2)
+        label.font = .preferredFont(forTextStyle: .title1)
         label.numberOfLines = 1
         return label
     }()
     private let valueLabel: UILabel = {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .largeTitle)
+        label.textAlignment = .right
         return label
     }()
     // TODO: DateFormat 변경
@@ -66,7 +67,12 @@ class CustomDataCell: UITableViewCell {
     // MARK: Internal Methods
     
     func configureLabel(data: Motion) {
-        dateLabel.text = data.date?.description
+        if let formatDate = data.date {
+            let format = DateFormatter()
+            format.dateFormat = "yyyy/MM/dd HH:mm:ss"
+            dateLabel.text = format.string(from: formatDate)
+        }
+        
         titleLabel.text = data.title
         valueLabel.text = String(data.runningTime)
     }
@@ -91,10 +97,10 @@ class CustomDataCell: UITableViewCell {
         contentView.addSubview(mainStackView)
         
         NSLayoutConstraint.activate([
-            mainStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: (frameSize / 20)),
-            mainStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: (frameSize / 20)),
-            mainStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: (frameSize / 10)),
-            mainStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: (frameSize / 10))
+            mainStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: frameSize * 0.05),
+            mainStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -frameSize * 0.05),
+            mainStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: frameSize * 0.1),
+            mainStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -frameSize * 0.1)
         ])
     }
 }

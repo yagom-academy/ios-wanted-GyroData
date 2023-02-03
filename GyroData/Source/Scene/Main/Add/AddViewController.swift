@@ -20,6 +20,7 @@ class AddViewController: UIViewController {
     
     private let currentDate = Date()
     private let motionManager = CMMotionManager()
+    private let graphView = GraphView()
     private var motionDataList = [MotionData]()
     private var jsonMotionData: Data?
     private var timer: Timer?
@@ -30,12 +31,6 @@ class AddViewController: UIViewController {
         segmentControl.backgroundColor = .white
         segmentControl.selectedSegmentIndex = 0
         return segmentControl
-    }()
-    private let graphView: GraphView = {
-        let view = GraphView()
-        view.layer.borderWidth = 3
-        view.layer.borderColor = UIColor.black.cgColor
-        return view
     }()
     private let playButton: UIButton = {
         let button = UIButton()

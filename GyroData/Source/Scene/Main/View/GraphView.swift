@@ -58,7 +58,9 @@ class GraphView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        self.backgroundColor = .systemBackground
+        backgroundColor = .systemBackground
+        layer.borderWidth = 3
+        layer.borderColor = UIColor.black.cgColor
         configureLayout()
     }
     

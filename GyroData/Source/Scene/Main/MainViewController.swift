@@ -13,6 +13,7 @@ final class MainViewController: UIViewController {
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.separatorStyle = .none
         tableView.register(CustomDataCell.self, forCellReuseIdentifier: CustomDataCell.identifier)
         return tableView
     }()
