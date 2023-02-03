@@ -28,27 +28,6 @@ final class RecordViewController: UIViewController {
         return graphView
     }()
     
-    private let xPositionLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .systemRed
-        label.text = "x:"
-        return label
-    }()
-    
-    private let yPositionLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .systemGreen
-        label.text = "y:"
-        return label
-    }()
-    
-    private let zPositionLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .systemBlue
-        label.text = "z:"
-        return label
-    }()
-    
     let recordButton: UIButton = {
         let button = UIButton()
         button.setTitle("측정", for: .normal)
@@ -323,9 +302,9 @@ private extension RecordViewController {
         let newZPosition = CGPoint(x: currentX, y: centerY - data.acceleration.z)
         zPath.addLine(to: newZPosition)
         
-        xPositionLabel.text = "x: \(data.acceleration.x)"
-        yPositionLabel.text = "y: \(data.acceleration.y)"
-        zPositionLabel.text = "z: \(data.acceleration.z)"
+//        xPositionLabel.text = "x: \(data.acceleration.x)"
+//        yPositionLabel.text = "y: \(data.acceleration.y)"
+//        zPositionLabel.text = "z: \(data.acceleration.z)"
         
         addGraphViewSublayer(layer: xLayer, path: xPath)
         addGraphViewSublayer(layer: yLayer, path: yPath)
@@ -341,9 +320,9 @@ private extension RecordViewController {
         let newZPosition = CGPoint(x: currentX, y: centerY - data.rotationRate.z)
         zPath.addLine(to: newZPosition)
         
-        xPositionLabel.text = "x: \(data.rotationRate.x)"
-        yPositionLabel.text = "y: \(data.rotationRate.y)"
-        zPositionLabel.text = "z: \(data.rotationRate.z)"
+//        xPositionLabel.text = "x: \(data.rotationRate.x)"
+//        yPositionLabel.text = "y: \(data.rotationRate.y)"
+//        zPositionLabel.text = "z: \(data.rotationRate.z)"
         
         addGraphViewSublayer(layer: xLayer, path: xPath)
         addGraphViewSublayer(layer: yLayer, path: yPath)
@@ -381,14 +360,9 @@ private extension RecordViewController {
     }
     
     func addChildView() {
-        [segmentControl, recordButton, cancelButton, graphView, xPositionLabel, yPositionLabel, zPositionLabel, indicator].forEach {
+        [segmentControl, recordButton, cancelButton, graphView, indicator].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview($0)
-        }
-        
-        [xPositionLabel, yPositionLabel, zPositionLabel].forEach {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            graphView.addSubview($0)
         }
     }
     
@@ -415,15 +389,6 @@ private extension RecordViewController {
             cancelButton.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
             cancelButton.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
             cancelButton.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: -50),
-            
-            xPositionLabel.topAnchor.constraint(equalTo: graphView.topAnchor, constant: 20),
-            xPositionLabel.leadingAnchor.constraint(equalTo: graphView.leadingAnchor, constant: 40),
-            
-            zPositionLabel.topAnchor.constraint(equalTo: graphView.topAnchor, constant: 20),
-            zPositionLabel.trailingAnchor.constraint(equalTo: graphView.trailingAnchor, constant: -40),
-            
-            yPositionLabel.topAnchor.constraint(equalTo: graphView.topAnchor, constant: 20),
-            yPositionLabel.centerXAnchor.constraint(equalTo: graphView.centerXAnchor),
             
             indicator.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor),
             indicator.centerYAnchor.constraint(equalTo: safeArea.centerYAnchor)
