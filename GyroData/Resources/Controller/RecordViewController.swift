@@ -21,8 +21,8 @@ final class RecordViewController: UIViewController {
         return indicator
     }()
     
-    private let graphView: UIView = {
-        let graphView = UIView()
+    private let graphView: GraphView = {
+        let graphView = GraphView(frame: .zero)
         graphView.backgroundColor = .systemBackground
         graphView.layer.borderWidth = 3
         return graphView
@@ -229,37 +229,6 @@ private extension RecordViewController {
 
 // MARK: - GraphViewConfiguration
 private extension RecordViewController {
-    func makeGridBackground() {
-        graphView.layoutIfNeeded()
-        let gridLayer = CAShapeLayer()
-        let gridPath = UIBezierPath()
-        let divideCount = 8
-        let xOffset = (graphView.frame.width - 20) / CGFloat(divideCount)
-        let yOffset = (graphView.frame.height - 20) / CGFloat(divideCount)
-        var currentX: CGFloat = 10
-        var currentY: CGFloat = 10
-        
-        for index in 1...divideCount + 1 {
-            gridPath.move(to: CGPoint(x: currentX, y: currentY))
-            gridPath.addLine(to: CGPoint(x: graphView.frame.width - 10, y: currentY))
-            currentY = 10 + CGFloat(index) * yOffset
-        }
-        
-        currentY = 10
-        
-        for index in 1...divideCount + 1 {
-            gridPath.move(to: CGPoint(x: currentX, y: currentY))
-            gridPath.addLine(to: CGPoint(x: currentX, y: graphView.frame.height - 10))
-            currentX = 10 + CGFloat(index) * xOffset
-        }
-        
-        gridLayer.fillColor = nil
-        gridLayer.strokeColor = UIColor.systemGray.cgColor
-        gridLayer.lineWidth = 2
-        gridLayer.path = gridPath.cgPath
-        graphView.layer.addSublayer(gridLayer)
-    }
-    
     func addGraphViewSublayer(layer: CAShapeLayer, path: UIBezierPath) {
         switch layer {
         case xLayer:
@@ -339,7 +308,6 @@ private extension RecordViewController {
         
         addChildView()
         setLayout()
-        makeGridBackground()
     }
     
     func setNavigationBar() {
