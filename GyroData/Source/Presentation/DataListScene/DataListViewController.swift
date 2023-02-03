@@ -32,7 +32,7 @@ final class DataListViewController: UIViewController {
     
     private let tableView = UITableView(frame: .zero, style: .plain)
     
-    private lazy var viewModel = DataListViewModel(delegate: self)
+    private lazy var viewModel = DataListViewModel(delegate: self, alertDelegate: self)
     private lazy var dataSource = configureDataSoruce()
     
     override func viewDidLoad() {

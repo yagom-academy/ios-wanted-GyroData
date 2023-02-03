@@ -21,6 +21,7 @@ final class DataListViewModel {
     )
     
     private weak var delegate: DataListConfigurable?
+    private weak var alertDelegate: AlertPresentable?
     
     private var measureDatas:[MeasureData] = [] {
         didSet {
@@ -28,8 +29,9 @@ final class DataListViewModel {
         }
     }
     
-    init(delegate: DataListConfigurable) {
+    init(delegate: DataListConfigurable, alertDelegate: AlertPresentable) {
         self.delegate = delegate
+        self.alertDelegate = alertDelegate
         setupData()
     }
 }
@@ -56,13 +58,19 @@ extension DataListViewModel {
     }
     
     private func deleteData(index: Int) {
-        transactionSevice.delete(date: measureDatas[index].date) { result in
+        transactionSevice.delete(date: measureDatas[index].date) { [weak self] result in
             switch result {
             case .success(_):
                 return
             case .failure(let error):
-                //TODO: Alert Delegate
-                print(error)
+                if let coreDataError = error as? CoreDataError {
+                    self?.alertDelegate?.presentErrorAlert(message: coreDataError.errorDescription ?? "")
+                    return
+                } else if let fileError = error as? FileSystemError {
+                    self?.alertDelegate?.presentErrorAlert(message: fileError.errorDescription ?? "")
+                    return
+                }
+                self?.alertDelegate?.presentErrorAlert(message: error.localizedDescription)
             }
         }
     }
