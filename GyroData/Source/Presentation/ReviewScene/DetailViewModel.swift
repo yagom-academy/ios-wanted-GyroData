@@ -16,7 +16,16 @@ final class DetailViewModel {
 }
 
 extension DetailViewModel {
-    func bindData(handler: @escaping (MeasureData) -> Void) {
-        handler(measureData)
+    typealias Values = (x: Double, y: Double, z: Double)
+    
+    func bindData(handler: @escaping (MeasureData, [Values]) -> Void) {
+        var segmentValues: [Values] = []
+
+        for i in 0..<measureData.xValue.count {
+            let values: Values = (measureData.xValue[i], measureData.yValue[i], measureData.zValue[i])
+            segmentValues.append(values)
+        }
+
+        handler(measureData, segmentValues)
     }
 }
