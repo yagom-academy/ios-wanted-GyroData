@@ -118,7 +118,7 @@ final class MeasurementViewController: UIViewController {
     }
 
     private func storeDataInDevice(completion: @escaping ()->()) {
-        DispatchQueue.global(qos: .default).asyncAfter(deadline: .now() + 0.5) {
+        DispatchQueue.global(qos: .default).asyncAfter(deadline: .now() + 1) {
             do {
                 for manager in self.dataManagers {
                     try manager.saveData(self.measurementData)

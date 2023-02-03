@@ -43,6 +43,7 @@ final class MeasurementView: UIView {
         let indicator = UIActivityIndicatorView(style: .large)
         indicator.translatesAutoresizingMaskIntoConstraints = false
         indicator.hidesWhenStopped = true
+        indicator.color = .red
         indicator.stopAnimating()
         return indicator
     }()
@@ -55,7 +56,7 @@ final class MeasurementView: UIView {
     // MARK: Initialization
     override init(frame: CGRect) {
         super.init(frame: frame)
-
+        
         configureView()
         configureConstraints()
     }

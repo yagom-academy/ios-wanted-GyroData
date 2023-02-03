@@ -14,6 +14,7 @@ extension UILabel {
         self.init(frame: .zero)
         self.font = .preferredFont(forTextStyle: font)
         self.textAlignment = textAlignment
+        textColor = .label
         translatesAutoresizingMaskIntoConstraints = false
     }
 }

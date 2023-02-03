@@ -18,7 +18,7 @@ class ReviewPageView: UIView {
         let button = UIButton(frame: .zero)
         let playImage = UIImage(systemName: "play.fill")
         button.setBackgroundImage(playImage, for: .normal)
-        button.tintColor = .black
+        button.tintColor = .label
         button.translatesAutoresizingMaskIntoConstraints = false
         
         return button
