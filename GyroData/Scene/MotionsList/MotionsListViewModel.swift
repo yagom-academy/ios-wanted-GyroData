@@ -13,7 +13,7 @@ protocol MotionsListViewModelDelegate: AnyObject {
     func motionsListViewModel(selectedPlayMotionID id: String)
 }
 
-struct MotionsListViewModel {
+final class MotionsListViewModel {
     enum Action {
         case viewWillApear
         case nextPageRequest
@@ -32,7 +32,13 @@ struct MotionsListViewModel {
     private let deleteService: MotionDeletable
     private weak var delegate: MotionsListViewModelDelegate?
     
-    mutating func action(_ action: Action) {
+    init(readService: CoreDataMotionReadable, deleteService: MotionDeletable, delegate: MotionsListViewModelDelegate? = nil) {
+        self.readService = readService
+        self.deleteService = deleteService
+        self.delegate = delegate
+    }
+    
+    func action(_ action: Action) {
         switch action {
         case .viewWillApear:
             setInitialMotions()
@@ -46,16 +52,20 @@ struct MotionsListViewModel {
             tapMotionPlayAction(indexPath: indexPath)
         }
     }
+    
+    func setDelegate(_ delegate: MotionsListViewModelDelegate) {
+        self.delegate = delegate
+    }
 }
 
 private extension MotionsListViewModel {
-    mutating func setInitialMotions() {
+    func setInitialMotions() {
         guard let initialMotions = readService.read(from: 0) else { return }
         
         motions = initialMotions
     }
     
-    mutating func setNextPageMotions() {
+    func setNextPageMotions() {
         guard let count = readService.count(),
               count > motions.count,
               let nextPageMotions = readService.read(from: motions.count)
@@ -72,7 +82,7 @@ private extension MotionsListViewModel {
         delegate?.motionsListViewModel(selectedGraphMotionID: selectedMotion.id)
     }
     
-    mutating func tapMotionDeleteAction(indexPath: IndexPath) {
+    func tapMotionDeleteAction(indexPath: IndexPath) {
         let selectedMotion = motions[indexPath.row]
         
         if deleteService.delete(selectedMotion.id) {

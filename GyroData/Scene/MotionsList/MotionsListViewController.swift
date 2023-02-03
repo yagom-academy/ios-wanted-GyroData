@@ -51,6 +51,9 @@ extension MotionsListViewController {
         
         navigationItem.title = Constant.title
         navigationItem.rightBarButtonItem = measurementButton
+        
+        tableView.delegate = self
+        viewModel.setDelegate(self)
     }
     
     private func configureLayout() {
@@ -65,7 +68,22 @@ extension MotionsListViewController {
     }
 }
 
+// MARK: UITableViewDelegate
+extension MotionsListViewController: UITableViewDelegate {
+    
+}
 
+// MARK: MotionsListViewModelDelegate
+extension MotionsListViewController: MotionsListViewModelDelegate {
+    func motionsListViewModel(didChange motions: [Motion]) {
+        
     }
-
+    
+    func motionsListViewModel(selectedGraphMotionID id: String) {
+        
+    }
+    
+    func motionsListViewModel(selectedPlayMotionID id: String) {
+        
+    }
 }
