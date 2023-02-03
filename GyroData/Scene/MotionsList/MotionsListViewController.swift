@@ -11,8 +11,6 @@ class MotionsListViewController: UIViewController {
     enum Constant {
         static let title = "목록"
         static let measurementButtonTitle = "측정"
-        static let playActionTitle = "Play"
-        static let deleteActionTitle = "Delete"
     }
     
     private let tableView: UITableView = {
@@ -120,12 +118,12 @@ extension MotionsListViewController: UITableViewDelegate {
         _ tableView: UITableView,
         trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
     ) -> UISwipeActionsConfiguration? {
-        let playAction = UIContextualAction(style: .normal, title: "Play") { [weak self] _, view, completion in
+        let playAction = UIContextualAction(style: .normal, title: nil) { [weak self] _, view, completion in
             self?.viewModel.action(.motionPlay(indexPath: indexPath))
             completion(true)
         }
         
-        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] _, _, completion in
+        let deleteAction = UIContextualAction(style: .destructive, title: nil) { [weak self] _, _, completion in
             self?.viewModel.action(.motionDelete(indexPath: indexPath))
             completion(true)
         }
