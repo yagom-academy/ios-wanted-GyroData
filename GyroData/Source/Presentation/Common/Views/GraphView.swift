@@ -31,6 +31,23 @@ class GraphView: UIView {
     typealias Values = (x: Double, y: Double, z: Double)
     typealias Positions = (x: Double, y: Double, z: Double)
     
+    enum Segment {
+        case x
+        case y
+        case z
+        
+        var color: UIColor {
+            switch self {
+            case .x:
+                return .systemRed
+            case .y:
+                return .systemGreen
+            case .z:
+                return .systemBlue
+            }
+        }
+    }
+    
     private var segmentValues: [Values] = []
     private var segmentPositions: [Positions] = []
     private let segmentOffset: Double
@@ -52,26 +69,26 @@ class GraphView: UIView {
     
     private let xLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .systemRed
+        label.textColor = Segment.x.color
         label.font = .preferredFont(forTextStyle: .body, compatibleWith: .current)
-        label.text = "x : -1.234"
+        label.text = "x : 0"
         
         return label
     }()
     
     private let yLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .systemGreen
+        label.textColor = Segment.y.color
         label.font = .preferredFont(forTextStyle: .body, compatibleWith: .current)
-        label.text = "y : -1.234"
+        label.text = "y : 0"
         return label
     }()
     
     private let zLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .systemBlue
+        label.textColor = Segment.z.color
         label.font = .preferredFont(forTextStyle: .body, compatibleWith: .current)
-        label.text = "z : -1.234"
+        label.text = "z : 0"
         return label
     }()
     
@@ -94,7 +111,18 @@ class GraphView: UIView {
         self.bringSubviewToFront(labelStackView)
     }
     
+    func dataInit() {
+        segmentValues = []
+        segmentPositions = []
+        layer.sublayers = [layer.sublayers![0]]
+        setupStackView()
+    }
+    
     func drawData(data: Values) {
+        let xlayer = CAShapeLayer()
+        let ylayer = CAShapeLayer()
+        let zlayer = CAShapeLayer()
+        
         let xPath = UIBezierPath()
         let yPath = UIBezierPath()
         let zPath = UIBezierPath()
@@ -116,26 +144,39 @@ class GraphView: UIView {
         let zStartPoint = CGPoint(x: lastPosition, y: convertedValues.z)
         let zEndPoint = CGPoint(x: lastPosition + widthInterval, y: convertedNewValues.z)
         
-        UIColor.systemRed.setStroke()
+        // path
         xPath.move(to: xStartPoint)
         xPath.addLine(to: xEndPoint)
-        xPath.stroke()
-        
-        UIColor.systemGreen.setStroke()
+
         yPath.move(to: yStartPoint)
         yPath.addLine(to: yEndPoint)
-        yPath.stroke()
         
-        UIColor.systemBlue.setStroke()
         zPath.move(to: zStartPoint)
         zPath.addLine(to: zEndPoint)
-        zPath.stroke()
         
-        segmentValues.append(data)
+        // layer
+        xlayer.strokeColor = Segment.x.color.cgColor
+        xlayer.lineWidth = 3
+        xlayer.path = xPath.cgPath
+        
+        ylayer.strokeColor = Segment.y.color.cgColor
+        ylayer.lineWidth = 3
+        ylayer.path = yPath.cgPath
+        
+        zlayer.strokeColor = Segment.z.color.cgColor
+        zlayer.lineWidth = 3
+        zlayer.path = zPath.cgPath
+        
+        // add layer
+        self.layer.addSublayer(xlayer)
+        self.layer.addSublayer(ylayer)
+        self.layer.addSublayer(zlayer)
+        
         self.xLabel.text = "x: \(Double(round(1000 * data.x) / 1000))"
         self.yLabel.text = "y: \(Double(round(1000 * data.y) / 1000))"
         self.zLabel.text = "z: \(Double(round(1000 * data.z) / 1000))"
-        self.setNeedsLayout()
+        
+        segmentValues.append(data)
     }
 }
 
@@ -245,8 +286,8 @@ private extension GraphView {
 
 
 
-
-
+//
+//
 //import SwiftUI
 //
 //struct PreView: PreviewProvider {
@@ -260,15 +301,15 @@ private extension GraphView {
 //extension UIViewController {
 //    private struct Preview: UIViewControllerRepresentable {
 //        let viewController: UIViewController
-//        
+//
 //        func makeUIViewController(context: Context) -> UIViewController {
 //            return viewController
 //        }
-//        
+//
 //        func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
 //        }
 //    }
-//    
+//
 //    func toPreview() -> some View {
 //        Preview(viewController: self)
 //    }
