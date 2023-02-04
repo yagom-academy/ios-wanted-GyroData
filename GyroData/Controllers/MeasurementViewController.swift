@@ -52,24 +52,28 @@ final class MeasurementViewController: UIViewController {
     }
     
     private func saveSensorData() {
-        if measurementData.axisValues == [] {
+        setDisabledUserInteraction()
+
+        guard !measurementData.axisValues.isEmpty else {
             UIAlertController.show(title: "Error",
-                                   message: DataHandleError.noDataError(detail: "측정한 데이터가 없습니다.").localizedDescription,
+                                   message: DataHandleError.noDataError(detail:"측정값이 없습니다.").localizedDescription,
                                    target: self)
+            setEnabledUserInteraction()
+
             return
         }
-        
+
         startActivityIndicator()
-        
+
         storeDataInDevice {
             self.stopActivityIndicator()
-            
+
             DispatchQueue.main.async {
                 self.navigationController?.popViewController(animated: false)
             }
         }
     }
-    
+
     private func storeDataInDevice(completion: @escaping ()->()) {
         DispatchQueue.global(qos: .default).asyncAfter(deadline: .now() + 1) {
             do {
