@@ -11,6 +11,7 @@
 		63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB628D44FC400C53A39 /* SceneDelegate.swift */; };
 		63F01BBE28D44FC500C53A39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBD28D44FC500C53A39 /* Assets.xcassets */; };
 		63F01BC128D44FC500C53A39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */; };
+		D34E1DD7298E39B400F0FBC3 /* AlertBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34E1DD6298E39B400F0FBC3 /* AlertBuilder.swift */; };
 		D35E335B298A800500EF0484 /* CoreDataRepositoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35E335A298A800500EF0484 /* CoreDataRepositoryMock.swift */; };
 		D35E335D298A801700EF0484 /* FileManagerRepositoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35E335C298A801700EF0484 /* FileManagerRepositoryMock.swift */; };
 		D35E335F298A827B00EF0484 /* MotionCreateServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35E335E298A827B00EF0484 /* MotionCreateServiceTests.swift */; };
@@ -71,6 +72,7 @@
 		63F01BBD28D44FC500C53A39 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		63F01BC028D44FC500C53A39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		63F01BC228D44FC500C53A39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D34E1DD6298E39B400F0FBC3 /* AlertBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertBuilder.swift; sourceTree = "<group>"; };
 		D35E335A298A800500EF0484 /* CoreDataRepositoryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataRepositoryMock.swift; sourceTree = "<group>"; };
 		D35E335C298A801700EF0484 /* FileManagerRepositoryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerRepositoryMock.swift; sourceTree = "<group>"; };
 		D35E335E298A827B00EF0484 /* MotionCreateServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionCreateServiceTests.swift; sourceTree = "<group>"; };
@@ -191,20 +193,13 @@
 		D3811723298B77BA00CFDDF0 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
-				D3811726298B77F200CFDDF0 /* AlertFactory */,
 				D37A5888298C9E2900D90F15 /* Date+.swift */,
 				D37A588A298CFDD600D90F15 /* PlayButton.swift */,
 				E3F7B5A9298D3ED400A7810A /* ViewControllerFactory.swift */,
+				D3811724298B77D500CFDDF0 /* AlertStlye.swift */,
+				D34E1DD6298E39B400F0FBC3 /* AlertBuilder.swift */,
 			);
 			path = Utility;
-			sourceTree = "<group>";
-		};
-		D3811726298B77F200CFDDF0 /* AlertFactory */ = {
-			isa = PBXGroup;
-			children = (
-				D3811724298B77D500CFDDF0 /* AlertStlye.swift */,
-			);
-			path = AlertFactory;
 			sourceTree = "<group>";
 		};
 		D381D2692988E58700567C6B /* Scene */ = {
@@ -503,6 +498,7 @@
 				D381D29B2988EC5B00567C6B /* MotionMO+CoreDataProperties.swift in Sources */,
 				D381D27C2988E58700567C6B /* MotionsListViewController.swift in Sources */,
 				D381D29D2988FE2900567C6B /* MotionMO+.swift in Sources */,
+				D34E1DD7298E39B400F0FBC3 /* AlertBuilder.swift in Sources */,
 				E3F7B5A6298CB38300A7810A /* MotionCell.swift in Sources */,
 				E3D84AB12988F7C800FDA64F /* CMRotationRate+.swift in Sources */,
 				D381D2852988E8AB00567C6B /* DefaultCoreDataRepository.swift in Sources */,
