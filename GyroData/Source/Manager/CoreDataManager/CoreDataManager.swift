@@ -5,11 +5,11 @@ import Foundation
 import CoreData
 
 final class CoreDataManager: CoreDataManageable {
-
+    
     static let shared = CoreDataManager()
     private let fileManager = FileManager()
     
-    lazy var persistentContainer: NSPersistentContainer = {
+    private lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "Motion")
         
         container.loadPersistentStores(completionHandler: { (_, error) in
@@ -21,7 +21,7 @@ final class CoreDataManager: CoreDataManageable {
         return container
     }()
     
-    var context: NSManagedObjectContext {
+    private var context: NSManagedObjectContext {
         return persistentContainer.viewContext
     }
     
@@ -96,6 +96,7 @@ final class CoreDataManager: CoreDataManageable {
               let objectID = storeCoordinator.managedObjectID(forURIRepresentation: objectURL) else {
             return nil
         }
+        
         return objectID
     }
 }

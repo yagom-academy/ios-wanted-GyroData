@@ -3,16 +3,16 @@
 
 import UIKit
 
-class DetailViewController: UIViewController {
+final class DetailViewController: UIViewController {
     
     private enum Constant {
         static let saveButtonTitle = "저장"
         static let title = "다시보기"
     }
     
-    let detailViewMode: DetailViewMode
-    let createdAt: Date
-    let detailViewModel: DetailViewModel
+    private let detailViewModel: DetailViewModel
+    private let detailViewMode: DetailViewMode
+    private let createdAt: Date
     
     private let createdAtLabel: UILabel = {
         let label = UILabel()
@@ -84,7 +84,6 @@ class DetailViewController: UIViewController {
     private let measurementTimeLabel: UILabel = {
         let label = UILabel()
         
-        label.text = "30.1"
         label.isHidden = true
         label.textAlignment = .center
         label.font = .preferredFont(forTextStyle: .largeTitle)
@@ -95,9 +94,9 @@ class DetailViewController: UIViewController {
     }()
     
     init(detailViewMode: DetailViewMode, createdAt: Date) {
+        self.detailViewModel = DetailViewModel(date: createdAt)
         self.detailViewMode = detailViewMode
         self.createdAt = createdAt
-        self.detailViewModel = DetailViewModel(date: createdAt)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -174,26 +173,27 @@ class DetailViewController: UIViewController {
     }
     
     private func setupButtons() {
-        let playAction = UIAction { _ in
-            self.playButton.isHidden = true
-            self.stopButton.isHidden = false
-            self.tappedPlayButton()
+        let playAction = UIAction { [weak self] _ in
+            self?.playButton.isHidden = true
+            self?.stopButton.isHidden = false
+            self?.tappedPlayButton()
         }
         playButton.addAction(playAction, for: .touchUpInside)
         
-        let stopAction = UIAction { _ in
-            self.playButton.isHidden = false
-            self.stopButton.isHidden = true
-            self.tappedStopButton()
+        let stopAction = UIAction { [weak self] _ in
+            self?.playButton.isHidden = false
+            self?.stopButton.isHidden = true
+            self?.tappedStopButton()
         }
         stopButton.addAction(stopAction, for: .touchUpInside)
     }
     
     private func setupBind() {
-        detailViewModel.runtime.bind { runtime in
-            self.measurementTimeLabel.text = "\(String(format: "%.1f", runtime))"
+        detailViewModel.runtime.bind { [weak self] playTime in
+            guard let self = self else { return }
+            self.measurementTimeLabel.text = "\(String(format: "%.1f", playTime))"
             
-            if runtime >= self.detailViewModel.model.value.runtime {
+            if playTime >= self.detailViewModel.model.value.runtime {
                 self.playButton.isHidden = false
                 self.stopButton.isHidden = true
             }
@@ -203,9 +203,9 @@ class DetailViewController: UIViewController {
     private func tappedPlayButton() {
         self.graphView.resetView()
         detailViewModel.reset()
-        detailViewModel.startDraw { x, y, z in
-            self.graphView.drawLine(xPoint: x, yPoint: y, zPoint: z)
-            self.graphView.configure(xPoint: x, yPoint: y, zPoint: z)
+        detailViewModel.startDraw { [weak self] x, y, z in
+            self?.graphView.drawLine(xPoint: x, yPoint: y, zPoint: z)
+            self?.graphView.configure(xPoint: x, yPoint: y, zPoint: z)
         }
     }
     

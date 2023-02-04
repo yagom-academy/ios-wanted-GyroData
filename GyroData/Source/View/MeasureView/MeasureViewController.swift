@@ -14,7 +14,7 @@ final class MeasureViewController: UIViewController {
         static let saveButtonTitle = "저장"
     }
     
-    let measureViewModel: MeasureViewModel
+    private let measureViewModel: MeasureViewModel
     private var sensorMode: SensorMode {
         return self.segmentedControl.selectedSegmentIndex == 0 ? .Acc : .Gyro
     }
@@ -98,18 +98,19 @@ final class MeasureViewController: UIViewController {
     }
     
     private func bind() {
-        measureViewModel.measureDatas.bind { data in
-            self.graphView.drawLine(xPoint: data.x.last,
-                                    yPoint: data.y.last,
-                                    zPoint: data.z.last)
-            self.graphView.configure(xPoint: data.x.last,
+        measureViewModel.measureDatas.bind { [weak self] data in
+            self?.graphView.drawLine(xPoint: data.x.last,
                                      yPoint: data.y.last,
                                      zPoint: data.z.last)
+            self?.graphView.configure(xPoint: data.x.last,
+                                      yPoint: data.y.last,
+                                      zPoint: data.z.last)
         }
     }
     
     private func setupNavigation() {
-        let saveAction = UIAction { _ in
+        let saveAction = UIAction { [weak self] _ in
+            guard let self = self else { return }
             self.measureViewModel.add(sensorMode: self.sensorMode,
                                       sensorData: self.measureViewModel.measureDatas.value)
             self.navigationController?.popViewController(animated: true)
@@ -123,18 +124,18 @@ final class MeasureViewController: UIViewController {
     
     
     private func setupButtons() {
-        let measureAction = UIAction { _ in
-            self.tappedMeasureButton()
+        let measureAction = UIAction { [weak self] _ in
+            self?.tappedMeasureButton()
         }
         measureButton.addAction(measureAction, for: .touchUpInside)
         
-        let stopAction = UIAction { _ in
-            self.tappedStopButton()
+        let stopAction = UIAction { [weak self] _ in
+            self?.tappedStopButton()
         }
         stopButton.addAction(stopAction, for: .touchUpInside)
         
-        let segmentedControlAction = UIAction { _ in
-            self.resetGraphView()
+        let segmentedControlAction = UIAction { [weak self] _ in
+            self?.resetGraphView()
         }
         segmentedControl.addAction(segmentedControlAction, for: .valueChanged)
     }

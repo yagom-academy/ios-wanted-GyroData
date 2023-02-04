@@ -5,6 +5,7 @@ import Foundation
 import CoreData
 
 protocol CoreDataManageable {
+    
     associatedtype Object: ManagedObjectModel
     
     func add(_ object: Object) throws

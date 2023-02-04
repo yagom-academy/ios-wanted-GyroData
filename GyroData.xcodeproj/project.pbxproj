@@ -148,7 +148,6 @@
 			children = (
 				B4564280298C175A0060DEC4 /* CoreDataManager */,
 				B4A2F5D6298A1ABB004BA0ED /* CoreMotionManager.swift */,
-				D2D44DB0298E4B460005ED01 /* FileManager+Extension.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -159,6 +158,7 @@
 				B4A2F5DB298A39F8004BA0ED /* App */,
 				B4A2F5D8298A1CC0004BA0ED /* Manager */,
 				B4AC80782988CBBB0095621A /* Protocol */,
+				D2BF0BF3298BE785002DDF61 /* Extension */,
 				B4A2F5DE298A3A4E004BA0ED /* Model */,
 				B456427D298C118C0060DEC4 /* View */,
 			);
@@ -168,7 +168,6 @@
 		B4A2F5DA298A39DB004BA0ED /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				D2BF0BF3298BE785002DDF61 /* Extension */,
 				B4C661E0298A47C500A18C60 /* Enum */,
 				63F01BBD28D44FC500C53A39 /* Assets.xcassets */,
 				63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */,
@@ -247,9 +246,10 @@
 		D2BF0BF3298BE785002DDF61 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				D2BF0BF4298BE7A2002DDF61 /* NotificationName+Extension.swift */,
-				D2D44DB4298E537E0005ED01 /* DateFormatter+Extension.swift */,
 				B4E9790C298E9AB300E8E1C1 /* Array+Extension.swift */,
+				D2D44DB4298E537E0005ED01 /* DateFormatter+Extension.swift */,
+				D2D44DB0298E4B460005ED01 /* FileManager+Extension.swift */,
+				D2BF0BF4298BE7A2002DDF61 /* NotificationName+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";

@@ -7,11 +7,10 @@ import CoreMotion
 final class CoreMotionManager {
     private var motion = CMMotionManager()
     private var timer: Timer?
-    var second: Double = 0
-    
     private var xData: [Double] = []
     private var yData: [Double] = []
     private var zData: [Double] = []
+    var second: Double = 0
     
     func startGyros(completion: @escaping (SensorData) -> Void) {
         if motion.isGyroAvailable {

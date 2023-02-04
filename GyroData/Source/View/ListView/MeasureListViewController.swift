@@ -19,6 +19,9 @@ final class MeasureListViewController: UIViewController {
     typealias DataSource = UITableViewDiffableDataSource<Schedule, MotionData>
     typealias Snapshot = NSDiffableDataSourceSnapshot<Schedule, MotionData>
     
+    private var dataSource: DataSource?
+    private var measureListViewModel: MeasureListViewModel
+    
     private let tableView: UITableView = {
         let tableView = UITableView()
         
@@ -29,9 +32,6 @@ final class MeasureListViewController: UIViewController {
         
         return tableView
     }()
-    
-    private var dataSource: DataSource?
-    private var measureListViewModel: MeasureListViewModel
     
     init(dataSource: DataSource? = nil, measureListViewModel: MeasureListViewModel) {
         self.dataSource = dataSource
@@ -46,10 +46,10 @@ final class MeasureListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.dataSource = setupTableViewDataSource()
+        tableView.delegate = self
+        dataSource = setupTableViewDataSource()
         setupNavigation()
         setupViews()
-        tableView.delegate = self
         bind()
     }
     
@@ -65,10 +65,10 @@ final class MeasureListViewController: UIViewController {
     }
     
     private func setupNavigation() {
-        let pushMeasureViewAction = UIAction { _ in
+        let pushMeasureViewAction = UIAction { [weak self] _ in
             let measurViewModel = MeasureViewModel()
             let measureViewController = MeasureViewController(measureViewModel: measurViewModel)
-            self.push(viewController: measureViewController)
+            self?.push(viewController: measureViewController)
         }
         
         navigationItem.title = Constant.title
@@ -132,17 +132,17 @@ extension MeasureListViewController: UITableViewDelegate {
         trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
     ) -> UISwipeActionsConfiguration? {
         let playAction = UIContextualAction(style: .normal,
-                                            title: Constant.playSwipeAction) { (_, _, success) in
-            let createdAt = self.measureListViewModel.model.value[indexPath.row].createdAt
+                                            title: Constant.playSwipeAction) { [weak self] (_, _, success) in
+            guard let createdAt = self?.measureListViewModel.model.value[indexPath.row].createdAt else { return }
             let detailViewController = DetailViewController(detailViewMode: .play,
                                                             createdAt: createdAt)
-            self.push(viewController: detailViewController)
+            self?.push(viewController: detailViewController)
         }
         playAction.backgroundColor = .systemGreen
         
         let deleteAction = UIContextualAction(style: .destructive,
-                                              title: Constant.deleteSwipeAction) { (_, _, success) in
-            self.measureListViewModel.delete(index: indexPath.row)
+                                              title: Constant.deleteSwipeAction) { [weak self] (_, _, success) in
+            self?.measureListViewModel.delete(index: indexPath.row)
             success(true)
         }
         

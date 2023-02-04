@@ -3,7 +3,8 @@
 
 import Foundation
 
-class MeasureListViewModel {
+final class MeasureListViewModel {
+    
     let model: Observable<[MotionData]> = Observable([])
     
     private let coreDataManager = CoreDataManager.shared
@@ -31,6 +32,5 @@ class MeasureListViewModel {
         } catch {
             print(error.localizedDescription)
         }
-        
     }
 }

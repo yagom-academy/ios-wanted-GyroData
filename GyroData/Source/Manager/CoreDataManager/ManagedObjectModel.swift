@@ -4,6 +4,7 @@
 import CoreData.NSManagedObject
 
 protocol ManagedObjectModel: Hashable, Codable {
+    
     associatedtype Object: NSManagedObject
     var objectID: String? { get set }
     
@@ -11,6 +12,7 @@ protocol ManagedObjectModel: Hashable, Codable {
 }
 
 extension ManagedObjectModel {
+    
     public static func == (lhs: any ManagedObjectModel, rhs: any ManagedObjectModel) -> Bool {
         return lhs.objectID == rhs.objectID
     }

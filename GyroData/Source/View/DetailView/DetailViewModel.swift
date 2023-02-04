@@ -3,7 +3,7 @@
 
 import Foundation
 
-class DetailViewModel {
+final class DetailViewModel {
     let model: Observable<FileManagedData> = .init(FileManagedData(createdAt: Date(),
                                                                    runtime: 0.0,
                                                                    sensorData: .init(x: [],

@@ -3,8 +3,7 @@
 
 import UIKit
 
-// MARK: - Configure
-class GraphView: UIView {
+final class GraphView: UIView {
     
     private var startX: Double = 0
     
