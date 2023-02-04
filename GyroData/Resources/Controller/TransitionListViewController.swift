@@ -101,15 +101,26 @@ extension TransitionListViewController: UIScrollViewDelegate {
         tableView.tableFooterView = createIndicatorFooter()
 
         fetchData { [weak self] fetchedData in
-            guard let self = self else { return }
+            guard let self = self,
+                  fetchedData.isEmpty == false else {
+                
+                self?.resetFooterView()
+                return
+            }
+            
             self.pageIndex += 1
-            self.isPaginating = false
             self.metaDatas.append(contentsOf: fetchedData)
             
-            DispatchQueue.main.async {
-                self.tableView.tableFooterView = nil
-                self.tableView.reloadData()
-            }
+            self.resetFooterView()
+        }
+    }
+    
+    func resetFooterView() {
+        isPaginating = false
+        
+        DispatchQueue.main.async {
+            self.tableView.tableFooterView = nil
+            self.tableView.reloadData()
         }
     }
 }
