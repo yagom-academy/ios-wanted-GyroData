@@ -109,7 +109,9 @@ extension MeasureListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let detailViewController = DetailViewController()
+        let createdAt = measureListViewModel.model.value[indexPath.row].createdAt
+        let detailViewController = DetailViewController(detailViewMode: .view,
+                                                        createdAt: createdAt)
         push(viewController: detailViewController)
     }
     

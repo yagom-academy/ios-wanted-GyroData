@@ -9,13 +9,12 @@ extension FileManager {
         guard let path = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first else { return }
         var filePath = URL(fileURLWithPath: path)
         guard let jsonData = encodeFileManagerData(data: fileManagedData) else { return }
-        let appendPathJsonComponent = fileName.decomposedStringWithCanonicalMapping + ".json"
+        let appendPathJsonComponent = fileName + ".json"
         
         filePath.appendPathComponent(appendPathJsonComponent)
         self.createFile(atPath: filePath.path,
                         contents: jsonData)
         print(path)
-        print(fileName)
     }
     
     private func encodeFileManagerData(data: FileManagedData) -> Data? {
