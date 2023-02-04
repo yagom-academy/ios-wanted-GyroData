@@ -24,13 +24,8 @@ struct DefaultCoreDataRepository: CoreDataRepository {
     }()
     
     private let context: NSManagedObjectContext
-    private let backgroundContext: NSManagedObjectContext
     
     init() {
-        let backgroundContext = persistentContainer.newBackgroundContext()
-        backgroundContext.automaticallyMergesChangesFromParent = true
-        self.backgroundContext = backgroundContext
-        
         persistentContainer.viewContext.automaticallyMergesChangesFromParent = true
         context = persistentContainer.viewContext
     }
@@ -43,7 +38,7 @@ struct DefaultCoreDataRepository: CoreDataRepository {
             return .failure(CoreDataError.invalidEntity)
         }
         
-        let motionMO = MotionMO(entity: entity, insertInto: self.backgroundContext)
+        let motionMO = MotionMO(entity: entity, insertInto: context)
         
         motionMO.setValue(domain.id, forKey: "id")
         motionMO.setValue(domain.date.timeIntervalSince1970, forKey: "date")
@@ -54,7 +49,7 @@ struct DefaultCoreDataRepository: CoreDataRepository {
         motionMO.setValue(domain.data.z, forKey: "z")
         
         do {
-            try self.backgroundContext.save()
+            try context.save()
             return .success(())
         } catch {
             return .failure(error)
@@ -72,7 +67,7 @@ struct DefaultCoreDataRepository: CoreDataRepository {
     
     func count() throws -> Int {
         let request = MotionMO.fetchRequest()
-        let count = try self.context.count(for: request)
+        let count = try context.count(for: request)
         return count
     }
     
