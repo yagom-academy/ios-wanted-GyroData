@@ -6,7 +6,7 @@
 //
 
 struct MotionMeasures: Codable {
-    let axisX: [Double]
-    let axisY: [Double]
-    let axisZ: [Double]
+    var axisX: [Double]
+    var axisY: [Double]
+    var axisZ: [Double]
 }

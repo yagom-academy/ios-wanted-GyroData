@@ -9,24 +9,35 @@ import CoreData
 import UIKit
 
 protocol CoreDataManageable {
-    func saveCoreData(motionData: MotionData) throws
+    func saveCoreData(
+        motionData: MotionData,
+        dispatchGroup: DispatchGroup,
+        completionHandler: @escaping (Result<Void, CoreDataError>) -> Void
+    )
     func readCoreData() -> Result<[MotionEntity], CoreDataError>
     func deleteCoreData(motionData: MotionData) throws
 }
 
 extension CoreDataManageable {
-    func saveCoreData(motionData: MotionData) throws {
+    func saveCoreData(
+        motionData: MotionData,
+        dispatchGroup: DispatchGroup,
+        completionHandler: @escaping (Result<Void, CoreDataError>) -> Void
+    ) {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            throw CoreDataError.appDelegateError
+            completionHandler(.failure(.appDelegateError))
+            return
         }
         
         let backgroundContext = appDelegate.backgroundContext
         
+        dispatchGroup.enter()
         backgroundContext.perform {
             guard let entity = NSEntityDescription.entity(
                 forEntityName: Constant.entityName,
                 in: backgroundContext
             ) else {
+                completionHandler(.failure(.saveError))
                 return
             }
             
@@ -35,19 +46,23 @@ extension CoreDataManageable {
             object.setValue(motionData.duration, forKey: Constant.duration)
             object.setValue(motionData.id, forKey: Constant.id)
             object.setValue(motionData.measuredDate, forKey: Constant.measuredDate)
-            object.setValue(motionData.type, forKey: Constant.type)
+            object.setValue(motionData.type.rawValue, forKey: Constant.type)
             
             appDelegate.saveContext()
+            completionHandler(.success(()))
+            dispatchGroup.leave()
         }
     }
     
-    func readCoreData() -> Result<[MotionEntity], CoreDataError> {
+    func readCoreData(offset: Int) -> Result<[MotionEntity], CoreDataError> {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             return .failure(.appDelegateError)
         }
         
-        let managedContext = appDelegate.persistentContainer.viewContext
+        let managedContext = appDelegate.backgroundContext
         let fetchRequest = NSFetchRequest<MotionEntity>(entityName: Constant.entityName)
+        fetchRequest.fetchLimit = 10
+        fetchRequest.fetchOffset = offset
         
         do {
             let result = try managedContext.fetch(fetchRequest)
@@ -63,7 +78,7 @@ extension CoreDataManageable {
             throw CoreDataError.appDelegateError
         }
         
-        let managedContext = appDelegate.persistentContainer.viewContext
+        let managedContext = appDelegate.backgroundContext
         let fetchRequest = NSFetchRequest<MotionEntity>(entityName: Constant.entityName)
         
         fetchRequest.predicate = NSPredicate(format: Constant.idFormat, motionData.id.uuidString)

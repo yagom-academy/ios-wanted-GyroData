@@ -35,19 +35,29 @@ class FileHandleManager: FileManagerProtocol {
         }
     }
     
-    func save(fileName: UUID, _ motionMeasures: MotionMeasures) throws {
+    func save(
+        fileName: UUID,
+        motionMeasures: MotionMeasures,
+        dispatchGroup: DispatchGroup,
+        completionHandler: @escaping (Result<Void, FileManagingError>) -> Void
+    ) {
         let encoder = JSONEncoder()
         let fileName = fileName.uuidString
         
-        do {
-            guard let jsonData = try? encoder.encode(motionMeasures) else {
-                throw FileManagingError.encodeFailed
+        DispatchQueue.global().async(group: dispatchGroup) { [weak self] in
+            do {
+                guard let jsonData = try? encoder.encode(motionMeasures) else {
+                    completionHandler(.failure(.encodeFailed))
+                    return
+                }
+                
+                guard let jsonPath: URL = self?.directoryPath.appendingPathComponent("\(fileName).json") else { return }
+                
+                try jsonData.write(to: jsonPath)
+                completionHandler(.success(()))
+            } catch {
+                completionHandler(.failure(.saveFailed))
             }
-            let jsonPath: URL = directoryPath.appendingPathComponent("\(fileName).json")
-            
-            try jsonData.write(to: jsonPath)
-        } catch {
-            throw FileManagingError.saveFailed
         }
     }
     

@@ -7,8 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0C27E404298A492C00C570C4 /* MotionMeasureManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C27E403298A492C00C570C4 /* MotionMeasureManager.swift */; };
+		0C27E404298A492C00C570C4 /* AccelerometerMotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C27E403298A492C00C570C4 /* AccelerometerMotionManager.swift */; };
 		0C27E428298B9EBE00C570C4 /* MeasureTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C27E427298B9EBE00C570C4 /* MeasureTimer.swift */; };
+		0C27E42B298BF0D700C570C4 /* MeasureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C27E42A298BF0D700C570C4 /* MeasureViewController.swift */; };
+		0C27E439298CE58900C570C4 /* MeasureViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C27E438298CE58900C570C4 /* MeasureViewModel.swift */; };
+		0C27E43B298D497100C570C4 /* MotionManagerable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C27E43A298D497100C570C4 /* MotionManagerable.swift */; };
+		0C27E43D298D49A500C570C4 /* MotionCoordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C27E43C298D49A500C570C4 /* MotionCoordinate.swift */; };
+		0C27E43F298E6A7B00C570C4 /* GyroMotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C27E43E298E6A7B00C570C4 /* GyroMotionManager.swift */; };
+		0C27E441298E777A00C570C4 /* MotionManagerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C27E440298E777A00C570C4 /* MotionManagerError.swift */; };
 		0CC8B8382988B73C0011E5FB /* MotionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CC8B8372988B73C0011E5FB /* MotionData.swift */; };
 		0CC8B83A2988BA580011E5FB /* MotionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CC8B8392988BA580011E5FB /* MotionType.swift */; };
 		575938F4298EC01C0030A06A /* GraphBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575938F3298EC01C0030A06A /* GraphBackgroundView.swift */; };
@@ -29,11 +35,22 @@
 		B20D4BDF29894BEE00ADC6B6 /* MotionDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B20D4BDD29894BEE00ADC6B6 /* MotionDataModel.xcdatamodeld */; };
 		B240905A2989624E008DC79B /* CoreDataManageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24090592989624E008DC79B /* CoreDataManageable.swift */; };
 		B240905C298A4531008DC79B /* CoreDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B240905B298A4531008DC79B /* CoreDataError.swift */; };
+		B240908C298C8ED1008DC79B /* MotionDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B240908B298C8ED1008DC79B /* MotionDataCell.swift */; };
+		B240908E298C8F4B008DC79B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B240908D298C8F4B008DC79B /* MainViewController.swift */; };
+		B2409090298C9111008DC79B /* MotionCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B240908F298C9111008DC79B /* MotionCellViewModel.swift */; };
+		B2409092298CD339008DC79B /* DateFormatter +.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2409091298CD339008DC79B /* DateFormatter +.swift */; };
+		B2409094298CEE6C008DC79B /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2409093298CEE6C008DC79B /* MainViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0C27E403298A492C00C570C4 /* MotionMeasureManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionMeasureManager.swift; sourceTree = "<group>"; };
+		0C27E403298A492C00C570C4 /* AccelerometerMotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccelerometerMotionManager.swift; sourceTree = "<group>"; };
 		0C27E427298B9EBE00C570C4 /* MeasureTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureTimer.swift; sourceTree = "<group>"; };
+		0C27E42A298BF0D700C570C4 /* MeasureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureViewController.swift; sourceTree = "<group>"; };
+		0C27E438298CE58900C570C4 /* MeasureViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureViewModel.swift; sourceTree = "<group>"; };
+		0C27E43A298D497100C570C4 /* MotionManagerable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionManagerable.swift; sourceTree = "<group>"; };
+		0C27E43C298D49A500C570C4 /* MotionCoordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionCoordinate.swift; sourceTree = "<group>"; };
+		0C27E43E298E6A7B00C570C4 /* GyroMotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroMotionManager.swift; sourceTree = "<group>"; };
+		0C27E440298E777A00C570C4 /* MotionManagerError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionManagerError.swift; sourceTree = "<group>"; };
 		0CC8B8372988B73C0011E5FB /* MotionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionData.swift; sourceTree = "<group>"; };
 		0CC8B8392988BA580011E5FB /* MotionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionType.swift; sourceTree = "<group>"; };
 		575938F3298EC01C0030A06A /* GraphBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphBackgroundView.swift; sourceTree = "<group>"; };
@@ -56,6 +73,11 @@
 		B20D4BDE29894BEE00ADC6B6 /* MotionDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MotionDataModel.xcdatamodel; sourceTree = "<group>"; };
 		B24090592989624E008DC79B /* CoreDataManageable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManageable.swift; sourceTree = "<group>"; };
 		B240905B298A4531008DC79B /* CoreDataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataError.swift; sourceTree = "<group>"; };
+		B240908B298C8ED1008DC79B /* MotionDataCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDataCell.swift; sourceTree = "<group>"; };
+		B240908D298C8F4B008DC79B /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		B240908F298C9111008DC79B /* MotionCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionCellViewModel.swift; sourceTree = "<group>"; };
+		B2409091298CD339008DC79B /* DateFormatter +.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter +.swift"; sourceTree = "<group>"; };
+		B2409093298CEE6C008DC79B /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,12 +91,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0C27E429298BF0C500C570C4 /* MeasureScene */ = {
+			isa = PBXGroup;
+			children = (
+				0C27E42A298BF0D700C570C4 /* MeasureViewController.swift */,
+				0C27E438298CE58900C570C4 /* MeasureViewModel.swift */,
+			);
+			path = MeasureScene;
+			sourceTree = "<group>";
+		};
 		0CC8B8362988B7230011E5FB /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				57D312A3298A14F1001963C5 /* MotionMeasures.swift */,
 				0CC8B8372988B73C0011E5FB /* MotionData.swift */,
 				0CC8B8392988BA580011E5FB /* MotionType.swift */,
+				0C27E43C298D49A500C570C4 /* MotionCoordinate.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -82,6 +114,11 @@
 		5785B3702988B13900DD61B2 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+
+				0C27E429298BF0C500C570C4 /* MeasureScene */,
+
+				B240908A298C8EA3008DC79B /* FirstScene */,
+
 				5785B3722988B31D00DD61B2 /* App */,
 				B2409080298BAF50008DC79B /* Protocol */,
 				B2409081298BAF68008DC79B /* Error */,
@@ -164,6 +201,7 @@
 			children = (
 				B24090592989624E008DC79B /* CoreDataManageable.swift */,
 				5785B396298A0CCF00DD61B2 /* FileManagerProtocol.swift */,
+				0C27E43A298D497100C570C4 /* MotionManagerable.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -173,6 +211,7 @@
 			children = (
 				B240905B298A4531008DC79B /* CoreDataError.swift */,
 				57D312A7298A532C001963C5 /* FileManagingError.swift */,
+				0C27E440298E777A00C570C4 /* MotionManagerError.swift */,
 			);
 			path = Error;
 			sourceTree = "<group>";
@@ -181,10 +220,23 @@
 			isa = PBXGroup;
 			children = (
 				0C27E427298B9EBE00C570C4 /* MeasureTimer.swift */,
-				0C27E403298A492C00C570C4 /* MotionMeasureManager.swift */,
+				0C27E403298A492C00C570C4 /* AccelerometerMotionManager.swift */,
+				0C27E43E298E6A7B00C570C4 /* GyroMotionManager.swift */,
 				57D312A5298A15A1001963C5 /* FileHandleManager.swift */,
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		B240908A298C8EA3008DC79B /* FirstScene */ = {
+			isa = PBXGroup;
+			children = (
+				B240908B298C8ED1008DC79B /* MotionDataCell.swift */,
+				B240908D298C8F4B008DC79B /* MainViewController.swift */,
+				B240908F298C9111008DC79B /* MotionCellViewModel.swift */,
+				B2409091298CD339008DC79B /* DateFormatter +.swift */,
+				B2409093298CEE6C008DC79B /* MainViewModel.swift */,
+			);
+			path = FirstScene;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,18 +309,33 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C27E43B298D497100C570C4 /* MotionManagerable.swift in Sources */,
 				63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */,
 				57D312B1298E563A001963C5 /* DetailView.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				57EF194B298EA54900A9572B /* GraphViewModel.swift in Sources */,
 				0C27E404298A492C00C570C4 /* MotionMeasureManager.swift in Sources */,
 				575938F4298EC01C0030A06A /* GraphBackgroundView.swift in Sources */,
+
+				0C27E43F298E6A7B00C570C4 /* GyroMotionManager.swift in Sources */,
+				0C27E404298A492C00C570C4 /* AccelerometerMotionManager.swift in Sources */,
+				0C27E42B298BF0D700C570C4 /* MeasureViewController.swift in Sources */,
+				0C27E441298E777A00C570C4 /* MotionManagerError.swift in Sources */,
+
+				0C27E404298A492C00C570C4 /* MotionMeasureManager.swift in Sources */,
+				B2409092298CD339008DC79B /* DateFormatter +.swift in Sources */,
+
 				57D312A4298A14F1001963C5 /* MotionMeasures.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
 				B240905C298A4531008DC79B /* CoreDataError.swift in Sources */,
+				B240908C298C8ED1008DC79B /* MotionDataCell.swift in Sources */,
+				B240908E298C8F4B008DC79B /* MainViewController.swift in Sources */,
 				B240905A2989624E008DC79B /* CoreDataManageable.swift in Sources */,
+				0C27E43D298D49A500C570C4 /* MotionCoordinate.swift in Sources */,
 				5785B397298A0CCF00DD61B2 /* FileManagerProtocol.swift in Sources */,
+				B2409090298C9111008DC79B /* MotionCellViewModel.swift in Sources */,
 				0CC8B83A2988BA580011E5FB /* MotionType.swift in Sources */,
+				B2409094298CEE6C008DC79B /* MainViewModel.swift in Sources */,
 				57D312A8298A532C001963C5 /* FileManagingError.swift in Sources */,
 				57D312A6298A15A1001963C5 /* FileHandleManager.swift in Sources */,
 				0CC8B8382988B73C0011E5FB /* MotionData.swift in Sources */,
@@ -277,6 +344,8 @@
 				0C27E428298B9EBE00C570C4 /* MeasureTimer.swift in Sources */,
 				B20D4BDF29894BEE00ADC6B6 /* MotionDataModel.xcdatamodeld in Sources */,
 				57D312AD298CF3B0001963C5 /* DetailViewModel.swift in Sources */,
+
+				0C27E439298CE58900C570C4 /* MeasureViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -415,6 +484,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = KHQ37J8NU9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GyroData/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -426,7 +496,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.GyroData;
+				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.GyroDatas;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -441,6 +511,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = KHQ37J8NU9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GyroData/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -452,7 +523,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.GyroData;
+				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.GyroDatas;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
