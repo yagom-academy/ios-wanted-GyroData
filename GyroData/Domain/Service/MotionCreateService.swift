@@ -22,14 +22,14 @@ struct MotionCreateService: MotionCreatable {
         type: Int,
         time: String,
         data: [MotionDataType],
-        completion: @escaping (Bool) -> Void
+        completion: @escaping (CreatingServiceResult<Void>) -> Void
     ) {
         DispatchQueue.global().async {
             guard let date = dateFormatter.date(from: date),
                   let type = Motion.MeasurementType(rawValue: type),
                   let time = Double(time)
             else {
-                return completion(false)
+                return completion(.failure(.insufficientDataToCreate))
             }
             
             let data = Motion.MeasurementData(
@@ -39,7 +39,9 @@ struct MotionCreateService: MotionCreatable {
             )
             let motion = Motion(id: UUID().uuidString, date: date, type: type, time: time, data: data)
   
-            saveToRepository(motion, completion: completion)
+            saveToRepository(motion) { isSuccess in
+                isSuccess ? completion(.success(())): completion(.failure(.motionCreatingFailed))
+            }
         }
     }
     

@@ -5,6 +5,16 @@
 //  Created by Ayaan, Wonbi on 2023/01/31.
 //
 
+enum CreatingServiceResult<T> {
+    case success(T)
+    case failure(CreatingError)
+    
+    enum CreatingError: Error {
+        case motionCreatingFailed
+        case insufficientDataToCreate
+    }
+}
+
 protocol MotionCreatable {
     var coreDataRepository: CoreDataRepository { get }
     var fileManagerRepository: FileManagerRepository { get }
@@ -14,5 +24,5 @@ protocol MotionCreatable {
         type: Int,
         time: String,
         data: [MotionDataType],
-        completion: @escaping (Bool) -> Void)
+        completion: @escaping (CreatingServiceResult<Void>) -> Void)
 }
