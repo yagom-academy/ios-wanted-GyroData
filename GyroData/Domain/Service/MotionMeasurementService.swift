@@ -17,7 +17,7 @@ final class MotionMeasurementService: MotionMeasurable {
     
     func measure(
         type: Motion.MeasurementType,
-        measurementHandler: @escaping (MotionDataType, Double) -> Void,
+        measurementHandler: @escaping (MotionDataType) -> Void,
         completeHandler: @escaping (Bool) -> Void
     ) {
         switch type {
@@ -44,7 +44,7 @@ final class MotionMeasurementService: MotionMeasurable {
 
 private extension MotionMeasurementService {
     func measureAccelerometer(
-        measurementHandler: @escaping (MotionDataType, Double) -> Void,
+        measurementHandler: @escaping (MotionDataType) -> Void,
         completeHandler: @escaping (Bool) -> Void
     ) {
         var currentTime: Double = .zero
@@ -55,13 +55,13 @@ private extension MotionMeasurementService {
                 self?.stopMeasurement(type: .acc)
                 return
             }
-            measurementHandler(data.acceleration, currentTime)
+            measurementHandler(data.acceleration)
             currentTime += Constant.timeInterval
         }
     }
     
     func measureGyro(
-        measurementHandler: @escaping (MotionDataType, Double) -> Void,
+        measurementHandler: @escaping (MotionDataType) -> Void,
         completeHandler: @escaping (Bool) -> Void
     ) {
         var currentTime: Double = .zero
@@ -72,7 +72,7 @@ private extension MotionMeasurementService {
                 self?.stopMeasurement(type: .gyro)
                 return
             }
-            measurementHandler(data.rotationRate, currentTime)
+            measurementHandler(data.rotationRate)
             currentTime += Constant.timeInterval
         }
     }
