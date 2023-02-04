@@ -86,7 +86,7 @@ extension RecordViewController: Uploadable {
         
         let transitionValues = Transition(values: values)
         let metaData = TransitionMetaData(
-            saveDate: Date().description,
+            saveDate: Date().saveDescription,
             sensorType: recordedSensor,
             recordTime: recordTime,
             jsonName: fileName
