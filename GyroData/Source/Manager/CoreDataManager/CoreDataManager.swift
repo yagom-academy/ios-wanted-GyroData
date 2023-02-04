@@ -40,8 +40,9 @@ final class CoreDataManager: CoreDataManageable {
         motionObject.setValue(motionData.sensorData.y, forKey: "yData")
         motionObject.setValue(motionData.sensorData.z, forKey: "zData")
         
-        // TODO: hasChanged 될때만 save 되도록 수정
-        try context.save()
+        if context.hasChanges {
+            try context.save()
+        }
         
         let saveToData = FileManagedData(createdAt: motionData.createdAt,
                                          runtime: motionData.runtime,
@@ -70,7 +71,9 @@ final class CoreDataManager: CoreDataManageable {
         motionObject.setValue(motionData.sensorData.y, forKey: "yData")
         motionObject.setValue(motionData.sensorData.z, forKey: "zData")
         
-        try context.save()
+        if context.hasChanges {
+            try context.save()
+        }
     }
     
     func remove(_ motionData: MotionData) throws {
@@ -80,7 +83,10 @@ final class CoreDataManager: CoreDataManageable {
         let motionObject = context.object(with: objectID)
         
         context.delete(motionObject)
-        try context.save()
+        
+        if context.hasChanges {
+            try context.save()
+        }
     }
     
     private func fetchObjectID(from motionID: String?) -> NSManagedObjectID? {
