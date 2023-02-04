@@ -110,19 +110,19 @@ only apple FrameWork
 
 |Accelerometer|Gyroscope|
 |:-----:|:-----:|
-|<img src="https://i.imgur.com/5SibbrZ.gif" width=300>|<img src="https://i.imgur.com/0P5T57h.gif" width=300>|
+|<img src="https://i.imgur.com/5SibbrZ.gif" width=250>|<img src="https://i.imgur.com/0P5T57h.gif" width=250>|
 
 ### List
 
 |라이트 모드|다크 모드|페이지네이션|
 |:-----:|:----:|:-----:|
-|<img src="https://i.imgur.com/zX33lKR.png" width=300>|<img src="https://i.imgur.com/6xxfVsR.png" width=300>|<img src="https://user-images.githubusercontent.com/59204352/216769608-51938654-6014-4eb6-8b81-e11c86f0e08c.gif" width=300>|
+|<img src="https://i.imgur.com/zX33lKR.png" width=250>|<img src="https://i.imgur.com/6xxfVsR.png" width=250>|<img src="https://user-images.githubusercontent.com/59204352/216769608-51938654-6014-4eb6-8b81-e11c86f0e08c.gif" width=250>|
 
 ### Graph Detail
 
 |Play Accelerometer|Play Gyroscope|View|
 |:-----:|:-----:|:----:|
-|<img src="https://i.imgur.com/Q7NjxiA.gif" width=300>|<img src="https://i.imgur.com/wWE1FT2.gif" width=300>|<img src="https://i.imgur.com/6ph3BH2.png" width=300>|
+|<img src="https://i.imgur.com/Q7NjxiA.gif" width=250>|<img src="https://i.imgur.com/wWE1FT2.gif" width=250>|<img src="https://i.imgur.com/6ph3BH2.png" width=250>|
 
 <br/>
 
