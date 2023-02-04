@@ -24,6 +24,7 @@
 		B4AC807A2988CBCC0095621A /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AC80792988CBCC0095621A /* ReusableView.swift */; };
 		B4AC807C2988E4310095621A /* MeasureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AC807B2988E4310095621A /* MeasureViewController.swift */; };
 		B4C661E2298A47D800A18C60 /* SensorMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C661E1298A47D800A18C60 /* SensorMode.swift */; };
+		B4E9790D298E9AB300E8E1C1 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E9790C298E9AB300E8E1C1 /* Array+Extension.swift */; };
 		D2BF0BF5298BE7A2002DDF61 /* NotificationName+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BF0BF4298BE7A2002DDF61 /* NotificationName+Extension.swift */; };
 		D2C94E2A2988BE9F00F70389 /* MeasureTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C94E292988BE9F00F70389 /* MeasureTableViewCell.swift */; };
 		D2D44DB1298E4B460005ED01 /* FileManager+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D44DB0298E4B460005ED01 /* FileManager+Extension.swift */; };
@@ -59,6 +60,7 @@
 		B4AC80792988CBCC0095621A /* ReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
 		B4AC807B2988E4310095621A /* MeasureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureViewController.swift; sourceTree = "<group>"; };
 		B4C661E1298A47D800A18C60 /* SensorMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensorMode.swift; sourceTree = "<group>"; };
+		B4E9790C298E9AB300E8E1C1 /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
 		D2BF0BF4298BE7A2002DDF61 /* NotificationName+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationName+Extension.swift"; sourceTree = "<group>"; };
 		D2C94E292988BE9F00F70389 /* MeasureTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureTableViewCell.swift; sourceTree = "<group>"; };
 		D2D44DB0298E4B460005ED01 /* FileManager+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Extension.swift"; sourceTree = "<group>"; };
@@ -247,6 +249,7 @@
 			children = (
 				D2BF0BF4298BE7A2002DDF61 /* NotificationName+Extension.swift */,
 				D2D44DB4298E537E0005ED01 /* DateFormatter+Extension.swift */,
+				B4E9790C298E9AB300E8E1C1 /* Array+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -322,6 +325,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B4AC807A2988CBCC0095621A /* ReusableView.swift in Sources */,
+				B4E9790D298E9AB300E8E1C1 /* Array+Extension.swift in Sources */,
 				D2C94E2A2988BE9F00F70389 /* MeasureTableViewCell.swift in Sources */,
 				B4564290298C1A7F0060DEC4 /* MotionCoreModel+CoreDataProperties.swift in Sources */,
 				D2DA2C24298A389C006B4FC3 /* SensorData.swift in Sources */,

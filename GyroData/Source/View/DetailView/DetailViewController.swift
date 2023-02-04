@@ -110,8 +110,10 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
         setupNavigation()
         setupViews()
+        setupButtons()
         setupContent()
         setupToMode()
+        setupBind()
     }
     
     private func setupNavigation() {
@@ -169,5 +171,45 @@ class DetailViewController: UIViewController {
             self.playButton.isHidden = false
             self.measurementTimeLabel.isHidden = false
         }
+    }
+    
+    private func setupButtons() {
+        let playAction = UIAction { _ in
+            self.playButton.isHidden = true
+            self.stopButton.isHidden = false
+            self.tappedPlayButton()
+        }
+        playButton.addAction(playAction, for: .touchUpInside)
+        
+        let stopAction = UIAction { _ in
+            self.playButton.isHidden = false
+            self.stopButton.isHidden = true
+            self.tappedStopButton()
+        }
+        stopButton.addAction(stopAction, for: .touchUpInside)
+    }
+    
+    private func setupBind() {
+        detailViewModel.runtime.bind { runtime in
+            self.measurementTimeLabel.text = "\(String(format: "%.1f", runtime))"
+            
+            if runtime >= self.detailViewModel.model.value.runtime {
+                self.playButton.isHidden = false
+                self.stopButton.isHidden = true
+            }
+        }
+    }
+    
+    private func tappedPlayButton() {
+        self.graphView.resetView()
+        detailViewModel.reset()
+        detailViewModel.startDraw { x, y, z in
+            self.graphView.drawLine(xPoint: x, yPoint: y, zPoint: z)
+            self.graphView.configure(xPoint: x, yPoint: y, zPoint: z)
+        }
+    }
+    
+    private func tappedStopButton() {
+        detailViewModel.stopDraw()
     }
 }
