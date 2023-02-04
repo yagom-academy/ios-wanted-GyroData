@@ -42,7 +42,7 @@ class GraphView: UIView {
 
     var timeTrigger = true
     var realTime = Timer()
-    var transitionData: Transition
+    var transitionData: Transition = Transition(x: [], y: [], z: [])
 
     // MARK: - LifeCycle
     override init(frame: CGRect) {
@@ -121,6 +121,33 @@ extension GraphView {
         addGraphViewSublayer(layer: xLayer, path: xPath)
         addGraphViewSublayer(layer: yLayer, path: yPath)
         addGraphViewSublayer(layer: zLayer, path: zPath)
+    }
+
+    @objc private func replayDrawLine() {
+        let xOffset: CGFloat = self.frame.width / CGFloat(600 - 1)
+        let centerY = self.frame.height / 2
+        let limitedIndex = findMinimumCount()
+        var currentIndex = 0
+        currentX += xOffset
+        let newXPosition = CGPoint(x: currentX, y: centerY - transitionData.x[currentIndex])
+        xPath.addLine(to: newXPosition)
+        let newYPosition = CGPoint(x: currentX, y: centerY - transitionData.y[currentIndex])
+        yPath.addLine(to: newYPosition)
+        let newZPosition = CGPoint(x: currentX, y: centerY - transitionData.z[currentIndex])
+        zPath.addLine(to: newZPosition)
+
+        xPositionLabel.text = "x: \(transitionData.x[currentIndex])"
+        yPositionLabel.text = "y: \(transitionData.y[currentIndex])"
+        zPositionLabel.text = "z: \(transitionData.z[currentIndex])"
+
+        addGraphViewSublayer(layer: xLayer, path: xPath)
+        addGraphViewSublayer(layer: yLayer, path: yPath)
+        addGraphViewSublayer(layer: zLayer, path: zPath)
+
+        currentIndex += 1
+        if currentIndex >= limitedIndex {
+            realTime.invalidate()
+        }
     }
 
     private func addGraphViewSublayer(layer: CAShapeLayer, path: UIBezierPath) {
