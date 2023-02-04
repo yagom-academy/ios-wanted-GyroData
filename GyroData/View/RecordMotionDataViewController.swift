@@ -33,7 +33,7 @@ final class RecordMotionDataViewController: UIViewController {
     }()
 
     private let segmentedControl = UISegmentedControl()
-    private let graphView = GraphView(frame: .zero)
+    private let graphView = GraphView()
     private let measureButton: UIButton = {
         let button = UIButton()
         button.setTitle(Constant.Namespace.measure, for: .normal)
@@ -72,6 +72,11 @@ final class RecordMotionDataViewController: UIViewController {
         configureButtonActions()
         bind()
         configureActivityIndicator()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        graphView.drawGrid()
     }
     
     private func configureNavigationBar() {
@@ -146,6 +151,7 @@ final class RecordMotionDataViewController: UIViewController {
     
     private func measureButtonAction() -> UIAction {
         return UIAction(handler: { _ in
+            self.graphView.clearGraph()
             self.viewModel.action(.start(
                 selectedIndex: self.segmentedControl.selectedSegmentIndex,
                 handler: self.toggleControlsAvailability)

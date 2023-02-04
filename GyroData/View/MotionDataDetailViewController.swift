@@ -84,6 +84,11 @@ final class MotionDataDetailViewController: UIViewController {
         super.viewWillAppear(animated)
         viewModel.action(.onAppear)
     }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        graphView.drawGrid()
+    }
     
     private func setNavigationTitle(with text: String) {
         title = text
@@ -139,6 +144,7 @@ final class MotionDataDetailViewController: UIViewController {
     private func setButtonAction() {
         playStopButton.addAction(
             UIAction { _ in
+                self.graphView.clearGraph()
                 self.viewModel.action(.buttonTapped(handler: { buttonImage in
                     self.playStopButton.setImage(
                         UIImage(systemName: buttonImage),
