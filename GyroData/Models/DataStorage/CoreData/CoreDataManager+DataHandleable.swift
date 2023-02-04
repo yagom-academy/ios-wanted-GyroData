@@ -55,25 +55,20 @@ final class CoreDataManager: MeasurementDataHandleable {
         try context.save()
     }
     
-    func fetchData() -> Result<[Measurement], DataHandleError> {
+    func fetchData() throws -> [Measurement] {
+        var measurements: [Measurement] = []
         let request = NSFetchRequest<MeasurementCoreModel>(entityName: "MeasurementCoreModel")
         request.fetchLimit = fetchLimit
         request.fetchOffset = fetchOffset
         
-        var measurements: [Measurement] = []
+        let fetchedData = try context.fetch(request)
         
-        do {
-            let fetchedData = try context.fetch(request)
-            
-            try fetchedData.forEach { measurementsCoreModel in
-                let measurement = try convertTypeToMeasurement(from: measurementsCoreModel)
-                measurements.append(measurement)
-            }
-            
-            return .success(measurements)
-        } catch {
-            return .failure(DataHandleError.fetchFailError(error: error))
+        try fetchedData.forEach { measurementsCoreModel in
+            let measurement = try convertTypeToMeasurement(from: measurementsCoreModel)
+            measurements.append(measurement)
         }
+        
+        return measurements
     }
     
     func deleteData(_ data: DataType) throws {

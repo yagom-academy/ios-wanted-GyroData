@@ -26,24 +26,20 @@ final class SensorFileManager: MeasurementDataHandleable {
         try encodedData.write(to: fileURL, options: [.atomicWrite])
     }
 
-    func fetchData() -> Result<[Measurement], DataHandleError> {
-        do {
-            var fetchedData: [Measurement] = []
-            let contents = try fileManager.contentsOfDirectory(at: documentURL, includingPropertiesForKeys: nil, options: [])
+    func fetchData() throws -> [Measurement] {
+        var fetchedData: [Measurement] = []
+        let contents = try fileManager.contentsOfDirectory(at: documentURL, includingPropertiesForKeys: nil, options: [])
 
-            for url in contents {
-                let data = try Data(contentsOf: url)
-                guard let measurement = try? JSONDecoder().decode(Measurement.self, from: data) else {
-                    return .failure(.decodingError)
-                }
-                
-                fetchedData.append(measurement)
+        for url in contents {
+            let data = try Data(contentsOf: url)
+            guard let measurement = try? JSONDecoder().decode(Measurement.self, from: data) else {
+                throw DataHandleError.decodingError
             }
-            
-            return .success(fetchedData)
-        } catch let error {
-            return .failure(.fetchFailError(error: error))
+
+            fetchedData.append(measurement)
         }
+
+        return fetchedData
     }
 
     func deleteData(_ data: Measurement) throws {

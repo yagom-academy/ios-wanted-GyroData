@@ -13,7 +13,7 @@ protocol DataHandleable {
     
     func saveData(_ data: DataType) throws -> Void
     
-    func fetchData() -> Result<[DataType], DataHandleError>
+    func fetchData() throws -> [DataType]
     
     func deleteData(_ data: DataType) throws -> Void
 }

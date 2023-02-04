@@ -40,12 +40,11 @@ final class ListViewController: UIViewController {
         guard let coreDataManager = dataManagers[0] as? CoreDataManager else { return }
         
         coreDataManager.changeFetchOffset(isInitialFetch: true)
-        
-        switch coreDataManager.fetchData() {
-        case .success(let fetchedMeasurements):
-            measurements = fetchedMeasurements
-        case .failure(let dataHandlerError):
-            print(dataHandlerError.description)
+
+        do {
+            measurements = try coreDataManager.fetchData()
+        } catch(let error) {
+            print(DataHandleError.fetchFailError(error: error).description)
             UIAlertController.show(title: "Error", message: "데이터 로딩에 실패했습니다", target: self)
         }
     }
@@ -136,17 +135,18 @@ extension ListViewController: UITableViewDelegate {
         isPaging = true
         coreDataManager.changeFetchOffset(isInitialFetch: false)
         self.listView.tableView.tableFooterView = generateSpinnerFooter()
-        
-        switch coreDataManager.fetchData() {
-        case .success(let fetchedMeasurements):
+
+        do {
+            let fetchedMeasurements = try coreDataManager.fetchData()
+
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
                 self?.measurements += fetchedMeasurements
                 self?.listView.tableView.tableFooterView = nil
                 self?.applySnapshot()
                 self?.isPaging = false
             }
-        case .failure(let dataHandlerError):
-            print(dataHandlerError.description)
+        } catch(let error) {
+            print(DataHandleError.fetchFailError(error: error).description)
             UIAlertController.show(title: "Error", message: "데이터 로딩에 실패했습니다", target: self)
         }
     }
