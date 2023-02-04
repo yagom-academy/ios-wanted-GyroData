@@ -90,8 +90,8 @@ extension ListViewController: UITableViewDelegate {
         let playAction = UIContextualAction(style: .normal, title: "Play") { [weak self] _, _, _ in
             guard let self = self else { return }
 
-            let reviewPageViewController = ReviewPageViewController(
-                reviewPageView: ReviewPageView(pageState: .resultPlay),
+            let reviewPageViewController = ReviewViewController(
+                reviewPageView: ReviewView(pageState: .resultPlay),
                 measurement: self.measurements[indexPath.item])
             
             self.navigationController?.pushViewController(reviewPageViewController, animated: false)
@@ -124,8 +124,8 @@ extension ListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.cellForRow(at: indexPath)?.isSelected = false
         
-        let reviewPageViewController = ReviewPageViewController(
-            reviewPageView: ReviewPageView(pageState: .resultView),
+        let reviewPageViewController = ReviewViewController(
+            reviewPageView: ReviewView(pageState: .resultView),
             measurement: measurements[indexPath.item])
         
         self.navigationController?.pushViewController(reviewPageViewController, animated: false)

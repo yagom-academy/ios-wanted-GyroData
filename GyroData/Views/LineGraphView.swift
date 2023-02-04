@@ -13,7 +13,7 @@ final class LineGraphView: UIView {
     private let axisYLabel = UILabel(text: "y: 0", textColor: .green, textAlignment: .center)
     private let axisZLabel = UILabel(text: "z: 0", textColor: .blue, textAlignment: .center)
     private let stackView = UIStackView(distribution: .fillEqually)
-    
+
     private var data: [AxisValue] = [] {
         didSet {
             setNeedsDisplay()
@@ -51,30 +51,26 @@ final class LineGraphView: UIView {
     }
     
     private func drawGrid(column: Int, row: Int) {
-        guard let context = UIGraphicsGetCurrentContext() else { return }
-        
-        context.setStrokeColor(UIColor.lightGray.cgColor)
-        context.setLineWidth(0.5)
-        
-        for i in 1...column {
-            let y = frame.height / CGFloat(column) * CGFloat(i)
-            context.move(to: CGPoint(x: 0, y: y))
-            context.addLine(to: CGPoint(x: frame.width, y: y))
+        let linePath = UIBezierPath()
+        linePath.lineWidth = 0.5
+        UIColor.lightGray.setStroke()
+
+        for i in 0...column {
+            let y = frame.width / CGFloat(column) * CGFloat(i)
+            linePath.move(to: CGPoint(x: 0, y: y))
+            linePath.addLine(to: CGPoint(x: frame.width, y: y))
         }
-        
-        context.strokePath()
-        
-        for i in 1...row {
-            let x = frame.width / CGFloat(row) * CGFloat(i)
-            context.move(to: CGPoint(x: x, y: 0))
-            context.addLine(to: CGPoint(x: x, y: frame.height))
+
+        for i in 0...row {
+            let x = frame.height / CGFloat(row) * CGFloat(i)
+            linePath.move(to: CGPoint(x: x, y: 0))
+            linePath.addLine(to: CGPoint(x: x, y: frame.height))
         }
-        
-        context.strokePath()
+
+        linePath.stroke()
     }
     
     private func drawGraph() {
-        guard let context = UIGraphicsGetCurrentContext() else { return }
         let width = frame.width
         let height = frame.height / 2
         
@@ -86,9 +82,9 @@ final class LineGraphView: UIView {
             }
         }
         
-        let axisXpath = CGMutablePath()
-        let axisYpath = CGMutablePath()
-        let axisZpath = CGMutablePath()
+        let axisXpath = UIBezierPath()
+        let axisYpath = UIBezierPath()
+        let axisZpath = UIBezierPath()
         
         axisXpath.move(to: CGPoint(x: 0, y: height))
         axisYpath.move(to: CGPoint(x: 0, y: height))
@@ -107,18 +103,14 @@ final class LineGraphView: UIView {
             axisZpath.addLine(to: CGPoint(x: x, y: axisZPosition))
         }
         
-        context.setLineWidth(1)
-        context.addPath(axisXpath)
-        context.setStrokeColor(UIColor.red.cgColor)
-        context.strokePath()
-        
-        context.addPath(axisYpath)
-        context.setStrokeColor(UIColor.green.cgColor)
-        context.strokePath()
-        
-        context.addPath(axisZpath)
-        context.setStrokeColor(UIColor.blue.cgColor)
-        context.strokePath()
+        UIColor.red.setStroke()
+        axisXpath.stroke()
+
+        UIColor.green.setStroke()
+        axisYpath.stroke()
+
+        UIColor.blue.setStroke()
+        axisZpath.stroke()
     }
     
     @available (*, unavailable)

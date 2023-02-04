@@ -128,12 +128,12 @@ extension MeasurementView {
             graphView.topAnchor.constraint(equalTo: segmentedController.bottomAnchor, constant: 16),
             graphView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 16),
             graphView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -16),
-            graphView.heightAnchor.constraint(equalTo: safeArea.heightAnchor, multiplier: 0.4),
+            graphView.heightAnchor.constraint(equalTo: graphView.widthAnchor),
             
-            measurementButton.topAnchor.constraint(equalTo: graphView.bottomAnchor, constant: 16),
+            measurementButton.topAnchor.constraint(equalTo: graphView.bottomAnchor, constant: 40),
             measurementButton.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 16),
             
-            stopButton.topAnchor.constraint(equalTo: measurementButton.bottomAnchor, constant: 16),
+            stopButton.topAnchor.constraint(equalTo: measurementButton.bottomAnchor, constant: 40),
             stopButton.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 16),
             
             indicatorView.centerXAnchor.constraint(equalTo: centerXAnchor),

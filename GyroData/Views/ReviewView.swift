@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ReviewPageView: UIView {
+final class ReviewView: UIView {
 
     enum PageState {
 
@@ -103,7 +103,7 @@ final class ReviewPageView: UIView {
 }
 
 // MARK: Layout
-extension ReviewPageView {
+extension ReviewView {
     
     private func configureHierarchy() {
         [dateLabel, pageStateLabel, lineGraphView].forEach { view in

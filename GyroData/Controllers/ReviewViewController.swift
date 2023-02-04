@@ -7,9 +7,9 @@
 
 import UIKit
 
-final class ReviewPageViewController: UIViewController {
+final class ReviewViewController: UIViewController {
 
-    private let reviewPageView: ReviewPageView
+    private let reviewPageView: ReviewView
     private let measurement: Measurement
 
     private var timer: Timer?
@@ -21,7 +21,7 @@ final class ReviewPageViewController: UIViewController {
         configureView()
     }
     
-    init(reviewPageView: ReviewPageView, measurement: Measurement) {
+    init(reviewPageView: ReviewView, measurement: Measurement) {
         self.reviewPageView = reviewPageView
         self.measurement = measurement
         super.init(nibName: nil, bundle: nil)
