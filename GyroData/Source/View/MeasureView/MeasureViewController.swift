@@ -23,10 +23,11 @@ final class MeasureViewController: UIViewController {
         let segmentedControl = UISegmentedControl(items: [Constant.leftSegmentedItem,
                                                           Constant.rightSegmentedItem])
         
-        segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black],
+        segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white],
                                                 for: UIControl.State.selected)
-        segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black],
+        segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.systemBlue],
                                                 for: UIControl.State.normal)
+        segmentedControl.selectedSegmentTintColor = .systemBlue
         segmentedControl.selectedSegmentIndex = 0
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         
@@ -165,9 +166,9 @@ final class MeasureViewController: UIViewController {
         self.stopButton.isUserInteractionEnabled = false
         self.navigationItem.rightBarButtonItem?.isEnabled = true
         
-        self.segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black],
+        self.segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white],
                                                      for: UIControl.State.selected)
-        self.segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black],
+        self.segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.systemBlue],
                                                      for: UIControl.State.normal)
         self.measureButton.setTitleColor(.systemBlue, for: .normal)
         self.stopButton.setTitleColor(.gray, for: .normal)
