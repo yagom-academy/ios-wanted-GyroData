@@ -20,19 +20,6 @@ final class AccelerometerMotionManager: MotionManagerable {
         configureUpdateInterval(interval)
     }
     
-    func start(handler: @escaping (MotionCoordinate) -> Void) {
-        motionManager.startAccelerometerUpdates()
-        measureTimer.activate { [weak self] in
-            guard let coordinate = self?.createAccelerometerCoordinate() else { return }
-            handler(coordinate)
-        }
-    }
-    
-    func stop() {
-        motionManager.stopAccelerometerUpdates()
-        measureTimer.stop()
-    }
-    
     private func configureUpdateInterval(_ interval: TimeInterval) {
         motionManager.accelerometerUpdateInterval = interval
     }
@@ -44,5 +31,43 @@ final class AccelerometerMotionManager: MotionManagerable {
         
         let coordinate = MotionCoordinate(x: measureData.x, y: measureData.y, z: measureData.z)
         return coordinate
+    }
+    
+    private func createMotionData(duration: Double) {
+        let measuredData = Date(timeInterval: -duration, since: Date())
+        
+        motionData = MotionData(
+            measuredDate: measuredData,
+            duration: duration,
+            type: .accelerometer,
+            id: UUID()
+        )
+    }
+}
+
+// MARK: MotionManagerable Requirement
+extension AccelerometerMotionManager {
+    func start(handler: @escaping (MotionMeasures?) -> Void) {
+        motionManager.startAccelerometerUpdates()
+        measureTimer.activate { [weak self] in
+            guard let measureData =  self?.motionManager.accelerometerData?.acceleration else {
+                return
+            }
+            
+            self?.measuredMotion?.axisX.append(measureData.x)
+            self?.measuredMotion?.axisY.append(measureData.y)
+            self?.measuredMotion?.axisZ.append(measureData.z)
+            handler(self?.measuredMotion)
+        }
+    }
+    
+    func stop() {
+        motionManager.stopAccelerometerUpdates()
+        let duration = measureTimer.stop()
+        createMotionData(duration: duration)
+    }
+    
+    func save(completionHandler: @escaping () -> Void) {
+        
     }
 }

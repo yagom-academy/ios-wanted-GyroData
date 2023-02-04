@@ -20,29 +20,50 @@ final class GyroMotionManager: MotionManagerable {
         configureUpdateInterval(interval)
     }
     
-    func start(handler: @escaping (MotionCoordinate) -> Void) {
+    private func configureUpdateInterval(_ interval: TimeInterval) {
+        motionManager.gyroUpdateInterval = interval
+    }
+    
+    private func createMotionData(duration: Double) {
+        let measuredData = Date(timeInterval: -duration, since: Date())
+        
+        motionData = MotionData(
+            measuredDate: measuredData,
+            duration: duration,
+            type: .accelerometer,
+            id: UUID()
+        )
+    }
+    
+    private func initialMotionData() {
+        motionData = nil
+        measuredMotion = MotionMeasures(axisX: [], axisY: [], axisZ: [])
+    }
+}
+
+// MARK: MotionManagerable Requirement
+extension GyroMotionManager {
+    func start(handler: @escaping (MotionMeasures?) -> Void) {
+        initialMotionData()
         motionManager.startAccelerometerUpdates()
         measureTimer.activate { [weak self] in
-            guard let coordinate = self?.createGyroCoordinate() else { return }
-            handler(coordinate)
+            guard let measureData =  self?.motionManager.gyroData?.rotationRate else {
+                return
+            }
+            self?.measuredMotion?.axisX.append(measureData.x)
+            self?.measuredMotion?.axisY.append(measureData.y)
+            self?.measuredMotion?.axisZ.append(measureData.z)
+            handler(self?.measuredMotion)
         }
     }
 
     func stop() {
         motionManager.stopGyroUpdates()
-        measureTimer.stop()
+        let duration = measureTimer.stop()
+        createMotionData(duration: duration)
     }
-    
-    private func configureUpdateInterval(_ interval: TimeInterval) {
-        motionManager.gyroUpdateInterval = interval
-    }
-    
-    private func createGyroCoordinate() -> MotionCoordinate? {
-        guard let measureData =  motionManager.accelerometerData?.acceleration else {
-            return nil
-        }
+
+    func save(completionHandler: @escaping () -> Void) {
         
-        let coordinate = MotionCoordinate(x: measureData.x, y: measureData.y, z: measureData.z)
-        return coordinate
     }
 }

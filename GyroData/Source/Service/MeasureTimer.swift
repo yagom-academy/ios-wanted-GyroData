@@ -48,8 +48,10 @@ final class MeasureTimer {
         })
     }
     
-    func stop() {
+    func stop() -> Double {
         resetTimer()
+        
+        return Double(duration) / Double(10)
     }
     
     private func resetTimer() {

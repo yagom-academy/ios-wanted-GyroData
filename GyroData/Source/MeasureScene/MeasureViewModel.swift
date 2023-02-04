@@ -99,10 +99,8 @@ extension MeasureViewModel {
             axisZ: []
         )
         
-        motionManager.start { [weak self] measuredCoordinate in
-            self?.measuredMotion?.axisX.append(measuredCoordinate.x)
-            self?.measuredMotion?.axisY.append(measuredCoordinate.y)
-            self?.measuredMotion?.axisZ.append(measuredCoordinate.z)
+        motionManager.start { [weak self] measuredMotion in
+            self?.measuredMotion = measuredMotion
         }
     }
     

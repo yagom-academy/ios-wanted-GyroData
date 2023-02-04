@@ -8,6 +8,7 @@
 import Foundation
 
 protocol MotionManagerable {
-    func start(handler: @escaping (MotionCoordinate) -> Void)
+    func start(handler: @escaping (MotionMeasures?) -> Void)
     func stop()
+    func save(completionHandler: @escaping () -> Void)
 }
