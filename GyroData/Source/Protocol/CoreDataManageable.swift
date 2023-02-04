@@ -46,7 +46,7 @@ extension CoreDataManageable {
             return .failure(.appDelegateError)
         }
         
-        let managedContext = appDelegate.persistentContainer.viewContext
+        let managedContext = appDelegate.backgroundContext
         let fetchRequest = NSFetchRequest<MotionEntity>(entityName: Constant.entityName)
         fetchRequest.fetchLimit = 10
         fetchRequest.fetchOffset = offset
@@ -65,7 +65,7 @@ extension CoreDataManageable {
             throw CoreDataError.appDelegateError
         }
         
-        let managedContext = appDelegate.persistentContainer.viewContext
+        let managedContext = appDelegate.backgroundContext
         let fetchRequest = NSFetchRequest<MotionEntity>(entityName: Constant.entityName)
         
         fetchRequest.predicate = NSPredicate(format: Constant.idFormat, motionData.id.uuidString)
