@@ -11,7 +11,7 @@
 		1138F24C2988E68000007C11 /* JSONDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1138F24B2988E68000007C11 /* JSONDataManager.swift */; };
 		1170085029892ECA001DFB60 /* MotionListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1170084F29892ECA001DFB60 /* MotionListCell.swift */; };
 		1170085229893867001DFB60 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1170085129893867001DFB60 /* Reusable.swift */; };
-		11700857298CCD55001DFB60 /* ReplayTipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11700856298CCD55001DFB60 /* ReplayTipe.swift */; };
+		11700857298CCD55001DFB60 /* ReplayType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11700856298CCD55001DFB60 /* ReplayType.swift */; };
 		11B34A8C2988A6AB00DA3A56 /* MotionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B34A8B2988A6AB00DA3A56 /* MotionData.swift */; };
 		11B34A8E2988AA2100DA3A56 /* MotionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B34A8D2988AA2100DA3A56 /* MotionType.swift */; };
 		63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB428D44FC400C53A39 /* AppDelegate.swift */; };
@@ -40,7 +40,7 @@
 		1138F24B2988E68000007C11 /* JSONDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDataManager.swift; sourceTree = "<group>"; };
 		1170084F29892ECA001DFB60 /* MotionListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionListCell.swift; sourceTree = "<group>"; };
 		1170085129893867001DFB60 /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
-		11700856298CCD55001DFB60 /* ReplayTipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplayTipe.swift; sourceTree = "<group>"; };
+		11700856298CCD55001DFB60 /* ReplayType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplayType.swift; sourceTree = "<group>"; };
 		11B34A8B2988A6AB00DA3A56 /* MotionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionData.swift; sourceTree = "<group>"; };
 		11B34A8D2988AA2100DA3A56 /* MotionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionType.swift; sourceTree = "<group>"; };
 		63F01BB128D44FC400C53A39 /* GyroData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GyroData.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -115,7 +115,7 @@
 				BF128AB72988DCCD00C3CB7B /* FileManager.swift */,
 				11B34A8B2988A6AB00DA3A56 /* MotionData.swift */,
 				11B34A8D2988AA2100DA3A56 /* MotionType.swift */,
-				11700856298CCD55001DFB60 /* ReplayTipe.swift */,
+				11700856298CCD55001DFB60 /* ReplayType.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -328,7 +328,7 @@
 				1170085229893867001DFB60 /* Reusable.swift in Sources */,
 				BF128ABC29892BB400C3CB7B /* MeasurementMotionDataViewController.swift in Sources */,
 				BFBD6B6D298BB07A0057D637 /* GraphView.swift in Sources */,
-				11700857298CCD55001DFB60 /* ReplayTipe.swift in Sources */,
+				11700857298CCD55001DFB60 /* ReplayType.swift in Sources */,
 				1138F2492988D09200007C11 /* CoreDataManager.swift in Sources */,
 				11B34A8C2988A6AB00DA3A56 /* MotionData.swift in Sources */,
 				1138F24C2988E68000007C11 /* JSONDataManager.swift in Sources */,
