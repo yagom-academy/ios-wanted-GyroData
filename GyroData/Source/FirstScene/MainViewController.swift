@@ -27,6 +27,14 @@ class MainViewController: UIViewController {
     }()
     private var mainDataSource: DataSource?
     private var mainViewModel: MainViewModel = .init()
+    private var isPaging: Bool = false {
+        didSet {
+            if isPaging {
+                mainViewModel.increaseOffset()
+                isPaging.toggle()
+            }
+        }
+    }
 
     //MARK: LifeCycle
     
@@ -37,7 +45,7 @@ class MainViewController: UIViewController {
         configureView()
         configureDataSource()
         bindViewModel()
-        configureSnapShot(motionDatas: mainViewModel.motionDatas)
+        mainViewModel.fetchDatas()
         mainTableView.delegate = self
     }
     
@@ -131,5 +139,18 @@ extension MainViewController: UITableViewDelegate {
         playButton.backgroundColor = .systemGreen
         
         return UISwipeActionsConfiguration(actions: [deleteButton, playButton])
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard scrollView.frame.height < scrollView.contentSize.height,
+              !isPaging
+        else {
+            return
+        }
+
+        if scrollView.frame.height + scrollView.contentOffset.y >= scrollView.contentSize.height,
+           mainViewModel.hasNext {
+            isPaging = true
+        }
     }
 }
