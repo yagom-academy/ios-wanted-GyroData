@@ -9,6 +9,8 @@ import UIKit
 
 final class MeasureViewController: UIViewController {
     private let measureViewModel: MeasureViewModel
+    private let graphViewModel: GraphViewModel
+    private let graphView: GraphView
     
     private let measureButton: UIButton = {
         let button = UIButton()
@@ -33,12 +35,6 @@ final class MeasureViewController: UIViewController {
         stackView.distribution = .fillEqually
         stackView.spacing = 15
         return stackView
-    }()
-    
-    private let graphView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .systemGray4
-        return view
     }()
     
     private let segmentControl: UISegmentedControl = {
@@ -73,8 +69,10 @@ final class MeasureViewController: UIViewController {
         return indicator
     }()
     
-    init(measureViewModel: MeasureViewModel) {
+    init(measureViewModel: MeasureViewModel, graphViewModel: GraphViewModel) {
         self.measureViewModel = measureViewModel
+        self.graphViewModel = graphViewModel
+        self.graphView = GraphView(viewModel: graphViewModel)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -92,6 +90,10 @@ final class MeasureViewController: UIViewController {
     }
     
     private func bindToMeasureViewModel() {
+        measureViewModel.bindMotionCoordinate { [weak self] coordinate in
+            self?.graphViewModel.drawCoordinate(coordinate)
+        }
+        
         measureViewModel.bindCanChangeMotionType { [weak self] canChange in
             self?.segmentControl.isUserInteractionEnabled = canChange
         }

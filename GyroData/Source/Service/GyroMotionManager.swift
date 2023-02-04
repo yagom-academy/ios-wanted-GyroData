@@ -45,9 +45,9 @@ final class GyroMotionManager: MotionManagerable {
 
 // MARK: MotionManagerable Requirement
 extension GyroMotionManager {
-    func start(handler: @escaping (MotionMeasures?) -> Void) {
+    func start(handler: @escaping (MotionCoordinate?) -> Void) {
         initialMotionData()
-        motionManager.startAccelerometerUpdates()
+        motionManager.startGyroUpdates()
         measureTimer.activate { [weak self] in
             guard let measureData =  self?.motionManager.gyroData?.rotationRate else {
                 return
@@ -55,7 +55,7 @@ extension GyroMotionManager {
             self?.measuredMotion?.axisX.append(measureData.x)
             self?.measuredMotion?.axisY.append(measureData.y)
             self?.measuredMotion?.axisZ.append(measureData.z)
-            handler(self?.measuredMotion)
+            handler(MotionCoordinate(x: measureData.x, y: measureData.y, z: measureData.z))
         }
     }
 

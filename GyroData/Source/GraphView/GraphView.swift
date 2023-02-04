@@ -8,7 +8,7 @@
 import UIKit
 
 final class GraphView: UIView {
-    private let valueXLabel = {
+    private let valueXLabel: UILabel = {
         let label = UILabel()
         label.textColor = .systemRed
         label.text = "x: 0"
@@ -16,7 +16,7 @@ final class GraphView: UIView {
         return label
     }()
     
-    private let valueYLabel = {
+    private let valueYLabel: UILabel = {
         let label = UILabel()
         label.textColor = .systemGreen
         label.text = "y: 0"
@@ -24,13 +24,27 @@ final class GraphView: UIView {
         return label
     }()
     
-    private let valueZLabel = {
+    private let valueZLabel: UILabel = {
         let label = UILabel()
         label.textColor = .systemBlue
         label.text = "z: 0"
         
         return label
     }()
+    
+    private let valueStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.distribution = .fillEqually
+        stackView.alignment = .center
+        stackView.spacing = 30
+        return stackView
+    }()
+    
+    private let graphBackgroundView = GraphBackgroundView()
+    
+//    private let xShapeLayer = CAShapeLayer()
+//    private let xShapeLayer = CAShapeLayer()
     
     private let xPath = UIBezierPath()
     private let yPath = UIBezierPath()
@@ -44,10 +58,9 @@ final class GraphView: UIView {
     private var yAxisOffset: CGFloat = 0
     private var maxValue: CGFloat = 1.0 {
         didSet {
-            yAxisOffset = maxValue + (maxValue * 0.2)
+            yAxisOffset = (maxValue + (maxValue * 0.2))
         }
     }
-    private var scale: Double = 0
     
     private var viewModel: GraphViewModel
     
@@ -56,13 +69,19 @@ final class GraphView: UIView {
         super.init(frame: .zero)
         
         configureSubview()
+        configureLayout()
         bind()
     }
     
     private func bind() {
         viewModel.bindGraphData { [weak self] motionCoordinate in
             self?.drawGraph(motionCoordinate)
+            self?.setValueLabel(motionCoordinate)
             self?.setNeedsDisplay()
+        }
+        
+        viewModel.bindResetHandler { [weak self] in
+            self?.reset()
         }
     }
     
@@ -75,11 +94,32 @@ final class GraphView: UIView {
     }
     
     private func configureSubview() {
-        backgroundColor = .systemBackground
-        self.layer.borderWidth = 2
-        self.addSubview(valueXLabel)
-        self.addSubview(valueYLabel)
-        self.addSubview(valueZLabel)
+        backgroundColor = .clear
+        graphBackgroundView.backgroundColor = .clear
+        layer.borderWidth = 2
+    
+        [valueXLabel, valueYLabel, valueZLabel].forEach {
+            valueStackView.addArrangedSubview($0)
+        }
+        
+        addSubview(graphBackgroundView)
+        addSubview(valueStackView)
+    }
+    
+    private func configureLayout() {
+        [graphBackgroundView, valueStackView].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
+        
+        NSLayoutConstraint.activate([
+            valueStackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            valueStackView.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor),
+            
+            graphBackgroundView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            graphBackgroundView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
+            graphBackgroundView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
+            graphBackgroundView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
+        ])
     }
     
     override func draw(_ rect: CGRect) {
@@ -94,6 +134,9 @@ final class GraphView: UIView {
     
     private func drawGraph(_ coordinate: MotionCoordinate) {
         let initialYPoint = bounds.height / 2
+        xPath.lineWidth = 2
+        yPath.lineWidth = 2
+        zPath.lineWidth = 2
         
         xPath.move(to: CGPoint(x: xAxisOffset, y: initialYPoint + currentX))
         yPath.move(to: CGPoint(x: xAxisOffset, y: initialYPoint + currentX))
@@ -110,5 +153,23 @@ final class GraphView: UIView {
         xPath.addLine(to: CGPoint(x: xAxisOffset, y: initialYPoint + currentX))
         yPath.addLine(to: CGPoint(x: xAxisOffset, y: initialYPoint + currentY))
         zPath.addLine(to: CGPoint(x: xAxisOffset, y: initialYPoint + currentZ))
+    }
+    
+    private func reset() {
+        [xPath, yPath, zPath].forEach {
+            $0.removeAllPoints()
+        }
+        
+        maxValue = 1.0
+        xAxisOffset = 0
+        currentX = 0
+        currentY = 0
+        currentZ = 0
+    }
+    
+    private func setValueLabel(_ coordinate: MotionCoordinate) {
+        valueXLabel.text = "x: " + String(format: "%.1f", coordinate.x)
+        valueYLabel.text = "y: " + String(format: "%.1f", coordinate.y)
+        valueZLabel.text = "z: " + String(format: "%.1f", coordinate.z)
     }
 }

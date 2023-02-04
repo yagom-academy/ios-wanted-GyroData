@@ -67,7 +67,11 @@ final class MainViewController: UIViewController {
     
     @objc private func tapRightBarButton() {
         let measureViewModel = MeasureViewModel()
-        let measureViewController = MeasureViewController(measureViewModel: measureViewModel)
+        let graphViewModel = GraphViewModel()
+        let measureViewController = MeasureViewController(
+            measureViewModel: measureViewModel,
+            graphViewModel: graphViewModel
+        )
         
         show(measureViewController, sender: nil)
     }
@@ -142,8 +146,15 @@ extension MainViewController: UITableViewDelegate {
         _ tableView: UITableView,
         trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
     ) -> UISwipeActionsConfiguration? {
-        let playButton = UIContextualAction(style: .normal, title: "Play") { _, _, _ in
-            print("play button pressed")
+        let playButton = UIContextualAction(style: .normal, title: "Play") { [weak self] _, _, _ in
+            
+            guard let motionData = self?.mainDataSource?.itemIdentifier(for: indexPath),
+                  let fileManager = FileHandleManager() else { return }
+            
+            let detailViewModel = DetailViewModel(motionData, by: .play, fileManager: fileManager)
+            let detailViewController = DetailViewController(viewModel: detailViewModel, graphViewModel: GraphViewModel())
+            
+            self?.show(detailViewController, sender: nil)
         }
         let deleteButton = UIContextualAction(style: .destructive, title: "Delete") { _, _, _ in
             self.mainViewModel.deleteData(at: indexPath.row)

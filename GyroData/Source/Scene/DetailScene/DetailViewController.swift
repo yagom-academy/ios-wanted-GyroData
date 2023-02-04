@@ -71,7 +71,7 @@ final class DetailViewController: UIViewController {
             self?.detailView.configureView(by: pageTypeString)
         }
         detailViewModel.bindGraphData { [weak self] motionMeasures, duration in
-            self?.graphViewModel.setMeasures(motionMeasures, for: duration)
+//            self?.graphViewModel.setMeasures(motionMeasures, for: duration)
         }
         
     }
