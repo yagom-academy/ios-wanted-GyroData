@@ -61,6 +61,7 @@ final class PlayViewController: UIViewController {
         self.playType = viewType
         self.metaData = metaData
         super.init(nibName: nil, bundle: nil)
+        graphView.delegate = self
         
         SystemFileManager().readData(fileName: metaData.jsonName, type: Transition.self) { [weak self] result in
             guard let self = self else { return }
@@ -112,6 +113,25 @@ extension PlayViewController {
         } else {
             graphView.drawPlayGraph(ticks: transitionData.values, viewType: playType)
         }
+    }
+}
+
+// MARK: - GraphDelegate
+extension PlayViewController: GraphDelegate {
+    var isCheckFinish: Bool {
+        get {
+            return false
+        }
+        set {
+            if newValue == true {
+                controlButton.isSelected.toggle()
+                graphView.resetGraph()
+            }
+        }
+    }
+
+    func checkTime(time: Double) {
+        timeLabel.text = String(format: "%.1f", time)
     }
 }
 
