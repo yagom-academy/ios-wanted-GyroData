@@ -32,7 +32,7 @@ final class DataListViewController: UIViewController {
     
     private let tableView = UITableView(frame: .zero, style: .plain)
     
-    private lazy var viewModel = DataListViewModel(delegate: self, alertDelegate: self)
+    private let viewModel: DataListViewModel
     private lazy var dataSource = configureDataSoruce()
     
     override func viewDidLoad() {
@@ -40,6 +40,26 @@ final class DataListViewController: UIViewController {
         setupNavigationBar()
         setupView()
         setupConstraint()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        viewModel.action(.viewWillAppearEvent)
+    }
+    
+    init(viewModel: DataListViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+        
+        setViewModelDelegate()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setViewModelDelegate() {
+        self.viewModel.delegate = self
+        self.viewModel.alertDelegate = self
     }
 }
 
@@ -186,5 +206,15 @@ extension DataListViewController {
             tableView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor)
         ])
+    }
+}
+
+extension DataListViewController: UIScrollViewDelegate {
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        let contentHeight = tableView.contentSize.height
+        
+        if scrollView.contentOffset.y + tableView.bounds.height >= contentHeight {
+            viewModel.action(.scrollToBottomEvent)
+        }
     }
 }

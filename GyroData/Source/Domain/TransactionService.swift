@@ -24,6 +24,7 @@ final class TransactionService {
     }
     
     func bindData(handler: @escaping (([MeasureData]) -> Void)) {
+        handler(list)
         dataHandler = handler
     }
 }
@@ -71,7 +72,6 @@ extension TransactionService {
         }
         
         group.wait()
-        self.list.append(data)
         completion(.success(()))
     }
     

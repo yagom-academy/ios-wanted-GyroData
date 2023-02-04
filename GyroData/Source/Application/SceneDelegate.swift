@@ -18,7 +18,8 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         let window = UIWindow(windowScene: windowScene)
-        let viewController = DataListViewController()
+        let viewModel = DataListViewModel()
+        let viewController = DataListViewController(viewModel: viewModel)
         let navigationController = UINavigationController(rootViewController: viewController)
         
         window.rootViewController = navigationController
