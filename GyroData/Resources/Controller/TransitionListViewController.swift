@@ -167,11 +167,11 @@ private extension TransitionListViewController {
     
     func swipeDeleteAction(indexPath: IndexPath) -> UIContextualAction {
         let deleteAction = UIContextualAction(style: .destructive, title: nil) { [weak self] _, _, handler in
-            // TODO: - 삭제 메서드 추가 및 CoreData 삭제 하기
             guard let self = self else { return }
-            self.metaDatas.remove(at: indexPath.row)
-            self.tableView.reloadData()
+            let data = self.metaDatas[indexPath.row]
+            PersistentContainerManager.shared.deleteTransitionMetaData(data: data)
             
+            self.fetchReloadData()
             handler(true)
         }
         deleteAction.backgroundColor = .systemRed
