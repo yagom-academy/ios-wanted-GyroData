@@ -121,7 +121,10 @@ extension MeasureListViewController: UITableViewDelegate {
     ) -> UISwipeActionsConfiguration? {
         let playAction = UIContextualAction(style: .normal,
                                             title: Constant.playSwipeAction) { (_, _, success) in
-            
+            let createdAt = self.measureListViewModel.model.value[indexPath.row].createdAt
+            let detailViewController = DetailViewController(detailViewMode: .play,
+                                                            createdAt: createdAt)
+            self.push(viewController: detailViewController)
         }
         playAction.backgroundColor = .systemGreen
         

@@ -31,7 +31,12 @@ class DetailViewModel {
         return nil
     }
     
+    func tappedPlayButton() {
+        
+    }
     
-    
+    func tappedStopButton() {
+        
+    }
     
 }
