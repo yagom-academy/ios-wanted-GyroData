@@ -75,23 +75,44 @@ extension GyroMotionManager {
         }
         
         let saveGroup = DispatchGroup()
+        var coreDataError: Error?
+        var fileManigingError: Error?
         
         fileHandleManager?.save(
             fileName: motionData.id,
             motionMeasures: measuredMotion,
-            dispatchGroup: saveGroup,
-            errorHandler: { error in
-            errorHandler(error)
-        })
+            dispatchGroup: saveGroup) { result in
+                switch result {
+                case .success:
+                    break
+                case .failure(let failure):
+                    fileManigingError = failure
+                }
+            }
         
         saveCoreData(
             motionData: motionData,
-            dispatchGroup: saveGroup,
-            errorHandler: { error in
-                errorHandler(error)
-            })
+            dispatchGroup: saveGroup) { result in
+                switch result {
+                case .success:
+                    break
+                case .failure(let failure):
+                    coreDataError = failure
+                }
+            }
+        
         
         saveGroup.notify(queue: .main) {
+            if let coreDataError = coreDataError {
+                errorHandler(coreDataError)
+                return
+            }
+            
+            if let fileManigingError = fileManigingError {
+                errorHandler(fileManigingError)
+                return
+            }
+            
             completionHandler()
         }
     }

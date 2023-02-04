@@ -12,7 +12,7 @@ protocol CoreDataManageable {
     func saveCoreData(
         motionData: MotionData,
         dispatchGroup: DispatchGroup,
-        errorHandler: @escaping (CoreDataError) -> Void
+        completionHandler: @escaping (Result<Void, CoreDataError>) -> Void
     )
     func readCoreData() -> Result<[MotionEntity], CoreDataError>
     func deleteCoreData(motionData: MotionData) throws
@@ -22,10 +22,10 @@ extension CoreDataManageable {
     func saveCoreData(
         motionData: MotionData,
         dispatchGroup: DispatchGroup,
-        errorHandler: @escaping (CoreDataError) -> Void
+        completionHandler: @escaping (Result<Void, CoreDataError>) -> Void
     ) {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            errorHandler(.appDelegateError)
+            completionHandler(.failure(.appDelegateError))
             return
         }
         
@@ -37,7 +37,7 @@ extension CoreDataManageable {
                 forEntityName: Constant.entityName,
                 in: backgroundContext
             ) else {
-                errorHandler(.saveError)
+                completionHandler(.failure(.saveError))
                 return
             }
             
@@ -49,6 +49,7 @@ extension CoreDataManageable {
             object.setValue(motionData.type.rawValue, forKey: Constant.type)
             
             appDelegate.saveContext()
+            completionHandler(.success(()))
             dispatchGroup.leave()
         }
     }

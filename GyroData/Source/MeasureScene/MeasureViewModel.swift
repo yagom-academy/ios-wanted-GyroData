@@ -40,7 +40,7 @@ final class MeasureViewModel {
     
     private var canSaveMeasureData: Bool = false {
         didSet {
-            
+            canSaveMeasureDataHandler?(canSaveMeasureData)
         }
     }
     
@@ -125,6 +125,10 @@ extension MeasureViewModel {
     
     func bindCanStopMeasure(handler: @escaping (Bool) -> Void) {
         canStopMeasureHandler = handler
+    }
+    
+    func bindCanSaveMeasureData(handler: @escaping (Bool) -> Void) {
+        canSaveMeasureDataHandler = handler
     }
     
     func bindAlertMessage(handler: @escaping (String?) -> Void) {

@@ -67,6 +67,12 @@ final class MeasureViewController: UIViewController {
         return stackView
     }()
     
+    private let indicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .medium)
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        return indicator
+    }()
+    
     init(measureViewModel: MeasureViewModel) {
         self.measureViewModel = measureViewModel
         super.init(nibName: nil, bundle: nil)
@@ -95,6 +101,7 @@ final class MeasureViewController: UIViewController {
         }
         
         measureViewModel.bindAlertMessage { [weak self] message in
+            self?.indicator.stopAnimating()
             let alert = UIAlertController(
                 title: nil,
                 message: message,
@@ -119,9 +126,10 @@ extension MeasureViewController {
     }
     
     @objc private func tapSaveButton() {
-        measureViewModel.action(.save(handler: {
-            // TODO: Activity Indicator
-            print("완료")
+        indicator.startAnimating()
+        measureViewModel.action(.save(handler: { [weak self] in
+            self?.indicator.stopAnimating()
+            self?.navigationController?.popViewController(animated: true)
         }))
     }
     
@@ -149,6 +157,7 @@ extension MeasureViewController {
         
         view.backgroundColor = .systemBackground
         view.addSubview(totalStackView)
+        view.addSubview(indicator)
     }
     
     private func configureLayout() {
@@ -160,7 +169,10 @@ extension MeasureViewController {
             totalStackView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -15),
             totalStackView.bottomAnchor.constraint(lessThanOrEqualTo: safeArea.bottomAnchor),
             
-            graphStackView.heightAnchor.constraint(equalTo: safeArea.heightAnchor, multiplier: 0.4)
+            graphStackView.heightAnchor.constraint(equalTo: safeArea.heightAnchor, multiplier: 0.4),
+            
+            indicator.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor),
+            indicator.centerYAnchor.constraint(equalTo: safeArea.centerYAnchor)
         ])
     }
     

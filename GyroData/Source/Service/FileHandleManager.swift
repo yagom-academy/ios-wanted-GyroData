@@ -39,7 +39,7 @@ class FileHandleManager: FileManagerProtocol {
         fileName: UUID,
         motionMeasures: MotionMeasures,
         dispatchGroup: DispatchGroup,
-        errorHandler: @escaping (FileManagingError) -> Void
+        completionHandler: @escaping (Result<Void, FileManagingError>) -> Void
     ) {
         let encoder = JSONEncoder()
         let fileName = fileName.uuidString
@@ -47,15 +47,16 @@ class FileHandleManager: FileManagerProtocol {
         DispatchQueue.global().async(group: dispatchGroup) { [weak self] in
             do {
                 guard let jsonData = try? encoder.encode(motionMeasures) else {
-                    errorHandler(.encodeFailed)
+                    completionHandler(.failure(.encodeFailed))
                     return
                 }
                 
                 guard let jsonPath: URL = self?.directoryPath.appendingPathComponent("\(fileName).json") else { return }
                 
                 try jsonData.write(to: jsonPath)
+                completionHandler(.success(()))
             } catch {
-                errorHandler(.saveFailed)
+                completionHandler(.failure(.saveFailed))
             }
         }
     }
