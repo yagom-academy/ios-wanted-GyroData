@@ -6,25 +6,48 @@
 //
 
 final class GraphViewModel {
-    typealias MotionMeasuresHandler = (MotionMeasures, Double) -> Void
+    typealias MotionMeasuresHandler = (MotionCoordinate) -> Void
     
-    private var motionMeasures: MotionMeasures = MotionMeasures(axisX: [], axisY: [], axisZ: []) {
+    private var motionCoordinate: MotionCoordinate? {
         didSet {
-            graphDataHandler?(motionMeasures, duration)
+            guard let motionCoordinate = motionCoordinate else { return }
+            graphDataHandler?(motionCoordinate)
         }
     }
     
-    private var duration: Double = Double()
-    
     private var graphDataHandler: MotionMeasuresHandler?
+    private var resetHandler: (() -> Void)?
     
     func bindGraphData(_ handler: @escaping MotionMeasuresHandler) {
         graphDataHandler = handler
     }
     
-    func setMeasures(_ motionMeasures: MotionMeasures, for duration: Double) {
-        self.duration = duration
-        self.motionMeasures = motionMeasures
+    func bindResetHandler(_ handler: @escaping (() -> Void)) {
+        resetHandler = handler
     }
-
+    
+    func drawCoordinate(_ motionCoordinate: MotionCoordinate) {
+        self.motionCoordinate = motionCoordinate
+    }
+    
+    func drawAll(_ motionMeasures: MotionMeasures) {
+        var axisX = Array(motionMeasures.axisX.reversed())
+        var axisY = Array(motionMeasures.axisY.reversed())
+        var axisZ = Array(motionMeasures.axisZ.reversed())
+        
+        for _ in 0..<motionMeasures.axisX.count {
+            guard let x = axisX.popLast(),
+                  let y = axisY.popLast(),
+                  let z = axisZ.popLast()
+            else {
+                return
+            }
+            
+            motionCoordinate = MotionCoordinate(x: x, y: y, z: z)
+        }
+    }
+    
+    func reset() {
+        resetHandler?()
+    }
 }

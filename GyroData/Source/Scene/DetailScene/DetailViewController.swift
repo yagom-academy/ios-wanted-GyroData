@@ -72,7 +72,7 @@ final class DetailViewController: UIViewController {
             self?.detailView.configureView(isViewPage)
         }
         detailViewModel.bindGraphData { [weak self] motionMeasures, duration in
-            self?.graphViewModel.setMeasures(motionMeasures, for: duration)
+//            self?.graphViewModel.setMeasures(motionMeasures, for: duration)
         }
         detailViewModel.bindTimer { [weak self] imageName in
             let image = UIImage(systemName: imageName)

@@ -20,9 +20,10 @@ final class MeasureViewModel {
         interval: 0.1
     )
     
-    private var measuredMotion: MotionMeasures? {
+    private var motionCoordinate: MotionCoordinate? {
         didSet {
-            
+            guard let motionCoordinate = motionCoordinate else { return }
+            motionCoordinateHandler?(motionCoordinate)
         }
     }
     
@@ -50,6 +51,7 @@ final class MeasureViewModel {
         }
     }
     
+    private var motionCoordinateHandler: ((MotionCoordinate) -> Void)?
     private var canChangeMotionTypeHandler: ((Bool) -> Void)?
     private var canStopMeasureHandler: ((Bool) -> Void)?
     private var canSaveMeasureDataHandler: ((Bool) -> Void)?
@@ -106,8 +108,8 @@ extension MeasureViewModel {
             self?.canStopMeasure = !isTimeOver
         }
         
-        motionManager.start { [weak self] measuredMotion in
-            self?.measuredMotion = measuredMotion
+        motionManager.start { [weak self] motionCoordinate in
+            self?.motionCoordinate = motionCoordinate
         }
     }
     
@@ -142,5 +144,9 @@ extension MeasureViewModel {
     
     func bindAlertMessage(handler: @escaping (String?) -> Void) {
         alertMessageHandler = handler
+    }
+    
+    func bindMotionCoordinate(handler: @escaping (MotionCoordinate) -> Void) {
+        motionCoordinateHandler = handler
     }
 }

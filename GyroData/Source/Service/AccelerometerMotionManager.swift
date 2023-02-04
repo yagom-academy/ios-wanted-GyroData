@@ -54,7 +54,7 @@ final class AccelerometerMotionManager: MotionManagerable {
 
 // MARK: MotionManagerable Requirement
 extension AccelerometerMotionManager {
-    func start(handler: @escaping (MotionMeasures?) -> Void) {
+    func start(handler: @escaping (MotionCoordinate?) -> Void) {
         initialMotionData()
         motionManager.startAccelerometerUpdates()
         measureTimer.activate { [weak self] in
@@ -65,7 +65,8 @@ extension AccelerometerMotionManager {
             self?.measuredMotion?.axisX.append(measureData.x)
             self?.measuredMotion?.axisY.append(measureData.y)
             self?.measuredMotion?.axisZ.append(measureData.z)
-            handler(self?.measuredMotion)
+            
+            handler(MotionCoordinate(x: measureData.x, y: measureData.y, z: measureData.z))
         }
     }
     

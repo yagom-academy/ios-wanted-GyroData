@@ -67,7 +67,11 @@ final class MainViewController: UIViewController {
     
     @objc private func tapRightBarButton() {
         let measureViewModel = MeasureViewModel()
-        let measureViewController = MeasureViewController(measureViewModel: measureViewModel)
+        let graphViewModel = GraphViewModel()
+        let measureViewController = MeasureViewController(
+            measureViewModel: measureViewModel,
+            graphViewModel: graphViewModel
+        )
         
         show(measureViewController, sender: nil)
     }

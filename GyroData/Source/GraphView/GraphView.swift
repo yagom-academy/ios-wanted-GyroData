@@ -8,49 +8,80 @@
 import UIKit
 
 final class GraphView: UIView {
-    private let valueXLabel = {
+    private let valueXLabel: UILabel = {
         let label = UILabel()
         label.textColor = .systemRed
-        label.text = "x: -3362"
+        label.text = "x: 0"
         
         return label
     }()
     
-    private let valueYLabel = {
+    private let valueYLabel: UILabel = {
         let label = UILabel()
         label.textColor = .systemGreen
-        label.text = "y: -143"
+        label.text = "y: 0"
         
         return label
     }()
     
-    private let valueZLabel = {
+    private let valueZLabel: UILabel = {
         let label = UILabel()
         label.textColor = .systemBlue
-        label.text = "z: 2497"
+        label.text = "z: 0"
         
         return label
     }()
     
+    private let valueStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.distribution = .fillEqually
+        stackView.alignment = .center
+        stackView.spacing = 30
+        return stackView
+    }()
+    
+    private let graphBackgroundView = GraphBackgroundView()
+    
+//    private let xShapeLayer = CAShapeLayer()
+//    private let xShapeLayer = CAShapeLayer()
+    
+    private let xPath = UIBezierPath()
+    private let yPath = UIBezierPath()
+    private let zPath = UIBezierPath()
+    
+    private var currentX: CGFloat = 0
+    private var currentY: CGFloat = 0
+    private var currentZ: CGFloat = 0
+    
+    private var xAxisOffset: CGFloat = 0
+    private var yAxisOffset: CGFloat = 0
+    private var maxValue: CGFloat = 1.0 {
+        didSet {
+            yAxisOffset = (maxValue + (maxValue * 0.2))
+        }
+    }
     
     private var viewModel: GraphViewModel
-    var motionMeasures: MotionMeasures?
-    var duration: Double?
-    var drawMode: PageType = .view
-    
     
     init(viewModel: GraphViewModel) {
         self.viewModel = viewModel
         super.init(frame: .zero)
         
-        configureView()
+        configureSubview()
+        configureLayout()
         bind()
     }
     
     private func bind() {
-        viewModel.bindGraphData { [weak self] motionMeasures, duration in
-            self?.motionMeasures = motionMeasures
-            self?.duration = duration
+        viewModel.bindGraphData { [weak self] motionCoordinate in
+            self?.drawGraph(motionCoordinate)
+            self?.setValueLabel(motionCoordinate)
+            self?.setNeedsDisplay()
+        }
+        
+        viewModel.bindResetHandler { [weak self] in
+            self?.reset()
         }
     }
     
@@ -62,61 +93,83 @@ final class GraphView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func configureView() {
+    private func configureSubview() {
         backgroundColor = .clear
-        self.layer.borderWidth = 2
-        self.addSubview(valueXLabel)
-        self.addSubview(valueYLabel)
-        self.addSubview(valueZLabel)
+        graphBackgroundView.backgroundColor = .clear
+        layer.borderWidth = 2
+    
+        [valueXLabel, valueYLabel, valueZLabel].forEach {
+            valueStackView.addArrangedSubview($0)
+        }
+        
+        addSubview(graphBackgroundView)
+        addSubview(valueStackView)
+    }
+   
+    private func configureLayout() {
+        [graphBackgroundView, valueStackView].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
+        
+        NSLayoutConstraint.activate([
+            valueStackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            valueStackView.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor),
+            
+            graphBackgroundView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            graphBackgroundView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
+            graphBackgroundView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
+            graphBackgroundView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
+        ])
     }
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
-        
-        switch drawMode {
-        case .play:
-            break
-        case .view:
-            guard let motionMeasures,
-                  let duration  else { return }
-            drawWholeGraph(motionMeasures, for: duration)
-        }
-        
+        UIColor.systemRed.set()
+        xPath.stroke()
+        UIColor.green.set()
+        yPath.stroke()
+        UIColor.blue.set()
+        zPath.stroke()
     }
     
-    private func drawWholeGraph(_ motionMeasures: MotionMeasures, for duration: Double) {
-        let graphData: [[Double]] = [
-            motionMeasures.axisX.map { $0 * 30 },
-            motionMeasures.axisY.map { $0 * 30 },
-            motionMeasures.axisZ.map { $0 * 30 }
-        ]
-        var axisColors: [UIColor] = [.red, .green, .blue]
+    private func drawGraph(_ coordinate: MotionCoordinate) {
+        let initialYPoint = bounds.height / 2
+        xPath.lineWidth = 2
+        yPath.lineWidth = 2
+        zPath.lineWidth = 2
         
-        let xOffset: Double = self.frame.width / CGFloat(duration)
-        let startPosition = CGPoint(x: .zero, y: self.frame.height / CGFloat(2))
+        xPath.move(to: CGPoint(x: xAxisOffset, y: initialYPoint + currentX))
+        yPath.move(to: CGPoint(x: xAxisOffset, y: initialYPoint + currentX))
+        zPath.move(to: CGPoint(x: xAxisOffset, y: initialYPoint + currentX))
         
-        graphData.forEach({ eachAxis in
-            let path = UIBezierPath()
-            let axisColor = axisColors.removeFirst()
-            
-            path.move(to: startPosition)
-            path.lineWidth = 1
-            axisColor.setStroke()
-            
-            path.drawPath(xOffset: xOffset, axisData: eachAxis, yFrameHeight: self.frame.height)
-            
-            path.stroke()
-        })
+        xAxisOffset += bounds.width / 600
+        
+        maxValue = max(abs(coordinate.x), abs(coordinate.y), abs(coordinate.z), maxValue)
+        
+        currentX = coordinate.x * yAxisOffset
+        currentY = coordinate.y * yAxisOffset
+        currentZ = coordinate.z * yAxisOffset
+        
+        xPath.addLine(to: CGPoint(x: xAxisOffset, y: initialYPoint + currentX))
+        yPath.addLine(to: CGPoint(x: xAxisOffset, y: initialYPoint + currentY))
+        zPath.addLine(to: CGPoint(x: xAxisOffset, y: initialYPoint + currentZ))
     }
-}
-
-extension UIBezierPath {
-    func drawPath(xOffset: Double, axisData: [Double], yFrameHeight: Double) {
-        var currentX: Double = 0
-        
-        axisData.forEach { yPoint in
-            self.addLine(to: CGPoint(x: currentX, y: yFrameHeight / 2 - yPoint))
-            currentX += xOffset
+    
+    private func reset() {
+        [xPath, yPath, zPath].forEach {
+            $0.removeAllPoints()
         }
+        
+        maxValue = 1.0
+        xAxisOffset = 0
+        currentX = 0
+        currentY = 0
+        currentZ = 0
+    }
+    
+    private func setValueLabel(_ coordinate: MotionCoordinate) {
+        valueXLabel.text = "x: " + String(format: "%.1f", coordinate.x)
+        valueYLabel.text = "y: " + String(format: "%.1f", coordinate.y)
+        valueZLabel.text = "z: " + String(format: "%.1f", coordinate.z)
     }
 }
