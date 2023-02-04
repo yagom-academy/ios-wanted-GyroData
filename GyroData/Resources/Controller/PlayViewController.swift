@@ -15,6 +15,7 @@
      private let metaData: TransitionMetaData
      private var transitionData: Transition = Transition(x: [], y: [], z: [])
      private var playTime: Double = 0.0
+     private var isStopDrawing: Bool = true
 
      private let dateLabel: UILabel = {
          let label = UILabel()
@@ -95,7 +96,13 @@
 
  extension PlayViewController {
      @objc func didTapControlButton() {
+         graphView.replayGraphDrawing()
          controlButton.isSelected.toggle()
+         isStopDrawing.toggle()
+         if isStopDrawing {
+             graphView.timer.invalidate()
+             graphView.timeTrigger = true
+         }
      }
  }
 

@@ -41,7 +41,7 @@ class GraphView: UIView {
     private var currentX: CGFloat = 0
 
     var timeTrigger = true
-    var realTime = Timer()
+    var timer = Timer()
     var transitionData: Transition = Transition(x: [], y: [], z: [])
 
     // MARK: - LifeCycle
@@ -67,7 +67,7 @@ class GraphView: UIView {
 extension GraphView {
     func replayGraphDrawing() {
         if timeTrigger {
-            realTime = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(replayDrawLine), userInfo: nil, repeats: true)
+            timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(replayDrawLine), userInfo: nil, repeats: true)
             timeTrigger = false
         }
     }
@@ -146,7 +146,7 @@ extension GraphView {
 
         currentIndex += 1
         if currentIndex >= limitedIndex {
-            realTime.invalidate()
+            timer.invalidate()
         }
     }
 
