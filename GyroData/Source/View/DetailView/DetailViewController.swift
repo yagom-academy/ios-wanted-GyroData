@@ -32,11 +32,14 @@ enum PageType {
 }
 
 final class DetailViewController: UIViewController {
-    private let detailView = DetailView()
-    private let viewModel: DetailViewModel
+    private let detailView: DetailView
+    private let detailViewModel: DetailViewModel
+    private let graphViewModel: GraphViewModel
     
-    init(viewModel: DetailViewModel) {
-        self.viewModel = viewModel
+    init(viewModel: DetailViewModel, graphViewModel: GraphViewModel) {
+        self.detailViewModel = viewModel
+        self.graphViewModel = graphViewModel
+        self.detailView = DetailView(graph: GraphView(viewModel: graphViewModel))
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -57,7 +60,7 @@ final class DetailViewController: UIViewController {
     
     private func setupView() {
         setupNavigationBar()
-        viewModel.convertModelData()
+        detailViewModel.fetchData()
     }
     
     private func setupNavigationBar() {
@@ -70,35 +73,18 @@ final class DetailViewController: UIViewController {
     }
     
     private func bind() {
-        viewModel.bindDate { [weak self] dateString in
+        detailViewModel.bindDate { [weak self] dateString in
             self?.detailView.dateLabel.text = dateString
         }
-        viewModel.bindPageType { [weak self] pageTypeString in
+        detailViewModel.bindPageType { [weak self] pageTypeString in
             self?.detailView.pageTypeLabel.text = pageTypeString
+            self?.detailView.configureView(by: pageTypeString)
         }
-        viewModel.bindGraphData { [weak self] axisX, axisY, axisZ in
-            
+        detailViewModel.bindGraphData { [weak self] motionMeasures, duration in
+            self?.graphViewModel.setMeasures(motionMeasures, for: duration)
         }
+        
     }
     
     
-    
-//    private func setGraph() {
-//        let padding: CGFloat = 100
-//
-//        let frame = CGRect(
-//            x: 0,
-//            y: 0,
-//            width: self.view.frame.width - padding,
-//            height: self.view.frame.height - padding
-//        )
-//        let view = LineGraphView( // 그래프 뷰
-//            frame: frame,
-//            values: [20, 10, 30, 20, 50, 100, 10, 10]
-//        )
-//
-//        view.center = CGPoint(x: self.view.frame.size.width / 2, y: self.view.frame.size.height / 2)
-//        self.view.addSubview(view)
-//        graphView = view
-//    }
 }
