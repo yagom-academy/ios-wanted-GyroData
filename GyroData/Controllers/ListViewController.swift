@@ -87,14 +87,15 @@ extension ListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView,
                    trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let playAction = UIContextualAction(style: .normal, title: "Play") { [weak self] _, _, _ in
+        let playAction = UIContextualAction(style: .normal, title: "Play") { [weak self] _, _, actionCompleted in
             guard let self = self else { return }
 
             let reviewPageViewController = ReviewViewController(
                 reviewPageView: ReviewView(pageState: .resultPlay),
                 measurement: self.measurements[indexPath.item])
-            
+
             self.navigationController?.pushViewController(reviewPageViewController, animated: false)
+            actionCompleted(true)
         }
         
         playAction.backgroundColor = .systemGreen
