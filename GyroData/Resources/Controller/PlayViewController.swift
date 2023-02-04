@@ -68,6 +68,9 @@
              case .success(let data):
                  self.transitionData = data
                  self.graphView.transitionData = data
+                 if viewType == .view {
+                     self.graphView.viewGraphDrawing()
+                 }
              case .failure(let error):
                  print(error)
              }
