@@ -9,14 +9,14 @@ import UIKit
 
 final class GraphView: UIView {
 
-    private let viewModel: GraphViewModel
+    private(set) var viewModel = GraphViewModel()
+    
     private let axisXLabel = UILabel(text: "x: 0", textColor: .red, textAlignment: .center)
     private let axisYLabel = UILabel(text: "y: 0", textColor: .green, textAlignment: .center)
     private let axisZLabel = UILabel(text: "z: 0", textColor: .blue, textAlignment: .center)
     private let stackView = UIStackView(distribution: .fillEqually)
     
-    init(viewModel: GraphViewModel) {
-        self.viewModel = viewModel
+    init() {
         super.init(frame: .zero)
         
         backgroundColor = .white

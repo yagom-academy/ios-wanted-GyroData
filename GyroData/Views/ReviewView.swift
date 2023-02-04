@@ -41,8 +41,7 @@ final class ReviewView: UIView {
         return button
     }()
 
-    private let graphViewModel = GraphViewModel()
-    private lazy var graphView = GraphView(viewModel: graphViewModel)
+    private lazy var graphView = GraphView()
 
     var state: PageState {
         return pageState
@@ -78,15 +77,15 @@ final class ReviewView: UIView {
     }
     
     func showGraph(with data: [AxisValue]) {
-        graphViewModel.setAxisValues(data)
+        graphView.viewModel.setAxisValues(data)
     }
     
     func clearGraph() {
-        graphViewModel.setAxisValues([])
+        graphView.viewModel.setAxisValues([])
     }
     
     func drawGraph(with data: AxisValue) {
-        graphViewModel.addAxisValue(data)
+        graphView.viewModel.addAxisValue(data)
     }
     
     func togglePlayButton() {
