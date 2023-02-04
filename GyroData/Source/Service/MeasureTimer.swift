@@ -15,14 +15,15 @@ final class MeasureTimer {
 
     private var state: State = .suspended
     private var interval: Double
-    private var duration: Double
+    private var duration: Int = 0
+    private var deadline: Double
     private var timer: Timer?
     private var isOverdue: Bool {
-        return duration < interval
+        return duration == Int(deadline * 10)
     }
 
-    init(duration: Double, interval: Double) {
-        self.duration = duration
+    init(deadline: Double, interval: Double) {
+        self.deadline = deadline
         self.interval = interval
     }
     
@@ -37,16 +38,21 @@ final class MeasureTimer {
                 guard let self = self,
                       self.isOverdue == false
                 else {
-                    self?.stop()
+                    self?.resetTimer()
+                    // TODO: 타임오바
                     return
                 }
 
                 eventHandler()
-                self.duration -= self.interval
+                self.duration += Int(self.interval * 10)
         })
     }
     
     func stop() {
+        resetTimer()
+    }
+    
+    private func resetTimer() {
         timer?.invalidate()
         state = .suspended
     }

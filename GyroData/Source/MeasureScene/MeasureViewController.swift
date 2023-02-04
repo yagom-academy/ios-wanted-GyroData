@@ -20,7 +20,9 @@ final class MeasureViewController: UIViewController {
     private let stopButton: UIButton = {
         let button = UIButton()
         button.setTitle("정지", for: .normal)
+        button.setTitleColor(.systemGray2, for: .disabled)
         button.setTitleColor(.systemBlue, for: .normal)
+        button.isEnabled = false
         return button
     }()
     
@@ -86,6 +88,10 @@ final class MeasureViewController: UIViewController {
     private func bindToMeasureViewModel() {
         measureViewModel.bindCanChangeMotionType { [weak self] canChange in
             self?.segmentControl.isUserInteractionEnabled = canChange
+        }
+        
+        measureViewModel.bindCanStopMeasure { [weak self] canStop in
+            self?.stopButton.isEnabled = canStop
         }
     }
 }

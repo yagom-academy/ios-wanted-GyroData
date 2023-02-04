@@ -16,13 +16,13 @@ final class MeasureViewModel {
     }
     
     private var motionManager: MotionManagerable = AccelerometerMotionManager(
-        duration: 60,
+        deadline: 60,
         interval: 0.1
     )
     
     private var measuredMotion: MotionMeasures? {
         didSet {
-
+            
         }
     }
     
@@ -32,7 +32,21 @@ final class MeasureViewModel {
         }
     }
     
+    private var canStopMeasure: Bool = false {
+        didSet {
+            canStopMeasureHandler?(canStopMeasure)
+        }
+    }
+    
+    private var canSaveMeasureData: Bool = false {
+        didSet {
+            
+        }
+    }
+    
     private var canChangeMotionTypeHandler: ((Bool) -> Void)?
+    private var canStopMeasureHandler: ((Bool) -> Void)?
+    private var canSaveMeasureDataHandler: ((Bool) -> Void)?
     
     func action(_ action: Action) {
         switch action {
@@ -43,7 +57,6 @@ final class MeasureViewModel {
         case .stop:
             stopMeasure()
         case .save:
-            // TODO: 저장
             break
         }
     }
@@ -65,19 +78,21 @@ extension MeasureViewModel {
         switch motionType {
         case .accelerometer:
             motionManager = AccelerometerMotionManager(
-                duration: 60,
+                deadline: 60,
                 interval: 0.1
             )
         case .gyroscope:
             motionManager = GyroMotionManager(
-                duration: 60,
+                deadline: 60,
                 interval: 0.1
             )
         }
     }
     
     private func startMeasure() {
+        print("시작 눌림")
         canChangeMotionType = false
+        canStopMeasure = true
         measuredMotion =  MotionMeasures(
             axisX: [],
             axisY: [],
@@ -92,6 +107,7 @@ extension MeasureViewModel {
     }
     
     private func stopMeasure() {
+        print("정지 눌림")
         canChangeMotionType = true
         motionManager.stop()
     }
@@ -101,5 +117,9 @@ extension MeasureViewModel {
 extension MeasureViewModel {
     func bindCanChangeMotionType(handler: @escaping (Bool) -> Void) {
         canChangeMotionTypeHandler = handler
+    }
+    
+    func bindCanStopMeasure(handler: @escaping (Bool) -> Void) {
+        canStopMeasureHandler = handler
     }
 }
