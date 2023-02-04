@@ -40,6 +40,9 @@ class GraphView: UIView {
     private let zPath = UIBezierPath()
     private var currentX: CGFloat = 0
 
+    var timeTrigger = true
+    var realTime = Timer()
+
     // MARK: - LifeCycle
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -56,6 +59,16 @@ class GraphView: UIView {
 
         makeGridBackground()
         settingInitialization()
+    }
+}
+
+// MARK: - Business Logic
+extension GraphView {
+    func replayGraphDrawing() {
+        if timeTrigger {
+            realTime = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: <#T##Selector#>, userInfo: nil, repeats: true)
+            timeTrigger = false
+        }
     }
 }
 
