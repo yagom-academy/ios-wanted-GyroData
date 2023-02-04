@@ -118,26 +118,10 @@ extension GraphView {
         layer.addSublayer(gridLayer)
     }
     
-    func drawGraph(data: [Double], color: CGColor) {
-        let path = UIBezierPath()
-        let layer = CAShapeLayer()
-        
-        let widthSize: Double = Double(self.frame.size.width / 600)
-        var startPoint: Double = 0
-        
-        path.move(to: CGPoint(x: startPoint, y: convertDrawingData(item: data.first)))
-        
-        for item in data {
-            let drawingData = convertDrawingData(item: item)
-            path.addLine(to: CGPoint(x: startPoint, y: drawingData))
-            startPoint += widthSize
-            layer.path = path.cgPath
-            layer.fillColor = nil
-            layer.strokeColor = color
+    func drawGraph(data: SensorData) {
+        for index in 0..<data.x.count {
+            drawLine(xPoint: data.x[index], yPoint: data.y[index], zPoint: data.z[index])
         }
-        
-        self.layer.addSublayer(layer)
-        
     }
     
     func drawLine(xPoint: Double?, yPoint: Double?, zPoint: Double?) {

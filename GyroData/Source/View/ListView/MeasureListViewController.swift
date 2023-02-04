@@ -109,7 +109,9 @@ extension MeasureListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let detailViewController = DetailViewController()
+        let createdAt = measureListViewModel.model.value[indexPath.row].createdAt
+        let detailViewController = DetailViewController(detailViewMode: .view,
+                                                        createdAt: createdAt)
         push(viewController: detailViewController)
     }
     
@@ -119,7 +121,10 @@ extension MeasureListViewController: UITableViewDelegate {
     ) -> UISwipeActionsConfiguration? {
         let playAction = UIContextualAction(style: .normal,
                                             title: Constant.playSwipeAction) { (_, _, success) in
-            
+            let createdAt = self.measureListViewModel.model.value[indexPath.row].createdAt
+            let detailViewController = DetailViewController(detailViewMode: .play,
+                                                            createdAt: createdAt)
+            self.push(viewController: detailViewController)
         }
         playAction.backgroundColor = .systemGreen
         
