@@ -29,6 +29,11 @@
 		B20D4BDF29894BEE00ADC6B6 /* MotionDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B20D4BDD29894BEE00ADC6B6 /* MotionDataModel.xcdatamodeld */; };
 		B240905A2989624E008DC79B /* CoreDataManageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24090592989624E008DC79B /* CoreDataManageable.swift */; };
 		B240905C298A4531008DC79B /* CoreDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B240905B298A4531008DC79B /* CoreDataError.swift */; };
+		B240908C298C8ED1008DC79B /* MotionDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B240908B298C8ED1008DC79B /* MotionDataCell.swift */; };
+		B240908E298C8F4B008DC79B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B240908D298C8F4B008DC79B /* MainViewController.swift */; };
+		B2409090298C9111008DC79B /* MotionCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B240908F298C9111008DC79B /* MotionCellViewModel.swift */; };
+		B2409092298CD339008DC79B /* DateFormatter +.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2409091298CD339008DC79B /* DateFormatter +.swift */; };
+		B2409094298CEE6C008DC79B /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2409093298CEE6C008DC79B /* MainViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +61,11 @@
 		B20D4BDE29894BEE00ADC6B6 /* MotionDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MotionDataModel.xcdatamodel; sourceTree = "<group>"; };
 		B24090592989624E008DC79B /* CoreDataManageable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManageable.swift; sourceTree = "<group>"; };
 		B240905B298A4531008DC79B /* CoreDataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataError.swift; sourceTree = "<group>"; };
+		B240908B298C8ED1008DC79B /* MotionDataCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDataCell.swift; sourceTree = "<group>"; };
+		B240908D298C8F4B008DC79B /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		B240908F298C9111008DC79B /* MotionCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionCellViewModel.swift; sourceTree = "<group>"; };
+		B2409091298CD339008DC79B /* DateFormatter +.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter +.swift"; sourceTree = "<group>"; };
+		B2409093298CEE6C008DC79B /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,7 +102,11 @@
 		5785B3702988B13900DD61B2 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+
 				0C27E429298BF0C500C570C4 /* MeasureScene */,
+
+				B240908A298C8EA3008DC79B /* FirstScene */,
+
 				5785B3722988B31D00DD61B2 /* App */,
 				B2409080298BAF50008DC79B /* Protocol */,
 				B2409081298BAF68008DC79B /* Error */,
@@ -187,6 +201,18 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
+		B240908A298C8EA3008DC79B /* FirstScene */ = {
+			isa = PBXGroup;
+			children = (
+				B240908B298C8ED1008DC79B /* MotionDataCell.swift */,
+				B240908D298C8F4B008DC79B /* MainViewController.swift */,
+				B240908F298C9111008DC79B /* MotionCellViewModel.swift */,
+				B2409091298CD339008DC79B /* DateFormatter +.swift */,
+				B2409093298CEE6C008DC79B /* MainViewModel.swift */,
+			);
+			path = FirstScene;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -260,17 +286,26 @@
 				0C27E43B298D497100C570C4 /* MotionManagerable.swift in Sources */,
 				63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
+
 				0C27E43F298E6A7B00C570C4 /* GyroMotionManager.swift in Sources */,
 				0C27E404298A492C00C570C4 /* AccelerometerMotionManager.swift in Sources */,
 				0C27E42B298BF0D700C570C4 /* MeasureViewController.swift in Sources */,
 				0C27E441298E777A00C570C4 /* MotionManagerError.swift in Sources */,
+
+				0C27E404298A492C00C570C4 /* MotionMeasureManager.swift in Sources */,
+				B2409092298CD339008DC79B /* DateFormatter +.swift in Sources */,
+
 				57D312A4298A14F1001963C5 /* MotionMeasures.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
 				B240905C298A4531008DC79B /* CoreDataError.swift in Sources */,
+				B240908C298C8ED1008DC79B /* MotionDataCell.swift in Sources */,
+				B240908E298C8F4B008DC79B /* MainViewController.swift in Sources */,
 				B240905A2989624E008DC79B /* CoreDataManageable.swift in Sources */,
 				0C27E43D298D49A500C570C4 /* MotionCoordinate.swift in Sources */,
 				5785B397298A0CCF00DD61B2 /* FileManagerProtocol.swift in Sources */,
+				B2409090298C9111008DC79B /* MotionCellViewModel.swift in Sources */,
 				0CC8B83A2988BA580011E5FB /* MotionType.swift in Sources */,
+				B2409094298CEE6C008DC79B /* MainViewModel.swift in Sources */,
 				57D312A8298A532C001963C5 /* FileManagingError.swift in Sources */,
 				57D312A6298A15A1001963C5 /* FileHandleManager.swift in Sources */,
 				0CC8B8382988B73C0011E5FB /* MotionData.swift in Sources */,
