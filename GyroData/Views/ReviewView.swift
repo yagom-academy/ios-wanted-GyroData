@@ -35,6 +35,7 @@ final class ReviewView: UIView {
         let playImage = UIImage(systemName: "play.fill")
         button.setBackgroundImage(playImage, for: .normal)
         button.tintColor = .label
+        button.isSelected = true
         button.translatesAutoresizingMaskIntoConstraints = false
         
         return button
