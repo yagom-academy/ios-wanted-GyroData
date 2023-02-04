@@ -24,7 +24,6 @@ final class RecordViewController: UIViewController {
     private let graphView: GraphView = {
         let graphView = GraphView(frame: .zero)
         graphView.backgroundColor = .systemBackground
-        graphView.layer.borderWidth = 3
         return graphView
     }()
     
@@ -66,15 +65,7 @@ final class RecordViewController: UIViewController {
 // MARK: - Motion Manager Delegate
 extension RecordViewController: MotionManagerDelegate {
     func motionManager(send manager: MotionManager, sendData: CMLogItem?) {
-        guard let data = sendData,
-              let sensor = SensorType(rawInt: segmentControl.selectedSegmentIndex) else {
-            return
-        }
-        if isRestart {
-            graphView.settingInitialization()
-            isRestart = false
-        }
-        graphView.callDrawLine(data, sensor)
+        guard let data = sendData else { return }
         saveData(data: data)
     }
     
@@ -84,9 +75,7 @@ extension RecordViewController: MotionManagerDelegate {
     }
 }
 
-//
-// Mark 필요!!
-//
+// MARK: - Uploadable Method
 extension RecordViewController: Uploadable {
     func upload(completion: @escaping (Result<Void, UploadError>) -> Void) {
         var isSuccessJson: Bool = false
@@ -146,12 +135,24 @@ private extension RecordViewController {
         if let accelerometerData = data as? CMAccelerometerData {
             let valueSet = accelerometerData.acceleration
             let tick = Tick(x: valueSet.x, y: valueSet.y, z: valueSet.z)
+            drawGraphView(tick: tick)
             values.append(tick)
         } else if let gyroData = data as? CMGyroData {
             let valueSet = gyroData.rotationRate
             let tick = Tick(x: valueSet.x, y: valueSet.y, z: valueSet.z)
+            drawGraphView(tick: tick)
             values.append(tick)
         }
+    }
+    
+    func drawGraphView(tick: Tick) {
+        if isRestart {
+            graphView.settingInitialization()
+            values.removeAll()
+            isRestart = false
+        }
+        
+        graphView.drawRecord(values: tick, isStart: values.isEmpty)
     }
 }
 
@@ -295,5 +296,6 @@ private extension RecordViewController {
             indicator.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor),
             indicator.centerYAnchor.constraint(equalTo: safeArea.centerYAnchor)
         ])
+        
     }
 }
