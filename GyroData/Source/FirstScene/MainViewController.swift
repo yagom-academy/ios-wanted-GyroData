@@ -127,13 +127,7 @@ extension MainViewController: UITableViewDelegate {
             print("play button pressed")
         }
         let deleteButton = UIContextualAction(style: .destructive, title: "Delete") { _, _, _ in
-            guard let cell = tableView.cellForRow(at: indexPath) as? MotionDataCell,
-                  let viewModel = cell.viewModel
-            else {
-                return
-            }
-            
-            print("\(viewModel)해당 셀이 삭제될 예정입니다.")
+            self.mainViewModel.deleteData(at: indexPath.row)
         }
         
         playButton.backgroundColor = .systemGreen
