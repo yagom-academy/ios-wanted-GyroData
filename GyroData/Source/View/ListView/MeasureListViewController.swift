@@ -16,14 +16,8 @@ final class MeasureListViewController: UIViewController {
         case main
     }
     
-    struct SampleData: Hashable {
-        var createdAt: String
-        var sensorType: String
-        var measureTime: String
-    }
-    
-    typealias DataSource = UITableViewDiffableDataSource<Schedule, SampleData>
-    typealias Snapshot = NSDiffableDataSourceSnapshot<Schedule, SampleData>
+    typealias DataSource = UITableViewDiffableDataSource<Schedule, MotionData>
+    typealias Snapshot = NSDiffableDataSourceSnapshot<Schedule, MotionData>
     
     private let tableView: UITableView = {
         let tableView = UITableView()
@@ -37,6 +31,7 @@ final class MeasureListViewController: UIViewController {
     }()
     
     private var dataSource: DataSource?
+    private var measureListViewModel = MeasureListViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +39,18 @@ final class MeasureListViewController: UIViewController {
         setupNavigation()
         setupViews()
         tableView.delegate = self
-        appendData()
+        bind()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.measureListViewModel.fetchToCoreData()
+    }
+    
+    private func bind() {
+        measureListViewModel.model.bind { [weak self] item in
+            self?.appendData(item: item)
+        }
     }
     
     private func setupNavigation() {
@@ -75,7 +81,9 @@ final class MeasureListViewController: UIViewController {
                 for: indexPath
             ) as? MeasureTableViewCell else { return UITableViewCell() }
             
-            cell.configure()
+            cell.configure(createdAt: item.createdAt,
+                           sensorType: item.sensorType.rawValue,
+                           runtime: item.runtime)
             
             return cell
         }
@@ -83,16 +91,12 @@ final class MeasureListViewController: UIViewController {
         return dataSource
     }
     
-    private func appendData() {
+    private func appendData(item: [MotionData]) {
         var snapshot = Snapshot()
         
         snapshot.appendSections([.main])
-        snapshot.appendItems([
-            SampleData(createdAt: "1", sensorType: "", measureTime: ""),
-            SampleData(createdAt: "2", sensorType: "", measureTime: ""),
-            SampleData(createdAt: "3", sensorType: "", measureTime: "")
-        ])
-        dataSource?.apply(snapshot)
+        snapshot.appendItems(item)
+        dataSource?.apply(snapshot, animatingDifferences: false)
     }
     
     private func push(viewController: UIViewController) {
@@ -121,7 +125,8 @@ extension MeasureListViewController: UITableViewDelegate {
         
         let deleteAction = UIContextualAction(style: .destructive,
                                               title: Constant.deleteSwipeAction) { (_, _, success) in
-            
+            self.measureListViewModel.delete(index: indexPath.row)
+            success(true)
         }
         
         return UISwipeActionsConfiguration(actions: [deleteAction,playAction])

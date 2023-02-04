@@ -15,6 +15,9 @@ final class MeasureViewController: UIViewController {
     }
     
     let measureViewModel = MeasureViewModel()
+    private var sensorMode: SensorMode {
+        return self.segmentedControl.selectedSegmentIndex == 0 ? .Acc : .Gyro
+    }
     
     private let segmentedControl: UISegmentedControl = {
         let segmentedControl = UISegmentedControl(items: [Constant.leftSegmentedItem,
@@ -96,13 +99,18 @@ final class MeasureViewController: UIViewController {
     }
     
     private func setupNavigation() {
+        let saveAction = UIAction { _ in
+            self.measureViewModel.add(sensorMode: self.sensorMode,
+                                      sensorData: self.measureViewModel.measureDatas.value)
+            self.navigationController?.popViewController(animated: true)
+        }
+        
         navigationItem.title = Constant.title
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: Constant.saveButtonTitle,
-                                                            style: .plain,
-                                                            target: self,
-                                                            action: nil)
+                                                            primaryAction: saveAction)
         self.navigationItem.rightBarButtonItem?.isEnabled = false
     }
+    
     
     private func setupButtons() {
         let measureAction = UIAction { _ in
@@ -135,9 +143,8 @@ final class MeasureViewController: UIViewController {
                                                      for: UIControl.State.normal)
         self.measureButton.setTitleColor(.gray, for: .normal)
         self.stopButton.setTitleColor(.systemBlue, for: .normal)
-
-        let mode: SensorMode = self.segmentedControl.selectedSegmentIndex == 0 ? .Acc : .Gyro
-        self.measureViewModel.startMeasure(mode: mode)
+        
+        self.measureViewModel.startMeasure(mode: self.sensorMode)
     }
     
     @objc
@@ -154,8 +161,7 @@ final class MeasureViewController: UIViewController {
         self.measureButton.setTitleColor(.systemBlue, for: .normal)
         self.stopButton.setTitleColor(.gray, for: .normal)
         
-        let mode: SensorMode = self.segmentedControl.selectedSegmentIndex == 0 ? .Acc : .Gyro
-        self.measureViewModel.stopMeasure(mode: mode)
+        self.measureViewModel.stopMeasure(mode: self.sensorMode)
     }
     
     private func resetGraphView() {
