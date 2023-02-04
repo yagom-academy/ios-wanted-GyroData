@@ -67,7 +67,14 @@ extension AccelerometerMotionManager {
         createMotionData(duration: duration)
     }
     
-    func save(completionHandler: @escaping () -> Void) {
+    func save(completionHandler: @escaping () -> Void) throws {
+        guard let motionData = motionData,
+              let measuredMotion = measuredMotion
+        else {
+            throw MotionManagerError.noData
+        }
         
+        try fileHandleManager?.save(fileName: motionData.id, measuredMotion)
+        try saveCoreData(motionData: motionData)
     }
 }

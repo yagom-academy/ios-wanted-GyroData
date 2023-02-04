@@ -7,8 +7,8 @@
 
 import Foundation
 
-protocol MotionManagerable {
+protocol MotionManagerable: CoreDataManageable {
     func start(handler: @escaping (MotionMeasures?) -> Void)
     func stop()
-    func save(completionHandler: @escaping () -> Void)
+    func save(completionHandler: @escaping () -> Void) throws
 }

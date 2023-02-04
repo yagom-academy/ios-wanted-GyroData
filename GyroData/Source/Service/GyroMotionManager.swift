@@ -63,7 +63,7 @@ extension GyroMotionManager {
         createMotionData(duration: duration)
     }
 
-    func save(completionHandler: @escaping () -> Void) {
+    func save(completionHandler: @escaping () -> Void) throws {
         
     }
 }

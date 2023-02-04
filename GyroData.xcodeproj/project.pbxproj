@@ -14,6 +14,7 @@
 		0C27E43B298D497100C570C4 /* MotionManagerable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C27E43A298D497100C570C4 /* MotionManagerable.swift */; };
 		0C27E43D298D49A500C570C4 /* MotionCoordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C27E43C298D49A500C570C4 /* MotionCoordinate.swift */; };
 		0C27E43F298E6A7B00C570C4 /* GyroMotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C27E43E298E6A7B00C570C4 /* GyroMotionManager.swift */; };
+		0C27E441298E777A00C570C4 /* MotionManagerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C27E440298E777A00C570C4 /* MotionManagerError.swift */; };
 		0CC8B8382988B73C0011E5FB /* MotionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CC8B8372988B73C0011E5FB /* MotionData.swift */; };
 		0CC8B83A2988BA580011E5FB /* MotionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CC8B8392988BA580011E5FB /* MotionType.swift */; };
 		5785B397298A0CCF00DD61B2 /* FileManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5785B396298A0CCF00DD61B2 /* FileManagerProtocol.swift */; };
@@ -38,6 +39,7 @@
 		0C27E43A298D497100C570C4 /* MotionManagerable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionManagerable.swift; sourceTree = "<group>"; };
 		0C27E43C298D49A500C570C4 /* MotionCoordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionCoordinate.swift; sourceTree = "<group>"; };
 		0C27E43E298E6A7B00C570C4 /* GyroMotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroMotionManager.swift; sourceTree = "<group>"; };
+		0C27E440298E777A00C570C4 /* MotionManagerError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionManagerError.swift; sourceTree = "<group>"; };
 		0CC8B8372988B73C0011E5FB /* MotionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionData.swift; sourceTree = "<group>"; };
 		0CC8B8392988BA580011E5FB /* MotionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionType.swift; sourceTree = "<group>"; };
 		5785B396298A0CCF00DD61B2 /* FileManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerProtocol.swift; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 			children = (
 				B240905B298A4531008DC79B /* CoreDataError.swift */,
 				57D312A7298A532C001963C5 /* FileManagingError.swift */,
+				0C27E440298E777A00C570C4 /* MotionManagerError.swift */,
 			);
 			path = Error;
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 				0C27E43F298E6A7B00C570C4 /* GyroMotionManager.swift in Sources */,
 				0C27E404298A492C00C570C4 /* AccelerometerMotionManager.swift in Sources */,
 				0C27E42B298BF0D700C570C4 /* MeasureViewController.swift in Sources */,
+				0C27E441298E777A00C570C4 /* MotionManagerError.swift in Sources */,
 				57D312A4298A14F1001963C5 /* MotionMeasures.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
 				B240905C298A4531008DC79B /* CoreDataError.swift in Sources */,
