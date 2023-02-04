@@ -1,5 +1,5 @@
 //
-//  MotionViewModel.swift
+//  MotionGraphViewModel.swift
 //  GyroData
 //
 //  Created by Ayaan, Wonbi on 2023/01/31.
@@ -7,18 +7,21 @@
 
 import Foundation
 
-protocol MotionViewDelegate: AnyObject {
-    func motionViewModel(willDisplayMotion motion: Motion)
+protocol MotionGraphViewModelDelegate: AnyObject {
+    func motionGraphViewModel(willDisplayDate date: String, type: String, data: Motion.MeasurementData)
 }
 
-final class MotionViewModel {
+final class MotionGraphViewModel {
+    enum Constant {
+        static let dateFormat = "yyyy/MM/dd HH:mm:ss"
+    }
     enum Action {
         case viewWillAppear
     }
     
     private let motionID: String
     private let readService: FileManagerMotionReadService
-    private weak var delegate: MotionViewDelegate?
+    private weak var delegate: MotionGraphViewModelDelegate?
     
     init(motionID: String, readService: FileManagerMotionReadService) {
         self.motionID = motionID
@@ -32,15 +35,18 @@ final class MotionViewModel {
         }
     }
     
-    func configureDelegate(_ delegate: MotionViewDelegate) {
+    func configureDelegate(_ delegate: MotionGraphViewModelDelegate) {
         self.delegate = delegate
     }
 }
 
-private extension MotionViewModel {
+private extension MotionGraphViewModel {
     func fetchMotion(with id: String) {
         guard let motion = readService.read(with: motionID) else { return }
         
-        delegate?.motionViewModel(willDisplayMotion: motion)
+        delegate?.motionGraphViewModel(
+            willDisplayDate: motion.date.formatted(by: Constant.dateFormat),
+            type: motion.type.text,
+            data: motion.data)
     }
 }

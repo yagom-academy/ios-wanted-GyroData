@@ -68,7 +68,7 @@ enum ViewControllerFactory {
         
         let fileManagerReadService = FileManagerMotionReadService(repository: fileManagerRepository)
         
-        let motionViewModel = MotionViewModel(motionID: id, readService: fileManagerReadService)
+        let motionViewModel = MotionGraphViewModel(motionID: id, readService: fileManagerReadService)
         
         let motionGraphViewController = MotionGraphViewController(style: style, viewModel: motionViewModel)
         return motionGraphViewController

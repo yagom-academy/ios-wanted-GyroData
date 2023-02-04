@@ -28,10 +28,9 @@ final class MotionGraphViewController: UIViewController {
     private let dateLabel: UILabel = {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .body)
-        label.text = "2023/02/03 16:00:00"
         return label
     }()
-    private let styleLabel: UILabel = {
+    private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .title1)
         return label
@@ -42,7 +41,6 @@ final class MotionGraphViewController: UIViewController {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .title1)
         label.textAlignment = .right
-        label.text = "00.0"
         return label
     }()
     private let spaceView = UIView()
@@ -60,9 +58,9 @@ final class MotionGraphViewController: UIViewController {
         return stackView
     }()
     private let style: Style
-    private let viewModel: MotionViewModel
+    private let viewModel: MotionGraphViewModel
     
-    init(style: Style, viewModel: MotionViewModel) {
+    init(style: Style, viewModel: MotionGraphViewModel) {
         self.style = style
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -92,7 +90,7 @@ private extension MotionGraphViewController {
         view.backgroundColor = .systemBackground
         title = Constant.title
         [spaceView, playButton, timeLabel].forEach(bottomStackView.addArrangedSubview(_:))
-        [dateLabel, styleLabel, graphView, bottomStackView].forEach(contentsStackView.addArrangedSubview(_:))
+        [dateLabel, titleLabel, graphView, bottomStackView].forEach(contentsStackView.addArrangedSubview(_:))
         view.addSubview(contentsStackView)
         
         NSLayoutConstraint.activate([
@@ -111,7 +109,6 @@ private extension MotionGraphViewController {
             spaceView.widthAnchor.constraint(equalTo: timeLabel.widthAnchor)
         ])
         
-        styleLabel.text = style.title
         bottomStackView.isHidden = style == .view
     }
     
@@ -125,8 +122,9 @@ private extension MotionGraphViewController {
     }
 }
 
-extension MotionGraphViewController: MotionViewDelegate {
-    func motionViewModel(willDisplayMotion motion: Motion) {
-        dateLabel.text = motion.date.description
+extension MotionGraphViewController: MotionGraphViewModelDelegate {
+    func motionGraphViewModel(willDisplayDate date: String, type: String, data: Motion.MeasurementData) {
+        dateLabel.text = date
+        titleLabel.text = "\(type) \(style.title)"
     }
 }
