@@ -7,10 +7,12 @@
 
 import UIKit
 
-class MotionsListViewController: UIViewController {
+final class MotionsListViewController: UIViewController {
     enum Constant {
         static let title = "목록"
         static let measurementButtonTitle = "측정"
+        static let playImageName = "play.fill"
+        static let deleteImageName = "trash.fill"
     }
     
     private let tableView: UITableView = {
@@ -51,6 +53,11 @@ extension MotionsListViewController {
         view.addSubview(tableView)
         
         navigationItem.title = Constant.title
+        navigationController?.navigationBar.titleTextAttributes = [
+            NSAttributedString.Key.font: UIFont.preferredFont(
+                forTextStyle: .title2
+            )
+        ]
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             title: Constant.measurementButtonTitle,
             primaryAction: UIAction(handler: tapMeasurementButton)
@@ -111,6 +118,7 @@ extension MotionsListViewController {
 // MARK: UITableViewDelegate
 extension MotionsListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
         viewModel.action(.motionTap(indexPath: indexPath))
     }
     
@@ -118,7 +126,7 @@ extension MotionsListViewController: UITableViewDelegate {
         _ tableView: UITableView,
         trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
     ) -> UISwipeActionsConfiguration? {
-        let playAction = UIContextualAction(style: .normal, title: nil) { [weak self] _, view, completion in
+        let playAction = UIContextualAction(style: .normal, title: nil) { [weak self] _, _, completion in
             self?.viewModel.action(.motionPlay(indexPath: indexPath))
             completion(true)
         }
@@ -129,8 +137,8 @@ extension MotionsListViewController: UITableViewDelegate {
         }
         
         playAction.backgroundColor = .systemGreen
-        playAction.image = UIImage(systemName: "play.fill")
-        deleteAction.image = UIImage(systemName: "trash.fill")
+        playAction.image = UIImage(systemName: Constant.playImageName)
+        deleteAction.image = UIImage(systemName: Constant.deleteImageName)
         
         let swipeConfiguration = UISwipeActionsConfiguration(actions: [deleteAction, playAction])
         swipeConfiguration.performsFirstActionWithFullSwipe = false
