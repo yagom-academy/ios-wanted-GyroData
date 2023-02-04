@@ -21,11 +21,13 @@ final class MotionCell: UITableViewCell, CellIdentifiable {
     enum Constant {
         static let padding: Double = 16.0
         static let halfPadding: Double = 8.0
+        static let alpha: Double = 0.8
     }
     
     private let dateLabel: UILabel = {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .body)
+        label.alpha = Constant.alpha
         return label
     }()
     
@@ -37,7 +39,12 @@ final class MotionCell: UITableViewCell, CellIdentifiable {
     
     private let timeLabel: UILabel = {
         let label = UILabel()
-        label.font = .preferredFont(forTextStyle: .largeTitle)
+        label.font = .preferredFont(
+            forTextStyle: .largeTitle,
+            compatibleWith: UITraitCollection(
+                preferredContentSizeCategory: .extraExtraExtraLarge
+            )
+        )
         return label
     }()
     
@@ -81,8 +88,10 @@ final class MotionCell: UITableViewCell, CellIdentifiable {
     private func configureLayout() {
         let safeArea = contentView.safeAreaLayoutGuide
         
-        let mainStackViewBottomAnchor = mainStackView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor,
-                                                           constant: -Constant.halfPadding)
+        let mainStackViewBottomAnchor = mainStackView.bottomAnchor.constraint(
+            equalTo: safeArea.bottomAnchor,
+            constant: -Constant.halfPadding
+        )
         mainStackViewBottomAnchor.priority = .defaultHigh
         
         NSLayoutConstraint.activate([
