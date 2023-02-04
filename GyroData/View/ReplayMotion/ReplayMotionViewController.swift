@@ -27,15 +27,14 @@ class ReplayMotionViewController: UIViewController {
     
     let dateLabel: UILabel = {
         let label = UILabel()
-
-        label.text = "test date"
+        label.font = .preferredFont(forTextStyle: .caption1)
+        
         return label
     }()
 
     let typeLabel: UILabel = {
         let label = UILabel()
-        label.font = .preferredFont(forTextStyle: .title2)
-        label.text = "test type"
+        label.font = .preferredFont(forTextStyle: .largeTitle)
         
         return label
     }()
@@ -111,9 +110,9 @@ class ReplayMotionViewController: UIViewController {
         let stackView = UIStackView(arrangedSubviews: [dateLabel, typeLabel, graphView])
         stackView.axis = .vertical
         stackView.spacing = 4
+        stackView.setCustomSpacing(20, after: typeLabel)
         return stackView
     }()
-
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -142,10 +141,7 @@ class ReplayMotionViewController: UIViewController {
     func configureLayout() {
         containerStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            dateLabel.heightAnchor.constraint(equalToConstant: 16),
-
-            typeLabel.heightAnchor.constraint(equalToConstant: 36),
-            typeLabel.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 4),
+//            dateLabel.heightAnchor.constraint(equalToConstant: 16),
 
             valueLabelStackView.topAnchor.constraint(equalTo: graphView.topAnchor, constant: 4),
             valueLabelStackView.leadingAnchor.constraint(equalTo: containerStackView.leadingAnchor, constant: 16),
