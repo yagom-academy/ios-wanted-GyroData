@@ -237,19 +237,19 @@ private extension GraphView {
     }
     
     func setupBaseLine() {
-        let layer = CAShapeLayer()
+        let shapeLayer = CAShapeLayer()
         let path = UIBezierPath()
+        let width = frame.width
+        let height = frame.height
         
         let lineCount = 8
-        let xOffset = self.frame.width / CGFloat(lineCount)
-        let yOffset = self.frame.height / CGFloat(lineCount)
+        let xOffset = width / CGFloat(lineCount)
+        let yOffset = height / CGFloat(lineCount)
         var xpointer: CGFloat = .zero
         var ypointer: CGFloat = .zero
-        let width: CGFloat = frame.width
-        let height: CGFloat = frame.height
         
-        layer.borderWidth = 3
-        layer.borderColor = UIColor.systemGray2.cgColor
+        self.layer.borderWidth = 3
+        self.layer.borderColor = UIColor.systemGray2.cgColor
         
         Array(1...lineCount).forEach { _ in
             xpointer += xOffset
@@ -263,12 +263,12 @@ private extension GraphView {
             path.addLine(to: newYPosition)
         }
         
-        layer.fillColor = UIColor.gray.cgColor
-        layer.strokeColor = UIColor.gray.cgColor
-        layer.lineWidth = 1
-        layer.path = path.cgPath
+        shapeLayer.fillColor = UIColor.gray.cgColor
+        shapeLayer.strokeColor = UIColor.gray.cgColor
+        shapeLayer.lineWidth = 1
+        shapeLayer.path = path.cgPath
         
-        self.layer.addSublayer(layer)
+        self.layer.addSublayer(shapeLayer)
     }
     
     func mappingValuesToFrame(values: Values) -> Values {
