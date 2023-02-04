@@ -10,9 +10,9 @@
 		1A087CEF2989344700FC2056 /* LineGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A087CEE2989344600FC2056 /* LineGraphView.swift */; };
 		1A087CF82989348800FC2056 /* SensorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A087CF42989348800FC2056 /* SensorManager.swift */; };
 		1A087CFA2989353400FC2056 /* MeasurementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A087CF92989353300FC2056 /* MeasurementViewController.swift */; };
-		1A087D0C298A96CE00FC2056 /* SensorFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A087D0B298A96CE00FC2056 /* SensorFileManager.swift */; };
 		1A087D0E298A976E00FC2056 /* MeasurementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A087D0D298A976E00FC2056 /* MeasurementView.swift */; };
 		1A92956F298B9B3B004B5B20 /* UIAlertController +.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A92956E298B9B3B004B5B20 /* UIAlertController +.swift */; };
+		1A929574298E20AA004B5B20 /* SensorFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A929573298E20AA004B5B20 /* SensorFileManager.swift */; };
 		4143584C298A277E00D243C5 /* GyroCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4143584A298A277E00D243C5 /* GyroCoreData.xcdatamodeld */; };
 		414C7A702988CE2A00452C25 /* AxisValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414C7A6F2988CE2A00452C25 /* AxisValue.swift */; };
 		414C7A772988DFDB00452C25 /* Date +.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414C7A762988DFDB00452C25 /* Date +.swift */; };
@@ -41,9 +41,9 @@
 		1A087CEE2989344600FC2056 /* LineGraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineGraphView.swift; sourceTree = "<group>"; };
 		1A087CF42989348800FC2056 /* SensorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SensorManager.swift; sourceTree = "<group>"; };
 		1A087CF92989353300FC2056 /* MeasurementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeasurementViewController.swift; sourceTree = "<group>"; };
-		1A087D0B298A96CE00FC2056 /* SensorFileManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SensorFileManager.swift; path = GyroData/Models/DataStorage/FileManager/SensorFileManager.swift; sourceTree = SOURCE_ROOT; };
 		1A087D0D298A976E00FC2056 /* MeasurementView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeasurementView.swift; sourceTree = "<group>"; };
 		1A92956E298B9B3B004B5B20 /* UIAlertController +.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController +.swift"; sourceTree = "<group>"; };
+		1A929573298E20AA004B5B20 /* SensorFileManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SensorFileManager.swift; sourceTree = "<group>"; };
 		4143584B298A277E00D243C5 /* GyroCoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GyroCoreData.xcdatamodel; sourceTree = "<group>"; };
 		414C7A6F2988CE2A00452C25 /* AxisValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxisValue.swift; sourceTree = "<group>"; };
 		414C7A762988DFDB00452C25 /* Date +.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date +.swift"; sourceTree = "<group>"; };
@@ -118,7 +118,6 @@
 		1A087CF02989348800FC2056 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				41539B96298A620900B7A446 /* DataStorage */,
 				1A087CF42989348800FC2056 /* SensorManager.swift */,
 				414E530E2987E052000221E2 /* Measurement.swift */,
 				414E53082987DE1B000221E2 /* Sensor.swift */,
@@ -131,7 +130,7 @@
 		1A087D0F298A9F7B00FC2056 /* FileManager */ = {
 			isa = PBXGroup;
 			children = (
-				1A087D0B298A96CE00FC2056 /* SensorFileManager.swift */,
+				1A929573298E20AA004B5B20 /* SensorFileManager.swift */,
 			);
 			path = FileManager;
 			sourceTree = "<group>";
@@ -189,6 +188,7 @@
 		63F01BB328D44FC400C53A39 /* GyroData */ = {
 			isa = PBXGroup;
 			children = (
+				41539B96298A620900B7A446 /* DataStorage */,
 				414E53142987E6BC000221E2 /* Extension + */,
 				1A087CED2989344600FC2056 /* Views */,
 				1A087CF02989348800FC2056 /* Models */,
@@ -272,8 +272,8 @@
 				414E53162987E6DB000221E2 /* UILabel +.swift in Sources */,
 				414E530F2987E052000221E2 /* Measurement.swift in Sources */,
 				414C7A772988DFDB00452C25 /* Date +.swift in Sources */,
-				1A087D0C298A96CE00FC2056 /* SensorFileManager.swift in Sources */,
 				41539B93298A612E00B7A446 /* JSONEncoder +.swift in Sources */,
+				1A929574298E20AA004B5B20 /* SensorFileManager.swift in Sources */,
 				414E53112987E0CC000221E2 /* ListView.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				414E53182987E915000221E2 /* UIStackView +.swift in Sources */,
@@ -432,7 +432,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = G9W4Z8U9JB;
+				DEVELOPMENT_TEAM = 453RFCPVJY;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "GyroData/Supporting Files/Info.plist";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
@@ -446,7 +446,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.GyroData.SunnyRhovin2;
+				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.GyroData.SunnyRhovin3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -461,7 +461,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = G9W4Z8U9JB;
+				DEVELOPMENT_TEAM = 453RFCPVJY;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "GyroData/Supporting Files/Info.plist";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
@@ -475,7 +475,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.GyroData.SunnyRhovin2;
+				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.GyroData.SunnyRhovin3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
