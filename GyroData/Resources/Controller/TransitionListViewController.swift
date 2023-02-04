@@ -67,29 +67,9 @@ extension TransitionListViewController: UITableViewDelegate {
         _ tableView: UITableView,
         trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
     ) -> UISwipeActionsConfiguration? {
-        let playAction = UIContextualAction(style: .normal, title: nil) { [weak self] (_, _, completion) in
-            guard let self = self else { return }
-            let metaData = self.metaDatas[indexPath.row]
-            self.presentPlayView(with: .play, metaData: metaData)
-            
-            completion(true)
-        }
-        playAction.backgroundColor = .systemGreen
-        playAction.image = createSwipeActionImage(text: "Play")
-
-        let deleteAction = UIContextualAction(style: .destructive, title: nil) { [weak self] (_, _, completion) in
-            // TODO: - 삭제 메서드 추가 및 CoreData 삭제 하기
-            guard let self = self else { return }
-            self.metaDatas.remove(at: indexPath.row)
-            
-            DispatchQueue.main.async {
-                tableView.reloadData()
-            }
-            completion(true)
-        }
-        deleteAction.backgroundColor = .systemRed
-        deleteAction.image = createSwipeActionImage(text: "Delete")
-
+        let playAction = swipePlayAction(indexPath: indexPath)
+        let deleteAction = swipeDeleteAction(indexPath: indexPath)
+    
         return UISwipeActionsConfiguration(actions: [deleteAction, playAction])
     }
     
@@ -159,6 +139,36 @@ private extension TransitionListViewController {
         let controller = PlayViewController(viewType: type, metaData: metaData)
         
         navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    func swipePlayAction(indexPath: IndexPath) -> UIContextualAction {
+        let playAction = UIContextualAction(style: .normal, title: nil) { [weak self] _, _, handler in
+            guard let self = self else { return }
+            
+            let metaData = self.metaDatas[indexPath.row]
+            self.presentPlayView(with: .play, metaData: metaData)
+            
+            handler(true)
+        }
+        playAction.backgroundColor = .systemGreen
+        playAction.image = createSwipeActionImage(text: "Play")
+        
+        return playAction
+    }
+    
+    func swipeDeleteAction(indexPath: IndexPath) -> UIContextualAction {
+        let deleteAction = UIContextualAction(style: .destructive, title: nil) { [weak self] _, _, handler in
+            // TODO: - 삭제 메서드 추가 및 CoreData 삭제 하기
+            guard let self = self else { return }
+            self.metaDatas.remove(at: indexPath.row)
+            self.tableView.reloadData()
+            
+            handler(true)
+        }
+        deleteAction.backgroundColor = .systemRed
+        deleteAction.image = createSwipeActionImage(text: "Delete")
+        
+        return deleteAction
     }
 }
 
