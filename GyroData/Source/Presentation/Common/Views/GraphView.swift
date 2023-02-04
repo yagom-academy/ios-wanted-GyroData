@@ -294,7 +294,7 @@ private extension GraphView {
     }
     
     func adjustScale(_ scale: Double) {
-        self.scale = self.scale + scale * 0.2
+        self.scale = scale * 1.2
     }
     
     func reDrawEntireData() {
