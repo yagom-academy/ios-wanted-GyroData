@@ -51,7 +51,7 @@ final class DetailViewController: UIViewController {
     
     func setupBind() {
         viewModel.bindData { [weak self] data, segmentedData in
-            self?.dateLabel.text = data.date.description
+            self?.dateLabel.text = DateFormatter.convertDate(data.date)
             self?.typeLabel.text = "View"
             self?.graphView.setEntrieData(data: segmentedData)
         }

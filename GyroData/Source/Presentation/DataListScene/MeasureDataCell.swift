@@ -48,9 +48,8 @@ final class MeasureDataCell: UITableViewCell {
     func setupData(data: MeasureData) {
         guard let type = data.type else { return }
         
-        dateLabel.text = data.date.description
+        dateLabel.text = DateFormatter.convertDate(data.date)
         sensorLabel.text = "\(type)"
-//        runTimeLabel.text = String(data.runTime)
         runTimeLabel.text = String(format: "%.1f", data.runTime)
     }
 }

@@ -86,7 +86,7 @@ extension PlayViewController {
         view.addSubview(labelStackView)
         [dateLabel, typeLabel].forEach { labelStackView.addArrangedSubview($0) }
         
-        dateLabel.text = data.date.description
+        dateLabel.text = DateFormatter.convertDate(data.date)
         typeLabel.text = "Play"
         
         NSLayoutConstraint.activate([
