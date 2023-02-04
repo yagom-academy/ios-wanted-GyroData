@@ -14,6 +14,7 @@ final class DataListViewModel {
         case play(index: Int)
         case delete(index: Int)
         case viewWillAppearEvent
+        case scrollToBottomEvent
     }
     
     private let transactionSevice = TransactionService(
@@ -62,6 +63,8 @@ extension DataListViewModel {
             deleteData(index: index)
         case .viewWillAppearEvent:
             fetchData()
+        case .scrollToBottomEvent:
+            paginationData()
         }
     }
     
@@ -94,6 +97,17 @@ extension DataListViewModel {
     
     private func fetchData() {
         let result = transactionSevice.dataLoad(offset: 0, limit: page)
+        
+        switch result {
+        case .success(let dataList):
+            measureDatas = dataList
+        case .failure(let failure):
+            alertDelegate?.presentErrorAlert(title: "불러오기 실패", message: failure.localizedDescription)
+        }
+    }
+    
+    private func paginationData() {
+        let result = transactionSevice.dataLoad(offset: 0, limit: page + 1)
         
         switch result {
         case .success(let dataList):

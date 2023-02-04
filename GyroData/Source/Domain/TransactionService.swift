@@ -72,7 +72,6 @@ extension TransactionService {
         }
         
         group.wait()
-        self.list.append(data)
         completion(.success(()))
     }
     

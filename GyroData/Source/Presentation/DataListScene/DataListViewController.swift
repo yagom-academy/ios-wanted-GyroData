@@ -208,3 +208,13 @@ extension DataListViewController {
         ])
     }
 }
+
+extension DataListViewController: UIScrollViewDelegate {
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        let contentHeight = tableView.contentSize.height
+        
+        if scrollView.contentOffset.y + tableView.bounds.height >= contentHeight {
+            viewModel.action(.scrollToBottomEvent)
+        }
+    }
+}
