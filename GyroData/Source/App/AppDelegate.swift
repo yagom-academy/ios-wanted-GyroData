@@ -45,11 +45,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }()
     
     func saveContext() {
-        let context = persistentContainer.viewContext
-        
-        if context.hasChanges {
+        if backgroundContext.hasChanges {
             do {
-                try context.save()
+                try backgroundContext.save()
             } catch {
                 print(error)
             }
