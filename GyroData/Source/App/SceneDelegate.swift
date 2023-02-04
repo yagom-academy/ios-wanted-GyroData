@@ -11,7 +11,8 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                willConnectTo session: UISceneSession,
                options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
-        let MeasureListViewController = MeasureListViewController()
+        let measurListViewModel = MeasureListViewModel()
+        let MeasureListViewController = MeasureListViewController(measureListViewModel: measurListViewModel)
         let navigationController = UINavigationController(rootViewController: MeasureListViewController)
         
         window = UIWindow(windowScene: windowScene)

@@ -14,18 +14,6 @@ class DetailViewController: UIViewController {
     let createdAt: Date
     let detailViewModel: DetailViewModel
     
-    init(detailViewMode: DetailViewMode, createdAt: Date) {
-        self.detailViewMode = detailViewMode
-        self.createdAt = createdAt
-        self.detailViewModel = DetailViewModel(date: createdAt)
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    @available(*, unavailable)
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     private let createdAtLabel: UILabel = {
         let label = UILabel()
         
@@ -105,6 +93,18 @@ class DetailViewController: UIViewController {
         
         return label
     }()
+    
+    init(detailViewMode: DetailViewMode, createdAt: Date) {
+        self.detailViewMode = detailViewMode
+        self.createdAt = createdAt
+        self.detailViewModel = DetailViewModel(date: createdAt)
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

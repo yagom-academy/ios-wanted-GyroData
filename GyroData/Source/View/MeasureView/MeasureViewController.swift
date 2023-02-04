@@ -14,7 +14,7 @@ final class MeasureViewController: UIViewController {
         static let saveButtonTitle = "저장"
     }
     
-    let measureViewModel = MeasureViewModel()
+    let measureViewModel: MeasureViewModel
     private var sensorMode: SensorMode {
         return self.segmentedControl.selectedSegmentIndex == 0 ? .Acc : .Gyro
     }
@@ -72,6 +72,16 @@ final class MeasureViewController: UIViewController {
         
         return stackView
     }()
+    
+    init(measureViewModel: MeasureViewModel) {
+        self.measureViewModel = measureViewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
