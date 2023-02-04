@@ -203,7 +203,6 @@
 			children = (
 				DF5D8C40298BB33600E7312D /* CoreDataPlatform */,
 				DF5D8C8E298D154F00E7312D /* CoreMotionPlatform */,
-				DF5D8C43298BB80100E7312D /* Repository */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -216,13 +215,6 @@
 				DF5D8C5E298CC73300E7312D /* MotionData_v1.xcdatamodeld */,
 			);
 			path = CoreDataPlatform;
-			sourceTree = "<group>";
-		};
-		DF5D8C43298BB80100E7312D /* Repository */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Repository;
 			sourceTree = "<group>";
 		};
 		DF5D8C4D298BF7A000E7312D /* Entities */ = {
