@@ -142,7 +142,7 @@ private extension MeasureViewController {
         measureStopButton.setTitle(Constant.measureStopButtonTitle, for: .normal)
         
         measureStartButton.addTarget(self, action: #selector(measureStartButtonTapped), for: .touchUpInside)
-        measureStopButton.addTarget(self, action: #selector(methodmeasureStopButtonTapped), for: .touchUpInside)
+        measureStopButton.addTarget(self, action: #selector(measureStopButtonTapped), for: .touchUpInside)
         
         let safeArea = view.safeAreaLayoutGuide
         
@@ -193,7 +193,7 @@ extension MeasureViewController {
         }
     }
     
-    @objc func methodmeasureStopButtonTapped(_ sender: UIButton) {
+    @objc func measureStopButtonTapped(_ sender: UIButton) {
         viewModel.action(.measureEndbuttonTapped)
     }
 }
