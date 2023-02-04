@@ -8,4 +8,13 @@
 enum MotionType {
     case accelerometer
     case gyroscope
+    
+    var description: String {
+        switch self {
+        case .accelerometer:
+            return "Accelerometer"
+        case .gyroscope:
+            return "Gyro"
+        }
+    }
 }
