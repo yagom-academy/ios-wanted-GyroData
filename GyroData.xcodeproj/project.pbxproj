@@ -26,6 +26,9 @@
 		B4C661E2298A47D800A18C60 /* SensorMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C661E1298A47D800A18C60 /* SensorMode.swift */; };
 		D2BF0BF5298BE7A2002DDF61 /* NotificationName+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BF0BF4298BE7A2002DDF61 /* NotificationName+Extension.swift */; };
 		D2C94E2A2988BE9F00F70389 /* MeasureTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C94E292988BE9F00F70389 /* MeasureTableViewCell.swift */; };
+		D2D44DB1298E4B460005ED01 /* FileManager+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D44DB0298E4B460005ED01 /* FileManager+Extension.swift */; };
+		D2D44DB3298E4F370005ED01 /* FileManagedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D44DB2298E4F370005ED01 /* FileManagedData.swift */; };
+		D2D44DB5298E537E0005ED01 /* DateFormatter+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D44DB4298E537E0005ED01 /* DateFormatter+Extension.swift */; };
 		D2D47A37298C2CE100233477 /* MeasureListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D47A36298C2CE100233477 /* MeasureListViewModel.swift */; };
 		D2DA2C20298A3313006B4FC3 /* MeasureViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2DA2C1F298A3313006B4FC3 /* MeasureViewModel.swift */; };
 		D2DA2C22298A3387006B4FC3 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2DA2C21298A3387006B4FC3 /* Observable.swift */; };
@@ -56,6 +59,9 @@
 		B4C661E1298A47D800A18C60 /* SensorMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensorMode.swift; sourceTree = "<group>"; };
 		D2BF0BF4298BE7A2002DDF61 /* NotificationName+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationName+Extension.swift"; sourceTree = "<group>"; };
 		D2C94E292988BE9F00F70389 /* MeasureTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureTableViewCell.swift; sourceTree = "<group>"; };
+		D2D44DB0298E4B460005ED01 /* FileManager+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Extension.swift"; sourceTree = "<group>"; };
+		D2D44DB2298E4F370005ED01 /* FileManagedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagedData.swift; sourceTree = "<group>"; };
+		D2D44DB4298E537E0005ED01 /* DateFormatter+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Extension.swift"; sourceTree = "<group>"; };
 		D2D47A36298C2CE100233477 /* MeasureListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureListViewModel.swift; sourceTree = "<group>"; };
 		D2DA2C1F298A3313006B4FC3 /* MeasureViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureViewModel.swift; sourceTree = "<group>"; };
 		D2DA2C21298A3387006B4FC3 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
@@ -136,6 +142,7 @@
 			children = (
 				B4564280298C175A0060DEC4 /* CoreDataManager */,
 				B4A2F5D6298A1ABB004BA0ED /* CoreMotionManager.swift */,
+				D2D44DB0298E4B460005ED01 /* FileManager+Extension.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -199,6 +206,7 @@
 				D2DA2C23298A389C006B4FC3 /* SensorData.swift */,
 				D2DA2C21298A3387006B4FC3 /* Observable.swift */,
 				B4564288298C17F00060DEC4 /* MotionData.swift */,
+				D2D44DB2298E4F370005ED01 /* FileManagedData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -232,6 +240,7 @@
 			isa = PBXGroup;
 			children = (
 				D2BF0BF4298BE7A2002DDF61 /* NotificationName+Extension.swift */,
+				D2D44DB4298E537E0005ED01 /* DateFormatter+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -310,6 +319,7 @@
 				D2C94E2A2988BE9F00F70389 /* MeasureTableViewCell.swift in Sources */,
 				B4564290298C1A7F0060DEC4 /* MotionCoreModel+CoreDataProperties.swift in Sources */,
 				D2DA2C24298A389C006B4FC3 /* SensorData.swift in Sources */,
+				D2D44DB3298E4F370005ED01 /* FileManagedData.swift in Sources */,
 				B4564284298C17970060DEC4 /* CoreDataManageable.swift in Sources */,
 				B456428C298C191D0060DEC4 /* Motion.xcdatamodeld in Sources */,
 				D2D47A37298C2CE100233477 /* MeasureListViewModel.swift in Sources */,
@@ -317,12 +327,14 @@
 				B456428F298C1A7F0060DEC4 /* MotionCoreModel+CoreDataClass.swift in Sources */,
 				63F01BB928D44FC400C53A39 /* MeasureListViewController.swift in Sources */,
 				B4AC807C2988E4310095621A /* MeasureViewController.swift in Sources */,
+				D2D44DB5298E537E0005ED01 /* DateFormatter+Extension.swift in Sources */,
 				B4A2F5D7298A1ABB004BA0ED /* CoreMotionManager.swift in Sources */,
 				D2DA2C28298A4CD7006B4FC3 /* GraphView.swift in Sources */,
 				B4C661E2298A47D800A18C60 /* SensorMode.swift in Sources */,
 				D2BF0BF5298BE7A2002DDF61 /* NotificationName+Extension.swift in Sources */,
 				D2DA2C20298A3313006B4FC3 /* MeasureViewModel.swift in Sources */,
 				B4564282298C177A0060DEC4 /* ManagedObjectModel.swift in Sources */,
+				D2D44DB1298E4B460005ED01 /* FileManager+Extension.swift in Sources */,
 				B4564289298C17F00060DEC4 /* MotionData.swift in Sources */,
 				D2DA2C22298A3387006B4FC3 /* Observable.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,

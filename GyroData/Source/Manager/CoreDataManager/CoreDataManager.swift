@@ -7,6 +7,7 @@ import CoreData
 final class CoreDataManager: CoreDataManageable {
 
     static let shared = CoreDataManager()
+    private let fileManager = FileManager()
     
     lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "Motion")
@@ -39,7 +40,14 @@ final class CoreDataManager: CoreDataManageable {
         motionObject.setValue(motionData.sensorData.y, forKey: "yData")
         motionObject.setValue(motionData.sensorData.z, forKey: "zData")
         
+        // TODO: hasChanged 될때만 save 되도록 수정
         try context.save()
+        
+        let saveToData = FileManagedData(createdAt: motionData.createdAt,
+                                         runtime: motionData.runtime,
+                                         sensorData: motionData.sensorData)
+        fileManager.add(fileName: DateFormatter.convertToFileFormat(date: saveToData.createdAt),
+                        fileManagedData: saveToData)
     }
     
     func fetchObjects() throws -> [MotionData] {
