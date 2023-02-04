@@ -76,11 +76,8 @@ final class MotionDataTableViewController: UIViewController {
     
     private func createPushAction() -> UIAction {
         let action = UIAction { _ in
-//            let measurementMotionDataViewController = MeasurementMotionDataViewController()
-//            self.navigationController?.pushViewController(measurementMotionDataViewController, animated: true)
-            FileManager.shared.motionDataList = [
-                MotionData(date: Date(timeIntervalSince1970: 10000), type: .accelerometer, time: 20, value: [SIMD3(x: 1, y: 2, z: 3)], id: UUID())
-            ]
+            let measurementMotionDataViewController = MeasurementMotionDataViewController()
+            self.navigationController?.pushViewController(measurementMotionDataViewController, animated: true)
         }
         
         return action
@@ -100,7 +97,7 @@ extension MotionDataTableViewController {
     }
 
     private func makeSwipeActions(for indexPath: IndexPath?) -> UISwipeActionsConfiguration? {
-        guard let indexPath = indexPath, let id = dataSource?.itemIdentifier(for: indexPath) else { return nil }
+        guard let indexPath = indexPath, let _ = dataSource?.itemIdentifier(for: indexPath) else { return nil }
 
         let playAction = UIContextualAction(style: .normal, title: "Play") { action, view, completion in
             let replayMotionViewModel = ReplayMotionViewModel(index: indexPath, type: .play)

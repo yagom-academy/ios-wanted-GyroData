@@ -34,12 +34,54 @@ class ReplayMotionViewController: UIViewController {
 
     let typeLabel: UILabel = {
         let label = UILabel()
-
+        label.font = .preferredFont(forTextStyle: .title2)
         label.text = "test type"
         return label
     }()
 
-    let graphView: GraphView = {
+    private let xValueLabel: UILabel = {
+        let label = UILabel()
+        label.text = "x: 0"
+        label.textColor = .red
+        label.font = .preferredFont(forTextStyle: .caption1)
+        label.textAlignment = .left
+
+        return label
+    }()
+
+    private let yValueLabel: UILabel = {
+        let label = UILabel()
+        label.text = "y: 0"
+        label.textColor = .green
+        label.font = .preferredFont(forTextStyle: .caption1)
+        label.textAlignment = .center
+
+        return label
+    }()
+
+    private let zValueLabel: UILabel = {
+        let label = UILabel()
+        label.text = "z: 0"
+        label.textColor = .blue
+        label.font = .preferredFont(forTextStyle: .caption1)
+        label.textAlignment = .right
+
+        return label
+    }()
+
+    private lazy var valueLabelStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [xValueLabel,
+                                                       yValueLabel,
+                                                       zValueLabel])
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .horizontal
+        stackView.alignment = .fill
+        stackView.distribution = .equalSpacing
+
+        return stackView
+    }()
+
+    var graphView: GraphView = {
         let view = GraphView()
 
         return view
@@ -47,6 +89,7 @@ class ReplayMotionViewController: UIViewController {
 
     let playButton: UIButton = {
         let btn = UIButton()
+        btn.translatesAutoresizingMaskIntoConstraints = false
         btn.backgroundColor = .white
         btn.addTarget(self, action: #selector(didTappedStartButton), for: .touchUpInside)
 
@@ -54,26 +97,23 @@ class ReplayMotionViewController: UIViewController {
         let largeBoldDoc = UIImage(systemName: "play.fill", withConfiguration: largeConfig)
 
         btn.setImage(largeBoldDoc, for: .normal)
+        btn.tintColor = .black
 
         return btn
     }()
 
     let timeLabel: UILabel = {
         let label = UILabel()
-        label.text = "text time"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "00.0"
+        label.font = .preferredFont(forTextStyle: .title1)
         return label
     }()
 
-    lazy var buttonStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [playButton, timeLabel])
-        stackView.alignment = .leading
-        return stackView
-    }()
-
     lazy var containerStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [dateLabel, typeLabel, graphView, buttonStackView])
+        let stackView = UIStackView(arrangedSubviews: [dateLabel, typeLabel, graphView])
         stackView.axis = .vertical
-        stackView.spacing = 8
+        stackView.spacing = 4
         return stackView
     }()
 
@@ -90,37 +130,74 @@ class ReplayMotionViewController: UIViewController {
         configureHierarchy()
         configureLayout()
         configureNavigation()
-
+        configureGraphView()
+        configureViewModel()
         setUpUIData()
     }
 
     func configureHierarchy() {
-        graphView.dataSource = self
         view.addSubview(containerStackView)
+        view.addSubview(valueLabelStackView)
+        view.addSubview(playButton)
+        view.addSubview(timeLabel)
     }
 
     func configureLayout() {
-        buttonStackView.translatesAutoresizingMaskIntoConstraints = false
         containerStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             dateLabel.heightAnchor.constraint(equalToConstant: 16),
 
             typeLabel.heightAnchor.constraint(equalToConstant: 36),
+            typeLabel.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 4),
+
+            valueLabelStackView.topAnchor.constraint(equalTo: graphView.topAnchor, constant: 4),
+            valueLabelStackView.leadingAnchor.constraint(equalTo: containerStackView.leadingAnchor, constant: 16),
+            valueLabelStackView.trailingAnchor.constraint(equalTo: containerStackView.trailingAnchor, constant: -16),
+            valueLabelStackView.heightAnchor.constraint(equalToConstant: 12),
 
             graphView.widthAnchor.constraint(equalTo: containerStackView.widthAnchor),
             graphView.heightAnchor.constraint(equalTo: graphView.widthAnchor, multiplier: 0.9),
 
-            buttonStackView.heightAnchor.constraint(equalToConstant: 50),
+            playButton.topAnchor.constraint(equalTo: containerStackView.bottomAnchor, constant: 36),
+            playButton.leadingAnchor.constraint(equalTo: containerStackView.centerXAnchor, constant: -20),
+            playButton.widthAnchor.constraint(equalToConstant: 40),
+
+            timeLabel.centerYAnchor.constraint(equalTo: playButton.centerYAnchor),
+            timeLabel.topAnchor.constraint(equalTo: containerStackView.bottomAnchor, constant: 40),
+            timeLabel.trailingAnchor.constraint(equalTo: containerStackView.trailingAnchor, constant: -16),
 
             containerStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             containerStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 40),
             containerStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -40),
-//            containerStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            containerStackView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.5)
         ])
     }
 
     func configureNavigation() {
-        self.navigationController?.title = "다시 보기"
+        navigationItem.title = "다시보기"
+
+        let backBTN = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"),
+                                      style: .plain,
+                                      target: navigationController,
+                                      action: #selector(UINavigationController.popViewController(animated:)))
+        navigationItem.leftBarButtonItem = backBTN
+        navigationItem.leftBarButtonItem?.tintColor = .black
+    }
+
+    func configureGraphView() {
+        graphView.dataSource = replayMotionViewModel
+    }
+
+    private func configureViewModel() {
+        replayMotionViewModel?.bindMotionData { [weak self] in
+            self?.graphView.setNeedsDisplay()
+            guard let currentValue = self?.replayMotionViewModel?.fetchCurrentValue() else {
+                return
+            }
+            self?.xValueLabel.text = "x: " + currentValue.x
+            self?.yValueLabel.text = "y: " + currentValue.y
+            self?.zValueLabel.text = "z: " + currentValue.z
+        }
     }
 
     // MARK: - binding Data
@@ -132,17 +209,9 @@ class ReplayMotionViewController: UIViewController {
         replayTime = cellData?.0.time
         typeLabel.text = cellData?.1.rawValue
 
-        switch cellData?.1 {
-        case .play:
-            drawnGraph()
-        case .view:
-            buttonStackView.isHidden = false
-        case .none: break
-        }
-    }
+        playButton.isHidden = cellData?.1 == .view
+        timeLabel.isHidden = cellData?.1 == .view
 
-    func drawnGraph() {
-        
     }
 }
 // MARK: - setUP Timer
@@ -156,6 +225,10 @@ extension ReplayMotionViewController {
         switch self.watchStatus {
         case .start:
             self.watchStatus = .stop
+            graphView.linePaths.forEach { $0.removeAllPoints() }
+            graphView.linePaths = []
+            replayMotionViewModel?.cleanGraph()
+
             self.timer = Timer.scheduledTimer(timeInterval: 0.1,
                                               target: self,
                                               selector: #selector(timeUp),
@@ -190,42 +263,7 @@ extension ReplayMotionViewController {
             timer = nil
         }
 
-        //drawing graph
-    }
-}
-
-extension ReplayMotionViewController: GraphViewDataSource {
-    func dataList(graphView: GraphView) -> [[Double]] {
-        return [[1, 2, 3],
-                [1, 2, 3],
-                [1, 2, 3],
-                [1, 2, 3],
-                [1, 2, 3],
-                [1, 2, 3],
-                [1, 2, 3],
-                [1, 2, 3],
-                [1, 2, 3],
-                [1, 2, 3],
-                [1, 2, 3],
-                [1, 2, 3],
-                [1, 2, 3],
-                [1, 2, 3],
-                [1, 2, 3],
-                [1, 2, 3],
-                [1, 2, 3],
-                [1, 2, 3],
-                [1, 2, 3],
-                [1, 2, 3],
-                [1, 2, 3],
-                [1, 2, 3]]
-    }
-
-    func maximumXValueCount(graphView: GraphView) -> CGFloat {
-        return 20
-    }
-
-    func numberOfLines(graphView: GraphView) -> Int {
-        return 3
+        replayMotionViewModel?.setUpMotionDataForDrawing(index: Int(playingTime*10))
     }
 }
 
