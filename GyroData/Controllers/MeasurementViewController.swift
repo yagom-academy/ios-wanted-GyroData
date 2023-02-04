@@ -53,8 +53,9 @@ final class MeasurementViewController: UIViewController {
     
     private func saveSensorData() {
         if measurementData.axisValues == [] {
-            UIAlertController.show(title: "Error", message: "저장할 데이터가 없습니다.",target: self)
-            print(DataHandleError.noDataError(detail: "측정한 데이터가 없습니다."))
+            UIAlertController.show(title: "Error",
+                                   message: DataHandleError.noDataError(detail: "측정한 데이터가 없습니다.").localizedDescription,
+                                   target: self)
             return
         }
         
@@ -76,8 +77,9 @@ final class MeasurementViewController: UIViewController {
                     try manager.saveData(self.measurementData)
                 }
             } catch {
-                print(DataHandleError.saveFailError(error: error).description)
-                UIAlertController.show(title: "Error", message: "데이터를 저장에 실패했습니다.", target: self)
+                UIAlertController.show(title: "Error",
+                                       message: DataHandleError.saveFailError(error: error).localizedDescription,
+                                       target: self)
             }
             
             completion()

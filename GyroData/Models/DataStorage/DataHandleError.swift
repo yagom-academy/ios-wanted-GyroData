@@ -18,21 +18,21 @@ enum DataHandleError: Error {
 }
 
 extension DataHandleError: LocalizedError {
-    
-    var description: String {
+
+    var errorDescription: String? {
         switch self {
         case .saveFailError(let error):
-            return "Data Save Failed with Error: \(error.localizedDescription)"
+            return "저장에 실패했습니다. \n Error: \(error.localizedDescription)"
         case .fetchFailError(let error):
-            return "Data fetch Failed with Error: \(error.localizedDescription)"
+            return "로딩에 실패했습니다. \n Error: \(error.localizedDescription)"
         case .deleteFailError(let error):
-            return "Data delete Failed with Error: \(error.localizedDescription)"
+            return "삭제에 실패했습니다. \n Error: \(error.localizedDescription)"
         case .encodingError:
-            return "Data Encoding Failed"
+            return "Data Encoding 과정에 문제가 있습니다."
         case .decodingError:
-            return "Data Decoding Failed"
+            return "Data Decoding 과정에 문제가 있습니다."
         case .noDataError(let detail):
-            return "there in No Value, detail: \(detail)"
+            return detail
         }
     }
 }

@@ -23,6 +23,7 @@ final class ListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         drawView()
         registerListCell()
         configureDataSource()
@@ -44,8 +45,9 @@ final class ListViewController: UIViewController {
         do {
             measurements = try coreDataManager.fetchData()
         } catch(let error) {
-            print(DataHandleError.fetchFailError(error: error).description)
-            UIAlertController.show(title: "Error", message: "데이터 로딩에 실패했습니다", target: self)
+            UIAlertController.show(title: "Error",
+                                   message: DataHandleError.fetchFailError(error: error).localizedDescription,
+                                   target: self)
         }
     }
     
@@ -108,9 +110,10 @@ extension ListViewController: UITableViewDelegate {
                 self.measurements.remove(at: indexPath.item)
                 self.applySnapshot()
             }
-            catch {
-                print(DataHandleError.deleteFailError(error: error))
-                UIAlertController.show(title: "Error", message: "데이터 삭제에 실패했습니다.", target: self)
+            catch(let error) {
+                UIAlertController.show(title: "Error",
+                                       message: DataHandleError.deleteFailError(error: error).localizedDescription,
+                                       target: self)
             }
             
         }
@@ -146,8 +149,9 @@ extension ListViewController: UITableViewDelegate {
                 self?.isPaging = false
             }
         } catch(let error) {
-            print(DataHandleError.fetchFailError(error: error).description)
-            UIAlertController.show(title: "Error", message: "데이터 로딩에 실패했습니다", target: self)
+            UIAlertController.show(title: "Error",
+                                   message: DataHandleError.fetchFailError(error: error).localizedDescription,
+                                   target: self)
         }
     }
     

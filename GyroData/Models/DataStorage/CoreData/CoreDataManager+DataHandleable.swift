@@ -74,27 +74,21 @@ final class CoreDataManager: MeasurementDataHandleable {
     func deleteData(_ data: DataType) throws {
         let request = NSFetchRequest<MeasurementCoreModel>(entityName: "MeasurementCoreModel")
         request.predicate = NSPredicate(format: "date = %@", data.date as NSDate)
-        
-        do {
-            guard let measurementWillDelete = try context.fetch(request).first else {
-                throw DataHandleError.noDataError(detail: "no fetched data for delete")
-            }
-            
-            context.delete(measurementWillDelete)
-            try context.save()
+
+        guard let measurementWillDelete = try context.fetch(request).first else {
+            throw DataHandleError.noDataError(detail: "저장되어 있지 않은 데이터입니다.")
         }
+
+        context.delete(measurementWillDelete)
+        try context.save()
     }
-    
+
     func deleteAll() throws {
         let request = NSFetchRequest<MeasurementCoreModel>(entityName: "MeasurementCoreModel")
-        
-        do {
-            let measurementsWillDelete = try context.fetch(request)
-            measurementsWillDelete.forEach { measurement in
-                context.delete(measurement)
-            }
-            
-            try context.save()
+
+        let measurementsWillDelete = try context.fetch(request)
+        measurementsWillDelete.forEach { measurement in
+            context.delete(measurement)
         }
     }
     
