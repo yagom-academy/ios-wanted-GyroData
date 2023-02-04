@@ -106,7 +106,7 @@
          isStopDrawing.toggle()
          if isStopDrawing {
              graphView.timer.invalidate()
-             graphView.timeTrigger = true
+             graphView.isTimeTrigger = true
          }
      }
  }
