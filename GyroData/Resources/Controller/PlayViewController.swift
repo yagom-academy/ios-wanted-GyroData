@@ -28,6 +28,13 @@
          return label
      }()
 
+     private let graphView: GraphView = {
+         let graphView = GraphView(frame: .zero)
+         graphView.backgroundColor = .systemBackground
+         graphView.layer.borderWidth = 3
+         return graphView
+     }()
+
      private let controlButton: UIButton = {
          let button = UIButton()
 
@@ -109,7 +116,8 @@
      func addBaseChildComponents() {
          [
              dateLabel,
-             viewTypeLabel
+             viewTypeLabel,
+             graphView
          ].forEach {
              view.addSubview($0)
              $0.translatesAutoresizingMaskIntoConstraints = false
@@ -147,7 +155,12 @@
 
              viewTypeLabel.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 8),
              viewTypeLabel.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
-             viewTypeLabel.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor)
+             viewTypeLabel.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
+
+             graphView.topAnchor.constraint(equalTo: viewTypeLabel.bottomAnchor, constant: 20),
+             graphView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
+             graphView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
+             graphView.heightAnchor.constraint(equalTo: graphView.widthAnchor)
          ])
 
          if playType == .play {
