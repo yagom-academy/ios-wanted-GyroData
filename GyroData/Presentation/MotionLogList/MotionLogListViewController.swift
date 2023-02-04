@@ -102,14 +102,13 @@ final class MotionLogListViewController: UIViewController {
             title: Titles.leftNavigationButtonTitle,
             style: .plain,
             target: self,
-            action: nil
+            action: #selector(tap)
         )
         navigationItem.title = Titles.navigationItemTitle
         navigationItem.rightBarButtonItem = leftNavigationButton
     }
     
     private func configureViewStyles() {
-        view.backgroundColor = .white
         motionLogListCollectionView.backgroundColor = .systemGray4
     }
     
@@ -136,5 +135,14 @@ final class MotionLogListViewController: UIViewController {
                     equalTo: view.trailingAnchor
                 ),
         ])
+    }
+    
+    @objc
+    func tap() {
+        let view = MotionMeasurementViewController()
+        let repository = CoreMotionRepository(dataSource: CoreMotionManager.shared)
+        let useCase = TrackMotionUseCase(repository: repository)
+        view.viewModel = MotionMeasurementViewModel(useCase: useCase)
+        navigationController?.pushViewController(view, animated: true)
     }
 }

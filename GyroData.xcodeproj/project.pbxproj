@@ -12,6 +12,10 @@
 		63F01BB928D44FC400C53A39 /* MotionLogListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB828D44FC400C53A39 /* MotionLogListViewController.swift */; };
 		63F01BBE28D44FC500C53A39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBD28D44FC500C53A39 /* Assets.xcassets */; };
 		63F01BC128D44FC500C53A39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */; };
+		DF3682C0298EA4C500C3A9B8 /* MotionMeasurementViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3682BF298EA4C500C3A9B8 /* MotionMeasurementViewModel.swift */; };
+		DF3682C3298EBD3C00C3A9B8 /* MotionCoordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3682C2298EBD3C00C3A9B8 /* MotionCoordinates.swift */; };
+		DF3682C6298ECF6800C3A9B8 /* CoreMotionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3682C5298ECF6800C3A9B8 /* CoreMotionRepository.swift */; };
+		DF3682CA298ECF9600C3A9B8 /* TrackMotionUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3682C9298ECF9600C3A9B8 /* TrackMotionUseCase.swift */; };
 		DF539F78298D6076007F8571 /* MotionLogCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF539F77298D6076007F8571 /* MotionLogCellViewModel.swift */; };
 		DF5D8C42298BB34300E7312D /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5D8C41298BB34300E7312D /* CoreDataStack.swift */; };
 		DF5D8C60298CC73300E7312D /* MotionData_v1.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DF5D8C5E298CC73300E7312D /* MotionData_v1.xcdatamodeld */; };
@@ -29,6 +33,7 @@
 		DF5D8C93298D1D1C00E7312D /* MotionLogCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5D8C92298D1D1C00E7312D /* MotionLogCell.swift */; };
 		DF5D8C96298D2F4000E7312D /* UIStackView + addMultiplearrangedSubviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5D8C95298D2F4000E7312D /* UIStackView + addMultiplearrangedSubviews.swift */; };
 		DF5D8C9F298D59DB00E7312D /* MotionLogListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5D8C9E298D59DB00E7312D /* MotionLogListViewModel.swift */; };
+		DFB91FA8298E774C00185AD6 /* MotionMesurementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFB91FA7298E774C00185AD6 /* MotionMesurementViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +44,10 @@
 		63F01BBD28D44FC500C53A39 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		63F01BC028D44FC500C53A39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		63F01BC228D44FC500C53A39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = GyroData/Resource/Info.plist; sourceTree = SOURCE_ROOT; };
+		DF3682BF298EA4C500C3A9B8 /* MotionMeasurementViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionMeasurementViewModel.swift; sourceTree = "<group>"; };
+		DF3682C2298EBD3C00C3A9B8 /* MotionCoordinates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionCoordinates.swift; sourceTree = "<group>"; };
+		DF3682C5298ECF6800C3A9B8 /* CoreMotionRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMotionRepository.swift; sourceTree = "<group>"; };
+		DF3682C9298ECF9600C3A9B8 /* TrackMotionUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackMotionUseCase.swift; sourceTree = "<group>"; };
 		DF539F77298D6076007F8571 /* MotionLogCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionLogCellViewModel.swift; sourceTree = "<group>"; };
 		DF5D8C41298BB34300E7312D /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		DF5D8C5F298CC73300E7312D /* MotionData_v1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MotionData_v1.xcdatamodel; sourceTree = "<group>"; };
@@ -56,6 +65,7 @@
 		DF5D8C92298D1D1C00E7312D /* MotionLogCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionLogCell.swift; sourceTree = "<group>"; };
 		DF5D8C95298D2F4000E7312D /* UIStackView + addMultiplearrangedSubviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView + addMultiplearrangedSubviews.swift"; sourceTree = "<group>"; };
 		DF5D8C9E298D59DB00E7312D /* MotionLogListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionLogListViewModel.swift; sourceTree = "<group>"; };
+		DFB91FA7298E774C00185AD6 /* MotionMesurementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionMesurementViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +108,30 @@
 			path = GyroData;
 			sourceTree = "<group>";
 		};
+		DF3682C1298EBCF600C3A9B8 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				DF3682C2298EBD3C00C3A9B8 /* MotionCoordinates.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		DF3682C4298ECF5200C3A9B8 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				DF3682C5298ECF6800C3A9B8 /* CoreMotionRepository.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		DF3682C8298ECF8700C3A9B8 /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				DF3682C9298ECF9600C3A9B8 /* TrackMotionUseCase.swift */,
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
 		DF539F79298D60B6007F8571 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -120,6 +154,8 @@
 		DF5D8C35298BAD3900E7312D /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				DF3682C8298ECF8700C3A9B8 /* UseCases */,
+				DF3682C1298EBCF600C3A9B8 /* Entities */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -127,6 +163,7 @@
 		DF5D8C36298BAD3E00E7312D /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				DFB91FA6298E76C100185AD6 /* MotionMeasurement */,
 				DF5D8C3B298BAE4500E7312D /* MotionLogList */,
 			);
 			path = Presentation;
@@ -144,9 +181,9 @@
 		DF5D8C3B298BAE4500E7312D /* MotionLogList */ = {
 			isa = PBXGroup;
 			children = (
+				DF539F79298D60B6007F8571 /* Views */,
 				63F01BB828D44FC400C53A39 /* MotionLogListViewController.swift */,
 				DF5D8C9E298D59DB00E7312D /* MotionLogListViewModel.swift */,
-				DF539F79298D60B6007F8571 /* Views */,
 			);
 			path = MotionLogList;
 			sourceTree = "<group>";
@@ -206,6 +243,7 @@
 		DF5D8C8E298D154F00E7312D /* CoreMotionPlatform */ = {
 			isa = PBXGroup;
 			children = (
+				DF3682C4298ECF5200C3A9B8 /* Repository */,
 				DF5D8C91298D157700E7312D /* CoreMotionManager */,
 			);
 			path = CoreMotionPlatform;
@@ -225,6 +263,15 @@
 				DF5D8C95298D2F4000E7312D /* UIStackView + addMultiplearrangedSubviews.swift */,
 			);
 			path = Uitilities;
+			sourceTree = "<group>";
+		};
+		DFB91FA6298E76C100185AD6 /* MotionMeasurement */ = {
+			isa = PBXGroup;
+			children = (
+				DFB91FA7298E774C00185AD6 /* MotionMesurementViewController.swift */,
+				DF3682BF298EA4C500C3A9B8 /* MotionMeasurementViewModel.swift */,
+			);
+			path = MotionMeasurement;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -299,6 +346,7 @@
 			files = (
 				DF5D8C83298CDD6900E7312D /* Gyro+CoreDataClass.swift in Sources */,
 				DF539F78298D6076007F8571 /* MotionLogCellViewModel.swift in Sources */,
+				DF3682C0298EA4C500C3A9B8 /* MotionMeasurementViewModel.swift in Sources */,
 				DF5D8C88298CDD6900E7312D /* Velocity+CoreDataProperties.swift in Sources */,
 				DF5D8C82298CDD6900E7312D /* MotionData+CoreDataProperties.swift in Sources */,
 				DF5D8C93298D1D1C00E7312D /* MotionLogCell.swift in Sources */,
@@ -309,11 +357,15 @@
 				DF5D8C42298BB34300E7312D /* CoreDataStack.swift in Sources */,
 				DF5D8C85298CDD6900E7312D /* Acceletometer+CoreDataClass.swift in Sources */,
 				DF5D8C60298CC73300E7312D /* MotionData_v1.xcdatamodeld in Sources */,
+				DF3682C3298EBD3C00C3A9B8 /* MotionCoordinates.swift in Sources */,
 				DF5D8C80298CDD6900E7312D /* Acceleration+CoreDataProperties.swift in Sources */,
+				DFB91FA8298E774C00185AD6 /* MotionMesurementViewController.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
 				DF5D8C90298D157400E7312D /* CoreMotionManager.swift in Sources */,
 				DF5D8C81298CDD6900E7312D /* MotionData+CoreDataClass.swift in Sources */,
 				DF5D8C7F298CDD6900E7312D /* Acceleration+CoreDataClass.swift in Sources */,
+				DF3682C6298ECF6800C3A9B8 /* CoreMotionRepository.swift in Sources */,
+				DF3682CA298ECF9600C3A9B8 /* TrackMotionUseCase.swift in Sources */,
 				DF5D8C87298CDD6900E7312D /* Velocity+CoreDataClass.swift in Sources */,
 				DF5D8C96298D2F4000E7312D /* UIStackView + addMultiplearrangedSubviews.swift in Sources */,
 				DF5D8C9F298D59DB00E7312D /* MotionLogListViewModel.swift in Sources */,
