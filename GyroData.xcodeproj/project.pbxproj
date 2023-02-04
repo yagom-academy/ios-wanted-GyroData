@@ -208,8 +208,8 @@
 			children = (
 				B456428D298C1A7F0060DEC4 /* MotionCoreModel+CoreDataClass.swift */,
 				B456428E298C1A7F0060DEC4 /* MotionCoreModel+CoreDataProperties.swift */,
-				D2DA2C23298A389C006B4FC3 /* SensorData.swift */,
 				D2DA2C21298A3387006B4FC3 /* Observable.swift */,
+				D2DA2C23298A389C006B4FC3 /* SensorData.swift */,
 				B4564288298C17F00060DEC4 /* MotionData.swift */,
 				D2D44DB2298E4F370005ED01 /* FileManagedData.swift */,
 			);
