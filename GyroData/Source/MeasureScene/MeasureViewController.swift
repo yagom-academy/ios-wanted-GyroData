@@ -93,6 +93,18 @@ final class MeasureViewController: UIViewController {
         measureViewModel.bindCanStopMeasure { [weak self] canStop in
             self?.stopButton.isEnabled = canStop
         }
+        
+        measureViewModel.bindAlertMessage { [weak self] message in
+            let alert = UIAlertController(
+                title: nil,
+                message: message,
+                preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "확인", style: .default) { _ in
+                self?.dismiss(animated: true)
+            }
+            alert.addAction(okAction)
+            self?.present(alert, animated: true)
+        }
     }
 }
 
@@ -107,7 +119,10 @@ extension MeasureViewController {
     }
     
     @objc private func tapSaveButton() {
-        measureViewModel.action(.save)
+        measureViewModel.action(.save(handler: {
+            // TODO: Activity Indicator
+            print("완료")
+        }))
     }
     
     @objc private func tapSegmentControl(_ sender: UISegmentedControl) {

@@ -43,11 +43,17 @@ final class AccelerometerMotionManager: MotionManagerable {
             id: UUID()
         )
     }
+    
+    private func initialMotionData() {
+        motionData = nil
+        measuredMotion = MotionMeasures(axisX: [], axisY: [], axisZ: [])
+    }
 }
 
 // MARK: MotionManagerable Requirement
 extension AccelerometerMotionManager {
     func start(handler: @escaping (MotionMeasures?) -> Void) {
+        initialMotionData()
         motionManager.startAccelerometerUpdates()
         measureTimer.activate { [weak self] in
             guard let measureData =  self?.motionManager.accelerometerData?.acceleration else {
@@ -67,14 +73,36 @@ extension AccelerometerMotionManager {
         createMotionData(duration: duration)
     }
     
-    func save(completionHandler: @escaping () -> Void) throws {
+    func save(
+        completionHandler: @escaping () -> Void,
+        errorHandler: @escaping (Error) -> Void
+    ) {
         guard let motionData = motionData,
               let measuredMotion = measuredMotion
         else {
-            throw MotionManagerError.noData
+            errorHandler(MotionManagerError.noData)
+            return
         }
         
-        try fileHandleManager?.save(fileName: motionData.id, measuredMotion)
-        try saveCoreData(motionData: motionData)
+        let saveGroup = DispatchGroup()
+        
+        fileHandleManager?.save(
+            fileName: motionData.id,
+            motionMeasures: measuredMotion,
+            dispatchGroup: saveGroup,
+            errorHandler: { error in
+            errorHandler(error)
+        })
+        
+        saveCoreData(
+            motionData: motionData,
+            dispatchGroup: saveGroup,
+            errorHandler: { error in
+                errorHandler(error)
+            })
+        
+        saveGroup.notify(queue: .main) {
+            completionHandler()
+        }
     }
 }

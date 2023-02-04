@@ -12,7 +12,7 @@ final class MeasureViewModel {
         case motionTypeChange(with: String?)
         case measure
         case stop
-        case save
+        case save(handler: () -> Void)
     }
     
     private var motionManager: MotionManagerable = AccelerometerMotionManager(
@@ -44,9 +44,16 @@ final class MeasureViewModel {
         }
     }
     
+    private var alertMessage: String? {
+        didSet {
+            alertMessageHandler?(alertMessage)
+        }
+    }
+    
     private var canChangeMotionTypeHandler: ((Bool) -> Void)?
     private var canStopMeasureHandler: ((Bool) -> Void)?
     private var canSaveMeasureDataHandler: ((Bool) -> Void)?
+    private var alertMessageHandler: ((String?) -> Void)?
     
     func action(_ action: Action) {
         switch action {
@@ -56,8 +63,8 @@ final class MeasureViewModel {
             startMeasure()
         case .stop:
             stopMeasure()
-        case .save:
-            break
+        case .save(let handler):
+            save(handler: handler)
         }
     }
 }
@@ -90,14 +97,8 @@ extension MeasureViewModel {
     }
     
     private func startMeasure() {
-        print("시작 눌림")
         canChangeMotionType = false
         canStopMeasure = true
-        measuredMotion =  MotionMeasures(
-            axisX: [],
-            axisY: [],
-            axisZ: []
-        )
         
         motionManager.start { [weak self] measuredMotion in
             self?.measuredMotion = measuredMotion
@@ -105,9 +106,14 @@ extension MeasureViewModel {
     }
     
     private func stopMeasure() {
-        print("정지 눌림")
         canChangeMotionType = true
         motionManager.stop()
+    }
+    
+    private func save(handler: @escaping () -> Void) {
+        motionManager.save(completionHandler: handler) { [weak self] error in
+            self?.alertMessage = error.localizedDescription
+        }
     }
 }
 
@@ -119,5 +125,9 @@ extension MeasureViewModel {
     
     func bindCanStopMeasure(handler: @escaping (Bool) -> Void) {
         canStopMeasureHandler = handler
+    }
+    
+    func bindAlertMessage(handler: @escaping (String?) -> Void) {
+        alertMessageHandler = handler
     }
 }

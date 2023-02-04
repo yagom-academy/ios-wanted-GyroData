@@ -63,7 +63,36 @@ extension GyroMotionManager {
         createMotionData(duration: duration)
     }
 
-    func save(completionHandler: @escaping () -> Void) throws {
+    func save(
+        completionHandler: @escaping () -> Void,
+        errorHandler: @escaping (Error) -> Void
+    ) {
+        guard let motionData = motionData,
+              let measuredMotion = measuredMotion
+        else {
+            errorHandler(MotionManagerError.noData)
+            return
+        }
         
+        let saveGroup = DispatchGroup()
+        
+        fileHandleManager?.save(
+            fileName: motionData.id,
+            motionMeasures: measuredMotion,
+            dispatchGroup: saveGroup,
+            errorHandler: { error in
+            errorHandler(error)
+        })
+        
+        saveCoreData(
+            motionData: motionData,
+            dispatchGroup: saveGroup,
+            errorHandler: { error in
+                errorHandler(error)
+            })
+        
+        saveGroup.notify(queue: .main) {
+            completionHandler()
+        }
     }
 }

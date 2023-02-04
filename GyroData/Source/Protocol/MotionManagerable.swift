@@ -10,5 +10,8 @@ import Foundation
 protocol MotionManagerable: CoreDataManageable {
     func start(handler: @escaping (MotionMeasures?) -> Void)
     func stop()
-    func save(completionHandler: @escaping () -> Void) throws
+    func save(
+        completionHandler: @escaping () -> Void,
+        errorHandler: @escaping (Error) -> Void
+    )
 }

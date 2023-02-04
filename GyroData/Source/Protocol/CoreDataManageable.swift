@@ -9,24 +9,35 @@ import CoreData
 import UIKit
 
 protocol CoreDataManageable {
-    func saveCoreData(motionData: MotionData) throws
+    func saveCoreData(
+        motionData: MotionData,
+        dispatchGroup: DispatchGroup,
+        errorHandler: @escaping (CoreDataError) -> Void
+    )
     func readCoreData() -> Result<[MotionEntity], CoreDataError>
     func deleteCoreData(motionData: MotionData) throws
 }
 
 extension CoreDataManageable {
-    func saveCoreData(motionData: MotionData) throws {
+    func saveCoreData(
+        motionData: MotionData,
+        dispatchGroup: DispatchGroup,
+        errorHandler: @escaping (CoreDataError) -> Void
+    ) {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            throw CoreDataError.appDelegateError
+            errorHandler(.appDelegateError)
+            return
         }
         
         let backgroundContext = appDelegate.backgroundContext
         
+        dispatchGroup.enter()
         backgroundContext.perform {
             guard let entity = NSEntityDescription.entity(
                 forEntityName: Constant.entityName,
                 in: backgroundContext
             ) else {
+                errorHandler(.saveError)
                 return
             }
             
@@ -35,9 +46,10 @@ extension CoreDataManageable {
             object.setValue(motionData.duration, forKey: Constant.duration)
             object.setValue(motionData.id, forKey: Constant.id)
             object.setValue(motionData.measuredDate, forKey: Constant.measuredDate)
-            object.setValue(motionData.type, forKey: Constant.type)
+            object.setValue(motionData.type.rawValue, forKey: Constant.type)
             
             appDelegate.saveContext()
+            dispatchGroup.leave()
         }
     }
     
