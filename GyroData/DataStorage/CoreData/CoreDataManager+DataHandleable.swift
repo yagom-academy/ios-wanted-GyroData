@@ -9,9 +9,7 @@ import Foundation
 import CoreData
 
 final class CoreDataManager: MeasurementDataHandleable {
-    
-    typealias DataType = Measurement
-    
+
     private let persistentContainer: NSPersistentContainer = {
         let persistentContainer = NSPersistentContainer(name: "GyroCoreData")
         persistentContainer.loadPersistentStores { _, error in
@@ -40,7 +38,7 @@ final class CoreDataManager: MeasurementDataHandleable {
         }
     }
     
-    func saveData(_ data: DataType) throws {
+    func saveData(_ data: Measurement) throws {
         let measurementCoreModel = MeasurementCoreModel(context: context)
         
         guard let axisValue = JSONEncoder.encode(data.axisValues) else {
@@ -71,7 +69,7 @@ final class CoreDataManager: MeasurementDataHandleable {
         return measurements
     }
     
-    func deleteData(_ data: DataType) throws {
+    func deleteData(_ data: Measurement) throws {
         let request = NSFetchRequest<MeasurementCoreModel>(entityName: "MeasurementCoreModel")
         request.predicate = NSPredicate(format: "date = %@", data.date as NSDate)
 

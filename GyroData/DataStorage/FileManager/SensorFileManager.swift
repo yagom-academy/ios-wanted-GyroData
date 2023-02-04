@@ -8,8 +8,6 @@
 import Foundation
 
 final class SensorFileManager: MeasurementDataHandleable {
-    
-    typealias DataType = Measurement
 
     private let fileManager: FileManager
     private lazy var documentURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
