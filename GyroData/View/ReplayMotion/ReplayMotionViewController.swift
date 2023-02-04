@@ -36,6 +36,7 @@ class ReplayMotionViewController: UIViewController {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .title2)
         label.text = "test type"
+        
         return label
     }()
 
@@ -81,23 +82,19 @@ class ReplayMotionViewController: UIViewController {
         return stackView
     }()
 
-    var graphView: GraphView = {
-        let view = GraphView()
-
-        return view
-    }()
+    let graphView = GraphView()
 
     let playButton: UIButton = {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.backgroundColor = .white
+        btn.backgroundColor = .systemBackground
         btn.addTarget(self, action: #selector(didTappedStartButton), for: .touchUpInside)
 
         let largeConfig = UIImage.SymbolConfiguration(pointSize: 40, weight: .bold, scale: .large)
         let largeBoldDoc = UIImage(systemName: "play.fill", withConfiguration: largeConfig)
 
         btn.setImage(largeBoldDoc, for: .normal)
-        btn.tintColor = .black
+        btn.tintColor = .label
 
         return btn
     }()
@@ -120,7 +117,7 @@ class ReplayMotionViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
 
         configureUI()
     }
@@ -181,10 +178,11 @@ class ReplayMotionViewController: UIViewController {
                                       target: navigationController,
                                       action: #selector(UINavigationController.popViewController(animated:)))
         navigationItem.leftBarButtonItem = backBTN
-        navigationItem.leftBarButtonItem?.tintColor = .black
+        navigationItem.leftBarButtonItem?.tintColor = .label
     }
 
     func configureGraphView() {
+        graphView.backgroundColor = .systemBackground
         graphView.dataSource = replayMotionViewModel
     }
 
@@ -225,8 +223,6 @@ extension ReplayMotionViewController {
         switch self.watchStatus {
         case .start:
             self.watchStatus = .stop
-            graphView.linePaths.forEach { $0.removeAllPoints() }
-            graphView.linePaths = []
             replayMotionViewModel?.cleanGraph()
 
             self.timer = Timer.scheduledTimer(timeInterval: 0.1,
@@ -255,15 +251,16 @@ extension ReplayMotionViewController {
     }
     @objc
     private func timeUp() {
-        playingTime += 0.1
         timeLabel.text = String(format: "%.1f", playingTime)
 
-        if playingTime > replayTime {
+        guard  playingTime <= replayTime else {
             timer?.invalidate()
             timer = nil
+            return
         }
 
         replayMotionViewModel?.setUpMotionDataForDrawing(index: Int(playingTime*10))
+        playingTime += 0.1
     }
 }
 

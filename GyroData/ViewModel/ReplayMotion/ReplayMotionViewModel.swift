@@ -21,7 +21,6 @@ final class ReplayMotionViewModel {
         return formatter
     }()
 
-    private var motionDataForDrawn: [SIMD3<Double>] = []
     private var motionDataForDrawing: [SIMD3<Double>] = [] {
         didSet {
             replayMotionDataHandler?()
@@ -33,8 +32,6 @@ final class ReplayMotionViewModel {
         self.fileManager = FileManager.shared
         self.replayType = type
         self.motionInstance = fetchMotionData(index: index.item)
-
-        self.motionDataForDrawn = motionInstance.value
     }
 
     func fetchMotionData(index: Int) -> MotionData {
@@ -64,8 +61,8 @@ final class ReplayMotionViewModel {
     }
 
     func setUpMotionDataForDrawing(index: Int) {
-        currentValue = motionDataForDrawn[index]
-        motionDataForDrawing.append(currentValue)
+        currentValue = motionInstance.value[index]
+        motionDataForDrawing.append(.init(x: currentValue.x, y: currentValue.y, z: currentValue.z))
     }
 
     func cleanGraph() {
@@ -78,9 +75,9 @@ extension ReplayMotionViewModel: GraphViewDataSource {
     func dataList(graphView: GraphView) -> [[Double]] {
         switch replayType {
         case .view:
-            let xValues: [Double] = motionDataForDrawn.map({ $0.x })
-            let yValues: [Double] = motionDataForDrawn.map({ $0.y })
-            let zValues: [Double] = motionDataForDrawn.map({ $0.z })
+            let xValues: [Double] = motionInstance.value.map({ $0.x })
+            let yValues: [Double] = motionInstance.value.map({ $0.y })
+            let zValues: [Double] = motionInstance.value.map({ $0.z })
 
             return [xValues, yValues, zValues]
         case .play:

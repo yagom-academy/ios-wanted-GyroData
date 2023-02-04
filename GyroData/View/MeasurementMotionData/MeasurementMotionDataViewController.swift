@@ -9,7 +9,7 @@ import UIKit
 
 class MeasurementMotionDataViewController: UIViewController {
     
-    private var graphView = GraphView()
+    private let graphView = GraphView()
     private var currentMotion: MotionType = .accelerometer
     private lazy var segmentedControl: UISegmentedControl = {
         let segmentedControl = UISegmentedControl(items: [MotionType.accelerometer.rawValue, MotionType.gyro.rawValue])
@@ -161,8 +161,14 @@ class MeasurementMotionDataViewController: UIViewController {
     }
     
     private func configureNavigationBar() {
-        navigationItem.title = "측정하기"
+        let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"),
+                                      style: .plain,
+                                      target: navigationController,
+                                      action: #selector(UINavigationController.popViewController(animated:)))
+        navigationItem.leftBarButtonItem = backButton
+        navigationItem.leftBarButtonItem?.tintColor = .label
         navigationItem.rightBarButtonItem = rightBarButton
+        navigationItem.title = "측정하기"
     }
     
     private func createSaveButton() -> UIBarButtonItem {
