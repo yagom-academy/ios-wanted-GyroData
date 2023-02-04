@@ -8,17 +8,18 @@
 @testable import GyroData
 
 final class CoreDataRepositoryMock: CoreDataRepository {
-    typealias Domain = GyroData.Motion
-    typealias Entity = GyroData.MotionMO
-    
     var isCalledCreateFunction: Bool = false
     var isCalledReadFunction: Bool = false
     var isCalledDeleteFunction: Bool = false
     let returnValuesOfReadFunction: [GyroData.MotionMO] = []
     
-    func create(_ domain: GyroData.Motion, completion: @escaping (Result<Void, Error>) -> Void) {
+    func create(_ domain: GyroData.Motion) -> Result<Void, Error> {
         isCalledCreateFunction = true
-        completion(.success(()))
+        return .success(())
+    }
+    
+    func count() throws -> Int {
+        return 0
     }
     
     func read(from offset: Int) throws -> [GyroData.MotionMO] {

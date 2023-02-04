@@ -31,15 +31,20 @@ final class MotionCreateServiceTests: XCTestCase {
         service = nil
     }
     
-    func test_create_with_invalid_date_then_completion_argument_and_repository_isCalledCreateFunction_is_false() {
+    func test_create_with_invalid_date_then_result_is_failure_and_repository_isCalledCreateFunction_is_false() {
         let expectation = XCTestExpectation(description: "Invalid Date Test")
         let invalidDateDummy = "Wrong Date Dummy"
         service.create(
             date: invalidDateDummy,
             type: typeDummy,
             time: timeDummy,
-            data: dataDummy) { isCreateSuccess in
-                XCTAssertFalse(isCreateSuccess)
+            data: dataDummy) { result in
+                switch result {
+                case .success:
+                    XCTAssert(false)
+                case .failure(_):
+                    XCTAssert(true)
+                }
                 expectation.fulfill()
             }
         
@@ -48,15 +53,20 @@ final class MotionCreateServiceTests: XCTestCase {
         XCTAssertFalse(fileManagerRepository.isCalledCreateFunction)
     }
     
-    func test_create_with_invalid_type_then_completion_argument_and_repository_isCalledCreateFunction_is_false() {
+    func test_create_with_invalid_type_then_result_is_failure_and_repository_isCalledCreateFunction_is_false() {
         let expectation = XCTestExpectation(description: "Invalid Type Test")
         let invalidTypeDummy = 3
         service.create(
             date: dateDummy,
             type: invalidTypeDummy,
             time: timeDummy,
-            data: dataDummy) { isCreateSuccess in
-                XCTAssertFalse(isCreateSuccess)
+            data: dataDummy) { result in
+                switch result {
+                case .success:
+                    XCTAssert(false)
+                case .failure(_):
+                    XCTAssert(true)
+                }
                 expectation.fulfill()
             }
         
@@ -65,15 +75,20 @@ final class MotionCreateServiceTests: XCTestCase {
         XCTAssertFalse(fileManagerRepository.isCalledCreateFunction)
     }
     
-    func test_create_with_invalid_time_then_completion_argument_and_repository_isCalledCreateFunction_is_false() {
+    func test_create_with_invalid_time_then_result_is_failure_and_repository_isCalledCreateFunction_is_false() {
         let expectation = XCTestExpectation(description: "Invalid Time Test")
         let invalidTimeDummy = "Wrong Time Dummy"
         service.create(
             date: dateDummy,
             type: typeDummy,
             time: invalidTimeDummy,
-            data: dataDummy) { isCreateSuccess in
-                XCTAssertFalse(isCreateSuccess)
+            data: dataDummy) { result in
+                switch result {
+                case .success:
+                    XCTAssert(false)
+                case .failure(_):
+                    XCTAssert(true)
+                }
                 expectation.fulfill()
             }
         
@@ -82,14 +97,19 @@ final class MotionCreateServiceTests: XCTestCase {
         XCTAssertFalse(fileManagerRepository.isCalledCreateFunction)
     }
     
-    func test_create_with_valid_data_then_completion_argument_and_repository_isCalledCreateFunction_is_true() {
+    func test_create_with_valid_data_then_result_is_success_and_repository_isCalledCreateFunction_is_true() {
         let expectation = XCTestExpectation(description: "Valid Data Test")
         service.create(
             date: dateDummy,
             type: typeDummy,
             time: timeDummy,
-            data: dataDummy) { isCreateSuccess in
-                XCTAssertTrue(isCreateSuccess)
+            data: dataDummy) { result in
+                switch result {
+                case .success:
+                    XCTAssert(true)
+                case .failure(_):
+                    XCTAssert(false)
+                }
                 expectation.fulfill()
             }
         

@@ -8,9 +8,6 @@
 @testable import GyroData
 
 final class FileManagerRepositoryMock: FileManagerRepository {
-    typealias Domain = GyroData.Motion
-    typealias Entity = GyroData.MotionDTO
-    
     var isCalledCreateFunction: Bool = false
     var isCalledReadFunction: Bool = false
     var isCalledDeleteFunction: Bool = false
@@ -24,9 +21,9 @@ final class FileManagerRepositoryMock: FileManagerRepository {
         z: []
     )
     
-    func create(_ domain: GyroData.Motion, completion: @escaping (Result<Void, Error>) -> Void) {
+    func create(_ domain: GyroData.Motion) -> Result<Void, Error> {
         isCalledCreateFunction = true
-        completion(.success(()))
+        return .success(())
     }
     
     func read(with id: String) throws -> GyroData.MotionDTO {
