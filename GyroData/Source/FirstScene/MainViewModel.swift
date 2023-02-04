@@ -8,6 +8,7 @@
 import Foundation
 
 final class MainViewModel: CoreDataManageable {
+    private let fileHandleManager = FileHandleManager()
     private var motionDatas: [MotionData] = [] {
         didSet {
             self.dataHandler?(motionDatas)
@@ -50,6 +51,17 @@ final class MainViewModel: CoreDataManageable {
             
             motionDatas += convertedDatas
         case .failure(let error):
+            print(error)
+        }
+    }
+    
+    func deleteData(at index: Int) {
+        let dataToDelete = motionDatas.remove(at: index)
+        
+        do {
+            try deleteCoreData(motionData: dataToDelete)
+            try fileHandleManager?.delete(fileName: dataToDelete.id)
+        } catch {
             print(error)
         }
     }
