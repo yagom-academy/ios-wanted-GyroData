@@ -10,6 +10,12 @@ import CoreMotion
 
 class GraphView: UIView {
 
+    enum Position {
+        case x
+        case y
+        case z
+    }
+
     // MARK: - Property
     private let xPositionLabel: UILabel = {
         let label = UILabel()
@@ -147,6 +153,39 @@ extension GraphView {
         currentIndex += 1
         if currentIndex >= limitedIndex {
             timer.invalidate()
+        }
+    }
+
+    private func drawLine(datas: [Double], position: Position) {
+        let xOffset: CGFloat = self.frame.width / CGFloat(600 - 1)
+        let centerY = self.frame.height / 2
+        var sum: Double = 0
+        currentX = 0
+
+        for data in datas {
+            sum += data
+            currentX += xOffset
+            let newXPosition = CGPoint(x: currentX, y: centerY - data)
+            switch position {
+            case .x:
+                xPath.addLine(to: newXPosition)
+            case .y:
+                yPath.addLine(to: newXPosition)
+            case .z:
+                zPath.addLine(to: newXPosition)
+            }
+        }
+
+        switch position {
+        case .x:
+            xPositionLabel.text = "x: \(sum)"
+            addGraphViewSublayer(layer: xLayer, path: xPath)
+        case .y:
+            yPositionLabel.text = "x: \(sum)"
+            addGraphViewSublayer(layer: yLayer, path: yPath)
+        case .z:
+            zPositionLabel.text = "x: \(sum)"
+            addGraphViewSublayer(layer: zLayer, path: zPath)
         }
     }
 
