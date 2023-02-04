@@ -129,7 +129,7 @@ final class GraphView: UIView {
         let yPath = UIBezierPath()
         let zPath = UIBezierPath()
         
-        let lastValues = segmentValues.last ?? (0, 0, 0)
+        let lastValues = segmentValues.last ?? (.zero, .zero, .zero)
         let widthInterval = self.frame.width / segmentOffset
         
         let lastPosition = (Double(segmentValues.count) * widthInterval)
@@ -188,7 +188,7 @@ final class GraphView: UIView {
     
     func playEntireDataFlow() {
         let entireData = segmentValues
-        timerIntervalPoint = 0
+        timerIntervalPoint = .zero
         initView()
         
         timer = Timer(timeInterval: interval, repeats: true, block: { [weak self] timer in
@@ -214,7 +214,7 @@ final class GraphView: UIView {
     func stopEntireDataFlow() {
         timer?.invalidate()
         timer = nil
-        self.timerIntervalPoint = 0
+        self.timerIntervalPoint = .zero
     }
     
 }
@@ -233,7 +233,7 @@ private extension GraphView {
     }
     
     func initView() {
-        layer.sublayers = [layer.sublayers![0]]
+        layer.sublayers = [layer.sublayers![.zero]]
         segmentValues = []
         setupStackView()
     }
@@ -255,12 +255,12 @@ private extension GraphView {
         
         Array(1...lineCount).forEach { _ in
             xpointer += xOffset
-            path.move(to: CGPoint(x: xpointer, y: 0))
+            path.move(to: CGPoint(x: xpointer, y: .zero))
             let newXPosition = CGPoint(x: xpointer, y: height)
             path.addLine(to: newXPosition)
             
             ypointer += yOffset
-            path.move(to: CGPoint(x: 0, y: ypointer))
+            path.move(to: CGPoint(x: .zero, y: ypointer))
             let newYPosition = CGPoint(x: width, y: ypointer)
             path.addLine(to: newYPosition)
         }
@@ -281,7 +281,7 @@ private extension GraphView {
             return positionFromFrame
         }
         
-        return (mappingValues[0], mappingValues[1], mappingValues[2])
+        return (mappingValues[.zero], mappingValues[1], mappingValues[2])
     }
     
     func isOverScale(_ data: Values) -> Bool {

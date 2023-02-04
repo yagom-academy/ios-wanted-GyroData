@@ -18,7 +18,7 @@ final class FileSystemManagerStub: FileManageable {
     }
     
     func fetch(date: Date) throws -> Data {
-        return data[0]
+        return data[.zero]
     }
     
     func delete(_ date: Date) throws {

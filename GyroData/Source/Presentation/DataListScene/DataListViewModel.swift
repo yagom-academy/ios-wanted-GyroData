@@ -96,7 +96,7 @@ extension DataListViewModel {
     }
     
     private func fetchData() {
-        let result = transactionSevice.dataLoad(offset: 0, limit: page)
+        let result = transactionSevice.dataLoad(offset: .zero, limit: page)
         
         switch result {
         case .success(let dataList):
@@ -110,7 +110,7 @@ extension DataListViewModel {
     }
     
     private func paginationData() {
-        let result = transactionSevice.dataLoad(offset: 0, limit: page + 1)
+        let result = transactionSevice.dataLoad(offset: .zero, limit: page + 1)
         
         switch result {
         case .success(let dataList):
