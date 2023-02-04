@@ -54,7 +54,7 @@ final class MainViewController: UIViewController {
     private func configureView() {
         view.backgroundColor = .systemBackground
         
-        navigationItem.title = "목록"
+        navigationItem.title = NameSpace.navigationItemTitle
         
         navigationItem.backBarButtonItem = UIBarButtonItem(
             title: String(),
@@ -65,7 +65,7 @@ final class MainViewController: UIViewController {
         navigationItem.backBarButtonItem?.tintColor = .label
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(
-            title: "측정",
+            title: NameSpace.navigationItemRightButtonTitle,
             style: .plain,
             target: self,
             action: #selector(tapRightBarButton)
@@ -101,7 +101,7 @@ extension MainViewController: UITableViewDelegate {
     ) -> UISwipeActionsConfiguration? {
         let playAction = UIContextualAction(
             style: .normal,
-            title: "Play"
+            title: NameSpace.play
         ) { _, _, _ in
             let data = self.motionDataList[indexPath.row]
             let replayViewController = ReplayViewController(mode: .play, motionData: data)
@@ -110,7 +110,7 @@ extension MainViewController: UITableViewDelegate {
         }
         let deleteAction = UIContextualAction(
             style: .destructive,
-            title: "Delete"
+            title: NameSpace.delete
         ) { _, _, _ in
             let deleteData = self.motionDataList.remove(at: indexPath.row)
             guard let id = deleteData.id else { return }
@@ -169,4 +169,13 @@ extension MainViewController: CoreDataProcessable {
             return nil
         }
     }
+}
+
+// MARK: - NameSpace
+
+private enum NameSpace {
+    static let play = "Play"
+    static let delete = "Delete"
+    static let navigationItemTitle = "목록"
+    static let navigationItemRightButtonTitle = "측정"
 }

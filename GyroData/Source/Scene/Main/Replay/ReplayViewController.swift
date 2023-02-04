@@ -43,13 +43,13 @@ final class ReplayViewController: UIViewController {
     private let graphView = GraphView()
     private let playToggleButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(systemName: "play.fill"), for: .normal)
+        button.setImage(UIImage(systemName: NameSpace.playButtonImageName), for: .normal)
         button.addTarget(nil, action: #selector(tapToggleButton), for: .touchUpInside)
         return button
     }()
     private let timerLabel: UILabel = {
         let label = UILabel()
-        label.text = "0.00"
+        label.text = NameSpace.initialTimerLabelText
         label.font = .preferredFont(forTextStyle: .title2)
         return label
     }()
@@ -107,7 +107,7 @@ final class ReplayViewController: UIViewController {
         view.backgroundColor = .systemBackground
         view.layoutMargins = .init(top: 10, left: 10, bottom: 10, right: 10)
         
-        navigationItem.title = "다시보기"
+        navigationItem.title = NameSpace.navigationItemTitle
     }
     
     private func setupTitleStackView() {
@@ -182,7 +182,9 @@ final class ReplayViewController: UIViewController {
         
         if let formatDate = motionData.date {
             let format = DateFormatter()
-            format.dateFormat = "yyyy/MM/dd HH:mm:ss"
+            
+            format.dateFormat = NameSpace.dateFormat
+            
             dateLabel.text = format.string(from: formatDate)
         }
     }
@@ -199,14 +201,14 @@ final class ReplayViewController: UIViewController {
                 userInfo: nil,
                 repeats: true
             )
-            playToggleButton.setImage(UIImage(systemName: "stop.fill"), for: .normal)
+            playToggleButton.setImage(UIImage(systemName: NameSpace.stopButtonImageName), for: .normal)
             timerData = Int.init()
             graphView.clearData()
             state = .play
             
         case .play:
             timer.invalidate()
-            playToggleButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+            playToggleButton.setImage(UIImage(systemName: NameSpace.playButtonImageName), for: .normal)
             state = .stop
         }
     }
@@ -217,4 +219,14 @@ final class ReplayViewController: UIViewController {
         timerData += 1
         timerLabel.text = String(Double(timerData) / 10 )
     }
+}
+
+// MARK: - NameSpace
+
+private enum NameSpace {
+    static let navigationItemTitle = "다시보기"
+    static let playButtonImageName = "play.fill"
+    static let stopButtonImageName = "stop.fill"
+    static let dateFormat = "yyyy/MM/dd HH:mm:ss"
+    static let initialTimerLabelText = "0.00"
 }

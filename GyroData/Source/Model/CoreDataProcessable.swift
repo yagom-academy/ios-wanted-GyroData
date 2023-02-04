@@ -33,16 +33,16 @@ extension CoreDataProcessable {
     func saveCoreData(motion: MotionDataForm, complete: @escaping () -> Void) {
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
         guard let context = appDelegate?.persistentContainer.viewContext else { return }
-        let entity = NSEntityDescription.entity(forEntityName: "Motion", in: context)
+        let entity = NSEntityDescription.entity(forEntityName: NameSpace.entityName, in: context)
         
         if let entity = entity {
             let info = NSManagedObject(entity: entity, insertInto: context)
             
-            info.setValue(motion.title, forKey: "title")
-            info.setValue(motion.date, forKey: "date")
-            info.setValue(motion.runningTime, forKey: "runningTime")
-            info.setValue(motion.jsonData, forKey: "jsonData")
-            info.setValue(UUID(), forKey: "id")
+            info.setValue(motion.title, forKey: NameSpace.entityTitle)
+            info.setValue(motion.date, forKey: NameSpace.entityDate)
+            info.setValue(motion.runningTime, forKey: NameSpace.entityRunningTime)
+            info.setValue(motion.jsonData, forKey: NameSpace.entityJsonData)
+            info.setValue(UUID(), forKey: NameSpace.entityID)
             
             do {
                 try context.save()
@@ -56,9 +56,9 @@ extension CoreDataProcessable {
     func deleteDate(id: UUID) {
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
         guard let context = appDelegate?.persistentContainer.viewContext else { return }
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>.init(entityName: "Motion")
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>.init(entityName: NameSpace.entityName)
         
-        fetchRequest.predicate = NSPredicate(format: "id = %@", id as CVarArg)
+        fetchRequest.predicate = NSPredicate(format: NameSpace.idFormat, id as CVarArg)
         
         do {
             let test = try context.fetch(fetchRequest)
@@ -77,3 +77,16 @@ extension CoreDataProcessable {
         }
     }
 }
+
+// MARK: - NameSpace
+
+private enum NameSpace {
+    static let entityName = "Motion"
+    static let entityTitle = "title"
+    static let entityDate = "date"
+    static let entityRunningTime = "runningTime"
+    static let entityJsonData = "jsonData"
+    static let entityID = "id"
+    static let idFormat = "id = %@"
+}
+

@@ -35,19 +35,19 @@ class GraphView: UIView {
     private let dataXLabel: UILabel = {
         let label = UILabel()
         label.textColor = .systemRed
-        label.text = "x:0"
+        label.text = NameSpace.initialDataXLabelText
         return label
     }()
     private let dataYLabel: UILabel = {
         let label = UILabel()
         label.textColor = .systemGreen
-        label.text = "y:0"
+        label.text = NameSpace.initialDataYLabelText
         return label
     }()
     private let dataZLabel: UILabel = {
         let label = UILabel()
         label.textColor = .systemBlue
-        label.text = "z:0"
+        label.text = NameSpace.initialDataZLabelText
         return label
     }()
     private let dataLabelStackView: UIStackView = {
@@ -145,9 +145,9 @@ class GraphView: UIView {
         let kiloDataY = Int(dataY * kilo)
         let kiloDataZ = Int(dataZ * kilo)
         
-        dataXLabel.text = "x:" + String(kiloDataX)
-        dataYLabel.text = "y:" + String(kiloDataY)
-        dataZLabel.text = "z:" + String(kiloDataZ)
+        dataXLabel.text = NameSpace.dataXLabelText + String(kiloDataX)
+        dataYLabel.text = NameSpace.dataYLabelText + String(kiloDataY)
+        dataZLabel.text = NameSpace.dataZLabelText + String(kiloDataZ)
     }
     
     private func drawMeasureLines(_ rect: CGRect) {
@@ -214,4 +214,15 @@ class GraphView: UIView {
         
         linePath.stroke()
     }
+}
+
+// MARK: - NameSpace
+
+private enum NameSpace {
+    static let initialDataXLabelText = "x:0"
+    static let initialDataYLabelText = "y:0"
+    static let initialDataZLabelText = "z:0"
+    static let dataXLabelText = "x:"
+    static let dataYLabelText = "y:"
+    static let dataZLabelText = "z:"
 }

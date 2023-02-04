@@ -28,14 +28,14 @@ final class AddViewController: UIViewController {
     private var measureTime: Int = 0
     
     private let segmentControl: UISegmentedControl = {
-        let segmentControl = UISegmentedControl(items: ["Acc", "Gyro"])
+        let segmentControl = UISegmentedControl(items: [NameSpace.acc, NameSpace.gyro])
         segmentControl.backgroundColor = .white
         segmentControl.selectedSegmentIndex = 0
         return segmentControl
     }()
     private let playButton: UIButton = {
         let button = UIButton()
-        button.setTitle("측정", for: .normal)
+        button.setTitle(NameSpace.playButtonTitle, for: .normal)
         button.titleLabel?.font = .preferredFont(forTextStyle: .title2)
         button.contentHorizontalAlignment = .left
         button.setTitleColor(.systemBlue, for: .normal)
@@ -43,7 +43,7 @@ final class AddViewController: UIViewController {
     }()
     private let stopButton: UIButton = {
         let button = UIButton()
-        button.setTitle("정지", for: .normal)
+        button.setTitle(NameSpace.stopButtonTitle, for: .normal)
         button.titleLabel?.font = .preferredFont(forTextStyle: .title2)
         button.contentHorizontalAlignment = .left
         button.setTitleColor(.systemBlue, for: .normal)
@@ -82,9 +82,9 @@ final class AddViewController: UIViewController {
     private func configureView() {
         view.backgroundColor = .systemBackground
         
-        navigationItem.title = "측정하기"
+        navigationItem.title = NameSpace.navigationItemTitle
         navigationItem.rightBarButtonItem = UIBarButtonItem(
-            title: "저장",
+            title: NameSpace.navigationItemRightButtonTitle,
             style: .plain,
             target: self,
             action: #selector(saveMotionData)
@@ -132,9 +132,9 @@ final class AddViewController: UIViewController {
             
             switch segmentControl.selectedSegmentIndex {
             case MeasurementUnit.acc.rawValue:
-                titleText = "Acc"
+                titleText = NameSpace.acc
             case MeasurementUnit.gyro.rawValue:
-                titleText = "Gyro"
+                titleText = NameSpace.gyro
             default:
                 break
             }
@@ -176,16 +176,16 @@ final class AddViewController: UIViewController {
     
     private func presentSaveErrorAlert() {
         let alert = createAlert(
-            title: "측정 미진행",
-            message: "데이터 저장을 하지 않습니까?"
+            title: NameSpace.alertTitle,
+            message: NameSpace.alertMessage
         )
         let firstAlertAction = createAlertAction(
-            title: "확인"
+            title: NameSpace.firstAlertActionTitle
         ) {
             self.navigationController?.popViewController(animated: true)
         }
         let secondAlertAction = createAlertAction(
-            title: "취소"
+            title: NameSpace.secondAlertActionTitle
         ) {}
         
         alert.addAction(firstAlertAction)
@@ -323,3 +323,18 @@ extension AddViewController: CoreDataProcessable {}
 // MARK: - AlertPresentable
 
 extension AddViewController: AlertPresentable {}
+
+// MARK: - NameSpace
+
+private enum NameSpace {
+    static let acc = "Acc"
+    static let gyro = "Gyro"
+    static let navigationItemTitle = "측정하기"
+    static let navigationItemRightButtonTitle = "저장"
+    static let playButtonTitle = "측정"
+    static let stopButtonTitle = "정지"
+    static let alertTitle = "측정 미진행"
+    static let alertMessage = "데이터 저장을 하지 않습니까?"
+    static let firstAlertActionTitle = "확인"
+    static let secondAlertActionTitle = "취소"
+}

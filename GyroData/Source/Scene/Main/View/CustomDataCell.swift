@@ -11,7 +11,7 @@ class CustomDataCell: UITableViewCell {
     
     // MARK: Identifier
     
-    static let identifier = "CustomDataCell"
+    static let identifier = NameSpace.identifier
     
     // MARK: Private Properties
     
@@ -70,7 +70,7 @@ class CustomDataCell: UITableViewCell {
         if let formatDate = data.date {
             let format = DateFormatter()
             
-            format.dateFormat = "yyyy/MM/dd HH:mm:ss"
+            format.dateFormat = NameSpace.dateFormat
             
             dateLabel.text = format.string(from: formatDate)
         }
@@ -108,3 +108,9 @@ class CustomDataCell: UITableViewCell {
     }
 }
 
+// MARK: - NameSpace
+
+private enum NameSpace {
+    static let identifier = "CustomDataCell"
+    static let dateFormat = "yyyy/MM/dd HH:mm:ss"
+}
