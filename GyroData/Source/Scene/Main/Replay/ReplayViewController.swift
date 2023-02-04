@@ -9,6 +9,8 @@ import UIKit
 
 final class ReplayViewController: UIViewController {
     
+    // MARK: Enumerations
+    
     enum Mode: String {
         case view = "View"
         case play = "Play"
@@ -52,30 +54,32 @@ final class ReplayViewController: UIViewController {
         return label
     }()
     private let titleStackView: UIStackView = {
-        let stackview = UIStackView()
-        stackview.axis = .vertical
-        stackview.alignment = .leading
-        stackview.distribution = .equalSpacing
-        stackview.spacing = 10
-        return stackview
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.alignment = .leading
+        stackView.distribution = .equalSpacing
+        stackView.spacing = 10
+        return stackView
     }()
     private let topStackView: UIStackView = {
-        let stackview = UIStackView()
-        stackview.axis = .vertical
-        stackview.alignment = .leading
-        stackview.distribution = .equalSpacing
-        stackview.translatesAutoresizingMaskIntoConstraints = false
-        stackview.spacing = 20
-        return stackview
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.alignment = .leading
+        stackView.distribution = .equalSpacing
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.spacing = 20
+        return stackView
     }()
     private let bottomStackView: UIStackView = {
-        let stackview = UIStackView()
-        stackview.axis = .horizontal
-        stackview.alignment = .center
-        stackview.distribution = .equalSpacing
-        stackview.translatesAutoresizingMaskIntoConstraints = false
-        return stackview
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.alignment = .center
+        stackView.distribution = .equalSpacing
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
     }()
+    
+    // MARK: Initializer
     
     init(mode: Mode, motionData: Motion) {
         self.mode = mode
@@ -97,37 +101,6 @@ final class ReplayViewController: UIViewController {
         fetchRecodedData()
     }
     
-    // MARK: Action Methods
-    
-    @objc private func tapToggleButton() {
-        switch state {
-        case .stop:
-            timer = Timer.scheduledTimer(
-                timeInterval: 0.1,
-                target: self,
-                selector: #selector(timerCallBack),
-                userInfo: nil,
-                repeats: true
-            )
-            playToggleButton.setImage(UIImage(systemName: "stop.fill"), for: .normal)
-            timerData = Int.init()
-            graphView.clear()
-            state = .play
-            
-        case .play:
-            timer.invalidate()
-            playToggleButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
-            state = .stop
-        }
-    }
-    
-    @objc private func timerCallBack() {
-        if replayData.count <= timerData { return }
-        graphView.motionDatas = replayData[timerData]
-        timerData += 1
-        timerLabel.text = String(Double(timerData) / 10 )
-    }
-    
     // MARK: Private Methods
     
     private func configureView() {
@@ -142,13 +115,13 @@ final class ReplayViewController: UIViewController {
         titleStackView.addArrangedSubview(titleLabel)
     }
     
-    private func setupTopStackView() {
+    private func setUpTopStackView() {
         topStackView.addArrangedSubview(titleStackView)
         topStackView.addArrangedSubview(graphView)
         setupTitleStackView()
     }
     
-    private func setupBottomStakcView() {
+    private func setUpBottomStackView() {
         bottomStackView.addArrangedSubview(playToggleButton)
         bottomStackView.addArrangedSubview(timerLabel)
     }
@@ -156,8 +129,8 @@ final class ReplayViewController: UIViewController {
     private func configureLayout() {
         let margin = view.layoutMarginsGuide
         
-        setupTopStackView()
-        setupBottomStakcView()
+        setUpTopStackView()
+        setUpBottomStackView()
         
         view.addSubview(topStackView)
         view.addSubview(bottomStackView)
@@ -199,8 +172,8 @@ final class ReplayViewController: UIViewController {
         switch mode {
         case .view:
             titleLabel.text = mode.rawValue
-            replayData.forEach { motiondata in
-                graphView.motionDatas = motiondata
+            replayData.forEach { motionData in
+                graphView.motionDatas = motionData
             }
             bottomStackView.removeFromSuperview()
         case .play:
@@ -212,5 +185,36 @@ final class ReplayViewController: UIViewController {
             format.dateFormat = "yyyy/MM/dd HH:mm:ss"
             dateLabel.text = format.string(from: formatDate)
         }
+    }
+    
+    // MARK: Action Methods
+    
+    @objc private func tapToggleButton() {
+        switch state {
+        case .stop:
+            timer = Timer.scheduledTimer(
+                timeInterval: 0.1,
+                target: self,
+                selector: #selector(timerCallBack),
+                userInfo: nil,
+                repeats: true
+            )
+            playToggleButton.setImage(UIImage(systemName: "stop.fill"), for: .normal)
+            timerData = Int.init()
+            graphView.clearData()
+            state = .play
+            
+        case .play:
+            timer.invalidate()
+            playToggleButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+            state = .stop
+        }
+    }
+    
+    @objc private func timerCallBack() {
+        if replayData.count <= timerData { return }
+        graphView.motionDatas = replayData[timerData]
+        timerData += 1
+        timerLabel.text = String(Double(timerData) / 10 )
     }
 }

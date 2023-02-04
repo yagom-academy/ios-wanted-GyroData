@@ -21,9 +21,8 @@
 		D0962531298C08EC00426AD1 /* AlertPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0962530298C08EC00426AD1 /* AlertPresentable.swift */; };
 		F69C9F6F298A2D6A00F59A71 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69C9F6E298A2D6A00F59A71 /* GraphView.swift */; };
 		F6AAD48029895426008A79B5 /* MotionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AAD47F29895426008A79B5 /* MotionData.swift */; };
-		F6C594382988D01500705625 /* NavigationTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C594372988D01500705625 /* NavigationTitleView.swift */; };
 		F6C7FB672989084F00CD92FD /* ReplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C7FB662989084F00CD92FD /* ReplayViewController.swift */; };
-		FCCFAB5E298A8C4800308398 /* CoreDataProcessible.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCFAB5D298A8C4800308398 /* CoreDataProcessible.swift */; };
+		FCCFAB5E298A8C4800308398 /* CoreDataProcessable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCFAB5D298A8C4800308398 /* CoreDataProcessable.swift */; };
 		FCCFAB60298A90F000308398 /* CoreDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCFAB5F298A90F000308398 /* CoreDataError.swift */; };
 /* End PBXBuildFile section */
 
@@ -44,9 +43,8 @@
 		D0962530298C08EC00426AD1 /* AlertPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPresentable.swift; sourceTree = "<group>"; };
 		F69C9F6E298A2D6A00F59A71 /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		F6AAD47F29895426008A79B5 /* MotionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionData.swift; sourceTree = "<group>"; };
-		F6C594372988D01500705625 /* NavigationTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationTitleView.swift; sourceTree = "<group>"; };
 		F6C7FB662989084F00CD92FD /* ReplayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplayViewController.swift; sourceTree = "<group>"; };
-		FCCFAB5D298A8C4800308398 /* CoreDataProcessible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataProcessible.swift; sourceTree = "<group>"; };
+		FCCFAB5D298A8C4800308398 /* CoreDataProcessable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataProcessable.swift; sourceTree = "<group>"; };
 		FCCFAB5F298A90F000308398 /* CoreDataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -129,7 +127,8 @@
 		D03B06792988C49F002BEB96 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				FCCFAB5D298A8C4800308398 /* CoreDataProcessible.swift */,
+				D0962530298C08EC00426AD1 /* AlertPresentable.swift */,
+				FCCFAB5D298A8C4800308398 /* CoreDataProcessable.swift */,
 				FCCFAB5F298A90F000308398 /* CoreDataError.swift */,
 				F6AAD47F29895426008A79B5 /* MotionData.swift */,
 				D026C780298AAC9300FBBF8E /* MotionDataForm.swift */,
@@ -160,9 +159,7 @@
 			isa = PBXGroup;
 			children = (
 				F69C9F6E298A2D6A00F59A71 /* GraphView.swift */,
-				F6C594372988D01500705625 /* NavigationTitleView.swift */,
 				D03B067C2988DBFC002BEB96 /* CustomDataCell.swift */,
-				D0962530298C08EC00426AD1 /* AlertPresentable.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -249,7 +246,6 @@
 				F6C7FB672989084F00CD92FD /* ReplayViewController.swift in Sources */,
 				FCCFAB60298A90F000308398 /* CoreDataError.swift in Sources */,
 				D026C781298AAC9300FBBF8E /* MotionDataForm.swift in Sources */,
-				F6C594382988D01500705625 /* NavigationTitleView.swift in Sources */,
 				D026C77D298A8A6A00FBBF8E /* Motion+CoreDataClass.swift in Sources */,
 				D026C776298A87CD00FBBF8E /* MotionDataModel.xcdatamodeld in Sources */,
 				F6AAD48029895426008A79B5 /* MotionData.swift in Sources */,
@@ -260,7 +256,7 @@
 				D026C77E298A8A6A00FBBF8E /* Motion+CoreDataProperties.swift in Sources */,
 				D03B067D2988DBFC002BEB96 /* CustomDataCell.swift in Sources */,
 				D0962531298C08EC00426AD1 /* AlertPresentable.swift in Sources */,
-				FCCFAB5E298A8C4800308398 /* CoreDataProcessible.swift in Sources */,
+				FCCFAB5E298A8C4800308398 /* CoreDataProcessable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

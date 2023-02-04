@@ -8,10 +8,11 @@
 import UIKit
 import CoreMotion
 
-class AddViewController: UIViewController {
+final class AddViewController: UIViewController {
+    
     // MARK: Enumerations
     
-    enum MeasurementUnit: Int {
+    private enum MeasurementUnit: Int {
         case acc
         case gyro
     }
@@ -154,7 +155,7 @@ class AddViewController: UIViewController {
         }
     }
     
-    public func startTimer() {
+    private func startTimer() {
         stopTimer()
         measureTime = .init()
 
@@ -315,9 +316,9 @@ class AddViewController: UIViewController {
     }
 }
 
-// MARK: - CoreDataProcessible
+// MARK: - CoreDataProcessable
 
-extension AddViewController: CoreDataProcessible {}
+extension AddViewController: CoreDataProcessable {}
 
 // MARK: - AlertPresentable
 

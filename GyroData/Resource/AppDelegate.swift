@@ -12,6 +12,7 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // MARK: CoreData Setting
+    
     lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "MotionDataModel")
         container.loadPersistentStores { _, error in
@@ -28,8 +29,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             do {
                 try context.save()
             } catch {
-                let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+                let nsError = error as NSError
+                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
             }
         }
     }

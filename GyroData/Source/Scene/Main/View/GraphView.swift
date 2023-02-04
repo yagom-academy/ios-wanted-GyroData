@@ -8,11 +8,30 @@
 import UIKit
 
 class GraphView: UIView {
-    private let dataLinePath = UIBezierPath()
+    
+    // MARK: Internal Properties
+    
+    var motionDatas: MotionData? {
+        didSet {
+            guard let motionDatas = motionDatas else { return }
+            
+            configureLabelText(dataX: motionDatas.x, dataY: motionDatas.y, dataZ: motionDatas.z)
+            
+            dataListX.append(motionDatas.x)
+            dataListY.append(motionDatas.y)
+            dataListZ.append(motionDatas.z)
+            
+            setNeedsDisplay()
+        }
+    }
+    
+    // MARK: Private Properties
+    
     private var graphXSize: CGFloat = 600
     private var dataListX = [Double]()
     private var dataListY = [Double]()
     private var dataListZ = [Double]()
+    
     private let dataXLabel: UILabel = {
         let label = UILabel()
         label.textColor = .systemRed
@@ -41,45 +60,50 @@ class GraphView: UIView {
         return stackView
     }()
     
-    var motionDatas: MotionData? {
-        didSet {
-            guard let motionDatas = motionDatas else { return }
-            
-            configureLabelText(dataX: motionDatas.x, dataY: motionDatas.y, dataZ: motionDatas.z)
-            
-            dataListX.append(motionDatas.x)
-            dataListY.append(motionDatas.y)
-            dataListZ.append(motionDatas.z)
-            
-            setNeedsDisplay()
-        }
-    }
+    // MARK: Initializer
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = .systemBackground
-        layer.borderWidth = 3
-        layer.borderColor = UIColor.black.cgColor
+        configureView()
         configureLayout()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     override func draw(_ rect: CGRect) {
         startDrawLines(rect)
     }
     
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: Internal Methods
+    
     func stopDrawLines() {
         dataListX.removeAll()
         dataListY.removeAll()
         dataListZ.removeAll()
         
-        dataLinePath.removeAllPoints()
-        
         configureLabelText()
+    }
+    
+    func clearData() {
+        dataListX = .init()
+        dataListY = .init()
+        dataListZ = .init()
+    }
+    
+    func changeGraphXSize(graphXSize: CGFloat) {
+        self.graphXSize = graphXSize * 10
+    }
+    
+    // MARK: Private Methods
+    
+    private func configureView() {
+        backgroundColor = .systemBackground
+        
+        layer.borderWidth = 3
+        layer.borderColor = UIColor.black.cgColor
     }
     
     private func setUpStackView() {
@@ -143,6 +167,7 @@ class GraphView: UIView {
                 )
             )
             measureLinePath.close()
+            
             measureLinePath.move(
                 to: CGPoint(
                     x: rect.maxX - (rect.maxX / CGFloat(8)) * CGFloat(ratio),
@@ -174,6 +199,7 @@ class GraphView: UIView {
         
         color.setStroke()
         linePath.lineWidth = 1
+        
         ratioDataList.forEach({ value in
             let point = CGPoint(x: xPosition, y: value)
             
@@ -185,16 +211,7 @@ class GraphView: UIView {
             
             xPosition += xInterval
         })
+        
         linePath.stroke()
-    }
-    
-    func clear() {
-        dataListX = .init()
-        dataListY = .init()
-        dataListZ = .init()
-    }
-    
-    func changeGraphXSize(graphXSize: CGFloat) {
-        self.graphXSize = graphXSize * 10
     }
 }

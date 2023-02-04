@@ -2,13 +2,15 @@
 //  MainViewController.swift
 //  GyroData
 //
-//  Created by Baem, Dragon on 2022/09/16.
+//  Created by Baem, Dragon on 2023/01/30.
 //
 
 import UIKit
 
 final class MainViewController: UIViewController {
+    
     // MARK: Private Properties
+    
     private var motionDataList: [Motion] = []
     private let tableView: UITableView = {
         let tableView = UITableView()
@@ -50,11 +52,10 @@ final class MainViewController: UIViewController {
     }
     
     private func configureView() {
-        let titleView = NavigationTitleView()
-        titleView.configureTitleLabel(title: "목록")
-        
         view.backgroundColor = .systemBackground
-        navigationItem.titleView = titleView
+        
+        navigationItem.title = "목록"
+        
         navigationItem.backBarButtonItem = UIBarButtonItem(
             title: String(),
             style: .plain,
@@ -62,6 +63,7 @@ final class MainViewController: UIViewController {
             action: nil
         )
         navigationItem.backBarButtonItem?.tintColor = .label
+        
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             title: "측정",
             style: .plain,
@@ -154,9 +156,9 @@ extension MainViewController: UITableViewDataSource {
     }
 }
 
-// MARK: - CoreDataProcessible
+// MARK: - CoreDataProcessable
 
-extension MainViewController: CoreDataProcessible {
+extension MainViewController: CoreDataProcessable {
     func fetchMotionData() -> [Motion]? {
         let result = readCoreData()
         

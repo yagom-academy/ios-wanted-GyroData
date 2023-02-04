@@ -8,7 +8,8 @@
 import UIKit
 
 class CustomDataCell: UITableViewCell {
-    // MARK: Static Properties
+    
+    // MARK: Identifier
     
     static let identifier = "CustomDataCell"
     
@@ -32,7 +33,6 @@ class CustomDataCell: UITableViewCell {
         label.textAlignment = .right
         return label
     }()
-    // TODO: DateFormat 변경
     private let dateTitleStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -69,7 +69,9 @@ class CustomDataCell: UITableViewCell {
     func configureLabel(data: Motion) {
         if let formatDate = data.date {
             let format = DateFormatter()
+            
             format.dateFormat = "yyyy/MM/dd HH:mm:ss"
+            
             dateLabel.text = format.string(from: formatDate)
         }
         
@@ -91,6 +93,7 @@ class CustomDataCell: UITableViewCell {
     
     private func configureLayout() {
         let frameSize = frame.size.width
+        
         setUpDateTitleStackView()
         setUpMainStackView()
         
