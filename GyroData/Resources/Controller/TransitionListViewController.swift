@@ -24,8 +24,12 @@ final class TransitionListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loadListData()
         configureUI()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fetchReloadData()
     }
 }
 
@@ -77,7 +81,7 @@ extension TransitionListViewController: UITableViewDelegate {
         _ tableView: UITableView,
         didSelectRowAt indexPath: IndexPath
     ) {
-        let metaData = TransitionMetaData.transitionMetaDatas[indexPath.row]
+        let metaData = metaDatas[indexPath.row]
         presentPlayView(with: .view, metaData: metaData)
     }
 }
@@ -123,16 +127,10 @@ private extension TransitionListViewController {
         }
     }
 
-    func loadListData() {
-        let data = PersistentContainerManager.shared.fetchTransitionMetaData(pageCount: pageIndex)
-        pageIndex += 1
-        isPaginating = false
-        metaDatas.append(contentsOf: data)
-
-        DispatchQueue.main.async {
-            self.tableView.tableFooterView = nil
-            self.tableView.reloadData()
-        }
+    func fetchReloadData() {
+        let data = PersistentContainerManager.shared.fetchReloadData(pageCount: self.pageIndex)
+        metaDatas = data
+        tableView.reloadData()
     }
     
     func presentPlayView(with type: PlayViewController.viewType, metaData: TransitionMetaData) {
@@ -207,13 +205,14 @@ private extension TransitionListViewController {
     }
 
     func setNavigationBar() {
-        let rightBarButton = UIBarButtonItem(title: "측정", style: .plain, target: self, action: #selector(didTapRecordButton))
-        rightBarButton.setTitleTextAttributes([.font: UIFont.preferredFont(forTextStyle: .title3)], for: .normal)
-        let titleLable = UILabel()
-        titleLable.text = "목록"
-        titleLable.font = UIFont.preferredFont(forTextStyle: .title1)
+        let rightBarButton = UIBarButtonItem(
+            title: "측정",
+            style: .plain,
+            target: self,
+            action: #selector(didTapRecordButton)
+        )
         navigationItem.rightBarButtonItem = rightBarButton
-        navigationItem.titleView = titleLable
+        navigationItem.title = "목록"
     }
 
     func createIndicatorFooter() -> UIView {

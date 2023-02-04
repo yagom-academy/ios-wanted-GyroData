@@ -9,14 +9,7 @@ import UIKit
 import CoreMotion
 
 class GraphView: UIView {
-
-    // MARK: - Type
-    enum Position {
-        case x
-        case y
-        case z
-    }
-
+    
     // MARK: - Property
     private let xPositionLabel: UILabel = {
         let label = UILabel()
@@ -24,258 +17,203 @@ class GraphView: UIView {
         label.text = "x:"
         return label
     }()
-
+    
     private let yPositionLabel: UILabel = {
         let label = UILabel()
         label.textColor = .systemGreen
         label.text = "y:"
         return label
     }()
-
+    
     private let zPositionLabel: UILabel = {
         let label = UILabel()
         label.textColor = .systemBlue
         label.text = "z:"
         return label
     }()
-
-    private let xLayer = CAShapeLayer()
-    private let yLayer = CAShapeLayer()
-    private let zLayer = CAShapeLayer()
+    
+    private let xLayer: CAShapeLayer = {
+        let layer = CAShapeLayer()
+        layer.strokeColor = UIColor.systemRed.cgColor
+        layer.fillColor = nil
+        layer.lineWidth = 1.5
+        return layer
+    }()
+    
+    private let yLayer: CAShapeLayer = {
+        let layer = CAShapeLayer()
+        layer.strokeColor = UIColor.systemGreen.cgColor
+        layer.fillColor = nil
+        layer.lineWidth = 1.5
+        return layer
+    }()
+    
+    private let zLayer: CAShapeLayer = {
+        let layer = CAShapeLayer()
+        layer.strokeColor = UIColor.systemBlue.cgColor
+        layer.fillColor = nil
+        layer.lineWidth = 1.5
+        return layer
+    }()
+    
     private let xPath = UIBezierPath()
     private let yPath = UIBezierPath()
     private let zPath = UIBezierPath()
     private var currentX: CGFloat = 0
-
-    var isCheckStartLines = false
-    var isTimeTrigger = true
-    var timer = Timer()
-    var transitionData: Transition = Transition(x: [], y: [], z: [])
-
+    
+    private var isCheckStartLines = false
+    private var timer: Timer?
+    private var currentIndex: Int = 0
+    private var transitionData: Transition = Transition(values: [])
+    
     // MARK: - LifeCycle
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-
-        configureUI()
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
     override func draw(_ rect: CGRect) {
         super.draw(rect)
-
+        
         makeGridBackground()
         settingInitialization()
+        configureUI()
+    }
+}
+
+// MARK: - Draw Logic
+extension GraphView {
+    func drawRecord(values: Tick, isStart: Bool = false) {
+        let tickValues = values.convert()
+        drawLine(values: tickValues, isStart: isStart)
+    }
+    
+    func drawPlayGraph(
+        ticks: [Tick],
+        viewType: PlayViewController.viewType
+    ) {
+        var ticks = ticks
+        let firstTick = ticks.removeFirst().convert()
+        
+        settingInitialization()
+        setStartTick(tick: firstTick)
+        
+        switch viewType {
+        case .play:
+            
+            transitionData = Transition(values: ticks)
+            if timer == nil {
+                timer = Timer.scheduledTimer(
+                    timeInterval: 0.1,
+                    target: self,
+                    selector: #selector(replayDrawLine),
+                    userInfo: nil,
+                    repeats: true
+                )
+            }
+
+        case .view:
+            ticks.forEach { drawLine(values: $0.convert(), isStart: false) }
+        }
+    }
+    
+    @objc private func replayDrawLine() {
+        let limitedIndex = findMinimumCount()
+        
+        guard currentIndex < limitedIndex else {
+            timer?.invalidate()
+            return
+        }
+        
+        let tick = self.transitionData.values[currentIndex]
+        drawRecord(values: tick, isStart: false)
+        currentIndex += 1
+    }
+    
+    private func drawLine(values: Tick, isStart: Bool) {
+        let xOffset: CGFloat = self.frame.width / CGFloat(600)
+        let centerY = self.frame.height / 2
+        
+        if isStart {
+            xPath.move(to: CGPoint(x: currentX, y: centerY - values.x))
+            yPath.move(to: CGPoint(x: currentX, y: centerY - values.y))
+            zPath.move(to: CGPoint(x: currentX, y: centerY - values.z))
+        } else {
+            currentX += xOffset
+            let newX = CGPoint(x: currentX, y: centerY - values.x)
+            let newY = CGPoint(x: currentX, y: centerY - values.y)
+            let newZ = CGPoint(x: currentX, y: centerY - values.z)
+            
+            xPath.addLine(to: newX)
+            yPath.addLine(to: newY)
+            zPath.addLine(to: newZ)
+        }
+        
+        xLayer.path = xPath.cgPath
+        yLayer.path = yPath.cgPath
+        zLayer.path = zPath.cgPath
+        
+        [xLayer, yLayer, zLayer].forEach {
+            layer.addSublayer($0)
+        }
+        
+        setLabels(tick: values)
     }
 }
 
 // MARK: - Business Logic
 extension GraphView {
-    func viewGraphDrawing() {
-        if !isCheckStartLines {
-            let centerY = self.frame.height / 2
-            xPath.move(to: CGPoint(x: currentX, y: centerY - transitionData.x.removeFirst()))
-            yPath.move(to: CGPoint(x: currentX, y: centerY - transitionData.y.removeFirst()))
-            zPath.move(to: CGPoint(x: currentX, y: centerY - transitionData.z.removeFirst()))
-            isCheckStartLines = true
-        }
-        drawLine(datas: transitionData.x, position: .x)
-        drawLine(datas: transitionData.y, position: .y)
-        drawLine(datas: transitionData.z, position: .z)
+    private func setStartTick(tick: Tick) {
+        let centerY = frame.height / 2
+        xPath.move(to: CGPoint(x: .zero, y: centerY - tick.x))
+        yPath.move(to: CGPoint(x: .zero, y: centerY - tick.y))
+        zPath.move(to: CGPoint(x: .zero, y: centerY - tick.z))
     }
-
-    func replayGraphDrawing() {
-        if isTimeTrigger {
-            timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(replayDrawLine), userInfo: nil, repeats: true)
-            isTimeTrigger = false
-        }
-    }
-
+    
     private func findMinimumCount() -> Int {
-        let xCount = transitionData.x.count
-        let yCount = transitionData.y.count
-        let zCount = transitionData.z.count
-        var value = xCount
-
-        if yCount < value { value = yCount }
-        if zCount < value { value = zCount }
-        return value
+        let xCount = transitionData.values.map { $0.x }.count
+        let yCount = transitionData.values.map { $0.y }.count
+        let zCount = transitionData.values.map { $0.z }.count
+        return min(xCount, yCount, zCount)
     }
-}
-
-// MARK: - LineDrawMethod
-extension GraphView {
-    func callDrawLine(_ data: CMLogItem, _ sensorType: SensorType) {
-        switch sensorType {
-        case .Accelerometer:
-            guard let data = data as? CMAccelerometerData else { return }
-            let xValue = data.acceleration.x
-            let yValue = data.acceleration.y
-            let zValue = data.acceleration.z
-            drawLine(xValue, yValue, zValue)
-        case .Gyro:
-            guard let data = data as? CMGyroData else { return }
-            let xValue = data.rotationRate.x
-            let yValue = data.rotationRate.y
-            let zValue = data.rotationRate.z
-            drawLine(xValue, yValue, zValue)
-        }
+    
+    private func setLabels(tick: Tick) {
+        xPositionLabel.text = "x: \(Double(round(1000 * tick.x) / 1000))"
+        yPositionLabel.text = "y: \(Double(round(1000 * tick.y) / 1000))"
+        zPositionLabel.text = "z: \(Double(round(1000 * tick.z) / 1000))"
     }
-
-    private func drawLine(_ xValue: CGFloat, _ yValue: CGFloat, _ zValue: CGFloat) {
-        let xOffset: CGFloat = self.frame.width / CGFloat(600 - 1)
-        let centerY = self.frame.height / 2
-        if !isCheckStartLines {
-            xPath.move(to: CGPoint(x: currentX, y: centerY - xValue))
-            yPath.move(to: CGPoint(x: currentX, y: centerY - yValue))
-            zPath.move(to: CGPoint(x: currentX, y: centerY - zValue))
-            isCheckStartLines = true
-        } else {
-            currentX += xOffset
-            let newXPosition = CGPoint(x: currentX, y: centerY - xValue)
-            xPath.addLine(to: newXPosition)
-            let newYPosition = CGPoint(x: currentX, y: centerY - yValue)
-            yPath.addLine(to: newYPosition)
-            let newZPosition = CGPoint(x: currentX, y: centerY - zValue)
-            zPath.addLine(to: newZPosition)
-        }
-
-        xPositionLabel.text = "x: \(xValue)"
-        yPositionLabel.text = "y: \(yValue)"
-        zPositionLabel.text = "z: \(zValue)"
-
-        addGraphViewSublayer(layer: xLayer, path: xPath)
-        addGraphViewSublayer(layer: yLayer, path: yPath)
-        addGraphViewSublayer(layer: zLayer, path: zPath)
-    }
-
-    private func drawLine(datas: [Double], position: Position) {
-        let xOffset: CGFloat = self.frame.width / CGFloat(600 - 1)
-        let centerY = self.frame.height / 2
-        var sum: Double = 0
-        currentX = 0
-
-        for data in datas {
-            sum += data
-            currentX += xOffset
-            let newXPosition = CGPoint(x: currentX, y: centerY - data)
-            switch position {
-            case .x:
-                xPath.addLine(to: newXPosition)
-            case .y:
-                yPath.addLine(to: newXPosition)
-            case .z:
-                zPath.addLine(to: newXPosition)
-            }
-        }
-
-        switch position {
-        case .x:
-            xPositionLabel.text = "x: \(sum)"
-            addGraphViewSublayer(layer: xLayer, path: xPath)
-        case .y:
-            yPositionLabel.text = "x: \(sum)"
-            addGraphViewSublayer(layer: yLayer, path: yPath)
-        case .z:
-            zPositionLabel.text = "x: \(sum)"
-            addGraphViewSublayer(layer: zLayer, path: zPath)
-        }
-    }
-
-    @objc private func replayDrawLine() {
-        let xOffset: CGFloat = self.frame.width / CGFloat(600 - 1)
-        let centerY = self.frame.height / 2
-        let limitedIndex = findMinimumCount()
-        var currentIndex = 0
-
-        if !isCheckStartLines {
-            xPath.move(to: CGPoint(x: currentX, y: centerY - transitionData.x[currentIndex]))
-            yPath.move(to: CGPoint(x: currentX, y: centerY - transitionData.y[currentIndex]))
-            zPath.move(to: CGPoint(x: currentX, y: centerY - transitionData.z[currentIndex]))
-            isCheckStartLines = true
-        } else {
-            currentX += xOffset
-            let newXPosition = CGPoint(x: currentX, y: centerY - transitionData.x[currentIndex])
-            xPath.addLine(to: newXPosition)
-            let newYPosition = CGPoint(x: currentX, y: centerY - transitionData.y[currentIndex])
-            yPath.addLine(to: newYPosition)
-            let newZPosition = CGPoint(x: currentX, y: centerY - transitionData.z[currentIndex])
-            zPath.addLine(to: newZPosition)
-        }
-
-        xPositionLabel.text = "x: \(transitionData.x[currentIndex])"
-        yPositionLabel.text = "y: \(transitionData.y[currentIndex])"
-        zPositionLabel.text = "z: \(transitionData.z[currentIndex])"
-
-        addGraphViewSublayer(layer: xLayer, path: xPath)
-        addGraphViewSublayer(layer: yLayer, path: yPath)
-        addGraphViewSublayer(layer: zLayer, path: zPath)
-
-        currentIndex += 1
-        if currentIndex >= limitedIndex {
-            timer.invalidate()
-        }
-    }
-
-    private func addGraphViewSublayer(layer: CAShapeLayer, path: UIBezierPath) {
-        switch layer {
-        case xLayer:
-            layer.strokeColor = UIColor.systemRed.cgColor
-        case yLayer:
-            layer.strokeColor = UIColor.systemGreen.cgColor
-        case zLayer:
-            layer.strokeColor = UIColor.systemBlue.cgColor
-        default:
-            return
-        }
-        layer.fillColor = nil
-        layer.lineWidth = 2
-        layer.path = path.cgPath
-        self.layer.addSublayer(layer)
-    }
-
+    
     func settingInitialization() {
         [xLayer, yLayer, zLayer].forEach { $0.removeFromSuperlayer() }
         [xPath, yPath, zPath].forEach { $0.removeAllPoints() }
         currentX = 0
-        settingStartLines()
     }
-
-    private func settingStartLines() {
-        let centerY = self.frame.height / 2
-        xPath.move(to: CGPoint(x: currentX, y: centerY))
-        yPath.move(to: CGPoint(x: currentX, y: centerY))
-        zPath.move(to: CGPoint(x: currentX, y: centerY))
+    
+    func resetGraph() {
+        timer?.invalidate()
+        timer = nil
+        currentIndex = 0
     }
 }
 
-// MARK: - GraphViewConfiguration
+// MARK: - Graph Background Configuration
 private extension GraphView {
-    func makeGridBackground() {
+    private func makeGridBackground() {
         let gridLayer = CAShapeLayer()
         let gridPath = UIBezierPath()
-        let divideCount = 8
-        let xOffset = (self.frame.width - 20) / CGFloat(divideCount)
-        let yOffset = (self.frame.height - 20) / CGFloat(divideCount)
-        var currentX: CGFloat = 10
-        var currentY: CGFloat = 10
-
-        for index in 1...divideCount + 1 {
+        let xOffset = self.frame.width / CGFloat(8)
+        let yOffset = self.frame.height / CGFloat(8)
+        var currentX: CGFloat = 0, currentY: CGFloat = 0
+        
+        for index in 0..<9 {
             gridPath.move(to: CGPoint(x: currentX, y: currentY))
-            gridPath.addLine(to: CGPoint(x: self.frame.width - 10, y: currentY))
-            currentY = 10 + CGFloat(index) * yOffset
+            gridPath.addLine(to: CGPoint(x: self.frame.width, y: currentY))
+            currentY = CGFloat(index + 1) * yOffset
         }
-
-        currentY = 10
-
-        for index in 1...divideCount + 1 {
+        
+        currentY = 0
+        
+        for index in 0..<9 {
             gridPath.move(to: CGPoint(x: currentX, y: currentY))
-            gridPath.addLine(to: CGPoint(x: currentX, y: self.frame.height - 10))
-            currentX = 10 + CGFloat(index) * xOffset
+            gridPath.addLine(to: CGPoint(x: currentX, y: self.frame.height))
+            currentX = CGFloat(index + 1) * xOffset
         }
-
+        
         gridLayer.fillColor = nil
         gridLayer.strokeColor = UIColor.systemGray.cgColor
         gridLayer.lineWidth = 2
@@ -290,22 +228,22 @@ private extension GraphView {
         addChildView()
         setUpLayouts()
     }
-
+    
     func addChildView() {
         [xPositionLabel, yPositionLabel, zPositionLabel].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
             self.addSubview($0)
         }
     }
-
+    
     func setUpLayouts() {
         NSLayoutConstraint.activate([
             xPositionLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 20),
             xPositionLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 40),
-
+            
             zPositionLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 20),
             zPositionLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -40),
-
+            
             yPositionLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 20),
             yPositionLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
         ])
