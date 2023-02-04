@@ -39,12 +39,11 @@ final class CoreDataManager: MeasurementDataHandleable {
     }
     
     func saveData(_ data: Measurement) throws {
-        let measurementCoreModel = MeasurementCoreModel(context: context)
-        
         guard let axisValue = JSONEncoder.encode(data.axisValues) else {
             throw DataHandleError.encodingError
         }
-        
+
+        let measurementCoreModel = MeasurementCoreModel(context: context)
         measurementCoreModel.sensor = Int16(data.sensor.rawValue)
         measurementCoreModel.date = data.date
         measurementCoreModel.time = data.time
@@ -90,8 +89,7 @@ final class CoreDataManager: MeasurementDataHandleable {
         }
     }
     
-    private func convertTypeToMeasurement(from measurementCoreModel: MeasurementCoreModel) throws
-    -> Measurement {
+    private func convertTypeToMeasurement(from measurementCoreModel: MeasurementCoreModel) throws -> Measurement {
         let date = measurementCoreModel.date
         let time = measurementCoreModel.time
         let axisValues = measurementCoreModel.axisValues
