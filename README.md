@@ -35,7 +35,7 @@
 			 <td style="text-align:center" > <img width="180px" img style="border: 2px solid lightgray; border-radius: 90px;-moz-border-radius: 90px;-khtml-border-radius: 90px;-webkit-border-radius: 90px;" src="https://avatars.githubusercontent.com/u/49301866?v=4"> </td>
   	  </tr>
 	<tr>
-	 <td style="text-align:center" >  - 데이터목록 화면 View와 Logic 담당 <br> - 다시보기 화면 View 담당 <br> - CoreData를 통한 데이터 관리 <br> - 데이터 핸들링 Error처리 <br> - GraphView MVVM 디자인패턴 적용  </td>
+	 <td style="text-align:center" >  - 데이터목록 화면 View와 Logic 담당 <br> - 다시보기 화면 View 담당 <br> - CoreData를 통한 데이터 관리 <br> - 데이터 핸들링 Error처리 <br> - GraphView MVVM 적용  </td>
 			 <td style="text-align:center" >  - 측정화면 View와 Logic 담당 <br> - 다시보기 화면 Logic 담당 <br> - 자이로, 가속도 측정 <br> - 그래프 그리기 <br> - FileManager를 통한 데이터 관리  </td>
   </tr>
   
