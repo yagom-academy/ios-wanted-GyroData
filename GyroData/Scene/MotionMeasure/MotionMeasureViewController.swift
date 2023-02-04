@@ -124,7 +124,7 @@ private extension MotionMeasureViewController {
         stopButton.addTarget(self, action: #selector(stopMeasurement), for: .touchUpInside)
     }
     
-    func showSaveIndicatorView() {
+    func startIndicatorView() {
         navigationController?.navigationBar.isUserInteractionEnabled = false
         indicator.startAnimating()
     }
@@ -132,49 +132,65 @@ private extension MotionMeasureViewController {
     @objc func saveMotion() {
         viewModel.action(.motionCreate(
             type: measurementTypeSegmentedControl.selectedSegmentIndex,
-            time: "46.5",
+            time: "",
             data: [])
         )
-        showSaveIndicatorView()
+        startIndicatorView()
     }
     
     @objc func measureMotion() {
         viewModel.action(.measurementStart(type: measurementTypeSegmentedControl.selectedSegmentIndex))
+    }
+    
+    @objc func stopMeasurement() {
+        viewModel.action(.measurementStop(type: measurementTypeSegmentedControl.selectedSegmentIndex))
+    }
+}
+
+extension MotionMeasureViewController: MotionMeasurementViewModelDelegate {
+    func motionMeasurementViewModel(measuredData data: MotionDataType) {
+        
+    }
+    
+    func motionMeasurementViewModel(actionConfigurationAboutMeasurementStarted: Void) {
         stopButton.isEnabled = true
         measureButton.isEnabled = false
         saveBarButton.isEnabled = false
         measurementTypeSegmentedControl.isEnabled = false
     }
     
-    @objc func stopMeasurement() {
-        viewModel.action(.measurementStop(type: measurementTypeSegmentedControl.selectedSegmentIndex))
+    func motionMeasurementViewModel(actionConfigurationAboutMeasurementCompleted: Void) {
         stopButton.isEnabled = false
         measureButton.isEnabled = true
         saveBarButton.isEnabled = true
         measurementTypeSegmentedControl.isEnabled = true
     }
-}
-
-extension MotionMeasureViewController: MotionMeasurementViewModelDelegate {
-    func motionMeasurementViewModel(measuredData data: MotionDataType, takenCurrentTime time: Double) {
-        
+    
+    func motionMeasurementViewModel(actionConfigurationAboutInsufficientData: Void) {
+        navigationController?.navigationBar.isUserInteractionEnabled = true
+        indicator.stopAnimating()
+        let alert = AlertBuilder()
+            .withTitle(AlertStyle.insufficientDataToCreate.title)
+            .withMessage(AlertStyle.insufficientDataToCreate.message)
+            .withStyle(.alert)
+            .withDefaultActions()
+            .build()
+        present(alert, animated: true)
     }
     
-    func motionMeasurementViewModel(isCompletedInMotionMeasurement: Bool) {
-        if isCompletedInMotionMeasurement {
-            stopButton.isEnabled = false
-            measureButton.isEnabled = true
-            saveBarButton.isEnabled = true
-            measurementTypeSegmentedControl.isEnabled = true
-        }
-    }
-    
-    func motionMeasurementViewModel(isSucceedInCreating: Bool) {
+    func motionMeasurementViewModel(actionConfigurationAboutCreatingSuccess: Void) {
         navigationController?.popViewController(animated: true)
     }
     
-    func motionMeasurementViewModel(alertStyleToPresent: AlertStyle) {
+    func motionMeasurementViewModel(actionConfigurationAboutCreatingFailed: Void) {
         navigationController?.navigationBar.isUserInteractionEnabled = true
         indicator.stopAnimating()
+        let alert = AlertBuilder()
+            .withTitle(AlertStyle.motionCreatingFailed.title)
+            .withMessage(AlertStyle.motionCreatingFailed.message)
+            .withStyle(.alert)
+            .withDefaultActions()
+            .build()
+        present(alert, animated: true)
     }
 }

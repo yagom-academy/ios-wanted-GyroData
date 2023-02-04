@@ -8,10 +8,12 @@
 import Foundation
 
 protocol MotionMeasurementViewModelDelegate: AnyObject {
-    func motionMeasurementViewModel(measuredData data: MotionDataType, takenCurrentTime time: Double)
-    func motionMeasurementViewModel(isCompletedInMotionMeasurement: Bool)
-    func motionMeasurementViewModel(isSucceedInCreating: Bool)
-    func motionMeasurementViewModel(alertStyleToPresent: AlertStyle)
+    func motionMeasurementViewModel(measuredData data: MotionDataType)
+    func motionMeasurementViewModel(actionConfigurationAboutMeasurementStarted: Void)
+    func motionMeasurementViewModel(actionConfigurationAboutMeasurementCompleted: Void)
+    func motionMeasurementViewModel(actionConfigurationAboutInsufficientData: Void)
+    func motionMeasurementViewModel(actionConfigurationAboutCreatingSuccess: Void)
+    func motionMeasurementViewModel(actionConfigurationAboutCreatingFailed: Void)
 }
 
 final class MotionMeasurementViewModel {
@@ -41,9 +43,11 @@ final class MotionMeasurementViewModel {
         case let .measurementStart(type):
             guard let type = Motion.MeasurementType(rawValue: type) else { return }
             startMeasurementService(of: type)
+            delegate?.motionMeasurementViewModel(actionConfigurationAboutMeasurementStarted: ())
         case let .measurementStop(type):
             guard let type = Motion.MeasurementType(rawValue: type) else { return }
             measurementService.stopMeasurement(type: type)
+            delegate?.motionMeasurementViewModel(actionConfigurationAboutMeasurementCompleted: ())
         case let .motionCreate(type, time, data):
             createMotionWith(type: type, time: time, data: data)
         }
@@ -58,10 +62,15 @@ private extension MotionMeasurementViewModel {
     func startMeasurementService(of type: Motion.MeasurementType) {
         measurementService.measure(
             type: type,
-            measurementHandler: { [weak self] data, time in
-                self?.delegate?.motionMeasurementViewModel(measuredData: data, takenCurrentTime: time)
-            }, completeHandler: { [weak self] isCompleted in
-                self?.delegate?.motionMeasurementViewModel(isCompletedInMotionMeasurement: true)
+            measurementHandler: { [weak self] data in
+                self?.delegate?.motionMeasurementViewModel(measuredData: data)
+            },
+            completeHandler: { [weak self] isCompleted in
+                if isCompleted {
+                    self?.delegate?.motionMeasurementViewModel(
+                        actionConfigurationAboutMeasurementCompleted: ()
+                    )
+                }
             })
     }
     
@@ -71,11 +80,28 @@ private extension MotionMeasurementViewModel {
             type: type,
             time: time,
             data: data
-        ) { [weak self] isSuccess in
-            if isSuccess {
-                self?.delegate?.motionMeasurementViewModel(isSucceedInCreating: isSuccess)
-            } else {
-                self?.delegate?.motionMeasurementViewModel(alertStyleToPresent: .motionCreatingFailed)
+        ) { [weak self] result in
+            switch result {
+            case .success():
+                self?.delegate?.motionMeasurementViewModel(actionConfigurationAboutCreatingSuccess: ())
+            case .failure(let error) where error == .motionCreatingFailed:
+                DispatchQueue.main.async {
+                    self?.delegate?.motionMeasurementViewModel(
+                        actionConfigurationAboutCreatingFailed: ()
+                    )
+                }
+            case .failure(let error) where error == .insufficientDataToCreate:
+                DispatchQueue.main.async {
+                    self?.delegate?.motionMeasurementViewModel(
+                        actionConfigurationAboutInsufficientData: ()
+                    )
+                }
+            case .failure(_):
+                DispatchQueue.main.async {
+                    self?.delegate?.motionMeasurementViewModel(
+                        actionConfigurationAboutCreatingFailed: ()
+                    )
+                }
             }
         }
     }
