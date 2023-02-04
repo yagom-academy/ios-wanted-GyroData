@@ -86,7 +86,7 @@ extension RecordViewController: Uploadable {
         
         let transitionValues = Transition(values: values)
         let metaData = TransitionMetaData(
-            saveDate: Date().description,
+            saveDate: Date().saveDescription,
             sensorType: recordedSensor,
             recordTime: recordTime,
             jsonName: fileName
@@ -152,7 +152,7 @@ private extension RecordViewController {
             isRestart = false
         }
         
-        graphView.drawRecord(values: tick, isStart: values.isEmpty)
+        graphView.drawRecord(with: .Accelerometer, values: tick, isStart: values.isEmpty)
     }
 }
 
