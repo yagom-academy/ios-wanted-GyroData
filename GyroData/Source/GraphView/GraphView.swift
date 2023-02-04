@@ -11,7 +11,7 @@ final class GraphView: UIView {
     private let valueXLabel = {
         let label = UILabel()
         label.textColor = .systemRed
-        label.text = "x: -3362"
+        label.text = "x: 0"
         
         return label
     }()
@@ -19,7 +19,7 @@ final class GraphView: UIView {
     private let valueYLabel = {
         let label = UILabel()
         label.textColor = .systemGreen
-        label.text = "y: -143"
+        label.text = "y: 0"
         
         return label
     }()
@@ -27,30 +27,42 @@ final class GraphView: UIView {
     private let valueZLabel = {
         let label = UILabel()
         label.textColor = .systemBlue
-        label.text = "z: 2497"
+        label.text = "z: 0"
         
         return label
     }()
     
+    private let xPath = UIBezierPath()
+    private let yPath = UIBezierPath()
+    private let zPath = UIBezierPath()
+    
+    private var currentX: CGFloat = 0
+    private var currentY: CGFloat = 0
+    private var currentZ: CGFloat = 0
+    
+    private var xAxisOffset: CGFloat = 0
+    private var yAxisOffset: CGFloat = 0
+    private var maxValue: CGFloat = 1.0 {
+        didSet {
+            yAxisOffset = maxValue + (maxValue * 0.2)
+        }
+    }
+    private var scale: Double = 0
     
     private var viewModel: GraphViewModel
-    var motionMeasures: MotionMeasures?
-    var duration: Double?
-    var drawMode: PageType = .view
-    
     
     init(viewModel: GraphViewModel) {
         self.viewModel = viewModel
         super.init(frame: .zero)
         
-        configureView()
+        configureSubview()
         bind()
     }
     
     private func bind() {
-        viewModel.bindGraphData { [weak self] motionMeasures, duration in
-            self?.motionMeasures = motionMeasures
-            self?.duration = duration
+        viewModel.bindGraphData { [weak self] motionCoordinate in
+            self?.drawGraph(motionCoordinate)
+            self?.setNeedsDisplay()
         }
     }
     
@@ -62,8 +74,8 @@ final class GraphView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func configureView() {
-        backgroundColor = .clear
+    private func configureSubview() {
+        backgroundColor = .systemBackground
         self.layer.borderWidth = 2
         self.addSubview(valueXLabel)
         self.addSubview(valueYLabel)
@@ -72,51 +84,31 @@ final class GraphView: UIView {
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
-        
-        switch drawMode {
-        case .play:
-            break
-        case .view:
-            guard let motionMeasures,
-                  let duration  else { return }
-            drawWholeGraph(motionMeasures, for: duration)
-        }
-        
+        UIColor.systemRed.set()
+        xPath.stroke()
+        UIColor.green.set()
+        yPath.stroke()
+        UIColor.blue.set()
+        zPath.stroke()
     }
     
-    private func drawWholeGraph(_ motionMeasures: MotionMeasures, for duration: Double) {
-        let graphData: [[Double]] = [
-            motionMeasures.axisX,
-            motionMeasures.axisY,
-            motionMeasures.axisZ
-        ]
-        var axisColors: [UIColor] = [.red, .green, .blue]
+    private func drawGraph(_ coordinate: MotionCoordinate) {
+        let initialYPoint = bounds.height / 2
         
-        let xOffset: Double = self.frame.width / CGFloat(duration)
-        let startPosition = CGPoint(x: .zero, y: self.frame.height / CGFloat(2))
+        xPath.move(to: CGPoint(x: xAxisOffset, y: initialYPoint + currentX))
+        yPath.move(to: CGPoint(x: xAxisOffset, y: initialYPoint + currentX))
+        zPath.move(to: CGPoint(x: xAxisOffset, y: initialYPoint + currentX))
         
-        graphData.forEach({ eachAxis in
-            let path = UIBezierPath()
-            let axisColor = axisColors.removeFirst()
-            
-            path.move(to: startPosition)
-            path.lineWidth = 1
-            axisColor.setStroke()
-            
-            path.drawPath(xOffset: xOffset, axisData: eachAxis, yFrameHeight: self.frame.height)
-            
-            path.stroke()
-        })
-    }
-}
-
-extension UIBezierPath {
-    func drawPath(xOffset: Double, axisData: [Double], yFrameHeight: Double) {
-        var currentX: Double = 0
+        xAxisOffset += bounds.width / 600
         
-        axisData.forEach { yPoint in
-            self.addLine(to: CGPoint(x: currentX, y: yFrameHeight / 2 - yPoint))
-            currentX += xOffset
-        }
+        maxValue = max(abs(coordinate.x), abs(coordinate.y), abs(coordinate.z), maxValue)
+        
+        currentX = coordinate.x * yAxisOffset
+        currentY = coordinate.y * yAxisOffset
+        currentZ = coordinate.z * yAxisOffset
+        
+        xPath.addLine(to: CGPoint(x: xAxisOffset, y: initialYPoint + currentX))
+        yPath.addLine(to: CGPoint(x: xAxisOffset, y: initialYPoint + currentY))
+        zPath.addLine(to: CGPoint(x: xAxisOffset, y: initialYPoint + currentZ))
     }
 }

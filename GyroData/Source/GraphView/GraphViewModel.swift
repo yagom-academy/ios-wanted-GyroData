@@ -6,15 +6,14 @@
 //
 
 final class GraphViewModel {
-    typealias MotionMeasuresHandler = (MotionMeasures, Double) -> Void
+    typealias MotionMeasuresHandler = (MotionCoordinate) -> Void
     
-    private var motionMeasures: MotionMeasures = MotionMeasures(axisX: [], axisY: [], axisZ: []) {
+    private var motionCoordinate: MotionCoordinate? {
         didSet {
-            graphDataHandler?(motionMeasures, duration)
+            guard let motionCoordinate = motionCoordinate else { return }
+            graphDataHandler?(motionCoordinate)
         }
     }
-    
-    private var duration: Double = Double()
     
     private var graphDataHandler: MotionMeasuresHandler?
     
@@ -22,9 +21,7 @@ final class GraphViewModel {
         graphDataHandler = handler
     }
     
-    func setMeasures(_ motionMeasures: MotionMeasures, for duration: Double) {
-        self.duration = duration
-        self.motionMeasures = motionMeasures
+    func setCoordinate(_ motionMeasures: MotionCoordinate) {
+        self.motionCoordinate = motionMeasures
     }
-
 }
