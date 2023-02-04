@@ -66,6 +66,14 @@ class GraphView: UIView {
     private var currentIndex: Int = 0
     private var transitionData: Transition = Transition(values: [])
     
+    var yOffset: CGFloat = 0
+    
+    var maxValue: CGFloat = 1.0 {
+        didSet {
+            yOffset = (frame.height / 2) / (maxValue + maxValue * 0.2)
+        }
+    }
+    
     // MARK: - LifeCycle
     override func draw(_ rect: CGRect) {
         super.draw(rect)
@@ -78,8 +86,8 @@ class GraphView: UIView {
 
 // MARK: - Draw Logic
 extension GraphView {
-    func drawRecord(values: Tick, isStart: Bool = false) {
-        let tickValues = values.convert()
+    func drawRecord(with sensor: SensorType, values: Tick, isStart: Bool = false) {
+        let tickValues = values.convert(with: sensor)
         drawLine(values: tickValues, isStart: isStart)
     }
     
@@ -121,7 +129,7 @@ extension GraphView {
         }
         
         let tick = self.transitionData.values[currentIndex]
-        drawRecord(values: tick, isStart: false)
+        drawRecord(with: .Accelerometer, values: tick, isStart: false)
         currentIndex += 1
     }
     
@@ -129,15 +137,21 @@ extension GraphView {
         let xOffset: CGFloat = self.frame.width / CGFloat(600)
         let centerY = self.frame.height / 2
         
+        maxValue = max(abs(values.x), abs(values.y), abs(values.z), maxValue)
+        
+        let xPosition = centerY - values.x * yOffset
+        let yPosition = centerY - values.y * yOffset
+        let zPosition = centerY - values.z * yOffset
+        
         if isStart {
-            xPath.move(to: CGPoint(x: currentX, y: centerY - values.x))
-            yPath.move(to: CGPoint(x: currentX, y: centerY - values.y))
-            zPath.move(to: CGPoint(x: currentX, y: centerY - values.z))
+            xPath.move(to: CGPoint(x: currentX, y: xPosition))
+            yPath.move(to: CGPoint(x: currentX, y: yPosition))
+            zPath.move(to: CGPoint(x: currentX, y: zPosition))
         } else {
             currentX += xOffset
-            let newX = CGPoint(x: currentX, y: centerY - values.x)
-            let newY = CGPoint(x: currentX, y: centerY - values.y)
-            let newZ = CGPoint(x: currentX, y: centerY - values.z)
+            let newX = CGPoint(x: currentX, y: xPosition)
+            let newY = CGPoint(x: currentX, y: yPosition)
+            let newZ = CGPoint(x: currentX, y: zPosition)
             
             xPath.addLine(to: newX)
             yPath.addLine(to: newY)
@@ -187,6 +201,7 @@ extension GraphView {
     func resetGraph() {
         timer?.invalidate()
         timer = nil
+        maxValue = 0.1
         currentIndex = 0
     }
 }

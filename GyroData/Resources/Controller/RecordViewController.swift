@@ -152,7 +152,7 @@ private extension RecordViewController {
             isRestart = false
         }
         
-        graphView.drawRecord(values: tick, isStart: values.isEmpty)
+        graphView.drawRecord(with: .Accelerometer, values: tick, isStart: values.isEmpty)
     }
 }
 

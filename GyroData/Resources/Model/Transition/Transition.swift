@@ -20,7 +20,13 @@ struct Tick: Codable {
 }
 
 extension Tick {
-    func convert() -> Self {
-        return Tick(x: self.x * 20, y: self.y * 20, z: self.z * 20)
+    func convert(with sensor: SensorType = .Accelerometer) -> Self {
+        switch sensor {
+        case .Accelerometer:
+            return Tick(x: self.x * 20, y: self.y * 20, z: self.z * 20)
+        case .Gyro:
+            return self
+        }
+        
     }
 }
