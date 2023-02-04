@@ -105,7 +105,7 @@ final class GraphView: UIView {
         addSubview(graphBackgroundView)
         addSubview(valueStackView)
     }
-    
+   
     private func configureLayout() {
         [graphBackgroundView, valueStackView].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false

@@ -52,7 +52,7 @@ final class DetailView: UIView {
     
     private let graphView: GraphView
     
-    private let playButton = {
+    var playButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(systemName: "play.fill"), for: .normal)
@@ -66,11 +66,12 @@ final class DetailView: UIView {
         return button
     }()
     
-    private let timerLabel = {
+    var timerLabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.preferredFont(forTextStyle: .title2)
         label.text = "00.0"
+        
         return label
     }()
     
@@ -126,11 +127,8 @@ final class DetailView: UIView {
 }
 
 extension DetailView {
-    func configureView(by pageType: String) {
-        guard pageType == PageType.view.description else {
-            return
-        }
-        playButton.isHidden = true
-        timerLabel.isHidden = true
+    func configureView(_ isViewPage: Bool) {
+        playButton.isHidden = isViewPage
+        timerLabel.isHidden = isViewPage
     }
 }

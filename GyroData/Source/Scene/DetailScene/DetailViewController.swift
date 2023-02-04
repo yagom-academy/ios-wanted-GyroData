@@ -50,6 +50,7 @@ final class DetailViewController: UIViewController {
     
     private func setupView() {
         setupNavigationBar()
+        configureButtonAction()
         detailViewModel.fetchData()
     }
     
@@ -66,15 +67,29 @@ final class DetailViewController: UIViewController {
         detailViewModel.bindDate { [weak self] dateString in
             self?.detailView.dateLabel.text = dateString
         }
-        detailViewModel.bindPageType { [weak self] pageTypeString in
+        detailViewModel.bindPageType { [weak self] pageTypeString, isViewPage in
             self?.detailView.pageTypeLabel.text = pageTypeString
-            self?.detailView.configureView(by: pageTypeString)
+            self?.detailView.configureView(isViewPage)
         }
         detailViewModel.bindGraphData { [weak self] motionMeasures, duration in
 //            self?.graphViewModel.setMeasures(motionMeasures, for: duration)
         }
-        
+        detailViewModel.bindTimer { [weak self] imageName in
+            let image = UIImage(systemName: imageName)
+            self?.detailView.playButton.setImage(image, for: .normal)
+        }
+        detailViewModel.bindDuration { [weak self] duration in
+            self?.detailView.timerLabel.text = String(format: "%.1f", duration)
+        }
+    }
+}
+
+extension DetailViewController {
+    private func configureButtonAction() {
+        detailView.playButton.addTarget(self, action: #selector(touchUpPlayButton), for: .touchUpInside)
     }
     
-    
+    @objc private func touchUpPlayButton() {
+        detailViewModel.touchButton()
+    }
 }
