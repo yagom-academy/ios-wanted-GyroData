@@ -197,8 +197,10 @@ class ReplayMotionViewController: UIViewController {
     // MARK: - binding Data
     func setUpUIData() {
         let cellData = replayMotionViewModel?.bindCellData()
-        
-        dateLabel.text = cellData?.0.date.description
+
+        if let formattedDate = cellData?.0.date {
+            dateLabel.text = DateFormatter.measurementFormatter.string(from: formattedDate)
+        }
 
         replayTime = cellData?.0.time
         typeLabel.text = cellData?.1.rawValue
