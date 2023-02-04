@@ -10,6 +10,7 @@ import CoreData
 
 final class CoreDataManager: MeasurementDataHandleable {
 
+    private let entityName: String = "MeasurementCoreModel"
     private let persistentContainer: NSPersistentContainer = {
         let persistentContainer = NSPersistentContainer(name: "GyroCoreData")
         persistentContainer.loadPersistentStores { _, error in
@@ -48,28 +49,28 @@ final class CoreDataManager: MeasurementDataHandleable {
         measurementCoreModel.date = data.date
         measurementCoreModel.time = data.time
         measurementCoreModel.axisValues = axisValue
-        
+
         try context.save()
     }
     
     func fetchData() throws -> [Measurement] {
         var measurements: [Measurement] = []
-        let request = NSFetchRequest<MeasurementCoreModel>(entityName: "MeasurementCoreModel")
+        let request = NSFetchRequest<MeasurementCoreModel>(entityName: entityName)
         request.fetchLimit = fetchLimit
         request.fetchOffset = fetchOffset
-        
+
         let fetchedData = try context.fetch(request)
-        
+
         try fetchedData.forEach { measurementsCoreModel in
             let measurement = try convertTypeToMeasurement(from: measurementsCoreModel)
             measurements.append(measurement)
         }
-        
+
         return measurements
     }
     
     func deleteData(_ data: Measurement) throws {
-        let request = NSFetchRequest<MeasurementCoreModel>(entityName: "MeasurementCoreModel")
+        let request = NSFetchRequest<MeasurementCoreModel>(entityName: entityName)
         request.predicate = NSPredicate(format: "date = %@", data.date as NSDate)
 
         guard let measurementWillDelete = try context.fetch(request).first else {
@@ -81,7 +82,7 @@ final class CoreDataManager: MeasurementDataHandleable {
     }
 
     func deleteAll() throws {
-        let request = NSFetchRequest<MeasurementCoreModel>(entityName: "MeasurementCoreModel")
+        let request = NSFetchRequest<MeasurementCoreModel>(entityName: entityName)
 
         let measurementsWillDelete = try context.fetch(request)
         measurementsWillDelete.forEach { measurement in

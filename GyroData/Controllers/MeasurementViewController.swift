@@ -18,7 +18,7 @@ final class MeasurementViewController: UIViewController {
     private var selectedSensor: Sensor {
         return measurementView.selectedSensor
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -72,7 +72,7 @@ final class MeasurementViewController: UIViewController {
             }
         }
     }
-
+    
     private func storeDataInDevice(completion: @escaping ()->()) {
         DispatchQueue.global(qos: .default).asyncAfter(deadline: .now() + 1) {
             do {
@@ -80,15 +80,17 @@ final class MeasurementViewController: UIViewController {
                     try manager.saveData(self.measurement)
                 }
             } catch {
-                UIAlertController.show(title: "Error",
-                                       message: DataHandleError.saveFailError(error: error).localizedDescription,
-                                       target: self)
+                DispatchQueue.main.async {
+                    UIAlertController.show(title: "Error",
+                                           message: DataHandleError.saveFailError(error: error).localizedDescription,
+                                           target: self)
+                }
             }
             
             completion()
         }
     }
-
+    
     @available (*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
