@@ -49,6 +49,7 @@ final class RecordViewController: UIViewController {
     private var recordTime: Double = 0
     private var recordedSensor: SensorType = .Accelerometer
     private var values: [Tick] = []
+    private var isRestart: Bool = false
     
     // MARK: - LifeCycle
     override func viewDidLoad() {
@@ -66,17 +67,26 @@ final class RecordViewController: UIViewController {
 extension RecordViewController: MotionManagerDelegate {
     func motionManager(send manager: MotionManager, sendData: CMLogItem?) {
         guard let data = sendData,
-              let sensor = SensorType(rawInt: segmentControl.selectedSegmentIndex) else { return }
-        
+              let sensor = SensorType(rawInt: segmentControl.selectedSegmentIndex) else {
+            return
+        }
+        if isRestart {
+            graphView.settingInitialization()
+            isRestart = false
+        }
         graphView.callDrawLine(data, sensor)
         saveData(data: data)
     }
     
     func motionManager(stop manager: MotionManager, sendTime: Double) {
         self.recordTime = sendTime
+        isRestart = true
     }
 }
 
+//
+// Mark 필요!!
+//
 extension RecordViewController: Uploadable {
     func upload(completion: @escaping (Result<Void, UploadError>) -> Void) {
         var isSuccessJson: Bool = false
@@ -158,6 +168,8 @@ private extension RecordViewController {
     func convertButtonsState(isEnable: Bool) {
         recordButton.isEnabled = isEnable
         cancelButton.isHidden = isEnable
+        segmentControl.isEnabled = isEnable
+        navigationItem.rightBarButtonItem?.isEnabled = isEnable
         
         if recordButton.isEnabled {
             recordButton.layer.backgroundColor = UIColor.systemBlue.cgColor
@@ -206,6 +218,9 @@ private extension RecordViewController {
     }
 }
 
+//
+// MARK 필요!!
+//
 private extension RecordViewController {
     func presentErrorAlert(error: UploadError) {
         let alert = AlertConcreteBuilder()
