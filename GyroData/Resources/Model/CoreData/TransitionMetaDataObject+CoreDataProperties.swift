@@ -30,6 +30,7 @@ extension TransitionMetaDataObject : Identifiable {
             return nil
         }
         return TransitionMetaData(
+            id: self.id,
             saveDate: self.saveDate,
             sensorType: sensor,
             recordTime: self.recordTime,

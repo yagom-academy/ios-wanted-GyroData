@@ -26,8 +26,6 @@ final class PersistentContainerManager {
     }
 
     func saveContext() {
-        let context = PersistentContainerManager.shared.persistentContainer.viewContext
-        
         guard context.hasChanges else { return }
         
         do {
@@ -41,7 +39,6 @@ final class PersistentContainerManager {
         metaData: TransitionMetaData,
         completion: @escaping (Result<Void, FileWriteError>) -> Void
     ) {
-        let context = persistentContainer.viewContext
         let newObject = TransitionMetaDataObject(context: context)
         
         newObject.setValue(metaData.saveDate, forKey: "saveDate")
@@ -58,23 +55,39 @@ final class PersistentContainerManager {
         completion(.success(()))
     }
 
-    private func fetchAllTransitionMetaDataObjects() -> [TransitionMetaDataObject] {
+    func fetchAllTransitionMetaDataObjects() -> [TransitionMetaDataObject] {
         do {
             let request = TransitionMetaDataObject.fetchRequest()
-            return try persistentContainer.viewContext.fetch(request)
+            return try context.fetch(request)
         } catch {
-            print(error.localizedDescription)
             return []
         }
     }
 
     func fetchTransitionMetaData(pageCount: Int, limit: Int = 10) -> [TransitionMetaData] {
         let request = TransitionMetaDataObject.fetchRequest()
+        let dateSort = NSSortDescriptor(key: "saveDate", ascending: false)
+        
+        request.sortDescriptors = [dateSort]
         request.fetchOffset = pageCount * limit
         request.fetchLimit = limit
         guard let objects = try? context.fetch(request) else {
             return []
         }
+        
+        return objects.compactMap { $0.metaData }
+    }
+    
+    func fetchReloadData(pageCount: Int) -> [TransitionMetaData] {
+        let request = TransitionMetaDataObject.fetchRequest()
+        let dateSort = NSSortDescriptor(key: "saveDate", ascending: false)
+        
+        request.sortDescriptors = [dateSort]
+        request.fetchLimit = pageCount * 10
+        guard let objects = try? context.fetch(request) else {
+            return []
+        }
+        
         return objects.compactMap { $0.metaData }
     }
 
