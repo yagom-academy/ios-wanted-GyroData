@@ -15,6 +15,7 @@
      private let metaData: TransitionMetaData
      private var transitionData: Transition = Transition(x: [], y: [], z: [])
      private var playTime: Double = 0.0
+     private var isStopDrawing: Bool = true
 
      private let dateLabel: UILabel = {
          let label = UILabel()
@@ -26,6 +27,13 @@
          let label = UILabel()
          label.font = .preferredFont(for: .largeTitle, weight: .bold)
          return label
+     }()
+
+     private let graphView: GraphView = {
+         let graphView = GraphView(frame: .zero)
+         graphView.backgroundColor = .systemBackground
+         graphView.layer.borderWidth = 3
+         return graphView
      }()
 
      private let controlButton: UIButton = {
@@ -54,10 +62,15 @@
          self.metaData = metaData
          super.init(nibName: nil, bundle: nil)
          
-         SystemFileManager().readData(fileName: metaData.jsonName, type: Transition.self) { result in
+         SystemFileManager().readData(fileName: metaData.jsonName, type: Transition.self) { [weak self] result in
+             guard let self = self else { return }
              switch result {
              case .success(let data):
                  self.transitionData = data
+                 self.graphView.transitionData = data
+                 if viewType == .view {
+                     self.graphView.viewGraphDrawing()
+                 }
              case .failure(let error):
                  print(error)
              }
@@ -88,7 +101,13 @@
 
  extension PlayViewController {
      @objc func didTapControlButton() {
+         graphView.replayGraphDrawing()
          controlButton.isSelected.toggle()
+         isStopDrawing.toggle()
+         if isStopDrawing {
+             graphView.timer.invalidate()
+             graphView.isTimeTrigger = true
+         }
      }
  }
 
@@ -109,7 +128,8 @@
      func addBaseChildComponents() {
          [
              dateLabel,
-             viewTypeLabel
+             viewTypeLabel,
+             graphView
          ].forEach {
              view.addSubview($0)
              $0.translatesAutoresizingMaskIntoConstraints = false
@@ -147,7 +167,12 @@
 
              viewTypeLabel.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 8),
              viewTypeLabel.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
-             viewTypeLabel.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor)
+             viewTypeLabel.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
+
+             graphView.topAnchor.constraint(equalTo: viewTypeLabel.bottomAnchor, constant: 20),
+             graphView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
+             graphView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
+             graphView.heightAnchor.constraint(equalTo: graphView.widthAnchor)
          ])
 
          if playType == .play {
