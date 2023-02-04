@@ -71,12 +71,13 @@ final class DetailViewController: UIViewController {
             self?.detailView.pageTypeLabel.text = pageTypeString
             self?.detailView.configureView(isViewPage)
         }
-        detailViewModel.bindGraphData { [weak self] motionMeasures, duration in
-//            self?.graphViewModel.setMeasures(motionMeasures, for: duration)
+        detailViewModel.bindGraphCoordinate { [weak self] motionCoordinate in
+            self?.graphViewModel.drawCoordinate(motionCoordinate)
         }
         detailViewModel.bindTimer { [weak self] imageName in
             let image = UIImage(systemName: imageName)
             self?.detailView.playButton.setImage(image, for: .normal)
+            self?.graphViewModel.reset()
         }
         detailViewModel.bindDuration { [weak self] duration in
             self?.detailView.timerLabel.text = String(format: "%.1f", duration)

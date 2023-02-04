@@ -24,9 +24,11 @@ final class DetailViewModel {
             pageTypeHandler?(pageType.description, isViewPage)
         }
     }
-    private var motionMeasures: MotionMeasures = MotionMeasures(axisX: [], axisY: [], axisZ: []) {
+    private var motionMeasures: MotionMeasures?
+    private var motionCoordinate: MotionCoordinate? {
         didSet {
-            measuresHandler?(motionMeasures, model.duration)
+            guard let motionCoordinate = motionCoordinate else { return }
+            measuresHandler?(motionCoordinate)
         }
     }
     private var isPlaying: Bool = false {
@@ -43,7 +45,7 @@ final class DetailViewModel {
     
     private var dateHandler: StringHandler?
     private var pageTypeHandler: PageTypeHandler?
-    private var measuresHandler: MotionMeasuresHandler?
+    private var measuresHandler: ((MotionCoordinate) -> Void)?
     private var timerHandler: StringHandler?
     private var durationHandler: DurationHandler?
     
@@ -84,7 +86,7 @@ final class DetailViewModel {
         pageTypeHandler = handler
     }
     
-    func bindGraphData(_ handler: @escaping MotionMeasuresHandler) {
+    func bindGraphCoordinate(_ handler: @escaping (MotionCoordinate) -> Void) {
         measuresHandler = handler
     }
     
@@ -107,9 +109,19 @@ extension DetailViewModel {
         case false:
             timer.activate { [weak self] in
                 self?.timerSecond += 0.1
+                self?.createMotionCoordinate()
             }
             isPlaying = true
         }
+    }
+    
+    private func createMotionCoordinate() {
+        guard var motionMeasures = motionMeasures else { return }
+        let x = motionMeasures.axisX.removeFirst()
+        let y = motionMeasures.axisY.removeFirst()
+        let z = motionMeasures.axisZ.removeFirst()
+        
+        motionCoordinate = MotionCoordinate(x: x, y: y, z: z)
     }
 }
 
