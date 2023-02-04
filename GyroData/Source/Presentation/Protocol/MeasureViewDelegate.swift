@@ -2,7 +2,7 @@
 //  MeasureViewDelegate.swift
 //  GyroData
 //
-//  Created by 이정민 on 2023/02/02.
+//  Created by Kyo, JPush on 2023/02/02.
 //
 
 import Foundation

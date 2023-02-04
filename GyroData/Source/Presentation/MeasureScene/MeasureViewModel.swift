@@ -17,7 +17,7 @@ final class MeasureViewModel {
         case sensorTypeChanged(sensorType: Sensor?)
     }
     
-    private var sensorMeasureValues: Values = (0, 0, 0) {
+    private var sensorMeasureValues: Values = (.zero, .zero, .zero) {
         didSet {
             delegate?.updateValue(sensorMeasureValues)
         }

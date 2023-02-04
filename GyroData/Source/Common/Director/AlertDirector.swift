@@ -8,7 +8,11 @@
 import UIKit
 
 final class AlertDirector {
-    func setupErrorAlert(builder: AlertBuilder, title: String, errorMessage: String) -> UIAlertController {
+    func setupErrorAlert(
+        builder: AlertBuilder,
+        title: String,
+        errorMessage: String
+    ) -> UIAlertController {
         let alert = builder
             .setTitle(title)
             .setMessage(errorMessage)

@@ -146,7 +146,6 @@ final class GraphView: UIView {
         let zStartPoint = CGPoint(x: lastPosition, y: convertedValues.z)
         let zEndPoint = CGPoint(x: lastPosition + widthInterval, y: convertedNewValues.z)
         
-        // path
         xPath.move(to: xStartPoint)
         xPath.addLine(to: xEndPoint)
 
@@ -156,7 +155,6 @@ final class GraphView: UIView {
         zPath.move(to: zStartPoint)
         zPath.addLine(to: zEndPoint)
         
-        // layer
         xlayer.strokeColor = Segment.x.color.cgColor
         xlayer.lineWidth = Constant.graphLineWidth
         xlayer.path = xPath.cgPath
@@ -169,7 +167,6 @@ final class GraphView: UIView {
         zlayer.lineWidth = Constant.graphLineWidth
         zlayer.path = zPath.cgPath
         
-        // add layer
         self.layer.addSublayer(xlayer)
         self.layer.addSublayer(ylayer)
         self.layer.addSublayer(zlayer)
@@ -312,5 +309,3 @@ private extension GraphView {
         }
     }
 }
-
-

@@ -89,9 +89,18 @@ extension PlayViewController {
         typeLabel.text = "Play"
         
         NSLayoutConstraint.activate([
-            labelStackView.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 10),
-            labelStackView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 20),
-            labelStackView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -20),
+            labelStackView.topAnchor.constraint(
+                equalTo: safeArea.topAnchor,
+                constant: 10
+            ),
+            labelStackView.leadingAnchor.constraint(
+                equalTo: safeArea.leadingAnchor,
+                constant: 20
+            ),
+            labelStackView.trailingAnchor.constraint(
+                equalTo: safeArea.trailingAnchor,
+                constant: -20
+            ),
         ])
     }
     
@@ -174,5 +183,3 @@ extension PlayViewController: GraphViewPlayDelegate {
         playButton.isHidden = false
     }
 }
-
-

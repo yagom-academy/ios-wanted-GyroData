@@ -68,13 +68,29 @@ extension DetailViewController {
     private func setupConstraint() {
         let safeArea = view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
-            labelStackView.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 10),
-            labelStackView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 20),
-            labelStackView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -20),
+            labelStackView.topAnchor.constraint(
+                equalTo: safeArea.topAnchor,
+                constant: 10
+            ),
+            labelStackView.leadingAnchor.constraint(
+                equalTo: safeArea.leadingAnchor,
+                constant: 20
+            ),
+            labelStackView.trailingAnchor.constraint(
+                equalTo: safeArea.trailingAnchor,
+                constant: -20
+            ),
             
-            graphView.topAnchor.constraint(equalTo: labelStackView.bottomAnchor, constant: 30),
-            graphView.leadingAnchor.constraint(equalTo: labelStackView.leadingAnchor),
-            graphView.trailingAnchor.constraint(equalTo: labelStackView.trailingAnchor),
+            graphView.topAnchor.constraint(
+                equalTo: labelStackView.bottomAnchor,
+                constant: 30
+            ),
+            graphView.leadingAnchor.constraint(
+                equalTo: labelStackView.leadingAnchor
+            ),
+            graphView.trailingAnchor.constraint(
+                equalTo: labelStackView.trailingAnchor
+            ),
             
             graphView.heightAnchor.constraint(equalTo: graphView.widthAnchor)
         ])

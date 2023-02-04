@@ -78,13 +78,22 @@ extension DataListViewController: DataListConfigurable {
     
     func setupMeasure(_ transactionService: TransactionService) {
         let measureService = SensorMeasureService()
-        let viewModel = MeasureViewModel(measureService: measureService, transactionService: transactionService)
-        navigationController?.pushViewController(MeasureViewController(viewModel: viewModel), animated: true)
+        let viewModel = MeasureViewModel(
+            measureService: measureService,
+            transactionService: transactionService
+        )
+        navigationController?.pushViewController(
+            MeasureViewController(viewModel: viewModel),
+            animated: true
+        )
     }
     
     func setupPlay(_ data: MeasureData) {
         let viewModel = PlayViewModel(entireData: data)
-        navigationController?.pushViewController(PlayViewController(viewModel: viewModel), animated: true)
+        navigationController?.pushViewController(
+            PlayViewController(viewModel: viewModel),
+            animated: true
+        )
     }
 }
 
@@ -119,12 +128,18 @@ extension DataListViewController: UITableViewDelegate {
         trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
     ) -> UISwipeActionsConfiguration? {
         
-        let play = UIContextualAction(style: .normal, title: nil) { [weak self] _, _, completion in
+        let play = UIContextualAction(
+            style: .normal,
+            title: nil
+        ) { [weak self] _, _, completion in
             self?.viewModel.action(.play(index: indexPath.row))
             completion(true)
         }
         
-        let delete = UIContextualAction(style: .normal, title: nil) { [weak self] _, _, completion in
+        let delete = UIContextualAction(
+            style: .normal,
+            title: nil
+        ) { [weak self] _, _, completion in
             self?.viewModel.action(.delete(index: indexPath.row))
             completion(true)
         }

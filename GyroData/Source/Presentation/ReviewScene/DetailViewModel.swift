@@ -22,7 +22,11 @@ extension DetailViewModel {
         var segmentValues: [Values] = []
 
         for i in 0..<measureData.xValue.count {
-            let values: Values = (measureData.xValue[i], measureData.yValue[i], measureData.zValue[i])
+            let values: Values = (
+                measureData.xValue[i],
+                measureData.yValue[i],
+                measureData.zValue[i]
+            )
             segmentValues.append(values)
         }
 

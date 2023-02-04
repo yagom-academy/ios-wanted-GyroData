@@ -112,14 +112,26 @@ private extension MeasureViewController {
     func setupSegmentControl() {
         view.addSubview(segmentedControl)
         
-        segmentedControl.addTarget(self, action: #selector(segmentedControlValueChanged), for: .valueChanged)
+        segmentedControl.addTarget(
+            self,
+            action: #selector(segmentedControlValueChanged),
+            for: .valueChanged
+        )
         
         let safeArea = view.safeAreaLayoutGuide
         
         NSLayoutConstraint.activate([
-            segmentedControl.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: Constant.margin),
-            segmentedControl.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: Constant.margin),
-            segmentedControl.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -Constant.margin),
+            segmentedControl.topAnchor.constraint(
+                equalTo: safeArea.topAnchor,
+                constant: Constant.margin
+            ),
+            segmentedControl.leadingAnchor.constraint(
+                equalTo: safeArea.leadingAnchor,
+                constant: Constant.margin
+            ),
+            segmentedControl.trailingAnchor.constraint(
+                equalTo: safeArea.trailingAnchor, constant: -Constant.margin
+            ),
         ])
     }
     
@@ -129,9 +141,18 @@ private extension MeasureViewController {
         let safeArea = view.safeAreaLayoutGuide
         
         NSLayoutConstraint.activate([
-            graphView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: Constant.margin),
-            graphView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: Constant.margin),
-            graphView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -Constant.margin),
+            graphView.topAnchor.constraint(
+                equalTo: segmentedControl.bottomAnchor,
+                constant: Constant.margin
+            ),
+            graphView.leadingAnchor.constraint(
+                equalTo: safeArea.leadingAnchor,
+                constant: Constant.margin
+            ),
+            graphView.trailingAnchor.constraint(
+                equalTo: safeArea.trailingAnchor,
+                constant: -Constant.margin
+            ),
             graphView.heightAnchor.constraint(equalTo: graphView.widthAnchor)
         ])
     }
@@ -142,17 +163,37 @@ private extension MeasureViewController {
         measureStartButton.setTitle(Constant.measureStartButtonTitle, for: .normal)
         measureStopButton.setTitle(Constant.measureStopButtonTitle, for: .normal)
         
-        measureStartButton.addTarget(self, action: #selector(measureStartButtonTapped), for: .touchUpInside)
-        measureStopButton.addTarget(self, action: #selector(measureStopButtonTapped), for: .touchUpInside)
+        measureStartButton.addTarget(
+            self,
+            action: #selector(measureStartButtonTapped),
+            for: .touchUpInside
+        )
+        measureStopButton.addTarget(
+            self,
+            action: #selector(measureStopButtonTapped),
+            for: .touchUpInside
+        )
         
         let safeArea = view.safeAreaLayoutGuide
         
         NSLayoutConstraint.activate([
-            measureStartButton.topAnchor.constraint(equalTo: graphView.bottomAnchor, constant: Constant.margin * 2),
-            measureStartButton.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: Constant.margin),
+            measureStartButton.topAnchor.constraint(
+                equalTo: graphView.bottomAnchor,
+                constant: Constant.margin * 2
+            ),
+            measureStartButton.leadingAnchor.constraint(
+                equalTo: safeArea.leadingAnchor,
+                constant: Constant.margin
+            ),
             
-            measureStopButton.topAnchor.constraint(equalTo: measureStartButton.bottomAnchor, constant: Constant.margin * 2),
-            measureStopButton.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: Constant.margin)
+            measureStopButton.topAnchor.constraint(
+                equalTo: measureStartButton.bottomAnchor,
+                constant: Constant.margin * 2
+            ),
+            measureStopButton.leadingAnchor.constraint(
+                equalTo: safeArea.leadingAnchor,
+                constant: Constant.margin
+            )
         ])
     }
     

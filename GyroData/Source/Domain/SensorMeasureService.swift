@@ -24,7 +24,12 @@ final class SensorMeasureService {
     
     weak var delegate: MeasureServiceDelegate?
     
-    func measureStart(_ startDate: Date, _ sensorType: Sensor, interval: TimeInterval, duration: TimeInterval) {
+    func measureStart(
+        _ startDate: Date,
+        _ sensorType: Sensor,
+        interval: TimeInterval,
+        duration: TimeInterval
+    ) {
         fireDate = startDate
         
         switch sensorType {
@@ -55,7 +60,11 @@ private extension SensorMeasureService {
         timer = Timer(timeInterval: interval, repeats: true) { [weak self] _ in
             guard let self = self else { return }
             if let data = self.motionManager.accelerometerData {
-                let accelerationData = (x: data.acceleration.x, y: data.acceleration.y, z: data.acceleration.z)
+                let accelerationData = (
+                    x: data.acceleration.x,
+                    y: data.acceleration.y,
+                    z: data.acceleration.z
+                )
                 self.data = accelerationData
                 self.wasteTime += interval
             }

@@ -10,7 +10,6 @@ import Foundation
 final class PlayViewModel {
     typealias Values = (x: Double, y: Double, z: Double)
     
-    // input
     enum Action {
         case playEntireDataFlowButtonTapped
         case stopEntireDataFlowButtonTapped

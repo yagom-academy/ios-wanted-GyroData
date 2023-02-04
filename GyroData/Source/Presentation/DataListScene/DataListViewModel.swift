@@ -102,7 +102,10 @@ extension DataListViewModel {
         case .success(let dataList):
             measureDatas = dataList
         case .failure(let failure):
-            alertDelegate?.presentErrorAlert(title: "불러오기 실패", message: failure.localizedDescription)
+            alertDelegate?.presentErrorAlert(
+                title: "불러오기 실패",
+                message: failure.localizedDescription
+            )
         }
     }
     
@@ -113,7 +116,10 @@ extension DataListViewModel {
         case .success(let dataList):
             measureDatas = dataList
         case .failure(let failure):
-            alertDelegate?.presentErrorAlert(title: "불러오기 실패", message: failure.localizedDescription)
+            alertDelegate?.presentErrorAlert(
+                title: "불러오기 실패",
+                message: failure.localizedDescription
+            )
         }
     }
 }

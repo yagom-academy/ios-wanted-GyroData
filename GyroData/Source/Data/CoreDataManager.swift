@@ -37,7 +37,10 @@ final class CoreDataManager {
 extension CoreDataManager: DataManageable {
     func save(_ model: MeasureData) throws {
         guard let type = model.type?.rawValue,
-              let entity = NSEntityDescription.entity(forEntityName: "SensorData", in: context) else {
+              let entity = NSEntityDescription.entity(
+                forEntityName: "SensorData",
+                in: context
+              ) else {
             throw CoreDataError.invalidData
         }
         
