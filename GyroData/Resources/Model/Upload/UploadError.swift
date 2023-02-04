@@ -7,12 +7,15 @@
 import Foundation
 
 enum UploadError: Error {
+    case emptyValue
     case urlCreationFailed
     case jsonUploadFailed
     case coreDataUploadFailed
     
     var alertTitle: String {
         switch self {
+        case .emptyValue:
+            return "파일 생성 오류"
         case .urlCreationFailed:
             return "파일 생성 오류"
         case .jsonUploadFailed:
@@ -24,6 +27,8 @@ enum UploadError: Error {
     
     var alertMessage: String {
         switch self {
+        case .emptyValue:
+            return "기록된 데이터가 없어 파일을 생성할 수 없습니다."
         case .urlCreationFailed:
             return "파일을 생성하는 도중 예기치 못한 오류가 발생하였습니다. 잠시 후 다시 시도해주세요."
         case .jsonUploadFailed:

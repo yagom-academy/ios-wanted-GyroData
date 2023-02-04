@@ -208,6 +208,11 @@ private extension RecordViewController {
     }
     
     @objc func didTapSaveButton() {
+        guard values.isEmpty == false else {
+            self.presentErrorAlert(error: .emptyValue)
+            return
+        }
+
         indicator.startAnimating()
         
         upload { [weak self] result in
