@@ -63,7 +63,9 @@ enum ViewControllerFactory {
         return motionMeasureViewController
     }
     
-    static private func makeGraphViewController(style: MotionGraphViewController.Style, id: String) -> MotionGraphViewController {
+    static private func makeGraphViewController(
+        style: MotionGraphViewController.Style, id: String
+    ) -> MotionGraphViewController {
         let fileManagerRepository = DefaultFileManagerRepository()
         
         let fileManagerReadService = FileManagerMotionReadService(repository: fileManagerRepository)

@@ -175,7 +175,6 @@ extension MotionsListViewController: UIScrollViewDelegate {
         let isEndOfScroll: Bool = endPoint >= scrollView.contentSize.height * 0.9
         
         if isEndOfScroll {
-            print(endPoint)
             viewModel.action(.nextPageRequest)
         }
     }
