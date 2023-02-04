@@ -13,8 +13,7 @@ final class MeasurementViewController: UIViewController {
     private let sensorManager = SensorManager()
     private let dataManagers: [any MeasurementDataHandleable]
     
-    private var measurementData = Measurement(sensor: .Accelerometer, date: Date(), time: 0, axisValues: [])
-    private var axisValues: [AxisValue] = []
+    private var measurement = Measurement(sensor: .Accelerometer, date: Date(), time: 0, axisValues: [])
     
     private var selectedSensor: Sensor {
         return measurementView.selectedSensor
@@ -35,17 +34,17 @@ final class MeasurementViewController: UIViewController {
     }
     
     private func measure() {
-        measurementData = Measurement(sensor: selectedSensor, date: Date(), time: 0, axisValues: [])
+        measurement = Measurement(sensor: selectedSensor, date: Date(), time: 0, axisValues: [])
         clearGraph()
         
-        sensorManager.measure(sensor: selectedSensor, interval: 0.1, timeout: 600) { [weak self] data in
-            guard let data else {
+        sensorManager.measure(sensor: selectedSensor, interval: 0.1, timeout: 600) { [weak self] axisValue in
+            guard let axisValue else {
                 self?.stop()
                 return
             }
             
-            self?.axisValues.append(data)
-            self?.drawGraph(with: data)
+            self?.measurement.axisValues.append(axisValue)
+            self?.drawGraph(with: axisValue)
         }
         
         setDisabledUserInteraction()
@@ -54,7 +53,7 @@ final class MeasurementViewController: UIViewController {
     private func saveSensorData() {
         setDisabledUserInteraction()
 
-        guard !measurementData.axisValues.isEmpty else {
+        guard !measurement.axisValues.isEmpty else {
             UIAlertController.show(title: "Error",
                                    message: DataHandleError.noDataError(detail:"측정값이 없습니다.").localizedDescription,
                                    target: self)
@@ -78,7 +77,7 @@ final class MeasurementViewController: UIViewController {
         DispatchQueue.global(qos: .default).asyncAfter(deadline: .now() + 1) {
             do {
                 for manager in self.dataManagers {
-                    try manager.saveData(self.measurementData)
+                    try manager.saveData(self.measurement)
                 }
             } catch {
                 UIAlertController.show(title: "Error",
@@ -135,8 +134,7 @@ extension MeasurementViewController {
     }
     
     private func updateMeasurementData() {
-        measurementData.axisValues = axisValues
-        measurementData.time = 0.1 * Double(measurementData.axisValues.count)
+        measurement.time = 0.1 * Double(measurement.axisValues.count)
     }
 }
 
@@ -157,8 +155,8 @@ extension MeasurementViewController {
 // MARK: Draw Graph
 extension MeasurementViewController {
     
-    private func drawGraph(with data: AxisValue) {
-        measurementView.drawGraph(with: data)
+    private func drawGraph(with axisValue: AxisValue) {
+        measurementView.drawGraph(with: axisValue)
     }
     
     private func clearGraph() {
