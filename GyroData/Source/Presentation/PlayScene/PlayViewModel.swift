@@ -2,12 +2,12 @@
 //  PlayViewModel.swift
 //  GyroData
 //
-//  Created by 이정민 on 2023/02/03.
+//  Created by Kyo, JPush on 2023/02/03.
 //
 
 import Foundation
 
-class PlayViewModel {
+final class PlayViewModel {
     typealias Values = (x: Double, y: Double, z: Double)
     
     // input

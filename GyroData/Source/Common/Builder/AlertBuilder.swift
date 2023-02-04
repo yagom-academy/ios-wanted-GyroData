@@ -2,7 +2,7 @@
 //  AlertBuilder.swift
 //  GyroData
 //
-//  Created by parkhyo on 2023/02/03.
+//  Created by Kyo, JPush on 2023/02/03.
 //
 
 import UIKit

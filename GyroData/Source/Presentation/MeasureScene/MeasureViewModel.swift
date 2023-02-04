@@ -7,7 +7,7 @@
 
 import Foundation
 
-class MeasureViewModel {
+final class MeasureViewModel {
     typealias Values = (x: Double, y: Double, z: Double)
     
     enum Action {

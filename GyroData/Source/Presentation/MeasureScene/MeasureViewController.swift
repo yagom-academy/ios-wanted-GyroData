@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MeasureViewController: UIViewController {
+final class MeasureViewController: UIViewController {
     private enum Constant {
         static let title = "측정하기"
         static let rightBarButtonItemTitle = "저장"

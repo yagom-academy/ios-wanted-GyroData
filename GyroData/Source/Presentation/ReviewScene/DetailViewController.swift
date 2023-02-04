@@ -2,7 +2,7 @@
 //  DetailViewController.swift
 //  GyroData
 //
-//  Created by parkhyo on 2023/02/02.
+//  Created by Kyo, JPush on 2023/02/02.
 //
 
 import UIKit

@@ -2,12 +2,12 @@
 //  GraphView.swift
 //  GyroData
 //
-//  Created by 이정민 on 2023/02/02.
+//  Created by Kyo, JPush on 2023/02/02.
 //
 
 import UIKit
 
-class GraphView: UIView {
+final class GraphView: UIView {
     typealias Values = (x: Double, y: Double, z: Double)
     typealias Positions = (x: Double, y: Double, z: Double)
     

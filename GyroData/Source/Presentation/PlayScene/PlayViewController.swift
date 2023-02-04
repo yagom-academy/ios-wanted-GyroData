@@ -2,13 +2,12 @@
 //  PlayViewController.swift
 //  GyroData
 //
-//  Created by 이정민 on 2023/02/03.
+//  Created by Kyo, JPush on 2023/02/03.
 //
 
-import Foundation
 import UIKit
 
-class PlayViewController: UIViewController {
+final class PlayViewController: UIViewController {
     private let viewModel: PlayViewModel
     private let dateLabel = UILabel(textStyle: .body)
     private let typeLabel = UILabel(textStyle: .title1)
