@@ -32,7 +32,7 @@ final class GyroMotionManager: MotionManagerable {
         motionData = MotionData(
             measuredDate: measuredData,
             duration: duration,
-            type: .accelerometer,
+            type: .gyroscope,
             id: UUID()
         )
     }
@@ -123,6 +123,7 @@ extension GyroMotionManager {
 // MARK: MeasureTimerDelegate
 extension GyroMotionManager: MeasureTimerDelegate {
     func timeOver(duration: Double) {
+        motionManager.stopGyroUpdates()
         createMotionData(duration: duration)
         timeOverHandler?(true)
     }

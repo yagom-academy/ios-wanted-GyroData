@@ -44,8 +44,9 @@ final class MainViewModel: CoreDataManageable {
             }
             
             let convertedDatas = motionEntities.compactMap { convertEntityToData($0) }
+            let filteredDatas = convertedDatas.filter { !motionDatas.contains($0) }
             
-            motionDatas += convertedDatas
+            motionDatas += filteredDatas
         case .failure(let error):
             print(error)
         }

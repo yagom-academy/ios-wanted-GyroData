@@ -16,7 +16,7 @@ final class MeasureViewModel {
     }
     
     private lazy var motionManager: MotionManagerable = AccelerometerMotionManager(
-        deadline: 1,
+        deadline: 60,
         interval: 0.1
     )
     

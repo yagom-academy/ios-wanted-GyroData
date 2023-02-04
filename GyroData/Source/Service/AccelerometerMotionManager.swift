@@ -133,6 +133,7 @@ extension AccelerometerMotionManager {
 // MARK: MeasureTimerDelegate
 extension AccelerometerMotionManager: MeasureTimerDelegate {
     func timeOver(duration: Double) {
+        motionManager.stopAccelerometerUpdates()
         createMotionData(duration: duration)
         timeOverHandler?(true)
     }

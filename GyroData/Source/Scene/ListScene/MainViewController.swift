@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
+final class MainViewController: UIViewController {
     typealias DataSource = UITableViewDiffableDataSource<Section, MotionData>
     
     enum Section {
@@ -45,8 +45,12 @@ class MainViewController: UIViewController {
         configureView()
         configureDataSource()
         bindViewModel()
-        mainViewModel.fetchDatas()
         mainTableView.delegate = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        mainViewModel.fetchDatas()
     }
     
     //MARK: Private Methods
@@ -57,8 +61,15 @@ class MainViewController: UIViewController {
             title: "측정",
             style: .plain,
             target: self,
-            action: nil
+            action: #selector(tapRightBarButton)
         )
+    }
+    
+    @objc private func tapRightBarButton() {
+        let measureViewModel = MeasureViewModel()
+        let measureViewController = MeasureViewController(measureViewModel: measureViewModel)
+        
+        show(measureViewController, sender: nil)
     }
     
     private func configureView() {
