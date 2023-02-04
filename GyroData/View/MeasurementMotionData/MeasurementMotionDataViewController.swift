@@ -97,6 +97,14 @@ class MeasurementMotionDataViewController: UIViewController {
         return stackView
     }()
     
+    private let loadingView: UIActivityIndicatorView = {
+        let view = UIActivityIndicatorView(style: .large)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.isHidden = true
+        
+        return view
+    }()
+    
     private lazy var rightBarButton = createSaveButton()
     
     private var measurementMotionDataViewModel: MeasurementMotionDataViewModel?
@@ -144,6 +152,7 @@ class MeasurementMotionDataViewController: UIViewController {
     
     private func configureLayout() {
         view.addSubview(containerStackView)
+        view.addSubview(loadingView)
         NSLayoutConstraint.activate([
             containerStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,
                                            constant: 20),
@@ -156,7 +165,11 @@ class MeasurementMotionDataViewController: UIViewController {
             segmentedControl.widthAnchor.constraint(equalTo: containerStackView.widthAnchor),
             valueLabelStackView.widthAnchor.constraint(equalTo: containerStackView.widthAnchor),
             graphView.widthAnchor.constraint(equalTo: containerStackView.widthAnchor),
-            graphView.heightAnchor.constraint(equalTo: graphView.widthAnchor)
+            graphView.heightAnchor.constraint(equalTo: graphView.widthAnchor),
+            loadingView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            loadingView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            loadingView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            loadingView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
     
@@ -179,8 +192,10 @@ class MeasurementMotionDataViewController: UIViewController {
     
     private func createSaveAction() -> UIAction {
         let action = UIAction { [weak self] _ in
+            self?.loadingView.isHidden = false
             guard let list = self?.measurementMotionDataViewModel?.fetchData(),
                   list.isEmpty == false else {
+                self?.loadingView.isHidden = true
                 self?.showErrorAlert(message: "측정값이 없습니다.")
                 return
             }
@@ -199,6 +214,7 @@ class MeasurementMotionDataViewController: UIViewController {
                     self?.navigationController?.popViewController(animated: true)
                 }
             } catch {
+                self?.loadingView.isHidden = true
               self?.showErrorAlert(message: "CoreData 저장에 실패했습니다.")
             }
         }

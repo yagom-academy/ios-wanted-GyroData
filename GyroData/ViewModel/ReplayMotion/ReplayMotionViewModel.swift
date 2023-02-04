@@ -90,6 +90,6 @@ extension ReplayMotionViewModel: GraphViewDataSource {
     }
 
     func maximumXValueCount(graphView: GraphView) -> CGFloat {
-        return CGFloat(motionInstance.value.count)
+        return CGFloat(motionInstance.value.count - 1)
     }
 }

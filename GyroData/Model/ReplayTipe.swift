@@ -6,6 +6,6 @@
 //
 
 enum ReplayType: String {
-    case view
-    case play
+    case view = "View"
+    case play = "Play"
 }
