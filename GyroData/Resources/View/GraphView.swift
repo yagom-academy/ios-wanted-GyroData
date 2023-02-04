@@ -42,6 +42,7 @@ class GraphView: UIView {
 
     var timeTrigger = true
     var realTime = Timer()
+    var transitionData: Transition
 
     // MARK: - LifeCycle
     override init(frame: CGRect) {
@@ -66,9 +67,20 @@ class GraphView: UIView {
 extension GraphView {
     func replayGraphDrawing() {
         if timeTrigger {
-            realTime = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: <#T##Selector#>, userInfo: nil, repeats: true)
+            realTime = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(replayDrawLine), userInfo: nil, repeats: true)
             timeTrigger = false
         }
+    }
+
+    private func findMinimumCount() -> Int {
+        let xCount = transitionData.x.count
+        let yCount = transitionData.y.count
+        let zCount = transitionData.z.count
+        var value = xCount
+
+        if yCount < value { value = yCount }
+        if zCount < value { value = zCount }
+        return value
     }
 }
 
