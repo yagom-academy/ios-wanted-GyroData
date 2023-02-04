@@ -18,3 +18,9 @@ struct Tick: Codable {
     let y: Double
     let z: Double
 }
+
+extension Tick {
+    func convert() -> Self {
+        return Tick(x: self.x * 20, y: self.y * 20, z: self.z * 20)
+    }
+}
