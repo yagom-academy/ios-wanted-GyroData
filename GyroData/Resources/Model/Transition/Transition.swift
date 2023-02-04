@@ -10,7 +10,11 @@ import Foundation
 typealias TransitionValue = (Double, Double, Double)
 
 struct Transition: Codable {
-    var x: [Double]
-    var y: [Double]
-    var z: [Double]
+    let values: [Tick]
+}
+
+struct Tick: Codable {
+    let x: Double
+    let y: Double
+    let z: Double
 }

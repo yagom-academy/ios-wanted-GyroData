@@ -13,13 +13,13 @@ protocol Uploadable {
         dispatchGroup: DispatchGroup,
         fileName: String,
         transition: Transition,
-        completion: @escaping (Result<Bool, UploadError>) -> Void
+        completion: @escaping (Result<Void, FileWriteError>) -> Void
     )
     
     func uploadCoreDataObject(
         dispatchGroup: DispatchGroup,
         metaData: TransitionMetaData,
-        completion: @escaping (Result<Bool, UploadError>) -> Void
+        completion: @escaping (Result<Void, FileWriteError>) -> Void
     )
 }
 
@@ -28,22 +28,24 @@ extension Uploadable {
         dispatchGroup: DispatchGroup,
         fileName: String,
         transition: Transition,
-        completion: @escaping (Result<Bool, UploadError>) -> Void
+        completion: @escaping (Result<Void, FileWriteError>) -> Void
     ) {
         dispatchGroup.enter()
-        let result = SystemFileManager().saveData(fileName: fileName, value: transition)
-        completion(.success(result))
-        dispatchGroup.leave()
+        SystemFileManager().saveData(fileName: fileName, value: transition) { result in
+            completion(result)
+            dispatchGroup.leave()
+        }
     }
     
     func uploadCoreDataObject(
         dispatchGroup: DispatchGroup,
         metaData: TransitionMetaData,
-        completion: @escaping (Result<Bool, UploadError>) -> Void
+        completion: @escaping (Result<Void, FileWriteError>) -> Void
     ) {
         dispatchGroup.enter()
-        let result = PersistentContainerManager.shared.createNewGyroObject(metaData: metaData)
-        completion(.success(result))
-        dispatchGroup.leave()
+        PersistentContainerManager.shared.createNewGyroObject(metaData: metaData) { result in
+            completion(result)
+            dispatchGroup.leave()
+        }
     }
 }

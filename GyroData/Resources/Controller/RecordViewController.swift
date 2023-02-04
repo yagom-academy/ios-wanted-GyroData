@@ -39,7 +39,7 @@ final class RecordViewController: UIViewController {
     
     let cancelButton: UIButton = {
         let button = UIButton()
-        button.setTitle("취소", for: .normal)
+        button.setTitle("정지", for: .normal)
         button.layer.backgroundColor = UIColor.systemBlue.cgColor
         button.layer.cornerRadius = 5
         return button
@@ -48,7 +48,7 @@ final class RecordViewController: UIViewController {
     private let motionManager = MotionManager()
     private var recordTime: Double = 0
     private var recordedSensor: SensorType = .Accelerometer
-    private var values: [TransitionValue] = []
+    private var values: [Tick] = []
     private var isRestart: Bool = false
     
     // MARK: - LifeCycle
@@ -95,7 +95,7 @@ extension RecordViewController: Uploadable {
         
         let fileName = Date().fileName()
         
-        let transitionValues = values.convertTransition()
+        let transitionValues = Transition(values: values)
         let metaData = TransitionMetaData(
             saveDate: Date().description,
             sensorType: recordedSensor,
@@ -105,8 +105,8 @@ extension RecordViewController: Uploadable {
         
         uploadJson(dispatchGroup: uploadGroup, fileName: fileName, transition: transitionValues) { result in
             switch result {
-            case .success(let isSuccess):
-                isSuccessJson = isSuccess
+            case .success:
+                isSuccessJson = true
             case .failure:
                 isSuccessJson = false
             }
@@ -114,9 +114,8 @@ extension RecordViewController: Uploadable {
         
         uploadCoreDataObject(dispatchGroup: uploadGroup, metaData: metaData) { result in
             switch result {
-            case .success(let isSuccess):
-                isSuccessCoreData = isSuccess
-                
+            case .success:
+                isSuccessCoreData = true
             case .failure:
                 isSuccessCoreData = false
             }
@@ -146,10 +145,12 @@ private extension RecordViewController {
     func saveData(data: CMLogItem) {
         if let accelerometerData = data as? CMAccelerometerData {
             let valueSet = accelerometerData.acceleration
-            values.append((valueSet.x, valueSet.y, valueSet.z))
+            let tick = Tick(x: valueSet.x, y: valueSet.y, z: valueSet.z)
+            values.append(tick)
         } else if let gyroData = data as? CMGyroData {
             let valueSet = gyroData.rotationRate
-            values.append((valueSet.x, valueSet.y, valueSet.z))
+            let tick = Tick(x: valueSet.x, y: valueSet.y, z: valueSet.z)
+            values.append(tick)
         }
     }
 }

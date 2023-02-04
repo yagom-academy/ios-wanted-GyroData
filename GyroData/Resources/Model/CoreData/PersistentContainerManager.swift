@@ -20,32 +20,42 @@ final class PersistentContainerManager {
         }
         return container
     }()
+    
+    private var context: NSManagedObjectContext {
+        return persistentContainer.viewContext
+    }
 
-    @discardableResult
-    func saveContext() -> Bool {
+    func saveContext() {
         let context = PersistentContainerManager.shared.persistentContainer.viewContext
         
-        guard context.hasChanges else { return false }
+        guard context.hasChanges else { return }
         
         do {
             try context.save()
-            return true
         } catch {
-            return false
+            return
         }
     }
     
-    func createNewGyroObject(metaData: TransitionMetaData) -> Bool {
+    func createNewGyroObject(
+        metaData: TransitionMetaData,
+        completion: @escaping (Result<Void, FileWriteError>) -> Void
+    ) {
         let context = persistentContainer.viewContext
         let newObject = TransitionMetaDataObject(context: context)
-        print("path in core Data \(metaData.jsonName)")
+        
         newObject.setValue(metaData.saveDate, forKey: "saveDate")
         newObject.setValue(metaData.sensorType.rawValue, forKey: "sensorType")
         newObject.setValue(metaData.recordTime, forKey: "recordTime")
         newObject.setValue(metaData.jsonName, forKey: "jsonName")
         newObject.setValue(metaData.id, forKey: "id")
         
-        return saveContext()
+        guard let _ = try? context.save() else {
+            completion(.failure(.writeError))
+            return
+        }
+        
+        completion(.success(()))
     }
 
     private func fetchAllTransitionMetaDataObjects() -> [TransitionMetaDataObject] {
@@ -58,27 +68,14 @@ final class PersistentContainerManager {
         }
     }
 
-    private func fetchTenTransitionMetaDataObjects(pageCount: Int) -> [TransitionMetaDataObject] {
-        do {
-            let request = TransitionMetaDataObject.fetchRequest()
-            request.fetchOffset = pageCount * 10
-            request.fetchLimit = 10
-            return try persistentContainer.viewContext.fetch(request)
-        } catch {
-            print(error.localizedDescription)
+    func fetchTransitionMetaData(pageCount: Int, limit: Int = 10) -> [TransitionMetaData] {
+        let request = TransitionMetaDataObject.fetchRequest()
+        request.fetchOffset = pageCount * limit
+        request.fetchLimit = limit
+        guard let objects = try? context.fetch(request) else {
             return []
         }
-    }
-
-    func fetchTenTransitionMetaDatas(pageCount: Int) -> [TransitionMetaData] {
-        let fetchTenTransitionMetaDataObjects = fetchTenTransitionMetaDataObjects(pageCount: pageCount)
-        let transitionMetaDatas = fetchTenTransitionMetaDataObjects.map {
-            TransitionMetaData(saveDate: $0.saveDate,
-                               sensorType: SensorType(rawValue: $0.sensorType) ?? SensorType.Accelerometer,
-                               recordTime: $0.recordTime,
-                               jsonName: $0.jsonName)
-        }
-        return transitionMetaDatas
+        return objects.compactMap { $0.metaData }
     }
 
     func deleteTransitionMetaData(data: TransitionMetaData) {

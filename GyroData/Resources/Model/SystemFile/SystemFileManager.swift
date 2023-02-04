@@ -9,23 +9,29 @@ import Foundation
 class SystemFileManager {
     private let manager = FileManager.default
     
-    func saveData<T: Codable>(fileName: String, value: T) -> Bool {
+    func saveData<T: Codable>(
+        fileName: String,
+        value: T,
+        completion: @escaping (Result<Void, FileWriteError>) -> Void
+    ) {
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
         
         guard let path = createFilePath(with: fileName) else {
-            return false
+            completion(.failure(.invalidURL))
+            return
         }
         
         guard let encodeData = try? encoder.encode(value) else {
-            return false
+            completion(.failure(.encodeData))
+            return
         }
         
         guard let _ = try? encodeData.write(to: path) else {
-            return false
+            completion(.failure(.writeError))
+            return
         }
-        
-        return true
+        completion(.success(()))
     }
     
     func readData<T: Codable>(

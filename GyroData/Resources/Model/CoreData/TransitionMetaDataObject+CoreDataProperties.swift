@@ -25,5 +25,15 @@ extension TransitionMetaDataObject {
 }
 
 extension TransitionMetaDataObject : Identifiable {
-
+    var metaData: TransitionMetaData? {
+        guard let sensor = SensorType(rawValue: self.sensorType) else {
+            return nil
+        }
+        return TransitionMetaData(
+            saveDate: self.saveDate,
+            sensorType: sensor,
+            recordTime: self.recordTime,
+            jsonName: self.jsonName
+        )
+    }
 }
