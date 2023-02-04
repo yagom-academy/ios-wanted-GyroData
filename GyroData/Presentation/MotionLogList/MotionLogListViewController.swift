@@ -14,7 +14,7 @@ fileprivate enum Titles {
 }
 
 final class MotionLogListViewController: UIViewController {
-    enum Section {
+    private enum Section {
         case main
     }
     
@@ -102,7 +102,7 @@ final class MotionLogListViewController: UIViewController {
             title: Titles.leftNavigationButtonTitle,
             style: .plain,
             target: self,
-            action: #selector(tap)
+            action: #selector(tapMeasureButton)
         )
         navigationItem.title = Titles.navigationItemTitle
         navigationItem.rightBarButtonItem = leftNavigationButton
@@ -138,7 +138,7 @@ final class MotionLogListViewController: UIViewController {
     }
     
     @objc
-    func tap() {
+    func tapMeasureButton() {
         let view = MotionMeasurementViewController()
         let repository = CoreMotionRepository(dataSource: CoreMotionManager.shared)
         let useCase = TrackMotionUseCase(repository: repository)

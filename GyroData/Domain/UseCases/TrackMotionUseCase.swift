@@ -23,14 +23,12 @@ final class TrackMotionUseCase: TrackMotionUseCaseType {
         repository.startAccelerometer { data in
             completion(data)
         }
-        print("Accel")
     }
     
     func startGyro(_ completion: @escaping (MotionCoordinates) -> Void) {
         repository.startGyroscope { data in
             completion(data)
         }
-        print("Gyro")
     }
     
     func stopAccelerometer() {

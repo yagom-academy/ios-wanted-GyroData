@@ -8,17 +8,15 @@
 import UIKit
 
 final class MotionMeasurementViewController: UIViewController {
-    
-    // MARK: View(s)
-    
-    enum Literals {
+    private enum Literals {
         static let accelerometer = "Accelerometer"
         static let gyro = "Gyro"
         static let start = "Start"
         static let stop = "Stop"
+        static let rightNavigationItem = "저장"
     }
     
-    enum Selection {
+    private enum Selection {
         case accelerometer
         case gyro
         
@@ -31,12 +29,14 @@ final class MotionMeasurementViewController: UIViewController {
     }
     
     var viewModel: MotionMeasurementViewModel?
-    var selectedSegmentControlItem: Selection {
+    private var selectedSegmentControlItem: Selection {
         switch measureTypeControl.selectedSegmentIndex {
         case Selection.gyro.value: return .gyro
         default: return .accelerometer
         }
     }
+    
+    // MARK: View(s)
     
     private let measureTypeControl: UISegmentedControl = {
         let segmentControl = UISegmentedControl(items: [
@@ -47,8 +47,8 @@ final class MotionMeasurementViewController: UIViewController {
         segmentControl.backgroundColor = .systemGreen
         return segmentControl
     }()
-    private let graphView: UIView = {
-        let view = UIView()
+    private let graphView: GraphView = {
+        let view = GraphView()
         view.backgroundColor = .systemBlue
         return view
     }()
@@ -56,12 +56,16 @@ final class MotionMeasurementViewController: UIViewController {
         let button = UIButton(type: .system)
         button.backgroundColor = .systemYellow
         button.setTitle(Literals.start, for: .normal)
+        button.layer.cornerRadius = 5
+        button.clipsToBounds = true
         return button
     }()
     private let stopMeasureButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = .systemGray5
         button.setTitle(Literals.stop, for: .normal)
+        button.layer.cornerRadius = 5
+        button.clipsToBounds = true
         button.isEnabled = false
         return button
     }()
@@ -75,8 +79,8 @@ final class MotionMeasurementViewController: UIViewController {
     }()
     private let buttonsStackView: UIStackView = {
         let stackView = UIStackView()
-        //        stackView.axis = .vertical
-        stackView.distribution = .fillProportionally
+        stackView.distribution = .fillEqually
+        stackView.spacing = 10
         stackView.alignment = .center
         return stackView
     }()
@@ -94,18 +98,19 @@ final class MotionMeasurementViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureNavigationItems()
-        
         combineViews()
         configureViewConstraints()
-        
+        configureNavigationItems()
+        addButtonActions()
         bindViewModel()
-        
-        startMeasureButton.addTarget(self, action: #selector(start), for: .touchDown)
-        stopMeasureButton.addTarget(self, action: #selector(stop), for: .touchDown)
     }
     
-    // MARK: Function(s)
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        viewModel?.request(.stopTrackAcceleration)
+        viewModel?.request(.stopTrackGyro)
+    }
     
     // MARK: Private Function(s)
     
@@ -113,19 +118,26 @@ final class MotionMeasurementViewController: UIViewController {
         guard let viewModel = self.viewModel else { return }
         
         viewModel.bind { response in
-            print("viewmodel receive ----------------")
-            print(response.receivedMotionData)
+            guard let data = response.receivedMotionData?.z else { return }
+            DispatchQueue.main.async {
+                self.graphView.addGraphLine(y: data)
+            }
         }
     }
     
     private func configureNavigationItems() {
         let rightNavigationItem = UIBarButtonItem(
-            title: "저장",
+            title: Literals.rightNavigationItem,
             style: .plain,
             target: self,
             action: #selector(save)
         )
         navigationItem.rightBarButtonItem = rightNavigationItem
+    }
+    
+    private func addButtonActions() {
+        startMeasureButton.addTarget(self, action: #selector(start), for: .touchDown)
+        stopMeasureButton.addTarget(self, action: #selector(stop), for: .touchDown)
     }
     
     private func combineViews() {

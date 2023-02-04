@@ -33,7 +33,6 @@ final class CoreMotionRepository: CoreMotionRepositorable {
                         y: data.y,
                         z: data.z
                     )
-                    print("repository received ----------")
                     completion(accelerationCoordinates)
                 }
         }
@@ -50,7 +49,6 @@ final class CoreMotionRepository: CoreMotionRepositorable {
                         y: data.y,
                         z: data.z
                     )
-                    print("repository received ----------")
                     completion(gyroCoordinates)
                 }
         }

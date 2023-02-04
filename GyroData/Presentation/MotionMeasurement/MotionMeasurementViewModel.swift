@@ -8,6 +8,9 @@
 import Foundation
 
 final class MotionMeasurementViewModel {
+    enum UnsavedDataError: Error {
+        case unSavedMeasurement
+    }
     
     private let trackMotionUseCase: TrackMotionUseCase
     private var updateTrigger: ((Response) -> Void)?
@@ -72,11 +75,6 @@ extension MotionMeasurementViewModel {
     }
     struct Response {
         var receivedMotionData: MotionCoordinates? = nil
-        var error: CustomError? = nil
-    }
-    enum CustomError: Error {
-        case unSavedMeasurement
+        var error: UnsavedDataError? = nil
     }
 }
-
-// TODO: Save Data

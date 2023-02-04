@@ -16,6 +16,7 @@
 		DF3682C3298EBD3C00C3A9B8 /* MotionCoordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3682C2298EBD3C00C3A9B8 /* MotionCoordinates.swift */; };
 		DF3682C6298ECF6800C3A9B8 /* CoreMotionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3682C5298ECF6800C3A9B8 /* CoreMotionRepository.swift */; };
 		DF3682CA298ECF9600C3A9B8 /* TrackMotionUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3682C9298ECF9600C3A9B8 /* TrackMotionUseCase.swift */; };
+		DF3682D0298F047C00C3A9B8 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3682CF298F047C00C3A9B8 /* GraphView.swift */; };
 		DF539F78298D6076007F8571 /* MotionLogCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF539F77298D6076007F8571 /* MotionLogCellViewModel.swift */; };
 		DF5D8C42298BB34300E7312D /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5D8C41298BB34300E7312D /* CoreDataStack.swift */; };
 		DF5D8C60298CC73300E7312D /* MotionData_v1.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DF5D8C5E298CC73300E7312D /* MotionData_v1.xcdatamodeld */; };
@@ -48,6 +49,7 @@
 		DF3682C2298EBD3C00C3A9B8 /* MotionCoordinates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionCoordinates.swift; sourceTree = "<group>"; };
 		DF3682C5298ECF6800C3A9B8 /* CoreMotionRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMotionRepository.swift; sourceTree = "<group>"; };
 		DF3682C9298ECF9600C3A9B8 /* TrackMotionUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackMotionUseCase.swift; sourceTree = "<group>"; };
+		DF3682CF298F047C00C3A9B8 /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		DF539F77298D6076007F8571 /* MotionLogCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionLogCellViewModel.swift; sourceTree = "<group>"; };
 		DF5D8C41298BB34300E7312D /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		DF5D8C5F298CC73300E7312D /* MotionData_v1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MotionData_v1.xcdatamodel; sourceTree = "<group>"; };
@@ -132,6 +134,14 @@
 			path = UseCases;
 			sourceTree = "<group>";
 		};
+		DF3682CE298F046400C3A9B8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DF3682CF298F047C00C3A9B8 /* GraphView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		DF539F79298D60B6007F8571 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -163,8 +173,8 @@
 		DF5D8C36298BAD3E00E7312D /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				DFB91FA6298E76C100185AD6 /* MotionMeasurement */,
 				DF5D8C3B298BAE4500E7312D /* MotionLogList */,
+				DFB91FA6298E76C100185AD6 /* MotionMeasurement */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -268,6 +278,7 @@
 		DFB91FA6298E76C100185AD6 /* MotionMeasurement */ = {
 			isa = PBXGroup;
 			children = (
+				DF3682CE298F046400C3A9B8 /* Views */,
 				DFB91FA7298E774C00185AD6 /* MotionMesurementViewController.swift */,
 				DF3682BF298EA4C500C3A9B8 /* MotionMeasurementViewModel.swift */,
 			);
@@ -361,6 +372,7 @@
 				DF5D8C80298CDD6900E7312D /* Acceleration+CoreDataProperties.swift in Sources */,
 				DFB91FA8298E774C00185AD6 /* MotionMesurementViewController.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
+				DF3682D0298F047C00C3A9B8 /* GraphView.swift in Sources */,
 				DF5D8C90298D157400E7312D /* CoreMotionManager.swift in Sources */,
 				DF5D8C81298CDD6900E7312D /* MotionData+CoreDataClass.swift in Sources */,
 				DF5D8C7F298CDD6900E7312D /* Acceleration+CoreDataClass.swift in Sources */,
