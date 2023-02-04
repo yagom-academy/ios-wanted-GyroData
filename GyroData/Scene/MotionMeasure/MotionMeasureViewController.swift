@@ -17,6 +17,7 @@ final class MotionMeasureViewController: UIViewController {
         static let gyroTitle = "Gyro"
         static let margin = CGFloat(16.0)
         static let spacing = CGFloat(8.0)
+        static let indicatorAlpha = 0.5
     }
     private let measurementTypeSegmentedControl: UISegmentedControl = {
         let segmentedControl = UISegmentedControl(items: [Motion.MeasurementType.acc.text,
@@ -53,6 +54,14 @@ final class MotionMeasureViewController: UIViewController {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
+    private lazy var indicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .large)
+        indicator.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height)
+        indicator.backgroundColor = .systemGray5
+        indicator.alpha = Constant.indicatorAlpha
+        indicator.hidesWhenStopped = true
+        return indicator
+    }()
     
     private let viewModel: MotionMeasurementViewModel
     
@@ -85,8 +94,11 @@ private extension MotionMeasureViewController {
          measureButton,
          stopButton
         ].forEach(contentsStackView.addArrangedSubview(_:))
+        view.addSubview(indicator)
         view.addLayoutGuide(spacingView)
         view.addSubview(contentsStackView)
+        view.bringSubviewToFront(indicator)
+        navigationController?.navigationBar.bringSubviewToFront(indicator)
         
         NSLayoutConstraint.activate([
             contentsStackView.topAnchor.constraint(equalTo: safeArea.topAnchor,
@@ -110,6 +122,11 @@ private extension MotionMeasureViewController {
         
         measureButton.addTarget(self, action: #selector(measureMotion), for: .touchUpInside)
         stopButton.addTarget(self, action: #selector(stopMeasurement), for: .touchUpInside)
+    }
+    
+    func showSaveIndicatorView() {
+        navigationController?.navigationBar.isUserInteractionEnabled = false
+        indicator.startAnimating()
     }
     
     @objc func saveMotion() {
@@ -157,6 +174,7 @@ extension MotionMeasureViewController: MotionMeasurementViewModelDelegate {
     }
     
     func motionMeasurementViewModel(alertStyleToPresent: AlertStyle) {
-        
+        navigationController?.navigationBar.isUserInteractionEnabled = true
+        indicator.stopAnimating()
     }
 }
