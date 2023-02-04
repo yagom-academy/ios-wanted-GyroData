@@ -107,22 +107,24 @@ extension TransitionListViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let triggerHeight = tableView.contentSize.height - scrollView.frame.size.height + 100
         let position = scrollView.contentOffset.y
+        
+        guard (triggerHeight > 0) && (position > triggerHeight),
+              isPaginating == false else {
+            return
+        }
+        
+        isPaginating = true
+        tableView.tableFooterView = createIndicatorFooter()
 
-        if triggerHeight > 0 && position > triggerHeight {
-            guard !isPaginating else { return }
-            isPaginating = true
-            tableView.tableFooterView = createIndicatorFooter()
-
-            fetchData { [weak self] fetchedData in
-                guard let self = self else { return }
-                self.pageIndex += 1
-                self.isPaginating = false
-                self.metaDatas.append(contentsOf: fetchedData)
-                
-                DispatchQueue.main.async {
-                    self.tableView.tableFooterView = nil
-                    self.tableView.reloadData()
-                }
+        fetchData { [weak self] fetchedData in
+            guard let self = self else { return }
+            self.pageIndex += 1
+            self.isPaginating = false
+            self.metaDatas.append(contentsOf: fetchedData)
+            
+            DispatchQueue.main.async {
+                self.tableView.tableFooterView = nil
+                self.tableView.reloadData()
             }
         }
     }
