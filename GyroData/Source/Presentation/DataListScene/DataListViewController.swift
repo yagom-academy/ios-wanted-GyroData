@@ -58,8 +58,8 @@ final class DataListViewController: UIViewController {
     }
     
     private func setViewModelDelegate() {
-        self.viewModel.delegate = self
-        self.viewModel.alertDelegate = self
+        viewModel.delegate = self
+        viewModel.alertDelegate = self
     }
 }
 

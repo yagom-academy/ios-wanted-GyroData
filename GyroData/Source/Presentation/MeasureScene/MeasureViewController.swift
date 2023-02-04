@@ -92,8 +92,8 @@ final class MeasureViewController: UIViewController {
 
 private extension MeasureViewController {
     func setViewModelDelegate() {
-        self.viewModel.delegate = self
-        self.viewModel.alertDelegate = self
+        viewModel.delegate = self
+        viewModel.alertDelegate = self
     }
     
     func setupNavigationBar() {
@@ -104,8 +104,8 @@ private extension MeasureViewController {
             action: #selector(rightBarButtonTapped)
         )
         rightBarButtonItem.isEnabled = false
-        self.navigationItem.rightBarButtonItem = rightBarButtonItem
-        self.navigationItem.title = Constant.title
+        navigationItem.rightBarButtonItem = rightBarButtonItem
+        navigationItem.title = Constant.title
         
     }
     

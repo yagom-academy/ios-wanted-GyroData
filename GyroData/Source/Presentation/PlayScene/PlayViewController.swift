@@ -62,7 +62,6 @@ final class PlayViewController: UIViewController {
         setupPlayButton()
         setupStopButton()
         setupTimerLabel()
-        
         setupBind()
     }
     

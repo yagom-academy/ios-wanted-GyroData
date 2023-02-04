@@ -103,7 +103,7 @@ private extension MeasureViewModel {
     }
     
     func setDelegate() {
-        self.measureService.delegate = self
+        measureService.delegate = self
     }
 }
 

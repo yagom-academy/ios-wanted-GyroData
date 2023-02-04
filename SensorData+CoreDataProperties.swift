@@ -9,7 +9,6 @@
 import Foundation
 import CoreData
 
-
 extension SensorData {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<SensorData> {

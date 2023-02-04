@@ -11,7 +11,7 @@ import Foundation
 final class SensorMeasureService {
     typealias Values = (x: Double, y: Double, z: Double)
     
-    private var data: Values = (0, 0, 0) {
+    private var data: Values = (.zero, .zero, .zero) {
         didSet {
             delegate?.updateData(data)
         }

@@ -62,7 +62,6 @@ final class GraphView: UIView {
         stackView.distribution = .equalSpacing
         stackView.backgroundColor = .clear
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        
         return stackView
     }()
     
@@ -71,7 +70,6 @@ final class GraphView: UIView {
         label.textColor = Segment.x.color
         label.font = .preferredFont(forTextStyle: .body, compatibleWith: .current)
         label.text = "x : 0"
-        
         return label
     }()
     
@@ -94,8 +92,8 @@ final class GraphView: UIView {
     init(interval: TimeInterval, duration: TimeInterval) {
         self.interval = interval
         self.duration = duration
-        self.segmentOffset = duration / interval
-        self.scale = Constant.scale
+        segmentOffset = duration / interval
+        scale = Constant.scale
         super.init(frame: .zero)
         setupStackView()
     }
@@ -107,7 +105,7 @@ final class GraphView: UIView {
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         setupBaseLine()
-        self.bringSubviewToFront(labelStackView)
+        bringSubviewToFront(labelStackView)
     }
     
     func dataInit() {
@@ -167,13 +165,13 @@ final class GraphView: UIView {
         zlayer.lineWidth = Constant.graphLineWidth
         zlayer.path = zPath.cgPath
         
-        self.layer.addSublayer(xlayer)
-        self.layer.addSublayer(ylayer)
-        self.layer.addSublayer(zlayer)
+        layer.addSublayer(xlayer)
+        layer.addSublayer(ylayer)
+        layer.addSublayer(zlayer)
         
-        self.xLabel.text = "x: \(Double(round(1000 * data.x) / 1000))"
-        self.yLabel.text = "y: \(Double(round(1000 * data.y) / 1000))"
-        self.zLabel.text = "z: \(Double(round(1000 * data.z) / 1000))"
+        xLabel.text = "x: \(Double(round(1000 * data.x) / 1000))"
+        yLabel.text = "y: \(Double(round(1000 * data.y) / 1000))"
+        zLabel.text = "z: \(Double(round(1000 * data.z) / 1000))"
         
         segmentValues.append(data)
     }
@@ -214,19 +212,19 @@ final class GraphView: UIView {
     func stopEntireDataFlow() {
         timer?.invalidate()
         timer = nil
-        self.timerIntervalPoint = .zero
+        timerIntervalPoint = .zero
     }
     
 }
 
 private extension GraphView {
     func setupStackView() {
-        self.addSubview(labelStackView)
+        addSubview(labelStackView)
         
         NSLayoutConstraint.activate([
-            labelStackView.topAnchor.constraint(equalTo: self.topAnchor, constant: 8),
-            labelStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant:  8),
-            labelStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8),
+            labelStackView.topAnchor.constraint(equalTo: topAnchor, constant: 8),
+            labelStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant:  8),
+            labelStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
         ])
         
         [xLabel, yLabel, zLabel].forEach { labelStackView.addArrangedSubview($0) }
@@ -247,11 +245,11 @@ private extension GraphView {
         let yOffset = self.frame.height / CGFloat(lineCount)
         var xpointer: CGFloat = .zero
         var ypointer: CGFloat = .zero
-        let width: CGFloat = self.frame.width
-        let height: CGFloat = self.frame.height
+        let width: CGFloat = frame.width
+        let height: CGFloat = frame.height
         
-        self.layer.borderWidth = 3
-        self.layer.borderColor = UIColor.systemGray2.cgColor
+        layer.borderWidth = 3
+        layer.borderColor = UIColor.systemGray2.cgColor
         
         Array(1...lineCount).forEach { _ in
             xpointer += xOffset
@@ -276,7 +274,7 @@ private extension GraphView {
     func mappingValuesToFrame(values: Values) -> Values {
         let mappingValues = [values.x, values.y, values.z].map {
             let mappingValue = $0 / (scale * 2)
-            let positionFromFrame = self.frame.height * (0.5 - mappingValue)
+            let positionFromFrame = frame.height * (0.5 - mappingValue)
             
             return positionFromFrame
         }
