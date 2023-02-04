@@ -7,11 +7,11 @@
 
 import Foundation
 
-class MeasureDetailViewModel {
+final class MeasureDetailViewModel {
     var motionData: MotionEntity
-    var coordinates: [Coordinate] = []
+    private var coordinates: [Coordinate] = []
     var pageType: MeasureViewType
-    var timer: Timer?
+    private var timer: Timer?
     
     var loading: Bool = false {
         didSet {

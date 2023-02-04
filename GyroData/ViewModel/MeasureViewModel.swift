@@ -7,28 +7,28 @@
 
 import Foundation
 
-class MeasureViewModel {
-    let motionManager = MotionManager()
+final class MeasureViewModel {
+    private let motionManager = MotionManager()
     
-    var motionType: MotionType = .acc {
+    private var motionType: MotionType = .acc {
         didSet {
             typeHandler?(motionTypeIndex)
         }
     }
-    var coordinates: [Coordinate] = [] {
+    private var coordinates: [Coordinate] = [] {
         didSet {
             guard let coordinate = coordinates.last else { return }
             graphHandler?(coordinate)
         }
     }
     
-    var measureState: Bool = true {
+    private var measureState: Bool = true {
         didSet {
             measureHandler?(measureState)
         }
     }
     
-    var loading: Bool = false {
+    private var loading: Bool = false {
         didSet {
             loading ? loadingStartHandler?() :loadingStopHandler?()
         }

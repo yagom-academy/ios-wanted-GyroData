@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ListCell: UITableViewCell {
+final class ListCell: UITableViewCell {
     static let identifier = ListCell.description()
     
     var viewModel: ListCellViewModel?
@@ -59,7 +59,7 @@ class ListCell: UITableViewCell {
         viewModel.load()
     }
     
-    func configureBind() {
+    private func configureBind() {
         viewModel?.bind(handler: { entity in
             self.titleLabel.text = entity.measureType
             self.dateLabel.text =  entity.date?.formatted("yyyy/MM/dd HH:mm:ss")
@@ -67,7 +67,7 @@ class ListCell: UITableViewCell {
         })
     }
     
-    func configureLayout() {
+    private func configureLayout() {
         addSubview(stackView)
         stackView.addArrangedSubview(labelStackView)
         stackView.addArrangedSubview(secondLabel)

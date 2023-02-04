@@ -10,6 +10,4 @@ import Foundation
 import CoreData
 
 @objc(MotionEntity)
-public class MotionEntity: NSManagedObject {
-
-}
+public class MotionEntity: NSManagedObject { }

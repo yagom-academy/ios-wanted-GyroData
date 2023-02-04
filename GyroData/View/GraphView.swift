@@ -8,11 +8,11 @@
 import UIKit
 import CoreMotion
 
-class GraphView: UIView {
-    var coordinates: [Coordinate] = []
-    var scale: Double = 0
+final class GraphView: UIView {
+    private var coordinates: [Coordinate] = []
+    private var scale: Double = 0
     
-    let xLabel: UILabel = {
+    private let xLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
@@ -20,7 +20,7 @@ class GraphView: UIView {
         return label
     }()
     
-    let yLabel: UILabel = {
+    private let yLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
@@ -28,7 +28,7 @@ class GraphView: UIView {
         return label
     }()
     
-    let zLabel: UILabel = {
+    private let zLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
@@ -36,7 +36,7 @@ class GraphView: UIView {
         return label
     }()
     
-    let labelStackView: UIStackView = {
+    private let labelStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .horizontal
@@ -45,19 +45,19 @@ class GraphView: UIView {
         return stackView
     }()
     
-    var xLayer: CAShapeLayer?
-    var yLayer: CAShapeLayer?
-    var zLayer: CAShapeLayer?
+    private var xLayer: CAShapeLayer?
+    private var yLayer: CAShapeLayer?
+    private var zLayer: CAShapeLayer?
     
-    var xPath: UIBezierPath?
-    var yPath: UIBezierPath?
-    var zPath: UIBezierPath?
+    private var xPath: UIBezierPath?
+    private var yPath: UIBezierPath?
+    private var zPath: UIBezierPath?
     
-    var currentXPoint: CGFloat = 0
-    var currentYPoint: CGFloat = 0
-    var currentZPoint: CGFloat = 0
+    private var currentXPoint: CGFloat = 0
+    private var currentYPoint: CGFloat = 0
+    private var currentZPoint: CGFloat = 0
     
-    var offsetPoint: CGFloat = 0
+    private var offsetPoint: CGFloat = 0
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -73,7 +73,7 @@ class GraphView: UIView {
         configureGridLayer()
     }
     
-    func configureGridLayer() {
+    private func configureGridLayer() {
         let gridLayer = CAShapeLayer()
         let multiPath = CGMutablePath()
         let offset = frame.width / 8
@@ -103,7 +103,7 @@ class GraphView: UIView {
         layer.addSublayer(gridLayer)
     }
     
-    func configureLayout() {
+    private func configureLayout() {
         addSubview(labelStackView)
         labelStackView.addArrangedSubview(xLabel)
         labelStackView.addArrangedSubview(yLabel)
@@ -116,7 +116,7 @@ class GraphView: UIView {
         ])
     }
     
-    func configureLayer() {
+    private func configureLayer() {
         xLayer?.lineWidth = 1
         xLayer?.strokeColor = UIColor.red.cgColor
         xLayer?.path = xPath?.cgPath
@@ -165,7 +165,7 @@ class GraphView: UIView {
         zLayer?.path = zPath?.cgPath
     }
     
-    func drawAll() {
+    private func drawAll() {
         let hasCoordinates = coordinates
         reset()
         configureLayer()
@@ -175,7 +175,7 @@ class GraphView: UIView {
         }
     }
     
-    func reset() {
+    private func reset() {
         xLayer?.removeFromSuperlayer()
         yLayer?.removeFromSuperlayer()
         zLayer?.removeFromSuperlayer()
@@ -205,7 +205,7 @@ class GraphView: UIView {
         configureLayer()
     }
     
-    func updateCoordinateLabel(x: Double, y: Double, z: Double) {
+    private func updateCoordinateLabel(x: Double, y: Double, z: Double) {
         xLabel.text = "x: \(x.decimalPlace(3))"
         yLabel.text = "y: \(y.decimalPlace(3))"
         zLabel.text = "z: \(z.decimalPlace(3))"

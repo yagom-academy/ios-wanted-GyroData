@@ -7,10 +7,10 @@
 
 import UIKit
 
-class MainListViewController: UIViewController {
-    let viewModel = MainListViewModel()
+final class MainListViewController: UIViewController {
+    private let viewModel = MainListViewModel()
     
-    let tableView: UITableView = {
+    private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.register(ListCell.self, forCellReuseIdentifier: ListCell.identifier)
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -26,7 +26,7 @@ class MainListViewController: UIViewController {
         configureBind()
     }
     
-    func configureNavigationBar() {
+    private func configureNavigationBar() {
         navigationItem.title = "목록"
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "측정",
                                                             style: .plain,
@@ -39,7 +39,7 @@ class MainListViewController: UIViewController {
         navigationController?.pushViewController(measureViewController, animated: true)
     }
     
-    func configureTableView() {
+    private func configureTableView() {
         tableView.delegate = self
         tableView.dataSource = self
     }
@@ -49,7 +49,7 @@ class MainListViewController: UIViewController {
         viewModel.fetchData()
     }
 
-    func configureLayout() {
+    private func configureLayout() {
         view.addSubview(tableView)
         
         NSLayoutConstraint.activate([
@@ -60,7 +60,7 @@ class MainListViewController: UIViewController {
         ])
         
     }
-    func configureBind() {
+    private func configureBind() {
         viewModel.bindTableView {
             self.tableView.reloadData()
         }

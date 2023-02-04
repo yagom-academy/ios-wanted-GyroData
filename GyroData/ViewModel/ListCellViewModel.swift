@@ -7,9 +7,9 @@
 
 import Foundation
 
-class ListCellViewModel {
+final class ListCellViewModel {
     
-    var motionEntity: MotionEntity {
+    private var motionEntity: MotionEntity {
         didSet {
             cellHandler?(motionEntity)
         }

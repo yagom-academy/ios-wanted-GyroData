@@ -7,13 +7,13 @@
 
 import Foundation
 
-class MainListViewModel{
+final class MainListViewModel{
     var motionDataList: [MotionEntity] = [] {
         didSet {
             tableViewHandler?()
         }
     }
-    var hasNextPage = false
+    private var hasNextPage = false
     
     private var tableViewHandler: (() -> Void)?
     

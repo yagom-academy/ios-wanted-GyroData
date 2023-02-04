@@ -8,12 +8,12 @@
 import Foundation
 import CoreMotion
 
-class MotionManager {
-    var manager = CMMotionManager()
-    var timer: Timer?
+final class MotionManager {
+    private var manager = CMMotionManager()
+    private var timer: Timer?
     var second: Double = 0.0
     
-    var interval: Double = 0.0
+    private var interval: Double = 0.0
     
     func start(type: MotionType, completion: @escaping (Coordinate) -> Void) {
         second = 0
@@ -35,7 +35,7 @@ class MotionManager {
         manager.stopAccelerometerUpdates()
     }
     
-    func accelerometerMode(completion: @escaping (Coordinate) -> Void) {
+    private func accelerometerMode(completion: @escaping (Coordinate) -> Void) {
         manager.accelerometerUpdateInterval = interval
         manager.startAccelerometerUpdates()
         timer = Timer.scheduledTimer(withTimeInterval: interval, repeats: true, block: { _ in
@@ -48,7 +48,7 @@ class MotionManager {
         })
     }
     
-    func gyroMode(completion: @escaping (Coordinate) -> Void) {
+    private func gyroMode(completion: @escaping (Coordinate) -> Void) {
         manager.gyroUpdateInterval = interval
         manager.startGyroUpdates()
         timer = Timer.scheduledTimer(withTimeInterval: interval, repeats: true, block: { _ in
@@ -61,7 +61,7 @@ class MotionManager {
         })
     }
     
-    func convert(measureData: MeasureData) -> Coordinate {
+    private func convert(measureData: MeasureData) -> Coordinate {
         var (x,y,z) = (0.0, 0.0, 0.0)
         
         if let data = measureData as? CMAccelerometerData {

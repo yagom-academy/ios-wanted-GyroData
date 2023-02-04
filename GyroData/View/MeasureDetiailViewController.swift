@@ -7,10 +7,10 @@
 
 import UIKit
 
-class MeasureDetailViewController: UIViewController {
-    let viewModel: MeasureDetailViewModel
+final class MeasureDetailViewController: UIViewController {
+    private let viewModel: MeasureDetailViewModel
     
-    var graphView: GraphView = {
+    private var graphView: GraphView = {
         let view = GraphView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.borderWidth = 2
@@ -18,26 +18,28 @@ class MeasureDetailViewController: UIViewController {
         return view
     }()
     
-    let dateLabel: UILabel = {
+    private  let dateLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .label
         return label
     }()
     
-    let pageLabel: UILabel = {
+    private let pageLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .label
         return label
     }()
     
-    let buttonStackView: UIStackView = {
+    private let buttonStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         return stackView
     }()
     
-    let playButton: UIButton = {
+    private let playButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 50, weight: .light)
@@ -46,7 +48,7 @@ class MeasureDetailViewController: UIViewController {
         return button
     }()
     
-    let stopButton: UIButton = {
+    private let stopButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 50, weight: .light)
@@ -55,18 +57,18 @@ class MeasureDetailViewController: UIViewController {
         return button
     }()
     
-    let timeLabel: UILabel = {
+    private let timeLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .label
         return label
     }()
     
-    let indicatorView: UIActivityIndicatorView = {
+    private let indicatorView: UIActivityIndicatorView = {
         let activityIndicator = UIActivityIndicatorView(style: .large)
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         activityIndicator.hidesWhenStopped = true
         activityIndicator.color = .black
-        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         return activityIndicator
     }()
     
@@ -97,7 +99,7 @@ class MeasureDetailViewController: UIViewController {
         configureGraphView()
     }
     
-    func configureLayout() {
+    private func configureLayout() {
         view.addSubview(dateLabel)
         view.addSubview(pageLabel)
         view.addSubview(graphView)
@@ -134,11 +136,11 @@ class MeasureDetailViewController: UIViewController {
         ])
     }
     
-    func configureNavigationBar() {
+    private func configureNavigationBar() {
         navigationItem.title = "다시보기"
     }
     
-    func configureBind() {
+    private func configureBind() {
         viewModel.bindStartLoading {
             self.indicatorView.startAnimating()
         }
@@ -162,20 +164,19 @@ class MeasureDetailViewController: UIViewController {
         viewModel.bindStopButton {
             self.stopButton.isHidden = $0
         }
-        
     }
     
-    func configureAction() {
+    private func configureAction() {
         playButton.addTarget(self, action: #selector(playDrawGraph), for: .touchUpInside)
         stopButton.addTarget(self, action: #selector(stopDrawGraph), for: .touchUpInside)
     }
     
-    func configureGraphView() {
+    private func configureGraphView() {
         graphView.configureData()
         viewModel.graphViewLoad()
     }
     
-    func configureData() {
+    private func configureData() {
         viewModel.fetchData()
         viewModel.load()
         pageLabel.text = viewModel.pageType.rawValue
@@ -190,5 +191,4 @@ class MeasureDetailViewController: UIViewController {
     @objc func stopDrawGraph() {
         viewModel.stop()
     }
-    
 }

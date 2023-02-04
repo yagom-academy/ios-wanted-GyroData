@@ -8,15 +8,15 @@
 import UIKit
 import CoreMotion
 
-class MeasureViewController: UIViewController {
+final class MeasureViewController: UIViewController {
     let viewModel = MeasureViewModel()
     
-    let segmentedControl: UISegmentedControl = {
+    private let segmentedControl: UISegmentedControl = {
         let control = UISegmentedControl(items: [MotionType.acc.rawValue, MotionType.gyro.rawValue])
+        control.translatesAutoresizingMaskIntoConstraints = false
         control.selectedSegmentIndex = 0
         control.layer.borderWidth = 1
         control.selectedSegmentTintColor = .systemBlue
-        control.translatesAutoresizingMaskIntoConstraints = false
         control.layer.borderColor = UIColor.systemBlue.cgColor
         control.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.systemBlue],
                                        for: UIControl.State.normal)
@@ -25,15 +25,15 @@ class MeasureViewController: UIViewController {
         return control
     }()
     
-    var graphView: GraphView = {
+    private var graphView: GraphView = {
         let view = GraphView()
+        view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.borderWidth = 2
         view.layer.borderColor = UIColor.black.cgColor
-        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    let buttonStackView: UIStackView = {
+    private let buttonStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .horizontal
@@ -42,31 +42,31 @@ class MeasureViewController: UIViewController {
         return stackView
     }()
     
-    let measureButton: UIButton = {
+    private let measureButton: UIButton = {
         let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("측정", for: .normal)
         button.setTitleColor(.systemBlue, for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
-    let stopButton: UIButton = {
+    private let stopButton: UIButton = {
         let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("정지", for: .normal)
         button.setTitleColor(.systemBlue, for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
-    let indicatorView: UIActivityIndicatorView = {
+    private let indicatorView: UIActivityIndicatorView = {
         let activityIndicator = UIActivityIndicatorView(style: .large)
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         activityIndicator.hidesWhenStopped = true
         activityIndicator.color = .black
-        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         return activityIndicator
     }()
     
-    let emptyAlert: UIAlertController = {
+    private let emptyAlert: UIAlertController = {
         var alert = UIAlertController(title: "알림", message: """
                                                             저장할 데이터가 없습니다.
                                                             측정 후 다시 시도해주세요.
@@ -77,7 +77,7 @@ class MeasureViewController: UIViewController {
         return alert
     }()
     
-    let failAlert: UIAlertController = {
+    private let failAlert: UIAlertController = {
         var alert = UIAlertController(title: "저장 실패", message: """
                                                                 저장이 실패하였습니다.
                                                                 다시 시도해주세요.
@@ -99,7 +99,7 @@ class MeasureViewController: UIViewController {
         
     }
     
-    func configureLayout() {
+    private func configureLayout() {
         view.addSubview(segmentedControl)
         view.addSubview(graphView)
         view.addSubview(buttonStackView)
@@ -126,7 +126,7 @@ class MeasureViewController: UIViewController {
         ])
     }
     
-    func configureNavigationBar() {
+    private func configureNavigationBar() {
         navigationItem.title = "측정하기"
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "저장",
                                                             style: .plain,
@@ -134,18 +134,18 @@ class MeasureViewController: UIViewController {
                                                             action: #selector(saveButtonTapped))
     }
     
-    func configureAction() {
+    private func configureAction() {
         self.segmentedControl.addTarget(self,action: #selector(didChangeValue(_:)), for: .valueChanged)
         measureButton.addTarget(self, action: #selector(measureButtonTapped), for: .touchUpInside)
         stopButton.addTarget(self, action: #selector(stopButtonTapped), for: .touchUpInside)
     }
     
     
-    func configureData() {
+    private func configureData() {
         viewModel.load()
     }
     
-    func configureBind() {
+    private func configureBind() {
         viewModel.bindType { index in
             self.segmentedControl.selectedSegmentIndex = index
         }

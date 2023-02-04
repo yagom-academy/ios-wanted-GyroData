@@ -9,9 +9,7 @@
 import Foundation
 import CoreData
 
-
 extension MotionEntity {
-
     @nonobjc public class func fetchRequest() -> NSFetchRequest<MotionEntity> {
         return NSFetchRequest<MotionEntity>(entityName: "MotionEntity")
     }
@@ -23,6 +21,4 @@ extension MotionEntity {
 
 }
 
-extension MotionEntity : Identifiable {
-
-}
+extension MotionEntity : Identifiable { }
