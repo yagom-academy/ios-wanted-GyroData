@@ -227,7 +227,7 @@ private extension TransitionListViewController {
     }
 
     func createIndicatorFooter() -> UIView {
-        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 100))
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.width / 5))
         let indicator = UIActivityIndicatorView()
 
         indicator.center = footerView.center

@@ -8,7 +8,13 @@
 import UIKit
 import CoreMotion
 
-class GraphView: UIView {
+final class GraphView: UIView {
+
+    // MARK: - Constant
+    enum Constant {
+        static let middleSpacing: CGFloat = 20
+        static let largeSpacing: CGFloat = 40
+    }
     
     // MARK: - Property
     private let xPositionLabel: UILabel = {
@@ -257,14 +263,14 @@ private extension GraphView {
     
     func setUpLayouts() {
         NSLayoutConstraint.activate([
-            xPositionLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 20),
-            xPositionLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 40),
+            xPositionLabel.topAnchor.constraint(equalTo: topAnchor, constant: Constant.middleSpacing),
+            xPositionLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constant.largeSpacing),
             
-            zPositionLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 20),
-            zPositionLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -40),
+            zPositionLabel.topAnchor.constraint(equalTo: topAnchor, constant: Constant.middleSpacing),
+            zPositionLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constant.largeSpacing),
             
-            yPositionLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 20),
-            yPositionLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            yPositionLabel.topAnchor.constraint(equalTo: topAnchor, constant: Constant.middleSpacing),
+            yPositionLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
         ])
     }
 }

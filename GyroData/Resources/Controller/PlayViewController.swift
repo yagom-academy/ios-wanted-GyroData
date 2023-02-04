@@ -7,11 +7,19 @@
 import UIKit
 
 final class PlayViewController: UIViewController {
+
+    // MARK: - Enum Type
+    enum Constant {
+        static let smallSpacing: CGFloat = 8
+        static let middleSpacing: CGFloat = 20
+    }
+
     enum viewType: String {
         case play = "Play"
         case view = "View"
     }
-    
+
+    // MARK: - Property
     private let playType: viewType
     private let metaData: TransitionMetaData
     private var transitionData: Transition = Transition(values: [])
@@ -56,6 +64,8 @@ final class PlayViewController: UIViewController {
         label.textAlignment = .center
         return label
     }()
+
+    // MARK: - LifeCycle
     
     init(viewType: PlayViewController.viewType, metaData: TransitionMetaData) {
         self.playType = viewType
@@ -94,7 +104,8 @@ final class PlayViewController: UIViewController {
     }
 }
 
-extension PlayViewController {
+// MARK: - Button Method
+private extension PlayViewController {
     func setButtonActions() {
         controlButton.addTarget(
             self,
@@ -104,7 +115,8 @@ extension PlayViewController {
     }
 }
 
-extension PlayViewController {
+// MARK: - Objc Method
+private extension PlayViewController {
     @objc func didTapControlButton() {
         controlButton.isSelected.toggle()
         
@@ -135,7 +147,8 @@ extension PlayViewController: GraphDelegate {
     }
 }
 
-extension PlayViewController {
+// MARK: - UIConfiguration
+private extension PlayViewController {
     func configureUI() {
         view.backgroundColor = .systemBackground
         setAdditionalSafeArea()
@@ -192,13 +205,13 @@ extension PlayViewController {
             dateLabel.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
             dateLabel.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
             
-            viewTypeLabel.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 8),
+            viewTypeLabel.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: Constant.smallSpacing),
             viewTypeLabel.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
             viewTypeLabel.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
             
-            graphView.topAnchor.constraint(equalTo: viewTypeLabel.bottomAnchor, constant: 20),
-            graphView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 20),
-            graphView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -20),
+            graphView.topAnchor.constraint(equalTo: viewTypeLabel.bottomAnchor, constant: Constant.middleSpacing),
+            graphView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: Constant.middleSpacing),
+            graphView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -Constant.middleSpacing),
             graphView.heightAnchor.constraint(equalTo: graphView.widthAnchor)
         ])
         
@@ -211,7 +224,7 @@ extension PlayViewController {
         let safeArea = view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
             controlButton.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor),
-            controlButton.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: -120),
+            controlButton.topAnchor.constraint(equalTo: graphView.bottomAnchor, constant: Constant.middleSpacing),
             timeLabel.centerYAnchor.constraint(equalTo: controlButton.centerYAnchor),
             timeLabel.leadingAnchor.constraint(equalTo: controlButton.trailingAnchor),
             timeLabel.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor)

@@ -8,15 +8,21 @@ import UIKit
 import CoreMotion
 
 final class RecordViewController: UIViewController {
+
+    // MARK: - Constant
+    enum Constant {
+        static let middleSpacing: CGFloat = 20
+        static let largeSpacing: CGFloat = 50
+    }
     
     // MARK: - Property
-    let segmentControl: UISegmentedControl = {
+    private let segmentControl: UISegmentedControl = {
         let control = UISegmentedControl(items: ["Acc", "Gyro"])
         control.selectedSegmentIndex = 0
         return control
     }()
     
-    let indicator: UIActivityIndicatorView = {
+    private let indicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView(style: .medium)
         return indicator
     }()
@@ -27,7 +33,7 @@ final class RecordViewController: UIViewController {
         return graphView
     }()
     
-    let recordButton: UIButton = {
+    private let recordButton: UIButton = {
         let button = UIButton()
         button.setTitle("측정", for: .normal)
         button.setTitleColor(.gray, for: .disabled)
@@ -36,7 +42,7 @@ final class RecordViewController: UIViewController {
         return button
     }()
     
-    let cancelButton: UIButton = {
+    private let cancelButton: UIButton = {
         let button = UIButton()
         button.setTitle("정지", for: .normal)
         button.layer.backgroundColor = UIColor.systemBlue.cgColor
@@ -278,20 +284,20 @@ private extension RecordViewController {
             segmentControl.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
             segmentControl.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
             
-            graphView.topAnchor.constraint(equalTo: segmentControl.bottomAnchor, constant: 20),
-            graphView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            graphView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            graphView.topAnchor.constraint(equalTo: segmentControl.bottomAnchor, constant: Constant.middleSpacing),
+            graphView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constant.middleSpacing),
+            graphView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constant.middleSpacing),
             graphView.heightAnchor.constraint(equalTo: graphView.widthAnchor),
             
             recordButton.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor),
             recordButton.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
             recordButton.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
-            recordButton.bottomAnchor.constraint(equalTo: cancelButton.topAnchor, constant: -20),
+            recordButton.bottomAnchor.constraint(equalTo: cancelButton.topAnchor, constant: -Constant.middleSpacing),
             
             cancelButton.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor),
             cancelButton.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
             cancelButton.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
-            cancelButton.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: -50),
+            cancelButton.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: -Constant.largeSpacing),
             
             indicator.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor),
             indicator.centerYAnchor.constraint(equalTo: safeArea.centerYAnchor)

@@ -6,7 +6,7 @@
 
 import Foundation
 
-class SystemFileManager {
+final class SystemFileManager {
     private let manager = FileManager.default
     
     func saveData<T: Codable>(

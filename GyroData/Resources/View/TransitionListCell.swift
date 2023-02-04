@@ -9,9 +9,9 @@ import UIKit
 
 class TransitionListCell: UITableViewCell {
     
+    // MARK: - Property
     static let identifier = String(describing: TransitionListCell.self)
     
-    // MARK: - Property
     let dateView: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
