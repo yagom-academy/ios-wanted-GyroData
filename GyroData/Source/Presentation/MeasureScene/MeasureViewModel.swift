@@ -25,7 +25,7 @@ final class MeasureViewModel {
     
     private var wasteTime: TimeInterval = .zero {
         didSet {
-            delegate?.saveSuccess()
+            delegate?.activeSave()
         }
     }
     
