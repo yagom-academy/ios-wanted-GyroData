@@ -86,9 +86,9 @@ final class GraphView: UIView {
     
     private func drawWholeGraph(_ motionMeasures: MotionMeasures, for duration: Double) {
         let graphData: [[Double]] = [
-            motionMeasures.axisX,
-            motionMeasures.axisY,
-            motionMeasures.axisZ
+            motionMeasures.axisX.map { $0 * 30 },
+            motionMeasures.axisY.map { $0 * 30 },
+            motionMeasures.axisZ.map { $0 * 30 }
         ]
         var axisColors: [UIColor] = [.red, .green, .blue]
         
