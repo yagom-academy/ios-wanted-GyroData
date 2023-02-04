@@ -52,6 +52,7 @@ final class MeasureViewController: UIViewController {
     
     private let measureStopButton: UIButton = {
         let button = UIButton()
+        button.isEnabled = false
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitleColor(.systemBlue, for: .normal)
         button.titleLabel?.font = .preferredFont(forTextStyle: .title2)
