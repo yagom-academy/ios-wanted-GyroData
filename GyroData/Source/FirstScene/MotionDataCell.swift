@@ -10,11 +10,22 @@ import UIKit
 final class MotionDataCell: UITableViewCell {
     static let identifier = String(describing: MotionDataCell.self)
     
-    private let leftStackView: UIStackView = {
+    private let totalStackView: UIStackView = {
         let stackView = UIStackView()
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.distribution = .fillEqually
+        stackView.alignment = .center
+        stackView.axis = .horizontal
+        stackView.spacing = 30
+        
+        return stackView
+    }()
+    private let leftStackView: UIStackView = {
+        let stackView = UIStackView()
+        
         stackView.axis = .vertical
+        stackView.spacing = 20
         
         return stackView
     }()
@@ -36,8 +47,8 @@ final class MotionDataCell: UITableViewCell {
     private let durationLabel: UILabel = {
         let label = UILabel()
         
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .preferredFont(forTextStyle: .largeTitle)
+        label.textAlignment = .center
         
         return label
     }()
@@ -62,27 +73,18 @@ final class MotionDataCell: UITableViewCell {
     
     private func configureContentView() {
         [leftStackView, durationLabel].forEach {
-            contentView.addSubview($0)
+            totalStackView.addArrangedSubview($0)
         }
+        contentView.addSubview(totalStackView)
+
+        leftStackView.layoutMargins = .init(top: 20, left: 30, bottom: 20, right: 0)
+        leftStackView.isLayoutMarginsRelativeArrangement = true
         
         NSLayoutConstraint.activate([
-            leftStackView.leadingAnchor.constraint(
-                equalTo: contentView.leadingAnchor,
-                constant: 40
-            ),
-            leftStackView.trailingAnchor.constraint(
-                lessThanOrEqualTo: durationLabel.leadingAnchor,
-                constant: -60
-            ),
-            leftStackView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            leftStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            
-            durationLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
-            durationLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            durationLabel.trailingAnchor.constraint(
-                equalTo: contentView.trailingAnchor,
-                constant: -40
-            )
+            totalStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            totalStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            totalStackView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            totalStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
     
