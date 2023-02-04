@@ -7,28 +7,35 @@
 
 import Foundation
 
+protocol MeasureTimerDelegate: AnyObject {
+    func timeOver(duration: Double)
+}
+
 final class MeasureTimer {
     private enum State {
         case active
         case suspended
     }
-
+    
+    weak var delegate: MeasureTimerDelegate?
     private var state: State = .suspended
     private var interval: Double
-    private var duration: Double
+    private var duration: Int = .zero
+    private var deadline: Double
     private var timer: Timer?
     private var isOverdue: Bool {
-        return duration < interval
+        return duration == Int(deadline * 10)
     }
-
-    init(duration: Double, interval: Double) {
-        self.duration = duration
+    
+    init(deadline: Double, interval: Double) {
+        self.deadline = deadline
         self.interval = interval
     }
     
     func activate(eventHandler: @escaping (() -> Void)) {
         guard state != .active else { return }
         state = .active
+        duration = .zero
         
         timer = Timer.scheduledTimer(
             withTimeInterval: interval,
@@ -37,17 +44,34 @@ final class MeasureTimer {
                 guard let self = self,
                       self.isOverdue == false
                 else {
-                    self?.stop()
+                    self?.timeOver()
                     return
                 }
-
+                
                 eventHandler()
-                self.duration -= self.interval
-        })
+                self.duration += Int(self.interval * 10)
+            })
     }
     
-    func stop() {
+    func stop() -> Double {
+        resetTimer()
+        
+        return duration.convertDoubleDuration
+    }
+    
+    private func resetTimer() {
         timer?.invalidate()
         state = .suspended
+    }
+    
+    private func timeOver() {
+        resetTimer()
+        delegate?.timeOver(duration: duration.convertDoubleDuration)
+    }
+}
+
+extension Int {
+    var convertDoubleDuration: Double {
+        return Double(self) / Double(10)
     }
 }
