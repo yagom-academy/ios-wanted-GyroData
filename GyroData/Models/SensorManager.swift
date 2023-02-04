@@ -8,11 +8,11 @@
 import CoreMotion
 
 final class SensorManager {
+    
     private let motionManager = CMMotionManager()
     private var timer: Timer?
 
     func measure(sensor: Sensor, interval: TimeInterval, timeout: TimeInterval, completion: @escaping (AxisValue?) -> ()) {
-        // 측정중에 측정버튼 누르는 경우 타이머 초기화해주기 위함
         if timer != nil {
             stop(completion: nil)
         }
@@ -51,6 +51,7 @@ final class SensorManager {
         motionManager.accelerometerUpdateInterval = interval
         motionManager.startAccelerometerUpdates(to: .main) { accelerometerData, _ in
             guard let acceleration = accelerometerData?.acceleration else { return }
+            
             completion(AxisValue(x: acceleration.x, y: acceleration.y, z: acceleration.z))
         }
     }
@@ -59,6 +60,7 @@ final class SensorManager {
         motionManager.gyroUpdateInterval = interval
         motionManager.startGyroUpdates(to: .main) { gyroData, _ in
             guard let rotationRate = gyroData?.rotationRate else { return }
+            
             completion(AxisValue(x: rotationRate.x, y: rotationRate.y, z: rotationRate.z))
         }
     }

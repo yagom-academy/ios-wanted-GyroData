@@ -10,22 +10,18 @@ import UIKit
 final class ListCell: UITableViewCell {
     
     static var reuseIdentifier: String {
-           return String(describing: self)
-       }
+        return String(describing: self)
+    }
     
     private let dateLabel = UILabel(font: .body)
     private let sensorNameLabel = UILabel(font: .title2)
     private let valueLabel = UILabel(font: .largeTitle, textAlignment: .center)
-    private let verticalStackView = UIStackView(axis: .vertical,
-                                                distribution: .fill,
-                                                alignment: .fill,
-                                                spacing: 20)
-    private let totalStackView = UIStackView(distribution: .fill,
-                                             alignment: .center,
-                                             margin: 20)
+    private let verticalStackView = UIStackView(axis: .vertical, distribution: .fill, alignment: .fill, spacing: 20)
+    private let totalStackView = UIStackView(distribution: .fill, alignment: .center, margin: 20)
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
         configureHierarchy()
         configureLayout()
     }
@@ -35,6 +31,15 @@ final class ListCell: UITableViewCell {
         sensorNameLabel.text = sensorName
         valueLabel.text = value
     }
+    
+    @available (*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+// MARK: Layout
+extension ListCell {
     
     private func configureHierarchy() {
         [dateLabel, sensorNameLabel].forEach { label in
@@ -57,10 +62,5 @@ final class ListCell: UITableViewCell {
             
             valueLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.3)
         ])
-    }
-    
-    @available (*, unavailable)
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }

@@ -19,9 +19,19 @@ final class ListView: UIView {
     
     init() {
         super.init(frame: .zero)
+
         configureHierarchy()
         configureLayout()
     }
+    
+    @available (*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+// MARK: Layout
+extension ListView {
     
     private func configureHierarchy() {
         self.addSubview(tableView)
@@ -34,10 +44,5 @@ final class ListView: UIView {
             tableView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             tableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
         ])
-    }
-    
-    @available (*, unavailable)
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }

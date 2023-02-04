@@ -8,14 +8,16 @@
 import UIKit
 
 final class ReviewPageViewController: UIViewController {
+
     private let reviewPageView: ReviewPageView
     private let measurement: Measurement
+
     private var timer: Timer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view = reviewPageView
 
+        view = reviewPageView
         configureView()
     }
     
@@ -23,11 +25,6 @@ final class ReviewPageViewController: UIViewController {
         self.reviewPageView = reviewPageView
         self.measurement = measurement
         super.init(nibName: nil, bundle: nil)
-    }
-    
-    @available (*, unavailable)
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 
     private func configureView() {
@@ -38,7 +35,7 @@ final class ReviewPageViewController: UIViewController {
             let action = UIAction { [weak self] _ in
                 self?.replayGraph()
             }
-            reviewPageView.configureButtonAction(action: action)
+            reviewPageView.setupButtonAction(action: action)
         }
         
         reviewPageView.setupDateLabelText(measurement.date.makeSlashFormat())
@@ -65,11 +62,16 @@ final class ReviewPageViewController: UIViewController {
 
                 time += 0.1
                 self?.reviewPageView.drawGraph(with: axisValues.removeFirst())
-                self?.reviewPageView.configureTimeLabel(string: String(format: "%.1f", time))
+                self?.reviewPageView.setupTimeLabel(string: String(format: "%.1f", time))
             }
         } else {
             reviewPageView.togglePlayButton()
             resetTimer()
         }
+    }
+
+    @available (*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }

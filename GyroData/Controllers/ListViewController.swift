@@ -13,8 +13,7 @@ final class ListViewController: UIViewController {
     private typealias SnapShot = NSDiffableDataSourceSnapshot<Section, Measurement>
     
     private let listView: ListView = ListView()
-    private let dataManagers: [any MeasurementDataHandleable] = [CoreDataManager(),
-                                                                 SensorFileManager()]
+    private let dataManagers: [any MeasurementDataHandleable] = [CoreDataManager(), SensorFileManager()]
     
     private var measurements: [Measurement] = []
     private var dataSource: DataSource? = nil
@@ -32,6 +31,7 @@ final class ListViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
         initialFetchMeasurementData()
         applySnapshot()
     }
@@ -56,8 +56,7 @@ final class ListViewController: UIViewController {
     }
     
     private func registerListCell() {
-        listView.tableView.register(ListCell.self,
-                                    forCellReuseIdentifier: ListCell.reuseIdentifier)
+        listView.tableView.register(ListCell.self, forCellReuseIdentifier: ListCell.reuseIdentifier)
     }
     
     private func configureDataSource() {
@@ -65,10 +64,7 @@ final class ListViewController: UIViewController {
         
         dataSource = DataSource(tableView: tableView) { tableView, indexPath, measurement in
             let cellIdentifier = ListCell.reuseIdentifier
-            
-            let listCell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier)
-            as? ListCell
-            
+            let listCell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as? ListCell
             listCell?.setup(date: measurement.date.makeSlashFormat(),
                             sensorName: measurement.sensor.name,
                             value: String(format: "%.1f", measurement.time))
@@ -89,11 +85,10 @@ final class ListViewController: UIViewController {
 extension ListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView,
-                   trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath)
-    
-    -> UISwipeActionsConfiguration? {
+                   trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let playAction = UIContextualAction(style: .normal, title: "Play") { [weak self] _, _, _ in
             guard let self = self else { return }
+
             let reviewPageViewController = ReviewPageViewController(
                 reviewPageView: ReviewPageView(pageState: .resultPlay),
                 measurement: self.measurements[indexPath.item])
@@ -103,8 +98,7 @@ extension ListViewController: UITableViewDelegate {
         
         playAction.backgroundColor = .systemGreen
         
-        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") {
-            [weak self] _, _, _ in
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] _, _, _ in
             guard let self = self else { return }
             
             do {
@@ -117,9 +111,7 @@ extension ListViewController: UITableViewDelegate {
             }
             catch {
                 print(DataHandleError.deleteFailError(error: error))
-                UIAlertController.show(title: "Error",
-                                       message: "데이터 삭제에 실패했습니다.",
-                                       target: self)
+                UIAlertController.show(title: "Error", message: "데이터 삭제에 실패했습니다.", target: self)
             }
             
         }
@@ -168,8 +160,7 @@ extension ListViewController: UITableViewDelegate {
     }
     
     private func generateSpinnerFooter() -> UIView {
-        let footerView = UIView(frame: CGRect(x: .zero, y: .zero,
-                                              width: view.frame.size.width, height: 100))
+        let footerView = UIView(frame: CGRect(x: .zero, y: .zero, width: view.frame.size.width, height: 100))
         let spinner = UIActivityIndicatorView()
         spinner.center = footerView.center
         
@@ -198,12 +189,14 @@ extension ListViewController {
         return UIAction { [weak self] _ in
             guard let self = self else { return }
             let measureViewController = MeasurementViewController(dataManagers: self.dataManagers)
+
             self.navigationController?.pushViewController(measureViewController, animated: false)
         }
     }
 }
 
 extension ListViewController {
+    
     private enum Section {
         case main
     }
