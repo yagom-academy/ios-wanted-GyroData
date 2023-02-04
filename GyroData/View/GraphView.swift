@@ -9,6 +9,8 @@ import UIKit
 import CoreMotion
 
 class GraphView: UIView {
+    var coordinates: [Coordinate] = []
+    var scale: Double = 0
     
     let xLabel: UILabel = {
         let label = UILabel()
@@ -134,6 +136,8 @@ class GraphView: UIView {
     
     func drawLine(x: Double, y: Double, z: Double) {
         let startYPoint = frame.height / 2
+        
+        coordinates.append(Coordinate(x: x, y: y, z: z))
         updateCoordinateLabel(x: x, y: y, z: z)
         
         xPath?.move(to: CGPoint(x: offsetPoint, y: startYPoint + currentXPoint))
@@ -142,9 +146,15 @@ class GraphView: UIView {
         
         offsetPoint += frame.width / 600
         
-        currentXPoint = x * 5
-        currentYPoint = y * 5
-        currentZPoint = z * 5
+        currentXPoint = x * scale
+        currentYPoint = y * scale
+        currentZPoint = z * scale
+        
+        if currentXPoint > startYPoint || currentYPoint > startYPoint || currentZPoint > startYPoint ||
+            -currentXPoint > startYPoint || -currentYPoint > startYPoint || -currentZPoint > startYPoint {
+            scale -= scale * 0.2
+            drawAll()
+        }
         
         xPath?.addLine(to: CGPoint(x: offsetPoint, y: startYPoint + currentXPoint))
         yPath?.addLine(to: CGPoint(x: offsetPoint, y: startYPoint + currentYPoint))
@@ -153,6 +163,16 @@ class GraphView: UIView {
         xLayer?.path = xPath?.cgPath
         yLayer?.path = yPath?.cgPath
         zLayer?.path = zPath?.cgPath
+    }
+    
+    func drawAll() {
+        let hasCoordinates = coordinates
+        reset()
+        configureLayer()
+        
+        hasCoordinates.forEach { coordinate in
+            drawLine(x: coordinate.x, y: coordinate.y, z: coordinate.z)
+        }
     }
     
     func reset() {
@@ -172,6 +192,7 @@ class GraphView: UIView {
         yLabel.text = "y: 0"
         zLabel.text = "z: 0"
         
+        coordinates = []
         currentXPoint = 0
         currentYPoint = 0
         currentZPoint = 0
@@ -179,6 +200,7 @@ class GraphView: UIView {
     }
     
     func configureData() {
+        scale = 20
         reset()
         configureLayer()
     }
