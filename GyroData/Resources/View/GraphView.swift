@@ -63,8 +63,10 @@ class GraphView: UIView {
     
     private var isCheckStartLines = false
     private var timer: Timer?
+    private var currentTime: Double = 0
     private var currentIndex: Int = 0
     private var transitionData: Transition = Transition(values: [])
+    var delegate: GraphDelegate?
     
     var yOffset: CGFloat = 0
     
@@ -103,7 +105,6 @@ extension GraphView {
         
         switch viewType {
         case .play:
-            
             transitionData = Transition(values: ticks)
             if timer == nil {
                 timer = Timer.scheduledTimer(
@@ -114,7 +115,6 @@ extension GraphView {
                     repeats: true
                 )
             }
-
         case .view:
             ticks.forEach { drawLine(values: $0.convert(), isStart: false) }
         }
@@ -122,9 +122,12 @@ extension GraphView {
     
     @objc private func replayDrawLine() {
         let limitedIndex = findMinimumCount()
+        currentTime += 0.1
+        delegate?.checkTime(time: currentTime)
         
         guard currentIndex < limitedIndex else {
             timer?.invalidate()
+            delegate?.isCheckFinish = true
             return
         }
         
@@ -202,6 +205,7 @@ extension GraphView {
         timer?.invalidate()
         timer = nil
         maxValue = 0.1
+        currentTime = 0
         currentIndex = 0
     }
 }

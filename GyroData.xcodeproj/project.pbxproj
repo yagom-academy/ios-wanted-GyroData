@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		09CDDC7F298ED59900B63401 /* GraphDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CDDC7E298ED59900B63401 /* GraphDelegate.swift */; };
 		09D60BFE298A485300568B32 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D60BFD298A485300568B32 /* UIFont+Extension.swift */; };
 		09DBC66F2988CE26003228DB /* TransitionMetaDataObject+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09DBC66D2988CE26003228DB /* TransitionMetaDataObject+CoreDataClass.swift */; };
 		09DBC6702988CE26003228DB /* TransitionMetaDataObject+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09DBC66E2988CE26003228DB /* TransitionMetaDataObject+CoreDataProperties.swift */; };
@@ -36,6 +37,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		09CDDC7E298ED59900B63401 /* GraphDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphDelegate.swift; sourceTree = "<group>"; };
 		09D60BFD298A485300568B32 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 		09DBC66D2988CE26003228DB /* TransitionMetaDataObject+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TransitionMetaDataObject+CoreDataClass.swift"; sourceTree = "<group>"; };
 		09DBC66E2988CE26003228DB /* TransitionMetaDataObject+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TransitionMetaDataObject+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -75,6 +77,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		09CDDC7D298ED56C00B63401 /* Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				09CDDC7E298ED59900B63401 /* GraphDelegate.swift */,
+			);
+			path = Delegate;
+			sourceTree = "<group>";
+		};
 		09DBC6712988CED7003228DB /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -166,6 +176,7 @@
 		18D1105D2987ABBE0088ED79 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				09CDDC7D298ED56C00B63401 /* Delegate */,
 				18186205298CCAB00072CD7F /* Upload */,
 				18A4DAFE298A294600B7BC1D /* CoreData */,
 				18A4DAFD298A293E00B7BC1D /* Motion */,
@@ -312,6 +323,7 @@
 				18A4DAFA298A228A00B7BC1D /* SystemFileManager.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
 				18D110612987BB770088ED79 /* RecordViewController.swift in Sources */,
+				09CDDC7F298ED59900B63401 /* GraphDelegate.swift in Sources */,
 				18A4DAFC298A22B200B7BC1D /* MotionManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
