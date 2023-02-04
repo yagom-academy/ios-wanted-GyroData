@@ -8,17 +8,10 @@
 import UIKit
 
 final class GraphBackgroundView: UIView {
-    private enum Configuration {
-        static let lineColor = UIColor.black
-        static let lineWidth: CGFloat = 1.0
-        
-        static let numberOfLines = 8
-    }
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        self.backgroundColor = .clear
+        self.backgroundColor = .systemBackground
     }
     
     required init?(coder: NSCoder) {
@@ -27,41 +20,36 @@ final class GraphBackgroundView: UIView {
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
-        
-        drawBackgroundView()
+        drawBackgroundLines()
     }
 }
 
 private extension GraphBackgroundView {
-    func drawBackgroundView() {
-        let path = UIBezierPath()
-        path.lineWidth = Configuration.lineWidth
-        Configuration.lineColor.setStroke()
-
-        let horizontalLineInterval = bounds.height / CGFloat(Configuration.numberOfLines)
-        let verticalLineInterval = bounds.width / CGFloat(Configuration.numberOfLines)
-
-        drawHorizontalLines(Configuration.numberOfLines, interval: horizontalLineInterval, with: path)
-        drawVerticalLines(Configuration.numberOfLines, interval: verticalLineInterval, with: path)
-        
-        path.stroke()
-    }
-    
-    func drawHorizontalLines(_ numberOfLines: Int, interval: CGFloat, with path: UIBezierPath) {
-        var y: CGFloat = 0.0
-        for _ in 0...numberOfLines {
-            path.move(to: CGPoint(x: 0.0, y: y))
-            path.addLine(to: CGPoint(x: bounds.width, y: y))
-            y += interval
-        }
-    }
-    
-    func drawVerticalLines(_ numberOfLines: Int, interval: CGFloat, with path: UIBezierPath) {
+    private func drawBackgroundLines() {
+        let horizontalPath = UIBezierPath()
+        horizontalPath.lineWidth = 1
+        let verticalPath = UIBezierPath()
+        verticalPath.lineWidth = 1
         var x: CGFloat = 0.0
-        for _ in 0...numberOfLines {
-            path.move(to: CGPoint(x: x, y: 0.0))
-            path.addLine(to: CGPoint(x: x, y: bounds.height))
-            x += interval
+        var y: CGFloat = 0.0
+        
+        let xInterval = bounds.width / CGFloat(8)
+        let yInterval = bounds.height / CGFloat(8)
+        
+        
+        for _ in 0...7 {
+            horizontalPath.move(to: CGPoint(x: 0, y: y))
+            verticalPath.move(to: CGPoint(x: x, y: 0))
+            
+            horizontalPath.addLine(to: CGPoint(x: bounds.width, y: y))
+            verticalPath.addLine(to: CGPoint(x: x, y: bounds.height))
+            
+            x += xInterval
+            y += yInterval
         }
+        
+        UIColor.black.set()
+        horizontalPath.stroke()
+        verticalPath.stroke()
     }
 }
