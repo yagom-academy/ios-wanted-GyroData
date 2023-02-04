@@ -62,10 +62,12 @@
          self.metaData = metaData
          super.init(nibName: nil, bundle: nil)
          
-         SystemFileManager().readData(fileName: metaData.jsonName, type: Transition.self) { result in
+         SystemFileManager().readData(fileName: metaData.jsonName, type: Transition.self) { [weak self] result in
+             guard let self = self else { return }
              switch result {
              case .success(let data):
                  self.transitionData = data
+                 self.graphView.transitionData = data
              case .failure(let error):
                  print(error)
              }
