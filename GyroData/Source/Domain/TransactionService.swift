@@ -24,6 +24,7 @@ final class TransactionService {
     }
     
     func bindData(handler: @escaping (([MeasureData]) -> Void)) {
+        handler(list)
         dataHandler = handler
     }
 }

@@ -13,6 +13,7 @@ final class DataListViewModel {
         case measure
         case play(index: Int)
         case delete(index: Int)
+        case viewWillAppearEvent
     }
     
     private let transactionSevice = TransactionService(
@@ -20,8 +21,8 @@ final class DataListViewModel {
         fileManager: FileSystemManager()
     )
     
-    private weak var delegate: DataListConfigurable?
-    private weak var alertDelegate: AlertPresentable?
+    weak var delegate: DataListConfigurable?
+    weak var alertDelegate: AlertPresentable?
     
     private var measureDatas: [MeasureData] = [] {
         didSet {
@@ -29,9 +30,14 @@ final class DataListViewModel {
         }
     }
     
-    init(delegate: DataListConfigurable, alertDelegate: AlertPresentable) {
-        self.delegate = delegate
-        self.alertDelegate = alertDelegate
+    private var page: Int {
+        let offset = measureDatas.count / 10
+        let page = (offset + 1) * 10
+        
+        return page
+    }
+    
+    init() {
         setupData()
     }
 }
@@ -54,6 +60,8 @@ extension DataListViewModel {
             delegate?.setupPlay(measureDatas[index])
         case .delete(let index):
             deleteData(index: index)
+        case .viewWillAppearEvent:
+            fetchData()
         }
     }
     
@@ -81,6 +89,17 @@ extension DataListViewModel {
                     message: error.localizedDescription
                 )
             }
+        }
+    }
+    
+    private func fetchData() {
+        let result = transactionSevice.dataLoad(offset: 0, limit: page)
+        
+        switch result {
+        case .success(let dataList):
+            measureDatas = dataList
+        case .failure(let failure):
+            alertDelegate?.presentErrorAlert(title: "불러오기 실패", message: failure.localizedDescription)
         }
     }
 }

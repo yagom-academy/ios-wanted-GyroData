@@ -339,11 +339,11 @@
 		AC52BAF02988D4BA0057CA56 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				AC52BAF12988D4C20057CA56 /* Application */,
 				3CB15C47298944D40049E390 /* Presentation */,
 				AC52BAA82987E8F80057CA56 /* Domain */,
 				AC52BAA92987E8FD0057CA56 /* Data */,
 				AC52BAC629880B660057CA56 /* Common */,
-				AC52BAF12988D4C20057CA56 /* Application */,
 			);
 			path = Source;
 			sourceTree = "<group>";
