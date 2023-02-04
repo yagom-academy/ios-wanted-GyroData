@@ -23,11 +23,16 @@ final class MeasureViewModel {
         }
     }
     
+    private var wasteTime: TimeInterval = .zero {
+        didSet {
+            delegate?.saveSuccess()
+        }
+    }
+    
     private var xValues: [Double] = []
     private var yValues: [Double] = []
     private var zValues: [Double] = []
     private var startDate: Date = .init()
-    private var wasteTime: TimeInterval = .zero
     private var sensorType: Sensor?
     
     private let transactionSevice: TransactionService

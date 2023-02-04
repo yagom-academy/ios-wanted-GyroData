@@ -12,7 +12,7 @@ protocol MeasureViewDelegate: AnyObject {
     
     func updateValue(_ values: Values)
     func endMeasuringData()
-    
+    func activeSave()
     func saveSuccess()
     func saveFail(_ error: Error)
 }

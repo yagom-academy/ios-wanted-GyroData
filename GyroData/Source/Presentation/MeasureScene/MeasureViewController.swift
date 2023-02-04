@@ -168,7 +168,7 @@ private extension MeasureViewController {
     func setUserInteractive(_ setValue: Bool) {
         segmentedControl.isEnabled = setValue
         measureStartButton.isEnabled = setValue
-        navigationItem.rightBarButtonItem?.isEnabled = setValue
+        measureStopButton.isEnabled = !setValue
         navigationItem.backBarButtonItem?.isEnabled = setValue
     }
 }
@@ -186,15 +186,16 @@ extension MeasureViewController {
     }
     
     @objc func measureStartButtonTapped(_ sender: UIButton) {
-        if segmentedControl.selectedSegmentIndex != -1 {
-            graphView.dataInit()
-            viewModel.action(.mesureStartButtonTapped)
-            setUserInteractive(false)
-        }
+        guard segmentedControl.selectedSegmentIndex != -1 else { return }
+        graphView.dataInit()
+        setUserInteractive(false)
+        viewModel.action(.mesureStartButtonTapped)
     }
     
     @objc func measureStopButtonTapped(_ sender: UIButton) {
         viewModel.action(.measureEndbuttonTapped)
+        navigationItem.rightBarButtonItem?.isEnabled = true
+        setUserInteractive(true)
     }
 }
 
@@ -206,6 +207,10 @@ extension MeasureViewController: MeasureViewDelegate {
     
     func endMeasuringData() {
         setUserInteractive(true)
+    }
+    
+    func activeSave() {
+        navigationItem.rightBarButtonItem?.isEnabled = true
     }
     
     func saveSuccess() {
@@ -225,6 +230,7 @@ extension MeasureViewController: AlertPresentable {
             title: title,
             errorMessage: message
         )
+        setUserInteractive(true)
         present(errorAlert, animated: true)
     }
 
