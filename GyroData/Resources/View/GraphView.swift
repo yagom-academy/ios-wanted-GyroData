@@ -71,6 +71,12 @@ class GraphView: UIView {
 
 // MARK: - Business Logic
 extension GraphView {
+    func viewGraphDrawing() {
+        drawLine(datas: transitionData.x, position: .x)
+        drawLine(datas: transitionData.y, position: .y)
+        drawLine(datas: transitionData.z, position: .z)
+    }
+
     func replayGraphDrawing() {
         if timeTrigger {
             timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(replayDrawLine), userInfo: nil, repeats: true)
