@@ -185,6 +185,7 @@ final class MeasureViewController: UIViewController {
     }
     
     @objc func didChangeValue(_ segment: UISegmentedControl) {
+        graphView.configureData()
         viewModel.motionTypeIndex = segment.selectedSegmentIndex
     }
     

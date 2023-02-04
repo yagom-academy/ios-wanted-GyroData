@@ -12,6 +12,7 @@ final class MeasureViewModel {
     
     private var motionType: MotionType = .acc {
         didSet {
+            coordinates = []
             typeHandler?(motionTypeIndex)
         }
     }
