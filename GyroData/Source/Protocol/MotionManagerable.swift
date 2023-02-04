@@ -8,6 +8,8 @@
 import Foundation
 
 protocol MotionManagerable: CoreDataManageable {
+    var timeOverHandler: ((Bool) -> Void)? { get set }
+    
     func start(handler: @escaping (MotionMeasures?) -> Void)
     func stop()
     func save(

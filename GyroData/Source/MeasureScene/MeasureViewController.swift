@@ -100,6 +100,10 @@ final class MeasureViewController: UIViewController {
             self?.stopButton.isEnabled = canStop
         }
         
+        measureViewModel.bindCanSaveMeasureData { [weak self] canSave in
+            self?.navigationItem.rightBarButtonItem?.isEnabled = canSave
+        }
+        
         measureViewModel.bindAlertMessage { [weak self] message in
             self?.indicator.stopAnimating()
             let alert = UIAlertController(

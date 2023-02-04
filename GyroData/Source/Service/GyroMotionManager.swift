@@ -14,9 +14,11 @@ final class GyroMotionManager: MotionManagerable {
     private let measureTimer: MeasureTimer
     private var motionData: MotionData?
     private var measuredMotion: MotionMeasures?
+    var timeOverHandler: ((Bool) -> Void)?
     
     init(deadline: Double, interval: TimeInterval) {
         measureTimer = MeasureTimer(deadline: deadline, interval: interval)
+        measureTimer.delegate = self
         configureUpdateInterval(interval)
     }
     
@@ -115,5 +117,13 @@ extension GyroMotionManager {
             
             completionHandler()
         }
+    }
+}
+
+// MARK: MeasureTimerDelegate
+extension GyroMotionManager: MeasureTimerDelegate {
+    func timeOver(duration: Double) {
+        createMotionData(duration: duration)
+        timeOverHandler?(true)
     }
 }

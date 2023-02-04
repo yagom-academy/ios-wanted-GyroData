@@ -15,8 +15,8 @@ final class MeasureViewModel {
         case save(handler: () -> Void)
     }
     
-    private var motionManager: MotionManagerable = AccelerometerMotionManager(
-        deadline: 60,
+    private lazy var motionManager: MotionManagerable = AccelerometerMotionManager(
+        deadline: 1,
         interval: 0.1
     )
     
@@ -99,6 +99,12 @@ extension MeasureViewModel {
     private func startMeasure() {
         canChangeMotionType = false
         canStopMeasure = true
+        canSaveMeasureData = false
+        
+        motionManager.timeOverHandler = { [weak self] isTimeOver in
+            self?.canSaveMeasureData = isTimeOver
+            self?.canStopMeasure = !isTimeOver
+        }
         
         motionManager.start { [weak self] measuredMotion in
             self?.measuredMotion = measuredMotion
@@ -107,6 +113,9 @@ extension MeasureViewModel {
     
     private func stopMeasure() {
         canChangeMotionType = true
+        canStopMeasure = false
+        canSaveMeasureData = true
+        
         motionManager.stop()
     }
     
