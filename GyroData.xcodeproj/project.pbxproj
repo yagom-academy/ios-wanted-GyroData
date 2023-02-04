@@ -11,6 +11,7 @@
 		0C27E428298B9EBE00C570C4 /* MeasureTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C27E427298B9EBE00C570C4 /* MeasureTimer.swift */; };
 		0CC8B8382988B73C0011E5FB /* MotionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CC8B8372988B73C0011E5FB /* MotionData.swift */; };
 		0CC8B83A2988BA580011E5FB /* MotionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CC8B8392988BA580011E5FB /* MotionType.swift */; };
+		575938F4298EC01C0030A06A /* GraphBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575938F3298EC01C0030A06A /* GraphBackgroundView.swift */; };
 		5785B397298A0CCF00DD61B2 /* FileManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5785B396298A0CCF00DD61B2 /* FileManagerProtocol.swift */; };
 		57D312A4298A14F1001963C5 /* MotionMeasures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D312A3298A14F1001963C5 /* MotionMeasures.swift */; };
 		57D312A6298A15A1001963C5 /* FileHandleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D312A5298A15A1001963C5 /* FileHandleManager.swift */; };
@@ -19,6 +20,7 @@
 		57D312AD298CF3B0001963C5 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D312AC298CF3B0001963C5 /* DetailViewModel.swift */; };
 		57D312AF298D0091001963C5 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D312AE298D0091001963C5 /* GraphView.swift */; };
 		57D312B1298E563A001963C5 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D312B0298E563A001963C5 /* DetailView.swift */; };
+		57EF194B298EA54900A9572B /* GraphViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EF194A298EA54900A9572B /* GraphViewModel.swift */; };
 		63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB428D44FC400C53A39 /* AppDelegate.swift */; };
 		63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB628D44FC400C53A39 /* SceneDelegate.swift */; };
 		63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB828D44FC400C53A39 /* ViewController.swift */; };
@@ -34,6 +36,7 @@
 		0C27E427298B9EBE00C570C4 /* MeasureTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureTimer.swift; sourceTree = "<group>"; };
 		0CC8B8372988B73C0011E5FB /* MotionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionData.swift; sourceTree = "<group>"; };
 		0CC8B8392988BA580011E5FB /* MotionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionType.swift; sourceTree = "<group>"; };
+		575938F3298EC01C0030A06A /* GraphBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphBackgroundView.swift; sourceTree = "<group>"; };
 		5785B396298A0CCF00DD61B2 /* FileManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerProtocol.swift; sourceTree = "<group>"; };
 		57D312A3298A14F1001963C5 /* MotionMeasures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionMeasures.swift; sourceTree = "<group>"; };
 		57D312A5298A15A1001963C5 /* FileHandleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileHandleManager.swift; sourceTree = "<group>"; };
@@ -42,6 +45,7 @@
 		57D312AC298CF3B0001963C5 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		57D312AE298D0091001963C5 /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		57D312B0298E563A001963C5 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		57EF194A298EA54900A9572B /* GraphViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphViewModel.swift; sourceTree = "<group>"; };
 		63F01BB128D44FC400C53A39 /* GyroData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GyroData.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63F01BB428D44FC400C53A39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63F01BB628D44FC400C53A39 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -118,7 +122,9 @@
 		57D312A9298CF38F001963C5 /* DetailView */ = {
 			isa = PBXGroup;
 			children = (
+				575938F3298EC01C0030A06A /* GraphBackgroundView.swift */,
 				57D312AE298D0091001963C5 /* GraphView.swift */,
+				57EF194A298EA54900A9572B /* GraphViewModel.swift */,
 				57D312B0298E563A001963C5 /* DetailView.swift */,
 				57D312AA298CF3A4001963C5 /* DetailViewController.swift */,
 				57D312AC298CF3B0001963C5 /* DetailViewModel.swift */,
@@ -254,7 +260,9 @@
 				63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */,
 				57D312B1298E563A001963C5 /* DetailView.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
+				57EF194B298EA54900A9572B /* GraphViewModel.swift in Sources */,
 				0C27E404298A492C00C570C4 /* MotionMeasureManager.swift in Sources */,
+				575938F4298EC01C0030A06A /* GraphBackgroundView.swift in Sources */,
 				57D312A4298A14F1001963C5 /* MotionMeasures.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
 				B240905C298A4531008DC79B /* CoreDataError.swift in Sources */,
