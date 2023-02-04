@@ -7,10 +7,6 @@
 
 import Foundation
 
-//protocol GraphViewPlayDelegate: AnyObject {
-//    func updateWasteTime(_ wasteTime: TimeInterval)
-//}
-
 class PlayViewModel {
     typealias Values = (x: Double, y: Double, z: Double)
     
@@ -48,7 +44,6 @@ class PlayViewModel {
     }
 }
 
-// output
 private extension PlayViewModel {
     func playGraph(_ data: MeasureData) {
         var values: [Values] = []

@@ -156,8 +156,13 @@ private extension MeasureViewController {
     }
     
     func setupActivityIndicator() {
-        activityIndicatorView.center = self.view.center
-        // do test 
+        view.addSubview(activityIndicatorView)
+        
+        NSLayoutConstraint.activate([
+            activityIndicatorView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            activityIndicatorView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
+        ])
+        view.bringSubviewToFront(activityIndicatorView)
     }
     
     func setUserInteractive(_ setValue: Bool) {
