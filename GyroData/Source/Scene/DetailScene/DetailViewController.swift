@@ -7,16 +7,6 @@
 
 import UIKit
 
-extension DateFormatter {
-    static let measuredDateFormatter: DateFormatter = {
-        let dateFormatter = DateFormatter()
-        
-        dateFormatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
-        
-        return dateFormatter
-    }()
-}
-
 enum PageType {
     case play
     case view

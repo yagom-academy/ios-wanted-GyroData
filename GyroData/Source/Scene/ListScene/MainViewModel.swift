@@ -27,12 +27,8 @@ final class MainViewModel: CoreDataManageable {
     }
     
     func saveMotionData(_ data: MotionData) {
-        do {
-            try saveCoreData(motionData: data)
+            saveCoreData(motionData: data)
             fetchDatas()
-        } catch {
-            print(error)
-        }
     }
     
     func fetchDatas() {

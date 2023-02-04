@@ -11,33 +11,33 @@ import UIKit
 protocol CoreDataManageable {
     func saveCoreData(
         motionData: MotionData,
-        dispatchGroup: DispatchGroup,
-        completionHandler: @escaping (Result<Void, CoreDataError>) -> Void
+        dispatchGroup: DispatchGroup?,
+        completionHandler: ((Result<Void, CoreDataError>) -> Void)?
     )
-    func readCoreData() -> Result<[MotionEntity], CoreDataError>
+    func readCoreData(offset: Int) -> Result<[MotionEntity], CoreDataError>
     func deleteCoreData(motionData: MotionData) throws
 }
 
 extension CoreDataManageable {
     func saveCoreData(
         motionData: MotionData,
-        dispatchGroup: DispatchGroup,
-        completionHandler: @escaping (Result<Void, CoreDataError>) -> Void
+        dispatchGroup: DispatchGroup? = nil,
+        completionHandler: ((Result<Void, CoreDataError>) -> Void)? = nil
     ) {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            completionHandler(.failure(.appDelegateError))
+            completionHandler?(.failure(.appDelegateError))
             return
         }
         
         let backgroundContext = appDelegate.backgroundContext
         
-        dispatchGroup.enter()
+        dispatchGroup?.enter()
         backgroundContext.perform {
             guard let entity = NSEntityDescription.entity(
                 forEntityName: Constant.entityName,
                 in: backgroundContext
             ) else {
-                completionHandler(.failure(.saveError))
+                completionHandler?(.failure(.saveError))
                 return
             }
             
@@ -49,8 +49,8 @@ extension CoreDataManageable {
             object.setValue(motionData.type.rawValue, forKey: Constant.type)
             
             appDelegate.saveContext()
-            completionHandler(.success(()))
-            dispatchGroup.leave()
+            completionHandler?(.success(()))
+            dispatchGroup?.leave()
         }
     }
     
