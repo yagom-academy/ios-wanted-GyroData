@@ -14,6 +14,12 @@ fileprivate enum Titles {
 }
 
 final class MotionLogListViewController: UIViewController {
+    enum Section {
+        case main
+    }
+    
+    var viewModel: MotionLogListViewModel?
+    private var dataSource: UICollectionViewDiffableDataSource<Section, MotionLogCellViewModel>?
     
     // MARK: View(s)
     
@@ -36,31 +42,59 @@ final class MotionLogListViewController: UIViewController {
         configureViewConstraints()
         configureNavigationItems()
         configureMotionLogListCollectionView()
+        bindViewModel()
     }
     
     //MARK: Private Function(s)
     
-    private func configureMotionLogListCollectionView() {
-        let layout = UICollectionViewFlowLayout()
-        layout.minimumLineSpacing = 10
-        layout.scrollDirection = .vertical
-        layout.itemSize = .init(
-            width: view.frame.width,
-            height: 120
-        )
-        
-        motionLogListCollectionView.collectionViewLayout = layout
-        motionLogListCollectionView.delegate = self
-        motionLogListCollectionView.dataSource = self
-        motionLogListCollectionView.register(
-            MotionLogCell.self,
-            forCellWithReuseIdentifier: MotionLogCell.identifier
-        )
+    private func bindViewModel() {
+        viewModel?.bind{ [weak self] items in
+            self?.updateSnapshot(with: items)
+        }
     }
     
-    private func configureViewStyles() {
-        view.backgroundColor = .white
-        motionLogListCollectionView.backgroundColor = .systemGray4
+    private func updateSnapshot(with items: [MotionLogCellViewModel]) {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, MotionLogCellViewModel>()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(items)
+        self.dataSource?.apply(snapshot)
+    }
+    
+    private func configureMotionLogListCollectionView() {
+        let configuration = UICollectionLayoutListConfiguration(appearance: .plain)
+        let layout = UICollectionViewCompositionalLayout.list(using: configuration)
+        motionLogListCollectionView.collectionViewLayout = layout
+        
+        configureDataSource()
+    }
+    
+    private func createListCellRegistration()
+    -> UICollectionView.CellRegistration<MotionLogCell, MotionLogCellViewModel> {
+        let registration = UICollectionView
+            .CellRegistration<MotionLogCell, MotionLogCellViewModel>
+            .init { cell, _, item in
+                cell.configure(with: item)
+            }
+        return registration
+    }
+    
+    private func configureDataSource() {
+        let registration = createListCellRegistration()
+        dataSource = UICollectionViewDiffableDataSource<Section, MotionLogCellViewModel>(
+            collectionView: motionLogListCollectionView
+        ) { collectionView, indexPath, item in
+            
+            let cell = collectionView
+                .dequeueConfiguredReusableCell(
+                    using: registration,
+                    for: indexPath,
+                    item: item
+                )
+            cell.configure(with: item)
+            
+            return cell
+        }
+        motionLogListCollectionView.dataSource = dataSource
     }
     
     private func configureNavigationItems() {
@@ -72,6 +106,11 @@ final class MotionLogListViewController: UIViewController {
         )
         navigationItem.title = Titles.navigationItemTitle
         navigationItem.rightBarButtonItem = leftNavigationButton
+    }
+    
+    private func configureViewStyles() {
+        view.backgroundColor = .white
+        motionLogListCollectionView.backgroundColor = .systemGray4
     }
     
     private func combineViews() {
@@ -97,35 +136,5 @@ final class MotionLogListViewController: UIViewController {
                     equalTo: view.trailingAnchor
                 ),
         ])
-    }
-}
-
-/*
- MARK: Testing collectionView
- TODO: change to DiffableDataSource
- */
-
-extension MotionLogListViewController: UICollectionViewDelegate { }
-
-extension MotionLogListViewController: UICollectionViewDataSource {
-    func collectionView(
-        _ collectionView: UICollectionView,
-        numberOfItemsInSection section: Int
-    ) -> Int {
-        return 20
-    }
-    
-    func collectionView(
-        _ collectionView: UICollectionView,
-        cellForItemAt indexPath: IndexPath
-    ) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: "cell",
-            for: indexPath
-        ) as? MotionLogCell
-        else {
-            return MotionLogCell()
-        }
-        return cell
     }
 }

@@ -19,6 +19,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     ) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let rootView = MotionLogListViewController()
+        rootView.viewModel = MotionLogListViewModel()
         let rootNavigationController = UINavigationController(rootViewController: rootView)
         
         window = UIWindow(windowScene: windowScene)

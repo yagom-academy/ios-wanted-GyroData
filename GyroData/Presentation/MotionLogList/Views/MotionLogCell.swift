@@ -67,6 +67,14 @@ final class MotionLogCell: UICollectionViewCell {
     
     // MARK: Function(s)
     
+    func configure(with viewModel: MotionLogCellViewModel) {
+        createdAtLabel.text = viewModel.createDate
+        motionTypeLabel.text = viewModel.title
+        runTimeLabel.text = viewModel.runTime
+    }
+    
+    // MARK: Private Function(s)
+    
     private func combineViews() {
         let dateAndNameViews: [UIView] = [
             createdAtLabel,
