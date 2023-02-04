@@ -53,6 +53,7 @@ final class MeasureTimer {
             })
     }
     
+    @discardableResult
     func stop() -> Double {
         resetTimer()
         

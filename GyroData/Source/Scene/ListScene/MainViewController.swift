@@ -128,22 +128,16 @@ extension MainViewController {
 extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
-        guard let motionData = mainDataSource?.itemIdentifier(for: indexPath),
-              let fileManager = FileHandleManager() else { return }
-        
-        let detailViewModel = DetailViewModel(motionData, by: .view, fileManager: fileManager)
-        let detailViewController = DetailViewController(viewModel: detailViewModel, graphViewModel: GraphViewModel())
-        
-        show(detailViewController, sender: nil)
+        moveToDetailView(indexPath: indexPath, pageType: .view)
     }
     
     func tableView(
         _ tableView: UITableView,
         trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
     ) -> UISwipeActionsConfiguration? {
-        let playButton = UIContextualAction(style: .normal, title: "Play") { _, _, _ in
-            print("play button pressed")
+        let playButton = UIContextualAction(style: .normal, title: "Play") { _, _, completion in
+            self.moveToDetailView(indexPath: indexPath, pageType: .play)
+            completion(true)
         }
         let deleteButton = UIContextualAction(style: .destructive, title: "Delete") { _, _, _ in
             self.mainViewModel.deleteData(at: indexPath.row)
@@ -152,6 +146,16 @@ extension MainViewController: UITableViewDelegate {
         playButton.backgroundColor = .systemGreen
         
         return UISwipeActionsConfiguration(actions: [deleteButton, playButton])
+    }
+    
+    private func moveToDetailView(indexPath: IndexPath, pageType: PageType) {
+        guard let motionData = mainDataSource?.itemIdentifier(for: indexPath),
+              let fileManager = FileHandleManager() else { return }
+        
+        let detailViewModel = DetailViewModel(motionData, by: pageType, fileManager: fileManager)
+        let detailViewController = DetailViewController(viewModel: detailViewModel, graphViewModel: GraphViewModel())
+        
+        show(detailViewController, sender: nil)
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
