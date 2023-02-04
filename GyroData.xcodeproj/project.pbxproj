@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1A087CEF2989344700FC2056 /* LineGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A087CEE2989344600FC2056 /* LineGraphView.swift */; };
+		1A087CEF2989344700FC2056 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A087CEE2989344600FC2056 /* GraphView.swift */; };
 		1A087CF82989348800FC2056 /* SensorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A087CF42989348800FC2056 /* SensorManager.swift */; };
 		1A087CFA2989353400FC2056 /* MeasurementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A087CF92989353300FC2056 /* MeasurementViewController.swift */; };
 		1A087D0E298A976E00FC2056 /* MeasurementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A087D0D298A976E00FC2056 /* MeasurementView.swift */; };
@@ -23,6 +23,7 @@
 		414E53132987E503000221E2 /* ListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414E53122987E503000221E2 /* ListCell.swift */; };
 		414E53162987E6DB000221E2 /* UILabel +.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414E53152987E6DB000221E2 /* UILabel +.swift */; };
 		414E53182987E915000221E2 /* UIStackView +.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414E53172987E915000221E2 /* UIStackView +.swift */; };
+		4150A18F298E566A00EEA5AE /* GraphViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4150A18E298E566A00EEA5AE /* GraphViewModel.swift */; };
 		41539B90298A607100B7A446 /* MeasurementCoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41539B8E298A607100B7A446 /* MeasurementCoreModel.swift */; };
 		41539B93298A612E00B7A446 /* JSONEncoder +.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41539B92298A612E00B7A446 /* JSONEncoder +.swift */; };
 		41539B95298A61C000B7A446 /* JSONDecoder +.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41539B94298A61C000B7A446 /* JSONDecoder +.swift */; };
@@ -38,7 +39,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1A087CEE2989344600FC2056 /* LineGraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineGraphView.swift; sourceTree = "<group>"; };
+		1A087CEE2989344600FC2056 /* GraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		1A087CF42989348800FC2056 /* SensorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SensorManager.swift; sourceTree = "<group>"; };
 		1A087CF92989353300FC2056 /* MeasurementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeasurementViewController.swift; sourceTree = "<group>"; };
 		1A087D0D298A976E00FC2056 /* MeasurementView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeasurementView.swift; sourceTree = "<group>"; };
@@ -54,6 +55,7 @@
 		414E53122987E503000221E2 /* ListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCell.swift; sourceTree = "<group>"; };
 		414E53152987E6DB000221E2 /* UILabel +.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel +.swift"; sourceTree = "<group>"; };
 		414E53172987E915000221E2 /* UIStackView +.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView +.swift"; sourceTree = "<group>"; };
+		4150A18E298E566A00EEA5AE /* GraphViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphViewModel.swift; sourceTree = "<group>"; };
 		41539B8E298A607100B7A446 /* MeasurementCoreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementCoreModel.swift; sourceTree = "<group>"; };
 		41539B92298A612E00B7A446 /* JSONEncoder +.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONEncoder +.swift"; sourceTree = "<group>"; };
 		41539B94298A61C000B7A446 /* JSONDecoder +.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONDecoder +.swift"; sourceTree = "<group>"; };
@@ -106,7 +108,7 @@
 		1A087CED2989344600FC2056 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				1A087CEE2989344600FC2056 /* LineGraphView.swift */,
+				1A087CEE2989344600FC2056 /* GraphView.swift */,
 				414E53102987E0CC000221E2 /* ListView.swift */,
 				414E53122987E503000221E2 /* ListCell.swift */,
 				41539B9F298A94D600B7A446 /* ReviewView.swift */,
@@ -118,6 +120,7 @@
 		1A087CF02989348800FC2056 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				4150A18E298E566A00EEA5AE /* GraphViewModel.swift */,
 				1A087CF42989348800FC2056 /* SensorManager.swift */,
 				414E530E2987E052000221E2 /* Measurement.swift */,
 				414E53082987DE1B000221E2 /* Sensor.swift */,
@@ -188,11 +191,11 @@
 		63F01BB328D44FC400C53A39 /* GyroData */ = {
 			isa = PBXGroup;
 			children = (
-				41539B96298A620900B7A446 /* DataStorage */,
-				414E53142987E6BC000221E2 /* Extension + */,
 				1A087CED2989344600FC2056 /* Views */,
 				1A087CF02989348800FC2056 /* Models */,
 				1A087CCA2987CE1500FC2056 /* Controllers */,
+				41539B96298A620900B7A446 /* DataStorage */,
+				414E53142987E6BC000221E2 /* Extension + */,
 				1A087CC82987CDEA00FC2056 /* Supporting Files */,
 			);
 			path = GyroData;
@@ -288,10 +291,11 @@
 				1A087CF82989348800FC2056 /* SensorManager.swift in Sources */,
 				414C7A702988CE2A00452C25 /* AxisValue.swift in Sources */,
 				1A087D0E298A976E00FC2056 /* MeasurementView.swift in Sources */,
+				4150A18F298E566A00EEA5AE /* GraphViewModel.swift in Sources */,
 				41539B95298A61C000B7A446 /* JSONDecoder +.swift in Sources */,
 				414E530B2987DE9E000221E2 /* ListViewController.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
-				1A087CEF2989344700FC2056 /* LineGraphView.swift in Sources */,
+				1A087CEF2989344700FC2056 /* GraphView.swift in Sources */,
 				1A087CFA2989353400FC2056 /* MeasurementViewController.swift in Sources */,
 				4143584C298A277E00D243C5 /* GyroCoreData.xcdatamodeld in Sources */,
 			);
@@ -432,7 +436,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 453RFCPVJY;
+				DEVELOPMENT_TEAM = G9W4Z8U9JB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "GyroData/Supporting Files/Info.plist";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
@@ -446,7 +450,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.GyroData.SunnyRhovin3;
+				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.GyroData.SunnyRhovin2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -461,7 +465,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 453RFCPVJY;
+				DEVELOPMENT_TEAM = G9W4Z8U9JB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "GyroData/Supporting Files/Info.plist";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
@@ -475,7 +479,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.GyroData.SunnyRhovin3;
+				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.GyroData.SunnyRhovin2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

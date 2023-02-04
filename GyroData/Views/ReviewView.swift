@@ -28,7 +28,6 @@ final class ReviewView: UIView {
     private let dateLabel = UILabel(font: .body)
     private let pageStateLabel = UILabel(font: .title1)
     private let timeLabel = UILabel(text: "0.0", font: .title1, textAlignment: .right)
-    private let lineGraphView = LineGraphView()
     private let graphStackView = UIStackView(axis: .vertical, alignment: .leading, spacing: 30)
     private let playStackView = UIStackView(distribution: .fill, alignment: .center)
     private let playButton: UIButton = {
@@ -40,7 +39,10 @@ final class ReviewView: UIView {
         
         return button
     }()
-    
+
+    private let graphViewModel = GraphViewModel()
+    private lazy var graphView = GraphView(viewModel: graphViewModel)
+
     var state: PageState {
         return pageState
     }
@@ -75,15 +77,15 @@ final class ReviewView: UIView {
     }
     
     func showGraph(with data: [AxisValue]) {
-        lineGraphView.setData(data)
+        graphViewModel.setAxisValues(data)
     }
     
     func clearGraph() {
-        lineGraphView.setData([])
+        graphViewModel.setAxisValues([])
     }
     
     func drawGraph(with data: AxisValue) {
-        lineGraphView.addData(data)
+        graphViewModel.addAxisValue(data)
     }
     
     func togglePlayButton() {
@@ -106,7 +108,7 @@ final class ReviewView: UIView {
 extension ReviewView {
     
     private func configureHierarchy() {
-        [dateLabel, pageStateLabel, lineGraphView].forEach { view in
+        [dateLabel, pageStateLabel, graphView].forEach { view in
             graphStackView.addArrangedSubview(view)
         }
         
@@ -141,8 +143,8 @@ extension ReviewView {
             graphStackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -30),
             graphStackView.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor,  multiplier: 0.6),
             
-            lineGraphView.widthAnchor.constraint(equalTo: graphStackView.widthAnchor),
-            lineGraphView.heightAnchor.constraint(equalTo: lineGraphView.widthAnchor)
+            graphView.widthAnchor.constraint(equalTo: graphStackView.widthAnchor),
+            graphView.heightAnchor.constraint(equalTo: graphView.widthAnchor)
         ])
     }
     

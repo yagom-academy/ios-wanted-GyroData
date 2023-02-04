@@ -1,5 +1,5 @@
 //
-//  LineGraphView.swift
+//  GraphView.swift
 //  GyroData
 //
 //  Created by 로빈 on 2023/01/30.
@@ -7,26 +7,22 @@
 
 import UIKit
 
-final class LineGraphView: UIView {
-    
+final class GraphView: UIView {
+
+    private let viewModel: GraphViewModel
     private let axisXLabel = UILabel(text: "x: 0", textColor: .red, textAlignment: .center)
     private let axisYLabel = UILabel(text: "y: 0", textColor: .green, textAlignment: .center)
     private let axisZLabel = UILabel(text: "z: 0", textColor: .blue, textAlignment: .center)
     private let stackView = UIStackView(distribution: .fillEqually)
-
-    private var data: [AxisValue] = [] {
-        didSet {
-            setNeedsDisplay()
-        }
-    }
     
-    init(data: [AxisValue] = []) {
-        self.data = data
+    init(viewModel: GraphViewModel) {
+        self.viewModel = viewModel
         super.init(frame: .zero)
         
         backgroundColor = .white
         configureView()
         configureConstraints()
+        bindingViewModel()
     }
     
     override func draw(_ rect: CGRect) {
@@ -35,13 +31,11 @@ final class LineGraphView: UIView {
         drawGrid(column: 8, row: 8)
         drawGraph()
     }
-    
-    func setData(_ data: [AxisValue]) {
-        self.data = data
-    }
-    
-    func addData(_ data: AxisValue) {
-        self.data.append(data)
+
+    private func bindingViewModel() {
+        viewModel.bindingUpdate { [weak self] in
+            self?.setNeedsDisplay()
+        }
     }
     
     private func configureLabel(with data: AxisValue) {
@@ -74,7 +68,7 @@ final class LineGraphView: UIView {
         let width = frame.width
         let height = frame.height / 2
         
-        let xOffset = width / CGFloat(data.count)
+        let xOffset = width / CGFloat(viewModel.numberOfAxisValues)
         var yOffset: CGFloat = 0
         var maxValue: CGFloat = 0.1 {
             didSet {
@@ -82,15 +76,15 @@ final class LineGraphView: UIView {
             }
         }
         
-        let axisXpath = UIBezierPath()
-        let axisYpath = UIBezierPath()
-        let axisZpath = UIBezierPath()
+        let axisPathX = UIBezierPath()
+        let axisPathY = UIBezierPath()
+        let axisPathZ = UIBezierPath()
         
-        axisXpath.move(to: CGPoint(x: 0, y: height))
-        axisYpath.move(to: CGPoint(x: 0, y: height))
-        axisZpath.move(to: CGPoint(x: 0, y: height))
+        axisPathX.move(to: CGPoint(x: 0, y: height))
+        axisPathY.move(to: CGPoint(x: 0, y: height))
+        axisPathZ.move(to: CGPoint(x: 0, y: height))
         
-        for (index, axisData) in data.enumerated() {
+        for (index, axisData) in viewModel.axisValues.enumerated() {
             configureLabel(with: axisData)
             maxValue = max(maxValue, abs(axisData.x), abs(axisData.y), abs(axisData.z))
             let x = CGFloat(index) * xOffset
@@ -98,19 +92,19 @@ final class LineGraphView: UIView {
             let axisYPosition = height - axisData.y * yOffset
             let axisZPosition = height - axisData.z * yOffset
             
-            axisXpath.addLine(to: CGPoint(x: x, y: axisXPosition))
-            axisYpath.addLine(to: CGPoint(x: x, y: axisYPosition))
-            axisZpath.addLine(to: CGPoint(x: x, y: axisZPosition))
+            axisPathX.addLine(to: CGPoint(x: x, y: axisXPosition))
+            axisPathY.addLine(to: CGPoint(x: x, y: axisYPosition))
+            axisPathZ.addLine(to: CGPoint(x: x, y: axisZPosition))
         }
         
         UIColor.red.setStroke()
-        axisXpath.stroke()
+        axisPathX.stroke()
 
         UIColor.green.setStroke()
-        axisYpath.stroke()
+        axisPathY.stroke()
 
         UIColor.blue.setStroke()
-        axisZpath.stroke()
+        axisPathZ.stroke()
     }
     
     @available (*, unavailable)
@@ -120,7 +114,7 @@ final class LineGraphView: UIView {
 }
 
 // MARK: Layout
-extension LineGraphView {
+extension GraphView {
     private func configureView() {
         addSubview(stackView)
         stackView.addArrangedSubview(axisXLabel)

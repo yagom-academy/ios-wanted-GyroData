@@ -8,8 +8,9 @@
 import UIKit
 
 final class MeasurementView: UIView {
-    
-    private var graphView = LineGraphView()
+
+    private var graphViewModel = GraphViewModel()
+    private lazy var graphView = GraphView(viewModel: graphViewModel)
     
     private let segmentedController: UISegmentedControl = {
         let controller = UISegmentedControl(items: ["Acc", "Gyro"])
@@ -90,11 +91,11 @@ final class MeasurementView: UIView {
     }
     
     func clearGraph() {
-        graphView.setData([])
+        graphViewModel.setAxisValues([])
     }
     
     func drawGraph(with data: AxisValue) {
-        graphView.addData(data)
+        graphViewModel.addAxisValue(data)
     }
     
     func startActivityIndicator() {
