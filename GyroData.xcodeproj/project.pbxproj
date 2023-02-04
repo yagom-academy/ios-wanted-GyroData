@@ -109,9 +109,20 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		575938F7298EDDBE0030A06A /* GraphView */ = {
+			isa = PBXGroup;
+			children = (
+				575938F3298EC01C0030A06A /* GraphBackgroundView.swift */,
+				57D312AE298D0091001963C5 /* GraphView.swift */,
+				57EF194A298EA54900A9572B /* GraphViewModel.swift */,
+			);
+			path = GraphView;
+			sourceTree = "<group>";
+		};
 		5785B3702988B13900DD61B2 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				575938F7298EDDBE0030A06A /* GraphView */,
 				5785B3722988B31D00DD61B2 /* App */,
 				B2409080298BAF50008DC79B /* Protocol */,
 				B2409081298BAF68008DC79B /* Error */,
@@ -153,9 +164,6 @@
 		57D312A9298CF38F001963C5 /* DetailScene */ = {
 			isa = PBXGroup;
 			children = (
-				575938F3298EC01C0030A06A /* GraphBackgroundView.swift */,
-				57D312AE298D0091001963C5 /* GraphView.swift */,
-				57EF194A298EA54900A9572B /* GraphViewModel.swift */,
 				57D312B0298E563A001963C5 /* DetailView.swift */,
 				57D312AA298CF3A4001963C5 /* DetailViewController.swift */,
 				57D312AC298CF3B0001963C5 /* DetailViewModel.swift */,

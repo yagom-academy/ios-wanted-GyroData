@@ -128,6 +128,14 @@ extension MainViewController {
 extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        guard let motionData = mainDataSource?.itemIdentifier(for: indexPath),
+              let fileManager = FileHandleManager() else { return }
+        
+        let detailViewModel = DetailViewModel(motionData, by: .view, fileManager: fileManager)
+        let detailViewController = DetailViewController(viewModel: detailViewModel, graphViewModel: GraphViewModel())
+        
+        show(detailViewController, sender: nil)
     }
     
     func tableView(
