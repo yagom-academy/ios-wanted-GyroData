@@ -8,6 +8,11 @@
 import UIKit
 
 final class MotionDataDetailViewController: UIViewController {
+    enum DetailViewType: String {
+        case view = "View"
+        case play = "Play"
+    }
+    
     enum Constant {
         enum Namespace {
             static let playButton = "play.fill"
