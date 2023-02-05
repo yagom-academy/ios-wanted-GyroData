@@ -140,12 +140,14 @@
             - Play모드
                 - 실시간으로 저장된 데이터의 변화를 그래프 다시 그려줌
 <br>
+
 - **View**
     - GraphView
         - 아이폰의 움직임을 그래프로 표현해주는 View
     - CustomDataCell
         - `MainViewController` - `UITableView`에 사용되는 CustomCell
 <br>
+
 - **Model**
     - CoreDataProcessable
         - `CoreData` 사용을 위한 `Create, Read, Delete` 기능 구현 (`Update` 미사용으로 미구현)
