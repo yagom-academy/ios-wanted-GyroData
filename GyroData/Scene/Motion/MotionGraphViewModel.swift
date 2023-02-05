@@ -14,6 +14,7 @@ protocol MotionGraphViewModelDelegate: AnyObject {
         data: [MotionDataType]
     )
     func motionGraphViewModel(actionConfigurationAboutViewWillAppear isPlayButtonHidden: Bool)
+    func motionGraphViewModel(data: MotionDataType, at time: String)
 }
 
 final class MotionGraphViewModel {
@@ -23,6 +24,8 @@ final class MotionGraphViewModel {
     enum Action {
         case viewWillAppear
         case viewDidAppear
+        case playButtonTap
+        case stopButtonTap
     }
     enum Style {
         case play, view
@@ -39,6 +42,8 @@ final class MotionGraphViewModel {
     
     private let style: Style
     private let motionID: String
+    private var motion: Motion?
+    private var playTimer: Timer?
     private let readService: FileManagerMotionReadService
     private weak var delegate: MotionGraphViewModelDelegate?
     
@@ -56,6 +61,10 @@ final class MotionGraphViewModel {
             )
         case .viewDidAppear:
             fetchMotion(with: motionID)
+        case .playButtonTap:
+            play()
+        case .stopButtonTap:
+            stop()
         }
     }
     
@@ -65,16 +74,47 @@ final class MotionGraphViewModel {
 }
 
 private extension MotionGraphViewModel {
+    func play() {
+        var index = 0
+        playTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] timer in
+            guard let motion = self?.motion, index < Int(motion.time * 10) else {
+                self?.playTimer?.invalidate()
+                return
+            }
+            self?.delegate?.motionGraphViewModel(
+                data: MotionData(
+                    x: motion.data.x[index],
+                    y: motion.data.y[index],
+                    z: motion.data.z[index]
+                ),
+                at: String(format: "%.1f", Double(index + 1) / 10.0)
+            )
+            index += 1
+        }
+    }
+    
+    func stop() {
+        playTimer?.invalidate()
+    }
+    
     func fetchMotion(with id: String) {
-        guard let motion = readService.read(with: motionID) else { return }
+        guard let currentMotion = readService.read(with: motionID) else { return }
+        motion = currentMotion
         var motionData: [MotionData] = []
-        for index in 0..<motion.data.x.count {
-            motionData.append(MotionData(x: motion.data.x[index], y: motion.data.y[index], z: motion.data.z[index]))
+        for index in 0..<currentMotion.data.x.count {
+            motionData.append(
+                MotionData(
+                    x: currentMotion.data.x[index],
+                    y: currentMotion.data.y[index],
+                    z: currentMotion.data.z[index]
+                )
+            )
         }
         
         delegate?.motionGraphViewModel(
-            actionConfigurationAboutViewDidAppear: motion.date.formatted(by: Constant.dateFormat),
-            title: "\(motion.type.text) \(style.title)",
-            data: motionData)
+            actionConfigurationAboutViewDidAppear: currentMotion.date.formatted(by: Constant.dateFormat),
+            title: "\(currentMotion.type.text) \(style.title)",
+            data: style == .view ? motionData : []
+        )
     }
 }

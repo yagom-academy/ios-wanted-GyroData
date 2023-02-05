@@ -112,15 +112,21 @@ private extension MotionGraphViewController {
     
     func setupButton() {
         playButton.setActiveHandler {
-            //write active action
+            self.graphView.clear()
+            self.viewModel.action(.playButtonTap)
         }
         playButton.setInactiveHandler {
-            //write active inaction
+            self.viewModel.action(.stopButtonTap)
         }
     }
 }
 
 extension MotionGraphViewController: MotionGraphViewModelDelegate {
+    func motionGraphViewModel(data: MotionDataType, at time: String) {
+        graphView.addData(data)
+        timeLabel.text = time
+    }
+    
     func motionGraphViewModel(
         actionConfigurationAboutViewDidAppear date: String,
         title: String,
