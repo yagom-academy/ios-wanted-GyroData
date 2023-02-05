@@ -33,7 +33,13 @@ final class RecordMotionDataViewController: UIViewController {
     }()
 
     private let segmentedControl = UISegmentedControl()
-    private let graphView = GraphView()
+    private let graphView: GraphView = {
+        let graphView = GraphView(frame: .zero)
+        graphView.backgroundColor = .systemBackground
+        graphView.translatesAutoresizingMaskIntoConstraints = false
+        return graphView
+    }()
+    
     private let measureButton: UIButton = {
         let button = UIButton()
         button.setTitle(Constant.Namespace.measure, for: .normal)
@@ -124,8 +130,7 @@ final class RecordMotionDataViewController: UIViewController {
             stackView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
         ])
-
-        graphView.translatesAutoresizingMaskIntoConstraints = false
+        
         NSLayoutConstraint.activate([
             graphView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.8),
             graphView.heightAnchor.constraint(equalTo: graphView.widthAnchor)

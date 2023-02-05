@@ -28,7 +28,13 @@ final class MotionDataDetailViewController: UIViewController {
         return label
     }()
     
-    private let graphView = GraphView()
+    private let graphView: GraphView = {
+        let graphView = GraphView(frame: .zero)
+        graphView.backgroundColor = .systemBackground
+        graphView.translatesAutoresizingMaskIntoConstraints = false
+        return graphView
+    }()
+    
     private let playStopButton: UIButton = {
         let button = UIButton()
         button.isHidden = true
@@ -121,7 +127,6 @@ final class MotionDataDetailViewController: UIViewController {
             viewTypeLabel.leadingAnchor.constraint(equalTo: graphView.leadingAnchor)
         ])
         
-        graphView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             graphView.topAnchor.constraint(equalTo: viewTypeLabel.bottomAnchor, constant: Constant.Layout.spacing),
             graphView.centerXAnchor.constraint(equalTo: view.layoutMarginsGuide.centerXAnchor),
