@@ -10,6 +10,14 @@ import UIKit
 final class GraphView: UIView {
     static let segmentColor: [UIColor] = [.systemRed, .systemGreen, .systemBlue]
     static let capacity: Double = 600.0
+    private(set) var rangeLimit: Double = 1.0 {
+        didSet {
+            changeSegmentsScale()
+        }
+    }
+    private var scale: Double {
+        return bounds.height / (rangeLimit * 2)
+    }
     
     private let xLabel: UILabel = {
         let label = UILabel()
@@ -88,6 +96,10 @@ final class GraphView: UIView {
     }
     
     func addData(_ data: MotionDataType) {
+        if let maxData = [abs(data.x), abs(data.y), abs(data.z)].max(), maxData >= rangeLimit {
+            rangeLimit = maxData + (maxData * 0.2)
+        }
+        
         if segments.isEmpty {
             addSegment()
         } else if let currentSegment = segments.last, currentSegment.isFull {
@@ -98,6 +110,10 @@ final class GraphView: UIView {
         xLabel.text = "x: \(data.xDescription)"
         yLabel.text = "y: \(data.yDescription)"
         zLabel.text = "z: \(data.zDescription)"
+    }
+    
+    private func changeSegmentsScale() {
+        segments.forEach { $0.setScale(to: scale) }
     }
     
     private func addSegment() {
@@ -111,10 +127,19 @@ final class GraphView: UIView {
                     width: segmentWidth,
                     height: bounds.height
                 ),
+                scale: scale,
                 startPoint: startPoint
             )
         } else {
-            segment = GraphSegmentView(frame: CGRect(x: 0, y: 0, width: segmentWidth, height: bounds.height))
+            segment = GraphSegmentView(
+                frame: CGRect(
+                    x: 0,
+                    y: 0,
+                    width: segmentWidth,
+                    height: bounds.height
+                ),
+                scale: scale
+            )
         }
         
         segments.append(segment)

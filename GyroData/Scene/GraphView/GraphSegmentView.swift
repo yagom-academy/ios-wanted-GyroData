@@ -15,9 +15,10 @@ struct MotionData: MotionDataType {
 
 final class GraphSegmentView: UIView {
     static let capacity: Double = 30.0
-    private(set) var rangeLimit: Double = 10.0
-    private var scale: CGFloat {
-        return bounds.height / rangeLimit
+    private var scale: Double {
+        didSet {
+            setNeedsDisplay()
+        }
     }
     private var dataWidth: CGFloat {
         return bounds.width / GraphSegmentView.capacity
@@ -33,8 +34,9 @@ final class GraphSegmentView: UIView {
         return dataPoints.count == Int(GraphSegmentView.capacity)
     }
     
-    init(frame: CGRect, startPoint: MotionData = MotionData(x: 0, y: 0, z: 0)) {
+    init(frame: CGRect, scale: Double, startPoint: MotionData = MotionData(x: 0, y: 0, z: 0)) {
         self.startPoint = startPoint
+        self.scale = scale
         super.init(frame: frame)
         backgroundColor = .clear
     }
@@ -47,6 +49,10 @@ final class GraphSegmentView: UIView {
         let data = MotionData(x: data.x, y: data.y, z: data.z)
         
         dataPoints.append(data)
+    }
+    
+    func setScale(to scale: Double) {
+        self.scale = scale
     }
     
     override func draw(_ rect: CGRect) {
