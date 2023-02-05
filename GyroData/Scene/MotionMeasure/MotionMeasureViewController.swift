@@ -132,8 +132,7 @@ private extension MotionMeasureViewController {
     @objc func saveMotion() {
         viewModel.action(.motionCreate(
             type: measurementTypeSegmentedControl.selectedSegmentIndex,
-            time: "",
-            data: [])
+            data: graphView.motionData)
         )
         startIndicatorView()
     }

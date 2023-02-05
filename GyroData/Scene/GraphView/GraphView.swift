@@ -14,6 +14,17 @@ final class GraphView: UIView {
     
     static let segmentColor: [UIColor] = [.systemRed, .systemGreen, .systemBlue]
     static let capacity: Double = 600.0
+    
+    private var segments: [GraphSegmentView] = []
+    private var segmentWidth: CGFloat {
+        return bounds.width / (GraphView.capacity / GraphSegmentView.capacity)
+    }
+    private var gridHeight: CGFloat {
+        return bounds.height / 8
+    }
+    private var gridWidth: CGFloat {
+        return bounds.width / 8
+    }
     private(set) var rangeLimit: Double = Default.rangeLimit {
         didSet {
             changeSegmentsScale()
@@ -21,6 +32,9 @@ final class GraphView: UIView {
     }
     private var scale: Double {
         return bounds.height / (rangeLimit * 2)
+    }
+    var motionData: [MotionDataType] {
+        return segments.reduce(into: [MotionDataType]()) { $0 += $1.dataPoints }
     }
     
     private let xLabel: UILabel = {
@@ -56,18 +70,6 @@ final class GraphView: UIView {
         return stackView
     }()
     
-    private var segments: [GraphSegmentView] = []
-    private var segmentWidth: CGFloat {
-        return bounds.width / (GraphView.capacity / GraphSegmentView.capacity)
-    }
-    
-    private var gridHeight: CGFloat {
-        return bounds.height / 8
-    }
-    
-    private var gridWidth: CGFloat {
-        return bounds.width / 8
-    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -88,10 +90,9 @@ final class GraphView: UIView {
         context.setStrokeColor(UIColor.systemGray4.cgColor)
         
         for lineIndex in 1...7 {
-            // 세로줄
             context.move(to: CGPoint(x: gridWidth * CGFloat(lineIndex), y: 0))
             context.addLine(to: CGPoint(x: gridWidth * CGFloat(lineIndex), y: bounds.height))
-            // 가로줄
+            
             context.move(to: CGPoint(x: 0, y: gridHeight * CGFloat(lineIndex)))
             context.addLine(to: CGPoint(x: bounds.width, y: gridHeight * CGFloat(lineIndex)))
         }
@@ -154,6 +155,7 @@ final class GraphView: UIView {
         
         segments.append(segment)
         addSubview(segment)
+        bringSubviewToFront(labelStackView)
     }
 }
 

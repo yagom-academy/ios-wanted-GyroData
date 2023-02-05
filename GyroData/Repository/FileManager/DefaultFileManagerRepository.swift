@@ -14,7 +14,7 @@ struct DefaultFileManagerRepository: FileManagerRepository {
     
     func create(_ domain: Motion) -> Result<Void, Error> {
         let motionDTO = MotionDTO(from: domain)
-        let fileURL = directory.appendingPathExtension("\(motionDTO.id).json")
+        let fileURL = directory.appendingPathComponent("\(motionDTO.id).json")
         do {
             let JSONData = try JSONEncoder().encode(motionDTO)
             try JSONData.write(to: fileURL)
@@ -25,14 +25,14 @@ struct DefaultFileManagerRepository: FileManagerRepository {
     }
 
     func read(with id: String) throws -> MotionDTO {
-        let fileURL = directory.appendingPathExtension("\(id).json")
+        let fileURL = directory.appendingPathComponent("\(id).json")
         let JSONData = try Data(contentsOf: fileURL, options: .mappedIfSafe)
         
         return try JSONDecoder().decode(MotionDTO.self, from: JSONData)
     }
     
     func delete(with id: String) throws {
-        let fileURL = directory.appendingPathExtension("\(id).json")
+        let fileURL = directory.appendingPathComponent("\(id).json")
         
         try FileManager.default.removeItem(at: fileURL)
     }

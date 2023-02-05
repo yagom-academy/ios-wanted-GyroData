@@ -23,7 +23,7 @@ final class MotionMeasurementViewModel {
     enum Action {
         case measurementStart(type: Int)
         case measurementStop(type: Int)
-        case motionCreate(type: Int, time: String, data: [MotionDataType])
+        case motionCreate(type: Int, data: [MotionDataType])
     }
 
     private let createService: MotionCreatable
@@ -48,8 +48,8 @@ final class MotionMeasurementViewModel {
             guard let type = Motion.MeasurementType(rawValue: type) else { return }
             measurementService.stopMeasurement(type: type)
             delegate?.motionMeasurementViewModel(actionConfigurationAboutMeasurementCompleted: ())
-        case let .motionCreate(type, time, data):
-            createMotionWith(type: type, time: time, data: data)
+        case let .motionCreate(type, data):
+            createMotionWith(type: type, data: data)
         }
     }
     
@@ -78,11 +78,11 @@ private extension MotionMeasurementViewModel {
             })
     }
     
-    func createMotionWith(type: Int, time: String, data: [MotionDataType]) {
+    func createMotionWith(type: Int, data: [MotionDataType]) {
         createService.create(
             date: Date().formatted(by: Constant.dateFormat),
             type: type,
-            time: time,
+            time: String(format: "%.1f", Double(data.count) / 10.0),
             data: data
         ) { [weak self] result in
             switch result {
