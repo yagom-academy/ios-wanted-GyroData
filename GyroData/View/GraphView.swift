@@ -16,21 +16,21 @@ final class GraphView: UIView {
     private var layerY = CAShapeLayer()
     private var layerZ = CAShapeLayer()
     private var gridLayer: CAShapeLayer?
-
+    
     // TODO: 세번째화면 play 시 maxValue 미리 설정, 세번째화면 view 시 전체 그려서 보여주기
-
+    
     init() {
         super.init(frame: .zero)
         clearGraph()
         viewModel.bind { [weak self] coordinates in
-            self?.redrawGraph(coordinates)
+            self?.drawCompleteGraph(coordinates)
         }
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     private func calculateY(_ y: Double) -> CGFloat {
         let height = frame.height
         let centerY = height / 2
@@ -38,15 +38,19 @@ final class GraphView: UIView {
         let calculatedY = centerY + CGFloat(y) / axisRange * height
         return calculatedY
     }
-
-    private func redrawGraph(_ coordinates: [Coordinate]) {
+    
+    func drawCompleteGraph(_ coordinates: [Coordinate]) {
         removeGraphLine()
         coordinates.forEach { coordinate in
             drawXYZLine(coordinate)
         }
         setNeedsDisplay()
     }
-
+    
+    func configureAxisRange(_ coordinates: [Coordinate]) {
+        viewModel.action(.configureAxisRange(coordinates: coordinates))
+    }
+    
     private func drawLine(by lineLayer: CAShapeLayer, from start: CGPoint?, to end: CGPoint) {
         guard let start else { return }
         let path: UIBezierPath
@@ -60,11 +64,11 @@ final class GraphView: UIView {
         lineLayer.frame = bounds
         lineLayer.path = path.cgPath
     }
-
+    
     func drawGrid() {
         layer.borderColor = UIColor.systemGray.cgColor
         layer.borderWidth = 1
-
+        
         let width: Int = Int(bounds.width)
         let fraction: Int = Int(bounds.width) / 8
         let path = UIBezierPath()
@@ -74,7 +78,7 @@ final class GraphView: UIView {
             path.move(to: CGPoint(x: fraction * i, y: .zero))
             path.addLine(to: CGPoint(x: fraction * i, y: width))
         }
-
+        
         let layer = CAShapeLayer()
         layer.lineWidth = 1
         layer.frame = bounds
@@ -84,7 +88,7 @@ final class GraphView: UIView {
         layer.masksToBounds = true
         setNeedsDisplay()
     }
-
+    
     private func createLineLayer(color: CGColor) -> CAShapeLayer {
         let layer = CAShapeLayer()
         layer.lineWidth = 1
@@ -93,7 +97,7 @@ final class GraphView: UIView {
         self.layer.addSublayer(layer)
         return layer
     }
-
+    
     private func removeGraphLine() {
         layer.sublayers?.removeAll(where: { layer in
             layer == layerX || layer == layerY || layer == layerZ
@@ -101,35 +105,42 @@ final class GraphView: UIView {
         layerX = createLineLayer(color: UIColor.systemRed.cgColor)
         layerY = createLineLayer(color: UIColor.systemGreen.cgColor)
         layerZ = createLineLayer(color: UIColor.systemBlue.cgColor)
-
+        
         viewModel.count = 1.0
         currentPointX = CGPoint(x: .zero, y: frame.height / 2)
         currentPointY = CGPoint(x: .zero, y: frame.height / 2)
         currentPointZ = CGPoint(x: .zero, y: frame.height / 2)
     }
-
+    
+    func fetchCoordinates(_ coordinates: [Coordinate]) {
+        viewModel.action(.fetchCoordinates(coordinates: coordinates))
+    }
+    
     func clearGraph() {
         removeGraphLine()
         setNeedsDisplay()
     }
-
+    
     func drawChartLine(_ coordinate: Coordinate) {
-        viewModel.action(.drawChartLine(coordinate: coordinate, handler: { [weak self] coordinate in
-            self?.drawXYZLine(coordinate)
-            self?.setNeedsDisplay()
-        }))
+        viewModel.action(.drawChartLine(
+            coordinate: coordinate,
+            handler: { [weak self] coordinate in
+                self?.drawXYZLine(coordinate)
+                self?.setNeedsDisplay()
+            })
+        )
     }
-
+    
     private func drawXYZLine(_ coordinate: Coordinate) {
         viewModel.count += 1
         let pointX = CGPoint(x: Double(viewModel.count) / viewModel.maxCount * frame.width, y: calculateY(coordinate.x))
         let pointY = CGPoint(x: Double(viewModel.count) / viewModel.maxCount * frame.width, y: calculateY(coordinate.y))
         let pointZ = CGPoint(x: Double(viewModel.count) / viewModel.maxCount * frame.width, y: calculateY(coordinate.z))
-
+        
         drawLine(by: layerX, from: currentPointX, to: pointX)
         drawLine(by: layerY, from: currentPointY, to: pointY)
         drawLine(by: layerZ, from: currentPointZ, to: pointZ)
-
+        
         currentPointX = pointX
         currentPointY = pointY
         currentPointZ = pointZ

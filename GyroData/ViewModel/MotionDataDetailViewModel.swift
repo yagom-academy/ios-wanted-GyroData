@@ -17,6 +17,7 @@ final class MotionDataDetailViewModel {
     enum Action {
         case onAppear
         case buttonTapped(handler: (String) -> Void)
+        case didAppear(handler: ([Coordinate]) -> Void)
     }
     
     enum ButtonState {
@@ -51,6 +52,7 @@ final class MotionDataDetailViewModel {
     private var showPlayViewComponents: (() -> Void)?
     private var isPlaying: ButtonState = ButtonState.isStopped
     private var onUpdate: ((Coordinate, String) -> Void)?
+    private var onSetGraphView: (([Coordinate]) -> Void)?
     private var timer: Timer?
     private var startTime: Date = Date()
     
@@ -79,6 +81,10 @@ final class MotionDataDetailViewModel {
         self.onUpdate = onUpdate
     }
     
+    func bind(onSetGraphView: @escaping ([Coordinate]) -> Void) {
+        self.onSetGraphView = onSetGraphView
+    }
+    
     func action(_ action: Action) {
         switch action {
         case .onAppear:
@@ -92,6 +98,11 @@ final class MotionDataDetailViewModel {
                 play()
             case .isStopped:
                 pause()
+            }
+        case let .didAppear(handler):
+            if viewType == .view {
+                guard let coordinates = fetchCoordinateData() else { return }
+                handler(coordinates)
             }
         }
     }
@@ -116,6 +127,7 @@ final class MotionDataDetailViewModel {
     
     private func play() {
         guard let coordinates = fetchCoordinateData() else { return }
+        onSetGraphView?(coordinates)
         var reversed = Array(coordinates.reversed())
         startTime = Date()
         timer = Timer.scheduledTimer(
@@ -132,6 +144,7 @@ final class MotionDataDetailViewModel {
         })
     }
     
+    // TODO: - stop으로 수정
     private func pause() {
         timer?.invalidate()
     }

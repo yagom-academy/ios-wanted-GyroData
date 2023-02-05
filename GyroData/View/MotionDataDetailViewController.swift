@@ -43,9 +43,9 @@ final class MotionDataDetailViewController: UIViewController {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
-
+    
     private let timerLabel: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.font = .preferredFont(forTextStyle: .title1)
         label.adjustsFontForContentSizeCategory = true
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -53,7 +53,7 @@ final class MotionDataDetailViewController: UIViewController {
         label.isHidden = true
         return label
     }()
-
+    
     init(viewModel: MotionDataDetailViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -78,16 +78,22 @@ final class MotionDataDetailViewController: UIViewController {
             self.graphView.drawChartLine(coordinate)
             self.timerLabel.text = timerText
         }
+        viewModel.bind { coordinates in
+            self.graphView.configureAxisRange(coordinates)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewModel.action(.onAppear)
     }
-
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         graphView.drawGrid()
+        viewModel.action(.didAppear(handler: { [weak self] coordinates in
+            self?.graphView.fetchCoordinates(coordinates)
+        }))
     }
     
     private func setNavigationTitle(with text: String) {
@@ -140,7 +146,7 @@ final class MotionDataDetailViewController: UIViewController {
             imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor)
         ])
     }
-
+    
     private func setButtonAction() {
         playStopButton.addAction(
             UIAction { _ in
@@ -149,7 +155,7 @@ final class MotionDataDetailViewController: UIViewController {
                     self.playStopButton.setImage(
                         UIImage(systemName: buttonImage),
                         for: .normal
-                )
+                    )
                 })) },
             for: .touchUpInside
         )
