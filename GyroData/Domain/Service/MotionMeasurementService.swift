@@ -10,7 +10,7 @@ import CoreMotion
 final class MotionMeasurementService: MotionMeasurable {
     enum Constant {
         static let timeInterval: Double = 0.1
-        static let timeLimit: Double = 60.01
+        static let timeLimit: Double = 60.0
     }
     private let measurementQueue = OperationQueue()
     private let motionManager = CMMotionManager()
@@ -50,7 +50,7 @@ private extension MotionMeasurementService {
         var currentTime: Double = .zero
         motionManager.accelerometerUpdateInterval = Constant.timeInterval
         motionManager.startAccelerometerUpdates(to: measurementQueue) { [weak self] data, error in
-            guard let data = data, currentTime <= Constant.timeLimit else {
+            guard let data = data, currentTime < Constant.timeLimit else {
                 completeHandler(true)
                 self?.stopMeasurement(type: .acc)
                 return
@@ -67,7 +67,7 @@ private extension MotionMeasurementService {
         var currentTime: Double = .zero
         motionManager.gyroUpdateInterval = Constant.timeInterval
         motionManager.startGyroUpdates(to: measurementQueue) { [weak self] data, error in
-            guard let data = data, currentTime <= Constant.timeLimit else {
+            guard let data = data, currentTime < Constant.timeLimit else {
                 completeHandler(true)
                 self?.stopMeasurement(type: .gyro)
                 return

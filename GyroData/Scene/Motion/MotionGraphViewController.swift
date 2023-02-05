@@ -28,14 +28,16 @@ final class MotionGraphViewController: UIViewController {
     private let dateLabel: UILabel = {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .body)
+        label.text = " "
         return label
     }()
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .title1)
+        label.text = "View"
         return label
     }()
-    private let graphView = UIView()
+    private let graphView = GraphView()
     private let playButton = PlayButton()
     private let timeLabel: UILabel = {
         let label = UILabel()
@@ -77,9 +79,9 @@ final class MotionGraphViewController: UIViewController {
         viewModel.configureDelegate(self)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        viewModel.action(.viewWillAppear)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        viewModel.action(.viewDidAppear)
     }
 }
 
@@ -123,8 +125,9 @@ private extension MotionGraphViewController {
 }
 
 extension MotionGraphViewController: MotionGraphViewModelDelegate {
-    func motionGraphViewModel(willDisplayDate date: String, type: String, data: Motion.MeasurementData) {
+    func motionGraphViewModel(willDisplayDate date: String, type: String, data: [MotionDataType]) {
         dateLabel.text = date
         titleLabel.text = "\(type) \(style.title)"
+        data.forEach(graphView.addData(_:))
     }
 }
