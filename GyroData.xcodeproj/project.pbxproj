@@ -53,6 +53,7 @@
 		E3D84AB32988F81200FDA64F /* CMAcceleration+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D84AB22988F81200FDA64F /* CMAcceleration+.swift */; };
 		E3F7B5A6298CB38300A7810A /* MotionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F7B5A5298CB38300A7810A /* MotionCell.swift */; };
 		E3F7B5AA298D3ED400A7810A /* ViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F7B5A9298D3ED400A7810A /* ViewControllerFactory.swift */; };
+		E3F7B5AD298F2A2E00A7810A /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F7B5AC298F2A2E00A7810A /* GraphView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,6 +116,7 @@
 		E3D84AB22988F81200FDA64F /* CMAcceleration+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CMAcceleration+.swift"; sourceTree = "<group>"; };
 		E3F7B5A5298CB38300A7810A /* MotionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionCell.swift; sourceTree = "<group>"; };
 		E3F7B5A9298D3ED400A7810A /* ViewControllerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerFactory.swift; sourceTree = "<group>"; };
+		E3F7B5AC298F2A2E00A7810A /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -205,6 +207,7 @@
 		D381D2692988E58700567C6B /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				E3F7B5AB298F29FF00A7810A /* GraphView */,
 				D3811723298B77BA00CFDDF0 /* Utility */,
 				D381D26D2988E58700567C6B /* MotionMeasure */,
 				D381D2702988E58700567C6B /* Motion */,
@@ -374,6 +377,14 @@
 			path = Utility;
 			sourceTree = "<group>";
 		};
+		E3F7B5AB298F29FF00A7810A /* GraphView */ = {
+			isa = PBXGroup;
+			children = (
+				E3F7B5AC298F2A2E00A7810A /* GraphView.swift */,
+			);
+			path = GraphView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -506,6 +517,7 @@
 				E3D84AA22988E72E00FDA64F /* MotionCreateService.swift in Sources */,
 				E3D84AAF2988F76200FDA64F /* MotionDataType.swift in Sources */,
 				D381D27D2988E58700567C6B /* MotionsListViewModel.swift in Sources */,
+				E3F7B5AD298F2A2E00A7810A /* GraphView.swift in Sources */,
 				E3D84AA02988E71800FDA64F /* FileManagerMotionReadable.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
 				D381174E298BA6CE00CFDDF0 /* MotionMeasurementService.swift in Sources */,

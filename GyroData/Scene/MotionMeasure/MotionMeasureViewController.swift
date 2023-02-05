@@ -25,7 +25,7 @@ final class MotionMeasureViewController: UIViewController {
         segmentedControl.selectedSegmentIndex = 0
         return segmentedControl
     }()
-    private let graphView = UIView()
+    private let graphView = GraphView()
     private let measureButton: UIButton = {
         let button = UIButton()
         button.setTitle(Constant.measureButtonTitle, for: .normal)
