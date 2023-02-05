@@ -138,9 +138,8 @@ final class MotionDataDetailViewController: UIViewController {
         playStopButton.addAction(
             UIAction { _ in
                 self.graphView.resetGraph()
-                self.viewModel.action(.playStopButtonTapped(handler: { buttonImage in
-                    self.imageView.image = UIImage(systemName: buttonImage)
-                })) },
+                self.viewModel.action(.playStopButtonTapped)
+            },
             for: .touchUpInside
         )
     }
@@ -170,6 +169,9 @@ final class MotionDataDetailViewController: UIViewController {
         }
         viewModel.bind { coordinates in
             self.graphView.configureAxisRange(coordinates)
+        }
+        viewModel.bind { buttonImage in
+            self.imageView.image = UIImage(systemName: buttonImage)
         }
     }
 }

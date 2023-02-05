@@ -16,7 +16,7 @@ final class MotionDataDetailViewModel {
     
     enum Action {
         case onAppear
-        case playStopButtonTapped(handler: (String) -> Void)
+        case playStopButtonTapped
         case didAppear(handler: ([Coordinate]) -> Void)
     }
     
@@ -42,7 +42,6 @@ final class MotionDataDetailViewModel {
             }
         }
     }
-
     
     private let viewType: DetailViewType
     private let motionData: MotionData
@@ -51,6 +50,7 @@ final class MotionDataDetailViewModel {
     private var setViewTypeText: ((String) -> Void)?
     private var showPlayViewComponents: (() -> Void)?
     private var isPlaying: ButtonState = ButtonState.isStopped
+    private var onButtonStateToggle: ((String) -> Void)?
     private var onGraphViewUpdate: ((Coordinate, String) -> Void)?
     private var onGraphViewSet: (([Coordinate]) -> Void)?
     private var timer: Timer?
@@ -77,6 +77,10 @@ final class MotionDataDetailViewModel {
         self.showPlayViewComponents = showPlayViewComponents
     }
     
+    func bind(onButtonStateToggle: @escaping (String) -> Void) {
+        self.onButtonStateToggle = onButtonStateToggle
+    }
+    
     func bind(onGraphViewUpdate: @escaping ((Coordinate, String) -> Void)) {
         self.onGraphViewUpdate = onGraphViewUpdate
     }
@@ -90,9 +94,8 @@ final class MotionDataDetailViewModel {
         case .onAppear:
             setNavigationTitle?(motionData.createdAt.dateTimeString())
             setDetailViewType()
-        case let .playStopButtonTapped(handler):
+        case let .playStopButtonTapped:
             toggleButtonState()
-            handler(isPlaying.buttonImage)
         case let .didAppear(handler):
             if viewType == .view {
                 guard let coordinates = fetchCoordinateData() else { return }
@@ -127,6 +130,7 @@ final class MotionDataDetailViewModel {
         case .isStopped:
             stop()
         }
+        onButtonStateToggle?(isPlaying.buttonImage)
     }
     
     private func play() {
@@ -150,6 +154,8 @@ final class MotionDataDetailViewModel {
     
     private func stop() {
         timer?.invalidate()
+        isPlaying.toggle()
+        onButtonStateToggle?(isPlaying.buttonImage)
     }
     
     private func fetchCoordinateData() -> [Coordinate]? {
