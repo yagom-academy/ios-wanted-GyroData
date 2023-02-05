@@ -37,6 +37,7 @@
 		EB96E7702987B8F500F9DF79 /* MotionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB96E76F2987B8F500F9DF79 /* MotionData.swift */; };
 		EB96E7722987C8DE00F9DF79 /* Coordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB96E7712987C8DE00F9DF79 /* Coordinate.swift */; };
 		EB96E7742987C93C00F9DF79 /* MotionDataType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB96E7732987C93C00F9DF79 /* MotionDataType.swift */; };
+		EBBB9DCC298F48AA000E46FE /* GraphViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBB9DCB298F48AA000E46FE /* GraphViewModel.swift */; };
 		EBBD3F542989378B0058EA45 /* MotionDataListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBD3F532989378B0058EA45 /* MotionDataListViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -73,6 +74,7 @@
 		EB96E76F2987B8F500F9DF79 /* MotionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionData.swift; sourceTree = "<group>"; };
 		EB96E7712987C8DE00F9DF79 /* Coordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinate.swift; sourceTree = "<group>"; };
 		EB96E7732987C93C00F9DF79 /* MotionDataType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDataType.swift; sourceTree = "<group>"; };
+		EBBB9DCB298F48AA000E46FE /* GraphViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphViewModel.swift; sourceTree = "<group>"; };
 		EBBD3F532989378B0058EA45 /* MotionDataListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDataListViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -93,6 +95,7 @@
 				5760AC8A2989415D00534EF0 /* MotionDataListViewModel.swift */,
 				5760AC8C2989416600534EF0 /* RecordMotionDataViewModel.swift */,
 				5760AC8E2989416D00534EF0 /* MotionDataDetailViewModel.swift */,
+				EBBB9DCB298F48AA000E46FE /* GraphViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -249,6 +252,7 @@
 				EB14D214298A4A00003732C3 /* CoreDataError.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				579C4D902988A40300D3949F /* MotionManagerType.swift in Sources */,
+				EBBB9DCC298F48AA000E46FE /* GraphViewModel.swift in Sources */,
 				579C4D9A2988CBA400D3949F /* DataStorage.swift in Sources */,
 				5760AC8B2989415D00534EF0 /* MotionDataListViewModel.swift in Sources */,
 				EB14D244298BA7B3003732C3 /* FileType.swift in Sources */,

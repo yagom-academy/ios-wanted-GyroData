@@ -8,9 +8,7 @@
 import UIKit
 
 final class GraphView: UIView {
-    private var coordinates = [Coordinate]()
-    private var count = 1.0
-    private let maxCount = 600.0
+    private let viewModel = GraphViewModel()
     private lazy var currentPointX = CGPoint(x: .zero, y: frame.height / 2)
     private lazy var currentPointY = CGPoint(x: .zero, y: frame.height / 2)
     private lazy var currentPointZ = CGPoint(x: .zero, y: frame.height / 2)
@@ -18,16 +16,15 @@ final class GraphView: UIView {
     private var layerY = CAShapeLayer()
     private var layerZ = CAShapeLayer()
     private var gridLayer: CAShapeLayer?
-    private var maxValue = 5.0 {
-        didSet {
-            print(oldValue, maxValue)
-            redrawGraph()
-        }
-    }
+
+    // TODO: 세번째화면 play 시 maxValue 미리 설정, 세번째화면 view 시 전체 그려서 보여주기
 
     init() {
         super.init(frame: .zero)
         clearGraph()
+        viewModel.bind { [weak self] coordinates in
+            self?.redrawGraph(coordinates)
+        }
     }
 
     required init?(coder: NSCoder) {
@@ -37,12 +34,12 @@ final class GraphView: UIView {
     private func calculateY(_ y: Double) -> CGFloat {
         let height = frame.height
         let centerY = height / 2
-        let axisRange = maxValue * 2
+        let axisRange = viewModel.maxValue * 2 * 1.2
         let calculatedY = centerY + CGFloat(y) / axisRange * height
         return calculatedY
     }
 
-    private func redrawGraph() {
+    private func redrawGraph(_ coordinates: [Coordinate]) {
         removeGraphLine()
         coordinates.forEach { coordinate in
             drawXYZLine(coordinate)
@@ -97,13 +94,6 @@ final class GraphView: UIView {
         return layer
     }
 
-    private func axisRangeNeedsUpdate(_ coordinate: Coordinate) {
-        var maxValue = max(coordinate.x, coordinate.y, coordinate.z)
-        let minValue = min(coordinate.x, coordinate.y, coordinate.z)
-        maxValue = max(maxValue, abs(minValue))
-        if maxValue > self.maxValue { self.maxValue = maxValue }
-    }
-
     private func removeGraphLine() {
         layer.sublayers?.removeAll(where: { layer in
             layer == layerX || layer == layerY || layer == layerZ
@@ -112,7 +102,7 @@ final class GraphView: UIView {
         layerY = createLineLayer(color: UIColor.systemGreen.cgColor)
         layerZ = createLineLayer(color: UIColor.systemBlue.cgColor)
 
-        count = 1.0
+        viewModel.count = 1.0
         currentPointX = CGPoint(x: .zero, y: frame.height / 2)
         currentPointY = CGPoint(x: .zero, y: frame.height / 2)
         currentPointZ = CGPoint(x: .zero, y: frame.height / 2)
@@ -124,17 +114,17 @@ final class GraphView: UIView {
     }
 
     func drawChartLine(_ coordinate: Coordinate) {
-        coordinates.append(coordinate)
-        axisRangeNeedsUpdate(coordinate)
-        drawXYZLine(coordinate)
-        setNeedsDisplay()
+        viewModel.action(.drawChartLine(coordinate: coordinate, handler: { [weak self] coordinate in
+            self?.drawXYZLine(coordinate)
+            self?.setNeedsDisplay()
+        }))
     }
 
     private func drawXYZLine(_ coordinate: Coordinate) {
-        count += 1
-        let pointX = CGPoint(x: Double(count) / maxCount * frame.width, y: calculateY(coordinate.x))
-        let pointY = CGPoint(x: Double(count) / maxCount * frame.width, y: calculateY(coordinate.y))
-        let pointZ = CGPoint(x: Double(count) / maxCount * frame.width, y: calculateY(coordinate.z))
+        viewModel.count += 1
+        let pointX = CGPoint(x: Double(viewModel.count) / viewModel.maxCount * frame.width, y: calculateY(coordinate.x))
+        let pointY = CGPoint(x: Double(viewModel.count) / viewModel.maxCount * frame.width, y: calculateY(coordinate.y))
+        let pointZ = CGPoint(x: Double(viewModel.count) / viewModel.maxCount * frame.width, y: calculateY(coordinate.z))
 
         drawLine(by: layerX, from: currentPointX, to: pointX)
         drawLine(by: layerY, from: currentPointY, to: pointY)
