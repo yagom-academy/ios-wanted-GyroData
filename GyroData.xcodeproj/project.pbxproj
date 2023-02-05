@@ -54,6 +54,7 @@
 		E3F7B5A6298CB38300A7810A /* MotionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F7B5A5298CB38300A7810A /* MotionCell.swift */; };
 		E3F7B5AA298D3ED400A7810A /* ViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F7B5A9298D3ED400A7810A /* ViewControllerFactory.swift */; };
 		E3F7B5AD298F2A2E00A7810A /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F7B5AC298F2A2E00A7810A /* GraphView.swift */; };
+		E3F7B5AF298F468000A7810A /* GraphSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F7B5AE298F468000A7810A /* GraphSegmentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -117,6 +118,7 @@
 		E3F7B5A5298CB38300A7810A /* MotionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionCell.swift; sourceTree = "<group>"; };
 		E3F7B5A9298D3ED400A7810A /* ViewControllerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerFactory.swift; sourceTree = "<group>"; };
 		E3F7B5AC298F2A2E00A7810A /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
+		E3F7B5AE298F468000A7810A /* GraphSegmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphSegmentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -381,6 +383,7 @@
 			isa = PBXGroup;
 			children = (
 				E3F7B5AC298F2A2E00A7810A /* GraphView.swift */,
+				E3F7B5AE298F468000A7810A /* GraphSegmentView.swift */,
 			);
 			path = GraphView;
 			sourceTree = "<group>";
@@ -502,6 +505,7 @@
 				D381D28D2988E95B00567C6B /* DomainConvertible.swift in Sources */,
 				D381D2932988EA5900567C6B /* GyroData.xcdatamodeld in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
+				E3F7B5AF298F468000A7810A /* GraphSegmentView.swift in Sources */,
 				D381D27A2988E58700567C6B /* MotionGraphViewModel.swift in Sources */,
 				D381D2A32989363C00567C6B /* FileManagerRepository.swift in Sources */,
 				E3D84AA82988E76700FDA64F /* FileManagerMotionReadService.swift in Sources */,
