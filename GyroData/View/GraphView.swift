@@ -17,8 +17,6 @@ final class GraphView: UIView {
     private var layerZ = CAShapeLayer()
     private var gridLayer: CAShapeLayer?
     
-    // TODO: 세번째화면 play 시 maxValue 미리 설정, 세번째화면 view 시 전체 그려서 보여주기
-    
     init() {
         super.init(frame: .zero)
         clearGraph()
