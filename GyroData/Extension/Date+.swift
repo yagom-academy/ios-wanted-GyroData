@@ -2,7 +2,7 @@
 //  Date+.swift
 //  GyroData
 //
-//  Created by junho lee on 2023/02/01.
+//  Created by junho on 2023/02/01.
 //
 
 import Foundation

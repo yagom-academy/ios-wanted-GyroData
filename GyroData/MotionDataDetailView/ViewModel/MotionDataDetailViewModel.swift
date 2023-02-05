@@ -94,7 +94,7 @@ final class MotionDataDetailViewModel {
         case .onAppear:
             setNavigationTitle?(motionData.createdAt.dateTimeString())
             setDetailViewType()
-        case let .playStopButtonTapped:
+        case .playStopButtonTapped:
             toggleButtonState()
         case let .didAppear(handler):
             if viewType == .view {

@@ -2,7 +2,7 @@
 //  MotionDataEntity+CoreDataClass.swift
 //  GyroData
 //
-//  Created by junho lee on 2023/01/31.
+//  Created by junho on 2023/01/31.
 //
 //
 

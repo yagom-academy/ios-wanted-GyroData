@@ -2,7 +2,7 @@
 //  GraphViewModel.swift
 //  GyroData
 //
-//  Created by junho lee on 2023/02/05.
+//  Created by junho on 2023/02/05.
 //
 
 import Foundation
