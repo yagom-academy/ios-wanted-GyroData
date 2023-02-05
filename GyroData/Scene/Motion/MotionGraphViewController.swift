@@ -13,28 +13,14 @@ final class MotionGraphViewController: UIViewController {
         static let margin = CGFloat(16.0)
         static let spacing = CGFloat(8.0)
     }
-    enum Style {
-        case play, view
-        
-        var title: String {
-            switch self {
-            case .play:
-                return "Play"
-            case .view:
-                return "View"
-            }
-        }
-    }
     private let dateLabel: UILabel = {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .body)
-        label.text = " "
         return label
     }()
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .title1)
-        label.text = "View"
         return label
     }()
     private let graphView = GraphView()
@@ -59,11 +45,17 @@ final class MotionGraphViewController: UIViewController {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
-    private let style: Style
+    private lazy var indicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .large)
+        indicator.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height)
+        indicator.backgroundColor = .systemGray5
+        indicator.alpha = 0.8
+        indicator.hidesWhenStopped = true
+        return indicator
+    }()
     private let viewModel: MotionGraphViewModel
     
-    init(style: Style, viewModel: MotionGraphViewModel) {
-        self.style = style
+    init(viewModel: MotionGraphViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -77,6 +69,11 @@ final class MotionGraphViewController: UIViewController {
         setupUI()
         setupButton()
         viewModel.configureDelegate(self)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.action(.viewWillAppear)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -94,6 +91,7 @@ private extension MotionGraphViewController {
         [spaceView, playButton, timeLabel].forEach(bottomStackView.addArrangedSubview(_:))
         [dateLabel, titleLabel, graphView, bottomStackView].forEach(contentsStackView.addArrangedSubview(_:))
         view.addSubview(contentsStackView)
+        view.addSubview(indicator)
         
         NSLayoutConstraint.activate([
             contentsStackView.topAnchor.constraint(equalTo: safeArea.topAnchor,
@@ -110,8 +108,6 @@ private extension MotionGraphViewController {
             playButton.widthAnchor.constraint(equalTo: playButton.heightAnchor),
             spaceView.widthAnchor.constraint(equalTo: timeLabel.widthAnchor)
         ])
-        
-        bottomStackView.isHidden = style == .view
     }
     
     func setupButton() {
@@ -125,9 +121,19 @@ private extension MotionGraphViewController {
 }
 
 extension MotionGraphViewController: MotionGraphViewModelDelegate {
-    func motionGraphViewModel(willDisplayDate date: String, type: String, data: [MotionDataType]) {
+    func motionGraphViewModel(
+        actionConfigurationAboutViewDidAppear date: String,
+        title: String,
+        data: [MotionDataType]
+    ) {
         dateLabel.text = date
-        titleLabel.text = "\(type) \(style.title)"
+        titleLabel.text = title
         data.forEach(graphView.addData(_:))
+        indicator.stopAnimating()
+    }
+    
+    func motionGraphViewModel(actionConfigurationAboutViewWillAppear isPlayButtonHidden: Bool) {
+        bottomStackView.isHidden = isPlayButtonHidden
+        indicator.startAnimating()
     }
 }

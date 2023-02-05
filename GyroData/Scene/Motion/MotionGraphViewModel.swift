@@ -8,7 +8,12 @@
 import Foundation
 
 protocol MotionGraphViewModelDelegate: AnyObject {
-    func motionGraphViewModel(willDisplayDate date: String, type: String, data: [MotionDataType])
+    func motionGraphViewModel(
+        actionConfigurationAboutViewDidAppear date: String,
+        title: String,
+        data: [MotionDataType]
+    )
+    func motionGraphViewModel(actionConfigurationAboutViewWillAppear isPlayButtonHidden: Bool)
 }
 
 final class MotionGraphViewModel {
@@ -16,20 +21,39 @@ final class MotionGraphViewModel {
         static let dateFormat = "yyyy/MM/dd HH:mm:ss"
     }
     enum Action {
+        case viewWillAppear
         case viewDidAppear
     }
+    enum Style {
+        case play, view
+        
+        var title: String {
+            switch self {
+            case .play:
+                return "Play"
+            case .view:
+                return "View"
+            }
+        }
+    }
     
+    private let style: Style
     private let motionID: String
     private let readService: FileManagerMotionReadService
     private weak var delegate: MotionGraphViewModelDelegate?
     
-    init(motionID: String, readService: FileManagerMotionReadService) {
+    init(style: Style, motionID: String, readService: FileManagerMotionReadService) {
+        self.style = style
         self.motionID = motionID
         self.readService = readService
     }
     
     func action(_ action: Action) {
         switch action {
+        case .viewWillAppear:
+            delegate?.motionGraphViewModel(
+                actionConfigurationAboutViewWillAppear: style == .view ? true : false
+            )
         case .viewDidAppear:
             fetchMotion(with: motionID)
         }
@@ -49,8 +73,8 @@ private extension MotionGraphViewModel {
         }
         
         delegate?.motionGraphViewModel(
-            willDisplayDate: motion.date.formatted(by: Constant.dateFormat),
-            type: motion.type.text,
+            actionConfigurationAboutViewDidAppear: motion.date.formatted(by: Constant.dateFormat),
+            title: "\(motion.type.text) \(style.title)",
             data: motionData)
     }
 }

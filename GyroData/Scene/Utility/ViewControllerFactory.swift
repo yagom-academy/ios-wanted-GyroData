@@ -10,7 +10,7 @@ import UIKit
 enum ControllerType {
     case list
     case measurement
-    case graph(style: MotionGraphViewController.Style, id: String)
+    case graph(style: MotionGraphViewModel.Style, id: String)
 }
 
 enum ViewControllerFactory {
@@ -64,15 +64,19 @@ enum ViewControllerFactory {
     }
     
     static private func makeGraphViewController(
-        style: MotionGraphViewController.Style, id: String
+        style: MotionGraphViewModel.Style, id: String
     ) -> MotionGraphViewController {
         let fileManagerRepository = DefaultFileManagerRepository()
         
         let fileManagerReadService = FileManagerMotionReadService(repository: fileManagerRepository)
         
-        let motionViewModel = MotionGraphViewModel(motionID: id, readService: fileManagerReadService)
+        let motionViewModel = MotionGraphViewModel(
+            style: style,
+            motionID: id,
+            readService: fileManagerReadService
+        )
         
-        let motionGraphViewController = MotionGraphViewController(style: style, viewModel: motionViewModel)
+        let motionGraphViewController = MotionGraphViewController(viewModel: motionViewModel)
         return motionGraphViewController
     }
 }
