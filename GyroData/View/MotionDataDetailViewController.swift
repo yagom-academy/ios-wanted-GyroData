@@ -152,10 +152,7 @@ final class MotionDataDetailViewController: UIViewController {
             UIAction { _ in
                 self.graphView.clearGraph()
                 self.viewModel.action(.buttonTapped(handler: { buttonImage in
-                    self.playStopButton.setImage(
-                        UIImage(systemName: buttonImage),
-                        for: .normal
-                    )
+                    self.imageView.image = UIImage(systemName: buttonImage)
                 })) },
             for: .touchUpInside
         )
