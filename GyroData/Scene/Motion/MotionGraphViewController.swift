@@ -142,4 +142,8 @@ extension MotionGraphViewController: MotionGraphViewModelDelegate {
         bottomStackView.isHidden = isPlayButtonHidden
         indicator.startAnimating()
     }
+    
+    func motionGraphViewModel(actionConfigurationAboutCompletedPlay: Void) {
+        playButton.toggleAction()
+    }
 }

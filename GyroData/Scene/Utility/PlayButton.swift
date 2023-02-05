@@ -32,6 +32,10 @@ final class PlayButton: UIButton {
         isActive.toggle()
     }
     
+    func toggleAction() {
+        isActive.toggle()
+    }
+    
     func setActiveHandler(_ activeHandler: @escaping () -> Void) {
         self.activeHandler = activeHandler
     }

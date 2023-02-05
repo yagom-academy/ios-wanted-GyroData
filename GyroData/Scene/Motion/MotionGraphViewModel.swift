@@ -15,6 +15,7 @@ protocol MotionGraphViewModelDelegate: AnyObject {
     )
     func motionGraphViewModel(actionConfigurationAboutViewWillAppear isPlayButtonHidden: Bool)
     func motionGraphViewModel(data: MotionDataType, at time: String)
+    func motionGraphViewModel(actionConfigurationAboutCompletedPlay: Void)
 }
 
 final class MotionGraphViewModel {
@@ -79,6 +80,7 @@ private extension MotionGraphViewModel {
         playTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] timer in
             guard let motion = self?.motion, index < Int(motion.time * 10) else {
                 self?.playTimer?.invalidate()
+                self?.delegate?.motionGraphViewModel(actionConfigurationAboutCompletedPlay: ())
                 return
             }
             self?.delegate?.motionGraphViewModel(
