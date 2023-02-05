@@ -52,7 +52,8 @@ final class MotionMeasurementViewModel {
         case .stopTrackGyro:
             trackMotionUseCase.stopGyro()
         case .save:
-            print(motionResponseItems)
+            trackMotionUseCase.stopGyro()
+            trackMotionUseCase.stopAccelerometer()
         }
     }
     

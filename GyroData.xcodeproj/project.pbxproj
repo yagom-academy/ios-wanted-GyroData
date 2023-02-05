@@ -34,6 +34,7 @@
 		DF5D8C93298D1D1C00E7312D /* MotionLogCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5D8C92298D1D1C00E7312D /* MotionLogCell.swift */; };
 		DF5D8C96298D2F4000E7312D /* UIStackView + addMultiplearrangedSubviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5D8C95298D2F4000E7312D /* UIStackView + addMultiplearrangedSubviews.swift */; };
 		DF5D8C9F298D59DB00E7312D /* MotionLogListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5D8C9E298D59DB00E7312D /* MotionLogListViewModel.swift */; };
+		DFB33378298FC527009CA154 /* CoreMotionRepositorable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFB33377298FC527009CA154 /* CoreMotionRepositorable.swift */; };
 		DFB91FA8298E774C00185AD6 /* MotionMesurementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFB91FA7298E774C00185AD6 /* MotionMesurementViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -67,6 +68,7 @@
 		DF5D8C92298D1D1C00E7312D /* MotionLogCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionLogCell.swift; sourceTree = "<group>"; };
 		DF5D8C95298D2F4000E7312D /* UIStackView + addMultiplearrangedSubviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView + addMultiplearrangedSubviews.swift"; sourceTree = "<group>"; };
 		DF5D8C9E298D59DB00E7312D /* MotionLogListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionLogListViewModel.swift; sourceTree = "<group>"; };
+		DFB33377298FC527009CA154 /* CoreMotionRepositorable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMotionRepositorable.swift; sourceTree = "<group>"; };
 		DFB91FA7298E774C00185AD6 /* MotionMesurementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionMesurementViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -165,6 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				DF3682C8298ECF8700C3A9B8 /* UseCases */,
+				DFB33376298FC511009CA154 /* RepositoryInterface */,
 				DF3682C1298EBCF600C3A9B8 /* Entities */,
 			);
 			path = Domain;
@@ -267,6 +270,14 @@
 			path = Uitilities;
 			sourceTree = "<group>";
 		};
+		DFB33376298FC511009CA154 /* RepositoryInterface */ = {
+			isa = PBXGroup;
+			children = (
+				DFB33377298FC527009CA154 /* CoreMotionRepositorable.swift */,
+			);
+			path = RepositoryInterface;
+			sourceTree = "<group>";
+		};
 		DFB91FA6298E76C100185AD6 /* MotionMeasurement */ = {
 			isa = PBXGroup;
 			children = (
@@ -358,6 +369,7 @@
 				DF5D8C86298CDD6900E7312D /* Acceletometer+CoreDataProperties.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				DF5D8C42298BB34300E7312D /* CoreDataStack.swift in Sources */,
+				DFB33378298FC527009CA154 /* CoreMotionRepositorable.swift in Sources */,
 				DF5D8C85298CDD6900E7312D /* Acceletometer+CoreDataClass.swift in Sources */,
 				DF5D8C60298CC73300E7312D /* MotionData_v1.xcdatamodeld in Sources */,
 				DF3682C3298EBD3C00C3A9B8 /* MotionCoordinates.swift in Sources */,
@@ -523,7 +535,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "net.yagom-----.GyroData";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.yagom--------.GyroData";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

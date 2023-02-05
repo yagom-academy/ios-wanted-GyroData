@@ -117,10 +117,10 @@ final class MotionMeasurementViewController: UIViewController {
     private func bindViewModel() {
         guard let viewModel = self.viewModel else { return }
         
-        viewModel.bind { response in
+        viewModel.bind { [weak self] response in
             guard let data = response.receivedMotionData?.z else { return }
             DispatchQueue.main.async {
-                self.graphView.addGraphLine(y: data)
+                self?.graphView.addGraphLine(y: data)
             }
         }
     }
@@ -210,8 +210,6 @@ final class MotionMeasurementViewController: UIViewController {
     
     @objc
     func save() {
-        viewModel?.request(.stopTrackAcceleration)
-        viewModel?.request(.stopTrackGyro)
         viewModel?.request(.save)
         navigationController?.popViewController(animated: true)
     }
