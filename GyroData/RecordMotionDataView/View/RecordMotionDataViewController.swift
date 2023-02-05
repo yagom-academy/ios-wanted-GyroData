@@ -103,7 +103,6 @@ final class RecordMotionDataViewController: UIViewController {
             self.viewModel.action(.save)
             DispatchQueue.main.async {
                 self.stopActivityIndicator()
-                self.navigationController?.popViewController(animated: true)
             }})
         return action
     }
@@ -206,6 +205,12 @@ final class RecordMotionDataViewController: UIViewController {
                 self?.showAlert(alertTitle: errorMessage)
             }
         }
+        
+        viewModel.bind(onSaveCompletion: ) { [weak self] in
+            DispatchQueue.main.async {
+                self?.dismiss()
+            }
+        }
     }
 
     private func configureActivityIndicator() {
@@ -219,5 +224,9 @@ final class RecordMotionDataViewController: UIViewController {
 
     private func stopActivityIndicator() {
         activityIndicator.stopAnimating()
+    }
+    
+    private func dismiss() {
+        navigationController?.popViewController(animated: true)
     }
 }

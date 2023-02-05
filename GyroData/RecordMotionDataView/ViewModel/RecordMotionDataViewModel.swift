@@ -25,6 +25,7 @@ final class RecordMotionDataViewModel {
     private var onUpdate: ((Coordinate) -> Void)?
     private var onAdd: ((MotionData) -> Void)?
     private var onError: ((String) -> Void)?
+    private var onSaveCompletion: (() -> Void)?
     
     init(
         coreDataManager: CoreDataManagerType = CoreDataManager.shared,
@@ -44,6 +45,10 @@ final class RecordMotionDataViewModel {
     
     func bind(onError: @escaping (String) -> Void) {
         self.onError = onError
+    }
+    
+    func bind(onSaveCompletion: @escaping () -> Void) {
+        self .onSaveCompletion = onSaveCompletion
     }
     
     func action(_ action: Action) {
@@ -102,6 +107,7 @@ final class RecordMotionDataViewModel {
             try saveToDataStorage(motionData)
             self.onAdd?(motionData)
             self.motionData = nil
+            self.onSaveCompletion?()
         } catch {
             onError?(error.localizedDescription)
         }
