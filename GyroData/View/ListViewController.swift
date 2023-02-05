@@ -23,7 +23,7 @@ final class ListViewController: UIViewController {
         configureTableView()
     }
     
-    func configureNavigationBar() {
+    private func configureNavigationBar() {
         navigationItem.title = "목록"
         
         let measurementButtonAction = UIAction { [weak self] _ in
@@ -36,7 +36,7 @@ final class ListViewController: UIViewController {
         navigationItem.rightBarButtonItem = measurementButtonItem
     }
     
-    func configureTableView() {
+    private func configureTableView() {
         tableView.dataSource = self
         tableView.delegate = self
         
@@ -50,7 +50,7 @@ final class ListViewController: UIViewController {
         ])
     }
     
-    func bind() {
+    private func bind() {
         listViewModel.gyroInformations.bind { _ in
             self.tableView.reloadData()
         }

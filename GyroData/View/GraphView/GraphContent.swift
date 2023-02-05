@@ -2,7 +2,7 @@
 //  GraphContent.swift
 //  GyroData
 //
-//  Created by 정선아 on 2023/02/03.
+//  Created by ash and som on 2023/02/03.
 //
 
 import Foundation

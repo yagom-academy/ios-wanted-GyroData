@@ -2,7 +2,7 @@
 //  Measurable.swift
 //  GyroData
 //
-//  Created by 정선아 on 2023/01/31.
+//  Created by ash and som on 2023/01/31.
 //
 
 import CoreMotion

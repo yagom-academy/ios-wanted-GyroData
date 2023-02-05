@@ -18,10 +18,10 @@
 		63F01BC128D44FC500C53A39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */; };
 		AE441314298923280005BD92 /* MeasurementManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE441313298923280005BD92 /* MeasurementManager.swift */; };
 		AE44131629892D480005BD92 /* Measurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE44131529892D480005BD92 /* Measurable.swift */; };
-		AE441319298A6EC40005BD92 /* Date + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE441318298A6EC40005BD92 /* Date + Extension.swift */; };
+		AE441319298A6EC40005BD92 /* Date +.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE441318298A6EC40005BD92 /* Date +.swift */; };
 		AE441326298BF0A50005BD92 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE441324298BF0A50005BD92 /* GraphView.swift */; };
 		AE441327298BF0A50005BD92 /* GraphSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE441325298BF0A50005BD92 /* GraphSegment.swift */; };
-		AE441329298BF0D30005BD92 /* CGContext + .swift in Sources */ = {isa = PBXBuildFile; fileRef = AE441328298BF0D30005BD92 /* CGContext + .swift */; };
+		AE441329298BF0D30005BD92 /* CGContext +.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE441328298BF0D30005BD92 /* CGContext +.swift */; };
 		AE44132F298CB3AC0005BD92 /* GraphContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE44132E298CB3AC0005BD92 /* GraphContent.swift */; };
 		AEA15D7E2988A90C00EF6EBF /* GyroInformationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA15D7D2988A90C00EF6EBF /* GyroInformationModel.swift */; };
 		AEA15D802988A94800EF6EBF /* GyroData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA15D7F2988A94800EF6EBF /* GyroData.swift */; };
@@ -52,10 +52,10 @@
 		63F01BC228D44FC500C53A39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AE441313298923280005BD92 /* MeasurementManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementManager.swift; sourceTree = "<group>"; };
 		AE44131529892D480005BD92 /* Measurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Measurable.swift; sourceTree = "<group>"; };
-		AE441318298A6EC40005BD92 /* Date + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date + Extension.swift"; sourceTree = "<group>"; };
+		AE441318298A6EC40005BD92 /* Date +.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date +.swift"; sourceTree = "<group>"; };
 		AE441324298BF0A50005BD92 /* GraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		AE441325298BF0A50005BD92 /* GraphSegment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphSegment.swift; sourceTree = "<group>"; };
-		AE441328298BF0D30005BD92 /* CGContext + .swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGContext + .swift"; sourceTree = "<group>"; };
+		AE441328298BF0D30005BD92 /* CGContext +.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGContext +.swift"; sourceTree = "<group>"; };
 		AE44132E298CB3AC0005BD92 /* GraphContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphContent.swift; sourceTree = "<group>"; };
 		AEA15D7D2988A90C00EF6EBF /* GyroInformationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroInformationModel.swift; sourceTree = "<group>"; };
 		AEA15D7F2988A94800EF6EBF /* GyroData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroData.swift; sourceTree = "<group>"; };
@@ -118,8 +118,8 @@
 		AE441317298A6EAD0005BD92 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				AE441318298A6EC40005BD92 /* Date + Extension.swift */,
-				AE441328298BF0D30005BD92 /* CGContext + .swift */,
+				AE441318298A6EC40005BD92 /* Date +.swift */,
+				AE441328298BF0D30005BD92 /* CGContext +.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -281,11 +281,11 @@
 				2668C6032988B8D20017C9DD /* GyroInformation.xcdatamodeld in Sources */,
 				AEA15D862988A9C200EF6EBF /* Observable.swift in Sources */,
 				264B949B298A2DC7007289BC /* ListTableViewCell.swift in Sources */,
-				AE441329298BF0D30005BD92 /* CGContext + .swift in Sources */,
+				AE441329298BF0D30005BD92 /* CGContext +.swift in Sources */,
 				63F01BB928D44FC400C53A39 /* ListViewController.swift in Sources */,
 				AEA15D8A2988AA5800EF6EBF /* MeasurementViewModel.swift in Sources */,
 				AEA15D822988A96C00EF6EBF /* CoreDataManager.swift in Sources */,
-				AE441319298A6EC40005BD92 /* Date + Extension.swift in Sources */,
+				AE441319298A6EC40005BD92 /* Date +.swift in Sources */,
 				AEA15D992988ABBC00EF6EBF /* GraphMode.swift in Sources */,
 				AE44131629892D480005BD92 /* Measurable.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,

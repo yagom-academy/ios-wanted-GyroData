@@ -1,8 +1,8 @@
 //
-//  CGContext + .swift
+//  CGContext +.swift
 //  GyroData
 //
-//  Created by 정선아 on 2023/02/02.
+//  Created by ash and som on 2023/02/02.
 //
 
 import UIKit
