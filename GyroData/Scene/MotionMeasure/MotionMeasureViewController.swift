@@ -153,6 +153,7 @@ extension MotionMeasureViewController: MotionMeasurementViewModelDelegate {
     }
     
     func motionMeasurementViewModel(actionConfigurationAboutMeasurementStarted: Void) {
+        graphView.clear()
         stopButton.isEnabled = true
         measureButton.isEnabled = false
         saveBarButton.isEnabled = false

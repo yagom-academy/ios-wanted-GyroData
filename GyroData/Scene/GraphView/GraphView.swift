@@ -8,9 +8,13 @@
 import UIKit
 
 final class GraphView: UIView {
+    enum Default {
+        static let rangeLimit: Double = 1.0
+    }
+    
     static let segmentColor: [UIColor] = [.systemRed, .systemGreen, .systemBlue]
     static let capacity: Double = 600.0
-    private(set) var rangeLimit: Double = 1.0 {
+    private(set) var rangeLimit: Double = Default.rangeLimit {
         didSet {
             changeSegmentsScale()
         }
@@ -110,6 +114,12 @@ final class GraphView: UIView {
         xLabel.text = "x: \(data.xDescription)"
         yLabel.text = "y: \(data.yDescription)"
         zLabel.text = "z: \(data.zDescription)"
+    }
+    
+    func clear() {
+        segments.removeAll()
+        subviews.filter({ $0 is GraphSegmentView }).forEach { $0.removeFromSuperview() }
+        rangeLimit = Default.rangeLimit
     }
     
     private func changeSegmentsScale() {
