@@ -27,7 +27,8 @@ struct MotionCreateService: MotionCreatable {
         DispatchQueue.global().async {
             guard let date = dateFormatter.date(from: date),
                   let type = Motion.MeasurementType(rawValue: type),
-                  let time = Double(time)
+                  let time = Double(time),
+                  data.isEmpty == false
             else {
                 return completion(.failure(.insufficientDataToCreate))
             }
