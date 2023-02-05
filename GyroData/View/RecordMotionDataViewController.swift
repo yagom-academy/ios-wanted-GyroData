@@ -136,12 +136,22 @@ final class RecordMotionDataViewController: UIViewController {
         let segments = viewModel.motionDataTypes()
         for (index, item) in segments.enumerated() {
             segmentedControl.insertSegment(
-                withTitle: item,
+                action: configureSegmentedControlAction(item),
                 at: index,
                 animated: true
             )
         }
         segmentedControl.selectedSegmentIndex = .zero
+    }
+    
+    private func configureSegmentedControlAction(_ item: String) -> UIAction {
+        let action = UIAction(
+            title: item,
+            handler: { _ in
+                self.graphView.clearGraph()
+            }
+        )
+        return action
     }
     
     private func configureButtonActions() {
