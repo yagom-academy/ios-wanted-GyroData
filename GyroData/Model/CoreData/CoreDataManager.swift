@@ -10,7 +10,7 @@ import CoreData
 final class CoreDataManager: CoreDataManagerType {
     typealias FetchRequest = NSFetchRequest<MotionDataEntity>
     static let shared = CoreDataManager()
-    private lazy var persistentContainer = {
+    private lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "MotionData")
         container.loadPersistentStores { _, error in
             if let error {

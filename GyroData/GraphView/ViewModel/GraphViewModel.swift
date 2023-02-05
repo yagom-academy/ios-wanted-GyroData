@@ -9,12 +9,12 @@ import Foundation
 
 final class GraphViewModel {
     enum Action {
-        case drawChartLine(coordinate: Coordinate, handler: (Coordinate) -> Void)
-        case fetchCoordinates(coordinates: [Coordinate])
-        case configureAxisRange(coordinates: [Coordinate])
+        case updateGraph(coordinate: Coordinate, handler: (Coordinate) -> Void)
+        case drawCompleteGraph(with: [Coordinate])
+        case configureAxisRange(with: [Coordinate])
     }
 
-    private var onRedraw: ([Coordinate]) -> Void = { _ in }
+    private var drawCompleteGraph: (([Coordinate]) -> Void)?
     private var coordinates = [Coordinate]()
     var maxValue = 5.0
     var count = 1.0
@@ -26,7 +26,7 @@ final class GraphViewModel {
         maxValue = max(maxValue, abs(minValue))
         if maxValue > self.maxValue {
             self.maxValue = maxValue
-            onRedraw(coordinates)
+            drawCompleteGraph?(coordinates)
         }
     }
     
@@ -40,20 +40,20 @@ final class GraphViewModel {
     
     func action(_ action: Action) {
         switch action {
-        case let .drawChartLine(coordinate, handler):
+        case let .updateGraph(coordinate, handler):
             coordinates.append(coordinate)
             axisRangeNeedsUpdate(coordinate)
             handler(coordinate)
-        case let .fetchCoordinates(coordinates):
+        case let .drawCompleteGraph(coordinates):
             self.coordinates = coordinates
-            updateMaxValue(coordinates) // play에서도 해야한다.
-            onRedraw(coordinates)
-        case .configureAxisRange(coordinates: let coordinates):
+            updateMaxValue(coordinates)
+            drawCompleteGraph?(coordinates)
+        case let .configureAxisRange(coordinates):
             updateMaxValue(coordinates)
         }
     }
 
-    func bind(onRedraw: @escaping ([Coordinate]) -> Void) {
-        self.onRedraw = onRedraw
+    func bind(drawCompleteGraph: @escaping ([Coordinate]) -> Void) {
+        self.drawCompleteGraph = drawCompleteGraph
     }
 }

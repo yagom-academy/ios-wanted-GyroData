@@ -2,49 +2,56 @@
 //  MotionDataListViewModel.swift
 //  GyroData
 //
-//  Created by Jiyoung Lee on 2023/01/31.
+//  Created by junho on 2023/01/31.
 //
 
 import Foundation
 
 final class MotionDataListViewModel {
+    enum Constant {
+        enum Namespace {
+            static let pagingLimit: Int = 10
+        }
+    }
+    
     enum Action {
         case record(handler: (RecordMotionDataViewModel) -> Void)
         case view(at: IndexPath, handler: (MotionDataDetailViewModel) -> Void)
         case play(at: IndexPath, handler: (MotionDataDetailViewModel) -> Void)
-        case delete(at: IndexPath)
+        case remove(at: IndexPath)
         case fetchData
     }
 
     private var motionData: [MotionData] = [] {
         didSet {
-            onUpdate?()
+            onInsert?()
         }
     }
     private let coreDataManager: CoreDataManagerType
-    private var onUpdate: (() -> Void)?
+    private var onInsert: (() -> Void)?
     private var onError: ((String) -> Void)?
-    private let pagingLimit = 10
+    private let pagingLimit = Constant.Namespace.pagingLimit
 
     init(coreDataManager: CoreDataManagerType = CoreDataManager.shared) {
         self.coreDataManager = coreDataManager
     }
 
-    private func createNewRecordMotionDataViewModel(_ handler: @escaping (RecordMotionDataViewModel) -> Void) {
-        let newRecordMotionDataViewModel = RecordMotionDataViewModel(motionManager: MotionManager())
-        newRecordMotionDataViewModel.bind(onAdd: { [weak self] motionData in
-            self?.add(motionData)
+    private func createRecordMotionDataViewModel(_ handler: @escaping (RecordMotionDataViewModel) -> Void) {
+        let recordMotionDataViewModel = RecordMotionDataViewModel(motionManager: MotionManager())
+        recordMotionDataViewModel.bind(onAdd: { [weak self] motionData in
+            self?.insert(motionData)
         })
-        handler(newRecordMotionDataViewModel)
+        handler(recordMotionDataViewModel)
     }
 
     private func createMotionDataDetailViewModelToView(
         _ data: MotionData,
         _ handler: @escaping (MotionDataDetailViewModel) -> Void
     ) {
-        guard let motionDataDetailViewModel = try? MotionDataDetailViewModel(viewType: .view, motionData: data) else {
-            return
-        }
+        guard let motionDataDetailViewModel = try? MotionDataDetailViewModel(
+            viewType: .view,
+            motionData: data
+        ) else { return }
         handler(motionDataDetailViewModel)
     }
 
@@ -52,26 +59,29 @@ final class MotionDataListViewModel {
         _ data: MotionData,
         _ handler: @escaping (MotionDataDetailViewModel) -> Void
     ) {
-        guard let motionDataDetailViewModel = try? MotionDataDetailViewModel(viewType: .play, motionData: data) else {
-            return
-        }
+        guard let motionDataDetailViewModel = try? MotionDataDetailViewModel(
+            viewType: .play,
+            motionData: data
+        ) else { return }
         handler(motionDataDetailViewModel)
     }
 
-    private func add(_ data: MotionData) {
-        motionData.insert(data, at: 0)
+    private func insert(_ data: MotionData) {
+        motionData.insert(data, at: .zero)
     }
 
-    private func delete(at indexPath: IndexPath) {
+    private func remove(at indexPath: IndexPath) {
         motionData.remove(at: indexPath.row)
     }
 
     private func fetchMotionData() {
-        let offset = numberOfData()
-        let limit = pagingLimit
+        let offset: Int = numberOfData()
+        let limit: Int = pagingLimit
         do {
             var motionData = [MotionData]()
-            motionData = try coreDataManager.read(offset: offset, limit: limit).compactMap { entity in
+            motionData = try coreDataManager
+                .read(offset: offset, limit: limit)
+                .compactMap { entity in
                 guard let motionDataType = MotionDataType(rawValue: entity.motionDataType) else { return nil }
                 return MotionData(
                     id: entity.id,
@@ -80,9 +90,7 @@ final class MotionDataListViewModel {
                     motionDataType: motionDataType
                 )
             }
-            if motionData.isEmpty == false {
-                self.motionData.append(contentsOf: motionData)
-            }
+            if motionData.isEmpty == false { self.motionData.append(contentsOf: motionData) }
         } catch {
             onError?(error.localizedDescription)
         }
@@ -93,8 +101,8 @@ final class MotionDataListViewModel {
         return motionData[indexPath.row]
     }
 
-    func bind(onUpdate: @escaping () -> Void) {
-        self.onUpdate = onUpdate
+    func bind(onInsert: @escaping () -> Void) {
+        self.onInsert = onInsert
     }
 
     func bind(onError: @escaping (String) -> Void) {
@@ -104,7 +112,7 @@ final class MotionDataListViewModel {
     func action(_ action: Action) {
         switch action {
         case let .record(handler):
-            createNewRecordMotionDataViewModel(handler)
+            createRecordMotionDataViewModel(handler)
         case let .view(indexPath, handler):
             guard let data = motionData(at: indexPath) else { break }
             createMotionDataDetailViewModelToView(data, handler)
@@ -113,8 +121,8 @@ final class MotionDataListViewModel {
             guard let data = motionData(at: indexPath) else { break }
             createMotionDataDetailViewModelToPlay(data, handler)
             break
-        case let .delete(indexPath):
-            delete(at: indexPath)
+        case let .remove(indexPath):
+            remove(at: indexPath)
             break
         case .fetchData:
             fetchMotionData()

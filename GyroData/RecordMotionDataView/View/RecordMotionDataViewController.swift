@@ -18,7 +18,7 @@ final class RecordMotionDataViewController: UIViewController {
         }
         
         enum Layout {
-            static let stackSpacing = CGFloat(8)
+            static let stackSpacing: CGFloat = 8
         }
     }
     
@@ -34,7 +34,7 @@ final class RecordMotionDataViewController: UIViewController {
 
     private let segmentedControl = UISegmentedControl()
     private let graphView: GraphView = {
-        let graphView = GraphView(frame: .zero)
+        let graphView = GraphView()
         graphView.backgroundColor = .systemBackground
         graphView.translatesAutoresizingMaskIntoConstraints = false
         return graphView
@@ -98,23 +98,14 @@ final class RecordMotionDataViewController: UIViewController {
     }
     
     private func saveButtonAction() -> UIAction {
-        return UIAction(handler: { _ in
+        let action = UIAction(handler: { _ in
             self.startActivityIndicator()
-            DispatchQueue.global().async {
-                do {
-                    try self.viewModel.throwableAction(.save)
-                    DispatchQueue.main.async {
-                        self.stopActivityIndicator()
-                        self.navigationController?.popViewController(animated: true)
-                    }
-                } catch {
-                    DispatchQueue.main.async {
-                        self.stopActivityIndicator()
-                        self.showAlert(alertTitle: error.localizedDescription)
-                    }
-                }
-            }
-        })
+            self.viewModel.action(.save)
+            DispatchQueue.main.async {
+                self.stopActivityIndicator()
+                self.navigationController?.popViewController(animated: true)
+            }})
+        return action
     }
     
     private func configureHierarchy() {
@@ -205,7 +196,14 @@ final class RecordMotionDataViewController: UIViewController {
     private func bind() {
         viewModel.bind(onUpdate: ) { [weak self] coordinate in
             DispatchQueue.main.async {
-                self?.graphView.drawChartLine(coordinate)
+                self?.graphView.updateGraph(with: coordinate)
+            }
+        }
+        
+        viewModel.bind(onError: ) { [weak self] errorMessage in
+            DispatchQueue.main.async {
+                self?.stopActivityIndicator()
+                self?.showAlert(alertTitle: errorMessage)
             }
         }
     }

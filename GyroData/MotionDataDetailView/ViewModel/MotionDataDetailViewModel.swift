@@ -16,7 +16,7 @@ final class MotionDataDetailViewModel {
     
     enum Action {
         case onAppear
-        case buttonTapped(handler: (String) -> Void)
+        case playStopButtonTapped(handler: (String) -> Void)
         case didAppear(handler: ([Coordinate]) -> Void)
     }
     
@@ -51,8 +51,8 @@ final class MotionDataDetailViewModel {
     private var setViewTypeText: ((String) -> Void)?
     private var showPlayViewComponents: (() -> Void)?
     private var isPlaying: ButtonState = ButtonState.isStopped
-    private var onUpdateGraphView: ((Coordinate, String) -> Void)?
-    private var onSetGraphView: (([Coordinate]) -> Void)?
+    private var onGraphViewUpdate: ((Coordinate, String) -> Void)?
+    private var onGraphViewSet: (([Coordinate]) -> Void)?
     private var timer: Timer?
     private var startTime: Date = Date()
     
@@ -63,7 +63,7 @@ final class MotionDataDetailViewModel {
     ) throws {
         self.viewType = viewType
         self.motionData = motionData
-        self.onUpdateGraphView = onUpdate
+        self.onGraphViewUpdate = onUpdate
         try setDataStorage()
     }
     
@@ -77,12 +77,12 @@ final class MotionDataDetailViewModel {
         self.showPlayViewComponents = showPlayViewComponents
     }
     
-    func bind(onUpdateGraphView: @escaping ((Coordinate, String) -> Void)) {
-        self.onUpdateGraphView = onUpdateGraphView
+    func bind(onGraphViewUpdate: @escaping ((Coordinate, String) -> Void)) {
+        self.onGraphViewUpdate = onGraphViewUpdate
     }
     
-    func bind(onSetGraphView: @escaping ([Coordinate]) -> Void) {
-        self.onSetGraphView = onSetGraphView
+    func bind(onGraphViewSet: @escaping ([Coordinate]) -> Void) {
+        self.onGraphViewSet = onGraphViewSet
     }
     
     func action(_ action: Action) {
@@ -90,15 +90,9 @@ final class MotionDataDetailViewModel {
         case .onAppear:
             setNavigationTitle?(motionData.createdAt.dateTimeString())
             setDetailViewType()
-        case let .buttonTapped(handler):
-            isPlaying.toggle()
+        case let .playStopButtonTapped(handler):
+            toggleButtonState()
             handler(isPlaying.buttonImage)
-            switch isPlaying {
-            case .isPlaying:
-                play()
-            case .isStopped:
-                stop()
-            }
         case let .didAppear(handler):
             if viewType == .view {
                 guard let coordinates = fetchCoordinateData() else { return }
@@ -124,10 +118,20 @@ final class MotionDataDetailViewModel {
             throw DataStorageError.cannotFindDirectory
         }
     }
+
+    private func toggleButtonState() {
+        isPlaying.toggle()
+        switch isPlaying {
+        case .isPlaying:
+            play()
+        case .isStopped:
+            stop()
+        }
+    }
     
     private func play() {
         guard let coordinates = fetchCoordinateData() else { return }
-        onSetGraphView?(coordinates)
+        onGraphViewSet?(coordinates)
         var reversed = Array(coordinates.reversed())
         startTime = Date()
         timer = Timer.scheduledTimer(
@@ -140,7 +144,7 @@ final class MotionDataDetailViewModel {
                 }
                 let elapsedTime = Date().timeIntervalSince(self.startTime)
                 let truncatedTime = round(elapsedTime * 10) / 10
-                self.onUpdateGraphView?(reversed.removeLast(), truncatedTime.description)
+                self.onGraphViewUpdate?(reversed.removeLast(), truncatedTime.description)
         })
     }
     
@@ -149,7 +153,7 @@ final class MotionDataDetailViewModel {
     }
     
     private func fetchCoordinateData() -> [Coordinate]? {
-        let data = dataStorage?.read(motionData.id.description)
+        let data = dataStorage?.read(motionData.id.uuidString)
         return data?.coordinates
     }
 }

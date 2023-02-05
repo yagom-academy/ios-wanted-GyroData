@@ -11,6 +11,7 @@ final class RecordMotionDataViewModel {
     enum Action {
         case start(selectedIndex: Int, handler: () -> Void)
         case stop(handler: () -> Void)
+        case save
     }
     
     enum ThrowableAction {
@@ -23,6 +24,7 @@ final class RecordMotionDataViewModel {
     private let motionManager: MotionManagerType
     private var onUpdate: ((Coordinate) -> Void)?
     private var onAdd: ((MotionData) -> Void)?
+    private var onError: ((String) -> Void)?
     
     init(
         coreDataManager: CoreDataManagerType = CoreDataManager.shared,
@@ -40,19 +42,20 @@ final class RecordMotionDataViewModel {
         self.onAdd = onAdd
     }
     
+    func bind(onError: @escaping (String) -> Void) {
+        self.onError = onError
+    }
+    
     func action(_ action: Action) {
         switch action {
         case let .start(index, handler):
             start(selectedIndex: index, handler)
         case let .stop(handler):
             stop(handler)
-        }
-    }
-    
-    func throwableAction(_ action: ThrowableAction) throws {
-        switch action {
         case .save:
-            try save()
+            DispatchQueue.global().async {
+                self.save()
+            }
         }
     }
     
@@ -87,14 +90,21 @@ final class RecordMotionDataViewModel {
         handler()
     }
     
-    private func save() throws {
-        guard var motionData = motionData else { throw MotionDataError.emptyData }
+    private func save() {
+        guard var motionData = motionData else {
+            self.onError?(MotionDataError.emptyData.localizedDescription)
+            return
+        }
         motionData.length = round(Double(motionData.coordinates.count)) / 10
-        dataStorage = try DataStorage(directoryName: motionData.motionDataType.rawValue)
-        try saveToCoreData(motionData)
-        try saveToDataStorage(motionData)
-        onAdd?(motionData)
-        self.motionData = nil
+        do {
+            dataStorage = try DataStorage(directoryName: motionData.motionDataType.rawValue)
+            try saveToCoreData(motionData)
+            try saveToDataStorage(motionData)
+            self.onAdd?(motionData)
+            self.motionData = nil
+        } catch {
+            onError?(error.localizedDescription)
+        }
     }
     
     private func saveToCoreData(_ motionData: MotionData) throws {

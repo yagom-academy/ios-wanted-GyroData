@@ -7,20 +7,21 @@
 
 import UIKit
 
+enum DetailViewType: String {
+    case view = "View"
+    case play = "Play"
+}
+
 final class MotionDataDetailViewController: UIViewController {
-    enum DetailViewType: String {
-        case view = "View"
-        case play = "Play"
-    }
-    
     enum Constant {
         enum Namespace {
             static let playButton = "play.fill"
             static let stopButton = "stop.fill"
+            static let defaultTimerText = "0.0"
         }
         
         enum Layout {
-            static let spacing = CGFloat(8)
+            static let spacing: CGFloat = 8
         }
     }
     
@@ -34,7 +35,7 @@ final class MotionDataDetailViewController: UIViewController {
     }()
     
     private let graphView: GraphView = {
-        let graphView = GraphView(frame: .zero)
+        let graphView = GraphView()
         graphView.backgroundColor = .systemBackground
         graphView.translatesAutoresizingMaskIntoConstraints = false
         return graphView
@@ -60,7 +61,7 @@ final class MotionDataDetailViewController: UIViewController {
         label.font = .preferredFont(forTextStyle: .title1)
         label.adjustsFontForContentSizeCategory = true
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "0.0"
+        label.text = Constant.Namespace.defaultTimerText
         label.isHidden = true
         return label
     }()
@@ -86,7 +87,7 @@ final class MotionDataDetailViewController: UIViewController {
             showPlayViewComponents: showPlayStopButtonAndTimerLabel
         )
         viewModel.bind { coordinate, timerText in
-            self.graphView.drawChartLine(coordinate)
+            self.graphView.updateGraph(with: coordinate)
             self.timerLabel.text = timerText
         }
         viewModel.bind { coordinates in
@@ -103,21 +104,8 @@ final class MotionDataDetailViewController: UIViewController {
         super.viewDidAppear(animated)
         graphView.drawGrid()
         viewModel.action(.didAppear(handler: { [weak self] coordinates in
-            self?.graphView.fetchCoordinates(coordinates)
+            self?.graphView.drawCompleteGraph(with: coordinates)
         }))
-    }
-    
-    private func setNavigationTitle(with text: String) {
-        title = text
-    }
-    
-    private func setViewTypeLabelText(with text: String) {
-        viewTypeLabel.text = text
-    }
-    
-    private func showPlayStopButtonAndTimerLabel() {
-        timerLabel.isHidden = false
-        playStopButton.isHidden = false
     }
     
     private func configureHierarchy() {
@@ -161,10 +149,23 @@ final class MotionDataDetailViewController: UIViewController {
         playStopButton.addAction(
             UIAction { _ in
                 self.graphView.clearGraph()
-                self.viewModel.action(.buttonTapped(handler: { buttonImage in
+                self.viewModel.action(.playStopButtonTapped(handler: { buttonImage in
                     self.imageView.image = UIImage(systemName: buttonImage)
                 })) },
             for: .touchUpInside
         )
+    }
+    
+    private func setNavigationTitle(with text: String) {
+        title = text
+    }
+    
+    private func setViewTypeLabelText(with text: String) {
+        viewTypeLabel.text = text
+    }
+    
+    private func showPlayStopButtonAndTimerLabel() {
+        timerLabel.isHidden = false
+        playStopButton.isHidden = false
     }
 }

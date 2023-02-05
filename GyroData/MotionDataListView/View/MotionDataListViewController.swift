@@ -8,9 +8,19 @@
 import UIKit
 
 class MotionDataListViewController: UIViewController {
-    private let tableView = UITableView(frame: .zero, style: .plain)
-    private let viewModel = MotionDataListViewModel()
-    private var isLoading = false
+    enum Constant {
+        enum Namespace {
+            static let list = "목록"
+            static let measure = "측정"
+            static let confirm = "확인"
+            static let play = "play"
+            static let delete = "delete"
+        }
+    }
+    
+    private let tableView: UITableView = UITableView(frame: .zero, style: .plain)
+    private let viewModel: MotionDataListViewModel = MotionDataListViewModel()
+    private var isLoading: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,7 +28,8 @@ class MotionDataListViewController: UIViewController {
         configureTableView()
         configureNavigationItem()
         configureHierarchy()
-        bindToViewModel()
+        configureLayout()
+        bind()
         viewModel.action(.fetchData)
     }
 
@@ -32,18 +43,21 @@ class MotionDataListViewController: UIViewController {
     }
 
     private func configureNavigationItem() {
-        navigationItem.title = "목록"
+        navigationItem.title = Constant.Namespace.list
         navigationItem.rightBarButtonItem = UIBarButtonItem(
-            title: "측정",
+            title: Constant.Namespace.measure,
             style: .plain,
             target: self,
             action: #selector(didPressRecordButton)
         )
     }
-
+    
     private func configureHierarchy() {
-        tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
+    }
+    
+    private func configureLayout() {
+        tableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
@@ -51,9 +65,9 @@ class MotionDataListViewController: UIViewController {
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
-
-    private func bindToViewModel() {
-        viewModel.bind(onUpdate: { [weak self] in
+    
+    private func bind() {
+        viewModel.bind(onInsert: { [weak self] in
             DispatchQueue.main.async {
                 self?.reloadTableViewData()
             }
@@ -75,7 +89,7 @@ class MotionDataListViewController: UIViewController {
             message: .none,
             preferredStyle: .alert
         )
-        let okayAction = UIAlertAction(title: "확인", style: .default)
+        let okayAction = UIAlertAction(title: Constant.Namespace.confirm, style: .default)
         alertController.addAction(okayAction)
         self.present(alertController, animated: true)
     }
@@ -134,7 +148,7 @@ extension MotionDataListViewController: UITableViewDelegate {
     }
 
     private func makePlayContextualAction(_ indexPath: IndexPath) -> UIContextualAction {
-        let title = "Play"
+        let title = Constant.Namespace.play
         return UIContextualAction(style: .normal, title: title) { [weak self] _, _, completion in
             self?.viewModel.action(.play(at: indexPath, handler: { motionDataDetailViewModel in
                 let viewController = MotionDataDetailViewController(viewModel: motionDataDetailViewModel)
@@ -145,9 +159,9 @@ extension MotionDataListViewController: UITableViewDelegate {
     }
 
     private func makeDeleteContextualAction(_ indexPath: IndexPath) -> UIContextualAction {
-        let title = "Delete"
+        let title = Constant.Namespace.delete
         return UIContextualAction(style: .destructive, title: title) { [weak self] _, _, completion in
-            self?.viewModel.action(.delete(at: indexPath))
+            self?.viewModel.action(.remove(at: indexPath))
             completion(true)
         }
     }
