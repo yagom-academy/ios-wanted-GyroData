@@ -16,7 +16,6 @@ final class GraphView: UIView {
         label.font = .preferredFont(forTextStyle: .caption2)
         label.textAlignment = .center
         label.textColor = segmentColor[0]
-        label.text  = "x: 123123"
         return label
     }()
     
@@ -25,7 +24,6 @@ final class GraphView: UIView {
         label.font = .preferredFont(forTextStyle: .caption2)
         label.textAlignment = .center
         label.textColor = segmentColor[1]
-        label.text  = "x: 123123"
         return label
     }()
     
@@ -34,7 +32,6 @@ final class GraphView: UIView {
         label.font = .preferredFont(forTextStyle: .caption2)
         label.textAlignment = .center
         label.textColor = segmentColor[2]
-        label.text  = "x: 123123"
         return label
     }()
     
@@ -98,6 +95,9 @@ final class GraphView: UIView {
         }
         
         segments.last?.addData(data)
+        xLabel.text = "x: \(data.xDescription)"
+        yLabel.text = "y: \(data.yDescription)"
+        zLabel.text = "z: \(data.zDescription)"
     }
     
     private func addSegment() {

@@ -68,10 +68,12 @@ private extension MotionMeasurementViewModel {
                 }
             },
             completeHandler: { [weak self] isCompleted in
-                if isCompleted {
-                    self?.delegate?.motionMeasurementViewModel(
-                        actionConfigurationAboutMeasurementCompleted: ()
-                    )
+                DispatchQueue.main.async {
+                    if isCompleted {
+                        self?.delegate?.motionMeasurementViewModel(
+                            actionConfigurationAboutMeasurementCompleted: ()
+                        )
+                    }
                 }
             })
     }

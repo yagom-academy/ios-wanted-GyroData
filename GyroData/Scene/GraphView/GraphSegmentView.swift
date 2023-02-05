@@ -55,9 +55,9 @@ final class GraphSegmentView: UIView {
         context.setShouldAntialias(false)
         context.translateBy(x: 0, y: bounds.size.height / 2.0)
         
-        drawX(at: context)
-        drawY(at: context)
         drawZ(at: context)
+        drawY(at: context)
+        drawX(at: context)
     }
     
     private func drawX(at context: CGContext) {
@@ -87,10 +87,10 @@ final class GraphSegmentView: UIView {
     private func drawZ(at context: CGContext) {
         context.setStrokeColor(GraphView.segmentColor[2].cgColor)
         
-        context.move(to: CGPoint(x: 0, y: startPoint.z * scale))
+        context.move(to: CGPoint(x: 0, y: -startPoint.z * scale))
         
         for (pointIndex, dataPoint) in dataPoints.enumerated() {
-            context.addLine(to: CGPoint(x: dataWidth * CGFloat(pointIndex + 1), y: dataPoint.z * scale))
+            context.addLine(to: CGPoint(x: dataWidth * CGFloat(pointIndex + 1), y: -dataPoint.z * scale))
         }
         
         context.strokePath()
