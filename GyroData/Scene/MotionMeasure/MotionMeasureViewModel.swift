@@ -63,7 +63,9 @@ private extension MotionMeasurementViewModel {
         measurementService.measure(
             type: type,
             measurementHandler: { [weak self] data in
-                self?.delegate?.motionMeasurementViewModel(measuredData: data)
+                DispatchQueue.main.async {
+                    self?.delegate?.motionMeasurementViewModel(measuredData: data)
+                }
             },
             completeHandler: { [weak self] isCompleted in
                 if isCompleted {

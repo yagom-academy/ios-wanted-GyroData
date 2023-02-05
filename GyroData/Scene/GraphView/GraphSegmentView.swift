@@ -29,10 +29,14 @@ final class GraphSegmentView: UIView {
         }
     }
     private let startPoint: MotionData
+    var isFull: Bool {
+        return dataPoints.count == Int(GraphSegmentView.capacity)
+    }
     
     init(frame: CGRect, startPoint: MotionData = MotionData(x: 0, y: 0, z: 0)) {
         self.startPoint = startPoint
         super.init(frame: frame)
+        backgroundColor = .clear
     }
     
     required init?(coder: NSCoder) {

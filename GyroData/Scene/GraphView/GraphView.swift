@@ -9,6 +9,7 @@ import UIKit
 
 final class GraphView: UIView {
     static let segmentColor: [UIColor] = [.systemRed, .systemGreen, .systemBlue]
+    static let capacity: Double = 600.0
     
     private let xLabel: UILabel = {
         let label = UILabel()
@@ -46,12 +47,31 @@ final class GraphView: UIView {
         return stackView
     }()
     
+    private var segments: [GraphSegmentView] = []
+    private var segmentWidth: CGFloat {
+        return bounds.width / (GraphView.capacity / GraphSegmentView.capacity)
+    }
+    
     private var gridHeight: CGFloat {
         return bounds.height / 8
     }
     
     private var gridWidth: CGFloat {
         return bounds.width / 8
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        layer.borderWidth = 1
+        layer.borderColor = UIColor.systemGray4.cgColor
+        backgroundColor = .systemBackground
+        
+        configureView()
+        configureLayout()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func draw(_ rect: CGRect) {
@@ -70,20 +90,40 @@ final class GraphView: UIView {
         context.strokePath()
     }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        layer.borderWidth = 1
-        layer.borderColor = UIColor.systemGray4.cgColor
-        backgroundColor = .systemBackground
+    func addData(_ data: MotionDataType) {
+        if segments.isEmpty {
+            addSegment()
+        } else if let currentSegment = segments.last, currentSegment.isFull {
+            addSegment()
+        }
         
-        configureView()
-        configureLayout()
+        segments.last?.addData(data)
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    private func addSegment() {
+        let segment: GraphSegmentView
+
+        if let startPoint = segments.last?.dataPoints.last {
+            segment = GraphSegmentView(
+                frame: CGRect(
+                    x: segmentWidth * Double(segments.count),
+                    y: 0,
+                    width: segmentWidth,
+                    height: bounds.height
+                ),
+                startPoint: startPoint
+            )
+        } else {
+            segment = GraphSegmentView(frame: CGRect(x: 0, y: 0, width: segmentWidth, height: bounds.height))
+        }
+        
+        segments.append(segment)
+        addSubview(segment)
     }
-    
+}
+
+// MARK: UI Componenets
+extension GraphView {
     private func configureView() {
         [xLabel, yLabel, zLabel].forEach(labelStackView.addArrangedSubview(_:))
         

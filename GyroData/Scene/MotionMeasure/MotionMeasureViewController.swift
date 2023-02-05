@@ -149,7 +149,7 @@ private extension MotionMeasureViewController {
 
 extension MotionMeasureViewController: MotionMeasurementViewModelDelegate {
     func motionMeasurementViewModel(measuredData data: MotionDataType) {
-        
+        graphView.addData(data)
     }
     
     func motionMeasurementViewModel(actionConfigurationAboutMeasurementStarted: Void) {
