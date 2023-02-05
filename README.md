@@ -10,6 +10,8 @@
 |[@zhilly](https://github.com/zhilly11)|[@woong](https://github.com/iOS-Woong)|
 |:---:|:---:|
 |<img src = "https://i.imgur.com/LI4k2B7.jpg" width=300 height=300>|<img src = "https://i.imgur.com/iF9OiA4.jpg" width=300 height=300>|
+
+>모든 기능은 PairProgramming을 통하여 구현하였습니다.
  </br>
  
  
