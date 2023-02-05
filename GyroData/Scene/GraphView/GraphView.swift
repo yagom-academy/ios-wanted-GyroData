@@ -10,6 +10,9 @@ import UIKit
 final class GraphView: UIView {
     enum Default {
         static let rangeLimit: Double = 1.0
+        static let xLabel: String = "x: 0.0000"
+        static let yLabel: String = "y: 0.0000"
+        static let zLabel: String = "z: 0.0000"
     }
     
     static let segmentColor: [UIColor] = [.systemRed, .systemGreen, .systemBlue]
@@ -41,6 +44,7 @@ final class GraphView: UIView {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .caption2)
         label.textAlignment = .center
+        label.text = Default.xLabel
         label.textColor = segmentColor[0]
         return label
     }()
@@ -49,6 +53,7 @@ final class GraphView: UIView {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .caption2)
         label.textAlignment = .center
+        label.text = Default.yLabel
         label.textColor = segmentColor[1]
         return label
     }()
@@ -57,6 +62,7 @@ final class GraphView: UIView {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .caption2)
         label.textAlignment = .center
+        label.text = Default.zLabel
         label.textColor = segmentColor[2]
         return label
     }()
@@ -119,6 +125,9 @@ final class GraphView: UIView {
     
     func clear() {
         segments.removeAll()
+        xLabel.text = Default.xLabel
+        yLabel.text = Default.yLabel
+        zLabel.text = Default.zLabel
         subviews.filter({ $0 is GraphSegmentView }).forEach { $0.removeFromSuperview() }
         rangeLimit = Default.rangeLimit
     }
