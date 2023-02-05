@@ -75,6 +75,7 @@ final class GraphView: UIView {
         viewModel.bindGraphCoordinate { [weak self] motionCoordinate in
             self?.drawGraph(motionCoordinate)
             self?.setValueLabel(motionCoordinate)
+            self?.setNeedsDisplay()
         }
         
         viewModel.bindResetHandler { [weak self] in
