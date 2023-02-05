@@ -120,6 +120,11 @@ private extension MotionMeasureViewController {
         saveBarButton.action = #selector(saveMotion)
         navigationItem.rightBarButtonItem = saveBarButton
         
+        measurementTypeSegmentedControl.addTarget(
+            self,
+            action: #selector(changeMeasurementType),
+            for: .valueChanged
+        )
         measureButton.addTarget(self, action: #selector(measureMotion), for: .touchUpInside)
         stopButton.addTarget(self, action: #selector(stopMeasurement), for: .touchUpInside)
     }
@@ -127,6 +132,10 @@ private extension MotionMeasureViewController {
     func startIndicatorView() {
         navigationController?.navigationBar.isUserInteractionEnabled = false
         indicator.startAnimating()
+    }
+    
+    @objc func changeMeasurementType() {
+        graphView.clear()
     }
     
     @objc func saveMotion() {
