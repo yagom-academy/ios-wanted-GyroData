@@ -51,7 +51,7 @@ final class MotionDataDetailViewModel {
     private var setViewTypeText: ((String) -> Void)?
     private var showPlayViewComponents: (() -> Void)?
     private var isPlaying: ButtonState = ButtonState.isStopped
-    private var onUpdate: ((Coordinate, String) -> Void)?
+    private var onUpdateGraphView: ((Coordinate, String) -> Void)?
     private var onSetGraphView: (([Coordinate]) -> Void)?
     private var timer: Timer?
     private var startTime: Date = Date()
@@ -63,7 +63,7 @@ final class MotionDataDetailViewModel {
     ) throws {
         self.viewType = viewType
         self.motionData = motionData
-        self.onUpdate = onUpdate
+        self.onUpdateGraphView = onUpdate
         try setDataStorage()
     }
     
@@ -77,8 +77,8 @@ final class MotionDataDetailViewModel {
         self.showPlayViewComponents = showPlayViewComponents
     }
     
-    func bind(onUpdate: @escaping ((Coordinate, String) -> Void)) {
-        self.onUpdate = onUpdate
+    func bind(onUpdateGraphView: @escaping ((Coordinate, String) -> Void)) {
+        self.onUpdateGraphView = onUpdateGraphView
     }
     
     func bind(onSetGraphView: @escaping ([Coordinate]) -> Void) {
@@ -97,7 +97,7 @@ final class MotionDataDetailViewModel {
             case .isPlaying:
                 play()
             case .isStopped:
-                pause()
+                stop()
             }
         case let .didAppear(handler):
             if viewType == .view {
@@ -135,17 +135,16 @@ final class MotionDataDetailViewModel {
             repeats: true,
             block: { _ in
                 guard reversed.isEmpty == false else {
-                    self.pause()
+                    self.stop()
                     return
                 }
                 let elapsedTime = Date().timeIntervalSince(self.startTime)
                 let truncatedTime = round(elapsedTime * 10) / 10
-                self.onUpdate?(reversed.removeLast(), truncatedTime.description)
+                self.onUpdateGraphView?(reversed.removeLast(), truncatedTime.description)
         })
     }
     
-    // TODO: - stop으로 수정
-    private func pause() {
+    private func stop() {
         timer?.invalidate()
     }
     
