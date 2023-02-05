@@ -16,7 +16,7 @@
 ## 구조 설명 
 
 ### Presentation, Domain, Data
-- Presentation: UI로직을 담당하
+- Presentation: UI로직을 담당
 - Domain
     - UseCase: ViewModel의 요청을 수행
     - Entity: 데이터
