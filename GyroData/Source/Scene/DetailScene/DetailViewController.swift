@@ -67,9 +67,13 @@ final class DetailViewController: UIViewController {
         detailViewModel.bindDate { [weak self] dateString in
             self?.detailView.dateLabel.text = dateString
         }
-        detailViewModel.bindPageType { [weak self] pageTypeString, isViewPage in
+        detailViewModel.bindPageType { [weak self] pageTypeString, isViewPage, motionMeasures in
             self?.detailView.pageTypeLabel.text = pageTypeString
             self?.detailView.configureView(isViewPage)
+            
+            if isViewPage {
+                self?.graphViewModel.drawAll(motionMeasures)
+            }
         }
         detailViewModel.bindGraphCoordinate { [weak self] motionCoordinate in
             self?.graphViewModel.drawCoordinate(motionCoordinate)

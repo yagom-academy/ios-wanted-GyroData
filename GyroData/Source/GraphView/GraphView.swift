@@ -8,6 +8,7 @@
 import UIKit
 
 final class GraphView: UIView {
+    private var a = 1
     private let valueXLabel: UILabel = {
         let label = UILabel()
         label.textColor = .systemRed
@@ -43,9 +44,6 @@ final class GraphView: UIView {
     
     private let graphBackgroundView = GraphBackgroundView()
     
-//    private let xShapeLayer = CAShapeLayer()
-//    private let xShapeLayer = CAShapeLayer()
-    
     private let xPath = UIBezierPath()
     private let yPath = UIBezierPath()
     private let zPath = UIBezierPath()
@@ -74,14 +72,33 @@ final class GraphView: UIView {
     }
     
     private func bind() {
-        viewModel.bindGraphData { [weak self] motionCoordinate in
+        viewModel.bindGraphCoordinate { [weak self] motionCoordinate in
             self?.drawGraph(motionCoordinate)
             self?.setValueLabel(motionCoordinate)
-            self?.setNeedsDisplay()
         }
         
         viewModel.bindResetHandler { [weak self] in
             self?.reset()
+        }
+        
+        viewModel.bindGraphMotionMeasures { [weak self] motionMeasures in
+            let motionData = motionMeasures
+            var axisX = Array(motionData.axisX.reversed())
+            var axisY = Array(motionData.axisY.reversed())
+            var axisZ = Array(motionData.axisZ.reversed())
+            
+            for _ in 0..<motionData.axisX.count {
+                guard let x = axisX.popLast(),
+                      let y = axisY.popLast(),
+                      let z = axisZ.popLast()
+                else {
+                    return
+                }
+                
+                self?.drawGraph(MotionCoordinate(x: x, y: y, z: z))
+            }
+            
+            self?.setNeedsDisplay()
         }
     }
     

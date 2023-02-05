@@ -9,8 +9,7 @@ import Foundation
 
 final class DetailViewModel {
     typealias StringHandler = (String) -> Void
-    typealias PageTypeHandler = (String, Bool) -> Void
-    typealias MotionMeasuresHandler = (MotionMeasures, Double) -> Void
+    typealias PageTypeHandler = (String, Bool, MotionMeasures) -> Void
     typealias DurationHandler = (Double) -> Void
     
     private var date: String = String() {
@@ -21,10 +20,10 @@ final class DetailViewModel {
     private var pageType: PageType = .view {
         didSet {
             let isViewPage = pageType == .view
-            pageTypeHandler?(pageType.description, isViewPage)
+            pageTypeHandler?(pageType.description, isViewPage, motionMeasures)
         }
     }
-    private var motionMeasures: MotionMeasures?
+    private var motionMeasures: MotionMeasures = MotionMeasures(axisX: [], axisY: [], axisZ: [])
     private var motionCoordinate: MotionCoordinate? {
         didSet {
             guard let motionCoordinate = motionCoordinate else { return }
@@ -63,8 +62,8 @@ final class DetailViewModel {
     
     func fetchData() {
         date = DateFormatter.measuredDateFormatter.string(from: model.measuredDate)
-        pageType = currentType
         fetchMeasures()
+        pageType = currentType
     }
     
     private func fetchMeasures() {
@@ -106,6 +105,7 @@ extension DetailViewModel {
             timer.stop() 
             timerSecond = 0
             isPlaying = false
+            fetchData()
         case false:
             timer.activate { [weak self] in
                 self?.timerSecond += 0.1
@@ -116,7 +116,6 @@ extension DetailViewModel {
     }
     
     private func createMotionCoordinate() {
-        guard var motionMeasures = motionMeasures else { return }
         let x = motionMeasures.axisX.removeFirst()
         let y = motionMeasures.axisY.removeFirst()
         let z = motionMeasures.axisZ.removeFirst()

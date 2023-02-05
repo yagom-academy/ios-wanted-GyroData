@@ -6,20 +6,32 @@
 //
 
 final class GraphViewModel {
-    typealias MotionMeasuresHandler = (MotionCoordinate) -> Void
+    typealias MotionCoordinateHandler = (MotionCoordinate) -> Void
     
     private var motionCoordinate: MotionCoordinate? {
         didSet {
             guard let motionCoordinate = motionCoordinate else { return }
-            graphDataHandler?(motionCoordinate)
+            graphCoordinateHandler?(motionCoordinate)
         }
     }
     
-    private var graphDataHandler: MotionMeasuresHandler?
+    private var motionMeasures: MotionMeasures? {
+        didSet {
+            guard let motionMeasures = motionMeasures else { return }
+            graphMotionMeasuresHandler?(motionMeasures)
+        }
+    }
+    
+    private var graphCoordinateHandler: MotionCoordinateHandler?
+    private var graphMotionMeasuresHandler: ((MotionMeasures) -> Void)?
     private var resetHandler: (() -> Void)?
     
-    func bindGraphData(_ handler: @escaping MotionMeasuresHandler) {
-        graphDataHandler = handler
+    func bindGraphCoordinate(_ handler: @escaping MotionCoordinateHandler) {
+        graphCoordinateHandler = handler
+    }
+    
+    func bindGraphMotionMeasures(_ handler: @escaping (MotionMeasures) -> Void) {
+        graphMotionMeasuresHandler = handler
     }
     
     func bindResetHandler(_ handler: @escaping (() -> Void)) {
@@ -31,20 +43,7 @@ final class GraphViewModel {
     }
     
     func drawAll(_ motionMeasures: MotionMeasures) {
-        var axisX = Array(motionMeasures.axisX.reversed())
-        var axisY = Array(motionMeasures.axisY.reversed())
-        var axisZ = Array(motionMeasures.axisZ.reversed())
-        
-        for _ in 0..<motionMeasures.axisX.count {
-            guard let x = axisX.popLast(),
-                  let y = axisY.popLast(),
-                  let z = axisZ.popLast()
-            else {
-                return
-            }
-            
-            motionCoordinate = MotionCoordinate(x: x, y: y, z: z)
-        }
+        self.motionMeasures = motionMeasures
     }
     
     func reset() {
