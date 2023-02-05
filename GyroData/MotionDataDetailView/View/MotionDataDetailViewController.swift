@@ -148,7 +148,7 @@ final class MotionDataDetailViewController: UIViewController {
     private func setButtonAction() {
         playStopButton.addAction(
             UIAction { _ in
-                self.graphView.clearGraph()
+                self.graphView.resetGraph()
                 self.viewModel.action(.playStopButtonTapped(handler: { buttonImage in
                     self.imageView.image = UIImage(systemName: buttonImage)
                 })) },

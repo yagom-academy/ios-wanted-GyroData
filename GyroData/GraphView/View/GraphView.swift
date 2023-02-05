@@ -9,20 +9,51 @@ import UIKit
 
 final class GraphView: UIView {
     private let viewModel = GraphViewModel()
-    private lazy var currentPointX = CGPoint(x: .zero, y: frame.height / 2)
-    private lazy var currentPointY = CGPoint(x: .zero, y: frame.height / 2)
-    private lazy var currentPointZ = CGPoint(x: .zero, y: frame.height / 2)
-    private var layerX = CAShapeLayer()
-    private var layerY = CAShapeLayer()
-    private var layerZ = CAShapeLayer()
+    private lazy var currentXPoint = CGPoint(x: .zero, y: frame.height / 2)
+    private lazy var currentYPoint = CGPoint(x: .zero, y: frame.height / 2)
+    private lazy var currentZPoint = CGPoint(x: .zero, y: frame.height / 2)
+    private var xLayer = CAShapeLayer()
+    private var yLayer = CAShapeLayer()
+    private var zLayer = CAShapeLayer()
     private var gridLayer: CAShapeLayer?
+    private let labelStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.distribution = .equalSpacing
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private let xLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .systemRed
+        label.font = .preferredFont(forTextStyle: .caption1)
+        label.adjustsFontForContentSizeCategory = true
+        return label
+    }()
+    
+    private let yLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .systemGreen
+        label.font = .preferredFont(forTextStyle: .caption1)
+        label.adjustsFontForContentSizeCategory = true
+        return label
+    }()
+    
+    private let zLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .systemBlue
+        label.font = .preferredFont(forTextStyle: .caption1)
+        label.adjustsFontForContentSizeCategory = true
+        return label
+    }()
     
     init() {
         super.init(frame: .zero)
-        clearGraph()
-        viewModel.bind { [weak self] coordinates in
-            self?.drawCompleteGraph(coordinates)
-        }
+        resetGraph()
+        configureStackView()
+        setLabelsToZero()
+        bind()
     }
     
     required init?(coder: NSCoder) {
@@ -62,23 +93,32 @@ final class GraphView: UIView {
         viewModel.action(.updateGraph(
             coordinate: coordinate,
             handler: { [weak self] coordinate in
-                self?.drawXYZLine(coordinate)
+                self?.drawLines(to: coordinate)
                 self?.setNeedsDisplay()
             })
         )
     }
     
-    func drawCompleteGraph(_ coordinates: [Coordinate]) {
+    func resetGraph() {
         removeGraphLines()
-        coordinates.forEach { coordinate in
-            drawXYZLine(coordinate)
-        }
+        setLabelsToZero()
         setNeedsDisplay()
     }
     
-    func clearGraph() {
-        removeGraphLines()
-        setNeedsDisplay()
+    private func bind() {
+        viewModel.bind(drawGraphLines)
+        viewModel.bind(updateLabels)
+    }
+    
+    private func configureStackView() {
+        addSubview(labelStackView)
+        [xLabel, yLabel, zLabel].forEach { labelStackView.addArrangedSubview($0) }
+        
+        NSLayoutConstraint.activate([
+            labelStackView.topAnchor.constraint(equalTo: topAnchor),
+            labelStackView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.9),
+            labelStackView.centerXAnchor.constraint(equalTo: centerXAnchor)
+        ])
     }
     
     private func createLineLayer(color: CGColor) -> CAShapeLayer {
@@ -89,19 +129,39 @@ final class GraphView: UIView {
         return layer
     }
     
-    private func drawXYZLine(_ coordinate: Coordinate) {
+    private func drawGraphLines(_ coordinates: [Coordinate]) {
+        removeGraphLines()
+        coordinates.forEach { coordinate in
+            drawLines(to: coordinate)
+        }
+        setNeedsDisplay()
+    }
+    
+    private func drawLines(to coordinate: Coordinate) {
         viewModel.count += 1
         let pointX = CGPoint(x: Double(viewModel.count) / viewModel.maxCount * frame.width, y: calculate(coordinate.x))
         let pointY = CGPoint(x: Double(viewModel.count) / viewModel.maxCount * frame.width, y: calculate(coordinate.y))
         let pointZ = CGPoint(x: Double(viewModel.count) / viewModel.maxCount * frame.width, y: calculate(coordinate.z))
         
-        drawLine(by: layerX, from: currentPointX, to: pointX)
-        drawLine(by: layerY, from: currentPointY, to: pointY)
-        drawLine(by: layerZ, from: currentPointZ, to: pointZ)
+        drawLine(by: xLayer, from: currentXPoint, to: pointX)
+        drawLine(by: yLayer, from: currentYPoint, to: pointY)
+        drawLine(by: zLayer, from: currentZPoint, to: pointZ)
         
-        currentPointX = pointX
-        currentPointY = pointY
-        currentPointZ = pointZ
+        currentXPoint = pointX
+        currentYPoint = pointY
+        currentZPoint = pointZ
+    }
+    
+    private func updateLabels(_ values: (x: String, y: String, z: String)) {
+        xLabel.text = "x: " + values.x
+        yLabel.text = "y: " + values.y
+        zLabel.text = "z: " + values.z
+    }
+    
+    private func setLabelsToZero() {
+        xLabel.text = "x: 0"
+        yLabel.text = "y: 0"
+        zLabel.text = "z: 0"
     }
     
     private func drawLine(by lineLayer: CAShapeLayer, from start: CGPoint?, to end: CGPoint) {
@@ -120,16 +180,16 @@ final class GraphView: UIView {
     
     private func removeGraphLines() {
         layer.sublayers?.removeAll(where: { layer in
-            layer == layerX || layer == layerY || layer == layerZ
+            layer == xLayer || layer == yLayer || layer == zLayer
         })
-        layerX = createLineLayer(color: UIColor.systemRed.cgColor)
-        layerY = createLineLayer(color: UIColor.systemGreen.cgColor)
-        layerZ = createLineLayer(color: UIColor.systemBlue.cgColor)
+        xLayer = createLineLayer(color: UIColor.systemRed.cgColor)
+        yLayer = createLineLayer(color: UIColor.systemGreen.cgColor)
+        zLayer = createLineLayer(color: UIColor.systemBlue.cgColor)
         
         viewModel.count = 1.0
-        currentPointX = CGPoint(x: .zero, y: frame.height / 2)
-        currentPointY = CGPoint(x: .zero, y: frame.height / 2)
-        currentPointZ = CGPoint(x: .zero, y: frame.height / 2)
+        currentXPoint = CGPoint(x: .zero, y: frame.height / 2)
+        currentYPoint = CGPoint(x: .zero, y: frame.height / 2)
+        currentZPoint = CGPoint(x: .zero, y: frame.height / 2)
     }
     
     private func calculate(_ y: Double) -> CGFloat {

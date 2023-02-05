@@ -14,12 +14,13 @@ final class GraphViewModel {
         case configureAxisRange(with: [Coordinate])
     }
 
+    var maxValue: Double = 5.0
+    var count: Double = 1.0
+    let maxCount: Double = 600.0
     private var drawCompleteGraph: (([Coordinate]) -> Void)?
+    private var updateLabels: (((x: String, y: String, z: String)) -> Void)?
     private var coordinates = [Coordinate]()
-    var maxValue = 5.0
-    var count = 1.0
-    let maxCount = 600.0
-
+    
     private func axisRangeNeedsUpdate(_ coordinate: Coordinate) {
         var maxValue = max(coordinate.x, coordinate.y, coordinate.z)
         let minValue = min(coordinate.x, coordinate.y, coordinate.z)
@@ -43,17 +44,31 @@ final class GraphViewModel {
         case let .updateGraph(coordinate, handler):
             coordinates.append(coordinate)
             axisRangeNeedsUpdate(coordinate)
+            let values: (x: String, y: String, z: String) = pointValue(coordinate)
             handler(coordinate)
+            updateLabels?(values)
         case let .drawCompleteGraph(coordinates):
             self.coordinates = coordinates
             updateMaxValue(coordinates)
             drawCompleteGraph?(coordinates)
+            let value = pointValue(coordinates.last)
+            updateLabels?(value)
         case let .configureAxisRange(coordinates):
             updateMaxValue(coordinates)
         }
     }
 
-    func bind(drawCompleteGraph: @escaping ([Coordinate]) -> Void) {
+    func bind(_ drawCompleteGraph: @escaping ([Coordinate]) -> Void) {
         self.drawCompleteGraph = drawCompleteGraph
+    }
+    
+    func bind(_ updateLabels: @escaping ((x: String, y: String, z: String)) -> Void) {
+        self.updateLabels = updateLabels
+    }
+    
+    private func pointValue(_ coordinate: Coordinate?) -> (x: String, y: String, z: String) {
+        return (x: Int(round(coordinate?.x ?? .zero)).description,
+                y: Int(round(coordinate?.y ?? .zero)).description,
+                z: Int(round(coordinate?.z ?? .zero)).description)
     }
 }

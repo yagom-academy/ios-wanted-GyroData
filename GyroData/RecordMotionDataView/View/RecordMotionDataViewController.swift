@@ -144,7 +144,7 @@ final class RecordMotionDataViewController: UIViewController {
         let action = UIAction(
             title: item,
             handler: { _ in
-                self.graphView.clearGraph()
+                self.graphView.resetGraph()
             }
         )
         return action
@@ -157,7 +157,7 @@ final class RecordMotionDataViewController: UIViewController {
     
     private func measureButtonAction() -> UIAction {
         return UIAction(handler: { _ in
-            self.graphView.clearGraph()
+            self.graphView.resetGraph()
             self.viewModel.action(.start(
                 selectedIndex: self.segmentedControl.selectedSegmentIndex,
                 handler: self.toggleControlsAvailability)
