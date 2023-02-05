@@ -139,20 +139,20 @@ final class GraphView: UIView {
     
     private func drawLines(to coordinate: Coordinate) {
         viewModel.count += 1
-        let pointX = CGPoint(x: Double(viewModel.count) / viewModel.maxCount * frame.width, y: calculate(coordinate.x))
-        let pointY = CGPoint(x: Double(viewModel.count) / viewModel.maxCount * frame.width, y: calculate(coordinate.y))
-        let pointZ = CGPoint(x: Double(viewModel.count) / viewModel.maxCount * frame.width, y: calculate(coordinate.z))
+        let xPoint = CGPoint(x: Double(viewModel.count) / viewModel.maxCount * frame.width, y: calculate(coordinate.x))
+        let yPoint = CGPoint(x: Double(viewModel.count) / viewModel.maxCount * frame.width, y: calculate(coordinate.y))
+        let zPoint = CGPoint(x: Double(viewModel.count) / viewModel.maxCount * frame.width, y: calculate(coordinate.z))
         
-        drawLine(by: xLayer, from: currentXPoint, to: pointX)
-        drawLine(by: yLayer, from: currentYPoint, to: pointY)
-        drawLine(by: zLayer, from: currentZPoint, to: pointZ)
+        drawLine(by: xLayer, from: currentXPoint, to: xPoint)
+        drawLine(by: yLayer, from: currentYPoint, to: yPoint)
+        drawLine(by: zLayer, from: currentZPoint, to: zPoint)
         
-        currentXPoint = pointX
-        currentYPoint = pointY
-        currentZPoint = pointZ
+        currentXPoint = xPoint
+        currentYPoint = yPoint
+        currentZPoint = zPoint
     }
     
-    private func updateLabels(_ values: (x: String, y: String, z: String)) {
+    private func updateLabels(with values: (x: String, y: String, z: String)) {
         xLabel.text = "x: " + values.x
         yLabel.text = "y: " + values.y
         zLabel.text = "z: " + values.z

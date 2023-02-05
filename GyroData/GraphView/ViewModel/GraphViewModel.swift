@@ -44,15 +44,13 @@ final class GraphViewModel {
         case let .updateGraph(coordinate, handler):
             coordinates.append(coordinate)
             axisRangeNeedsUpdate(coordinate)
-            let values: (x: String, y: String, z: String) = pointValue(coordinate)
             handler(coordinate)
-            updateLabels?(values)
+            updateLabels?(convertToValues(from: coordinate))
         case let .drawCompleteGraph(coordinates):
             self.coordinates = coordinates
             updateMaxValue(coordinates)
             drawCompleteGraph?(coordinates)
-            let value = pointValue(coordinates.last)
-            updateLabels?(value)
+            updateLabels?(convertToValues(from: coordinates.last))
         case let .configureAxisRange(coordinates):
             updateMaxValue(coordinates)
         }
@@ -66,7 +64,7 @@ final class GraphViewModel {
         self.updateLabels = updateLabels
     }
     
-    private func pointValue(_ coordinate: Coordinate?) -> (x: String, y: String, z: String) {
+    private func convertToValues(from coordinate: Coordinate?) -> (x: String, y: String, z: String) {
         return (x: Int(round(coordinate?.x ?? .zero)).description,
                 y: Int(round(coordinate?.y ?? .zero)).description,
                 z: Int(round(coordinate?.z ?? .zero)).description)

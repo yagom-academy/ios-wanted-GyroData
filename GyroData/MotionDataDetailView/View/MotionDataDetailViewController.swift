@@ -81,18 +81,7 @@ final class MotionDataDetailViewController: UIViewController {
         configureHierarchy()
         configureLayout()
         setButtonAction()
-        viewModel.bind(
-            setNavigationTitle: setNavigationTitle,
-            setViewTypeText: setViewTypeLabelText,
-            showPlayViewComponents: showPlayStopButtonAndTimerLabel
-        )
-        viewModel.bind { coordinate, timerText in
-            self.graphView.updateGraph(with: coordinate)
-            self.timerLabel.text = timerText
-        }
-        viewModel.bind { coordinates in
-            self.graphView.configureAxisRange(coordinates)
-        }
+        bind()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -167,5 +156,20 @@ final class MotionDataDetailViewController: UIViewController {
     private func showPlayStopButtonAndTimerLabel() {
         timerLabel.isHidden = false
         playStopButton.isHidden = false
+    }
+    
+    private func bind() {
+        viewModel.bind(
+            setNavigationTitle: setNavigationTitle,
+            setViewTypeText: setViewTypeLabelText,
+            showPlayViewComponents: showPlayStopButtonAndTimerLabel
+        )
+        viewModel.bind { coordinate, timerText in
+            self.graphView.updateGraph(with: coordinate)
+            self.timerLabel.text = timerText
+        }
+        viewModel.bind { coordinates in
+            self.graphView.configureAxisRange(coordinates)
+        }
     }
 }
