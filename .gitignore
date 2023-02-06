@@ -1,1 +1,16 @@
 .DS_Store
+*.xcuserdata
+/xcuserdata
+
+xcuserdata/
+
+*.xcscmblueprint
+*.xccheckout
+*.xcodeproj/*
+!*.xcodeproj/project.pbxproj
+!*.xcodeproj/xcshareddata/
+!*.xcodeproj/project.xcworkspace/
+!*.xcworkspace/contents.xcworkspacedata
+/*.gcno
+**/xcshareddata/WorkspaceSettings.xcsettings
+GyroData.xcodeproj/project.xcworkspace/xcuserdata/ijeongmin.xcuserdatad/UserInterfaceState.xcuserstate
