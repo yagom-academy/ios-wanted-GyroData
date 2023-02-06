@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21279" systemVersion="22A380" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Acceleration" representedClassName="Acceleration" syncable="YES">
+        <attribute name="x" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="y" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="z" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="accelerometer" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Acceletometer" inverseName="acceleration" inverseEntity="Acceletometer"/>
+    </entity>
+    <entity name="Acceletometer" representedClassName="Acceletometer" parentEntity="MotionData" syncable="YES">
+        <relationship name="acceleration" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Acceleration" inverseName="accelerometer" inverseEntity="Acceleration"/>
+        <relationship name="motionData" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="MotionData" inverseName="accelerometer" inverseEntity="MotionData"/>
+    </entity>
+    <entity name="Gyro" representedClassName="Gyro" parentEntity="MotionData" syncable="YES">
+        <relationship name="motionData" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MotionData" inverseName="gyro" inverseEntity="MotionData"/>
+        <relationship name="velocity" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Velocity" inverseName="gyro" inverseEntity="Velocity"/>
+    </entity>
+    <entity name="MotionData" representedClassName="MotionData" isAbstract="YES" syncable="YES">
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="accelerometer" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Acceletometer" inverseName="motionData" inverseEntity="Acceletometer"/>
+        <relationship name="gyro" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Gyro" inverseName="motionData" inverseEntity="Gyro"/>
+    </entity>
+    <entity name="Velocity" representedClassName="Velocity" syncable="YES">
+        <attribute name="x" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="y" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="z" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="gyro" optional="YES" toMany="YES" maxCount="600" deletionRule="Nullify" ordered="YES" destinationEntity="Gyro" inverseName="velocity" inverseEntity="Gyro"/>
+    </entity>
+</model>
