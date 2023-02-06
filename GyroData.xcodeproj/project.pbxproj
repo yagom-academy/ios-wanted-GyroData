@@ -7,23 +7,63 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1138F2492988D09200007C11 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1138F2482988D09200007C11 /* CoreDataManager.swift */; };
+		1138F24C2988E68000007C11 /* JSONDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1138F24B2988E68000007C11 /* JSONDataManager.swift */; };
+		1170085029892ECA001DFB60 /* MotionListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1170084F29892ECA001DFB60 /* MotionListCell.swift */; };
+		1170085229893867001DFB60 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1170085129893867001DFB60 /* Reusable.swift */; };
+		11700857298CCD55001DFB60 /* ReplayType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11700856298CCD55001DFB60 /* ReplayType.swift */; };
+		11B34A8C2988A6AB00DA3A56 /* MotionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B34A8B2988A6AB00DA3A56 /* MotionData.swift */; };
+		11B34A8E2988AA2100DA3A56 /* MotionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B34A8D2988AA2100DA3A56 /* MotionType.swift */; };
 		63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB428D44FC400C53A39 /* AppDelegate.swift */; };
 		63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB628D44FC400C53A39 /* SceneDelegate.swift */; };
-		63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB828D44FC400C53A39 /* ViewController.swift */; };
-		63F01BBC28D44FC400C53A39 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBA28D44FC400C53A39 /* Main.storyboard */; };
+		63F01BB928D44FC400C53A39 /* MotionDataTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB828D44FC400C53A39 /* MotionDataTableViewController.swift */; };
 		63F01BBE28D44FC500C53A39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBD28D44FC500C53A39 /* Assets.xcassets */; };
 		63F01BC128D44FC500C53A39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */; };
+		BF128AAD2988AEB000C3CB7B /* MotionDataTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF128AAC2988AEB000C3CB7B /* MotionDataTableViewModel.swift */; };
+		BF128AB12988AFC700C3CB7B /* MotionDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BF128AAF2988AFC700C3CB7B /* MotionDataModel.xcdatamodeld */; };
+		BF128AB42988CAA700C3CB7B /* MotionDataEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF128AB22988CAA700C3CB7B /* MotionDataEntity+CoreDataClass.swift */; };
+		BF128AB52988CAA700C3CB7B /* MotionDataEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF128AB32988CAA700C3CB7B /* MotionDataEntity+CoreDataProperties.swift */; };
+		BF128AB82988DCCD00C3CB7B /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF128AB72988DCCD00C3CB7B /* FileManager.swift */; };
+		BF128ABC29892BB400C3CB7B /* MeasurementMotionDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF128ABB29892BB400C3CB7B /* MeasurementMotionDataViewController.swift */; };
+		BF128AC029892D2700C3CB7B /* ReplayMotionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF128ABF29892D2700C3CB7B /* ReplayMotionViewController.swift */; };
+		BF128AC229892D5700C3CB7B /* MeasurementMotionDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF128AC129892D5700C3CB7B /* MeasurementMotionDataViewModel.swift */; };
+		BF128AC429892D7200C3CB7B /* ReplayMotionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF128AC329892D7200C3CB7B /* ReplayMotionViewModel.swift */; };
+		BF128AC6298948BE00C3CB7B /* DateFormatter+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF128AC5298948BE00C3CB7B /* DateFormatter+.swift */; };
+		BFBD6B6D298BB07A0057D637 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBD6B6C298BB07A0057D637 /* GraphView.swift */; };
+		BFBD6B6F298BB0F90057D637 /* GraphViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBD6B6E298BB0F90057D637 /* GraphViewDataSource.swift */; };
+		BFBD6B71298BB4EF0057D637 /* GraphViewDataSource+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBD6B70298BB4EF0057D637 /* GraphViewDataSource+.swift */; };
+		BFBD6B73298CC0160057D637 /* MotionDataManageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBD6B72298CC0160057D637 /* MotionDataManageable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1138F2482988D09200007C11 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		1138F24B2988E68000007C11 /* JSONDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDataManager.swift; sourceTree = "<group>"; };
+		1170084F29892ECA001DFB60 /* MotionListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionListCell.swift; sourceTree = "<group>"; };
+		1170085129893867001DFB60 /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
+		11700856298CCD55001DFB60 /* ReplayType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplayType.swift; sourceTree = "<group>"; };
+		11B34A8B2988A6AB00DA3A56 /* MotionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionData.swift; sourceTree = "<group>"; };
+		11B34A8D2988AA2100DA3A56 /* MotionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionType.swift; sourceTree = "<group>"; };
 		63F01BB128D44FC400C53A39 /* GyroData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GyroData.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63F01BB428D44FC400C53A39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63F01BB628D44FC400C53A39 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		63F01BB828D44FC400C53A39 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		63F01BBB28D44FC400C53A39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		63F01BB828D44FC400C53A39 /* MotionDataTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDataTableViewController.swift; sourceTree = "<group>"; };
 		63F01BBD28D44FC500C53A39 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		63F01BC028D44FC500C53A39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		63F01BC228D44FC500C53A39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BF128AAC2988AEB000C3CB7B /* MotionDataTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDataTableViewModel.swift; sourceTree = "<group>"; };
+		BF128AB02988AFC700C3CB7B /* MotionDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MotionDataModel.xcdatamodel; sourceTree = "<group>"; };
+		BF128AB22988CAA700C3CB7B /* MotionDataEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MotionDataEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		BF128AB32988CAA700C3CB7B /* MotionDataEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MotionDataEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		BF128AB72988DCCD00C3CB7B /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
+		BF128ABB29892BB400C3CB7B /* MeasurementMotionDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementMotionDataViewController.swift; sourceTree = "<group>"; };
+		BF128ABF29892D2700C3CB7B /* ReplayMotionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplayMotionViewController.swift; sourceTree = "<group>"; };
+		BF128AC129892D5700C3CB7B /* MeasurementMotionDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementMotionDataViewModel.swift; sourceTree = "<group>"; };
+		BF128AC329892D7200C3CB7B /* ReplayMotionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplayMotionViewModel.swift; sourceTree = "<group>"; };
+		BF128AC5298948BE00C3CB7B /* DateFormatter+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "DateFormatter+.swift"; path = "GyroData/ViewModel/ReplayMotion/DateFormatter+.swift"; sourceTree = SOURCE_ROOT; };
+		BFBD6B6C298BB07A0057D637 /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
+		BFBD6B6E298BB0F90057D637 /* GraphViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphViewDataSource.swift; sourceTree = "<group>"; };
+		BFBD6B70298BB4EF0057D637 /* GraphViewDataSource+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "GraphViewDataSource+.swift"; path = "GyroData/View/GraphViewDataSource+.swift"; sourceTree = SOURCE_ROOT; };
+		BFBD6B72298CC0160057D637 /* MotionDataManageable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDataManageable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +77,68 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1138F24A2988E62900007C11 /* JSONData */ = {
+			isa = PBXGroup;
+			children = (
+				1138F24B2988E68000007C11 /* JSONDataManager.swift */,
+			);
+			path = JSONData;
+			sourceTree = "<group>";
+		};
+		11B34A862988A54200DA3A56 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				BF128AAA2988AE5900C3CB7B /* MotionDataTable */,
+				BF128AB929892B6A00C3CB7B /* MeasurementMotionData */,
+				BF128ABD29892CFC00C3CB7B /* ReplayMotion */,
+				BFBD6B6C298BB07A0057D637 /* GraphView.swift */,
+				BFBD6B6E298BB0F90057D637 /* GraphViewDataSource.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		11B34A872988A55200DA3A56 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				BF128AAB2988AE9600C3CB7B /* MotionDataTable */,
+				BF128ABA29892B8E00C3CB7B /* MeasurementMotionData */,
+				BF128ABE29892D0E00C3CB7B /* ReplayMotion */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		11B34A882988A55F00DA3A56 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1138F24A2988E62900007C11 /* JSONData */,
+				BF128AB62988CAB200C3CB7B /* CoreData */,
+				BF128AB72988DCCD00C3CB7B /* FileManager.swift */,
+				11B34A8B2988A6AB00DA3A56 /* MotionData.swift */,
+				11B34A8D2988AA2100DA3A56 /* MotionType.swift */,
+				11700856298CCD55001DFB60 /* ReplayType.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		11B34A892988A58100DA3A56 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				63F01BBD28D44FC500C53A39 /* Assets.xcassets */,
+				63F01BC228D44FC500C53A39 /* Info.plist */,
+				63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		11B34A8A2988A58A00DA3A56 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				1170085129893867001DFB60 /* Reusable.swift */,
+				BF128AAE2988AEBF00C3CB7B /* Extension */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
 		63F01BA828D44FC400C53A39 = {
 			isa = PBXGroup;
 			children = (
@@ -58,13 +160,83 @@
 			children = (
 				63F01BB428D44FC400C53A39 /* AppDelegate.swift */,
 				63F01BB628D44FC400C53A39 /* SceneDelegate.swift */,
-				63F01BB828D44FC400C53A39 /* ViewController.swift */,
-				63F01BBA28D44FC400C53A39 /* Main.storyboard */,
-				63F01BBD28D44FC500C53A39 /* Assets.xcassets */,
-				63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */,
-				63F01BC228D44FC500C53A39 /* Info.plist */,
+				11B34A892988A58100DA3A56 /* Resource */,
+				11B34A882988A55F00DA3A56 /* Model */,
+				11B34A862988A54200DA3A56 /* View */,
+				11B34A872988A55200DA3A56 /* ViewModel */,
+				11B34A8A2988A58A00DA3A56 /* Utility */,
 			);
 			path = GyroData;
+			sourceTree = "<group>";
+		};
+		BF128AAA2988AE5900C3CB7B /* MotionDataTable */ = {
+			isa = PBXGroup;
+			children = (
+				63F01BB828D44FC400C53A39 /* MotionDataTableViewController.swift */,
+				1170084F29892ECA001DFB60 /* MotionListCell.swift */,
+			);
+			path = MotionDataTable;
+			sourceTree = "<group>";
+		};
+		BF128AAB2988AE9600C3CB7B /* MotionDataTable */ = {
+			isa = PBXGroup;
+			children = (
+				BF128AAC2988AEB000C3CB7B /* MotionDataTableViewModel.swift */,
+			);
+			path = MotionDataTable;
+			sourceTree = "<group>";
+		};
+		BF128AAE2988AEBF00C3CB7B /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				BF128AC5298948BE00C3CB7B /* DateFormatter+.swift */,
+				BFBD6B70298BB4EF0057D637 /* GraphViewDataSource+.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		BF128AB62988CAB200C3CB7B /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				BF128AB22988CAA700C3CB7B /* MotionDataEntity+CoreDataClass.swift */,
+				BF128AB32988CAA700C3CB7B /* MotionDataEntity+CoreDataProperties.swift */,
+				BF128AAF2988AFC700C3CB7B /* MotionDataModel.xcdatamodeld */,
+				1138F2482988D09200007C11 /* CoreDataManager.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		BF128AB929892B6A00C3CB7B /* MeasurementMotionData */ = {
+			isa = PBXGroup;
+			children = (
+				BF128ABB29892BB400C3CB7B /* MeasurementMotionDataViewController.swift */,
+			);
+			path = MeasurementMotionData;
+			sourceTree = "<group>";
+		};
+		BF128ABA29892B8E00C3CB7B /* MeasurementMotionData */ = {
+			isa = PBXGroup;
+			children = (
+				BF128AC129892D5700C3CB7B /* MeasurementMotionDataViewModel.swift */,
+				BFBD6B72298CC0160057D637 /* MotionDataManageable.swift */,
+			);
+			path = MeasurementMotionData;
+			sourceTree = "<group>";
+		};
+		BF128ABD29892CFC00C3CB7B /* ReplayMotion */ = {
+			isa = PBXGroup;
+			children = (
+				BF128ABF29892D2700C3CB7B /* ReplayMotionViewController.swift */,
+			);
+			path = ReplayMotion;
+			sourceTree = "<group>";
+		};
+		BF128ABE29892D0E00C3CB7B /* ReplayMotion */ = {
+			isa = PBXGroup;
+			children = (
+				BF128AC329892D7200C3CB7B /* ReplayMotionViewModel.swift */,
+			);
+			path = ReplayMotion;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -127,7 +299,6 @@
 			files = (
 				63F01BC128D44FC500C53A39 /* LaunchScreen.storyboard in Resources */,
 				63F01BBE28D44FC500C53A39 /* Assets.xcassets in Resources */,
-				63F01BBC28D44FC400C53A39 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,23 +309,36 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */,
+				BFBD6B71298BB4EF0057D637 /* GraphViewDataSource+.swift in Sources */,
+				BF128AC029892D2700C3CB7B /* ReplayMotionViewController.swift in Sources */,
+				63F01BB928D44FC400C53A39 /* MotionDataTableViewController.swift in Sources */,
+				BF128AC6298948BE00C3CB7B /* DateFormatter+.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
+				BFBD6B6F298BB0F90057D637 /* GraphViewDataSource.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
+				BFBD6B73298CC0160057D637 /* MotionDataManageable.swift in Sources */,
+				BF128AB52988CAA700C3CB7B /* MotionDataEntity+CoreDataProperties.swift in Sources */,
+				BF128AC429892D7200C3CB7B /* ReplayMotionViewModel.swift in Sources */,
+				BF128AB12988AFC700C3CB7B /* MotionDataModel.xcdatamodeld in Sources */,
+				BF128AAD2988AEB000C3CB7B /* MotionDataTableViewModel.swift in Sources */,
+				11B34A8E2988AA2100DA3A56 /* MotionType.swift in Sources */,
+				BF128AB82988DCCD00C3CB7B /* FileManager.swift in Sources */,
+				BF128AC229892D5700C3CB7B /* MeasurementMotionDataViewModel.swift in Sources */,
+				BF128AB42988CAA700C3CB7B /* MotionDataEntity+CoreDataClass.swift in Sources */,
+				1170085229893867001DFB60 /* Reusable.swift in Sources */,
+				BF128ABC29892BB400C3CB7B /* MeasurementMotionDataViewController.swift in Sources */,
+				BFBD6B6D298BB07A0057D637 /* GraphView.swift in Sources */,
+				11700857298CCD55001DFB60 /* ReplayType.swift in Sources */,
+				1138F2492988D09200007C11 /* CoreDataManager.swift in Sources */,
+				11B34A8C2988A6AB00DA3A56 /* MotionData.swift in Sources */,
+				1138F24C2988E68000007C11 /* JSONDataManager.swift in Sources */,
+				1170085029892ECA001DFB60 /* MotionListCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		63F01BBA28D44FC400C53A39 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				63F01BBB28D44FC400C53A39 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -216,7 +400,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -270,7 +454,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -287,19 +471,21 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = RKG4N9K9YM;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = GyroData/Info.plist;
+				INFOPLIST_FILE = GyroData/Resource/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.GyroData;
+				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.GyroData.CoreMotion;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -314,19 +500,21 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = RKG4N9K9YM;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = GyroData/Info.plist;
+				INFOPLIST_FILE = GyroData/Resource/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.GyroData;
+				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.GyroData.CoreMotion;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -356,6 +544,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		BF128AAF2988AFC700C3CB7B /* MotionDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				BF128AB02988AFC700C3CB7B /* MotionDataModel.xcdatamodel */,
+			);
+			currentVersion = BF128AB02988AFC700C3CB7B /* MotionDataModel.xcdatamodel */;
+			path = MotionDataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 63F01BA928D44FC400C53A39 /* Project object */;
 }
