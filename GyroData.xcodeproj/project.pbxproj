@@ -3,27 +3,49 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB428D44FC400C53A39 /* AppDelegate.swift */; };
 		63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB628D44FC400C53A39 /* SceneDelegate.swift */; };
-		63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB828D44FC400C53A39 /* ViewController.swift */; };
-		63F01BBC28D44FC400C53A39 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBA28D44FC400C53A39 /* Main.storyboard */; };
+		63F01BB928D44FC400C53A39 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB828D44FC400C53A39 /* MainViewController.swift */; };
 		63F01BBE28D44FC500C53A39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBD28D44FC500C53A39 /* Assets.xcassets */; };
 		63F01BC128D44FC500C53A39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */; };
+		D026C776298A87CD00FBBF8E /* MotionDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D026C774298A87CD00FBBF8E /* MotionDataModel.xcdatamodeld */; };
+		D026C77D298A8A6A00FBBF8E /* Motion+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D026C77B298A8A6A00FBBF8E /* Motion+CoreDataClass.swift */; };
+		D026C77E298A8A6A00FBBF8E /* Motion+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D026C77C298A8A6A00FBBF8E /* Motion+CoreDataProperties.swift */; };
+		D026C781298AAC9300FBBF8E /* MotionDataForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = D026C780298AAC9300FBBF8E /* MotionDataForm.swift */; };
+		D03B067D2988DBFC002BEB96 /* CustomDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03B067C2988DBFC002BEB96 /* CustomDataCell.swift */; };
+		D03B06802988E656002BEB96 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03B067F2988E656002BEB96 /* AddViewController.swift */; };
+		D0962531298C08EC00426AD1 /* AlertPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0962530298C08EC00426AD1 /* AlertPresentable.swift */; };
+		F69C9F6F298A2D6A00F59A71 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69C9F6E298A2D6A00F59A71 /* GraphView.swift */; };
+		F6AAD48029895426008A79B5 /* MotionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AAD47F29895426008A79B5 /* MotionData.swift */; };
+		F6C7FB672989084F00CD92FD /* ReplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C7FB662989084F00CD92FD /* ReplayViewController.swift */; };
+		FCCFAB5E298A8C4800308398 /* CoreDataProcessable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCFAB5D298A8C4800308398 /* CoreDataProcessable.swift */; };
+		FCCFAB60298A90F000308398 /* CoreDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCFAB5F298A90F000308398 /* CoreDataError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		63F01BB128D44FC400C53A39 /* GyroData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GyroData.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63F01BB428D44FC400C53A39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63F01BB628D44FC400C53A39 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		63F01BB828D44FC400C53A39 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		63F01BBB28D44FC400C53A39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		63F01BB828D44FC400C53A39 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		63F01BBD28D44FC500C53A39 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		63F01BC028D44FC500C53A39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		63F01BC228D44FC500C53A39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D026C775298A87CD00FBBF8E /* MotionDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MotionDataModel.xcdatamodel; sourceTree = "<group>"; };
+		D026C77B298A8A6A00FBBF8E /* Motion+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Motion+CoreDataClass.swift"; path = "GyroData/Source/CoreData/Motion+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		D026C77C298A8A6A00FBBF8E /* Motion+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Motion+CoreDataProperties.swift"; path = "GyroData/Source/CoreData/Motion+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		D026C780298AAC9300FBBF8E /* MotionDataForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionDataForm.swift; sourceTree = "<group>"; };
+		D03B067C2988DBFC002BEB96 /* CustomDataCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDataCell.swift; sourceTree = "<group>"; };
+		D03B067F2988E656002BEB96 /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
+		D0962530298C08EC00426AD1 /* AlertPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPresentable.swift; sourceTree = "<group>"; };
+		F69C9F6E298A2D6A00F59A71 /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
+		F6AAD47F29895426008A79B5 /* MotionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionData.swift; sourceTree = "<group>"; };
+		F6C7FB662989084F00CD92FD /* ReplayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplayViewController.swift; sourceTree = "<group>"; };
+		FCCFAB5D298A8C4800308398 /* CoreDataProcessable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataProcessable.swift; sourceTree = "<group>"; };
+		FCCFAB5F298A90F000308398 /* CoreDataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +78,98 @@
 		63F01BB328D44FC400C53A39 /* GyroData */ = {
 			isa = PBXGroup;
 			children = (
-				63F01BB428D44FC400C53A39 /* AppDelegate.swift */,
-				63F01BB628D44FC400C53A39 /* SceneDelegate.swift */,
-				63F01BB828D44FC400C53A39 /* ViewController.swift */,
-				63F01BBA28D44FC400C53A39 /* Main.storyboard */,
-				63F01BBD28D44FC500C53A39 /* Assets.xcassets */,
-				63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */,
+				D03B06772988C48E002BEB96 /* Source */,
+				D03B06762988C47C002BEB96 /* Resource */,
 				63F01BC228D44FC500C53A39 /* Info.plist */,
+				D026C774298A87CD00FBBF8E /* MotionDataModel.xcdatamodeld */,
 			);
 			path = GyroData;
+			sourceTree = "<group>";
+		};
+		D026C77F298A8A7E00FBBF8E /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				D026C77B298A8A6A00FBBF8E /* Motion+CoreDataClass.swift */,
+				D026C77C298A8A6A00FBBF8E /* Motion+CoreDataProperties.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		D03B06762988C47C002BEB96 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				63F01BB428D44FC400C53A39 /* AppDelegate.swift */,
+				63F01BB628D44FC400C53A39 /* SceneDelegate.swift */,
+				63F01BBD28D44FC500C53A39 /* Assets.xcassets */,
+				63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		D03B06772988C48E002BEB96 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				D026C77F298A8A7E00FBBF8E /* CoreData */,
+				D03B06782988C498002BEB96 /* Scene */,
+				D03B06792988C49F002BEB96 /* Model */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		D03B06782988C498002BEB96 /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				F6C594392988D03D00705625 /* Main */,
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
+		D03B06792988C49F002BEB96 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D0962530298C08EC00426AD1 /* AlertPresentable.swift */,
+				FCCFAB5D298A8C4800308398 /* CoreDataProcessable.swift */,
+				FCCFAB5F298A90F000308398 /* CoreDataError.swift */,
+				F6AAD47F29895426008A79B5 /* MotionData.swift */,
+				D026C780298AAC9300FBBF8E /* MotionDataForm.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D03B067E2988E5D7002BEB96 /* Add */ = {
+			isa = PBXGroup;
+			children = (
+				D03B067F2988E656002BEB96 /* AddViewController.swift */,
+			);
+			path = Add;
+			sourceTree = "<group>";
+		};
+		F6C594392988D03D00705625 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				63F01BB828D44FC400C53A39 /* MainViewController.swift */,
+				D03B067E2988E5D7002BEB96 /* Add */,
+				F6C7FB682989091E00CD92FD /* Replay */,
+				F6C5943A2988D04700705625 /* View */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		F6C5943A2988D04700705625 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F69C9F6E298A2D6A00F59A71 /* GraphView.swift */,
+				D03B067C2988DBFC002BEB96 /* CustomDataCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F6C7FB682989091E00CD92FD /* Replay */ = {
+			isa = PBXGroup;
+			children = (
+				F6C7FB662989084F00CD92FD /* ReplayViewController.swift */,
+			);
+			path = Replay;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -103,7 +208,7 @@
 				};
 			};
 			buildConfigurationList = 63F01BAC28D44FC400C53A39 /* Build configuration list for PBXProject "GyroData" */;
-			compatibilityVersion = "Xcode 14.0";
+			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -127,7 +232,6 @@
 			files = (
 				63F01BC128D44FC500C53A39 /* LaunchScreen.storyboard in Resources */,
 				63F01BBE28D44FC500C53A39 /* Assets.xcassets in Resources */,
-				63F01BBC28D44FC400C53A39 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,23 +242,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */,
+				63F01BB928D44FC400C53A39 /* MainViewController.swift in Sources */,
+				F6C7FB672989084F00CD92FD /* ReplayViewController.swift in Sources */,
+				FCCFAB60298A90F000308398 /* CoreDataError.swift in Sources */,
+				D026C781298AAC9300FBBF8E /* MotionDataForm.swift in Sources */,
+				D026C77D298A8A6A00FBBF8E /* Motion+CoreDataClass.swift in Sources */,
+				D026C776298A87CD00FBBF8E /* MotionDataModel.xcdatamodeld in Sources */,
+				F6AAD48029895426008A79B5 /* MotionData.swift in Sources */,
+				D03B06802988E656002BEB96 /* AddViewController.swift in Sources */,
+				F69C9F6F298A2D6A00F59A71 /* GraphView.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
+				D026C77E298A8A6A00FBBF8E /* Motion+CoreDataProperties.swift in Sources */,
+				D03B067D2988DBFC002BEB96 /* CustomDataCell.swift in Sources */,
+				D0962531298C08EC00426AD1 /* AlertPresentable.swift in Sources */,
+				FCCFAB5E298A8C4800308398 /* CoreDataProcessable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		63F01BBA28D44FC400C53A39 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				63F01BBB28D44FC400C53A39 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -287,19 +395,21 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = D5VN784N4W;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GyroData/Info.plist;
+				INFOPLIST_KEY_NSMotionUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.GyroData;
+				PRODUCT_BUNDLE_IDENTIFIER = yagom.gyro.dragon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -314,19 +424,21 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = D5VN784N4W;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GyroData/Info.plist;
+				INFOPLIST_KEY_NSMotionUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.GyroData;
+				PRODUCT_BUNDLE_IDENTIFIER = yagom.gyro.dragon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -356,6 +468,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		D026C774298A87CD00FBBF8E /* MotionDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				D026C775298A87CD00FBBF8E /* MotionDataModel.xcdatamodel */,
+			);
+			currentVersion = D026C775298A87CD00FBBF8E /* MotionDataModel.xcdatamodel */;
+			path = MotionDataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 63F01BA928D44FC400C53A39 /* Project object */;
 }
