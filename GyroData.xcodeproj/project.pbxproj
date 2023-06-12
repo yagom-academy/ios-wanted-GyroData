@@ -16,7 +16,7 @@
 		AA51FF022A372CBF00C1888F /* GyroData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA51FF012A372CBF00C1888F /* GyroData.swift */; };
 		AA51FF042A372D3C00C1888F /* Coordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA51FF032A372D3C00C1888F /* Coordinate.swift */; };
 		AA51FF072A372EFD00C1888F /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA51FF062A372EFD00C1888F /* Node.swift */; };
-		AA51FF092A37302B00C1888F /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA51FF082A37302B00C1888F /* Queue.swift */; };
+		AA51FF092A37302B00C1888F /* LimitedQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA51FF082A37302B00C1888F /* LimitedQueue.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,7 +31,7 @@
 		AA51FF012A372CBF00C1888F /* GyroData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroData.swift; sourceTree = "<group>"; };
 		AA51FF032A372D3C00C1888F /* Coordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinate.swift; sourceTree = "<group>"; };
 		AA51FF062A372EFD00C1888F /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
-		AA51FF082A37302B00C1888F /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
+		AA51FF082A37302B00C1888F /* LimitedQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitedQueue.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,7 +85,7 @@
 			isa = PBXGroup;
 			children = (
 				AA51FF062A372EFD00C1888F /* Node.swift */,
-				AA51FF082A37302B00C1888F /* Queue.swift */,
+				AA51FF082A37302B00C1888F /* LimitedQueue.swift */,
 			);
 			path = DataStructure;
 			sourceTree = "<group>";
@@ -192,7 +192,7 @@
 				AA51FEFE2A37292400C1888F /* GyroManager.swift in Sources */,
 				63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */,
 				AA51FF022A372CBF00C1888F /* GyroData.swift in Sources */,
-				AA51FF092A37302B00C1888F /* Queue.swift in Sources */,
+				AA51FF092A37302B00C1888F /* LimitedQueue.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
 				AA51FF042A372D3C00C1888F /* Coordinate.swift in Sources */,

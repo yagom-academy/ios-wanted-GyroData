@@ -1,11 +1,11 @@
 //
-//  Queue.swift
+//  LimitedQueue.swift
 //  GyroData
 //
 //  Created by kokkilE on 2023/06/12.
 //
 
-struct Queue<Element> {
+final class LimitedQueue<Element> {
     private let maxCount = Int(GyroManager.Constant.frequency * 60)
     
     private(set) var head: Node<Element>?
@@ -25,7 +25,7 @@ struct Queue<Element> {
     }
     
     @discardableResult
-    mutating func dequeue() -> Element? {
+    func dequeue() -> Element? {
         if isEmpty { return nil }
         
         let data = head?.data
@@ -35,7 +35,7 @@ struct Queue<Element> {
         return data
     }
     
-    mutating func enqueue(_ data: Element) {
+    func enqueue(_ data: Element) {
         let node = Node(data)
         
         if isEmpty {
