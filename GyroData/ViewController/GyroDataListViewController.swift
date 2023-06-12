@@ -24,6 +24,7 @@ final class GyroDataListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        gyroDataTableView.delegate = self
         setUpView()
         configureGyroDataTableView()
         
@@ -82,5 +83,24 @@ extension GyroDataListViewController {
         snapshot.appendSections([.main])
         snapshot.appendItems(data)
         dataSource?.apply(snapshot, animatingDifferences: true)
+    }
+}
+
+// MARK: UITableViewDelegate
+extension GyroDataListViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let play = "Play"
+        let playAction = UIContextualAction(style: .normal, title: play) { _, _, _ in
+            print("play")
+        }
+        playAction.backgroundColor = .systemGreen
+        
+        let delete = "Delete"
+        let deleteAction = UIContextualAction(style: .normal, title: delete) { _, _, _ in
+            print("delete")
+        }
+        deleteAction.backgroundColor = .red
+        
+        return UISwipeActionsConfiguration(actions: [playAction, deleteAction])
     }
 }
