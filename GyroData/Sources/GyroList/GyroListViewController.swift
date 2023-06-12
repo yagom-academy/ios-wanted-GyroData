@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 final class GyroListViewController: UIViewController {
     enum Section {
@@ -14,6 +15,8 @@ final class GyroListViewController: UIViewController {
     
     private let tableView = UITableView()
     private var dataSource: UITableViewDiffableDataSource<Section, GyroData>?
+    private let viewModel = GyroListViewModel()
+    private var subscriptions = Set<AnyCancellable>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +25,8 @@ final class GyroListViewController: UIViewController {
         setupNavigationItems()
         setupTableView()
         layout()
+        setupDataSource()
+        bind()
     }
     
     private func setupView() {
@@ -53,8 +58,8 @@ final class GyroListViewController: UIViewController {
     
     private func setupTableView() {
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.register(GyroListCell.self, forCellReuseIdentifier: GyroListCell.reuseIdentifier)
         tableView.dataSource = dataSource
-        tableView.backgroundColor = .gray
         
         view.addSubview(tableView)
     }
@@ -67,6 +72,39 @@ final class GyroListViewController: UIViewController {
             tableView.leadingAnchor.constraint(equalTo: safe.leadingAnchor, constant: 8),
             tableView.trailingAnchor.constraint(equalTo: safe.trailingAnchor, constant: -8),
             tableView.bottomAnchor.constraint(equalTo: safe.bottomAnchor, constant: -8)
-            ])
+        ])
+    }
+    
+    private func setupDataSource() {
+        dataSource = UITableViewDiffableDataSource<Section, GyroData>(tableView: tableView) { tableView, indexPath, gyroData in
+            guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: GyroListCell.reuseIdentifier,
+                for: indexPath) as? GyroListCell else {
+                return UITableViewCell()
+            }
+            
+            cell.configure(date: "2022/09/08 14:50:43",
+                           type: "Accelerometer", duration: "43.4")
+            
+            return cell
+        }
+    }
+    
+    private func bind() {
+        viewModel.gyroDataPublisher()
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] gyroDataList in
+                self?.applyVideoListCellSnapshot(by: gyroDataList)
+            }
+            .store(in: &subscriptions)
+    }
+    
+    private func applyVideoListCellSnapshot(by gyroDataList: [GyroData]) {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, GyroData>()
+
+        snapshot.appendSections([.main])
+        snapshot.appendItems(gyroDataList)
+
+        dataSource?.apply(snapshot, animatingDifferences: true)
     }
 }

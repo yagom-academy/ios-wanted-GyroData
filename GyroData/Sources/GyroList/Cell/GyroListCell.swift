@@ -1,5 +1,5 @@
 //
-//  GryoListCell.swift
+//  GyroListCell.swift
 //  GyroData
 //
 //  Created by kokkilE on 2023/06/12.
@@ -7,14 +7,16 @@
 
 import UIKit
 
-final class GryoListCell: UITableViewCell {
+final class GyroListCell: UITableViewCell {
     private let mainStackView = {
         let stackView = UIStackView()
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .horizontal
-        stackView.alignment = .leading
+        stackView.alignment = .center
         stackView.distribution = .equalSpacing
+        stackView.layoutMargins = UIEdgeInsets(top: 12, left: 20, bottom: 12, right: 20)
+        stackView.isLayoutMarginsRelativeArrangement = true
         
         return stackView
     }()
@@ -25,6 +27,7 @@ final class GryoListCell: UITableViewCell {
         stackView.axis = .vertical
         stackView.alignment = .leading
         stackView.distribution = .equalSpacing
+        stackView.spacing = 20
         
         return stackView
     }()
@@ -33,7 +36,6 @@ final class GryoListCell: UITableViewCell {
         let label = UILabel()
         
         label.font = .preferredFont(forTextStyle: .body)
-        label.text = "TEST DATE"
         
         return label
     }()
@@ -42,7 +44,6 @@ final class GryoListCell: UITableViewCell {
         let label = UILabel()
         
         label.font = .preferredFont(forTextStyle: .title2)
-        label.text = "TEST typeLabel"
         
         return label
     }()
@@ -50,8 +51,7 @@ final class GryoListCell: UITableViewCell {
     private let durationLabel = {
         let label = UILabel()
         
-        label.font = .boldSystemFont(ofSize: 40)
-        label.text = "60.0"
+        label.font = .systemFont(ofSize: 40, weight: .bold, width: .standard)
         
         return label
     }()
@@ -68,6 +68,11 @@ final class GryoListCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func configure(date: String, type: String, duration: String) {
+        dateLabel.text = date
+        typeLabel.text = type
+        durationLabel.text = duration
+    }
     
     private func setupCell() {
         backgroundColor = .systemBackground
@@ -79,6 +84,8 @@ final class GryoListCell: UITableViewCell {
         
         mainStackView.addArrangedSubview(stackView)
         mainStackView.addArrangedSubview(durationLabel)
+        
+        addSubview(mainStackView)
     }
     
     private func layout() {
