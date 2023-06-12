@@ -24,6 +24,7 @@ final class GyroDataListViewController: UIViewController {
     private func setUpView() {
         view.backgroundColor = .white
         view.addSubview(gyroDataTableView)
+        setUpNavigationBar()
         setUpGyroDataTableView()
     }
     
@@ -37,7 +38,20 @@ final class GyroDataListViewController: UIViewController {
             gyroDataTableView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor)
         ])
     }
-
-
+    
+    private func setUpNavigationBar() {
+        let title = "목록"
+        let measurement = "측정"
+        let rightButtonItem = UIBarButtonItem(title: measurement,
+                                              style: .plain,
+                                              target: self, action: #selector(measurementButtonTapped))
+        
+        navigationItem.title = title
+        navigationItem.rightBarButtonItem = rightButtonItem
+    }
+    
+    @objc private func measurementButtonTapped() {
+        print("측정버튼이 눌렸습니다.")
+    }
 }
 
