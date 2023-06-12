@@ -95,8 +95,8 @@
 			children = (
 				AA51FF052A372EC200C1888F /* DataStructure */,
 				AA51FF002A372C8700C1888F /* Model */,
-				63F01BB828D44FC400C53A39 /* ViewController.swift */,
 				AA51FEFD2A37292400C1888F /* GyroManager.swift */,
+				63F01BB828D44FC400C53A39 /* ViewController.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
