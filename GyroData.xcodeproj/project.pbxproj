@@ -15,6 +15,7 @@
 		FB42DFC62A36DF2900238381 /* SixAxisData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB42DFC52A36DF2900238381 /* SixAxisData.swift */; };
 		FB42DFC82A36E25700238381 /* SensorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB42DFC72A36E25600238381 /* SensorType.swift */; };
 		FB42DFCB2A36E35A00238381 /* GyroDataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB42DFCA2A36E35A00238381 /* GyroDataTableViewCell.swift */; };
+		FB42DFCE2A36EB7300238381 /* GyroDataTableCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB42DFCD2A36EB7300238381 /* GyroDataTableCellViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		FB42DFC52A36DF2900238381 /* SixAxisData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SixAxisData.swift; sourceTree = "<group>"; };
 		FB42DFC72A36E25600238381 /* SensorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensorType.swift; sourceTree = "<group>"; };
 		FB42DFCA2A36E35A00238381 /* GyroDataTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroDataTableViewCell.swift; sourceTree = "<group>"; };
+		FB42DFCD2A36EB7300238381 /* GyroDataTableCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroDataTableCellViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 			isa = PBXGroup;
 			children = (
 				FB42DFC42A36DF0E00238381 /* Model */,
+				FB42DFCC2A36EB5500238381 /* ViewModel */,
 				FB42DFC92A36E33500238381 /* View */,
 				FB42DFC32A36DB7000238381 /* ViewController */,
 				63F01BB428D44FC400C53A39 /* AppDelegate.swift */,
@@ -95,6 +98,14 @@
 				FB42DFCA2A36E35A00238381 /* GyroDataTableViewCell.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		FB42DFCC2A36EB5500238381 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				FB42DFCD2A36EB7300238381 /* GyroDataTableCellViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -167,6 +178,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB42DFCE2A36EB7300238381 /* GyroDataTableCellViewModel.swift in Sources */,
 				FB42DFCB2A36E35A00238381 /* GyroDataTableViewCell.swift in Sources */,
 				63F01BB928D44FC400C53A39 /* GyroDataListViewController.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,

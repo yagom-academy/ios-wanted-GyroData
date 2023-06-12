@@ -6,12 +6,19 @@
 //
 
 import UIKit
+import Combine
 
 final class GyroDataTableViewCell: UITableViewCell {
     static let identifier = "GyroDataTableViewCell"
+    
+    private var viewModel: GyroDataTableCellViewModel?
+    private var cancellables = Set<AnyCancellable>()
+    
     private let horizontalStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
+        stackView.alignment = .fill
+        stackView.spacing = 20
         
         return stackView
     }()
@@ -19,6 +26,8 @@ final class GyroDataTableViewCell: UITableViewCell {
     private let verticalStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
+        stackView.distribution = .fillEqually
+        stackView.spacing = 10
         
         return stackView
     }()
@@ -40,19 +49,39 @@ final class GyroDataTableViewCell: UITableViewCell {
     
         return label
     }()
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         setUpUI()
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
+    private func bind() {
+        viewModel?.$sixAxisData
+            .map { $0.date }
+            .sink { [weak self] date in
+                self?.dateLabel.text = date
+            }
+            .store(in: &cancellables)
+        viewModel?.$sixAxisData
+            .map { $0.title }
+            .sink { [weak self] title in
+                self?.sensorTypeLabel.text = title?.description
+            }
+            .store(in: &cancellables)
+        viewModel?.$sixAxisData
+            .map { $0.record }
+            .sink { [weak self] record in
+                self?.recordLabel.text = record?.description
+            }
+            .store(in: &cancellables)
+    }
+   
     private func setUpUI() {
-        self.backgroundColor = .red
+        self.backgroundColor = .white
         self.addSubview(horizontalStackView)
         setUpStackView()
     }
@@ -66,10 +95,17 @@ final class GyroDataTableViewCell: UITableViewCell {
         
         horizontalStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            horizontalStackView.topAnchor.constraint(equalTo: self.topAnchor),
-            horizontalStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            horizontalStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            horizontalStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor)
+            horizontalStackView.topAnchor.constraint(equalTo: self.topAnchor, constant: 5),
+            horizontalStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 30),
+            horizontalStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5),
+            horizontalStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -30)
         ])
+    }
+}
+
+extension GyroDataTableViewCell {
+    func configureCell(with data: SixAxisData) {
+        viewModel = GyroDataTableCellViewModel(sixAxisData: data)
+        bind()
     }
 }

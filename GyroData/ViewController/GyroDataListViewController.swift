@@ -25,7 +25,10 @@ final class GyroDataListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpView()
-      
+        configureGyroDataTableView()
+        
+        let data = SixAxisData(date: Date().description, title: .accelerometer, record: 40.3)
+        createSnapshot([data])
     }
 
     private func setUpView() {
@@ -68,6 +71,7 @@ extension GyroDataListViewController {
         dataSource = UITableViewDiffableDataSource<Section, SixAxisData>(tableView: gyroDataTableView, cellProvider: { tableView, indexPath, itemIdentifier in
             guard let cell = tableView.dequeueReusableCell(withIdentifier: GyroDataTableViewCell.identifier, for: indexPath) as? GyroDataTableViewCell else { return UITableViewCell() }
             
+            cell.configureCell(with: itemIdentifier)
             return cell
         })
     }
