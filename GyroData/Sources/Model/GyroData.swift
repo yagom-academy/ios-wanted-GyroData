@@ -22,6 +22,7 @@ final class GyroData {
         }
     }
     
+    private let identifier: UUID
     private let dataType: DataType
     private var queue = LimitedQueue<Coordinate>()
     private var date: Date?
@@ -34,6 +35,7 @@ final class GyroData {
     
     init(dataType: DataType) {
         self.dataType = dataType
+        identifier = UUID()
     }
     
     func add(_ data: Coordinate) {

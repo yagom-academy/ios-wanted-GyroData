@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  GyroListViewController.swift
 //  GyroData
 //
 //  Created by kokkilE on 2023/06/12.
@@ -8,9 +8,7 @@
 import UIKit
 import CoreMotion
 
-final class ViewController: UIViewController {
-    private let gyroManager = GyroManager.shared
-    
+final class GyroListViewController: UIViewController {    
     override func viewDidLoad() {
         super.viewDidLoad()
         

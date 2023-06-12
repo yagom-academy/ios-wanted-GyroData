@@ -1,5 +1,5 @@
 //
-//  GyroManager.swift
+//  GyroRecorder.swift
 //  GyroData
 //
 //  Created by kokkilE on 2023/06/12.
@@ -7,12 +7,12 @@
 
 import CoreMotion
 
-final class GyroManager {
+final class GyroRecorder {
     enum Constant {
         static let frequency = 10.0
     }
     
-    static let shared = GyroManager()
+    static let shared = GyroRecorder()
     private let motionManager = CMMotionManager()
     private var dataType: GyroData.DataType?
     private var gyroData: GyroData?
@@ -66,7 +66,7 @@ final class GyroManager {
     }
     
     private func setupPeriod() {
-        let period = 1 / GyroManager.Constant.frequency
+        let period = 1 / GyroRecorder.Constant.frequency
         
         motionManager.accelerometerUpdateInterval = period
         motionManager.gyroUpdateInterval = period

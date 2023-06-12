@@ -6,7 +6,7 @@
 //
 
 final class LimitedQueue<Element> {
-    private let maxCount = Int(GyroManager.Constant.frequency * 60)
+    private let maxCount = Int(GyroRecorder.Constant.frequency * 60)
     
     private(set) var head: Node<Element>?
     private(set) var tail: Node<Element>?
