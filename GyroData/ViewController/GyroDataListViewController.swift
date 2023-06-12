@@ -8,10 +8,16 @@
 import UIKit
 
 final class GyroDataListViewController: UIViewController {
+    enum Section {
+        case main
+    }
+    
+    private var dataSource: UITableViewDiffableDataSource<Section, SixAxisData>?
     
     private let gyroDataTableView: UITableView = {
         let tableView = UITableView()
         tableView.backgroundColor = .white
+        tableView.register(GyroDataTableViewCell.self, forCellReuseIdentifier: GyroDataTableViewCell.identifier)
         
         return tableView
     }()
@@ -19,6 +25,7 @@ final class GyroDataListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpView()
+      
     }
 
     private func setUpView() {
@@ -55,3 +62,21 @@ final class GyroDataListViewController: UIViewController {
     }
 }
 
+// MARK: DiffableDataSource
+extension GyroDataListViewController {
+    private func configureGyroDataTableView() {
+        dataSource = UITableViewDiffableDataSource<Section, SixAxisData>(tableView: gyroDataTableView, cellProvider: { tableView, indexPath, itemIdentifier in
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: GyroDataTableViewCell.identifier, for: indexPath) as? GyroDataTableViewCell else { return UITableViewCell() }
+            
+            return cell
+        })
+    }
+    
+    private func createSnapshot(_ data: [SixAxisData]) {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, SixAxisData>()
+        
+        snapshot.appendSections([.main])
+        snapshot.appendItems(data)
+        dataSource?.apply(snapshot, animatingDifferences: true)
+    }
+}

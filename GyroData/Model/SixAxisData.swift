@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SixAxisData {
+struct SixAxisData: Hashable {
     let id = UUID()
     let date: String?
     let title: SensorType?
