@@ -43,3 +43,13 @@ final class GyroData {
         date = Date()
     }
 }
+
+extension GyroData: Hashable {
+    static func == (lhs: GyroData, rhs: GyroData) -> Bool {
+        return lhs.identifier == rhs.identifier
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(identifier)
+    }
+}
