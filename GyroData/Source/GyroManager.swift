@@ -1,0 +1,55 @@
+//
+//  GyroManager.swift
+//  GyroData
+//
+//  Created by kokkilE on 2023/06/12.
+//
+
+import CoreMotion
+
+final class GyroManager {
+    enum Constant {
+        static let frequency = 10.0
+    }
+    
+    static let shared = GyroManager()
+    
+    private let motionManager = CMMotionManager()
+    
+    private init() {
+        setupPeriod()
+    }
+    
+    func startAccelerometerUpdates() {
+        motionManager.accelerometerUpdateInterval = 0.1
+        
+        motionManager.startAccelerometerUpdates(to: .current!) { data, error in
+            guard let x = data?.acceleration.x,
+                  let y = data?.acceleration.y,
+                  let z = data?.acceleration.z else {
+                // error handle
+                return
+            }
+        }
+    }
+    
+    func startGyroUpdates() {
+        motionManager.gyroUpdateInterval = 0.1
+        
+        motionManager.startGyroUpdates(to: .current!) { data, error in
+            guard let x = data?.rotationRate.x,
+                  let y = data?.rotationRate.y,
+                  let z = data?.rotationRate.z else {
+                // error handle
+                return
+            }
+        }
+    }
+    
+    private func setupPeriod() {
+        let period = 1 / GyroManager.Constant.frequency
+        
+        motionManager.accelerometerUpdateInterval = period
+        motionManager.gyroUpdateInterval = period
+    }
+}

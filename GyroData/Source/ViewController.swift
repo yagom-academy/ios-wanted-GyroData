@@ -6,12 +6,14 @@
 //
 
 import UIKit
+import CoreMotion
 
-class ViewController: UIViewController {
-
+final class ViewController: UIViewController {
+    private let gyroManager = GyroManager.shared
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .systemGray
     }
 }
