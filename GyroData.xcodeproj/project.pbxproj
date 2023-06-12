@@ -19,6 +19,8 @@
 		AA51FF092A37302B00C1888F /* LimitedQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA51FF082A37302B00C1888F /* LimitedQueue.swift */; };
 		AA51FF0D2A37491900C1888F /* RecordGyroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA51FF0C2A37491900C1888F /* RecordGyroViewController.swift */; };
 		AA51FF102A374B2800C1888F /* GyroDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA51FF0F2A374B2800C1888F /* GyroDataManager.swift */; };
+		AA51FF122A37585E00C1888F /* GryoListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA51FF112A37585E00C1888F /* GryoListCell.swift */; };
+		AA51FF142A3758C800C1888F /* UITableViewCell+ReuseIdentifying.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA51FF132A3758C800C1888F /* UITableViewCell+ReuseIdentifying.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,8 @@
 		AA51FF082A37302B00C1888F /* LimitedQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitedQueue.swift; sourceTree = "<group>"; };
 		AA51FF0C2A37491900C1888F /* RecordGyroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordGyroViewController.swift; sourceTree = "<group>"; };
 		AA51FF0F2A374B2800C1888F /* GyroDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroDataManager.swift; sourceTree = "<group>"; };
+		AA51FF112A37585E00C1888F /* GryoListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GryoListCell.swift; sourceTree = "<group>"; };
+		AA51FF132A3758C800C1888F /* UITableViewCell+ReuseIdentifying.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+ReuseIdentifying.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +101,7 @@
 		AA51FF0A2A37488700C1888F /* GyroList */ = {
 			isa = PBXGroup;
 			children = (
+				AA51FF152A375BDE00C1888F /* Cell */,
 				63F01BB828D44FC400C53A39 /* GyroListViewController.swift */,
 			);
 			path = GyroList;
@@ -117,6 +122,15 @@
 				AA51FF0F2A374B2800C1888F /* GyroDataManager.swift */,
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		AA51FF152A375BDE00C1888F /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				AA51FF132A3758C800C1888F /* UITableViewCell+ReuseIdentifying.swift */,
+				AA51FF112A37585E00C1888F /* GryoListCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		AABC7EAA2A36F6FE006A07DF /* Sources */ = {
@@ -225,10 +239,12 @@
 				63F01BB928D44FC400C53A39 /* GyroListViewController.swift in Sources */,
 				AA51FF022A372CBF00C1888F /* GyroData.swift in Sources */,
 				AA51FF092A37302B00C1888F /* LimitedQueue.swift in Sources */,
+				AA51FF122A37585E00C1888F /* GryoListCell.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
 				AA51FF042A372D3C00C1888F /* Coordinate.swift in Sources */,
 				AA51FF072A372EFD00C1888F /* Node.swift in Sources */,
+				AA51FF142A3758C800C1888F /* UITableViewCell+ReuseIdentifying.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

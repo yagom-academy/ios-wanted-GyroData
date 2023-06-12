@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import CoreMotion
 
 final class GyroListViewController: UIViewController {
     enum Section {

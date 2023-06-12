@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import CoreMotion
 
 final class RecordGyroViewController: UIViewController {
     private let gyroRecorder = GyroRecorder.shared
