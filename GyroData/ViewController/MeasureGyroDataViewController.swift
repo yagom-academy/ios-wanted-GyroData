@@ -95,6 +95,7 @@ final class MeasureGyroDataViewController: UIViewController {
                                               target: self,
                                               action: #selector(saveButtonTapped))
         navigationItem.title = title
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.black]
         navigationItem.rightBarButtonItem = rightButtonItem
         navigationController?.navigationBar.topItem?.title = ""
     }

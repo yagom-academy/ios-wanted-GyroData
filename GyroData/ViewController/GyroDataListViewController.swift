@@ -31,11 +31,15 @@ final class GyroDataListViewController: UIViewController {
         let data = SixAxisData(date: Date().description, title: .accelerometer, record: 40.3)
         createSnapshot([data])
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        setUpNavigationBar()
+    }
 
     private func setUpView() {
         view.backgroundColor = .white
         view.addSubview(gyroDataTableView)
-        setUpNavigationBar()
+      
         setUpGyroDataTableView()
     }
     
@@ -57,6 +61,7 @@ final class GyroDataListViewController: UIViewController {
                                               style: .plain,
                                               target: self, action: #selector(measurementButtonTapped))
         
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.black]
         navigationItem.title = title
         navigationItem.rightBarButtonItem = rightButtonItem
     }
