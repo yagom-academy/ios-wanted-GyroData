@@ -40,8 +40,6 @@ final class GyroRecorder {
     }
     
     private func startAccelerometerUpdates() {
-        motionManager.accelerometerUpdateInterval = 0.1
-        
         motionManager.startAccelerometerUpdates(to: .current!) { [weak self] data, error in
             guard let x = data?.acceleration.x,
                   let y = data?.acceleration.y,
@@ -56,8 +54,6 @@ final class GyroRecorder {
     }
     
     private func startGyroUpdates() {
-        motionManager.gyroUpdateInterval = 0.1
-        
         motionManager.startGyroUpdates(to: .current!) { [weak self] data, error in
             guard let x = data?.rotationRate.x,
                   let y = data?.rotationRate.y,

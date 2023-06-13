@@ -33,6 +33,10 @@ struct GyroData {
         return Double(formattedDuration)
     }
     
+    var count: Int {
+        queue.count
+    }
+    
     init(dataType: DataType) {
         self.dataType = dataType
         identifier = UUID()

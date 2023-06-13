@@ -11,7 +11,6 @@ import Combine
 class GraphView: UIView {
     private let xLabel = {
         let label = UILabel()
-        label.text = "testing"
         
         label.textAlignment = .center
         label.textColor = .systemRed
@@ -22,8 +21,7 @@ class GraphView: UIView {
     }()
     private let yLabel = {
         let label = UILabel()
-        label.text = "testing"
-
+        
         label.textAlignment = .center
         label.textColor = .systemGreen
         label.font = .preferredFont(forTextStyle: .body)
@@ -33,7 +31,6 @@ class GraphView: UIView {
     }()
     private let zLabel = {
         let label = UILabel()
-        label.text = "testing"
 
         label.textAlignment = .center
         label.textColor = .systemBlue
@@ -43,9 +40,38 @@ class GraphView: UIView {
         return label
     }()
     
+    // MARK: 삭제 필요
+    private lazy var countLabel = {
+        let label = UILabel()
+        
+        label.text = "testing"
+        label.textAlignment = .center
+        label.textColor = .systemBlue
+        label.font = .preferredFont(forTextStyle: .body)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        addSubview(label)
+        label.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
+        label.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true
+        label.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.2).isActive = true
+        
+        return label
+    }()
+    
     private let viewModel: RecordGyroViewModel
     private var gyroData: GyroData?
     private var subscriptions = Set<AnyCancellable>()
+    
+    private var drawSectionHeight: Double {
+        bounds.height * 0.95
+    }
+    private var drawSectionWidth: Double {
+        bounds.width * 0.95
+    }
+    private var maximumY = 0.5
+    private var scaleY: Double {
+        drawSectionHeight / (maximumY * 2)
+    }
 
     init(viewModel: RecordGyroViewModel) {
         self.viewModel = viewModel
@@ -73,27 +99,23 @@ class GraphView: UIView {
     private func drawGrid() {
         let row = 8
         let column = 8
-        let width = bounds.width * 0.95
-        let height = bounds.height * 0.95
-        let unitWidth = width / CGFloat(column)
-        let unitHeight = height / CGFloat(row)
-        let startPoint = CGPoint(x: (bounds.width - width) / 2.0,
-                                 y: (bounds.height - height) / 2.0)
+        let offsetX = drawSectionWidth / CGFloat(column)
+        let offsetY = drawSectionHeight / CGFloat(row)
+        let startPoint = CGPoint(x: (bounds.width - drawSectionWidth) / 2.0,
+                                 y: (bounds.height - drawSectionHeight) / 2.0)
+        let x = (bounds.width - drawSectionWidth) / 2.0
+        let y = (bounds.height - drawSectionHeight) / 2.0
         
         let path = UIBezierPath()
 
         for count in 0...row {
-            let y = startPoint.y + (unitHeight * CGFloat(count))
-            
-            path.move(to: CGPoint(x: startPoint.x, y: y))
-            path.addLine(to: CGPoint(x: startPoint.x + width, y: y))
+            path.move(to: CGPoint(x: x, y: y + (offsetY * CGFloat(count))))
+            path.addLine(to: CGPoint(x: x + drawSectionWidth, y: y + (offsetY * CGFloat(count))))
         }
         
         for count in 0...column {
-            let x = startPoint.x + (unitWidth * CGFloat(count))
-            
-            path.move(to: CGPoint(x: x, y: startPoint.y))
-            path.addLine(to: CGPoint(x: x, y: startPoint.y + height))
+            path.move(to: CGPoint(x: x + (offsetX * CGFloat(count)), y: y))
+            path.addLine(to: CGPoint(x: x + (offsetX * CGFloat(count)), y: y + drawSectionHeight))
         }
         
         UIColor.black.setStroke()
@@ -102,28 +124,33 @@ class GraphView: UIView {
     }
     
     private func drawGraph() {
-        guard var gyroData else { return }
+        guard var gyroData,
+              gyroData.count > 1 else { return }
         
-        let width = bounds.width * 0.95
-        let unitWidth = width / (GyroRecorder.Constant.frequency * 60.0)
-        
-        var x = (bounds.width - width) / 2.0
+        let offsetX = drawSectionWidth / (Double(gyroData.count) - 1)
+        countLabel.text = String(gyroData.count)
+        var x = (bounds.width - drawSectionWidth) / 2.0
         let y = bounds.height / 2.0
         
         let pathX = UIBezierPath()
         let pathY = UIBezierPath()
         let pathZ = UIBezierPath()
         
-        pathX.move(to: CGPoint(x: x, y: y))
-        pathY.move(to: CGPoint(x: x, y: y))
-        pathZ.move(to: CGPoint(x: x, y: y))
+        if let coordinate = gyroData.dequeue() {
+            checkMaximumValue(coordinate.x, coordinate.y, coordinate.z)
+            
+            pathX.move(to: CGPoint(x: x, y: y - (coordinate.x * scaleY)))
+            pathY.move(to: CGPoint(x: x, y: y - (coordinate.y * scaleY)))
+            pathZ.move(to: CGPoint(x: x, y: y - (coordinate.z * scaleY)))
+        }
         
         while let coordinate = gyroData.dequeue() {
-            pathX.addLine(to: CGPoint(x: x, y: y - (coordinate.x * 100)))
-            pathY.addLine(to: CGPoint(x: x, y: y - (coordinate.y * 100)))
-            pathZ.addLine(to: CGPoint(x: x, y: y - (coordinate.z * 100)))
+            checkMaximumValue(coordinate.x, coordinate.y, coordinate.z)
             
-            x += unitWidth
+            x += offsetX
+            pathX.addLine(to: CGPoint(x: x, y: y - (coordinate.x * scaleY)))
+            pathY.addLine(to: CGPoint(x: x, y: y - (coordinate.y * scaleY)))
+            pathZ.addLine(to: CGPoint(x: x, y: y - (coordinate.z * scaleY)))
         }
         
         UIColor.systemRed.setStroke()
@@ -174,6 +201,14 @@ class GraphView: UIView {
             zLabel.leadingAnchor.constraint(equalTo: yLabel.trailingAnchor, constant: 20),
             zLabel.widthAnchor.constraint(equalTo: safe.widthAnchor, multiplier: 0.2),
         ])
+    }
+    
+    private func checkMaximumValue(_ x: Double, _ y: Double, _ z: Double) {
+        guard let maximumValue = [maximumY, abs(x), abs(y), abs(z)].max() else { return }
+        
+        if maximumValue > maximumY {
+            maximumY = maximumValue * 1.2
+        }
     }
     
     private func bind() {
