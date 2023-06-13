@@ -62,7 +62,8 @@ final class GyroDataListViewController: UIViewController {
     }
     
     @objc private func measurementButtonTapped() {
-        print("측정버튼이 눌렸습니다.")
+        let measureGyroDataViewController = MeasureGyroDataViewController()
+        navigationController?.pushViewController(measureGyroDataViewController, animated: true)
     }
 }
 
