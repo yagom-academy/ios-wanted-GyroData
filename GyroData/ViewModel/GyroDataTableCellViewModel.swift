@@ -8,9 +8,9 @@
 import Combine
 
 final class GyroDataTableCellViewModel {
-    @Published private(set) var sixAxisData: SixAxisData
+    @Published private(set) var sixAxisData: GyroEntity
     
-    init(sixAxisData: SixAxisData) {
+    init(sixAxisData: GyroEntity) {
         self.sixAxisData = sixAxisData
     }
 }

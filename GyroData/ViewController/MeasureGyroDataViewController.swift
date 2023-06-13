@@ -12,6 +12,10 @@ final class MeasureGyroDataViewController: UIViewController {
     
     private let viewModel = MeasureViewModel()
     private var cancellables = Set<AnyCancellable>()
+    
+    private var accThreeAxisData: [ThreeAxisValue]?
+    private var gyroThreeAxisData: [ThreeAxisValue]?
+    
     private var selectedSensor: SensorType = .accelerometer
     private let segmentedControl: UISegmentedControl = {
         let control = UISegmentedControl(items: ["Acc", "Gyro"])
@@ -68,11 +72,13 @@ final class MeasureGyroDataViewController: UIViewController {
     private func bind() {
         viewModel.accelerometerSubject
             .sink { [weak self] data in
+                self?.accThreeAxisData = data
                 self?.graphView.drawGraph(with: data)
             }
             .store(in: &cancellables)
         viewModel.gyroscopeSubject
             .sink { [weak self] data in
+                self?.gyroThreeAxisData = data
                 self?.graphView.drawGraph(with: data)
             }
             .store(in: &cancellables)
@@ -157,6 +163,17 @@ final class MeasureGyroDataViewController: UIViewController {
         measurementButton.addTarget(self, action: #selector(startMeasure), for: .touchUpInside)
         stopButton.addTarget(self, action: #selector(stopMeasure), for: .touchUpInside)
     }
+    
+    private func showAlert() {
+        let title = "측정된 데이터가 없습니다."
+        let message = "다시 확인해주세요."
+        let okSign = "확인"
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: okSign, style: .default)
+        
+        alert.addAction(okAction)
+        present(alert, animated: true)
+    }
 }
 
 // MARK: Button Action
@@ -187,6 +204,13 @@ extension MeasureGyroDataViewController {
     }
     
     @objc private func saveButtonTapped() {
-        print("저장버튼이 눌렸습니다.")
+        switch selectedSensor {
+        case .accelerometer:
+            let data = SixAxisData(id: UUID(), date: Date().description, title: SensorType.accelerometer.description, accelerometer: accThreeAxisData)
+            viewModel.saveToFileManager(data)
+        case .gyroscope:
+            let data = SixAxisData(id: UUID(), date: Date().description, title: SensorType.accelerometer.description, gyroscope: gyroThreeAxisData)
+            viewModel.saveToFileManager(data)
+        }
     }
 }

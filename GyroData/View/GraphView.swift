@@ -58,7 +58,7 @@ final class GraphView: UIView {
         layer.addSublayer(graphLayer)
     }
     
-    func drawGraph(with data: [(x: Double, y: Double, z: Double)]) {
+    func drawGraph(with data: [ThreeAxisValue]) {
         graphPathX = UIBezierPath()
         graphPathY = UIBezierPath()
         graphPathZ = UIBezierPath()
@@ -71,17 +71,17 @@ final class GraphView: UIView {
         let spacing = width / CGFloat(totalDataPoints - 1)
         
         for i in 0..<data.count {
-            let valueX: CGFloat = data[i].x
+            let valueX: CGFloat = data[i].valueX
             
             var valueY: CGFloat = 0
             
             if (midY + valueY) >= midY * 2 || (midY + valueY) <= 0 {
                 valueY = valueY + (valueY * 0.2)
             } else {
-                valueY = data[i].y
+                valueY = data[i].valueY
             }
         
-            let valueZ: CGFloat = data[i].z
+            let valueZ: CGFloat = data[i].valueZ
             let pointX = CGPoint(x: CGFloat(i) * spacing, y: midY + valueX - 5)
             let pointY = CGPoint(x: CGFloat(i) * spacing, y: midY + valueY)
             let pointZ = CGPoint(x: CGFloat(i) * spacing, y: midY + valueZ + 5)

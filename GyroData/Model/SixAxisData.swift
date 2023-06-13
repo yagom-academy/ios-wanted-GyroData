@@ -7,15 +7,16 @@
 
 import Foundation
 
-struct SixAxisData: Hashable {
-    let id = UUID()
-    let date: String?
-    let title: SensorType?
-    let record: Double?
-    
-    init(date: String?, title: SensorType?, record: Double?) {
-        self.date = date
-        self.title = title
-        self.record = record
-    }
+struct SixAxisData: Codable {
+    let id: UUID
+    var date: String?
+    var title: String?
+    var accelerometer: [ThreeAxisValue]?
+    var gyroscope: [ThreeAxisValue]?
+}
+
+struct ThreeAxisValue: Codable {
+    var valueX: Double
+    var valueY: Double
+    var valueZ: Double
 }

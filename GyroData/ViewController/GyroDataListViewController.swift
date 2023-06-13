@@ -12,7 +12,7 @@ final class GyroDataListViewController: UIViewController {
         case main
     }
     
-    private var dataSource: UITableViewDiffableDataSource<Section, SixAxisData>?
+    private var dataSource: UITableViewDiffableDataSource<Section, GyroEntity>?
     
     private let gyroDataTableView: UITableView = {
         let tableView = UITableView()
@@ -28,8 +28,8 @@ final class GyroDataListViewController: UIViewController {
         setUpView()
         configureGyroDataTableView()
         
-        let data = SixAxisData(date: Date().description, title: .accelerometer, record: 40.3)
-        createSnapshot([data])
+//        let data = SixAxisData(date: Date().description, title: .accelerometer, record: 40.3)
+//        createSnapshot([data])
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -75,7 +75,7 @@ final class GyroDataListViewController: UIViewController {
 // MARK: DiffableDataSource
 extension GyroDataListViewController {
     private func configureGyroDataTableView() {
-        dataSource = UITableViewDiffableDataSource<Section, SixAxisData>(tableView: gyroDataTableView, cellProvider: { tableView, indexPath, itemIdentifier in
+        dataSource = UITableViewDiffableDataSource<Section, GyroEntity>(tableView: gyroDataTableView, cellProvider: { tableView, indexPath, itemIdentifier in
             guard let cell = tableView.dequeueReusableCell(withIdentifier: GyroDataTableViewCell.identifier, for: indexPath) as? GyroDataTableViewCell else { return UITableViewCell() }
             
             cell.configureCell(with: itemIdentifier)
@@ -83,8 +83,8 @@ extension GyroDataListViewController {
         })
     }
     
-    private func createSnapshot(_ data: [SixAxisData]) {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, SixAxisData>()
+    private func createSnapshot(_ data: [GyroEntity]) {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, GyroEntity>()
         
         snapshot.appendSections([.main])
         snapshot.appendItems(data)

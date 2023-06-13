@@ -9,42 +9,12 @@ import Combine
 import CoreMotion
 
 final class MeasureViewModel {
-    var accelerometerSubject = PassthroughSubject<[(x: Double, y: Double, z: Double)], Never>()
-    var gyroscopeSubject = PassthroughSubject<[(x: Double, y: Double, z: Double)], Never>()
+    var accelerometerSubject = PassthroughSubject<[ThreeAxisValue], Never>()
+    var gyroscopeSubject = PassthroughSubject<[ThreeAxisValue], Never>()
     
     private var cancellables = Set<AnyCancellable>()
     private let motionManager = CMMotionManager()
     private var timer: Timer?
-    
-    func startMeasure(by selectedSensor: SensorType) {
-        let updateInterval = 0.1
-        switch selectedSensor {
-        case .accelerometer:
-            timer = Timer(timeInterval: updateInterval,
-                          target: self,
-                          selector: #selector(measureAcc),
-                          userInfo: nil,
-                          repeats: true)
-        case .gyroscope:
-            timer = Timer(timeInterval: updateInterval,
-                          target: self,
-                          selector: #selector(measureGyro),
-                          userInfo: nil,
-                          repeats: true)
-        }
-        
-        timer?.fire()
-    }
-    
-    func stopMeasure(by selectedSensor: SensorType) {
-        timer?.invalidate()
-        switch selectedSensor {
-        case .accelerometer:
-            motionManager.stopAccelerometerUpdates()
-        case .gyroscope:
-            motionManager.stopGyroUpdates()
-        }
-    }
     
     @objc private func measureAcc(timer: Timer) {
         if motionManager.isAccelerometerAvailable {
@@ -82,11 +52,11 @@ final class MeasureViewModel {
         }
     }
 
-    private func acceleroDataPublisher() -> Future<[(x: Double, y: Double, z: Double)], Error> {
-        return Future<[(x: Double, y: Double, z: Double)], Error> { promise in
+    private func acceleroDataPublisher() -> Future<[ThreeAxisValue], Error> {
+        return Future<[ThreeAxisValue], Error> { promise in
             
-            let timeout: TimeInterval = 60
-            var accelerometerData: [(x: Double, y: Double, z: Double)] = []
+            let timeout: TimeInterval = 5
+            var accelerometerData: [ThreeAxisValue] = []
             var elapsedTime: TimeInterval = 0
             
             self.motionManager.startAccelerometerUpdates(to: .main) { [weak self] data, error in
@@ -97,7 +67,8 @@ final class MeasureViewModel {
                     let accX = data.acceleration.x
                     let accY = data.acceleration.y
                     let accZ = data.acceleration.z
-                    accelerometerData.append((x: accX, y: accY, z: accZ))
+                    let accData = ThreeAxisValue(valueX: accX, valueY: accY, valueZ: accZ)
+                    accelerometerData.append(accData)
                     print("acc측정 중")
                     elapsedTime += 0.1
                     
@@ -111,21 +82,23 @@ final class MeasureViewModel {
         }
     }
     
-    private func gyroDataPublisher() -> Future<[(x: Double, y: Double, z: Double)], Error> {
-        return Future<[(x: Double, y: Double, z: Double)], Error> { promise in
+    private func gyroDataPublisher() -> Future<[ThreeAxisValue], Error> {
+        return Future<[ThreeAxisValue], Error> { promise in
             
-            let timeout: TimeInterval = 60
-            var gyroscopeData: [(x: Double, y: Double, z: Double)] = []
+            let timeout: TimeInterval = 5
+            var gyroscopeData: [ThreeAxisValue] = []
             var elapsedTime: TimeInterval = 0
             
             self.motionManager.startGyroUpdates(to: .main) { [weak self] data, error in
                 if let error = error {
                     promise(.failure(error))
                 } else if let data = data {
+                    
                     let gyroX = data.rotationRate.x
                     let gyroY = data.rotationRate.y
                     let gyroZ = data.rotationRate.z
-                    gyroscopeData.append((x: gyroX, y: gyroY, z: gyroZ))
+                    let gyroData = ThreeAxisValue(valueX: gyroX, valueY: gyroY, valueZ: gyroZ)
+                    gyroscopeData.append(gyroData)
                     print("gyro측정 중")
                     elapsedTime += 0.1
                     
@@ -136,6 +109,52 @@ final class MeasureViewModel {
                     }
                 }
             }
+        }
+    }
+}
+
+extension MeasureViewModel {
+    func startMeasure(by selectedSensor: SensorType) {
+        let updateInterval = 0.1
+        switch selectedSensor {
+        case .accelerometer:
+            timer = Timer(timeInterval: updateInterval,
+                          target: self,
+                          selector: #selector(measureAcc),
+                          userInfo: nil,
+                          repeats: true)
+        case .gyroscope:
+            timer = Timer(timeInterval: updateInterval,
+                          target: self,
+                          selector: #selector(measureGyro),
+                          userInfo: nil,
+                          repeats: true)
+        }
+        
+        timer?.fire()
+    }
+    
+    func stopMeasure(by selectedSensor: SensorType) {
+        timer?.invalidate()
+        switch selectedSensor {
+        case .accelerometer:
+            motionManager.stopAccelerometerUpdates()
+        case .gyroscope:
+            motionManager.stopGyroUpdates()
+        }
+    }
+    
+    func saveToFileManager(_ data: SixAxisData) {
+        do {
+            let jsonEncoder = JSONEncoder()
+            let jsonData = try jsonEncoder.encode(data)
+            
+            if let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+                let fileURL = documentDirectory.appendingPathComponent("SixAxisData.json")
+                try jsonData.write(to: fileURL)
+            }
+        } catch {
+            print("JSON Encoding Fail \(error)")
         }
     }
 }
