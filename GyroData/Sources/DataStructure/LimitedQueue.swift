@@ -49,6 +49,11 @@ final class LimitedQueue<Element> {
         count += 1
     }
     
+    func clear() {
+        head = nil
+        tail = nil
+    }
+    
     // for test
     var realCount: Int {
         guard !isEmpty else {
