@@ -10,7 +10,8 @@ import Foundation
 import CoreData
 
 
-extension GyroEntity {
+extension GyroEntity: EntityKeyProtocol {
+    static let key = "GyroEntity"
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<GyroEntity> {
         return NSFetchRequest<GyroEntity>(entityName: "GyroEntity")
