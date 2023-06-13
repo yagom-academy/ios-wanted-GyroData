@@ -6,9 +6,12 @@
 //
 
 import UIKit
+import Combine
 
 final class MeasureGyroDataViewController: UIViewController {
     
+    private let viewModel = MeasureViewModel()
+    private var cancellables = Set<AnyCancellable>()
     private var selectedSensor: SensorType = .accelerometer
     private let segmentedControl: UISegmentedControl = {
         let control = UISegmentedControl(items: ["Acc", "Gyro"])
@@ -16,8 +19,8 @@ final class MeasureGyroDataViewController: UIViewController {
         return control
     }()
     
-    private let graphView: UIView = {
-        let view = UIView()
+    private let graphView: GraphView = {
+        let view = GraphView()
         let lineWidth: CGFloat = 3
         view.layer.borderWidth = lineWidth
         
@@ -59,6 +62,20 @@ final class MeasureGyroDataViewController: UIViewController {
         super.viewDidLoad()
         
         setUpView()
+        bind()
+    }
+    
+    private func bind() {
+        viewModel.accelerometerSubject
+            .sink { [weak self] data in
+                self?.graphView.drawGraph(with: data)
+            }
+            .store(in: &cancellables)
+        viewModel.gyroscopeSubject
+            .sink { [weak self] data in
+                self?.graphView.drawGraph(with: data)
+            }
+            .store(in: &cancellables)
     }
     
     private func setUpView() {
@@ -67,6 +84,7 @@ final class MeasureGyroDataViewController: UIViewController {
         view.backgroundColor = .white
         setUpUI()
         setUpSegmentedControl()
+        setUpButtons()
     }
     
     private func setUpNavigationBar() {
@@ -79,10 +97,6 @@ final class MeasureGyroDataViewController: UIViewController {
         navigationItem.title = title
         navigationItem.rightBarButtonItem = rightButtonItem
         navigationController?.navigationBar.topItem?.title = ""
-    }
-    
-    @objc private func saveButtonTapped() {
-        print("저장버튼이 눌렸습니다.")
     }
     
     private func setUpSegmentedControl() {
@@ -138,6 +152,14 @@ final class MeasureGyroDataViewController: UIViewController {
         ])
     }
     
+    private func setUpButtons() {
+        measurementButton.addTarget(self, action: #selector(startMeasure), for: .touchUpInside)
+        stopButton.addTarget(self, action: #selector(stopMeasure), for: .touchUpInside)
+    }
+}
+
+// MARK: Button Action
+extension MeasureGyroDataViewController {
     @objc private func changeSensorType(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
@@ -147,5 +169,17 @@ final class MeasureGyroDataViewController: UIViewController {
         default:
             return
         }
+    }
+    
+    @objc private func startMeasure() {
+        viewModel.startMeasure(by: selectedSensor)
+    }
+    
+    @objc private func stopMeasure() {
+        viewModel.stopMeasure()
+    }
+    
+    @objc private func saveButtonTapped() {
+        print("저장버튼이 눌렸습니다.")
     }
 }
