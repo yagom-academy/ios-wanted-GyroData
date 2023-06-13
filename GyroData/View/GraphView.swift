@@ -72,7 +72,15 @@ final class GraphView: UIView {
         
         for i in 0..<data.count {
             let valueX: CGFloat = data[i].x
-            let valueY: CGFloat = data[i].y
+            
+            var valueY: CGFloat = 0
+            
+            if (midY + valueY) >= midY * 2 || (midY + valueY) <= 0 {
+                valueY = valueY + (valueY * 0.2)
+            } else {
+                valueY = data[i].y
+            }
+        
             let valueZ: CGFloat = data[i].z
             let pointX = CGPoint(x: CGFloat(i) * spacing, y: midY + valueX - 5)
             let pointY = CGPoint(x: CGFloat(i) * spacing, y: midY + valueY)

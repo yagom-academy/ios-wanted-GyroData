@@ -36,8 +36,14 @@ final class MeasureViewModel {
         timer?.fire()
     }
     
-    func stopMeasure() {
+    func stopMeasure(by selectedSensor: SensorType) {
         timer?.invalidate()
+        switch selectedSensor {
+        case .accelerometer:
+            motionManager.stopAccelerometerUpdates()
+        case .gyroscope:
+            motionManager.stopGyroUpdates()
+        }
     }
     
     @objc private func measureAcc(timer: Timer) {

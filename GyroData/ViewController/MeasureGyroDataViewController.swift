@@ -173,13 +173,17 @@ extension MeasureGyroDataViewController {
     }
     
     @objc private func startMeasure() {
-        segmentedControl.isEnabled = false
+        if segmentedControl.isEnabled == false {
+            segmentedControl.isEnabled = true
+        } else {
+            segmentedControl.isEnabled = false
+        }
         viewModel.startMeasure(by: selectedSensor)
     }
     
     @objc private func stopMeasure() {
         segmentedControl.isEnabled = true
-        viewModel.stopMeasure()
+        viewModel.stopMeasure(by: selectedSensor)
     }
     
     @objc private func saveButtonTapped() {
