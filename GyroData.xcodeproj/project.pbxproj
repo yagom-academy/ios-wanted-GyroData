@@ -24,6 +24,7 @@
 		AA51FF172A375D7000C1888F /* GyroListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA51FF162A375D7000C1888F /* GyroListViewModel.swift */; };
 		AA51FF192A3812F800C1888F /* GyroSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA51FF182A3812F800C1888F /* GyroSegmentedControl.swift */; };
 		AA51FF1B2A38238200C1888F /* RecordGyroViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA51FF1A2A38238200C1888F /* RecordGyroViewModel.swift */; };
+		AA51FF1D2A38385300C1888F /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA51FF1C2A38385300C1888F /* GraphView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		AA51FF162A375D7000C1888F /* GyroListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroListViewModel.swift; sourceTree = "<group>"; };
 		AA51FF182A3812F800C1888F /* GyroSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroSegmentedControl.swift; sourceTree = "<group>"; };
 		AA51FF1A2A38238200C1888F /* RecordGyroViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordGyroViewModel.swift; sourceTree = "<group>"; };
+		AA51FF1C2A38385300C1888F /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +122,7 @@
 				AA51FF182A3812F800C1888F /* GyroSegmentedControl.swift */,
 				AA51FF0C2A37491900C1888F /* RecordGyroViewController.swift */,
 				AA51FF1A2A38238200C1888F /* RecordGyroViewModel.swift */,
+				AA51FF1C2A38385300C1888F /* GraphView.swift */,
 			);
 			path = RecordGyro;
 			sourceTree = "<group>";
@@ -249,6 +252,7 @@
 				63F01BB928D44FC400C53A39 /* GyroListViewController.swift in Sources */,
 				AA51FF022A372CBF00C1888F /* GyroData.swift in Sources */,
 				AA51FF092A37302B00C1888F /* LimitedQueue.swift in Sources */,
+				AA51FF1D2A38385300C1888F /* GraphView.swift in Sources */,
 				AA51FF122A37585E00C1888F /* GyroListCell.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,

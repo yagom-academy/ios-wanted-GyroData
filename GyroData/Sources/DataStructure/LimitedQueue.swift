@@ -5,7 +5,7 @@
 //  Created by kokkilE on 2023/06/12.
 //
 
-final class LimitedQueue<Element> {
+struct LimitedQueue<Element> {
     private let maxCount = Int(GyroRecorder.Constant.frequency * 60)
     
     private(set) var head: Node<Element>?
@@ -25,7 +25,7 @@ final class LimitedQueue<Element> {
     }
     
     @discardableResult
-    func dequeue() -> Element? {
+    mutating func dequeue() -> Element? {
         if isEmpty { return nil }
         
         let data = head?.data
@@ -35,7 +35,7 @@ final class LimitedQueue<Element> {
         return data
     }
     
-    func enqueue(_ data: Element) {
+    mutating func enqueue(_ data: Element) {
         let node = Node(data)
         
         if isEmpty {
@@ -49,9 +49,13 @@ final class LimitedQueue<Element> {
         count += 1
     }
     
-    func clear() {
+    mutating func clear() {
         head = nil
         tail = nil
+    }
+    
+    func peek() -> Element? {
+        return tail?.data
     }
     
     // for test

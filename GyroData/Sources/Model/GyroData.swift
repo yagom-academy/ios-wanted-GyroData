@@ -42,6 +42,14 @@ struct GyroData {
         queue.enqueue(data)
         date = Date()
     }
+    
+    func readLastGyroData() -> Coordinate? {
+        return queue.peek()
+    }
+    
+    mutating func dequeue() -> Coordinate? {
+        return queue.dequeue()
+    }
 }
 
 extension GyroData: Hashable {
