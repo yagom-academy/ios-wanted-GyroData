@@ -14,7 +14,7 @@ final class GyroDataManager {
     
     private init() {
         // for test
-        let gyroData = GyroData(dataType: .accelerometer)
+        var gyroData = GyroData(dataType: .accelerometer)
         gyroData.add(Coordinate(x: 1, y: -1.2, z: -3.444))
         create(gyroData)
     }

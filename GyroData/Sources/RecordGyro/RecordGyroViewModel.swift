@@ -24,4 +24,8 @@ final class RecordGyroViewModel {
     func save() {
         
     }
+    
+    func gyroDataPublisher() -> AnyPublisher<GyroData?, Never> {
+        return gyroRecorder.gyroDataPublisher()
+    }
 }

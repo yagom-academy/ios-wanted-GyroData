@@ -9,7 +9,8 @@ import UIKit
 
 final class RecordGyroViewController: UIViewController {
     private lazy var stackView = {
-        let stackView = UIStackView(arrangedSubviews: [segmentedControl, recordButton, stopButton])
+        let stackView = UIStackView(arrangedSubviews: [segmentedControl, graphView, recordButton, stopButton])
+        
         stackView.alignment = .leading
         stackView.distribution = .fill
         stackView.axis = .vertical
@@ -20,11 +21,24 @@ final class RecordGyroViewController: UIViewController {
         
         return stackView
     }()
+    
     private let segmentedControl = GyroSegmentedControl(items: ["Acc", "Gyro"])
+    private let graphView: GraphView
     private let recordButton = UIButton()
     private let stopButton = UIButton()
     
-    private let viewModel = RecordGyroViewModel()
+    private let viewModel: RecordGyroViewModel
+    
+    init() {
+        viewModel = RecordGyroViewModel()
+        graphView = GraphView(viewModel: viewModel)
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,18 +67,18 @@ final class RecordGyroViewController: UIViewController {
             stackView.leadingAnchor.constraint(equalTo: safe.leadingAnchor, constant: 32),
             stackView.trailingAnchor.constraint(equalTo: safe.trailingAnchor, constant: -32),
             
-            segmentedControl.widthAnchor.constraint(equalTo: stackView.widthAnchor)
+            segmentedControl.widthAnchor.constraint(equalTo: stackView.widthAnchor),
+            graphView.widthAnchor.constraint(equalTo: stackView.widthAnchor),
+            graphView.heightAnchor.constraint(equalTo: stackView.widthAnchor)
         ])
     }
     
     private func setupSegmentedControl() {
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
-        
-        segmentedControl.addTarget(self, action: #selector(segmentedControlTapped), for: .valueChanged)
     }
     
-    @objc private func segmentedControlTapped(_ sender: UISegmentedControl) {
-        print(sender.selectedSegmentIndex)
+    private func setupGraphView() {
+        graphView.translatesAutoresizingMaskIntoConstraints = false
     }
     
     private func setupRecordButton() {

@@ -6,6 +6,7 @@
 //
 
 import CoreMotion
+import Combine
 
 final class GyroRecorder {
     enum Constant {
@@ -15,10 +16,15 @@ final class GyroRecorder {
     static let shared = GyroRecorder()
     private let motionManager = CMMotionManager()
     private var dataType: GyroData.DataType?
-    private var gyroData: GyroData?
+    @Published private var gyroData: GyroData?
     
     private init() {
         setupPeriod()
+    }
+    
+    func gyroDataPublisher() -> AnyPublisher<GyroData?, Never> {
+        return $gyroData
+            .eraseToAnyPublisher()
     }
     
     func start(dataType: GyroData.DataType) {
