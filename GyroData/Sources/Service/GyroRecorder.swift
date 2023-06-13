@@ -39,6 +39,17 @@ final class GyroRecorder {
         }
     }
     
+    func stop() {
+        guard let dataType else { return }
+        
+        switch dataType {
+        case .accelerometer:
+            stopAccelerometerUpdates()
+        case .gyro:
+            stopGyroUpdates()
+        }
+    }
+    
     private func startAccelerometerUpdates() {
         motionManager.startAccelerometerUpdates(to: .current!) { [weak self] data, error in
             guard let x = data?.acceleration.x,
@@ -64,6 +75,18 @@ final class GyroRecorder {
             
             let data = Coordinate(x: x, y: y, z: z)
             self?.gyroData?.add(data)
+        }
+    }
+    
+    private func stopAccelerometerUpdates() {
+        if motionManager.isAccelerometerActive {
+            motionManager.stopAccelerometerUpdates()
+        }
+    }
+    
+    private func stopGyroUpdates() {
+        if motionManager.isGyroActive {
+            motionManager.stopGyroUpdates()
         }
     }
     

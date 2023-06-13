@@ -18,7 +18,7 @@ final class RecordGyroViewModel {
     }
     
     func stopRecord() {
-
+        gyroRecorder.stop()
     }
     
     func save() {
