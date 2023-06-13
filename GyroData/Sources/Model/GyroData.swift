@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class GyroData {
+struct GyroData {
     enum DataType: Int {
         case accelerometer = 0
         case gyro = 1
@@ -38,7 +38,7 @@ final class GyroData {
         identifier = UUID()
     }
     
-    func add(_ data: Coordinate) {
+    mutating func add(_ data: Coordinate) {
         queue.enqueue(data)
         date = Date()
     }
@@ -48,7 +48,7 @@ extension GyroData: Hashable {
     static func == (lhs: GyroData, rhs: GyroData) -> Bool {
         return lhs.identifier == rhs.identifier
     }
-    
+
     func hash(into hasher: inout Hasher) {
         hasher.combine(identifier)
     }
