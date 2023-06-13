@@ -49,6 +49,7 @@ final class RecordGyroViewController: UIViewController {
         setupSegmentedControl()
         setupRecordButton()
         setupStopButton()
+        stopButton.isEnabled = false
     }
     
     private func setupView() {
@@ -94,7 +95,9 @@ final class RecordGyroViewController: UIViewController {
         let title = "정지"
         stopButton.setTitle(title, for: .normal)
         stopButton.setTitleColor(.tintColor, for: .normal)
+        stopButton.setTitleColor(.systemGray, for: .disabled)
         stopButton.titleLabel?.font = .preferredFont(forTextStyle: .title2)
+        stopButton.isEnabled = false
         
         stopButton.addTarget(self, action: #selector(stopRecord), for: .touchUpInside)
     }
@@ -103,9 +106,13 @@ final class RecordGyroViewController: UIViewController {
         let selectedIndex = segmentedControl.selectedSegmentIndex
         
         viewModel.startRecord(dataTypeRawValue: selectedIndex)
+        
+        stopButton.isEnabled = true
     }
     
     @objc private func stopRecord() {
         viewModel.stopRecord()
+        
+        stopButton.isEnabled = false
     }
 }
