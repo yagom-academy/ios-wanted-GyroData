@@ -22,6 +22,7 @@
 		AA51FF122A37585E00C1888F /* GyroListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA51FF112A37585E00C1888F /* GyroListCell.swift */; };
 		AA51FF142A3758C800C1888F /* UITableViewCell+ReuseIdentifying.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA51FF132A3758C800C1888F /* UITableViewCell+ReuseIdentifying.swift */; };
 		AA51FF172A375D7000C1888F /* GyroListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA51FF162A375D7000C1888F /* GyroListViewModel.swift */; };
+		AA51FF192A3812F800C1888F /* GyroSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA51FF182A3812F800C1888F /* GyroSegmentedControl.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		AA51FF112A37585E00C1888F /* GyroListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroListCell.swift; sourceTree = "<group>"; };
 		AA51FF132A3758C800C1888F /* UITableViewCell+ReuseIdentifying.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+ReuseIdentifying.swift"; sourceTree = "<group>"; };
 		AA51FF162A375D7000C1888F /* GyroListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroListViewModel.swift; sourceTree = "<group>"; };
+		AA51FF182A3812F800C1888F /* GyroSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroSegmentedControl.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 		AA51FF0B2A3748FC00C1888F /* RecordGyro */ = {
 			isa = PBXGroup;
 			children = (
+				AA51FF182A3812F800C1888F /* GyroSegmentedControl.swift */,
 				AA51FF0C2A37491900C1888F /* RecordGyroViewController.swift */,
 			);
 			path = RecordGyro;
@@ -239,6 +242,7 @@
 				AA51FF102A374B2800C1888F /* GyroDataManager.swift in Sources */,
 				AA51FF0D2A37491900C1888F /* RecordGyroViewController.swift in Sources */,
 				AA51FEFE2A37292400C1888F /* GyroRecorder.swift in Sources */,
+				AA51FF192A3812F800C1888F /* GyroSegmentedControl.swift in Sources */,
 				63F01BB928D44FC400C53A39 /* GyroListViewController.swift in Sources */,
 				AA51FF022A372CBF00C1888F /* GyroData.swift in Sources */,
 				AA51FF092A37302B00C1888F /* LimitedQueue.swift in Sources */,

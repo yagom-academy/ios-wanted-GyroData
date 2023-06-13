@@ -8,9 +8,9 @@
 import Foundation
 
 final class GyroData {
-    enum DataType {
-        case accelerometer
-        case gyro
+    enum DataType: Int {
+        case accelerometer = 0
+        case gyro = 1
         
         var description: String {
             switch self {
