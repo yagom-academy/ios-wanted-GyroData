@@ -11,6 +11,7 @@ import CoreMotion
 final class MeasureViewModel {
     var isProcessingSubject = PassthroughSubject<Bool, Never>()
     var isSavingSubject = PassthroughSubject<Bool, Never>()
+    var isSaveFailed = PassthroughSubject<(Bool, Error), Never>()
     var accelerometerSubject = PassthroughSubject<[ThreeAxisValue], Never>()
     var gyroscopeSubject = PassthroughSubject<[ThreeAxisValue], Never>()
     
@@ -169,7 +170,7 @@ extension MeasureViewModel {
                     print("저장성공")
                 }
             } catch {
-                print("JSON Encoding Fail \(error)")
+                self?.isSaveFailed.send((true, error))
             }
         }
         

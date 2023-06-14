@@ -188,8 +188,7 @@ final class MeasureGyroDataViewController: UIViewController {
         stopButton.addTarget(self, action: #selector(stopMeasure), for: .touchUpInside)
     }
     
-    private func showAlert() {
-        let title = "측정된 데이터가 없습니다."
+    private func showAlert(_ title: String) {
         let message = "다시 확인해주세요."
         let okSign = "확인"
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -242,8 +241,10 @@ extension MeasureGyroDataViewController {
         if let threeAxisData = threeAxisData {
             let data = SixAxisDataForJSON(date: Date(), title: selectedSensor.description, threeAxisValue: threeAxisData)
             viewModel.saveToFileManager(data)
+            bindIsSaveFailure()
         } else {
-            showAlert()
+            let title = "측정된 데이터가 없습니다."
+            showAlert(title)
         }
     }
     
@@ -256,6 +257,20 @@ extension MeasureGyroDataViewController {
                     self?.activityIndicator.startAnimating()
                 } else {
                     print("인디케이터종료")
+                    self?.activityIndicator.stopAnimating()
+                    self?.navigationController?.popViewController(animated: true)
+                }
+            }
+            .store(in: &cancellables)
+    }
+    
+    private func bindIsSaveFailure() {
+        viewModel.isSaveFailed
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] bool, error in
+                if bool == true {
+                    let title = "\(error)로 인해 저장을 실패하였습니다."
+                    self?.showAlert(title)
                     self?.activityIndicator.stopAnimating()
                 }
             }
