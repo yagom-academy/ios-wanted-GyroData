@@ -6,10 +6,13 @@
 //
 
 import UIKit
+import Combine
 
 final class DetailViewController: UIViewController {
     
     private var pageType: PageType
+    private let viewModel: DetailViewModel
+    private var cancellables = Set<AnyCancellable>()
     
     private let labelStackView: UIStackView = {
         let stackView = UIStackView()
@@ -23,7 +26,7 @@ final class DetailViewController: UIViewController {
         let label = UILabel()
         label.textColor = .black
         label.font = UIFont.preferredFont(forTextStyle: .caption2)
-        label.text = "2023/06/06"
+        
         return label
     }()
     
@@ -37,15 +40,16 @@ final class DetailViewController: UIViewController {
     
     private let graphView: GraphView = {
         let view = GraphView()
-        view.backgroundColor = .green
+        view.backgroundColor = .white
         let lineWidth: CGFloat = 3
         view.layer.borderWidth = lineWidth
         
         return view
     }()
     
-    init(pageType: PageType) {
+    init(pageType: PageType, viewModel: DetailViewModel) {
         self.pageType = pageType
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -56,6 +60,22 @@ final class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpView()
+        bind()
+    }
+    
+    private func bind() {
+        viewModel.$currentData
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] data in
+                self?.dateLabel.text = self?.viewModel.date
+                
+                guard let id = data?.id,
+                      let data = self?.viewModel.fetchData(by: id),
+                      let threeAxisValue = data.threeAxisValue else { return }
+                
+                self?.graphView.drawGraph(with: threeAxisValue)
+            }
+            .store(in: &cancellables)
     }
     
     private func setUpView() {

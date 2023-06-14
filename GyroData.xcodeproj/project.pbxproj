@@ -29,6 +29,7 @@
 		FB42DFF02A39D77A00238381 /* FileError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB42DFEF2A39D77A00238381 /* FileError.swift */; };
 		FB42DFF22A39DA6A00238381 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB42DFF12A39DA6A00238381 /* DetailViewController.swift */; };
 		FB42DFF42A39E04F00238381 /* PageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB42DFF32A39E04F00238381 /* PageType.swift */; };
+		FB42DFF62A39E37E00238381 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB42DFF52A39E37E00238381 /* DetailViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,7 @@
 		FB42DFEF2A39D77A00238381 /* FileError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileError.swift; sourceTree = "<group>"; };
 		FB42DFF12A39DA6A00238381 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		FB42DFF32A39E04F00238381 /* PageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageType.swift; sourceTree = "<group>"; };
+		FB42DFF52A39E37E00238381 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +145,7 @@
 				FB42DFCD2A36EB7300238381 /* GyroDataTableCellViewModel.swift */,
 				FB42DFDA2A3809B800238381 /* GyroDataListViewModel.swift */,
 				FB42DFE02A3862D200238381 /* MeasureViewModel.swift */,
+				FB42DFF52A39E37E00238381 /* DetailViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -233,6 +236,7 @@
 				FB42DFDB2A3809B800238381 /* GyroDataListViewModel.swift in Sources */,
 				FB42DFC62A36DF2900238381 /* SixAxisDataForJSON.swift in Sources */,
 				FB42DFDD2A380B5700238381 /* MeasureGyroDataViewController.swift in Sources */,
+				FB42DFF62A39E37E00238381 /* DetailViewModel.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
 				FB42DFD52A37FE6000238381 /* GyroEntity+CoreDataProperties.swift in Sources */,
 				FB42DFD72A37FF4D00238381 /* CoreDataManager.swift in Sources */,

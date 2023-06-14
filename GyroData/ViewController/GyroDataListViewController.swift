@@ -138,8 +138,11 @@ extension GyroDataListViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let detailViewController = DetailViewController(pageType: .view)
-//        let plan = viewModel.read(at: indexPath)
+        let data = viewModel.read(at: indexPath)
+        let detailViewModel = DetailViewModel()
+        let detailViewController = DetailViewController(pageType: .view, viewModel: detailViewModel)
+        
+        detailViewModel.addData(data)
         navigationController?.pushViewController(detailViewController, animated: true)
     }
 }
