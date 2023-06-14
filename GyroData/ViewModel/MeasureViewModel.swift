@@ -19,6 +19,7 @@ final class MeasureViewModel {
     private var cancellables = Set<AnyCancellable>()
     private let motionManager = CMMotionManager()
     private var timer: Timer?
+    private var isStopButtonTapped: Bool = false
     
     @objc private func measureAcc(timer: Timer) {
         if motionManager.isAccelerometerAvailable {
@@ -77,6 +78,13 @@ final class MeasureViewModel {
                     print("acc측정 중")
                     elapsedTime += 0.1
                     
+                    if self?.isStopButtonTapped == true {
+                        self?.motionManager.stopAccelerometerUpdates()
+                        self?.isProcessingSubject.send(false)
+                        promise(.success((accelerometerData, elapsedTime)))
+                        self?.isStopButtonTapped = false
+                    }
+                    
                     if elapsedTime >= timeout {
                         self?.motionManager.stopAccelerometerUpdates()
                         self?.timer?.invalidate()
@@ -91,7 +99,7 @@ final class MeasureViewModel {
     private func gyroDataPublisher() -> Future<([ThreeAxisValue], Double), Error> {
         return Future<([ThreeAxisValue], Double), Error> { promise in
             
-            let timeout: TimeInterval = 5.5
+            let timeout: TimeInterval = 60
             var gyroscopeData: [ThreeAxisValue] = []
             var elapsedTime: TimeInterval = 0
             
@@ -108,6 +116,13 @@ final class MeasureViewModel {
                     self?.isProcessingSubject.send(true)
                     print("gyro측정 중")
                     elapsedTime += 0.1
+                    
+                    if self?.isStopButtonTapped == true {
+                        self?.motionManager.stopAccelerometerUpdates()
+                        self?.isProcessingSubject.send(false)
+                        promise(.success((gyroscopeData, elapsedTime)))
+                        self?.isStopButtonTapped = false
+                    }
                     
                     if elapsedTime >= timeout {
                         self?.motionManager.stopGyroUpdates()
@@ -144,16 +159,9 @@ extension MeasureViewModel {
         timer?.fire()
     }
     
-    func stopMeasure(by selectedSensor: SensorType) {
+    func stopMeasure() {
         timer?.invalidate()
-        switch selectedSensor {
-        case .accelerometer:
-            motionManager.stopAccelerometerUpdates()
-            isProcessingSubject.send(false)
-        case .gyroscope:
-            motionManager.stopGyroUpdates()
-            isProcessingSubject.send(false)
-        }
+        isStopButtonTapped = true
     }
     
     func saveToFileManager(_ data: SixAxisDataForJSON, time: Double) {

@@ -230,7 +230,7 @@ extension MeasureGyroDataViewController {
     }
     
     @objc private func stopMeasure() {
-        viewModel.stopMeasure(by: selectedSensor)
+        viewModel.stopMeasure()
         bindIsProcessing()
     }
     
