@@ -13,8 +13,8 @@ final class MeasureGyroDataViewController: UIViewController {
     private let viewModel = MeasureViewModel()
     private var cancellables = Set<AnyCancellable>()
     
-    private var accThreeAxisData: [ThreeAxisValue]?
-    private var gyroThreeAxisData: [ThreeAxisValue]?
+    private var threeAxisData: [ThreeAxisValue]?
+//    private var gyroThreeAxisData: [ThreeAxisValue]?
     
     private var selectedSensor: SensorType = .accelerometer
     private let segmentedControl: UISegmentedControl = {
@@ -72,13 +72,13 @@ final class MeasureGyroDataViewController: UIViewController {
     private func bind() {
         viewModel.accelerometerSubject
             .sink { [weak self] data in
-                self?.accThreeAxisData = data
+                self?.threeAxisData = data
                 self?.graphView.drawGraph(with: data)
             }
             .store(in: &cancellables)
         viewModel.gyroscopeSubject
             .sink { [weak self] data in
-                self?.gyroThreeAxisData = data
+                self?.threeAxisData = data
                 self?.graphView.drawGraph(with: data)
             }
             .store(in: &cancellables)
@@ -190,27 +190,41 @@ extension MeasureGyroDataViewController {
     }
     
     @objc private func startMeasure() {
-        if segmentedControl.isEnabled == false {
-            segmentedControl.isEnabled = true
-        } else {
-            segmentedControl.isEnabled = false
-        }
         viewModel.startMeasure(by: selectedSensor)
+        bindIsProcessing()
     }
     
     @objc private func stopMeasure() {
-        segmentedControl.isEnabled = true
         viewModel.stopMeasure(by: selectedSensor)
+        bindIsProcessing()
+    }
+    
+    private func bindIsProcessing() {
+        viewModel.isProcessingSubject
+            .sink { [weak self] bool in
+                if bool == true {
+                    self?.segmentedControl.isEnabled = false
+                    self?.navigationItem.rightBarButtonItem?.isEnabled = false
+                } else {
+                    self?.segmentedControl.isEnabled = true
+                    self?.navigationItem.rightBarButtonItem?.isEnabled = true
+                }
+            }
+            .store(in: &cancellables)
     }
     
     @objc private func saveButtonTapped() {
-        switch selectedSensor {
-        case .accelerometer:
-            let data = SixAxisDataForJSON(date: Date(), title: SensorType.accelerometer.description, threeAxisValue: accThreeAxisData)
-            viewModel.saveToFileManager(data)
-        case .gyroscope:
-            let data = SixAxisDataForJSON(date: Date(), title: SensorType.accelerometer.description, threeAxisValue: gyroThreeAxisData)
-            viewModel.saveToFileManager(data)
+        if let threeAxisData = threeAxisData {
+            switch selectedSensor {
+            case .accelerometer:
+                let data = SixAxisDataForJSON(date: Date(), title: SensorType.accelerometer.description, threeAxisValue: threeAxisData)
+                viewModel.saveToFileManager(data)
+            case .gyroscope:
+                let data = SixAxisDataForJSON(date: Date(), title: SensorType.accelerometer.description, threeAxisValue: threeAxisData)
+                viewModel.saveToFileManager(data)
+            }
+        } else {
+            showAlert()
         }
     }
 }

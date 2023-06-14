@@ -9,6 +9,7 @@ import Combine
 import CoreMotion
 
 final class MeasureViewModel {
+    var isProcessingSubject = PassthroughSubject<Bool, Never>()
     var accelerometerSubject = PassthroughSubject<[ThreeAxisValue], Never>()
     var gyroscopeSubject = PassthroughSubject<[ThreeAxisValue], Never>()
     
@@ -69,12 +70,14 @@ final class MeasureViewModel {
                     let accZ = data.acceleration.z
                     let accData = ThreeAxisValue(valueX: accX, valueY: accY, valueZ: accZ)
                     accelerometerData.append(accData)
+                    self?.isProcessingSubject.send(true)
                     print("acc측정 중")
                     elapsedTime += 0.1
                     
                     if elapsedTime >= timeout {
                         self?.motionManager.stopAccelerometerUpdates()
                         self?.timer?.invalidate()
+                        self?.isProcessingSubject.send(false)
                         promise(.success(accelerometerData))
                     }
                 }
@@ -99,12 +102,14 @@ final class MeasureViewModel {
                     let gyroZ = data.rotationRate.z
                     let gyroData = ThreeAxisValue(valueX: gyroX, valueY: gyroY, valueZ: gyroZ)
                     gyroscopeData.append(gyroData)
+                    self?.isProcessingSubject.send(true)
                     print("gyro측정 중")
                     elapsedTime += 0.1
                     
                     if elapsedTime >= timeout {
                         self?.motionManager.stopGyroUpdates()
                         self?.timer?.invalidate()
+                        self?.isProcessingSubject.send(false)
                         promise(.success(gyroscopeData))
                     }
                 }
@@ -139,8 +144,10 @@ extension MeasureViewModel {
         switch selectedSensor {
         case .accelerometer:
             motionManager.stopAccelerometerUpdates()
+            isProcessingSubject.send(false)
         case .gyroscope:
             motionManager.stopGyroUpdates()
+            isProcessingSubject.send(false)
         }
     }
     
