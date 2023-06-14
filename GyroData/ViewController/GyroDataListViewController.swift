@@ -6,13 +6,18 @@
 //
 
 import UIKit
+import Combine
 
 final class GyroDataListViewController: UIViewController {
     enum Section {
         case main
     }
     
+    private let viewModel: GyroDataListViewModel
+    private let measureViewModel: MeasureViewModel
+    
     private var dataSource: UITableViewDiffableDataSource<Section, GyroEntity>?
+    private var cancellables = Set<AnyCancellable>()
     
     private let gyroDataTableView: UITableView = {
         let tableView = UITableView()
@@ -21,10 +26,21 @@ final class GyroDataListViewController: UIViewController {
         
         return tableView
     }()
-
+    
+    init(viewModel: GyroDataListViewModel, measureViewModel: MeasureViewModel) {
+        self.viewModel = viewModel
+        self.measureViewModel = measureViewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 //        CoreDataManager.shared.deleteAll()
+        viewModel.readAll()
         gyroDataTableView.delegate = self
         setUpView()
         configureGyroDataTableView()
@@ -32,10 +48,16 @@ final class GyroDataListViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         setUpNavigationBar()
-        guard let data = CoreDataManager.shared.readTenPiecesOfData() else {
-            print("데이터없음")
-            return }
-        createSnapshot(data)
+        bind()
+    }
+    
+    private func bind() {
+        viewModel.$gyroData
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] data in
+                self?.createSnapshot(data)
+            }
+            .store(in: &cancellables)
     }
 
     private func setUpView() {
@@ -69,7 +91,7 @@ final class GyroDataListViewController: UIViewController {
     }
     
     @objc private func measurementButtonTapped() {
-        let measureGyroDataViewController = MeasureGyroDataViewController()
+        let measureGyroDataViewController = MeasureGyroDataViewController(viewModel: measureViewModel)
         navigationController?.pushViewController(measureGyroDataViewController, animated: true)
     }
 }
@@ -97,6 +119,9 @@ extension GyroDataListViewController {
 // MARK: UITableViewDelegate
 extension GyroDataListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        guard let gyroEntity = dataSource?.itemIdentifier(for: indexPath),
+              let id = gyroEntity.id else { return nil }
+        
         let play = "Play"
         let playAction = UIContextualAction(style: .normal, title: play) { _, _, _ in
             print("play")
@@ -104,8 +129,8 @@ extension GyroDataListViewController: UITableViewDelegate {
         playAction.backgroundColor = .systemGreen
         
         let delete = "Delete"
-        let deleteAction = UIContextualAction(style: .normal, title: delete) { _, _, _ in
-            print("delete")
+        let deleteAction = UIContextualAction(style: .normal, title: delete) { [weak self] _, _, _ in
+            self?.viewModel.delete(by: id)
         }
         deleteAction.backgroundColor = .red
         

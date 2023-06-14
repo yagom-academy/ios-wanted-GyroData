@@ -8,7 +8,7 @@
 import Foundation
 
 struct SixAxisDataForCoreData {
-    let id = UUID()
+    let id: UUID?
     var date: Date?
     var title: String?
     var recordURL: Data?

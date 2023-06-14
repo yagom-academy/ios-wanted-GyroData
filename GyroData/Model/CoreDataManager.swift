@@ -23,6 +23,19 @@ final class CoreDataManager {
         save()
     }
     
+    func read(by id: UUID) -> GyroEntity? {
+        guard let context else { return nil }
+        let request = NSFetchRequest<NSManagedObject>(entityName: GyroEntity.key)
+        request.predicate = NSPredicate(format: "id == %@", id as CVarArg)
+        
+        do {
+            let data = try context.fetch(request)
+            return data.first as? GyroEntity
+        } catch {
+            return nil
+        }
+    }
+    
     func readTenPiecesOfData() -> [GyroEntity]? {
         guard let context = context else { return nil }
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: GyroEntity.key)

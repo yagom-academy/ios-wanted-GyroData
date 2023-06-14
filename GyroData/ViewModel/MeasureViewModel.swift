@@ -9,6 +9,7 @@ import Combine
 import CoreMotion
 
 final class MeasureViewModel {
+    var createSubject = PassthroughSubject<GyroEntity, Never>()
     var isProcessingSubject = PassthroughSubject<Bool, Never>()
     var isSavingSubject = PassthroughSubject<Bool, Never>()
     var isSaveFailed = PassthroughSubject<(Bool, Error), Never>()
@@ -34,7 +35,7 @@ final class MeasureViewModel {
                     self?.accelerometerSubject.send(gyroscope)
                 }
                 .store(in: &cancellables)
-           }
+        }
     }
     
     @objc private func measureGyro(timer: Timer) {
@@ -54,7 +55,7 @@ final class MeasureViewModel {
                 .store(in: &cancellables)
         }
     }
-
+    
     private func acceleroDataPublisher() -> Future<[ThreeAxisValue], Error> {
         return Future<[ThreeAxisValue], Error> { promise in
             
@@ -155,24 +156,53 @@ extension MeasureViewModel {
     
     func saveToFileManager(_ data: SixAxisDataForJSON) {
         isSavingSubject.send(true)
-        DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 3) { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
             do {
                 let jsonEncoder = JSONEncoder()
                 let jsonData = try jsonEncoder.encode(data)
                 
-                if let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-                    let fileURL = documentDirectory.appendingPathComponent("SixAxisData.json")
-                    try jsonData.write(to: fileURL)
-                    
-                    let saveToCoreData = SixAxisDataForCoreData(date: data.date, title: data.title, recordURL: jsonData)
-                    CoreDataManager.shared.create(saveToCoreData)
+                guard let documentURL = self?.createDirectory() else {
+                    self?.isSaveFailed.send((true, FileError.creationOfDirectory))
+                    return
+                }
+                
+                guard let id = data.id else { return }
+                let fileName = documentURL.appendingPathComponent("\(id).json")
+                
+                do {
+                    try jsonData.write(to: fileName)
+                    self?.saveToCoreData(jsonData, and: data)
                     self?.isSavingSubject.send(false)
-                    print("저장성공")
+                    
+                } catch {
+                    self?.isSaveFailed.send((true, error))
                 }
             } catch {
                 self?.isSaveFailed.send((true, error))
             }
         }
+    }
+    
+    private func createDirectory() -> URL? {
+        guard let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return nil }
+        let documentURL = documentDirectory.appendingPathComponent("GyroData폴더")
         
+        do {
+            try FileManager.default.createDirectory(atPath: documentURL.path, withIntermediateDirectories: true, attributes: nil)
+            return documentURL
+        } catch {
+            
+            return nil
+        }
+    }
+    
+    private func saveToCoreData(_ jsonData: Data, and data: SixAxisDataForJSON) {
+        let saveToCoreData = SixAxisDataForCoreData(id: data.id, date: data.date, title: data.title, recordURL: jsonData)
+        CoreDataManager.shared.create(saveToCoreData)
+        
+        guard let id = saveToCoreData.id,
+              let data = CoreDataManager.shared.read(by: id) else { return }
+        
+        createSubject.send(data)
     }
 }

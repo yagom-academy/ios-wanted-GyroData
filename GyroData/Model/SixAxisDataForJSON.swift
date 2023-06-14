@@ -8,6 +8,7 @@
 import Foundation
 
 struct SixAxisDataForJSON: Codable {
+    let id: UUID?
     var date: Date?
     var title: String?
     var threeAxisValue: [ThreeAxisValue]?

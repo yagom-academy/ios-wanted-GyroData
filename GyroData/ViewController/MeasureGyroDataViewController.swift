@@ -10,7 +10,7 @@ import Combine
 
 final class MeasureGyroDataViewController: UIViewController {
     
-    private let viewModel = MeasureViewModel()
+    private let viewModel: MeasureViewModel
     private var cancellables = Set<AnyCancellable>()
     
     private var threeAxisData: [ThreeAxisValue]?
@@ -72,6 +72,15 @@ final class MeasureGyroDataViewController: UIViewController {
         return button
     }()
 
+    init(viewModel: MeasureViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -239,7 +248,7 @@ extension MeasureGyroDataViewController {
     @objc private func saveButtonTapped() {
         bindIsSaving()
         if let threeAxisData = threeAxisData {
-            let data = SixAxisDataForJSON(date: Date(), title: selectedSensor.description, threeAxisValue: threeAxisData)
+            let data = SixAxisDataForJSON(id: UUID(), date: Date(), title: selectedSensor.description, threeAxisValue: threeAxisData)
             viewModel.saveToFileManager(data)
             bindIsSaveFailure()
         } else {
