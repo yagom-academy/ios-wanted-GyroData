@@ -30,6 +30,7 @@
 		FB42DFF22A39DA6A00238381 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB42DFF12A39DA6A00238381 /* DetailViewController.swift */; };
 		FB42DFF42A39E04F00238381 /* PageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB42DFF32A39E04F00238381 /* PageType.swift */; };
 		FB42DFF62A39E37E00238381 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB42DFF52A39E37E00238381 /* DetailViewModel.swift */; };
+		FB42DFF82A3A11C400238381 /* PlayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB42DFF72A3A11C400238381 /* PlayButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +59,7 @@
 		FB42DFF12A39DA6A00238381 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		FB42DFF32A39E04F00238381 /* PageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageType.swift; sourceTree = "<group>"; };
 		FB42DFF52A39E37E00238381 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
+		FB42DFF72A3A11C400238381 /* PlayButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +137,7 @@
 			children = (
 				FB42DFCA2A36E35A00238381 /* GyroDataTableViewCell.swift */,
 				FB42DFDE2A38450700238381 /* GraphView.swift */,
+				FB42DFF72A3A11C400238381 /* PlayButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -225,6 +228,7 @@
 				FB42DFEE2A396D0D00238381 /* SixAxisDataForCoreData.swift in Sources */,
 				FB42DFD92A38034800238381 /* EntityKeyProtocol.swift in Sources */,
 				FB42DFF42A39E04F00238381 /* PageType.swift in Sources */,
+				FB42DFF82A3A11C400238381 /* PlayButton.swift in Sources */,
 				63F01BB928D44FC400C53A39 /* GyroDataListViewController.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				FB42DFDF2A38450700238381 /* GraphView.swift in Sources */,
