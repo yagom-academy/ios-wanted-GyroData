@@ -20,7 +20,7 @@ extension GyroEntity: EntityKeyProtocol {
     @NSManaged public var id: UUID?
     @NSManaged public var date: Date?
     @NSManaged public var title: String?
-    @NSManaged public var recordURL: Data?
+    @NSManaged public var recordTime: Double
 }
 
 extension GyroEntity : Identifiable {

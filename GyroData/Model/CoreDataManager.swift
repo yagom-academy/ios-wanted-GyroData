@@ -79,7 +79,7 @@ final class CoreDataManager {
         target.setValue(data.id, forKey: "id")
         target.setValue(data.date, forKey: "date")
         target.setValue(data.title, forKey: "title")
-        target.setValue(data.recordURL, forKey: "recordURL")
+        target.setValue(data.recordTime, forKey: "recordTime")
     }
     
     private func save() {

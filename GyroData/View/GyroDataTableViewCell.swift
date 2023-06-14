@@ -51,7 +51,6 @@ final class GyroDataTableViewCell: UITableViewCell {
     private let recordLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
-        label.text = "40.4"
         label.font = UIFont.preferredFont(forTextStyle: .largeTitle)
         
         return label
@@ -79,6 +78,12 @@ final class GyroDataTableViewCell: UITableViewCell {
                 self?.sensorTypeLabel.text = self?.viewModel?.title
             }
             .store(in: &cancellables)
+        viewModel?.$sixAxisData
+            .map { $0.recordTime }
+            .sink { [weak self] time in
+                self?.recordLabel.text = self?.viewModel?.recordTitle
+            }
+            .store(in: &cancellables)
     }
    
     private func setUpUI() {
@@ -95,7 +100,9 @@ final class GyroDataTableViewCell: UITableViewCell {
         verticalStackView.addArrangedSubview(sensorTypeLabel)
         
         horizontalStackView.translatesAutoresizingMaskIntoConstraints = false
+        verticalStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
+            verticalStackView.widthAnchor.constraint(equalTo: horizontalStackView.widthAnchor, multiplier: 0.5),
             horizontalStackView.topAnchor.constraint(equalTo: self.topAnchor, constant: 5),
             horizontalStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 30),
             horizontalStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5),

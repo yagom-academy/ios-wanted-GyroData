@@ -18,6 +18,16 @@ final class GyroDataTableCellViewModel {
         return dateFormatter
     }()
     
+    private let numberFormatter: NumberFormatter = {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.roundingMode = .halfUp
+        numberFormatter.minimumFractionDigits = 1
+        numberFormatter.maximumFractionDigits = 1
+        
+        return numberFormatter
+    }()
+    
     init(sixAxisData: GyroEntity) {
         self.sixAxisData = sixAxisData
     }
@@ -32,4 +42,11 @@ final class GyroDataTableCellViewModel {
         guard let title = sixAxisData.title else { return nil }
         return title
     }
+    
+    var recordTitle: String? {
+        let recordTime = sixAxisData.recordTime
+        guard let convertedTime = numberFormatter.string(from: NSNumber(value: recordTime)) else { return nil }
+        return String(describing: convertedTime)
+    }
 }
+

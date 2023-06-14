@@ -13,8 +13,8 @@ final class MeasureViewModel {
     var isProcessingSubject = PassthroughSubject<Bool, Never>()
     var isSavingSubject = PassthroughSubject<Bool, Never>()
     var isSaveFailed = PassthroughSubject<(Bool, Error), Never>()
-    var accelerometerSubject = PassthroughSubject<[ThreeAxisValue], Never>()
-    var gyroscopeSubject = PassthroughSubject<[ThreeAxisValue], Never>()
+    var accelerometerSubject = PassthroughSubject<([ThreeAxisValue], Double), Never>()
+    var gyroscopeSubject = PassthroughSubject<([ThreeAxisValue], Double), Never>()
     
     private var cancellables = Set<AnyCancellable>()
     private let motionManager = CMMotionManager()
@@ -31,8 +31,8 @@ final class MeasureViewModel {
                     case .failure(let error):
                         print(error.localizedDescription)
                     }
-                } receiveValue: { [weak self] gyroscope in
-                    self?.accelerometerSubject.send(gyroscope)
+                } receiveValue: { [weak self] accelerometer, time in
+                    self?.accelerometerSubject.send((accelerometer, time))
                 }
                 .store(in: &cancellables)
         }
@@ -49,17 +49,17 @@ final class MeasureViewModel {
                     case .failure(let error):
                         print(error.localizedDescription)
                     }
-                } receiveValue: { [weak self] gyroscope in
-                    self?.gyroscopeSubject.send(gyroscope)
+                } receiveValue: { [weak self] gyroscope, time in
+                    self?.gyroscopeSubject.send((gyroscope, time))
                 }
                 .store(in: &cancellables)
         }
     }
     
-    private func acceleroDataPublisher() -> Future<[ThreeAxisValue], Error> {
-        return Future<[ThreeAxisValue], Error> { promise in
+    private func acceleroDataPublisher() -> Future<([ThreeAxisValue], Double), Error> {
+        return Future<([ThreeAxisValue], Double), Error> { promise in
             
-            let timeout: TimeInterval = 5
+            let timeout: TimeInterval = 60
             var accelerometerData: [ThreeAxisValue] = []
             var elapsedTime: TimeInterval = 0
             
@@ -81,17 +81,17 @@ final class MeasureViewModel {
                         self?.motionManager.stopAccelerometerUpdates()
                         self?.timer?.invalidate()
                         self?.isProcessingSubject.send(false)
-                        promise(.success(accelerometerData))
+                        promise(.success((accelerometerData, elapsedTime)))
                     }
                 }
             }
         }
     }
     
-    private func gyroDataPublisher() -> Future<[ThreeAxisValue], Error> {
-        return Future<[ThreeAxisValue], Error> { promise in
+    private func gyroDataPublisher() -> Future<([ThreeAxisValue], Double), Error> {
+        return Future<([ThreeAxisValue], Double), Error> { promise in
             
-            let timeout: TimeInterval = 5
+            let timeout: TimeInterval = 5.5
             var gyroscopeData: [ThreeAxisValue] = []
             var elapsedTime: TimeInterval = 0
             
@@ -113,7 +113,7 @@ final class MeasureViewModel {
                         self?.motionManager.stopGyroUpdates()
                         self?.timer?.invalidate()
                         self?.isProcessingSubject.send(false)
-                        promise(.success(gyroscopeData))
+                        promise(.success((gyroscopeData, elapsedTime)))
                     }
                 }
             }
@@ -131,6 +131,8 @@ extension MeasureViewModel {
                           selector: #selector(measureAcc),
                           userInfo: nil,
                           repeats: true)
+           
+        
         case .gyroscope:
             timer = Timer(timeInterval: updateInterval,
                           target: self,
@@ -154,7 +156,7 @@ extension MeasureViewModel {
         }
     }
     
-    func saveToFileManager(_ data: SixAxisDataForJSON) {
+    func saveToFileManager(_ data: SixAxisDataForJSON, time: Double) {
         isSavingSubject.send(true)
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
             do {
@@ -171,7 +173,7 @@ extension MeasureViewModel {
                 
                 do {
                     try jsonData.write(to: fileName)
-                    self?.saveToCoreData(jsonData, and: data)
+                    self?.saveToCoreData(data, time: time)
                     self?.isSavingSubject.send(false)
                     
                 } catch {
@@ -196,8 +198,8 @@ extension MeasureViewModel {
         }
     }
     
-    private func saveToCoreData(_ jsonData: Data, and data: SixAxisDataForJSON) {
-        let saveToCoreData = SixAxisDataForCoreData(id: data.id, date: data.date, title: data.title, recordURL: jsonData)
+    private func saveToCoreData(_ data: SixAxisDataForJSON, time: Double) {
+        let saveToCoreData = SixAxisDataForCoreData(id: data.id, date: data.date, title: data.title, recordTime: time)
         CoreDataManager.shared.create(saveToCoreData)
         
         guard let id = saveToCoreData.id,

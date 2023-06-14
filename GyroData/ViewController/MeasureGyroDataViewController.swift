@@ -16,6 +16,7 @@ final class MeasureGyroDataViewController: UIViewController {
     private var threeAxisData: [ThreeAxisValue]?
 //    private var gyroThreeAxisData: [ThreeAxisValue]?
     
+    private var totalTime: Double = 00.0
     private var selectedSensor: SensorType = .accelerometer
     private let segmentedControl: UISegmentedControl = {
         let control = UISegmentedControl(items: ["Acc", "Gyro"])
@@ -90,14 +91,16 @@ final class MeasureGyroDataViewController: UIViewController {
     
     private func bind() {
         viewModel.accelerometerSubject
-            .sink { [weak self] data in
+            .sink { [weak self] data, time in
                 self?.threeAxisData = data
+                self?.totalTime = time
                 self?.graphView.drawGraph(with: data)
             }
             .store(in: &cancellables)
         viewModel.gyroscopeSubject
-            .sink { [weak self] data in
+            .sink { [weak self] data, time in
                 self?.threeAxisData = data
+                self?.totalTime = time
                 self?.graphView.drawGraph(with: data)
             }
             .store(in: &cancellables)
@@ -249,7 +252,7 @@ extension MeasureGyroDataViewController {
         bindIsSaving()
         if let threeAxisData = threeAxisData {
             let data = SixAxisDataForJSON(id: UUID(), date: Date(), title: selectedSensor.description, threeAxisValue: threeAxisData)
-            viewModel.saveToFileManager(data)
+            viewModel.saveToFileManager(data, time: totalTime)
             bindIsSaveFailure()
         } else {
             let title = "측정된 데이터가 없습니다."
