@@ -11,12 +11,14 @@ import Combine
 final class GyroRecorder {
     enum Constant {
         static let frequency = 10.0
+        static let timeout = 60.0
     }
     
     static let shared = GyroRecorder()
     private let motionManager = CMMotionManager()
     private var dataType: GyroData.DataType?
     @Published private var gyroData: GyroData?
+    @Published private(set) var isUpdating: Bool = false
     
     private init() {
         setupPeriod()
@@ -60,7 +62,19 @@ final class GyroRecorder {
     }
     
     private func startAccelerometerUpdates() {
-        motionManager.startAccelerometerUpdates(to: .current!) { [weak self] data, error in
+        guard let queue = OperationQueue.current else { return }
+        
+        isUpdating = true
+        var elapsedTime = 0.0
+        let interval = motionManager.accelerometerUpdateInterval
+        
+        motionManager.startAccelerometerUpdates(to: queue) { [weak self] data, error in
+            guard elapsedTime < GyroRecorder.Constant.timeout else {
+                self?.stopAccelerometerUpdates()
+                
+                return
+            }
+            
             guard let x = data?.acceleration.x,
                   let y = data?.acceleration.y,
                   let z = data?.acceleration.z else {
@@ -70,11 +84,26 @@ final class GyroRecorder {
             
             let data = Coordinate(x: x, y: y, z: z)
             self?.gyroData?.add(data)
+            
+            elapsedTime += interval
         }
     }
     
     private func startGyroUpdates() {
-        motionManager.startGyroUpdates(to: .current!) { [weak self] data, error in
+        guard let queue = OperationQueue.current else { return }
+        
+        isUpdating = true
+        var elapsedTime = 0.0
+        let interval = motionManager.accelerometerUpdateInterval
+        
+        motionManager.startGyroUpdates(to: queue) { [weak self] data, error in
+            guard elapsedTime < GyroRecorder.Constant.timeout else {
+                // time out handle
+                self?.stopGyroUpdates()
+                
+                return
+            }
+            
             guard let x = data?.rotationRate.x,
                   let y = data?.rotationRate.y,
                   let z = data?.rotationRate.z else {
@@ -84,18 +113,22 @@ final class GyroRecorder {
             
             let data = Coordinate(x: x, y: y, z: z)
             self?.gyroData?.add(data)
+            
+            elapsedTime += interval
         }
     }
     
     private func stopAccelerometerUpdates() {
         if motionManager.isAccelerometerActive {
             motionManager.stopAccelerometerUpdates()
+            isUpdating = false
         }
     }
     
     private func stopGyroUpdates() {
         if motionManager.isGyroActive {
             motionManager.stopGyroUpdates()
+            isUpdating = false
         }
     }
     

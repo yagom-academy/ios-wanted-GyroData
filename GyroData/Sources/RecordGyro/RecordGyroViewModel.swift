@@ -27,6 +27,11 @@ final class RecordGyroViewModel {
         gyroDataManager.create(data)
     }
     
+    func gyroRecorderStatusPublisher() -> AnyPublisher<Bool, Never> {
+        return gyroRecorder.$isUpdating
+            .eraseToAnyPublisher()
+    }
+    
     func gyroDataPublisher() -> AnyPublisher<GyroData?, Never> {
         return gyroRecorder.gyroDataPublisher()
     }

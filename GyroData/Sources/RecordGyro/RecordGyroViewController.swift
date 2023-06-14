@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 final class RecordGyroViewController: UIViewController {
     private lazy var stackView = {
@@ -27,7 +28,8 @@ final class RecordGyroViewController: UIViewController {
     private let recordButton = UIButton()
     private let stopButton = UIButton()
     
-    private var viewModel: RecordGyroViewModel
+    private let viewModel: RecordGyroViewModel
+    private var subscriptions = Set<AnyCancellable>()
     
     init() {
         viewModel = RecordGyroViewModel()
@@ -50,7 +52,7 @@ final class RecordGyroViewController: UIViewController {
         setupSegmentedControl()
         setupRecordButton()
         setupStopButton()
-        stopButton.isEnabled = false
+        bind()
     }
     
     private func setupView() {
@@ -144,15 +146,20 @@ final class RecordGyroViewController: UIViewController {
         let selectedIndex = segmentedControl.selectedSegmentIndex
         
         viewModel.startRecord(dataTypeRawValue: selectedIndex)
-        
-        stopButton.isEnabled = true
-        navigationItem.rightBarButtonItem?.isEnabled = false
     }
     
     @objc private func stopRecord() {
         viewModel.stopRecord()
-        
-        stopButton.isEnabled = false
-        navigationItem.rightBarButtonItem?.isEnabled = true
+    }
+    
+    private func bind() {
+        viewModel.gyroRecorderStatusPublisher()
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] isUpdating in
+                self?.navigationItem.rightBarButtonItem?.isEnabled = !isUpdating
+                self?.segmentedControl.isEnabled = !isUpdating
+                self?.stopButton.isEnabled = isUpdating
+            }
+            .store(in: &subscriptions)
     }
 }
