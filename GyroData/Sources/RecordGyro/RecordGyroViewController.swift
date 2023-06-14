@@ -97,6 +97,9 @@ final class RecordGyroViewController: UIViewController {
                                              target: self,
                                              action: #selector(save))
         rightBarButton.setTitleTextAttributes([.font: UIFont.preferredFont(forTextStyle: .title2)], for: .normal)
+        rightBarButton.setTitleTextAttributes([.font: UIFont.preferredFont(forTextStyle: .title2)], for: .disabled)
+        rightBarButton.isEnabled = false
+        
         navigationItem.rightBarButtonItem = rightBarButton
     }
     
@@ -143,11 +146,13 @@ final class RecordGyroViewController: UIViewController {
         viewModel.startRecord(dataTypeRawValue: selectedIndex)
         
         stopButton.isEnabled = true
+        navigationItem.rightBarButtonItem?.isEnabled = false
     }
     
     @objc private func stopRecord() {
         viewModel.stopRecord()
         
         stopButton.isEnabled = false
+        navigationItem.rightBarButtonItem?.isEnabled = true
     }
 }
