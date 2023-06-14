@@ -23,10 +23,10 @@ struct GyroData {
     }
     
     private let identifier: UUID
-    private let dataType: DataType
-    private var queue = LimitedQueue<Coordinate>()
-    private var date: Date?
-    private var duration: Double? {
+    let dataType: DataType
+    var queue = LimitedQueue<Coordinate>()
+    var date: Date?
+    var duration: Double? {
         let duration = Double(queue.count) / 10.0
         let formattedDuration = String(format: "%.1f", duration)
         

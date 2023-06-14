@@ -22,7 +22,9 @@ final class RecordGyroViewModel {
     }
     
     func save() {
+        guard let data = gyroRecorder.save() else { return }
         
+        gyroDataManager.create(data)
     }
     
     func gyroDataPublisher() -> AnyPublisher<GyroData?, Never> {

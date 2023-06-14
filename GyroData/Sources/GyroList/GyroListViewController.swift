@@ -81,9 +81,17 @@ final class GyroListViewController: UIViewController {
                 for: indexPath) as? GyroListCell else {
                 return UITableViewCell()
             }
+            guard let duration = gyroData.duration else { return UITableViewCell() }
             
-            cell.configure(date: "2022/09/08 14:50:43",
-                           type: "Accelerometer", duration: "43.4")
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "YYYY/MM/dd hh:mm:ss"
+            
+            let formattedDate = dateFormatter.string(from: gyroData.date!)
+            let formattedDuration = String(format: "%.1f", duration)
+            let type = gyroData.dataType.description
+            
+            cell.configure(date: formattedDate,
+                           type: type, duration: formattedDuration)
             
             return cell
         }

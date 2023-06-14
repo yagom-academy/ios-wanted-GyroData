@@ -13,10 +13,10 @@ final class GyroDataManager {
     @Published var gyroDataList: [GyroData] = []
     
     private init() {
-        // for test
-        var gyroData = GyroData(dataType: .accelerometer)
-        gyroData.add(Coordinate(x: 1, y: -1.2, z: -3.444))
-        create(gyroData)
+//        // for test
+//        var gyroData = GyroData(dataType: .accelerometer)
+//        gyroData.add(Coordinate(x: 1, y: -1.2, z: -3.444))
+//        create(gyroData)
     }
     
     func create(_ data: GyroData) {

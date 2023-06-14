@@ -50,6 +50,10 @@ final class GyroRecorder {
         }
     }
     
+    func save() -> GyroData? {
+        return gyroData
+    }
+    
     func clear() {
         dataType = nil
         gyroData = nil

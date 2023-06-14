@@ -27,11 +27,11 @@ final class RecordGyroViewController: UIViewController {
     private let recordButton = UIButton()
     private let stopButton = UIButton()
     
-    private var viewModel: RecordGyroViewModel?
+    private var viewModel: RecordGyroViewModel
     
     init() {
         viewModel = RecordGyroViewModel()
-        graphView = GraphView(viewModel: viewModel!)
+        graphView = GraphView(viewModel: viewModel)
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -101,13 +101,12 @@ final class RecordGyroViewController: UIViewController {
     }
     
     @objc private func stopAndDismiss() {
-        viewModel?.stopRecord()
-        viewModel = nil
+        viewModel.stopRecord()
         navigationController?.popViewController(animated: true)
     }
     
     @objc private func save() {
-        
+        viewModel.save()
     }
     
     private func setupSegmentedControl() {
@@ -141,13 +140,13 @@ final class RecordGyroViewController: UIViewController {
     @objc private func startRecord() {
         let selectedIndex = segmentedControl.selectedSegmentIndex
         
-        viewModel?.startRecord(dataTypeRawValue: selectedIndex)
+        viewModel.startRecord(dataTypeRawValue: selectedIndex)
         
         stopButton.isEnabled = true
     }
     
     @objc private func stopRecord() {
-        viewModel?.stopRecord()
+        viewModel.stopRecord()
         
         stopButton.isEnabled = false
     }
