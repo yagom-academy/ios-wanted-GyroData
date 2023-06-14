@@ -18,7 +18,7 @@ final class GyroDataTableViewCell: UITableViewCell {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.alignment = .fill
-        stackView.spacing = 20
+        stackView.spacing = 50
         
         return stackView
     }()
@@ -34,19 +34,26 @@ final class GyroDataTableViewCell: UITableViewCell {
     
     private let dateLabel: UILabel = {
         let label = UILabel()
-       
+        label.textColor = .black
+        label.font = UIFont.preferredFont(forTextStyle: .caption2)
+        
         return label
     }()
     
     private let sensorTypeLabel: UILabel = {
         let label = UILabel()
-
+        label.textColor = .black
+        label.font = UIFont.preferredFont(forTextStyle: .title2)
+        
         return label
     }()
     
     private let recordLabel: UILabel = {
         let label = UILabel()
-    
+        label.textColor = .black
+        label.text = "40.4"
+        label.font = UIFont.preferredFont(forTextStyle: .largeTitle)
+        
         return label
     }()
     
@@ -63,19 +70,13 @@ final class GyroDataTableViewCell: UITableViewCell {
         viewModel?.$sixAxisData
             .map { $0.date }
             .sink { [weak self] date in
-                self?.dateLabel.text = date
+                self?.dateLabel.text = self?.viewModel?.date
             }
             .store(in: &cancellables)
         viewModel?.$sixAxisData
             .map { $0.title }
             .sink { [weak self] title in
-                self?.sensorTypeLabel.text = title?.description
-            }
-            .store(in: &cancellables)
-        viewModel?.$sixAxisData
-            .map { $0.record }
-            .sink { [weak self] record in
-                self?.recordLabel.text = record?.description
+                self?.sensorTypeLabel.text = self?.viewModel?.title
             }
             .store(in: &cancellables)
     }
@@ -104,7 +105,7 @@ final class GyroDataTableViewCell: UITableViewCell {
 }
 
 extension GyroDataTableViewCell {
-    func configureCell(with data: SixAxisData) {
+    func configureCell(with data: GyroEntity) {
         viewModel = GyroDataTableCellViewModel(sixAxisData: data)
         bind()
     }

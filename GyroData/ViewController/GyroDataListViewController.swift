@@ -27,13 +27,14 @@ final class GyroDataListViewController: UIViewController {
         gyroDataTableView.delegate = self
         setUpView()
         configureGyroDataTableView()
-        
-//        let data = SixAxisData(date: Date().description, title: .accelerometer, record: 40.3)
-//        createSnapshot([data])
     }
     
     override func viewWillAppear(_ animated: Bool) {
         setUpNavigationBar()
+        guard let data = CoreDataManager.shared.readTenPiecesOfData() else {
+            print("데이터없음")
+            return }
+        createSnapshot(data)
     }
 
     private func setUpView() {

@@ -8,27 +8,29 @@
 import UIKit
 import CoreData
 
-final class CoreDataManager<T: NSManagedObject & EntityKeyProtocol> {
+final class CoreDataManager {
+    static let shared = CoreDataManager()
+    private init() { }
     
     private let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
     
-    func create(_ data: SixAxisData) {
+    func create(_ data: SixAxisDataForCoreData) {
         guard let context = context,
-              let entity = NSEntityDescription.entity(forEntityName: T.key, in: context),
-              let storage = NSManagedObject(entity: entity, insertInto: context) as? T else { return }
+              let entity = NSEntityDescription.entity(forEntityName: GyroEntity.key, in: context),
+              let storage = NSManagedObject(entity: entity, insertInto: context) as? GyroEntity else { return }
         
         setValue(at: storage, data: data)
         save()
     }
     
-    func readTenPiecesOfData() -> [T]? {
+    func readTenPiecesOfData() -> [GyroEntity]? {
         guard let context = context else { return nil }
-        let request = NSFetchRequest<T>(entityName: T.key)
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: GyroEntity.key)
         request.fetchLimit = 10
         
         do {
             let data = try context.fetch(request)
-            return data
+            return data as? [GyroEntity]
         } catch {
             return nil
         }
@@ -36,7 +38,7 @@ final class CoreDataManager<T: NSManagedObject & EntityKeyProtocol> {
     
     func delete(by id: UUID) {
         guard let context = context else { return }
-        let request: NSFetchRequest<NSFetchRequestResult> = T.fetchRequest()
+        let request: NSFetchRequest<NSFetchRequestResult> = GyroEntity.fetchRequest()
         request.predicate = NSPredicate(format: "id == %@", id as CVarArg)
         let delete = NSBatchDeleteRequest(fetchRequest: request)
         
@@ -47,13 +49,11 @@ final class CoreDataManager<T: NSManagedObject & EntityKeyProtocol> {
         }
     }
     
-    private func setValue(at target: T, data: SixAxisData) {
-        if target is GyroEntity {
-            target.setValue(data.id, forKey: "id")
-            target.setValue(data.date, forKey: "date")
-            target.setValue(data.title, forKey: "title")
-            target.setValue(data.record, forKey: "record")
-        }
+    private func setValue(at target: GyroEntity, data: SixAxisDataForCoreData) {
+        target.setValue(data.id, forKey: "id")
+        target.setValue(data.date, forKey: "date")
+        target.setValue(data.title, forKey: "title")
+        target.setValue(data.recordURL, forKey: "recordURL")
     }
     
     private func save() {

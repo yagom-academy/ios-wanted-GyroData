@@ -206,10 +206,10 @@ extension MeasureGyroDataViewController {
     @objc private func saveButtonTapped() {
         switch selectedSensor {
         case .accelerometer:
-            let data = SixAxisData(id: UUID(), date: Date().description, title: SensorType.accelerometer.description, accelerometer: accThreeAxisData)
+            let data = SixAxisDataForJSON(date: Date(), title: SensorType.accelerometer.description, threeAxisValue: accThreeAxisData)
             viewModel.saveToFileManager(data)
         case .gyroscope:
-            let data = SixAxisData(id: UUID(), date: Date().description, title: SensorType.accelerometer.description, gyroscope: gyroThreeAxisData)
+            let data = SixAxisDataForJSON(date: Date(), title: SensorType.accelerometer.description, threeAxisValue: gyroThreeAxisData)
             viewModel.saveToFileManager(data)
         }
     }

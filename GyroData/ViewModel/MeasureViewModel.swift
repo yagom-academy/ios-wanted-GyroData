@@ -144,7 +144,7 @@ extension MeasureViewModel {
         }
     }
     
-    func saveToFileManager(_ data: SixAxisData) {
+    func saveToFileManager(_ data: SixAxisDataForJSON) {
         do {
             let jsonEncoder = JSONEncoder()
             let jsonData = try jsonEncoder.encode(data)
@@ -152,6 +152,9 @@ extension MeasureViewModel {
             if let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
                 let fileURL = documentDirectory.appendingPathComponent("SixAxisData.json")
                 try jsonData.write(to: fileURL)
+                
+                let saveToCoreData = SixAxisDataForCoreData(date: data.date, title: data.title, recordURL: jsonData)
+                CoreDataManager.shared.create(saveToCoreData)
             }
         } catch {
             print("JSON Encoding Fail \(error)")
