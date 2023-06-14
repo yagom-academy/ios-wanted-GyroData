@@ -27,6 +27,8 @@
 		FB42DFE12A3862D200238381 /* MeasureViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB42DFE02A3862D200238381 /* MeasureViewModel.swift */; };
 		FB42DFEE2A396D0D00238381 /* SixAxisDataForCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB42DFED2A396D0D00238381 /* SixAxisDataForCoreData.swift */; };
 		FB42DFF02A39D77A00238381 /* FileError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB42DFEF2A39D77A00238381 /* FileError.swift */; };
+		FB42DFF22A39DA6A00238381 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB42DFF12A39DA6A00238381 /* DetailViewController.swift */; };
+		FB42DFF42A39E04F00238381 /* PageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB42DFF32A39E04F00238381 /* PageType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +54,8 @@
 		FB42DFE02A3862D200238381 /* MeasureViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureViewModel.swift; sourceTree = "<group>"; };
 		FB42DFED2A396D0D00238381 /* SixAxisDataForCoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SixAxisDataForCoreData.swift; sourceTree = "<group>"; };
 		FB42DFEF2A39D77A00238381 /* FileError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileError.swift; sourceTree = "<group>"; };
+		FB42DFF12A39DA6A00238381 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		FB42DFF32A39E04F00238381 /* PageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +109,7 @@
 			children = (
 				63F01BB828D44FC400C53A39 /* GyroDataListViewController.swift */,
 				FB42DFDC2A380B5700238381 /* MeasureGyroDataViewController.swift */,
+				FB42DFF12A39DA6A00238381 /* DetailViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -118,6 +123,7 @@
 				FB42DFD62A37FF4D00238381 /* CoreDataManager.swift */,
 				FB42DFD82A38034800238381 /* EntityKeyProtocol.swift */,
 				FB42DFEF2A39D77A00238381 /* FileError.swift */,
+				FB42DFF32A39E04F00238381 /* PageType.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -215,12 +221,14 @@
 				FB42DFCB2A36E35A00238381 /* GyroDataTableViewCell.swift in Sources */,
 				FB42DFEE2A396D0D00238381 /* SixAxisDataForCoreData.swift in Sources */,
 				FB42DFD92A38034800238381 /* EntityKeyProtocol.swift in Sources */,
+				FB42DFF42A39E04F00238381 /* PageType.swift in Sources */,
 				63F01BB928D44FC400C53A39 /* GyroDataListViewController.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				FB42DFDF2A38450700238381 /* GraphView.swift in Sources */,
 				FB42DFC82A36E25700238381 /* SensorType.swift in Sources */,
 				FB42DFF02A39D77A00238381 /* FileError.swift in Sources */,
 				FB42DFD42A37FE6000238381 /* GyroEntity+CoreDataClass.swift in Sources */,
+				FB42DFF22A39DA6A00238381 /* DetailViewController.swift in Sources */,
 				FB42DFD12A36FD2200238381 /* GyroCoreData.xcdatamodeld in Sources */,
 				FB42DFDB2A3809B800238381 /* GyroDataListViewModel.swift in Sources */,
 				FB42DFC62A36DF2900238381 /* SixAxisDataForJSON.swift in Sources */,

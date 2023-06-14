@@ -136,4 +136,10 @@ extension GyroDataListViewController: UITableViewDelegate {
         
         return UISwipeActionsConfiguration(actions: [playAction, deleteAction])
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let detailViewController = DetailViewController(pageType: .view)
+//        let plan = viewModel.read(at: indexPath)
+        navigationController?.pushViewController(detailViewController, animated: true)
+    }
 }

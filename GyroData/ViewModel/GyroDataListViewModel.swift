@@ -32,6 +32,10 @@ final class GyroDataListViewModel {
         gyroData.append(contentsOf: data)
     }
     
+    func read(at indexPath: IndexPath) -> GyroEntity {
+        gyroData[indexPath.row]
+    }
+    
     func delete(by id: UUID) {
         gyroData.removeAll { $0.id == id }
         CoreDataManager.shared.delete(by: id)
