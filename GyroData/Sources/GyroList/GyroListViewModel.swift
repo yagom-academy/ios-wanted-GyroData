@@ -6,6 +6,7 @@
 //
 
 import Combine
+import Foundation
 
 final class GyroListViewModel {
     private let gyroDataManager = GyroDataManager.shared
@@ -13,5 +14,16 @@ final class GyroListViewModel {
     func gyroDataPublisher() -> AnyPublisher<[GyroData], Never> {
         return gyroDataManager.$gyroDataList
             .eraseToAnyPublisher()
+    }
+    
+    func formatGyroDataToString(gyroData: GyroData) -> (date: String, duration: String, dataType: String)? {
+        guard let date = gyroData.date,
+              let duration = gyroData.duration else { return nil }
+        
+        let formattedDate = DateFormatter.dateToText(date)
+        let formattedDuration = String(format: "%.1f", duration)
+        let formattedDataType = gyroData.dataType.description
+        
+        return (formattedDate, formattedDuration, formattedDataType)
     }
 }

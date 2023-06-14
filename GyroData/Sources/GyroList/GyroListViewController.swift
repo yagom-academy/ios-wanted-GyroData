@@ -75,23 +75,18 @@ final class GyroListViewController: UIViewController {
     }
     
     private func setupDataSource() {
-        dataSource = UITableViewDiffableDataSource<Section, GyroData>(tableView: tableView) { tableView, indexPath, gyroData in
+        dataSource = UITableViewDiffableDataSource<Section, GyroData>(tableView: tableView) { [weak self] tableView, indexPath, gyroData in
             guard let cell = tableView.dequeueReusableCell(
                 withIdentifier: GyroListCell.reuseIdentifier,
                 for: indexPath) as? GyroListCell else {
                 return UITableViewCell()
             }
-            guard let duration = gyroData.duration else { return UITableViewCell() }
             
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "YYYY/MM/dd hh:mm:ss"
+            guard let dataForCell = self?.viewModel.formatGyroDataToString(gyroData: gyroData) else {
+                return UITableViewCell()
+            }
             
-            let formattedDate = dateFormatter.string(from: gyroData.date!)
-            let formattedDuration = String(format: "%.1f", duration)
-            let type = gyroData.dataType.description
-            
-            cell.configure(date: formattedDate,
-                           type: type, duration: formattedDuration)
+            cell.configure(date: dataForCell.date, type: dataForCell.dataType, duration: dataForCell.duration)
             
             return cell
         }

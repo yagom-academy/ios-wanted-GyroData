@@ -25,6 +25,7 @@
 		AA51FF192A3812F800C1888F /* GyroSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA51FF182A3812F800C1888F /* GyroSegmentedControl.swift */; };
 		AA51FF1B2A38238200C1888F /* RecordGyroViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA51FF1A2A38238200C1888F /* RecordGyroViewModel.swift */; };
 		AA51FF1D2A38385300C1888F /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA51FF1C2A38385300C1888F /* GraphView.swift */; };
+		AAD598492A39752400E4385D /* DateFormatter+dateToText.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD598482A39752400E4385D /* DateFormatter+dateToText.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		AA51FF182A3812F800C1888F /* GyroSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroSegmentedControl.swift; sourceTree = "<group>"; };
 		AA51FF1A2A38238200C1888F /* RecordGyroViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordGyroViewModel.swift; sourceTree = "<group>"; };
 		AA51FF1C2A38385300C1888F /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
+		AAD598482A39752400E4385D /* DateFormatter+dateToText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+dateToText.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +150,7 @@
 		AABC7EAA2A36F6FE006A07DF /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				AAD5984A2A39795100E4385D /* Utilitiy */,
 				AA51FF052A372EC200C1888F /* DataStructure */,
 				AA51FF002A372C8700C1888F /* Model */,
 				AA51FF0E2A374AA700C1888F /* Service */,
@@ -173,6 +176,14 @@
 				63F01BB628D44FC400C53A39 /* SceneDelegate.swift */,
 			);
 			path = Application;
+			sourceTree = "<group>";
+		};
+		AAD5984A2A39795100E4385D /* Utilitiy */ = {
+			isa = PBXGroup;
+			children = (
+				AAD598482A39752400E4385D /* DateFormatter+dateToText.swift */,
+			);
+			path = Utilitiy;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -260,6 +271,7 @@
 				AA51FF1B2A38238200C1888F /* RecordGyroViewModel.swift in Sources */,
 				AA51FF042A372D3C00C1888F /* Coordinate.swift in Sources */,
 				AA51FF072A372EFD00C1888F /* Node.swift in Sources */,
+				AAD598492A39752400E4385D /* DateFormatter+dateToText.swift in Sources */,
 				AA51FF142A3758C800C1888F /* UITableViewCell+ReuseIdentifying.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
