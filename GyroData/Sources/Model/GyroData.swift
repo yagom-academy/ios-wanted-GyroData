@@ -24,17 +24,12 @@ struct GyroData {
     
     private let identifier: UUID
     let dataType: DataType
-    var queue = LimitedQueue<Coordinate>()
+    var coordinateList = [Coordinate]()
     var date: Date?
-    var duration: Double? {
-        let duration = Double(queue.count) / 10.0
-        let formattedDuration = String(format: "%.1f", duration)
-        
-        return Double(formattedDuration)
-    }
+    var duration: Double = 0.0
     
     var count: Int {
-        queue.count
+        coordinateList.count
     }
     
     init(dataType: DataType) {
@@ -42,17 +37,24 @@ struct GyroData {
         identifier = UUID()
     }
     
-    mutating func add(_ data: Coordinate) {
-        queue.enqueue(data)
+    mutating func add(_ data: Coordinate, interval: Double) {
+        coordinateList.append(data)
+        duration += interval
         date = Date()
     }
     
     func readLastGyroData() -> Coordinate? {
-        return queue.peek()
+        return coordinateList.last
     }
     
-    mutating func dequeue() -> Coordinate? {
-        return queue.dequeue()
+    mutating func removeFirst() -> Coordinate {
+        return coordinateList.removeFirst()
+    }
+    
+    func forEach(_ completion: (Coordinate) -> Void) {
+        coordinateList.forEach { coordinate in
+            completion(coordinate)
+        }
     }
 }
 

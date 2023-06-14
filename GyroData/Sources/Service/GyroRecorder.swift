@@ -21,7 +21,7 @@ final class GyroRecorder {
     @Published private(set) var isUpdating: Bool = false
     
     private init() {
-        setupPeriod()
+        setupInterval()
     }
     
     func gyroDataPublisher() -> AnyPublisher<GyroData?, Never> {
@@ -32,6 +32,7 @@ final class GyroRecorder {
     func start(dataType: GyroData.DataType) {
         self.dataType = dataType
         gyroData = GyroData(dataType: dataType)
+        gyroData?.duration = 0.0
         
         switch dataType {
         case .accelerometer:
@@ -52,7 +53,7 @@ final class GyroRecorder {
         }
     }
     
-    func save() -> GyroData? {
+    func getGyroData() -> GyroData? {
         return gyroData
     }
     
@@ -65,11 +66,12 @@ final class GyroRecorder {
         guard let queue = OperationQueue.current else { return }
         
         isUpdating = true
-        var elapsedTime = 0.0
         let interval = motionManager.accelerometerUpdateInterval
         
         motionManager.startAccelerometerUpdates(to: queue) { [weak self] data, error in
-            guard elapsedTime < GyroRecorder.Constant.timeout else {
+            guard let duration = self?.gyroData?.duration,
+                  duration < GyroRecorder.Constant.timeout else {
+                // time out handle
                 self?.stopAccelerometerUpdates()
                 
                 return
@@ -83,9 +85,7 @@ final class GyroRecorder {
             }
             
             let data = Coordinate(x: x, y: y, z: z)
-            self?.gyroData?.add(data)
-            
-            elapsedTime += interval
+            self?.gyroData?.add(data, interval: interval)
         }
     }
     
@@ -93,11 +93,11 @@ final class GyroRecorder {
         guard let queue = OperationQueue.current else { return }
         
         isUpdating = true
-        var elapsedTime = 0.0
-        let interval = motionManager.accelerometerUpdateInterval
+        let interval = motionManager.gyroUpdateInterval
         
         motionManager.startGyroUpdates(to: queue) { [weak self] data, error in
-            guard elapsedTime < GyroRecorder.Constant.timeout else {
+            guard let duration = self?.gyroData?.duration,
+                  duration < GyroRecorder.Constant.timeout else {
                 // time out handle
                 self?.stopGyroUpdates()
                 
@@ -112,9 +112,7 @@ final class GyroRecorder {
             }
             
             let data = Coordinate(x: x, y: y, z: z)
-            self?.gyroData?.add(data)
-            
-            elapsedTime += interval
+            self?.gyroData?.add(data, interval: interval)
         }
     }
     
@@ -132,10 +130,10 @@ final class GyroRecorder {
         }
     }
     
-    private func setupPeriod() {
-        let period = 1 / GyroRecorder.Constant.frequency
+    private func setupInterval() {
+        let interval = 1 / GyroRecorder.Constant.frequency
         
-        motionManager.accelerometerUpdateInterval = period
-        motionManager.gyroUpdateInterval = period
+        motionManager.accelerometerUpdateInterval = interval
+        motionManager.gyroUpdateInterval = interval
     }
 }

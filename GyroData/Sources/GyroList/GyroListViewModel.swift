@@ -17,11 +17,10 @@ final class GyroListViewModel {
     }
     
     func formatGyroDataToString(gyroData: GyroData) -> (date: String, duration: String, dataType: String)? {
-        guard let date = gyroData.date,
-              let duration = gyroData.duration else { return nil }
+        guard let date = gyroData.date else { return nil }
         
         let formattedDate = DateFormatter.dateToText(date)
-        let formattedDuration = String(format: "%.1f", duration)
+        let formattedDuration = String(format: "%.1f", gyroData.duration)
         let formattedDataType = gyroData.dataType.description
         
         return (formattedDate, formattedDuration, formattedDataType)

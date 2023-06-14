@@ -133,16 +133,16 @@ class GraphView: UIView {
         let pathY = UIBezierPath()
         let pathZ = UIBezierPath()
         
-        if let coordinate = gyroData.dequeue() {
-            checkMaximumValue(coordinate.x, coordinate.y, coordinate.z)
-            
-            pathX.move(to: CGPoint(x: x, y: y - (coordinate.x * scaleY)))
-            pathY.move(to: CGPoint(x: x, y: y - (coordinate.y * scaleY)))
-            pathZ.move(to: CGPoint(x: x, y: y - (coordinate.z * scaleY)))
-        }
+        let coordinate = gyroData.removeFirst()
+        adjustScaleIfNeeded(coordinate.x, coordinate.y, coordinate.z)
         
-        while let coordinate = gyroData.dequeue() {
-            checkMaximumValue(coordinate.x, coordinate.y, coordinate.z)
+        pathX.move(to: CGPoint(x: x, y: y - (coordinate.x * scaleY)))
+        pathY.move(to: CGPoint(x: x, y: y - (coordinate.y * scaleY)))
+        pathZ.move(to: CGPoint(x: x, y: y - (coordinate.z * scaleY)))
+        
+        
+        gyroData.forEach { coordinate in
+            adjustScaleIfNeeded(coordinate.x, coordinate.y, coordinate.z)
             
             x += offsetX
             pathX.addLine(to: CGPoint(x: x, y: y - (coordinate.x * scaleY)))
@@ -200,7 +200,7 @@ class GraphView: UIView {
         ])
     }
     
-    private func checkMaximumValue(_ x: Double, _ y: Double, _ z: Double) {
+    private func adjustScaleIfNeeded(_ x: Double, _ y: Double, _ z: Double) {
         guard let maximumValue = [maximumY, abs(x), abs(y), abs(z)].max() else { return }
         
         if maximumValue > maximumY {
