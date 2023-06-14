@@ -23,6 +23,16 @@ final class MeasureGyroDataViewController: UIViewController {
         return control
     }()
     
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+       let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.center = view.center
+        activityIndicator.style = UIActivityIndicatorView.Style.large
+        activityIndicator.color = .systemGreen
+        activityIndicator.hidesWhenStopped = true
+        
+        return activityIndicator
+    }()
+    
     private let graphView: GraphView = {
         let view = GraphView()
         let lineWidth: CGFloat = 3
@@ -89,6 +99,7 @@ final class MeasureGyroDataViewController: UIViewController {
         
         view.backgroundColor = .white
         setUpUI()
+        setUpActivityIndicator()
         setUpSegmentedControl()
         setUpButtons()
     }
@@ -104,6 +115,19 @@ final class MeasureGyroDataViewController: UIViewController {
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.black]
         navigationItem.rightBarButtonItem = rightButtonItem
         navigationController?.navigationBar.topItem?.title = ""
+    }
+    
+    private func setUpActivityIndicator() {
+        view.addSubview(activityIndicator)
+        
+        let safeArea = view.safeAreaLayoutGuide
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            activityIndicator.topAnchor.constraint(equalTo: safeArea.topAnchor),
+            activityIndicator.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
+            activityIndicator.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
+            activityIndicator.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor)
+            ])
     }
     
     private func setUpSegmentedControl() {
@@ -214,11 +238,13 @@ extension MeasureGyroDataViewController {
     }
     
     @objc private func saveButtonTapped() {
+        bindIsSaving()
         if let threeAxisData = threeAxisData {
             switch selectedSensor {
             case .accelerometer:
                 let data = SixAxisDataForJSON(date: Date(), title: SensorType.accelerometer.description, threeAxisValue: threeAxisData)
                 viewModel.saveToFileManager(data)
+                
             case .gyroscope:
                 let data = SixAxisDataForJSON(date: Date(), title: SensorType.accelerometer.description, threeAxisValue: threeAxisData)
                 viewModel.saveToFileManager(data)
@@ -226,5 +252,20 @@ extension MeasureGyroDataViewController {
         } else {
             showAlert()
         }
+    }
+    
+    private func bindIsSaving() {
+        viewModel.isSavingSubject
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] bool in
+                if bool == true {
+                print("인디케이터시작")
+                    self?.activityIndicator.startAnimating()
+                } else {
+                    print("인디케이터종료")
+                    self?.activityIndicator.stopAnimating()
+                }
+            }
+            .store(in: &cancellables)
     }
 }

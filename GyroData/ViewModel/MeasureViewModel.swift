@@ -10,6 +10,7 @@ import CoreMotion
 
 final class MeasureViewModel {
     var isProcessingSubject = PassthroughSubject<Bool, Never>()
+    var isSavingSubject = PassthroughSubject<Bool, Never>()
     var accelerometerSubject = PassthroughSubject<[ThreeAxisValue], Never>()
     var gyroscopeSubject = PassthroughSubject<[ThreeAxisValue], Never>()
     
@@ -152,19 +153,25 @@ extension MeasureViewModel {
     }
     
     func saveToFileManager(_ data: SixAxisDataForJSON) {
-        do {
-            let jsonEncoder = JSONEncoder()
-            let jsonData = try jsonEncoder.encode(data)
-            
-            if let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-                let fileURL = documentDirectory.appendingPathComponent("SixAxisData.json")
-                try jsonData.write(to: fileURL)
+        isSavingSubject.send(true)
+        DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 3) { [weak self] in
+            do {
+                let jsonEncoder = JSONEncoder()
+                let jsonData = try jsonEncoder.encode(data)
                 
-                let saveToCoreData = SixAxisDataForCoreData(date: data.date, title: data.title, recordURL: jsonData)
-                CoreDataManager.shared.create(saveToCoreData)
+                if let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+                    let fileURL = documentDirectory.appendingPathComponent("SixAxisData.json")
+                    try jsonData.write(to: fileURL)
+                    
+                    let saveToCoreData = SixAxisDataForCoreData(date: data.date, title: data.title, recordURL: jsonData)
+                    CoreDataManager.shared.create(saveToCoreData)
+                    self?.isSavingSubject.send(false)
+                    print("저장성공")
+                }
+            } catch {
+                print("JSON Encoding Fail \(error)")
             }
-        } catch {
-            print("JSON Encoding Fail \(error)")
         }
+        
     }
 }
