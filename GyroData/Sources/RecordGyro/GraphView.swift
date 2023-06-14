@@ -88,7 +88,6 @@ class GraphView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         setupView()
@@ -101,8 +100,6 @@ class GraphView: UIView {
         let column = 8
         let offsetX = drawSectionWidth / CGFloat(column)
         let offsetY = drawSectionHeight / CGFloat(row)
-        let startPoint = CGPoint(x: (bounds.width - drawSectionWidth) / 2.0,
-                                 y: (bounds.height - drawSectionHeight) / 2.0)
         let x = (bounds.width - drawSectionWidth) / 2.0
         let y = (bounds.height - drawSectionHeight) / 2.0
         
