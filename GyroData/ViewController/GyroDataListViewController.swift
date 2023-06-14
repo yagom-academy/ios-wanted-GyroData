@@ -15,6 +15,7 @@ final class GyroDataListViewController: UIViewController {
     
     private let viewModel: GyroDataListViewModel
     private let measureViewModel: MeasureViewModel
+    private let detailViewModel: DetailViewModel
     
     private var dataSource: UITableViewDiffableDataSource<Section, GyroEntity>?
     private var cancellables = Set<AnyCancellable>()
@@ -27,9 +28,10 @@ final class GyroDataListViewController: UIViewController {
         return tableView
     }()
     
-    init(viewModel: GyroDataListViewModel, measureViewModel: MeasureViewModel) {
+    init(viewModel: GyroDataListViewModel, measureViewModel: MeasureViewModel, detailViewModel: DetailViewModel) {
         self.viewModel = viewModel
         self.measureViewModel = measureViewModel
+        self.detailViewModel = detailViewModel
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -123,8 +125,14 @@ extension GyroDataListViewController: UITableViewDelegate {
               let id = gyroEntity.id else { return nil }
         
         let play = "Play"
-        let playAction = UIContextualAction(style: .normal, title: play) { _, _, _ in
-            print("play")
+        let playAction = UIContextualAction(style: .normal, title: play) { [weak self] _, _, _ in
+            guard let self = self else { return }
+            
+            let data = self.viewModel.read(at: indexPath)
+            let detailViewController = DetailViewController(pageType: .play, viewModel: self.detailViewModel)
+            
+            self.detailViewModel.addData(data)
+            navigationController?.pushViewController(detailViewController, animated: true)
         }
         playAction.backgroundColor = .systemGreen
         
@@ -139,7 +147,6 @@ extension GyroDataListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let data = viewModel.read(at: indexPath)
-        let detailViewModel = DetailViewModel()
         let detailViewController = DetailViewController(pageType: .view, viewModel: detailViewModel)
         
         detailViewModel.addData(data)
