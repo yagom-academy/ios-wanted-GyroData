@@ -47,7 +47,6 @@ final class GyroListViewController: UIViewController {
                                              action: #selector(recordGyro))
         rightBarButton.setTitleTextAttributes([.font: UIFont.preferredFont(forTextStyle: .title2)], for: .normal)
         navigationItem.rightBarButtonItem = rightBarButton
-        
     }
     
     @objc private func recordGyro() {        

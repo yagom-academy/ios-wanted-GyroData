@@ -27,11 +27,11 @@ final class RecordGyroViewController: UIViewController {
     private let recordButton = UIButton()
     private let stopButton = UIButton()
     
-    private let viewModel: RecordGyroViewModel
+    private var viewModel: RecordGyroViewModel?
     
     init() {
         viewModel = RecordGyroViewModel()
-        graphView = GraphView(viewModel: viewModel)
+        graphView = GraphView(viewModel: viewModel!)
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -46,6 +46,7 @@ final class RecordGyroViewController: UIViewController {
         setupView()
         addSubviews()
         layout()
+        setupNavigationItems()
         setupSegmentedControl()
         setupRecordButton()
         setupStopButton()
@@ -72,6 +73,41 @@ final class RecordGyroViewController: UIViewController {
             graphView.widthAnchor.constraint(equalTo: stackView.widthAnchor),
             graphView.heightAnchor.constraint(equalTo: stackView.widthAnchor)
         ])
+    }
+    
+    private func setupNavigationItems() {
+        let title = "측정하기"
+        let titleLabel = UILabel()
+        titleLabel.text = title
+        titleLabel.font = .preferredFont(forTextStyle: .title1)
+        navigationItem.titleView = titleLabel
+        
+        let systemImageName = "chevron.backward"
+        let leftButtonImage = UIImage(systemName: systemImageName)
+        let leftBarButton = UIBarButtonItem(image: leftButtonImage,
+                                             style: .plain,
+                                             target: self,
+                                             action: #selector(stopAndDismiss))
+        
+        navigationItem.leftBarButtonItem = leftBarButton
+        
+        let rightBarButtonTitle = "저장"
+        let rightBarButton = UIBarButtonItem(title: rightBarButtonTitle,
+                                             image: nil,
+                                             target: self,
+                                             action: #selector(save))
+        rightBarButton.setTitleTextAttributes([.font: UIFont.preferredFont(forTextStyle: .title2)], for: .normal)
+        navigationItem.rightBarButtonItem = rightBarButton
+    }
+    
+    @objc private func stopAndDismiss() {
+        viewModel?.stopRecord()
+        viewModel = nil
+        navigationController?.popViewController(animated: true)
+    }
+    
+    @objc private func save() {
+        
     }
     
     private func setupSegmentedControl() {
@@ -105,13 +141,13 @@ final class RecordGyroViewController: UIViewController {
     @objc private func startRecord() {
         let selectedIndex = segmentedControl.selectedSegmentIndex
         
-        viewModel.startRecord(dataTypeRawValue: selectedIndex)
+        viewModel?.startRecord(dataTypeRawValue: selectedIndex)
         
         stopButton.isEnabled = true
     }
     
     @objc private func stopRecord() {
-        viewModel.stopRecord()
+        viewModel?.stopRecord()
         
         stopButton.isEnabled = false
     }

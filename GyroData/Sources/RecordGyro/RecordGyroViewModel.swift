@@ -28,4 +28,8 @@ final class RecordGyroViewModel {
     func gyroDataPublisher() -> AnyPublisher<GyroData?, Never> {
         return gyroRecorder.gyroDataPublisher()
     }
+    
+    deinit {
+        gyroRecorder.clear()
+    }
 }

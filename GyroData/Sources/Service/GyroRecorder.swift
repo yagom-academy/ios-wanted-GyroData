@@ -50,6 +50,11 @@ final class GyroRecorder {
         }
     }
     
+    func clear() {
+        dataType = nil
+        gyroData = nil
+    }
+    
     private func startAccelerometerUpdates() {
         motionManager.startAccelerometerUpdates(to: .current!) { [weak self] data, error in
             guard let x = data?.acceleration.x,
