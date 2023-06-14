@@ -24,6 +24,7 @@ final class GyroDataListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+//        CoreDataManager.shared.deleteAll()
         gyroDataTableView.delegate = self
         setUpView()
         configureGyroDataTableView()

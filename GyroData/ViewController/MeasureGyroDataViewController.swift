@@ -240,15 +240,8 @@ extension MeasureGyroDataViewController {
     @objc private func saveButtonTapped() {
         bindIsSaving()
         if let threeAxisData = threeAxisData {
-            switch selectedSensor {
-            case .accelerometer:
-                let data = SixAxisDataForJSON(date: Date(), title: SensorType.accelerometer.description, threeAxisValue: threeAxisData)
-                viewModel.saveToFileManager(data)
-                
-            case .gyroscope:
-                let data = SixAxisDataForJSON(date: Date(), title: SensorType.accelerometer.description, threeAxisValue: threeAxisData)
-                viewModel.saveToFileManager(data)
-            }
+            let data = SixAxisDataForJSON(date: Date(), title: selectedSensor.description, threeAxisValue: threeAxisData)
+            viewModel.saveToFileManager(data)
         } else {
             showAlert()
         }
