@@ -42,11 +42,3 @@ extension GyroEntity : DataAccessObject {
         duration = model.duration
     }
 }
-
-protocol DataAccessObject: Identifiable {
-    associatedtype DataTransferObject
-    
-    var identifier: UUID? { get }
-    
-    func setValues(from model: DataTransferObject)
-}

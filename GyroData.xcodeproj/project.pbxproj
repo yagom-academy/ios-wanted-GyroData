@@ -29,6 +29,7 @@
 		AAD5984D2A3991EF00E4385D /* CoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AAD5984B2A3991EF00E4385D /* CoreData.xcdatamodeld */; };
 		AAD598712A3AE13100E4385D /* GyroEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD5986F2A3AE13100E4385D /* GyroEntity+CoreDataClass.swift */; };
 		AAD598742A3AE2D500E4385D /* DataTransferObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD598732A3AE2D500E4385D /* DataTransferObject.swift */; };
+		AAD598762A3AE82F00E4385D /* DataAccessObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD598752A3AE82F00E4385D /* DataAccessObject.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,7 @@
 		AAD5984C2A3991EF00E4385D /* CoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreData.xcdatamodel; sourceTree = "<group>"; };
 		AAD5986F2A3AE13100E4385D /* GyroEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GyroEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		AAD598732A3AE2D500E4385D /* DataTransferObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTransferObject.swift; sourceTree = "<group>"; };
+		AAD598752A3AE82F00E4385D /* DataAccessObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataAccessObject.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 				AA51FF032A372D3C00C1888F /* Coordinate.swift */,
 				AA51FF012A372CBF00C1888F /* GyroData.swift */,
 				AAD598732A3AE2D500E4385D /* DataTransferObject.swift */,
+				AAD598752A3AE82F00E4385D /* DataAccessObject.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -293,6 +296,7 @@
 				AA51FF072A372EFD00C1888F /* Node.swift in Sources */,
 				AAD598492A39752400E4385D /* DateFormatter+dateToText.swift in Sources */,
 				AA51FF142A3758C800C1888F /* UITableViewCell+ReuseIdentifying.swift in Sources */,
+				AAD598762A3AE82F00E4385D /* DataAccessObject.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
