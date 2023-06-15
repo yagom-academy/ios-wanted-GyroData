@@ -12,16 +12,16 @@ final class DetailViewModel {
     @Published private(set) var currentData: GyroEntity?
     @Published var timerLabel: String = "00.0"
     
-    let timerViewModel: TimerModel
+    let timerModel: TimerModel
     private var cancellables = Set<AnyCancellable>()
     
     init(timerViewModel: TimerModel) {
-        self.timerViewModel = timerViewModel
+        self.timerModel = timerViewModel
         bindTimer()
     }
 
     private func bindTimer() {
-        timerViewModel.$tenthOfaSeconds
+        timerModel.$tenthOfaSeconds
             .sink(receiveValue: { [weak self] double in
                 guard let convertedTime = self?.numberFormatter.string(from: NSNumber(value: double)) else { return }
                 self?.timerLabel = convertedTime

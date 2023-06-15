@@ -49,7 +49,7 @@ final class DetailViewController: UIViewController {
     }()
     
     private lazy var graphView: GraphView = {
-        let view = GraphView(frame: .zero, viewModel: viewModel.timerViewModel)
+        let view = GraphView(frame: .zero, viewModel: viewModel.timerModel)
         
         return view
     }()
@@ -102,7 +102,7 @@ final class DetailViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        viewModel.timerViewModel.restartTimer()
+        viewModel.timerModel.restartTimer()
     }
     
     private func bind() {
@@ -197,13 +197,13 @@ final class DetailViewController: UIViewController {
     
     @objc private func playButtonTapped() {
         if isPlaying == false {
-            viewModel.timerViewModel.restartTimer()
+            viewModel.timerModel.restartTimer()
             playButton.setUpStopMode()
             guard let data = viewModel.currentData else { return }
             playGraph(data)
             isPlaying = true
         } else {
-            viewModel.timerViewModel.stopTimer(true)
+            viewModel.timerModel.stopTimer(true)
             playButton.setUpPlayMode()
             isPlaying = false
         }
