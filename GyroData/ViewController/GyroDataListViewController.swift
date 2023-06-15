@@ -141,8 +141,11 @@ extension GyroDataListViewController: UITableViewDelegate {
             self?.viewModel.delete(by: id)
         }
         deleteAction.backgroundColor = .red
+
+        let configuration = UISwipeActionsConfiguration(actions: [playAction, deleteAction])
+        configuration.performsFirstActionWithFullSwipe = false
         
-        return UISwipeActionsConfiguration(actions: [playAction, deleteAction])
+        return configuration
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -151,5 +154,6 @@ extension GyroDataListViewController: UITableViewDelegate {
         
         detailViewModel.addData(data)
         navigationController?.pushViewController(detailViewController, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }

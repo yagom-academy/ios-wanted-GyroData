@@ -56,6 +56,11 @@ final class GyroDataTableViewCell: UITableViewCell {
         return label
     }()
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        cancellables.removeAll()
+    }
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setUpUI()
