@@ -32,9 +32,14 @@ struct GyroData: DataTransferObject {
         coordinateList.count
     }
     
-    init(dataType: DataType) {
+    init(dataType: DataType, identifier: UUID? = nil) {
         self.dataType = dataType
-        identifier = UUID()
+        
+        if let identifier {
+            self.identifier = identifier
+        } else {
+            self.identifier = UUID()
+        }
     }
     
     mutating func add(_ data: Coordinate, interval: Double) {
