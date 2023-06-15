@@ -31,7 +31,9 @@ final class GyroDataTableCellViewModel {
     init(sixAxisData: GyroEntity) {
         self.sixAxisData = sixAxisData
     }
-    
+}
+
+extension GyroDataTableCellViewModel {
     var date: String? {
         guard let date = sixAxisData.date else { return nil }
         let convertedDate = dateFormatter.string(from: date)
@@ -49,4 +51,3 @@ final class GyroDataTableCellViewModel {
         return String(describing: convertedTime)
     }
 }
-

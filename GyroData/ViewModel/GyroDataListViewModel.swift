@@ -19,6 +19,20 @@ final class GyroDataListViewModel {
         bind()
     }
     
+    private func deleteFile(withId id: UUID) {
+        guard let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
+        let fileName = "\(id).json"
+        let fileURL = documentDirectory.appendingPathComponent("GyroData폴더").appendingPathComponent(fileName)
+        
+        do {
+            try FileManager.default.removeItem(at: fileURL)
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+}
+
+extension GyroDataListViewModel {
     func bind() {
         measureViewModel.createSubject
             .sink { [self] data in
@@ -40,17 +54,5 @@ final class GyroDataListViewModel {
         gyroData.removeAll { $0.id == id }
         CoreDataManager.shared.delete(by: id)
         deleteFile(withId: id)
-    }
-    
-    private func deleteFile(withId id: UUID) {
-        guard let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
-        let fileName = "\(id).json"
-        let fileURL = documentDirectory.appendingPathComponent("GyroData폴더").appendingPathComponent(fileName)
-        
-        do {
-            try FileManager.default.removeItem(at: fileURL)
-        } catch {
-            print(error.localizedDescription)
-        }
     }
 }
