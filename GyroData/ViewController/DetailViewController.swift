@@ -175,10 +175,22 @@ final class DetailViewController: UIViewController {
     @objc private func playButtonTapped() {
         if isPlaying == false {
             playButton.setUpStopMode()
+            guard let data = viewModel.currentData else { return }
+            playGraph(data)
             isPlaying = true
         } else {
             playButton.setUpPlayMode()
             isPlaying = false
+        }
+    }
+    
+    private func playGraph(_ data: GyroEntity) {
+        guard let id = data.id,
+              let data = viewModel.fetchData(by: id),
+              let threeAxisValue = data.threeAxisValue else { return }
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.graphView.drawGraphByTenthOfASecond(with: threeAxisValue)
         }
     }
 }
