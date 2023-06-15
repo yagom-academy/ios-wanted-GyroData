@@ -40,25 +40,6 @@ class GraphView: UIView {
         return label
     }()
     
-    // MARK: 삭제 필요
-    private lazy var countLabel = {
-        let label = UILabel()
-        
-        label.text = "testing"
-        label.textAlignment = .center
-        label.textColor = .systemBlue
-        label.font = .preferredFont(forTextStyle: .body)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        
-        addSubview(label)
-        label.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
-        label.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true
-        label.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.2).isActive = true
-        
-        return label
-    }()
-    
-    private let viewModel: RecordGyroViewModel
     private var gyroData: GyroData?
     private var subscriptions = Set<AnyCancellable>()
     
@@ -73,15 +54,14 @@ class GraphView: UIView {
         drawSectionHeight / (maximumY * 2)
     }
 
-    init(viewModel: RecordGyroViewModel) {
-        self.viewModel = viewModel
+    init(gyroData: GyroData? = nil) {
+        self.gyroData = gyroData
         
         super.init(frame: .zero)
         
         setupView()
         addSubviews()
         layout()
-        bind()
     }
     
     required init?(coder: NSCoder) {
@@ -125,7 +105,6 @@ class GraphView: UIView {
               gyroData.count > 1 else { return }
         
         let offsetX = drawSectionWidth / (Double(gyroData.count) - 1)
-        countLabel.text = String(gyroData.count)
         var x = (bounds.width - drawSectionWidth) / 2.0
         let y = bounds.height / 2.0
         
@@ -166,10 +145,6 @@ class GraphView: UIView {
         pathZ.stroke()
     }
     
-    private func drawEachPoint(_ coordinate: Coordinate) {
-        
-    }
-    
     private func setupView() {
         layer.borderWidth = 2.0
         layer.borderColor = UIColor.black.cgColor
@@ -208,14 +183,16 @@ class GraphView: UIView {
         }
     }
     
-    private func bind() {
-        viewModel.gyroDataPublisher()
-            .sink { [weak self] gyroData in
-                self?.gyroData = gyroData
-                self?.configureLabel()
-                self?.setNeedsDisplay()
-            }
-            .store(in: &subscriptions)
+    func configureUI(gyroData: GyroData?) {
+        guard let gyroData else { return }
+        
+        configureGyroData(gyroData)
+        configureLabel()
+        setNeedsDisplay()
+    }
+    
+    private func configureGyroData(_ gyroData: GyroData) {
+        self.gyroData = gyroData
     }
     
     private func configureLabel() {

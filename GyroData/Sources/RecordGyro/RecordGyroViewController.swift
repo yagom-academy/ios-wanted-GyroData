@@ -33,7 +33,7 @@ final class RecordGyroViewController: UIViewController {
     
     init() {
         viewModel = RecordGyroViewModel()
-        graphView = GraphView(viewModel: viewModel)
+        graphView = GraphView()
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -159,6 +159,12 @@ final class RecordGyroViewController: UIViewController {
                 self?.navigationItem.rightBarButtonItem?.isEnabled = !isUpdating
                 self?.segmentedControl.isEnabled = !isUpdating
                 self?.stopButton.isEnabled = isUpdating
+            }
+            .store(in: &subscriptions)
+        
+        viewModel.gyroDataPublisher()
+            .sink { [weak self] gyroData in
+                self?.graphView.configureUI(gyroData: gyroData)
             }
             .store(in: &subscriptions)
     }
