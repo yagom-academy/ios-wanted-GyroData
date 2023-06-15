@@ -13,6 +13,7 @@ final class DetailViewController: UIViewController {
     private var pageType: PageType
     private let viewModel: DetailViewModel
     private var cancellables = Set<AnyCancellable>()
+    private var isPlaying: Bool = false
     
     private let labelStackView: UIStackView = {
         let stackView = UIStackView()
@@ -47,6 +48,14 @@ final class DetailViewController: UIViewController {
         return view
     }()
     
+    private let playStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 100
+        
+        return stackView
+    }()
+    
     private lazy var playButton: PlayButton = {
         let button = PlayButton()
         
@@ -58,6 +67,15 @@ final class DetailViewController: UIViewController {
         }
         
         return button
+    }()
+    
+    private let timerLabel: UILabel = {
+        let label = UILabel()
+        label.text = "00.0"
+        label.font = UIFont.preferredFont(forTextStyle: .title2)
+        label.textColor = .black
+        
+        return label
     }()
     
     init(pageType: PageType, viewModel: DetailViewModel) {
@@ -100,6 +118,7 @@ final class DetailViewController: UIViewController {
         view.backgroundColor = .white
         setUpNavigationBar()
         setUpUI()
+        configurePlayButton()
     }
     
     private func setUpNavigationBar() {
@@ -112,18 +131,23 @@ final class DetailViewController: UIViewController {
     private func setUpUI() {
         view.addSubview(labelStackView)
         view.addSubview(graphView)
-        view.addSubview(playButton)
+        view.addSubview(playStackView)
         labelStackView.addArrangedSubview(dateLabel)
         labelStackView.addArrangedSubview(pageTypeLabel)
+        playStackView.addArrangedSubview(playButton)
+        playStackView.addArrangedSubview(timerLabel)
         
         let safeArea = view.safeAreaLayoutGuide
         let leading: CGFloat = 30
         let trailing: CGFloat = -30
-        let bottom: CGFloat = -50
+        let bottom: CGFloat = -280
         let top: CGFloat = 10
+        let playStackViewTop: CGFloat = 20
+        let playStackViewLeading: CGFloat = 150
     
         labelStackView.translatesAutoresizingMaskIntoConstraints = false
         graphView.translatesAutoresizingMaskIntoConstraints = false
+        playStackView.translatesAutoresizingMaskIntoConstraints = false
         playButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
@@ -136,11 +160,25 @@ final class DetailViewController: UIViewController {
             graphView.trailingAnchor.constraint(equalTo: labelStackView.trailingAnchor),
             graphView.widthAnchor.constraint(equalTo: graphView.heightAnchor),
             
-            playButton.topAnchor.constraint(equalTo: graphView.bottomAnchor, constant: top),
-            playButton.leadingAnchor.constraint(equalTo: labelStackView.leadingAnchor),
-            playButton.trailingAnchor.constraint(equalTo: labelStackView.trailingAnchor),
+            playStackView.topAnchor.constraint(equalTo: graphView.bottomAnchor, constant: playStackViewTop),
+            playStackView.leadingAnchor.constraint(equalTo: labelStackView.leadingAnchor, constant: playStackViewLeading),
+            playStackView.trailingAnchor.constraint(equalTo: labelStackView.trailingAnchor),
             playButton.widthAnchor.constraint(equalTo: playButton.heightAnchor),
-            playButton.bottomAnchor.constraint(greaterThanOrEqualTo: safeArea.bottomAnchor, constant: bottom),
+            playStackView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: bottom),
         ])
+    }
+    
+    private func configurePlayButton() {
+        playButton.addTarget(self, action: #selector(playButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc private func playButtonTapped() {
+        if isPlaying == false {
+            playButton.setUpStopMode()
+            isPlaying = true
+        } else {
+            playButton.setUpPlayMode()
+            isPlaying = false
+        }
     }
 }
