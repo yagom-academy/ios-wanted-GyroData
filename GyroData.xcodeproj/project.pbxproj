@@ -35,6 +35,7 @@
 		AAD5987D2A3B11C100E4385D /* PlayGyroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD5987C2A3B11C100E4385D /* PlayGyroViewController.swift */; };
 		AAD5987F2A3B25F800E4385D /* PlayGyroViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD5987E2A3B25F800E4385D /* PlayGyroViewModel.swift */; };
 		AAD598812A3B537600E4385D /* GyroPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD598802A3B537600E4385D /* GyroPlayer.swift */; };
+		AAD598832A3B5A6200E4385D /* PlayControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD598822A3B5A6200E4385D /* PlayControlView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +69,7 @@
 		AAD5987C2A3B11C100E4385D /* PlayGyroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayGyroViewController.swift; sourceTree = "<group>"; };
 		AAD5987E2A3B25F800E4385D /* PlayGyroViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayGyroViewModel.swift; sourceTree = "<group>"; };
 		AAD598802A3B537600E4385D /* GyroPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroPlayer.swift; sourceTree = "<group>"; };
+		AAD598822A3B5A6200E4385D /* PlayControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayControlView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -223,6 +225,7 @@
 		AAD5987B2A3B04A700E4385D /* PlayGyro */ = {
 			isa = PBXGroup;
 			children = (
+				AAD598822A3B5A6200E4385D /* PlayControlView.swift */,
 				AAD5987C2A3B11C100E4385D /* PlayGyroViewController.swift */,
 				AAD5987E2A3B25F800E4385D /* PlayGyroViewModel.swift */,
 			);
@@ -321,6 +324,7 @@
 				AA51FF1B2A38238200C1888F /* RecordGyroViewModel.swift in Sources */,
 				AA51FF042A372D3C00C1888F /* Coordinate.swift in Sources */,
 				AAD5987F2A3B25F800E4385D /* PlayGyroViewModel.swift in Sources */,
+				AAD598832A3B5A6200E4385D /* PlayControlView.swift in Sources */,
 				AA51FF072A372EFD00C1888F /* Node.swift in Sources */,
 				AAD598492A39752400E4385D /* DateFormatter+dateToText.swift in Sources */,
 				AA51FF142A3758C800C1888F /* UITableViewCell+ReuseIdentifying.swift in Sources */,

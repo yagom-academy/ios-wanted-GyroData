@@ -24,7 +24,7 @@ final class PlayGyroViewController: UIViewController {
     }
 
     private lazy var stackView = {
-        let stackView = UIStackView(arrangedSubviews: [labelStackView, graphView])
+        let stackView = UIStackView(arrangedSubviews: [labelStackView, graphView, playControlView])
 
         stackView.alignment = .leading
         stackView.distribution = .fill
@@ -50,6 +50,8 @@ final class PlayGyroViewController: UIViewController {
     private let dateLabel = UILabel()
     private let titleLabel = UILabel()
     private let graphView = GraphView()
+    private let playControlView = PlayControlView()
+    
     private let gyroData: GyroData
     private let viewMode: Mode
     private let viewModel: PlayGyroViewModel
@@ -71,6 +73,7 @@ final class PlayGyroViewController: UIViewController {
         super.viewDidLoad()
         
         setupView()
+        setupNavigationItems()
         setupDateLabel()
         setupTitleLabel()
         layout()
@@ -79,6 +82,29 @@ final class PlayGyroViewController: UIViewController {
     
     private func setupView() {
         view.backgroundColor = .systemBackground
+    }
+    
+    private func setupNavigationItems() {
+        let title = "다시보기"
+        let titleLabel = UILabel()
+        titleLabel.text = title
+        titleLabel.font = .preferredFont(forTextStyle: .title1)
+        navigationItem.titleView = titleLabel
+        
+        let systemImageName = "chevron.backward"
+        let leftButtonImage = UIImage(systemName: systemImageName)
+        let leftBarButton = UIBarButtonItem(image: leftButtonImage,
+                                            style: .plain,
+                                            target: self,
+                                            action: #selector(stopAndDismiss))
+        leftBarButton.tintColor = .label
+        
+        navigationItem.leftBarButtonItem = leftBarButton
+    }
+    
+    @objc private func stopAndDismiss() {
+        viewModel.pause()
+        navigationController?.popViewController(animated: true)
     }
     
     private func setupDateLabel() {
@@ -106,7 +132,9 @@ final class PlayGyroViewController: UIViewController {
             stackView.trailingAnchor.constraint(equalTo: safe.trailingAnchor, constant: -32),
 
             graphView.widthAnchor.constraint(equalTo: stackView.widthAnchor),
-            graphView.heightAnchor.constraint(equalTo: stackView.widthAnchor)
+            graphView.heightAnchor.constraint(equalTo: stackView.widthAnchor),
+            
+            playControlView.widthAnchor.constraint(equalTo: stackView.widthAnchor)
         ])
     }
     
@@ -114,9 +142,9 @@ final class PlayGyroViewController: UIViewController {
         switch viewMode {
         case .view:
             graphView.configureUI(gyroData: gyroData)
+            playControlView.isHidden = true
         case .play:
             bind()
-            viewModel.play()
         }
     }
         
@@ -124,6 +152,18 @@ final class PlayGyroViewController: UIViewController {
         viewModel.playingGyroDataPublisher()
             .sink { [weak self] gyroData in
                 self?.graphView.configureUI(gyroData: gyroData)
+                self?.playControlView.configureLabel(duration: gyroData.duration)
+            }
+            .store(in: &subscriptions)
+        
+        playControlView.$isPlaying
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] isPlaying in
+                if isPlaying {
+                    self?.viewModel.play()
+                } else {
+                    self?.viewModel.pause()
+                }
             }
             .store(in: &subscriptions)
     }

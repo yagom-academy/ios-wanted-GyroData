@@ -26,6 +26,7 @@ final class GyroPlayer {
         endIndex = gyrodata.coordinateList.endIndex
         playingGyroData = gyrodata
         playingGyroData.coordinateList = []
+        playingGyroData.duration = 0.0
     }
     
     func play() {

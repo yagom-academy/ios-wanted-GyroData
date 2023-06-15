@@ -90,7 +90,8 @@ final class RecordGyroViewController: UIViewController {
                                              style: .plain,
                                              target: self,
                                              action: #selector(stopAndDismiss))
-        
+        leftBarButton.tintColor = .label
+
         navigationItem.leftBarButtonItem = leftBarButton
         
         let rightBarButtonTitle = "저장"
