@@ -49,7 +49,11 @@ final class GyroPlayer {
             .autoconnect()
             .sink { [weak self] _ in
                 guard let index = self?.startIndex,
-                      let selectedData = self?.originalGyroData.coordinateList[safe: index] else { return }
+                      let selectedData = self?.originalGyroData.coordinateList[safe: index] else {
+                    self?.subscription?.cancel()
+                    
+                    return
+                }
                 
                 self?.startIndex += 1
                 self?.playingGyroData.add(selectedData, interval: interval)
