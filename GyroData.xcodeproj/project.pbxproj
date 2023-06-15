@@ -31,6 +31,7 @@
 		FB42DFF42A39E04F00238381 /* PageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB42DFF32A39E04F00238381 /* PageType.swift */; };
 		FB42DFF62A39E37E00238381 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB42DFF52A39E37E00238381 /* DetailViewModel.swift */; };
 		FB42DFF82A3A11C400238381 /* PlayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB42DFF72A3A11C400238381 /* PlayButton.swift */; };
+		FB42E0002A3B4C7300238381 /* TimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB42DFFF2A3B4C7300238381 /* TimerModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		FB42DFF32A39E04F00238381 /* PageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageType.swift; sourceTree = "<group>"; };
 		FB42DFF52A39E37E00238381 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		FB42DFF72A3A11C400238381 /* PlayButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayButton.swift; sourceTree = "<group>"; };
+		FB42DFFF2A3B4C7300238381 /* TimerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,13 +123,12 @@
 		FB42DFC42A36DF0E00238381 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				FB42DFED2A396D0D00238381 /* SixAxisDataForCoreData.swift */,
-				FB42DFC52A36DF2900238381 /* SixAxisDataForJSON.swift */,
-				FB42DFC72A36E25600238381 /* SensorType.swift */,
 				FB42DFD62A37FF4D00238381 /* CoreDataManager.swift */,
 				FB42DFD82A38034800238381 /* EntityKeyProtocol.swift */,
+				FB42DFFF2A3B4C7300238381 /* TimerModel.swift */,
 				FB42DFEF2A39D77A00238381 /* FileError.swift */,
-				FB42DFF32A39E04F00238381 /* PageType.swift */,
+				FB42E0012A3B5A8B00238381 /* mappingModel */,
+				FB42E0022A3B5AAA00238381 /* Type */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -151,6 +152,24 @@
 				FB42DFF52A39E37E00238381 /* DetailViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		FB42E0012A3B5A8B00238381 /* mappingModel */ = {
+			isa = PBXGroup;
+			children = (
+				FB42DFED2A396D0D00238381 /* SixAxisDataForCoreData.swift */,
+				FB42DFC52A36DF2900238381 /* SixAxisDataForJSON.swift */,
+			);
+			path = mappingModel;
+			sourceTree = "<group>";
+		};
+		FB42E0022A3B5AAA00238381 /* Type */ = {
+			isa = PBXGroup;
+			children = (
+				FB42DFC72A36E25600238381 /* SensorType.swift */,
+				FB42DFF32A39E04F00238381 /* PageType.swift */,
+			);
+			path = Type;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -245,6 +264,7 @@
 				FB42DFD52A37FE6000238381 /* GyroEntity+CoreDataProperties.swift in Sources */,
 				FB42DFD72A37FF4D00238381 /* CoreDataManager.swift in Sources */,
 				FB42DFE12A3862D200238381 /* MeasureViewModel.swift in Sources */,
+				FB42E0002A3B4C7300238381 /* TimerModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

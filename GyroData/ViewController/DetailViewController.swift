@@ -39,8 +39,8 @@ final class DetailViewController: UIViewController {
         return label
     }()
     
-    private let graphView: GraphView = {
-        let view = GraphView()
+    private lazy var graphView: GraphView = {
+        let view = GraphView(frame: .zero, viewModel: viewModel.timerViewModel)
         view.backgroundColor = .white
         let lineWidth: CGFloat = 3
         view.layer.borderWidth = lineWidth
@@ -94,6 +94,11 @@ final class DetailViewController: UIViewController {
         bind()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        viewModel.timerViewModel.restartTimer()
+    }
+    
     private func bind() {
         viewModel.$currentData
             .receive(on: DispatchQueue.main)
@@ -110,6 +115,11 @@ final class DetailViewController: UIViewController {
                 default:
                     return
                 }
+            }
+            .store(in: &cancellables)
+        viewModel.$timerLabel
+            .sink { [weak self] label in
+                self?.timerLabel.text = label
             }
             .store(in: &cancellables)
     }
@@ -174,11 +184,13 @@ final class DetailViewController: UIViewController {
     
     @objc private func playButtonTapped() {
         if isPlaying == false {
+            viewModel.timerViewModel.restartTimer()
             playButton.setUpStopMode()
             guard let data = viewModel.currentData else { return }
             playGraph(data)
             isPlaying = true
         } else {
+            viewModel.timerViewModel.stopTimer(true)
             playButton.setUpPlayMode()
             isPlaying = false
         }

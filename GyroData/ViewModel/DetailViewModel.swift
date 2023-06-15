@@ -10,6 +10,24 @@ import Combine
 
 final class DetailViewModel {
     @Published private(set) var currentData: GyroEntity?
+    @Published var timerLabel: String = "00.0"
+    
+    let timerViewModel: TimerModel
+    private var cancellables = Set<AnyCancellable>()
+    
+    init(timerViewModel: TimerModel) {
+        self.timerViewModel = timerViewModel
+        bindTimer()
+    }
+
+    private func bindTimer() {
+        timerViewModel.$tenthOfaSeconds
+            .sink(receiveValue: { [weak self] double in
+                guard let convertedTime = self?.numberFormatter.string(from: NSNumber(value: double)) else { return }
+                self?.timerLabel = convertedTime
+            })
+            .store(in: &cancellables)
+    }
     
     private let dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
@@ -18,6 +36,30 @@ final class DetailViewModel {
         return dateFormatter
     }()
     
+    private func decodeJSONFile(at url: URL) -> SixAxisDataForJSON? {
+        do {
+            let jsonData = try Data(contentsOf: url)
+            let jsonDecoder = JSONDecoder()
+            let decodeData = try jsonDecoder.decode(SixAxisDataForJSON.self, from: jsonData)
+            return decodeData
+        } catch {
+            print("디코딩실패 \(error.localizedDescription)")
+            return nil
+        }
+    }
+    
+    private let numberFormatter: NumberFormatter = {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.roundingMode = .halfUp
+        numberFormatter.minimumFractionDigits = 1
+        numberFormatter.maximumFractionDigits = 1
+        
+        return numberFormatter
+    }()
+}
+
+extension DetailViewModel {
     var date: String? {
         guard let currentData = currentData,
               let date = currentData.date else { return nil }
@@ -37,15 +79,4 @@ final class DetailViewModel {
         return decodeJSONFile(at: fileURL)
     }
     
-    private func decodeJSONFile(at url: URL) -> SixAxisDataForJSON? {
-        do {
-            let jsonData = try Data(contentsOf: url)
-            let jsonDecoder = JSONDecoder()
-            let decodeData = try jsonDecoder.decode(SixAxisDataForJSON.self, from: jsonData)
-            return decodeData
-        } catch {
-            print("디코딩실패 \(error.localizedDescription)")
-            return nil
-        }
-    }
 }

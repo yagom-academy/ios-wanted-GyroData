@@ -35,7 +35,7 @@ final class MeasureGyroDataViewController: UIViewController {
     }()
     
     private let graphView: GraphView = {
-        let view = GraphView()
+        let view = GraphView(frame: .zero, viewModel: nil)
         let lineWidth: CGFloat = 3
         view.layer.borderWidth = lineWidth
         

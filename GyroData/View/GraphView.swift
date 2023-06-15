@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 final class GraphView: UIView {
 
@@ -16,7 +17,11 @@ final class GraphView: UIView {
     private var graphPathY: UIBezierPath?
     private var graphPathZ: UIBezierPath?
     
-    override init(frame: CGRect) {
+    private let viewModel: TimerModel?
+    private var cancellables = Set<AnyCancellable>()
+    
+    init(frame: CGRect, viewModel: TimerModel?) {
+        self.viewModel = viewModel
         super.init(frame: frame)
         self.backgroundColor = .white
         setUpGraphLayerX()
@@ -58,6 +63,54 @@ final class GraphView: UIView {
         layer.addSublayer(graphLayer)
     }
     
+    private func drawLine(by standard: Int, _ pointX: CGPoint, _ pointY: CGPoint, _ pointZ: CGPoint) {
+        if standard == 0 {
+            graphPathX?.move(to: pointX)
+            graphPathY?.move(to: pointY)
+            graphPathZ?.move(to: pointZ)
+        } else {
+            graphPathX?.addLine(to: pointX)
+            graphPathY?.addLine(to: pointY)
+            graphPathZ?.addLine(to: pointZ)
+        }
+    }
+    
+    private func matchPath() {
+        graphLayerX?.path = graphPathX?.cgPath
+        graphLayerY?.path = graphPathY?.cgPath
+        graphLayerZ?.path = graphPathZ?.cgPath
+    }
+    
+    private func setUpPoints(with data: [ThreeAxisValue], standard: Int, midY: CGFloat, spacing: CGFloat) {
+        let valueX: CGFloat = data[standard].valueX
+        
+        var valueY: CGFloat = 0
+        
+        if (midY + valueY) >= midY * 2 || (midY + valueY) <= 0 {
+            valueY = valueY + (valueY * 0.2)
+        } else {
+            valueY = data[standard].valueY
+        }
+    
+        let valueZ: CGFloat = data[standard].valueZ
+        let pointX = CGPoint(x: CGFloat(standard) * spacing, y: midY + valueX - 5)
+        let pointY = CGPoint(x: CGFloat(standard) * spacing, y: midY + valueY)
+        let pointZ = CGPoint(x: CGFloat(standard) * spacing, y: midY + valueZ + 5)
+        
+        drawLine(by: standard, pointX, pointY, pointZ)
+    }
+    
+    private func isStopButtonTapped(_ timer: Timer) {
+        viewModel?.isStop
+            .map { $0 == true }
+            .sink { _ in
+                timer.invalidate()
+            }
+            .store(in: &cancellables)
+    }
+}
+
+extension GraphView {
     func drawGraph(with data: [ThreeAxisValue]) {
         graphPathX = UIBezierPath()
         graphPathY = UIBezierPath()
@@ -95,49 +148,13 @@ final class GraphView: UIView {
                 timer.invalidate()
                 return
             }
-            
+            self?.isStopButtonTapped(timer)
+            self?.viewModel?.startTimer()
             self?.setUpPoints(with: data, standard: currentIndex, midY: midY, spacing: spacing)
             currentIndex += 1
             self?.matchPath()
         }
         
         RunLoop.current.add(animationTimer, forMode: .common)
-    }
-    
-    private func drawLine(by standard: Int, _ pointX: CGPoint, _ pointY: CGPoint, _ pointZ: CGPoint) {
-        if standard == 0 {
-            graphPathX?.move(to: pointX)
-            graphPathY?.move(to: pointY)
-            graphPathZ?.move(to: pointZ)
-        } else {
-            graphPathX?.addLine(to: pointX)
-            graphPathY?.addLine(to: pointY)
-            graphPathZ?.addLine(to: pointZ)
-        }
-    }
-    
-    private func matchPath() {
-        graphLayerX?.path = graphPathX?.cgPath
-        graphLayerY?.path = graphPathY?.cgPath
-        graphLayerZ?.path = graphPathZ?.cgPath
-    }
-    
-    private func setUpPoints(with data: [ThreeAxisValue], standard: Int, midY: CGFloat, spacing: CGFloat) {
-        let valueX: CGFloat = data[standard].valueX
-        
-        var valueY: CGFloat = 0
-        
-        if (midY + valueY) >= midY * 2 || (midY + valueY) <= 0 {
-            valueY = valueY + (valueY * 0.2)
-        } else {
-            valueY = data[standard].valueY
-        }
-    
-        let valueZ: CGFloat = data[standard].valueZ
-        let pointX = CGPoint(x: CGFloat(standard) * spacing, y: midY + valueX - 5)
-        let pointY = CGPoint(x: CGFloat(standard) * spacing, y: midY + valueY)
-        let pointZ = CGPoint(x: CGFloat(standard) * spacing, y: midY + valueZ + 5)
-        
-        drawLine(by: standard, pointX, pointY, pointZ)
     }
 }

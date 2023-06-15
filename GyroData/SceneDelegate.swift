@@ -15,7 +15,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
         
-        let detailViewModel = DetailViewModel()
+        let timerViewModel = TimerModel()
+        let detailViewModel = DetailViewModel(timerViewModel: timerViewModel)
         let measureViewModel = MeasureViewModel()
         let gyroListViewModel = GyroDataListViewModel(measureViewModel: measureViewModel)
         
