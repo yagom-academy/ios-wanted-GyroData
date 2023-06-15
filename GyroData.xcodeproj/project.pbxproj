@@ -30,6 +30,7 @@
 		AAD598712A3AE13100E4385D /* GyroEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD5986F2A3AE13100E4385D /* GyroEntity+CoreDataClass.swift */; };
 		AAD598742A3AE2D500E4385D /* DataTransferObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD598732A3AE2D500E4385D /* DataTransferObject.swift */; };
 		AAD598762A3AE82F00E4385D /* DataAccessObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD598752A3AE82F00E4385D /* DataAccessObject.swift */; };
+		AAD598782A3AE90300E4385D /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD598772A3AE90300E4385D /* CoreDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +59,7 @@
 		AAD5986F2A3AE13100E4385D /* GyroEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GyroEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		AAD598732A3AE2D500E4385D /* DataTransferObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTransferObject.swift; sourceTree = "<group>"; };
 		AAD598752A3AE82F00E4385D /* DataAccessObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataAccessObject.swift; sourceTree = "<group>"; };
+		AAD598772A3AE90300E4385D /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,6 +204,7 @@
 			children = (
 				AAD5984B2A3991EF00E4385D /* CoreData.xcdatamodeld */,
 				AAD5986F2A3AE13100E4385D /* GyroEntity+CoreDataClass.swift */,
+				AAD598772A3AE90300E4385D /* CoreDataManager.swift */,
 			);
 			path = Database;
 			sourceTree = "<group>";
@@ -286,6 +289,7 @@
 				AA51FF022A372CBF00C1888F /* GyroData.swift in Sources */,
 				AA51FF092A37302B00C1888F /* LimitedQueue.swift in Sources */,
 				AA51FF1D2A38385300C1888F /* GraphView.swift in Sources */,
+				AAD598782A3AE90300E4385D /* CoreDataManager.swift in Sources */,
 				AA51FF122A37585E00C1888F /* GyroListCell.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
