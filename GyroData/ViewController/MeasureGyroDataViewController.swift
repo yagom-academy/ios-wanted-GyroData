@@ -34,10 +34,17 @@ final class MeasureGyroDataViewController: UIViewController {
         return activityIndicator
     }()
     
-    private let graphView: GraphView = {
-        let view = GraphView(frame: .zero, viewModel: nil)
+    private let borderView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
         let lineWidth: CGFloat = 3
         view.layer.borderWidth = lineWidth
+        
+        return view
+    }()
+    
+    private lazy var graphView: GraphView = {
+        let view = GraphView(frame: .zero, viewModel: nil)
         
         return view
     }()
@@ -163,8 +170,9 @@ final class MeasureGyroDataViewController: UIViewController {
     
     private func setUpUI() {
         view.addSubview(segmentedControl)
-        view.addSubview(graphView)
+        view.addSubview(borderView)
         view.addSubview(labelStackView)
+        borderView.addSubview(graphView)
         labelStackView.addArrangedSubview(measurementButton)
         labelStackView.addArrangedSubview(stopButton)
 
@@ -174,8 +182,10 @@ final class MeasureGyroDataViewController: UIViewController {
         let trailing: CGFloat = -30
         let contentsTop: CGFloat = 20
         let bottom: CGFloat = -140
+        let graphViewAllConstant: CGFloat = 5
         
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
+        borderView.translatesAutoresizingMaskIntoConstraints = false
         graphView.translatesAutoresizingMaskIntoConstraints = false
         labelStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -183,10 +193,15 @@ final class MeasureGyroDataViewController: UIViewController {
             segmentedControl.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: leading),
             segmentedControl.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: trailing),
             
-            graphView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: contentsTop),
-            graphView.leadingAnchor.constraint(equalTo: segmentedControl.leadingAnchor),
-            graphView.trailingAnchor.constraint(equalTo: segmentedControl.trailingAnchor),
-            graphView.widthAnchor.constraint(equalTo: graphView.heightAnchor),
+            borderView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: contentsTop),
+            borderView.leadingAnchor.constraint(equalTo: segmentedControl.leadingAnchor),
+            borderView.trailingAnchor.constraint(equalTo: segmentedControl.trailingAnchor),
+            borderView.widthAnchor.constraint(equalTo: borderView.heightAnchor),
+            
+            graphView.topAnchor.constraint(equalTo: borderView.topAnchor, constant: graphViewAllConstant),
+            graphView.leadingAnchor.constraint(equalTo: borderView.leadingAnchor, constant: graphViewAllConstant),
+            graphView.trailingAnchor.constraint(equalTo: borderView.trailingAnchor, constant: graphViewAllConstant * -1),
+            graphView.bottomAnchor.constraint(equalTo: borderView.bottomAnchor, constant: graphViewAllConstant * -1),
             
             labelStackView.topAnchor.constraint(equalTo: graphView.bottomAnchor, constant: contentsTop),
             labelStackView.leadingAnchor.constraint(equalTo: segmentedControl.leadingAnchor),
