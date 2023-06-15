@@ -25,4 +25,8 @@ final class GyroListViewModel {
         
         return (formattedDate, formattedDuration, formattedDataType)
     }
+    
+    func deleteGyroData(at index: Int) {
+        gyroDataManager.delete(at: index)
+    }
 }

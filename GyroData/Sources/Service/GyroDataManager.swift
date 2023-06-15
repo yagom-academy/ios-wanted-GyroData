@@ -38,6 +38,16 @@ final class GyroDataManager {
         let fetchedData = getModels(from: entityList)
         gyroDataList.append(contentsOf: fetchedData)
     }
+    
+    func delete(at index: Int) {
+        guard let selectedData = gyroDataList[safe: index] else { return }
+        
+        gyroDataList.removeAll { gyroData in
+            gyroData.identifier == selectedData.identifier
+        }
+        
+        coreDataManager.delete(type: GyroEntity.self, data: selectedData)
+    }
 }
 
 extension GyroDataManager {

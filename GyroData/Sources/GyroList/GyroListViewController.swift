@@ -59,6 +59,7 @@ final class GyroListViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(GyroListCell.self, forCellReuseIdentifier: GyroListCell.reuseIdentifier)
         tableView.dataSource = dataSource
+        tableView.delegate = self
         
         view.addSubview(tableView)
     }
@@ -108,5 +109,27 @@ final class GyroListViewController: UIViewController {
         snapshot.appendItems(gyroDataList)
 
         dataSource?.apply(snapshot, animatingDifferences: true)
+    }
+}
+
+// MARK: - Table view delegate
+extension GyroListViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+    }
+    
+    func tableView(_ tableView: UITableView,
+                   trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let play = UIContextualAction(style: .normal, title: "Play") { [weak self] _, _, _ in
+
+        }
+        
+        play.backgroundColor = .systemGreen
+        
+        let delete = UIContextualAction(style: .destructive, title: "Delete") { [weak self] _, _, _ in
+            self?.viewModel.deleteGyroData(at: indexPath.item)
+        }
+        
+        return UISwipeActionsConfiguration(actions: [delete, play])
     }
 }
