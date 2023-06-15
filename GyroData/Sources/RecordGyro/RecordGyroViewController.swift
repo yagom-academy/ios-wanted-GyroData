@@ -156,6 +156,7 @@ final class RecordGyroViewController: UIViewController {
     private func bind() {
         viewModel.gyroRecorderStatusPublisher()
             .receive(on: DispatchQueue.main)
+            .dropFirst()
             .sink { [weak self] isUpdating in
                 self?.navigationItem.rightBarButtonItem?.isEnabled = !isUpdating
                 self?.segmentedControl.isEnabled = !isUpdating
