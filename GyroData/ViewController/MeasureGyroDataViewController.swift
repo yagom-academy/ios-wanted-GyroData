@@ -14,7 +14,6 @@ final class MeasureGyroDataViewController: UIViewController {
     private var cancellables = Set<AnyCancellable>()
     
     private var threeAxisData: [ThreeAxisValue]?
-//    private var gyroThreeAxisData: [ThreeAxisValue]?
     
     private var totalTime: Double = 00.0
     private var selectedSensor: SensorType = .accelerometer
@@ -28,7 +27,7 @@ final class MeasureGyroDataViewController: UIViewController {
        let activityIndicator = UIActivityIndicatorView()
         activityIndicator.center = view.center
         activityIndicator.style = UIActivityIndicatorView.Style.large
-        activityIndicator.color = .systemGreen
+        activityIndicator.color = .systemGray
         activityIndicator.hidesWhenStopped = true
         
         return activityIndicator
@@ -215,14 +214,14 @@ final class MeasureGyroDataViewController: UIViewController {
         stopButton.addTarget(self, action: #selector(stopMeasure), for: .touchUpInside)
     }
     
-    private func showAlert(_ title: String) {
-        let message = "다시 확인해주세요."
+    private func showAlert(_ title: String, _ message: String) {
         let okSign = "확인"
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: okSign, style: .default)
-        
-        alert.addAction(okAction)
-        present(alert, animated: true)
+        AlertBuilder(viewController: self)
+            .withTitle(title)
+            .andMessage(message)
+            .preferredStyle(.alert)
+            .onSuccessAction(title: okSign) { _ in }
+            .showAlert()
     }
 }
 
@@ -240,6 +239,9 @@ extension MeasureGyroDataViewController {
     }
     
     @objc private func startMeasure() {
+        let title = "측정을 시작했습니다!"
+        let message = "측정이 완료되면 버튼이 활성화됩니다. \n 잠시만 기다려주세요."
+        showAlert(title, message)
         viewModel.startMeasure(by: selectedSensor)
         bindIsProcessing()
     }
@@ -271,7 +273,8 @@ extension MeasureGyroDataViewController {
             bindIsSaveFailure()
         } else {
             let title = "측정된 데이터가 없습니다."
-            showAlert(title)
+            let message = "다시 확인해주세요."
+            showAlert(title, message)
         }
     }
     
@@ -280,10 +283,8 @@ extension MeasureGyroDataViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] bool in
                 if bool == true {
-                print("인디케이터시작")
                     self?.activityIndicator.startAnimating()
                 } else {
-                    print("인디케이터종료")
                     self?.activityIndicator.stopAnimating()
                     self?.navigationController?.popViewController(animated: true)
                 }
@@ -297,7 +298,8 @@ extension MeasureGyroDataViewController {
             .sink { [weak self] bool, error in
                 if bool == true {
                     let title = "\(error)로 인해 저장을 실패하였습니다."
-                    self?.showAlert(title)
+                    let message = "다시 확인해주세요."
+                    self?.showAlert(title, message)
                     self?.activityIndicator.stopAnimating()
                 }
             }

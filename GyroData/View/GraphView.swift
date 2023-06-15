@@ -152,7 +152,7 @@ extension GraphView {
         let width = self.bounds.width
         let midY = height / 2
         
-        let totalDataPoints = data.count
+        let totalDataPoints = 600
         let spacing = width / CGFloat(totalDataPoints - 1)
         
         for i in 0..<data.count {
@@ -170,7 +170,7 @@ extension GraphView {
         let width = self.bounds.width
         let midY = height / 2
 
-        let totalDataPoints = data.count
+        let totalDataPoints = 600
         let spacing = width / CGFloat(totalDataPoints - 1)
         
         var currentIndex = 0

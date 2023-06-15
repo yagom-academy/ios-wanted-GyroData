@@ -32,6 +32,9 @@
 		FB42DFF62A39E37E00238381 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB42DFF52A39E37E00238381 /* DetailViewModel.swift */; };
 		FB42DFF82A3A11C400238381 /* PlayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB42DFF72A3A11C400238381 /* PlayButton.swift */; };
 		FB42E0002A3B4C7300238381 /* TimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB42DFFF2A3B4C7300238381 /* TimerModel.swift */; };
+		FB42E0052A3B744700238381 /* AlertProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB42E0042A3B744700238381 /* AlertProperties.swift */; };
+		FB42E0072A3B749600238381 /* AlertBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB42E0062A3B749600238381 /* AlertBuilder.swift */; };
+		FB42E0092A3B74FC00238381 /* AlertActionProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB42E0082A3B74FC00238381 /* AlertActionProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +65,9 @@
 		FB42DFF52A39E37E00238381 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		FB42DFF72A3A11C400238381 /* PlayButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayButton.swift; sourceTree = "<group>"; };
 		FB42DFFF2A3B4C7300238381 /* TimerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerModel.swift; sourceTree = "<group>"; };
+		FB42E0042A3B744700238381 /* AlertProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertProperties.swift; sourceTree = "<group>"; };
+		FB42E0062A3B749600238381 /* AlertBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertBuilder.swift; sourceTree = "<group>"; };
+		FB42E0082A3B74FC00238381 /* AlertActionProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertActionProperties.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +142,7 @@
 		FB42DFC92A36E33500238381 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				FB42E0032A3B742E00238381 /* AlertBuilder */,
 				FB42DFCA2A36E35A00238381 /* GyroDataTableViewCell.swift */,
 				FB42DFDE2A38450700238381 /* GraphView.swift */,
 				FB42DFF72A3A11C400238381 /* PlayButton.swift */,
@@ -170,6 +177,16 @@
 				FB42DFF32A39E04F00238381 /* PageType.swift */,
 			);
 			path = Type;
+			sourceTree = "<group>";
+		};
+		FB42E0032A3B742E00238381 /* AlertBuilder */ = {
+			isa = PBXGroup;
+			children = (
+				FB42E0042A3B744700238381 /* AlertProperties.swift */,
+				FB42E0082A3B74FC00238381 /* AlertActionProperties.swift */,
+				FB42E0062A3B749600238381 /* AlertBuilder.swift */,
+			);
+			path = AlertBuilder;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -255,16 +272,19 @@
 				FB42DFF02A39D77A00238381 /* FileError.swift in Sources */,
 				FB42DFD42A37FE6000238381 /* GyroEntity+CoreDataClass.swift in Sources */,
 				FB42DFF22A39DA6A00238381 /* DetailViewController.swift in Sources */,
+				FB42E0052A3B744700238381 /* AlertProperties.swift in Sources */,
 				FB42DFD12A36FD2200238381 /* GyroCoreData.xcdatamodeld in Sources */,
 				FB42DFDB2A3809B800238381 /* GyroDataListViewModel.swift in Sources */,
 				FB42DFC62A36DF2900238381 /* SixAxisDataForJSON.swift in Sources */,
 				FB42DFDD2A380B5700238381 /* MeasureGyroDataViewController.swift in Sources */,
 				FB42DFF62A39E37E00238381 /* DetailViewModel.swift in Sources */,
+				FB42E0072A3B749600238381 /* AlertBuilder.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
 				FB42DFD52A37FE6000238381 /* GyroEntity+CoreDataProperties.swift in Sources */,
 				FB42DFD72A37FF4D00238381 /* CoreDataManager.swift in Sources */,
 				FB42DFE12A3862D200238381 /* MeasureViewModel.swift in Sources */,
 				FB42E0002A3B4C7300238381 /* TimerModel.swift in Sources */,
+				FB42E0092A3B74FC00238381 /* AlertActionProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
