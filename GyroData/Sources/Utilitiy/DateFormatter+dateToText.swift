@@ -16,7 +16,9 @@ extension DateFormatter {
         return dateFormatter
     }()
     
-    static func dateToText(_ date: Date) -> String {
+    static func dateToText(_ date: Date?) -> String? {
+        guard let date else { return nil }
+        
         return dateFormatter.string(from: date)
     }
 }

@@ -115,6 +115,15 @@ final class GyroListViewController: UIViewController {
 // MARK: - Table view delegate
 extension GyroListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let selectedItem = dataSource?.itemIdentifier(for: indexPath) else {
+            return
+        }
+        
+        let playGyroViewController = PlayGyroViewController(viewMode: .view,
+                                                            gyroData: selectedItem)
+        
+        navigationController?.pushViewController(playGyroViewController, animated: true)
+        
         tableView.deselectRow(at: indexPath, animated: false)
     }
     

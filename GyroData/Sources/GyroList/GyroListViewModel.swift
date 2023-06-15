@@ -16,7 +16,7 @@ final class GyroListViewModel {
             .eraseToAnyPublisher()
     }
     
-    func formatGyroDataToString(gyroData: GyroData) -> (date: String, duration: String, dataType: String)? {
+    func formatGyroDataToString(gyroData: GyroData) -> (date: String?, duration: String, dataType: String)? {
         guard let date = gyroData.date else { return nil }
         
         let formattedDate = DateFormatter.dateToText(date)

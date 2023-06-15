@@ -68,7 +68,7 @@ final class GyroListCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(date: String, type: String, duration: String) {
+    func configure(date: String?, type: String, duration: String) {
         dateLabel.text = date
         typeLabel.text = type
         durationLabel.text = duration
