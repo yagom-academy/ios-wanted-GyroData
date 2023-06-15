@@ -20,6 +20,38 @@ final class GraphView: UIView {
     private let viewModel: TimerModel?
     private var cancellables = Set<AnyCancellable>()
     
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        
+        guard let context = UIGraphicsGetCurrentContext() else {
+            return
+        }
+        
+        let lineColor = UIColor.lightGray.cgColor
+        let lineWidth: CGFloat = 0.5
+        let rowCount = 8
+        let columnCount = 8
+        
+        context.setStrokeColor(lineColor)
+        context.setLineWidth(lineWidth)
+        
+        let rowHeight = rect.height / CGFloat(rowCount)
+        for i in 0...rowCount {
+            let y = CGFloat(i) * rowHeight
+            context.move(to: CGPoint(x: 0, y: y))
+            context.addLine(to: CGPoint(x: rect.width, y: y))
+        }
+        context.strokePath()
+
+        let columnWidth = rect.width / CGFloat(columnCount)
+        for i in 0...columnCount {
+            let x = CGFloat(i) * columnWidth
+            context.move(to: CGPoint(x: x, y: 0))
+            context.addLine(to: CGPoint(x: x, y: rect.height))
+        }
+        context.strokePath()
+    }
+    
     init(frame: CGRect, viewModel: TimerModel?) {
         self.viewModel = viewModel
         super.init(frame: frame)

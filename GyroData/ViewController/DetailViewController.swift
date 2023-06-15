@@ -39,11 +39,17 @@ final class DetailViewController: UIViewController {
         return label
     }()
     
-    private lazy var graphView: GraphView = {
-        let view = GraphView(frame: .zero, viewModel: viewModel.timerViewModel)
+    private let borderView: UIView = {
+        let view = UIView()
         view.backgroundColor = .white
         let lineWidth: CGFloat = 3
         view.layer.borderWidth = lineWidth
+        
+        return view
+    }()
+    
+    private lazy var graphView: GraphView = {
+        let view = GraphView(frame: .zero, viewModel: viewModel.timerViewModel)
         
         return view
     }()
@@ -140,37 +146,44 @@ final class DetailViewController: UIViewController {
     
     private func setUpUI() {
         view.addSubview(labelStackView)
-        view.addSubview(graphView)
+        view.addSubview(borderView)
         view.addSubview(playStackView)
         labelStackView.addArrangedSubview(dateLabel)
         labelStackView.addArrangedSubview(pageTypeLabel)
+        borderView.addSubview(graphView)
         playStackView.addArrangedSubview(playButton)
         playStackView.addArrangedSubview(timerLabel)
         
         let safeArea = view.safeAreaLayoutGuide
-        let leading: CGFloat = 30
-        let trailing: CGFloat = -30
+        let labelStackViewHorizontal: CGFloat = 30
         let bottom: CGFloat = -280
         let top: CGFloat = 10
         let playStackViewTop: CGFloat = 20
         let playStackViewLeading: CGFloat = 150
+        let graphViewAllConstant: CGFloat = 5
     
         labelStackView.translatesAutoresizingMaskIntoConstraints = false
+        borderView.translatesAutoresizingMaskIntoConstraints = false
         graphView.translatesAutoresizingMaskIntoConstraints = false
         playStackView.translatesAutoresizingMaskIntoConstraints = false
         playButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             labelStackView.topAnchor.constraint(equalTo: safeArea.topAnchor),
-            labelStackView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: leading),
-            labelStackView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: trailing),
+            labelStackView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: labelStackViewHorizontal),
+            labelStackView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: labelStackViewHorizontal * -1),
             
-            graphView.topAnchor.constraint(equalTo: labelStackView.bottomAnchor, constant: top),
-            graphView.leadingAnchor.constraint(equalTo: labelStackView.leadingAnchor),
-            graphView.trailingAnchor.constraint(equalTo: labelStackView.trailingAnchor),
-            graphView.widthAnchor.constraint(equalTo: graphView.heightAnchor),
+            borderView.topAnchor.constraint(equalTo: labelStackView.bottomAnchor, constant: top),
+            borderView.leadingAnchor.constraint(equalTo: labelStackView.leadingAnchor),
+            borderView.trailingAnchor.constraint(equalTo: labelStackView.trailingAnchor),
+            borderView.widthAnchor.constraint(equalTo: borderView.heightAnchor),
             
-            playStackView.topAnchor.constraint(equalTo: graphView.bottomAnchor, constant: playStackViewTop),
+            graphView.topAnchor.constraint(equalTo: borderView.topAnchor, constant: graphViewAllConstant),
+            graphView.leadingAnchor.constraint(equalTo: borderView.leadingAnchor, constant: graphViewAllConstant),
+            graphView.trailingAnchor.constraint(equalTo: borderView.trailingAnchor, constant: graphViewAllConstant * -1),
+            graphView.bottomAnchor.constraint(equalTo: borderView.bottomAnchor, constant: graphViewAllConstant * -1),
+            
+            playStackView.topAnchor.constraint(equalTo: borderView.bottomAnchor, constant: playStackViewTop),
             playStackView.leadingAnchor.constraint(equalTo: labelStackView.leadingAnchor, constant: playStackViewLeading),
             playStackView.trailingAnchor.constraint(equalTo: labelStackView.trailingAnchor),
             playButton.widthAnchor.constraint(equalTo: playButton.heightAnchor),
