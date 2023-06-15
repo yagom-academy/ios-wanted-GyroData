@@ -125,7 +125,7 @@ extension GyroDataListViewController: UITableViewDelegate {
               let id = gyroEntity.id else { return nil }
         
         let play = "Play"
-        let playAction = UIContextualAction(style: .normal, title: play) { [weak self] _, _, _ in
+        let playAction = UIContextualAction(style: .normal, title: play) { [weak self] _, _, completion in
             guard let self = self else { return }
             
             let data = self.viewModel.read(at: indexPath)
@@ -133,12 +133,14 @@ extension GyroDataListViewController: UITableViewDelegate {
             
             self.detailViewModel.addData(data)
             navigationController?.pushViewController(detailViewController, animated: true)
+            completion(true)
         }
         playAction.backgroundColor = .systemGreen
         
         let delete = "Delete"
-        let deleteAction = UIContextualAction(style: .normal, title: delete) { [weak self] _, _, _ in
+        let deleteAction = UIContextualAction(style: .normal, title: delete) { [weak self] _, _, completion in
             self?.viewModel.delete(by: id)
+            completion(true)
         }
         deleteAction.backgroundColor = .red
 
