@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct GyroData {
+struct GyroData: DataTransferObject {
     enum DataType: Int {
         case accelerometer = 0
         case gyro = 1
@@ -22,7 +22,7 @@ struct GyroData {
         }
     }
     
-    private let identifier: UUID
+    let identifier: UUID
     let dataType: DataType
     var coordinateList = [Coordinate]()
     var date: Date?

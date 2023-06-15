@@ -27,6 +27,8 @@
 		AA51FF1D2A38385300C1888F /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA51FF1C2A38385300C1888F /* GraphView.swift */; };
 		AAD598492A39752400E4385D /* DateFormatter+dateToText.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD598482A39752400E4385D /* DateFormatter+dateToText.swift */; };
 		AAD5984D2A3991EF00E4385D /* CoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AAD5984B2A3991EF00E4385D /* CoreData.xcdatamodeld */; };
+		AAD598712A3AE13100E4385D /* GyroEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD5986F2A3AE13100E4385D /* GyroEntity+CoreDataClass.swift */; };
+		AAD598742A3AE2D500E4385D /* DataTransferObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD598732A3AE2D500E4385D /* DataTransferObject.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +54,8 @@
 		AA51FF1C2A38385300C1888F /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		AAD598482A39752400E4385D /* DateFormatter+dateToText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+dateToText.swift"; sourceTree = "<group>"; };
 		AAD5984C2A3991EF00E4385D /* CoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreData.xcdatamodel; sourceTree = "<group>"; };
+		AAD5986F2A3AE13100E4385D /* GyroEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GyroEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		AAD598732A3AE2D500E4385D /* DataTransferObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTransferObject.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +101,7 @@
 			children = (
 				AA51FF032A372D3C00C1888F /* Coordinate.swift */,
 				AA51FF012A372CBF00C1888F /* GyroData.swift */,
+				AAD598732A3AE2D500E4385D /* DataTransferObject.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -193,6 +198,7 @@
 			isa = PBXGroup;
 			children = (
 				AAD5984B2A3991EF00E4385D /* CoreData.xcdatamodeld */,
+				AAD5986F2A3AE13100E4385D /* GyroEntity+CoreDataClass.swift */,
 			);
 			path = Database;
 			sourceTree = "<group>";
@@ -273,12 +279,14 @@
 				AA51FEFE2A37292400C1888F /* GyroRecorder.swift in Sources */,
 				AA51FF192A3812F800C1888F /* GyroSegmentedControl.swift in Sources */,
 				63F01BB928D44FC400C53A39 /* GyroListViewController.swift in Sources */,
+				AAD598712A3AE13100E4385D /* GyroEntity+CoreDataClass.swift in Sources */,
 				AA51FF022A372CBF00C1888F /* GyroData.swift in Sources */,
 				AA51FF092A37302B00C1888F /* LimitedQueue.swift in Sources */,
 				AA51FF1D2A38385300C1888F /* GraphView.swift in Sources */,
 				AA51FF122A37585E00C1888F /* GyroListCell.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
+				AAD598742A3AE2D500E4385D /* DataTransferObject.swift in Sources */,
 				AA51FF172A375D7000C1888F /* GyroListViewModel.swift in Sources */,
 				AA51FF1B2A38238200C1888F /* RecordGyroViewModel.swift in Sources */,
 				AA51FF042A372D3C00C1888F /* Coordinate.swift in Sources */,
