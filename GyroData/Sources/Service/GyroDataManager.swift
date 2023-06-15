@@ -65,9 +65,11 @@ extension GyroDataManager {
         var gyroData = GyroData(dataType: dataType, identifier: identifier)
         
         for index in 0..<axisX.count {
-            let coordinate = Coordinate(x: axisX[index],
-                                        y: axisY[index],
-                                        z: axisZ[index])
+            guard let x = axisX[safe: index],
+                  let y = axisY[safe: index],
+                  let z = axisZ[safe: index] else { continue }
+            
+            let coordinate = Coordinate(x: x, y: y, z: z)
             
             gyroData.coordinateList.append(coordinate)
         }

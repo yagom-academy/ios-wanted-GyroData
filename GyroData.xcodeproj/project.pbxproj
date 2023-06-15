@@ -31,6 +31,7 @@
 		AAD598742A3AE2D500E4385D /* DataTransferObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD598732A3AE2D500E4385D /* DataTransferObject.swift */; };
 		AAD598762A3AE82F00E4385D /* DataAccessObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD598752A3AE82F00E4385D /* DataAccessObject.swift */; };
 		AAD598782A3AE90300E4385D /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD598772A3AE90300E4385D /* CoreDataManager.swift */; };
+		AAD5987A2A3AF66500E4385D /* Array+subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD598792A3AF66500E4385D /* Array+subscript.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		AAD598732A3AE2D500E4385D /* DataTransferObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTransferObject.swift; sourceTree = "<group>"; };
 		AAD598752A3AE82F00E4385D /* DataAccessObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataAccessObject.swift; sourceTree = "<group>"; };
 		AAD598772A3AE90300E4385D /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		AAD598792A3AF66500E4385D /* Array+subscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+subscript.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,6 +197,7 @@
 			isa = PBXGroup;
 			children = (
 				AAD598482A39752400E4385D /* DateFormatter+dateToText.swift */,
+				AAD598792A3AF66500E4385D /* Array+subscript.swift */,
 			);
 			path = Utilitiy;
 			sourceTree = "<group>";
@@ -284,6 +287,7 @@
 				AAD5984D2A3991EF00E4385D /* CoreData.xcdatamodeld in Sources */,
 				AA51FEFE2A37292400C1888F /* GyroRecorder.swift in Sources */,
 				AA51FF192A3812F800C1888F /* GyroSegmentedControl.swift in Sources */,
+				AAD5987A2A3AF66500E4385D /* Array+subscript.swift in Sources */,
 				63F01BB928D44FC400C53A39 /* GyroListViewController.swift in Sources */,
 				AAD598712A3AE13100E4385D /* GyroEntity+CoreDataClass.swift in Sources */,
 				AA51FF022A372CBF00C1888F /* GyroData.swift in Sources */,
