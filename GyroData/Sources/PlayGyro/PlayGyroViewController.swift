@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import Combine
 
-class PlayGyroViewController: UIViewController {
+final class PlayGyroViewController: UIViewController {
     enum Mode {
         case play
         case view
@@ -42,21 +43,22 @@ class PlayGyroViewController: UIViewController {
         stackView.distribution = .fill
         stackView.axis = .vertical
         stackView.spacing = 8
-        stackView.translatesAutoresizingMaskIntoConstraints = false
         
         return stackView
     }()
     
     private let dateLabel = UILabel()
     private let titleLabel = UILabel()
-    private let graphView: GraphView
+    private let graphView = GraphView()
     private let gyroData: GyroData
-    private let mode: Mode
+    private let viewMode: Mode
+    private let viewModel: PlayGyroViewModel
+    private var subscriptions = Set<AnyCancellable>()
     
     init(viewMode: PlayGyroViewController.Mode, gyroData: GyroData) {
-        mode = viewMode
-        graphView = GraphView(gyroData: gyroData)
+        self.viewMode = viewMode
         self.gyroData = gyroData
+        viewModel = PlayGyroViewModel(gyrodata: gyroData)
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -72,6 +74,7 @@ class PlayGyroViewController: UIViewController {
         setupDateLabel()
         setupTitleLabel()
         layout()
+        drawGraph()
     }
     
     private func setupView() {
@@ -89,7 +92,7 @@ class PlayGyroViewController: UIViewController {
     }
     
     private func setupTitleLabel() {
-        titleLabel.text = mode.description
+        titleLabel.text = viewMode.description
         titleLabel.textAlignment = .left
         titleLabel.font = .preferredFont(forTextStyle: .largeTitle)
     }
@@ -105,5 +108,23 @@ class PlayGyroViewController: UIViewController {
             graphView.widthAnchor.constraint(equalTo: stackView.widthAnchor),
             graphView.heightAnchor.constraint(equalTo: stackView.widthAnchor)
         ])
+    }
+    
+    private func drawGraph() {
+        switch viewMode {
+        case .view:
+            graphView.configureUI(gyroData: gyroData)
+        case .play:
+            bind()
+            viewModel.play()
+        }
+    }
+        
+    private func bind() {
+        viewModel.playingGyroDataPublisher()
+            .sink { [weak self] gyroData in
+                self?.graphView.configureUI(gyroData: gyroData)
+            }
+            .store(in: &subscriptions)
     }
 }

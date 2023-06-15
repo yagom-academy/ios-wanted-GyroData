@@ -18,6 +18,7 @@ final class GyroSegmentedControl: UISegmentedControl {
         selectedSegmentTintColor = UIColor(red: 0.4, green: 0.6, blue: 0.8, alpha: 1)
         
         selectedSegmentIndex = 0
+        layer.borderWidth = 2.0
     }
     
     required init?(coder: NSCoder) {
@@ -27,7 +28,7 @@ final class GyroSegmentedControl: UISegmentedControl {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        layer.borderWidth = 2.0
-        layer.cornerRadius = 0.0
+//        layer.borderWidth = 2.0
+//        layer.cornerRadius = 0.0
     }
 }

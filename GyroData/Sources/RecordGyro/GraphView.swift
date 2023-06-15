@@ -54,9 +54,7 @@ class GraphView: UIView {
         drawSectionHeight / (maximumY * 2)
     }
 
-    init(gyroData: GyroData? = nil) {
-        self.gyroData = gyroData
-        
+    init() {        
         super.init(frame: .zero)
         
         setupView()

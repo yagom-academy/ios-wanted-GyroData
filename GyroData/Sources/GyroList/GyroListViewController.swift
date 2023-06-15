@@ -115,14 +115,7 @@ final class GyroListViewController: UIViewController {
 // MARK: - Table view delegate
 extension GyroListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let selectedItem = dataSource?.itemIdentifier(for: indexPath) else {
-            return
-        }
-        
-        let playGyroViewController = PlayGyroViewController(viewMode: .view,
-                                                            gyroData: selectedItem)
-        
-        navigationController?.pushViewController(playGyroViewController, animated: true)
+        showPlayGyro(seletedIndexPath: indexPath, viewMode: .view)
         
         tableView.deselectRow(at: indexPath, animated: false)
     }
@@ -130,7 +123,7 @@ extension GyroListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView,
                    trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let play = UIContextualAction(style: .normal, title: "Play") { [weak self] _, _, _ in
-
+            self?.showPlayGyro(seletedIndexPath: indexPath, viewMode: .play)
         }
         
         play.backgroundColor = .systemGreen
@@ -140,5 +133,16 @@ extension GyroListViewController: UITableViewDelegate {
         }
         
         return UISwipeActionsConfiguration(actions: [delete, play])
+    }
+    
+    private func showPlayGyro(seletedIndexPath: IndexPath, viewMode: PlayGyroViewController.Mode) {
+        guard let selectedItem = dataSource?.itemIdentifier(for: seletedIndexPath) else {
+            return
+        }
+        
+        let playGyroViewController = PlayGyroViewController(viewMode: viewMode,
+                                                            gyroData: selectedItem)
+        
+        navigationController?.pushViewController(playGyroViewController, animated: true)
     }
 }
