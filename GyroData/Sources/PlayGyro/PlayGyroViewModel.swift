@@ -26,4 +26,9 @@ final class PlayGyroViewModel {
     func playingGyroDataPublisher() -> AnyPublisher<GyroData, Never> {
         return gyroPlayer.playingGyroDataPublisher()
     }
+    
+    func isFinishedPublsher() -> AnyPublisher<Bool, Never> {
+        return gyroPlayer.$isFinished
+            .eraseToAnyPublisher()
+    }
 }

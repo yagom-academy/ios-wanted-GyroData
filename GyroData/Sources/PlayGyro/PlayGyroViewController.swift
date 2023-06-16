@@ -166,5 +166,14 @@ final class PlayGyroViewController: UIViewController {
                 }
             }
             .store(in: &subscriptions)
+        
+        viewModel.isFinishedPublsher()
+            .dropFirst()
+            .sink { [weak self] isFinished in
+                if isFinished {
+                    self?.playControlView.touchUpPlayOrStop()
+                }
+            }
+            .store(in: &subscriptions)
     }
 }

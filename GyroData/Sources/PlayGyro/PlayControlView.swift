@@ -88,7 +88,7 @@ final class PlayControlView: UIView {
         playOrStopButton.addTarget(self, action: #selector(touchUpPlayOrStop), for: .touchUpInside)
     }
     
-    @objc private func touchUpPlayOrStop() {
+    @objc func touchUpPlayOrStop() {
         isPlaying.toggle()
         playOrStopButton.setImage(buttonImage, for: .normal)
     }

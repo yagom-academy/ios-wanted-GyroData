@@ -8,13 +8,14 @@
 import Foundation
 import Combine
 
-final class GyroPlayer {
+final class GyroPlayer: PlayingStatusObservable {
     enum Constant {
         static let interval = 0.1
     }
     
     private let originalGyroData: GyroData
     @Published private var playingGyroData: GyroData
+    @Published var isFinished = false
     private var subscription: AnyCancellable?
     
     private var startIndex: Int
@@ -30,6 +31,8 @@ final class GyroPlayer {
     }
     
     func play() {
+        isFinished = false
+        resetCurrentData()
         bindToTimer()
     }
     
@@ -42,6 +45,17 @@ final class GyroPlayer {
         return $playingGyroData.eraseToAnyPublisher()
     }
     
+    func isPlayingPublisher() -> AnyPublisher<Bool, Never> {
+        return $isFinished.eraseToAnyPublisher()
+    }
+    
+    private func resetCurrentData() {
+        startIndex = originalGyroData.coordinateList.startIndex
+        playingGyroData = originalGyroData
+        playingGyroData.coordinateList = []
+        playingGyroData.duration = 0.0
+    }
+    
     private func bindToTimer() {
         let interval = Constant.interval
         
@@ -50,7 +64,8 @@ final class GyroPlayer {
             .sink { [weak self] _ in
                 guard let index = self?.startIndex,
                       let selectedData = self?.originalGyroData.coordinateList[safe: index] else {
-                    self?.subscription?.cancel()
+                    self?.pause()
+                    self?.isFinished = true
                     
                     return
                 }
@@ -59,4 +74,8 @@ final class GyroPlayer {
                 self?.playingGyroData.add(selectedData, interval: interval)
             }
     }
+}
+
+protocol PlayingStatusObservable {
+    var isFinished: Bool { get }
 }
