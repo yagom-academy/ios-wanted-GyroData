@@ -16,6 +16,11 @@ final class GyroListViewModel {
             .eraseToAnyPublisher()
     }
     
+    func isNoMoreDataPublisher() -> AnyPublisher<Bool, Never> {
+        return gyroDataManager.$isNoMoreData
+            .eraseToAnyPublisher()
+    }
+    
     func formatGyroDataToString(gyroData: GyroData) -> (date: String?, duration: String, dataType: String)? {
         guard let date = gyroData.date else { return nil }
         
@@ -28,5 +33,9 @@ final class GyroListViewModel {
     
     func deleteGyroData(at index: Int) {
         gyroDataManager.delete(at: index)
+    }
+    
+    func requestFetch() {
+        gyroDataManager.read()
     }
 }

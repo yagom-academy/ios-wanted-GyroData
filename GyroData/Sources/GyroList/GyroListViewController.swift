@@ -13,10 +13,13 @@ final class GyroListViewController: UIViewController {
         case main
     }
     
+    private let loadingIndicatorView = UIActivityIndicatorView(style: .large)
     private let tableView = UITableView()
     private var dataSource: UITableViewDiffableDataSource<Section, GyroData>?
     private let viewModel = GyroListViewModel()
     private var subscriptions = Set<AnyCancellable>()
+    private var isPaging = false
+    private var isNoMoreData = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +27,7 @@ final class GyroListViewController: UIViewController {
         setupView()
         setupNavigationItems()
         setupTableView()
+        setupLoadingIndicatorView()
         layout()
         setupDataSource()
         bind()
@@ -55,6 +59,12 @@ final class GyroListViewController: UIViewController {
         navigationController?.pushViewController(recordGyroViewController, animated: true)
     }
     
+    private func setupLoadingIndicatorView() {
+        loadingIndicatorView.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(loadingIndicatorView)
+    }
+    
     private func setupTableView() {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(GyroListCell.self, forCellReuseIdentifier: GyroListCell.reuseIdentifier)
@@ -71,7 +81,12 @@ final class GyroListViewController: UIViewController {
             tableView.topAnchor.constraint(equalTo: safe.topAnchor, constant: 8),
             tableView.leadingAnchor.constraint(equalTo: safe.leadingAnchor, constant: 8),
             tableView.trailingAnchor.constraint(equalTo: safe.trailingAnchor, constant: -8),
-            tableView.bottomAnchor.constraint(equalTo: safe.bottomAnchor, constant: -8)
+            tableView.bottomAnchor.constraint(equalTo: safe.bottomAnchor, constant: -8),
+            
+            loadingIndicatorView.centerXAnchor.constraint(equalTo: safe.centerXAnchor),
+            loadingIndicatorView.bottomAnchor.constraint(equalTo: safe.bottomAnchor),
+            loadingIndicatorView.widthAnchor.constraint(equalTo: safe.widthAnchor, multiplier: 0.4),
+            loadingIndicatorView.heightAnchor.constraint(equalTo: safe.widthAnchor, multiplier: 0.4)
         ])
     }
     
@@ -98,7 +113,13 @@ final class GyroListViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] gyroDataList in
                 self?.applyVideoListCellSnapshot(by: gyroDataList)
+                self?.isPaging = false
+                self?.configureLoadingStatus()
             }
+            .store(in: &subscriptions)
+        
+        viewModel.isNoMoreDataPublisher()
+            .assign(to: \.isNoMoreData, on: self)
             .store(in: &subscriptions)
     }
     
@@ -144,5 +165,38 @@ extension GyroListViewController: UITableViewDelegate {
                                                             gyroData: selectedItem)
         
         navigationController?.pushViewController(playGyroViewController, animated: true)
+    }
+}
+
+// MARK: - Scroll view delegate for pagination
+extension GyroListViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let height = scrollView.frame.height
+        let isScrollingBottom = offsetY > (contentHeight - height)
+        
+        if isScrollingBottom && !isNoMoreData && !isPaging {
+            requestMorePage()
+        }
+    }
+    
+    private func requestMorePage() {
+        isPaging = true
+        configureLoadingStatus()
+        
+        DispatchQueue.global().asyncAfter(deadline: .now() + 2) { [weak self] in
+            self?.viewModel.requestFetch()
+        }
+    }
+    
+    private func configureLoadingStatus() {
+        loadingIndicatorView.isHidden = !isPaging
+        
+        if isPaging {
+            loadingIndicatorView.startAnimating()
+        } else {
+            loadingIndicatorView.stopAnimating()
+        }
     }
 }

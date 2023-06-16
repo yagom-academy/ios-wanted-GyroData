@@ -10,10 +10,11 @@ import Combine
 final class GyroDataManager {
     static let shared = GyroDataManager()
     
+    private let paginationUnit = 10
     private let coreDataManager = CoreDataManager.shared
     
     @Published var gyroDataList: [GyroData] = []
-    @Published var isLastData = false
+    @Published var isNoMoreData = false
     
     private init() {
         read()
@@ -26,14 +27,10 @@ final class GyroDataManager {
     
     func read() {
         guard let entityList = coreDataManager.read(type: GyroEntity.self,
-                                                    countLimit: 10,
+                                                    countLimit: paginationUnit,
                                                     sortKey: "date") else { return }
         
-        if entityList.isEmpty {
-            isLastData = true
-            
-            return
-        }
+        isNoMoreData = entityList.isEmpty
         
         let fetchedData = getModels(from: entityList)
         gyroDataList.append(contentsOf: fetchedData)
