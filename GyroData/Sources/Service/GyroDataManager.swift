@@ -18,12 +18,9 @@ final class GyroDataManager {
     @Published var isNoMoreData = false
     
     private init() {
-
-//        jsonCoder.deleteAll()
-//        coreDataManager.deleteAll(type: GyroEntity.self)
-        jsonCoder.debug()
-        
         readDataListFromCoreData()
+        
+        jsonCoder.debug()
     }
     
     func create(_ gyroData: GyroData) throws {

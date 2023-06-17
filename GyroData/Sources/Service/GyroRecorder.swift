@@ -71,7 +71,6 @@ final class GyroRecorder {
         motionManager.startAccelerometerUpdates(to: queue) { [weak self] data, error in
             guard let duration = self?.gyroData?.duration,
                   duration < GyroRecorder.Constant.timeout else {
-                // time out handle
                 self?.stopAccelerometerUpdates()
                 
                 return
@@ -80,7 +79,6 @@ final class GyroRecorder {
             guard let x = data?.acceleration.x,
                   let y = data?.acceleration.y,
                   let z = data?.acceleration.z else {
-                // error handle
                 return
             }
             
@@ -98,7 +96,6 @@ final class GyroRecorder {
         motionManager.startGyroUpdates(to: queue) { [weak self] data, error in
             guard let duration = self?.gyroData?.duration,
                   duration < GyroRecorder.Constant.timeout else {
-                // time out handle
                 self?.stopGyroUpdates()
                 
                 return
@@ -107,7 +104,6 @@ final class GyroRecorder {
             guard let x = data?.rotationRate.x,
                   let y = data?.rotationRate.y,
                   let z = data?.rotationRate.z else {
-                // error handle
                 return
             }
             

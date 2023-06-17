@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-final class GyroPlayer: PlayingStatusObservable {
+final class GyroPlayer {
     enum Constant {
         static let interval = 0.1
     }
@@ -74,8 +74,4 @@ final class GyroPlayer: PlayingStatusObservable {
                 self?.playingGyroData.add(selectedData, interval: interval)
             }
     }
-}
-
-protocol PlayingStatusObservable {
-    var isFinished: Bool { get }
 }
