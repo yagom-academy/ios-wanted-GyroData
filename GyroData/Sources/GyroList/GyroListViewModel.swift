@@ -35,7 +35,11 @@ final class GyroListViewModel {
         gyroDataManager.delete(at: index)
     }
     
-    func requestFetch() {
-        gyroDataManager.read()
+    func requestDataList() {
+        gyroDataManager.readDataListFromCoreData()
+    }
+    
+    func requestDataDetails(at index: Int) -> GyroData? {
+        return gyroDataManager.read(at: index)
     }
 }

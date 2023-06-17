@@ -157,9 +157,7 @@ extension GyroListViewController: UITableViewDelegate {
     }
     
     private func showPlayGyro(seletedIndexPath: IndexPath, viewMode: PlayGyroViewController.Mode) {
-        guard let selectedItem = dataSource?.itemIdentifier(for: seletedIndexPath) else {
-            return
-        }
+        guard let selectedItem = viewModel.requestDataDetails(at: seletedIndexPath.item) else { return }
         
         let playGyroViewController = PlayGyroViewController(viewMode: viewMode,
                                                             gyroData: selectedItem)
@@ -186,7 +184,7 @@ extension GyroListViewController: UIScrollViewDelegate {
         configureLoadingStatus()
         
         DispatchQueue.global().asyncAfter(deadline: .now() + 2) { [weak self] in
-            self?.viewModel.requestFetch()
+            self?.viewModel.requestDataList()
         }
     }
     

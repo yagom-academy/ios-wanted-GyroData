@@ -18,8 +18,8 @@ final class GyroDataManager {
     @Published var isNoMoreData = false
     
     private init() {
-        read()
-        
+        readDataListFromCoreData()
+//        jsonCoder.deleteAll()
         jsonCoder.debug()
     }
     
@@ -27,13 +27,13 @@ final class GyroDataManager {
         gyroDataList.insert(gyroData, at: 0)
         coreDataManager.create(type: GyroEntity.self, data: gyroData)
         do {
-            try jsonCoder.save(data: gyroData)
+            try jsonCoder.create(data: gyroData)
         } catch {
             print(error.localizedDescription)
         }
     }
     
-    func read() {
+    func readDataListFromCoreData() {
         guard let entityList = coreDataManager.read(type: GyroEntity.self,
                                                     countLimit: paginationUnit,
                                                     sortKey: "date") else { return }
@@ -42,6 +42,12 @@ final class GyroDataManager {
         
         let fetchedData = getModels(from: entityList)
         gyroDataList.append(contentsOf: fetchedData)
+    }
+    
+    func read(at index: Int) -> GyroData? {
+        guard let selectedData = gyroDataList[safe: index] else { return nil }
+        
+        return jsonCoder.read(type: GyroData.self, data: selectedData)
     }
     
     func delete(at index: Int) {
@@ -76,24 +82,11 @@ extension GyroDataManager {
     
     private func getModel(from entity: GyroEntity) -> GyroData? {
         guard let identifier = entity.identifier,
-              let dataType = GyroData.DataType(rawValue: Int(entity.dataTypeRawValue)),
-              let axisX = entity.axisX,
-              let axisY = entity.axisY,
-              let axisZ = entity.axisZ else {
+              let dataType = GyroData.DataType(rawValue: Int(entity.dataTypeRawValue)) else {
             return nil
         }
         
         var gyroData = GyroData(dataType: dataType, identifier: identifier)
-        
-        for index in 0..<axisX.count {
-            guard let x = axisX[safe: index],
-                  let y = axisY[safe: index],
-                  let z = axisZ[safe: index] else { continue }
-            
-            let coordinate = Coordinate(x: x, y: y, z: z)
-            
-            gyroData.coordinateList.append(coordinate)
-        }
         
         gyroData.date = entity.date
         gyroData.duration = entity.duration

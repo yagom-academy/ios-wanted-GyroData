@@ -8,17 +8,10 @@
 import Foundation
 
 extension DateFormatter {
-    static let formatterForUI = {
+    static let dateFormatter = {
         let dateFormatter = DateFormatter()
         
         dateFormatter.dateFormat = "YYYY/MM/dd HH:mm:ss"
-        
-        return dateFormatter
-    }()
-    static let formatterForJSON = {
-        let dateFormatter = DateFormatter()
-        
-        dateFormatter.dateFormat = "YYYYMMdd-HHmmss"
         
         return dateFormatter
     }()
@@ -26,12 +19,6 @@ extension DateFormatter {
     static func dateToText(_ date: Date?) -> String? {
         guard let date else { return nil }
         
-        return formatterForUI.string(from: date)
-    }
-    
-    static func dateToTextForJSON(_ date: Date?) -> String? {
-        guard let date else { return nil }
-        
-        return formatterForJSON.string(from: date)
+        return dateFormatter.string(from: date)
     }
 }
