@@ -23,7 +23,7 @@ final class RecordGyroViewController: UIViewController {
         return stackView
     }()
     
-    private let segmentedControl = GyroSegmentedControl(items: ["Acc", "Gyro"])
+    private let segmentedControl = UISegmentedControl(items: ["Acc", "Gyro"])
     private let graphView: GraphView
     private let recordButton = UIButton()
     private let stopButton = UIButton()
@@ -48,8 +48,8 @@ final class RecordGyroViewController: UIViewController {
         setupView()
         addSubviews()
         layout()
-        setupNavigationItems()
         setupSegmentedControl()
+        setupNavigationItems()
         setupRecordButton()
         setupStopButton()
         bind()
@@ -75,6 +75,14 @@ final class RecordGyroViewController: UIViewController {
             graphView.widthAnchor.constraint(equalTo: stackView.widthAnchor),
             graphView.heightAnchor.constraint(equalTo: stackView.widthAnchor)
         ])
+    }
+    
+    private func setupSegmentedControl() {
+        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
+        segmentedControl.backgroundColor = .white
+        segmentedControl.selectedSegmentTintColor = UIColor(red: 0.4, green: 0.6, blue: 0.8, alpha: 1)
+        segmentedControl.selectedSegmentIndex = 0
+        segmentedControl.layer.borderWidth = 2.0
     }
     
     private func setupNavigationItems() {
@@ -114,10 +122,6 @@ final class RecordGyroViewController: UIViewController {
     @objc private func save() {
         viewModel.save()
         navigationItem.rightBarButtonItem?.isEnabled = false
-    }
-    
-    private func setupSegmentedControl() {
-        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
     }
     
     private func setupGraphView() {

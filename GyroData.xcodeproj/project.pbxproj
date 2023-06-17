@@ -20,7 +20,6 @@
 		AA51FF122A37585E00C1888F /* GyroListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA51FF112A37585E00C1888F /* GyroListCell.swift */; };
 		AA51FF142A3758C800C1888F /* UITableViewCell+ReuseIdentifying.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA51FF132A3758C800C1888F /* UITableViewCell+ReuseIdentifying.swift */; };
 		AA51FF172A375D7000C1888F /* GyroListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA51FF162A375D7000C1888F /* GyroListViewModel.swift */; };
-		AA51FF192A3812F800C1888F /* GyroSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA51FF182A3812F800C1888F /* GyroSegmentedControl.swift */; };
 		AA51FF1B2A38238200C1888F /* RecordGyroViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA51FF1A2A38238200C1888F /* RecordGyroViewModel.swift */; };
 		AA51FF1D2A38385300C1888F /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA51FF1C2A38385300C1888F /* GraphView.swift */; };
 		AAD598492A39752400E4385D /* DateFormatter+dateToText.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD598482A39752400E4385D /* DateFormatter+dateToText.swift */; };
@@ -53,7 +52,6 @@
 		AA51FF112A37585E00C1888F /* GyroListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroListCell.swift; sourceTree = "<group>"; };
 		AA51FF132A3758C800C1888F /* UITableViewCell+ReuseIdentifying.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+ReuseIdentifying.swift"; sourceTree = "<group>"; };
 		AA51FF162A375D7000C1888F /* GyroListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroListViewModel.swift; sourceTree = "<group>"; };
-		AA51FF182A3812F800C1888F /* GyroSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroSegmentedControl.swift; sourceTree = "<group>"; };
 		AA51FF1A2A38238200C1888F /* RecordGyroViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordGyroViewModel.swift; sourceTree = "<group>"; };
 		AA51FF1C2A38385300C1888F /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		AAD598482A39752400E4385D /* DateFormatter+dateToText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+dateToText.swift"; sourceTree = "<group>"; };
@@ -122,7 +120,7 @@
 		AA51FF0A2A37488700C1888F /* GyroList */ = {
 			isa = PBXGroup;
 			children = (
-				AA51FF152A375BDE00C1888F /* Cell */,
+				AA51FF112A37585E00C1888F /* GyroListCell.swift */,
 				63F01BB828D44FC400C53A39 /* GyroListViewController.swift */,
 				AA51FF162A375D7000C1888F /* GyroListViewModel.swift */,
 			);
@@ -133,7 +131,6 @@
 			isa = PBXGroup;
 			children = (
 				AA51FF1C2A38385300C1888F /* GraphView.swift */,
-				AA51FF182A3812F800C1888F /* GyroSegmentedControl.swift */,
 				AA51FF0C2A37491900C1888F /* RecordGyroViewController.swift */,
 				AA51FF1A2A38238200C1888F /* RecordGyroViewModel.swift */,
 			);
@@ -148,15 +145,6 @@
 				AAD598802A3B537600E4385D /* GyroPlayer.swift */,
 			);
 			path = Service;
-			sourceTree = "<group>";
-		};
-		AA51FF152A375BDE00C1888F /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				AA51FF132A3758C800C1888F /* UITableViewCell+ReuseIdentifying.swift */,
-				AA51FF112A37585E00C1888F /* GyroListCell.swift */,
-			);
-			path = Cell;
 			sourceTree = "<group>";
 		};
 		AABC7EAA2A36F6FE006A07DF /* Sources */ = {
@@ -196,6 +184,7 @@
 			children = (
 				AAD598482A39752400E4385D /* DateFormatter+dateToText.swift */,
 				AAD598792A3AF66500E4385D /* Array+subscript.swift */,
+				AA51FF132A3758C800C1888F /* UITableViewCell+ReuseIdentifying.swift */,
 			);
 			path = Utilitiy;
 			sourceTree = "<group>";
@@ -295,7 +284,6 @@
 				AA51FF0D2A37491900C1888F /* RecordGyroViewController.swift in Sources */,
 				AAD5984D2A3991EF00E4385D /* CoreData.xcdatamodeld in Sources */,
 				AA51FEFE2A37292400C1888F /* GyroRecorder.swift in Sources */,
-				AA51FF192A3812F800C1888F /* GyroSegmentedControl.swift in Sources */,
 				AAD5987D2A3B11C100E4385D /* PlayGyroViewController.swift in Sources */,
 				AAD5987A2A3AF66500E4385D /* Array+subscript.swift in Sources */,
 				63F01BB928D44FC400C53A39 /* GyroListViewController.swift in Sources */,
