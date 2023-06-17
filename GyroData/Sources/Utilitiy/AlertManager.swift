@@ -19,4 +19,16 @@ struct AlertManager {
         
         return alertController
     }
+    
+    func createNoDataAlert() -> UIAlertController {
+        let alertController = UIAlertController(title: "저장할 데이터가 없습니다.",
+                                                message: nil,
+                                                preferredStyle: .alert)
+        
+        let cancelAction = UIAlertAction(title: "확인", style: .destructive)
+        
+        alertController.addAction(cancelAction)
+        
+        return alertController
+    }
 }

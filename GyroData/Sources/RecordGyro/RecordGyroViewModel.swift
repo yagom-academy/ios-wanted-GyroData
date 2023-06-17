@@ -11,6 +11,10 @@ final class RecordGyroViewModel {
     private let gyroDataManager = GyroDataManager.shared
     private let gyroRecorder = GyroRecorder.shared
     
+    var isNoData: Bool {
+        return gyroRecorder.getGyroData() == nil
+    }
+    
     func startRecord(dataTypeRawValue: Int) {
         guard let dataType = GyroData.DataType(rawValue: dataTypeRawValue) else { return }
         

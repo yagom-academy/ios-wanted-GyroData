@@ -118,7 +118,6 @@ final class RecordGyroViewController: UIViewController {
                                              action: #selector(save))
         rightBarButton.setTitleTextAttributes([.font: UIFont.preferredFont(forTextStyle: .title2)], for: .normal)
         rightBarButton.setTitleTextAttributes([.font: UIFont.preferredFont(forTextStyle: .title2)], for: .disabled)
-        rightBarButton.isEnabled = false
         
         navigationItem.rightBarButtonItem = rightBarButton
     }
@@ -129,6 +128,14 @@ final class RecordGyroViewController: UIViewController {
     }
     
     @objc private func save() {
+        if viewModel.isNoData {
+            let alert = AlertManager().createNoDataAlert()
+            
+            present(alert, animated: true, completion: nil)
+            
+            return
+        }
+        
         navigationItem.rightBarButtonItem?.isEnabled = false
         loadingIndicatorView.startAnimating()
         
@@ -145,6 +152,7 @@ final class RecordGyroViewController: UIViewController {
                 DispatchQueue.main.async {
                     self?.present(alert, animated: true, completion: nil)
                     self?.loadingIndicatorView.stopAnimating()
+                    self?.navigationItem.rightBarButtonItem?.isEnabled = true
                 }
             }
         }
