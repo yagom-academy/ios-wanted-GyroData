@@ -28,8 +28,18 @@ final class GyroDataManager {
         
         do {
             try coreDataManager.create(type: GyroEntity.self, data: gyroData)
+        } catch {
+            gyroDataList.removeFirst()
+            
+            throw error
+        }
+        
+        do {
             try jsonCoder.create(data: gyroData)
         } catch {
+            gyroDataList.removeFirst()
+            coreDataManager.delete(type: GyroEntity.self, data: gyroData)
+            
             throw error
         }
     }
