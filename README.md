@@ -21,8 +21,7 @@
 <img src = "https://img.shields.io/badge/swift-5.8-orange"> <img src = "https://img.shields.io/badge/Xcode-14.3-orange"> <img src = "https://img.shields.io/badge/Minimum%20Deployments-14.0-orange">
 
 ### 적용 프레임워크
-<img src = "https://img.shields.io/badge/Foundation--green">
-<img src = "https://img.shields.io/badge/UIKit--green"> <img src = "https://img.shields.io/badge/Combine--green"> <img src = "https://img.shields.io/badge/CoreData--green">  <img src = "https://img.shields.io/badge/CoreMotion--green">
+<img src = "https://img.shields.io/badge/Foundation--green"> <img src = "https://img.shields.io/badge/UIKit--green"> <img src = "https://img.shields.io/badge/Combine--green"> <img src = "https://img.shields.io/badge/CoreData--green">  <img src = "https://img.shields.io/badge/CoreMotion--green">
 
 </br>
 
@@ -35,7 +34,7 @@
 
 </br>
 
-# 📆 타임라인
+# 📆 타임 라인
 | 일자 | <center>구현 내용 |
 | :---: | --- |
 | 23.06.12(월) | - 요구사항 분석 </br> - 데이터 모델 구현 </br> - 목록 화면 UI 구현 |
@@ -47,7 +46,8 @@
 
 </br>
 
-# 🏗️ 프로젝트 구조
+# ⚒ 프로젝트 구조
+
 UIKit과 MVVM 패턴을 적용하였고, Combine을 사용하였습니다.
 
 | UI | 아키텍처 | 반응형 프레임워크 |
@@ -65,7 +65,7 @@ UIKit과 MVVM 패턴을 적용하였고, Combine을 사용하였습니다.
 
 <img src="https://hackmd.io/_uploads/H153JfjP3.png" width=500>
 
-코어데이터에는 좌표 데이터가 저장되지 않고, 화면에 표시하기 위해 필요한 정보와 데이터를 식별하기 위한 UUID만 저장됩니다. 파일 시스템에는 모든 데이터가 저장됩니다.
+코어데이터에는 좌표 데이터가 저장되지 않고, 화면에 표시하기 위해 필요한 정보와 데이터를 식별하기 위한 UUID만 저장됩니다. 파일시스템에는 모든 데이터가 저장됩니다.
 
 </br>
 
@@ -149,7 +149,7 @@ GyroData
 
 - 코어데이터에서 데이터를 읽어옵니다. 읽어온 데이터에는 좌표 정보가 없습니다.
 - 10개 단위로 pagination됩니다. 더이상 읽어올 데이터가 없을 경우 읽어오기를 시도하지 않습니다.
-- 스와이프로 데이터를 삭제합니다. 데이터를 삭제하면 코어데이터와 파일매니저에서 모두 삭제됩니다.
+- 스와이프로 데이터를 삭제합니다. 데이터를 삭제하면 코어데이터와 파일시스템에서 모두 삭제됩니다.
 
 ## 측정 화면
 | **측정 후 저장** | **60초 초과 시 자동 중지** | **측정 중 재측정** |
@@ -158,7 +158,7 @@ GyroData
 
 - Acc, Gyro 중 하나를 선택하여 측정합니다.
 - 측정된 데이터가 없는 상태에서 저장을 시도하면 알림을 표시합니다.
-- 데이터 저장 시 인디케이터가 표시되며, 저장에 성공하면 코어데이터와 파일시스템에 각각 저장됩니다.
+- 데이터 저장 시 인디케이터가 표시되며, 저장에 성공하면 코어데이터와 파일시스템에 모두 저장됩니다.
 - 저장에 실패하면 알림을 표시합니다.
 - 측정 중 y축의 최대값 범위를 벗어나면 y축의 스케일이 재조정됩니다.
 - 최대 60초간 600개의 데이터를 저장할 수 있으며, 60초가 넘을 경우 측정은 자동으로 중지됩니다.
