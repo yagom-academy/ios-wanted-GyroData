@@ -34,10 +34,7 @@ final class CoreDataManager {
     
     func create<DAO: NSManagedObject & DataAccessObject, DTO: DataTransferObject>(type: DAO.Type, data: DTO) throws where DTO == DAO.DataTransferObject {
         guard let entityName = DAO.entity().name,
-              let entityDescription = NSEntityDescription.entity(forEntityName: entityName, in: context) else {
-            return
-            
-        }
+              let entityDescription = NSEntityDescription.entity(forEntityName: entityName, in: context) else { return }
         
         let storage = DAO(entity: entityDescription, insertInto: context)
         storage.setValues(from: data)

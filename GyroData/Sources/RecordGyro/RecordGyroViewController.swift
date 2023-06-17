@@ -18,16 +18,14 @@ final class RecordGyroViewController: UIViewController {
         stackView.spacing = 28
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
-        view.addSubview(stackView)
-        
         return stackView
     }()
     
     private let segmentedControl = UISegmentedControl(items: ["Acc", "Gyro"])
     private let graphView: GraphView
+    private let loadingIndicatorView = UIActivityIndicatorView(style: .large)
     private let recordButton = UIButton()
     private let stopButton = UIButton()
-    
     private let viewModel: RecordGyroViewModel
     private var subscriptions = Set<AnyCancellable>()
     
@@ -49,6 +47,7 @@ final class RecordGyroViewController: UIViewController {
         addSubviews()
         layout()
         setupSegmentedControl()
+        setupLoadingIndicatorView()
         setupNavigationItems()
         setupRecordButton()
         setupStopButton()
@@ -60,7 +59,8 @@ final class RecordGyroViewController: UIViewController {
     }
     
     private func addSubviews() {
-        view.addSubview(segmentedControl)
+        view.addSubview(stackView)
+        view.addSubview(loadingIndicatorView)
     }
     
     private func layout() {
@@ -73,7 +73,12 @@ final class RecordGyroViewController: UIViewController {
             
             segmentedControl.widthAnchor.constraint(equalTo: stackView.widthAnchor),
             graphView.widthAnchor.constraint(equalTo: stackView.widthAnchor),
-            graphView.heightAnchor.constraint(equalTo: stackView.widthAnchor)
+            graphView.heightAnchor.constraint(equalTo: stackView.widthAnchor),
+            
+            loadingIndicatorView.centerXAnchor.constraint(equalTo: safe.centerXAnchor),
+            loadingIndicatorView.centerYAnchor.constraint(equalTo: safe.centerYAnchor),
+            loadingIndicatorView.widthAnchor.constraint(equalTo: safe.widthAnchor, multiplier: 0.4),
+            loadingIndicatorView.heightAnchor.constraint(equalTo: safe.widthAnchor, multiplier: 0.4)
         ])
     }
     
@@ -83,6 +88,10 @@ final class RecordGyroViewController: UIViewController {
         segmentedControl.selectedSegmentTintColor = UIColor(red: 0.4, green: 0.6, blue: 0.8, alpha: 1)
         segmentedControl.selectedSegmentIndex = 0
         segmentedControl.layer.borderWidth = 2.0
+    }
+    
+    private func setupLoadingIndicatorView() {
+        loadingIndicatorView.translatesAutoresizingMaskIntoConstraints = false
     }
     
     private func setupNavigationItems() {
@@ -120,11 +129,24 @@ final class RecordGyroViewController: UIViewController {
     }
     
     @objc private func save() {
-        do {
-            try viewModel.save()
-            navigationItem.rightBarButtonItem?.isEnabled = false
-        } catch {
-            
+        navigationItem.rightBarButtonItem?.isEnabled = false
+        loadingIndicatorView.startAnimating()
+        
+        DispatchQueue.global().asyncAfter(deadline: .now() + 1.5) { [weak self] in
+            do {
+                try self?.viewModel.save()
+                
+                DispatchQueue.main.async {
+                    self?.navigationController?.popViewController(animated: true)
+                }
+            } catch {
+                let alert = AlertManager().createErrorAlert(error: error)
+                
+                DispatchQueue.main.async {
+                    self?.present(alert, animated: true, completion: nil)
+                    self?.loadingIndicatorView.stopAnimating()
+                }
+            }
         }
     }
     

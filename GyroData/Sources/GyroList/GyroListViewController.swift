@@ -183,7 +183,7 @@ extension GyroListViewController: UIScrollViewDelegate {
         isPaging = true
         configureLoadingStatus()
         
-        DispatchQueue.global().asyncAfter(deadline: .now() + 2) { [weak self] in
+        DispatchQueue.global().asyncAfter(deadline: .now() + 1.5) { [weak self] in
             self?.viewModel.requestDataList()
         }
     }
