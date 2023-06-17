@@ -113,6 +113,7 @@ final class RecordGyroViewController: UIViewController {
     
     @objc private func save() {
         viewModel.save()
+        navigationItem.rightBarButtonItem?.isEnabled = false
     }
     
     private func setupSegmentedControl() {

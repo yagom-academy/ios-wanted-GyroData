@@ -12,17 +12,25 @@ final class GyroDataManager {
     
     private let paginationUnit = 10
     private let coreDataManager = CoreDataManager.shared
+    private let jsonCoder = JSONCoder()
     
     @Published var gyroDataList: [GyroData] = []
     @Published var isNoMoreData = false
     
     private init() {
         read()
+        
+        jsonCoder.debug()
     }
     
     func create(_ gyroData: GyroData) {
         gyroDataList.insert(gyroData, at: 0)
         coreDataManager.create(type: GyroEntity.self, data: gyroData)
+        do {
+            try jsonCoder.save(data: gyroData)
+        } catch {
+            print(error.localizedDescription)
+        }
     }
     
     func read() {
@@ -44,6 +52,12 @@ final class GyroDataManager {
         }
         
         coreDataManager.delete(type: GyroEntity.self, data: selectedData)
+        
+        do {
+            try jsonCoder.delete(data: selectedData)
+        } catch {
+            print(error.localizedDescription)
+        }
     }
 }
 

@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct GyroData: DataTransferObject {
-    enum DataType: Int {
+struct GyroData: DataTransferObject, Codable {
+    enum DataType: Int, Codable {
         case accelerometer = 0
         case gyro = 1
         

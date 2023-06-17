@@ -36,6 +36,7 @@
 		AAD5987F2A3B25F800E4385D /* PlayGyroViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD5987E2A3B25F800E4385D /* PlayGyroViewModel.swift */; };
 		AAD598812A3B537600E4385D /* GyroPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD598802A3B537600E4385D /* GyroPlayer.swift */; };
 		AAD598832A3B5A6200E4385D /* PlayControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD598822A3B5A6200E4385D /* PlayControlView.swift */; };
+		AAD795212A3D63DA003384D5 /* JSONCoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD795202A3D63DA003384D5 /* JSONCoder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +71,7 @@
 		AAD5987E2A3B25F800E4385D /* PlayGyroViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayGyroViewModel.swift; sourceTree = "<group>"; };
 		AAD598802A3B537600E4385D /* GyroPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroPlayer.swift; sourceTree = "<group>"; };
 		AAD598822A3B5A6200E4385D /* PlayControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayControlView.swift; sourceTree = "<group>"; };
+		AAD795202A3D63DA003384D5 /* JSONCoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONCoder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,8 +156,8 @@
 		AA51FF0E2A374AA700C1888F /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				AA51FEFD2A37292400C1888F /* GyroRecorder.swift */,
 				AA51FF0F2A374B2800C1888F /* GyroDataManager.swift */,
+				AA51FEFD2A37292400C1888F /* GyroRecorder.swift */,
 				AAD598802A3B537600E4385D /* GyroPlayer.swift */,
 			);
 			path = Service;
@@ -218,6 +220,7 @@
 				AAD5984B2A3991EF00E4385D /* CoreData.xcdatamodeld */,
 				AAD5986F2A3AE13100E4385D /* GyroEntity+CoreDataClass.swift */,
 				AAD598772A3AE90300E4385D /* CoreDataManager.swift */,
+				AAD795202A3D63DA003384D5 /* JSONCoder.swift */,
 			);
 			path = Database;
 			sourceTree = "<group>";
@@ -327,6 +330,7 @@
 				AAD598832A3B5A6200E4385D /* PlayControlView.swift in Sources */,
 				AA51FF072A372EFD00C1888F /* Node.swift in Sources */,
 				AAD598492A39752400E4385D /* DateFormatter+dateToText.swift in Sources */,
+				AAD795212A3D63DA003384D5 /* JSONCoder.swift in Sources */,
 				AA51FF142A3758C800C1888F /* UITableViewCell+ReuseIdentifying.swift in Sources */,
 				AAD598762A3AE82F00E4385D /* DataAccessObject.swift in Sources */,
 			);

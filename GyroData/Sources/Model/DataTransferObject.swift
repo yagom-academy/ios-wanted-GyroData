@@ -9,4 +9,5 @@ import Foundation
 
 protocol DataTransferObject {
     var identifier: UUID { get }
+    var date: Date? { get set }
 }

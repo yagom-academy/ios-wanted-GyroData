@@ -5,7 +5,7 @@
 //  Created by kokkilE on 2023/06/12.
 //
 
-struct Coordinate {
+struct Coordinate: Codable {
     let x: Double
     let y: Double
     let z: Double
