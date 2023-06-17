@@ -14,14 +14,13 @@ final class JSONCoder {
     
     func save<DTO: DataTransferObject & Codable>(data: DTO) throws {
         do {
-            guard let documentDirectory else { return }
-            guard var date = DateFormatter.dateToTextForJSON(data.date) else { return }
-            date.replace(" ", with: "")
+            guard let documentDirectory,
+                  let date = DateFormatter.dateToTextForJSON(data.date) else { return }
+            
             let fileURL = documentDirectory.appending(path: "\(date).json")
             let encodedData = try JSONCoder.encoder.encode(data)
             
             try encodedData.write(to: fileURL)
-            print("JSON 파일이 생성되었습니다. 경로: \(fileURL)")
         } catch {
             throw error
         }
@@ -29,12 +28,12 @@ final class JSONCoder {
     
     func delete<DTO: DataTransferObject & Codable>(data: DTO) throws {
         do {
-            guard let documentDirectory else { return }
+            guard let documentDirectory,
+                  let date = DateFormatter.dateToTextForJSON(data.date) else { return }
             
-            let fileURL = documentDirectory.appending(path: "\(data.identifier).json")
+            let fileURL = documentDirectory.appending(path: "\(date).json")
             
             try filemanager.removeItem(at: fileURL)
-            print("JSON 파일이 삭제되었습니다. 경로: \(fileURL)")
         } catch {
             throw error
         }
@@ -43,6 +42,9 @@ final class JSONCoder {
     func debug() {
         do {
             let fileURLs = try filemanager.contentsOfDirectory(at: documentDirectory!, includingPropertiesForKeys: nil)
+            
+            print("[FileSystem 내 json 파일 목록을 읽어옵니다.]")
+            
             for fileURL in fileURLs {
                 print("파일: \(fileURL.lastPathComponent)")
             }
@@ -58,7 +60,6 @@ final class JSONCoder {
         
         for fileURL in fileURLs {
             try? filemanager.removeItem(at: fileURL)
-            print("파일이 삭제되었습니다. 경로: \(fileURL)")
         }
     }
 }
