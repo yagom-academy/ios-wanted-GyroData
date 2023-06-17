@@ -15,8 +15,6 @@
 		AA51FEFE2A37292400C1888F /* GyroRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA51FEFD2A37292400C1888F /* GyroRecorder.swift */; };
 		AA51FF022A372CBF00C1888F /* GyroData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA51FF012A372CBF00C1888F /* GyroData.swift */; };
 		AA51FF042A372D3C00C1888F /* Coordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA51FF032A372D3C00C1888F /* Coordinate.swift */; };
-		AA51FF072A372EFD00C1888F /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA51FF062A372EFD00C1888F /* Node.swift */; };
-		AA51FF092A37302B00C1888F /* LimitedQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA51FF082A37302B00C1888F /* LimitedQueue.swift */; };
 		AA51FF0D2A37491900C1888F /* RecordGyroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA51FF0C2A37491900C1888F /* RecordGyroViewController.swift */; };
 		AA51FF102A374B2800C1888F /* GyroDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA51FF0F2A374B2800C1888F /* GyroDataManager.swift */; };
 		AA51FF122A37585E00C1888F /* GyroListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA51FF112A37585E00C1888F /* GyroListCell.swift */; };
@@ -50,8 +48,6 @@
 		AA51FEFD2A37292400C1888F /* GyroRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroRecorder.swift; sourceTree = "<group>"; };
 		AA51FF012A372CBF00C1888F /* GyroData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroData.swift; sourceTree = "<group>"; };
 		AA51FF032A372D3C00C1888F /* Coordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinate.swift; sourceTree = "<group>"; };
-		AA51FF062A372EFD00C1888F /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
-		AA51FF082A37302B00C1888F /* LimitedQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitedQueue.swift; sourceTree = "<group>"; };
 		AA51FF0C2A37491900C1888F /* RecordGyroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordGyroViewController.swift; sourceTree = "<group>"; };
 		AA51FF0F2A374B2800C1888F /* GyroDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroDataManager.swift; sourceTree = "<group>"; };
 		AA51FF112A37585E00C1888F /* GyroListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroListCell.swift; sourceTree = "<group>"; };
@@ -123,15 +119,6 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		AA51FF052A372EC200C1888F /* DataStructure */ = {
-			isa = PBXGroup;
-			children = (
-				AA51FF062A372EFD00C1888F /* Node.swift */,
-				AA51FF082A37302B00C1888F /* LimitedQueue.swift */,
-			);
-			path = DataStructure;
-			sourceTree = "<group>";
-		};
 		AA51FF0A2A37488700C1888F /* GyroList */ = {
 			isa = PBXGroup;
 			children = (
@@ -177,7 +164,6 @@
 			children = (
 				AAD5984E2A3991FD00E4385D /* Database */,
 				AAD5984A2A39795100E4385D /* Utilitiy */,
-				AA51FF052A372EC200C1888F /* DataStructure */,
 				AA51FF002A372C8700C1888F /* Model */,
 				AA51FF0E2A374AA700C1888F /* Service */,
 				AA51FF0A2A37488700C1888F /* GyroList */,
@@ -315,7 +301,6 @@
 				63F01BB928D44FC400C53A39 /* GyroListViewController.swift in Sources */,
 				AAD598712A3AE13100E4385D /* GyroEntity+CoreDataClass.swift in Sources */,
 				AA51FF022A372CBF00C1888F /* GyroData.swift in Sources */,
-				AA51FF092A37302B00C1888F /* LimitedQueue.swift in Sources */,
 				AA51FF1D2A38385300C1888F /* GraphView.swift in Sources */,
 				AAD598782A3AE90300E4385D /* CoreDataManager.swift in Sources */,
 				AA51FF122A37585E00C1888F /* GyroListCell.swift in Sources */,
@@ -328,7 +313,6 @@
 				AA51FF042A372D3C00C1888F /* Coordinate.swift in Sources */,
 				AAD5987F2A3B25F800E4385D /* PlayGyroViewModel.swift in Sources */,
 				AAD598832A3B5A6200E4385D /* PlayControlView.swift in Sources */,
-				AA51FF072A372EFD00C1888F /* Node.swift in Sources */,
 				AAD598492A39752400E4385D /* DateFormatter+dateToText.swift in Sources */,
 				AAD795212A3D63DA003384D5 /* JSONCoder.swift in Sources */,
 				AA51FF142A3758C800C1888F /* UITableViewCell+ReuseIdentifying.swift in Sources */,
