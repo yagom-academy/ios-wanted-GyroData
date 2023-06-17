@@ -120,8 +120,12 @@ final class RecordGyroViewController: UIViewController {
     }
     
     @objc private func save() {
-        viewModel.save()
-        navigationItem.rightBarButtonItem?.isEnabled = false
+        do {
+            try viewModel.save()
+            navigationItem.rightBarButtonItem?.isEnabled = false
+        } catch {
+            
+        }
     }
     
     private func setupGraphView() {

@@ -32,7 +32,7 @@ final class CoreDataManager {
     
     private init() { }
     
-    func create<DAO: NSManagedObject & DataAccessObject, DTO: DataTransferObject>(type: DAO.Type, data: DTO) where DTO == DAO.DataTransferObject {
+    func create<DAO: NSManagedObject & DataAccessObject, DTO: DataTransferObject>(type: DAO.Type, data: DTO) throws where DTO == DAO.DataTransferObject {
         guard let entityName = DAO.entity().name,
               let entityDescription = NSEntityDescription.entity(forEntityName: entityName, in: context) else {
             return
@@ -42,7 +42,11 @@ final class CoreDataManager {
         let storage = DAO(entity: entityDescription, insertInto: context)
         storage.setValues(from: data)
         
-        save()
+        do {
+            try context.save()
+        } catch {
+            throw error
+        }
     }
         
     func read<DAO: NSManagedObject & DataAccessObject>(type: DAO.Type, countLimit: Int, sortKey: String) -> [DAO]? {
@@ -78,6 +82,19 @@ final class CoreDataManager {
             print(error.localizedDescription)
             return nil
         }
+    }
+    
+    func deleteAll<DAO: NSManagedObject & DataAccessObject>(type: DAO.Type) {
+        guard let entityName = DAO.entity().name else { return }
+        
+        let fetchRequest = NSFetchRequest<DAO>(entityName: entityName)
+        guard let storage = try? context.fetch(fetchRequest) else { return }
+        
+        storage.forEach { data in
+            context.delete(data)
+        }
+        
+        save()
     }
     
     func delete<DAO: NSManagedObject & DataAccessObject, DTO: DataTransferObject>(type: DAO.Type, data: DTO) {

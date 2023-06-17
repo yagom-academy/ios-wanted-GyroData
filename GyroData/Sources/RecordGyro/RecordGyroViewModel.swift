@@ -21,10 +21,14 @@ final class RecordGyroViewModel {
         gyroRecorder.stop()
     }
     
-    func save() {
+    func save() throws {
         guard let data = gyroRecorder.getGyroData() else { return }
         
-        gyroDataManager.create(data)
+        do {
+            try gyroDataManager.create(data)
+        } catch {
+            throw error
+        }
     }
     
     func gyroRecorderStatusPublisher() -> AnyPublisher<Bool, Never> {
