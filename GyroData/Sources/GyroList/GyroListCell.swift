@@ -51,7 +51,7 @@ final class GyroListCell: UITableViewCell {
     private let durationLabel = {
         let label = UILabel()
         
-        label.font = .systemFont(ofSize: 40, weight: .bold, width: .standard)
+        label.font = .systemFont(ofSize: 40, weight: .bold)
         
         return label
     }()

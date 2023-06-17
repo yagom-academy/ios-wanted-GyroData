@@ -113,7 +113,7 @@ final class RecordGyroViewController: UIViewController {
         
         let rightBarButtonTitle = "저장"
         let rightBarButton = UIBarButtonItem(title: rightBarButtonTitle,
-                                             image: nil,
+                                             style: .plain,
                                              target: self,
                                              action: #selector(save))
         rightBarButton.setTitleTextAttributes([.font: UIFont.preferredFont(forTextStyle: .title2)], for: .normal)
@@ -165,7 +165,7 @@ final class RecordGyroViewController: UIViewController {
     private func setupRecordButton() {
         let title = "측정"
         recordButton.setTitle(title, for: .normal)
-        recordButton.setTitleColor(.tintColor, for: .normal)
+        recordButton.setTitleColor(.systemBlue, for: .normal)
         recordButton.titleLabel?.font = .preferredFont(forTextStyle: .title2)
         
         recordButton.addTarget(self, action: #selector(startRecord), for: .touchUpInside)
@@ -174,7 +174,7 @@ final class RecordGyroViewController: UIViewController {
     private func setupStopButton() {
         let title = "정지"
         stopButton.setTitle(title, for: .normal)
-        stopButton.setTitleColor(.tintColor, for: .normal)
+        stopButton.setTitleColor(.systemBlue, for: .normal)
         stopButton.setTitleColor(.systemGray, for: .disabled)
         stopButton.titleLabel?.font = .preferredFont(forTextStyle: .title2)
         stopButton.isEnabled = false

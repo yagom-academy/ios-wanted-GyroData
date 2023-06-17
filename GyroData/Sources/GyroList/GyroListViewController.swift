@@ -45,8 +45,9 @@ final class GyroListViewController: UIViewController {
         navigationItem.titleView = titleLabel
         
         let rightBarButtonTitle = "측정"
+        
         let rightBarButton = UIBarButtonItem(title: rightBarButtonTitle,
-                                             image: nil,
+                                             style: .plain,
                                              target: self,
                                              action: #selector(recordGyro))
         rightBarButton.setTitleTextAttributes([.font: UIFont.preferredFont(forTextStyle: .title2)], for: .normal)

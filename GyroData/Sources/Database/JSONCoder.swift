@@ -17,7 +17,7 @@ final class JSONCoder {
         do {
             guard let documentDirectory else { return }
             
-            let fileURL = documentDirectory.appending(path: "\(data.identifier).json")
+            let fileURL = documentDirectory.appendingPathComponent("\(data.identifier).json")
             let encodedData = try JSONCoder.encoder.encode(data)
             
             try encodedData.write(to: fileURL)
@@ -29,7 +29,7 @@ final class JSONCoder {
     func read<DTO: DataTransferObject & Decodable>(type: DTO.Type, data: DTO) -> DTO? {
         guard let documentDirectory else { return nil }
         
-        let fileURL = documentDirectory.appending(path: "\(data.identifier).json")
+        let fileURL = documentDirectory.appendingPathComponent("\(data.identifier).json")
         guard let data = try? Data(contentsOf: fileURL) else { return nil }
         
         let decodedData = try? JSONCoder.decoder.decode(type, from: data)
@@ -40,7 +40,7 @@ final class JSONCoder {
     func delete<DTO: DataTransferObject>(data: DTO) throws {
         guard let documentDirectory else { return }
         
-        let fileURL = documentDirectory.appending(path: "\(data.identifier).json")
+        let fileURL = documentDirectory.appendingPathComponent("\(data.identifier).json")
         
         try? filemanager.removeItem(at: fileURL)
     }
