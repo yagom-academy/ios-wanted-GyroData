@@ -133,20 +133,11 @@
 			isa = PBXGroup;
 			children = (
 				AA51FF1C2A38385300C1888F /* GraphView.swift */,
+				AA51FEFD2A37292400C1888F /* GyroRecorder.swift */,
 				AA51FF0C2A37491900C1888F /* RecordGyroViewController.swift */,
 				AA51FF1A2A38238200C1888F /* RecordGyroViewModel.swift */,
 			);
 			path = RecordGyro;
-			sourceTree = "<group>";
-		};
-		AA51FF0E2A374AA700C1888F /* Service */ = {
-			isa = PBXGroup;
-			children = (
-				AA51FF0F2A374B2800C1888F /* GyroDataManager.swift */,
-				AA51FEFD2A37292400C1888F /* GyroRecorder.swift */,
-				AAD598802A3B537600E4385D /* GyroPlayer.swift */,
-			);
-			path = Service;
 			sourceTree = "<group>";
 		};
 		AABC7EAA2A36F6FE006A07DF /* Sources */ = {
@@ -155,7 +146,6 @@
 				AAD5984E2A3991FD00E4385D /* Database */,
 				AAD5984A2A39795100E4385D /* Utilitiy */,
 				AA51FF002A372C8700C1888F /* Model */,
-				AA51FF0E2A374AA700C1888F /* Service */,
 				AA51FF0A2A37488700C1888F /* GyroList */,
 				AA51FF0B2A3748FC00C1888F /* RecordGyro */,
 				AAD5987B2A3B04A700E4385D /* PlayGyro */,
@@ -199,6 +189,7 @@
 				AAD5986F2A3AE13100E4385D /* GyroEntity+CoreDataClass.swift */,
 				AAD598772A3AE90300E4385D /* CoreDataManager.swift */,
 				AAD795202A3D63DA003384D5 /* JSONCoder.swift */,
+				AA51FF0F2A374B2800C1888F /* GyroDataManager.swift */,
 			);
 			path = Database;
 			sourceTree = "<group>";
@@ -207,6 +198,7 @@
 			isa = PBXGroup;
 			children = (
 				AAD598822A3B5A6200E4385D /* PlayControlView.swift */,
+				AAD598802A3B537600E4385D /* GyroPlayer.swift */,
 				AAD5987C2A3B11C100E4385D /* PlayGyroViewController.swift */,
 				AAD5987E2A3B25F800E4385D /* PlayGyroViewModel.swift */,
 			);
