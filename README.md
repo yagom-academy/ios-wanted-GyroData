@@ -44,7 +44,7 @@ https://github.com/yijiye/ios-wanted-GyroData/assets/114971172/38f4c92b-f4c7-446
 
 |                            메인 화면                             |                               삭제                               |                            측정 화면                             |                          play 모드|                              view 모드                              |
 |:----------------------------------------------------------------:|:----------------------------------------------------------------:|:----------------------------------------------------------------:|:----------------------------------------------------------------:|:----------------------------------------------------------------:|
-| <img src="https://hackmd.io/_uploads/S1FPiZ2P2.gif" width="300"> | <img src="https://hackmd.io/_uploads/HyfYsbnvh.gif" width="300"> | <img src="https://hackmd.io/_uploads/ryioj-3v3.gif" width="300"> | <img src="https://hackmd.io/_uploads/Hk2hsZhw2.gif" width="300"> | <img src="https://hackmd.io/_uploads/HJ3Rob2v2.gif" width="300"> |
+| <img src="https://hackmd.io/_uploads/S1FPiZ2P2.gif" width="150"> | <img src="https://hackmd.io/_uploads/HyfYsbnvh.gif" width="150"> | <img src="https://hackmd.io/_uploads/ryioj-3v3.gif" width="150"> | <img src="https://hackmd.io/_uploads/Hk2hsZhw2.gif" width="150"> | <img src="https://hackmd.io/_uploads/HJ3Rob2v2.gif" width="150"> |
 
 
 <br/>
