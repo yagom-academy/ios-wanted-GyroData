@@ -25,6 +25,10 @@
 # 실행 화면
 
 
+https://github.com/yijiye/ios-wanted-GyroData/assets/114971172/38f4c92b-f4c7-446b-ad2e-a94a2a9325f1
+
+
+
 
 <br/>
 
@@ -96,6 +100,5 @@ private func showAlert(_ title: String, _ message: String) {
 
  <br/>
  
-
 
 
