@@ -9,21 +9,65 @@
 /* Begin PBXBuildFile section */
 		63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB428D44FC400C53A39 /* AppDelegate.swift */; };
 		63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB628D44FC400C53A39 /* SceneDelegate.swift */; };
-		63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB828D44FC400C53A39 /* ViewController.swift */; };
-		63F01BBC28D44FC400C53A39 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBA28D44FC400C53A39 /* Main.storyboard */; };
+		63F01BB928D44FC400C53A39 /* GyroDataListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F01BB828D44FC400C53A39 /* GyroDataListViewController.swift */; };
 		63F01BBE28D44FC500C53A39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBD28D44FC500C53A39 /* Assets.xcassets */; };
 		63F01BC128D44FC500C53A39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */; };
+		FB42DFC62A36DF2900238381 /* SixAxisDataForJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB42DFC52A36DF2900238381 /* SixAxisDataForJSON.swift */; };
+		FB42DFC82A36E25700238381 /* SensorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB42DFC72A36E25600238381 /* SensorType.swift */; };
+		FB42DFCB2A36E35A00238381 /* GyroDataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB42DFCA2A36E35A00238381 /* GyroDataTableViewCell.swift */; };
+		FB42DFCE2A36EB7300238381 /* GyroDataTableCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB42DFCD2A36EB7300238381 /* GyroDataTableCellViewModel.swift */; };
+		FB42DFD12A36FD2200238381 /* GyroCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FB42DFCF2A36FD2200238381 /* GyroCoreData.xcdatamodeld */; };
+		FB42DFD42A37FE6000238381 /* GyroEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB42DFD22A37FE6000238381 /* GyroEntity+CoreDataClass.swift */; };
+		FB42DFD52A37FE6000238381 /* GyroEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB42DFD32A37FE6000238381 /* GyroEntity+CoreDataProperties.swift */; };
+		FB42DFD72A37FF4D00238381 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB42DFD62A37FF4D00238381 /* CoreDataManager.swift */; };
+		FB42DFD92A38034800238381 /* EntityKeyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB42DFD82A38034800238381 /* EntityKeyProtocol.swift */; };
+		FB42DFDB2A3809B800238381 /* GyroDataListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB42DFDA2A3809B800238381 /* GyroDataListViewModel.swift */; };
+		FB42DFDD2A380B5700238381 /* MeasureGyroDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB42DFDC2A380B5700238381 /* MeasureGyroDataViewController.swift */; };
+		FB42DFDF2A38450700238381 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB42DFDE2A38450700238381 /* GraphView.swift */; };
+		FB42DFE12A3862D200238381 /* MeasureViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB42DFE02A3862D200238381 /* MeasureViewModel.swift */; };
+		FB42DFEE2A396D0D00238381 /* SixAxisDataForCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB42DFED2A396D0D00238381 /* SixAxisDataForCoreData.swift */; };
+		FB42DFF02A39D77A00238381 /* FileError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB42DFEF2A39D77A00238381 /* FileError.swift */; };
+		FB42DFF22A39DA6A00238381 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB42DFF12A39DA6A00238381 /* DetailViewController.swift */; };
+		FB42DFF42A39E04F00238381 /* PageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB42DFF32A39E04F00238381 /* PageType.swift */; };
+		FB42DFF62A39E37E00238381 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB42DFF52A39E37E00238381 /* DetailViewModel.swift */; };
+		FB42DFF82A3A11C400238381 /* PlayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB42DFF72A3A11C400238381 /* PlayButton.swift */; };
+		FB42E0002A3B4C7300238381 /* TimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB42DFFF2A3B4C7300238381 /* TimerModel.swift */; };
+		FB42E0052A3B744700238381 /* AlertProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB42E0042A3B744700238381 /* AlertProperties.swift */; };
+		FB42E0072A3B749600238381 /* AlertBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB42E0062A3B749600238381 /* AlertBuilder.swift */; };
+		FB42E0092A3B74FC00238381 /* AlertActionProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB42E0082A3B74FC00238381 /* AlertActionProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		63F01BB128D44FC400C53A39 /* GyroData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GyroData.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63F01BB428D44FC400C53A39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63F01BB628D44FC400C53A39 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		63F01BB828D44FC400C53A39 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		63F01BBB28D44FC400C53A39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		63F01BB828D44FC400C53A39 /* GyroDataListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroDataListViewController.swift; sourceTree = "<group>"; };
 		63F01BBD28D44FC500C53A39 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		63F01BC028D44FC500C53A39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		63F01BC228D44FC500C53A39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FB42DFC52A36DF2900238381 /* SixAxisDataForJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SixAxisDataForJSON.swift; sourceTree = "<group>"; };
+		FB42DFC72A36E25600238381 /* SensorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensorType.swift; sourceTree = "<group>"; };
+		FB42DFCA2A36E35A00238381 /* GyroDataTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroDataTableViewCell.swift; sourceTree = "<group>"; };
+		FB42DFCD2A36EB7300238381 /* GyroDataTableCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroDataTableCellViewModel.swift; sourceTree = "<group>"; };
+		FB42DFD02A36FD2200238381 /* GyroCoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GyroCoreData.xcdatamodel; sourceTree = "<group>"; };
+		FB42DFD22A37FE6000238381 /* GyroEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GyroEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		FB42DFD32A37FE6000238381 /* GyroEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GyroEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		FB42DFD62A37FF4D00238381 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		FB42DFD82A38034800238381 /* EntityKeyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityKeyProtocol.swift; sourceTree = "<group>"; };
+		FB42DFDA2A3809B800238381 /* GyroDataListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GyroDataListViewModel.swift; sourceTree = "<group>"; };
+		FB42DFDC2A380B5700238381 /* MeasureGyroDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureGyroDataViewController.swift; sourceTree = "<group>"; };
+		FB42DFDE2A38450700238381 /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
+		FB42DFE02A3862D200238381 /* MeasureViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureViewModel.swift; sourceTree = "<group>"; };
+		FB42DFED2A396D0D00238381 /* SixAxisDataForCoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SixAxisDataForCoreData.swift; sourceTree = "<group>"; };
+		FB42DFEF2A39D77A00238381 /* FileError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileError.swift; sourceTree = "<group>"; };
+		FB42DFF12A39DA6A00238381 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		FB42DFF32A39E04F00238381 /* PageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageType.swift; sourceTree = "<group>"; };
+		FB42DFF52A39E37E00238381 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
+		FB42DFF72A3A11C400238381 /* PlayButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayButton.swift; sourceTree = "<group>"; };
+		FB42DFFF2A3B4C7300238381 /* TimerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerModel.swift; sourceTree = "<group>"; };
+		FB42E0042A3B744700238381 /* AlertProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertProperties.swift; sourceTree = "<group>"; };
+		FB42E0062A3B749600238381 /* AlertBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertBuilder.swift; sourceTree = "<group>"; };
+		FB42E0082A3B74FC00238381 /* AlertActionProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertActionProperties.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +84,9 @@
 		63F01BA828D44FC400C53A39 = {
 			isa = PBXGroup;
 			children = (
+				FB42DFD22A37FE6000238381 /* GyroEntity+CoreDataClass.swift */,
+				FB42DFD32A37FE6000238381 /* GyroEntity+CoreDataProperties.swift */,
+				FB42DFCF2A36FD2200238381 /* GyroCoreData.xcdatamodeld */,
 				63F01BB328D44FC400C53A39 /* GyroData */,
 				63F01BB228D44FC400C53A39 /* Products */,
 			);
@@ -56,15 +103,90 @@
 		63F01BB328D44FC400C53A39 /* GyroData */ = {
 			isa = PBXGroup;
 			children = (
+				FB42DFC42A36DF0E00238381 /* Model */,
+				FB42DFCC2A36EB5500238381 /* ViewModel */,
+				FB42DFC92A36E33500238381 /* View */,
+				FB42DFC32A36DB7000238381 /* ViewController */,
 				63F01BB428D44FC400C53A39 /* AppDelegate.swift */,
 				63F01BB628D44FC400C53A39 /* SceneDelegate.swift */,
-				63F01BB828D44FC400C53A39 /* ViewController.swift */,
-				63F01BBA28D44FC400C53A39 /* Main.storyboard */,
 				63F01BBD28D44FC500C53A39 /* Assets.xcassets */,
 				63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */,
 				63F01BC228D44FC500C53A39 /* Info.plist */,
 			);
 			path = GyroData;
+			sourceTree = "<group>";
+		};
+		FB42DFC32A36DB7000238381 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				63F01BB828D44FC400C53A39 /* GyroDataListViewController.swift */,
+				FB42DFDC2A380B5700238381 /* MeasureGyroDataViewController.swift */,
+				FB42DFF12A39DA6A00238381 /* DetailViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		FB42DFC42A36DF0E00238381 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FB42DFD62A37FF4D00238381 /* CoreDataManager.swift */,
+				FB42DFD82A38034800238381 /* EntityKeyProtocol.swift */,
+				FB42DFFF2A3B4C7300238381 /* TimerModel.swift */,
+				FB42DFEF2A39D77A00238381 /* FileError.swift */,
+				FB42E0012A3B5A8B00238381 /* mappingModel */,
+				FB42E0022A3B5AAA00238381 /* Type */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		FB42DFC92A36E33500238381 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				FB42E0032A3B742E00238381 /* AlertBuilder */,
+				FB42DFCA2A36E35A00238381 /* GyroDataTableViewCell.swift */,
+				FB42DFDE2A38450700238381 /* GraphView.swift */,
+				FB42DFF72A3A11C400238381 /* PlayButton.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		FB42DFCC2A36EB5500238381 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				FB42DFCD2A36EB7300238381 /* GyroDataTableCellViewModel.swift */,
+				FB42DFDA2A3809B800238381 /* GyroDataListViewModel.swift */,
+				FB42DFE02A3862D200238381 /* MeasureViewModel.swift */,
+				FB42DFF52A39E37E00238381 /* DetailViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		FB42E0012A3B5A8B00238381 /* mappingModel */ = {
+			isa = PBXGroup;
+			children = (
+				FB42DFED2A396D0D00238381 /* SixAxisDataForCoreData.swift */,
+				FB42DFC52A36DF2900238381 /* SixAxisDataForJSON.swift */,
+			);
+			path = mappingModel;
+			sourceTree = "<group>";
+		};
+		FB42E0022A3B5AAA00238381 /* Type */ = {
+			isa = PBXGroup;
+			children = (
+				FB42DFC72A36E25600238381 /* SensorType.swift */,
+				FB42DFF32A39E04F00238381 /* PageType.swift */,
+			);
+			path = Type;
+			sourceTree = "<group>";
+		};
+		FB42E0032A3B742E00238381 /* AlertBuilder */ = {
+			isa = PBXGroup;
+			children = (
+				FB42E0042A3B744700238381 /* AlertProperties.swift */,
+				FB42E0082A3B74FC00238381 /* AlertActionProperties.swift */,
+				FB42E0062A3B749600238381 /* AlertBuilder.swift */,
+			);
+			path = AlertBuilder;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -127,7 +249,6 @@
 			files = (
 				63F01BC128D44FC500C53A39 /* LaunchScreen.storyboard in Resources */,
 				63F01BBE28D44FC500C53A39 /* Assets.xcassets in Resources */,
-				63F01BBC28D44FC400C53A39 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,23 +259,38 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63F01BB928D44FC400C53A39 /* ViewController.swift in Sources */,
+				FB42DFCE2A36EB7300238381 /* GyroDataTableCellViewModel.swift in Sources */,
+				FB42DFCB2A36E35A00238381 /* GyroDataTableViewCell.swift in Sources */,
+				FB42DFEE2A396D0D00238381 /* SixAxisDataForCoreData.swift in Sources */,
+				FB42DFD92A38034800238381 /* EntityKeyProtocol.swift in Sources */,
+				FB42DFF42A39E04F00238381 /* PageType.swift in Sources */,
+				FB42DFF82A3A11C400238381 /* PlayButton.swift in Sources */,
+				63F01BB928D44FC400C53A39 /* GyroDataListViewController.swift in Sources */,
 				63F01BB528D44FC400C53A39 /* AppDelegate.swift in Sources */,
+				FB42DFDF2A38450700238381 /* GraphView.swift in Sources */,
+				FB42DFC82A36E25700238381 /* SensorType.swift in Sources */,
+				FB42DFF02A39D77A00238381 /* FileError.swift in Sources */,
+				FB42DFD42A37FE6000238381 /* GyroEntity+CoreDataClass.swift in Sources */,
+				FB42DFF22A39DA6A00238381 /* DetailViewController.swift in Sources */,
+				FB42E0052A3B744700238381 /* AlertProperties.swift in Sources */,
+				FB42DFD12A36FD2200238381 /* GyroCoreData.xcdatamodeld in Sources */,
+				FB42DFDB2A3809B800238381 /* GyroDataListViewModel.swift in Sources */,
+				FB42DFC62A36DF2900238381 /* SixAxisDataForJSON.swift in Sources */,
+				FB42DFDD2A380B5700238381 /* MeasureGyroDataViewController.swift in Sources */,
+				FB42DFF62A39E37E00238381 /* DetailViewModel.swift in Sources */,
+				FB42E0072A3B749600238381 /* AlertBuilder.swift in Sources */,
 				63F01BB728D44FC400C53A39 /* SceneDelegate.swift in Sources */,
+				FB42DFD52A37FE6000238381 /* GyroEntity+CoreDataProperties.swift in Sources */,
+				FB42DFD72A37FF4D00238381 /* CoreDataManager.swift in Sources */,
+				FB42DFE12A3862D200238381 /* MeasureViewModel.swift in Sources */,
+				FB42E0002A3B4C7300238381 /* TimerModel.swift in Sources */,
+				FB42E0092A3B74FC00238381 /* AlertActionProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		63F01BBA28D44FC400C53A39 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				63F01BBB28D44FC400C53A39 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		63F01BBF28D44FC500C53A39 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -287,11 +423,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 623K76893F;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GyroData/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -299,7 +435,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.GyroData;
+				PRODUCT_BUNDLE_IDENTIFIER = net.riji.GyroData;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -314,11 +450,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 623K76893F;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GyroData/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -326,7 +462,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = net.yagom.GyroData;
+				PRODUCT_BUNDLE_IDENTIFIER = net.riji.GyroData;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -356,6 +492,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		FB42DFCF2A36FD2200238381 /* GyroCoreData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				FB42DFD02A36FD2200238381 /* GyroCoreData.xcdatamodel */,
+			);
+			currentVersion = FB42DFD02A36FD2200238381 /* GyroCoreData.xcdatamodel */;
+			path = GyroCoreData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 63F01BA928D44FC400C53A39 /* Project object */;
 }
