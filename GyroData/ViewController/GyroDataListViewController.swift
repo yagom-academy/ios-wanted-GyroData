@@ -19,6 +19,10 @@ final class GyroDataListViewController: UIViewController {
     
     private var dataSource: UITableViewDiffableDataSource<Section, GyroEntity>?
     private var cancellables = Set<AnyCancellable>()
+
+    private var isPaging: Bool = false
+    private var isNoMoreData: Bool = false
+    private let loadingIndicatorView = UIActivityIndicatorView(style: .large)
     
     private let gyroDataTableView: UITableView = {
         let tableView = UITableView()
@@ -41,16 +45,14 @@ final class GyroDataListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        CoreDataManager.shared.deleteAll()
-        viewModel.readAll()
         gyroDataTableView.delegate = self
         setUpView()
         configureGyroDataTableView()
+        bind()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         setUpNavigationBar()
-        bind()
     }
     
     private func bind() {
@@ -58,6 +60,13 @@ final class GyroDataListViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] data in
                 self?.createSnapshot(data)
+                self?.isPaging = false
+                self?.configureLoadingStatus()
+            }
+            .store(in: &cancellables)
+        viewModel.$isNoMoreData
+            .sink { [weak self] bool in
+                self?.isNoMoreData = bool
             }
             .store(in: &cancellables)
     }
@@ -65,8 +74,10 @@ final class GyroDataListViewController: UIViewController {
     private func setUpView() {
         view.backgroundColor = .white
         view.addSubview(gyroDataTableView)
+        view.addSubview(loadingIndicatorView)
       
         setUpGyroDataTableView()
+        setUpLoadingIndicatorView()
     }
     
     private func setUpGyroDataTableView() {
@@ -77,6 +88,17 @@ final class GyroDataListViewController: UIViewController {
             gyroDataTableView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
             gyroDataTableView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor),
             gyroDataTableView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor)
+        ])
+    }
+    
+    private func setUpLoadingIndicatorView() {
+        let safeArea = view.safeAreaLayoutGuide
+        loadingIndicatorView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            loadingIndicatorView.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor),
+            loadingIndicatorView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor),
+            loadingIndicatorView.widthAnchor.constraint(equalTo: safeArea.widthAnchor, multiplier: 0.4),
+            loadingIndicatorView.heightAnchor.constraint(equalTo: safeArea.widthAnchor, multiplier: 0.4)
         ])
     }
     
@@ -157,5 +179,32 @@ extension GyroDataListViewController: UITableViewDelegate {
         detailViewModel.addData(data)
         navigationController?.pushViewController(detailViewController, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if gyroDataTableView.contentOffset.y > (gyroDataTableView.contentSize.height - gyroDataTableView.bounds.size.height) {
+            if !isNoMoreData && !isPaging {
+                requestMorePage()
+            }
+        }
+    }
+    
+    private func requestMorePage() {
+        isPaging = true
+        configureLoadingStatus()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
+            self?.viewModel.readAll()
+        }
+    }
+    
+    private func configureLoadingStatus() {
+        loadingIndicatorView.isHidden = !isPaging
+        
+        if isPaging {
+            loadingIndicatorView.startAnimating()
+        } else {
+            loadingIndicatorView.stopAnimating()
+        }
     }
 }

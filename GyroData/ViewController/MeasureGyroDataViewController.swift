@@ -257,7 +257,7 @@ extension MeasureGyroDataViewController {
                 if bool == true {
                     self?.segmentedControl.isEnabled = false
                     self?.navigationItem.rightBarButtonItem?.isEnabled = false
-                } else {
+                } else if bool == false {
                     self?.segmentedControl.isEnabled = true
                     self?.navigationItem.rightBarButtonItem?.isEnabled = true
                 }

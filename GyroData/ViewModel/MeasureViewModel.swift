@@ -19,7 +19,7 @@ final class MeasureViewModel {
     private var cancellables = Set<AnyCancellable>()
     private let motionManager = CMMotionManager()
     private var timer: Timer?
-    private var isStopButtonTapped: Bool = false
+    private var isStopButtonTapped: Bool?
     
     @objc private func measureAcc(timer: Timer) {
         if motionManager.isAccelerometerAvailable {
@@ -75,7 +75,6 @@ final class MeasureViewModel {
                     let accData = ThreeAxisValue(valueX: accX, valueY: accY, valueZ: accZ)
                     accelerometerData.append(accData)
                     self?.isProcessingSubject.send(true)
-                    print("acc측정 중")
                     elapsedTime += 0.1
                     
                     if self?.isStopButtonTapped == true {
@@ -114,11 +113,10 @@ final class MeasureViewModel {
                     let gyroData = ThreeAxisValue(valueX: gyroX, valueY: gyroY, valueZ: gyroZ)
                     gyroscopeData.append(gyroData)
                     self?.isProcessingSubject.send(true)
-                    print("gyro측정 중")
                     elapsedTime += 0.1
                     
                     if self?.isStopButtonTapped == true {
-                        self?.motionManager.stopAccelerometerUpdates()
+                        self?.motionManager.stopGyroUpdates()
                         self?.isProcessingSubject.send(false)
                         promise(.success((gyroscopeData, elapsedTime)))
                         self?.isStopButtonTapped = false
@@ -138,6 +136,7 @@ final class MeasureViewModel {
 
 extension MeasureViewModel {
     func startMeasure(by selectedSensor: SensorType) {
+        isStopButtonTapped = false
         let updateInterval = 0.1
         switch selectedSensor {
         case .accelerometer:

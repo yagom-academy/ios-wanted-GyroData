@@ -13,6 +13,7 @@ final class CoreDataManager {
     private init() { }
     
     private let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
+    private var currentOffset: Int = 0
     
     func create(_ data: SixAxisDataForCoreData) {
         guard let context = context,
@@ -39,6 +40,8 @@ final class CoreDataManager {
     func readTenPiecesOfData() -> [GyroEntity]? {
         guard let context = context else { return nil }
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: GyroEntity.key)
+        request.fetchOffset = currentOffset
+        currentOffset += 10
         request.fetchLimit = 10
         
         do {

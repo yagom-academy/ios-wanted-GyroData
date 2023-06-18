@@ -10,6 +10,7 @@ import Combine
 
 final class GyroDataListViewModel {
     @Published private(set) var gyroData: [GyroEntity] = []
+    @Published var isNoMoreData: Bool = false
     
     private let measureViewModel: MeasureViewModel
     private var cancellables = Set<AnyCancellable>()
@@ -43,7 +44,13 @@ extension GyroDataListViewModel {
     
     func readAll() {
         guard let data = CoreDataManager.shared.readTenPiecesOfData() else { return }
+        isNoMoreData = data.isEmpty
         gyroData.append(contentsOf: data)
+    }
+    
+    func isNoMoreDataPublisher() -> AnyPublisher<Bool, Never> {
+        return self.$isNoMoreData
+            .eraseToAnyPublisher()
     }
     
     func read(at indexPath: IndexPath) -> GyroEntity {
